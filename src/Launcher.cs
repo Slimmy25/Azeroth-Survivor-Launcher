@@ -1133,7 +1133,7 @@ namespace AzerothLauncher
         {
             LauncherRelease rel = launcherRelease;
             if (rel == null || Updating) return;
-            if (GameRunningFlag || Installing || SyncBusy || UpdateChecking)
+            if (GameRunningFlag || Installing || SyncBusy || UpdateChecking || setupOpen)
             {
                 SetStatus("A launcher update (" + rel.Name + ") will be installed as soon as the game, an install or a cloud sync has finished.");
                 After(5000, ForceLauncherUpdate);
