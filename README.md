@@ -13,7 +13,7 @@ The launcher for **Azeroth Survivors**, a game made by Aethus, styled after the 
 
 ## Download
 
-Get `Azeroth Survivors Launcher.exe` from the [Releases](../../releases) page and put it in the folder where the
+Get `Azeroth Survivors Launcher.exe` from the [downloads page](https://github.com/Slimmy25/Azeroth-Survivor-Launcher-Releases/releases/latest) and put it in the folder where the
 game is (or should be installed). It needs nothing else: it runs on the .NET Framework 4.8 that is part of
 Windows 10 and 11.
 
