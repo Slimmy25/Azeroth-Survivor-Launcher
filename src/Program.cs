@@ -37,9 +37,15 @@ namespace AzerothLauncher
         static void Main(string[] args)
         {
             bool tray = Array.IndexOf(args, "--tray") >= 0;
+            bool afterUpdate = Array.IndexOf(args, "--after-update") >= 0;
             bool first;
             using (var mutex = new Mutex(true, MutexName, out first))
             {
+                if (!first && afterUpdate)                   // started by a launcher update: wait for the old one to close
+                {
+                    try { first = mutex.WaitOne(20000); }
+                    catch (AbandonedMutexException) { first = true; }
+                }
                 if (!first)
                 {
                     // already running: bring that window forward (unless this start was --tray) and quit
@@ -48,6 +54,7 @@ namespace AzerothLauncher
                                         "Azeroth Survivors Launcher");
                     return;
                 }
+                SelfUpdate.CleanUp();                        // the previous exe after a launcher update
                 try { SetCurrentProcessExplicitAppUserModelID("Aethus.AzerothSurvivors.Launcher"); }   // own taskbar identity
                 catch (Exception) { }
                 Application.EnableVisualStyles();
@@ -72,6 +79,7 @@ namespace AzerothLauncher
                     listener.Start();
                     Application.Run(app);
                 }
+                try { mutex.ReleaseMutex(); } catch (Exception) { }   // lets a just-updated launcher start at once
                 GC.KeepAlive(mutex);
             }
         }

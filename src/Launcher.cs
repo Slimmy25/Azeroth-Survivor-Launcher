@@ -73,7 +73,7 @@ namespace AzerothLauncher
             discordBtn = Place(new WowButton("DISCORD", delegate { Util.OpenInShell(DiscordUrl); }, 115, 26, 8), 170, 636 - 13);
             discordBtn.Icon = Icons.Chat;
             // top left corner: checks for a game update (turns gold while one is waiting)
-            updateBtn = Place(new WowButton("UPDATE", delegate { CheckForUpdate(true, false); }, 78, 24, 8), 24, 24);
+            updateBtn = Place(new WowButton("UPDATE", delegate { CheckLauncherUpdate(true); }, 78, 24, 8), 24, 24);
             LayoutNav();
 
             BuildSide();
@@ -817,7 +817,7 @@ namespace AzerothLauncher
         void RefreshUpdateBtn()
         {
             updateBtn.Label = UpdateChecking ? "CHECKING" : Updating ? "UPDATING" : "UPDATE";
-            updateBtn.Selected = UpdateAvailable && !Updating;      // gold: an update is waiting
+            updateBtn.Selected = (UpdateAvailable || launcherRelease != null) && !Updating;   // gold: an update is waiting
         }
 
         void TellUpdateRecovery()
@@ -837,7 +837,149 @@ namespace AzerothLauncher
 
         void StartupUpdateCheck()
         {
-            if (Updater.Enabled && ClientPresent()) CheckForUpdate(false, false);
+            CheckLauncherUpdate(false);
+        }
+
+        // ---- the launcher itself: compared with the exe on the latest GitHub release ----
+        LauncherRelease launcherRelease;                     // a different (newer) launcher on GitHub, when found
+
+        // The UPDATE button and the start-up check: the launcher first, then (when switched on) the game.
+        // At start-up it stays quiet unless there is something to offer; the button always answers.
+        void CheckLauncherUpdate(bool manual)
+        {
+            if (Updating)
+            {
+                if (updateDlg != null && !updateDlg.IsDisposed) ShowUpdateDialog();
+                return;
+            }
+            if (UpdateChecking) return;
+            UpdateChecking = true;
+            RefreshUpdateBtn();
+            if (manual) SetStatus("Checking for updates...");
+            Bg(delegate
+            {
+                LauncherRelease rel = null;
+                bool differs = false;
+                string err = null;
+                try
+                {
+                    rel = SelfUpdate.FetchLatest();
+                    differs = SelfUpdate.Differs(rel);
+                }
+                catch (UserError e) { err = e.Message; }
+                catch (Exception e) { err = "The update check failed (" + e.Message + ")."; }
+                Ui(delegate { LauncherCheckDone(rel, differs, err, manual); });
+            });
+        }
+
+        void LauncherCheckDone(LauncherRelease rel, bool differs, string err, bool manual)
+        {
+            UpdateChecking = false;
+            launcherRelease = err == null && differs ? rel : null;
+            RefreshUpdateBtn();
+            if (err != null)
+            {
+                if (manual)
+                {
+                    SetStatus("Could not check for launcher updates.");
+                    Warn("Launcher update", err);
+                }
+            }
+            else if (launcherRelease != null)
+            {
+                SetStatus("Launcher " + rel.Name + " is available.");
+                OfferLauncherUpdate(manual);
+                return;
+            }
+            else if (manual && !Updater.Enabled)
+            {
+                SetStatus("The launcher is up to date (" + rel.Name + ").");
+                Info("Launcher update", "You have the newest launcher (" + rel.Name + ").");
+            }
+            NextGameCheck(manual);
+        }
+
+        void NextGameCheck(bool manual)
+        {
+            if (!Updater.Enabled) return;                    // game updates are switched on in src/Update.cs
+            if (manual) CheckForUpdate(true, false);
+            else if (ClientPresent()) CheckForUpdate(false, false);
+        }
+
+        void OfferLauncherUpdate(bool manual)
+        {
+            LauncherRelease rel = launcherRelease;
+            if (rel == null) return;
+            if (!manual && setupOpen)
+            {
+                After(3000, delegate { OfferLauncherUpdate(false); });
+                return;
+            }
+            if (!manual && !Visible)                         // hidden in the tray: the gold UPDATE button waits
+            {
+                Notify("A new launcher (" + rel.Name + ") is available. Open the launcher and press UPDATE.");
+                return;
+            }
+            if (GameRunningFlag || Installing || SyncBusy || Updating)
+            {
+                if (manual) Info("Launcher update", "Finish what is running first (the game, an install or a cloud sync), then press UPDATE again.");
+                return;
+            }
+            if (!Ask("Launcher update", "A new version of the launcher is on GitHub: " + rel.Name + ".\n\nUpdate now? The new launcher" +
+                     (rel.Size > 0 ? " (" + Util.FmtSize(rel.Size) + ")" : "") + " is downloaded, checked and started in place of this one. " +
+                     "Your settings stay as they are."))
+            {
+                SetStatus("Launcher update postponed. Press UPDATE when you want it.");
+                NextGameCheck(manual);
+                return;
+            }
+            Updating = true;
+            RefreshPlayLabel();
+            RefreshUpdateBtn();
+            SetStatus("Downloading the new launcher...");
+            Bg(delegate
+            {
+                string err = null, path = null;
+                DateTime last = DateTime.MinValue;
+                try
+                {
+                    path = SelfUpdate.Download(rel, delegate(long done, long total)
+                    {
+                        if ((DateTime.Now - last).TotalSeconds < 0.2) return;
+                        last = DateTime.Now;
+                        string t = "Downloading the new launcher... " + (total > 0 ? (done * 100 / total) + "%" : Util.FmtSize(done));
+                        Ui(delegate { SetStatus(t); });
+                    }, null);
+                }
+                catch (Exception e) { err = e.Message; }
+                Ui(delegate { LauncherDownloaded(path, err); });
+            });
+        }
+
+        void LauncherDownloaded(string path, string err)
+        {
+            if (err == null)
+            {
+                try { SelfUpdate.InstallAndRestart(path); }
+                catch (Exception e) { err = e.Message; }
+            }
+            if (err != null)
+            {
+                Updating = false;
+                RefreshPlayLabel();
+                RefreshUpdateBtn();
+                SetStatus("Launcher update failed.");
+                Error("Launcher update", err);
+                return;
+            }
+            quitting = true;                                 // the new launcher is starting: close this one
+            if (tray != null)
+            {
+                tray.Visible = false;
+                tray.Dispose();
+                tray = null;
+            }
+            Application.Exit();
         }
 
         // Reads update.json in the background. At start-up it stays quiet unless there is an update to offer;
