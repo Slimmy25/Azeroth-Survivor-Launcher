@@ -795,3 +795,25 @@ Updating the launcher to {0}...
 = Başlatıcı {0} sürümüne güncelleniyor...
 You can keep using this version for now. The launcher tries again the next time it starts.
 = Şimdilik bu sürümü kullanmaya devam edebilirsin. Başlatıcı bir sonraki açılışta tekrar deneyecek.
+EARLIER DOWNLOADS
+= ÖNCEKİ İNDİRMELER
+Restore a download kept on this PC (last resort):
+= Bu bilgisayarda tutulan bir indirmeyi geri yükle (son çare):
+No downloads kept yet.
+= Henüz tutulan indirme yok.
+Earlier download restored.
+= Önceki indirme geri yüklendi.
+Restoring an earlier download ...
+= Önceki bir indirme geri yükleniyor ...
+Replace your local data with the download from {0}?\n\n{1}\n\nA backup of the current files is made first. Only do this if your save is broken and the cloud copy cannot fix it.
+= Yerel verilerin {0} tarihli indirmeyle değiştirilsin mi?\n\n{1}\n\nÖnce mevcut dosyaların yedeği alınır. Bunu yalnızca kaydın bozuksa ve bulut kopyası onu düzeltemiyorsa yap.
+That kept download is no longer there.
+= Bu tutulan indirme artık yok.
+{0}: restored from the download of {1}.
+= {0}: {1} tarihli indirmeden geri yüklendi.
+The next upload puts this state in the cloud.
+= Bir sonraki yükleme bu durumu buluta koyar.
+Could not keep a local copy of this download ({0}).
+= Bu indirmenin yerel kopyası tutulamadı ({0}).
+The game is running. Close it before you restore.
+= Oyun çalışıyor. Geri yüklemeden önce kapat.

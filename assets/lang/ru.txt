@@ -795,3 +795,25 @@ Updating the launcher to {0}...
 = Обновление лаунчера до {0}...
 You can keep using this version for now. The launcher tries again the next time it starts.
 = Пока можно пользоваться этой версией. Лаунчер попробует снова при следующем запуске.
+EARLIER DOWNLOADS
+= ПРЕДЫДУЩИЕ ЗАГРУЗКИ
+Restore a download kept on this PC (last resort):
+= Восстановить загрузку, сохранённую на этом ПК (крайняя мера):
+No downloads kept yet.
+= Сохранённых загрузок пока нет.
+Earlier download restored.
+= Предыдущая загрузка восстановлена.
+Restoring an earlier download ...
+= Восстановление предыдущей загрузки ...
+Replace your local data with the download from {0}?\n\n{1}\n\nA backup of the current files is made first. Only do this if your save is broken and the cloud copy cannot fix it.
+= Заменить твои локальные данные загрузкой от {0}?\n\n{1}\n\nСначала создаётся резервная копия текущих файлов. Делай это, только если сохранение повреждено и облачная копия не может его исправить.
+That kept download is no longer there.
+= Этой сохранённой загрузки больше нет.
+{0}: restored from the download of {1}.
+= {0}: восстановлено из загрузки от {1}.
+The next upload puts this state in the cloud.
+= Следующая выгрузка отправит это состояние в облако.
+Could not keep a local copy of this download ({0}).
+= Не удалось сохранить локальную копию этой загрузки ({0}).
+The game is running. Close it before you restore.
+= Игра запущена. Закрой её перед восстановлением.

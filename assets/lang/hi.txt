@@ -795,3 +795,25 @@ Updating the launcher to {0}...
 = लॉन्चर {0} पर अपडेट हो रहा है...
 You can keep using this version for now. The launcher tries again the next time it starts.
 = आप अभी के लिए यही संस्करण इस्तेमाल करते रह सकते हैं। लॉन्चर अगली बार शुरू होने पर फिर कोशिश करेगा।
+EARLIER DOWNLOADS
+= पिछले डाउनलोड
+Restore a download kept on this PC (last resort):
+= इस PC पर रखा डाउनलोड वापस लाएँ (आख़िरी उपाय):
+No downloads kept yet.
+= अभी कोई डाउनलोड नहीं रखा गया।
+Earlier download restored.
+= पिछला डाउनलोड वापस लाया गया।
+Restoring an earlier download ...
+= पिछला डाउनलोड वापस लाया जा रहा है ...
+Replace your local data with the download from {0}?\n\n{1}\n\nA backup of the current files is made first. Only do this if your save is broken and the cloud copy cannot fix it.
+= अपना लोकल डेटा {0} के डाउनलोड से बदलें?\n\n{1}\n\nपहले मौजूदा फ़ाइलों का बैकअप बनता है। यह सिर्फ़ तब करें जब आपका सेव ख़राब हो और क्लाउड कॉपी उसे ठीक न कर सके।
+That kept download is no longer there.
+= वह रखा हुआ डाउनलोड अब मौजूद नहीं है।
+{0}: restored from the download of {1}.
+= {0}: {1} के डाउनलोड से वापस लाया गया।
+The next upload puts this state in the cloud.
+= अगला अपलोड यह स्थिति क्लाउड पर डाल देगा।
+Could not keep a local copy of this download ({0}).
+= इस डाउनलोड की लोकल कॉपी नहीं रखी जा सकी ({0})।
+The game is running. Close it before you restore.
+= गेम चल रहा है। वापस लाने से पहले इसे बंद करें।

@@ -794,3 +794,25 @@ Updating the launcher to {0}...
 = Aggiornamento del launcher a {0}...
 You can keep using this version for now. The launcher tries again the next time it starts.
 = Per ora puoi continuare a usare questa versione. Il launcher riproverà al prossimo avvio.
+EARLIER DOWNLOADS
+= DOWNLOAD PRECEDENTI
+Restore a download kept on this PC (last resort):
+= Ripristina un download conservato su questo PC (ultima risorsa):
+No downloads kept yet.
+= Ancora nessun download conservato.
+Earlier download restored.
+= Download precedente ripristinato.
+Restoring an earlier download ...
+= Ripristino di un download precedente ...
+Replace your local data with the download from {0}?\n\n{1}\n\nA backup of the current files is made first. Only do this if your save is broken and the cloud copy cannot fix it.
+= Sostituire i tuoi dati locali con il download del {0}?\n\n{1}\n\nPrima viene fatto un backup dei file attuali. Fallo solo se il tuo salvataggio è rotto e la copia cloud non può ripararlo.
+That kept download is no longer there.
+= Quel download conservato non esiste più.
+{0}: restored from the download of {1}.
+= {0}: ripristinato dal download del {1}.
+The next upload puts this state in the cloud.
+= Il prossimo caricamento porterà questo stato nel cloud.
+Could not keep a local copy of this download ({0}).
+= Impossibile conservare una copia locale di questo download ({0}).
+The game is running. Close it before you restore.
+= Il gioco è aperto. Chiudilo prima di ripristinare.

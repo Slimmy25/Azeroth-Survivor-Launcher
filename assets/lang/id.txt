@@ -794,3 +794,25 @@ Updating the launcher to {0}...
 = Memperbarui launcher ke {0}...
 You can keep using this version for now. The launcher tries again the next time it starts.
 = Kamu bisa tetap memakai versi ini untuk sementara. Launcher akan mencoba lagi saat dibuka berikutnya.
+EARLIER DOWNLOADS
+= UNDUHAN SEBELUMNYA
+Restore a download kept on this PC (last resort):
+= Pulihkan unduhan yang disimpan di PC ini (upaya terakhir):
+No downloads kept yet.
+= Belum ada unduhan yang disimpan.
+Earlier download restored.
+= Unduhan sebelumnya dipulihkan.
+Restoring an earlier download ...
+= Memulihkan unduhan sebelumnya ...
+Replace your local data with the download from {0}?\n\n{1}\n\nA backup of the current files is made first. Only do this if your save is broken and the cloud copy cannot fix it.
+= Ganti data lokal kamu dengan unduhan dari {0}?\n\n{1}\n\nCadangan file saat ini dibuat dulu. Lakukan ini hanya jika simpanan kamu rusak dan salinan cloud tidak bisa memperbaikinya.
+That kept download is no longer there.
+= Unduhan yang disimpan itu sudah tidak ada.
+{0}: restored from the download of {1}.
+= {0}: dipulihkan dari unduhan {1}.
+The next upload puts this state in the cloud.
+= Unggahan berikutnya akan menaruh kondisi ini di cloud.
+Could not keep a local copy of this download ({0}).
+= Tidak bisa menyimpan salinan lokal unduhan ini ({0}).
+The game is running. Close it before you restore.
+= Game sedang berjalan. Tutup dulu sebelum memulihkan.

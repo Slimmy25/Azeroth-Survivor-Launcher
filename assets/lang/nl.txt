@@ -794,3 +794,25 @@ Updating the launcher to {0}...
 = De launcher wordt bijgewerkt naar {0}...
 You can keep using this version for now. The launcher tries again the next time it starts.
 = Je kunt deze versie voorlopig blijven gebruiken. De launcher probeert het de volgende keer dat hij start opnieuw.
+EARLIER DOWNLOADS
+= EERDERE DOWNLOADS
+Restore a download kept on this PC (last resort):
+= Een op deze pc bewaarde download terugzetten (laatste redmiddel):
+No downloads kept yet.
+= Nog geen downloads bewaard.
+Earlier download restored.
+= Eerdere download teruggezet.
+Restoring an earlier download ...
+= Eerdere download terugzetten ...
+Replace your local data with the download from {0}?\n\n{1}\n\nA backup of the current files is made first. Only do this if your save is broken and the cloud copy cannot fix it.
+= Je lokale gegevens vervangen door de download van {0}?\n\n{1}\n\nEr wordt eerst een back-up van de huidige bestanden gemaakt. Doe dit alleen als je opslag kapot is en de cloudkopie hem niet kan herstellen.
+That kept download is no longer there.
+= Die bewaarde download bestaat niet meer.
+{0}: restored from the download of {1}.
+= {0}: teruggezet uit de download van {1}.
+The next upload puts this state in the cloud.
+= De volgende upload zet deze staat in de cloud.
+Could not keep a local copy of this download ({0}).
+= Kon geen lokale kopie van deze download bewaren ({0}).
+The game is running. Close it before you restore.
+= Het spel draait. Sluit het voordat je terugzet.

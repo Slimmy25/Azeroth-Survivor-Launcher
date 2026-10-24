@@ -794,3 +794,25 @@ Updating the launcher to {0}...
 = Uppdaterar launchern till {0}...
 You can keep using this version for now. The launcher tries again the next time it starts.
 = Du kan fortsätta använda den här versionen tills vidare. Launchern försöker igen nästa gång den startar.
+EARLIER DOWNLOADS
+= TIDIGARE NEDLADDNINGAR
+Restore a download kept on this PC (last resort):
+= Återställ en nedladdning som sparats på den här datorn (sista utväg):
+No downloads kept yet.
+= Inga nedladdningar sparade än.
+Earlier download restored.
+= Tidigare nedladdning återställd.
+Restoring an earlier download ...
+= Återställer en tidigare nedladdning ...
+Replace your local data with the download from {0}?\n\n{1}\n\nA backup of the current files is made first. Only do this if your save is broken and the cloud copy cannot fix it.
+= Ersätta dina lokala data med nedladdningen från {0}?\n\n{1}\n\nEn säkerhetskopia av de nuvarande filerna görs först. Gör bara detta om ditt sparade spel är trasigt och molnkopian inte kan laga det.
+That kept download is no longer there.
+= Den sparade nedladdningen finns inte längre.
+{0}: restored from the download of {1}.
+= {0}: återställt från nedladdningen {1}.
+The next upload puts this state in the cloud.
+= Nästa uppladdning lägger detta läge i molnet.
+Could not keep a local copy of this download ({0}).
+= Kunde inte spara en lokal kopia av den här nedladdningen ({0}).
+The game is running. Close it before you restore.
+= Spelet körs. Stäng det innan du återställer.

@@ -795,3 +795,25 @@ Updating the launcher to {0}...
 = Đang cập nhật launcher lên {0}...
 You can keep using this version for now. The launcher tries again the next time it starts.
 = Bạn có thể tiếp tục dùng phiên bản này lúc này. Launcher sẽ thử lại ở lần mở tiếp theo.
+EARLIER DOWNLOADS
+= CÁC LẦN TẢI TRƯỚC
+Restore a download kept on this PC (last resort):
+= Khôi phục một lần tải được giữ trên máy này (biện pháp cuối cùng):
+No downloads kept yet.
+= Chưa giữ lần tải nào.
+Earlier download restored.
+= Đã khôi phục lần tải trước.
+Restoring an earlier download ...
+= Đang khôi phục một lần tải trước ...
+Replace your local data with the download from {0}?\n\n{1}\n\nA backup of the current files is made first. Only do this if your save is broken and the cloud copy cannot fix it.
+= Thay dữ liệu trên máy bằng lần tải lúc {0}?\n\n{1}\n\nCác tệp hiện tại sẽ được sao lưu trước. Chỉ làm vậy nếu bản lưu của bạn bị hỏng và bản trên mây không sửa được.
+That kept download is no longer there.
+= Lần tải được giữ đó không còn nữa.
+{0}: restored from the download of {1}.
+= {0}: đã khôi phục từ lần tải lúc {1}.
+The next upload puts this state in the cloud.
+= Lần tải lên tiếp theo sẽ đưa trạng thái này lên mây.
+Could not keep a local copy of this download ({0}).
+= Không thể giữ bản sao trên máy của lần tải này ({0}).
+The game is running. Close it before you restore.
+= Trò chơi đang chạy. Hãy đóng trước khi khôi phục.
