@@ -1,6 +1,6 @@
 # Addons offered in Addons > DOWNLOAD MORE. One addon per line:
 #   CATEGORY | Name shown | https://direct-link-to/addon.zip | FILTERS | description
-# CATEGORY is AS ADDONS or WOW 1.12 ADDONS. FILTERS: UI OVERHAUL, GAMEPLAY and/or COSMETIC
+# CATEGORY is AS ADDONS or WOW 1.12 ADDONS. A link "local:<name>.zip" is a zip kept next to the launcher (listed only where it exists). FILTERS: UI OVERHAUL, GAMEPLAY and/or COSMETIC
 # (several separated by commas, or empty). The description is optional. Lines starting with # are ignored.
 # FILTERS: UI OVERHAUL, GAMEPLAY, COSMETIC
 
@@ -11,3 +11,4 @@ AS ADDONS | Chest GPS By Fotze | https://github.com/Slimmy25/Azeroth-Survivor-La
 AS ADDONS | SurvivorsDragonU By Mxgwyn | https://github.com/Slimmy25/Azeroth-Survivor-Launcher-Releases/releases/download/addons/SurvivorsDragonUi-by-Mxgwyn.zip | UI OVERHAUL
 AS ADDONS | Keijin UI By Keijin | https://github.com/Slimmy25/Azeroth-Survivor-Launcher-Releases/releases/download/addons/Keijin-UI-by-Keijin.zip | UI OVERHAUL
 AS ADDONS | AZS Stats By Slimjim | https://github.com/Slimmy25/Azeroth-Survivor-Launcher-Releases/releases/download/addons/AZS-Stats-by-Slimjim.zip | GAMEPLAY | All your stats in game (/azs) and on the STATS page: runs, records, abilities, classes, play time, your Nemesis and co-op with friends.
+WOW 1.12 ADDONS | Peggle (Unofficial) | local:Peggle-2.2.1-azs.zip | | PopCap's Peggle, ported to this client. Private: only listed where Peggle-2.2.1-azs.zip sits next to the launcher.
