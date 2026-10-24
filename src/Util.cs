@@ -382,7 +382,6 @@ namespace AzerothLauncher
                     try { Directory.CreateDirectory(dataDir); } catch (Exception) { }
                 }
                 try { MoveOldData(dataDir); } catch (Exception) { }
-                try { WriteCredits(dataDir); } catch (Exception) { }
                 try { DeleteTreeQuiet(Path.Combine(dataDir, "temp")); } catch (Exception) { }
             }
         }
@@ -410,42 +409,6 @@ namespace AzerothLauncher
             }
             catch (Exception) { }
             return false;
-        }
-
-        // Credits.txt in the launcher's folder: rewritten whenever it is missing or differs from this text.
-        const string CreditsText =
-            "Azeroth Survivors Launcher - Credits\r\n" +
-            "====================================\r\n" +
-            "\r\n" +
-            "Made by Slimjim.\r\n" +
-            "\r\n" +
-            "This launcher was vibe coded: Slimjim led the way and shaped every feature, and the code was written\r\n" +
-            "together with an AI assistant.\r\n" +
-            "\r\n" +
-            "Thank you, Aethus\r\n" +
-            "-----------------\r\n" +
-            "Azeroth Survivors is Aethus's game. Thank you for creating it, for keeping it going with update after\r\n" +
-            "update, and for supporting the people who play it. None of this would exist without you.\r\n" +
-            "\r\n" +
-            "Thank you, community\r\n" +
-            "--------------------\r\n" +
-            "To everyone in the Azeroth Survivors community who makes addons, shares fixes and tips, tests\r\n" +
-            "things, reports problems and simply plays: thank you for sharing something this fun alongside me.\r\n" +
-            "This launcher is for you.\r\n" +
-            "\r\n" +
-            "Also thanks to\r\n" +
-            "--------------\r\n" +
-            "Keijin - the cloud save sync is based on AzerothSync by KeijinDE (MIT License).\r\n" +
-            "The addon authors, whose work is offered for download in the launcher.\r\n" +
-            "\r\n" +
-            "Source code: https://github.com/Slimmy25/Azeroth-Survivor-Launcher\r\n";
-
-        static void WriteCredits(string dir)
-        {
-            string path = Path.Combine(dir, "Credits.txt");
-            try { if (File.Exists(path) && File.ReadAllText(path, Encoding.UTF8) == CreditsText) return; }
-            catch (Exception) { }
-            WriteAtomic(path, CreditsText);
         }
 
         static bool Writable(string dir)
