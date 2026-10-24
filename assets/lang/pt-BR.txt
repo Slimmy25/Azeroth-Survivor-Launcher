@@ -788,3 +788,9 @@ Backup: {0}
 = Backup: {0}
 Restored {0} after an interrupted sync.
 = {0} restaurado após uma sincronização interrompida.
+A launcher update ({0}) will be installed as soon as the game, an install or a cloud sync has finished.
+= Uma atualização do launcher ({0}) será instalada assim que o jogo, uma instalação ou uma sincronização na nuvem terminar.
+Updating the launcher to {0}...
+= Atualizando o launcher para {0}...
+You can keep using this version for now. The launcher tries again the next time it starts.
+= Você pode continuar usando esta versão por enquanto. O launcher tenta de novo na próxima vez que iniciar.

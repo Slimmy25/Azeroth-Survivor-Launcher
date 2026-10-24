@@ -789,3 +789,9 @@ Backup: {0}
 = สำรองข้อมูล: {0}
 Restored {0} after an interrupted sync.
 = กู้คืน {0} หลังการซิงก์ที่ถูกขัดจังหวะ
+A launcher update ({0}) will be installed as soon as the game, an install or a cloud sync has finished.
+= อัปเดตลันเชอร์ ({0}) จะถูกติดตั้งทันทีที่เกม การติดตั้ง หรือการซิงก์คลาวด์เสร็จสิ้น
+Updating the launcher to {0}...
+= กำลังอัปเดตลันเชอร์เป็น {0}...
+You can keep using this version for now. The launcher tries again the next time it starts.
+= คุณยังใช้เวอร์ชันนี้ต่อได้ในตอนนี้ ลันเชอร์จะลองอีกครั้งเมื่อเปิดครั้งถัดไป

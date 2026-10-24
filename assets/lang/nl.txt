@@ -788,3 +788,9 @@ Backup: {0}
 = Back-up: {0}
 Restored {0} after an interrupted sync.
 = {0} hersteld na een onderbroken synchronisatie.
+A launcher update ({0}) will be installed as soon as the game, an install or a cloud sync has finished.
+= Een launcher-update ({0}) wordt geïnstalleerd zodra het spel, een installatie of een cloudsynchronisatie klaar is.
+Updating the launcher to {0}...
+= De launcher wordt bijgewerkt naar {0}...
+You can keep using this version for now. The launcher tries again the next time it starts.
+= Je kunt deze versie voorlopig blijven gebruiken. De launcher probeert het de volgende keer dat hij start opnieuw.

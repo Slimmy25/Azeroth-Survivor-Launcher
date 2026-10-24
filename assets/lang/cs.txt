@@ -789,3 +789,9 @@ Backup: {0}
 = Záloha: {0}
 Restored {0} after an interrupted sync.
 = {0} obnoveno po přerušené synchronizaci.
+A launcher update ({0}) will be installed as soon as the game, an install or a cloud sync has finished.
+= Aktualizace launcheru ({0}) se nainstaluje, jakmile skončí hra, instalace nebo synchronizace s cloudem.
+Updating the launcher to {0}...
+= Aktualizace launcheru na {0}...
+You can keep using this version for now. The launcher tries again the next time it starts.
+= Zatím můžeš dál používat tuto verzi. Launcher to zkusí znovu při příštím spuštění.

@@ -789,3 +789,9 @@ Backup: {0}
 = バックアップ: {0}
 Restored {0} after an interrupted sync.
 = 中断された同期の後、{0} を復元しました。
+A launcher update ({0}) will be installed as soon as the game, an install or a cloud sync has finished.
+= ランチャーのアップデート（{0}）は、ゲーム、インストール、クラウド同期が終わりしだいインストールされます。
+Updating the launcher to {0}...
+= ランチャーを {0} に更新中...
+You can keep using this version for now. The launcher tries again the next time it starts.
+= 当面はこのバージョンをそのまま使えます。次回の起動時にランチャーが再試行します。

@@ -789,3 +789,9 @@ Backup: {0}
 = Αντίγραφο ασφαλείας: {0}
 Restored {0} after an interrupted sync.
 = Το {0} επαναφέρθηκε μετά από διακοπή συγχρονισμού.
+A launcher update ({0}) will be installed as soon as the game, an install or a cloud sync has finished.
+= Μια ενημέρωση του launcher ({0}) θα εγκατασταθεί μόλις τελειώσει το παιχνίδι, μια εγκατάσταση ή ένας συγχρονισμός cloud.
+Updating the launcher to {0}...
+= Ενημέρωση του launcher σε {0}...
+You can keep using this version for now. The launcher tries again the next time it starts.
+= Μπορείς να συνεχίσεις να χρησιμοποιείς αυτή την έκδοση προς το παρόν. Ο launcher θα ξαναδοκιμάσει την επόμενη φορά που θα ξεκινήσει.

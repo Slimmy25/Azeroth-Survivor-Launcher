@@ -101,7 +101,7 @@ namespace AzerothLauncher
 
         // Swaps the new exe in and starts it. A running exe cannot be overwritten, but it can be renamed:
         // this one becomes "<name>.exe.old" and is deleted by the new launcher when it starts.
-        public static void InstallAndRestart(string newExe)
+        public static void InstallAndRestart(string newExe, bool tray)
         {
             string exe = ExePath, old = exe + ".old";
             try
@@ -121,7 +121,7 @@ namespace AzerothLauncher
                 try { File.Move(old, exe); } catch (Exception) { }
                 throw new UserError("The new launcher could not be put in place (" + e.Message + "). Nothing was changed.");
             }
-            Process.Start(new ProcessStartInfo(exe, "--after-update") { UseShellExecute = false, WorkingDirectory = Path.GetDirectoryName(exe) });
+            Process.Start(new ProcessStartInfo(exe, tray ? "--after-update --tray" : "--after-update") { UseShellExecute = false, WorkingDirectory = Path.GetDirectoryName(exe) });
         }
 
         // run at start: removes the previous exe left behind by an update, and a half-finished download

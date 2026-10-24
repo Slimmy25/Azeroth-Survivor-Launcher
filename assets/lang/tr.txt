@@ -789,3 +789,9 @@ Backup: {0}
 = Yedek: {0}
 Restored {0} after an interrupted sync.
 = Kesilen bir eşitlemeden sonra {0} geri yüklendi.
+A launcher update ({0}) will be installed as soon as the game, an install or a cloud sync has finished.
+= Bir başlatıcı güncellemesi ({0}), oyun, bir yükleme ya da bir bulut eşitlemesi biter bitmez yüklenecek.
+Updating the launcher to {0}...
+= Başlatıcı {0} sürümüne güncelleniyor...
+You can keep using this version for now. The launcher tries again the next time it starts.
+= Şimdilik bu sürümü kullanmaya devam edebilirsin. Başlatıcı bir sonraki açılışta tekrar deneyecek.

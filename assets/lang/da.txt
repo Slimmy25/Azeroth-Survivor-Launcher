@@ -788,3 +788,9 @@ Backup: {0}
 = Sikkerhedskopi: {0}
 Restored {0} after an interrupted sync.
 = {0} gendannet efter en afbrudt synkronisering.
+A launcher update ({0}) will be installed as soon as the game, an install or a cloud sync has finished.
+= En launcher-opdatering ({0}) installeres, så snart spillet, en installation eller en skysynkronisering er færdig.
+Updating the launcher to {0}...
+= Opdaterer launcheren til {0}...
+You can keep using this version for now. The launcher tries again the next time it starts.
+= Du kan fortsætte med at bruge denne version indtil videre. Launcheren prøver igen næste gang, den starter.

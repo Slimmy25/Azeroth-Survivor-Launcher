@@ -789,3 +789,9 @@ Backup: {0}
 = Bản sao lưu: {0}
 Restored {0} after an interrupted sync.
 = Đã khôi phục {0} sau một lần đồng bộ bị gián đoạn.
+A launcher update ({0}) will be installed as soon as the game, an install or a cloud sync has finished.
+= Bản cập nhật launcher ({0}) sẽ được cài ngay khi trò chơi, quá trình cài đặt hoặc đồng bộ mây kết thúc.
+Updating the launcher to {0}...
+= Đang cập nhật launcher lên {0}...
+You can keep using this version for now. The launcher tries again the next time it starts.
+= Bạn có thể tiếp tục dùng phiên bản này lúc này. Launcher sẽ thử lại ở lần mở tiếp theo.
