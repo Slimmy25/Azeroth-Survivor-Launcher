@@ -4,7 +4,8 @@
 // them can share one folder and this launcher keeps the sync memory of the old one.
 //
 // No merging: per area one complete state wins and the overwritten one is backed up as a ZIP first.
-// Areas: save game, AddOns, addon settings.
+// Areas: save game, AddOns, addon settings. Uploads update the cloud folder in place (no .azsync-new / .azsync-old
+// folders inside the cloud drive); downloads swap the local folder through a staging copy.
 //   <sync folder>\manifest.json   fingerprints of the last upload
 //   <sync folder>\data\save|addons|saved
 //   <sync folder>\history\        cloud backups (last 10 per area)
@@ -300,6 +301,9 @@ namespace AzerothLauncher
         static bool IsEmpty(string h) { return h == NoneHash || h == EmptyHash; }
 
         // ---------- copy with staging ----------
+        // Leftovers of an interrupted sync (this launcher's or AzerothSync's): "<folder>.azsync-old" is put back
+        // when the folder itself is missing, otherwise it and "<folder>.azsync-new" are removed. A leftover that
+        // cannot be removed (no permission, locked by the cloud app) never stops the sync: it is only reported.
         void Recover(string directory)
         {
             string stage = directory + StageSuffix, old = directory + OldSuffix;
@@ -307,12 +311,31 @@ namespace AzerothLauncher
             {
                 if (!Directory.Exists(directory))
                 {
-                    Directory.Move(old, directory);
-                    Log("  Restored " + directory + " after an interrupted sync.", Level.Warn);
+                    try
+                    {
+                        Directory.Move(old, directory);
+                        Log("  Restored " + directory + " after an interrupted sync.", Level.Warn);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new SyncError("An interrupted sync left your data in " + old + " and it could not be moved " +
+                                            "back (" + ex.Message + "). Rename that folder to " + Path.GetFileName(directory) +
+                                            " yourself, then sync again.");
+                    }
                 }
-                else Util.DeleteTree(old);
+                else RemoveLeftover(old);
             }
-            if (Directory.Exists(stage)) Util.DeleteTree(stage);
+            if (Directory.Exists(stage)) RemoveLeftover(stage);
+        }
+
+        void RemoveLeftover(string path)
+        {
+            try { Util.DeleteTree(path); }
+            catch (Exception ex)
+            {
+                Log("  An old sync folder could not be removed and is ignored: " + path + " (" + ex.Message + "). " +
+                    "You can delete it yourself.", Level.Dim);
+            }
         }
 
         void RecoverAll()
@@ -399,6 +422,91 @@ namespace AzerothLauncher
             catch (Exception ex)
             {
                 Log("    Could not remove the old copy " + old + " (" + ex.Message + "), it is cleaned up next time.", Level.Dim);
+            }
+        }
+
+        // Makes the cloud folder dst an exact copy of src without a second folder next to it: cloud drives (Google
+        // Drive, OneDrive ...) upload every folder they see and may not let a folder be renamed or removed, so the
+        // swap that Mirror does (dst.azsync-new / dst.azsync-old) is not used there. The files are first copied to the
+        // launcher's temp folder and checked (the game may still be writing), then only the changed files are
+        // written into dst and the ones that are gone are removed; finally dst is checked against expectedHash.
+        void UpdateInPlace(string src, string dst, string[] exclude, string expectedHash)
+        {
+            dst = Path.GetFullPath(dst).TrimEnd('\\', '/');
+            string stage = Path.Combine(Util.TempDir, "upload-" + Path.GetFileName(dst));
+            Util.DeleteTree(stage);
+            Directory.CreateDirectory(stage);
+            try
+            {
+                var files = ListFiles(src, exclude);
+                foreach (var f in files)
+                {
+                    string target = Path.Combine(stage, f.Rel);
+                    Directory.CreateDirectory(Path.GetDirectoryName(target));
+                    CopyFile(f.Full, target);
+                }
+                if (TreeHash(stage, exclude, false) != expectedHash)
+                    throw new SyncError("The source changed while copying (" + src + "). Nothing was replaced, please sync again.");
+
+                Directory.CreateDirectory(dst);
+                var want = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                foreach (var f in ListFiles(stage, exclude))
+                {
+                    want.Add(f.Rel);
+                    string target = Path.Combine(dst, f.Rel);
+                    if (File.Exists(target) && Same(f.Full, target)) { FileDone(); continue; }
+                    Directory.CreateDirectory(Path.GetDirectoryName(target));
+                    if (File.Exists(target)) File.SetAttributes(target, FileAttributes.Normal);
+                    File.Copy(f.Full, target, true);
+                    File.SetLastWriteTimeUtc(target, File.GetLastWriteTimeUtc(f.Full));
+                    FileDone();
+                }
+                foreach (var f in ListFiles(dst, exclude))             // files that are no longer there
+                    if (!want.Contains(f.Rel))
+                    {
+                        File.SetAttributes(f.Full, FileAttributes.Normal);
+                        File.Delete(f.Full);
+                    }
+                RemoveEmptyFolders(dst);
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                throw new SyncError("The sync folder could not be written (" + ex.Message + "). Check that your cloud app is " +
+                                    "running and that you may change files in " + dst + ".");
+            }
+            catch (IOException ex)
+            {
+                throw new SyncError("The sync folder could not be written (" + ex.Message + "). Close programs that use " +
+                                    dst + " and try again.");
+            }
+            finally { Util.DeleteTreeQuiet(stage); }
+            if (TreeHash(dst, exclude, false) != expectedHash)
+                throw new SyncError("The cloud copy does not match your files after the upload (" + dst + "). " +
+                                    "Your cloud app may be changing it right now; please sync again in a moment.");
+        }
+
+        // same size and same content
+        static bool Same(string a, string b)
+        {
+            try
+            {
+                if (new FileInfo(a).Length != new FileInfo(b).Length) return false;
+                return Net.FileSha256(a) == Net.FileSha256(b);
+            }
+            catch (Exception) { return false; }
+        }
+
+        static void RemoveEmptyFolders(string root)
+        {
+            foreach (string d in Directory.GetDirectories(root))
+            {
+                if (Util.IsLink(d)) continue;
+                RemoveEmptyFolders(d);
+                try
+                {
+                    if (Directory.GetFileSystemEntries(d).Length == 0) Directory.Delete(d);
+                }
+                catch (Exception) { }
             }
         }
 
@@ -919,7 +1027,7 @@ namespace AzerothLauncher
                         continue;
                     }
                     Backup(e.Set.Cloud, e.Set.Exclude, History, e.Set.Name, KeepCloudBackups);
-                    Mirror(e.Set.Dir, e.Set.Cloud, e.Set.Exclude, e.Local);
+                    UpdateInPlace(e.Set.Dir, e.Set.Cloud, e.Set.Exclude, e.Local);
                     SetLastHash(e.Set.Name, e.Local);
                     published[e.Set.Name] = e.Local;
                     uploaded = true;
