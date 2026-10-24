@@ -2,7 +2,6 @@
 ## Title: AZS Stats
 ## Notes: All your Azeroth Survivors stats: runs, records, abilities, classes, play time, a death log and your Nemesis, and Co-op stats with your friends. Type /azs in game; the launcher's STATS page shows them too.
 ## Author: Slimjim
-## Version: 2.1
 ## SavedVariables: AZSStatsDB
 AZSStats.lua
 AZSStatsUI.lua
