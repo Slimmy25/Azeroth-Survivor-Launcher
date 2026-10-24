@@ -818,3 +818,15 @@ The game is running. Close it before you restore.
 = Game sedang berjalan. Tutup dulu sebelum memulihkan.
 Cloud Save needs the game. Press INSTALL to download it first.
 = Simpan cloud membutuhkan game. Tekan INSTAL untuk mengunduhnya dulu.
+GUIDE
+= PANDUAN
+Guide
+= Panduan
+‹ ALL TOPICS
+= ‹ SEMUA TOPIK
+‹ BACK
+= ‹ KEMBALI
+OPEN ›
+= BUKA ›
+New to Azeroth Survivors? Pick a topic.
+= Baru di Azeroth Survivors? Pilih topik.

@@ -819,3 +819,15 @@ The game is running. Close it before you restore.
 = Το παιχνίδι τρέχει. Κλείσ' το πριν από την επαναφορά.
 Cloud Save needs the game. Press INSTALL to download it first.
 = Η αποθήκευση cloud χρειάζεται το παιχνίδι. Πάτησε πρώτα ΕΓΚΑΤΑΣΤΑΣΗ για να το κατεβάσεις.
+GUIDE
+= ΟΔΗΓΟΣ
+Guide
+= Οδηγός
+‹ ALL TOPICS
+= ‹ ΟΛΑ ΤΑ ΘΕΜΑΤΑ
+‹ BACK
+= ‹ ΠΙΣΩ
+OPEN ›
+= ΑΝΟΙΓΜΑ ›
+New to Azeroth Survivors? Pick a topic.
+= Νέος στο Azeroth Survivors; Διάλεξε ένα θέμα.

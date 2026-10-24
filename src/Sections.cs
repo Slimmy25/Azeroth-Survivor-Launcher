@@ -134,7 +134,8 @@ namespace AzerothLauncher
         Dictionary<string, CheckBox> addonRows;
         Label addonCount;
 
-        static readonly string[] SectionNames = { "Cloud Save", "Addons", "Options", "Changelog", "About Launcher" };
+        static readonly string[] SectionNames = { "Cloud Save", "Addons", "Options", "Changelog", "Guide", "About Launcher" };
+        int gTopic = -1, gPage = -1;                         // the guide: -1 = the topic list / the topic itself
 
         int PW { get { return panel.ClientSize.Width; } }
         int PH { get { return panel.ClientSize.Height; } }
@@ -193,7 +194,7 @@ namespace AzerothLauncher
             body.Controls.Add(strip);
             homeBtn = new IconButton(Icons.Home, ShowWindowFront);    // bring the launcher back
             strip.Controls.Add(homeBtn);
-            var icons = new Action<Graphics, float, float, Color>[] { Icons.Cloud, Icons.AddonsIcon, Icons.Gear, Icons.Scroll, Icons.Info };
+            var icons = new Action<Graphics, float, float, Color>[] { Icons.Cloud, Icons.AddonsIcon, Icons.Gear, Icons.Scroll, Icons.Book, Icons.Info };
             for (int i = 0; i < SectionNames.Length; i++)
             {
                 string n = SectionNames[i];
@@ -285,8 +286,8 @@ namespace AzerothLauncher
 
         public void ShowSection(string name)
         {
-            // Options and About work without the game; the other sections need it
-            if (name != "Home" && name != "Options" && name != "About Launcher" && !GateOpen())
+            // Options, About and the Guide work without the game; the other sections need it
+            if (name != "Home" && name != "Options" && name != "About Launcher" && name != "Guide" && !GateOpen())
             {
                 SetStatus("Press INSTALL to download the game first.");
                 ShowWindowFront();
@@ -297,6 +298,7 @@ namespace AzerothLauncher
             foreach (var kv in nav) kv.Value.Active = kv.Key == name;
             RefreshStrip();
             if (name == "Changelog") clView = ClNewest;
+            if (name == "Guide") { gTopic = -1; gPage = -1; }      // the guide always opens on its topic list
             if (name == "Home")
             {
                 HideSide();
@@ -315,6 +317,7 @@ namespace AzerothLauncher
                 else if (name == "Addons") PanelAddons();
                 else if (name == "Options") PanelOptions();
                 else if (name == "Changelog") PanelChangelog();
+                else if (name == "Guide") PanelGuide();
                 else if (name == "About Launcher") PanelAbout();
             }
             finally { panel.ResumeLayout(); }
@@ -351,6 +354,11 @@ namespace AzerothLauncher
                 if (clView >= 0) { SetChangelogView(ClList); return; }
                 if (clView == ClList) { SetChangelogView(ClNewest); return; }
             }
+            if (current == "Guide")
+            {
+                if (gPage >= 0) { SetGuideView(gTopic, -1); return; }
+                if (gTopic >= 0) { SetGuideView(-1, -1); return; }
+            }
             CloseSide();
         }
 
@@ -386,6 +394,159 @@ namespace AzerothLauncher
         static int BottomOf(Control c) { return c.Top + c.Height; }
 
         // ------------------------------------------------------------------ Changelog
+        // ------------------------------------------------------------------ Guide
+        // assets\guide.txt: topics on the first page; a topic with pages lists them, the others show their text.
+        // The guide's own text is English; only the buttons around it are translated.
+        void SetGuideView(int topic, int page)
+        {
+            gTopic = topic;
+            gPage = page;
+            if (current == "Guide") BuildPanel("Guide");
+        }
+
+        void PanelGuide()
+        {
+            var topics = Data.Guide;
+            if (gTopic >= topics.Count) { gTopic = -1; gPage = -1; }
+            if (gTopic < 0)
+            {
+                ClearPanel("Guide");
+                var intro = PutText("New to Azeroth Survivors? Pick a topic.", 11, FontStyle.Italic, Theme.GoldDim, 60, 18, 0);
+                var items = new List<GuidePage>();
+                foreach (var t in topics) items.Add(t);
+                GuideList(items, BottomOf(intro) + 12, delegate(int i) { SetGuideView(i, -1); });
+                return;
+            }
+            GuideTopic topic = topics[gTopic];
+            if (gPage >= topic.Pages.Count) gPage = -1;
+            if (gPage < 0 && topic.Pages.Count > 0)            // a topic made of pages: list them
+            {
+                ClearPanel(topic.Title);
+                Put(new WowButton("‹ ALL TOPICS", delegate { SetGuideView(-1, -1); }, 170, 32, 10), PW - 20 - 170, 12);
+                int ti = gTopic;
+                GuideList(topic.Pages, 56, delegate(int i) { SetGuideView(ti, i); });
+                return;
+            }
+            GuidePage shown = gPage >= 0 ? topic.Pages[gPage] : topic;
+            ClearPanel(shown.Title);
+            bool inPage = gPage >= 0;
+            if (inPage) Put(new WowButton("‹ BACK", delegate { SetGuideView(gTopic, -1); }, 120, 32, 10), PW - 20 - 120, 12);
+            else Put(new WowButton("‹ ALL TOPICS", delegate { SetGuideView(-1, -1); }, 170, 32, 10), PW - 20 - 170, 12);
+            // PREVIOUS / NEXT step through the pages of this topic, or through the topics
+            int count = inPage ? topic.Pages.Count : topics.Count, at = inPage ? gPage : gTopic, by = PH - 12 - 34;
+            int tIndex = gTopic;
+            if (at > 0)
+                Put(new WowButton("‹ PREVIOUS", delegate { if (inPage) SetGuideView(tIndex, at - 1); else SetGuideView(at - 1, -1); }, 150, 34, 10), 20, by);
+            if (at + 1 < count)
+                Put(new WowButton("NEXT ›", delegate { if (inPage) SetGuideView(tIndex, at + 1); else SetGuideView(at + 1, -1); }, 150, 34, 10), PW - 20 - 150, by);
+            var sp = MakeScroll(panel, new Rectangle(20, 56, PW - 40, by - 14 - 56), Theme.Panel, Theme.Bronze);
+            GuideBox(sp, shown);
+        }
+
+        // rows of title + description with an OPEN button, like the addon download list
+        void GuideList(List<GuidePage> items, int top, Action<int> open)
+        {
+            Color listbg = Theme.Ink;
+            var sp = MakeScroll(panel, new Rectangle(20, top, PW - 40, PH - 12 - top), listbg, Theme.Bronze);
+            int w = sp.ClientSize.Width - SystemInformation.VerticalScrollBarWidth - 8;
+            int y = 4;
+            for (int i = 0; i < items.Count; i++)
+            {
+                int index = i;
+                var row = new Bordered(Theme.GoldDim, 1);
+                var inner = new Panel();
+                inner.BackColor = listbg;
+                inner.Dock = DockStyle.Fill;
+                row.Controls.Add(inner);
+                var btn = new WowButton("OPEN ›", delegate { open(index); }, 100, 30, 10);
+                int textW = w - 2 - 10 - 100 - 10 - 10;
+                int ty = 6;
+                var labels = new List<Label>();
+                labels.Add(UI.Text(items[i].Title, 12, FontStyle.Bold, Theme.Gold, listbg, textW, false));
+                if (items[i].Desc.Length > 0) labels.Add(UI.Text(items[i].Desc, 9, FontStyle.Regular, Theme.Text, listbg, textW, false));
+                foreach (var l in labels)
+                {
+                    l.Size = VStack.Measure(l);
+                    l.Location = new Point(10, ty);
+                    l.Cursor = Cursors.Hand;
+                    l.Click += delegate { open(index); };   // the whole row opens the topic, not only the button
+                    inner.Controls.Add(l);
+                    ty += l.Height;
+                }
+                int h = Math.Max(ty + 6, 42) + 2;
+                inner.Cursor = Cursors.Hand;
+                inner.Click += delegate { open(index); };
+                btn.Location = new Point(w - 2 - 10 - 100, (h - 2 - 30) / 2);
+                inner.Controls.Add(btn);
+                row.Bounds = new Rectangle(4, y, w, h);
+                sp.Controls.Add(row);
+                y += h + 6;
+            }
+        }
+
+        // the text of a guide page: "# heading", "- bullet", a line in quotes, paragraphs
+        void GuideBox(ScrollPanel sp, GuidePage page)
+        {
+            Color boxbg = Theme.Ink;
+            int w = sp.ClientSize.Width - SystemInformation.VerticalScrollBarWidth - 8;
+            int tw = w - 32;
+            var box = new Bordered(Theme.GoldDim, 2);
+            var inner = new Panel();
+            inner.BackColor = boxbg;
+            inner.Dock = DockStyle.Fill;
+            box.Controls.Add(inner);
+            int y = 10;
+            Action<Label, int, int> add = delegate(Label l, int x, int gap)
+            {
+                l.Size = VStack.Measure(l);
+                l.Location = new Point(x, y + gap);
+                inner.Controls.Add(l);
+                y += gap + l.Height;
+            };
+            add(UI.Text(page.Title, 16, FontStyle.Bold, Theme.Gold, boxbg, tw, false), 14, 0);
+            if (page.Desc.Length > 0) add(UI.Text(page.Desc, 10, FontStyle.Italic, Theme.GoldDim, boxbg, tw, false), 14, 0);
+            var para = new List<string>();
+            Action flush = delegate
+            {
+                if (para.Count == 0) return;
+                add(UI.Text(string.Join(" ", para.ToArray()), 10, FontStyle.Regular, Theme.Text, boxbg, tw, false), 14, 6);
+                para.Clear();
+            };
+            foreach (string raw in page.Body.Split('\n'))
+            {
+                string line = raw.Trim();
+                if (line.Length == 0) { flush(); continue; }
+                if (line.StartsWith("# "))
+                {
+                    flush();
+                    add(UI.Text(line.Substring(2).Trim(), 12, FontStyle.Bold, Theme.Gold, boxbg, tw, false), 14, 12);
+                }
+                else if (line.StartsWith("- "))
+                {
+                    flush();
+                    var dot = UI.Text("•", 10, FontStyle.Bold, Theme.Gold, boxbg, 0, false);
+                    dot.Size = VStack.Measure(dot);
+                    dot.Location = new Point(18, y + 4);
+                    inner.Controls.Add(dot);
+                    add(UI.Text(line.Substring(2).Trim(), 10, FontStyle.Regular, Theme.Text, boxbg, tw - 18, false), 32, 4);
+                }
+                else if (line.StartsWith("\""))
+                {
+                    flush();
+                    add(UI.Text(line, 10, FontStyle.Italic, Theme.GoldDim, boxbg, tw, false), 14, 6);
+                }
+                else para.Add(line);
+            }
+            flush();
+            y += 14;
+            box.Bounds = new Rectangle(4, 4, w, y + 4);
+            sp.Controls.Add(box);
+            var pad = new Panel();                           // a little room under the box
+            pad.Bounds = new Rectangle(4, box.Bottom, 1, 8);
+            pad.BackColor = sp.BackColor;
+            sp.Controls.Add(pad);
+        }
+
         void PanelChangelog()
         {
             var entries = Data.Changelog;

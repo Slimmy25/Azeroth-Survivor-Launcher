@@ -819,3 +819,15 @@ The game is running. Close it before you restore.
 = Игра запущена. Закрой её перед восстановлением.
 Cloud Save needs the game. Press INSTALL to download it first.
 = Для облачного сохранения нужна игра. Сначала нажми УСТАНОВИТЬ, чтобы скачать её.
+GUIDE
+= РУКОВОДСТВО
+Guide
+= Руководство
+‹ ALL TOPICS
+= ‹ ВСЕ ТЕМЫ
+‹ BACK
+= ‹ НАЗАД
+OPEN ›
+= ОТКРЫТЬ ›
+New to Azeroth Survivors? Pick a topic.
+= Впервые в Azeroth Survivors? Выбери тему.

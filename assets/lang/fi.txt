@@ -818,3 +818,15 @@ The game is running. Close it before you restore.
 = Peli on käynnissä. Sulje se ennen palauttamista.
 Cloud Save needs the game. Press INSTALL to download it first.
 = Pilvitallennus tarvitsee pelin. Paina ensin ASENNA ladataksesi sen.
+GUIDE
+= OPAS
+Guide
+= Opas
+‹ ALL TOPICS
+= ‹ KAIKKI AIHEET
+‹ BACK
+= ‹ TAKAISIN
+OPEN ›
+= AVAA ›
+New to Azeroth Survivors? Pick a topic.
+= Uusi Azeroth Survivorsissa? Valitse aihe.

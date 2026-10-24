@@ -819,3 +819,15 @@ The game is running. Close it before you restore.
 = Oyun çalışıyor. Geri yüklemeden önce kapat.
 Cloud Save needs the game. Press INSTALL to download it first.
 = Bulut kaydı için oyun gerekli. Önce indirmek için YÜKLE'ye bas.
+GUIDE
+= REHBER
+Guide
+= Rehber
+‹ ALL TOPICS
+= ‹ TÜM KONULAR
+‹ BACK
+= ‹ GERİ
+OPEN ›
+= AÇ ›
+New to Azeroth Survivors? Pick a topic.
+= Azeroth Survivors'ta yeni misin? Bir konu seç.

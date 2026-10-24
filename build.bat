@@ -49,7 +49,7 @@ echo Building %OUT% ...
   /r:System.IO.Compression.dll /r:System.IO.Compression.FileSystem.dll ^
   /resource:assets\logo.png,AS.logo.png /resource:assets\portrait.png,AS.portrait.png ^
   /resource:assets\AzerothSurvivors.ico,AS.app.ico /resource:assets\changelog.txt,AS.changelog.txt ^
-  /resource:assets\addons.txt,AS.addons.txt /resource:assets\about.txt,AS.about.txt !LANGRES! ^
+  /resource:assets\addons.txt,AS.addons.txt /resource:assets\about.txt,AS.about.txt /resource:assets\guide.txt,AS.guide.txt !LANGRES! ^
   src\*.cs
 if errorlevel 1 goto fail
 

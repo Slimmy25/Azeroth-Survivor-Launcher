@@ -819,3 +819,15 @@ The game is running. Close it before you restore.
 = Hra běží. Před obnovením ji zavři.
 Cloud Save needs the game. Press INSTALL to download it first.
 = Ukládání do cloudu potřebuje hru. Nejdřív ji stáhni tlačítkem NAINSTALOVAT.
+GUIDE
+= PRŮVODCE
+Guide
+= Průvodce
+‹ ALL TOPICS
+= ‹ VŠECHNA TÉMATA
+‹ BACK
+= ‹ ZPĚT
+OPEN ›
+= OTEVŘÍT ›
+New to Azeroth Survivors? Pick a topic.
+= Nováček v Azeroth Survivors? Vyber téma.

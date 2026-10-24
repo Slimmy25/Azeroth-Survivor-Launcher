@@ -819,3 +819,15 @@ The game is running. Close it before you restore.
 = A játék fut. Zárd be a visszaállítás előtt.
 Cloud Save needs the game. Press INSTALL to download it first.
 = A felhőmentéshez kell a játék. Előbb töltsd le a TELEPÍTÉS gombbal.
+GUIDE
+= ÚTMUTATÓ
+Guide
+= Útmutató
+‹ ALL TOPICS
+= ‹ ÖSSZES TÉMA
+‹ BACK
+= ‹ VISSZA
+OPEN ›
+= MEGNYITÁS ›
+New to Azeroth Survivors? Pick a topic.
+= Új vagy az Azeroth Survivorsban? Válassz egy témát.

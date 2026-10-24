@@ -818,3 +818,15 @@ The game is running. Close it before you restore.
 = Spillet kjører. Lukk det før du gjenoppretter.
 Cloud Save needs the game. Press INSTALL to download it first.
 = Skylagring trenger spillet. Trykk INSTALLER for å laste det ned først.
+GUIDE
+= GUIDE
+Guide
+= Guide
+‹ ALL TOPICS
+= ‹ ALLE EMNER
+‹ BACK
+= ‹ TILBAKE
+OPEN ›
+= ÅPNE ›
+New to Azeroth Survivors? Pick a topic.
+= Ny i Azeroth Survivors? Velg et emne.
