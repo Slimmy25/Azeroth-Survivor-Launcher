@@ -968,3 +968,7 @@ Best rank {#0}
 = Paras taso {#0}
 {#0} damage
 = {#0} vahinkoa
+ABOUT
+= TIETOJA
+LAUNCHER CHANGELOG
+= KÄYNNISTIMEN MUUTOKSET

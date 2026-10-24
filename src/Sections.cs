@@ -299,6 +299,7 @@ namespace AzerothLauncher
             RefreshStrip();
             if (name == "Changelog") clView = ClNewest;
             if (name == "Guide") { gTopic = -1; gPage = -1; }      // the guide always opens on its topic list
+            if (name == "About Launcher") aboutLog = false;
             if (name == "Home")
             {
                 HideSide();
@@ -722,33 +723,48 @@ namespace AzerothLauncher
         }
 
         // ------------------------------------------------------------------ About Launcher
+        // About Launcher: ABOUT shows the description, LAUNCHER CHANGELOG the launcher's own changelog
+        bool aboutLog;
+
         void PanelAbout()
         {
             ClearPanel("About Launcher");
+            var about = Put(new WowButton("ABOUT", delegate { aboutLog = false; BuildPanel("About Launcher"); }, 130, 32, 10), 84, 12);
+            about.Selected = !aboutLog;
+            var log = Put(new WowButton("LAUNCHER CHANGELOG", delegate { aboutLog = true; BuildPanel("About Launcher"); }, 230, 32, 10),
+                          84 + 130 + 10, 12);
+            log.Selected = aboutLog;
             var credits = UI.Text("Vibe coded by Slimjim\nCloud save code established by Keijin", 13, FontStyle.Italic,
                                   Theme.Credit, Theme.Panel, 0);
             credits.TextAlign = ContentAlignment.TopRight;
             credits.Size = VStack.Measure(credits);
-            Put(credits, PW - 20 - credits.Width, 52);
+            Put(credits, PW - 20 - credits.Width, 56);
             var line = Put(UI.Line(Theme.GoldDim, PW - 40, 2), 20, BottomOf(credits) + 4);
             var box = UI.Log(Theme.Panel, 11);
             box.Bounds = new Rectangle(20, BottomOf(line) + 10, PW - 34, PH - BottomOf(line) - 18);
             Put(box, box.Left, box.Top);
-            foreach (string raw in Data.About.Split('\n'))
+            // "# heading", "- bullet", anything else a paragraph (the texts are not translated)
+            foreach (string raw in (aboutLog ? Data.LauncherChangelog : Data.About).Split('\n'))
             {
                 string ln = raw.TrimEnd();
+                box.SelectionStart = box.TextLength;
                 if (ln.StartsWith("#"))
                 {
                     box.SelectionIndent = 0;
                     box.SelectionHangingIndent = 0;
                     UI.Append(box, (box.TextLength > 0 ? "\n" : "") + ln.TrimStart('#', ' ').Trim() + "\n", Theme.Gold, Theme.F(14, FontStyle.Bold));
                 }
-                else if (ln.Trim().Length > 0)
+                else if (ln.TrimStart().StartsWith("-") || ln.TrimStart().StartsWith("*"))
                 {
-                    box.SelectionStart = box.TextLength;
                     box.SelectionIndent = 14;
                     box.SelectionHangingIndent = 14;
                     UI.Append(box, "• " + ln.TrimStart('-', '*', ' ').Trim() + "\n", Theme.Text, Theme.F(11));
+                }
+                else if (ln.Trim().Length > 0)
+                {
+                    box.SelectionIndent = 0;
+                    box.SelectionHangingIndent = 0;
+                    UI.Append(box, ln.Trim() + "\n\n", Theme.Text, Theme.F(11));
                 }
             }
             box.SelectionStart = 0;

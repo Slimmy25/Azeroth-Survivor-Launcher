@@ -25,7 +25,7 @@ if not exist "%CSC%" (
     exit /b 1
 )
 
-for %%f in (src\Program.cs assets\changelog.txt assets\addons.txt assets\about.txt assets\logo.png assets\portrait.png assets\AzerothSurvivors.ico app.manifest) do (
+for %%f in (src\Program.cs assets\changelog.txt assets\addons.txt assets\launcher-about.txt assets\launcher-changelog.txt assets\logo.png assets\portrait.png assets\AzerothSurvivors.ico app.manifest) do (
     if not exist "%%f" (
         echo Missing file: %%f
         echo Keep the whole folder together: build.bat, app.manifest, the src and the assets folders.
@@ -49,7 +49,7 @@ echo Building %OUT% ...
   /r:System.IO.Compression.dll /r:System.IO.Compression.FileSystem.dll ^
   /resource:assets\logo.png,AS.logo.png /resource:assets\portrait.png,AS.portrait.png ^
   /resource:assets\AzerothSurvivors.ico,AS.app.ico /resource:assets\changelog.txt,AS.changelog.txt ^
-  /resource:assets\addons.txt,AS.addons.txt /resource:assets\about.txt,AS.about.txt /resource:assets\guide.txt,AS.guide.txt !LANGRES! ^
+  /resource:assets\addons.txt,AS.addons.txt /resource:assets\launcher-about.txt,AS.launcher-about.txt /resource:assets\launcher-changelog.txt,AS.launcher-changelog.txt /resource:assets\guide.txt,AS.guide.txt !LANGRES! ^
   /resource:addons\ASTimeTracker\ASTimeTracker.toc,AS.addon.ASTimeTracker.toc /resource:addons\ASTimeTracker\ASTimeTracker.lua,AS.addon.ASTimeTracker.lua ^
   src\*.cs
 if errorlevel 1 goto fail

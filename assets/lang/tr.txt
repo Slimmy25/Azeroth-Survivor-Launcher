@@ -969,3 +969,7 @@ Best rank {#0}
 = En iyi seviye {#0}
 {#0} damage
 = {#0} hasar
+ABOUT
+= HAKKINDA
+LAUNCHER CHANGELOG
+= BAŞLATICI DEĞİŞİKLİKLERİ

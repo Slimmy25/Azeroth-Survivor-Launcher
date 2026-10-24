@@ -969,3 +969,7 @@ Best rank {#0}
 = Καλύτερη βαθμίδα {#0}
 {#0} damage
 = {#0} ζημιά
+ABOUT
+= ΣΧΕΤΙΚΑ
+LAUNCHER CHANGELOG
+= ΑΛΛΑΓΕΣ LAUNCHER

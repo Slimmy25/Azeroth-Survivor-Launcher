@@ -1,0 +1,11 @@
+# The Azeroth Survivors Launcher
+A community launcher for Azeroth Survivors, the game made by Aethus.
+
+It installs and updates the game, keeps your save in your own cloud drive, manages your addons and keeps track of your play time.
+
+# Write your own text here
+This page is a placeholder. Replace this text with your description of the launcher in assets/launcher-about.txt.
+
+- A line starting with # is a heading
+- A line starting with - is a bullet point
+- Any other line is a paragraph
