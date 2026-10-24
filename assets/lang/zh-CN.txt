@@ -789,3 +789,9 @@ Backup: {0}
 = 备份：{0}
 Restored {0} after an interrupted sync.
 = 同步中断后已恢复 {0}。
+A launcher update ({0}) will be installed as soon as the game, an install or a cloud sync has finished.
+= 启动器更新（{0}）将在游戏、安装或云同步结束后立即安装。
+Updating the launcher to {0}...
+= 正在将启动器更新到 {0}...
+You can keep using this version for now. The launcher tries again the next time it starts.
+= 你可以暂时继续使用此版本。启动器会在下次启动时重试。

@@ -789,3 +789,9 @@ Backup: {0}
 = Резервна копія: {0}
 Restored {0} after an interrupted sync.
 = {0} відновлено після перерваної синхронізації.
+A launcher update ({0}) will be installed as soon as the game, an install or a cloud sync has finished.
+= Оновлення лаунчера ({0}) буде встановлено, щойно завершиться гра, встановлення або хмарна синхронізація.
+Updating the launcher to {0}...
+= Оновлення лаунчера до {0}...
+You can keep using this version for now. The launcher tries again the next time it starts.
+= Поки можна користуватися цією версією. Лаунчер спробує знову під час наступного запуску.

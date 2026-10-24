@@ -789,3 +789,9 @@ Backup: {0}
 = बैकअप: {0}
 Restored {0} after an interrupted sync.
 = रुके हुए सिंक के बाद {0} वापस लाया गया।
+A launcher update ({0}) will be installed as soon as the game, an install or a cloud sync has finished.
+= लॉन्चर अपडेट ({0}) गेम, इंस्टॉल या क्लाउड सिंक पूरा होते ही इंस्टॉल हो जाएगा।
+Updating the launcher to {0}...
+= लॉन्चर {0} पर अपडेट हो रहा है...
+You can keep using this version for now. The launcher tries again the next time it starts.
+= आप अभी के लिए यही संस्करण इस्तेमाल करते रह सकते हैं। लॉन्चर अगली बार शुरू होने पर फिर कोशिश करेगा।

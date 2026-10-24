@@ -788,3 +788,9 @@ Backup: {0}
 = Varmuuskopio: {0}
 Restored {0} after an interrupted sync.
 = {0} palautettu keskeytyneen synkronoinnin jälkeen.
+A launcher update ({0}) will be installed as soon as the game, an install or a cloud sync has finished.
+= Launcherin päivitys ({0}) asennetaan heti, kun peli, asennus tai pilvisynkronointi on valmis.
+Updating the launcher to {0}...
+= Päivitetään launcher versioon {0}...
+You can keep using this version for now. The launcher tries again the next time it starts.
+= Voit jatkaa tämän version käyttöä toistaiseksi. Launcher yrittää uudelleen seuraavan käynnistyksen yhteydessä.

@@ -109,9 +109,9 @@ namespace AzerothLauncher
             Shown += delegate
             {
                 if (startInTray) Hide();
+                After(300, StartupUpdateCheck);              // a newer launcher on GitHub is installed right away
                 After(500, MaybeFirstRun);
                 After(900, TellUpdateRecovery);
-                After(1500, StartupUpdateCheck);             // the automatic check for a game update
                 After(2000, SyncPlayTime);                   // play time of all PCs from the sync folder
             };
             VisibleChanged += delegate
@@ -462,6 +462,11 @@ namespace AzerothLauncher
         {
             if (setupAsked || setupOpen || Cfg.Bool("setup_done", false) || !GateOpen()) return;
             if (!Visible) return;                            // started hidden: asked when the window is first opened
+            if (startupLauncherCheck || Updating)           // a launcher update may restart us first
+            {
+                After(500, MaybeFirstRun);
+                return;
+            }
             setupAsked = true;
             RunSetup();
         }
@@ -1010,11 +1015,18 @@ namespace AzerothLauncher
 
         void StartupUpdateCheck()
         {
+            startupLauncherCheck = true;
             CheckLauncherUpdate(false);
+            if (!UpdateChecking) startupLauncherCheck = false;   // the check could not start (another one is running)
         }
 
         // ---- the launcher itself: compared with the exe on the latest GitHub release ----
         LauncherRelease launcherRelease;                     // a different (newer) launcher on GitHub, when found
+        bool startupLauncherCheck;                           // the start-up check is still waiting for GitHub
+
+        // Started by a launcher update? Then a launcher that still differs is offered, not forced,
+        // so a release whose exe never matches can't restart the launcher over and over.
+        static readonly bool StartedAfterUpdate = Array.IndexOf(Environment.GetCommandLineArgs(), "--after-update") >= 0;
 
         // The UPDATE button and the start-up check: the launcher first, then (when switched on) the game.
         // At start-up it stays quiet unless there is something to offer; the button always answers.
@@ -1048,8 +1060,14 @@ namespace AzerothLauncher
         void LauncherCheckDone(LauncherRelease rel, bool differs, string err, bool manual)
         {
             UpdateChecking = false;
+            startupLauncherCheck = false;
             launcherRelease = err == null && differs ? rel : null;
             RefreshUpdateBtn();
+            if (!manual && launcherRelease != null && !StartedAfterUpdate)
+            {
+                ForceLauncherUpdate();                       // at start-up a newer launcher is installed without asking
+                return;
+            }
             if (err != null)
             {
                 if (manual)
@@ -1106,10 +1124,31 @@ namespace AzerothLauncher
                 NextGameCheck(manual);
                 return;
             }
+            DownloadLauncher(rel, false);
+        }
+
+        // The start-up update: no question. It waits while the game, an install or a cloud sync runs
+        // (so nothing is cut off), then downloads, checks and restarts into the new launcher.
+        void ForceLauncherUpdate()
+        {
+            LauncherRelease rel = launcherRelease;
+            if (rel == null || Updating) return;
+            if (GameRunningFlag || Installing || SyncBusy || UpdateChecking)
+            {
+                SetStatus("A launcher update (" + rel.Name + ") will be installed as soon as the game, an install or a cloud sync has finished.");
+                After(5000, ForceLauncherUpdate);
+                return;
+            }
+            Notify("Updating the launcher to " + rel.Name + "...");
+            DownloadLauncher(rel, true);
+        }
+
+        void DownloadLauncher(LauncherRelease rel, bool forced)
+        {
             Updating = true;
             RefreshPlayLabel();
             RefreshUpdateBtn();
-            SetStatus("Downloading the new launcher...");
+            SetStatus(forced ? "Updating the launcher to " + rel.Name + "..." : "Downloading the new launcher...");
             Bg(delegate
             {
                 string err = null, path = null;
@@ -1125,15 +1164,15 @@ namespace AzerothLauncher
                     }, null);
                 }
                 catch (Exception e) { err = e.Message; }
-                Ui(delegate { LauncherDownloaded(path, err); });
+                Ui(delegate { LauncherDownloaded(path, err, forced); });
             });
         }
 
-        void LauncherDownloaded(string path, string err)
+        void LauncherDownloaded(string path, string err, bool forced)
         {
             if (err == null)
             {
-                try { SelfUpdate.InstallAndRestart(path); }
+                try { SelfUpdate.InstallAndRestart(path, !Visible); }   // hidden in the tray: the new one starts there too
                 catch (Exception e) { err = e.Message; }
             }
             if (err != null)
@@ -1142,7 +1181,13 @@ namespace AzerothLauncher
                 RefreshPlayLabel();
                 RefreshUpdateBtn();
                 SetStatus("Launcher update failed.");
-                Error("Launcher update", err);
+                if (forced)
+                {
+                    // no internet or GitHub down: don't lock the player out; the next start tries again
+                    Error("Launcher update", err + "\n\nYou can keep using this version for now. The launcher tries again the next time it starts.");
+                    NextGameCheck(false);
+                }
+                else Error("Launcher update", err);
                 return;
             }
             quitting = true;                                 // the new launcher is starting: close this one

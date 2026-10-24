@@ -789,3 +789,9 @@ Backup: {0}
 = Backup: {0}
 Restored {0} after an interrupted sync.
 = {0} restaurat după o sincronizare întreruptă.
+A launcher update ({0}) will be installed as soon as the game, an install or a cloud sync has finished.
+= O actualizare a launcherului ({0}) va fi instalată imediat ce se termină jocul, o instalare sau o sincronizare cloud.
+Updating the launcher to {0}...
+= Se actualizează launcherul la {0}...
+You can keep using this version for now. The launcher tries again the next time it starts.
+= Poți folosi în continuare această versiune deocamdată. Launcherul va încerca din nou la următoarea pornire.
