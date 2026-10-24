@@ -98,13 +98,13 @@ namespace AzerothLauncher
                                low ? 775 : 693, low ? (n == "Guide" ? 598 : 634) : 480);
                 nav[n].Skin = low ? Retro.Long : Retro.Button;
             }
-            aboutBtn = Place(new WowButton("ABOUT LAUNCHER", delegate { ShowSection("About Launcher"); }, 159, 27, 8), W - 8 - 159 - 6, 64);
+            aboutBtn = Place(new WowButton("ABOUT LAUNCHER", delegate { ShowSection("About Launcher"); }, 159, 27, 8), W - 8 - 159 - 6, 98);         // under UPDATE LAUNCHER
             aboutBtn.Skin = Retro.Long;
             nav["About Launcher"] = aboutBtn;
             discordBtn = Place(new WowButton("DISCORD", delegate { Util.OpenInShell(DiscordUrl); }, 128, 27, 8.5f), 693, 480);
             discordBtn.Skin = Retro.Button;
             discordBtn.Icon = Icons.Chat;
-            updateBtn = Place(new WowButton("UPDATE LAUNCHER", delegate { CheckLauncherUpdate(true); }, 159, 27, 8), W - 8 - 2 * 159 - 14, 64);
+            updateBtn = Place(new WowButton("UPDATE LAUNCHER", delegate { CheckLauncherUpdate(true); }, 159, 27, 8), W - 8 - 159 - 6, 64);
             updateBtn.Skin = Retro.Long;
             LayoutNav();
 
