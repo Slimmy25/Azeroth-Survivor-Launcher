@@ -88,6 +88,7 @@ namespace AzerothLauncher
                 After(500, MaybeFirstRun);
                 After(900, TellUpdateRecovery);
                 After(1500, StartupUpdateCheck);             // the automatic check for a game update
+                After(2000, SyncPlayTime);                   // play time of all PCs from the sync folder
             };
             VisibleChanged += delegate
             {
@@ -226,10 +227,10 @@ namespace AzerothLauncher
                 using (var b = new SolidBrush(Theme.Text)) g.DrawString(body, f, b, box, sf);
             }
             // play time, at the bottom of the welcome area
-            if (PlayLong("play_sessions") > 0)
-                Theme.CenterText(g, "Time played: " + Duration(PlayLong("play_seconds")) + "   |   Last session: " +
-                                 Duration(PlayLong("play_last_seconds")), Theme.F(9, FontStyle.Italic), Theme.GoldDim,
-                                 new RectangleF(20, 300, W - 40, 18), null);
+            PlayStats ps = ShownPlayStats();
+            if (ps.Sessions > 0)
+                Theme.CenterText(g, "Time played: " + Duration(ps.Seconds) + "   |   Last session: " + Duration(ps.LastSeconds),
+                                 Theme.F(9, FontStyle.Italic), Theme.GoldDim, new RectangleF(20, 300, W - 40, 18), null);
             // footer text: cloud result, then the status
             Theme.CenterText(g, cloudNote, Theme.F(10, FontStyle.Italic), Theme.Gold, new RectangleF(25, 652, W - 50, 24), null);
             Theme.CenterText(g, status, Theme.F(12, FontStyle.Italic), Theme.Text, new RectangleF(25, 674, W - 50, 26), null);
@@ -277,6 +278,7 @@ namespace AzerothLauncher
         // call after cloud saving is turned on or off: show/hide every cloud reference
         public void ApplyCloudVisibility()
         {
+            SyncPlayTime();
             LayoutNav();
             if (!CloudEnabled()) SetCloudNote("");
             Invalidate();
@@ -494,6 +496,7 @@ namespace AzerothLauncher
             {
                 Cfg.Set("cloud_dir", d);
                 Cfg.Save();
+                SyncPlayTime();
                 RebuildCurrent();
             }
         }
@@ -750,6 +753,71 @@ namespace AzerothLauncher
             return h > 0 ? h + "h " + m.ToString("00") + "m" : m + "m";
         }
 
+        PlayStats cloudPlay;                                 // totals of all PCs from the sync folder, when known
+
+        PlayStats LocalPlayStats()
+        {
+            var p = new PlayStats();
+            p.Seconds = PlayLong("play_seconds");
+            p.Sessions = PlayLong("play_sessions");
+            p.Longest = PlayLong("play_longest_seconds");
+            p.LastSeconds = PlayLong("play_last_seconds");
+            p.LastDate = Cfg.Str("play_last_date");
+            return p;
+        }
+
+        // what the Home screen and Options show: all PCs while cloud saving is on, else this PC
+        public PlayStats ShownPlayStats()
+        {
+            return CloudEnabled() && cloudPlay != null ? cloudPlay : LocalPlayStats();
+        }
+
+        bool PlayCloudOn() { return CloudEnabled() && PlayTime.Reachable(Cfg.Str("cloud_dir").Trim()); }
+
+        string PlayDevice()
+        {
+            string id = Cfg.Str("play_device");
+            if (id.Length == 0)
+            {
+                id = SyncEngine.Machine + "-" + Guid.NewGuid().ToString("N").Substring(0, 6);
+                Cfg.Set("play_device", id);
+                Cfg.Save();
+            }
+            return id;
+        }
+
+        // Shares this PC's play time through the sync folder and fetches the totals of all PCs (in the background).
+        void SyncPlayTime()
+        {
+            if (!PlayCloudOn()) { cloudPlay = null; return; }
+            string cloud = Cfg.Str("cloud_dir").Trim(), device = PlayDevice(), myEpoch = Cfg.Str("play_epoch");
+            PlayStats mine = LocalPlayStats();
+            Bg(delegate
+            {
+                try
+                {
+                    string epoch = PlayTime.Epoch(cloud);
+                    bool adopt = epoch.Length > 0 && epoch != myEpoch;   // play time was reset on another PC
+                    if (adopt) mine = new PlayStats();
+                    PlayStats total = PlayTime.Publish(cloud, device, SyncEngine.Machine, mine, adopt ? epoch : myEpoch);
+                    Ui(delegate
+                    {
+                        if (adopt)
+                        {
+                            foreach (string k in new[] { "play_seconds", "play_sessions", "play_last_seconds", "play_longest_seconds", "play_last_date" })
+                                Cfg.Remove(k);
+                            Cfg.Set("play_epoch", epoch);
+                            Cfg.Save();
+                        }
+                        cloudPlay = total;
+                        Invalidate(new Rectangle(17, 296, W - 34, 26));
+                        if (current == "Options" && side.Visible && !GameRunningFlag) BuildPanel("Options");
+                    });
+                }
+                catch (Exception) { }                        // the cloud drive is busy or offline: try again later
+            });
+        }
+
         void StartPlaySession()
         {
             Cfg.Set("play_sessions", PlayLong("play_sessions") + 1);
@@ -768,13 +836,25 @@ namespace AzerothLauncher
             Cfg.Save();
             Invalidate(new Rectangle(17, 296, W - 34, 26));
             SetTrayTitle("Game running - " + Duration(sessionSeconds));
-            if (current == "Options" && side.Visible) BuildPanel("Options");
+            SyncPlayTime();
         }
 
+        // back to zero; with cloud saving on, on every PC (each one zeroes itself when it sees the new epoch)
         public void ResetPlayTime()
         {
             foreach (string k in new[] { "play_seconds", "play_sessions", "play_last_seconds", "play_longest_seconds", "play_last_date" })
                 Cfg.Remove(k);
+            cloudPlay = null;
+            if (PlayCloudOn())
+            {
+                string epoch = Guid.NewGuid().ToString("N"), cloud = Cfg.Str("cloud_dir").Trim();
+                Cfg.Set("play_epoch", epoch);
+                Bg(delegate
+                {
+                    try { PlayTime.Reset(cloud, epoch); } catch (Exception) { }
+                    Ui(SyncPlayTime);
+                });
+            }
             Cfg.Save();
             Invalidate();
             SetStatus("Play time reset.");
@@ -783,6 +863,7 @@ namespace AzerothLauncher
         void SessionDone(List<string> problems)
         {
             GameRunningFlag = false;
+            SyncPlayTime();
             RefreshPlayLabel();
             SetTrayTitle("Idle");
             ShowWindowFront();                               // the launcher stays up front after the session
