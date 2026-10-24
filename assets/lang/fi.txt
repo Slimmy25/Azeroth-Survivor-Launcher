@@ -862,14 +862,14 @@ Track every run
 = Pidä kirjaa jokaisesta pelikerrasta
 The stats file could not be read ({0}).
 = Tilastotiedostoa ei voitu lukea ({0}).
-The AS Time Tracker addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
-= AS Time Tracker -lisäosa pitää kirjaa jokaisesta pelikerrastasi: voitot, tapot, vahinko, kulta ja henkilökohtaiset ennätyksesi. Asenna se, pelaa pelikerta loppuun, niin tilastosi näkyvät täällä.
+The AZS Stats addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
+= AZS Stats -lisäosa pitää kirjaa jokaisesta pelikerrastasi: voitot, tapot, vahinko, kulta ja henkilökohtaiset ennätyksesi. Asenna se, pelaa pelikerta loppuun, niin tilastosi näkyvät täällä.
 It is optional: without it, this page only shows your play time.
 = Se on vapaaehtoinen: ilman sitä tällä sivulla näkyy vain peliaikasi.
-The AS Time Tracker addon is turned off. Turn it on in Addons to keep recording your runs.
-= AS Time Tracker -lisäosa on pois päältä. Ota se käyttöön Lisäosat-kohdassa, jotta pelikertasi tallentuvat jatkossakin.
-No runs recorded yet. Finish a run with the AS Time Tracker addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
-= Pelikertoja ei ole vielä tallennettu. Pelaa pelikerta loppuun AS Time Tracker päällä. Peli tallentaa lisäosien tiedot, kun poistut pelistä, joten tilastosi näkyvät täällä pelin sulkemisen jälkeen.
+The AZS Stats addon is turned off. Turn it on in Addons to keep recording your runs.
+= AZS Stats -lisäosa on pois päältä. Ota se käyttöön Lisäosat-kohdassa, jotta pelikertasi tallentuvat jatkossakin.
+No runs recorded yet. Finish a run with the AZS Stats addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
+= Pelikertoja ei ole vielä tallennettu. Pelaa pelikerta loppuun AZS Stats päällä. Peli tallentaa lisäosien tiedot, kun poistut pelistä, joten tilastosi näkyvät täällä pelin sulkemisen jälkeen.
 Runs
 = Pelikerrat
 Victories
@@ -940,12 +940,12 @@ In game, type /azstats to see your stats.
 = Kirjoita pelissä /azstats nähdäksesi tilastosi.
 Saved by the game {0}.
 = Pelin tallentama: {0}.
-AS Time Tracker updated.
-= AS Time Tracker päivitetty.
-AS Time Tracker installed. It records your runs from now on.
-= AS Time Tracker asennettu. Se tallentaa pelikertasi tästä lähtien.
-Could not install AS Time Tracker:\n\n{0}
-= AS Time Trackeria ei voitu asentaa:\n\n{0}
+AZS Stats updated.
+= AZS Stats päivitetty.
+AZS Stats installed. It records your runs from now on.
+= AZS Stats asennettu. Se tallentaa pelikertasi tästä lähtien.
+Could not install AZS Stats:\n\n{0}
+= AZS Statsia ei voitu asentaa:\n\n{0}
 ALL CLASSES
 = KAIKKI LUOKAT
 Class pick rate
@@ -960,8 +960,8 @@ Picks per month
 = Valinnat kuukaudessa
 Abilities
 = Kyvyt
-Abilities are recorded for runs played with the newest AS Time Tracker.
-= Kyvyt tallennetaan pelikerroista, jotka on pelattu uusimmalla AS Time Trackerilla.
+Abilities are recorded for runs played with the newest AZS Stats.
+= Kyvyt tallennetaan pelikerroista, jotka on pelattu uusimmalla AZS Statsilla.
 Picked in {#0} runs ({#1}%) · Win rate {#2}%
 = Valittu {#0} pelikerralla ({#1} %) · Voittoprosentti {#2} %
 Best rank {#0}
@@ -994,3 +994,75 @@ Level {#0}
 = Taso {#0}
 Runs: {#0} · Won: {#1}
 = Pelikerrat: {#0} · Voitot: {#1}
+Nemesis
+= Arkkivihollinen
+Co-op
+= Yhteispeli
+Your nemesis
+= Arkkivihollisesi
+Times it killed you
+= Kertaa se tappoi sinut
+Of your deaths
+= Kuolemistasi
+Deaths
+= Kuolemat
+Last time
+= Viimeksi
+Who kills you
+= Kuka tappaa sinut
+No deaths recorded yet.
+= Kuolemia ei ole vielä tallennettu.
+Killed you {#0} times ({#1}%)
+= Tappoi sinut {#0} kertaa ({#1} %)
+Death log
+= Kuolemaloki
+Slain by {0}
+= Tappaja: {0}
+Survived {0} · Level {#1}
+= Selvisi {0} · Taso {#1}
+Last hits: {0}
+= Viimeiset osumat: {0}
+Most damage from: {0}
+= Eniten vahinkoa: {0}
+Runs with friends
+= Pelikerrat ystävien kanssa
+Co-op win rate
+= Yhteispelin voittoprosentti
+Solo win rate
+= Yksinpelin voittoprosentti
+Time together
+= Aika yhdessä
+Friends
+= Ystävät
+Victories together
+= Voitot yhdessä
+Enemies slain together
+= Yhdessä kukistetut viholliset
+Bosses together
+= Pomot yhdessä
+Who you play with
+= Kenen kanssa pelaat
+No co-op runs recorded yet. Play a run with friends and they show up here.
+= Ei vielä yhteispelikertoja. Pelaa ystävien kanssa, niin he näkyvät täällä.
+First win together {0}
+= Ensimmäinen yhteinen voitto {0}
+Fastest win {0}
+= Nopein voitto {0}
+Most bosses {#0}
+= Eniten pomoja {#0}
+Played since {0}
+= Yhdessä alkaen {0}
+Accomplishments together
+= Yhteiset saavutukset
+With {0}
+= Mukana {0}
+No play time counted yet. AZS Stats counts it while the game runs.
+= Peliaikaa ei ole vielä laskettu. AZS Stats laskee sitä pelin ollessa käynnissä.
+Play time is counted in game by the AZS Stats addon. Install it on the STATS page.
+= Peliajan laskee pelissä AZS Stats -lisäosa. Asenna se TILASTOT-sivulta.
+Counted in game by AZS Stats; cloud saving carries it to your other PCs.
+= Laskettu pelissä AZS Statsilla; pilvitallennus vie sen muille koneillesi.
+Counted in game by AZS Stats. Turn on cloud saving to take it to your other PCs.
+= Laskettu pelissä AZS Statsilla. Ota pilvitallennus käyttöön viedäksesi sen muille koneillesi.
+Show play time on the home screen
+= Näytä peliaika aloitusnäytössä

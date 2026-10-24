@@ -863,14 +863,14 @@ Track every run
 = 모든 런 기록하기
 The stats file could not be read ({0}).
 = 통계 파일을 읽을 수 없습니다 ({0}).
-The AS Time Tracker addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
-= AS Time Tracker 애드온은 플레이한 모든 런을 기록합니다: 승리, 처치, 피해, 골드, 개인 최고 기록. 설치하고 런을 한 번 끝내면 여기에 통계가 표시됩니다.
+The AZS Stats addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
+= AZS Stats 애드온은 플레이한 모든 런을 기록합니다: 승리, 처치, 피해, 골드, 개인 최고 기록. 설치하고 런을 한 번 끝내면 여기에 통계가 표시됩니다.
 It is optional: without it, this page only shows your play time.
 = 선택 사항입니다: 없으면 이 페이지에는 플레이 시간만 표시됩니다.
-The AS Time Tracker addon is turned off. Turn it on in Addons to keep recording your runs.
-= AS Time Tracker 애드온이 꺼져 있습니다. 런을 계속 기록하려면 애드온에서 켜세요.
-No runs recorded yet. Finish a run with the AS Time Tracker addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
-= 아직 기록된 런이 없습니다. AS Time Tracker를 켠 상태로 런을 한 번 끝내세요. 게임은 종료할 때 애드온 데이터를 저장하므로, 게임을 닫은 후에 통계가 여기에 표시됩니다.
+The AZS Stats addon is turned off. Turn it on in Addons to keep recording your runs.
+= AZS Stats 애드온이 꺼져 있습니다. 런을 계속 기록하려면 애드온에서 켜세요.
+No runs recorded yet. Finish a run with the AZS Stats addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
+= 아직 기록된 런이 없습니다. AZS Stats를 켠 상태로 런을 한 번 끝내세요. 게임은 종료할 때 애드온 데이터를 저장하므로, 게임을 닫은 후에 통계가 여기에 표시됩니다.
 Runs
 = 런
 Victories
@@ -941,12 +941,12 @@ In game, type /azstats to see your stats.
 = 게임에서 /azstats 를 입력하면 통계를 볼 수 있습니다.
 Saved by the game {0}.
 = 게임이 저장한 시각: {0}.
-AS Time Tracker updated.
-= AS Time Tracker를 업데이트했습니다.
-AS Time Tracker installed. It records your runs from now on.
-= AS Time Tracker를 설치했습니다. 이제부터 런을 기록합니다.
-Could not install AS Time Tracker:\n\n{0}
-= AS Time Tracker를 설치할 수 없습니다:\n\n{0}
+AZS Stats updated.
+= AZS Stats를 업데이트했습니다.
+AZS Stats installed. It records your runs from now on.
+= AZS Stats를 설치했습니다. 이제부터 런을 기록합니다.
+Could not install AZS Stats:\n\n{0}
+= AZS Stats를 설치할 수 없습니다:\n\n{0}
 ALL CLASSES
 = 모든 직업
 Class pick rate
@@ -961,8 +961,8 @@ Picks per month
 = 월별 선택 수
 Abilities
 = 능력
-Abilities are recorded for runs played with the newest AS Time Tracker.
-= 능력은 최신 AS Time Tracker로 플레이한 런부터 기록됩니다.
+Abilities are recorded for runs played with the newest AZS Stats.
+= 능력은 최신 AZS Stats로 플레이한 런부터 기록됩니다.
 Picked in {#0} runs ({#1}%) · Win rate {#2}%
 = {#0}번의 런에서 선택 ({#1}%) · 승률 {#2}%
 Best rank {#0}
@@ -995,3 +995,75 @@ Level {#0}
 = 레벨 {#0}
 Runs: {#0} · Won: {#1}
 = 런: {#0} · 승리: {#1}
+Nemesis
+= 숙적
+Co-op
+= 협동
+Your nemesis
+= 당신의 숙적
+Times it killed you
+= 당신을 쓰러뜨린 횟수
+Of your deaths
+= 전체 사망 중
+Deaths
+= 사망
+Last time
+= 마지막
+Who kills you
+= 누가 당신을 쓰러뜨리나
+No deaths recorded yet.
+= 아직 기록된 사망이 없습니다.
+Killed you {#0} times ({#1}%)
+= 당신을 {#0}번 쓰러뜨림 ({#1}%)
+Death log
+= 사망 기록
+Slain by {0}
+= {0}에게 쓰러짐
+Survived {0} · Level {#1}
+= 생존 {0} · 레벨 {#1}
+Last hits: {0}
+= 마지막 공격: {0}
+Most damage from: {0}
+= 가장 큰 피해: {0}
+Runs with friends
+= 친구와 함께한 런
+Co-op win rate
+= 협동 승률
+Solo win rate
+= 솔로 승률
+Time together
+= 함께한 시간
+Friends
+= 친구
+Victories together
+= 함께한 승리
+Enemies slain together
+= 함께 처치한 적
+Bosses together
+= 함께 처치한 보스
+Who you play with
+= 함께 플레이하는 사람
+No co-op runs recorded yet. Play a run with friends and they show up here.
+= 아직 협동 런이 없습니다. 친구와 함께 플레이하면 여기에 표시됩니다.
+First win together {0}
+= 첫 공동 승리 {0}
+Fastest win {0}
+= 최단 승리 {0}
+Most bosses {#0}
+= 최다 보스 {#0}
+Played since {0}
+= {0}부터 함께
+Accomplishments together
+= 함께 이룬 업적
+With {0}
+= 함께: {0}
+No play time counted yet. AZS Stats counts it while the game runs.
+= 아직 플레이 시간이 집계되지 않았습니다. 게임 실행 중 AZS Stats가 집계합니다.
+Play time is counted in game by the AZS Stats addon. Install it on the STATS page.
+= 플레이 시간은 게임 내 AZS Stats 애드온이 집계합니다. 통계 페이지에서 설치하세요.
+Counted in game by AZS Stats; cloud saving carries it to your other PCs.
+= 게임 내 AZS Stats가 집계; 클라우드 저장이 다른 PC로 옮겨 줍니다.
+Counted in game by AZS Stats. Turn on cloud saving to take it to your other PCs.
+= 게임 내 AZS Stats가 집계. 다른 PC로 옮기려면 클라우드 저장을 켜세요.
+Show play time on the home screen
+= 홈 화면에 플레이 시간 표시

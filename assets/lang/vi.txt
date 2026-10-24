@@ -863,14 +863,14 @@ Track every run
 = Ghi lại mọi lượt chơi
 The stats file could not be read ({0}).
 = Không thể đọc tệp thống kê ({0}).
-The AS Time Tracker addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
-= Addon AS Time Tracker ghi lại mọi lượt chơi của bạn: chiến thắng, số hạ gục, sát thương, vàng và các kỷ lục cá nhân. Hãy cài nó, chơi xong một lượt, và thống kê sẽ hiện ở đây.
+The AZS Stats addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
+= Addon AZS Stats ghi lại mọi lượt chơi của bạn: chiến thắng, số hạ gục, sát thương, vàng và các kỷ lục cá nhân. Hãy cài nó, chơi xong một lượt, và thống kê sẽ hiện ở đây.
 It is optional: without it, this page only shows your play time.
 = Addon này không bắt buộc: không có nó, trang này chỉ hiện thời gian chơi của bạn.
-The AS Time Tracker addon is turned off. Turn it on in Addons to keep recording your runs.
-= Addon AS Time Tracker đang tắt. Hãy bật nó trong Addon để tiếp tục ghi lại các lượt chơi.
-No runs recorded yet. Finish a run with the AS Time Tracker addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
-= Chưa có lượt chơi nào được ghi lại. Hãy chơi xong một lượt khi bật AS Time Tracker. Trò chơi lưu dữ liệu addon khi bạn thoát, nên thống kê sẽ hiện ở đây sau khi bạn đóng trò chơi.
+The AZS Stats addon is turned off. Turn it on in Addons to keep recording your runs.
+= Addon AZS Stats đang tắt. Hãy bật nó trong Addon để tiếp tục ghi lại các lượt chơi.
+No runs recorded yet. Finish a run with the AZS Stats addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
+= Chưa có lượt chơi nào được ghi lại. Hãy chơi xong một lượt khi bật AZS Stats. Trò chơi lưu dữ liệu addon khi bạn thoát, nên thống kê sẽ hiện ở đây sau khi bạn đóng trò chơi.
 Runs
 = Lượt chơi
 Victories
@@ -941,12 +941,12 @@ In game, type /azstats to see your stats.
 = Trong game, gõ /azstats để xem thống kê.
 Saved by the game {0}.
 = Được trò chơi lưu lúc: {0}.
-AS Time Tracker updated.
-= Đã cập nhật AS Time Tracker.
-AS Time Tracker installed. It records your runs from now on.
-= Đã cài AS Time Tracker. Từ giờ nó sẽ ghi lại các lượt chơi của bạn.
-Could not install AS Time Tracker:\n\n{0}
-= Không thể cài AS Time Tracker:\n\n{0}
+AZS Stats updated.
+= Đã cập nhật AZS Stats.
+AZS Stats installed. It records your runs from now on.
+= Đã cài AZS Stats. Từ giờ nó sẽ ghi lại các lượt chơi của bạn.
+Could not install AZS Stats:\n\n{0}
+= Không thể cài AZS Stats:\n\n{0}
 ALL CLASSES
 = MỌI LỚP NHÂN VẬT
 Class pick rate
@@ -961,8 +961,8 @@ Picks per month
 = Số lần chọn mỗi tháng
 Abilities
 = Kỹ năng
-Abilities are recorded for runs played with the newest AS Time Tracker.
-= Kỹ năng được ghi lại cho các lượt chơi với AS Time Tracker mới nhất.
+Abilities are recorded for runs played with the newest AZS Stats.
+= Kỹ năng được ghi lại cho các lượt chơi với AZS Stats mới nhất.
 Picked in {#0} runs ({#1}%) · Win rate {#2}%
 = Được chọn trong {#0} lượt ({#1}%) · Tỉ lệ thắng {#2}%
 Best rank {#0}
@@ -995,3 +995,75 @@ Level {#0}
 = Cấp {#0}
 Runs: {#0} · Won: {#1}
 = Lượt: {#0} · Thắng: {#1}
+Nemesis
+= Kẻ thù truyền kiếp
+Co-op
+= Chơi cùng
+Your nemesis
+= Kẻ thù truyền kiếp của bạn
+Times it killed you
+= Số lần nó giết bạn
+Of your deaths
+= Trong số lần chết
+Deaths
+= Số lần chết
+Last time
+= Lần gần nhất
+Who kills you
+= Ai giết bạn
+No deaths recorded yet.
+= Chưa có lần chết nào được ghi lại.
+Killed you {#0} times ({#1}%)
+= Đã giết bạn {#0} lần ({#1}%)
+Death log
+= Nhật ký tử trận
+Slain by {0}
+= Bị giết bởi {0}
+Survived {0} · Level {#1}
+= Sống sót {0} · Cấp {#1}
+Last hits: {0}
+= Đòn cuối: {0}
+Most damage from: {0}
+= Gây nhiều sát thương nhất: {0}
+Runs with friends
+= Lượt chơi cùng bạn bè
+Co-op win rate
+= Tỉ lệ thắng khi chơi cùng
+Solo win rate
+= Tỉ lệ thắng khi chơi một mình
+Time together
+= Thời gian cùng nhau
+Friends
+= Bạn bè
+Victories together
+= Chiến thắng cùng nhau
+Enemies slain together
+= Kẻ địch hạ cùng nhau
+Bosses together
+= Trùm cùng nhau
+Who you play with
+= Bạn chơi cùng ai
+No co-op runs recorded yet. Play a run with friends and they show up here.
+= Chưa có lượt chơi cùng nào. Hãy chơi với bạn bè và họ sẽ hiện ở đây.
+First win together {0}
+= Chiến thắng đầu tiên cùng nhau {0}
+Fastest win {0}
+= Chiến thắng nhanh nhất {0}
+Most bosses {#0}
+= Nhiều trùm nhất {#0}
+Played since {0}
+= Cùng nhau từ {0}
+Accomplishments together
+= Thành tựu cùng nhau
+With {0}
+= Cùng {0}
+No play time counted yet. AZS Stats counts it while the game runs.
+= Chưa đếm được thời gian chơi. AZS Stats đếm khi trò chơi đang chạy.
+Play time is counted in game by the AZS Stats addon. Install it on the STATS page.
+= Thời gian chơi được addon AZS Stats đếm trong trò chơi. Hãy cài nó ở trang THỐNG KÊ.
+Counted in game by AZS Stats; cloud saving carries it to your other PCs.
+= Được AZS Stats đếm trong trò chơi; lưu trên mây mang nó sang các máy khác của bạn.
+Counted in game by AZS Stats. Turn on cloud saving to take it to your other PCs.
+= Được AZS Stats đếm trong trò chơi. Bật lưu trên mây để mang nó sang các máy khác của bạn.
+Show play time on the home screen
+= Hiện thời gian chơi trên màn hình chính

@@ -346,7 +346,7 @@ namespace AzerothLauncher
     // one item-style line
     public class ArmoryRow
     {
-        public string Icon = "?", Name = "", Sub = "", Value = "", ValueSub = "";
+        public string Icon = "?", Name = "", Sub = "", Sub2 = "", Value = "", ValueSub = "";     // Sub2: a dim third line
         public Color IconColor = Theme.Gold, NameColor = Armory.Bright, SubColor = Armory.Green, ValueColor = Armory.Bright;
         public bool RoundIcon;
         public double Bar = -1;                              // 0..1 draws a thin bar under the line
@@ -359,7 +359,8 @@ namespace AzerothLauncher
         public readonly List<ArmoryRow> Rows = new List<ArmoryRow>();
         public int Cols = 1;
         public string Empty = "";                            // translated text when there are no rows
-        const int Rh = 54, Gap = 8;
+        const int Gap = 8;
+        int Rh { get { return Rows.Exists(delegate(ArmoryRow x) { return x.Sub2.Length > 0; }) ? 72 : 54; } }
         int hover = -1;
         readonly List<Rectangle> rects = new List<Rectangle>();
 
@@ -402,6 +403,9 @@ namespace AzerothLauncher
                             TextFormatFlags.Left | TextFormatFlags.SingleLine | TextFormatFlags.EndEllipsis);
                 var vr = new Rectangle(s.Right - 10 - vw, s.Y + 8, vw, 20);
                 Armory.Text(g, row.Value, fv, row.ValueColor, vr, TextFormatFlags.Right | TextFormatFlags.SingleLine);
+                if (row.Sub2.Length > 0)
+                    Armory.Text(g, row.Sub2, Theme.F(8.5f, FontStyle.Italic), Armory.Dim, new Rectangle(tx, s.Y + 46, s.Right - 10 - tx, 18),
+                                TextFormatFlags.Left | TextFormatFlags.SingleLine | TextFormatFlags.EndEllipsis);
                 if (row.ValueSub.Length > 0)
                     Armory.Text(g, row.ValueSub, fvs, Armory.Dim, new Rectangle(vr.X, s.Y + 28, vw, 18), TextFormatFlags.Right | TextFormatFlags.SingleLine);
                 if (row.Bar >= 0)

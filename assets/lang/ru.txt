@@ -863,14 +863,14 @@ Track every run
 = Записывайте каждый забег
 The stats file could not be read ({0}).
 = Не удалось прочитать файл статистики ({0}).
-The AS Time Tracker addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
-= Аддон AS Time Tracker записывает каждый ваш забег: победы, убийства, урон, золото и личные рекорды. Установите его, завершите забег — и статистика появится здесь.
+The AZS Stats addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
+= Аддон AZS Stats записывает каждый ваш забег: победы, убийства, урон, золото и личные рекорды. Установите его, завершите забег — и статистика появится здесь.
 It is optional: without it, this page only shows your play time.
 = Он необязателен: без него эта страница показывает только время в игре.
-The AS Time Tracker addon is turned off. Turn it on in Addons to keep recording your runs.
-= Аддон AS Time Tracker выключен. Включите его в разделе «Аддоны», чтобы и дальше записывать забеги.
-No runs recorded yet. Finish a run with the AS Time Tracker addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
-= Забегов пока нет. Завершите забег с включённым аддоном AS Time Tracker. Игра сохраняет данные аддонов при выходе, поэтому статистика появится здесь после закрытия игры.
+The AZS Stats addon is turned off. Turn it on in Addons to keep recording your runs.
+= Аддон AZS Stats выключен. Включите его в разделе «Аддоны», чтобы и дальше записывать забеги.
+No runs recorded yet. Finish a run with the AZS Stats addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
+= Забегов пока нет. Завершите забег с включённым аддоном AZS Stats. Игра сохраняет данные аддонов при выходе, поэтому статистика появится здесь после закрытия игры.
 Runs
 = Забеги
 Victories
@@ -941,12 +941,12 @@ In game, type /azstats to see your stats.
 = В игре введите /azstats, чтобы увидеть статистику.
 Saved by the game {0}.
 = Сохранено игрой: {0}.
-AS Time Tracker updated.
-= AS Time Tracker обновлён.
-AS Time Tracker installed. It records your runs from now on.
-= AS Time Tracker установлен. Теперь он записывает ваши забеги.
-Could not install AS Time Tracker:\n\n{0}
-= Не удалось установить AS Time Tracker:\n\n{0}
+AZS Stats updated.
+= AZS Stats обновлён.
+AZS Stats installed. It records your runs from now on.
+= AZS Stats установлен. Теперь он записывает ваши забеги.
+Could not install AZS Stats:\n\n{0}
+= Не удалось установить AZS Stats:\n\n{0}
 ALL CLASSES
 = ВСЕ КЛАССЫ
 Class pick rate
@@ -961,8 +961,8 @@ Picks per month
 = Выборов за месяц
 Abilities
 = Способности
-Abilities are recorded for runs played with the newest AS Time Tracker.
-= Способности записываются в забегах с новейшей версией AS Time Tracker.
+Abilities are recorded for runs played with the newest AZS Stats.
+= Способности записываются в забегах с новейшей версией AZS Stats.
 Picked in {#0} runs ({#1}%) · Win rate {#2}%
 = Выбрана в {#0} забегах ({#1}%) · Побед {#2}%
 Best rank {#0}
@@ -995,3 +995,75 @@ Level {#0}
 = Уровень {#0}
 Runs: {#0} · Won: {#1}
 = Забеги: {#0} · Победы: {#1}
+Nemesis
+= Немезида
+Co-op
+= Кооператив
+Your nemesis
+= Ваша немезида
+Times it killed you
+= Сколько раз убивал вас
+Of your deaths
+= Ваших смертей
+Deaths
+= Смерти
+Last time
+= В последний раз
+Who kills you
+= Кто вас убивает
+No deaths recorded yet.
+= Смертей пока нет.
+Killed you {#0} times ({#1}%)
+= Убивал вас {#0} раз ({#1}%)
+Death log
+= Журнал смертей
+Slain by {0}
+= Убит: {0}
+Survived {0} · Level {#1}
+= Выжил {0} · Уровень {#1}
+Last hits: {0}
+= Последние удары: {0}
+Most damage from: {0}
+= Больше всего урона: {0}
+Runs with friends
+= Забеги с друзьями
+Co-op win rate
+= Побед в кооперативе
+Solo win rate
+= Побед в одиночку
+Time together
+= Время вместе
+Friends
+= Друзья
+Victories together
+= Побед вместе
+Enemies slain together
+= Врагов убито вместе
+Bosses together
+= Боссов вместе
+Who you play with
+= С кем вы играете
+No co-op runs recorded yet. Play a run with friends and they show up here.
+= Кооперативных забегов пока нет. Сыграйте с друзьями, и они появятся здесь.
+First win together {0}
+= Первая общая победа {0}
+Fastest win {0}
+= Самая быстрая победа {0}
+Most bosses {#0}
+= Больше всего боссов {#0}
+Played since {0}
+= Вместе с {0}
+Accomplishments together
+= Общие достижения
+With {0}
+= С {0}
+No play time counted yet. AZS Stats counts it while the game runs.
+= Время в игре ещё не посчитано. AZS Stats считает его, пока игра запущена.
+Play time is counted in game by the AZS Stats addon. Install it on the STATS page.
+= Время в игре считает аддон AZS Stats. Установите его на странице СТАТИСТИКА.
+Counted in game by AZS Stats; cloud saving carries it to your other PCs.
+= Считается в игре аддоном AZS Stats; облачное сохранение переносит его на другие ПК.
+Counted in game by AZS Stats. Turn on cloud saving to take it to your other PCs.
+= Считается в игре аддоном AZS Stats. Включите облачное сохранение, чтобы перенести его на другие ПК.
+Show play time on the home screen
+= Показывать время в игре на главном экране

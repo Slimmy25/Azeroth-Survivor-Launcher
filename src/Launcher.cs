@@ -112,7 +112,6 @@ namespace AzerothLauncher
                 After(300, StartupUpdateCheck);              // a newer launcher on GitHub is installed right away
                 After(500, MaybeFirstRun);
                 After(900, TellUpdateRecovery);
-                After(2000, SyncPlayTime);                   // play time of all PCs from the sync folder
             };
             VisibleChanged += delegate
             {
@@ -253,7 +252,7 @@ namespace AzerothLauncher
             }
             // play time, at the bottom of the welcome area
             PlayStats ps = ShownPlayStats();
-            if (ps.Sessions > 0)
+            if (ps.Sessions > 0 && StatsEnabled() && Cfg.Bool("home_playtime", true))
                 Theme.CenterText(g, Lang.T("Time played: " + Duration(ps.Seconds) + "   |   Last session: " + Duration(ps.LastSeconds)),
                                  Theme.F(9, FontStyle.Italic), Theme.GoldDim, new RectangleF(20, 300, W - 40, 18), null);
             // footer text: cloud result, then the status
@@ -337,7 +336,6 @@ namespace AzerothLauncher
         // call after cloud saving is turned on or off: show/hide every cloud reference
         public void ApplyCloudVisibility()
         {
-            SyncPlayTime();
             LayoutNav();
             if (!CloudEnabled()) SetCloudNote("");
             Invalidate();
@@ -561,7 +559,6 @@ namespace AzerothLauncher
             {
                 Cfg.Set("cloud_dir", d);
                 Cfg.Save();
-                SyncPlayTime();
                 RebuildCurrent();
             }
         }
@@ -754,28 +751,12 @@ namespace AzerothLauncher
                     var psi = new ProcessStartInfo(exe);
                     psi.WorkingDirectory = Path.GetDirectoryName(exe);
                     psi.UseShellExecute = false;
-                    DateTime started = DateTime.UtcNow, lastTick = started;
-                    long counted = 0;
-                    Action tick = delegate                   // play time so far, saved every minute
-                    {
-                        long elapsed = (long)(DateTime.UtcNow - started).TotalSeconds;
-                        long delta = elapsed - counted;
-                        counted = elapsed;
-                        lastTick = DateTime.UtcNow;
-                        Ui(delegate { AddPlayTime(delta, elapsed); });
-                    };
                     using (Process p = Process.Start(psi))
                     {
                         launched = true;
-                        Ui(StartPlaySession);
-                        while (!p.WaitForExit(60000)) tick();        // returns on normal exit or crash
+                        p.WaitForExit();                     // returns on normal exit or crash
                     }
-                    while (Util.GameRunning())               // the game may hand over to another process
-                    {
-                        Thread.Sleep(2000);
-                        if ((DateTime.UtcNow - lastTick).TotalSeconds >= 60) tick();
-                    }
-                    tick();
+                    while (Util.GameRunning()) Thread.Sleep(2000);   // the game may hand over to another process
                 }
                 catch (Exception e)
                 {
@@ -817,131 +798,46 @@ namespace AzerothLauncher
         }
 
         // ------------------------------------------------------------------ play time
-        // Counted while a game started with PLAY runs (also if it hands over to another process) and saved every
-        // minute, so a crash of the game or the launcher still counts. Stored in config.json.
-        public long PlayLong(string key)
-        {
-            object v = Json.Get(Cfg.Data, key);
-            return v is long ? (long)v : v is double ? (long)(double)v : 0;
-        }
-
+        // Counted in game by the AZS Stats addon (the time the game runs) and read from its saved file, which
+        // cloud saving carries between PCs with the other addon settings. The launcher no longer counts it.
         public static string Duration(long seconds)
         {
             long h = seconds / 3600, m = seconds % 3600 / 60;
             return h > 0 ? h + "h " + m.ToString("00") + "m" : m + "m";
         }
 
-        PlayStats cloudPlay;                                 // totals of all PCs from the sync folder, when known
+        RunStats statsCache;
+        string statsCacheKey = "";
 
-        PlayStats LocalPlayStats()
+        // the addon's stats, read again only when its file changed; null without the addon's file
+        public RunStats AddonStats()
         {
-            var p = new PlayStats();
-            p.Seconds = PlayLong("play_seconds");
-            p.Sessions = PlayLong("play_sessions");
-            p.Longest = PlayLong("play_longest_seconds");
-            p.LastSeconds = PlayLong("play_last_seconds");
-            p.LastDate = Cfg.Str("play_last_date");
-            return p;
+            try
+            {
+                string f = Stats.FindFile(SyncSettings().SavedDir);
+                if (f == null) { statsCache = null; statsCacheKey = ""; return null; }
+                string key = f + "|" + File.GetLastWriteTimeUtc(f).Ticks;
+                if (key != statsCacheKey)
+                {
+                    statsCache = Stats.Load(SyncSettings().SavedDir);
+                    statsCacheKey = key;
+                }
+                return statsCache;
+            }
+            catch (Exception) { return null; }
         }
 
-        // what the Home screen and Options show: all PCs while cloud saving is on, else this PC
+        // what the Home screen, Options and Stats show
         public PlayStats ShownPlayStats()
         {
-            return CloudEnabled() && cloudPlay != null ? cloudPlay : LocalPlayStats();
-        }
-
-        bool PlayCloudOn() { return CloudEnabled() && PlayTime.Reachable(Cfg.Str("cloud_dir").Trim()); }
-
-        string PlayDevice()
-        {
-            string id = Cfg.Str("play_device");
-            if (id.Length == 0)
-            {
-                id = SyncEngine.Machine + "-" + Guid.NewGuid().ToString("N").Substring(0, 6);
-                Cfg.Set("play_device", id);
-                Cfg.Save();
-            }
-            return id;
-        }
-
-        // Shares this PC's play time through the sync folder and fetches the totals of all PCs (in the background).
-        void SyncPlayTime()
-        {
-            if (!PlayCloudOn()) { cloudPlay = null; return; }
-            string cloud = Cfg.Str("cloud_dir").Trim(), device = PlayDevice(), myEpoch = Cfg.Str("play_epoch");
-            PlayStats mine = LocalPlayStats();
-            Bg(delegate
-            {
-                try
-                {
-                    string epoch = PlayTime.Epoch(cloud);
-                    bool adopt = epoch.Length > 0 && epoch != myEpoch;   // play time was reset on another PC
-                    if (adopt) mine = new PlayStats();
-                    PlayStats total = PlayTime.Publish(cloud, device, SyncEngine.Machine, mine, adopt ? epoch : myEpoch);
-                    Ui(delegate
-                    {
-                        if (adopt)
-                        {
-                            foreach (string k in new[] { "play_seconds", "play_sessions", "play_last_seconds", "play_longest_seconds", "play_last_date" })
-                                Cfg.Remove(k);
-                            Cfg.Set("play_epoch", epoch);
-                            Cfg.Save();
-                        }
-                        cloudPlay = total;
-                        Invalidate(new Rectangle(17, 296, W - 34, 26));
-                        if (current == "Options" && side.Visible && !GameRunningFlag) BuildPanel("Options");
-                    });
-                }
-                catch (Exception) { }                        // the cloud drive is busy or offline: try again later
-            });
-        }
-
-        void StartPlaySession()
-        {
-            Cfg.Set("play_sessions", PlayLong("play_sessions") + 1);
-            Cfg.Set("play_last_seconds", 0L);
-            Cfg.Set("play_last_date", DateTime.Now.ToString("yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture));
-            Cfg.Save();
-            Invalidate(new Rectangle(17, 296, W - 34, 26));
-        }
-
-        void AddPlayTime(long delta, long sessionSeconds)
-        {
-            if (delta <= 0) return;
-            Cfg.Set("play_seconds", PlayLong("play_seconds") + delta);
-            Cfg.Set("play_last_seconds", sessionSeconds);
-            if (sessionSeconds > PlayLong("play_longest_seconds")) Cfg.Set("play_longest_seconds", sessionSeconds);
-            Cfg.Save();
-            Invalidate(new Rectangle(17, 296, W - 34, 26));
-            SetTrayTitle("Game running - " + Duration(sessionSeconds));
-            SyncPlayTime();
-        }
-
-        // back to zero; with cloud saving on, on every PC (each one zeroes itself when it sees the new epoch)
-        public void ResetPlayTime()
-        {
-            foreach (string k in new[] { "play_seconds", "play_sessions", "play_last_seconds", "play_longest_seconds", "play_last_date" })
-                Cfg.Remove(k);
-            cloudPlay = null;
-            if (PlayCloudOn())
-            {
-                string epoch = Guid.NewGuid().ToString("N"), cloud = Cfg.Str("cloud_dir").Trim();
-                Cfg.Set("play_epoch", epoch);
-                Bg(delegate
-                {
-                    try { PlayTime.Reset(cloud, epoch); } catch (Exception) { }
-                    Ui(SyncPlayTime);
-                });
-            }
-            Cfg.Save();
-            Invalidate();
-            SetStatus("Play time reset.");
+            RunStats st = AddonStats();
+            return st != null ? st.Play : new PlayStats();
         }
 
         void SessionDone(List<string> problems)
         {
             GameRunningFlag = false;
-            SyncPlayTime();
+            Invalidate();                                    // the play time the game just saved
             RefreshPlayLabel();
             SetTrayTitle("Idle");
             ShowWindowFront();                               // the launcher stays up front after the session

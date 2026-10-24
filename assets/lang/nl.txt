@@ -862,14 +862,14 @@ Track every run
 = Houd elke run bij
 The stats file could not be read ({0}).
 = Het statistiekenbestand kon niet worden gelezen ({0}).
-The AS Time Tracker addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
-= De addon AS Time Tracker houdt elke run bij die je speelt: overwinningen, kills, schade, goud en je persoonlijke records. Installeer hem, maak een run af en je statistieken verschijnen hier.
+The AZS Stats addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
+= De addon AZS Stats houdt elke run bij die je speelt: overwinningen, kills, schade, goud en je persoonlijke records. Installeer hem, maak een run af en je statistieken verschijnen hier.
 It is optional: without it, this page only shows your play time.
 = Hij is optioneel: zonder de addon toont deze pagina alleen je speeltijd.
-The AS Time Tracker addon is turned off. Turn it on in Addons to keep recording your runs.
-= De addon AS Time Tracker staat uit. Zet hem aan bij Addons om je runs te blijven bijhouden.
-No runs recorded yet. Finish a run with the AS Time Tracker addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
-= Nog geen runs vastgelegd. Maak een run af met AS Time Tracker aan. Het spel slaat addongegevens op wanneer je het verlaat, dus je statistieken verschijnen hier nadat je het spel hebt gesloten.
+The AZS Stats addon is turned off. Turn it on in Addons to keep recording your runs.
+= De addon AZS Stats staat uit. Zet hem aan bij Addons om je runs te blijven bijhouden.
+No runs recorded yet. Finish a run with the AZS Stats addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
+= Nog geen runs vastgelegd. Maak een run af met AZS Stats aan. Het spel slaat addongegevens op wanneer je het verlaat, dus je statistieken verschijnen hier nadat je het spel hebt gesloten.
 Runs
 = Runs
 Victories
@@ -940,12 +940,12 @@ In game, type /azstats to see your stats.
 = Typ in het spel /azstats om je statistieken te zien.
 Saved by the game {0}.
 = Door het spel opgeslagen: {0}.
-AS Time Tracker updated.
-= AS Time Tracker bijgewerkt.
-AS Time Tracker installed. It records your runs from now on.
-= AS Time Tracker geïnstalleerd. Vanaf nu worden je runs bijgehouden.
-Could not install AS Time Tracker:\n\n{0}
-= AS Time Tracker kon niet worden geïnstalleerd:\n\n{0}
+AZS Stats updated.
+= AZS Stats bijgewerkt.
+AZS Stats installed. It records your runs from now on.
+= AZS Stats geïnstalleerd. Vanaf nu worden je runs bijgehouden.
+Could not install AZS Stats:\n\n{0}
+= AZS Stats kon niet worden geïnstalleerd:\n\n{0}
 ALL CLASSES
 = ALLE KLASSEN
 Class pick rate
@@ -960,8 +960,8 @@ Picks per month
 = Gekozen per maand
 Abilities
 = Vaardigheden
-Abilities are recorded for runs played with the newest AS Time Tracker.
-= Vaardigheden worden vastgelegd voor runs met de nieuwste AS Time Tracker.
+Abilities are recorded for runs played with the newest AZS Stats.
+= Vaardigheden worden vastgelegd voor runs met de nieuwste AZS Stats.
 Picked in {#0} runs ({#1}%) · Win rate {#2}%
 = Gekozen in {#0} runs ({#1}%) · Winstpercentage {#2}%
 Best rank {#0}
@@ -994,3 +994,75 @@ Level {#0}
 = Level {#0}
 Runs: {#0} · Won: {#1}
 = Runs: {#0} · Gewonnen: {#1}
+Nemesis
+= Aartsvijand
+Co-op
+= Co-op
+Your nemesis
+= Je aartsvijand
+Times it killed you
+= Zo vaak doodde hij je
+Of your deaths
+= Van je doden
+Deaths
+= Doden
+Last time
+= Laatst
+Who kills you
+= Wie je doodt
+No deaths recorded yet.
+= Nog geen doden vastgelegd.
+Killed you {#0} times ({#1}%)
+= Doodde je {#0} keer ({#1}%)
+Death log
+= Dodenlogboek
+Slain by {0}
+= Gedood door {0}
+Survived {0} · Level {#1}
+= Overleefd {0} · Level {#1}
+Last hits: {0}
+= Laatste treffers: {0}
+Most damage from: {0}
+= Meeste schade van: {0}
+Runs with friends
+= Runs met vrienden
+Co-op win rate
+= Co-op winstpercentage
+Solo win rate
+= Solo winstpercentage
+Time together
+= Tijd samen
+Friends
+= Vrienden
+Victories together
+= Samen gewonnen
+Enemies slain together
+= Samen verslagen vijanden
+Bosses together
+= Bazen samen
+Who you play with
+= Met wie je speelt
+No co-op runs recorded yet. Play a run with friends and they show up here.
+= Nog geen co-op runs. Speel een run met vrienden en ze verschijnen hier.
+First win together {0}
+= Eerste overwinning samen {0}
+Fastest win {0}
+= Snelste overwinning {0}
+Most bosses {#0}
+= Meeste bazen {#0}
+Played since {0}
+= Samen sinds {0}
+Accomplishments together
+= Samen bereikt
+With {0}
+= Met {0}
+No play time counted yet. AZS Stats counts it while the game runs.
+= Nog geen speeltijd geteld. AZS Stats telt die terwijl het spel draait.
+Play time is counted in game by the AZS Stats addon. Install it on the STATS page.
+= Speeltijd wordt in het spel geteld door de addon AZS Stats. Installeer hem op de pagina STATISTIEKEN.
+Counted in game by AZS Stats; cloud saving carries it to your other PCs.
+= In het spel geteld door AZS Stats; cloudopslag neemt hem mee naar je andere pc's.
+Counted in game by AZS Stats. Turn on cloud saving to take it to your other PCs.
+= In het spel geteld door AZS Stats. Zet cloudopslag aan om hem mee te nemen naar je andere pc's.
+Show play time on the home screen
+= Speeltijd tonen op het startscherm

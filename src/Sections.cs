@@ -1320,31 +1320,21 @@ namespace AzerothLauncher
             var head = PutText("Play time", 11, FontStyle.Bold, Theme.Gold, 20, y, 0);
             PlayStats ps = ShownPlayStats();
             long sessions = ps.Sessions;
-            bool shared = CloudEnabled() && cloudPlay != null;
-            string stats = sessions == 0 ? "No games played with this launcher yet." :
-                "Total: " + Duration(ps.Seconds) + " over " + Util.Plural((int)sessions, "session") +
-                (shared && ps.Devices > 1 ? " on " + ps.Devices + " PCs" : "") + "\n" +
-                "Last session: " + Duration(ps.LastSeconds) + " (" + ps.LastDate + ")\n" +
-                "Longest session: " + Duration(ps.Longest);
-            if (sessions > 0 && StatsEnabled())             // the details are on the STATS page
-                stats = "Total: " + Duration(ps.Seconds) + " over " + Util.Plural((int)sessions, "session") +
-                        (shared && ps.Devices > 1 ? " on " + ps.Devices + " PCs" : "") + "\n" +
-                        "Your sessions and records are on the STATS page.";
-            else
-                stats += shared ? "\nShared with your other PCs through the cloud sync folder." :
-                         CloudEnabled() ? "\nCounted on this PC (the sync folder is not reachable right now)." :
-                         "\nCounted on this PC. Turn on cloud saving to share it between your PCs.";
-            PutText(stats, 10, FontStyle.Regular, Theme.Text, 20, BottomOf(head) + 2, PW - 40);
-            if (sessions > 0)
-                Put(new WowButton("RESET PLAY TIME", delegate
-                {
-                    if (Msg.Show(side, shared ? "Set the play time back to zero on all your PCs?" : "Set the play time back to zero?",
-                                        "Play time", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                    {
-                        ResetPlayTime();
-                        BuildPanel("Options");
-                    }
-                }, 190, 30, 9), 20, PH - 10 - 30);
+            string stats = sessions == 0
+                ? (Stats.AddonInstalled(AddonsDir()) ? "No play time counted yet. AZS Stats counts it while the game runs."
+                                                      : "Play time is counted in game by the AZS Stats addon. Install it on the STATS page.")
+                : "Total: " + Duration(ps.Seconds) + " over " + Util.Plural((int)sessions, "session") + "\n" +
+                  "Counted in game by AZS Stats; cloud saving carries it to your other PCs.";
+            var statsLabel = PutText(stats, 10, FontStyle.Regular, Theme.Text, 20, BottomOf(head) + 2, PW - 40);
+            var homeCb = UI.Check("Show play time on the home screen", Cfg.Bool("home_playtime", true), Theme.Text, Theme.Panel, 11);
+            homeCb.CheckedChanged += delegate
+            {
+                Cfg.Set("home_playtime", homeCb.Checked);
+                Cfg.Save();
+                Invalidate();
+            };
+            homeCb.Size = VStack.Measure(homeCb);
+            Put(homeCb, 18, BottomOf(statsLabel) + 4);
             Put(new WowButton("RUN SETUP AGAIN", delegate { RunSetup(); }, 190, 30, 9), PW - 20 - 190, PH - 10 - 30);
         }
 

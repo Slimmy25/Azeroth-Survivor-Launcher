@@ -863,14 +863,14 @@ Track every run
 = हर रन का रिकॉर्ड रखें
 The stats file could not be read ({0}).
 = आँकड़ों की फ़ाइल पढ़ी नहीं जा सकी ({0})।
-The AS Time Tracker addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
-= AS Time Tracker ऐडऑन आपके हर रन का रिकॉर्ड रखता है: जीत, किल, डैमेज, सोना और आपके निजी रिकॉर्ड। इसे इंस्टॉल करें, एक रन पूरा करें, और आपके आँकड़े यहाँ दिखेंगे।
+The AZS Stats addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
+= AZS Stats ऐडऑन आपके हर रन का रिकॉर्ड रखता है: जीत, किल, डैमेज, सोना और आपके निजी रिकॉर्ड। इसे इंस्टॉल करें, एक रन पूरा करें, और आपके आँकड़े यहाँ दिखेंगे।
 It is optional: without it, this page only shows your play time.
 = यह वैकल्पिक है: इसके बिना यह पेज केवल आपका खेलने का समय दिखाता है।
-The AS Time Tracker addon is turned off. Turn it on in Addons to keep recording your runs.
-= AS Time Tracker ऐडऑन बंद है। अपने रन रिकॉर्ड करते रहने के लिए इसे ऐडऑन में चालू करें।
-No runs recorded yet. Finish a run with the AS Time Tracker addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
-= अभी तक कोई रन रिकॉर्ड नहीं हुआ। AS Time Tracker चालू रखकर एक रन पूरा करें। गेम बंद करते समय ऐडऑन का डेटा सेव करता है, इसलिए गेम बंद करने के बाद आपके आँकड़े यहाँ दिखेंगे।
+The AZS Stats addon is turned off. Turn it on in Addons to keep recording your runs.
+= AZS Stats ऐडऑन बंद है। अपने रन रिकॉर्ड करते रहने के लिए इसे ऐडऑन में चालू करें।
+No runs recorded yet. Finish a run with the AZS Stats addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
+= अभी तक कोई रन रिकॉर्ड नहीं हुआ। AZS Stats चालू रखकर एक रन पूरा करें। गेम बंद करते समय ऐडऑन का डेटा सेव करता है, इसलिए गेम बंद करने के बाद आपके आँकड़े यहाँ दिखेंगे।
 Runs
 = रन
 Victories
@@ -941,12 +941,12 @@ In game, type /azstats to see your stats.
 = गेम में अपने आँकड़े देखने के लिए /azstats लिखें।
 Saved by the game {0}.
 = गेम द्वारा सेव किया गया: {0}।
-AS Time Tracker updated.
-= AS Time Tracker अपडेट हुआ।
-AS Time Tracker installed. It records your runs from now on.
-= AS Time Tracker इंस्टॉल हुआ। अब से यह आपके रन रिकॉर्ड करेगा।
-Could not install AS Time Tracker:\n\n{0}
-= AS Time Tracker इंस्टॉल नहीं हो सका:\n\n{0}
+AZS Stats updated.
+= AZS Stats अपडेट हुआ।
+AZS Stats installed. It records your runs from now on.
+= AZS Stats इंस्टॉल हुआ। अब से यह आपके रन रिकॉर्ड करेगा।
+Could not install AZS Stats:\n\n{0}
+= AZS Stats इंस्टॉल नहीं हो सका:\n\n{0}
 ALL CLASSES
 = सभी क्लास
 Class pick rate
@@ -961,8 +961,8 @@ Picks per month
 = प्रति माह चुनाव
 Abilities
 = क्षमताएँ
-Abilities are recorded for runs played with the newest AS Time Tracker.
-= क्षमताएँ नवीनतम AS Time Tracker के साथ खेले गए रन में रिकॉर्ड होती हैं।
+Abilities are recorded for runs played with the newest AZS Stats.
+= क्षमताएँ नवीनतम AZS Stats के साथ खेले गए रन में रिकॉर्ड होती हैं।
 Picked in {#0} runs ({#1}%) · Win rate {#2}%
 = {#0} रन में चुना गया ({#1}%) · जीत दर {#2}%
 Best rank {#0}
@@ -995,3 +995,75 @@ Level {#0}
 = लेवल {#0}
 Runs: {#0} · Won: {#1}
 = रन: {#0} · जीते: {#1}
+Nemesis
+= कट्टर दुश्मन
+Co-op
+= को-ऑप
+Your nemesis
+= आपका कट्टर दुश्मन
+Times it killed you
+= इसने आपको कितनी बार मारा
+Of your deaths
+= आपकी मौतों में से
+Deaths
+= मौतें
+Last time
+= पिछली बार
+Who kills you
+= आपको कौन मारता है
+No deaths recorded yet.
+= अभी तक कोई मौत दर्ज नहीं हुई।
+Killed you {#0} times ({#1}%)
+= आपको {#0} बार मारा ({#1}%)
+Death log
+= मौत का लॉग
+Slain by {0}
+= {0} ने मारा
+Survived {0} · Level {#1}
+= बचे रहे {0} · लेवल {#1}
+Last hits: {0}
+= आखिरी वार: {0}
+Most damage from: {0}
+= सबसे ज़्यादा डैमेज: {0}
+Runs with friends
+= दोस्तों के साथ रन
+Co-op win rate
+= को-ऑप जीत दर
+Solo win rate
+= अकेले जीत दर
+Time together
+= साथ बिताया समय
+Friends
+= दोस्त
+Victories together
+= साथ में जीत
+Enemies slain together
+= साथ में हराए दुश्मन
+Bosses together
+= साथ में बॉस
+Who you play with
+= आप किसके साथ खेलते हैं
+No co-op runs recorded yet. Play a run with friends and they show up here.
+= अभी कोई को-ऑप रन नहीं। दोस्तों के साथ खेलें, वे यहाँ दिखेंगे।
+First win together {0}
+= साथ में पहली जीत {0}
+Fastest win {0}
+= सबसे तेज़ जीत {0}
+Most bosses {#0}
+= सबसे ज़्यादा बॉस {#0}
+Played since {0}
+= {0} से साथ
+Accomplishments together
+= साथ की उपलब्धियाँ
+With {0}
+= साथ: {0}
+No play time counted yet. AZS Stats counts it while the game runs.
+= अभी तक खेलने का समय नहीं गिना गया। गेम चलते समय AZS Stats इसे गिनता है।
+Play time is counted in game by the AZS Stats addon. Install it on the STATS page.
+= खेलने का समय गेम में AZS Stats ऐडऑन गिनता है। इसे आँकड़े पेज पर इंस्टॉल करें।
+Counted in game by AZS Stats; cloud saving carries it to your other PCs.
+= गेम में AZS Stats ने गिना; क्लाउड सेव इसे आपके दूसरे पीसी तक ले जाता है।
+Counted in game by AZS Stats. Turn on cloud saving to take it to your other PCs.
+= गेम में AZS Stats ने गिना। इसे दूसरे पीसी पर ले जाने के लिए क्लाउड सेव चालू करें।
+Show play time on the home screen
+= होम स्क्रीन पर खेलने का समय दिखाएँ

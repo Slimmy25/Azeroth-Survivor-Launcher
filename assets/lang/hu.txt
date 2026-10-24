@@ -863,14 +863,14 @@ Track every run
 = Rögzíts minden menetet
 The stats file could not be read ({0}).
 = A statisztikafájl nem olvasható ({0}).
-The AS Time Tracker addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
-= Az AS Time Tracker kiegészítő minden meneted rögzíti: győzelmek, ölések, sebzés, arany és a személyes rekordjaid. Telepítsd, fejezz be egy menetet, és a statisztikád itt jelenik meg.
+The AZS Stats addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
+= Az AZS Stats kiegészítő minden meneted rögzíti: győzelmek, ölések, sebzés, arany és a személyes rekordjaid. Telepítsd, fejezz be egy menetet, és a statisztikád itt jelenik meg.
 It is optional: without it, this page only shows your play time.
 = Nem kötelező: nélküle ez az oldal csak a játékidődet mutatja.
-The AS Time Tracker addon is turned off. Turn it on in Addons to keep recording your runs.
-= Az AS Time Tracker kiegészítő ki van kapcsolva. Kapcsold be a Kiegészítők között, hogy továbbra is rögzítse a meneteidet.
-No runs recorded yet. Finish a run with the AS Time Tracker addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
-= Még nincs rögzített menet. Fejezz be egy menetet bekapcsolt AS Time Tracker kiegészítővel. A játék kilépéskor menti a kiegészítők adatait, így a statisztikád a játék bezárása után jelenik meg itt.
+The AZS Stats addon is turned off. Turn it on in Addons to keep recording your runs.
+= Az AZS Stats kiegészítő ki van kapcsolva. Kapcsold be a Kiegészítők között, hogy továbbra is rögzítse a meneteidet.
+No runs recorded yet. Finish a run with the AZS Stats addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
+= Még nincs rögzített menet. Fejezz be egy menetet bekapcsolt AZS Stats kiegészítővel. A játék kilépéskor menti a kiegészítők adatait, így a statisztikád a játék bezárása után jelenik meg itt.
 Runs
 = Menetek
 Victories
@@ -941,12 +941,12 @@ In game, type /azstats to see your stats.
 = A játékban írd be: /azstats, hogy lásd a statisztikádat.
 Saved by the game {0}.
 = A játék mentette: {0}.
-AS Time Tracker updated.
-= AS Time Tracker frissítve.
-AS Time Tracker installed. It records your runs from now on.
-= AS Time Tracker telepítve. Mostantól rögzíti a meneteidet.
-Could not install AS Time Tracker:\n\n{0}
-= Az AS Time Tracker nem telepíthető:\n\n{0}
+AZS Stats updated.
+= AZS Stats frissítve.
+AZS Stats installed. It records your runs from now on.
+= AZS Stats telepítve. Mostantól rögzíti a meneteidet.
+Could not install AZS Stats:\n\n{0}
+= Az AZS Stats nem telepíthető:\n\n{0}
 ALL CLASSES
 = MINDEN KASZT
 Class pick rate
@@ -961,8 +961,8 @@ Picks per month
 = Választások havonta
 Abilities
 = Képességek
-Abilities are recorded for runs played with the newest AS Time Tracker.
-= A képességeket a legújabb AS Time Trackerrel játszott menetekben rögzíti.
+Abilities are recorded for runs played with the newest AZS Stats.
+= A képességeket a legújabb AZS Statsrel játszott menetekben rögzíti.
 Picked in {#0} runs ({#1}%) · Win rate {#2}%
 = {#0} menetben választva ({#1}%) · Győzelmi arány {#2}%
 Best rank {#0}
@@ -995,3 +995,75 @@ Level {#0}
 = Szint {#0}
 Runs: {#0} · Won: {#1}
 = Menetek: {#0} · Győzelmek: {#1}
+Nemesis
+= Ősellenség
+Co-op
+= Kooperatív
+Your nemesis
+= Az ősellenséged
+Times it killed you
+= Ennyiszer ölt meg
+Of your deaths
+= A halálaidból
+Deaths
+= Halálok
+Last time
+= Legutóbb
+Who kills you
+= Ki öl meg
+No deaths recorded yet.
+= Még nincs rögzített halál.
+Killed you {#0} times ({#1}%)
+= {#0}-szor ölt meg ({#1}%)
+Death log
+= Halálnapló
+Slain by {0}
+= Megölte: {0}
+Survived {0} · Level {#1}
+= Túlélt {0} · Szint {#1}
+Last hits: {0}
+= Utolsó találatok: {0}
+Most damage from: {0}
+= Legtöbb sebzés tőle: {0}
+Runs with friends
+= Menetek barátokkal
+Co-op win rate
+= Kooperatív győzelmi arány
+Solo win rate
+= Egyéni győzelmi arány
+Time together
+= Közös idő
+Friends
+= Barátok
+Victories together
+= Közös győzelmek
+Enemies slain together
+= Együtt legyőzött ellenségek
+Bosses together
+= Közös főellenségek
+Who you play with
+= Kikkel játszol
+No co-op runs recorded yet. Play a run with friends and they show up here.
+= Még nincs kooperatív menet. Játssz egy menetet a barátaiddal, és itt megjelennek.
+First win together {0}
+= Első közös győzelem {0}
+Fastest win {0}
+= Leggyorsabb győzelem {0}
+Most bosses {#0}
+= Legtöbb főellenség {#0}
+Played since {0}
+= Együtt {0} óta
+Accomplishments together
+= Közös eredmények
+With {0}
+= Velük: {0}
+No play time counted yet. AZS Stats counts it while the game runs.
+= Még nincs számolt játékidő. Az AZS Stats a játék futása közben számolja.
+Play time is counted in game by the AZS Stats addon. Install it on the STATS page.
+= A játékidőt a játékban az AZS Stats kiegészítő számolja. Telepítsd a STATISZTIKA oldalon.
+Counted in game by AZS Stats; cloud saving carries it to your other PCs.
+= A játékban az AZS Stats számolja; a felhőmentés átviszi a többi gépedre.
+Counted in game by AZS Stats. Turn on cloud saving to take it to your other PCs.
+= A játékban az AZS Stats számolja. Kapcsold be a felhőmentést, hogy a többi gépedre is átkerüljön.
+Show play time on the home screen
+= Játékidő mutatása a kezdőképernyőn

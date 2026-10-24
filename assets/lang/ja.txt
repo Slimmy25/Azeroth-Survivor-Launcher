@@ -863,14 +863,14 @@ Track every run
 = すべてのランを記録
 The stats file could not be read ({0}).
 = 統計ファイルを読み込めませんでした（{0}）。
-The AS Time Tracker addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
-= アドオン AS Time Tracker は、プレイしたすべてのランを記録します：勝利、撃破数、ダメージ、ゴールド、自己ベスト。インストールしてランを1回終えると、ここに統計が表示されます。
+The AZS Stats addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
+= アドオン AZS Stats は、プレイしたすべてのランを記録します：勝利、撃破数、ダメージ、ゴールド、自己ベスト。インストールしてランを1回終えると、ここに統計が表示されます。
 It is optional: without it, this page only shows your play time.
 = 任意です：なくても、このページにはプレイ時間が表示されます。
-The AS Time Tracker addon is turned off. Turn it on in Addons to keep recording your runs.
-= アドオン AS Time Tracker がオフになっています。ランの記録を続けるには「アドオン」でオンにしてください。
-No runs recorded yet. Finish a run with the AS Time Tracker addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
-= まだ記録されたランはありません。AS Time Tracker をオンにしてランを1回終えてください。ゲームは終了時にアドオンのデータを保存するため、ゲームを閉じた後に統計がここに表示されます。
+The AZS Stats addon is turned off. Turn it on in Addons to keep recording your runs.
+= アドオン AZS Stats がオフになっています。ランの記録を続けるには「アドオン」でオンにしてください。
+No runs recorded yet. Finish a run with the AZS Stats addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
+= まだ記録されたランはありません。AZS Stats をオンにしてランを1回終えてください。ゲームは終了時にアドオンのデータを保存するため、ゲームを閉じた後に統計がここに表示されます。
 Runs
 = ラン
 Victories
@@ -941,12 +941,12 @@ In game, type /azstats to see your stats.
 = ゲーム内で /azstats と入力すると統計を確認できます。
 Saved by the game {0}.
 = ゲームによる保存: {0}。
-AS Time Tracker updated.
-= AS Time Tracker をアップデートしました。
-AS Time Tracker installed. It records your runs from now on.
-= AS Time Tracker をインストールしました。これからランを記録します。
-Could not install AS Time Tracker:\n\n{0}
-= AS Time Tracker をインストールできませんでした：\n\n{0}
+AZS Stats updated.
+= AZS Stats をアップデートしました。
+AZS Stats installed. It records your runs from now on.
+= AZS Stats をインストールしました。これからランを記録します。
+Could not install AZS Stats:\n\n{0}
+= AZS Stats をインストールできませんでした：\n\n{0}
 ALL CLASSES
 = 全クラス
 Class pick rate
@@ -961,8 +961,8 @@ Picks per month
 = 月ごとの選択数
 Abilities
 = アビリティ
-Abilities are recorded for runs played with the newest AS Time Tracker.
-= アビリティは最新の AS Time Tracker でプレイしたランから記録されます。
+Abilities are recorded for runs played with the newest AZS Stats.
+= アビリティは最新の AZS Stats でプレイしたランから記録されます。
 Picked in {#0} runs ({#1}%) · Win rate {#2}%
 = {#0}回のランで選択（{#1}%）· 勝率 {#2}%
 Best rank {#0}
@@ -995,3 +995,75 @@ Level {#0}
 = レベル {#0}
 Runs: {#0} · Won: {#1}
 = ラン: {#0} · 勝利: {#1}
+Nemesis
+= 宿敵
+Co-op
+= 協力プレイ
+Your nemesis
+= あなたの宿敵
+Times it killed you
+= 倒された回数
+Of your deaths
+= 死亡のうち
+Deaths
+= 死亡
+Last time
+= 最後
+Who kills you
+= あなたを倒す敵
+No deaths recorded yet.
+= まだ死亡は記録されていません。
+Killed you {#0} times ({#1}%)
+= {#0}回倒された（{#1}%）
+Death log
+= 死亡ログ
+Slain by {0}
+= {0}に倒された
+Survived {0} · Level {#1}
+= 生存 {0} · レベル {#1}
+Last hits: {0}
+= 最後の攻撃: {0}
+Most damage from: {0}
+= 最大ダメージ: {0}
+Runs with friends
+= フレンドとのラン
+Co-op win rate
+= 協力プレイの勝率
+Solo win rate
+= ソロの勝率
+Time together
+= 一緒の時間
+Friends
+= フレンド
+Victories together
+= 一緒の勝利
+Enemies slain together
+= 一緒に倒した敵
+Bosses together
+= 一緒に倒したボス
+Who you play with
+= 一緒に遊ぶ人
+No co-op runs recorded yet. Play a run with friends and they show up here.
+= 協力プレイのランはまだありません。フレンドと遊ぶとここに表示されます。
+First win together {0}
+= 初めての共同勝利 {0}
+Fastest win {0}
+= 最速勝利 {0}
+Most bosses {#0}
+= 最多ボス {#0}
+Played since {0}
+= {0} から一緒
+Accomplishments together
+= 一緒の実績
+With {0}
+= 一緒: {0}
+No play time counted yet. AZS Stats counts it while the game runs.
+= プレイ時間はまだ数えられていません。ゲーム中に AZS Stats が数えます。
+Play time is counted in game by the AZS Stats addon. Install it on the STATS page.
+= プレイ時間はゲーム内でアドオン AZS Stats が数えます。「統計」ページでインストールしてください。
+Counted in game by AZS Stats; cloud saving carries it to your other PCs.
+= ゲーム内で AZS Stats が計測。クラウドセーブで他の PC にも引き継がれます。
+Counted in game by AZS Stats. Turn on cloud saving to take it to your other PCs.
+= ゲーム内で AZS Stats が計測。他の PC に引き継ぐにはクラウドセーブをオンにしてください。
+Show play time on the home screen
+= ホーム画面にプレイ時間を表示
