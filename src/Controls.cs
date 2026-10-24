@@ -502,6 +502,27 @@ namespace AzerothLauncher
 
         void Moved() { if (Scrolled != null) Scrolled(); }
 
+        // HideBars: Windows' own scroll bars are never drawn (a ThinScrollBar shows the position instead); the
+        // panel still scrolls the same way. The styles are taken off each time Windows sizes the window frame.
+        public bool HideBars;
+
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        static extern int GetWindowLong(IntPtr hWnd, int index);
+
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        static extern int SetWindowLong(IntPtr hWnd, int index, int value);
+
+        protected override void WndProc(ref Message m)
+        {
+            if (HideBars && m.Msg == 0x83)                    // WM_NCCALCSIZE
+            {
+                const int GWL_STYLE = -16, WS_VSCROLL = 0x00200000, WS_HSCROLL = 0x00100000;
+                int style = GetWindowLong(Handle, GWL_STYLE);
+                if ((style & (WS_VSCROLL | WS_HSCROLL)) != 0) SetWindowLong(Handle, GWL_STYLE, style & ~(WS_VSCROLL | WS_HSCROLL));
+            }
+            base.WndProc(ref m);
+        }
+
         protected override void OnScroll(ScrollEventArgs se) { base.OnScroll(se); Moved(); }
         protected override void OnLayout(LayoutEventArgs levent) { base.OnLayout(levent); Moved(); }
 
