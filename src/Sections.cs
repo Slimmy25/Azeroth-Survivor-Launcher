@@ -47,7 +47,7 @@ namespace AzerothLauncher
             using (var b = new SolidBrush(Theme.Hex("#fff0b0")))
             {
                 sf.LineAlignment = StringAlignment.Center;
-                g.DrawString(title, Theme.F(13, FontStyle.Bold), b, new RectangleF(66, 11, w - 110, 28), sf);
+                g.DrawString(Lang.T(title), Theme.F(13, FontStyle.Bold), b, new RectangleF(66, 11, w - 110, 28), sf);
             }
             if (Theme.Portrait != null) g.DrawImage(Theme.Portrait, 28 - 24, 25 - 24, 48, 48);
             Rectangle x = CloseBox;
@@ -236,7 +236,7 @@ namespace AzerothLauncher
         void SetSideTitle(string text)
         {
             sideHead.Title = text;
-            side.Text = Array.IndexOf(SectionNames, current) >= 0 ? current : text;    // the taskbar and Alt+Tab name
+            side.Text = Lang.T(Array.IndexOf(SectionNames, current) >= 0 ? current : text);    // the taskbar and Alt+Tab name
         }
 
         // opens at its remembered spot, or the first time to the right of the launcher
@@ -360,9 +360,9 @@ namespace AzerothLauncher
             return c;
         }
 
-        Label PutText(string text, float size, FontStyle style, Color fg, int x, int y, int wrap)
+        Label PutText(string text, float size, FontStyle style, Color fg, int x, int y, int wrap, bool translate = true)
         {
-            var l = UI.Text(text, size, style, fg, Theme.Panel, wrap);
+            var l = UI.Text(text, size, style, fg, Theme.Panel, wrap, translate);
             l.Size = VStack.Measure(l);
             return Put(l, x, y);
         }
@@ -433,7 +433,7 @@ namespace AzerothLauncher
             inner.Dock = DockStyle.Fill;
             box.Controls.Add(inner);
             int y = 10;
-            var t = UI.Text(lines[0], 16, FontStyle.Bold, Theme.Gold, boxbg, w - 32);
+            var t = UI.Text(lines[0], 16, FontStyle.Bold, Theme.Gold, boxbg, w - 32, false);
             t.Size = VStack.Measure(t);
             t.Location = new Point(14, y);
             inner.Controls.Add(t);
@@ -441,7 +441,7 @@ namespace AzerothLauncher
             int start = 1;
             if (lines.Length > 1 && System.Text.RegularExpressions.Regex.IsMatch(lines[1].Trim(), "^-{3,}$"))
             {
-                var dash = UI.Text(lines[1].Trim(), 11, FontStyle.Regular, Theme.GoldDim, boxbg, w - 32);
+                var dash = UI.Text(lines[1].Trim(), 11, FontStyle.Regular, Theme.GoldDim, boxbg, w - 32, false);
                 dash.Size = VStack.Measure(dash);
                 dash.Location = new Point(14, y);
                 inner.Controls.Add(dash);
@@ -451,7 +451,7 @@ namespace AzerothLauncher
             string body = string.Join("\n", lines, start, lines.Length - start).Trim('\n');
             if (body.Length > 0)
             {
-                var b = UI.Text(body, 10, FontStyle.Regular, Theme.Text, boxbg, w - 32);
+                var b = UI.Text(body, 10, FontStyle.Regular, Theme.Text, boxbg, w - 32, false);
                 b.Size = VStack.Measure(b);
                 b.Location = new Point(14, y + 4);
                 inner.Controls.Add(b);
@@ -691,9 +691,9 @@ namespace AzerothLauncher
                 int textW = w - 2 - 10 - 120 - 10 - 10;
                 int ty = 6;
                 var labels = new List<Label>();
-                labels.Add(UI.Text(it.Name, 12, FontStyle.Bold, Theme.Gold, listbg, textW));
-                if (it.Description.Length > 0) labels.Add(UI.Text(it.Description, 9, FontStyle.Regular, Theme.Text, listbg, textW));
-                labels.Add(UI.Text(it.Url, 8, FontStyle.Regular, Theme.LinkBlue, listbg, textW));
+                labels.Add(UI.Text(it.Name, 12, FontStyle.Bold, Theme.Gold, listbg, textW, false));
+                if (it.Description.Length > 0) labels.Add(UI.Text(it.Description, 9, FontStyle.Regular, Theme.Text, listbg, textW, false));
+                labels.Add(UI.Text(it.Url, 8, FontStyle.Regular, Theme.LinkBlue, listbg, textW, false));
                 foreach (var l in labels)
                 {
                     l.Size = VStack.Measure(l);
@@ -749,7 +749,7 @@ namespace AzerothLauncher
                         Cfg.Save();
                         if (current == "Addons") BuildPanel("Addons");
                     }
-                    else MessageBox.Show(side.Visible ? (IWin32Window)side : this, "Could not install " + name + ":\n\n" + err, "Addons",
+                    else Msg.Show(side.Visible ? (IWin32Window)side : this, "Could not install " + name + ":\n\n" + err, "Addons",
                                          MessageBoxButtons.OK, MessageBoxIcon.Error);
                 });
             });
@@ -765,14 +765,14 @@ namespace AzerothLauncher
                 BuildPanel("Addons");
                 return;
             }
-            if (MessageBox.Show(side, "Remove " + name + " from your AddOns folder?\n\nFolders: " + string.Join(", ", folders) +
+            if (Msg.Show(side, "Remove " + name + " from your AddOns folder?\n\nFolders: " + string.Join(", ", folders) +
                                 "\n\nThis deletes everything it added, including the settings it saved.", "Uninstall",
                                 MessageBoxButtons.YesNo) != DialogResult.Yes) return;
             List<string> removed;
             try { removed = Addons.Uninstall(AddonsDir(), folders, SyncSettings().SavedDir); }
             catch (Exception e)
             {
-                MessageBox.Show(side, "Could not uninstall " + name + ":\n\n" + e.Message, "Addons", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Msg.Show(side, "Could not uninstall " + name + ":\n\n" + e.Message, "Addons", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             AddonInstalls().Remove(name);
@@ -844,7 +844,7 @@ namespace AzerothLauncher
             foreach (var a in addons)
             {
                 string name = a.Key;
-                var cb = UI.Check(name, a.Value, a.Value ? Theme.Text : Theme.GoldDim, listbg, 11);
+                var cb = UI.Check(name, a.Value, a.Value ? Theme.Text : Theme.GoldDim, listbg, 11, false);
                 cb.AutoSize = false;
                 Size need = TextRenderer.MeasureText(name, cb.Font, new Size(w - 24, 0), TextFormatFlags.WordBreak);
                 cb.Bounds = new Rectangle(6, y, w, Math.Max(22, need.Height + 4));     // long names wrap
@@ -863,7 +863,7 @@ namespace AzerothLauncher
             if (addonRows == null || addonCount == null || addonCount.IsDisposed) return;
             int on = 0;
             foreach (var cb in addonRows.Values) if (cb.Checked) on++;
-            addonCount.Text = on + " of " + addonRows.Count + " enabled";
+            addonCount.Text = Lang.T(on + " of " + addonRows.Count + " enabled");
         }
 
         void OnAddonToggle(string name)
@@ -884,7 +884,7 @@ namespace AzerothLauncher
                 settingCheck = true;
                 cb.Checked = !want;
                 settingCheck = false;
-                MessageBox.Show(side, "Could not " + (want ? "enable" : "disable") + " " + name + ":\n\n" + e.Message, "Addons",
+                Msg.Show(side, "Could not " + (want ? "enable" : "disable") + " " + name + ":\n\n" + e.Message, "Addons",
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
@@ -911,19 +911,19 @@ namespace AzerothLauncher
             SetStatus("All addons " + (target ? "enabled." : "disabled."));
             BuildPanel("Addons");
             if (errors.Count > 0)
-                MessageBox.Show(side, "Some addons could not be changed:\n\n" + string.Join("\n", errors), "Addons",
+                Msg.Show(side, "Some addons could not be changed:\n\n" + string.Join("\n", errors), "Addons",
                                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
         void SaveAddonProfile(string slot)
         {
             var profiles = Cfg.Section("addon_profiles");
-            if (profiles.ContainsKey(slot) && MessageBox.Show(side, "Replace the saved Profile " + slot + " with the current toggles?",
+            if (profiles.ContainsKey(slot) && Msg.Show(side, "Replace the saved Profile " + slot + " with the current toggles?",
                                                               "Addons", MessageBoxButtons.YesNo) != DialogResult.Yes) return;
             try { profiles[slot] = Addons.MakeProfile(Addons.Scan(AddonsDir())); }
             catch (Exception e)
             {
-                MessageBox.Show(side, e.Message, "Addons");
+                Msg.Show(side, e.Message, "Addons");
                 return;
             }
             Cfg.Save();
@@ -946,7 +946,7 @@ namespace AzerothLauncher
             try { changed = Addons.ApplyProfile(AddonsDir(), prof, errors, unknown); }
             catch (Exception e)
             {
-                MessageBox.Show(side, e.Message, "Addons");
+                Msg.Show(side, e.Message, "Addons");
                 return;
             }
             string note = "Profile " + slot + " loaded: " + changed + " changed.";
@@ -954,7 +954,7 @@ namespace AzerothLauncher
             SetStatus(note);
             BuildPanel("Addons");
             if (errors.Count > 0)
-                MessageBox.Show(side, "Some addons could not be changed:\n\n" + string.Join("\n", errors), "Addons",
+                Msg.Show(side, "Some addons could not be changed:\n\n" + string.Join("\n", errors), "Addons",
                                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
@@ -975,8 +975,8 @@ namespace AzerothLauncher
             int y = BottomOf(intro) + 8;
             var lab = PutText("Sync folder", 11, FontStyle.Bold, Theme.Gold, 20, y, 0);
             string cloud = Cfg.Str("cloud_dir");
-            var path = PutText(cloud.Length > 0 ? cloud : "(not set - choose a folder inside Google Drive, OneDrive or Dropbox)",
-                               9, FontStyle.Regular, Theme.LinkBlue, 20, BottomOf(lab), 420);
+            var path = PutText(cloud.Length > 0 ? cloud : Lang.T("(not set - choose a folder inside Google Drive, OneDrive or Dropbox)"),
+                               9, FontStyle.Regular, Theme.LinkBlue, 20, BottomOf(lab), 420, false);
             int rowH = BottomOf(path) - y;
             Put(new WowButton("CHOOSE", ChooseCloudDir, 100, 30, 10), PW - 20 - 100, y + Math.Max(0, (rowH - 30) / 2));
             string info = "Not synced yet.";
@@ -1019,7 +1019,7 @@ namespace AzerothLauncher
             {
                 var lab = PutText((string)r[0], 11, FontStyle.Bold, Theme.Gold, 20, y, 0);
                 string v = (string)r[1];
-                var val = PutText(string.IsNullOrEmpty(v) ? "(not set)" : v, 9, FontStyle.Regular, Theme.LinkBlue, 20, BottomOf(lab), 400);
+                var val = PutText(string.IsNullOrEmpty(v) ? Lang.T("(not set)") : v, 9, FontStyle.Regular, Theme.LinkBlue, 20, BottomOf(lab), 400, false);
                 int h = BottomOf(val) - y;
                 Put(new WowButton("CHANGE", (Action)r[2], 100, 28, 9), PW - 20 - 100, y + Math.Max(0, (h - 28) / 2));
                 y = Math.Max(BottomOf(val), y + 30) + 5;
@@ -1049,6 +1049,25 @@ namespace AzerothLauncher
                 Put(cb, 18, y);
                 y += cb.Height + 4;
             }
+            // language: every language built into the launcher, in its own name
+            var langs = Lang.Available();
+            string langName = "English";
+            foreach (var kv in langs) if (kv.Key == Lang.Code) langName = kv.Value;
+            var langLab = PutText("Language", 11, FontStyle.Bold, Theme.Gold, 20, y + 9, 0);
+            WowButton langBtn = null;
+            langBtn = Put(new WowButton(langName, delegate
+            {
+                var menu = new ContextMenuStrip();
+                foreach (var kv in langs)
+                {
+                    string code = kv.Key;
+                    var item = new ToolStripMenuItem(kv.Value, null, delegate { SetLanguage(code); });
+                    item.Checked = code == Lang.Code;
+                    menu.Items.Add(item);
+                }
+                menu.Show(langBtn, new Point(0, langBtn.Height));
+            }, 220, 30, 10), 20 + langLab.Width + 14, y + 4);
+            y += 40;
             // play time
             Put(UI.Line(Theme.Bronze, PW - 40, 1), 20, y + 4);
             y += 15;
@@ -1068,7 +1087,7 @@ namespace AzerothLauncher
             if (sessions > 0)
                 Put(new WowButton("RESET PLAY TIME", delegate
                 {
-                    if (MessageBox.Show(side, shared ? "Set the play time back to zero on all your PCs?" : "Set the play time back to zero?",
+                    if (Msg.Show(side, shared ? "Set the play time back to zero on all your PCs?" : "Set the play time back to zero?",
                                         "Play time", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
                         ResetPlayTime();

@@ -1,0 +1,790 @@
+@name Bahasa Indonesia
+# Each English text is followed by its translation on the line below (starting with "= ").
+# {0}, {1} ... are filled in by the launcher; keep them. \n is a line break.
+
+PLAY
+= MAIN
+INSTALL
+= INSTAL
+PLAYING...
+= BERMAIN...
+INSTALLING
+= MENGINSTAL
+UPDATING
+= MEMPERBARUI
+UPDATE
+= PERBARUI
+CHECKING
+= MEMERIKSA
+CLOUD SAVE
+= SIMPAN CLOUD
+ADDONS
+= ADDON
+OPTIONS
+= OPSI
+CHANGELOG
+= CATATAN PATCH
+ABOUT LAUNCHER
+= TENTANG LAUNCHER
+A game made by Aethus
+= Game buatan Aethus
+Version {0}
+= Versi {0}
+Press PLAY to enter Azeroth.
+= Tekan MAIN untuk memasuki Azeroth.
+Game client not found.
+= Game tidak ditemukan.
+Press INSTALL to download it first.
+= Tekan INSTAL untuk mengunduhnya dulu.
+Press INSTALL to download it, or set the game folder in Options.
+= Tekan INSTAL untuk mengunduhnya, atau atur folder game di Opsi.
+Your cloud save syncs automatically.
+= Simpanan cloud kamu tersinkron otomatis.
+Time played: {0}   |   Last session: {1}
+= Waktu bermain: {0}   |   Sesi terakhir: {1}
+Ready.
+= Siap.
+Cloud Save
+= Simpan Cloud
+Addons
+= Addon
+Options
+= Opsi
+Changelog
+= Catatan patch
+About Launcher
+= Tentang Launcher
+Download More
+= Unduh Lainnya
+All Patch Notes
+= Semua Catatan Patch
+Show Launcher
+= Tampilkan Launcher
+Play
+= Main
+Upload Save Now
+= Unggah Simpanan Sekarang
+Close Button Hides to Tray
+= Tombol Tutup Menyembunyikan ke Tray
+Quit
+= Keluar
+Game running
+= Game berjalan
+Idle
+= Diam
+Game running - {0}
+= Game berjalan - {0}
+The launcher is in the tray; the open window stays. Right-click the icon to quit.
+= Launcher ada di system tray; jendela yang terbuka tetap ada. Klik kanan ikonnya untuk keluar.
+Still running in the tray. Right-click the icon to quit.
+= Masih berjalan di system tray. Klik kanan ikonnya untuk keluar.
+Cloud sync running
+= Sinkronisasi cloud berjalan
+A cloud sync is still running. If you quit now it is cut short; the next sync repairs any half-finished copy.
+= Sinkronisasi cloud masih berjalan. Jika keluar sekarang, prosesnya terputus; sinkronisasi berikutnya memperbaiki salinan yang setengah jadi.
+Quit anyway?
+= Tetap keluar?
+Installing
+= Menginstal
+The game client is still being installed. If you quit now, it is cut short.
+= Game masih diinstal. Jika keluar sekarang, prosesnya terputus.
+Updating
+= Memperbarui
+The game is still being updated. If you quit now, the update is cut short. Nothing is lost: a half-finished change is undone the next time the launcher starts.
+= Game masih diperbarui. Jika keluar sekarang, pembaruan terputus. Tidak ada yang hilang: perubahan setengah jadi dibatalkan saat launcher dibuka lagi.
+The game is still running. If you quit the launcher now, your saves will NOT be uploaded automatically.
+= Game masih berjalan. Jika kamu keluar dari launcher sekarang, simpanan kamu TIDAK akan diunggah otomatis.
+Setup saved.
+= Pengaturan disimpan.
+First-time setup
+= Pengaturan awal
+Welcome, Adventurer
+= Selamat datang, Petualang
+Step 1 of 2
+= Langkah 1 dari 2
+Step 2 of 2
+= Langkah 2 dari 2
+A.  Cloud saving
+= A.  Simpan cloud
+Keep my progress in the cloud (Google Drive, OneDrive, Dropbox ...)\nand share it between my PCs
+= Simpan progres saya di cloud (Google Drive, OneDrive, Dropbox ...)\ndan bagikan antar PC saya
+Sync folder (inside your cloud drive)
+= Folder sinkronisasi (di dalam drive cloud kamu)
+Cloud saving stays off. You can turn it on later in Cloud Save.
+= Simpan cloud tetap mati. Kamu bisa menyalakannya nanti di Simpan Cloud.
+B.  Where are your files?
+= B.  Di mana file kamu?
+Folders found at their usual place are used as they are. Choose the ones that are missing.
+= Folder yang ditemukan di tempat biasanya dipakai apa adanya. Pilih yang belum ada.
+AddOns
+= AddOns
+Game saves
+= Simpanan game
+Addon settings
+= Pengaturan addon
+Select your AddOns folder
+= Pilih folder AddOns kamu
+Select the folder that holds your save game (normally %APPDATA%\wenilla-rogue)
+= Pilih folder berisi simpanan game kamu (biasanya %APPDATA%\wenilla-rogue)
+Select your addon settings folder (the 'saved' folder in benilla-config)
+= Pilih folder pengaturan addon kamu (folder 'saved' di benilla-config)
+FINISH
+= SELESAI
+LATER
+= NANTI
+✓ found
+= ✓ ditemukan
+✓ chosen
+= ✓ dipilih
+not chosen yet
+= belum dipilih
+not found - please choose it
+= tidak ditemukan - silakan pilih
+(not set)
+= (belum diatur)
+CHANGE
+= UBAH
+CHOOSE
+= PILIH
+Choose a sync folder for cloud saving, or untick\n"Keep my progress in the cloud".
+= Pilih folder sinkronisasi untuk simpan cloud, atau hapus centang\n"Simpan progres saya di cloud".
+Setup
+= Pengaturan
+These folders were not found:
+= Folder berikut tidak ditemukan:
+Finish anyway? You can change them later in Options.
+= Tetap selesai? Kamu bisa mengubahnya nanti di Opsi.
+Your settings are saved.\n\nWould you like to go to the Addons section now\nto download some addons, or to enable or disable the ones you have?
+= Pengaturan kamu tersimpan.\n\nIngin ke bagian Addon sekarang\nuntuk mengunduh addon, atau menyalakan dan mematikan yang sudah ada?
+DOWNLOAD ADDONS
+= UNDUH ADDON
+ENABLE / DISABLE ADDONS
+= NYALAKAN / MATIKAN ADDON
+NO THANKS
+= TIDAK, TERIMA KASIH
+Install the game
+= Instal game
+Install Azeroth Survivors
+= Instal Azeroth Survivors
+Step 1
+= Langkah 1
+Download the game in your web browser.
+= Unduh game di browser web kamu.
+OPEN DOWNLOAD
+= BUKA UNDUHAN
+Download opened in your browser.
+= Unduhan dibuka di browser kamu.
+Step 2
+= Langkah 2
+When the download has finished, come back here.
+= Setelah unduhan selesai, kembali ke sini.
+IT'S IN MY DOWNLOADS
+= SUDAH ADA DI UNDUHAN SAYA
+The launcher finds the file (in its own folder or Downloads), unpacks the game here and deletes the download.
+= Launcher menemukan file-nya (di foldernya sendiri atau Unduhan), mengekstrak game di sini, dan menghapus unduhannya.
+CANCEL
+= BATAL
+Which progress do you want to keep?
+= Progres mana yang ingin kamu simpan?
+Both sides changed
+= Kedua sisi berubah
+This PC and the cloud both changed since the last sync:
+= PC ini dan cloud sama-sama berubah sejak sinkronisasi terakhir:
+• {0}:  this PC {1}   |   cloud {2}
+= • {0}:  PC ini {1}   |   cloud {2}
+One complete state wins, the other is backed up first.
+= Satu kondisi lengkap yang menang, yang lain dicadangkan dulu.
+First time on this PC? Choose USE CLOUD.
+= Pertama kali di PC ini? Pilih PAKAI CLOUD.
+USE CLOUD replaces your local data. KEEP LOCAL keeps it and uploads it later.
+= PAKAI CLOUD mengganti data lokal kamu. TETAP LOKAL menyimpannya dan mengunggahnya nanti.
+KEEP LOCAL replaces the cloud. USE CLOUD leaves the cloud and skips your upload.
+= TETAP LOKAL mengganti cloud. PAKAI CLOUD membiarkan cloud dan melewati unggahan kamu.
+USE CLOUD
+= PAKAI CLOUD
+KEEP LOCAL
+= TETAP LOKAL
+Save game
+= Simpanan game
+Game update
+= Pembaruan game
+Update available
+= Pembaruan tersedia
+New version:
+= Versi baru:
+Your version:
+= Versi kamu:
+not recorded yet
+= belum tercatat
+Download size:
+= Ukuran unduhan:
+What is new
+= Yang baru
+Your addons, settings and saves are left alone. If anything goes wrong, the old game files are put back.
+= Addon, pengaturan, dan simpanan kamu tidak disentuh. Jika ada masalah, file game lama dikembalikan.
+UPDATE NOW
+= PERBARUI SEKARANG
+NOT NOW
+= NANTI SAJA
+SKIP THIS VERSION
+= LEWATI VERSI INI
+I ALREADY HAVE THIS VERSION
+= SAYA SUDAH PUNYA VERSI INI
+The update is being installed. Please wait until it has finished.
+= Pembaruan sedang diinstal. Harap tunggu sampai selesai.
+Downloading the update...
+= Mengunduh pembaruan...
+Download the update
+= Unduh pembaruan
+Step 1: download the update in your web browser.
+= Langkah 1: unduh pembaruan di browser web kamu.
+OPEN DOWNLOAD AGAIN
+= BUKA UNDUHAN LAGI
+Step 2: when the download has finished, come back here.
+= Langkah 2: setelah unduhan selesai, kembali ke sini.
+The launcher finds the file (in its own folder or Downloads), installs it and deletes it.
+= Launcher menemukan file-nya (di foldernya sendiri atau Unduhan), menginstalnya, lalu menghapusnya.
+Checking the file...
+= Memeriksa file...
+CANCELLING...
+= MEMBATALKAN...
+Updating to {0}
+= Memperbarui ke {0}
+Please keep the launcher open until this has finished.
+= Biarkan launcher tetap terbuka sampai selesai.
+{0} of {1}  ({#2}%)
+= {0} dari {1}  ({2}%)
+{0} downloaded
+= {0} terunduh
+Update installed
+= Pembaruan terinstal
+Update failed
+= Pembaruan gagal
+CLOSE
+= TUTUP
+TRY AGAIN
+= COBA LAGI
+Version {0} is installed.
+= Versi {0} terinstal.
+{#0} files updated.
+= {0} file diperbarui.
+{#0} file updated.
+= {0} file diperbarui.
+{#0} files updated, {#1} removed.
+= {0} file diperbarui, {1} dihapus.
+{#0} file updated, {#1} removed.
+= {0} file diperbarui, {1} dihapus.
+Install
+= Instal
+Install the game from this file?
+= Instal game dari file ini?
+{0}  ({#1} MB)
+= {0}  ({1} MB)
+in {0}
+= di {0}
+Choose the game file you downloaded (.rar)
+= Pilih file game yang kamu unduh (.rar)
+Game archive (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|All files (*.*)|*.*
+= Arsip game (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|Semua file (*.*)|*.*
+Install cancelled.
+= Instalasi dibatalkan.
+Unpacking the game client...
+= Mengekstrak game...
+Install failed.
+= Instalasi gagal.
+Install complete - press PLAY.
+= Instalasi selesai - tekan MAIN.
+Install complete. Press PLAY to enter Azeroth.
+= Instalasi selesai. Tekan MAIN untuk memasuki Azeroth.
+The last game update was cut off before it finished. Your game files were put back exactly as they were.
+= Pembaruan game terakhir terputus sebelum selesai. File game kamu dikembalikan persis seperti semula.
+You can run the update again with the UPDATE button.
+= Kamu bisa menjalankan pembaruan lagi dengan tombol PERBARUI.
+The last game update was cut off, and some game files could not be put back automatically.
+= Pembaruan game terakhir terputus, dan beberapa file game tidak bisa dikembalikan otomatis.
+The old versions are kept in the folder "{0}" inside the game folder. Copy them back over the game files, or reinstall the game.
+= Versi lama disimpan di folder "{0}" di dalam folder game. Salin kembali ke file game, atau instal ulang game.
+Checking for updates...
+= Memeriksa pembaruan...
+The update check failed ({0}).
+= Pemeriksaan pembaruan gagal ({0}).
+Could not check for launcher updates.
+= Tidak bisa memeriksa pembaruan launcher.
+Launcher update
+= Pembaruan launcher
+Launcher {0} is available.
+= Launcher {0} tersedia.
+The launcher is up to date ({0}).
+= Launcher sudah terbaru ({0}).
+You have the newest launcher ({0}).
+= Kamu memakai launcher terbaru ({0}).
+A new launcher ({0}) is available. Open the launcher and press UPDATE.
+= Launcher baru ({0}) tersedia. Buka launcher dan tekan PERBARUI.
+Finish what is running first (the game, an install or a cloud sync), then press UPDATE again.
+= Selesaikan dulu yang sedang berjalan (game, instalasi, atau sinkronisasi cloud), lalu tekan PERBARUI lagi.
+A new version of the launcher is on GitHub: {0}.
+= Versi baru launcher ada di GitHub: {0}.
+Update now? The new launcher ({0}) is downloaded, checked and started in place of this one. Your settings stay as they are.
+= Perbarui sekarang? Launcher baru ({0}) diunduh, diperiksa, dan dijalankan menggantikan yang ini. Pengaturan kamu tetap sama.
+Update now? The new launcher is downloaded, checked and started in place of this one. Your settings stay as they are.
+= Perbarui sekarang? Launcher baru diunduh, diperiksa, dan dijalankan menggantikan yang ini. Pengaturan kamu tetap sama.
+Launcher update postponed. Press UPDATE when you want it.
+= Pembaruan launcher ditunda. Tekan PERBARUI kapan pun kamu mau.
+Downloading the new launcher...
+= Mengunduh launcher baru...
+Downloading the new launcher... {0}
+= Mengunduh launcher baru... {0}
+Launcher update failed.
+= Pembaruan launcher gagal.
+Update checking is not switched on in this launcher yet (it has no update address).
+= Pemeriksaan pembaruan belum diaktifkan di launcher ini (belum ada alamat pembaruan).
+The game is not installed yet. Press INSTALL first.
+= Game belum terinstal. Tekan INSTAL dulu.
+Could not check for updates.
+= Tidak bisa memeriksa pembaruan.
+You have the newest version ({0}).
+= Kamu memakai versi terbaru ({0}).
+Update {0} is available.
+= Pembaruan {0} tersedia.
+A game update ({0}) is available.
+= Pembaruan game ({0}) tersedia.
+Version {0} skipped. The UPDATE button still offers it.
+= Versi {0} dilewati. Tombol PERBARUI masih menawarkannya.
+Noted: you have version {0}.
+= Dicatat: kamu memakai versi {0}.
+Install the update from this file?
+= Instal pembaruan dari file ini?
+Choose the update file you downloaded
+= Pilih file pembaruan yang kamu unduh
+Update archive (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|All files (*.*)|*.*
+= Arsip pembaruan (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|Semua file (*.*)|*.*
+Close the game first, then try again.
+= Tutup game dulu, lalu coba lagi.
+Checking the download...
+= Memeriksa unduhan...
+The downloaded file does not match its checksum, so nothing was installed. Please try again later.
+= File yang diunduh tidak cocok dengan checksum-nya, jadi tidak ada yang diinstal. Silakan coba lagi nanti.
+That file is not this update (its checksum does not match), so nothing was installed. Download it again from the update page.
+= File itu bukan pembaruan ini (checksum-nya tidak cocok), jadi tidak ada yang diinstal. Unduh lagi dari halaman pembaruan.
+The update failed ({0}).
+= Pembaruan gagal ({0}).
+Updated to {0} - press PLAY.
+= Diperbarui ke {0} - tekan MAIN.
+Game updated to {0}. Press PLAY to enter Azeroth.
+= Game diperbarui ke {0}. Tekan MAIN untuk memasuki Azeroth.
+Update cancelled.
+= Pembaruan dibatalkan.
+Update failed.
+= Pembaruan gagal.
+Another task is still running - wait for it to finish.
+= Tugas lain masih berjalan - tunggu sampai selesai.
+Choose a sync folder inside your cloud drive first (Cloud Save or Options).
+= Pilih dulu folder sinkronisasi di drive cloud kamu (Simpan Cloud atau Opsi).
+Cloud sync failed.
+= Sinkronisasi cloud gagal.
+Status checked at {0}
+= Status diperiksa pukul {0}
+Downloaded from the cloud at {0}
+= Diunduh dari cloud pukul {0}
+Saves uploaded at {0}
+= Simpanan diunggah pukul {0}
+Not everything was synced - see the Cloud Save log.
+= Tidak semua tersinkron - lihat log Simpan Cloud.
+The game is being updated. Please wait until that has finished.
+= Game sedang diperbarui. Harap tunggu sampai selesai.
+The cloud save could NOT be loaded, so the game was not launched.
+= Simpanan cloud TIDAK bisa dimuat, jadi game tidak dijalankan.
+See the log in Cloud Save. If your cloud drive is still syncing, wait for it to finish and press PLAY again.
+= Lihat log di Simpan Cloud. Jika drive cloud kamu masih menyinkronkan, tunggu sampai selesai lalu tekan MAIN lagi.
+Cloud sync failed - game not launched
+= Sinkronisasi cloud gagal - game tidak dijalankan
+Cloud save was not loaded - game not launched.
+= Simpanan cloud tidak dimuat - game tidak dijalankan.
+Cloud sync successfully downloaded
+= Sinkronisasi cloud berhasil diunduh
+No sync folder set - launched without cloud sync.
+= Folder sinkronisasi belum diatur - dijalankan tanpa sinkronisasi cloud.
+Starting Azeroth Survivors ...
+= Menjalankan Azeroth Survivors ...
+Game running.
+= Game berjalan.
+Could not start the game: {0}
+= Tidak bisa menjalankan game: {0}
+Game closed.
+= Game ditutup.
+Game has closed.
+= Game telah ditutup.
+Cloud sync successfully uploaded
+= Sinkronisasi cloud berhasil diunggah
+Some of your progress was NOT uploaded. See the log in Cloud Save.
+= Sebagian progres kamu TIDAK diunggah. Lihat log di Simpan Cloud.
+Cloud sync NOT completed - see the Cloud Save log
+= Sinkronisasi cloud TIDAK selesai - lihat log Simpan Cloud
+Cloud upload failed: {0}
+= Unggah ke cloud gagal: {0}
+Cloud sync failed - see the Cloud Save log
+= Sinkronisasi cloud gagal - lihat log Simpan Cloud
+Launcher
+= Launcher
+Select a folder inside your cloud drive (Google Drive, OneDrive, Dropbox ...)
+= Pilih folder di dalam drive cloud kamu (Google Drive, OneDrive, Dropbox ...)
+That is the top level of your cloud drive.
+= Itu adalah tingkat teratas drive cloud kamu.
+Create and use a subfolder named AzerothSync inside it?
+= Buat dan pakai subfolder bernama AzerothSync di dalamnya?
+Sync folder
+= Folder sinkronisasi
+Play time reset.
+= Waktu bermain direset.
+Play time
+= Waktu bermain
+No games played with this launcher yet.
+= Belum ada permainan dengan launcher ini.
+Total: {0} over {#1} sessions
+= Total: {0} dalam {1} sesi
+Total: {0} over {#1} session
+= Total: {0} dalam {1} sesi
+Total: {0} over {#1} sessions on {#2} PCs
+= Total: {0} dalam {1} sesi di {2} PC
+Last session: {0} ({1})
+= Sesi terakhir: {0} ({1})
+Longest session: {0}
+= Sesi terlama: {0}
+Shared with your other PCs through the cloud sync folder.
+= Dibagikan dengan PC kamu yang lain lewat folder sinkronisasi cloud.
+Counted on this PC (the sync folder is not reachable right now).
+= Dihitung di PC ini (folder sinkronisasi sedang tidak bisa dijangkau).
+Counted on this PC. Turn on cloud saving to share it between your PCs.
+= Dihitung di PC ini. Nyalakan simpan cloud untuk membagikannya antar PC kamu.
+RESET PLAY TIME
+= RESET WAKTU BERMAIN
+Set the play time back to zero on all your PCs?
+= Kembalikan waktu bermain ke nol di semua PC kamu?
+Set the play time back to zero?
+= Kembalikan waktu bermain ke nol?
+Game folder
+= Folder game
+Save game folder
+= Folder simpanan game
+Game config folder (AddOns, addon settings)
+= Folder konfigurasi game (AddOns, pengaturan addon)
+Cloud saving
+= Simpan cloud
+Close button hides the launcher to the tray
+= Tombol tutup menyembunyikan launcher ke system tray
+Minimize the launcher when the game starts
+= Perkecil launcher saat game dimulai
+RUN SETUP AGAIN
+= JALANKAN PENGATURAN LAGI
+Select your Azeroth Survivors game folder
+= Pilih folder game Azeroth Survivors kamu
+Game folder set: {0}
+= Folder game diatur: {0}
+Select the game's benilla-config folder (contains AddOns and saved)
+= Pilih folder benilla-config game (berisi AddOns dan saved)
+Language
+= Bahasa
+ALL PATCH NOTES ›
+= SEMUA CATATAN PATCH ›
+‹ LATEST
+= ‹ TERBARU
+‹ ALL PATCH NOTES
+= ‹ SEMUA CATATAN PATCH
+‹ PREVIOUS
+= ‹ SEBELUMNYA
+NEXT ›
+= BERIKUTNYA ›
+{#0} of {#1}
+= {0} dari {1}
+PAGE
+= HALAMAN
+No patch notes yet.
+= Belum ada catatan patch.
+{0} (current)
+= {0} (saat ini)
+Vibe coded by Slimjim\nCloud save code established by Keijin
+= Dikoding dengan vibe oleh Slimjim\nKode simpan cloud oleh Keijin
+DOWNLOAD MORE ›
+= UNDUH LAINNYA ›
+ALL
+= SEMUA
+UI OVERHAUL
+= ROMBAK UI
+GAMEPLAY
+= GAMEPLAY
+COSMETIC
+= KOSMETIK
+No addons in this filter yet.
+= Belum ada addon di filter ini.
+No downloadable addons listed yet.
+= Belum ada addon yang bisa diunduh.
+UNINSTALL
+= COPOT
+Addons can't be changed while the game runs or a sync is running.
+= Addon tidak bisa diubah saat game atau sinkronisasi sedang berjalan.
+Another addon is still downloading.
+= Addon lain masih diunduh.
+Installing {0}...
+= Menginstal {0}...
+{0} installed.
+= {0} terinstal.
+{0} failed.
+= {0} gagal.
+Could not install {0}:
+= Tidak bisa menginstal {0}:
+{0} is not installed.
+= {0} tidak terinstal.
+Remove {0} from your AddOns folder?
+= Hapus {0} dari folder AddOns kamu?
+Folders: {0}
+= Folder: {0}
+This deletes everything it added, including the settings it saved.
+= Ini menghapus semua yang ditambahkannya, termasuk pengaturan yang disimpannya.
+Uninstall
+= Copot
+Could not uninstall {0}:
+= Tidak bisa mencopot {0}:
+{0} uninstalled.
+= {0} dicopot.
+{0} was not installed.
+= {0} tidak terinstal.
+No AddOns folder found.\nSet the game config folder in Options\n(the benilla-config folder).
+= Folder AddOns tidak ditemukan.\nAtur folder konfigurasi game di Opsi\n(folder benilla-config).
+REFRESH
+= SEGARKAN
+FOLDER
+= FOLDER
+TOGGLE ALL
+= BALIK SEMUA
+SAVE
+= SIMPAN
+LOAD
+= MUAT
+empty
+= kosong
+{#0} on, {#1} off
+= {0} nyala, {1} mati
+saved {0}
+= disimpan {0}
+Profile {0}
+= Profil {0}
+No addons installed.
+= Belum ada addon terinstal.
+{#0} of {#1} enabled
+= {0} dari {1} aktif
+Could not enable {0}:
+= Tidak bisa mengaktifkan {0}:
+Could not disable {0}:
+= Tidak bisa menonaktifkan {0}:
+{0} enabled.
+= {0} diaktifkan.
+{0} disabled.
+= {0} dinonaktifkan.
+All addons enabled.
+= Semua addon diaktifkan.
+All addons disabled.
+= Semua addon dinonaktifkan.
+Some addons could not be changed:
+= Beberapa addon tidak bisa diubah:
+Replace the saved Profile {0} with the current toggles?
+= Ganti Profil {0} yang tersimpan dengan pilihan saat ini?
+Profile {0} saved.
+= Profil {0} disimpan.
+Profile {0} is empty - press SAVE to store the current toggles.
+= Profil {0} kosong - tekan SIMPAN untuk menyimpan pilihan saat ini.
+Profile {0} loaded: {#1} changed.
+= Profil {0} dimuat: {1} diubah.
+Profile {0} loaded: {#1} changed. {#2} newer addon(s) left as they were.
+= Profil {0} dimuat: {1} diubah. {2} addon yang lebih baru dibiarkan.
+Cloud saving is turned off.\nYour progress stays on this PC only.
+= Simpan cloud dimatikan.\nProgres kamu hanya ada di PC ini.
+TURN ON CLOUD SAVING
+= NYALAKAN SIMPAN CLOUD
+PLAY downloads the newest state, starts the game and uploads your progress after you close it. One complete state wins; the overwritten one is backed up as a ZIP first.
+= MAIN mengunduh kondisi terbaru, menjalankan game, dan mengunggah progres kamu setelah ditutup. Satu kondisi lengkap yang menang; yang tertimpa dicadangkan dulu sebagai ZIP.
+(not set - choose a folder inside Google Drive, OneDrive or Dropbox)
+= (belum diatur - pilih folder di Google Drive, OneDrive, atau Dropbox)
+Not synced yet.
+= Belum tersinkron.
+Cloud: {0}
+= Cloud: {0}
+last uploaded by {0} on {1}
+= terakhir diunggah oleh {0} pada {1}
+no upload info
+= tidak ada info unggahan
+CHECK STATUS
+= PERIKSA STATUS
+DOWNLOAD
+= UNDUH
+UPLOAD
+= UNGGAH
+The launcher is already running.
+= Launcher sudah berjalan.
+Look for its icon in the system tray (near the clock).
+= Cari ikonnya di system tray (dekat jam).
+Press INSTALL to download the game first.
+= Tekan INSTAL untuk mengunduh game dulu.
+No launcher release has been published on GitHub yet.
+= Belum ada rilis launcher yang diterbitkan di GitHub.
+GitHub's answer could not be read.
+= Jawaban GitHub tidak bisa dibaca.
+The latest release on GitHub ({0}) has no launcher exe attached.
+= Rilis terbaru di GitHub ({0}) tidak melampirkan exe launcher.
+The latest release on GitHub has no checksum for its exe, so it is not installed.
+= Rilis terbaru di GitHub tidak punya checksum untuk exe-nya, jadi tidak diinstal.
+The downloaded launcher does not match its checksum, so it was not installed. Please try again later.
+= Launcher yang diunduh tidak cocok dengan checksum-nya, jadi tidak diinstal. Silakan coba lagi nanti.
+The launcher could not replace itself in this folder ({0}).
+= Launcher tidak bisa mengganti dirinya di folder ini ({0}).
+Download the new version from GitHub instead:
+= Unduh versi baru dari GitHub saja:
+The new launcher could not be put in place ({0}). Nothing was changed.
+= Launcher baru tidak bisa dipasang ({0}). Tidak ada yang diubah.
+The {0} address must start with https://
+= Alamat server {0} harus diawali https://
+The {0} server redirected to an address that is not secure (https).
+= Server {0} mengalihkan ke alamat yang tidak aman (https).
+The {0} server sent a broken redirect.
+= Server {0} mengirim pengalihan yang rusak.
+The {0} server answered with error {#1}.
+= Server {0} menjawab dengan galat {1}.
+The {0} server's security certificate was not accepted. It needs a normal, trusted https certificate.
+= Sertifikat keamanan server {0} tidak diterima. Server perlu sertifikat https normal yang tepercaya.
+The {0} server did not answer in time. Check your internet connection and try again.
+= Server {0} tidak menjawab tepat waktu. Periksa koneksi internet kamu dan coba lagi.
+Could not reach the {0} server. Check your internet connection and try again.
+= Tidak bisa menjangkau server {0}. Periksa koneksi internet kamu dan coba lagi.
+The {0} server redirected too many times.
+= Server {0} terlalu sering mengalihkan.
+update
+= pembaruan
+addon
+= addon
+The download link gave a web page instead of the file. It must be a direct download link.
+= Tautan unduhan memberikan halaman web, bukan file. Harus berupa tautan unduhan langsung.
+The download was interrupted. Check your connection and try again.
+= Unduhan terputus. Periksa koneksi kamu dan coba lagi.
+The download was cut off before it finished. Please try again.
+= Unduhan terhenti sebelum selesai. Silakan coba lagi.
+The .zip contains an unsafe path; nothing was installed.
+= File .zip berisi jalur yang tidak aman; tidak ada yang diinstal.
+The file is damaged or incomplete.
+= File rusak atau tidak lengkap.
+The file is a .{0} archive, and no program to unpack it was found.
+= File ini arsip .{0}, dan tidak ditemukan program untuk mengekstraknya.
+Install the free 7-Zip (7-zip.org) or WinRAR and try again.
+= Instal 7-Zip gratis (7-zip.org) atau WinRAR lalu coba lagi.
+The archive could not be unpacked.
+= Arsip tidak bisa diekstrak.
+That file is not a .rar, .zip or .7z archive.
+= File itu bukan arsip .rar, .zip, atau .7z.
+The archive was unpacked, but {0} was not inside it.
+= Arsip sudah diekstrak, tetapi {0} tidak ada di dalamnya.
+The install finished, but {0} is not in {1}.
+= Instalasi selesai, tetapi {0} tidak ada di {1}.
+The link did not give a .zip file. It must be a direct download link (share pages such as LimeWire do not work).
+= Tautan tidak memberikan file .zip. Harus berupa tautan unduhan langsung (halaman berbagi seperti LimeWire tidak bisa).
+There is not enough free disk space.
+= Ruang disk kosong tidak cukup.
+Not enough free disk space for the update: about {0} is needed on the drive with the game, {1} is free.
+= Ruang disk tidak cukup untuk pembaruan: perlu sekitar {0} di drive game, tersedia {1}.
+The update file is not a .rar, .zip or .7z archive.
+= File pembaruan bukan arsip .rar, .zip, atau .7z.
+An earlier update was cut off and its files could not be put back yet.
+= Pembaruan sebelumnya terputus dan file-nya belum bisa dikembalikan.
+The old files are kept in:
+= File lama disimpan di:
+Unpacking the update. This can take a few minutes...
+= Mengekstrak pembaruan. Ini bisa memakan beberapa menit...
+Installing the new files...
+= Menginstal file baru...
+The update did not contain any files to install.
+= Pembaruan tidak berisi file untuk diinstal.
+{0} is missing after the update.
+= {0} hilang setelah pembaruan.
+A game file is in use. Close the game and anything else using its folder, then try again.
+= Sebuah file game sedang dipakai. Tutup game dan apa pun yang memakai foldernya, lalu coba lagi.
+There is not enough free disk space for the update. Free some space and try again.
+= Ruang disk tidak cukup untuk pembaruan. Kosongkan sebagian ruang dan coba lagi.
+The update could not be installed ({0}).
+= Pembaruan tidak bisa diinstal ({0}).
+No game files were changed.
+= Tidak ada file game yang diubah.
+Some files could not be put back. The old versions are kept in:
+= Beberapa file tidak bisa dikembalikan. Versi lama disimpan di:
+Sync folder not reachable: {0} (is your cloud drive running?)
+= Folder sinkronisasi tidak bisa dijangkau: {0} (apakah drive cloud kamu berjalan?)
+The game is running. Close it before you download.
+= Game sedang berjalan. Tutup dulu sebelum mengunduh.
+The game is running. Close it before you upload.
+= Game sedang berjalan. Tutup dulu sebelum mengunggah.
+The folder is in use and was not replaced: {0} ({1}). Close programs or Explorer windows that use it and try again.
+= Folder sedang dipakai dan tidak diganti: {0} ({1}). Tutup program atau jendela Explorer yang memakainya lalu coba lagi.
+The source changed while copying ({0}). Nothing was replaced, please sync again.
+= Sumber berubah saat penyalinan ({0}). Tidak ada yang diganti, silakan sinkronkan lagi.
+No sync folder set. Choose a folder in Google Drive, OneDrive, Dropbox or similar in Options.
+= Folder sinkronisasi belum diatur. Pilih folder di Google Drive, OneDrive, Dropbox, atau sejenisnya di Opsi.
+Sync folder: {0}
+= Folder sinkronisasi: {0}
+The sync folder does not exist yet. It is created on the first upload.
+= Folder sinkronisasi belum ada. Folder dibuat saat unggahan pertama.
+{0}: in sync (local {1}, cloud {2})
+= {0}: tersinkron (lokal {1}, cloud {2})
+{0}: cloud empty, upload (local {1}, cloud {2})
+= {0}: cloud kosong, unggah (lokal {1}, cloud {2})
+{0}: cloud copy incomplete or still syncing, wait (local {1}, cloud {2})
+= {0}: salinan cloud belum lengkap atau masih sinkron, tunggu (lokal {1}, cloud {2})
+{0}: local is newer, upload (local {1}, cloud {2})
+= {0}: lokal lebih baru, unggah (lokal {1}, cloud {2})
+{0}: cloud is newer, download (local {1}, cloud {2})
+= {0}: cloud lebih baru, unduh (lokal {1}, cloud {2})
+{0}: both changed or never synced (local {1}, cloud {2})
+= {0}: keduanya berubah atau belum pernah sinkron (lokal {1}, cloud {2})
+{0}: {1} not found, skipped. Set the game config folder in Options.
+= {0}: {1} tidak ditemukan, dilewati. Atur folder konfigurasi game di Opsi.
+Downloading from the cloud ...
+= Mengunduh dari cloud ...
+The sync folder does not exist yet, nothing to download.
+= Folder sinkronisasi belum ada, tidak ada yang diunduh.
+{0}: cloud is empty, nothing to download.
+= {0}: cloud kosong, tidak ada yang diunduh.
+{0}: up to date.
+= {0}: sudah terbaru.
+{0}: the cloud copy does not match the last upload yet (incomplete or still syncing). Nothing replaced, try again in a moment.
+= {0}: salinan cloud belum cocok dengan unggahan terakhir (belum lengkap atau masih sinkron). Tidak ada yang diganti, coba lagi sebentar lagi.
+{0}: local is newer, kept.
+= {0}: lokal lebih baru, dipertahankan.
+Replace your local data with the cloud state?
+= Ganti data lokal kamu dengan kondisi cloud?
+A backup is made first.
+= Cadangan dibuat terlebih dahulu.
+Cancelled, nothing changed.
+= Dibatalkan, tidak ada yang berubah.
+{0}: local state kept, it will replace the cloud on the next upload.
+= {0}: kondisi lokal dipertahankan, akan mengganti cloud pada unggahan berikutnya.
+{0}: downloaded from the cloud.
+= {0}: diunduh dari cloud.
+Cloud state: {0}
+= Kondisi cloud: {0}
+Uploading to the cloud ...
+= Mengunggah ke cloud ...
+{0}: nothing local, nothing uploaded.
+= {0}: tidak ada data lokal, tidak ada yang diunggah.
+{0}: cloud is up to date.
+= {0}: cloud sudah terbaru.
+Replace the cloud state with your local data?
+= Ganti kondisi cloud dengan data lokal kamu?
+{0}: cloud kept, your local changes were NOT uploaded. Use "Download" to get the cloud state.
+= {0}: cloud dipertahankan, perubahan lokal kamu TIDAK diunggah. Pakai "Unduh" untuk mengambil kondisi cloud.
+Cancelled, your local changes were NOT uploaded.
+= Dibatalkan, perubahan lokal kamu TIDAK diunggah.
+{0}: the cloud changed during this sync, NOT uploaded. Sync again to decide.
+= {0}: cloud berubah selama sinkronisasi ini, TIDAK diunggah. Sinkronkan lagi untuk memutuskan.
+{0}: uploaded.
+= {0}: diunggah.
+Written to the sync folder. Your cloud app uploads it in the background, wait until it is done before you switch PCs.
+= Ditulis ke folder sinkronisasi. Aplikasi cloud kamu mengunggahnya di latar belakang; tunggu sampai selesai sebelum berganti PC.
+Backup: {0}
+= Cadangan: {0}
+Restored {0} after an interrupted sync.
+= {0} dipulihkan setelah sinkronisasi terputus.

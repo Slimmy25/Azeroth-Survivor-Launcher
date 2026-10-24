@@ -1,0 +1,791 @@
+@name ไทย
+@font Leelawadee UI, Tahoma
+# Each English text is followed by its translation on the line below (starting with "= ").
+# {0}, {1} ... are filled in by the launcher; keep them. \n is a line break.
+
+PLAY
+= เล่น
+INSTALL
+= ติดตั้ง
+PLAYING...
+= กำลังเล่น...
+INSTALLING
+= กำลังติดตั้ง
+UPDATING
+= กำลังอัปเดต
+UPDATE
+= อัปเดต
+CHECKING
+= กำลังตรวจสอบ
+CLOUD SAVE
+= เซฟบนคลาวด์
+ADDONS
+= แอดออน
+OPTIONS
+= ตัวเลือก
+CHANGELOG
+= บันทึกแพตช์
+ABOUT LAUNCHER
+= เกี่ยวกับลันเชอร์
+A game made by Aethus
+= เกมโดย Aethus
+Version {0}
+= เวอร์ชัน {0}
+Press PLAY to enter Azeroth.
+= กด เล่น เพื่อเข้าสู่ Azeroth
+Game client not found.
+= ไม่พบเกม
+Press INSTALL to download it first.
+= กด ติดตั้ง เพื่อดาวน์โหลดก่อน
+Press INSTALL to download it, or set the game folder in Options.
+= กด ติดตั้ง เพื่อดาวน์โหลด หรือตั้งค่าโฟลเดอร์เกมในตัวเลือก
+Your cloud save syncs automatically.
+= เซฟบนคลาวด์ของคุณซิงก์โดยอัตโนมัติ
+Time played: {0}   |   Last session: {1}
+= เวลาเล่น: {0}   |   เซสชันล่าสุด: {1}
+Ready.
+= พร้อม
+Cloud Save
+= เซฟบนคลาวด์
+Addons
+= แอดออน
+Options
+= ตัวเลือก
+Changelog
+= บันทึกแพตช์
+About Launcher
+= เกี่ยวกับลันเชอร์
+Download More
+= ดาวน์โหลดเพิ่ม
+All Patch Notes
+= บันทึกแพตช์ทั้งหมด
+Show Launcher
+= แสดงลันเชอร์
+Play
+= เล่น
+Upload Save Now
+= อัปโหลดเซฟตอนนี้
+Close Button Hides to Tray
+= ปุ่มปิดซ่อนไปที่ถาดระบบ
+Quit
+= ออก
+Game running
+= เกมกำลังทำงาน
+Idle
+= ว่าง
+Game running - {0}
+= เกมกำลังทำงาน - {0}
+The launcher is in the tray; the open window stays. Right-click the icon to quit.
+= ลันเชอร์อยู่ในถาดระบบ หน้าต่างที่เปิดอยู่จะยังอยู่ คลิกขวาที่ไอคอนเพื่อออก
+Still running in the tray. Right-click the icon to quit.
+= ยังทำงานอยู่ในถาดระบบ คลิกขวาที่ไอคอนเพื่อออก
+Cloud sync running
+= กำลังซิงก์คลาวด์
+A cloud sync is still running. If you quit now it is cut short; the next sync repairs any half-finished copy.
+= การซิงก์คลาวด์ยังทำงานอยู่ ถ้าออกตอนนี้จะถูกตัดกลางคัน การซิงก์ครั้งถัดไปจะซ่อมสำเนาที่ค้างไว้
+Quit anyway?
+= ออกอยู่ดีหรือไม่?
+Installing
+= กำลังติดตั้ง
+The game client is still being installed. If you quit now, it is cut short.
+= เกมยังติดตั้งอยู่ ถ้าออกตอนนี้การติดตั้งจะถูกตัดกลางคัน
+Updating
+= กำลังอัปเดต
+The game is still being updated. If you quit now, the update is cut short. Nothing is lost: a half-finished change is undone the next time the launcher starts.
+= เกมยังอัปเดตอยู่ ถ้าออกตอนนี้การอัปเดตจะถูกตัดกลางคัน ไม่มีอะไรสูญหาย: การเปลี่ยนแปลงที่ค้างไว้จะถูกย้อนกลับเมื่อเปิดลันเชอร์ครั้งถัดไป
+The game is still running. If you quit the launcher now, your saves will NOT be uploaded automatically.
+= เกมยังทำงานอยู่ ถ้าออกจากลันเชอร์ตอนนี้ เซฟของคุณจะไม่ถูกอัปโหลดอัตโนมัติ
+Setup saved.
+= บันทึกการตั้งค่าแล้ว
+First-time setup
+= ตั้งค่าครั้งแรก
+Welcome, Adventurer
+= ยินดีต้อนรับ นักผจญภัย
+Step 1 of 2
+= ขั้นที่ 1 จาก 2
+Step 2 of 2
+= ขั้นที่ 2 จาก 2
+A.  Cloud saving
+= A.  เซฟบนคลาวด์
+Keep my progress in the cloud (Google Drive, OneDrive, Dropbox ...)\nand share it between my PCs
+= เก็บความคืบหน้าของฉันไว้บนคลาวด์ (Google Drive, OneDrive, Dropbox ...)\nและแชร์ระหว่างพีซีของฉัน
+Sync folder (inside your cloud drive)
+= โฟลเดอร์ซิงก์ (ในไดรฟ์คลาวด์ของคุณ)
+Cloud saving stays off. You can turn it on later in Cloud Save.
+= เซฟบนคลาวด์ยังปิดอยู่ คุณเปิดได้ภายหลังในเซฟบนคลาวด์
+B.  Where are your files?
+= B.  ไฟล์ของคุณอยู่ที่ไหน?
+Folders found at their usual place are used as they are. Choose the ones that are missing.
+= โฟลเดอร์ที่พบในตำแหน่งปกติจะถูกใช้ตามเดิม เลือกโฟลเดอร์ที่ยังขาดอยู่
+AddOns
+= AddOns
+Game saves
+= เซฟเกม
+Addon settings
+= การตั้งค่าแอดออน
+Select your AddOns folder
+= เลือกโฟลเดอร์ AddOns ของคุณ
+Select the folder that holds your save game (normally %APPDATA%\wenilla-rogue)
+= เลือกโฟลเดอร์ที่เก็บเซฟเกม (ปกติคือ %APPDATA%\wenilla-rogue)
+Select your addon settings folder (the 'saved' folder in benilla-config)
+= เลือกโฟลเดอร์การตั้งค่าแอดออน (โฟลเดอร์ 'saved' ใน benilla-config)
+FINISH
+= เสร็จสิ้น
+LATER
+= ภายหลัง
+✓ found
+= ✓ พบแล้ว
+✓ chosen
+= ✓ เลือกแล้ว
+not chosen yet
+= ยังไม่ได้เลือก
+not found - please choose it
+= ไม่พบ - โปรดเลือก
+(not set)
+= (ยังไม่ได้ตั้งค่า)
+CHANGE
+= เปลี่ยน
+CHOOSE
+= เลือก
+Choose a sync folder for cloud saving, or untick\n"Keep my progress in the cloud".
+= เลือกโฟลเดอร์ซิงก์สำหรับเซฟบนคลาวด์ หรือเอาเครื่องหมายออกจาก\n"เก็บความคืบหน้าของฉันไว้บนคลาวด์"
+Setup
+= ตั้งค่า
+These folders were not found:
+= ไม่พบโฟลเดอร์เหล่านี้:
+Finish anyway? You can change them later in Options.
+= เสร็จสิ้นอยู่ดีหรือไม่? คุณเปลี่ยนได้ภายหลังในตัวเลือก
+Your settings are saved.\n\nWould you like to go to the Addons section now\nto download some addons, or to enable or disable the ones you have?
+= บันทึกการตั้งค่าของคุณแล้ว\n\nต้องการไปที่ส่วนแอดออนตอนนี้\nเพื่อดาวน์โหลดแอดออน หรือเปิดปิดแอดออนที่มีอยู่หรือไม่?
+DOWNLOAD ADDONS
+= ดาวน์โหลดแอดออน
+ENABLE / DISABLE ADDONS
+= เปิด / ปิดแอดออน
+NO THANKS
+= ไม่เป็นไร
+Install the game
+= ติดตั้งเกม
+Install Azeroth Survivors
+= ติดตั้ง Azeroth Survivors
+Step 1
+= ขั้นที่ 1
+Download the game in your web browser.
+= ดาวน์โหลดเกมในเว็บเบราว์เซอร์
+OPEN DOWNLOAD
+= เปิดหน้าดาวน์โหลด
+Download opened in your browser.
+= เปิดหน้าดาวน์โหลดในเบราว์เซอร์แล้ว
+Step 2
+= ขั้นที่ 2
+When the download has finished, come back here.
+= เมื่อดาวน์โหลดเสร็จ ให้กลับมาที่นี่
+IT'S IN MY DOWNLOADS
+= อยู่ในโฟลเดอร์ดาวน์โหลดแล้ว
+The launcher finds the file (in its own folder or Downloads), unpacks the game here and deletes the download.
+= ลันเชอร์จะหาไฟล์ (ในโฟลเดอร์ของตัวเองหรือดาวน์โหลด) แตกไฟล์เกมไว้ที่นี่ และลบไฟล์ที่ดาวน์โหลด
+CANCEL
+= ยกเลิก
+Which progress do you want to keep?
+= คุณต้องการเก็บความคืบหน้าแบบไหน?
+Both sides changed
+= ทั้งสองฝั่งเปลี่ยนแปลง
+This PC and the cloud both changed since the last sync:
+= พีซีนี้และคลาวด์เปลี่ยนแปลงทั้งคู่ตั้งแต่การซิงก์ครั้งล่าสุด:
+• {0}:  this PC {1}   |   cloud {2}
+= • {0}:  พีซีนี้ {1}   |   คลาวด์ {2}
+One complete state wins, the other is backed up first.
+= สถานะที่สมบูรณ์หนึ่งฝั่งจะถูกใช้ อีกฝั่งจะถูกสำรองไว้ก่อน
+First time on this PC? Choose USE CLOUD.
+= ใช้พีซีนี้ครั้งแรก? เลือก ใช้คลาวด์
+USE CLOUD replaces your local data. KEEP LOCAL keeps it and uploads it later.
+= ใช้คลาวด์ จะแทนที่ข้อมูลในเครื่อง เก็บในเครื่อง จะเก็บไว้และอัปโหลดภายหลัง
+KEEP LOCAL replaces the cloud. USE CLOUD leaves the cloud and skips your upload.
+= เก็บในเครื่อง จะแทนที่คลาวด์ ใช้คลาวด์ จะปล่อยคลาวด์ไว้และข้ามการอัปโหลดของคุณ
+USE CLOUD
+= ใช้คลาวด์
+KEEP LOCAL
+= เก็บในเครื่อง
+Save game
+= เซฟเกม
+Game update
+= อัปเดตเกม
+Update available
+= มีอัปเดต
+New version:
+= เวอร์ชันใหม่:
+Your version:
+= เวอร์ชันของคุณ:
+not recorded yet
+= ยังไม่ได้บันทึก
+Download size:
+= ขนาดดาวน์โหลด:
+What is new
+= มีอะไรใหม่
+Your addons, settings and saves are left alone. If anything goes wrong, the old game files are put back.
+= แอดออน การตั้งค่า และเซฟของคุณจะไม่ถูกแตะต้อง ถ้ามีปัญหา ไฟล์เกมเก่าจะถูกนำกลับมา
+UPDATE NOW
+= อัปเดตเลย
+NOT NOW
+= ไว้ทีหลัง
+SKIP THIS VERSION
+= ข้ามเวอร์ชันนี้
+I ALREADY HAVE THIS VERSION
+= ฉันมีเวอร์ชันนี้แล้ว
+The update is being installed. Please wait until it has finished.
+= กำลังติดตั้งอัปเดต โปรดรอจนเสร็จ
+Downloading the update...
+= กำลังดาวน์โหลดอัปเดต...
+Download the update
+= ดาวน์โหลดอัปเดต
+Step 1: download the update in your web browser.
+= ขั้นที่ 1: ดาวน์โหลดอัปเดตในเว็บเบราว์เซอร์
+OPEN DOWNLOAD AGAIN
+= เปิดหน้าดาวน์โหลดอีกครั้ง
+Step 2: when the download has finished, come back here.
+= ขั้นที่ 2: เมื่อดาวน์โหลดเสร็จ ให้กลับมาที่นี่
+The launcher finds the file (in its own folder or Downloads), installs it and deletes it.
+= ลันเชอร์จะหาไฟล์ (ในโฟลเดอร์ของตัวเองหรือดาวน์โหลด) ติดตั้ง แล้วลบไฟล์นั้น
+Checking the file...
+= กำลังตรวจสอบไฟล์...
+CANCELLING...
+= กำลังยกเลิก...
+Updating to {0}
+= กำลังอัปเดตเป็น {0}
+Please keep the launcher open until this has finished.
+= โปรดเปิดลันเชอร์ไว้จนกว่าจะเสร็จ
+{0} of {1}  ({#2}%)
+= {0} จาก {1}  ({2}%)
+{0} downloaded
+= ดาวน์โหลดแล้ว {0}
+Update installed
+= ติดตั้งอัปเดตแล้ว
+Update failed
+= อัปเดตล้มเหลว
+CLOSE
+= ปิด
+TRY AGAIN
+= ลองอีกครั้ง
+Version {0} is installed.
+= ติดตั้งเวอร์ชัน {0} แล้ว
+{#0} files updated.
+= อัปเดตแล้ว {0} ไฟล์
+{#0} file updated.
+= อัปเดตแล้ว {0} ไฟล์
+{#0} files updated, {#1} removed.
+= อัปเดตแล้ว {0} ไฟล์ ลบ {1} ไฟล์
+{#0} file updated, {#1} removed.
+= อัปเดตแล้ว {0} ไฟล์ ลบ {1} ไฟล์
+Install
+= ติดตั้ง
+Install the game from this file?
+= ติดตั้งเกมจากไฟล์นี้หรือไม่?
+{0}  ({#1} MB)
+= {0}  ({1} MB)
+in {0}
+= ใน {0}
+Choose the game file you downloaded (.rar)
+= เลือกไฟล์เกมที่คุณดาวน์โหลด (.rar)
+Game archive (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|All files (*.*)|*.*
+= ไฟล์บีบอัดเกม (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|ไฟล์ทั้งหมด (*.*)|*.*
+Install cancelled.
+= ยกเลิกการติดตั้งแล้ว
+Unpacking the game client...
+= กำลังแตกไฟล์เกม...
+Install failed.
+= การติดตั้งล้มเหลว
+Install complete - press PLAY.
+= ติดตั้งเสร็จ - กด เล่น
+Install complete. Press PLAY to enter Azeroth.
+= ติดตั้งเสร็จ กด เล่น เพื่อเข้าสู่ Azeroth
+The last game update was cut off before it finished. Your game files were put back exactly as they were.
+= การอัปเดตเกมครั้งล่าสุดถูกตัดก่อนเสร็จ ไฟล์เกมของคุณถูกนำกลับเหมือนเดิมทุกอย่าง
+You can run the update again with the UPDATE button.
+= คุณเรียกใช้อัปเดตอีกครั้งได้ด้วยปุ่ม อัปเดต
+The last game update was cut off, and some game files could not be put back automatically.
+= การอัปเดตเกมครั้งล่าสุดถูกตัด และไฟล์เกมบางไฟล์ไม่สามารถนำกลับโดยอัตโนมัติ
+The old versions are kept in the folder "{0}" inside the game folder. Copy them back over the game files, or reinstall the game.
+= เวอร์ชันเก่าเก็บไว้ในโฟลเดอร์ "{0}" ภายในโฟลเดอร์เกม คัดลอกกลับไปทับไฟล์เกม หรือติดตั้งเกมใหม่
+Checking for updates...
+= กำลังตรวจหาอัปเดต...
+The update check failed ({0}).
+= การตรวจหาอัปเดตล้มเหลว ({0})
+Could not check for launcher updates.
+= ไม่สามารถตรวจหาอัปเดตลันเชอร์
+Launcher update
+= อัปเดตลันเชอร์
+Launcher {0} is available.
+= มีลันเชอร์ {0} แล้ว
+The launcher is up to date ({0}).
+= ลันเชอร์เป็นรุ่นล่าสุดแล้ว ({0})
+You have the newest launcher ({0}).
+= คุณใช้ลันเชอร์ล่าสุดแล้ว ({0})
+A new launcher ({0}) is available. Open the launcher and press UPDATE.
+= มีลันเชอร์ใหม่ ({0}) เปิดลันเชอร์แล้วกด อัปเดต
+Finish what is running first (the game, an install or a cloud sync), then press UPDATE again.
+= ทำสิ่งที่กำลังทำงานให้เสร็จก่อน (เกม การติดตั้ง หรือการซิงก์คลาวด์) แล้วกด อัปเดต อีกครั้ง
+A new version of the launcher is on GitHub: {0}.
+= มีลันเชอร์เวอร์ชันใหม่บน GitHub: {0}
+Update now? The new launcher ({0}) is downloaded, checked and started in place of this one. Your settings stay as they are.
+= อัปเดตตอนนี้หรือไม่? ลันเชอร์ใหม่ ({0}) จะถูกดาวน์โหลด ตรวจสอบ และเริ่มแทนตัวนี้ การตั้งค่าของคุณจะคงเดิม
+Update now? The new launcher is downloaded, checked and started in place of this one. Your settings stay as they are.
+= อัปเดตตอนนี้หรือไม่? ลันเชอร์ใหม่จะถูกดาวน์โหลด ตรวจสอบ และเริ่มแทนตัวนี้ การตั้งค่าของคุณจะคงเดิม
+Launcher update postponed. Press UPDATE when you want it.
+= เลื่อนการอัปเดตลันเชอร์แล้ว กด อัปเดต เมื่อต้องการ
+Downloading the new launcher...
+= กำลังดาวน์โหลดลันเชอร์ใหม่...
+Downloading the new launcher... {0}
+= กำลังดาวน์โหลดลันเชอร์ใหม่... {0}
+Launcher update failed.
+= อัปเดตลันเชอร์ล้มเหลว
+Update checking is not switched on in this launcher yet (it has no update address).
+= ลันเชอร์นี้ยังไม่ได้เปิดการตรวจหาอัปเดต (ไม่มีที่อยู่อัปเดต)
+The game is not installed yet. Press INSTALL first.
+= ยังไม่ได้ติดตั้งเกม กด ติดตั้ง ก่อน
+Could not check for updates.
+= ไม่สามารถตรวจหาอัปเดต
+You have the newest version ({0}).
+= คุณมีเวอร์ชันล่าสุดแล้ว ({0})
+Update {0} is available.
+= มีอัปเดต {0}
+A game update ({0}) is available.
+= มีอัปเดตเกม ({0})
+Version {0} skipped. The UPDATE button still offers it.
+= ข้ามเวอร์ชัน {0} แล้ว ปุ่ม อัปเดต ยังเสนอให้อยู่
+Noted: you have version {0}.
+= บันทึกแล้ว: คุณมีเวอร์ชัน {0}
+Install the update from this file?
+= ติดตั้งอัปเดตจากไฟล์นี้หรือไม่?
+Choose the update file you downloaded
+= เลือกไฟล์อัปเดตที่คุณดาวน์โหลด
+Update archive (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|All files (*.*)|*.*
+= ไฟล์บีบอัดอัปเดต (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|ไฟล์ทั้งหมด (*.*)|*.*
+Close the game first, then try again.
+= ปิดเกมก่อน แล้วลองอีกครั้ง
+Checking the download...
+= กำลังตรวจสอบไฟล์ที่ดาวน์โหลด...
+The downloaded file does not match its checksum, so nothing was installed. Please try again later.
+= ไฟล์ที่ดาวน์โหลดไม่ตรงกับค่าเช็กซัม จึงไม่ได้ติดตั้งอะไร โปรดลองอีกครั้งภายหลัง
+That file is not this update (its checksum does not match), so nothing was installed. Download it again from the update page.
+= ไฟล์นั้นไม่ใช่อัปเดตนี้ (ค่าเช็กซัมไม่ตรง) จึงไม่ได้ติดตั้งอะไร ดาวน์โหลดใหม่จากหน้าอัปเดต
+The update failed ({0}).
+= อัปเดตล้มเหลว ({0})
+Updated to {0} - press PLAY.
+= อัปเดตเป็น {0} แล้ว - กด เล่น
+Game updated to {0}. Press PLAY to enter Azeroth.
+= อัปเดตเกมเป็น {0} แล้ว กด เล่น เพื่อเข้าสู่ Azeroth
+Update cancelled.
+= ยกเลิกการอัปเดตแล้ว
+Update failed.
+= อัปเดตล้มเหลว
+Another task is still running - wait for it to finish.
+= ยังมีงานอื่นทำงานอยู่ - รอให้เสร็จก่อน
+Choose a sync folder inside your cloud drive first (Cloud Save or Options).
+= เลือกโฟลเดอร์ซิงก์ในไดรฟ์คลาวด์ก่อน (เซฟบนคลาวด์หรือตัวเลือก)
+Cloud sync failed.
+= การซิงก์คลาวด์ล้มเหลว
+Status checked at {0}
+= ตรวจสอบสถานะเมื่อ {0}
+Downloaded from the cloud at {0}
+= ดาวน์โหลดจากคลาวด์เมื่อ {0}
+Saves uploaded at {0}
+= อัปโหลดเซฟเมื่อ {0}
+Not everything was synced - see the Cloud Save log.
+= ซิงก์ไม่ครบทั้งหมด - ดูบันทึกในเซฟบนคลาวด์
+The game is being updated. Please wait until that has finished.
+= เกมกำลังอัปเดต โปรดรอจนเสร็จ
+The cloud save could NOT be loaded, so the game was not launched.
+= ไม่สามารถโหลดเซฟบนคลาวด์ จึงไม่ได้เปิดเกม
+See the log in Cloud Save. If your cloud drive is still syncing, wait for it to finish and press PLAY again.
+= ดูบันทึกในเซฟบนคลาวด์ ถ้าไดรฟ์คลาวด์ยังซิงก์อยู่ ให้รอจนเสร็จแล้วกด เล่น อีกครั้ง
+Cloud sync failed - game not launched
+= การซิงก์คลาวด์ล้มเหลว - ไม่ได้เปิดเกม
+Cloud save was not loaded - game not launched.
+= ไม่ได้โหลดเซฟบนคลาวด์ - ไม่ได้เปิดเกม
+Cloud sync successfully downloaded
+= ดาวน์โหลดการซิงก์คลาวด์สำเร็จ
+No sync folder set - launched without cloud sync.
+= ยังไม่ได้ตั้งโฟลเดอร์ซิงก์ - เปิดโดยไม่มีการซิงก์คลาวด์
+Starting Azeroth Survivors ...
+= กำลังเริ่ม Azeroth Survivors ...
+Game running.
+= เกมกำลังทำงาน
+Could not start the game: {0}
+= ไม่สามารถเริ่มเกม: {0}
+Game closed.
+= ปิดเกมแล้ว
+Game has closed.
+= เกมปิดแล้ว
+Cloud sync successfully uploaded
+= อัปโหลดการซิงก์คลาวด์สำเร็จ
+Some of your progress was NOT uploaded. See the log in Cloud Save.
+= ความคืบหน้าบางส่วนไม่ได้ถูกอัปโหลด ดูบันทึกในเซฟบนคลาวด์
+Cloud sync NOT completed - see the Cloud Save log
+= การซิงก์คลาวด์ไม่เสร็จสมบูรณ์ - ดูบันทึกในเซฟบนคลาวด์
+Cloud upload failed: {0}
+= อัปโหลดขึ้นคลาวด์ล้มเหลว: {0}
+Cloud sync failed - see the Cloud Save log
+= การซิงก์คลาวด์ล้มเหลว - ดูบันทึกในเซฟบนคลาวด์
+Launcher
+= ลันเชอร์
+Select a folder inside your cloud drive (Google Drive, OneDrive, Dropbox ...)
+= เลือกโฟลเดอร์ในไดรฟ์คลาวด์ของคุณ (Google Drive, OneDrive, Dropbox ...)
+That is the top level of your cloud drive.
+= นั่นคือระดับบนสุดของไดรฟ์คลาวด์
+Create and use a subfolder named AzerothSync inside it?
+= สร้างและใช้โฟลเดอร์ย่อยชื่อ AzerothSync ในนั้นหรือไม่?
+Sync folder
+= โฟลเดอร์ซิงก์
+Play time reset.
+= รีเซ็ตเวลาเล่นแล้ว
+Play time
+= เวลาเล่น
+No games played with this launcher yet.
+= ยังไม่เคยเล่นเกมด้วยลันเชอร์นี้
+Total: {0} over {#1} sessions
+= รวม: {0} ใน {1} เซสชัน
+Total: {0} over {#1} session
+= รวม: {0} ใน {1} เซสชัน
+Total: {0} over {#1} sessions on {#2} PCs
+= รวม: {0} ใน {1} เซสชันบน {2} พีซี
+Last session: {0} ({1})
+= เซสชันล่าสุด: {0} ({1})
+Longest session: {0}
+= เซสชันที่นานที่สุด: {0}
+Shared with your other PCs through the cloud sync folder.
+= แชร์กับพีซีเครื่องอื่นผ่านโฟลเดอร์ซิงก์คลาวด์
+Counted on this PC (the sync folder is not reachable right now).
+= นับบนพีซีนี้ (ตอนนี้เข้าถึงโฟลเดอร์ซิงก์ไม่ได้)
+Counted on this PC. Turn on cloud saving to share it between your PCs.
+= นับบนพีซีนี้ เปิดเซฟบนคลาวด์เพื่อแชร์ระหว่างพีซี
+RESET PLAY TIME
+= รีเซ็ตเวลาเล่น
+Set the play time back to zero on all your PCs?
+= ตั้งเวลาเล่นกลับเป็นศูนย์บนพีซีทุกเครื่องหรือไม่?
+Set the play time back to zero?
+= ตั้งเวลาเล่นกลับเป็นศูนย์หรือไม่?
+Game folder
+= โฟลเดอร์เกม
+Save game folder
+= โฟลเดอร์เซฟเกม
+Game config folder (AddOns, addon settings)
+= โฟลเดอร์การกำหนดค่าเกม (AddOns, การตั้งค่าแอดออน)
+Cloud saving
+= เซฟบนคลาวด์
+Close button hides the launcher to the tray
+= ปุ่มปิดซ่อนลันเชอร์ไปที่ถาดระบบ
+Minimize the launcher when the game starts
+= ย่อลันเชอร์เมื่อเกมเริ่ม
+RUN SETUP AGAIN
+= ตั้งค่าใหม่อีกครั้ง
+Select your Azeroth Survivors game folder
+= เลือกโฟลเดอร์เกม Azeroth Survivors
+Game folder set: {0}
+= ตั้งโฟลเดอร์เกมแล้ว: {0}
+Select the game's benilla-config folder (contains AddOns and saved)
+= เลือกโฟลเดอร์ benilla-config ของเกม (มี AddOns และ saved)
+Language
+= ภาษา
+ALL PATCH NOTES ›
+= บันทึกแพตช์ทั้งหมด ›
+‹ LATEST
+= ‹ ล่าสุด
+‹ ALL PATCH NOTES
+= ‹ บันทึกแพตช์ทั้งหมด
+‹ PREVIOUS
+= ‹ ก่อนหน้า
+NEXT ›
+= ถัดไป ›
+{#0} of {#1}
+= {0} จาก {1}
+PAGE
+= หน้า
+No patch notes yet.
+= ยังไม่มีบันทึกแพตช์
+{0} (current)
+= {0} (ปัจจุบัน)
+Vibe coded by Slimjim\nCloud save code established by Keijin
+= เขียนโค้ดตามฟีลโดย Slimjim\nโค้ดเซฟบนคลาวด์โดย Keijin
+DOWNLOAD MORE ›
+= ดาวน์โหลดเพิ่ม ›
+ALL
+= ทั้งหมด
+UI OVERHAUL
+= ปรับโฉม UI
+GAMEPLAY
+= เกมเพลย์
+COSMETIC
+= ความสวยงาม
+No addons in this filter yet.
+= ยังไม่มีแอดออนในตัวกรองนี้
+No downloadable addons listed yet.
+= ยังไม่มีแอดออนให้ดาวน์โหลด
+UNINSTALL
+= ถอนการติดตั้ง
+Addons can't be changed while the game runs or a sync is running.
+= เปลี่ยนแอดออนไม่ได้ขณะที่เกมหรือการซิงก์กำลังทำงาน
+Another addon is still downloading.
+= แอดออนอื่นยังดาวน์โหลดอยู่
+Installing {0}...
+= กำลังติดตั้ง {0}...
+{0} installed.
+= ติดตั้ง {0} แล้ว
+{0} failed.
+= {0} ล้มเหลว
+Could not install {0}:
+= ไม่สามารถติดตั้ง {0}:
+{0} is not installed.
+= ยังไม่ได้ติดตั้ง {0}
+Remove {0} from your AddOns folder?
+= ลบ {0} ออกจากโฟลเดอร์ AddOns หรือไม่?
+Folders: {0}
+= โฟลเดอร์: {0}
+This deletes everything it added, including the settings it saved.
+= การทำเช่นนี้จะลบทุกอย่างที่เพิ่มเข้ามา รวมถึงการตั้งค่าที่บันทึกไว้
+Uninstall
+= ถอนการติดตั้ง
+Could not uninstall {0}:
+= ไม่สามารถถอนการติดตั้ง {0}:
+{0} uninstalled.
+= ถอนการติดตั้ง {0} แล้ว
+{0} was not installed.
+= {0} ไม่ได้ติดตั้งไว้
+No AddOns folder found.\nSet the game config folder in Options\n(the benilla-config folder).
+= ไม่พบโฟลเดอร์ AddOns\nตั้งค่าโฟลเดอร์การกำหนดค่าเกมในตัวเลือก\n(โฟลเดอร์ benilla-config)
+REFRESH
+= รีเฟรช
+FOLDER
+= โฟลเดอร์
+TOGGLE ALL
+= สลับทั้งหมด
+SAVE
+= บันทึก
+LOAD
+= โหลด
+empty
+= ว่าง
+{#0} on, {#1} off
+= เปิด {0}, ปิด {1}
+saved {0}
+= บันทึกเมื่อ {0}
+Profile {0}
+= โปรไฟล์ {0}
+No addons installed.
+= ยังไม่มีแอดออนที่ติดตั้ง
+{#0} of {#1} enabled
+= เปิด {0} จาก {1}
+Could not enable {0}:
+= ไม่สามารถเปิด {0}:
+Could not disable {0}:
+= ไม่สามารถปิด {0}:
+{0} enabled.
+= เปิด {0} แล้ว
+{0} disabled.
+= ปิด {0} แล้ว
+All addons enabled.
+= เปิดแอดออนทั้งหมดแล้ว
+All addons disabled.
+= ปิดแอดออนทั้งหมดแล้ว
+Some addons could not be changed:
+= เปลี่ยนแอดออนบางตัวไม่ได้:
+Replace the saved Profile {0} with the current toggles?
+= แทนที่โปรไฟล์ {0} ที่บันทึกไว้ด้วยการตั้งค่าปัจจุบันหรือไม่?
+Profile {0} saved.
+= บันทึกโปรไฟล์ {0} แล้ว
+Profile {0} is empty - press SAVE to store the current toggles.
+= โปรไฟล์ {0} ว่างอยู่ - กด บันทึก เพื่อเก็บการตั้งค่าปัจจุบัน
+Profile {0} loaded: {#1} changed.
+= โหลดโปรไฟล์ {0} แล้ว: เปลี่ยน {1} รายการ
+Profile {0} loaded: {#1} changed. {#2} newer addon(s) left as they were.
+= โหลดโปรไฟล์ {0} แล้ว: เปลี่ยน {1} รายการ ปล่อยแอดออนที่ใหม่กว่า {2} ตัวไว้ตามเดิม
+Cloud saving is turned off.\nYour progress stays on this PC only.
+= เซฟบนคลาวด์ปิดอยู่\nความคืบหน้าของคุณอยู่บนพีซีนี้เท่านั้น
+TURN ON CLOUD SAVING
+= เปิดเซฟบนคลาวด์
+PLAY downloads the newest state, starts the game and uploads your progress after you close it. One complete state wins; the overwritten one is backed up as a ZIP first.
+= เล่น จะดาวน์โหลดสถานะล่าสุด เริ่มเกม และอัปโหลดความคืบหน้าหลังคุณปิดเกม สถานะที่สมบูรณ์หนึ่งฝั่งจะถูกใช้ ฝั่งที่ถูกเขียนทับจะถูกสำรองเป็น ZIP ก่อน
+(not set - choose a folder inside Google Drive, OneDrive or Dropbox)
+= (ยังไม่ได้ตั้งค่า - เลือกโฟลเดอร์ใน Google Drive, OneDrive หรือ Dropbox)
+Not synced yet.
+= ยังไม่ได้ซิงก์
+Cloud: {0}
+= คลาวด์: {0}
+last uploaded by {0} on {1}
+= อัปโหลดล่าสุดโดย {0} เมื่อ {1}
+no upload info
+= ไม่มีข้อมูลการอัปโหลด
+CHECK STATUS
+= ตรวจสอบสถานะ
+DOWNLOAD
+= ดาวน์โหลด
+UPLOAD
+= อัปโหลด
+The launcher is already running.
+= ลันเชอร์ทำงานอยู่แล้ว
+Look for its icon in the system tray (near the clock).
+= มองหาไอคอนในถาดระบบ (ใกล้นาฬิกา)
+Press INSTALL to download the game first.
+= กด ติดตั้ง เพื่อดาวน์โหลดเกมก่อน
+No launcher release has been published on GitHub yet.
+= ยังไม่มีการเผยแพร่ลันเชอร์บน GitHub
+GitHub's answer could not be read.
+= ไม่สามารถอ่านคำตอบจาก GitHub
+The latest release on GitHub ({0}) has no launcher exe attached.
+= รุ่นล่าสุดบน GitHub ({0}) ไม่มีไฟล์ exe ของลันเชอร์แนบมา
+The latest release on GitHub has no checksum for its exe, so it is not installed.
+= รุ่นล่าสุดบน GitHub ไม่มีค่าเช็กซัมสำหรับ exe จึงไม่ติดตั้ง
+The downloaded launcher does not match its checksum, so it was not installed. Please try again later.
+= ลันเชอร์ที่ดาวน์โหลดไม่ตรงกับค่าเช็กซัม จึงไม่ได้ติดตั้ง โปรดลองอีกครั้งภายหลัง
+The launcher could not replace itself in this folder ({0}).
+= ลันเชอร์ไม่สามารถแทนที่ตัวเองในโฟลเดอร์นี้ ({0})
+Download the new version from GitHub instead:
+= ดาวน์โหลดเวอร์ชันใหม่จาก GitHub แทน:
+The new launcher could not be put in place ({0}). Nothing was changed.
+= ไม่สามารถวางลันเชอร์ใหม่เข้าที่ ({0}) ไม่มีอะไรเปลี่ยนแปลง
+The {0} address must start with https://
+= ที่อยู่เซิร์ฟเวอร์{0}ต้องขึ้นต้นด้วย https://
+The {0} server redirected to an address that is not secure (https).
+= เซิร์ฟเวอร์{0}เปลี่ยนเส้นทางไปยังที่อยู่ที่ไม่ปลอดภัย (ไม่ใช่ https)
+The {0} server sent a broken redirect.
+= เซิร์ฟเวอร์{0}ส่งการเปลี่ยนเส้นทางที่ผิดพลาด
+The {0} server answered with error {#1}.
+= เซิร์ฟเวอร์{0}ตอบกลับด้วยข้อผิดพลาด {1}
+The {0} server's security certificate was not accepted. It needs a normal, trusted https certificate.
+= ใบรับรองความปลอดภัยของเซิร์ฟเวอร์{0}ไม่ได้รับการยอมรับ ต้องใช้ใบรับรอง https ปกติที่เชื่อถือได้
+The {0} server did not answer in time. Check your internet connection and try again.
+= เซิร์ฟเวอร์{0}ไม่ตอบกลับทันเวลา ตรวจสอบการเชื่อมต่ออินเทอร์เน็ตแล้วลองอีกครั้ง
+Could not reach the {0} server. Check your internet connection and try again.
+= ไม่สามารถติดต่อเซิร์ฟเวอร์{0} ตรวจสอบการเชื่อมต่ออินเทอร์เน็ตแล้วลองอีกครั้ง
+The {0} server redirected too many times.
+= เซิร์ฟเวอร์{0}เปลี่ยนเส้นทางหลายครั้งเกินไป
+update
+= อัปเดต
+addon
+= แอดออน
+The download link gave a web page instead of the file. It must be a direct download link.
+= ลิงก์ดาวน์โหลดให้หน้าเว็บแทนที่จะเป็นไฟล์ ต้องเป็นลิงก์ดาวน์โหลดโดยตรง
+The download was interrupted. Check your connection and try again.
+= การดาวน์โหลดถูกขัดจังหวะ ตรวจสอบการเชื่อมต่อแล้วลองอีกครั้ง
+The download was cut off before it finished. Please try again.
+= การดาวน์โหลดถูกตัดก่อนเสร็จ โปรดลองอีกครั้ง
+The .zip contains an unsafe path; nothing was installed.
+= ไฟล์ .zip มีเส้นทางที่ไม่ปลอดภัย จึงไม่ได้ติดตั้งอะไร
+The file is damaged or incomplete.
+= ไฟล์เสียหายหรือไม่สมบูรณ์
+The file is a .{0} archive, and no program to unpack it was found.
+= ไฟล์นี้เป็นไฟล์บีบอัด .{0} และไม่พบโปรแกรมสำหรับแตกไฟล์
+Install the free 7-Zip (7-zip.org) or WinRAR and try again.
+= ติดตั้ง 7-Zip ฟรี (7-zip.org) หรือ WinRAR แล้วลองอีกครั้ง
+The archive could not be unpacked.
+= ไม่สามารถแตกไฟล์บีบอัด
+That file is not a .rar, .zip or .7z archive.
+= ไฟล์นั้นไม่ใช่ไฟล์บีบอัด .rar, .zip หรือ .7z
+The archive was unpacked, but {0} was not inside it.
+= แตกไฟล์แล้ว แต่ไม่มี {0} อยู่ข้างใน
+The install finished, but {0} is not in {1}.
+= ติดตั้งเสร็จแล้ว แต่ไม่มี {0} ใน {1}
+The link did not give a .zip file. It must be a direct download link (share pages such as LimeWire do not work).
+= ลิงก์ไม่ได้ให้ไฟล์ .zip ต้องเป็นลิงก์ดาวน์โหลดโดยตรง (หน้าแชร์อย่าง LimeWire ใช้ไม่ได้)
+There is not enough free disk space.
+= พื้นที่ดิสก์ว่างไม่พอ
+Not enough free disk space for the update: about {0} is needed on the drive with the game, {1} is free.
+= พื้นที่ดิสก์ไม่พอสำหรับอัปเดต: ต้องการประมาณ {0} บนไดรฟ์ที่มีเกม ว่างอยู่ {1}
+The update file is not a .rar, .zip or .7z archive.
+= ไฟล์อัปเดตไม่ใช่ไฟล์บีบอัด .rar, .zip หรือ .7z
+An earlier update was cut off and its files could not be put back yet.
+= การอัปเดตก่อนหน้าถูกตัด และยังไม่สามารถนำไฟล์กลับได้
+The old files are kept in:
+= ไฟล์เก่าเก็บไว้ที่:
+Unpacking the update. This can take a few minutes...
+= กำลังแตกไฟล์อัปเดต อาจใช้เวลาสักครู่...
+Installing the new files...
+= กำลังติดตั้งไฟล์ใหม่...
+The update did not contain any files to install.
+= อัปเดตไม่มีไฟล์ให้ติดตั้ง
+{0} is missing after the update.
+= {0} หายไปหลังอัปเดต
+A game file is in use. Close the game and anything else using its folder, then try again.
+= มีไฟล์เกมถูกใช้งานอยู่ ปิดเกมและทุกอย่างที่ใช้โฟลเดอร์ของเกม แล้วลองอีกครั้ง
+There is not enough free disk space for the update. Free some space and try again.
+= พื้นที่ดิสก์ไม่พอสำหรับอัปเดต เคลียร์พื้นที่แล้วลองอีกครั้ง
+The update could not be installed ({0}).
+= ไม่สามารถติดตั้งอัปเดต ({0})
+No game files were changed.
+= ไม่มีไฟล์เกมถูกเปลี่ยน
+Some files could not be put back. The old versions are kept in:
+= บางไฟล์ไม่สามารถนำกลับได้ เวอร์ชันเก่าเก็บไว้ที่:
+Sync folder not reachable: {0} (is your cloud drive running?)
+= เข้าถึงโฟลเดอร์ซิงก์ไม่ได้: {0} (ไดรฟ์คลาวด์ของคุณทำงานอยู่หรือไม่?)
+The game is running. Close it before you download.
+= เกมกำลังทำงาน ปิดก่อนดาวน์โหลด
+The game is running. Close it before you upload.
+= เกมกำลังทำงาน ปิดก่อนอัปโหลด
+The folder is in use and was not replaced: {0} ({1}). Close programs or Explorer windows that use it and try again.
+= โฟลเดอร์ถูกใช้งานอยู่และไม่ได้ถูกแทนที่: {0} ({1}) ปิดโปรแกรมหรือหน้าต่าง Explorer ที่ใช้อยู่แล้วลองอีกครั้ง
+The source changed while copying ({0}). Nothing was replaced, please sync again.
+= ต้นทางเปลี่ยนระหว่างการคัดลอก ({0}) ไม่ได้แทนที่อะไร โปรดซิงก์อีกครั้ง
+No sync folder set. Choose a folder in Google Drive, OneDrive, Dropbox or similar in Options.
+= ยังไม่ได้ตั้งโฟลเดอร์ซิงก์ เลือกโฟลเดอร์ใน Google Drive, OneDrive, Dropbox หรือบริการคล้ายกันในตัวเลือก
+Sync folder: {0}
+= โฟลเดอร์ซิงก์: {0}
+The sync folder does not exist yet. It is created on the first upload.
+= ยังไม่มีโฟลเดอร์ซิงก์ จะถูกสร้างเมื่ออัปโหลดครั้งแรก
+{0}: in sync (local {1}, cloud {2})
+= {0}: ซิงก์แล้ว (ในเครื่อง {1}, คลาวด์ {2})
+{0}: cloud empty, upload (local {1}, cloud {2})
+= {0}: คลาวด์ว่าง อัปโหลด (ในเครื่อง {1}, คลาวด์ {2})
+{0}: cloud copy incomplete or still syncing, wait (local {1}, cloud {2})
+= {0}: สำเนาบนคลาวด์ไม่สมบูรณ์หรือยังซิงก์อยู่ รอก่อน (ในเครื่อง {1}, คลาวด์ {2})
+{0}: local is newer, upload (local {1}, cloud {2})
+= {0}: ในเครื่องใหม่กว่า อัปโหลด (ในเครื่อง {1}, คลาวด์ {2})
+{0}: cloud is newer, download (local {1}, cloud {2})
+= {0}: คลาวด์ใหม่กว่า ดาวน์โหลด (ในเครื่อง {1}, คลาวด์ {2})
+{0}: both changed or never synced (local {1}, cloud {2})
+= {0}: เปลี่ยนทั้งคู่หรือไม่เคยซิงก์ (ในเครื่อง {1}, คลาวด์ {2})
+{0}: {1} not found, skipped. Set the game config folder in Options.
+= {0}: ไม่พบ {1} ข้ามไป ตั้งค่าโฟลเดอร์การกำหนดค่าเกมในตัวเลือก
+Downloading from the cloud ...
+= กำลังดาวน์โหลดจากคลาวด์ ...
+The sync folder does not exist yet, nothing to download.
+= ยังไม่มีโฟลเดอร์ซิงก์ ไม่มีอะไรให้ดาวน์โหลด
+{0}: cloud is empty, nothing to download.
+= {0}: คลาวด์ว่าง ไม่มีอะไรให้ดาวน์โหลด
+{0}: up to date.
+= {0}: ล่าสุดแล้ว
+{0}: the cloud copy does not match the last upload yet (incomplete or still syncing). Nothing replaced, try again in a moment.
+= {0}: สำเนาบนคลาวด์ยังไม่ตรงกับการอัปโหลดล่าสุด (ไม่สมบูรณ์หรือยังซิงก์อยู่) ไม่ได้แทนที่อะไร ลองอีกครั้งในอีกสักครู่
+{0}: local is newer, kept.
+= {0}: ในเครื่องใหม่กว่า เก็บไว้
+Replace your local data with the cloud state?
+= แทนที่ข้อมูลในเครื่องด้วยสถานะบนคลาวด์หรือไม่?
+A backup is made first.
+= จะสำรองข้อมูลไว้ก่อน
+Cancelled, nothing changed.
+= ยกเลิกแล้ว ไม่มีอะไรเปลี่ยน
+{0}: local state kept, it will replace the cloud on the next upload.
+= {0}: เก็บสถานะในเครื่องไว้ จะแทนที่คลาวด์ในการอัปโหลดครั้งถัดไป
+{0}: downloaded from the cloud.
+= {0}: ดาวน์โหลดจากคลาวด์แล้ว
+Cloud state: {0}
+= สถานะคลาวด์: {0}
+Uploading to the cloud ...
+= กำลังอัปโหลดขึ้นคลาวด์ ...
+{0}: nothing local, nothing uploaded.
+= {0}: ไม่มีข้อมูลในเครื่อง ไม่ได้อัปโหลดอะไร
+{0}: cloud is up to date.
+= {0}: คลาวด์ล่าสุดแล้ว
+Replace the cloud state with your local data?
+= แทนที่สถานะบนคลาวด์ด้วยข้อมูลในเครื่องหรือไม่?
+{0}: cloud kept, your local changes were NOT uploaded. Use "Download" to get the cloud state.
+= {0}: เก็บคลาวด์ไว้ การเปลี่ยนแปลงในเครื่องไม่ได้ถูกอัปโหลด ใช้ "ดาวน์โหลด" เพื่อรับสถานะจากคลาวด์
+Cancelled, your local changes were NOT uploaded.
+= ยกเลิกแล้ว การเปลี่ยนแปลงในเครื่องไม่ได้ถูกอัปโหลด
+{0}: the cloud changed during this sync, NOT uploaded. Sync again to decide.
+= {0}: คลาวด์เปลี่ยนระหว่างการซิงก์นี้ ไม่ได้อัปโหลด ซิงก์อีกครั้งเพื่อตัดสินใจ
+{0}: uploaded.
+= {0}: อัปโหลดแล้ว
+Written to the sync folder. Your cloud app uploads it in the background, wait until it is done before you switch PCs.
+= เขียนลงโฟลเดอร์ซิงก์แล้ว แอปคลาวด์ของคุณจะอัปโหลดในเบื้องหลัง รอจนเสร็จก่อนเปลี่ยนพีซี
+Backup: {0}
+= สำรองข้อมูล: {0}
+Restored {0} after an interrupted sync.
+= กู้คืน {0} หลังการซิงก์ที่ถูกขัดจังหวะ

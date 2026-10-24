@@ -39,6 +39,11 @@ namespace AzerothLauncher
             var have = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
             using (var fc = new InstalledFontCollection())
                 foreach (FontFamily f in fc.Families) have.Add(f.Name);
+            FontName = "Times New Roman";
+            fonts.Clear();
+            // a language whose letters the decorative fonts do not have (Cyrillic, Greek, Chinese ...) names its own fonts
+            foreach (string f in Lang.FontOverride.Split(','))
+                if (f.Trim().Length > 0 && have.Contains(f.Trim())) { FontName = f.Trim(); return; }
             foreach (string f in new[] { "Morpheus", "Cinzel", "Papyrus", "Friz Quadrata TT", "Friz Quadrata Std",
                                          "Palatino Linotype", "Book Antiqua", "Georgia" })
                 if (have.Contains(f)) { FontName = f; return; }
@@ -199,7 +204,10 @@ namespace AzerothLauncher
                 tx = 10 + isz + 4;
                 tw = w - 8 - tx;
             }
-            Theme.CenterText(g, text, Theme.F(size, FontStyle.Bold), fg, new RectangleF(tx, 0, tw, h), shadow);
+            string label = Lang.T(text);
+            float fs = size;                                  // a longer translation gets a smaller font so it fits
+            while (fs > 6 && g.MeasureString(label, Theme.F(fs, FontStyle.Bold)).Width > tw - 10) fs -= 0.5f;
+            Theme.CenterText(g, label, Theme.F(fs, FontStyle.Bold), fg, new RectangleF(tx, 0, tw, h), shadow);
         }
     }
 
@@ -324,10 +332,10 @@ namespace AzerothLauncher
     // ---------- small helpers to build the sections and dialogs ----------
     public static class UI
     {
-        public static Label Text(string text, float size, FontStyle style, Color fg, Color bg, int wrapWidth)
+        public static Label Text(string text, float size, FontStyle style, Color fg, Color bg, int wrapWidth, bool translate = true)
         {
             var l = new Label();
-            l.Text = text;
+            l.Text = translate ? Lang.T(text) : text;
             l.Font = Theme.F(size, style);
             l.ForeColor = fg;
             l.BackColor = bg;
@@ -345,10 +353,10 @@ namespace AzerothLauncher
             return p;
         }
 
-        public static CheckBox Check(string text, bool value, Color fg, Color bg, float size)
+        public static CheckBox Check(string text, bool value, Color fg, Color bg, float size, bool translate = true)
         {
             var c = new CheckBox();
-            c.Text = text;
+            c.Text = translate ? Lang.T(text) : text;
             c.Checked = value;
             c.ForeColor = fg;
             c.BackColor = bg;
@@ -545,7 +553,7 @@ namespace AzerothLauncher
 
         public WowDialog(string title)
         {
-            Text = title;
+            Text = Lang.T(title);
             Icon = Theme.AppIcon;
             BackColor = Theme.BgBottom;
             FormBorderStyle = FormBorderStyle.FixedSingle;

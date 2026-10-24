@@ -1,0 +1,791 @@
+@name Türkçe
+@font Palatino Linotype, Georgia
+# Each English text is followed by its translation on the line below (starting with "= ").
+# {0}, {1} ... are filled in by the launcher; keep them. \n is a line break.
+
+PLAY
+= OYNA
+INSTALL
+= YÜKLE
+PLAYING...
+= OYNANIYOR...
+INSTALLING
+= YÜKLENİYOR
+UPDATING
+= GÜNCELLENİYOR
+UPDATE
+= GÜNCELLE
+CHECKING
+= DENETLENİYOR
+CLOUD SAVE
+= BULUT KAYDI
+ADDONS
+= EKLENTİLER
+OPTIONS
+= SEÇENEKLER
+CHANGELOG
+= YAMA NOTLARI
+ABOUT LAUNCHER
+= BAŞLATICI HAKKINDA
+A game made by Aethus
+= Aethus tarafından yapılan bir oyun
+Version {0}
+= Sürüm {0}
+Press PLAY to enter Azeroth.
+= Azeroth'a girmek için OYNA'ya bas.
+Game client not found.
+= Oyun bulunamadı.
+Press INSTALL to download it first.
+= Önce indirmek için YÜKLE'ye bas.
+Press INSTALL to download it, or set the game folder in Options.
+= İndirmek için YÜKLE'ye bas ya da oyun klasörünü Seçenekler'den ayarla.
+Your cloud save syncs automatically.
+= Bulut kaydın otomatik olarak eşitlenir.
+Time played: {0}   |   Last session: {1}
+= Oynama süresi: {0}   |   Son oturum: {1}
+Ready.
+= Hazır.
+Cloud Save
+= Bulut Kaydı
+Addons
+= Eklentiler
+Options
+= Seçenekler
+Changelog
+= Yama notları
+About Launcher
+= Başlatıcı Hakkında
+Download More
+= Daha Fazla İndir
+All Patch Notes
+= Tüm Yama Notları
+Show Launcher
+= Başlatıcıyı Göster
+Play
+= Oyna
+Upload Save Now
+= Kaydı Şimdi Yükle
+Close Button Hides to Tray
+= Kapat Düğmesi Bildirim Alanına Gizler
+Quit
+= Çık
+Game running
+= Oyun çalışıyor
+Idle
+= Boşta
+Game running - {0}
+= Oyun çalışıyor - {0}
+The launcher is in the tray; the open window stays. Right-click the icon to quit.
+= Başlatıcı bildirim alanında; açık pencere kalır. Çıkmak için simgeye sağ tıkla.
+Still running in the tray. Right-click the icon to quit.
+= Hâlâ bildirim alanında çalışıyor. Çıkmak için simgeye sağ tıkla.
+Cloud sync running
+= Bulut eşitlemesi sürüyor
+A cloud sync is still running. If you quit now it is cut short; the next sync repairs any half-finished copy.
+= Bir bulut eşitlemesi hâlâ sürüyor. Şimdi çıkarsan yarıda kesilir; bir sonraki eşitleme yarım kalan kopyayı onarır.
+Quit anyway?
+= Yine de çıkılsın mı?
+Installing
+= Yükleniyor
+The game client is still being installed. If you quit now, it is cut short.
+= Oyun hâlâ yükleniyor. Şimdi çıkarsan yükleme yarıda kesilir.
+Updating
+= Güncelleniyor
+The game is still being updated. If you quit now, the update is cut short. Nothing is lost: a half-finished change is undone the next time the launcher starts.
+= Oyun hâlâ güncelleniyor. Şimdi çıkarsan güncelleme yarıda kesilir. Hiçbir şey kaybolmaz: yarım kalan değişiklik başlatıcı bir sonraki açılışta geri alınır.
+The game is still running. If you quit the launcher now, your saves will NOT be uploaded automatically.
+= Oyun hâlâ çalışıyor. Başlatıcıdan şimdi çıkarsan kayıtların otomatik olarak YÜKLENMEZ.
+Setup saved.
+= Kurulum kaydedildi.
+First-time setup
+= İlk kurulum
+Welcome, Adventurer
+= Hoş geldin, Maceracı
+Step 1 of 2
+= Adım 1 / 2
+Step 2 of 2
+= Adım 2 / 2
+A.  Cloud saving
+= A.  Bulut kaydı
+Keep my progress in the cloud (Google Drive, OneDrive, Dropbox ...)\nand share it between my PCs
+= İlerlememi bulutta tut (Google Drive, OneDrive, Dropbox ...)\nve bilgisayarlarım arasında paylaş
+Sync folder (inside your cloud drive)
+= Eşitleme klasörü (bulut sürücünün içinde)
+Cloud saving stays off. You can turn it on later in Cloud Save.
+= Bulut kaydı kapalı kalır. Daha sonra Bulut Kaydı bölümünden açabilirsin.
+B.  Where are your files?
+= B.  Dosyaların nerede?
+Folders found at their usual place are used as they are. Choose the ones that are missing.
+= Her zamanki yerinde bulunan klasörler olduğu gibi kullanılır. Eksik olanları seç.
+AddOns
+= AddOns
+Game saves
+= Oyun kayıtları
+Addon settings
+= Eklenti ayarları
+Select your AddOns folder
+= AddOns klasörünü seç
+Select the folder that holds your save game (normally %APPDATA%\wenilla-rogue)
+= Oyun kaydının bulunduğu klasörü seç (genellikle %APPDATA%\wenilla-rogue)
+Select your addon settings folder (the 'saved' folder in benilla-config)
+= Eklenti ayarları klasörünü seç (benilla-config içindeki 'saved' klasörü)
+FINISH
+= BİTİR
+LATER
+= SONRA
+✓ found
+= ✓ bulundu
+✓ chosen
+= ✓ seçildi
+not chosen yet
+= henüz seçilmedi
+not found - please choose it
+= bulunamadı - lütfen seç
+(not set)
+= (ayarlanmadı)
+CHANGE
+= DEĞİŞTİR
+CHOOSE
+= SEÇ
+Choose a sync folder for cloud saving, or untick\n"Keep my progress in the cloud".
+= Bulut kaydı için bir eşitleme klasörü seç ya da\n"İlerlememi bulutta tut" işaretini kaldır.
+Setup
+= Kurulum
+These folders were not found:
+= Bu klasörler bulunamadı:
+Finish anyway? You can change them later in Options.
+= Yine de bitirilsin mi? Daha sonra Seçenekler'den değiştirebilirsin.
+Your settings are saved.\n\nWould you like to go to the Addons section now\nto download some addons, or to enable or disable the ones you have?
+= Ayarların kaydedildi.\n\nŞimdi eklenti indirmek ya da sahip olduklarını\naçıp kapatmak için Eklentiler bölümüne gitmek ister misin?
+DOWNLOAD ADDONS
+= EKLENTİ İNDİR
+ENABLE / DISABLE ADDONS
+= EKLENTİLERİ AÇ / KAPAT
+NO THANKS
+= HAYIR, TEŞEKKÜRLER
+Install the game
+= Oyunu yükle
+Install Azeroth Survivors
+= Azeroth Survivors'ı yükle
+Step 1
+= Adım 1
+Download the game in your web browser.
+= Oyunu web tarayıcında indir.
+OPEN DOWNLOAD
+= İNDİRMEYİ AÇ
+Download opened in your browser.
+= İndirme tarayıcıda açıldı.
+Step 2
+= Adım 2
+When the download has finished, come back here.
+= İndirme bitince buraya geri dön.
+IT'S IN MY DOWNLOADS
+= İNDİRİLENLERDE
+The launcher finds the file (in its own folder or Downloads), unpacks the game here and deletes the download.
+= Başlatıcı dosyayı bulur (kendi klasöründe ya da İndirilenler'de), oyunu buraya çıkarır ve indirileni siler.
+CANCEL
+= İPTAL
+Which progress do you want to keep?
+= Hangi ilerlemeyi tutmak istiyorsun?
+Both sides changed
+= İki taraf da değişti
+This PC and the cloud both changed since the last sync:
+= Bu bilgisayar ve bulut son eşitlemeden beri değişti:
+• {0}:  this PC {1}   |   cloud {2}
+= • {0}:  bu bilgisayar {1}   |   bulut {2}
+One complete state wins, the other is backed up first.
+= Tam bir durum kazanır, diğeri önce yedeklenir.
+First time on this PC? Choose USE CLOUD.
+= Bu bilgisayarda ilk kez mi? BULUTU KULLAN'ı seç.
+USE CLOUD replaces your local data. KEEP LOCAL keeps it and uploads it later.
+= BULUTU KULLAN yerel verilerini değiştirir. YERELİ TUT onları saklar ve sonra yükler.
+KEEP LOCAL replaces the cloud. USE CLOUD leaves the cloud and skips your upload.
+= YERELİ TUT bulutu değiştirir. BULUTU KULLAN bulutu olduğu gibi bırakır ve yüklemeni atlar.
+USE CLOUD
+= BULUTU KULLAN
+KEEP LOCAL
+= YERELİ TUT
+Save game
+= Oyun kaydı
+Game update
+= Oyun güncellemesi
+Update available
+= Güncelleme mevcut
+New version:
+= Yeni sürüm:
+Your version:
+= Senin sürümün:
+not recorded yet
+= henüz kaydedilmedi
+Download size:
+= İndirme boyutu:
+What is new
+= Yenilikler
+Your addons, settings and saves are left alone. If anything goes wrong, the old game files are put back.
+= Eklentilerine, ayarlarına ve kayıtlarına dokunulmaz. Bir şey ters giderse eski oyun dosyaları geri konur.
+UPDATE NOW
+= ŞİMDİ GÜNCELLE
+NOT NOW
+= ŞİMDİ DEĞİL
+SKIP THIS VERSION
+= BU SÜRÜMÜ ATLA
+I ALREADY HAVE THIS VERSION
+= BU SÜRÜME ZATEN SAHİBİM
+The update is being installed. Please wait until it has finished.
+= Güncelleme yükleniyor. Lütfen bitene kadar bekle.
+Downloading the update...
+= Güncelleme indiriliyor...
+Download the update
+= Güncellemeyi indir
+Step 1: download the update in your web browser.
+= Adım 1: güncellemeyi web tarayıcında indir.
+OPEN DOWNLOAD AGAIN
+= İNDİRMEYİ TEKRAR AÇ
+Step 2: when the download has finished, come back here.
+= Adım 2: indirme bitince buraya geri dön.
+The launcher finds the file (in its own folder or Downloads), installs it and deletes it.
+= Başlatıcı dosyayı bulur (kendi klasöründe ya da İndirilenler'de), yükler ve siler.
+Checking the file...
+= Dosya denetleniyor...
+CANCELLING...
+= İPTAL EDİLİYOR...
+Updating to {0}
+= {0} sürümüne güncelleniyor
+Please keep the launcher open until this has finished.
+= Lütfen bu bitene kadar başlatıcıyı açık tut.
+{0} of {1}  ({#2}%)
+= {0} / {1}  (%{2})
+{0} downloaded
+= {0} indirildi
+Update installed
+= Güncelleme yüklendi
+Update failed
+= Güncelleme başarısız
+CLOSE
+= KAPAT
+TRY AGAIN
+= TEKRAR DENE
+Version {0} is installed.
+= {0} sürümü yüklü.
+{#0} files updated.
+= {0} dosya güncellendi.
+{#0} file updated.
+= {0} dosya güncellendi.
+{#0} files updated, {#1} removed.
+= {0} dosya güncellendi, {1} kaldırıldı.
+{#0} file updated, {#1} removed.
+= {0} dosya güncellendi, {1} kaldırıldı.
+Install
+= Yükle
+Install the game from this file?
+= Oyun bu dosyadan yüklensin mi?
+{0}  ({#1} MB)
+= {0}  ({1} MB)
+in {0}
+= konum: {0}
+Choose the game file you downloaded (.rar)
+= İndirdiğin oyun dosyasını seç (.rar)
+Game archive (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|All files (*.*)|*.*
+= Oyun arşivi (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|Tüm dosyalar (*.*)|*.*
+Install cancelled.
+= Yükleme iptal edildi.
+Unpacking the game client...
+= Oyun çıkarılıyor...
+Install failed.
+= Yükleme başarısız.
+Install complete - press PLAY.
+= Yükleme tamamlandı - OYNA'ya bas.
+Install complete. Press PLAY to enter Azeroth.
+= Yükleme tamamlandı. Azeroth'a girmek için OYNA'ya bas.
+The last game update was cut off before it finished. Your game files were put back exactly as they were.
+= Son oyun güncellemesi bitmeden kesildi. Oyun dosyaların tam olarak eski hâline geri kondu.
+You can run the update again with the UPDATE button.
+= Güncellemeyi GÜNCELLE düğmesiyle yeniden çalıştırabilirsin.
+The last game update was cut off, and some game files could not be put back automatically.
+= Son oyun güncellemesi kesildi ve bazı oyun dosyaları otomatik olarak geri konamadı.
+The old versions are kept in the folder "{0}" inside the game folder. Copy them back over the game files, or reinstall the game.
+= Eski sürümler oyun klasörünün içindeki "{0}" klasöründe duruyor. Onları oyun dosyalarının üzerine geri kopyala ya da oyunu yeniden yükle.
+Checking for updates...
+= Güncellemeler denetleniyor...
+The update check failed ({0}).
+= Güncelleme denetimi başarısız ({0}).
+Could not check for launcher updates.
+= Başlatıcı güncellemeleri denetlenemedi.
+Launcher update
+= Başlatıcı güncellemesi
+Launcher {0} is available.
+= Başlatıcı {0} mevcut.
+The launcher is up to date ({0}).
+= Başlatıcı güncel ({0}).
+You have the newest launcher ({0}).
+= En yeni başlatıcıya sahipsin ({0}).
+A new launcher ({0}) is available. Open the launcher and press UPDATE.
+= Yeni bir başlatıcı ({0}) mevcut. Başlatıcıyı aç ve GÜNCELLE'ye bas.
+Finish what is running first (the game, an install or a cloud sync), then press UPDATE again.
+= Önce çalışan işi bitir (oyun, bir yükleme ya da bir bulut eşitlemesi), sonra GÜNCELLE'ye tekrar bas.
+A new version of the launcher is on GitHub: {0}.
+= Başlatıcının yeni bir sürümü GitHub'da: {0}.
+Update now? The new launcher ({0}) is downloaded, checked and started in place of this one. Your settings stay as they are.
+= Şimdi güncellensin mi? Yeni başlatıcı ({0}) indirilir, denetlenir ve bunun yerine başlatılır. Ayarların olduğu gibi kalır.
+Update now? The new launcher is downloaded, checked and started in place of this one. Your settings stay as they are.
+= Şimdi güncellensin mi? Yeni başlatıcı indirilir, denetlenir ve bunun yerine başlatılır. Ayarların olduğu gibi kalır.
+Launcher update postponed. Press UPDATE when you want it.
+= Başlatıcı güncellemesi ertelendi. İstediğinde GÜNCELLE'ye bas.
+Downloading the new launcher...
+= Yeni başlatıcı indiriliyor...
+Downloading the new launcher... {0}
+= Yeni başlatıcı indiriliyor... {0}
+Launcher update failed.
+= Başlatıcı güncellemesi başarısız.
+Update checking is not switched on in this launcher yet (it has no update address).
+= Bu başlatıcıda güncelleme denetimi henüz açık değil (güncelleme adresi yok).
+The game is not installed yet. Press INSTALL first.
+= Oyun henüz yüklü değil. Önce YÜKLE'ye bas.
+Could not check for updates.
+= Güncellemeler denetlenemedi.
+You have the newest version ({0}).
+= En yeni sürüme sahipsin ({0}).
+Update {0} is available.
+= {0} güncellemesi mevcut.
+A game update ({0}) is available.
+= Bir oyun güncellemesi ({0}) mevcut.
+Version {0} skipped. The UPDATE button still offers it.
+= {0} sürümü atlandı. GÜNCELLE düğmesi onu hâlâ sunuyor.
+Noted: you have version {0}.
+= Not edildi: {0} sürümüne sahipsin.
+Install the update from this file?
+= Güncelleme bu dosyadan yüklensin mi?
+Choose the update file you downloaded
+= İndirdiğin güncelleme dosyasını seç
+Update archive (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|All files (*.*)|*.*
+= Güncelleme arşivi (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|Tüm dosyalar (*.*)|*.*
+Close the game first, then try again.
+= Önce oyunu kapat, sonra tekrar dene.
+Checking the download...
+= İndirilen dosya denetleniyor...
+The downloaded file does not match its checksum, so nothing was installed. Please try again later.
+= İndirilen dosya sağlama toplamıyla eşleşmiyor, bu yüzden hiçbir şey yüklenmedi. Lütfen daha sonra tekrar dene.
+That file is not this update (its checksum does not match), so nothing was installed. Download it again from the update page.
+= Bu dosya bu güncelleme değil (sağlama toplamı eşleşmiyor), bu yüzden hiçbir şey yüklenmedi. Güncelleme sayfasından tekrar indir.
+The update failed ({0}).
+= Güncelleme başarısız ({0}).
+Updated to {0} - press PLAY.
+= {0} sürümüne güncellendi - OYNA'ya bas.
+Game updated to {0}. Press PLAY to enter Azeroth.
+= Oyun {0} sürümüne güncellendi. Azeroth'a girmek için OYNA'ya bas.
+Update cancelled.
+= Güncelleme iptal edildi.
+Update failed.
+= Güncelleme başarısız.
+Another task is still running - wait for it to finish.
+= Başka bir iş hâlâ sürüyor - bitmesini bekle.
+Choose a sync folder inside your cloud drive first (Cloud Save or Options).
+= Önce bulut sürücünde bir eşitleme klasörü seç (Bulut Kaydı ya da Seçenekler).
+Cloud sync failed.
+= Bulut eşitlemesi başarısız.
+Status checked at {0}
+= Durum {0} saatinde denetlendi
+Downloaded from the cloud at {0}
+= Buluttan {0} saatinde indirildi
+Saves uploaded at {0}
+= Kayıtlar {0} saatinde yüklendi
+Not everything was synced - see the Cloud Save log.
+= Her şey eşitlenmedi - Bulut Kaydı günlüğüne bak.
+The game is being updated. Please wait until that has finished.
+= Oyun güncelleniyor. Lütfen bitene kadar bekle.
+The cloud save could NOT be loaded, so the game was not launched.
+= Bulut kaydı YÜKLENEMEDİ, bu yüzden oyun başlatılmadı.
+See the log in Cloud Save. If your cloud drive is still syncing, wait for it to finish and press PLAY again.
+= Bulut Kaydı'ndaki günlüğe bak. Bulut sürücün hâlâ eşitleniyorsa bitmesini bekle ve OYNA'ya tekrar bas.
+Cloud sync failed - game not launched
+= Bulut eşitlemesi başarısız - oyun başlatılmadı
+Cloud save was not loaded - game not launched.
+= Bulut kaydı yüklenmedi - oyun başlatılmadı.
+Cloud sync successfully downloaded
+= Bulut eşitlemesi başarıyla indirildi
+No sync folder set - launched without cloud sync.
+= Eşitleme klasörü ayarlı değil - bulut eşitlemesi olmadan başlatıldı.
+Starting Azeroth Survivors ...
+= Azeroth Survivors başlatılıyor ...
+Game running.
+= Oyun çalışıyor.
+Could not start the game: {0}
+= Oyun başlatılamadı: {0}
+Game closed.
+= Oyun kapandı.
+Game has closed.
+= Oyun kapatıldı.
+Cloud sync successfully uploaded
+= Bulut eşitlemesi başarıyla yüklendi
+Some of your progress was NOT uploaded. See the log in Cloud Save.
+= İlerlemenin bir kısmı YÜKLENMEDİ. Bulut Kaydı'ndaki günlüğe bak.
+Cloud sync NOT completed - see the Cloud Save log
+= Bulut eşitlemesi TAMAMLANMADI - Bulut Kaydı günlüğüne bak
+Cloud upload failed: {0}
+= Buluta yükleme başarısız: {0}
+Cloud sync failed - see the Cloud Save log
+= Bulut eşitlemesi başarısız - Bulut Kaydı günlüğüne bak
+Launcher
+= Başlatıcı
+Select a folder inside your cloud drive (Google Drive, OneDrive, Dropbox ...)
+= Bulut sürücünün içinde bir klasör seç (Google Drive, OneDrive, Dropbox ...)
+That is the top level of your cloud drive.
+= Bu, bulut sürücünün en üst düzeyi.
+Create and use a subfolder named AzerothSync inside it?
+= İçinde AzerothSync adlı bir alt klasör oluşturulup kullanılsın mı?
+Sync folder
+= Eşitleme klasörü
+Play time reset.
+= Oynama süresi sıfırlandı.
+Play time
+= Oynama süresi
+No games played with this launcher yet.
+= Bu başlatıcıyla henüz oyun oynanmadı.
+Total: {0} over {#1} sessions
+= Toplam: {0}, {1} oturum
+Total: {0} over {#1} session
+= Toplam: {0}, {1} oturum
+Total: {0} over {#1} sessions on {#2} PCs
+= Toplam: {0}, {1} oturum, {2} bilgisayarda
+Last session: {0} ({1})
+= Son oturum: {0} ({1})
+Longest session: {0}
+= En uzun oturum: {0}
+Shared with your other PCs through the cloud sync folder.
+= Bulut eşitleme klasörü üzerinden diğer bilgisayarlarınla paylaşılıyor.
+Counted on this PC (the sync folder is not reachable right now).
+= Bu bilgisayarda sayıldı (eşitleme klasörüne şu an ulaşılamıyor).
+Counted on this PC. Turn on cloud saving to share it between your PCs.
+= Bu bilgisayarda sayıldı. Bilgisayarların arasında paylaşmak için bulut kaydını aç.
+RESET PLAY TIME
+= OYNAMA SÜRESİNİ SIFIRLA
+Set the play time back to zero on all your PCs?
+= Oynama süresi tüm bilgisayarlarında sıfırlansın mı?
+Set the play time back to zero?
+= Oynama süresi sıfırlansın mı?
+Game folder
+= Oyun klasörü
+Save game folder
+= Oyun kaydı klasörü
+Game config folder (AddOns, addon settings)
+= Oyun yapılandırma klasörü (AddOns, eklenti ayarları)
+Cloud saving
+= Bulut kaydı
+Close button hides the launcher to the tray
+= Kapat düğmesi başlatıcıyı bildirim alanına gizler
+Minimize the launcher when the game starts
+= Oyun başlayınca başlatıcıyı simge durumuna küçült
+RUN SETUP AGAIN
+= KURULUMU YENİDEN ÇALIŞTIR
+Select your Azeroth Survivors game folder
+= Azeroth Survivors oyun klasörünü seç
+Game folder set: {0}
+= Oyun klasörü ayarlandı: {0}
+Select the game's benilla-config folder (contains AddOns and saved)
+= Oyunun benilla-config klasörünü seç (AddOns ve saved içerir)
+Language
+= Dil
+ALL PATCH NOTES ›
+= TÜM YAMA NOTLARI ›
+‹ LATEST
+= ‹ EN YENİ
+‹ ALL PATCH NOTES
+= ‹ TÜM YAMA NOTLARI
+‹ PREVIOUS
+= ‹ ÖNCEKİ
+NEXT ›
+= SONRAKİ ›
+{#0} of {#1}
+= {0} / {1}
+PAGE
+= SAYFA
+No patch notes yet.
+= Henüz yama notu yok.
+{0} (current)
+= {0} (geçerli)
+Vibe coded by Slimjim\nCloud save code established by Keijin
+= Slimjim tarafından vibe ile kodlandı\nBulut kaydı kodu: Keijin
+DOWNLOAD MORE ›
+= DAHA FAZLA İNDİR ›
+ALL
+= TÜMÜ
+UI OVERHAUL
+= ARAYÜZ YENİLEME
+GAMEPLAY
+= OYNANIŞ
+COSMETIC
+= KOZMETİK
+No addons in this filter yet.
+= Bu filtrede henüz eklenti yok.
+No downloadable addons listed yet.
+= Henüz indirilebilir eklenti yok.
+UNINSTALL
+= KALDIR
+Addons can't be changed while the game runs or a sync is running.
+= Oyun ya da bir eşitleme çalışırken eklentiler değiştirilemez.
+Another addon is still downloading.
+= Başka bir eklenti hâlâ indiriliyor.
+Installing {0}...
+= {0} yükleniyor...
+{0} installed.
+= {0} yüklendi.
+{0} failed.
+= {0} başarısız.
+Could not install {0}:
+= {0} yüklenemedi:
+{0} is not installed.
+= {0} yüklü değil.
+Remove {0} from your AddOns folder?
+= {0} AddOns klasöründen kaldırılsın mı?
+Folders: {0}
+= Klasörler: {0}
+This deletes everything it added, including the settings it saved.
+= Bu, eklediği her şeyi, kaydettiği ayarlar dahil, siler.
+Uninstall
+= Kaldır
+Could not uninstall {0}:
+= {0} kaldırılamadı:
+{0} uninstalled.
+= {0} kaldırıldı.
+{0} was not installed.
+= {0} yüklü değildi.
+No AddOns folder found.\nSet the game config folder in Options\n(the benilla-config folder).
+= AddOns klasörü bulunamadı.\nOyun yapılandırma klasörünü Seçenekler'den ayarla\n(benilla-config klasörü).
+REFRESH
+= YENİLE
+FOLDER
+= KLASÖR
+TOGGLE ALL
+= TÜMÜNÜ DEĞİŞTİR
+SAVE
+= KAYDET
+LOAD
+= AÇ
+empty
+= boş
+{#0} on, {#1} off
+= {0} açık, {1} kapalı
+saved {0}
+= kaydedildi {0}
+Profile {0}
+= Profil {0}
+No addons installed.
+= Yüklü eklenti yok.
+{#0} of {#1} enabled
+= {0} / {1} etkin
+Could not enable {0}:
+= {0} etkinleştirilemedi:
+Could not disable {0}:
+= {0} devre dışı bırakılamadı:
+{0} enabled.
+= {0} etkinleştirildi.
+{0} disabled.
+= {0} devre dışı bırakıldı.
+All addons enabled.
+= Tüm eklentiler etkinleştirildi.
+All addons disabled.
+= Tüm eklentiler devre dışı bırakıldı.
+Some addons could not be changed:
+= Bazı eklentiler değiştirilemedi:
+Replace the saved Profile {0} with the current toggles?
+= Kayıtlı Profil {0} geçerli seçimlerle değiştirilsin mi?
+Profile {0} saved.
+= Profil {0} kaydedildi.
+Profile {0} is empty - press SAVE to store the current toggles.
+= Profil {0} boş - geçerli seçimleri saklamak için KAYDET'e bas.
+Profile {0} loaded: {#1} changed.
+= Profil {0} yüklendi: {1} değişti.
+Profile {0} loaded: {#1} changed. {#2} newer addon(s) left as they were.
+= Profil {0} yüklendi: {1} değişti. {2} daha yeni eklenti olduğu gibi bırakıldı.
+Cloud saving is turned off.\nYour progress stays on this PC only.
+= Bulut kaydı kapalı.\nİlerlemen yalnızca bu bilgisayarda kalır.
+TURN ON CLOUD SAVING
+= BULUT KAYDINI AÇ
+PLAY downloads the newest state, starts the game and uploads your progress after you close it. One complete state wins; the overwritten one is backed up as a ZIP first.
+= OYNA en yeni durumu indirir, oyunu başlatır ve kapattıktan sonra ilerlemeni yükler. Tam bir durum kazanır; üzerine yazılan önce ZIP olarak yedeklenir.
+(not set - choose a folder inside Google Drive, OneDrive or Dropbox)
+= (ayarlanmadı - Google Drive, OneDrive ya da Dropbox içinde bir klasör seç)
+Not synced yet.
+= Henüz eşitlenmedi.
+Cloud: {0}
+= Bulut: {0}
+last uploaded by {0} on {1}
+= son yükleyen {0}, {1}
+no upload info
+= yükleme bilgisi yok
+CHECK STATUS
+= DURUMU DENETLE
+DOWNLOAD
+= İNDİR
+UPLOAD
+= BULUTA YÜKLE
+The launcher is already running.
+= Başlatıcı zaten çalışıyor.
+Look for its icon in the system tray (near the clock).
+= Simgesini bildirim alanında (saatin yanında) ara.
+Press INSTALL to download the game first.
+= Önce oyunu indirmek için YÜKLE'ye bas.
+No launcher release has been published on GitHub yet.
+= GitHub'da henüz bir başlatıcı sürümü yayımlanmadı.
+GitHub's answer could not be read.
+= GitHub'ın yanıtı okunamadı.
+The latest release on GitHub ({0}) has no launcher exe attached.
+= GitHub'daki en yeni sürüme ({0}) başlatıcı exe dosyası eklenmemiş.
+The latest release on GitHub has no checksum for its exe, so it is not installed.
+= GitHub'daki en yeni sürümde exe için sağlama toplamı yok, bu yüzden yüklenmiyor.
+The downloaded launcher does not match its checksum, so it was not installed. Please try again later.
+= İndirilen başlatıcı sağlama toplamıyla eşleşmiyor, bu yüzden yüklenmedi. Lütfen daha sonra tekrar dene.
+The launcher could not replace itself in this folder ({0}).
+= Başlatıcı bu klasörde kendini değiştiremedi ({0}).
+Download the new version from GitHub instead:
+= Bunun yerine yeni sürümü GitHub'dan indir:
+The new launcher could not be put in place ({0}). Nothing was changed.
+= Yeni başlatıcı yerine konamadı ({0}). Hiçbir şey değişmedi.
+The {0} address must start with https://
+= {0} sunucusunun adresi https:// ile başlamalı
+The {0} server redirected to an address that is not secure (https).
+= {0} sunucusu güvenli olmayan (https olmayan) bir adrese yönlendirdi.
+The {0} server sent a broken redirect.
+= {0} sunucusu bozuk bir yönlendirme gönderdi.
+The {0} server answered with error {#1}.
+= {0} sunucusu {1} hatasıyla yanıt verdi.
+The {0} server's security certificate was not accepted. It needs a normal, trusted https certificate.
+= {0} sunucusunun güvenlik sertifikası kabul edilmedi. Normal, güvenilir bir https sertifikası gerekir.
+The {0} server did not answer in time. Check your internet connection and try again.
+= {0} sunucusu zamanında yanıt vermedi. İnternet bağlantını denetle ve tekrar dene.
+Could not reach the {0} server. Check your internet connection and try again.
+= {0} sunucusuna ulaşılamadı. İnternet bağlantını denetle ve tekrar dene.
+The {0} server redirected too many times.
+= {0} sunucusu çok fazla kez yönlendirdi.
+update
+= Güncelleme
+addon
+= Eklenti
+The download link gave a web page instead of the file. It must be a direct download link.
+= İndirme bağlantısı dosya yerine bir web sayfası verdi. Doğrudan indirme bağlantısı olmalı.
+The download was interrupted. Check your connection and try again.
+= İndirme kesildi. Bağlantını denetle ve tekrar dene.
+The download was cut off before it finished. Please try again.
+= İndirme bitmeden kesildi. Lütfen tekrar dene.
+The .zip contains an unsafe path; nothing was installed.
+= .zip güvenli olmayan bir yol içeriyor; hiçbir şey yüklenmedi.
+The file is damaged or incomplete.
+= Dosya hasarlı ya da eksik.
+The file is a .{0} archive, and no program to unpack it was found.
+= Dosya bir .{0} arşivi ve onu açacak bir program bulunamadı.
+Install the free 7-Zip (7-zip.org) or WinRAR and try again.
+= Ücretsiz 7-Zip (7-zip.org) ya da WinRAR yükle ve tekrar dene.
+The archive could not be unpacked.
+= Arşiv açılamadı.
+That file is not a .rar, .zip or .7z archive.
+= Bu dosya bir .rar, .zip ya da .7z arşivi değil.
+The archive was unpacked, but {0} was not inside it.
+= Arşiv açıldı ama {0} içinde değildi.
+The install finished, but {0} is not in {1}.
+= Yükleme bitti ama {0}, {1} içinde değil.
+The link did not give a .zip file. It must be a direct download link (share pages such as LimeWire do not work).
+= Bağlantı bir .zip dosyası vermedi. Doğrudan indirme bağlantısı olmalı (LimeWire gibi paylaşım sayfaları çalışmaz).
+There is not enough free disk space.
+= Yeterli boş disk alanı yok.
+Not enough free disk space for the update: about {0} is needed on the drive with the game, {1} is free.
+= Güncelleme için yeterli boş disk alanı yok: oyunun bulunduğu sürücüde yaklaşık {0} gerekli, {1} boş.
+The update file is not a .rar, .zip or .7z archive.
+= Güncelleme dosyası bir .rar, .zip ya da .7z arşivi değil.
+An earlier update was cut off and its files could not be put back yet.
+= Önceki bir güncelleme kesildi ve dosyaları henüz geri konamadı.
+The old files are kept in:
+= Eski dosyalar şurada duruyor:
+Unpacking the update. This can take a few minutes...
+= Güncelleme açılıyor. Bu birkaç dakika sürebilir...
+Installing the new files...
+= Yeni dosyalar yükleniyor...
+The update did not contain any files to install.
+= Güncelleme yüklenecek dosya içermiyordu.
+{0} is missing after the update.
+= Güncellemeden sonra {0} eksik.
+A game file is in use. Close the game and anything else using its folder, then try again.
+= Bir oyun dosyası kullanımda. Oyunu ve klasörünü kullanan her şeyi kapat, sonra tekrar dene.
+There is not enough free disk space for the update. Free some space and try again.
+= Güncelleme için yeterli boş disk alanı yok. Biraz yer aç ve tekrar dene.
+The update could not be installed ({0}).
+= Güncelleme yüklenemedi ({0}).
+No game files were changed.
+= Hiçbir oyun dosyası değiştirilmedi.
+Some files could not be put back. The old versions are kept in:
+= Bazı dosyalar geri konamadı. Eski sürümler şurada duruyor:
+Sync folder not reachable: {0} (is your cloud drive running?)
+= Eşitleme klasörüne ulaşılamıyor: {0} (bulut sürücün çalışıyor mu?)
+The game is running. Close it before you download.
+= Oyun çalışıyor. İndirmeden önce kapat.
+The game is running. Close it before you upload.
+= Oyun çalışıyor. Yüklemeden önce kapat.
+The folder is in use and was not replaced: {0} ({1}). Close programs or Explorer windows that use it and try again.
+= Klasör kullanımda ve değiştirilmedi: {0} ({1}). Onu kullanan programları ya da Gezgin pencerelerini kapat ve tekrar dene.
+The source changed while copying ({0}). Nothing was replaced, please sync again.
+= Kopyalama sırasında kaynak değişti ({0}). Hiçbir şey değiştirilmedi, lütfen tekrar eşitle.
+No sync folder set. Choose a folder in Google Drive, OneDrive, Dropbox or similar in Options.
+= Eşitleme klasörü ayarlı değil. Seçenekler'den Google Drive, OneDrive, Dropbox ya da benzeri içinde bir klasör seç.
+Sync folder: {0}
+= Eşitleme klasörü: {0}
+The sync folder does not exist yet. It is created on the first upload.
+= Eşitleme klasörü henüz yok. İlk yüklemede oluşturulur.
+{0}: in sync (local {1}, cloud {2})
+= {0}: eşit (yerel {1}, bulut {2})
+{0}: cloud empty, upload (local {1}, cloud {2})
+= {0}: bulut boş, yükle (yerel {1}, bulut {2})
+{0}: cloud copy incomplete or still syncing, wait (local {1}, cloud {2})
+= {0}: bulut kopyası eksik ya da hâlâ eşitleniyor, bekle (yerel {1}, bulut {2})
+{0}: local is newer, upload (local {1}, cloud {2})
+= {0}: yerel daha yeni, yükle (yerel {1}, bulut {2})
+{0}: cloud is newer, download (local {1}, cloud {2})
+= {0}: bulut daha yeni, indir (yerel {1}, bulut {2})
+{0}: both changed or never synced (local {1}, cloud {2})
+= {0}: ikisi de değişti ya da hiç eşitlenmedi (yerel {1}, bulut {2})
+{0}: {1} not found, skipped. Set the game config folder in Options.
+= {0}: {1} bulunamadı, atlandı. Oyun yapılandırma klasörünü Seçenekler'den ayarla.
+Downloading from the cloud ...
+= Buluttan indiriliyor ...
+The sync folder does not exist yet, nothing to download.
+= Eşitleme klasörü henüz yok, indirilecek bir şey yok.
+{0}: cloud is empty, nothing to download.
+= {0}: bulut boş, indirilecek bir şey yok.
+{0}: up to date.
+= {0}: güncel.
+{0}: the cloud copy does not match the last upload yet (incomplete or still syncing). Nothing replaced, try again in a moment.
+= {0}: bulut kopyası henüz son yüklemeyle eşleşmiyor (eksik ya da hâlâ eşitleniyor). Hiçbir şey değiştirilmedi, biraz sonra tekrar dene.
+{0}: local is newer, kept.
+= {0}: yerel daha yeni, tutuldu.
+Replace your local data with the cloud state?
+= Yerel verilerin bulut durumuyla değiştirilsin mi?
+A backup is made first.
+= Önce bir yedek alınır.
+Cancelled, nothing changed.
+= İptal edildi, hiçbir şey değişmedi.
+{0}: local state kept, it will replace the cloud on the next upload.
+= {0}: yerel durum tutuldu, bir sonraki yüklemede bulutu değiştirecek.
+{0}: downloaded from the cloud.
+= {0}: buluttan indirildi.
+Cloud state: {0}
+= Bulut durumu: {0}
+Uploading to the cloud ...
+= Buluta yükleniyor ...
+{0}: nothing local, nothing uploaded.
+= {0}: yerelde bir şey yok, hiçbir şey yüklenmedi.
+{0}: cloud is up to date.
+= {0}: bulut güncel.
+Replace the cloud state with your local data?
+= Bulut durumu yerel verilerinle değiştirilsin mi?
+{0}: cloud kept, your local changes were NOT uploaded. Use "Download" to get the cloud state.
+= {0}: bulut tutuldu, yerel değişikliklerin YÜKLENMEDİ. Bulut durumunu almak için "İndir"i kullan.
+Cancelled, your local changes were NOT uploaded.
+= İptal edildi, yerel değişikliklerin YÜKLENMEDİ.
+{0}: the cloud changed during this sync, NOT uploaded. Sync again to decide.
+= {0}: bu eşitleme sırasında bulut değişti, YÜKLENMEDİ. Karar vermek için tekrar eşitle.
+{0}: uploaded.
+= {0}: yüklendi.
+Written to the sync folder. Your cloud app uploads it in the background, wait until it is done before you switch PCs.
+= Eşitleme klasörüne yazıldı. Bulut uygulaman onu arka planda yükler; bilgisayar değiştirmeden önce bitmesini bekle.
+Backup: {0}
+= Yedek: {0}
+Restored {0} after an interrupted sync.
+= Kesilen bir eşitlemeden sonra {0} geri yüklendi.

@@ -74,7 +74,7 @@ namespace AzerothLauncher
             var name = UI.Text(label, 11, FontStyle.Bold, Theme.Gold, Theme.Panel, 0);
             string note = found ? (defaultOk ? "✓ found" : "✓ chosen") : (path.Length == 0 ? "not chosen yet" : "not found - please choose it");
             var noteL = UI.Text(note, 9, FontStyle.Italic, found ? Theme.Good : Theme.Bad, Theme.Panel, 0);
-            var pathL = UI.Text(path.Length > 0 ? path : "(not set)", 9, FontStyle.Regular, Theme.LinkBlue, Theme.Panel, 470);
+            var pathL = UI.Text(path.Length > 0 ? path : Lang.T("(not set)"), 9, FontStyle.Regular, Theme.LinkBlue, Theme.Panel, 470, false);
             var btn = B(found ? "CHANGE" : "CHOOSE", chooser, 100, 28, 9);
             Size ns = VStack.Measure(name), ps = VStack.Measure(pathL), os = VStack.Measure(noteL);
             int w = 600;
@@ -117,13 +117,13 @@ namespace AzerothLauncher
         {
             if (cloudOn && (vals["cloud_dir"] ?? "").Trim().Length == 0)
             {
-                MessageBox.Show(this, "Choose a sync folder for cloud saving, or untick\n\"Keep my progress in the cloud\".", "Setup");
+                Msg.Show(this, "Choose a sync folder for cloud saving, or untick\n\"Keep my progress in the cloud\".", "Setup");
                 return;
             }
             var missing = new List<string>();
             foreach (var kv in new[] { new[] { "AddOns", "addons_dir" }, new[] { "Game saves", "save_dir" }, new[] { "Addon settings", "saved_dir" } })
                 if (!Directory.Exists(vals[kv[1]] ?? "")) missing.Add(kv[0]);
-            if (missing.Count > 0 && MessageBox.Show(this, "These folders were not found:\n\n  " + string.Join("\n  ", missing) +
+            if (missing.Count > 0 && Msg.Show(this, "These folders were not found:\n\n  " + string.Join("\n  ", missing) +
                     "\n\nFinish anyway? You can change them later in Options.", "Setup", MessageBoxButtons.YesNo) != DialogResult.Yes)
                 return;
             var res = new Dictionary<string, object>();
@@ -295,7 +295,7 @@ namespace AzerothLauncher
         void Back()
         {
             if (Phase == "install")
-                MessageBox.Show(this, "The update is being installed. Please wait until it has finished.", "Updating");
+                Msg.Show(this, "The update is being installed. Please wait until it has finished.", "Updating");
             else if (Phase == "download") Cancel();
             else Close();
         }
@@ -364,7 +364,7 @@ namespace AzerothLauncher
         {
             if (Phase == "done" || Phase == "offer" || Phase == "page") return;
             if (phase != Phase) ShowProgress(phase, text);
-            else if (statusLbl != null) statusLbl.Text = text;
+            else if (statusLbl != null) statusLbl.Text = Lang.T(text);
         }
 
         public void SetProgress(long done, long total)
@@ -374,11 +374,11 @@ namespace AzerothLauncher
             {
                 double frac = Math.Min(1.0, (double)done / total);
                 bar.Set(frac);
-                detail.Text = Util.FmtSize(done) + " of " + Util.FmtSize(total) + "  (" + (int)(frac * 100) + "%)";
+                detail.Text = Lang.T(Util.FmtSize(done) + " of " + Util.FmtSize(total) + "  (" + (int)(frac * 100) + "%)");
             }
             else
             {
-                detail.Text = Util.FmtSize(done) + " downloaded";
+                detail.Text = Lang.T(Util.FmtSize(done) + " downloaded");
                 bar.Pulse();
             }
         }

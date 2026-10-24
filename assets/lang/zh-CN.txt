@@ -1,0 +1,791 @@
+@name 简体中文
+@font Microsoft YaHei UI, Microsoft YaHei
+# Each English text is followed by its translation on the line below (starting with "= ").
+# {0}, {1} ... are filled in by the launcher; keep them. \n is a line break.
+
+PLAY
+= 开始游戏
+INSTALL
+= 安装
+PLAYING...
+= 游戏中...
+INSTALLING
+= 安装中
+UPDATING
+= 更新中
+UPDATE
+= 更新
+CHECKING
+= 检查中
+CLOUD SAVE
+= 云存档
+ADDONS
+= 插件
+OPTIONS
+= 选项
+CHANGELOG
+= 更新日志
+ABOUT LAUNCHER
+= 关于启动器
+A game made by Aethus
+= Aethus 出品的游戏
+Version {0}
+= 版本 {0}
+Press PLAY to enter Azeroth.
+= 点击“开始游戏”进入艾泽拉斯。
+Game client not found.
+= 未找到游戏。
+Press INSTALL to download it first.
+= 请先点击“安装”下载游戏。
+Press INSTALL to download it, or set the game folder in Options.
+= 点击“安装”下载游戏，或在“选项”中设置游戏文件夹。
+Your cloud save syncs automatically.
+= 你的云存档会自动同步。
+Time played: {0}   |   Last session: {1}
+= 游戏时长：{0}   |   上次游戏：{1}
+Ready.
+= 就绪。
+Cloud Save
+= 云存档
+Addons
+= 插件
+Options
+= 选项
+Changelog
+= 更新日志
+About Launcher
+= 关于启动器
+Download More
+= 下载更多
+All Patch Notes
+= 全部更新说明
+Show Launcher
+= 显示启动器
+Play
+= 开始游戏
+Upload Save Now
+= 立即上传存档
+Close Button Hides to Tray
+= 关闭按钮最小化到托盘
+Quit
+= 退出
+Game running
+= 游戏运行中
+Idle
+= 空闲
+Game running - {0}
+= 游戏运行中 - {0}
+The launcher is in the tray; the open window stays. Right-click the icon to quit.
+= 启动器在系统托盘中；已打开的窗口会保留。右键单击图标即可退出。
+Still running in the tray. Right-click the icon to quit.
+= 仍在系统托盘中运行。右键单击图标即可退出。
+Cloud sync running
+= 正在云同步
+A cloud sync is still running. If you quit now it is cut short; the next sync repairs any half-finished copy.
+= 云同步仍在进行。现在退出会中断同步；下次同步会修复未完成的副本。
+Quit anyway?
+= 仍要退出吗？
+Installing
+= 正在安装
+The game client is still being installed. If you quit now, it is cut short.
+= 游戏仍在安装。现在退出会中断安装。
+Updating
+= 正在更新
+The game is still being updated. If you quit now, the update is cut short. Nothing is lost: a half-finished change is undone the next time the launcher starts.
+= 游戏仍在更新。现在退出会中断更新。不会丢失任何东西：未完成的更改会在启动器下次启动时撤销。
+The game is still running. If you quit the launcher now, your saves will NOT be uploaded automatically.
+= 游戏仍在运行。如果现在退出启动器，你的存档将不会自动上传。
+Setup saved.
+= 设置已保存。
+First-time setup
+= 首次设置
+Welcome, Adventurer
+= 欢迎你，冒险者
+Step 1 of 2
+= 第 1 步，共 2 步
+Step 2 of 2
+= 第 2 步，共 2 步
+A.  Cloud saving
+= A.  云存档
+Keep my progress in the cloud (Google Drive, OneDrive, Dropbox ...)\nand share it between my PCs
+= 将我的进度保存在云端（Google Drive、OneDrive、Dropbox ...）\n并在我的电脑之间共享
+Sync folder (inside your cloud drive)
+= 同步文件夹（位于你的云盘中）
+Cloud saving stays off. You can turn it on later in Cloud Save.
+= 云存档保持关闭。你可以稍后在“云存档”中开启。
+B.  Where are your files?
+= B.  你的文件在哪里？
+Folders found at their usual place are used as they are. Choose the ones that are missing.
+= 在常规位置找到的文件夹会直接使用。请选择缺少的文件夹。
+AddOns
+= AddOns
+Game saves
+= 游戏存档
+Addon settings
+= 插件设置
+Select your AddOns folder
+= 选择你的 AddOns 文件夹
+Select the folder that holds your save game (normally %APPDATA%\wenilla-rogue)
+= 选择存放存档的文件夹（通常为 %APPDATA%\wenilla-rogue）
+Select your addon settings folder (the 'saved' folder in benilla-config)
+= 选择插件设置文件夹（benilla-config 中的“saved”文件夹）
+FINISH
+= 完成
+LATER
+= 稍后
+✓ found
+= ✓ 已找到
+✓ chosen
+= ✓ 已选择
+not chosen yet
+= 尚未选择
+not found - please choose it
+= 未找到 - 请选择
+(not set)
+= （未设置）
+CHANGE
+= 更改
+CHOOSE
+= 选择
+Choose a sync folder for cloud saving, or untick\n"Keep my progress in the cloud".
+= 请为云存档选择一个同步文件夹，或取消勾选\n“将我的进度保存在云端”。
+Setup
+= 设置
+These folders were not found:
+= 未找到以下文件夹：
+Finish anyway? You can change them later in Options.
+= 仍要完成吗？你可以稍后在“选项”中更改。
+Your settings are saved.\n\nWould you like to go to the Addons section now\nto download some addons, or to enable or disable the ones you have?
+= 你的设置已保存。\n\n现在要前往“插件”页面\n下载插件，或启用、禁用已有的插件吗？
+DOWNLOAD ADDONS
+= 下载插件
+ENABLE / DISABLE ADDONS
+= 启用 / 禁用插件
+NO THANKS
+= 不用了
+Install the game
+= 安装游戏
+Install Azeroth Survivors
+= 安装 Azeroth Survivors
+Step 1
+= 第 1 步
+Download the game in your web browser.
+= 在浏览器中下载游戏。
+OPEN DOWNLOAD
+= 打开下载
+Download opened in your browser.
+= 已在浏览器中打开下载。
+Step 2
+= 第 2 步
+When the download has finished, come back here.
+= 下载完成后，回到这里。
+IT'S IN MY DOWNLOADS
+= 已在我的下载文件夹中
+The launcher finds the file (in its own folder or Downloads), unpacks the game here and deletes the download.
+= 启动器会找到文件（在自身文件夹或“下载”中），将游戏解压到这里并删除下载的文件。
+CANCEL
+= 取消
+Which progress do you want to keep?
+= 你想保留哪份进度？
+Both sides changed
+= 双方都有更改
+This PC and the cloud both changed since the last sync:
+= 自上次同步以来，这台电脑和云端都有更改：
+• {0}:  this PC {1}   |   cloud {2}
+= • {0}：  这台电脑 {1}   |   云端 {2}
+One complete state wins, the other is backed up first.
+= 以一份完整状态为准，另一份会先备份。
+First time on this PC? Choose USE CLOUD.
+= 第一次在这台电脑上？请选择“使用云端”。
+USE CLOUD replaces your local data. KEEP LOCAL keeps it and uploads it later.
+= “使用云端”会替换你的本地数据。“保留本地”会保留本地数据并稍后上传。
+KEEP LOCAL replaces the cloud. USE CLOUD leaves the cloud and skips your upload.
+= “保留本地”会替换云端。“使用云端”会保持云端不变并跳过你的上传。
+USE CLOUD
+= 使用云端
+KEEP LOCAL
+= 保留本地
+Save game
+= 游戏存档
+Game update
+= 游戏更新
+Update available
+= 有可用更新
+New version:
+= 新版本：
+Your version:
+= 你的版本：
+not recorded yet
+= 尚未记录
+Download size:
+= 下载大小：
+What is new
+= 新内容
+Your addons, settings and saves are left alone. If anything goes wrong, the old game files are put back.
+= 你的插件、设置和存档不会受影响。如果出现问题，旧的游戏文件会被恢复。
+UPDATE NOW
+= 立即更新
+NOT NOW
+= 以后再说
+SKIP THIS VERSION
+= 跳过此版本
+I ALREADY HAVE THIS VERSION
+= 我已有此版本
+The update is being installed. Please wait until it has finished.
+= 正在安装更新。请等待完成。
+Downloading the update...
+= 正在下载更新...
+Download the update
+= 下载更新
+Step 1: download the update in your web browser.
+= 第 1 步：在浏览器中下载更新。
+OPEN DOWNLOAD AGAIN
+= 再次打开下载
+Step 2: when the download has finished, come back here.
+= 第 2 步：下载完成后，回到这里。
+The launcher finds the file (in its own folder or Downloads), installs it and deletes it.
+= 启动器会找到文件（在自身文件夹或“下载”中），安装后将其删除。
+Checking the file...
+= 正在检查文件...
+CANCELLING...
+= 正在取消...
+Updating to {0}
+= 正在更新到 {0}
+Please keep the launcher open until this has finished.
+= 完成之前请不要关闭启动器。
+{0} of {1}  ({#2}%)
+= {0} / {1}  ({2}%)
+{0} downloaded
+= 已下载 {0}
+Update installed
+= 更新已安装
+Update failed
+= 更新失败
+CLOSE
+= 关闭
+TRY AGAIN
+= 重试
+Version {0} is installed.
+= 已安装版本 {0}。
+{#0} files updated.
+= 已更新 {0} 个文件。
+{#0} file updated.
+= 已更新 {0} 个文件。
+{#0} files updated, {#1} removed.
+= 已更新 {0} 个文件，删除 {1} 个。
+{#0} file updated, {#1} removed.
+= 已更新 {0} 个文件，删除 {1} 个。
+Install
+= 安装
+Install the game from this file?
+= 从此文件安装游戏？
+{0}  ({#1} MB)
+= {0}  ({1} MB)
+in {0}
+= 位于 {0}
+Choose the game file you downloaded (.rar)
+= 选择你下载的游戏文件 (.rar)
+Game archive (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|All files (*.*)|*.*
+= 游戏压缩包 (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|所有文件 (*.*)|*.*
+Install cancelled.
+= 安装已取消。
+Unpacking the game client...
+= 正在解压游戏...
+Install failed.
+= 安装失败。
+Install complete - press PLAY.
+= 安装完成 - 点击“开始游戏”。
+Install complete. Press PLAY to enter Azeroth.
+= 安装完成。点击“开始游戏”进入艾泽拉斯。
+The last game update was cut off before it finished. Your game files were put back exactly as they were.
+= 上次游戏更新在完成前被中断。你的游戏文件已完全恢复原样。
+You can run the update again with the UPDATE button.
+= 你可以用“更新”按钮重新运行更新。
+The last game update was cut off, and some game files could not be put back automatically.
+= 上次游戏更新被中断，部分游戏文件无法自动恢复。
+The old versions are kept in the folder "{0}" inside the game folder. Copy them back over the game files, or reinstall the game.
+= 旧版本保存在游戏文件夹内的“{0}”文件夹中。请将它们复制回游戏文件，或重新安装游戏。
+Checking for updates...
+= 正在检查更新...
+The update check failed ({0}).
+= 检查更新失败（{0}）。
+Could not check for launcher updates.
+= 无法检查启动器更新。
+Launcher update
+= 启动器更新
+Launcher {0} is available.
+= 启动器 {0} 已发布。
+The launcher is up to date ({0}).
+= 启动器已是最新（{0}）。
+You have the newest launcher ({0}).
+= 你使用的是最新的启动器（{0}）。
+A new launcher ({0}) is available. Open the launcher and press UPDATE.
+= 有新的启动器（{0}）可用。打开启动器并点击“更新”。
+Finish what is running first (the game, an install or a cloud sync), then press UPDATE again.
+= 请先完成正在进行的操作（游戏、安装或云同步），然后再次点击“更新”。
+A new version of the launcher is on GitHub: {0}.
+= GitHub 上有新版启动器：{0}。
+Update now? The new launcher ({0}) is downloaded, checked and started in place of this one. Your settings stay as they are.
+= 现在更新吗？新的启动器（{0}）会被下载、校验并替代当前启动器运行。你的设置保持不变。
+Update now? The new launcher is downloaded, checked and started in place of this one. Your settings stay as they are.
+= 现在更新吗？新的启动器会被下载、校验并替代当前启动器运行。你的设置保持不变。
+Launcher update postponed. Press UPDATE when you want it.
+= 启动器更新已推迟。需要时点击“更新”。
+Downloading the new launcher...
+= 正在下载新的启动器...
+Downloading the new launcher... {0}
+= 正在下载新的启动器... {0}
+Launcher update failed.
+= 启动器更新失败。
+Update checking is not switched on in this launcher yet (it has no update address).
+= 此启动器尚未开启更新检查（没有更新地址）。
+The game is not installed yet. Press INSTALL first.
+= 游戏尚未安装。请先点击“安装”。
+Could not check for updates.
+= 无法检查更新。
+You have the newest version ({0}).
+= 你使用的是最新版本（{0}）。
+Update {0} is available.
+= 更新 {0} 已发布。
+A game update ({0}) is available.
+= 有游戏更新（{0}）可用。
+Version {0} skipped. The UPDATE button still offers it.
+= 已跳过版本 {0}。“更新”按钮仍会提供它。
+Noted: you have version {0}.
+= 已记录：你的版本是 {0}。
+Install the update from this file?
+= 从此文件安装更新？
+Choose the update file you downloaded
+= 选择你下载的更新文件
+Update archive (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|All files (*.*)|*.*
+= 更新压缩包 (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|所有文件 (*.*)|*.*
+Close the game first, then try again.
+= 请先关闭游戏，然后重试。
+Checking the download...
+= 正在检查下载内容...
+The downloaded file does not match its checksum, so nothing was installed. Please try again later.
+= 下载的文件与校验和不符，因此未安装任何内容。请稍后重试。
+That file is not this update (its checksum does not match), so nothing was installed. Download it again from the update page.
+= 该文件不是此更新（校验和不符），因此未安装任何内容。请从更新页面重新下载。
+The update failed ({0}).
+= 更新失败（{0}）。
+Updated to {0} - press PLAY.
+= 已更新到 {0} - 点击“开始游戏”。
+Game updated to {0}. Press PLAY to enter Azeroth.
+= 游戏已更新到 {0}。点击“开始游戏”进入艾泽拉斯。
+Update cancelled.
+= 更新已取消。
+Update failed.
+= 更新失败。
+Another task is still running - wait for it to finish.
+= 另一项任务仍在进行 - 请等待其完成。
+Choose a sync folder inside your cloud drive first (Cloud Save or Options).
+= 请先在云盘中选择一个同步文件夹（“云存档”或“选项”）。
+Cloud sync failed.
+= 云同步失败。
+Status checked at {0}
+= 已于 {0} 检查状态
+Downloaded from the cloud at {0}
+= 已于 {0} 从云端下载
+Saves uploaded at {0}
+= 已于 {0} 上传存档
+Not everything was synced - see the Cloud Save log.
+= 并非所有内容都已同步 - 请查看“云存档”日志。
+The game is being updated. Please wait until that has finished.
+= 游戏正在更新。请等待完成。
+The cloud save could NOT be loaded, so the game was not launched.
+= 无法加载云存档，因此游戏未启动。
+See the log in Cloud Save. If your cloud drive is still syncing, wait for it to finish and press PLAY again.
+= 请查看“云存档”中的日志。如果你的云盘仍在同步，请等待完成后再次点击“开始游戏”。
+Cloud sync failed - game not launched
+= 云同步失败 - 游戏未启动
+Cloud save was not loaded - game not launched.
+= 云存档未加载 - 游戏未启动。
+Cloud sync successfully downloaded
+= 云同步下载成功
+No sync folder set - launched without cloud sync.
+= 未设置同步文件夹 - 已在不进行云同步的情况下启动。
+Starting Azeroth Survivors ...
+= 正在启动 Azeroth Survivors ...
+Game running.
+= 游戏运行中。
+Could not start the game: {0}
+= 无法启动游戏：{0}
+Game closed.
+= 游戏已关闭。
+Game has closed.
+= 游戏已关闭。
+Cloud sync successfully uploaded
+= 云同步上传成功
+Some of your progress was NOT uploaded. See the log in Cloud Save.
+= 你的部分进度未能上传。请查看“云存档”中的日志。
+Cloud sync NOT completed - see the Cloud Save log
+= 云同步未完成 - 请查看“云存档”日志
+Cloud upload failed: {0}
+= 上传到云端失败：{0}
+Cloud sync failed - see the Cloud Save log
+= 云同步失败 - 请查看“云存档”日志
+Launcher
+= 启动器
+Select a folder inside your cloud drive (Google Drive, OneDrive, Dropbox ...)
+= 在你的云盘中选择一个文件夹（Google Drive、OneDrive、Dropbox ...）
+That is the top level of your cloud drive.
+= 这是你云盘的根目录。
+Create and use a subfolder named AzerothSync inside it?
+= 在其中创建并使用名为 AzerothSync 的子文件夹吗？
+Sync folder
+= 同步文件夹
+Play time reset.
+= 游戏时长已重置。
+Play time
+= 游戏时长
+No games played with this launcher yet.
+= 尚未通过此启动器玩过游戏。
+Total: {0} over {#1} sessions
+= 总计：{0}，共 {1} 次
+Total: {0} over {#1} session
+= 总计：{0}，共 {1} 次
+Total: {0} over {#1} sessions on {#2} PCs
+= 总计：{0}，共 {1} 次，{2} 台电脑
+Last session: {0} ({1})
+= 上次游戏：{0}（{1}）
+Longest session: {0}
+= 最长一次：{0}
+Shared with your other PCs through the cloud sync folder.
+= 通过云同步文件夹与你的其他电脑共享。
+Counted on this PC (the sync folder is not reachable right now).
+= 在这台电脑上统计（同步文件夹当前无法访问）。
+Counted on this PC. Turn on cloud saving to share it between your PCs.
+= 在这台电脑上统计。开启云存档即可在你的电脑之间共享。
+RESET PLAY TIME
+= 重置游戏时长
+Set the play time back to zero on all your PCs?
+= 将所有电脑上的游戏时长清零？
+Set the play time back to zero?
+= 将游戏时长清零？
+Game folder
+= 游戏文件夹
+Save game folder
+= 存档文件夹
+Game config folder (AddOns, addon settings)
+= 游戏配置文件夹（AddOns、插件设置）
+Cloud saving
+= 云存档
+Close button hides the launcher to the tray
+= 关闭按钮将启动器最小化到系统托盘
+Minimize the launcher when the game starts
+= 游戏启动时最小化启动器
+RUN SETUP AGAIN
+= 重新运行设置
+Select your Azeroth Survivors game folder
+= 选择你的 Azeroth Survivors 游戏文件夹
+Game folder set: {0}
+= 已设置游戏文件夹：{0}
+Select the game's benilla-config folder (contains AddOns and saved)
+= 选择游戏的 benilla-config 文件夹（包含 AddOns 和 saved）
+Language
+= 语言
+ALL PATCH NOTES ›
+= 全部更新说明 ›
+‹ LATEST
+= ‹ 最新
+‹ ALL PATCH NOTES
+= ‹ 全部更新说明
+‹ PREVIOUS
+= ‹ 上一个
+NEXT ›
+= 下一个 ›
+{#0} of {#1}
+= {0} / {1}
+PAGE
+= 页
+No patch notes yet.
+= 暂无更新说明。
+{0} (current)
+= {0}（当前）
+Vibe coded by Slimjim\nCloud save code established by Keijin
+= 由 Slimjim 凭感觉编写\n云存档代码由 Keijin 编写
+DOWNLOAD MORE ›
+= 下载更多 ›
+ALL
+= 全部
+UI OVERHAUL
+= 界面改造
+GAMEPLAY
+= 玩法
+COSMETIC
+= 外观
+No addons in this filter yet.
+= 此筛选下暂无插件。
+No downloadable addons listed yet.
+= 暂无可下载的插件。
+UNINSTALL
+= 卸载
+Addons can't be changed while the game runs or a sync is running.
+= 游戏或同步运行时无法更改插件。
+Another addon is still downloading.
+= 另一个插件仍在下载。
+Installing {0}...
+= 正在安装 {0}...
+{0} installed.
+= 已安装 {0}。
+{0} failed.
+= {0} 失败。
+Could not install {0}:
+= 无法安装 {0}：
+{0} is not installed.
+= {0} 未安装。
+Remove {0} from your AddOns folder?
+= 从 AddOns 文件夹中移除 {0}？
+Folders: {0}
+= 文件夹：{0}
+This deletes everything it added, including the settings it saved.
+= 这会删除它添加的所有内容，包括它保存的设置。
+Uninstall
+= 卸载
+Could not uninstall {0}:
+= 无法卸载 {0}：
+{0} uninstalled.
+= 已卸载 {0}。
+{0} was not installed.
+= {0} 未安装。
+No AddOns folder found.\nSet the game config folder in Options\n(the benilla-config folder).
+= 未找到 AddOns 文件夹。\n请在“选项”中设置游戏配置文件夹\n（benilla-config 文件夹）。
+REFRESH
+= 刷新
+FOLDER
+= 文件夹
+TOGGLE ALL
+= 全部切换
+SAVE
+= 保存
+LOAD
+= 载入
+empty
+= 空
+{#0} on, {#1} off
+= {0} 启用，{1} 禁用
+saved {0}
+= 已保存 {0}
+Profile {0}
+= 配置 {0}
+No addons installed.
+= 未安装任何插件。
+{#0} of {#1} enabled
+= 已启用 {0} / {1}
+Could not enable {0}:
+= 无法启用 {0}：
+Could not disable {0}:
+= 无法禁用 {0}：
+{0} enabled.
+= 已启用 {0}。
+{0} disabled.
+= 已禁用 {0}。
+All addons enabled.
+= 已启用所有插件。
+All addons disabled.
+= 已禁用所有插件。
+Some addons could not be changed:
+= 部分插件无法更改：
+Replace the saved Profile {0} with the current toggles?
+= 用当前开关替换已保存的配置 {0}？
+Profile {0} saved.
+= 已保存配置 {0}。
+Profile {0} is empty - press SAVE to store the current toggles.
+= 配置 {0} 为空 - 点击“保存”以存储当前开关。
+Profile {0} loaded: {#1} changed.
+= 已载入配置 {0}：更改了 {1} 个。
+Profile {0} loaded: {#1} changed. {#2} newer addon(s) left as they were.
+= 已载入配置 {0}：更改了 {1} 个。{2} 个较新的插件保持不变。
+Cloud saving is turned off.\nYour progress stays on this PC only.
+= 云存档已关闭。\n你的进度仅保存在这台电脑上。
+TURN ON CLOUD SAVING
+= 开启云存档
+PLAY downloads the newest state, starts the game and uploads your progress after you close it. One complete state wins; the overwritten one is backed up as a ZIP first.
+= “开始游戏”会下载最新状态、启动游戏，并在你关闭游戏后上传进度。以一份完整状态为准；被覆盖的一方会先备份为 ZIP。
+(not set - choose a folder inside Google Drive, OneDrive or Dropbox)
+= （未设置 - 请在 Google Drive、OneDrive 或 Dropbox 中选择文件夹）
+Not synced yet.
+= 尚未同步。
+Cloud: {0}
+= 云端：{0}
+last uploaded by {0} on {1}
+= 最后由 {0} 于 {1} 上传
+no upload info
+= 无上传信息
+CHECK STATUS
+= 检查状态
+DOWNLOAD
+= 下载
+UPLOAD
+= 上传
+The launcher is already running.
+= 启动器已在运行。
+Look for its icon in the system tray (near the clock).
+= 请在系统托盘（时钟附近）中查找它的图标。
+Press INSTALL to download the game first.
+= 请先点击“安装”下载游戏。
+No launcher release has been published on GitHub yet.
+= GitHub 上尚未发布启动器版本。
+GitHub's answer could not be read.
+= 无法读取 GitHub 的响应。
+The latest release on GitHub ({0}) has no launcher exe attached.
+= GitHub 上的最新版本（{0}）没有附带启动器 exe。
+The latest release on GitHub has no checksum for its exe, so it is not installed.
+= GitHub 上的最新版本没有 exe 的校验和，因此不会安装。
+The downloaded launcher does not match its checksum, so it was not installed. Please try again later.
+= 下载的启动器与校验和不符，因此未安装。请稍后重试。
+The launcher could not replace itself in this folder ({0}).
+= 启动器无法在此文件夹中替换自身（{0}）。
+Download the new version from GitHub instead:
+= 请改为从 GitHub 下载新版本：
+The new launcher could not be put in place ({0}). Nothing was changed.
+= 无法放置新的启动器（{0}）。未作任何更改。
+The {0} address must start with https://
+= {0}服务器地址必须以 https:// 开头
+The {0} server redirected to an address that is not secure (https).
+= {0}服务器重定向到了不安全的地址（非 https）。
+The {0} server sent a broken redirect.
+= {0}服务器发送了错误的重定向。
+The {0} server answered with error {#1}.
+= {0}服务器返回错误 {1}。
+The {0} server's security certificate was not accepted. It needs a normal, trusted https certificate.
+= 未接受{0}服务器的安全证书。它需要一个正常、受信任的 https 证书。
+The {0} server did not answer in time. Check your internet connection and try again.
+= {0}服务器未及时响应。请检查网络连接后重试。
+Could not reach the {0} server. Check your internet connection and try again.
+= 无法连接{0}服务器。请检查网络连接后重试。
+The {0} server redirected too many times.
+= {0}服务器重定向次数过多。
+update
+= 更新
+addon
+= 插件
+The download link gave a web page instead of the file. It must be a direct download link.
+= 下载链接返回的是网页而不是文件。必须是直接下载链接。
+The download was interrupted. Check your connection and try again.
+= 下载被中断。请检查网络连接后重试。
+The download was cut off before it finished. Please try again.
+= 下载在完成前中断。请重试。
+The .zip contains an unsafe path; nothing was installed.
+= .zip 中包含不安全的路径；未安装任何内容。
+The file is damaged or incomplete.
+= 文件已损坏或不完整。
+The file is a .{0} archive, and no program to unpack it was found.
+= 该文件是 .{0} 压缩包，未找到可解压它的程序。
+Install the free 7-Zip (7-zip.org) or WinRAR and try again.
+= 请安装免费的 7-Zip (7-zip.org) 或 WinRAR 后重试。
+The archive could not be unpacked.
+= 无法解压该压缩包。
+That file is not a .rar, .zip or .7z archive.
+= 该文件不是 .rar、.zip 或 .7z 压缩包。
+The archive was unpacked, but {0} was not inside it.
+= 压缩包已解压，但其中没有 {0}。
+The install finished, but {0} is not in {1}.
+= 安装已完成，但 {0} 不在 {1} 中。
+The link did not give a .zip file. It must be a direct download link (share pages such as LimeWire do not work).
+= 该链接没有返回 .zip 文件。必须是直接下载链接（LimeWire 等分享页面无法使用）。
+There is not enough free disk space.
+= 磁盘可用空间不足。
+Not enough free disk space for the update: about {0} is needed on the drive with the game, {1} is free.
+= 磁盘空间不足，无法更新：游戏所在磁盘约需 {0}，可用 {1}。
+The update file is not a .rar, .zip or .7z archive.
+= 更新文件不是 .rar、.zip 或 .7z 压缩包。
+An earlier update was cut off and its files could not be put back yet.
+= 之前的一次更新被中断，其文件尚未能恢复。
+The old files are kept in:
+= 旧文件保存在：
+Unpacking the update. This can take a few minutes...
+= 正在解压更新。这可能需要几分钟...
+Installing the new files...
+= 正在安装新文件...
+The update did not contain any files to install.
+= 更新中没有可安装的文件。
+{0} is missing after the update.
+= 更新后缺少 {0}。
+A game file is in use. Close the game and anything else using its folder, then try again.
+= 某个游戏文件正在使用中。请关闭游戏及任何使用其文件夹的程序，然后重试。
+There is not enough free disk space for the update. Free some space and try again.
+= 磁盘空间不足，无法更新。请释放空间后重试。
+The update could not be installed ({0}).
+= 无法安装更新（{0}）。
+No game files were changed.
+= 没有更改任何游戏文件。
+Some files could not be put back. The old versions are kept in:
+= 部分文件无法恢复。旧版本保存在：
+Sync folder not reachable: {0} (is your cloud drive running?)
+= 无法访问同步文件夹：{0}（你的云盘是否在运行？）
+The game is running. Close it before you download.
+= 游戏正在运行。下载前请先关闭游戏。
+The game is running. Close it before you upload.
+= 游戏正在运行。上传前请先关闭游戏。
+The folder is in use and was not replaced: {0} ({1}). Close programs or Explorer windows that use it and try again.
+= 文件夹正在使用中，未被替换：{0}（{1}）。请关闭正在使用它的程序或资源管理器窗口后重试。
+The source changed while copying ({0}). Nothing was replaced, please sync again.
+= 复制过程中源文件发生了变化（{0}）。未替换任何内容，请重新同步。
+No sync folder set. Choose a folder in Google Drive, OneDrive, Dropbox or similar in Options.
+= 未设置同步文件夹。请在“选项”中选择 Google Drive、OneDrive、Dropbox 或类似服务中的文件夹。
+Sync folder: {0}
+= 同步文件夹：{0}
+The sync folder does not exist yet. It is created on the first upload.
+= 同步文件夹尚不存在。它会在首次上传时创建。
+{0}: in sync (local {1}, cloud {2})
+= {0}：已同步（本地 {1}，云端 {2}）
+{0}: cloud empty, upload (local {1}, cloud {2})
+= {0}：云端为空，需上传（本地 {1}，云端 {2}）
+{0}: cloud copy incomplete or still syncing, wait (local {1}, cloud {2})
+= {0}：云端副本不完整或仍在同步，请等待（本地 {1}，云端 {2}）
+{0}: local is newer, upload (local {1}, cloud {2})
+= {0}：本地较新，需上传（本地 {1}，云端 {2}）
+{0}: cloud is newer, download (local {1}, cloud {2})
+= {0}：云端较新，需下载（本地 {1}，云端 {2}）
+{0}: both changed or never synced (local {1}, cloud {2})
+= {0}：双方都有更改或从未同步（本地 {1}，云端 {2}）
+{0}: {1} not found, skipped. Set the game config folder in Options.
+= {0}：未找到 {1}，已跳过。请在“选项”中设置游戏配置文件夹。
+Downloading from the cloud ...
+= 正在从云端下载 ...
+The sync folder does not exist yet, nothing to download.
+= 同步文件夹尚不存在，没有可下载的内容。
+{0}: cloud is empty, nothing to download.
+= {0}：云端为空，没有可下载的内容。
+{0}: up to date.
+= {0}：已是最新。
+{0}: the cloud copy does not match the last upload yet (incomplete or still syncing). Nothing replaced, try again in a moment.
+= {0}：云端副本与上次上传尚不一致（不完整或仍在同步）。未替换任何内容，请稍后重试。
+{0}: local is newer, kept.
+= {0}：本地较新，已保留。
+Replace your local data with the cloud state?
+= 用云端状态替换你的本地数据？
+A backup is made first.
+= 会先进行备份。
+Cancelled, nothing changed.
+= 已取消，未作任何更改。
+{0}: local state kept, it will replace the cloud on the next upload.
+= {0}：已保留本地状态，它会在下次上传时替换云端。
+{0}: downloaded from the cloud.
+= {0}：已从云端下载。
+Cloud state: {0}
+= 云端状态：{0}
+Uploading to the cloud ...
+= 正在上传到云端 ...
+{0}: nothing local, nothing uploaded.
+= {0}：本地没有内容，未上传任何内容。
+{0}: cloud is up to date.
+= {0}：云端已是最新。
+Replace the cloud state with your local data?
+= 用你的本地数据替换云端状态？
+{0}: cloud kept, your local changes were NOT uploaded. Use "Download" to get the cloud state.
+= {0}：已保留云端，你的本地更改未上传。使用“下载”获取云端状态。
+Cancelled, your local changes were NOT uploaded.
+= 已取消，你的本地更改未上传。
+{0}: the cloud changed during this sync, NOT uploaded. Sync again to decide.
+= {0}：本次同步期间云端发生了变化，未上传。请重新同步以作决定。
+{0}: uploaded.
+= {0}：已上传。
+Written to the sync folder. Your cloud app uploads it in the background, wait until it is done before you switch PCs.
+= 已写入同步文件夹。你的云盘应用会在后台上传；切换电脑前请等待其完成。
+Backup: {0}
+= 备份：{0}
+Restored {0} after an interrupted sync.
+= 同步中断后已恢复 {0}。

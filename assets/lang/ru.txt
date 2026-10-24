@@ -1,0 +1,791 @@
+@name Русский
+@font Palatino Linotype, Georgia
+# Each English text is followed by its translation on the line below (starting with "= ").
+# {0}, {1} ... are filled in by the launcher; keep them. \n is a line break.
+
+PLAY
+= ИГРАТЬ
+INSTALL
+= УСТАНОВИТЬ
+PLAYING...
+= В ИГРЕ...
+INSTALLING
+= УСТАНОВКА
+UPDATING
+= ОБНОВЛЕНИЕ
+UPDATE
+= ОБНОВИТЬ
+CHECKING
+= ПРОВЕРКА
+CLOUD SAVE
+= ОБЛАЧНОЕ СОХРАНЕНИЕ
+ADDONS
+= АДДОНЫ
+OPTIONS
+= НАСТРОЙКИ
+CHANGELOG
+= СПИСОК ИЗМЕНЕНИЙ
+ABOUT LAUNCHER
+= О ЛАУНЧЕРЕ
+A game made by Aethus
+= Игра от Aethus
+Version {0}
+= Версия {0}
+Press PLAY to enter Azeroth.
+= Нажми ИГРАТЬ, чтобы войти в Азерот.
+Game client not found.
+= Игра не найдена.
+Press INSTALL to download it first.
+= Сначала нажми УСТАНОВИТЬ, чтобы скачать её.
+Press INSTALL to download it, or set the game folder in Options.
+= Нажми УСТАНОВИТЬ, чтобы скачать её, или укажи папку игры в Настройках.
+Your cloud save syncs automatically.
+= Твоё облачное сохранение синхронизируется автоматически.
+Time played: {0}   |   Last session: {1}
+= Время в игре: {0}   |   Последний сеанс: {1}
+Ready.
+= Готово.
+Cloud Save
+= Облачное сохранение
+Addons
+= Аддоны
+Options
+= Настройки
+Changelog
+= Список изменений
+About Launcher
+= О лаунчере
+Download More
+= Скачать ещё
+All Patch Notes
+= Все списки изменений
+Show Launcher
+= Показать лаунчер
+Play
+= Играть
+Upload Save Now
+= Выгрузить сохранение сейчас
+Close Button Hides to Tray
+= Кнопка «Закрыть» сворачивает в трей
+Quit
+= Выход
+Game running
+= Игра запущена
+Idle
+= Ожидание
+Game running - {0}
+= Игра запущена - {0}
+The launcher is in the tray; the open window stays. Right-click the icon to quit.
+= Лаунчер в системном трее; открытое окно остаётся. Щёлкни по значку правой кнопкой, чтобы выйти.
+Still running in the tray. Right-click the icon to quit.
+= По-прежнему работает в системном трее. Щёлкни по значку правой кнопкой, чтобы выйти.
+Cloud sync running
+= Идёт облачная синхронизация
+A cloud sync is still running. If you quit now it is cut short; the next sync repairs any half-finished copy.
+= Облачная синхронизация ещё идёт. Если выйти сейчас, она прервётся; следующая синхронизация исправит недоделанную копию.
+Quit anyway?
+= Всё равно выйти?
+Installing
+= Идёт установка
+The game client is still being installed. If you quit now, it is cut short.
+= Игра ещё устанавливается. Если выйти сейчас, установка прервётся.
+Updating
+= Идёт обновление
+The game is still being updated. If you quit now, the update is cut short. Nothing is lost: a half-finished change is undone the next time the launcher starts.
+= Игра ещё обновляется. Если выйти сейчас, обновление прервётся. Ничего не потеряется: недоделанное изменение откатится при следующем запуске лаунчера.
+The game is still running. If you quit the launcher now, your saves will NOT be uploaded automatically.
+= Игра всё ещё запущена. Если закрыть лаунчер сейчас, твои сохранения НЕ будут выгружены автоматически.
+Setup saved.
+= Настройка сохранена.
+First-time setup
+= Первая настройка
+Welcome, Adventurer
+= Добро пожаловать, искатель приключений
+Step 1 of 2
+= Шаг 1 из 2
+Step 2 of 2
+= Шаг 2 из 2
+A.  Cloud saving
+= A.  Облачное сохранение
+Keep my progress in the cloud (Google Drive, OneDrive, Dropbox ...)\nand share it between my PCs
+= Хранить мой прогресс в облаке (Google Drive, OneDrive, Dropbox ...)\nи делиться им между моими ПК
+Sync folder (inside your cloud drive)
+= Папка синхронизации (внутри твоего облачного диска)
+Cloud saving stays off. You can turn it on later in Cloud Save.
+= Облачное сохранение остаётся выключенным. Его можно включить позже в разделе «Облачное сохранение».
+B.  Where are your files?
+= B.  Где твои файлы?
+Folders found at their usual place are used as they are. Choose the ones that are missing.
+= Папки, найденные на обычном месте, используются как есть. Выбери недостающие.
+AddOns
+= AddOns
+Game saves
+= Сохранения игры
+Addon settings
+= Настройки аддонов
+Select your AddOns folder
+= Выбери папку AddOns
+Select the folder that holds your save game (normally %APPDATA%\wenilla-rogue)
+= Выбери папку с сохранением игры (обычно %APPDATA%\wenilla-rogue)
+Select your addon settings folder (the 'saved' folder in benilla-config)
+= Выбери папку настроек аддонов (папка 'saved' в benilla-config)
+FINISH
+= ГОТОВО
+LATER
+= ПОЗЖЕ
+✓ found
+= ✓ найдено
+✓ chosen
+= ✓ выбрано
+not chosen yet
+= ещё не выбрано
+not found - please choose it
+= не найдено - выбери вручную
+(not set)
+= (не задано)
+CHANGE
+= ИЗМЕНИТЬ
+CHOOSE
+= ВЫБРАТЬ
+Choose a sync folder for cloud saving, or untick\n"Keep my progress in the cloud".
+= Выбери папку синхронизации для облачного сохранения или сними флажок\n«Хранить мой прогресс в облаке».
+Setup
+= Настройка
+These folders were not found:
+= Эти папки не найдены:
+Finish anyway? You can change them later in Options.
+= Всё равно завершить? Их можно изменить позже в Настройках.
+Your settings are saved.\n\nWould you like to go to the Addons section now\nto download some addons, or to enable or disable the ones you have?
+= Твои настройки сохранены.\n\nПерейти сейчас в раздел «Аддоны»,\nчтобы скачать аддоны или включить и выключить имеющиеся?
+DOWNLOAD ADDONS
+= СКАЧАТЬ АДДОНЫ
+ENABLE / DISABLE ADDONS
+= ВКЛ / ВЫКЛ АДДОНЫ
+NO THANKS
+= НЕТ, СПАСИБО
+Install the game
+= Установка игры
+Install Azeroth Survivors
+= Установить Azeroth Survivors
+Step 1
+= Шаг 1
+Download the game in your web browser.
+= Скачай игру в браузере.
+OPEN DOWNLOAD
+= ОТКРЫТЬ ЗАГРУЗКУ
+Download opened in your browser.
+= Загрузка открыта в браузере.
+Step 2
+= Шаг 2
+When the download has finished, come back here.
+= Когда загрузка завершится, вернись сюда.
+IT'S IN MY DOWNLOADS
+= ФАЙЛ В ЗАГРУЗКАХ
+The launcher finds the file (in its own folder or Downloads), unpacks the game here and deletes the download.
+= Лаунчер найдёт файл (в своей папке или в «Загрузках»), распакует игру сюда и удалит скачанный файл.
+CANCEL
+= ОТМЕНА
+Which progress do you want to keep?
+= Какой прогресс сохранить?
+Both sides changed
+= Изменились обе стороны
+This PC and the cloud both changed since the last sync:
+= И этот ПК, и облако изменились с последней синхронизации:
+• {0}:  this PC {1}   |   cloud {2}
+= • {0}:  этот ПК {1}   |   облако {2}
+One complete state wins, the other is backed up first.
+= Побеждает одно полное состояние, другое сначала сохраняется в резервную копию.
+First time on this PC? Choose USE CLOUD.
+= Впервые на этом ПК? Выбери ВЗЯТЬ ИЗ ОБЛАКА.
+USE CLOUD replaces your local data. KEEP LOCAL keeps it and uploads it later.
+= ВЗЯТЬ ИЗ ОБЛАКА заменяет твои локальные данные. ОСТАВИТЬ ЛОКАЛЬНЫЕ сохраняет их и выгружает позже.
+KEEP LOCAL replaces the cloud. USE CLOUD leaves the cloud and skips your upload.
+= ОСТАВИТЬ ЛОКАЛЬНЫЕ заменяет облако. ВЗЯТЬ ИЗ ОБЛАКА оставляет облако как есть и пропускает твою выгрузку.
+USE CLOUD
+= ВЗЯТЬ ИЗ ОБЛАКА
+KEEP LOCAL
+= ОСТАВИТЬ ЛОКАЛЬНЫЕ
+Save game
+= Сохранение игры
+Game update
+= Обновление игры
+Update available
+= Доступно обновление
+New version:
+= Новая версия:
+Your version:
+= Твоя версия:
+not recorded yet
+= ещё не записана
+Download size:
+= Размер загрузки:
+What is new
+= Что нового
+Your addons, settings and saves are left alone. If anything goes wrong, the old game files are put back.
+= Твои аддоны, настройки и сохранения не трогаются. Если что-то пойдёт не так, старые файлы игры вернутся на место.
+UPDATE NOW
+= ОБНОВИТЬ СЕЙЧАС
+NOT NOW
+= НЕ СЕЙЧАС
+SKIP THIS VERSION
+= ПРОПУСТИТЬ ВЕРСИЮ
+I ALREADY HAVE THIS VERSION
+= У МЕНЯ УЖЕ ЕСТЬ ЭТА ВЕРСИЯ
+The update is being installed. Please wait until it has finished.
+= Обновление устанавливается. Подожди, пока оно завершится.
+Downloading the update...
+= Скачивание обновления...
+Download the update
+= Скачать обновление
+Step 1: download the update in your web browser.
+= Шаг 1: скачай обновление в браузере.
+OPEN DOWNLOAD AGAIN
+= ОТКРЫТЬ ЗАГРУЗКУ СНОВА
+Step 2: when the download has finished, come back here.
+= Шаг 2: когда загрузка завершится, вернись сюда.
+The launcher finds the file (in its own folder or Downloads), installs it and deletes it.
+= Лаунчер найдёт файл (в своей папке или в «Загрузках»), установит его и удалит.
+Checking the file...
+= Проверка файла...
+CANCELLING...
+= ОТМЕНА...
+Updating to {0}
+= Обновление до {0}
+Please keep the launcher open until this has finished.
+= Не закрывай лаунчер, пока это не закончится.
+{0} of {1}  ({#2}%)
+= {0} из {1}  ({2}%)
+{0} downloaded
+= Скачано {0}
+Update installed
+= Обновление установлено
+Update failed
+= Ошибка обновления
+CLOSE
+= ЗАКРЫТЬ
+TRY AGAIN
+= ПОВТОРИТЬ
+Version {0} is installed.
+= Установлена версия {0}.
+{#0} files updated.
+= Обновлено файлов: {0}.
+{#0} file updated.
+= Обновлено файлов: {0}.
+{#0} files updated, {#1} removed.
+= Обновлено файлов: {0}, удалено: {1}.
+{#0} file updated, {#1} removed.
+= Обновлено файлов: {0}, удалено: {1}.
+Install
+= Установка
+Install the game from this file?
+= Установить игру из этого файла?
+{0}  ({#1} MB)
+= {0}  ({1} МБ)
+in {0}
+= в {0}
+Choose the game file you downloaded (.rar)
+= Выбери скачанный файл игры (.rar)
+Game archive (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|All files (*.*)|*.*
+= Архив игры (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|Все файлы (*.*)|*.*
+Install cancelled.
+= Установка отменена.
+Unpacking the game client...
+= Распаковка игры...
+Install failed.
+= Ошибка установки.
+Install complete - press PLAY.
+= Установка завершена - нажми ИГРАТЬ.
+Install complete. Press PLAY to enter Azeroth.
+= Установка завершена. Нажми ИГРАТЬ, чтобы войти в Азерот.
+The last game update was cut off before it finished. Your game files were put back exactly as they were.
+= Последнее обновление игры прервалось до завершения. Файлы игры возвращены точно в прежнее состояние.
+You can run the update again with the UPDATE button.
+= Обновление можно запустить снова кнопкой ОБНОВИТЬ.
+The last game update was cut off, and some game files could not be put back automatically.
+= Последнее обновление игры прервалось, и некоторые файлы игры не удалось вернуть автоматически.
+The old versions are kept in the folder "{0}" inside the game folder. Copy them back over the game files, or reinstall the game.
+= Старые версии лежат в папке «{0}» внутри папки игры. Скопируй их обратно поверх файлов игры или переустанови игру.
+Checking for updates...
+= Проверка обновлений...
+The update check failed ({0}).
+= Не удалось проверить обновления ({0}).
+Could not check for launcher updates.
+= Не удалось проверить обновления лаунчера.
+Launcher update
+= Обновление лаунчера
+Launcher {0} is available.
+= Доступен лаунчер {0}.
+The launcher is up to date ({0}).
+= Лаунчер актуален ({0}).
+You have the newest launcher ({0}).
+= У тебя самый новый лаунчер ({0}).
+A new launcher ({0}) is available. Open the launcher and press UPDATE.
+= Доступен новый лаунчер ({0}). Открой лаунчер и нажми ОБНОВИТЬ.
+Finish what is running first (the game, an install or a cloud sync), then press UPDATE again.
+= Сначала заверши то, что выполняется (игру, установку или облачную синхронизацию), затем снова нажми ОБНОВИТЬ.
+A new version of the launcher is on GitHub: {0}.
+= На GitHub есть новая версия лаунчера: {0}.
+Update now? The new launcher ({0}) is downloaded, checked and started in place of this one. Your settings stay as they are.
+= Обновить сейчас? Новый лаунчер ({0}) будет скачан, проверен и запущен вместо этого. Твои настройки останутся прежними.
+Update now? The new launcher is downloaded, checked and started in place of this one. Your settings stay as they are.
+= Обновить сейчас? Новый лаунчер будет скачан, проверен и запущен вместо этого. Твои настройки останутся прежними.
+Launcher update postponed. Press UPDATE when you want it.
+= Обновление лаунчера отложено. Нажми ОБНОВИТЬ, когда захочешь.
+Downloading the new launcher...
+= Скачивание нового лаунчера...
+Downloading the new launcher... {0}
+= Скачивание нового лаунчера... {0}
+Launcher update failed.
+= Ошибка обновления лаунчера.
+Update checking is not switched on in this launcher yet (it has no update address).
+= Проверка обновлений в этом лаунчере пока не включена (нет адреса обновлений).
+The game is not installed yet. Press INSTALL first.
+= Игра ещё не установлена. Сначала нажми УСТАНОВИТЬ.
+Could not check for updates.
+= Не удалось проверить обновления.
+You have the newest version ({0}).
+= У тебя самая новая версия ({0}).
+Update {0} is available.
+= Доступно обновление {0}.
+A game update ({0}) is available.
+= Доступно обновление игры ({0}).
+Version {0} skipped. The UPDATE button still offers it.
+= Версия {0} пропущена. Кнопка ОБНОВИТЬ по-прежнему её предлагает.
+Noted: you have version {0}.
+= Отмечено: у тебя версия {0}.
+Install the update from this file?
+= Установить обновление из этого файла?
+Choose the update file you downloaded
+= Выбери скачанный файл обновления
+Update archive (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|All files (*.*)|*.*
+= Архив обновления (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|Все файлы (*.*)|*.*
+Close the game first, then try again.
+= Сначала закрой игру, затем попробуй снова.
+Checking the download...
+= Проверка загрузки...
+The downloaded file does not match its checksum, so nothing was installed. Please try again later.
+= Скачанный файл не совпадает со своей контрольной суммой, поэтому ничего не установлено. Попробуй позже.
+That file is not this update (its checksum does not match), so nothing was installed. Download it again from the update page.
+= Этот файл не является этим обновлением (контрольная сумма не совпадает), поэтому ничего не установлено. Скачай его заново со страницы обновления.
+The update failed ({0}).
+= Ошибка обновления ({0}).
+Updated to {0} - press PLAY.
+= Обновлено до {0} - нажми ИГРАТЬ.
+Game updated to {0}. Press PLAY to enter Azeroth.
+= Игра обновлена до {0}. Нажми ИГРАТЬ, чтобы войти в Азерот.
+Update cancelled.
+= Обновление отменено.
+Update failed.
+= Ошибка обновления.
+Another task is still running - wait for it to finish.
+= Ещё выполняется другая задача - дождись её завершения.
+Choose a sync folder inside your cloud drive first (Cloud Save or Options).
+= Сначала выбери папку синхронизации на облачном диске (Облачное сохранение или Настройки).
+Cloud sync failed.
+= Ошибка облачной синхронизации.
+Status checked at {0}
+= Состояние проверено в {0}
+Downloaded from the cloud at {0}
+= Скачано из облака в {0}
+Saves uploaded at {0}
+= Сохранения выгружены в {0}
+Not everything was synced - see the Cloud Save log.
+= Синхронизировано не всё - смотри журнал в разделе «Облачное сохранение».
+The game is being updated. Please wait until that has finished.
+= Игра обновляется. Подожди, пока это закончится.
+The cloud save could NOT be loaded, so the game was not launched.
+= Облачное сохранение НЕ удалось загрузить, поэтому игра не запущена.
+See the log in Cloud Save. If your cloud drive is still syncing, wait for it to finish and press PLAY again.
+= Смотри журнал в разделе «Облачное сохранение». Если облачный диск ещё синхронизируется, дождись окончания и снова нажми ИГРАТЬ.
+Cloud sync failed - game not launched
+= Ошибка облачной синхронизации - игра не запущена
+Cloud save was not loaded - game not launched.
+= Облачное сохранение не загружено - игра не запущена.
+Cloud sync successfully downloaded
+= Облачная синхронизация успешно скачана
+No sync folder set - launched without cloud sync.
+= Папка синхронизации не задана - запуск без облачной синхронизации.
+Starting Azeroth Survivors ...
+= Запуск Azeroth Survivors ...
+Game running.
+= Игра запущена.
+Could not start the game: {0}
+= Не удалось запустить игру: {0}
+Game closed.
+= Игра закрыта.
+Game has closed.
+= Игра закрылась.
+Cloud sync successfully uploaded
+= Облачная синхронизация успешно выгружена
+Some of your progress was NOT uploaded. See the log in Cloud Save.
+= Часть твоего прогресса НЕ выгружена. Смотри журнал в разделе «Облачное сохранение».
+Cloud sync NOT completed - see the Cloud Save log
+= Облачная синхронизация НЕ завершена - смотри журнал в разделе «Облачное сохранение»
+Cloud upload failed: {0}
+= Ошибка выгрузки в облако: {0}
+Cloud sync failed - see the Cloud Save log
+= Ошибка облачной синхронизации - смотри журнал в разделе «Облачное сохранение»
+Launcher
+= Лаунчер
+Select a folder inside your cloud drive (Google Drive, OneDrive, Dropbox ...)
+= Выбери папку на своём облачном диске (Google Drive, OneDrive, Dropbox ...)
+That is the top level of your cloud drive.
+= Это верхний уровень твоего облачного диска.
+Create and use a subfolder named AzerothSync inside it?
+= Создать внутри него папку AzerothSync и использовать её?
+Sync folder
+= Папка синхронизации
+Play time reset.
+= Время в игре сброшено.
+Play time
+= Время в игре
+No games played with this launcher yet.
+= С этим лаунчером ещё не было игр.
+Total: {0} over {#1} sessions
+= Всего: {0}, сеансов: {1}
+Total: {0} over {#1} session
+= Всего: {0}, сеансов: {1}
+Total: {0} over {#1} sessions on {#2} PCs
+= Всего: {0}, сеансов: {1}, ПК: {2}
+Last session: {0} ({1})
+= Последний сеанс: {0} ({1})
+Longest session: {0}
+= Самый долгий сеанс: {0}
+Shared with your other PCs through the cloud sync folder.
+= Общее для твоих ПК через папку облачной синхронизации.
+Counted on this PC (the sync folder is not reachable right now).
+= Учитывается на этом ПК (папка синхронизации сейчас недоступна).
+Counted on this PC. Turn on cloud saving to share it between your PCs.
+= Учитывается на этом ПК. Включи облачное сохранение, чтобы делиться им между ПК.
+RESET PLAY TIME
+= СБРОСИТЬ ВРЕМЯ В ИГРЕ
+Set the play time back to zero on all your PCs?
+= Обнулить время в игре на всех твоих ПК?
+Set the play time back to zero?
+= Обнулить время в игре?
+Game folder
+= Папка игры
+Save game folder
+= Папка сохранений
+Game config folder (AddOns, addon settings)
+= Папка конфигурации игры (AddOns, настройки аддонов)
+Cloud saving
+= Облачное сохранение
+Close button hides the launcher to the tray
+= Кнопка «Закрыть» сворачивает лаунчер в системный трей
+Minimize the launcher when the game starts
+= Сворачивать лаунчер при запуске игры
+RUN SETUP AGAIN
+= ЗАПУСТИТЬ НАСТРОЙКУ СНОВА
+Select your Azeroth Survivors game folder
+= Выбери папку игры Azeroth Survivors
+Game folder set: {0}
+= Папка игры задана: {0}
+Select the game's benilla-config folder (contains AddOns and saved)
+= Выбери папку игры benilla-config (содержит AddOns и saved)
+Language
+= Язык
+ALL PATCH NOTES ›
+= ВСЕ ИЗМЕНЕНИЯ ›
+‹ LATEST
+= ‹ ПОСЛЕДНЕЕ
+‹ ALL PATCH NOTES
+= ‹ ВСЕ ИЗМЕНЕНИЯ
+‹ PREVIOUS
+= ‹ ПРЕДЫДУЩЕЕ
+NEXT ›
+= СЛЕДУЮЩЕЕ ›
+{#0} of {#1}
+= {0} из {1}
+PAGE
+= СТРАНИЦА
+No patch notes yet.
+= Списков изменений пока нет.
+{0} (current)
+= {0} (текущая)
+Vibe coded by Slimjim\nCloud save code established by Keijin
+= Навайбкодил Slimjim\nКод облачного сохранения: Keijin
+DOWNLOAD MORE ›
+= СКАЧАТЬ ЕЩЁ ›
+ALL
+= ВСЕ
+UI OVERHAUL
+= НОВЫЙ ИНТЕРФЕЙС
+GAMEPLAY
+= ГЕЙМПЛЕЙ
+COSMETIC
+= КОСМЕТИКА
+No addons in this filter yet.
+= В этом фильтре пока нет аддонов.
+No downloadable addons listed yet.
+= Аддонов для скачивания пока нет.
+UNINSTALL
+= УДАЛИТЬ
+Addons can't be changed while the game runs or a sync is running.
+= Аддоны нельзя менять, пока запущена игра или идёт синхронизация.
+Another addon is still downloading.
+= Другой аддон ещё скачивается.
+Installing {0}...
+= Установка {0}...
+{0} installed.
+= {0} установлен.
+{0} failed.
+= {0}: ошибка.
+Could not install {0}:
+= Не удалось установить {0}:
+{0} is not installed.
+= {0} не установлен.
+Remove {0} from your AddOns folder?
+= Удалить {0} из папки AddOns?
+Folders: {0}
+= Папки: {0}
+This deletes everything it added, including the settings it saved.
+= Это удалит всё, что он добавил, включая сохранённые им настройки.
+Uninstall
+= Удаление
+Could not uninstall {0}:
+= Не удалось удалить {0}:
+{0} uninstalled.
+= {0} удалён.
+{0} was not installed.
+= {0} не был установлен.
+No AddOns folder found.\nSet the game config folder in Options\n(the benilla-config folder).
+= Папка AddOns не найдена.\nУкажи папку конфигурации игры в Настройках\n(папка benilla-config).
+REFRESH
+= ОБНОВИТЬ СПИСОК
+FOLDER
+= ПАПКА
+TOGGLE ALL
+= ПЕРЕКЛЮЧИТЬ ВСЕ
+SAVE
+= СОХРАНИТЬ
+LOAD
+= ЗАГРУЗИТЬ
+empty
+= пусто
+{#0} on, {#1} off
+= вкл.: {0}, выкл.: {1}
+saved {0}
+= сохранено {0}
+Profile {0}
+= Профиль {0}
+No addons installed.
+= Аддоны не установлены.
+{#0} of {#1} enabled
+= Включено {0} из {1}
+Could not enable {0}:
+= Не удалось включить {0}:
+Could not disable {0}:
+= Не удалось выключить {0}:
+{0} enabled.
+= {0} включён.
+{0} disabled.
+= {0} выключен.
+All addons enabled.
+= Все аддоны включены.
+All addons disabled.
+= Все аддоны выключены.
+Some addons could not be changed:
+= Некоторые аддоны не удалось изменить:
+Replace the saved Profile {0} with the current toggles?
+= Заменить сохранённый Профиль {0} текущими переключателями?
+Profile {0} saved.
+= Профиль {0} сохранён.
+Profile {0} is empty - press SAVE to store the current toggles.
+= Профиль {0} пуст - нажми СОХРАНИТЬ, чтобы запомнить текущие переключатели.
+Profile {0} loaded: {#1} changed.
+= Профиль {0} загружен: изменено {1}.
+Profile {0} loaded: {#1} changed. {#2} newer addon(s) left as they were.
+= Профиль {0} загружен: изменено {1}. Более новые аддоны ({2}) оставлены как есть.
+Cloud saving is turned off.\nYour progress stays on this PC only.
+= Облачное сохранение выключено.\nТвой прогресс остаётся только на этом ПК.
+TURN ON CLOUD SAVING
+= ВКЛЮЧИТЬ ОБЛАЧНОЕ СОХРАНЕНИЕ
+PLAY downloads the newest state, starts the game and uploads your progress after you close it. One complete state wins; the overwritten one is backed up as a ZIP first.
+= ИГРАТЬ скачивает самое новое состояние, запускает игру и выгружает твой прогресс после её закрытия. Побеждает одно полное состояние; перезаписываемое сначала сохраняется в ZIP.
+(not set - choose a folder inside Google Drive, OneDrive or Dropbox)
+= (не задано - выбери папку в Google Drive, OneDrive или Dropbox)
+Not synced yet.
+= Ещё не синхронизировано.
+Cloud: {0}
+= Облако: {0}
+last uploaded by {0} on {1}
+= последняя выгрузка: {0}, {1}
+no upload info
+= нет данных о выгрузке
+CHECK STATUS
+= ПРОВЕРИТЬ СОСТОЯНИЕ
+DOWNLOAD
+= СКАЧАТЬ
+UPLOAD
+= ВЫГРУЗИТЬ
+The launcher is already running.
+= Лаунчер уже запущен.
+Look for its icon in the system tray (near the clock).
+= Найди его значок в системном трее (рядом с часами).
+Press INSTALL to download the game first.
+= Сначала нажми УСТАНОВИТЬ, чтобы скачать игру.
+No launcher release has been published on GitHub yet.
+= На GitHub пока не опубликовано ни одной версии лаунчера.
+GitHub's answer could not be read.
+= Не удалось прочитать ответ GitHub.
+The latest release on GitHub ({0}) has no launcher exe attached.
+= К последнему релизу на GitHub ({0}) не приложен exe лаунчера.
+The latest release on GitHub has no checksum for its exe, so it is not installed.
+= У последнего релиза на GitHub нет контрольной суммы для exe, поэтому он не устанавливается.
+The downloaded launcher does not match its checksum, so it was not installed. Please try again later.
+= Скачанный лаунчер не совпадает со своей контрольной суммой, поэтому не установлен. Попробуй позже.
+The launcher could not replace itself in this folder ({0}).
+= Лаунчер не смог заменить себя в этой папке ({0}).
+Download the new version from GitHub instead:
+= Скачай новую версию с GitHub вручную:
+The new launcher could not be put in place ({0}). Nothing was changed.
+= Не удалось поставить новый лаунчер на место ({0}). Ничего не изменено.
+The {0} address must start with https://
+= Адрес сервера {0} должен начинаться с https://
+The {0} server redirected to an address that is not secure (https).
+= Сервер {0} перенаправил на небезопасный адрес (не https).
+The {0} server sent a broken redirect.
+= Сервер {0} прислал некорректное перенаправление.
+The {0} server answered with error {#1}.
+= Сервер {0} ответил ошибкой {1}.
+The {0} server's security certificate was not accepted. It needs a normal, trusted https certificate.
+= Сертификат безопасности сервера {0} не принят. Нужен обычный доверенный сертификат https.
+The {0} server did not answer in time. Check your internet connection and try again.
+= Сервер {0} не ответил вовремя. Проверь подключение к интернету и попробуй снова.
+Could not reach the {0} server. Check your internet connection and try again.
+= Не удалось связаться с сервером {0}. Проверь подключение к интернету и попробуй снова.
+The {0} server redirected too many times.
+= Сервер {0} перенаправил слишком много раз.
+update
+= обновлений
+addon
+= аддонов
+The download link gave a web page instead of the file. It must be a direct download link.
+= Ссылка для скачивания вернула веб-страницу вместо файла. Нужна прямая ссылка на скачивание.
+The download was interrupted. Check your connection and try again.
+= Загрузка прервана. Проверь подключение и попробуй снова.
+The download was cut off before it finished. Please try again.
+= Загрузка оборвалась до завершения. Попробуй снова.
+The .zip contains an unsafe path; nothing was installed.
+= В .zip есть небезопасный путь; ничего не установлено.
+The file is damaged or incomplete.
+= Файл повреждён или неполный.
+The file is a .{0} archive, and no program to unpack it was found.
+= Файл является архивом .{0}, и программа для его распаковки не найдена.
+Install the free 7-Zip (7-zip.org) or WinRAR and try again.
+= Установи бесплатный 7-Zip (7-zip.org) или WinRAR и попробуй снова.
+The archive could not be unpacked.
+= Не удалось распаковать архив.
+That file is not a .rar, .zip or .7z archive.
+= Этот файл не является архивом .rar, .zip или .7z.
+The archive was unpacked, but {0} was not inside it.
+= Архив распакован, но {0} в нём не было.
+The install finished, but {0} is not in {1}.
+= Установка завершена, но {0} нет в {1}.
+The link did not give a .zip file. It must be a direct download link (share pages such as LimeWire do not work).
+= Ссылка не вернула файл .zip. Нужна прямая ссылка на скачивание (страницы обмена вроде LimeWire не подходят).
+There is not enough free disk space.
+= Недостаточно свободного места на диске.
+Not enough free disk space for the update: about {0} is needed on the drive with the game, {1} is free.
+= Недостаточно места для обновления: на диске с игрой нужно около {0}, свободно {1}.
+The update file is not a .rar, .zip or .7z archive.
+= Файл обновления не является архивом .rar, .zip или .7z.
+An earlier update was cut off and its files could not be put back yet.
+= Предыдущее обновление прервалось, и его файлы пока не удалось вернуть.
+The old files are kept in:
+= Старые файлы лежат в:
+Unpacking the update. This can take a few minutes...
+= Распаковка обновления. Это может занять несколько минут...
+Installing the new files...
+= Установка новых файлов...
+The update did not contain any files to install.
+= В обновлении не было файлов для установки.
+{0} is missing after the update.
+= После обновления отсутствует {0}.
+A game file is in use. Close the game and anything else using its folder, then try again.
+= Файл игры используется. Закрой игру и всё, что использует её папку, и попробуй снова.
+There is not enough free disk space for the update. Free some space and try again.
+= Недостаточно места для обновления. Освободи место и попробуй снова.
+The update could not be installed ({0}).
+= Не удалось установить обновление ({0}).
+No game files were changed.
+= Файлы игры не изменены.
+Some files could not be put back. The old versions are kept in:
+= Некоторые файлы не удалось вернуть. Старые версии лежат в:
+Sync folder not reachable: {0} (is your cloud drive running?)
+= Папка синхронизации недоступна: {0} (запущен ли облачный диск?)
+The game is running. Close it before you download.
+= Игра запущена. Закрой её перед скачиванием.
+The game is running. Close it before you upload.
+= Игра запущена. Закрой её перед выгрузкой.
+The folder is in use and was not replaced: {0} ({1}). Close programs or Explorer windows that use it and try again.
+= Папка используется и не была заменена: {0} ({1}). Закрой программы или окна Проводника, которые её используют, и попробуй снова.
+The source changed while copying ({0}). Nothing was replaced, please sync again.
+= Источник изменился во время копирования ({0}). Ничего не заменено, синхронизируй снова.
+No sync folder set. Choose a folder in Google Drive, OneDrive, Dropbox or similar in Options.
+= Папка синхронизации не задана. Выбери папку в Google Drive, OneDrive, Dropbox или похожем сервисе в Настройках.
+Sync folder: {0}
+= Папка синхронизации: {0}
+The sync folder does not exist yet. It is created on the first upload.
+= Папки синхронизации пока нет. Она создаётся при первой выгрузке.
+{0}: in sync (local {1}, cloud {2})
+= {0}: синхронизировано (локально {1}, облако {2})
+{0}: cloud empty, upload (local {1}, cloud {2})
+= {0}: облако пустое, выгрузить (локально {1}, облако {2})
+{0}: cloud copy incomplete or still syncing, wait (local {1}, cloud {2})
+= {0}: копия в облаке неполная или ещё синхронизируется, подожди (локально {1}, облако {2})
+{0}: local is newer, upload (local {1}, cloud {2})
+= {0}: локальная новее, выгрузить (локально {1}, облако {2})
+{0}: cloud is newer, download (local {1}, cloud {2})
+= {0}: облако новее, скачать (локально {1}, облако {2})
+{0}: both changed or never synced (local {1}, cloud {2})
+= {0}: изменились обе или ни разу не синхронизировались (локально {1}, облако {2})
+{0}: {1} not found, skipped. Set the game config folder in Options.
+= {0}: {1} не найдено, пропущено. Укажи папку конфигурации игры в Настройках.
+Downloading from the cloud ...
+= Скачивание из облака ...
+The sync folder does not exist yet, nothing to download.
+= Папки синхронизации пока нет, скачивать нечего.
+{0}: cloud is empty, nothing to download.
+= {0}: облако пустое, скачивать нечего.
+{0}: up to date.
+= {0}: актуально.
+{0}: the cloud copy does not match the last upload yet (incomplete or still syncing). Nothing replaced, try again in a moment.
+= {0}: копия в облаке пока не совпадает с последней выгрузкой (неполная или ещё синхронизируется). Ничего не заменено, попробуй чуть позже.
+{0}: local is newer, kept.
+= {0}: локальная новее, оставлена.
+Replace your local data with the cloud state?
+= Заменить твои локальные данные состоянием из облака?
+A backup is made first.
+= Сначала создаётся резервная копия.
+Cancelled, nothing changed.
+= Отменено, ничего не изменилось.
+{0}: local state kept, it will replace the cloud on the next upload.
+= {0}: локальное состояние оставлено, оно заменит облако при следующей выгрузке.
+{0}: downloaded from the cloud.
+= {0}: скачано из облака.
+Cloud state: {0}
+= Состояние облака: {0}
+Uploading to the cloud ...
+= Выгрузка в облако ...
+{0}: nothing local, nothing uploaded.
+= {0}: локально ничего нет, ничего не выгружено.
+{0}: cloud is up to date.
+= {0}: облако актуально.
+Replace the cloud state with your local data?
+= Заменить состояние облака твоими локальными данными?
+{0}: cloud kept, your local changes were NOT uploaded. Use "Download" to get the cloud state.
+= {0}: облако оставлено, твои локальные изменения НЕ выгружены. Используй «Скачать», чтобы получить состояние облака.
+Cancelled, your local changes were NOT uploaded.
+= Отменено, твои локальные изменения НЕ выгружены.
+{0}: the cloud changed during this sync, NOT uploaded. Sync again to decide.
+= {0}: облако изменилось во время этой синхронизации, НЕ выгружено. Синхронизируй снова, чтобы решить.
+{0}: uploaded.
+= {0}: выгружено.
+Written to the sync folder. Your cloud app uploads it in the background, wait until it is done before you switch PCs.
+= Записано в папку синхронизации. Облачное приложение выгружает его в фоне; дождись окончания, прежде чем сменить ПК.
+Backup: {0}
+= Резервная копия: {0}
+Restored {0} after an interrupted sync.
+= {0} восстановлено после прерванной синхронизации.

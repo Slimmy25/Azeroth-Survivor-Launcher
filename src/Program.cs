@@ -37,6 +37,7 @@ namespace AzerothLauncher
         static void Main(string[] args)
         {
             bool tray = Array.IndexOf(args, "--tray") >= 0;
+            Lang.Load(Lang.Default(Config.Load().Str("language")));     // the player's language (Options > Language)
             bool afterUpdate = Array.IndexOf(args, "--after-update") >= 0;
             bool first;
             using (var mutex = new Mutex(true, MutexName, out first))
@@ -50,7 +51,7 @@ namespace AzerothLauncher
                 {
                     // already running: bring that window forward (unless this start was --tray) and quit
                     if (!tray && !WakeExisting())
-                        MessageBox.Show("The launcher is already running.\n\nLook for its icon in the system tray (near the clock).",
+                        Msg.Show("The launcher is already running.\n\nLook for its icon in the system tray (near the clock).",
                                         "Azeroth Survivors Launcher");
                     return;
                 }

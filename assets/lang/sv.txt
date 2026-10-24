@@ -1,0 +1,790 @@
+@name Svenska
+# Each English text is followed by its translation on the line below (starting with "= ").
+# {0}, {1} ... are filled in by the launcher; keep them. \n is a line break.
+
+PLAY
+= SPELA
+INSTALL
+= INSTALLERA
+PLAYING...
+= SPELAR...
+INSTALLING
+= INSTALLERAR
+UPDATING
+= UPPDATERAR
+UPDATE
+= UPPDATERA
+CHECKING
+= KONTROLLERAR
+CLOUD SAVE
+= MOLNSPARNING
+ADDONS
+= TILLÄGG
+OPTIONS
+= ALTERNATIV
+CHANGELOG
+= PATCHANTECKNINGAR
+ABOUT LAUNCHER
+= OM LAUNCHERN
+A game made by Aethus
+= Ett spel skapat av Aethus
+Version {0}
+= Version {0}
+Press PLAY to enter Azeroth.
+= Tryck på SPELA för att gå in i Azeroth.
+Game client not found.
+= Spelet hittades inte.
+Press INSTALL to download it first.
+= Tryck på INSTALLERA för att ladda ner det först.
+Press INSTALL to download it, or set the game folder in Options.
+= Tryck på INSTALLERA för att ladda ner det, eller ange spelmappen under Alternativ.
+Your cloud save syncs automatically.
+= Din molnsparning synkas automatiskt.
+Time played: {0}   |   Last session: {1}
+= Speltid: {0}   |   Senaste session: {1}
+Ready.
+= Redo.
+Cloud Save
+= Molnsparning
+Addons
+= Tillägg
+Options
+= Alternativ
+Changelog
+= Patchanteckningar
+About Launcher
+= Om launchern
+Download More
+= Ladda ner fler
+All Patch Notes
+= Alla patchanteckningar
+Show Launcher
+= Visa launchern
+Play
+= Spela
+Upload Save Now
+= Ladda upp sparning nu
+Close Button Hides to Tray
+= Stäng-knappen döljer i aktivitetsfältet
+Quit
+= Avsluta
+Game running
+= Spelet körs
+Idle
+= Inaktiv
+Game running - {0}
+= Spelet körs - {0}
+The launcher is in the tray; the open window stays. Right-click the icon to quit.
+= Launchern ligger i meddelandefältet; det öppna fönstret finns kvar. Högerklicka på ikonen för att avsluta.
+Still running in the tray. Right-click the icon to quit.
+= Körs fortfarande i meddelandefältet. Högerklicka på ikonen för att avsluta.
+Cloud sync running
+= Molnsynk pågår
+A cloud sync is still running. If you quit now it is cut short; the next sync repairs any half-finished copy.
+= En molnsynkning pågår fortfarande. Om du avslutar nu avbryts den; nästa synkning reparerar en halvfärdig kopia.
+Quit anyway?
+= Avsluta ändå?
+Installing
+= Installerar
+The game client is still being installed. If you quit now, it is cut short.
+= Spelet installeras fortfarande. Om du avslutar nu avbryts installationen.
+Updating
+= Uppdaterar
+The game is still being updated. If you quit now, the update is cut short. Nothing is lost: a half-finished change is undone the next time the launcher starts.
+= Spelet uppdateras fortfarande. Om du avslutar nu avbryts uppdateringen. Inget går förlorat: en halvfärdig ändring ångras nästa gång launchern startar.
+The game is still running. If you quit the launcher now, your saves will NOT be uploaded automatically.
+= Spelet körs fortfarande. Om du avslutar launchern nu laddas dina sparningar INTE upp automatiskt.
+Setup saved.
+= Inställningarna sparades.
+First-time setup
+= Första konfigurationen
+Welcome, Adventurer
+= Välkommen, äventyrare
+Step 1 of 2
+= Steg 1 av 2
+Step 2 of 2
+= Steg 2 av 2
+A.  Cloud saving
+= A.  Molnsparning
+Keep my progress in the cloud (Google Drive, OneDrive, Dropbox ...)\nand share it between my PCs
+= Spara mina framsteg i molnet (Google Drive, OneDrive, Dropbox ...)\noch dela dem mellan mina datorer
+Sync folder (inside your cloud drive)
+= Synkmapp (i din molnlagring)
+Cloud saving stays off. You can turn it on later in Cloud Save.
+= Molnsparning förblir avstängd. Du kan slå på den senare under Molnsparning.
+B.  Where are your files?
+= B.  Var finns dina filer?
+Folders found at their usual place are used as they are. Choose the ones that are missing.
+= Mappar som hittas på sin vanliga plats används som de är. Välj de som saknas.
+AddOns
+= AddOns
+Game saves
+= Sparade spel
+Addon settings
+= Tilläggsinställningar
+Select your AddOns folder
+= Välj din AddOns-mapp
+Select the folder that holds your save game (normally %APPDATA%\wenilla-rogue)
+= Välj mappen med ditt sparade spel (normalt %APPDATA%\wenilla-rogue)
+Select your addon settings folder (the 'saved' folder in benilla-config)
+= Välj mappen för tilläggsinställningar (mappen 'saved' i benilla-config)
+FINISH
+= SLUTFÖR
+LATER
+= SENARE
+✓ found
+= ✓ hittad
+✓ chosen
+= ✓ vald
+not chosen yet
+= inte vald än
+not found - please choose it
+= hittades inte - välj den
+(not set)
+= (inte angiven)
+CHANGE
+= ÄNDRA
+CHOOSE
+= VÄLJ
+Choose a sync folder for cloud saving, or untick\n"Keep my progress in the cloud".
+= Välj en synkmapp för molnsparning, eller avmarkera\n"Spara mina framsteg i molnet".
+Setup
+= Konfiguration
+These folders were not found:
+= De här mapparna hittades inte:
+Finish anyway? You can change them later in Options.
+= Slutföra ändå? Du kan ändra dem senare under Alternativ.
+Your settings are saved.\n\nWould you like to go to the Addons section now\nto download some addons, or to enable or disable the ones you have?
+= Dina inställningar är sparade.\n\nVill du gå till avsnittet Tillägg nu\nför att ladda ner tillägg, eller slå på och av dem du har?
+DOWNLOAD ADDONS
+= LADDA NER TILLÄGG
+ENABLE / DISABLE ADDONS
+= SLÅ PÅ / AV TILLÄGG
+NO THANKS
+= NEJ TACK
+Install the game
+= Installera spelet
+Install Azeroth Survivors
+= Installera Azeroth Survivors
+Step 1
+= Steg 1
+Download the game in your web browser.
+= Ladda ner spelet i din webbläsare.
+OPEN DOWNLOAD
+= ÖPPNA NEDLADDNING
+Download opened in your browser.
+= Nedladdningen öppnades i webbläsaren.
+Step 2
+= Steg 2
+When the download has finished, come back here.
+= Kom tillbaka hit när nedladdningen är klar.
+IT'S IN MY DOWNLOADS
+= DEN LIGGER I MINA HÄMTADE FILER
+The launcher finds the file (in its own folder or Downloads), unpacks the game here and deletes the download.
+= Launchern hittar filen (i sin egen mapp eller i Hämtade filer), packar upp spelet här och tar bort nedladdningen.
+CANCEL
+= AVBRYT
+Which progress do you want to keep?
+= Vilka framsteg vill du behålla?
+Both sides changed
+= Båda sidor har ändrats
+This PC and the cloud both changed since the last sync:
+= Den här datorn och molnet har båda ändrats sedan senaste synkningen:
+• {0}:  this PC {1}   |   cloud {2}
+= • {0}:  den här datorn {1}   |   molnet {2}
+One complete state wins, the other is backed up first.
+= Ett komplett läge vinner, det andra säkerhetskopieras först.
+First time on this PC? Choose USE CLOUD.
+= Första gången på den här datorn? Välj ANVÄND MOLNET.
+USE CLOUD replaces your local data. KEEP LOCAL keeps it and uploads it later.
+= ANVÄND MOLNET ersätter dina lokala data. BEHÅLL LOKALT behåller dem och laddar upp dem senare.
+KEEP LOCAL replaces the cloud. USE CLOUD leaves the cloud and skips your upload.
+= BEHÅLL LOKALT ersätter molnet. ANVÄND MOLNET låter molnet vara och hoppar över din uppladdning.
+USE CLOUD
+= ANVÄND MOLNET
+KEEP LOCAL
+= BEHÅLL LOKALT
+Save game
+= Sparat spel
+Game update
+= Speluppdatering
+Update available
+= Uppdatering tillgänglig
+New version:
+= Ny version:
+Your version:
+= Din version:
+not recorded yet
+= inte registrerad än
+Download size:
+= Nedladdningsstorlek:
+What is new
+= Nyheter
+Your addons, settings and saves are left alone. If anything goes wrong, the old game files are put back.
+= Dina tillägg, inställningar och sparningar lämnas orörda. Om något går fel läggs de gamla spelfilerna tillbaka.
+UPDATE NOW
+= UPPDATERA NU
+NOT NOW
+= INTE NU
+SKIP THIS VERSION
+= HOPPA ÖVER DENNA VERSION
+I ALREADY HAVE THIS VERSION
+= JAG HAR REDAN DENNA VERSION
+The update is being installed. Please wait until it has finished.
+= Uppdateringen installeras. Vänta tills den är klar.
+Downloading the update...
+= Laddar ner uppdateringen...
+Download the update
+= Ladda ner uppdateringen
+Step 1: download the update in your web browser.
+= Steg 1: ladda ner uppdateringen i din webbläsare.
+OPEN DOWNLOAD AGAIN
+= ÖPPNA NEDLADDNING IGEN
+Step 2: when the download has finished, come back here.
+= Steg 2: kom tillbaka hit när nedladdningen är klar.
+The launcher finds the file (in its own folder or Downloads), installs it and deletes it.
+= Launchern hittar filen (i sin egen mapp eller i Hämtade filer), installerar den och tar bort den.
+Checking the file...
+= Kontrollerar filen...
+CANCELLING...
+= AVBRYTER...
+Updating to {0}
+= Uppdaterar till {0}
+Please keep the launcher open until this has finished.
+= Håll launchern öppen tills det är klart.
+{0} of {1}  ({#2}%)
+= {0} av {1}  ({2} %)
+{0} downloaded
+= {0} nedladdat
+Update installed
+= Uppdatering installerad
+Update failed
+= Uppdateringen misslyckades
+CLOSE
+= STÄNG
+TRY AGAIN
+= FÖRSÖK IGEN
+Version {0} is installed.
+= Version {0} är installerad.
+{#0} files updated.
+= {0} filer uppdaterade.
+{#0} file updated.
+= {0} fil uppdaterad.
+{#0} files updated, {#1} removed.
+= {0} filer uppdaterade, {1} borttagna.
+{#0} file updated, {#1} removed.
+= {0} fil uppdaterad, {1} borttagna.
+Install
+= Installera
+Install the game from this file?
+= Installera spelet från den här filen?
+{0}  ({#1} MB)
+= {0}  ({1} MB)
+in {0}
+= i {0}
+Choose the game file you downloaded (.rar)
+= Välj spelfilen du laddade ner (.rar)
+Game archive (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|All files (*.*)|*.*
+= Spelarkiv (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|Alla filer (*.*)|*.*
+Install cancelled.
+= Installationen avbröts.
+Unpacking the game client...
+= Packar upp spelet...
+Install failed.
+= Installationen misslyckades.
+Install complete - press PLAY.
+= Installationen klar - tryck på SPELA.
+Install complete. Press PLAY to enter Azeroth.
+= Installationen klar. Tryck på SPELA för att gå in i Azeroth.
+The last game update was cut off before it finished. Your game files were put back exactly as they were.
+= Den senaste speluppdateringen avbröts innan den var klar. Dina spelfiler återställdes exakt som de var.
+You can run the update again with the UPDATE button.
+= Du kan köra uppdateringen igen med knappen UPPDATERA.
+The last game update was cut off, and some game files could not be put back automatically.
+= Den senaste speluppdateringen avbröts, och vissa spelfiler kunde inte återställas automatiskt.
+The old versions are kept in the folder "{0}" inside the game folder. Copy them back over the game files, or reinstall the game.
+= De gamla versionerna finns i mappen "{0}" i spelmappen. Kopiera tillbaka dem över spelfilerna, eller installera om spelet.
+Checking for updates...
+= Söker efter uppdateringar...
+The update check failed ({0}).
+= Sökningen efter uppdateringar misslyckades ({0}).
+Could not check for launcher updates.
+= Kunde inte söka efter launcher-uppdateringar.
+Launcher update
+= Launcher-uppdatering
+Launcher {0} is available.
+= Launcher {0} är tillgänglig.
+The launcher is up to date ({0}).
+= Launchern är uppdaterad ({0}).
+You have the newest launcher ({0}).
+= Du har den senaste launchern ({0}).
+A new launcher ({0}) is available. Open the launcher and press UPDATE.
+= En ny launcher ({0}) är tillgänglig. Öppna launchern och tryck på UPPDATERA.
+Finish what is running first (the game, an install or a cloud sync), then press UPDATE again.
+= Avsluta det som körs först (spelet, en installation eller en molnsynkning) och tryck sedan på UPPDATERA igen.
+A new version of the launcher is on GitHub: {0}.
+= En ny version av launchern finns på GitHub: {0}.
+Update now? The new launcher ({0}) is downloaded, checked and started in place of this one. Your settings stay as they are.
+= Uppdatera nu? Den nya launchern ({0}) laddas ner, kontrolleras och startas i stället för den här. Dina inställningar behålls.
+Update now? The new launcher is downloaded, checked and started in place of this one. Your settings stay as they are.
+= Uppdatera nu? Den nya launchern laddas ner, kontrolleras och startas i stället för den här. Dina inställningar behålls.
+Launcher update postponed. Press UPDATE when you want it.
+= Launcher-uppdateringen skjuts upp. Tryck på UPPDATERA när du vill.
+Downloading the new launcher...
+= Laddar ner den nya launchern...
+Downloading the new launcher... {0}
+= Laddar ner den nya launchern... {0}
+Launcher update failed.
+= Launcher-uppdateringen misslyckades.
+Update checking is not switched on in this launcher yet (it has no update address).
+= Uppdateringskontroll är inte påslagen i den här launchern än (den har ingen uppdateringsadress).
+The game is not installed yet. Press INSTALL first.
+= Spelet är inte installerat än. Tryck på INSTALLERA först.
+Could not check for updates.
+= Kunde inte söka efter uppdateringar.
+You have the newest version ({0}).
+= Du har den senaste versionen ({0}).
+Update {0} is available.
+= Uppdatering {0} är tillgänglig.
+A game update ({0}) is available.
+= En speluppdatering ({0}) är tillgänglig.
+Version {0} skipped. The UPDATE button still offers it.
+= Version {0} överhoppad. Knappen UPPDATERA erbjuder den fortfarande.
+Noted: you have version {0}.
+= Noterat: du har version {0}.
+Install the update from this file?
+= Installera uppdateringen från den här filen?
+Choose the update file you downloaded
+= Välj uppdateringsfilen du laddade ner
+Update archive (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|All files (*.*)|*.*
+= Uppdateringsarkiv (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|Alla filer (*.*)|*.*
+Close the game first, then try again.
+= Stäng spelet först och försök sedan igen.
+Checking the download...
+= Kontrollerar nedladdningen...
+The downloaded file does not match its checksum, so nothing was installed. Please try again later.
+= Den nedladdade filen matchar inte sin kontrollsumma, så inget installerades. Försök igen senare.
+That file is not this update (its checksum does not match), so nothing was installed. Download it again from the update page.
+= Den filen är inte den här uppdateringen (kontrollsumman matchar inte), så inget installerades. Ladda ner den igen från uppdateringssidan.
+The update failed ({0}).
+= Uppdateringen misslyckades ({0}).
+Updated to {0} - press PLAY.
+= Uppdaterad till {0} - tryck på SPELA.
+Game updated to {0}. Press PLAY to enter Azeroth.
+= Spelet uppdaterat till {0}. Tryck på SPELA för att gå in i Azeroth.
+Update cancelled.
+= Uppdateringen avbröts.
+Update failed.
+= Uppdateringen misslyckades.
+Another task is still running - wait for it to finish.
+= En annan uppgift pågår fortfarande - vänta tills den är klar.
+Choose a sync folder inside your cloud drive first (Cloud Save or Options).
+= Välj först en synkmapp i din molnlagring (Molnsparning eller Alternativ).
+Cloud sync failed.
+= Molnsynkningen misslyckades.
+Status checked at {0}
+= Status kontrollerad kl. {0}
+Downloaded from the cloud at {0}
+= Nedladdat från molnet kl. {0}
+Saves uploaded at {0}
+= Sparningar uppladdade kl. {0}
+Not everything was synced - see the Cloud Save log.
+= Allt synkades inte - se loggen under Molnsparning.
+The game is being updated. Please wait until that has finished.
+= Spelet uppdateras. Vänta tills det är klart.
+The cloud save could NOT be loaded, so the game was not launched.
+= Molnsparningen kunde INTE läsas in, så spelet startades inte.
+See the log in Cloud Save. If your cloud drive is still syncing, wait for it to finish and press PLAY again.
+= Se loggen under Molnsparning. Om din molnlagring fortfarande synkar, vänta tills den är klar och tryck på SPELA igen.
+Cloud sync failed - game not launched
+= Molnsynkningen misslyckades - spelet startades inte
+Cloud save was not loaded - game not launched.
+= Molnsparningen lästes inte in - spelet startades inte.
+Cloud sync successfully downloaded
+= Molnsynk nedladdad
+No sync folder set - launched without cloud sync.
+= Ingen synkmapp angiven - startat utan molnsynk.
+Starting Azeroth Survivors ...
+= Startar Azeroth Survivors ...
+Game running.
+= Spelet körs.
+Could not start the game: {0}
+= Kunde inte starta spelet: {0}
+Game closed.
+= Spelet stängt.
+Game has closed.
+= Spelet har stängts.
+Cloud sync successfully uploaded
+= Molnsynk uppladdad
+Some of your progress was NOT uploaded. See the log in Cloud Save.
+= En del av dina framsteg laddades INTE upp. Se loggen under Molnsparning.
+Cloud sync NOT completed - see the Cloud Save log
+= Molnsynkningen INTE slutförd - se loggen under Molnsparning
+Cloud upload failed: {0}
+= Uppladdningen till molnet misslyckades: {0}
+Cloud sync failed - see the Cloud Save log
+= Molnsynkningen misslyckades - se loggen under Molnsparning
+Launcher
+= Launcher
+Select a folder inside your cloud drive (Google Drive, OneDrive, Dropbox ...)
+= Välj en mapp i din molnlagring (Google Drive, OneDrive, Dropbox ...)
+That is the top level of your cloud drive.
+= Det är den översta nivån i din molnlagring.
+Create and use a subfolder named AzerothSync inside it?
+= Skapa och använda en undermapp som heter AzerothSync där?
+Sync folder
+= Synkmapp
+Play time reset.
+= Speltiden nollställd.
+Play time
+= Speltid
+No games played with this launcher yet.
+= Inga spel spelade med den här launchern än.
+Total: {0} over {#1} sessions
+= Totalt: {0} över {1} sessioner
+Total: {0} over {#1} session
+= Totalt: {0} över {1} session
+Total: {0} over {#1} sessions on {#2} PCs
+= Totalt: {0} över {1} sessioner på {2} datorer
+Last session: {0} ({1})
+= Senaste session: {0} ({1})
+Longest session: {0}
+= Längsta session: {0}
+Shared with your other PCs through the cloud sync folder.
+= Delas med dina andra datorer via synkmappen.
+Counted on this PC (the sync folder is not reachable right now).
+= Räknat på den här datorn (synkmappen kan inte nås just nu).
+Counted on this PC. Turn on cloud saving to share it between your PCs.
+= Räknat på den här datorn. Slå på molnsparning för att dela den mellan dina datorer.
+RESET PLAY TIME
+= NOLLSTÄLL SPELTID
+Set the play time back to zero on all your PCs?
+= Nollställa speltiden på alla dina datorer?
+Set the play time back to zero?
+= Nollställa speltiden?
+Game folder
+= Spelmapp
+Save game folder
+= Mapp för sparade spel
+Game config folder (AddOns, addon settings)
+= Spelets konfigurationsmapp (AddOns, tilläggsinställningar)
+Cloud saving
+= Molnsparning
+Close button hides the launcher to the tray
+= Stäng-knappen döljer launchern i meddelandefältet
+Minimize the launcher when the game starts
+= Minimera launchern när spelet startar
+RUN SETUP AGAIN
+= KÖR KONFIGURATIONEN IGEN
+Select your Azeroth Survivors game folder
+= Välj din spelmapp för Azeroth Survivors
+Game folder set: {0}
+= Spelmapp angiven: {0}
+Select the game's benilla-config folder (contains AddOns and saved)
+= Välj spelets mapp benilla-config (innehåller AddOns och saved)
+Language
+= Språk
+ALL PATCH NOTES ›
+= ALLA PATCHANTECKNINGAR ›
+‹ LATEST
+= ‹ SENASTE
+‹ ALL PATCH NOTES
+= ‹ ALLA PATCHANTECKNINGAR
+‹ PREVIOUS
+= ‹ FÖREGÅENDE
+NEXT ›
+= NÄSTA ›
+{#0} of {#1}
+= {0} av {1}
+PAGE
+= SIDA
+No patch notes yet.
+= Inga patchanteckningar än.
+{0} (current)
+= {0} (aktuell)
+Vibe coded by Slimjim\nCloud save code established by Keijin
+= Vibe-kodad av Slimjim\nMolnsparningskod av Keijin
+DOWNLOAD MORE ›
+= LADDA NER FLER ›
+ALL
+= ALLA
+UI OVERHAUL
+= NYTT GRÄNSSNITT
+GAMEPLAY
+= SPELMEKANIK
+COSMETIC
+= KOSMETISKT
+No addons in this filter yet.
+= Inga tillägg i det här filtret än.
+No downloadable addons listed yet.
+= Inga nedladdningsbara tillägg än.
+UNINSTALL
+= AVINSTALLERA
+Addons can't be changed while the game runs or a sync is running.
+= Tillägg kan inte ändras medan spelet eller en synkning körs.
+Another addon is still downloading.
+= Ett annat tillägg laddas fortfarande ner.
+Installing {0}...
+= Installerar {0}...
+{0} installed.
+= {0} installerat.
+{0} failed.
+= {0} misslyckades.
+Could not install {0}:
+= Kunde inte installera {0}:
+{0} is not installed.
+= {0} är inte installerat.
+Remove {0} from your AddOns folder?
+= Ta bort {0} från din AddOns-mapp?
+Folders: {0}
+= Mappar: {0}
+This deletes everything it added, including the settings it saved.
+= Detta tar bort allt det lade till, inklusive inställningarna det sparade.
+Uninstall
+= Avinstallera
+Could not uninstall {0}:
+= Kunde inte avinstallera {0}:
+{0} uninstalled.
+= {0} avinstallerat.
+{0} was not installed.
+= {0} var inte installerat.
+No AddOns folder found.\nSet the game config folder in Options\n(the benilla-config folder).
+= Ingen AddOns-mapp hittades.\nAnge spelets konfigurationsmapp under Alternativ\n(mappen benilla-config).
+REFRESH
+= UPPDATERA LISTA
+FOLDER
+= MAPP
+TOGGLE ALL
+= VÄXLA ALLA
+SAVE
+= SPARA
+LOAD
+= LADDA
+empty
+= tom
+{#0} on, {#1} off
+= {0} på, {1} av
+saved {0}
+= sparad {0}
+Profile {0}
+= Profil {0}
+No addons installed.
+= Inga tillägg installerade.
+{#0} of {#1} enabled
+= {0} av {1} på
+Could not enable {0}:
+= Kunde inte slå på {0}:
+Could not disable {0}:
+= Kunde inte slå av {0}:
+{0} enabled.
+= {0} påslaget.
+{0} disabled.
+= {0} avslaget.
+All addons enabled.
+= Alla tillägg påslagna.
+All addons disabled.
+= Alla tillägg avslagna.
+Some addons could not be changed:
+= Vissa tillägg kunde inte ändras:
+Replace the saved Profile {0} with the current toggles?
+= Ersätta den sparade Profil {0} med de nuvarande valen?
+Profile {0} saved.
+= Profil {0} sparad.
+Profile {0} is empty - press SAVE to store the current toggles.
+= Profil {0} är tom - tryck på SPARA för att lagra de nuvarande valen.
+Profile {0} loaded: {#1} changed.
+= Profil {0} laddad: {1} ändrade.
+Profile {0} loaded: {#1} changed. {#2} newer addon(s) left as they were.
+= Profil {0} laddad: {1} ändrade. {2} nyare tillägg lämnades som de var.
+Cloud saving is turned off.\nYour progress stays on this PC only.
+= Molnsparning är avstängd.\nDina framsteg finns bara på den här datorn.
+TURN ON CLOUD SAVING
+= SLÅ PÅ MOLNSPARNING
+PLAY downloads the newest state, starts the game and uploads your progress after you close it. One complete state wins; the overwritten one is backed up as a ZIP first.
+= SPELA laddar ner det senaste läget, startar spelet och laddar upp dina framsteg när du stänger det. Ett komplett läge vinner; det som skrivs över säkerhetskopieras först som ZIP.
+(not set - choose a folder inside Google Drive, OneDrive or Dropbox)
+= (inte angiven - välj en mapp i Google Drive, OneDrive eller Dropbox)
+Not synced yet.
+= Inte synkad än.
+Cloud: {0}
+= Moln: {0}
+last uploaded by {0} on {1}
+= senast uppladdad av {0} den {1}
+no upload info
+= ingen uppladdningsinfo
+CHECK STATUS
+= KONTROLLERA STATUS
+DOWNLOAD
+= LADDA NER
+UPLOAD
+= LADDA UPP
+The launcher is already running.
+= Launchern körs redan.
+Look for its icon in the system tray (near the clock).
+= Leta efter ikonen i meddelandefältet (nära klockan).
+Press INSTALL to download the game first.
+= Tryck på INSTALLERA för att ladda ner spelet först.
+No launcher release has been published on GitHub yet.
+= Ingen launcher-version har publicerats på GitHub än.
+GitHub's answer could not be read.
+= GitHubs svar kunde inte läsas.
+The latest release on GitHub ({0}) has no launcher exe attached.
+= Den senaste versionen på GitHub ({0}) har ingen launcher-exe bifogad.
+The latest release on GitHub has no checksum for its exe, so it is not installed.
+= Den senaste versionen på GitHub har ingen kontrollsumma för sin exe, så den installeras inte.
+The downloaded launcher does not match its checksum, so it was not installed. Please try again later.
+= Den nedladdade launchern matchar inte sin kontrollsumma, så den installerades inte. Försök igen senare.
+The launcher could not replace itself in this folder ({0}).
+= Launchern kunde inte ersätta sig själv i den här mappen ({0}).
+Download the new version from GitHub instead:
+= Ladda ner den nya versionen från GitHub i stället:
+The new launcher could not be put in place ({0}). Nothing was changed.
+= Den nya launchern kunde inte läggas på plats ({0}). Inget ändrades.
+The {0} address must start with https://
+= Adressen till servern för {0} måste börja med https://
+The {0} server redirected to an address that is not secure (https).
+= Servern för {0} omdirigerade till en adress som inte är säker (https).
+The {0} server sent a broken redirect.
+= Servern för {0} skickade en trasig omdirigering.
+The {0} server answered with error {#1}.
+= Servern för {0} svarade med fel {1}.
+The {0} server's security certificate was not accepted. It needs a normal, trusted https certificate.
+= Säkerhetscertifikatet för servern för {0} godkändes inte. Det behöver ett vanligt, betrott https-certifikat.
+The {0} server did not answer in time. Check your internet connection and try again.
+= Servern för {0} svarade inte i tid. Kontrollera din internetanslutning och försök igen.
+Could not reach the {0} server. Check your internet connection and try again.
+= Kunde inte nå servern för {0}. Kontrollera din internetanslutning och försök igen.
+The {0} server redirected too many times.
+= Servern för {0} omdirigerade för många gånger.
+update
+= uppdateringar
+addon
+= tillägg
+The download link gave a web page instead of the file. It must be a direct download link.
+= Nedladdningslänken gav en webbsida i stället för filen. Den måste vara en direkt nedladdningslänk.
+The download was interrupted. Check your connection and try again.
+= Nedladdningen avbröts. Kontrollera anslutningen och försök igen.
+The download was cut off before it finished. Please try again.
+= Nedladdningen avbröts innan den var klar. Försök igen.
+The .zip contains an unsafe path; nothing was installed.
+= .zip-filen innehåller en osäker sökväg; inget installerades.
+The file is damaged or incomplete.
+= Filen är skadad eller ofullständig.
+The file is a .{0} archive, and no program to unpack it was found.
+= Filen är ett .{0}-arkiv, och inget program för att packa upp det hittades.
+Install the free 7-Zip (7-zip.org) or WinRAR and try again.
+= Installera gratisprogrammet 7-Zip (7-zip.org) eller WinRAR och försök igen.
+The archive could not be unpacked.
+= Arkivet kunde inte packas upp.
+That file is not a .rar, .zip or .7z archive.
+= Den filen är inte ett .rar-, .zip- eller .7z-arkiv.
+The archive was unpacked, but {0} was not inside it.
+= Arkivet packades upp, men {0} fanns inte i det.
+The install finished, but {0} is not in {1}.
+= Installationen är klar, men {0} finns inte i {1}.
+The link did not give a .zip file. It must be a direct download link (share pages such as LimeWire do not work).
+= Länken gav ingen .zip-fil. Den måste vara en direkt nedladdningslänk (delningssidor som LimeWire fungerar inte).
+There is not enough free disk space.
+= Det finns inte tillräckligt med ledigt diskutrymme.
+Not enough free disk space for the update: about {0} is needed on the drive with the game, {1} is free.
+= Inte tillräckligt med ledigt diskutrymme för uppdateringen: cirka {0} behövs på enheten med spelet, {1} är ledigt.
+The update file is not a .rar, .zip or .7z archive.
+= Uppdateringsfilen är inte ett .rar-, .zip- eller .7z-arkiv.
+An earlier update was cut off and its files could not be put back yet.
+= En tidigare uppdatering avbröts och dess filer har inte kunnat återställas än.
+The old files are kept in:
+= De gamla filerna finns i:
+Unpacking the update. This can take a few minutes...
+= Packar upp uppdateringen. Det kan ta några minuter...
+Installing the new files...
+= Installerar de nya filerna...
+The update did not contain any files to install.
+= Uppdateringen innehöll inga filer att installera.
+{0} is missing after the update.
+= {0} saknas efter uppdateringen.
+A game file is in use. Close the game and anything else using its folder, then try again.
+= En spelfil används. Stäng spelet och allt annat som använder dess mapp och försök igen.
+There is not enough free disk space for the update. Free some space and try again.
+= Inte tillräckligt med ledigt diskutrymme för uppdateringen. Frigör utrymme och försök igen.
+The update could not be installed ({0}).
+= Uppdateringen kunde inte installeras ({0}).
+No game files were changed.
+= Inga spelfiler ändrades.
+Some files could not be put back. The old versions are kept in:
+= Vissa filer kunde inte återställas. De gamla versionerna finns i:
+Sync folder not reachable: {0} (is your cloud drive running?)
+= Synkmappen kan inte nås: {0} (körs din molnlagring?)
+The game is running. Close it before you download.
+= Spelet körs. Stäng det innan du laddar ner.
+The game is running. Close it before you upload.
+= Spelet körs. Stäng det innan du laddar upp.
+The folder is in use and was not replaced: {0} ({1}). Close programs or Explorer windows that use it and try again.
+= Mappen används och ersattes inte: {0} ({1}). Stäng program eller Utforskarfönster som använder den och försök igen.
+The source changed while copying ({0}). Nothing was replaced, please sync again.
+= Källan ändrades under kopieringen ({0}). Inget ersattes, synka igen.
+No sync folder set. Choose a folder in Google Drive, OneDrive, Dropbox or similar in Options.
+= Ingen synkmapp angiven. Välj en mapp i Google Drive, OneDrive, Dropbox eller liknande under Alternativ.
+Sync folder: {0}
+= Synkmapp: {0}
+The sync folder does not exist yet. It is created on the first upload.
+= Synkmappen finns inte än. Den skapas vid första uppladdningen.
+{0}: in sync (local {1}, cloud {2})
+= {0}: synkad (lokalt {1}, moln {2})
+{0}: cloud empty, upload (local {1}, cloud {2})
+= {0}: molnet tomt, ladda upp (lokalt {1}, moln {2})
+{0}: cloud copy incomplete or still syncing, wait (local {1}, cloud {2})
+= {0}: molnkopian ofullständig eller synkar fortfarande, vänta (lokalt {1}, moln {2})
+{0}: local is newer, upload (local {1}, cloud {2})
+= {0}: lokalt är nyare, ladda upp (lokalt {1}, moln {2})
+{0}: cloud is newer, download (local {1}, cloud {2})
+= {0}: molnet är nyare, ladda ner (lokalt {1}, moln {2})
+{0}: both changed or never synced (local {1}, cloud {2})
+= {0}: båda ändrade eller aldrig synkade (lokalt {1}, moln {2})
+{0}: {1} not found, skipped. Set the game config folder in Options.
+= {0}: {1} hittades inte, hoppades över. Ange spelets konfigurationsmapp under Alternativ.
+Downloading from the cloud ...
+= Laddar ner från molnet ...
+The sync folder does not exist yet, nothing to download.
+= Synkmappen finns inte än, inget att ladda ner.
+{0}: cloud is empty, nothing to download.
+= {0}: molnet är tomt, inget att ladda ner.
+{0}: up to date.
+= {0}: uppdaterad.
+{0}: the cloud copy does not match the last upload yet (incomplete or still syncing). Nothing replaced, try again in a moment.
+= {0}: molnkopian matchar inte den senaste uppladdningen än (ofullständig eller synkar fortfarande). Inget ersattes, försök igen om en stund.
+{0}: local is newer, kept.
+= {0}: lokalt är nyare, behålls.
+Replace your local data with the cloud state?
+= Ersätta dina lokala data med molnets läge?
+A backup is made first.
+= En säkerhetskopia görs först.
+Cancelled, nothing changed.
+= Avbrutet, inget ändrades.
+{0}: local state kept, it will replace the cloud on the next upload.
+= {0}: lokalt läge behålls, det ersätter molnet vid nästa uppladdning.
+{0}: downloaded from the cloud.
+= {0}: nedladdat från molnet.
+Cloud state: {0}
+= Molnets läge: {0}
+Uploading to the cloud ...
+= Laddar upp till molnet ...
+{0}: nothing local, nothing uploaded.
+= {0}: inget lokalt, inget uppladdat.
+{0}: cloud is up to date.
+= {0}: molnet är uppdaterat.
+Replace the cloud state with your local data?
+= Ersätta molnets läge med dina lokala data?
+{0}: cloud kept, your local changes were NOT uploaded. Use "Download" to get the cloud state.
+= {0}: molnet behålls, dina lokala ändringar laddades INTE upp. Använd "Ladda ner" för att hämta molnets läge.
+Cancelled, your local changes were NOT uploaded.
+= Avbrutet, dina lokala ändringar laddades INTE upp.
+{0}: the cloud changed during this sync, NOT uploaded. Sync again to decide.
+= {0}: molnet ändrades under den här synkningen, INTE uppladdat. Synka igen för att avgöra.
+{0}: uploaded.
+= {0}: uppladdat.
+Written to the sync folder. Your cloud app uploads it in the background, wait until it is done before you switch PCs.
+= Skrivet till synkmappen. Din molnapp laddar upp det i bakgrunden; vänta tills den är klar innan du byter dator.
+Backup: {0}
+= Säkerhetskopia: {0}
+Restored {0} after an interrupted sync.
+= {0} återställt efter en avbruten synkning.

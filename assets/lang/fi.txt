@@ -1,0 +1,790 @@
+@name Suomi
+# Each English text is followed by its translation on the line below (starting with "= ").
+# {0}, {1} ... are filled in by the launcher; keep them. \n is a line break.
+
+PLAY
+= PELAA
+INSTALL
+= ASENNA
+PLAYING...
+= PELI KÄYNNISSÄ...
+INSTALLING
+= ASENNETAAN
+UPDATING
+= PÄIVITETÄÄN
+UPDATE
+= PÄIVITÄ
+CHECKING
+= TARKISTETAAN
+CLOUD SAVE
+= PILVITALLENNUS
+ADDONS
+= LISÄOSAT
+OPTIONS
+= ASETUKSET
+CHANGELOG
+= PÄIVITYSTIEDOT
+ABOUT LAUNCHER
+= TIETOJA LAUNCHERISTA
+A game made by Aethus
+= Pelin on tehnyt Aethus
+Version {0}
+= Versio {0}
+Press PLAY to enter Azeroth.
+= Paina PELAA astuaksesi Azerothiin.
+Game client not found.
+= Peliä ei löytynyt.
+Press INSTALL to download it first.
+= Paina ASENNA ladataksesi sen ensin.
+Press INSTALL to download it, or set the game folder in Options.
+= Paina ASENNA ladataksesi sen, tai aseta pelikansio kohdassa Asetukset.
+Your cloud save syncs automatically.
+= Pilvitallennuksesi synkronoituu automaattisesti.
+Time played: {0}   |   Last session: {1}
+= Peliaika: {0}   |   Viimeisin istunto: {1}
+Ready.
+= Valmis.
+Cloud Save
+= Pilvitallennus
+Addons
+= Lisäosat
+Options
+= Asetukset
+Changelog
+= Päivitystiedot
+About Launcher
+= Tietoja launcherista
+Download More
+= Lataa lisää
+All Patch Notes
+= Kaikki päivitystiedot
+Show Launcher
+= Näytä launcher
+Play
+= Pelaa
+Upload Save Now
+= Lähetä tallennus nyt
+Close Button Hides to Tray
+= Sulje-painike piilottaa ilmaisinalueelle
+Quit
+= Lopeta
+Game running
+= Peli käynnissä
+Idle
+= Joutilas
+Game running - {0}
+= Peli käynnissä - {0}
+The launcher is in the tray; the open window stays. Right-click the icon to quit.
+= Launcher on ilmaisinalueella; avoin ikkuna jää. Lopeta napsauttamalla kuvaketta hiiren oikealla.
+Still running in the tray. Right-click the icon to quit.
+= Edelleen käynnissä ilmaisinalueella. Lopeta napsauttamalla kuvaketta hiiren oikealla.
+Cloud sync running
+= Pilvisynkronointi käynnissä
+A cloud sync is still running. If you quit now it is cut short; the next sync repairs any half-finished copy.
+= Pilvisynkronointi on yhä käynnissä. Jos lopetat nyt, se keskeytyy; seuraava synkronointi korjaa keskeneräisen kopion.
+Quit anyway?
+= Lopetetaanko silti?
+Installing
+= Asennetaan
+The game client is still being installed. If you quit now, it is cut short.
+= Peliä asennetaan yhä. Jos lopetat nyt, asennus keskeytyy.
+Updating
+= Päivitetään
+The game is still being updated. If you quit now, the update is cut short. Nothing is lost: a half-finished change is undone the next time the launcher starts.
+= Peliä päivitetään yhä. Jos lopetat nyt, päivitys keskeytyy. Mitään ei menetetä: keskeneräinen muutos perutaan, kun launcher käynnistyy seuraavan kerran.
+The game is still running. If you quit the launcher now, your saves will NOT be uploaded automatically.
+= Peli on yhä käynnissä. Jos lopetat launcherin nyt, tallennuksiasi EI lähetetä automaattisesti.
+Setup saved.
+= Asetukset tallennettu.
+First-time setup
+= Ensimmäinen määritys
+Welcome, Adventurer
+= Tervetuloa, seikkailija
+Step 1 of 2
+= Vaihe 1/2
+Step 2 of 2
+= Vaihe 2/2
+A.  Cloud saving
+= A.  Pilvitallennus
+Keep my progress in the cloud (Google Drive, OneDrive, Dropbox ...)\nand share it between my PCs
+= Säilytä edistymiseni pilvessä (Google Drive, OneDrive, Dropbox ...)\nja jaa se tietokoneideni välillä
+Sync folder (inside your cloud drive)
+= Synkronointikansio (pilvitallennustilassasi)
+Cloud saving stays off. You can turn it on later in Cloud Save.
+= Pilvitallennus pysyy pois päältä. Voit ottaa sen käyttöön myöhemmin kohdassa Pilvitallennus.
+B.  Where are your files?
+= B.  Missä tiedostosi ovat?
+Folders found at their usual place are used as they are. Choose the ones that are missing.
+= Tavallisesta paikasta löytyneitä kansioita käytetään sellaisenaan. Valitse puuttuvat.
+AddOns
+= AddOns
+Game saves
+= Pelitallennukset
+Addon settings
+= Lisäosien asetukset
+Select your AddOns folder
+= Valitse AddOns-kansiosi
+Select the folder that holds your save game (normally %APPDATA%\wenilla-rogue)
+= Valitse kansio, jossa tallennuksesi on (yleensä %APPDATA%\wenilla-rogue)
+Select your addon settings folder (the 'saved' folder in benilla-config)
+= Valitse lisäosien asetuskansio (benilla-configin kansio 'saved')
+FINISH
+= VALMIS
+LATER
+= MYÖHEMMIN
+✓ found
+= ✓ löytyi
+✓ chosen
+= ✓ valittu
+not chosen yet
+= ei vielä valittu
+not found - please choose it
+= ei löytynyt - valitse se
+(not set)
+= (ei asetettu)
+CHANGE
+= VAIHDA
+CHOOSE
+= VALITSE
+Choose a sync folder for cloud saving, or untick\n"Keep my progress in the cloud".
+= Valitse synkronointikansio pilvitallennukselle tai poista valinta kohdasta\n"Säilytä edistymiseni pilvessä".
+Setup
+= Määritys
+These folders were not found:
+= Näitä kansioita ei löytynyt:
+Finish anyway? You can change them later in Options.
+= Viimeistelläänkö silti? Voit muuttaa niitä myöhemmin kohdassa Asetukset.
+Your settings are saved.\n\nWould you like to go to the Addons section now\nto download some addons, or to enable or disable the ones you have?
+= Asetuksesi on tallennettu.\n\nHaluatko siirtyä nyt Lisäosat-osioon\nlataamaan lisäosia tai ottamaan omiasi käyttöön ja pois?
+DOWNLOAD ADDONS
+= LATAA LISÄOSIA
+ENABLE / DISABLE ADDONS
+= LISÄOSAT PÄÄLLE / POIS
+NO THANKS
+= EI KIITOS
+Install the game
+= Asenna peli
+Install Azeroth Survivors
+= Asenna Azeroth Survivors
+Step 1
+= Vaihe 1
+Download the game in your web browser.
+= Lataa peli verkkoselaimellasi.
+OPEN DOWNLOAD
+= AVAA LATAUS
+Download opened in your browser.
+= Lataus avattiin selaimessa.
+Step 2
+= Vaihe 2
+When the download has finished, come back here.
+= Kun lataus on valmis, palaa tänne.
+IT'S IN MY DOWNLOADS
+= SE ON LATAUKSISSANI
+The launcher finds the file (in its own folder or Downloads), unpacks the game here and deletes the download.
+= Launcher löytää tiedoston (omasta kansiostaan tai Latauksista), purkaa pelin tänne ja poistaa latauksen.
+CANCEL
+= PERUUTA
+Which progress do you want to keep?
+= Minkä edistymisen haluat säilyttää?
+Both sides changed
+= Molemmat puolet ovat muuttuneet
+This PC and the cloud both changed since the last sync:
+= Tämä tietokone ja pilvi ovat molemmat muuttuneet edellisen synkronoinnin jälkeen:
+• {0}:  this PC {1}   |   cloud {2}
+= • {0}:  tämä tietokone {1}   |   pilvi {2}
+One complete state wins, the other is backed up first.
+= Yksi täydellinen tila voittaa, toisesta otetaan ensin varmuuskopio.
+First time on this PC? Choose USE CLOUD.
+= Ensimmäinen kerta tällä tietokoneella? Valitse KÄYTÄ PILVEÄ.
+USE CLOUD replaces your local data. KEEP LOCAL keeps it and uploads it later.
+= KÄYTÄ PILVEÄ korvaa paikalliset tietosi. PIDÄ PAIKALLINEN säilyttää ne ja lähettää ne myöhemmin.
+KEEP LOCAL replaces the cloud. USE CLOUD leaves the cloud and skips your upload.
+= PIDÄ PAIKALLINEN korvaa pilven. KÄYTÄ PILVEÄ jättää pilven ennalleen ja ohittaa lähetyksesi.
+USE CLOUD
+= KÄYTÄ PILVEÄ
+KEEP LOCAL
+= PIDÄ PAIKALLINEN
+Save game
+= Pelitallennus
+Game update
+= Pelin päivitys
+Update available
+= Päivitys saatavilla
+New version:
+= Uusi versio:
+Your version:
+= Sinun versiosi:
+not recorded yet
+= ei vielä tallennettu
+Download size:
+= Latauksen koko:
+What is new
+= Uutta
+Your addons, settings and saves are left alone. If anything goes wrong, the old game files are put back.
+= Lisäosiisi, asetuksiisi ja tallennuksiisi ei kosketa. Jos jokin menee pieleen, vanhat pelitiedostot palautetaan.
+UPDATE NOW
+= PÄIVITÄ NYT
+NOT NOW
+= EI NYT
+SKIP THIS VERSION
+= OHITA TÄMÄ VERSIO
+I ALREADY HAVE THIS VERSION
+= MINULLA ON JO TÄMÄ VERSIO
+The update is being installed. Please wait until it has finished.
+= Päivitystä asennetaan. Odota, kunnes se on valmis.
+Downloading the update...
+= Ladataan päivitystä...
+Download the update
+= Lataa päivitys
+Step 1: download the update in your web browser.
+= Vaihe 1: lataa päivitys verkkoselaimellasi.
+OPEN DOWNLOAD AGAIN
+= AVAA LATAUS UUDELLEEN
+Step 2: when the download has finished, come back here.
+= Vaihe 2: kun lataus on valmis, palaa tänne.
+The launcher finds the file (in its own folder or Downloads), installs it and deletes it.
+= Launcher löytää tiedoston (omasta kansiostaan tai Latauksista), asentaa sen ja poistaa sen.
+Checking the file...
+= Tarkistetaan tiedostoa...
+CANCELLING...
+= PERUUTETAAN...
+Updating to {0}
+= Päivitetään versioon {0}
+Please keep the launcher open until this has finished.
+= Pidä launcher auki, kunnes tämä on valmis.
+{0} of {1}  ({#2}%)
+= {0} / {1}  ({2} %)
+{0} downloaded
+= {0} ladattu
+Update installed
+= Päivitys asennettu
+Update failed
+= Päivitys epäonnistui
+CLOSE
+= SULJE
+TRY AGAIN
+= YRITÄ UUDELLEEN
+Version {0} is installed.
+= Versio {0} on asennettu.
+{#0} files updated.
+= {0} tiedostoa päivitetty.
+{#0} file updated.
+= {0} tiedosto päivitetty.
+{#0} files updated, {#1} removed.
+= {0} tiedostoa päivitetty, {1} poistettu.
+{#0} file updated, {#1} removed.
+= {0} tiedosto päivitetty, {1} poistettu.
+Install
+= Asenna
+Install the game from this file?
+= Asennetaanko peli tästä tiedostosta?
+{0}  ({#1} MB)
+= {0}  ({1} Mt)
+in {0}
+= kohteeseen {0}
+Choose the game file you downloaded (.rar)
+= Valitse lataamasi pelitiedosto (.rar)
+Game archive (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|All files (*.*)|*.*
+= Pelin arkisto (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|Kaikki tiedostot (*.*)|*.*
+Install cancelled.
+= Asennus peruutettu.
+Unpacking the game client...
+= Puretaan peliä...
+Install failed.
+= Asennus epäonnistui.
+Install complete - press PLAY.
+= Asennus valmis - paina PELAA.
+Install complete. Press PLAY to enter Azeroth.
+= Asennus valmis. Paina PELAA astuaksesi Azerothiin.
+The last game update was cut off before it finished. Your game files were put back exactly as they were.
+= Edellinen pelin päivitys keskeytyi ennen valmistumista. Pelitiedostosi palautettiin täsmälleen ennalleen.
+You can run the update again with the UPDATE button.
+= Voit ajaa päivityksen uudelleen PÄIVITÄ-painikkeella.
+The last game update was cut off, and some game files could not be put back automatically.
+= Edellinen pelin päivitys keskeytyi, eikä joitakin pelitiedostoja voitu palauttaa automaattisesti.
+The old versions are kept in the folder "{0}" inside the game folder. Copy them back over the game files, or reinstall the game.
+= Vanhat versiot ovat pelikansion kansiossa "{0}". Kopioi ne takaisin pelitiedostojen päälle tai asenna peli uudelleen.
+Checking for updates...
+= Etsitään päivityksiä...
+The update check failed ({0}).
+= Päivitysten tarkistus epäonnistui ({0}).
+Could not check for launcher updates.
+= Launcherin päivityksiä ei voitu tarkistaa.
+Launcher update
+= Launcherin päivitys
+Launcher {0} is available.
+= Launcher {0} on saatavilla.
+The launcher is up to date ({0}).
+= Launcher on ajan tasalla ({0}).
+You have the newest launcher ({0}).
+= Sinulla on uusin launcher ({0}).
+A new launcher ({0}) is available. Open the launcher and press UPDATE.
+= Uusi launcher ({0}) on saatavilla. Avaa launcher ja paina PÄIVITÄ.
+Finish what is running first (the game, an install or a cloud sync), then press UPDATE again.
+= Viimeistele ensin käynnissä oleva tehtävä (peli, asennus tai pilvisynkronointi) ja paina sitten PÄIVITÄ uudelleen.
+A new version of the launcher is on GitHub: {0}.
+= Launcherin uusi versio on GitHubissa: {0}.
+Update now? The new launcher ({0}) is downloaded, checked and started in place of this one. Your settings stay as they are.
+= Päivitetäänkö nyt? Uusi launcher ({0}) ladataan, tarkistetaan ja käynnistetään tämän tilalle. Asetuksesi säilyvät ennallaan.
+Update now? The new launcher is downloaded, checked and started in place of this one. Your settings stay as they are.
+= Päivitetäänkö nyt? Uusi launcher ladataan, tarkistetaan ja käynnistetään tämän tilalle. Asetuksesi säilyvät ennallaan.
+Launcher update postponed. Press UPDATE when you want it.
+= Launcherin päivitystä lykätty. Paina PÄIVITÄ, kun haluat.
+Downloading the new launcher...
+= Ladataan uutta launcheria...
+Downloading the new launcher... {0}
+= Ladataan uutta launcheria... {0}
+Launcher update failed.
+= Launcherin päivitys epäonnistui.
+Update checking is not switched on in this launcher yet (it has no update address).
+= Päivitysten tarkistus ei ole vielä käytössä tässä launcherissa (sillä ei ole päivitysosoitetta).
+The game is not installed yet. Press INSTALL first.
+= Peliä ei ole vielä asennettu. Paina ensin ASENNA.
+Could not check for updates.
+= Päivityksiä ei voitu tarkistaa.
+You have the newest version ({0}).
+= Sinulla on uusin versio ({0}).
+Update {0} is available.
+= Päivitys {0} on saatavilla.
+A game update ({0}) is available.
+= Pelin päivitys ({0}) on saatavilla.
+Version {0} skipped. The UPDATE button still offers it.
+= Versio {0} ohitettu. PÄIVITÄ-painike tarjoaa sitä yhä.
+Noted: you have version {0}.
+= Merkitty: sinulla on versio {0}.
+Install the update from this file?
+= Asennetaanko päivitys tästä tiedostosta?
+Choose the update file you downloaded
+= Valitse lataamasi päivitystiedosto
+Update archive (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|All files (*.*)|*.*
+= Päivitysarkisto (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|Kaikki tiedostot (*.*)|*.*
+Close the game first, then try again.
+= Sulje peli ensin ja yritä sitten uudelleen.
+Checking the download...
+= Tarkistetaan latausta...
+The downloaded file does not match its checksum, so nothing was installed. Please try again later.
+= Ladattu tiedosto ei vastaa tarkistussummaansa, joten mitään ei asennettu. Yritä myöhemmin uudelleen.
+That file is not this update (its checksum does not match), so nothing was installed. Download it again from the update page.
+= Tiedosto ei ole tämä päivitys (tarkistussumma ei täsmää), joten mitään ei asennettu. Lataa se uudelleen päivityssivulta.
+The update failed ({0}).
+= Päivitys epäonnistui ({0}).
+Updated to {0} - press PLAY.
+= Päivitetty versioon {0} - paina PELAA.
+Game updated to {0}. Press PLAY to enter Azeroth.
+= Peli päivitetty versioon {0}. Paina PELAA astuaksesi Azerothiin.
+Update cancelled.
+= Päivitys peruutettu.
+Update failed.
+= Päivitys epäonnistui.
+Another task is still running - wait for it to finish.
+= Toinen tehtävä on yhä käynnissä - odota, että se valmistuu.
+Choose a sync folder inside your cloud drive first (Cloud Save or Options).
+= Valitse ensin synkronointikansio pilvitallennustilastasi (Pilvitallennus tai Asetukset).
+Cloud sync failed.
+= Pilvisynkronointi epäonnistui.
+Status checked at {0}
+= Tila tarkistettu klo {0}
+Downloaded from the cloud at {0}
+= Ladattu pilvestä klo {0}
+Saves uploaded at {0}
+= Tallennukset lähetetty klo {0}
+Not everything was synced - see the Cloud Save log.
+= Kaikkea ei synkronoitu - katso Pilvitallennuksen loki.
+The game is being updated. Please wait until that has finished.
+= Peliä päivitetään. Odota, kunnes se on valmis.
+The cloud save could NOT be loaded, so the game was not launched.
+= Pilvitallennusta EI voitu ladata, joten peliä ei käynnistetty.
+See the log in Cloud Save. If your cloud drive is still syncing, wait for it to finish and press PLAY again.
+= Katso loki kohdassa Pilvitallennus. Jos pilvitallennustilasi synkronoi vielä, odota sen valmistumista ja paina PELAA uudelleen.
+Cloud sync failed - game not launched
+= Pilvisynkronointi epäonnistui - peliä ei käynnistetty
+Cloud save was not loaded - game not launched.
+= Pilvitallennusta ei ladattu - peliä ei käynnistetty.
+Cloud sync successfully downloaded
+= Pilvisynkronointi ladattu onnistuneesti
+No sync folder set - launched without cloud sync.
+= Synkronointikansiota ei ole asetettu - käynnistetty ilman pilvisynkronointia.
+Starting Azeroth Survivors ...
+= Käynnistetään Azeroth Survivors ...
+Game running.
+= Peli käynnissä.
+Could not start the game: {0}
+= Peliä ei voitu käynnistää: {0}
+Game closed.
+= Peli suljettu.
+Game has closed.
+= Peli on sulkeutunut.
+Cloud sync successfully uploaded
+= Pilvisynkronointi lähetetty onnistuneesti
+Some of your progress was NOT uploaded. See the log in Cloud Save.
+= Osaa edistymisestäsi EI lähetetty. Katso loki kohdassa Pilvitallennus.
+Cloud sync NOT completed - see the Cloud Save log
+= Pilvisynkronointi EI valmistunut - katso Pilvitallennuksen loki
+Cloud upload failed: {0}
+= Lähetys pilveen epäonnistui: {0}
+Cloud sync failed - see the Cloud Save log
+= Pilvisynkronointi epäonnistui - katso Pilvitallennuksen loki
+Launcher
+= Launcher
+Select a folder inside your cloud drive (Google Drive, OneDrive, Dropbox ...)
+= Valitse kansio pilvitallennustilastasi (Google Drive, OneDrive, Dropbox ...)
+That is the top level of your cloud drive.
+= Tämä on pilvitallennustilasi ylin taso.
+Create and use a subfolder named AzerothSync inside it?
+= Luodaanko sen sisään alikansio nimeltä AzerothSync ja käytetäänkö sitä?
+Sync folder
+= Synkronointikansio
+Play time reset.
+= Peliaika nollattu.
+Play time
+= Peliaika
+No games played with this launcher yet.
+= Tällä launcherilla ei ole vielä pelattu.
+Total: {0} over {#1} sessions
+= Yhteensä: {0}, {1} istuntoa
+Total: {0} over {#1} session
+= Yhteensä: {0}, {1} istunto
+Total: {0} over {#1} sessions on {#2} PCs
+= Yhteensä: {0}, {1} istuntoa {2} tietokoneella
+Last session: {0} ({1})
+= Viimeisin istunto: {0} ({1})
+Longest session: {0}
+= Pisin istunto: {0}
+Shared with your other PCs through the cloud sync folder.
+= Jaettu muiden tietokoneidesi kanssa synkronointikansion kautta.
+Counted on this PC (the sync folder is not reachable right now).
+= Laskettu tällä tietokoneella (synkronointikansioon ei saada yhteyttä juuri nyt).
+Counted on this PC. Turn on cloud saving to share it between your PCs.
+= Laskettu tällä tietokoneella. Ota pilvitallennus käyttöön jakaaksesi sen tietokoneidesi välillä.
+RESET PLAY TIME
+= NOLLAA PELIAIKA
+Set the play time back to zero on all your PCs?
+= Nollataanko peliaika kaikilla tietokoneillasi?
+Set the play time back to zero?
+= Nollataanko peliaika?
+Game folder
+= Pelikansio
+Save game folder
+= Tallennusten kansio
+Game config folder (AddOns, addon settings)
+= Pelin asetuskansio (AddOns, lisäosien asetukset)
+Cloud saving
+= Pilvitallennus
+Close button hides the launcher to the tray
+= Sulje-painike piilottaa launcherin ilmaisinalueelle
+Minimize the launcher when the game starts
+= Pienennä launcher, kun peli käynnistyy
+RUN SETUP AGAIN
+= AJA MÄÄRITYS UUDELLEEN
+Select your Azeroth Survivors game folder
+= Valitse Azeroth Survivors -pelikansiosi
+Game folder set: {0}
+= Pelikansio asetettu: {0}
+Select the game's benilla-config folder (contains AddOns and saved)
+= Valitse pelin benilla-config-kansio (sisältää AddOns ja saved)
+Language
+= Kieli
+ALL PATCH NOTES ›
+= KAIKKI PÄIVITYSTIEDOT ›
+‹ LATEST
+= ‹ UUSIN
+‹ ALL PATCH NOTES
+= ‹ KAIKKI PÄIVITYSTIEDOT
+‹ PREVIOUS
+= ‹ EDELLINEN
+NEXT ›
+= SEURAAVA ›
+{#0} of {#1}
+= {0} / {1}
+PAGE
+= SIVU
+No patch notes yet.
+= Ei vielä päivitystietoja.
+{0} (current)
+= {0} (nykyinen)
+Vibe coded by Slimjim\nCloud save code established by Keijin
+= Fiiliksellä koodannut Slimjim\nPilvitallennuksen koodi: Keijin
+DOWNLOAD MORE ›
+= LATAA LISÄÄ ›
+ALL
+= KAIKKI
+UI OVERHAUL
+= KÄYTTÖLIITTYMÄ
+GAMEPLAY
+= PELATTAVUUS
+COSMETIC
+= ULKOASU
+No addons in this filter yet.
+= Tässä suodattimessa ei ole vielä lisäosia.
+No downloadable addons listed yet.
+= Ladattavia lisäosia ei ole vielä.
+UNINSTALL
+= POISTA
+Addons can't be changed while the game runs or a sync is running.
+= Lisäosia ei voi muuttaa, kun peli tai synkronointi on käynnissä.
+Another addon is still downloading.
+= Toinen lisäosa latautuu vielä.
+Installing {0}...
+= Asennetaan {0}...
+{0} installed.
+= {0} asennettu.
+{0} failed.
+= {0} epäonnistui.
+Could not install {0}:
+= Kohdetta {0} ei voitu asentaa:
+{0} is not installed.
+= {0} ei ole asennettu.
+Remove {0} from your AddOns folder?
+= Poistetaanko {0} AddOns-kansiostasi?
+Folders: {0}
+= Kansiot: {0}
+This deletes everything it added, including the settings it saved.
+= Tämä poistaa kaiken, mitä se lisäsi, myös sen tallentamat asetukset.
+Uninstall
+= Poista
+Could not uninstall {0}:
+= Kohdetta {0} ei voitu poistaa:
+{0} uninstalled.
+= {0} poistettu.
+{0} was not installed.
+= {0} ei ollut asennettu.
+No AddOns folder found.\nSet the game config folder in Options\n(the benilla-config folder).
+= AddOns-kansiota ei löytynyt.\nAseta pelin asetuskansio kohdassa Asetukset\n(benilla-config-kansio).
+REFRESH
+= PÄIVITÄ LISTA
+FOLDER
+= KANSIO
+TOGGLE ALL
+= VAIHDA KAIKKI
+SAVE
+= TALLENNA
+LOAD
+= AVAA
+empty
+= tyhjä
+{#0} on, {#1} off
+= {0} päällä, {1} pois
+saved {0}
+= tallennettu {0}
+Profile {0}
+= Profiili {0}
+No addons installed.
+= Lisäosia ei ole asennettu.
+{#0} of {#1} enabled
+= {0} / {1} käytössä
+Could not enable {0}:
+= Kohdetta {0} ei voitu ottaa käyttöön:
+Could not disable {0}:
+= Kohdetta {0} ei voitu poistaa käytöstä:
+{0} enabled.
+= {0} otettu käyttöön.
+{0} disabled.
+= {0} poistettu käytöstä.
+All addons enabled.
+= Kaikki lisäosat otettu käyttöön.
+All addons disabled.
+= Kaikki lisäosat poistettu käytöstä.
+Some addons could not be changed:
+= Joitakin lisäosia ei voitu muuttaa:
+Replace the saved Profile {0} with the current toggles?
+= Korvataanko tallennettu Profiili {0} nykyisillä valinnoilla?
+Profile {0} saved.
+= Profiili {0} tallennettu.
+Profile {0} is empty - press SAVE to store the current toggles.
+= Profiili {0} on tyhjä - paina TALLENNA säilyttääksesi nykyiset valinnat.
+Profile {0} loaded: {#1} changed.
+= Profiili {0} ladattu: {1} muutettu.
+Profile {0} loaded: {#1} changed. {#2} newer addon(s) left as they were.
+= Profiili {0} ladattu: {1} muutettu. {2} uudempaa lisäosaa jätettiin ennalleen.
+Cloud saving is turned off.\nYour progress stays on this PC only.
+= Pilvitallennus on pois päältä.\nEdistymisesi on vain tällä tietokoneella.
+TURN ON CLOUD SAVING
+= OTA PILVITALLENNUS KÄYTTÖÖN
+PLAY downloads the newest state, starts the game and uploads your progress after you close it. One complete state wins; the overwritten one is backed up as a ZIP first.
+= PELAA lataa uusimman tilan, käynnistää pelin ja lähettää edistymisesi, kun suljet sen. Yksi täydellinen tila voittaa; korvattavasta otetaan ensin ZIP-varmuuskopio.
+(not set - choose a folder inside Google Drive, OneDrive or Dropbox)
+= (ei asetettu - valitse kansio Google Drivesta, OneDrivesta tai Dropboxista)
+Not synced yet.
+= Ei vielä synkronoitu.
+Cloud: {0}
+= Pilvi: {0}
+last uploaded by {0} on {1}
+= viimeksi lähettänyt {0} {1}
+no upload info
+= ei lähetystietoja
+CHECK STATUS
+= TARKISTA TILA
+DOWNLOAD
+= LATAA
+UPLOAD
+= LÄHETÄ
+The launcher is already running.
+= Launcher on jo käynnissä.
+Look for its icon in the system tray (near the clock).
+= Etsi sen kuvake ilmaisinalueelta (kellon vierestä).
+Press INSTALL to download the game first.
+= Paina ASENNA ladataksesi pelin ensin.
+No launcher release has been published on GitHub yet.
+= GitHubissa ei ole vielä julkaistu launcherin versiota.
+GitHub's answer could not be read.
+= GitHubin vastausta ei voitu lukea.
+The latest release on GitHub ({0}) has no launcher exe attached.
+= GitHubin uusimmassa julkaisussa ({0}) ei ole launcherin exe-tiedostoa liitteenä.
+The latest release on GitHub has no checksum for its exe, so it is not installed.
+= GitHubin uusimmassa julkaisussa ei ole exe-tiedoston tarkistussummaa, joten sitä ei asenneta.
+The downloaded launcher does not match its checksum, so it was not installed. Please try again later.
+= Ladattu launcher ei vastaa tarkistussummaansa, joten sitä ei asennettu. Yritä myöhemmin uudelleen.
+The launcher could not replace itself in this folder ({0}).
+= Launcher ei voinut korvata itseään tässä kansiossa ({0}).
+Download the new version from GitHub instead:
+= Lataa uusi versio sen sijaan GitHubista:
+The new launcher could not be put in place ({0}). Nothing was changed.
+= Uutta launcheria ei voitu siirtää paikalleen ({0}). Mitään ei muutettu.
+The {0} address must start with https://
+= Palvelimen ({0}) osoitteen on alettava https://
+The {0} server redirected to an address that is not secure (https).
+= Palvelin ({0}) uudelleenohjasi osoitteeseen, joka ei ole suojattu (https).
+The {0} server sent a broken redirect.
+= Palvelin ({0}) lähetti virheellisen uudelleenohjauksen.
+The {0} server answered with error {#1}.
+= Palvelin ({0}) vastasi virheellä {1}.
+The {0} server's security certificate was not accepted. It needs a normal, trusted https certificate.
+= Palvelimen ({0}) suojausvarmennetta ei hyväksytty. Se tarvitsee tavallisen, luotetun https-varmenteen.
+The {0} server did not answer in time. Check your internet connection and try again.
+= Palvelin ({0}) ei vastannut ajoissa. Tarkista internetyhteytesi ja yritä uudelleen.
+Could not reach the {0} server. Check your internet connection and try again.
+= Palvelimeen ({0}) ei saatu yhteyttä. Tarkista internetyhteytesi ja yritä uudelleen.
+The {0} server redirected too many times.
+= Palvelin ({0}) uudelleenohjasi liian monta kertaa.
+update
+= päivitykset
+addon
+= lisäosat
+The download link gave a web page instead of the file. It must be a direct download link.
+= Latauslinkki antoi verkkosivun tiedoston sijaan. Sen on oltava suora latauslinkki.
+The download was interrupted. Check your connection and try again.
+= Lataus keskeytyi. Tarkista yhteytesi ja yritä uudelleen.
+The download was cut off before it finished. Please try again.
+= Lataus katkesi ennen valmistumista. Yritä uudelleen.
+The .zip contains an unsafe path; nothing was installed.
+= .zip sisältää vaarallisen polun; mitään ei asennettu.
+The file is damaged or incomplete.
+= Tiedosto on vahingoittunut tai keskeneräinen.
+The file is a .{0} archive, and no program to unpack it was found.
+= Tiedosto on .{0}-arkisto, eikä sen purkamiseen löytynyt ohjelmaa.
+Install the free 7-Zip (7-zip.org) or WinRAR and try again.
+= Asenna ilmainen 7-Zip (7-zip.org) tai WinRAR ja yritä uudelleen.
+The archive could not be unpacked.
+= Arkistoa ei voitu purkaa.
+That file is not a .rar, .zip or .7z archive.
+= Tiedosto ei ole .rar-, .zip- tai .7z-arkisto.
+The archive was unpacked, but {0} was not inside it.
+= Arkisto purettiin, mutta {0} ei ollut sen sisällä.
+The install finished, but {0} is not in {1}.
+= Asennus valmistui, mutta {0} ei ole kohteessa {1}.
+The link did not give a .zip file. It must be a direct download link (share pages such as LimeWire do not work).
+= Linkki ei antanut .zip-tiedostoa. Sen on oltava suora latauslinkki (jakosivut kuten LimeWire eivät toimi).
+There is not enough free disk space.
+= Levytilaa ei ole tarpeeksi.
+Not enough free disk space for the update: about {0} is needed on the drive with the game, {1} is free.
+= Levytilaa ei ole tarpeeksi päivitykselle: pelin asemalla tarvitaan noin {0}, vapaana on {1}.
+The update file is not a .rar, .zip or .7z archive.
+= Päivitystiedosto ei ole .rar-, .zip- tai .7z-arkisto.
+An earlier update was cut off and its files could not be put back yet.
+= Aiempi päivitys keskeytyi, eikä sen tiedostoja ole vielä voitu palauttaa.
+The old files are kept in:
+= Vanhat tiedostot ovat täällä:
+Unpacking the update. This can take a few minutes...
+= Puretaan päivitystä. Tämä voi kestää muutaman minuutin...
+Installing the new files...
+= Asennetaan uusia tiedostoja...
+The update did not contain any files to install.
+= Päivitys ei sisältänyt asennettavia tiedostoja.
+{0} is missing after the update.
+= {0} puuttuu päivityksen jälkeen.
+A game file is in use. Close the game and anything else using its folder, then try again.
+= Pelitiedosto on käytössä. Sulje peli ja kaikki muu, mikä käyttää sen kansiota, ja yritä uudelleen.
+There is not enough free disk space for the update. Free some space and try again.
+= Levytilaa ei ole tarpeeksi päivitykselle. Vapauta tilaa ja yritä uudelleen.
+The update could not be installed ({0}).
+= Päivitystä ei voitu asentaa ({0}).
+No game files were changed.
+= Pelitiedostoja ei muutettu.
+Some files could not be put back. The old versions are kept in:
+= Joitakin tiedostoja ei voitu palauttaa. Vanhat versiot ovat täällä:
+Sync folder not reachable: {0} (is your cloud drive running?)
+= Synkronointikansioon ei saada yhteyttä: {0} (onko pilvitallennustilasi käynnissä?)
+The game is running. Close it before you download.
+= Peli on käynnissä. Sulje se ennen lataamista.
+The game is running. Close it before you upload.
+= Peli on käynnissä. Sulje se ennen lähettämistä.
+The folder is in use and was not replaced: {0} ({1}). Close programs or Explorer windows that use it and try again.
+= Kansio on käytössä, eikä sitä korvattu: {0} ({1}). Sulje sitä käyttävät ohjelmat tai Resurssienhallinnan ikkunat ja yritä uudelleen.
+The source changed while copying ({0}). Nothing was replaced, please sync again.
+= Lähde muuttui kopioinnin aikana ({0}). Mitään ei korvattu, synkronoi uudelleen.
+No sync folder set. Choose a folder in Google Drive, OneDrive, Dropbox or similar in Options.
+= Synkronointikansiota ei ole asetettu. Valitse kohdassa Asetukset kansio Google Drivesta, OneDrivesta, Dropboxista tai vastaavasta.
+Sync folder: {0}
+= Synkronointikansio: {0}
+The sync folder does not exist yet. It is created on the first upload.
+= Synkronointikansiota ei ole vielä olemassa. Se luodaan ensimmäisessä lähetyksessä.
+{0}: in sync (local {1}, cloud {2})
+= {0}: synkronoitu (paikallinen {1}, pilvi {2})
+{0}: cloud empty, upload (local {1}, cloud {2})
+= {0}: pilvi tyhjä, lähetä (paikallinen {1}, pilvi {2})
+{0}: cloud copy incomplete or still syncing, wait (local {1}, cloud {2})
+= {0}: pilvikopio keskeneräinen tai synkronoituu yhä, odota (paikallinen {1}, pilvi {2})
+{0}: local is newer, upload (local {1}, cloud {2})
+= {0}: paikallinen on uudempi, lähetä (paikallinen {1}, pilvi {2})
+{0}: cloud is newer, download (local {1}, cloud {2})
+= {0}: pilvi on uudempi, lataa (paikallinen {1}, pilvi {2})
+{0}: both changed or never synced (local {1}, cloud {2})
+= {0}: molemmat muuttuneet tai ei koskaan synkronoitu (paikallinen {1}, pilvi {2})
+{0}: {1} not found, skipped. Set the game config folder in Options.
+= {0}: {1} ei löytynyt, ohitettu. Aseta pelin asetuskansio kohdassa Asetukset.
+Downloading from the cloud ...
+= Ladataan pilvestä ...
+The sync folder does not exist yet, nothing to download.
+= Synkronointikansiota ei ole vielä olemassa, ei mitään ladattavaa.
+{0}: cloud is empty, nothing to download.
+= {0}: pilvi on tyhjä, ei mitään ladattavaa.
+{0}: up to date.
+= {0}: ajan tasalla.
+{0}: the cloud copy does not match the last upload yet (incomplete or still syncing). Nothing replaced, try again in a moment.
+= {0}: pilvikopio ei vielä vastaa viimeisintä lähetystä (keskeneräinen tai synkronoituu yhä). Mitään ei korvattu, yritä hetken päästä uudelleen.
+{0}: local is newer, kept.
+= {0}: paikallinen on uudempi, säilytetty.
+Replace your local data with the cloud state?
+= Korvataanko paikalliset tietosi pilven tilalla?
+A backup is made first.
+= Ensin otetaan varmuuskopio.
+Cancelled, nothing changed.
+= Peruutettu, mitään ei muutettu.
+{0}: local state kept, it will replace the cloud on the next upload.
+= {0}: paikallinen tila säilytetty, se korvaa pilven seuraavassa lähetyksessä.
+{0}: downloaded from the cloud.
+= {0}: ladattu pilvestä.
+Cloud state: {0}
+= Pilven tila: {0}
+Uploading to the cloud ...
+= Lähetetään pilveen ...
+{0}: nothing local, nothing uploaded.
+= {0}: ei mitään paikallisesti, mitään ei lähetetty.
+{0}: cloud is up to date.
+= {0}: pilvi on ajan tasalla.
+Replace the cloud state with your local data?
+= Korvataanko pilven tila paikallisilla tiedoillasi?
+{0}: cloud kept, your local changes were NOT uploaded. Use "Download" to get the cloud state.
+= {0}: pilvi säilytetty, paikallisia muutoksiasi EI lähetetty. Hae pilven tila valitsemalla "Lataa".
+Cancelled, your local changes were NOT uploaded.
+= Peruutettu, paikallisia muutoksiasi EI lähetetty.
+{0}: the cloud changed during this sync, NOT uploaded. Sync again to decide.
+= {0}: pilvi muuttui tämän synkronoinnin aikana, EI lähetetty. Synkronoi uudelleen päättääksesi.
+{0}: uploaded.
+= {0}: lähetetty.
+Written to the sync folder. Your cloud app uploads it in the background, wait until it is done before you switch PCs.
+= Kirjoitettu synkronointikansioon. Pilvisovelluksesi lähettää sen taustalla; odota sen valmistumista ennen kuin vaihdat tietokonetta.
+Backup: {0}
+= Varmuuskopio: {0}
+Restored {0} after an interrupted sync.
+= {0} palautettu keskeytyneen synkronoinnin jälkeen.

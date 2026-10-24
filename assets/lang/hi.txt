@@ -1,0 +1,791 @@
+@name हिन्दी
+@font Nirmala UI
+# Each English text is followed by its translation on the line below (starting with "= ").
+# {0}, {1} ... are filled in by the launcher; keep them. \n is a line break.
+
+PLAY
+= खेलें
+INSTALL
+= इंस्टॉल करें
+PLAYING...
+= खेल रहे हैं...
+INSTALLING
+= इंस्टॉल हो रहा है
+UPDATING
+= अपडेट हो रहा है
+UPDATE
+= अपडेट
+CHECKING
+= जाँच हो रही है
+CLOUD SAVE
+= क्लाउड सेव
+ADDONS
+= ऐडऑन
+OPTIONS
+= विकल्प
+CHANGELOG
+= पैच नोट्स
+ABOUT LAUNCHER
+= लॉन्चर के बारे में
+A game made by Aethus
+= Aethus का बनाया गेम
+Version {0}
+= संस्करण {0}
+Press PLAY to enter Azeroth.
+= Azeroth में जाने के लिए खेलें दबाएँ।
+Game client not found.
+= गेम नहीं मिला।
+Press INSTALL to download it first.
+= पहले इसे डाउनलोड करने के लिए इंस्टॉल करें दबाएँ।
+Press INSTALL to download it, or set the game folder in Options.
+= इसे डाउनलोड करने के लिए इंस्टॉल करें दबाएँ, या विकल्प में गेम फ़ोल्डर सेट करें।
+Your cloud save syncs automatically.
+= आपका क्लाउड सेव अपने-आप सिंक होता है।
+Time played: {0}   |   Last session: {1}
+= खेलने का समय: {0}   |   पिछला सत्र: {1}
+Ready.
+= तैयार।
+Cloud Save
+= क्लाउड सेव
+Addons
+= ऐडऑन
+Options
+= विकल्प
+Changelog
+= पैच नोट्स
+About Launcher
+= लॉन्चर के बारे में
+Download More
+= और डाउनलोड करें
+All Patch Notes
+= सभी पैच नोट्स
+Show Launcher
+= लॉन्चर दिखाएँ
+Play
+= खेलें
+Upload Save Now
+= सेव अभी अपलोड करें
+Close Button Hides to Tray
+= बंद करें बटन ट्रे में छिपाता है
+Quit
+= बाहर निकलें
+Game running
+= गेम चल रहा है
+Idle
+= निष्क्रिय
+Game running - {0}
+= गेम चल रहा है - {0}
+The launcher is in the tray; the open window stays. Right-click the icon to quit.
+= लॉन्चर सिस्टम ट्रे में है; खुली विंडो बनी रहती है। बाहर निकलने के लिए आइकन पर राइट-क्लिक करें।
+Still running in the tray. Right-click the icon to quit.
+= अब भी सिस्टम ट्रे में चल रहा है। बाहर निकलने के लिए आइकन पर राइट-क्लिक करें।
+Cloud sync running
+= क्लाउड सिंक चल रहा है
+A cloud sync is still running. If you quit now it is cut short; the next sync repairs any half-finished copy.
+= एक क्लाउड सिंक अभी चल रहा है। अभी बाहर निकलने पर यह बीच में रुक जाएगा; अगला सिंक अधूरी कॉपी को ठीक कर देगा।
+Quit anyway?
+= फिर भी बाहर निकलें?
+Installing
+= इंस्टॉल हो रहा है
+The game client is still being installed. If you quit now, it is cut short.
+= गेम अभी इंस्टॉल हो रहा है। अभी बाहर निकलने पर इंस्टॉल बीच में रुक जाएगा।
+Updating
+= अपडेट हो रहा है
+The game is still being updated. If you quit now, the update is cut short. Nothing is lost: a half-finished change is undone the next time the launcher starts.
+= गेम अभी अपडेट हो रहा है। अभी बाहर निकलने पर अपडेट बीच में रुक जाएगा। कुछ नहीं खोएगा: अधूरा बदलाव अगली बार लॉन्चर शुरू होने पर वापस ले लिया जाएगा।
+The game is still running. If you quit the launcher now, your saves will NOT be uploaded automatically.
+= गेम अभी चल रहा है। अगर आप अभी लॉन्चर बंद करते हैं, तो आपके सेव अपने-आप अपलोड नहीं होंगे।
+Setup saved.
+= सेटअप सहेजा गया।
+First-time setup
+= पहली बार सेटअप
+Welcome, Adventurer
+= स्वागत है, साहसी
+Step 1 of 2
+= चरण 1 / 2
+Step 2 of 2
+= चरण 2 / 2
+A.  Cloud saving
+= A.  क्लाउड सेव
+Keep my progress in the cloud (Google Drive, OneDrive, Dropbox ...)\nand share it between my PCs
+= मेरी प्रगति क्लाउड में रखें (Google Drive, OneDrive, Dropbox ...)\nऔर मेरे PC के बीच साझा करें
+Sync folder (inside your cloud drive)
+= सिंक फ़ोल्डर (आपकी क्लाउड ड्राइव के अंदर)
+Cloud saving stays off. You can turn it on later in Cloud Save.
+= क्लाउड सेव बंद रहेगा। आप इसे बाद में क्लाउड सेव में चालू कर सकते हैं।
+B.  Where are your files?
+= B.  आपकी फ़ाइलें कहाँ हैं?
+Folders found at their usual place are used as they are. Choose the ones that are missing.
+= सामान्य जगह पर मिले फ़ोल्डर वैसे ही इस्तेमाल होते हैं। जो नहीं मिले, उन्हें चुनें।
+AddOns
+= AddOns
+Game saves
+= गेम सेव
+Addon settings
+= ऐडऑन सेटिंग्स
+Select your AddOns folder
+= अपना AddOns फ़ोल्डर चुनें
+Select the folder that holds your save game (normally %APPDATA%\wenilla-rogue)
+= वह फ़ोल्डर चुनें जिसमें आपका सेव है (आम तौर पर %APPDATA%\wenilla-rogue)
+Select your addon settings folder (the 'saved' folder in benilla-config)
+= ऐडऑन सेटिंग्स फ़ोल्डर चुनें (benilla-config में 'saved' फ़ोल्डर)
+FINISH
+= पूरा करें
+LATER
+= बाद में
+✓ found
+= ✓ मिला
+✓ chosen
+= ✓ चुना गया
+not chosen yet
+= अभी नहीं चुना
+not found - please choose it
+= नहीं मिला - कृपया चुनें
+(not set)
+= (सेट नहीं)
+CHANGE
+= बदलें
+CHOOSE
+= चुनें
+Choose a sync folder for cloud saving, or untick\n"Keep my progress in the cloud".
+= क्लाउड सेव के लिए सिंक फ़ोल्डर चुनें, या\n"मेरी प्रगति क्लाउड में रखें" से टिक हटाएँ।
+Setup
+= सेटअप
+These folders were not found:
+= ये फ़ोल्डर नहीं मिले:
+Finish anyway? You can change them later in Options.
+= फिर भी पूरा करें? आप इन्हें बाद में विकल्प में बदल सकते हैं।
+Your settings are saved.\n\nWould you like to go to the Addons section now\nto download some addons, or to enable or disable the ones you have?
+= आपकी सेटिंग्स सहेज दी गई हैं।\n\nक्या आप अभी ऐडऑन सेक्शन में जाकर\nऐडऑन डाउनलोड करना या अपने ऐडऑन चालू-बंद करना चाहेंगे?
+DOWNLOAD ADDONS
+= ऐडऑन डाउनलोड करें
+ENABLE / DISABLE ADDONS
+= ऐडऑन चालू / बंद
+NO THANKS
+= नहीं, धन्यवाद
+Install the game
+= गेम इंस्टॉल करें
+Install Azeroth Survivors
+= Azeroth Survivors इंस्टॉल करें
+Step 1
+= चरण 1
+Download the game in your web browser.
+= अपने वेब ब्राउज़र में गेम डाउनलोड करें।
+OPEN DOWNLOAD
+= डाउनलोड खोलें
+Download opened in your browser.
+= डाउनलोड आपके ब्राउज़र में खुल गया।
+Step 2
+= चरण 2
+When the download has finished, come back here.
+= डाउनलोड पूरा होने पर यहाँ वापस आएँ।
+IT'S IN MY DOWNLOADS
+= यह मेरे डाउनलोड में है
+The launcher finds the file (in its own folder or Downloads), unpacks the game here and deletes the download.
+= लॉन्चर फ़ाइल ढूँढता है (अपने फ़ोल्डर या Downloads में), गेम यहाँ अनपैक करता है और डाउनलोड हटा देता है।
+CANCEL
+= रद्द करें
+Which progress do you want to keep?
+= आप कौन-सी प्रगति रखना चाहते हैं?
+Both sides changed
+= दोनों तरफ़ बदलाव हुए
+This PC and the cloud both changed since the last sync:
+= पिछले सिंक के बाद से यह PC और क्लाउड दोनों बदले हैं:
+• {0}:  this PC {1}   |   cloud {2}
+= • {0}:  यह PC {1}   |   क्लाउड {2}
+One complete state wins, the other is backed up first.
+= एक पूरी स्थिति जीतती है, दूसरी का पहले बैकअप बनता है।
+First time on this PC? Choose USE CLOUD.
+= इस PC पर पहली बार? क्लाउड इस्तेमाल करें चुनें।
+USE CLOUD replaces your local data. KEEP LOCAL keeps it and uploads it later.
+= क्लाउड इस्तेमाल करें आपका लोकल डेटा बदल देता है। लोकल रखें उसे रखता है और बाद में अपलोड करता है।
+KEEP LOCAL replaces the cloud. USE CLOUD leaves the cloud and skips your upload.
+= लोकल रखें क्लाउड को बदल देता है। क्लाउड इस्तेमाल करें क्लाउड को वैसा ही छोड़ता है और आपका अपलोड छोड़ देता है।
+USE CLOUD
+= क्लाउड इस्तेमाल करें
+KEEP LOCAL
+= लोकल रखें
+Save game
+= गेम सेव
+Game update
+= गेम अपडेट
+Update available
+= अपडेट उपलब्ध है
+New version:
+= नया संस्करण:
+Your version:
+= आपका संस्करण:
+not recorded yet
+= अभी दर्ज नहीं
+Download size:
+= डाउनलोड आकार:
+What is new
+= नया क्या है
+Your addons, settings and saves are left alone. If anything goes wrong, the old game files are put back.
+= आपके ऐडऑन, सेटिंग्स और सेव नहीं छुए जाते। कुछ गड़बड़ होने पर पुरानी गेम फ़ाइलें वापस रख दी जाती हैं।
+UPDATE NOW
+= अभी अपडेट करें
+NOT NOW
+= अभी नहीं
+SKIP THIS VERSION
+= यह संस्करण छोड़ें
+I ALREADY HAVE THIS VERSION
+= यह संस्करण मेरे पास है
+The update is being installed. Please wait until it has finished.
+= अपडेट इंस्टॉल हो रहा है। कृपया पूरा होने तक रुकें।
+Downloading the update...
+= अपडेट डाउनलोड हो रहा है...
+Download the update
+= अपडेट डाउनलोड करें
+Step 1: download the update in your web browser.
+= चरण 1: अपने वेब ब्राउज़र में अपडेट डाउनलोड करें।
+OPEN DOWNLOAD AGAIN
+= डाउनलोड फिर से खोलें
+Step 2: when the download has finished, come back here.
+= चरण 2: डाउनलोड पूरा होने पर यहाँ वापस आएँ।
+The launcher finds the file (in its own folder or Downloads), installs it and deletes it.
+= लॉन्चर फ़ाइल ढूँढता है (अपने फ़ोल्डर या Downloads में), उसे इंस्टॉल करता है और हटा देता है।
+Checking the file...
+= फ़ाइल जाँची जा रही है...
+CANCELLING...
+= रद्द हो रहा है...
+Updating to {0}
+= {0} पर अपडेट हो रहा है
+Please keep the launcher open until this has finished.
+= पूरा होने तक लॉन्चर खुला रखें।
+{0} of {1}  ({#2}%)
+= {1} में से {0}  ({2}%)
+{0} downloaded
+= {0} डाउनलोड हुआ
+Update installed
+= अपडेट इंस्टॉल हुआ
+Update failed
+= अपडेट विफल
+CLOSE
+= बंद करें
+TRY AGAIN
+= फिर से कोशिश करें
+Version {0} is installed.
+= संस्करण {0} इंस्टॉल है।
+{#0} files updated.
+= {0} फ़ाइलें अपडेट हुईं।
+{#0} file updated.
+= {0} फ़ाइल अपडेट हुई।
+{#0} files updated, {#1} removed.
+= {0} फ़ाइलें अपडेट हुईं, {1} हटाई गईं।
+{#0} file updated, {#1} removed.
+= {0} फ़ाइल अपडेट हुई, {1} हटाई गईं।
+Install
+= इंस्टॉल
+Install the game from this file?
+= इस फ़ाइल से गेम इंस्टॉल करें?
+{0}  ({#1} MB)
+= {0}  ({1} MB)
+in {0}
+= {0} में
+Choose the game file you downloaded (.rar)
+= अपनी डाउनलोड की गई गेम फ़ाइल चुनें (.rar)
+Game archive (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|All files (*.*)|*.*
+= गेम आर्काइव (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|सभी फ़ाइलें (*.*)|*.*
+Install cancelled.
+= इंस्टॉल रद्द हुआ।
+Unpacking the game client...
+= गेम अनपैक हो रहा है...
+Install failed.
+= इंस्टॉल विफल।
+Install complete - press PLAY.
+= इंस्टॉल पूरा - खेलें दबाएँ।
+Install complete. Press PLAY to enter Azeroth.
+= इंस्टॉल पूरा। Azeroth में जाने के लिए खेलें दबाएँ।
+The last game update was cut off before it finished. Your game files were put back exactly as they were.
+= पिछला गेम अपडेट पूरा होने से पहले रुक गया। आपकी गेम फ़ाइलें ठीक पहले जैसी वापस रख दी गईं।
+You can run the update again with the UPDATE button.
+= आप अपडेट बटन से अपडेट फिर चला सकते हैं।
+The last game update was cut off, and some game files could not be put back automatically.
+= पिछला गेम अपडेट रुक गया, और कुछ गेम फ़ाइलें अपने-आप वापस नहीं रखी जा सकीं।
+The old versions are kept in the folder "{0}" inside the game folder. Copy them back over the game files, or reinstall the game.
+= पुराने संस्करण गेम फ़ोल्डर के अंदर "{0}" फ़ोल्डर में रखे हैं। उन्हें गेम फ़ाइलों पर वापस कॉपी करें, या गेम दोबारा इंस्टॉल करें।
+Checking for updates...
+= अपडेट जाँचे जा रहे हैं...
+The update check failed ({0}).
+= अपडेट जाँच विफल ({0})।
+Could not check for launcher updates.
+= लॉन्चर अपडेट नहीं जाँचे जा सके।
+Launcher update
+= लॉन्चर अपडेट
+Launcher {0} is available.
+= लॉन्चर {0} उपलब्ध है।
+The launcher is up to date ({0}).
+= लॉन्चर अप-टू-डेट है ({0})।
+You have the newest launcher ({0}).
+= आपके पास सबसे नया लॉन्चर है ({0})।
+A new launcher ({0}) is available. Open the launcher and press UPDATE.
+= नया लॉन्चर ({0}) उपलब्ध है। लॉन्चर खोलें और अपडेट दबाएँ।
+Finish what is running first (the game, an install or a cloud sync), then press UPDATE again.
+= पहले जो चल रहा है उसे पूरा करें (गेम, इंस्टॉल या क्लाउड सिंक), फिर अपडेट दोबारा दबाएँ।
+A new version of the launcher is on GitHub: {0}.
+= लॉन्चर का नया संस्करण GitHub पर है: {0}।
+Update now? The new launcher ({0}) is downloaded, checked and started in place of this one. Your settings stay as they are.
+= अभी अपडेट करें? नया लॉन्चर ({0}) डाउनलोड, जाँचा और इसकी जगह शुरू किया जाएगा। आपकी सेटिंग्स वैसी ही रहेंगी।
+Update now? The new launcher is downloaded, checked and started in place of this one. Your settings stay as they are.
+= अभी अपडेट करें? नया लॉन्चर डाउनलोड, जाँचा और इसकी जगह शुरू किया जाएगा। आपकी सेटिंग्स वैसी ही रहेंगी।
+Launcher update postponed. Press UPDATE when you want it.
+= लॉन्चर अपडेट टाला गया। जब चाहें अपडेट दबाएँ।
+Downloading the new launcher...
+= नया लॉन्चर डाउनलोड हो रहा है...
+Downloading the new launcher... {0}
+= नया लॉन्चर डाउनलोड हो रहा है... {0}
+Launcher update failed.
+= लॉन्चर अपडेट विफल।
+Update checking is not switched on in this launcher yet (it has no update address).
+= इस लॉन्चर में अपडेट जाँच अभी चालू नहीं है (इसका कोई अपडेट पता नहीं है)।
+The game is not installed yet. Press INSTALL first.
+= गेम अभी इंस्टॉल नहीं है। पहले इंस्टॉल करें दबाएँ।
+Could not check for updates.
+= अपडेट नहीं जाँचे जा सके।
+You have the newest version ({0}).
+= आपके पास सबसे नया संस्करण है ({0})।
+Update {0} is available.
+= अपडेट {0} उपलब्ध है।
+A game update ({0}) is available.
+= गेम अपडेट ({0}) उपलब्ध है।
+Version {0} skipped. The UPDATE button still offers it.
+= संस्करण {0} छोड़ा गया। अपडेट बटन अब भी इसे देता है।
+Noted: you have version {0}.
+= दर्ज किया: आपके पास संस्करण {0} है।
+Install the update from this file?
+= इस फ़ाइल से अपडेट इंस्टॉल करें?
+Choose the update file you downloaded
+= अपनी डाउनलोड की गई अपडेट फ़ाइल चुनें
+Update archive (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|All files (*.*)|*.*
+= अपडेट आर्काइव (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|सभी फ़ाइलें (*.*)|*.*
+Close the game first, then try again.
+= पहले गेम बंद करें, फिर दोबारा कोशिश करें।
+Checking the download...
+= डाउनलोड जाँचा जा रहा है...
+The downloaded file does not match its checksum, so nothing was installed. Please try again later.
+= डाउनलोड की गई फ़ाइल अपने चेकसम से मेल नहीं खाती, इसलिए कुछ भी इंस्टॉल नहीं हुआ। कृपया बाद में फिर कोशिश करें।
+That file is not this update (its checksum does not match), so nothing was installed. Download it again from the update page.
+= यह फ़ाइल यह अपडेट नहीं है (चेकसम मेल नहीं खाता), इसलिए कुछ भी इंस्टॉल नहीं हुआ। अपडेट पेज से इसे फिर डाउनलोड करें।
+The update failed ({0}).
+= अपडेट विफल ({0})।
+Updated to {0} - press PLAY.
+= {0} पर अपडेट हुआ - खेलें दबाएँ।
+Game updated to {0}. Press PLAY to enter Azeroth.
+= गेम {0} पर अपडेट हुआ। Azeroth में जाने के लिए खेलें दबाएँ।
+Update cancelled.
+= अपडेट रद्द हुआ।
+Update failed.
+= अपडेट विफल।
+Another task is still running - wait for it to finish.
+= एक और काम अभी चल रहा है - उसके पूरा होने का इंतज़ार करें।
+Choose a sync folder inside your cloud drive first (Cloud Save or Options).
+= पहले अपनी क्लाउड ड्राइव में सिंक फ़ोल्डर चुनें (क्लाउड सेव या विकल्प)।
+Cloud sync failed.
+= क्लाउड सिंक विफल।
+Status checked at {0}
+= स्थिति {0} पर जाँची गई
+Downloaded from the cloud at {0}
+= क्लाउड से {0} पर डाउनलोड हुआ
+Saves uploaded at {0}
+= सेव {0} पर अपलोड हुए
+Not everything was synced - see the Cloud Save log.
+= सब कुछ सिंक नहीं हुआ - क्लाउड सेव लॉग देखें।
+The game is being updated. Please wait until that has finished.
+= गेम अपडेट हो रहा है। कृपया पूरा होने तक रुकें।
+The cloud save could NOT be loaded, so the game was not launched.
+= क्लाउड सेव लोड नहीं हो सका, इसलिए गेम शुरू नहीं हुआ।
+See the log in Cloud Save. If your cloud drive is still syncing, wait for it to finish and press PLAY again.
+= क्लाउड सेव में लॉग देखें। अगर आपकी क्लाउड ड्राइव अभी सिंक कर रही है, तो पूरा होने दें और खेलें फिर दबाएँ।
+Cloud sync failed - game not launched
+= क्लाउड सिंक विफल - गेम शुरू नहीं हुआ
+Cloud save was not loaded - game not launched.
+= क्लाउड सेव लोड नहीं हुआ - गेम शुरू नहीं हुआ।
+Cloud sync successfully downloaded
+= क्लाउड सिंक सफलतापूर्वक डाउनलोड हुआ
+No sync folder set - launched without cloud sync.
+= कोई सिंक फ़ोल्डर सेट नहीं - क्लाउड सिंक के बिना शुरू किया।
+Starting Azeroth Survivors ...
+= Azeroth Survivors शुरू हो रहा है ...
+Game running.
+= गेम चल रहा है।
+Could not start the game: {0}
+= गेम शुरू नहीं हो सका: {0}
+Game closed.
+= गेम बंद हुआ।
+Game has closed.
+= गेम बंद हो गया है।
+Cloud sync successfully uploaded
+= क्लाउड सिंक सफलतापूर्वक अपलोड हुआ
+Some of your progress was NOT uploaded. See the log in Cloud Save.
+= आपकी कुछ प्रगति अपलोड नहीं हुई। क्लाउड सेव में लॉग देखें।
+Cloud sync NOT completed - see the Cloud Save log
+= क्लाउड सिंक पूरा नहीं हुआ - क्लाउड सेव लॉग देखें
+Cloud upload failed: {0}
+= क्लाउड अपलोड विफल: {0}
+Cloud sync failed - see the Cloud Save log
+= क्लाउड सिंक विफल - क्लाउड सेव लॉग देखें
+Launcher
+= लॉन्चर
+Select a folder inside your cloud drive (Google Drive, OneDrive, Dropbox ...)
+= अपनी क्लाउड ड्राइव के अंदर एक फ़ोल्डर चुनें (Google Drive, OneDrive, Dropbox ...)
+That is the top level of your cloud drive.
+= यह आपकी क्लाउड ड्राइव का सबसे ऊपरी स्तर है।
+Create and use a subfolder named AzerothSync inside it?
+= इसके अंदर AzerothSync नाम का सबफ़ोल्डर बनाकर इस्तेमाल करें?
+Sync folder
+= सिंक फ़ोल्डर
+Play time reset.
+= खेलने का समय रीसेट हुआ।
+Play time
+= खेलने का समय
+No games played with this launcher yet.
+= इस लॉन्चर से अभी तक कोई गेम नहीं खेला गया।
+Total: {0} over {#1} sessions
+= कुल: {0}, {1} सत्र
+Total: {0} over {#1} session
+= कुल: {0}, {1} सत्र
+Total: {0} over {#1} sessions on {#2} PCs
+= कुल: {0}, {1} सत्र, {2} PC पर
+Last session: {0} ({1})
+= पिछला सत्र: {0} ({1})
+Longest session: {0}
+= सबसे लंबा सत्र: {0}
+Shared with your other PCs through the cloud sync folder.
+= क्लाउड सिंक फ़ोल्डर के ज़रिए आपके दूसरे PC के साथ साझा।
+Counted on this PC (the sync folder is not reachable right now).
+= इस PC पर गिना गया (सिंक फ़ोल्डर अभी पहुँच में नहीं है)।
+Counted on this PC. Turn on cloud saving to share it between your PCs.
+= इस PC पर गिना गया। इसे अपने PC के बीच साझा करने के लिए क्लाउड सेव चालू करें।
+RESET PLAY TIME
+= खेलने का समय रीसेट करें
+Set the play time back to zero on all your PCs?
+= अपने सभी PC पर खेलने का समय शून्य करें?
+Set the play time back to zero?
+= खेलने का समय शून्य करें?
+Game folder
+= गेम फ़ोल्डर
+Save game folder
+= सेव फ़ोल्डर
+Game config folder (AddOns, addon settings)
+= गेम कॉन्फ़िग फ़ोल्डर (AddOns, ऐडऑन सेटिंग्स)
+Cloud saving
+= क्लाउड सेव
+Close button hides the launcher to the tray
+= बंद करें बटन लॉन्चर को सिस्टम ट्रे में छिपाता है
+Minimize the launcher when the game starts
+= गेम शुरू होने पर लॉन्चर छोटा करें
+RUN SETUP AGAIN
+= सेटअप फिर चलाएँ
+Select your Azeroth Survivors game folder
+= अपना Azeroth Survivors गेम फ़ोल्डर चुनें
+Game folder set: {0}
+= गेम फ़ोल्डर सेट हुआ: {0}
+Select the game's benilla-config folder (contains AddOns and saved)
+= गेम का benilla-config फ़ोल्डर चुनें (इसमें AddOns और saved हैं)
+Language
+= भाषा
+ALL PATCH NOTES ›
+= सभी पैच नोट्स ›
+‹ LATEST
+= ‹ नवीनतम
+‹ ALL PATCH NOTES
+= ‹ सभी पैच नोट्स
+‹ PREVIOUS
+= ‹ पिछला
+NEXT ›
+= अगला ›
+{#0} of {#1}
+= {1} में से {0}
+PAGE
+= पेज
+No patch notes yet.
+= अभी कोई पैच नोट्स नहीं।
+{0} (current)
+= {0} (वर्तमान)
+Vibe coded by Slimjim\nCloud save code established by Keijin
+= Slimjim ने वाइब से कोड किया\nक्लाउड सेव कोड: Keijin
+DOWNLOAD MORE ›
+= और डाउनलोड करें ›
+ALL
+= सभी
+UI OVERHAUL
+= UI बदलाव
+GAMEPLAY
+= गेमप्ले
+COSMETIC
+= कॉस्मेटिक
+No addons in this filter yet.
+= इस फ़िल्टर में अभी कोई ऐडऑन नहीं।
+No downloadable addons listed yet.
+= अभी कोई डाउनलोड योग्य ऐडऑन नहीं।
+UNINSTALL
+= अनइंस्टॉल करें
+Addons can't be changed while the game runs or a sync is running.
+= गेम या सिंक चलते समय ऐडऑन नहीं बदले जा सकते।
+Another addon is still downloading.
+= एक और ऐडऑन अभी डाउनलोड हो रहा है।
+Installing {0}...
+= {0} इंस्टॉल हो रहा है...
+{0} installed.
+= {0} इंस्टॉल हुआ।
+{0} failed.
+= {0} विफल।
+Could not install {0}:
+= {0} इंस्टॉल नहीं हो सका:
+{0} is not installed.
+= {0} इंस्टॉल नहीं है।
+Remove {0} from your AddOns folder?
+= {0} को अपने AddOns फ़ोल्डर से हटाएँ?
+Folders: {0}
+= फ़ोल्डर: {0}
+This deletes everything it added, including the settings it saved.
+= इससे उसका जोड़ा सब कुछ हट जाएगा, उसकी सहेजी सेटिंग्स समेत।
+Uninstall
+= अनइंस्टॉल
+Could not uninstall {0}:
+= {0} अनइंस्टॉल नहीं हो सका:
+{0} uninstalled.
+= {0} अनइंस्टॉल हुआ।
+{0} was not installed.
+= {0} इंस्टॉल नहीं था।
+No AddOns folder found.\nSet the game config folder in Options\n(the benilla-config folder).
+= कोई AddOns फ़ोल्डर नहीं मिला।\nविकल्प में गेम कॉन्फ़िग फ़ोल्डर सेट करें\n(benilla-config फ़ोल्डर)।
+REFRESH
+= रीफ़्रेश
+FOLDER
+= फ़ोल्डर
+TOGGLE ALL
+= सब बदलें
+SAVE
+= सहेजें
+LOAD
+= लोड करें
+empty
+= खाली
+{#0} on, {#1} off
+= {0} चालू, {1} बंद
+saved {0}
+= सहेजा {0}
+Profile {0}
+= प्रोफ़ाइल {0}
+No addons installed.
+= कोई ऐडऑन इंस्टॉल नहीं।
+{#0} of {#1} enabled
+= {1} में से {0} चालू
+Could not enable {0}:
+= {0} चालू नहीं हो सका:
+Could not disable {0}:
+= {0} बंद नहीं हो सका:
+{0} enabled.
+= {0} चालू हुआ।
+{0} disabled.
+= {0} बंद हुआ।
+All addons enabled.
+= सभी ऐडऑन चालू हुए।
+All addons disabled.
+= सभी ऐडऑन बंद हुए।
+Some addons could not be changed:
+= कुछ ऐडऑन नहीं बदले जा सके:
+Replace the saved Profile {0} with the current toggles?
+= सहेजी गई प्रोफ़ाइल {0} को मौजूदा चुनाव से बदलें?
+Profile {0} saved.
+= प्रोफ़ाइल {0} सहेजी गई।
+Profile {0} is empty - press SAVE to store the current toggles.
+= प्रोफ़ाइल {0} खाली है - मौजूदा चुनाव रखने के लिए सहेजें दबाएँ।
+Profile {0} loaded: {#1} changed.
+= प्रोफ़ाइल {0} लोड हुई: {1} बदले।
+Profile {0} loaded: {#1} changed. {#2} newer addon(s) left as they were.
+= प्रोफ़ाइल {0} लोड हुई: {1} बदले। {2} नए ऐडऑन वैसे ही छोड़े गए।
+Cloud saving is turned off.\nYour progress stays on this PC only.
+= क्लाउड सेव बंद है।\nआपकी प्रगति सिर्फ़ इस PC पर रहती है।
+TURN ON CLOUD SAVING
+= क्लाउड सेव चालू करें
+PLAY downloads the newest state, starts the game and uploads your progress after you close it. One complete state wins; the overwritten one is backed up as a ZIP first.
+= खेलें नवीनतम स्थिति डाउनलोड करता है, गेम शुरू करता है और गेम बंद होने के बाद आपकी प्रगति अपलोड करता है। एक पूरी स्थिति जीतती है; जिसे बदला जाता है उसका पहले ZIP बैकअप बनता है।
+(not set - choose a folder inside Google Drive, OneDrive or Dropbox)
+= (सेट नहीं - Google Drive, OneDrive या Dropbox में एक फ़ोल्डर चुनें)
+Not synced yet.
+= अभी सिंक नहीं हुआ।
+Cloud: {0}
+= क्लाउड: {0}
+last uploaded by {0} on {1}
+= आख़िरी अपलोड {0} ने {1} को किया
+no upload info
+= अपलोड की कोई जानकारी नहीं
+CHECK STATUS
+= स्थिति जाँचें
+DOWNLOAD
+= डाउनलोड
+UPLOAD
+= अपलोड
+The launcher is already running.
+= लॉन्चर पहले से चल रहा है।
+Look for its icon in the system tray (near the clock).
+= सिस्टम ट्रे (घड़ी के पास) में इसका आइकन देखें।
+Press INSTALL to download the game first.
+= पहले गेम डाउनलोड करने के लिए इंस्टॉल करें दबाएँ।
+No launcher release has been published on GitHub yet.
+= GitHub पर अभी तक कोई लॉन्चर रिलीज़ प्रकाशित नहीं हुआ।
+GitHub's answer could not be read.
+= GitHub का जवाब पढ़ा नहीं जा सका।
+The latest release on GitHub ({0}) has no launcher exe attached.
+= GitHub पर नवीनतम रिलीज़ ({0}) में लॉन्चर exe जुड़ा नहीं है।
+The latest release on GitHub has no checksum for its exe, so it is not installed.
+= GitHub पर नवीनतम रिलीज़ में exe का चेकसम नहीं है, इसलिए इसे इंस्टॉल नहीं किया जाता।
+The downloaded launcher does not match its checksum, so it was not installed. Please try again later.
+= डाउनलोड किया गया लॉन्चर अपने चेकसम से मेल नहीं खाता, इसलिए इंस्टॉल नहीं हुआ। कृपया बाद में फिर कोशिश करें।
+The launcher could not replace itself in this folder ({0}).
+= लॉन्चर इस फ़ोल्डर में खुद को बदल नहीं सका ({0})।
+Download the new version from GitHub instead:
+= इसके बजाय GitHub से नया संस्करण डाउनलोड करें:
+The new launcher could not be put in place ({0}). Nothing was changed.
+= नया लॉन्चर उसकी जगह नहीं रखा जा सका ({0})। कुछ नहीं बदला।
+The {0} address must start with https://
+= {0} सर्वर का पता https:// से शुरू होना चाहिए
+The {0} server redirected to an address that is not secure (https).
+= {0} सर्वर ने ऐसे पते पर भेजा जो सुरक्षित (https) नहीं है।
+The {0} server sent a broken redirect.
+= {0} सर्वर ने ख़राब रीडायरेक्ट भेजा।
+The {0} server answered with error {#1}.
+= {0} सर्वर ने त्रुटि {1} के साथ जवाब दिया।
+The {0} server's security certificate was not accepted. It needs a normal, trusted https certificate.
+= {0} सर्वर का सुरक्षा प्रमाणपत्र स्वीकार नहीं हुआ। इसे एक सामान्य, भरोसेमंद https प्रमाणपत्र चाहिए।
+The {0} server did not answer in time. Check your internet connection and try again.
+= {0} सर्वर ने समय पर जवाब नहीं दिया। अपना इंटरनेट कनेक्शन जाँचें और फिर कोशिश करें।
+Could not reach the {0} server. Check your internet connection and try again.
+= {0} सर्वर तक नहीं पहुँच सके। अपना इंटरनेट कनेक्शन जाँचें और फिर कोशिश करें।
+The {0} server redirected too many times.
+= {0} सर्वर ने बहुत बार रीडायरेक्ट किया।
+update
+= अपडेट
+addon
+= ऐडऑन
+The download link gave a web page instead of the file. It must be a direct download link.
+= डाउनलोड लिंक ने फ़ाइल की जगह वेब पेज दिया। यह सीधा डाउनलोड लिंक होना चाहिए।
+The download was interrupted. Check your connection and try again.
+= डाउनलोड रुक गया। अपना कनेक्शन जाँचें और फिर कोशिश करें।
+The download was cut off before it finished. Please try again.
+= डाउनलोड पूरा होने से पहले कट गया। कृपया फिर कोशिश करें।
+The .zip contains an unsafe path; nothing was installed.
+= .zip में एक असुरक्षित पाथ है; कुछ भी इंस्टॉल नहीं हुआ।
+The file is damaged or incomplete.
+= फ़ाइल ख़राब या अधूरी है।
+The file is a .{0} archive, and no program to unpack it was found.
+= फ़ाइल एक .{0} आर्काइव है, और इसे अनपैक करने वाला कोई प्रोग्राम नहीं मिला।
+Install the free 7-Zip (7-zip.org) or WinRAR and try again.
+= मुफ़्त 7-Zip (7-zip.org) या WinRAR इंस्टॉल करें और फिर कोशिश करें।
+The archive could not be unpacked.
+= आर्काइव अनपैक नहीं हो सका।
+That file is not a .rar, .zip or .7z archive.
+= यह फ़ाइल .rar, .zip या .7z आर्काइव नहीं है।
+The archive was unpacked, but {0} was not inside it.
+= आर्काइव अनपैक हुआ, लेकिन उसमें {0} नहीं था।
+The install finished, but {0} is not in {1}.
+= इंस्टॉल पूरा हुआ, लेकिन {0} {1} में नहीं है।
+The link did not give a .zip file. It must be a direct download link (share pages such as LimeWire do not work).
+= लिंक ने .zip फ़ाइल नहीं दी। यह सीधा डाउनलोड लिंक होना चाहिए (LimeWire जैसे शेयर पेज काम नहीं करते)।
+There is not enough free disk space.
+= डिस्क में पर्याप्त खाली जगह नहीं है।
+Not enough free disk space for the update: about {0} is needed on the drive with the game, {1} is free.
+= अपडेट के लिए पर्याप्त खाली जगह नहीं: गेम वाली ड्राइव पर लगभग {0} चाहिए, {1} खाली है।
+The update file is not a .rar, .zip or .7z archive.
+= अपडेट फ़ाइल .rar, .zip या .7z आर्काइव नहीं है।
+An earlier update was cut off and its files could not be put back yet.
+= पिछला एक अपडेट रुक गया था और उसकी फ़ाइलें अभी वापस नहीं रखी जा सकीं।
+The old files are kept in:
+= पुरानी फ़ाइलें यहाँ रखी हैं:
+Unpacking the update. This can take a few minutes...
+= अपडेट अनपैक हो रहा है। इसमें कुछ मिनट लग सकते हैं...
+Installing the new files...
+= नई फ़ाइलें इंस्टॉल हो रही हैं...
+The update did not contain any files to install.
+= अपडेट में इंस्टॉल करने के लिए कोई फ़ाइल नहीं थी।
+{0} is missing after the update.
+= अपडेट के बाद {0} मौजूद नहीं है।
+A game file is in use. Close the game and anything else using its folder, then try again.
+= एक गेम फ़ाइल इस्तेमाल में है। गेम और उसके फ़ोल्डर को इस्तेमाल करने वाली हर चीज़ बंद करें, फिर कोशिश करें।
+There is not enough free disk space for the update. Free some space and try again.
+= अपडेट के लिए पर्याप्त खाली जगह नहीं। थोड़ी जगह खाली करें और फिर कोशिश करें।
+The update could not be installed ({0}).
+= अपडेट इंस्टॉल नहीं हो सका ({0})।
+No game files were changed.
+= कोई गेम फ़ाइल नहीं बदली गई।
+Some files could not be put back. The old versions are kept in:
+= कुछ फ़ाइलें वापस नहीं रखी जा सकीं। पुराने संस्करण यहाँ रखे हैं:
+Sync folder not reachable: {0} (is your cloud drive running?)
+= सिंक फ़ोल्डर तक नहीं पहुँच सके: {0} (क्या आपकी क्लाउड ड्राइव चल रही है?)
+The game is running. Close it before you download.
+= गेम चल रहा है। डाउनलोड करने से पहले इसे बंद करें।
+The game is running. Close it before you upload.
+= गेम चल रहा है। अपलोड करने से पहले इसे बंद करें।
+The folder is in use and was not replaced: {0} ({1}). Close programs or Explorer windows that use it and try again.
+= फ़ोल्डर इस्तेमाल में है और बदला नहीं गया: {0} ({1})। इसे इस्तेमाल करने वाले प्रोग्राम या Explorer विंडो बंद करें और फिर कोशिश करें।
+The source changed while copying ({0}). Nothing was replaced, please sync again.
+= कॉपी करते समय स्रोत बदल गया ({0})। कुछ नहीं बदला गया, कृपया फिर सिंक करें।
+No sync folder set. Choose a folder in Google Drive, OneDrive, Dropbox or similar in Options.
+= कोई सिंक फ़ोल्डर सेट नहीं। विकल्प में Google Drive, OneDrive, Dropbox या ऐसी ही किसी सेवा में फ़ोल्डर चुनें।
+Sync folder: {0}
+= सिंक फ़ोल्डर: {0}
+The sync folder does not exist yet. It is created on the first upload.
+= सिंक फ़ोल्डर अभी मौजूद नहीं है। यह पहले अपलोड पर बनता है।
+{0}: in sync (local {1}, cloud {2})
+= {0}: सिंक में (लोकल {1}, क्लाउड {2})
+{0}: cloud empty, upload (local {1}, cloud {2})
+= {0}: क्लाउड खाली, अपलोड करें (लोकल {1}, क्लाउड {2})
+{0}: cloud copy incomplete or still syncing, wait (local {1}, cloud {2})
+= {0}: क्लाउड कॉपी अधूरी या अभी सिंक हो रही है, रुकें (लोकल {1}, क्लाउड {2})
+{0}: local is newer, upload (local {1}, cloud {2})
+= {0}: लोकल नया है, अपलोड करें (लोकल {1}, क्लाउड {2})
+{0}: cloud is newer, download (local {1}, cloud {2})
+= {0}: क्लाउड नया है, डाउनलोड करें (लोकल {1}, क्लाउड {2})
+{0}: both changed or never synced (local {1}, cloud {2})
+= {0}: दोनों बदले या कभी सिंक नहीं हुए (लोकल {1}, क्लाउड {2})
+{0}: {1} not found, skipped. Set the game config folder in Options.
+= {0}: {1} नहीं मिला, छोड़ा गया। विकल्प में गेम कॉन्फ़िग फ़ोल्डर सेट करें।
+Downloading from the cloud ...
+= क्लाउड से डाउनलोड हो रहा है ...
+The sync folder does not exist yet, nothing to download.
+= सिंक फ़ोल्डर अभी मौजूद नहीं है, डाउनलोड करने को कुछ नहीं।
+{0}: cloud is empty, nothing to download.
+= {0}: क्लाउड खाली है, डाउनलोड करने को कुछ नहीं।
+{0}: up to date.
+= {0}: अप-टू-डेट।
+{0}: the cloud copy does not match the last upload yet (incomplete or still syncing). Nothing replaced, try again in a moment.
+= {0}: क्लाउड कॉपी अभी आख़िरी अपलोड से मेल नहीं खाती (अधूरी या अभी सिंक हो रही है)। कुछ नहीं बदला, थोड़ी देर में फिर कोशिश करें।
+{0}: local is newer, kept.
+= {0}: लोकल नया है, रखा गया।
+Replace your local data with the cloud state?
+= अपना लोकल डेटा क्लाउड स्थिति से बदलें?
+A backup is made first.
+= पहले बैकअप बनाया जाता है।
+Cancelled, nothing changed.
+= रद्द किया, कुछ नहीं बदला।
+{0}: local state kept, it will replace the cloud on the next upload.
+= {0}: लोकल स्थिति रखी गई, यह अगले अपलोड पर क्लाउड को बदल देगी।
+{0}: downloaded from the cloud.
+= {0}: क्लाउड से डाउनलोड हुआ।
+Cloud state: {0}
+= क्लाउड स्थिति: {0}
+Uploading to the cloud ...
+= क्लाउड पर अपलोड हो रहा है ...
+{0}: nothing local, nothing uploaded.
+= {0}: लोकल में कुछ नहीं, कुछ अपलोड नहीं हुआ।
+{0}: cloud is up to date.
+= {0}: क्लाउड अप-टू-डेट है।
+Replace the cloud state with your local data?
+= क्लाउड स्थिति को अपने लोकल डेटा से बदलें?
+{0}: cloud kept, your local changes were NOT uploaded. Use "Download" to get the cloud state.
+= {0}: क्लाउड रखा गया, आपके लोकल बदलाव अपलोड नहीं हुए। क्लाउड स्थिति पाने के लिए "डाउनलोड" इस्तेमाल करें।
+Cancelled, your local changes were NOT uploaded.
+= रद्द किया, आपके लोकल बदलाव अपलोड नहीं हुए।
+{0}: the cloud changed during this sync, NOT uploaded. Sync again to decide.
+= {0}: इस सिंक के दौरान क्लाउड बदल गया, अपलोड नहीं हुआ। तय करने के लिए फिर सिंक करें।
+{0}: uploaded.
+= {0}: अपलोड हुआ।
+Written to the sync folder. Your cloud app uploads it in the background, wait until it is done before you switch PCs.
+= सिंक फ़ोल्डर में लिखा गया। आपका क्लाउड ऐप इसे बैकग्राउंड में अपलोड करता है; PC बदलने से पहले इसके पूरा होने का इंतज़ार करें।
+Backup: {0}
+= बैकअप: {0}
+Restored {0} after an interrupted sync.
+= रुके हुए सिंक के बाद {0} वापस लाया गया।

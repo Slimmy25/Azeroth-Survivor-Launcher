@@ -1,0 +1,791 @@
+@name 日本語
+@font Yu Gothic UI, Meiryo UI, MS UI Gothic
+# Each English text is followed by its translation on the line below (starting with "= ").
+# {0}, {1} ... are filled in by the launcher; keep them. \n is a line break.
+
+PLAY
+= プレイ
+INSTALL
+= インストール
+PLAYING...
+= プレイ中...
+INSTALLING
+= インストール中
+UPDATING
+= 更新中
+UPDATE
+= アップデート
+CHECKING
+= 確認中
+CLOUD SAVE
+= クラウドセーブ
+ADDONS
+= アドオン
+OPTIONS
+= オプション
+CHANGELOG
+= 更新履歴
+ABOUT LAUNCHER
+= ランチャーについて
+A game made by Aethus
+= Aethus が制作したゲーム
+Version {0}
+= バージョン {0}
+Press PLAY to enter Azeroth.
+= 「プレイ」を押してアゼロスへ。
+Game client not found.
+= ゲームが見つかりません。
+Press INSTALL to download it first.
+= まず「インストール」を押してダウンロードしてください。
+Press INSTALL to download it, or set the game folder in Options.
+= 「インストール」を押してダウンロードするか、オプションでゲームフォルダーを設定してください。
+Your cloud save syncs automatically.
+= クラウドセーブは自動的に同期されます。
+Time played: {0}   |   Last session: {1}
+= プレイ時間: {0}   |   前回のセッション: {1}
+Ready.
+= 準備完了。
+Cloud Save
+= クラウドセーブ
+Addons
+= アドオン
+Options
+= オプション
+Changelog
+= 更新履歴
+About Launcher
+= ランチャーについて
+Download More
+= さらにダウンロード
+All Patch Notes
+= すべてのパッチノート
+Show Launcher
+= ランチャーを表示
+Play
+= プレイ
+Upload Save Now
+= 今すぐセーブをアップロード
+Close Button Hides to Tray
+= 閉じるボタンでトレイに格納
+Quit
+= 終了
+Game running
+= ゲーム実行中
+Idle
+= 待機中
+Game running - {0}
+= ゲーム実行中 - {0}
+The launcher is in the tray; the open window stays. Right-click the icon to quit.
+= ランチャーは通知領域にあります。開いているウィンドウはそのままです。終了するにはアイコンを右クリックしてください。
+Still running in the tray. Right-click the icon to quit.
+= 通知領域で実行中です。終了するにはアイコンを右クリックしてください。
+Cloud sync running
+= クラウド同期中
+A cloud sync is still running. If you quit now it is cut short; the next sync repairs any half-finished copy.
+= クラウド同期がまだ実行中です。今終了すると中断されます。次回の同期で途中のコピーは修復されます。
+Quit anyway?
+= それでも終了しますか？
+Installing
+= インストール中
+The game client is still being installed. If you quit now, it is cut short.
+= ゲームはまだインストール中です。今終了するとインストールが中断されます。
+Updating
+= 更新中
+The game is still being updated. If you quit now, the update is cut short. Nothing is lost: a half-finished change is undone the next time the launcher starts.
+= ゲームはまだ更新中です。今終了すると更新が中断されます。何も失われません。途中の変更は次回ランチャー起動時に元に戻されます。
+The game is still running. If you quit the launcher now, your saves will NOT be uploaded automatically.
+= ゲームはまだ実行中です。今ランチャーを終了すると、セーブは自動でアップロードされません。
+Setup saved.
+= 設定を保存しました。
+First-time setup
+= 初回セットアップ
+Welcome, Adventurer
+= ようこそ、冒険者
+Step 1 of 2
+= ステップ 1/2
+Step 2 of 2
+= ステップ 2/2
+A.  Cloud saving
+= A.  クラウドセーブ
+Keep my progress in the cloud (Google Drive, OneDrive, Dropbox ...)\nand share it between my PCs
+= 進行状況をクラウド（Google Drive、OneDrive、Dropbox ...）に保存し、\n自分の PC 間で共有する
+Sync folder (inside your cloud drive)
+= 同期フォルダー（クラウドドライブ内）
+Cloud saving stays off. You can turn it on later in Cloud Save.
+= クラウドセーブはオフのままです。後で「クラウドセーブ」からオンにできます。
+B.  Where are your files?
+= B.  ファイルはどこにありますか？
+Folders found at their usual place are used as they are. Choose the ones that are missing.
+= 通常の場所で見つかったフォルダーはそのまま使われます。見つからないものを選んでください。
+AddOns
+= AddOns
+Game saves
+= ゲームのセーブ
+Addon settings
+= アドオンの設定
+Select your AddOns folder
+= AddOns フォルダーを選択
+Select the folder that holds your save game (normally %APPDATA%\wenilla-rogue)
+= セーブデータのあるフォルダーを選択（通常は %APPDATA%\wenilla-rogue）
+Select your addon settings folder (the 'saved' folder in benilla-config)
+= アドオン設定フォルダーを選択（benilla-config 内の「saved」フォルダー）
+FINISH
+= 完了
+LATER
+= あとで
+✓ found
+= ✓ 見つかりました
+✓ chosen
+= ✓ 選択済み
+not chosen yet
+= 未選択
+not found - please choose it
+= 見つかりません - 選択してください
+(not set)
+= （未設定）
+CHANGE
+= 変更
+CHOOSE
+= 選択
+Choose a sync folder for cloud saving, or untick\n"Keep my progress in the cloud".
+= クラウドセーブ用の同期フォルダーを選ぶか、\n「進行状況をクラウドに保存」のチェックを外してください。
+Setup
+= セットアップ
+These folders were not found:
+= 次のフォルダーが見つかりませんでした:
+Finish anyway? You can change them later in Options.
+= このまま完了しますか？後でオプションから変更できます。
+Your settings are saved.\n\nWould you like to go to the Addons section now\nto download some addons, or to enable or disable the ones you have?
+= 設定を保存しました。\n\n今すぐアドオン画面に移動して\nアドオンをダウンロードしたり、手持ちのアドオンを有効・無効にしたりしますか？
+DOWNLOAD ADDONS
+= アドオンをダウンロード
+ENABLE / DISABLE ADDONS
+= アドオンの有効 / 無効
+NO THANKS
+= いいえ
+Install the game
+= ゲームのインストール
+Install Azeroth Survivors
+= Azeroth Survivors をインストール
+Step 1
+= ステップ 1
+Download the game in your web browser.
+= ブラウザーでゲームをダウンロードしてください。
+OPEN DOWNLOAD
+= ダウンロードを開く
+Download opened in your browser.
+= ブラウザーでダウンロードを開きました。
+Step 2
+= ステップ 2
+When the download has finished, come back here.
+= ダウンロードが終わったら、ここに戻ってください。
+IT'S IN MY DOWNLOADS
+= ダウンロード済み
+The launcher finds the file (in its own folder or Downloads), unpacks the game here and deletes the download.
+= ランチャーがファイルを（自身のフォルダーかダウンロードから）見つけ、ここにゲームを展開してダウンロードファイルを削除します。
+CANCEL
+= キャンセル
+Which progress do you want to keep?
+= どちらの進行状況を残しますか？
+Both sides changed
+= 両方が変更されています
+This PC and the cloud both changed since the last sync:
+= 前回の同期以降、この PC とクラウドの両方が変更されました:
+• {0}:  this PC {1}   |   cloud {2}
+= • {0}:  この PC {1}   |   クラウド {2}
+One complete state wins, the other is backed up first.
+= 一方の完全な状態が採用され、もう一方は先にバックアップされます。
+First time on this PC? Choose USE CLOUD.
+= この PC で初めてですか？「クラウドを使う」を選んでください。
+USE CLOUD replaces your local data. KEEP LOCAL keeps it and uploads it later.
+= 「クラウドを使う」はローカルデータを置き換えます。「ローカルを残す」はローカルデータを残し、後でアップロードします。
+KEEP LOCAL replaces the cloud. USE CLOUD leaves the cloud and skips your upload.
+= 「ローカルを残す」はクラウドを置き換えます。「クラウドを使う」はクラウドをそのままにし、アップロードをスキップします。
+USE CLOUD
+= クラウドを使う
+KEEP LOCAL
+= ローカルを残す
+Save game
+= セーブデータ
+Game update
+= ゲームのアップデート
+Update available
+= アップデートがあります
+New version:
+= 新しいバージョン:
+Your version:
+= 現在のバージョン:
+not recorded yet
+= 未記録
+Download size:
+= ダウンロードサイズ:
+What is new
+= 新機能
+Your addons, settings and saves are left alone. If anything goes wrong, the old game files are put back.
+= アドオン、設定、セーブには触れません。問題が起きた場合は、古いゲームファイルが元に戻されます。
+UPDATE NOW
+= 今すぐ更新
+NOT NOW
+= 今はしない
+SKIP THIS VERSION
+= このバージョンをスキップ
+I ALREADY HAVE THIS VERSION
+= このバージョンは導入済み
+The update is being installed. Please wait until it has finished.
+= アップデートをインストール中です。完了するまでお待ちください。
+Downloading the update...
+= アップデートをダウンロード中...
+Download the update
+= アップデートのダウンロード
+Step 1: download the update in your web browser.
+= ステップ 1: ブラウザーでアップデートをダウンロードしてください。
+OPEN DOWNLOAD AGAIN
+= ダウンロードを再度開く
+Step 2: when the download has finished, come back here.
+= ステップ 2: ダウンロードが終わったら、ここに戻ってください。
+The launcher finds the file (in its own folder or Downloads), installs it and deletes it.
+= ランチャーがファイルを（自身のフォルダーかダウンロードから）見つけ、インストールして削除します。
+Checking the file...
+= ファイルを確認中...
+CANCELLING...
+= キャンセル中...
+Updating to {0}
+= {0} に更新中
+Please keep the launcher open until this has finished.
+= 完了するまでランチャーを開いたままにしてください。
+{0} of {1}  ({#2}%)
+= {0} / {1}  ({2}%)
+{0} downloaded
+= {0} ダウンロード済み
+Update installed
+= アップデートをインストールしました
+Update failed
+= アップデートに失敗しました
+CLOSE
+= 閉じる
+TRY AGAIN
+= 再試行
+Version {0} is installed.
+= バージョン {0} がインストールされています。
+{#0} files updated.
+= {0} 個のファイルを更新しました。
+{#0} file updated.
+= {0} 個のファイルを更新しました。
+{#0} files updated, {#1} removed.
+= {0} 個のファイルを更新、{1} 個を削除しました。
+{#0} file updated, {#1} removed.
+= {0} 個のファイルを更新、{1} 個を削除しました。
+Install
+= インストール
+Install the game from this file?
+= このファイルからゲームをインストールしますか？
+{0}  ({#1} MB)
+= {0}  ({1} MB)
+in {0}
+= 場所: {0}
+Choose the game file you downloaded (.rar)
+= ダウンロードしたゲームファイルを選択（.rar）
+Game archive (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|All files (*.*)|*.*
+= ゲームアーカイブ (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|すべてのファイル (*.*)|*.*
+Install cancelled.
+= インストールをキャンセルしました。
+Unpacking the game client...
+= ゲームを展開中...
+Install failed.
+= インストールに失敗しました。
+Install complete - press PLAY.
+= インストール完了 - 「プレイ」を押してください。
+Install complete. Press PLAY to enter Azeroth.
+= インストール完了。「プレイ」を押してアゼロスへ。
+The last game update was cut off before it finished. Your game files were put back exactly as they were.
+= 前回のゲームアップデートは完了前に中断されました。ゲームファイルは元の状態にそのまま戻されました。
+You can run the update again with the UPDATE button.
+= 「アップデート」ボタンで再度アップデートを実行できます。
+The last game update was cut off, and some game files could not be put back automatically.
+= 前回のゲームアップデートが中断され、一部のゲームファイルを自動で元に戻せませんでした。
+The old versions are kept in the folder "{0}" inside the game folder. Copy them back over the game files, or reinstall the game.
+= 古いバージョンはゲームフォルダー内の「{0}」フォルダーに保存されています。ゲームファイルに上書きコピーするか、ゲームを再インストールしてください。
+Checking for updates...
+= アップデートを確認中...
+The update check failed ({0}).
+= アップデートの確認に失敗しました（{0}）。
+Could not check for launcher updates.
+= ランチャーのアップデートを確認できませんでした。
+Launcher update
+= ランチャーのアップデート
+Launcher {0} is available.
+= ランチャー {0} が利用可能です。
+The launcher is up to date ({0}).
+= ランチャーは最新です（{0}）。
+You have the newest launcher ({0}).
+= 最新のランチャーを使用しています（{0}）。
+A new launcher ({0}) is available. Open the launcher and press UPDATE.
+= 新しいランチャー（{0}）が利用可能です。ランチャーを開いて「アップデート」を押してください。
+Finish what is running first (the game, an install or a cloud sync), then press UPDATE again.
+= まず実行中の処理（ゲーム、インストール、クラウド同期）を終えてから、もう一度「アップデート」を押してください。
+A new version of the launcher is on GitHub: {0}.
+= GitHub に新しいランチャーがあります: {0}。
+Update now? The new launcher ({0}) is downloaded, checked and started in place of this one. Your settings stay as they are.
+= 今すぐ更新しますか？新しいランチャー（{0}）をダウンロード・確認し、このランチャーの代わりに起動します。設定はそのままです。
+Update now? The new launcher is downloaded, checked and started in place of this one. Your settings stay as they are.
+= 今すぐ更新しますか？新しいランチャーをダウンロード・確認し、このランチャーの代わりに起動します。設定はそのままです。
+Launcher update postponed. Press UPDATE when you want it.
+= ランチャーの更新を延期しました。必要なときに「アップデート」を押してください。
+Downloading the new launcher...
+= 新しいランチャーをダウンロード中...
+Downloading the new launcher... {0}
+= 新しいランチャーをダウンロード中... {0}
+Launcher update failed.
+= ランチャーの更新に失敗しました。
+Update checking is not switched on in this launcher yet (it has no update address).
+= このランチャーではアップデート確認がまだ有効になっていません（アップデート先がありません）。
+The game is not installed yet. Press INSTALL first.
+= ゲームがまだインストールされていません。先に「インストール」を押してください。
+Could not check for updates.
+= アップデートを確認できませんでした。
+You have the newest version ({0}).
+= 最新のバージョンです（{0}）。
+Update {0} is available.
+= アップデート {0} が利用可能です。
+A game update ({0}) is available.
+= ゲームのアップデート（{0}）が利用可能です。
+Version {0} skipped. The UPDATE button still offers it.
+= バージョン {0} をスキップしました。「アップデート」ボタンからは引き続き利用できます。
+Noted: you have version {0}.
+= 記録しました: バージョン {0} を使用中。
+Install the update from this file?
+= このファイルからアップデートをインストールしますか？
+Choose the update file you downloaded
+= ダウンロードしたアップデートファイルを選択
+Update archive (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|All files (*.*)|*.*
+= アップデートアーカイブ (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|すべてのファイル (*.*)|*.*
+Close the game first, then try again.
+= 先にゲームを閉じてから、もう一度お試しください。
+Checking the download...
+= ダウンロードを確認中...
+The downloaded file does not match its checksum, so nothing was installed. Please try again later.
+= ダウンロードしたファイルがチェックサムと一致しないため、何もインストールしませんでした。後でもう一度お試しください。
+That file is not this update (its checksum does not match), so nothing was installed. Download it again from the update page.
+= このファイルはこのアップデートではありません（チェックサム不一致）。何もインストールしませんでした。アップデートページから再度ダウンロードしてください。
+The update failed ({0}).
+= アップデートに失敗しました（{0}）。
+Updated to {0} - press PLAY.
+= {0} に更新しました - 「プレイ」を押してください。
+Game updated to {0}. Press PLAY to enter Azeroth.
+= ゲームを {0} に更新しました。「プレイ」を押してアゼロスへ。
+Update cancelled.
+= アップデートをキャンセルしました。
+Update failed.
+= アップデートに失敗しました。
+Another task is still running - wait for it to finish.
+= 別の処理が実行中です - 終わるまでお待ちください。
+Choose a sync folder inside your cloud drive first (Cloud Save or Options).
+= まずクラウドドライブ内の同期フォルダーを選んでください（クラウドセーブまたはオプション）。
+Cloud sync failed.
+= クラウド同期に失敗しました。
+Status checked at {0}
+= {0} に状態を確認
+Downloaded from the cloud at {0}
+= {0} にクラウドからダウンロード
+Saves uploaded at {0}
+= {0} にセーブをアップロード
+Not everything was synced - see the Cloud Save log.
+= 一部が同期されませんでした - クラウドセーブのログを確認してください。
+The game is being updated. Please wait until that has finished.
+= ゲームを更新中です。完了するまでお待ちください。
+The cloud save could NOT be loaded, so the game was not launched.
+= クラウドセーブを読み込めなかったため、ゲームは起動しませんでした。
+See the log in Cloud Save. If your cloud drive is still syncing, wait for it to finish and press PLAY again.
+= クラウドセーブのログを確認してください。クラウドドライブが同期中なら、完了を待ってからもう一度「プレイ」を押してください。
+Cloud sync failed - game not launched
+= クラウド同期に失敗 - ゲームは起動していません
+Cloud save was not loaded - game not launched.
+= クラウドセーブを読み込めませんでした - ゲームは起動していません。
+Cloud sync successfully downloaded
+= クラウド同期のダウンロードに成功しました
+No sync folder set - launched without cloud sync.
+= 同期フォルダー未設定 - クラウド同期なしで起動しました。
+Starting Azeroth Survivors ...
+= Azeroth Survivors を起動中 ...
+Game running.
+= ゲーム実行中。
+Could not start the game: {0}
+= ゲームを起動できませんでした: {0}
+Game closed.
+= ゲームを終了しました。
+Game has closed.
+= ゲームが終了しました。
+Cloud sync successfully uploaded
+= クラウド同期のアップロードに成功しました
+Some of your progress was NOT uploaded. See the log in Cloud Save.
+= 進行状況の一部がアップロードされていません。クラウドセーブのログを確認してください。
+Cloud sync NOT completed - see the Cloud Save log
+= クラウド同期が完了していません - クラウドセーブのログを確認してください
+Cloud upload failed: {0}
+= クラウドへのアップロードに失敗しました: {0}
+Cloud sync failed - see the Cloud Save log
+= クラウド同期に失敗 - クラウドセーブのログを確認してください
+Launcher
+= ランチャー
+Select a folder inside your cloud drive (Google Drive, OneDrive, Dropbox ...)
+= クラウドドライブ内のフォルダーを選択（Google Drive、OneDrive、Dropbox ...）
+That is the top level of your cloud drive.
+= そこはクラウドドライブの最上位です。
+Create and use a subfolder named AzerothSync inside it?
+= その中に AzerothSync というサブフォルダーを作成して使いますか？
+Sync folder
+= 同期フォルダー
+Play time reset.
+= プレイ時間をリセットしました。
+Play time
+= プレイ時間
+No games played with this launcher yet.
+= このランチャーでのプレイはまだありません。
+Total: {0} over {#1} sessions
+= 合計: {0}（{1} セッション）
+Total: {0} over {#1} session
+= 合計: {0}（{1} セッション）
+Total: {0} over {#1} sessions on {#2} PCs
+= 合計: {0}（{1} セッション、{2} 台の PC）
+Last session: {0} ({1})
+= 前回のセッション: {0}（{1}）
+Longest session: {0}
+= 最長セッション: {0}
+Shared with your other PCs through the cloud sync folder.
+= クラウド同期フォルダーを通じて他の PC と共有されます。
+Counted on this PC (the sync folder is not reachable right now).
+= この PC で集計中（同期フォルダーに今はアクセスできません）。
+Counted on this PC. Turn on cloud saving to share it between your PCs.
+= この PC で集計中。クラウドセーブをオンにすると PC 間で共有できます。
+RESET PLAY TIME
+= プレイ時間をリセット
+Set the play time back to zero on all your PCs?
+= すべての PC でプレイ時間をゼロに戻しますか？
+Set the play time back to zero?
+= プレイ時間をゼロに戻しますか？
+Game folder
+= ゲームフォルダー
+Save game folder
+= セーブフォルダー
+Game config folder (AddOns, addon settings)
+= ゲーム設定フォルダー（AddOns、アドオン設定）
+Cloud saving
+= クラウドセーブ
+Close button hides the launcher to the tray
+= 閉じるボタンでランチャーを通知領域に格納する
+Minimize the launcher when the game starts
+= ゲーム開始時にランチャーを最小化する
+RUN SETUP AGAIN
+= セットアップをやり直す
+Select your Azeroth Survivors game folder
+= Azeroth Survivors のゲームフォルダーを選択
+Game folder set: {0}
+= ゲームフォルダーを設定しました: {0}
+Select the game's benilla-config folder (contains AddOns and saved)
+= ゲームの benilla-config フォルダーを選択（AddOns と saved を含む）
+Language
+= 言語
+ALL PATCH NOTES ›
+= すべてのパッチノート ›
+‹ LATEST
+= ‹ 最新
+‹ ALL PATCH NOTES
+= ‹ すべてのパッチノート
+‹ PREVIOUS
+= ‹ 前へ
+NEXT ›
+= 次へ ›
+{#0} of {#1}
+= {0} / {1}
+PAGE
+= ページ
+No patch notes yet.
+= パッチノートはまだありません。
+{0} (current)
+= {0}（現在）
+Vibe coded by Slimjim\nCloud save code established by Keijin
+= Slimjim がノリでコーディング\nクラウドセーブのコード: Keijin
+DOWNLOAD MORE ›
+= さらにダウンロード ›
+ALL
+= すべて
+UI OVERHAUL
+= UI 刷新
+GAMEPLAY
+= ゲームプレイ
+COSMETIC
+= 見た目
+No addons in this filter yet.
+= このフィルターにはまだアドオンがありません。
+No downloadable addons listed yet.
+= ダウンロードできるアドオンはまだありません。
+UNINSTALL
+= アンインストール
+Addons can't be changed while the game runs or a sync is running.
+= ゲームや同期の実行中はアドオンを変更できません。
+Another addon is still downloading.
+= 別のアドオンをダウンロード中です。
+Installing {0}...
+= {0} をインストール中...
+{0} installed.
+= {0} をインストールしました。
+{0} failed.
+= {0} に失敗しました。
+Could not install {0}:
+= {0} をインストールできませんでした:
+{0} is not installed.
+= {0} はインストールされていません。
+Remove {0} from your AddOns folder?
+= AddOns フォルダーから {0} を削除しますか？
+Folders: {0}
+= フォルダー: {0}
+This deletes everything it added, including the settings it saved.
+= 追加されたものすべてが削除されます（保存された設定も含む）。
+Uninstall
+= アンインストール
+Could not uninstall {0}:
+= {0} をアンインストールできませんでした:
+{0} uninstalled.
+= {0} をアンインストールしました。
+{0} was not installed.
+= {0} はインストールされていませんでした。
+No AddOns folder found.\nSet the game config folder in Options\n(the benilla-config folder).
+= AddOns フォルダーが見つかりません。\nオプションでゲーム設定フォルダーを設定してください\n（benilla-config フォルダー）。
+REFRESH
+= 再読み込み
+FOLDER
+= フォルダー
+TOGGLE ALL
+= すべて切替
+SAVE
+= 保存
+LOAD
+= 読み込み
+empty
+= 空
+{#0} on, {#1} off
+= {0} オン、{1} オフ
+saved {0}
+= 保存日 {0}
+Profile {0}
+= プロファイル {0}
+No addons installed.
+= アドオンはインストールされていません。
+{#0} of {#1} enabled
+= {0} / {1} 有効
+Could not enable {0}:
+= {0} を有効にできませんでした:
+Could not disable {0}:
+= {0} を無効にできませんでした:
+{0} enabled.
+= {0} を有効にしました。
+{0} disabled.
+= {0} を無効にしました。
+All addons enabled.
+= すべてのアドオンを有効にしました。
+All addons disabled.
+= すべてのアドオンを無効にしました。
+Some addons could not be changed:
+= 一部のアドオンを変更できませんでした:
+Replace the saved Profile {0} with the current toggles?
+= 保存済みのプロファイル {0} を現在の設定で置き換えますか？
+Profile {0} saved.
+= プロファイル {0} を保存しました。
+Profile {0} is empty - press SAVE to store the current toggles.
+= プロファイル {0} は空です - 現在の設定を保存するには「保存」を押してください。
+Profile {0} loaded: {#1} changed.
+= プロファイル {0} を読み込みました: {1} 件変更。
+Profile {0} loaded: {#1} changed. {#2} newer addon(s) left as they were.
+= プロファイル {0} を読み込みました: {1} 件変更。新しいアドオン {2} 件はそのままです。
+Cloud saving is turned off.\nYour progress stays on this PC only.
+= クラウドセーブはオフです。\n進行状況はこの PC にのみ保存されます。
+TURN ON CLOUD SAVING
+= クラウドセーブをオンにする
+PLAY downloads the newest state, starts the game and uploads your progress after you close it. One complete state wins; the overwritten one is backed up as a ZIP first.
+= 「プレイ」は最新の状態をダウンロードしてゲームを起動し、終了後に進行状況をアップロードします。一方の完全な状態が採用され、上書きされる方は先に ZIP でバックアップされます。
+(not set - choose a folder inside Google Drive, OneDrive or Dropbox)
+= （未設定 - Google Drive、OneDrive、Dropbox 内のフォルダーを選んでください）
+Not synced yet.
+= まだ同期されていません。
+Cloud: {0}
+= クラウド: {0}
+last uploaded by {0} on {1}
+= 最終アップロード: {0}（{1}）
+no upload info
+= アップロード情報なし
+CHECK STATUS
+= 状態を確認
+DOWNLOAD
+= ダウンロード
+UPLOAD
+= アップロード
+The launcher is already running.
+= ランチャーはすでに実行中です。
+Look for its icon in the system tray (near the clock).
+= 通知領域（時計の近く）でアイコンを探してください。
+Press INSTALL to download the game first.
+= まず「インストール」を押してゲームをダウンロードしてください。
+No launcher release has been published on GitHub yet.
+= GitHub にはまだランチャーのリリースが公開されていません。
+GitHub's answer could not be read.
+= GitHub の応答を読み取れませんでした。
+The latest release on GitHub ({0}) has no launcher exe attached.
+= GitHub の最新リリース（{0}）にはランチャーの exe が添付されていません。
+The latest release on GitHub has no checksum for its exe, so it is not installed.
+= GitHub の最新リリースには exe のチェックサムがないため、インストールしません。
+The downloaded launcher does not match its checksum, so it was not installed. Please try again later.
+= ダウンロードしたランチャーがチェックサムと一致しないため、インストールしませんでした。後でもう一度お試しください。
+The launcher could not replace itself in this folder ({0}).
+= このフォルダーでランチャー自身を置き換えられませんでした（{0}）。
+Download the new version from GitHub instead:
+= 代わりに GitHub から新しいバージョンをダウンロードしてください:
+The new launcher could not be put in place ({0}). Nothing was changed.
+= 新しいランチャーを配置できませんでした（{0}）。何も変更されていません。
+The {0} address must start with https://
+= {0}サーバーのアドレスは https:// で始まる必要があります
+The {0} server redirected to an address that is not secure (https).
+= {0}サーバーが安全でない（https でない）アドレスにリダイレクトしました。
+The {0} server sent a broken redirect.
+= {0}サーバーが不正なリダイレクトを送信しました。
+The {0} server answered with error {#1}.
+= {0}サーバーがエラー {1} を返しました。
+The {0} server's security certificate was not accepted. It needs a normal, trusted https certificate.
+= {0}サーバーのセキュリティ証明書が受け入れられませんでした。通常の信頼できる https 証明書が必要です。
+The {0} server did not answer in time. Check your internet connection and try again.
+= {0}サーバーが時間内に応答しませんでした。インターネット接続を確認して、もう一度お試しください。
+Could not reach the {0} server. Check your internet connection and try again.
+= {0}サーバーに接続できませんでした。インターネット接続を確認して、もう一度お試しください。
+The {0} server redirected too many times.
+= {0}サーバーのリダイレクト回数が多すぎます。
+update
+= アップデート
+addon
+= アドオン
+The download link gave a web page instead of the file. It must be a direct download link.
+= ダウンロードリンクがファイルではなくウェブページを返しました。直接ダウンロードリンクである必要があります。
+The download was interrupted. Check your connection and try again.
+= ダウンロードが中断されました。接続を確認して、もう一度お試しください。
+The download was cut off before it finished. Please try again.
+= ダウンロードが途中で切れました。もう一度お試しください。
+The .zip contains an unsafe path; nothing was installed.
+= .zip に安全でないパスが含まれているため、何もインストールしませんでした。
+The file is damaged or incomplete.
+= ファイルが破損しているか不完全です。
+The file is a .{0} archive, and no program to unpack it was found.
+= このファイルは .{0} アーカイブですが、展開できるプログラムが見つかりませんでした。
+Install the free 7-Zip (7-zip.org) or WinRAR and try again.
+= 無料の 7-Zip（7-zip.org）か WinRAR をインストールして、もう一度お試しください。
+The archive could not be unpacked.
+= アーカイブを展開できませんでした。
+That file is not a .rar, .zip or .7z archive.
+= このファイルは .rar、.zip、.7z のいずれのアーカイブでもありません。
+The archive was unpacked, but {0} was not inside it.
+= アーカイブを展開しましたが、{0} が含まれていませんでした。
+The install finished, but {0} is not in {1}.
+= インストールは完了しましたが、{0} が {1} にありません。
+The link did not give a .zip file. It must be a direct download link (share pages such as LimeWire do not work).
+= リンクから .zip ファイルを取得できませんでした。直接ダウンロードリンクである必要があります（LimeWire などの共有ページは使えません）。
+There is not enough free disk space.
+= ディスクの空き容量が足りません。
+Not enough free disk space for the update: about {0} is needed on the drive with the game, {1} is free.
+= アップデートに必要な空き容量が足りません: ゲームのドライブに約 {0} 必要ですが、空きは {1} です。
+The update file is not a .rar, .zip or .7z archive.
+= アップデートファイルは .rar、.zip、.7z のいずれのアーカイブでもありません。
+An earlier update was cut off and its files could not be put back yet.
+= 以前のアップデートが中断され、そのファイルをまだ元に戻せていません。
+The old files are kept in:
+= 古いファイルの保存先:
+Unpacking the update. This can take a few minutes...
+= アップデートを展開中。数分かかることがあります...
+Installing the new files...
+= 新しいファイルをインストール中...
+The update did not contain any files to install.
+= アップデートにインストールするファイルが含まれていませんでした。
+{0} is missing after the update.
+= アップデート後に {0} がありません。
+A game file is in use. Close the game and anything else using its folder, then try again.
+= ゲームファイルが使用中です。ゲームとそのフォルダーを使っているものをすべて閉じて、もう一度お試しください。
+There is not enough free disk space for the update. Free some space and try again.
+= アップデートに必要な空き容量が足りません。空き容量を確保して、もう一度お試しください。
+The update could not be installed ({0}).
+= アップデートをインストールできませんでした（{0}）。
+No game files were changed.
+= ゲームファイルは変更されていません。
+Some files could not be put back. The old versions are kept in:
+= 一部のファイルを元に戻せませんでした。古いバージョンの保存先:
+Sync folder not reachable: {0} (is your cloud drive running?)
+= 同期フォルダーにアクセスできません: {0}（クラウドドライブは起動していますか？）
+The game is running. Close it before you download.
+= ゲームが実行中です。ダウンロードする前に閉じてください。
+The game is running. Close it before you upload.
+= ゲームが実行中です。アップロードする前に閉じてください。
+The folder is in use and was not replaced: {0} ({1}). Close programs or Explorer windows that use it and try again.
+= フォルダーが使用中のため置き換えられませんでした: {0}（{1}）。使用中のプログラムやエクスプローラーのウィンドウを閉じて、もう一度お試しください。
+The source changed while copying ({0}). Nothing was replaced, please sync again.
+= コピー中に元のデータが変更されました（{0}）。何も置き換えていません。もう一度同期してください。
+No sync folder set. Choose a folder in Google Drive, OneDrive, Dropbox or similar in Options.
+= 同期フォルダーが未設定です。オプションで Google Drive、OneDrive、Dropbox などのフォルダーを選んでください。
+Sync folder: {0}
+= 同期フォルダー: {0}
+The sync folder does not exist yet. It is created on the first upload.
+= 同期フォルダーはまだありません。最初のアップロード時に作成されます。
+{0}: in sync (local {1}, cloud {2})
+= {0}: 同期済み（ローカル {1}、クラウド {2}）
+{0}: cloud empty, upload (local {1}, cloud {2})
+= {0}: クラウドが空、アップロード（ローカル {1}、クラウド {2}）
+{0}: cloud copy incomplete or still syncing, wait (local {1}, cloud {2})
+= {0}: クラウドのコピーが不完全か同期中、待機（ローカル {1}、クラウド {2}）
+{0}: local is newer, upload (local {1}, cloud {2})
+= {0}: ローカルが新しい、アップロード（ローカル {1}、クラウド {2}）
+{0}: cloud is newer, download (local {1}, cloud {2})
+= {0}: クラウドが新しい、ダウンロード（ローカル {1}、クラウド {2}）
+{0}: both changed or never synced (local {1}, cloud {2})
+= {0}: 両方が変更されたか未同期（ローカル {1}、クラウド {2}）
+{0}: {1} not found, skipped. Set the game config folder in Options.
+= {0}: {1} が見つからないためスキップしました。オプションでゲーム設定フォルダーを設定してください。
+Downloading from the cloud ...
+= クラウドからダウンロード中 ...
+The sync folder does not exist yet, nothing to download.
+= 同期フォルダーはまだないため、ダウンロードするものはありません。
+{0}: cloud is empty, nothing to download.
+= {0}: クラウドが空のため、ダウンロードするものはありません。
+{0}: up to date.
+= {0}: 最新です。
+{0}: the cloud copy does not match the last upload yet (incomplete or still syncing). Nothing replaced, try again in a moment.
+= {0}: クラウドのコピーがまだ最後のアップロードと一致しません（不完全か同期中）。何も置き換えていません。少ししてからもう一度お試しください。
+{0}: local is newer, kept.
+= {0}: ローカルが新しいため保持しました。
+Replace your local data with the cloud state?
+= ローカルデータをクラウドの状態で置き換えますか？
+A backup is made first.
+= 先にバックアップを作成します。
+Cancelled, nothing changed.
+= キャンセルしました。何も変更されていません。
+{0}: local state kept, it will replace the cloud on the next upload.
+= {0}: ローカルの状態を保持しました。次回のアップロードでクラウドを置き換えます。
+{0}: downloaded from the cloud.
+= {0}: クラウドからダウンロードしました。
+Cloud state: {0}
+= クラウドの状態: {0}
+Uploading to the cloud ...
+= クラウドへアップロード中 ...
+{0}: nothing local, nothing uploaded.
+= {0}: ローカルにデータがないため、何もアップロードしていません。
+{0}: cloud is up to date.
+= {0}: クラウドは最新です。
+Replace the cloud state with your local data?
+= クラウドの状態をローカルデータで置き換えますか？
+{0}: cloud kept, your local changes were NOT uploaded. Use "Download" to get the cloud state.
+= {0}: クラウドを保持しました。ローカルの変更はアップロードされていません。クラウドの状態を取得するには「ダウンロード」を使ってください。
+Cancelled, your local changes were NOT uploaded.
+= キャンセルしました。ローカルの変更はアップロードされていません。
+{0}: the cloud changed during this sync, NOT uploaded. Sync again to decide.
+= {0}: この同期中にクラウドが変更されたため、アップロードしていません。もう一度同期して判断してください。
+{0}: uploaded.
+= {0}: アップロードしました。
+Written to the sync folder. Your cloud app uploads it in the background, wait until it is done before you switch PCs.
+= 同期フォルダーに書き込みました。クラウドアプリがバックグラウンドでアップロードします。PC を切り替える前に完了を待ってください。
+Backup: {0}
+= バックアップ: {0}
+Restored {0} after an interrupted sync.
+= 中断された同期の後、{0} を復元しました。

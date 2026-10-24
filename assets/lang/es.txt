@@ -1,0 +1,790 @@
+@name Español
+# Each English text is followed by its translation on the line below (starting with "= ").
+# {0}, {1} ... are filled in by the launcher; keep them. \n is a line break.
+
+PLAY
+= JUGAR
+INSTALL
+= INSTALAR
+PLAYING...
+= JUGANDO...
+INSTALLING
+= INSTALANDO
+UPDATING
+= ACTUALIZANDO
+UPDATE
+= ACTUALIZAR
+CHECKING
+= COMPROBANDO
+CLOUD SAVE
+= GUARDADO EN LA NUBE
+ADDONS
+= ADDONS
+OPTIONS
+= OPCIONES
+CHANGELOG
+= NOTAS DE PARCHE
+ABOUT LAUNCHER
+= ACERCA DEL LAUNCHER
+A game made by Aethus
+= Un juego creado por Aethus
+Version {0}
+= Versión {0}
+Press PLAY to enter Azeroth.
+= Pulsa JUGAR para entrar en Azeroth.
+Game client not found.
+= No se encontró el juego.
+Press INSTALL to download it first.
+= Pulsa INSTALAR para descargarlo primero.
+Press INSTALL to download it, or set the game folder in Options.
+= Pulsa INSTALAR para descargarlo, o elige la carpeta del juego en Opciones.
+Your cloud save syncs automatically.
+= Tu guardado en la nube se sincroniza automáticamente.
+Time played: {0}   |   Last session: {1}
+= Tiempo de juego: {0}   |   Última sesión: {1}
+Ready.
+= Listo.
+Cloud Save
+= Guardado en la nube
+Addons
+= Addons
+Options
+= Opciones
+Changelog
+= Notas de parche
+About Launcher
+= Acerca del launcher
+Download More
+= Descargar más
+All Patch Notes
+= Todas las notas de parche
+Show Launcher
+= Mostrar el launcher
+Play
+= Jugar
+Upload Save Now
+= Subir el guardado ahora
+Close Button Hides to Tray
+= El botón Cerrar minimiza a la bandeja
+Quit
+= Salir
+Game running
+= Jugando
+Idle
+= Inactivo
+Game running - {0}
+= Jugando - {0}
+The launcher is in the tray; the open window stays. Right-click the icon to quit.
+= El launcher está en la bandeja del sistema; la ventana abierta se queda. Clic derecho en el icono para salir.
+Still running in the tray. Right-click the icon to quit.
+= Sigue activo en la bandeja del sistema. Clic derecho en el icono para salir.
+Cloud sync running
+= Sincronización en curso
+A cloud sync is still running. If you quit now it is cut short; the next sync repairs any half-finished copy.
+= Todavía hay una sincronización en la nube en curso. Si sales ahora, se interrumpirá; la próxima sincronización repara cualquier copia a medias.
+Quit anyway?
+= ¿Salir de todos modos?
+Installing
+= Instalación en curso
+The game client is still being installed. If you quit now, it is cut short.
+= El juego todavía se está instalando. Si sales ahora, la instalación se interrumpirá.
+Updating
+= Actualización en curso
+The game is still being updated. If you quit now, the update is cut short. Nothing is lost: a half-finished change is undone the next time the launcher starts.
+= El juego todavía se está actualizando. Si sales ahora, la actualización se interrumpirá. No se pierde nada: un cambio a medias se deshace la próxima vez que se inicie el launcher.
+The game is still running. If you quit the launcher now, your saves will NOT be uploaded automatically.
+= El juego sigue abierto. Si sales del launcher ahora, tus partidas NO se subirán automáticamente.
+Setup saved.
+= Configuración guardada.
+First-time setup
+= Primera configuración
+Welcome, Adventurer
+= Bienvenido, aventurero
+Step 1 of 2
+= Paso 1 de 2
+Step 2 of 2
+= Paso 2 de 2
+A.  Cloud saving
+= A.  Guardado en la nube
+Keep my progress in the cloud (Google Drive, OneDrive, Dropbox ...)\nand share it between my PCs
+= Guardar mi progreso en la nube (Google Drive, OneDrive, Dropbox ...)\ny compartirlo entre mis PC
+Sync folder (inside your cloud drive)
+= Carpeta de sincronización (en tu unidad en la nube)
+Cloud saving stays off. You can turn it on later in Cloud Save.
+= El guardado en la nube queda desactivado. Puedes activarlo después en Guardado en la nube.
+B.  Where are your files?
+= B.  ¿Dónde están tus archivos?
+Folders found at their usual place are used as they are. Choose the ones that are missing.
+= Las carpetas encontradas en su lugar habitual se usan tal cual. Elige las que falten.
+AddOns
+= AddOns
+Game saves
+= Partidas guardadas
+Addon settings
+= Ajustes de addons
+Select your AddOns folder
+= Elige tu carpeta AddOns
+Select the folder that holds your save game (normally %APPDATA%\wenilla-rogue)
+= Elige la carpeta que contiene tu partida (normalmente %APPDATA%\wenilla-rogue)
+Select your addon settings folder (the 'saved' folder in benilla-config)
+= Elige tu carpeta de ajustes de addons (la carpeta «saved» dentro de benilla-config)
+FINISH
+= TERMINAR
+LATER
+= MÁS TARDE
+✓ found
+= ✓ encontrada
+✓ chosen
+= ✓ elegida
+not chosen yet
+= aún sin elegir
+not found - please choose it
+= no encontrada - elígela
+(not set)
+= (sin definir)
+CHANGE
+= CAMBIAR
+CHOOSE
+= ELEGIR
+Choose a sync folder for cloud saving, or untick\n"Keep my progress in the cloud".
+= Elige una carpeta de sincronización para el guardado en la nube, o desmarca\n«Guardar mi progreso en la nube».
+Setup
+= Configuración
+These folders were not found:
+= No se encontraron estas carpetas:
+Finish anyway? You can change them later in Options.
+= ¿Terminar de todos modos? Puedes cambiarlas después en Opciones.
+Your settings are saved.\n\nWould you like to go to the Addons section now\nto download some addons, or to enable or disable the ones you have?
+= Tus ajustes están guardados.\n\n¿Quieres ir ahora a la sección Addons\npara descargar addons, o activar o desactivar los que tienes?
+DOWNLOAD ADDONS
+= DESCARGAR ADDONS
+ENABLE / DISABLE ADDONS
+= ACTIVAR / DESACTIVAR
+NO THANKS
+= NO, GRACIAS
+Install the game
+= Instalar el juego
+Install Azeroth Survivors
+= Instalar Azeroth Survivors
+Step 1
+= Paso 1
+Download the game in your web browser.
+= Descarga el juego en tu navegador.
+OPEN DOWNLOAD
+= ABRIR DESCARGA
+Download opened in your browser.
+= Descarga abierta en tu navegador.
+Step 2
+= Paso 2
+When the download has finished, come back here.
+= Cuando termine la descarga, vuelve aquí.
+IT'S IN MY DOWNLOADS
+= ESTÁ EN MIS DESCARGAS
+The launcher finds the file (in its own folder or Downloads), unpacks the game here and deletes the download.
+= El launcher encuentra el archivo (en su carpeta o en Descargas), descomprime el juego aquí y borra la descarga.
+CANCEL
+= CANCELAR
+Which progress do you want to keep?
+= ¿Qué progreso quieres conservar?
+Both sides changed
+= Ambos lados han cambiado
+This PC and the cloud both changed since the last sync:
+= Este PC y la nube han cambiado desde la última sincronización:
+• {0}:  this PC {1}   |   cloud {2}
+= • {0}:  este PC {1}   |   nube {2}
+One complete state wins, the other is backed up first.
+= Un estado completo gana, el otro se respalda antes.
+First time on this PC? Choose USE CLOUD.
+= ¿Primera vez en este PC? Elige USAR LA NUBE.
+USE CLOUD replaces your local data. KEEP LOCAL keeps it and uploads it later.
+= USAR LA NUBE reemplaza tus datos locales. MANTENER LOCAL los conserva y los sube después.
+KEEP LOCAL replaces the cloud. USE CLOUD leaves the cloud and skips your upload.
+= MANTENER LOCAL reemplaza la nube. USAR LA NUBE deja la nube como está y omite tu subida.
+USE CLOUD
+= USAR LA NUBE
+KEEP LOCAL
+= MANTENER LOCAL
+Save game
+= Partida guardada
+Game update
+= Actualización del juego
+Update available
+= Actualización disponible
+New version:
+= Nueva versión:
+Your version:
+= Tu versión:
+not recorded yet
+= aún no registrada
+Download size:
+= Tamaño de la descarga:
+What is new
+= Novedades
+Your addons, settings and saves are left alone. If anything goes wrong, the old game files are put back.
+= Tus addons, ajustes y partidas no se tocan. Si algo falla, se restauran los archivos antiguos del juego.
+UPDATE NOW
+= ACTUALIZAR AHORA
+NOT NOW
+= AHORA NO
+SKIP THIS VERSION
+= OMITIR ESTA VERSIÓN
+I ALREADY HAVE THIS VERSION
+= YA TENGO ESTA VERSIÓN
+The update is being installed. Please wait until it has finished.
+= La actualización se está instalando. Espera a que termine.
+Downloading the update...
+= Descargando la actualización...
+Download the update
+= Descargar la actualización
+Step 1: download the update in your web browser.
+= Paso 1: descarga la actualización en tu navegador.
+OPEN DOWNLOAD AGAIN
+= VOLVER A ABRIR DESCARGA
+Step 2: when the download has finished, come back here.
+= Paso 2: cuando termine la descarga, vuelve aquí.
+The launcher finds the file (in its own folder or Downloads), installs it and deletes it.
+= El launcher encuentra el archivo (en su carpeta o en Descargas), lo instala y lo borra.
+Checking the file...
+= Comprobando el archivo...
+CANCELLING...
+= CANCELANDO...
+Updating to {0}
+= Actualizando a {0}
+Please keep the launcher open until this has finished.
+= Mantén el launcher abierto hasta que termine.
+{0} of {1}  ({#2}%)
+= {0} de {1}  ({2} %)
+{0} downloaded
+= {0} descargados
+Update installed
+= Actualización instalada
+Update failed
+= La actualización falló
+CLOSE
+= CERRAR
+TRY AGAIN
+= REINTENTAR
+Version {0} is installed.
+= La versión {0} está instalada.
+{#0} files updated.
+= {0} archivos actualizados.
+{#0} file updated.
+= {0} archivo actualizado.
+{#0} files updated, {#1} removed.
+= {0} archivos actualizados, {1} eliminados.
+{#0} file updated, {#1} removed.
+= {0} archivo actualizado, {1} eliminados.
+Install
+= Instalar
+Install the game from this file?
+= ¿Instalar el juego desde este archivo?
+{0}  ({#1} MB)
+= {0}  ({1} MB)
+in {0}
+= en {0}
+Choose the game file you downloaded (.rar)
+= Elige el archivo del juego que descargaste (.rar)
+Game archive (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|All files (*.*)|*.*
+= Archivo del juego (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|Todos los archivos (*.*)|*.*
+Install cancelled.
+= Instalación cancelada.
+Unpacking the game client...
+= Descomprimiendo el juego...
+Install failed.
+= La instalación falló.
+Install complete - press PLAY.
+= Instalación completa - pulsa JUGAR.
+Install complete. Press PLAY to enter Azeroth.
+= Instalación completa. Pulsa JUGAR para entrar en Azeroth.
+The last game update was cut off before it finished. Your game files were put back exactly as they were.
+= La última actualización del juego se interrumpió antes de terminar. Tus archivos del juego se han dejado exactamente como estaban.
+You can run the update again with the UPDATE button.
+= Puedes volver a ejecutar la actualización con el botón ACTUALIZAR.
+The last game update was cut off, and some game files could not be put back automatically.
+= La última actualización del juego se interrumpió y algunos archivos no se pudieron restaurar automáticamente.
+The old versions are kept in the folder "{0}" inside the game folder. Copy them back over the game files, or reinstall the game.
+= Las versiones antiguas están en la carpeta «{0}» dentro de la carpeta del juego. Cópialas de nuevo sobre los archivos del juego o reinstala el juego.
+Checking for updates...
+= Buscando actualizaciones...
+The update check failed ({0}).
+= La búsqueda de actualizaciones falló ({0}).
+Could not check for launcher updates.
+= No se pudo buscar actualizaciones del launcher.
+Launcher update
+= Actualización del launcher
+Launcher {0} is available.
+= El launcher {0} está disponible.
+The launcher is up to date ({0}).
+= El launcher está al día ({0}).
+You have the newest launcher ({0}).
+= Tienes el launcher más reciente ({0}).
+A new launcher ({0}) is available. Open the launcher and press UPDATE.
+= Hay un nuevo launcher ({0}) disponible. Abre el launcher y pulsa ACTUALIZAR.
+Finish what is running first (the game, an install or a cloud sync), then press UPDATE again.
+= Termina primero lo que está en curso (el juego, una instalación o una sincronización), luego pulsa ACTUALIZAR otra vez.
+A new version of the launcher is on GitHub: {0}.
+= Hay una nueva versión del launcher en GitHub: {0}.
+Update now? The new launcher ({0}) is downloaded, checked and started in place of this one. Your settings stay as they are.
+= ¿Actualizar ahora? El nuevo launcher ({0}) se descarga, se comprueba y se inicia en lugar de este. Tus ajustes se mantienen.
+Update now? The new launcher is downloaded, checked and started in place of this one. Your settings stay as they are.
+= ¿Actualizar ahora? El nuevo launcher se descarga, se comprueba y se inicia en lugar de este. Tus ajustes se mantienen.
+Launcher update postponed. Press UPDATE when you want it.
+= Actualización del launcher pospuesta. Pulsa ACTUALIZAR cuando quieras.
+Downloading the new launcher...
+= Descargando el nuevo launcher...
+Downloading the new launcher... {0}
+= Descargando el nuevo launcher... {0}
+Launcher update failed.
+= La actualización del launcher falló.
+Update checking is not switched on in this launcher yet (it has no update address).
+= La búsqueda de actualizaciones aún no está activada en este launcher (no tiene dirección de actualización).
+The game is not installed yet. Press INSTALL first.
+= El juego aún no está instalado. Pulsa INSTALAR primero.
+Could not check for updates.
+= No se pudo buscar actualizaciones.
+You have the newest version ({0}).
+= Tienes la versión más reciente ({0}).
+Update {0} is available.
+= La actualización {0} está disponible.
+A game update ({0}) is available.
+= Hay una actualización del juego ({0}) disponible.
+Version {0} skipped. The UPDATE button still offers it.
+= Versión {0} omitida. El botón ACTUALIZAR la sigue ofreciendo.
+Noted: you have version {0}.
+= Anotado: tienes la versión {0}.
+Install the update from this file?
+= ¿Instalar la actualización desde este archivo?
+Choose the update file you downloaded
+= Elige el archivo de actualización descargado
+Update archive (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|All files (*.*)|*.*
+= Archivo de actualización (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|Todos los archivos (*.*)|*.*
+Close the game first, then try again.
+= Cierra el juego primero y vuelve a intentarlo.
+Checking the download...
+= Comprobando la descarga...
+The downloaded file does not match its checksum, so nothing was installed. Please try again later.
+= El archivo descargado no coincide con su suma de comprobación, así que no se instaló nada. Inténtalo más tarde.
+That file is not this update (its checksum does not match), so nothing was installed. Download it again from the update page.
+= Este archivo no es esta actualización (su suma de comprobación no coincide), así que no se instaló nada. Descárgalo de nuevo desde la página de la actualización.
+The update failed ({0}).
+= La actualización falló ({0}).
+Updated to {0} - press PLAY.
+= Actualizado a {0} - pulsa JUGAR.
+Game updated to {0}. Press PLAY to enter Azeroth.
+= Juego actualizado a {0}. Pulsa JUGAR para entrar en Azeroth.
+Update cancelled.
+= Actualización cancelada.
+Update failed.
+= La actualización falló.
+Another task is still running - wait for it to finish.
+= Otra tarea sigue en curso - espera a que termine.
+Choose a sync folder inside your cloud drive first (Cloud Save or Options).
+= Primero elige una carpeta de sincronización en tu unidad en la nube (Guardado en la nube u Opciones).
+Cloud sync failed.
+= La sincronización en la nube falló.
+Status checked at {0}
+= Estado comprobado a las {0}
+Downloaded from the cloud at {0}
+= Descargado de la nube a las {0}
+Saves uploaded at {0}
+= Partidas subidas a las {0}
+Not everything was synced - see the Cloud Save log.
+= No todo se sincronizó - revisa el registro de Guardado en la nube.
+The game is being updated. Please wait until that has finished.
+= El juego se está actualizando. Espera a que termine.
+The cloud save could NOT be loaded, so the game was not launched.
+= El guardado en la nube NO se pudo cargar, así que el juego no se inició.
+See the log in Cloud Save. If your cloud drive is still syncing, wait for it to finish and press PLAY again.
+= Revisa el registro en Guardado en la nube. Si tu unidad en la nube aún está sincronizando, espera a que termine y pulsa JUGAR otra vez.
+Cloud sync failed - game not launched
+= La sincronización falló - juego no iniciado
+Cloud save was not loaded - game not launched.
+= Guardado en la nube no cargado - juego no iniciado.
+Cloud sync successfully downloaded
+= Sincronización descargada con éxito
+No sync folder set - launched without cloud sync.
+= Sin carpeta de sincronización - iniciado sin sincronización en la nube.
+Starting Azeroth Survivors ...
+= Iniciando Azeroth Survivors ...
+Game running.
+= Juego en marcha.
+Could not start the game: {0}
+= No se pudo iniciar el juego: {0}
+Game closed.
+= Juego cerrado.
+Game has closed.
+= El juego se ha cerrado.
+Cloud sync successfully uploaded
+= Sincronización subida con éxito
+Some of your progress was NOT uploaded. See the log in Cloud Save.
+= Parte de tu progreso NO se subió. Revisa el registro en Guardado en la nube.
+Cloud sync NOT completed - see the Cloud Save log
+= Sincronización NO terminada - revisa el registro de Guardado en la nube
+Cloud upload failed: {0}
+= La subida a la nube falló: {0}
+Cloud sync failed - see the Cloud Save log
+= La sincronización falló - revisa el registro de Guardado en la nube
+Launcher
+= Launcher
+Select a folder inside your cloud drive (Google Drive, OneDrive, Dropbox ...)
+= Elige una carpeta en tu unidad en la nube (Google Drive, OneDrive, Dropbox ...)
+That is the top level of your cloud drive.
+= Esta es la raíz de tu unidad en la nube.
+Create and use a subfolder named AzerothSync inside it?
+= ¿Crear y usar una subcarpeta llamada AzerothSync dentro?
+Sync folder
+= Carpeta de sincronización
+Play time reset.
+= Tiempo de juego reiniciado.
+Play time
+= Tiempo de juego
+No games played with this launcher yet.
+= Aún no has jugado con este launcher.
+Total: {0} over {#1} sessions
+= Total: {0} en {1} sesiones
+Total: {0} over {#1} session
+= Total: {0} en {1} sesión
+Total: {0} over {#1} sessions on {#2} PCs
+= Total: {0} en {1} sesiones en {2} PC
+Last session: {0} ({1})
+= Última sesión: {0} ({1})
+Longest session: {0}
+= Sesión más larga: {0}
+Shared with your other PCs through the cloud sync folder.
+= Compartido con tus otros PC a través de la carpeta de sincronización.
+Counted on this PC (the sync folder is not reachable right now).
+= Contado en este PC (la carpeta de sincronización no está accesible ahora).
+Counted on this PC. Turn on cloud saving to share it between your PCs.
+= Contado en este PC. Activa el guardado en la nube para compartirlo entre tus PC.
+RESET PLAY TIME
+= REINICIAR
+Set the play time back to zero on all your PCs?
+= ¿Reiniciar el tiempo de juego en todos tus PC?
+Set the play time back to zero?
+= ¿Reiniciar el tiempo de juego?
+Game folder
+= Carpeta del juego
+Save game folder
+= Carpeta de partidas
+Game config folder (AddOns, addon settings)
+= Carpeta de configuración del juego (AddOns, ajustes de addons)
+Cloud saving
+= Guardado en la nube
+Close button hides the launcher to the tray
+= El botón Cerrar minimiza el launcher a la bandeja del sistema
+Minimize the launcher when the game starts
+= Minimizar el launcher cuando empieza el juego
+RUN SETUP AGAIN
+= REPETIR CONFIGURACIÓN
+Select your Azeroth Survivors game folder
+= Elige tu carpeta del juego Azeroth Survivors
+Game folder set: {0}
+= Carpeta del juego definida: {0}
+Select the game's benilla-config folder (contains AddOns and saved)
+= Elige la carpeta benilla-config del juego (contiene AddOns y saved)
+Language
+= Idioma
+ALL PATCH NOTES ›
+= TODAS LAS NOTAS ›
+‹ LATEST
+= ‹ ÚLTIMA
+‹ ALL PATCH NOTES
+= ‹ TODAS LAS NOTAS
+‹ PREVIOUS
+= ‹ ANTERIOR
+NEXT ›
+= SIGUIENTE ›
+{#0} of {#1}
+= {0} de {1}
+PAGE
+= PÁGINA
+No patch notes yet.
+= Aún no hay notas de parche.
+{0} (current)
+= {0} (actual)
+Vibe coded by Slimjim\nCloud save code established by Keijin
+= Programado a puro vibe por Slimjim\nCódigo del guardado en la nube por Keijin
+DOWNLOAD MORE ›
+= DESCARGAR MÁS ›
+ALL
+= TODOS
+UI OVERHAUL
+= INTERFAZ
+GAMEPLAY
+= JUGABILIDAD
+COSMETIC
+= COSMÉTICO
+No addons in this filter yet.
+= Aún no hay addons en este filtro.
+No downloadable addons listed yet.
+= Aún no hay addons para descargar.
+UNINSTALL
+= DESINSTALAR
+Addons can't be changed while the game runs or a sync is running.
+= Los addons no se pueden cambiar mientras el juego o una sincronización están en curso.
+Another addon is still downloading.
+= Otro addon todavía se está descargando.
+Installing {0}...
+= Instalando {0}...
+{0} installed.
+= {0} instalado.
+{0} failed.
+= {0} falló.
+Could not install {0}:
+= No se pudo instalar {0}:
+{0} is not installed.
+= {0} no está instalado.
+Remove {0} from your AddOns folder?
+= ¿Quitar {0} de tu carpeta AddOns?
+Folders: {0}
+= Carpetas: {0}
+This deletes everything it added, including the settings it saved.
+= Esto borra todo lo que añadió, incluidos los ajustes que guardó.
+Uninstall
+= Desinstalar
+Could not uninstall {0}:
+= No se pudo desinstalar {0}:
+{0} uninstalled.
+= {0} desinstalado.
+{0} was not installed.
+= {0} no estaba instalado.
+No AddOns folder found.\nSet the game config folder in Options\n(the benilla-config folder).
+= No se encontró la carpeta AddOns.\nElige la carpeta de configuración del juego en Opciones\n(la carpeta benilla-config).
+REFRESH
+= ACTUALIZAR LISTA
+FOLDER
+= CARPETA
+TOGGLE ALL
+= ALTERNAR TODO
+SAVE
+= GUARDAR
+LOAD
+= CARGAR
+empty
+= vacío
+{#0} on, {#1} off
+= {0} activados, {1} desactivados
+saved {0}
+= guardado {0}
+Profile {0}
+= Perfil {0}
+No addons installed.
+= No hay addons instalados.
+{#0} of {#1} enabled
+= {0} de {1} activados
+Could not enable {0}:
+= No se pudo activar {0}:
+Could not disable {0}:
+= No se pudo desactivar {0}:
+{0} enabled.
+= {0} activado.
+{0} disabled.
+= {0} desactivado.
+All addons enabled.
+= Todos los addons activados.
+All addons disabled.
+= Todos los addons desactivados.
+Some addons could not be changed:
+= Algunos addons no se pudieron cambiar:
+Replace the saved Profile {0} with the current toggles?
+= ¿Reemplazar el perfil {0} guardado con los ajustes actuales?
+Profile {0} saved.
+= Perfil {0} guardado.
+Profile {0} is empty - press SAVE to store the current toggles.
+= El perfil {0} está vacío - pulsa GUARDAR para conservar los ajustes actuales.
+Profile {0} loaded: {#1} changed.
+= Perfil {0} cargado: {1} cambiados.
+Profile {0} loaded: {#1} changed. {#2} newer addon(s) left as they were.
+= Perfil {0} cargado: {1} cambiados. {2} addon(s) más nuevo(s) sin cambios.
+Cloud saving is turned off.\nYour progress stays on this PC only.
+= El guardado en la nube está desactivado.\nTu progreso se queda solo en este PC.
+TURN ON CLOUD SAVING
+= ACTIVAR GUARDADO EN LA NUBE
+PLAY downloads the newest state, starts the game and uploads your progress after you close it. One complete state wins; the overwritten one is backed up as a ZIP first.
+= JUGAR descarga el estado más reciente, inicia el juego y sube tu progreso al cerrarlo. Un estado completo gana; el que se sobrescribe se respalda antes como ZIP.
+(not set - choose a folder inside Google Drive, OneDrive or Dropbox)
+= (sin definir - elige una carpeta en Google Drive, OneDrive o Dropbox)
+Not synced yet.
+= Aún no sincronizado.
+Cloud: {0}
+= Nube: {0}
+last uploaded by {0} on {1}
+= última subida por {0} el {1}
+no upload info
+= sin información de subida
+CHECK STATUS
+= COMPROBAR ESTADO
+DOWNLOAD
+= DESCARGAR
+UPLOAD
+= SUBIR
+The launcher is already running.
+= El launcher ya está abierto.
+Look for its icon in the system tray (near the clock).
+= Busca su icono en la bandeja del sistema (junto al reloj).
+Press INSTALL to download the game first.
+= Pulsa INSTALAR para descargar el juego primero.
+No launcher release has been published on GitHub yet.
+= Aún no se ha publicado ninguna versión del launcher en GitHub.
+GitHub's answer could not be read.
+= No se pudo leer la respuesta de GitHub.
+The latest release on GitHub ({0}) has no launcher exe attached.
+= La última versión en GitHub ({0}) no tiene el exe del launcher adjunto.
+The latest release on GitHub has no checksum for its exe, so it is not installed.
+= La última versión en GitHub no tiene suma de comprobación para su exe, así que no se instala.
+The downloaded launcher does not match its checksum, so it was not installed. Please try again later.
+= El launcher descargado no coincide con su suma de comprobación, así que no se instaló. Inténtalo más tarde.
+The launcher could not replace itself in this folder ({0}).
+= El launcher no pudo reemplazarse en esta carpeta ({0}).
+Download the new version from GitHub instead:
+= Descarga la nueva versión desde GitHub en su lugar:
+The new launcher could not be put in place ({0}). Nothing was changed.
+= El nuevo launcher no se pudo colocar ({0}). No se cambió nada.
+The {0} address must start with https://
+= La dirección del servidor {0} debe empezar por https://
+The {0} server redirected to an address that is not secure (https).
+= El servidor {0} redirigió a una dirección no segura (sin https).
+The {0} server sent a broken redirect.
+= El servidor {0} envió una redirección no válida.
+The {0} server answered with error {#1}.
+= El servidor {0} respondió con el error {1}.
+The {0} server's security certificate was not accepted. It needs a normal, trusted https certificate.
+= No se aceptó el certificado de seguridad del servidor {0}. Necesita un certificado https normal y de confianza.
+The {0} server did not answer in time. Check your internet connection and try again.
+= El servidor {0} no respondió a tiempo. Revisa tu conexión a Internet y vuelve a intentarlo.
+Could not reach the {0} server. Check your internet connection and try again.
+= No se pudo conectar con el servidor {0}. Revisa tu conexión a Internet y vuelve a intentarlo.
+The {0} server redirected too many times.
+= El servidor {0} redirigió demasiadas veces.
+update
+= de actualizaciones
+addon
+= de addons
+The download link gave a web page instead of the file. It must be a direct download link.
+= El enlace de descarga dio una página web en lugar del archivo. Debe ser un enlace de descarga directa.
+The download was interrupted. Check your connection and try again.
+= La descarga se interrumpió. Revisa tu conexión y vuelve a intentarlo.
+The download was cut off before it finished. Please try again.
+= La descarga se detuvo antes de terminar. Vuelve a intentarlo.
+The .zip contains an unsafe path; nothing was installed.
+= El .zip contiene una ruta insegura; no se instaló nada.
+The file is damaged or incomplete.
+= El archivo está dañado o incompleto.
+The file is a .{0} archive, and no program to unpack it was found.
+= El archivo es un archivo .{0} y no se encontró ningún programa para descomprimirlo.
+Install the free 7-Zip (7-zip.org) or WinRAR and try again.
+= Instala el programa gratuito 7-Zip (7-zip.org) o WinRAR y vuelve a intentarlo.
+The archive could not be unpacked.
+= No se pudo descomprimir el archivo.
+That file is not a .rar, .zip or .7z archive.
+= Este archivo no es un archivo .rar, .zip ni .7z.
+The archive was unpacked, but {0} was not inside it.
+= El archivo se descomprimió, pero {0} no estaba dentro.
+The install finished, but {0} is not in {1}.
+= La instalación terminó, pero {0} no está en {1}.
+The link did not give a .zip file. It must be a direct download link (share pages such as LimeWire do not work).
+= El enlace no dio un archivo .zip. Debe ser un enlace de descarga directa (las páginas para compartir como LimeWire no funcionan).
+There is not enough free disk space.
+= No hay suficiente espacio libre en el disco.
+Not enough free disk space for the update: about {0} is needed on the drive with the game, {1} is free.
+= No hay suficiente espacio en disco para la actualización: se necesitan unos {0} en el disco del juego, hay {1} libres.
+The update file is not a .rar, .zip or .7z archive.
+= El archivo de actualización no es un archivo .rar, .zip ni .7z.
+An earlier update was cut off and its files could not be put back yet.
+= Una actualización anterior se interrumpió y sus archivos aún no se han podido restaurar.
+The old files are kept in:
+= Los archivos antiguos están en:
+Unpacking the update. This can take a few minutes...
+= Descomprimiendo la actualización. Puede tardar unos minutos...
+Installing the new files...
+= Instalando los archivos nuevos...
+The update did not contain any files to install.
+= La actualización no contenía archivos para instalar.
+{0} is missing after the update.
+= Falta {0} después de la actualización.
+A game file is in use. Close the game and anything else using its folder, then try again.
+= Un archivo del juego está en uso. Cierra el juego y todo lo que use su carpeta, y vuelve a intentarlo.
+There is not enough free disk space for the update. Free some space and try again.
+= No hay suficiente espacio en disco para la actualización. Libera espacio y vuelve a intentarlo.
+The update could not be installed ({0}).
+= No se pudo instalar la actualización ({0}).
+No game files were changed.
+= No se cambió ningún archivo del juego.
+Some files could not be put back. The old versions are kept in:
+= Algunos archivos no se pudieron restaurar. Las versiones antiguas están en:
+Sync folder not reachable: {0} (is your cloud drive running?)
+= Carpeta de sincronización inaccesible: {0} (¿está en marcha tu unidad en la nube?)
+The game is running. Close it before you download.
+= El juego está abierto. Ciérralo antes de descargar.
+The game is running. Close it before you upload.
+= El juego está abierto. Ciérralo antes de subir.
+The folder is in use and was not replaced: {0} ({1}). Close programs or Explorer windows that use it and try again.
+= La carpeta está en uso y no se reemplazó: {0} ({1}). Cierra los programas o ventanas del Explorador que la usan y vuelve a intentarlo.
+The source changed while copying ({0}). Nothing was replaced, please sync again.
+= El origen cambió durante la copia ({0}). No se reemplazó nada, sincroniza de nuevo.
+No sync folder set. Choose a folder in Google Drive, OneDrive, Dropbox or similar in Options.
+= No hay carpeta de sincronización. Elige una carpeta en Google Drive, OneDrive, Dropbox o similar en Opciones.
+Sync folder: {0}
+= Carpeta de sincronización: {0}
+The sync folder does not exist yet. It is created on the first upload.
+= La carpeta de sincronización aún no existe. Se crea en la primera subida.
+{0}: in sync (local {1}, cloud {2})
+= {0}: sincronizado (local {1}, nube {2})
+{0}: cloud empty, upload (local {1}, cloud {2})
+= {0}: nube vacía, subir (local {1}, nube {2})
+{0}: cloud copy incomplete or still syncing, wait (local {1}, cloud {2})
+= {0}: copia en la nube incompleta o sincronizando, esperar (local {1}, nube {2})
+{0}: local is newer, upload (local {1}, cloud {2})
+= {0}: lo local es más reciente, subir (local {1}, nube {2})
+{0}: cloud is newer, download (local {1}, cloud {2})
+= {0}: la nube es más reciente, descargar (local {1}, nube {2})
+{0}: both changed or never synced (local {1}, cloud {2})
+= {0}: ambos cambiaron o nunca sincronizado (local {1}, nube {2})
+{0}: {1} not found, skipped. Set the game config folder in Options.
+= {0}: {1} no encontrado, omitido. Elige la carpeta de configuración del juego en Opciones.
+Downloading from the cloud ...
+= Descargando de la nube ...
+The sync folder does not exist yet, nothing to download.
+= La carpeta de sincronización aún no existe, nada que descargar.
+{0}: cloud is empty, nothing to download.
+= {0}: la nube está vacía, nada que descargar.
+{0}: up to date.
+= {0}: al día.
+{0}: the cloud copy does not match the last upload yet (incomplete or still syncing). Nothing replaced, try again in a moment.
+= {0}: la copia en la nube aún no coincide con la última subida (incompleta o sincronizando). No se reemplazó nada, inténtalo en un momento.
+{0}: local is newer, kept.
+= {0}: lo local es más reciente, se mantiene.
+Replace your local data with the cloud state?
+= ¿Reemplazar tus datos locales con el estado de la nube?
+A backup is made first.
+= Antes se hace una copia de seguridad.
+Cancelled, nothing changed.
+= Cancelado, nada cambió.
+{0}: local state kept, it will replace the cloud on the next upload.
+= {0}: estado local conservado, reemplazará la nube en la próxima subida.
+{0}: downloaded from the cloud.
+= {0}: descargado de la nube.
+Cloud state: {0}
+= Estado de la nube: {0}
+Uploading to the cloud ...
+= Subiendo a la nube ...
+{0}: nothing local, nothing uploaded.
+= {0}: nada en local, nada subido.
+{0}: cloud is up to date.
+= {0}: la nube está al día.
+Replace the cloud state with your local data?
+= ¿Reemplazar el estado de la nube con tus datos locales?
+{0}: cloud kept, your local changes were NOT uploaded. Use "Download" to get the cloud state.
+= {0}: nube conservada, tus cambios locales NO se subieron. Usa «Descargar» para obtener el estado de la nube.
+Cancelled, your local changes were NOT uploaded.
+= Cancelado, tus cambios locales NO se subieron.
+{0}: the cloud changed during this sync, NOT uploaded. Sync again to decide.
+= {0}: la nube cambió durante esta sincronización, NO subido. Sincroniza de nuevo para decidir.
+{0}: uploaded.
+= {0}: subido.
+Written to the sync folder. Your cloud app uploads it in the background, wait until it is done before you switch PCs.
+= Escrito en la carpeta de sincronización. Tu app de la nube lo sube en segundo plano; espera a que termine antes de cambiar de PC.
+Backup: {0}
+= Copia de seguridad: {0}
+Restored {0} after an interrupted sync.
+= {0} restaurado tras una sincronización interrumpida.

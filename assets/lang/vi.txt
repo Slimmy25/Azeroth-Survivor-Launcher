@@ -1,0 +1,791 @@
+@name Tiếng Việt
+@font Palatino Linotype, Segoe UI
+# Each English text is followed by its translation on the line below (starting with "= ").
+# {0}, {1} ... are filled in by the launcher; keep them. \n is a line break.
+
+PLAY
+= CHƠI
+INSTALL
+= CÀI ĐẶT
+PLAYING...
+= ĐANG CHƠI...
+INSTALLING
+= ĐANG CÀI
+UPDATING
+= ĐANG CẬP NHẬT
+UPDATE
+= CẬP NHẬT
+CHECKING
+= ĐANG KIỂM TRA
+CLOUD SAVE
+= LƯU TRÊN MÂY
+ADDONS
+= ADDON
+OPTIONS
+= TÙY CHỌN
+CHANGELOG
+= NHẬT KÝ CẬP NHẬT
+ABOUT LAUNCHER
+= GIỚI THIỆU LAUNCHER
+A game made by Aethus
+= Một trò chơi của Aethus
+Version {0}
+= Phiên bản {0}
+Press PLAY to enter Azeroth.
+= Nhấn CHƠI để bước vào Azeroth.
+Game client not found.
+= Không tìm thấy trò chơi.
+Press INSTALL to download it first.
+= Nhấn CÀI ĐẶT để tải về trước.
+Press INSTALL to download it, or set the game folder in Options.
+= Nhấn CÀI ĐẶT để tải về, hoặc đặt thư mục trò chơi trong Tùy chọn.
+Your cloud save syncs automatically.
+= Bản lưu trên mây của bạn được đồng bộ tự động.
+Time played: {0}   |   Last session: {1}
+= Thời gian chơi: {0}   |   Phiên gần nhất: {1}
+Ready.
+= Sẵn sàng.
+Cloud Save
+= Lưu trên mây
+Addons
+= Addon
+Options
+= Tùy chọn
+Changelog
+= Nhật ký cập nhật
+About Launcher
+= Giới thiệu launcher
+Download More
+= Tải thêm
+All Patch Notes
+= Tất cả ghi chú bản vá
+Show Launcher
+= Hiện launcher
+Play
+= Chơi
+Upload Save Now
+= Tải bản lưu lên ngay
+Close Button Hides to Tray
+= Nút Đóng ẩn xuống khay
+Quit
+= Thoát
+Game running
+= Trò chơi đang chạy
+Idle
+= Rảnh
+Game running - {0}
+= Trò chơi đang chạy - {0}
+The launcher is in the tray; the open window stays. Right-click the icon to quit.
+= Launcher đang ở khay hệ thống; cửa sổ đang mở vẫn giữ nguyên. Nhấp chuột phải vào biểu tượng để thoát.
+Still running in the tray. Right-click the icon to quit.
+= Vẫn đang chạy ở khay hệ thống. Nhấp chuột phải vào biểu tượng để thoát.
+Cloud sync running
+= Đang đồng bộ mây
+A cloud sync is still running. If you quit now it is cut short; the next sync repairs any half-finished copy.
+= Một lần đồng bộ mây vẫn đang chạy. Nếu thoát bây giờ, nó sẽ bị cắt ngang; lần đồng bộ sau sẽ sửa bản sao dang dở.
+Quit anyway?
+= Vẫn thoát?
+Installing
+= Đang cài đặt
+The game client is still being installed. If you quit now, it is cut short.
+= Trò chơi vẫn đang được cài. Nếu thoát bây giờ, quá trình cài sẽ bị cắt ngang.
+Updating
+= Đang cập nhật
+The game is still being updated. If you quit now, the update is cut short. Nothing is lost: a half-finished change is undone the next time the launcher starts.
+= Trò chơi vẫn đang được cập nhật. Nếu thoát bây giờ, bản cập nhật sẽ bị cắt ngang. Không mất gì cả: thay đổi dang dở sẽ được hoàn tác ở lần mở launcher tiếp theo.
+The game is still running. If you quit the launcher now, your saves will NOT be uploaded automatically.
+= Trò chơi vẫn đang chạy. Nếu thoát launcher bây giờ, bản lưu của bạn sẽ KHÔNG được tải lên tự động.
+Setup saved.
+= Đã lưu thiết lập.
+First-time setup
+= Thiết lập lần đầu
+Welcome, Adventurer
+= Chào mừng, nhà thám hiểm
+Step 1 of 2
+= Bước 1/2
+Step 2 of 2
+= Bước 2/2
+A.  Cloud saving
+= A.  Lưu trên mây
+Keep my progress in the cloud (Google Drive, OneDrive, Dropbox ...)\nand share it between my PCs
+= Giữ tiến trình của tôi trên mây (Google Drive, OneDrive, Dropbox ...)\nvà chia sẻ giữa các máy tính của tôi
+Sync folder (inside your cloud drive)
+= Thư mục đồng bộ (trong ổ mây của bạn)
+Cloud saving stays off. You can turn it on later in Cloud Save.
+= Lưu trên mây vẫn tắt. Bạn có thể bật sau trong mục Lưu trên mây.
+B.  Where are your files?
+= B.  Tệp của bạn ở đâu?
+Folders found at their usual place are used as they are. Choose the ones that are missing.
+= Các thư mục tìm thấy ở vị trí thông thường được dùng nguyên trạng. Hãy chọn những thư mục còn thiếu.
+AddOns
+= AddOns
+Game saves
+= Bản lưu trò chơi
+Addon settings
+= Cài đặt addon
+Select your AddOns folder
+= Chọn thư mục AddOns của bạn
+Select the folder that holds your save game (normally %APPDATA%\wenilla-rogue)
+= Chọn thư mục chứa bản lưu trò chơi (thường là %APPDATA%\wenilla-rogue)
+Select your addon settings folder (the 'saved' folder in benilla-config)
+= Chọn thư mục cài đặt addon (thư mục 'saved' trong benilla-config)
+FINISH
+= HOÀN TẤT
+LATER
+= ĐỂ SAU
+✓ found
+= ✓ đã tìm thấy
+✓ chosen
+= ✓ đã chọn
+not chosen yet
+= chưa chọn
+not found - please choose it
+= không tìm thấy - hãy chọn
+(not set)
+= (chưa đặt)
+CHANGE
+= ĐỔI
+CHOOSE
+= CHỌN
+Choose a sync folder for cloud saving, or untick\n"Keep my progress in the cloud".
+= Hãy chọn thư mục đồng bộ cho lưu trên mây, hoặc bỏ chọn\n"Giữ tiến trình của tôi trên mây".
+Setup
+= Thiết lập
+These folders were not found:
+= Không tìm thấy các thư mục sau:
+Finish anyway? You can change them later in Options.
+= Vẫn hoàn tất? Bạn có thể đổi chúng sau trong Tùy chọn.
+Your settings are saved.\n\nWould you like to go to the Addons section now\nto download some addons, or to enable or disable the ones you have?
+= Đã lưu cài đặt của bạn.\n\nBạn có muốn đến mục Addon ngay\nđể tải addon, hoặc bật tắt các addon đang có không?
+DOWNLOAD ADDONS
+= TẢI ADDON
+ENABLE / DISABLE ADDONS
+= BẬT / TẮT ADDON
+NO THANKS
+= KHÔNG, CẢM ƠN
+Install the game
+= Cài đặt trò chơi
+Install Azeroth Survivors
+= Cài đặt Azeroth Survivors
+Step 1
+= Bước 1
+Download the game in your web browser.
+= Tải trò chơi trong trình duyệt.
+OPEN DOWNLOAD
+= MỞ TRANG TẢI
+Download opened in your browser.
+= Đã mở trang tải trong trình duyệt.
+Step 2
+= Bước 2
+When the download has finished, come back here.
+= Khi tải xong, hãy quay lại đây.
+IT'S IN MY DOWNLOADS
+= ĐÃ CÓ TRONG MỤC TẢI VỀ
+The launcher finds the file (in its own folder or Downloads), unpacks the game here and deletes the download.
+= Launcher tìm tệp (trong thư mục của nó hoặc thư mục Tải về), giải nén trò chơi vào đây và xóa tệp tải về.
+CANCEL
+= HỦY
+Which progress do you want to keep?
+= Bạn muốn giữ tiến trình nào?
+Both sides changed
+= Cả hai bên đều thay đổi
+This PC and the cloud both changed since the last sync:
+= Máy tính này và mây đều đã thay đổi kể từ lần đồng bộ trước:
+• {0}:  this PC {1}   |   cloud {2}
+= • {0}:  máy này {1}   |   mây {2}
+One complete state wins, the other is backed up first.
+= Một trạng thái đầy đủ sẽ thắng, bên còn lại được sao lưu trước.
+First time on this PC? Choose USE CLOUD.
+= Lần đầu trên máy này? Chọn DÙNG MÂY.
+USE CLOUD replaces your local data. KEEP LOCAL keeps it and uploads it later.
+= DÙNG MÂY thay thế dữ liệu trên máy. GIỮ BẢN MÁY giữ lại và tải lên sau.
+KEEP LOCAL replaces the cloud. USE CLOUD leaves the cloud and skips your upload.
+= GIỮ BẢN MÁY thay thế mây. DÙNG MÂY để nguyên mây và bỏ qua lần tải lên của bạn.
+USE CLOUD
+= DÙNG MÂY
+KEEP LOCAL
+= GIỮ BẢN MÁY
+Save game
+= Bản lưu trò chơi
+Game update
+= Cập nhật trò chơi
+Update available
+= Có bản cập nhật
+New version:
+= Phiên bản mới:
+Your version:
+= Phiên bản của bạn:
+not recorded yet
+= chưa ghi nhận
+Download size:
+= Dung lượng tải:
+What is new
+= Có gì mới
+Your addons, settings and saves are left alone. If anything goes wrong, the old game files are put back.
+= Addon, cài đặt và bản lưu của bạn không bị động đến. Nếu có lỗi, các tệp trò chơi cũ sẽ được đặt lại.
+UPDATE NOW
+= CẬP NHẬT NGAY
+NOT NOW
+= ĐỂ SAU
+SKIP THIS VERSION
+= BỎ QUA PHIÊN BẢN NÀY
+I ALREADY HAVE THIS VERSION
+= TÔI ĐÃ CÓ PHIÊN BẢN NÀY
+The update is being installed. Please wait until it has finished.
+= Bản cập nhật đang được cài. Vui lòng đợi đến khi xong.
+Downloading the update...
+= Đang tải bản cập nhật...
+Download the update
+= Tải bản cập nhật
+Step 1: download the update in your web browser.
+= Bước 1: tải bản cập nhật trong trình duyệt.
+OPEN DOWNLOAD AGAIN
+= MỞ LẠI TRANG TẢI
+Step 2: when the download has finished, come back here.
+= Bước 2: khi tải xong, hãy quay lại đây.
+The launcher finds the file (in its own folder or Downloads), installs it and deletes it.
+= Launcher tìm tệp (trong thư mục của nó hoặc thư mục Tải về), cài đặt rồi xóa nó.
+Checking the file...
+= Đang kiểm tra tệp...
+CANCELLING...
+= ĐANG HỦY...
+Updating to {0}
+= Đang cập nhật lên {0}
+Please keep the launcher open until this has finished.
+= Vui lòng giữ launcher mở cho đến khi xong.
+{0} of {1}  ({#2}%)
+= {0} / {1}  ({2}%)
+{0} downloaded
+= Đã tải {0}
+Update installed
+= Đã cài bản cập nhật
+Update failed
+= Cập nhật thất bại
+CLOSE
+= ĐÓNG
+TRY AGAIN
+= THỬ LẠI
+Version {0} is installed.
+= Đã cài phiên bản {0}.
+{#0} files updated.
+= Đã cập nhật {0} tệp.
+{#0} file updated.
+= Đã cập nhật {0} tệp.
+{#0} files updated, {#1} removed.
+= Đã cập nhật {0} tệp, xóa {1}.
+{#0} file updated, {#1} removed.
+= Đã cập nhật {0} tệp, xóa {1}.
+Install
+= Cài đặt
+Install the game from this file?
+= Cài trò chơi từ tệp này?
+{0}  ({#1} MB)
+= {0}  ({1} MB)
+in {0}
+= trong {0}
+Choose the game file you downloaded (.rar)
+= Chọn tệp trò chơi bạn đã tải (.rar)
+Game archive (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|All files (*.*)|*.*
+= Tệp nén trò chơi (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|Tất cả tệp (*.*)|*.*
+Install cancelled.
+= Đã hủy cài đặt.
+Unpacking the game client...
+= Đang giải nén trò chơi...
+Install failed.
+= Cài đặt thất bại.
+Install complete - press PLAY.
+= Cài đặt xong - nhấn CHƠI.
+Install complete. Press PLAY to enter Azeroth.
+= Cài đặt xong. Nhấn CHƠI để bước vào Azeroth.
+The last game update was cut off before it finished. Your game files were put back exactly as they were.
+= Lần cập nhật trò chơi trước bị cắt ngang trước khi xong. Các tệp trò chơi đã được đặt lại y như cũ.
+You can run the update again with the UPDATE button.
+= Bạn có thể chạy lại bản cập nhật bằng nút CẬP NHẬT.
+The last game update was cut off, and some game files could not be put back automatically.
+= Lần cập nhật trò chơi trước bị cắt ngang và một số tệp không thể tự động đặt lại.
+The old versions are kept in the folder "{0}" inside the game folder. Copy them back over the game files, or reinstall the game.
+= Các phiên bản cũ được giữ trong thư mục "{0}" bên trong thư mục trò chơi. Hãy chép chúng đè lại lên tệp trò chơi, hoặc cài lại trò chơi.
+Checking for updates...
+= Đang kiểm tra cập nhật...
+The update check failed ({0}).
+= Kiểm tra cập nhật thất bại ({0}).
+Could not check for launcher updates.
+= Không thể kiểm tra cập nhật launcher.
+Launcher update
+= Cập nhật launcher
+Launcher {0} is available.
+= Đã có launcher {0}.
+The launcher is up to date ({0}).
+= Launcher đã mới nhất ({0}).
+You have the newest launcher ({0}).
+= Bạn đang dùng launcher mới nhất ({0}).
+A new launcher ({0}) is available. Open the launcher and press UPDATE.
+= Đã có launcher mới ({0}). Mở launcher và nhấn CẬP NHẬT.
+Finish what is running first (the game, an install or a cloud sync), then press UPDATE again.
+= Hãy hoàn tất việc đang chạy trước (trò chơi, cài đặt hoặc đồng bộ mây), rồi nhấn CẬP NHẬT lại.
+A new version of the launcher is on GitHub: {0}.
+= Có phiên bản launcher mới trên GitHub: {0}.
+Update now? The new launcher ({0}) is downloaded, checked and started in place of this one. Your settings stay as they are.
+= Cập nhật ngay? Launcher mới ({0}) sẽ được tải, kiểm tra và chạy thay cho launcher này. Cài đặt của bạn giữ nguyên.
+Update now? The new launcher is downloaded, checked and started in place of this one. Your settings stay as they are.
+= Cập nhật ngay? Launcher mới sẽ được tải, kiểm tra và chạy thay cho launcher này. Cài đặt của bạn giữ nguyên.
+Launcher update postponed. Press UPDATE when you want it.
+= Đã hoãn cập nhật launcher. Nhấn CẬP NHẬT khi bạn muốn.
+Downloading the new launcher...
+= Đang tải launcher mới...
+Downloading the new launcher... {0}
+= Đang tải launcher mới... {0}
+Launcher update failed.
+= Cập nhật launcher thất bại.
+Update checking is not switched on in this launcher yet (it has no update address).
+= Launcher này chưa bật kiểm tra cập nhật (chưa có địa chỉ cập nhật).
+The game is not installed yet. Press INSTALL first.
+= Trò chơi chưa được cài. Hãy nhấn CÀI ĐẶT trước.
+Could not check for updates.
+= Không thể kiểm tra cập nhật.
+You have the newest version ({0}).
+= Bạn đang dùng phiên bản mới nhất ({0}).
+Update {0} is available.
+= Đã có bản cập nhật {0}.
+A game update ({0}) is available.
+= Đã có bản cập nhật trò chơi ({0}).
+Version {0} skipped. The UPDATE button still offers it.
+= Đã bỏ qua phiên bản {0}. Nút CẬP NHẬT vẫn đề xuất nó.
+Noted: you have version {0}.
+= Đã ghi nhận: bạn có phiên bản {0}.
+Install the update from this file?
+= Cài bản cập nhật từ tệp này?
+Choose the update file you downloaded
+= Chọn tệp cập nhật bạn đã tải
+Update archive (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|All files (*.*)|*.*
+= Tệp nén cập nhật (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|Tất cả tệp (*.*)|*.*
+Close the game first, then try again.
+= Hãy đóng trò chơi trước rồi thử lại.
+Checking the download...
+= Đang kiểm tra tệp tải về...
+The downloaded file does not match its checksum, so nothing was installed. Please try again later.
+= Tệp tải về không khớp mã kiểm tra, nên chưa cài gì cả. Vui lòng thử lại sau.
+That file is not this update (its checksum does not match), so nothing was installed. Download it again from the update page.
+= Tệp đó không phải bản cập nhật này (mã kiểm tra không khớp), nên chưa cài gì cả. Hãy tải lại từ trang cập nhật.
+The update failed ({0}).
+= Cập nhật thất bại ({0}).
+Updated to {0} - press PLAY.
+= Đã cập nhật lên {0} - nhấn CHƠI.
+Game updated to {0}. Press PLAY to enter Azeroth.
+= Trò chơi đã cập nhật lên {0}. Nhấn CHƠI để bước vào Azeroth.
+Update cancelled.
+= Đã hủy cập nhật.
+Update failed.
+= Cập nhật thất bại.
+Another task is still running - wait for it to finish.
+= Một tác vụ khác vẫn đang chạy - hãy đợi nó xong.
+Choose a sync folder inside your cloud drive first (Cloud Save or Options).
+= Hãy chọn thư mục đồng bộ trong ổ mây trước (Lưu trên mây hoặc Tùy chọn).
+Cloud sync failed.
+= Đồng bộ mây thất bại.
+Status checked at {0}
+= Đã kiểm tra trạng thái lúc {0}
+Downloaded from the cloud at {0}
+= Đã tải từ mây lúc {0}
+Saves uploaded at {0}
+= Đã tải bản lưu lên lúc {0}
+Not everything was synced - see the Cloud Save log.
+= Chưa đồng bộ hết - xem nhật ký Lưu trên mây.
+The game is being updated. Please wait until that has finished.
+= Trò chơi đang được cập nhật. Vui lòng đợi đến khi xong.
+The cloud save could NOT be loaded, so the game was not launched.
+= KHÔNG thể tải bản lưu trên mây, nên trò chơi chưa được mở.
+See the log in Cloud Save. If your cloud drive is still syncing, wait for it to finish and press PLAY again.
+= Xem nhật ký trong Lưu trên mây. Nếu ổ mây vẫn đang đồng bộ, hãy đợi xong rồi nhấn CHƠI lại.
+Cloud sync failed - game not launched
+= Đồng bộ mây thất bại - chưa mở trò chơi
+Cloud save was not loaded - game not launched.
+= Chưa tải bản lưu trên mây - chưa mở trò chơi.
+Cloud sync successfully downloaded
+= Đã tải đồng bộ mây thành công
+No sync folder set - launched without cloud sync.
+= Chưa đặt thư mục đồng bộ - đã mở mà không đồng bộ mây.
+Starting Azeroth Survivors ...
+= Đang mở Azeroth Survivors ...
+Game running.
+= Trò chơi đang chạy.
+Could not start the game: {0}
+= Không thể mở trò chơi: {0}
+Game closed.
+= Đã đóng trò chơi.
+Game has closed.
+= Trò chơi đã đóng.
+Cloud sync successfully uploaded
+= Đã tải lên đồng bộ mây thành công
+Some of your progress was NOT uploaded. See the log in Cloud Save.
+= Một phần tiến trình của bạn KHÔNG được tải lên. Xem nhật ký trong Lưu trên mây.
+Cloud sync NOT completed - see the Cloud Save log
+= Đồng bộ mây CHƯA hoàn tất - xem nhật ký Lưu trên mây
+Cloud upload failed: {0}
+= Tải lên mây thất bại: {0}
+Cloud sync failed - see the Cloud Save log
+= Đồng bộ mây thất bại - xem nhật ký Lưu trên mây
+Launcher
+= Launcher
+Select a folder inside your cloud drive (Google Drive, OneDrive, Dropbox ...)
+= Chọn một thư mục trong ổ mây của bạn (Google Drive, OneDrive, Dropbox ...)
+That is the top level of your cloud drive.
+= Đó là cấp cao nhất của ổ mây.
+Create and use a subfolder named AzerothSync inside it?
+= Tạo và dùng thư mục con tên AzerothSync bên trong?
+Sync folder
+= Thư mục đồng bộ
+Play time reset.
+= Đã đặt lại thời gian chơi.
+Play time
+= Thời gian chơi
+No games played with this launcher yet.
+= Chưa có lượt chơi nào với launcher này.
+Total: {0} over {#1} sessions
+= Tổng: {0} qua {1} phiên
+Total: {0} over {#1} session
+= Tổng: {0} qua {1} phiên
+Total: {0} over {#1} sessions on {#2} PCs
+= Tổng: {0} qua {1} phiên trên {2} máy
+Last session: {0} ({1})
+= Phiên gần nhất: {0} ({1})
+Longest session: {0}
+= Phiên dài nhất: {0}
+Shared with your other PCs through the cloud sync folder.
+= Được chia sẻ với các máy khác qua thư mục đồng bộ mây.
+Counted on this PC (the sync folder is not reachable right now).
+= Đếm trên máy này (hiện không truy cập được thư mục đồng bộ).
+Counted on this PC. Turn on cloud saving to share it between your PCs.
+= Đếm trên máy này. Bật lưu trên mây để chia sẻ giữa các máy.
+RESET PLAY TIME
+= ĐẶT LẠI THỜI GIAN CHƠI
+Set the play time back to zero on all your PCs?
+= Đặt thời gian chơi về 0 trên tất cả các máy?
+Set the play time back to zero?
+= Đặt thời gian chơi về 0?
+Game folder
+= Thư mục trò chơi
+Save game folder
+= Thư mục bản lưu
+Game config folder (AddOns, addon settings)
+= Thư mục cấu hình trò chơi (AddOns, cài đặt addon)
+Cloud saving
+= Lưu trên mây
+Close button hides the launcher to the tray
+= Nút đóng ẩn launcher xuống khay hệ thống
+Minimize the launcher when the game starts
+= Thu nhỏ launcher khi trò chơi bắt đầu
+RUN SETUP AGAIN
+= CHẠY LẠI THIẾT LẬP
+Select your Azeroth Survivors game folder
+= Chọn thư mục trò chơi Azeroth Survivors
+Game folder set: {0}
+= Đã đặt thư mục trò chơi: {0}
+Select the game's benilla-config folder (contains AddOns and saved)
+= Chọn thư mục benilla-config của trò chơi (chứa AddOns và saved)
+Language
+= Ngôn ngữ
+ALL PATCH NOTES ›
+= TẤT CẢ GHI CHÚ ›
+‹ LATEST
+= ‹ MỚI NHẤT
+‹ ALL PATCH NOTES
+= ‹ TẤT CẢ GHI CHÚ
+‹ PREVIOUS
+= ‹ TRƯỚC
+NEXT ›
+= TIẾP ›
+{#0} of {#1}
+= {0} / {1}
+PAGE
+= TRANG
+No patch notes yet.
+= Chưa có ghi chú bản vá.
+{0} (current)
+= {0} (hiện tại)
+Vibe coded by Slimjim\nCloud save code established by Keijin
+= Vibe code bởi Slimjim\nMã lưu trên mây bởi Keijin
+DOWNLOAD MORE ›
+= TẢI THÊM ›
+ALL
+= TẤT CẢ
+UI OVERHAUL
+= GIAO DIỆN
+GAMEPLAY
+= LỐI CHƠI
+COSMETIC
+= NGOẠI HÌNH
+No addons in this filter yet.
+= Chưa có addon trong bộ lọc này.
+No downloadable addons listed yet.
+= Chưa có addon để tải.
+UNINSTALL
+= GỠ CÀI ĐẶT
+Addons can't be changed while the game runs or a sync is running.
+= Không thể thay đổi addon khi trò chơi hoặc đồng bộ đang chạy.
+Another addon is still downloading.
+= Một addon khác vẫn đang tải.
+Installing {0}...
+= Đang cài {0}...
+{0} installed.
+= Đã cài {0}.
+{0} failed.
+= {0} thất bại.
+Could not install {0}:
+= Không thể cài {0}:
+{0} is not installed.
+= {0} chưa được cài.
+Remove {0} from your AddOns folder?
+= Xóa {0} khỏi thư mục AddOns?
+Folders: {0}
+= Thư mục: {0}
+This deletes everything it added, including the settings it saved.
+= Thao tác này xóa mọi thứ nó đã thêm, kể cả cài đặt nó đã lưu.
+Uninstall
+= Gỡ cài đặt
+Could not uninstall {0}:
+= Không thể gỡ {0}:
+{0} uninstalled.
+= Đã gỡ {0}.
+{0} was not installed.
+= {0} chưa được cài.
+No AddOns folder found.\nSet the game config folder in Options\n(the benilla-config folder).
+= Không tìm thấy thư mục AddOns.\nHãy đặt thư mục cấu hình trò chơi trong Tùy chọn\n(thư mục benilla-config).
+REFRESH
+= LÀM MỚI
+FOLDER
+= THƯ MỤC
+TOGGLE ALL
+= ĐẢO TẤT CẢ
+SAVE
+= LƯU
+LOAD
+= NẠP
+empty
+= trống
+{#0} on, {#1} off
+= {0} bật, {1} tắt
+saved {0}
+= đã lưu {0}
+Profile {0}
+= Hồ sơ {0}
+No addons installed.
+= Chưa cài addon nào.
+{#0} of {#1} enabled
+= Bật {0} / {1}
+Could not enable {0}:
+= Không thể bật {0}:
+Could not disable {0}:
+= Không thể tắt {0}:
+{0} enabled.
+= Đã bật {0}.
+{0} disabled.
+= Đã tắt {0}.
+All addons enabled.
+= Đã bật tất cả addon.
+All addons disabled.
+= Đã tắt tất cả addon.
+Some addons could not be changed:
+= Một số addon không thể thay đổi:
+Replace the saved Profile {0} with the current toggles?
+= Thay Hồ sơ {0} đã lưu bằng lựa chọn hiện tại?
+Profile {0} saved.
+= Đã lưu Hồ sơ {0}.
+Profile {0} is empty - press SAVE to store the current toggles.
+= Hồ sơ {0} trống - nhấn LƯU để giữ lựa chọn hiện tại.
+Profile {0} loaded: {#1} changed.
+= Đã nạp Hồ sơ {0}: đổi {1}.
+Profile {0} loaded: {#1} changed. {#2} newer addon(s) left as they were.
+= Đã nạp Hồ sơ {0}: đổi {1}. Giữ nguyên {2} addon mới hơn.
+Cloud saving is turned off.\nYour progress stays on this PC only.
+= Lưu trên mây đang tắt.\nTiến trình của bạn chỉ ở trên máy này.
+TURN ON CLOUD SAVING
+= BẬT LƯU TRÊN MÂY
+PLAY downloads the newest state, starts the game and uploads your progress after you close it. One complete state wins; the overwritten one is backed up as a ZIP first.
+= CHƠI tải trạng thái mới nhất, mở trò chơi và tải tiến trình lên sau khi bạn đóng. Một trạng thái đầy đủ sẽ thắng; bản bị ghi đè được sao lưu thành ZIP trước.
+(not set - choose a folder inside Google Drive, OneDrive or Dropbox)
+= (chưa đặt - chọn một thư mục trong Google Drive, OneDrive hoặc Dropbox)
+Not synced yet.
+= Chưa đồng bộ.
+Cloud: {0}
+= Mây: {0}
+last uploaded by {0} on {1}
+= tải lên gần nhất bởi {0} vào {1}
+no upload info
+= không có thông tin tải lên
+CHECK STATUS
+= KIỂM TRA TRẠNG THÁI
+DOWNLOAD
+= TẢI VỀ
+UPLOAD
+= TẢI LÊN
+The launcher is already running.
+= Launcher đã đang chạy.
+Look for its icon in the system tray (near the clock).
+= Tìm biểu tượng của nó ở khay hệ thống (gần đồng hồ).
+Press INSTALL to download the game first.
+= Nhấn CÀI ĐẶT để tải trò chơi trước.
+No launcher release has been published on GitHub yet.
+= Chưa có bản phát hành launcher nào trên GitHub.
+GitHub's answer could not be read.
+= Không đọc được phản hồi của GitHub.
+The latest release on GitHub ({0}) has no launcher exe attached.
+= Bản phát hành mới nhất trên GitHub ({0}) không đính kèm exe của launcher.
+The latest release on GitHub has no checksum for its exe, so it is not installed.
+= Bản phát hành mới nhất trên GitHub không có mã kiểm tra cho exe, nên không được cài.
+The downloaded launcher does not match its checksum, so it was not installed. Please try again later.
+= Launcher tải về không khớp mã kiểm tra, nên không được cài. Vui lòng thử lại sau.
+The launcher could not replace itself in this folder ({0}).
+= Launcher không thể tự thay thế trong thư mục này ({0}).
+Download the new version from GitHub instead:
+= Hãy tải phiên bản mới từ GitHub:
+The new launcher could not be put in place ({0}). Nothing was changed.
+= Không thể đặt launcher mới vào chỗ ({0}). Không có gì thay đổi.
+The {0} address must start with https://
+= Địa chỉ máy chủ {0} phải bắt đầu bằng https://
+The {0} server redirected to an address that is not secure (https).
+= Máy chủ {0} chuyển hướng đến địa chỉ không an toàn (không phải https).
+The {0} server sent a broken redirect.
+= Máy chủ {0} gửi một chuyển hướng hỏng.
+The {0} server answered with error {#1}.
+= Máy chủ {0} trả lời lỗi {1}.
+The {0} server's security certificate was not accepted. It needs a normal, trusted https certificate.
+= Chứng chỉ bảo mật của máy chủ {0} không được chấp nhận. Cần một chứng chỉ https bình thường, đáng tin cậy.
+The {0} server did not answer in time. Check your internet connection and try again.
+= Máy chủ {0} không trả lời kịp. Kiểm tra kết nối internet rồi thử lại.
+Could not reach the {0} server. Check your internet connection and try again.
+= Không thể kết nối máy chủ {0}. Kiểm tra kết nối internet rồi thử lại.
+The {0} server redirected too many times.
+= Máy chủ {0} chuyển hướng quá nhiều lần.
+update
+= cập nhật
+addon
+= addon
+The download link gave a web page instead of the file. It must be a direct download link.
+= Liên kết tải trả về trang web thay vì tệp. Phải là liên kết tải trực tiếp.
+The download was interrupted. Check your connection and try again.
+= Tải xuống bị gián đoạn. Kiểm tra kết nối rồi thử lại.
+The download was cut off before it finished. Please try again.
+= Tải xuống bị ngắt trước khi xong. Vui lòng thử lại.
+The .zip contains an unsafe path; nothing was installed.
+= Tệp .zip chứa đường dẫn không an toàn; chưa cài gì cả.
+The file is damaged or incomplete.
+= Tệp bị hỏng hoặc không đầy đủ.
+The file is a .{0} archive, and no program to unpack it was found.
+= Tệp là tệp nén .{0}, và không tìm thấy chương trình nào để giải nén.
+Install the free 7-Zip (7-zip.org) or WinRAR and try again.
+= Hãy cài 7-Zip miễn phí (7-zip.org) hoặc WinRAR rồi thử lại.
+The archive could not be unpacked.
+= Không thể giải nén tệp.
+That file is not a .rar, .zip or .7z archive.
+= Tệp đó không phải tệp nén .rar, .zip hay .7z.
+The archive was unpacked, but {0} was not inside it.
+= Đã giải nén, nhưng không có {0} bên trong.
+The install finished, but {0} is not in {1}.
+= Đã cài xong, nhưng {0} không có trong {1}.
+The link did not give a .zip file. It must be a direct download link (share pages such as LimeWire do not work).
+= Liên kết không trả về tệp .zip. Phải là liên kết tải trực tiếp (các trang chia sẻ như LimeWire không dùng được).
+There is not enough free disk space.
+= Không đủ dung lượng đĩa trống.
+Not enough free disk space for the update: about {0} is needed on the drive with the game, {1} is free.
+= Không đủ dung lượng cho bản cập nhật: cần khoảng {0} trên ổ chứa trò chơi, còn trống {1}.
+The update file is not a .rar, .zip or .7z archive.
+= Tệp cập nhật không phải tệp nén .rar, .zip hay .7z.
+An earlier update was cut off and its files could not be put back yet.
+= Một bản cập nhật trước bị cắt ngang và chưa thể đặt lại các tệp của nó.
+The old files are kept in:
+= Các tệp cũ được giữ tại:
+Unpacking the update. This can take a few minutes...
+= Đang giải nén bản cập nhật. Có thể mất vài phút...
+Installing the new files...
+= Đang cài các tệp mới...
+The update did not contain any files to install.
+= Bản cập nhật không chứa tệp nào để cài.
+{0} is missing after the update.
+= Thiếu {0} sau khi cập nhật.
+A game file is in use. Close the game and anything else using its folder, then try again.
+= Một tệp trò chơi đang được dùng. Hãy đóng trò chơi và mọi thứ đang dùng thư mục của nó, rồi thử lại.
+There is not enough free disk space for the update. Free some space and try again.
+= Không đủ dung lượng cho bản cập nhật. Hãy giải phóng dung lượng rồi thử lại.
+The update could not be installed ({0}).
+= Không thể cài bản cập nhật ({0}).
+No game files were changed.
+= Không có tệp trò chơi nào bị thay đổi.
+Some files could not be put back. The old versions are kept in:
+= Một số tệp không thể đặt lại. Các phiên bản cũ được giữ tại:
+Sync folder not reachable: {0} (is your cloud drive running?)
+= Không truy cập được thư mục đồng bộ: {0} (ổ mây của bạn có đang chạy không?)
+The game is running. Close it before you download.
+= Trò chơi đang chạy. Hãy đóng trước khi tải về.
+The game is running. Close it before you upload.
+= Trò chơi đang chạy. Hãy đóng trước khi tải lên.
+The folder is in use and was not replaced: {0} ({1}). Close programs or Explorer windows that use it and try again.
+= Thư mục đang được dùng và chưa được thay thế: {0} ({1}). Hãy đóng các chương trình hoặc cửa sổ Explorer đang dùng nó rồi thử lại.
+The source changed while copying ({0}). Nothing was replaced, please sync again.
+= Nguồn đã thay đổi trong khi sao chép ({0}). Chưa thay thế gì, hãy đồng bộ lại.
+No sync folder set. Choose a folder in Google Drive, OneDrive, Dropbox or similar in Options.
+= Chưa đặt thư mục đồng bộ. Hãy chọn một thư mục trong Google Drive, OneDrive, Dropbox hoặc tương tự trong Tùy chọn.
+Sync folder: {0}
+= Thư mục đồng bộ: {0}
+The sync folder does not exist yet. It is created on the first upload.
+= Thư mục đồng bộ chưa tồn tại. Nó sẽ được tạo ở lần tải lên đầu tiên.
+{0}: in sync (local {1}, cloud {2})
+= {0}: đã đồng bộ (máy {1}, mây {2})
+{0}: cloud empty, upload (local {1}, cloud {2})
+= {0}: mây trống, tải lên (máy {1}, mây {2})
+{0}: cloud copy incomplete or still syncing, wait (local {1}, cloud {2})
+= {0}: bản trên mây chưa đầy đủ hoặc đang đồng bộ, hãy đợi (máy {1}, mây {2})
+{0}: local is newer, upload (local {1}, cloud {2})
+= {0}: bản trên máy mới hơn, tải lên (máy {1}, mây {2})
+{0}: cloud is newer, download (local {1}, cloud {2})
+= {0}: bản trên mây mới hơn, tải về (máy {1}, mây {2})
+{0}: both changed or never synced (local {1}, cloud {2})
+= {0}: cả hai đều thay đổi hoặc chưa từng đồng bộ (máy {1}, mây {2})
+{0}: {1} not found, skipped. Set the game config folder in Options.
+= {0}: không tìm thấy {1}, đã bỏ qua. Hãy đặt thư mục cấu hình trò chơi trong Tùy chọn.
+Downloading from the cloud ...
+= Đang tải từ mây ...
+The sync folder does not exist yet, nothing to download.
+= Thư mục đồng bộ chưa tồn tại, không có gì để tải về.
+{0}: cloud is empty, nothing to download.
+= {0}: mây trống, không có gì để tải về.
+{0}: up to date.
+= {0}: đã mới nhất.
+{0}: the cloud copy does not match the last upload yet (incomplete or still syncing). Nothing replaced, try again in a moment.
+= {0}: bản trên mây chưa khớp với lần tải lên gần nhất (chưa đầy đủ hoặc đang đồng bộ). Chưa thay thế gì, hãy thử lại sau ít phút.
+{0}: local is newer, kept.
+= {0}: bản trên máy mới hơn, giữ nguyên.
+Replace your local data with the cloud state?
+= Thay dữ liệu trên máy bằng trạng thái trên mây?
+A backup is made first.
+= Một bản sao lưu sẽ được tạo trước.
+Cancelled, nothing changed.
+= Đã hủy, không có gì thay đổi.
+{0}: local state kept, it will replace the cloud on the next upload.
+= {0}: giữ trạng thái trên máy, nó sẽ thay thế mây ở lần tải lên tiếp theo.
+{0}: downloaded from the cloud.
+= {0}: đã tải từ mây.
+Cloud state: {0}
+= Trạng thái mây: {0}
+Uploading to the cloud ...
+= Đang tải lên mây ...
+{0}: nothing local, nothing uploaded.
+= {0}: máy không có gì, không tải lên gì.
+{0}: cloud is up to date.
+= {0}: mây đã mới nhất.
+Replace the cloud state with your local data?
+= Thay trạng thái trên mây bằng dữ liệu trên máy?
+{0}: cloud kept, your local changes were NOT uploaded. Use "Download" to get the cloud state.
+= {0}: giữ nguyên mây, thay đổi trên máy KHÔNG được tải lên. Dùng "Tải về" để lấy trạng thái trên mây.
+Cancelled, your local changes were NOT uploaded.
+= Đã hủy, thay đổi trên máy KHÔNG được tải lên.
+{0}: the cloud changed during this sync, NOT uploaded. Sync again to decide.
+= {0}: mây đã thay đổi trong lần đồng bộ này, KHÔNG tải lên. Hãy đồng bộ lại để quyết định.
+{0}: uploaded.
+= {0}: đã tải lên.
+Written to the sync folder. Your cloud app uploads it in the background, wait until it is done before you switch PCs.
+= Đã ghi vào thư mục đồng bộ. Ứng dụng mây sẽ tải lên trong nền; hãy đợi xong trước khi đổi máy.
+Backup: {0}
+= Bản sao lưu: {0}
+Restored {0} after an interrupted sync.
+= Đã khôi phục {0} sau một lần đồng bộ bị gián đoạn.
