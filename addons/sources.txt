@@ -9,7 +9,7 @@
 
 DBM-by-Gabriellus.zip           | https://files.catbox.moe/2r4n2u.zip
 Death-Recap-by-Fotze.zip        | https://files.catbox.moe/329wa0.zip
-Azerloot-by-KindaGray.zip       | https://github.com/Kindagrey/Azerloot/releases/download/v2.5.0/Azerloot-2.5.0.zip
+# (hidden until it works again) Azerloot-by-KindaGray.zip       | https://github.com/Kindagrey/Azerloot/releases/download/v2.5.0/Azerloot-2.5.0.zip
 Chest-GPS-by-Fotze.zip          | https://files.catbox.moe/riqfmy.zip
 SurvivorsDragonUi-by-Mxgwyn.zip | https://github.com/migwynkriid13/SurvivorsDragonUi/releases/latest/download/SurvivorsDragonUi.zip
 Keijin-UI-by-Keijin.zip         | https://github.com/KeijinDE/KeijinUI_modern-as-ui/releases/download/v3.7.1/KeijinUI-3.7.1.zip

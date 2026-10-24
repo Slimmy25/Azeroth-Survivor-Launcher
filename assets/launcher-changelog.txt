@@ -1,4 +1,5 @@
 # Next update (after v0.3)
+- Download More: Azerloot is hidden for now
 - About Launcher has two buttons: ABOUT (a description of the launcher) and LAUNCHER CHANGELOG (this list)
 - New STATS section (can be hidden in Options): your play time, and with the AS Time Tracker addon every run's result, totals, personal bests, milestones and recent runs
 - STATS: a class selector shows the same stats for each class on its own; class pick rate, pick rate month by month, and the abilities you took with their pick rate, win rate, best rank and damage

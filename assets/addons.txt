@@ -6,7 +6,7 @@
 
 AS ADDONS | DBM by Gabriellus | https://github.com/Slimmy25/Azeroth-Survivor-Launcher-Releases/releases/download/addons/DBM-by-Gabriellus.zip | GAMEPLAY
 AS ADDONS | Death Recap By Fotze | https://github.com/Slimmy25/Azeroth-Survivor-Launcher-Releases/releases/download/addons/Death-Recap-by-Fotze.zip | GAMEPLAY
-AS ADDONS | Azerloot By KindaGray | https://github.com/Slimmy25/Azeroth-Survivor-Launcher-Releases/releases/download/addons/Azerloot-by-KindaGray.zip | GAMEPLAY
+# (hidden until it works again) AS ADDONS | Azerloot By KindaGray | https://github.com/Slimmy25/Azeroth-Survivor-Launcher-Releases/releases/download/addons/Azerloot-by-KindaGray.zip | GAMEPLAY
 AS ADDONS | Chest GPS By Fotze | https://github.com/Slimmy25/Azeroth-Survivor-Launcher-Releases/releases/download/addons/Chest-GPS-by-Fotze.zip | COSMETIC
 AS ADDONS | SurvivorsDragonU By Mxgwyn | https://github.com/Slimmy25/Azeroth-Survivor-Launcher-Releases/releases/download/addons/SurvivorsDragonUi-by-Mxgwyn.zip | UI OVERHAUL
 AS ADDONS | Keijin UI By Keijin | https://github.com/Slimmy25/Azeroth-Survivor-Launcher-Releases/releases/download/addons/Keijin-UI-by-Keijin.zip | UI OVERHAUL
