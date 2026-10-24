@@ -1,14 +1,23 @@
 # Builds the launcher on GitHub's own Windows machines every time you upload changes.
 # The finished exe appears under the "Actions" tab (open the run, then "Artifacts").
-# When you create a release with a tag that starts with v (for example v2.0.1), the exe is attached to it.
+# It is attached to a release automatically when:
+#   - you publish a release (any tag name), or push a tag
+#   - you run this workflow by hand (Actions > Build > Run workflow) and type a release's tag name
 name: Build
 
 on:
   push:
     branches: [main]
-    tags: ['v*']
+    tags: ['*']
   pull_request:
+  release:
+    types: [published]
   workflow_dispatch:
+    inputs:
+      release:
+        description: 'Tag of the release to attach the exe to (leave empty to only build)'
+        required: false
+        default: ''
 
 permissions:
   contents: write
@@ -32,11 +41,12 @@ jobs:
             dist/Azeroth Survivors Launcher.sha256.txt
 
       - name: Attach the exe to the release
-        if: startsWith(github.ref, 'refs/tags/v')
+        if: github.event_name == 'release' || startsWith(github.ref, 'refs/tags/') || inputs.release != ''
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
+          TAG: ${{ inputs.release || github.event.release.tag_name || github.ref_name }}
         run: |
-          gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1 || \
-            gh release create "$GITHUB_REF_NAME" --title "Launcher $GITHUB_REF_NAME" --notes "Azeroth Survivors Launcher $GITHUB_REF_NAME"
-          gh release upload "$GITHUB_REF_NAME" "dist/Azeroth Survivors Launcher.exe" "dist/Azeroth Survivors Launcher.sha256.txt" --clobber
+          gh release view "$TAG" >/dev/null 2>&1 || \
+            gh release create "$TAG" --title "Launcher $TAG" --notes "Azeroth Survivors Launcher $TAG"
+          gh release upload "$TAG" "dist/Azeroth Survivors Launcher.exe" "dist/Azeroth Survivors Launcher.sha256.txt" --clobber
