@@ -1,4 +1,5 @@
 # Next update (after v0.3)
+- AZS Stats: in co-op, going down no longer spams the chat; each run is recorded once, when it is really over
 - AZS Stats replaces AS Time Tracker: one addon for every stat, also in game (/azs opens a window with Overview, Classes, Abilities, Records, Nemesis, Co-op and History)
 - Play time is now counted in game by AZS Stats (the time the game runs) instead of by the launcher; cloud saving carries it, with all the stats, to your other PCs
 - Nemesis: a death log (the killing blow and the hits before it) and who kills you most, overall and per class

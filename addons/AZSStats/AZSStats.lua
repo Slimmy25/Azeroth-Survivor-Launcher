@@ -362,14 +362,21 @@ local function CopyList(list, fields)
 	return out;
 end
 
+-- one record per run: a run's summary waits as `pending` until the run is really over (see Offer below)
+local pending, deathHits, recordedRun, finalizing = nil, nil, false, false;
+
 local function Snapshot()
+	if ( finalizing ) then return; end
 	local now = 0;
 	if ( AZS_GetRunTime ) then
 		now = Num(AZS_GetRunTime());
 	end
-	if ( now + 1 < lastRunTime ) then           -- a new run started
+	if ( now + 1 < lastRunTime ) then           -- a new run started: the last one is over
+		lastRunTime = now;
+		if ( pending and AZSStats_Finalize ) then AZSStats_Finalize(); end
 		lastSpells, lastMeter, lastTaken, lastParty = nil, nil, nil, nil;
 		hits = {};
+		recordedRun = false;
 	end
 	lastRunTime = now;
 	local tk = CopyList(AZS_TAKEN, { "source", "dmg" });
@@ -493,9 +500,12 @@ function AZSStats_Record(s)
 		local d = { date = when, hero = run.hero, class = run.class, cname = run.cname, rname = run.rname, zname = run.zname,
 		            t = run.t, lvl = run.lvl, killer = "", spell = "", amt = 0, last = "", top = "" };
 		local now = GetTime();
-		local recent = {};
-		for i = 1, table.getn(hits) do
-			if ( now - hits[i].at < 20 ) then table.insert(recent, hits[i]); end
+		local recent = deathHits;               -- the hits when the hero went down (kept while waiting)
+		if ( not recent ) then
+			recent = {};
+			for i = 1, table.getn(hits) do
+				if ( now - hits[i].at < 20 ) then table.insert(recent, hits[i]); end
+			end
 		end
 		local k = recent[table.getn(recent)];
 		if ( k ) then d.killer = k.src; d.spell = k.spell; d.amt = k.amt; end
@@ -774,12 +784,64 @@ SlashCmdList["AZSSTATS"] = function(msg)
 	end
 end
 
+-- ---------------------------------------------------------------- one record per run
+-- In co-op a downed hero is not out: the game already shows the run's summary while friends can still revive
+-- you, and it changes every few seconds. So a summary is only recorded once the run is really over:
+--   * a victory, or leaving the run: at once
+--   * a defeat: when the run's clock has stopped for a few seconds, or when the next run starts, or when you
+--     log out; a newer summary of the same run replaces the waiting one (after a revive the run goes on)
+-- Each run is recorded once, so nothing repeats in the chat.
+function AZSStats_Finalize()
+	if ( not pending ) then return; end
+	local s = pending;
+	pending = nil;
+	recordedRun = true;
+	finalizing = true;
+	AZSStats_Record(s);
+	finalizing = false;
+	deathHits = nil;
+end
+
+local function Offer(s)
+	if ( type(s) ~= "table" or not s.result ) then return; end
+	if ( recordedRun ) then return; end           -- this run is already counted
+	Check();
+	local sig = Signature(s);
+	if ( sig == AZSStatsDB.lastSig ) then return; end
+	local fresh = not pending or Signature(pending) ~= sig;
+	pending = s;
+	if ( Kind(s.result) == "defeat" ) then
+		if ( fresh ) then                             -- went down (again): keep the hits that did it
+			local now = GetTime();
+			deathHits = {};
+			for i = 1, table.getn(hits) do
+				if ( now - hits[i].at < 20 ) then table.insert(deathHits, hits[i]); end
+			end
+		end
+	else
+		AZSStats_Finalize();
+	end
+end
+
+local stillFor, clockSeen = 0, -1;
+
+-- every 2 seconds: is a waiting defeat final yet?
+local function CheckPending()
+	if ( not pending ) then stillFor, clockSeen = 0, -1; return; end
+	local now = 0;
+	if ( AZS_GetRunTime ) then now = Num(AZS_GetRunTime()); end
+	if ( now == clockSeen ) then stillFor = stillFor + 2; else stillFor = 0; end
+	clockSeen = now;
+	if ( stillFor >= 4 ) then AZSStats_Finalize(); end
+end
+
 -- the run's end arrives as an addon message; AZS_GetRunSummary() is checked too, now and then, in case
 -- the message came before this addon was listening (each run is counted once either way)
 local frame = CreateFrame("Frame", "AZSStatsEventFrame");
 local waited = 0;
 frame:RegisterEvent("VARIABLES_LOADED");
 frame:RegisterEvent("CHAT_MSG_ADDON");
+frame:RegisterEvent("PLAYER_LOGOUT");
 frame:RegisterEvent("CHAT_MSG_COMBAT_CREATURE_VS_SELF_HITS");
 frame:RegisterEvent("CHAT_MSG_SPELL_CREATURE_VS_SELF_DAMAGE");
 frame:RegisterEvent("CHAT_MSG_SPELL_PERIODIC_SELF_DAMAGE");
@@ -817,7 +879,9 @@ frame:SetScript("OnEvent", function()
 	if ( event == "VARIABLES_LOADED" ) then
 		StartSession();
 	elseif ( event == "CHAT_MSG_ADDON" ) then
-		if ( arg1 == "AZSEND" and arg2 ) then AZSStats_Record(Parse(arg2)); end
+		if ( arg1 == "AZSEND" and arg2 ) then Offer(Parse(arg2)); end
+	elseif ( event == "PLAYER_LOGOUT" ) then
+		AZSStats_Finalize();
 	else
 		OnHit(arg1);
 	end
@@ -847,9 +911,10 @@ frame:SetScript("OnUpdate", function()
 	if ( AZS_GetRunSummary ) then
 		local s = AZS_GetRunSummary();
 		if ( s ) then
-			AZSStats_Record(s);
+			Offer(s);
 		end
 	end
+	CheckPending();
 end);
 
 -- for the window (AZSStatsUI.lua)
