@@ -972,3 +972,25 @@ ABOUT
 = OVER
 LAUNCHER CHANGELOG
 = LAUNCHER-WIJZIGINGEN
+Overview
+= Overzicht
+Records
+= Records
+History
+= Geschiedenis
+‹ ALL CLASSES
+= ‹ ALLE KLASSEN
+Your Survivor
+= Jouw overlever
+Runs {#0} · Victories {#1} · Best level {#2}
+= Runs {#0} · Overwinningen {#1} · Hoogste level {#2}
+Picked in {#0}% of your runs
+= Gekozen in {#0}% van je runs
+No runs recorded yet.
+= Nog geen runs vastgelegd.
+Choose a class to see its own stats.
+= Kies een klasse om haar eigen statistieken te zien.
+Level {#0}
+= Level {#0}
+Runs: {#0} · Won: {#1}
+= Runs: {#0} · Gewonnen: {#1}

@@ -973,3 +973,25 @@ ABOUT
 = 关于
 LAUNCHER CHANGELOG
 = 启动器更新日志
+Overview
+= 概览
+Records
+= 纪录
+History
+= 历史
+‹ ALL CLASSES
+= ‹ 所有职业
+Your Survivor
+= 你的幸存者
+Runs {#0} · Victories {#1} · Best level {#2}
+= 对局 {#0} · 胜利 {#1} · 最高等级 {#2}
+Picked in {#0}% of your runs
+= 在你 {#0}% 的对局中被选择
+No runs recorded yet.
+= 还没有记录任何对局。
+Choose a class to see its own stats.
+= 选择一个职业，查看它自己的统计。
+Level {#0}
+= 等级 {#0}
+Runs: {#0} · Won: {#1}
+= 对局：{#0} · 胜利：{#1}

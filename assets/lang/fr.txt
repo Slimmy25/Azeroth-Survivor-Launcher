@@ -972,3 +972,25 @@ ABOUT
 = À PROPOS
 LAUNCHER CHANGELOG
 = NOTES DU LAUNCHER
+Overview
+= Aperçu
+Records
+= Records
+History
+= Historique
+‹ ALL CLASSES
+= ‹ TOUTES LES CLASSES
+Your Survivor
+= Ton survivant
+Runs {#0} · Victories {#1} · Best level {#2}
+= Parties {#0} · Victoires {#1} · Meilleur niveau {#2}
+Picked in {#0}% of your runs
+= Choisie dans {#0} % de tes parties
+No runs recorded yet.
+= Aucune partie enregistrée pour l'instant.
+Choose a class to see its own stats.
+= Choisis une classe pour voir ses propres statistiques.
+Level {#0}
+= Niveau {#0}
+Runs: {#0} · Won: {#1}
+= Parties : {#0} · Gagnées : {#1}

@@ -972,3 +972,25 @@ ABOUT
 = TENTANG
 LAUNCHER CHANGELOG
 = PERUBAHAN LAUNCHER
+Overview
+= Ringkasan
+Records
+= Rekor
+History
+= Riwayat
+‹ ALL CLASSES
+= ‹ SEMUA KELAS
+Your Survivor
+= Penyintasmu
+Runs {#0} · Victories {#1} · Best level {#2}
+= Permainan {#0} · Kemenangan {#1} · Level terbaik {#2}
+Picked in {#0}% of your runs
+= Dipilih di {#0}% permainanmu
+No runs recorded yet.
+= Belum ada permainan yang tercatat.
+Choose a class to see its own stats.
+= Pilih kelas untuk melihat statistiknya sendiri.
+Level {#0}
+= Level {#0}
+Runs: {#0} · Won: {#1}
+= Permainan: {#0} · Menang: {#1}

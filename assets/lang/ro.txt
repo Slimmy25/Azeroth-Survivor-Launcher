@@ -973,3 +973,25 @@ ABOUT
 = DESPRE
 LAUNCHER CHANGELOG
 = MODIFICĂRILE LAUNCHERULUI
+Overview
+= Prezentare
+Records
+= Recorduri
+History
+= Istoric
+‹ ALL CLASSES
+= ‹ TOATE CLASELE
+Your Survivor
+= Supraviețuitorul tău
+Runs {#0} · Victories {#1} · Best level {#2}
+= Runde {#0} · Victorii {#1} · Cel mai bun nivel {#2}
+Picked in {#0}% of your runs
+= Aleasă în {#0}% din rundele tale
+No runs recorded yet.
+= Nicio rundă înregistrată încă.
+Choose a class to see its own stats.
+= Alege o clasă ca să-i vezi statisticile.
+Level {#0}
+= Nivel {#0}
+Runs: {#0} · Won: {#1}
+= Runde: {#0} · Câștigate: {#1}

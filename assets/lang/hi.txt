@@ -973,3 +973,25 @@ ABOUT
 = परिचय
 LAUNCHER CHANGELOG
 = लॉन्चर बदलाव
+Overview
+= अवलोकन
+Records
+= रिकॉर्ड
+History
+= इतिहास
+‹ ALL CLASSES
+= ‹ सभी क्लास
+Your Survivor
+= आपका सर्वाइवर
+Runs {#0} · Victories {#1} · Best level {#2}
+= रन {#0} · जीत {#1} · सबसे अच्छा लेवल {#2}
+Picked in {#0}% of your runs
+= आपके {#0}% रन में चुना गया
+No runs recorded yet.
+= अभी तक कोई रन रिकॉर्ड नहीं हुआ।
+Choose a class to see its own stats.
+= किसी क्लास के अपने आँकड़े देखने के लिए उसे चुनें।
+Level {#0}
+= लेवल {#0}
+Runs: {#0} · Won: {#1}
+= रन: {#0} · जीते: {#1}

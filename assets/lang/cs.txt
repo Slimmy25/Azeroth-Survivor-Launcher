@@ -973,3 +973,25 @@ ABOUT
 = O SPOUŠTĚČI
 LAUNCHER CHANGELOG
 = ZMĚNY SPOUŠTĚČE
+Overview
+= Přehled
+Records
+= Rekordy
+History
+= Historie
+‹ ALL CLASSES
+= ‹ VŠECHNA POVOLÁNÍ
+Your Survivor
+= Tvůj přeživší
+Runs {#0} · Victories {#1} · Best level {#2}
+= Běhy {#0} · Vítězství {#1} · Nejvyšší úroveň {#2}
+Picked in {#0}% of your runs
+= Zvoleno v {#0} % tvých běhů
+No runs recorded yet.
+= Zatím žádné zaznamenané běhy.
+Choose a class to see its own stats.
+= Vyber povolání a uvidíš jeho vlastní statistiky.
+Level {#0}
+= Úroveň {#0}
+Runs: {#0} · Won: {#1}
+= Běhy: {#0} · Výhry: {#1}

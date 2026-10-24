@@ -972,3 +972,25 @@ ABOUT
 = OM
 LAUNCHER CHANGELOG
 = LAUNCHERNS ÄNDRINGAR
+Overview
+= Översikt
+Records
+= Rekord
+History
+= Historik
+‹ ALL CLASSES
+= ‹ ALLA KLASSER
+Your Survivor
+= Din överlevare
+Runs {#0} · Victories {#1} · Best level {#2}
+= Rundor {#0} · Segrar {#1} · Bästa nivå {#2}
+Picked in {#0}% of your runs
+= Vald i {#0} % av dina rundor
+No runs recorded yet.
+= Inga rundor sparade än.
+Choose a class to see its own stats.
+= Välj en klass för att se dess egen statistik.
+Level {#0}
+= Nivå {#0}
+Runs: {#0} · Won: {#1}
+= Rundor: {#0} · Vunna: {#1}

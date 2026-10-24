@@ -973,3 +973,25 @@ ABOUT
 = 概要
 LAUNCHER CHANGELOG
 = ランチャー更新履歴
+Overview
+= 概要
+Records
+= 記録
+History
+= 履歴
+‹ ALL CLASSES
+= ‹ 全クラス
+Your Survivor
+= あなたのサバイバー
+Runs {#0} · Victories {#1} · Best level {#2}
+= ラン {#0} · 勝利 {#1} · 最高レベル {#2}
+Picked in {#0}% of your runs
+= ランの{#0}%で選択
+No runs recorded yet.
+= まだ記録されたランはありません。
+Choose a class to see its own stats.
+= クラスを選ぶと、そのクラスの統計が見られます。
+Level {#0}
+= レベル {#0}
+Runs: {#0} · Won: {#1}
+= ラン: {#0} · 勝利: {#1}

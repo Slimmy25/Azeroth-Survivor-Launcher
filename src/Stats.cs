@@ -393,6 +393,9 @@ namespace AzerothLauncher
             st.Last = LuaReader.Text(db, "last");
             st.Total = Block("", LuaReader.Tab(db, "totals"));
             Bests(LuaReader.Tab(db, "best"), st.Total.Best);
+            StatRecord rec;                                  // version 1 kept these only as records
+            if (st.Total.BestLevel <= 0 && st.Total.Best.TryGetValue("lvl", out rec)) st.Total.BestLevel = rec.Value;
+            if (st.Total.BestTime <= 0 && st.Total.Best.TryGetValue("time", out rec)) st.Total.BestTime = rec.Value;
             Abilities(LuaReader.Tab(db, "abilities"), st.Abilities);
             Groups(LuaReader.Tab(db, "classes"), st.Classes);
             Groups(LuaReader.Tab(db, "races"), st.Races);

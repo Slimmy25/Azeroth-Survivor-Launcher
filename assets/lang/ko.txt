@@ -973,3 +973,25 @@ ABOUT
 = 소개
 LAUNCHER CHANGELOG
 = 런처 변경 내역
+Overview
+= 개요
+Records
+= 기록
+History
+= 기록 내역
+‹ ALL CLASSES
+= ‹ 모든 직업
+Your Survivor
+= 나의 생존자
+Runs {#0} · Victories {#1} · Best level {#2}
+= 런 {#0} · 승리 {#1} · 최고 레벨 {#2}
+Picked in {#0}% of your runs
+= 런의 {#0}%에서 선택
+No runs recorded yet.
+= 아직 기록된 런이 없습니다.
+Choose a class to see its own stats.
+= 직업을 고르면 그 직업만의 통계를 볼 수 있습니다.
+Level {#0}
+= 레벨 {#0}
+Runs: {#0} · Won: {#1}
+= 런: {#0} · 승리: {#1}

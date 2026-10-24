@@ -972,3 +972,25 @@ ABOUT
 = TIETOJA
 LAUNCHER CHANGELOG
 = KÄYNNISTIMEN MUUTOKSET
+Overview
+= Yleiskatsaus
+Records
+= Ennätykset
+History
+= Historia
+‹ ALL CLASSES
+= ‹ KAIKKI LUOKAT
+Your Survivor
+= Selviytyjäsi
+Runs {#0} · Victories {#1} · Best level {#2}
+= Pelikerrat {#0} · Voitot {#1} · Paras taso {#2}
+Picked in {#0}% of your runs
+= Valittu {#0} %:lla pelikerroistasi
+No runs recorded yet.
+= Pelikertoja ei ole vielä tallennettu.
+Choose a class to see its own stats.
+= Valitse luokka nähdäksesi sen omat tilastot.
+Level {#0}
+= Taso {#0}
+Runs: {#0} · Won: {#1}
+= Pelikerrat: {#0} · Voitot: {#1}
