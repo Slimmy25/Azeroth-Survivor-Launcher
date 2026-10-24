@@ -1049,6 +1049,25 @@ namespace AzerothLauncher
                 Put(cb, 18, y);
                 y += cb.Height + 4;
             }
+            // play time
+            Put(UI.Line(Theme.Bronze, PW - 40, 1), 20, y + 4);
+            y += 15;
+            var head = PutText("Play time", 11, FontStyle.Bold, Theme.Gold, 20, y, 0);
+            long sessions = PlayLong("play_sessions");
+            string stats = sessions == 0 ? "No games played with this launcher yet." :
+                "Total: " + Duration(PlayLong("play_seconds")) + " over " + Util.Plural((int)sessions, "session") + "\n" +
+                "Last session: " + Duration(PlayLong("play_last_seconds")) + " (" + Cfg.Str("play_last_date") + ")\n" +
+                "Longest session: " + Duration(PlayLong("play_longest_seconds"));
+            PutText(stats, 10, FontStyle.Regular, Theme.Text, 20, BottomOf(head) + 2, PW - 40);
+            if (sessions > 0)
+                Put(new WowButton("RESET PLAY TIME", delegate
+                {
+                    if (MessageBox.Show(side, "Set the play time back to zero?", "Play time", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
+                        ResetPlayTime();
+                        BuildPanel("Options");
+                    }
+                }, 190, 30, 9), 20, PH - 10 - 30);
             Put(new WowButton("RUN SETUP AGAIN", delegate { RunSetup(); }, 190, 30, 9), PW - 20 - 190, PH - 10 - 30);
         }
 
