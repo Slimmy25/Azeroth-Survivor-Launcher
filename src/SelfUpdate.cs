@@ -21,7 +21,8 @@ namespace AzerothLauncher
 
     public static class SelfUpdate
     {
-        public const string Repo = "Slimmy25/Azeroth-Survivor-Launcher";
+        // The public repository that only holds the exe releases (the source code repository is private)
+        public const string Repo = "Slimmy25/Azeroth-Survivor-Launcher-Releases";
         public static string ReleasesPage { get { return "https://github.com/" + Repo + "/releases/latest"; } }
 
         static string ExePath { get { return Path.GetFullPath(Application.ExecutablePath); } }
