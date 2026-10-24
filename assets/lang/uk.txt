@@ -973,3 +973,25 @@ ABOUT
 = ПРО ЛАУНЧЕР
 LAUNCHER CHANGELOG
 = ЗМІНИ ЛАУНЧЕРА
+Overview
+= Огляд
+Records
+= Рекорди
+History
+= Історія
+‹ ALL CLASSES
+= ‹ УСІ КЛАСИ
+Your Survivor
+= Ваш вцілілий
+Runs {#0} · Victories {#1} · Best level {#2}
+= Забіги {#0} · Перемоги {#1} · Найкращий рівень {#2}
+Picked in {#0}% of your runs
+= Вибрано в {#0}% ваших забігів
+No runs recorded yet.
+= Забігів ще немає.
+Choose a class to see its own stats.
+= Виберіть клас, щоб побачити його статистику.
+Level {#0}
+= Рівень {#0}
+Runs: {#0} · Won: {#1}
+= Забіги: {#0} · Перемоги: {#1}

@@ -973,3 +973,25 @@ ABOUT
 = HAKKINDA
 LAUNCHER CHANGELOG
 = BAŞLATICI DEĞİŞİKLİKLERİ
+Overview
+= Genel bakış
+Records
+= Rekorlar
+History
+= Geçmiş
+‹ ALL CLASSES
+= ‹ TÜM SINIFLAR
+Your Survivor
+= Hayatta kalanın
+Runs {#0} · Victories {#1} · Best level {#2}
+= Oyunlar {#0} · Zaferler {#1} · En iyi seviye {#2}
+Picked in {#0}% of your runs
+= Oyunlarının %{#0} kadarında seçildi
+No runs recorded yet.
+= Henüz kayıtlı oyun yok.
+Choose a class to see its own stats.
+= Kendi istatistiklerini görmek için bir sınıf seç.
+Level {#0}
+= Seviye {#0}
+Runs: {#0} · Won: {#1}
+= Oyunlar: {#0} · Kazanılan: {#1}

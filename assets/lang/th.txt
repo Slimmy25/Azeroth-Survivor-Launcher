@@ -973,3 +973,25 @@ ABOUT
 = เกี่ยวกับ
 LAUNCHER CHANGELOG
 = บันทึกการเปลี่ยนแปลงตัวเปิดเกม
+Overview
+= ภาพรวม
+Records
+= สถิติสูงสุด
+History
+= ประวัติ
+‹ ALL CLASSES
+= ‹ ทุกคลาส
+Your Survivor
+= ผู้รอดชีวิตของคุณ
+Runs {#0} · Victories {#1} · Best level {#2}
+= รอบ {#0} · ชนะ {#1} · เลเวลสูงสุด {#2}
+Picked in {#0}% of your runs
+= ถูกเลือกใน {#0}% ของรอบที่เล่น
+No runs recorded yet.
+= ยังไม่มีรอบที่บันทึกไว้
+Choose a class to see its own stats.
+= เลือกคลาสเพื่อดูสถิติของคลาสนั้น
+Level {#0}
+= เลเวล {#0}
+Runs: {#0} · Won: {#1}
+= รอบ: {#0} · ชนะ: {#1}

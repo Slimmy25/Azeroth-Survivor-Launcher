@@ -972,3 +972,25 @@ ABOUT
 = SOBRE
 LAUNCHER CHANGELOG
 = MUDANÇAS DO LAUNCHER
+Overview
+= Visão geral
+Records
+= Recordes
+History
+= Histórico
+‹ ALL CLASSES
+= ‹ TODAS AS CLASSES
+Your Survivor
+= Seu sobrevivente
+Runs {#0} · Victories {#1} · Best level {#2}
+= Partidas {#0} · Vitórias {#1} · Melhor nível {#2}
+Picked in {#0}% of your runs
+= Escolhida em {#0}% das suas partidas
+No runs recorded yet.
+= Nenhuma partida registrada ainda.
+Choose a class to see its own stats.
+= Escolha uma classe para ver as estatísticas dela.
+Level {#0}
+= Nível {#0}
+Runs: {#0} · Won: {#1}
+= Partidas: {#0} · Vitórias: {#1}

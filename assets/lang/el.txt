@@ -973,3 +973,25 @@ ABOUT
 = ΣΧΕΤΙΚΑ
 LAUNCHER CHANGELOG
 = ΑΛΛΑΓΕΣ LAUNCHER
+Overview
+= Επισκόπηση
+Records
+= Ρεκόρ
+History
+= Ιστορικό
+‹ ALL CLASSES
+= ‹ ΟΛΕΣ ΟΙ ΚΛΑΣΕΙΣ
+Your Survivor
+= Ο επιζών σου
+Runs {#0} · Victories {#1} · Best level {#2}
+= Γύροι {#0} · Νίκες {#1} · Καλύτερο επίπεδο {#2}
+Picked in {#0}% of your runs
+= Επιλέχθηκε στο {#0}% των γύρων σου
+No runs recorded yet.
+= Δεν έχουν καταγραφεί γύροι ακόμα.
+Choose a class to see its own stats.
+= Διάλεξε μια κλάση για να δεις τα στατιστικά της.
+Level {#0}
+= Επίπεδο {#0}
+Runs: {#0} · Won: {#1}
+= Γύροι: {#0} · Νίκες: {#1}

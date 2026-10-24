@@ -973,3 +973,25 @@ ABOUT
 = GIỚI THIỆU
 LAUNCHER CHANGELOG
 = NHẬT KÝ LAUNCHER
+Overview
+= Tổng quan
+Records
+= Kỷ lục
+History
+= Lịch sử
+‹ ALL CLASSES
+= ‹ MỌI LỚP NHÂN VẬT
+Your Survivor
+= Người sống sót của bạn
+Runs {#0} · Victories {#1} · Best level {#2}
+= Lượt {#0} · Chiến thắng {#1} · Cấp cao nhất {#2}
+Picked in {#0}% of your runs
+= Được chọn trong {#0}% lượt chơi
+No runs recorded yet.
+= Chưa có lượt chơi nào được ghi lại.
+Choose a class to see its own stats.
+= Chọn một lớp để xem thống kê riêng.
+Level {#0}
+= Cấp {#0}
+Runs: {#0} · Won: {#1}
+= Lượt: {#0} · Thắng: {#1}

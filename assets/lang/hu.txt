@@ -973,3 +973,25 @@ ABOUT
 = NÉVJEGY
 LAUNCHER CHANGELOG
 = A LAUNCHER VÁLTOZÁSAI
+Overview
+= Áttekintés
+Records
+= Rekordok
+History
+= Előzmények
+‹ ALL CLASSES
+= ‹ MINDEN KASZT
+Your Survivor
+= A túlélőd
+Runs {#0} · Victories {#1} · Best level {#2}
+= Menetek {#0} · Győzelmek {#1} · Legjobb szint {#2}
+Picked in {#0}% of your runs
+= A meneteid {#0}%-ában választva
+No runs recorded yet.
+= Még nincs rögzített menet.
+Choose a class to see its own stats.
+= Válassz egy kasztot a saját statisztikájához.
+Level {#0}
+= Szint {#0}
+Runs: {#0} · Won: {#1}
+= Menetek: {#0} · Győzelmek: {#1}

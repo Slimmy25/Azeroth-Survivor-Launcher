@@ -1,4 +1,5 @@
 # Next update (after v0.3)
+- STATS has a new look, like a WoW armory page: a character header with stat chips, tabs (Overview, Classes, Abilities, Records, History) and item-style rows colored by rarity
 - Download More: Azerloot is hidden for now
 - About Launcher has two buttons: ABOUT (a description of the launcher) and LAUNCHER CHANGELOG (this list)
 - New STATS section (can be hidden in Options): your play time, and with the AS Time Tracker addon every run's result, totals, personal bests, milestones and recent runs
