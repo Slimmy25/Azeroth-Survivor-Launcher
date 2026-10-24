@@ -7,6 +7,9 @@ The launcher for **Azeroth Survivors**, a game made by Aethus, styled after the 
   shares them between your PCs (downloaded before the game starts, uploaded after it closes, even after a crash)
 - **Addons**: switch addons on and off, two saveable profiles, and **Download More** to install addons with one click
 - **Changelog**: every patch note, newest first
+- **Guide**: a new player guide (classes, controls, zones, tips)
+- **Stats** (optional, can be hidden in Options): your play time, and with the built-in **Azeroth Stats** addon
+  every run's result, totals, personal bests, milestones and per class / race / zone records
 - **UPDATE**: checks this repository's latest release when the launcher starts and offers the new launcher exe
   (never forced); it downloads it, checks its SHA-256 and restarts itself. Game updates can be switched on too
 - Runs in the system tray; only one copy runs at a time
@@ -43,6 +46,8 @@ GitHub (see the **Actions** tab).
 | Patch notes | `assets/changelog.txt` (posts separated by a line with only `===`) |
 | Download More list | `assets/addons.txt` (format explained at the top) |
 | About Launcher page | `assets/about.txt` |
+| New player guide | `assets/guide.txt` |
+| The Azeroth Stats addon | `addons/AzerothStats` (built into the exe; the STATS page installs it) |
 | Where launcher updates come from | `Repo` in `src/SelfUpdate.cs` (the latest non-pre-release) |
 | Game update address | `ManifestUrl` in `src/Update.cs` |
 | Install link, Discord link | `src/Launcher.cs` |

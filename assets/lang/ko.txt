@@ -831,3 +831,119 @@ OPEN ›
 = 열기 ›
 New to Azeroth Survivors? Pick a topic.
 = Azeroth Survivors가 처음인가요? 주제를 고르세요.
+STATS
+= 통계
+Stats
+= 통계
+Show the Stats section (your play time and run records)
+= 통계 섹션 표시 (플레이 시간과 런 기록)
+Your sessions and records are on the STATS page.
+= 세션과 기록은 통계 페이지에 있습니다.
+INSTALL STATS ADDON
+= 통계 애드온 설치
+UPDATE STATS ADDON
+= 통계 애드온 업데이트
+Your first run is in the books!
+= 첫 번째 런을 마쳤습니다!
+{#0} enemies slain in {#1} runs!
+= {#1}번의 런에서 적 {#0}마리 처치!
+{#0} victories, {#1} bosses defeated and {#2} gold collected.
+= 승리 {#0}회, 보스 {#1}마리 처치, 골드 {#2} 획득.
+Time played
+= 플레이한 시간
+Sessions
+= 세션
+Longest session
+= 가장 긴 세션
+Last session
+= 마지막 세션
+Your runs
+= 나의 런
+Track every run
+= 모든 런 기록하기
+The stats file could not be read ({0}).
+= 통계 파일을 읽을 수 없습니다 ({0}).
+The Azeroth Stats addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
+= Azeroth Stats 애드온은 플레이한 모든 런을 기록합니다: 승리, 처치, 피해, 골드, 개인 최고 기록. 설치하고 런을 한 번 끝내면 여기에 통계가 표시됩니다.
+It is optional: without it, this page only shows your play time.
+= 선택 사항입니다: 없으면 이 페이지에는 플레이 시간만 표시됩니다.
+The Azeroth Stats addon is turned off. Turn it on in Addons to keep recording your runs.
+= Azeroth Stats 애드온이 꺼져 있습니다. 런을 계속 기록하려면 애드온에서 켜세요.
+No runs recorded yet. Finish a run with the Azeroth Stats addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
+= 아직 기록된 런이 없습니다. Azeroth Stats를 켠 상태로 런을 한 번 끝내세요. 게임은 종료할 때 애드온 데이터를 저장하므로, 게임을 닫은 후에 통계가 여기에 표시됩니다.
+Runs
+= 런
+Victories
+= 승리
+Win rate
+= 승률
+Time in runs
+= 런 시간
+Enemies slain
+= 처치한 적
+Elites
+= 정예
+Guardians
+= 수호자
+Bosses
+= 보스
+Damage dealt
+= 가한 피해
+Damage taken
+= 받은 피해
+Gold collected
+= 획득한 골드
+Caches opened
+= 연 상자
+Personal bests
+= 개인 최고 기록
+Longest run
+= 가장 긴 런
+Fastest victory
+= 가장 빠른 승리
+Highest level
+= 최고 레벨
+Most kills in a run
+= 한 런 최다 처치
+Most damage in a run
+= 한 런 최대 피해
+Most gold in a run
+= 한 런 최다 골드
+Most bosses in a run
+= 한 런 최다 보스
+Milestones
+= 이정표
+Hours played
+= 플레이한 시간(시간)
+Every milestone reached!
+= 모든 이정표 달성!
+Classes
+= 직업
+Races
+= 종족
+Zones
+= 지역
+Runs: {#0} · Won: {#1} · Longest: {2} · Best level: {#3}
+= 런: {#0} · 승리: {#1} · 최장: {2} · 최고 레벨: {#3}
+{#0} kills
+= {#0}마리 처치
+Recent runs
+= 최근 런
+Victory
+= 승리
+Defeat
+= 패배
+Left the run
+= 중단
+Survived {0} · Level {#1} · Kills {#2} · Gold {#3}
+= 생존 {0} · 레벨 {#1} · 처치 {#2} · 골드 {#3}
+In game, type /azstats to see your stats.
+= 게임에서 /azstats 를 입력하면 통계를 볼 수 있습니다.
+Saved by the game {0}.
+= 게임이 저장한 시각: {0}.
+Azeroth Stats updated.
+= Azeroth Stats를 업데이트했습니다.
+Azeroth Stats installed. It records your runs from now on.
+= Azeroth Stats를 설치했습니다. 이제부터 런을 기록합니다.
+Could not install Azeroth Stats:\n\n{0}
+= Azeroth Stats를 설치할 수 없습니다:\n\n{0}

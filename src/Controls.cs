@@ -366,6 +366,21 @@ namespace AzerothLauncher
             }
         }
 
+        // a trophy cup, for the STATS section
+        public static void Trophy(Graphics g, float x, float y, Color c)
+        {
+            using (var p = new Pen(c, 2))
+            {
+                g.DrawLines(p, new[] { new PointF(x - 7, y - 9), new PointF(x + 7, y - 9), new PointF(x + 6, y - 1),
+                                       new PointF(x + 2, y + 2), new PointF(x - 2, y + 2), new PointF(x - 6, y - 1),
+                                       new PointF(x - 7, y - 9) });
+                g.DrawArc(p, x - 12, y - 8, 7, 7, 90, 180);      // the handles
+                g.DrawArc(p, x + 5, y - 8, 7, 7, 270, 180);
+                g.DrawLine(p, x, y + 2, x, y + 6);               // stem and base
+                g.DrawLine(p, x - 6, y + 8, x + 6, y + 8);
+            }
+        }
+
         public static void Info(Graphics g, float x, float y, Color c)
         {
             using (var p = new Pen(c, 2)) g.DrawEllipse(p, x - 10, y - 10, 20, 20);

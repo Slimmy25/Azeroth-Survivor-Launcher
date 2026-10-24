@@ -831,3 +831,119 @@ OPEN ›
 = MỞ ›
 New to Azeroth Survivors? Pick a topic.
 = Mới chơi Azeroth Survivors? Hãy chọn một chủ đề.
+STATS
+= THỐNG KÊ
+Stats
+= Thống kê
+Show the Stats section (your play time and run records)
+= Hiện mục Thống kê (thời gian chơi và kỷ lục các lượt chơi)
+Your sessions and records are on the STATS page.
+= Các phiên chơi và kỷ lục của bạn nằm ở trang THỐNG KÊ.
+INSTALL STATS ADDON
+= CÀI ĐẶT ADDON THỐNG KÊ
+UPDATE STATS ADDON
+= CẬP NHẬT ADDON THỐNG KÊ
+Your first run is in the books!
+= Lượt chơi đầu tiên đã hoàn thành!
+{#0} enemies slain in {#1} runs!
+= Đã hạ {#0} kẻ địch trong {#1} lượt chơi!
+{#0} victories, {#1} bosses defeated and {#2} gold collected.
+= {#0} chiến thắng, {#1} trùm bị hạ và {#2} vàng thu được.
+Time played
+= Thời gian đã chơi
+Sessions
+= Phiên chơi
+Longest session
+= Phiên dài nhất
+Last session
+= Phiên gần nhất
+Your runs
+= Các lượt chơi của bạn
+Track every run
+= Ghi lại mọi lượt chơi
+The stats file could not be read ({0}).
+= Không thể đọc tệp thống kê ({0}).
+The Azeroth Stats addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
+= Addon Azeroth Stats ghi lại mọi lượt chơi của bạn: chiến thắng, số hạ gục, sát thương, vàng và các kỷ lục cá nhân. Hãy cài nó, chơi xong một lượt, và thống kê sẽ hiện ở đây.
+It is optional: without it, this page only shows your play time.
+= Addon này không bắt buộc: không có nó, trang này chỉ hiện thời gian chơi của bạn.
+The Azeroth Stats addon is turned off. Turn it on in Addons to keep recording your runs.
+= Addon Azeroth Stats đang tắt. Hãy bật nó trong Addon để tiếp tục ghi lại các lượt chơi.
+No runs recorded yet. Finish a run with the Azeroth Stats addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
+= Chưa có lượt chơi nào được ghi lại. Hãy chơi xong một lượt khi bật Azeroth Stats. Trò chơi lưu dữ liệu addon khi bạn thoát, nên thống kê sẽ hiện ở đây sau khi bạn đóng trò chơi.
+Runs
+= Lượt chơi
+Victories
+= Chiến thắng
+Win rate
+= Tỉ lệ thắng
+Time in runs
+= Thời gian trong lượt chơi
+Enemies slain
+= Kẻ địch bị hạ
+Elites
+= Tinh nhuệ
+Guardians
+= Hộ vệ
+Bosses
+= Trùm
+Damage dealt
+= Sát thương gây ra
+Damage taken
+= Sát thương nhận vào
+Gold collected
+= Vàng thu được
+Caches opened
+= Rương đã mở
+Personal bests
+= Kỷ lục cá nhân
+Longest run
+= Lượt chơi dài nhất
+Fastest victory
+= Chiến thắng nhanh nhất
+Highest level
+= Cấp cao nhất
+Most kills in a run
+= Hạ gục nhiều nhất trong một lượt
+Most damage in a run
+= Sát thương nhiều nhất trong một lượt
+Most gold in a run
+= Vàng nhiều nhất trong một lượt
+Most bosses in a run
+= Trùm nhiều nhất trong một lượt
+Milestones
+= Cột mốc
+Hours played
+= Số giờ đã chơi
+Every milestone reached!
+= Đã đạt mọi cột mốc!
+Classes
+= Lớp nhân vật
+Races
+= Chủng tộc
+Zones
+= Khu vực
+Runs: {#0} · Won: {#1} · Longest: {2} · Best level: {#3}
+= Lượt: {#0} · Thắng: {#1} · Dài nhất: {2} · Cấp cao nhất: {#3}
+{#0} kills
+= {#0} hạ gục
+Recent runs
+= Lượt chơi gần đây
+Victory
+= Chiến thắng
+Defeat
+= Thất bại
+Left the run
+= Đã rời
+Survived {0} · Level {#1} · Kills {#2} · Gold {#3}
+= Sống sót {0} · Cấp {#1} · Hạ gục {#2} · Vàng {#3}
+In game, type /azstats to see your stats.
+= Trong game, gõ /azstats để xem thống kê.
+Saved by the game {0}.
+= Được trò chơi lưu lúc: {0}.
+Azeroth Stats updated.
+= Đã cập nhật Azeroth Stats.
+Azeroth Stats installed. It records your runs from now on.
+= Đã cài Azeroth Stats. Từ giờ nó sẽ ghi lại các lượt chơi của bạn.
+Could not install Azeroth Stats:\n\n{0}
+= Không thể cài Azeroth Stats:\n\n{0}

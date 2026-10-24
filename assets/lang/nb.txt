@@ -830,3 +830,119 @@ OPEN ›
 = ÅPNE ›
 New to Azeroth Survivors? Pick a topic.
 = Ny i Azeroth Survivors? Velg et emne.
+STATS
+= STATISTIKK
+Stats
+= Statistikk
+Show the Stats section (your play time and run records)
+= Vis Statistikk-delen (spilletid og rekorder fra rundene dine)
+Your sessions and records are on the STATS page.
+= Øktene og rekordene dine finner du på siden STATISTIKK.
+INSTALL STATS ADDON
+= INSTALLER STATISTIKK-TILLEGG
+UPDATE STATS ADDON
+= OPPDATER STATISTIKK-TILLEGG
+Your first run is in the books!
+= Den første runden din er i boks!
+{#0} enemies slain in {#1} runs!
+= {#0} fiender beseiret på {#1} runder!
+{#0} victories, {#1} bosses defeated and {#2} gold collected.
+= {#0} seire, {#1} bosser beseiret og {#2} gull samlet.
+Time played
+= Spilt tid
+Sessions
+= Økter
+Longest session
+= Lengste økt
+Last session
+= Siste økt
+Your runs
+= Rundene dine
+Track every run
+= Før logg over hver runde
+The stats file could not be read ({0}).
+= Statistikkfilen kunne ikke leses ({0}).
+The Azeroth Stats addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
+= Tillegget Azeroth Stats fører logg over hver runde du spiller: seire, drap, skade, gull og personlige rekorder. Installer det, fullfør en runde, så dukker statistikken opp her.
+It is optional: without it, this page only shows your play time.
+= Det er valgfritt: uten det viser denne siden bare spilletiden din.
+The Azeroth Stats addon is turned off. Turn it on in Addons to keep recording your runs.
+= Tillegget Azeroth Stats er slått av. Slå det på under Tillegg for å fortsette å registrere rundene dine.
+No runs recorded yet. Finish a run with the Azeroth Stats addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
+= Ingen runder registrert ennå. Fullfør en runde med Azeroth Stats slått på. Spillet lagrer tilleggsdata når du avslutter, så statistikken dukker opp her etter at du har lukket spillet.
+Runs
+= Runder
+Victories
+= Seire
+Win rate
+= Seiersprosent
+Time in runs
+= Tid i runder
+Enemies slain
+= Beseirede fiender
+Elites
+= Eliter
+Guardians
+= Voktere
+Bosses
+= Bosser
+Damage dealt
+= Påført skade
+Damage taken
+= Mottatt skade
+Gold collected
+= Samlet gull
+Caches opened
+= Åpnede kister
+Personal bests
+= Personlige rekorder
+Longest run
+= Lengste runde
+Fastest victory
+= Raskeste seier
+Highest level
+= Høyeste nivå
+Most kills in a run
+= Flest drap i én runde
+Most damage in a run
+= Mest skade i én runde
+Most gold in a run
+= Mest gull i én runde
+Most bosses in a run
+= Flest bosser i én runde
+Milestones
+= Milepæler
+Hours played
+= Spilte timer
+Every milestone reached!
+= Alle milepæler nådd!
+Classes
+= Klasser
+Races
+= Raser
+Zones
+= Soner
+Runs: {#0} · Won: {#1} · Longest: {2} · Best level: {#3}
+= Runder: {#0} · Vunnet: {#1} · Lengste: {2} · Beste nivå: {#3}
+{#0} kills
+= {#0} drap
+Recent runs
+= Siste runder
+Victory
+= Seier
+Defeat
+= Tap
+Left the run
+= Forlatt
+Survived {0} · Level {#1} · Kills {#2} · Gold {#3}
+= Overlevde {0} · Nivå {#1} · Drap {#2} · Gull {#3}
+In game, type /azstats to see your stats.
+= Skriv /azstats i spillet for å se statistikken din.
+Saved by the game {0}.
+= Lagret av spillet: {0}.
+Azeroth Stats updated.
+= Azeroth Stats oppdatert.
+Azeroth Stats installed. It records your runs from now on.
+= Azeroth Stats installert. Det registrerer rundene dine fra nå av.
+Could not install Azeroth Stats:\n\n{0}
+= Kunne ikke installere Azeroth Stats:\n\n{0}

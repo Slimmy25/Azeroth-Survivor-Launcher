@@ -831,3 +831,119 @@ OPEN ›
 = เปิด ›
 New to Azeroth Survivors? Pick a topic.
 = เพิ่งเริ่มเล่น Azeroth Survivors? เลือกหัวข้อ
+STATS
+= สถิติ
+Stats
+= สถิติ
+Show the Stats section (your play time and run records)
+= แสดงส่วนสถิติ (เวลาเล่นและสถิติสูงสุดของแต่ละรอบ)
+Your sessions and records are on the STATS page.
+= เซสชันและสถิติสูงสุดของคุณอยู่ในหน้า สถิติ
+INSTALL STATS ADDON
+= ติดตั้งแอดออนสถิติ
+UPDATE STATS ADDON
+= อัปเดตแอดออนสถิติ
+Your first run is in the books!
+= รอบแรกของคุณสำเร็จแล้ว!
+{#0} enemies slain in {#1} runs!
+= กำจัดศัตรู {#0} ตัวใน {#1} รอบ!
+{#0} victories, {#1} bosses defeated and {#2} gold collected.
+= ชนะ {#0} ครั้ง ปราบบอส {#1} ตัว และเก็บทองได้ {#2}
+Time played
+= เวลาที่เล่น
+Sessions
+= เซสชัน
+Longest session
+= เซสชันที่นานที่สุด
+Last session
+= เซสชันล่าสุด
+Your runs
+= รอบของคุณ
+Track every run
+= บันทึกทุกรอบที่เล่น
+The stats file could not be read ({0}).
+= อ่านไฟล์สถิติไม่ได้ ({0})
+The Azeroth Stats addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
+= แอดออน Azeroth Stats จะบันทึกทุกรอบที่คุณเล่น ทั้งชัยชนะ การสังหาร ดาเมจ ทอง และสถิติสูงสุดส่วนตัว ติดตั้งแล้วเล่นให้จบหนึ่งรอบ สถิติของคุณจะปรากฏที่นี่
+It is optional: without it, this page only shows your play time.
+= ไม่บังคับ: หากไม่มีแอดออนนี้ หน้านี้จะแสดงเฉพาะเวลาเล่นของคุณ
+The Azeroth Stats addon is turned off. Turn it on in Addons to keep recording your runs.
+= แอดออน Azeroth Stats ปิดอยู่ เปิดได้ในแอดออนเพื่อบันทึกรอบที่เล่นต่อไป
+No runs recorded yet. Finish a run with the Azeroth Stats addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
+= ยังไม่มีรอบที่บันทึกไว้ เล่นให้จบหนึ่งรอบโดยเปิด Azeroth Stats ไว้ เกมจะบันทึกข้อมูลแอดออนเมื่อคุณออกจากเกม สถิติจึงจะปรากฏที่นี่หลังจากปิดเกม
+Runs
+= รอบ
+Victories
+= ชัยชนะ
+Win rate
+= อัตราชนะ
+Time in runs
+= เวลาในรอบ
+Enemies slain
+= ศัตรูที่กำจัด
+Elites
+= อีลีท
+Guardians
+= ผู้พิทักษ์
+Bosses
+= บอส
+Damage dealt
+= ดาเมจที่ทำได้
+Damage taken
+= ดาเมจที่ได้รับ
+Gold collected
+= ทองที่เก็บได้
+Caches opened
+= หีบที่เปิด
+Personal bests
+= สถิติสูงสุดส่วนตัว
+Longest run
+= รอบที่นานที่สุด
+Fastest victory
+= ชนะเร็วที่สุด
+Highest level
+= เลเวลสูงสุด
+Most kills in a run
+= สังหารมากที่สุดในหนึ่งรอบ
+Most damage in a run
+= ดาเมจมากที่สุดในหนึ่งรอบ
+Most gold in a run
+= ทองมากที่สุดในหนึ่งรอบ
+Most bosses in a run
+= บอสมากที่สุดในหนึ่งรอบ
+Milestones
+= เป้าหมายสำคัญ
+Hours played
+= ชั่วโมงที่เล่น
+Every milestone reached!
+= ทำครบทุกเป้าหมายแล้ว!
+Classes
+= คลาส
+Races
+= เผ่าพันธุ์
+Zones
+= โซน
+Runs: {#0} · Won: {#1} · Longest: {2} · Best level: {#3}
+= รอบ: {#0} · ชนะ: {#1} · นานที่สุด: {2} · เลเวลสูงสุด: {#3}
+{#0} kills
+= สังหาร {#0}
+Recent runs
+= รอบล่าสุด
+Victory
+= ชนะ
+Defeat
+= แพ้
+Left the run
+= ออกกลางคัน
+Survived {0} · Level {#1} · Kills {#2} · Gold {#3}
+= รอด {0} · เลเวล {#1} · สังหาร {#2} · ทอง {#3}
+In game, type /azstats to see your stats.
+= ในเกม พิมพ์ /azstats เพื่อดูสถิติของคุณ
+Saved by the game {0}.
+= เกมบันทึกเมื่อ: {0}
+Azeroth Stats updated.
+= อัปเดต Azeroth Stats แล้ว
+Azeroth Stats installed. It records your runs from now on.
+= ติดตั้ง Azeroth Stats แล้ว จากนี้ไปจะบันทึกรอบที่คุณเล่น
+Could not install Azeroth Stats:\n\n{0}
+= ติดตั้ง Azeroth Stats ไม่ได้:\n\n{0}

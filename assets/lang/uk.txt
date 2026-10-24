@@ -831,3 +831,119 @@ OPEN ›
 = ВІДКРИТИ ›
 New to Azeroth Survivors? Pick a topic.
 = Вперше в Azeroth Survivors? Обери тему.
+STATS
+= СТАТИСТИКА
+Stats
+= Статистика
+Show the Stats section (your play time and run records)
+= Показувати розділ «Статистика» (час у грі та рекорди забігів)
+Your sessions and records are on the STATS page.
+= Ваші сеанси та рекорди — на сторінці СТАТИСТИКА.
+INSTALL STATS ADDON
+= ВСТАНОВИТИ АДДОН СТАТИСТИКИ
+UPDATE STATS ADDON
+= ОНОВИТИ АДДОН СТАТИСТИКИ
+Your first run is in the books!
+= Перший забіг пройдено!
+{#0} enemies slain in {#1} runs!
+= {#0} ворогів переможено за {#1} забігів!
+{#0} victories, {#1} bosses defeated and {#2} gold collected.
+= Перемог: {#0}, переможено босів: {#1}, зібрано золота: {#2}.
+Time played
+= Час у грі
+Sessions
+= Сеанси
+Longest session
+= Найдовший сеанс
+Last session
+= Останній сеанс
+Your runs
+= Ваші забіги
+Track every run
+= Записуйте кожен забіг
+The stats file could not be read ({0}).
+= Не вдалося прочитати файл статистики ({0}).
+The Azeroth Stats addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
+= Аддон Azeroth Stats записує кожен ваш забіг: перемоги, вбивства, шкоду, золото та особисті рекорди. Встановіть його, завершіть забіг — і статистика з'явиться тут.
+It is optional: without it, this page only shows your play time.
+= Він необов'язковий: без нього ця сторінка показує лише час у грі.
+The Azeroth Stats addon is turned off. Turn it on in Addons to keep recording your runs.
+= Аддон Azeroth Stats вимкнено. Увімкніть його в розділі «Аддони», щоб і далі записувати забіги.
+No runs recorded yet. Finish a run with the Azeroth Stats addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
+= Забігів ще немає. Завершіть забіг з увімкненим аддоном Azeroth Stats. Гра зберігає дані аддонів під час виходу, тож статистика з'явиться тут після закриття гри.
+Runs
+= Забіги
+Victories
+= Перемоги
+Win rate
+= Частка перемог
+Time in runs
+= Час у забігах
+Enemies slain
+= Переможено ворогів
+Elites
+= Елітні
+Guardians
+= Вартові
+Bosses
+= Боси
+Damage dealt
+= Завдана шкода
+Damage taken
+= Отримана шкода
+Gold collected
+= Зібрано золота
+Caches opened
+= Відкрито скринь
+Personal bests
+= Особисті рекорди
+Longest run
+= Найдовший забіг
+Fastest victory
+= Найшвидша перемога
+Highest level
+= Найвищий рівень
+Most kills in a run
+= Найбільше вбивств за забіг
+Most damage in a run
+= Найбільше шкоди за забіг
+Most gold in a run
+= Найбільше золота за забіг
+Most bosses in a run
+= Найбільше босів за забіг
+Milestones
+= Віхи
+Hours played
+= Годин у грі
+Every milestone reached!
+= Усі віхи досягнуто!
+Classes
+= Класи
+Races
+= Раси
+Zones
+= Зони
+Runs: {#0} · Won: {#1} · Longest: {2} · Best level: {#3}
+= Забіги: {#0} · Перемоги: {#1} · Найдовший: {2} · Найкращий рівень: {#3}
+{#0} kills
+= Вбивств: {#0}
+Recent runs
+= Останні забіги
+Victory
+= Перемога
+Defeat
+= Поразка
+Left the run
+= Покинуто
+Survived {0} · Level {#1} · Kills {#2} · Gold {#3}
+= Вижив {0} · Рівень {#1} · Вбивства {#2} · Золото {#3}
+In game, type /azstats to see your stats.
+= У грі введіть /azstats, щоб побачити статистику.
+Saved by the game {0}.
+= Збережено грою: {0}.
+Azeroth Stats updated.
+= Azeroth Stats оновлено.
+Azeroth Stats installed. It records your runs from now on.
+= Azeroth Stats встановлено. Відтепер він записує ваші забіги.
+Could not install Azeroth Stats:\n\n{0}
+= Не вдалося встановити Azeroth Stats:\n\n{0}

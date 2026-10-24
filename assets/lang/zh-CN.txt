@@ -831,3 +831,119 @@ OPEN ›
 = 打开 ›
 New to Azeroth Survivors? Pick a topic.
 = 刚接触 Azeroth Survivors？选择一个主题。
+STATS
+= 统计
+Stats
+= 统计
+Show the Stats section (your play time and run records)
+= 显示统计栏目（游戏时长和每局记录）
+Your sessions and records are on the STATS page.
+= 你的游戏记录和最佳成绩在“统计”页面。
+INSTALL STATS ADDON
+= 安装统计插件
+UPDATE STATS ADDON
+= 更新统计插件
+Your first run is in the books!
+= 你的第一局已经完成！
+{#0} enemies slain in {#1} runs!
+= {#1} 局中共击败 {#0} 个敌人！
+{#0} victories, {#1} bosses defeated and {#2} gold collected.
+= 胜利 {#0} 次，击败首领 {#1} 个，收集金币 {#2}。
+Time played
+= 游戏时间
+Sessions
+= 游戏次数
+Longest session
+= 最长一次
+Last session
+= 上一次
+Your runs
+= 你的对局
+Track every run
+= 记录每一局
+The stats file could not be read ({0}).
+= 无法读取统计文件（{0}）。
+The Azeroth Stats addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
+= Azeroth Stats 插件会记录你玩的每一局：胜利、击杀、伤害、金币和个人最佳成绩。安装后完成一局，你的统计就会显示在这里。
+It is optional: without it, this page only shows your play time.
+= 它是可选的：没有它，此页面只显示你的游戏时长。
+The Azeroth Stats addon is turned off. Turn it on in Addons to keep recording your runs.
+= Azeroth Stats 插件已关闭。请在插件中开启，以继续记录你的对局。
+No runs recorded yet. Finish a run with the Azeroth Stats addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
+= 还没有记录任何对局。请在开启 Azeroth Stats 的情况下完成一局。游戏会在退出时保存插件数据，所以关闭游戏后统计才会显示在这里。
+Runs
+= 对局
+Victories
+= 胜利
+Win rate
+= 胜率
+Time in runs
+= 对局时间
+Enemies slain
+= 击败的敌人
+Elites
+= 精英
+Guardians
+= 守护者
+Bosses
+= 首领
+Damage dealt
+= 造成伤害
+Damage taken
+= 承受伤害
+Gold collected
+= 收集金币
+Caches opened
+= 开启宝箱
+Personal bests
+= 个人最佳
+Longest run
+= 最长一局
+Fastest victory
+= 最快胜利
+Highest level
+= 最高等级
+Most kills in a run
+= 单局最多击杀
+Most damage in a run
+= 单局最高伤害
+Most gold in a run
+= 单局最多金币
+Most bosses in a run
+= 单局最多首领
+Milestones
+= 里程碑
+Hours played
+= 游戏小时数
+Every milestone reached!
+= 所有里程碑均已达成！
+Classes
+= 职业
+Races
+= 种族
+Zones
+= 区域
+Runs: {#0} · Won: {#1} · Longest: {2} · Best level: {#3}
+= 对局：{#0} · 胜利：{#1} · 最长：{2} · 最高等级：{#3}
+{#0} kills
+= 击杀 {#0}
+Recent runs
+= 最近对局
+Victory
+= 胜利
+Defeat
+= 失败
+Left the run
+= 中途离开
+Survived {0} · Level {#1} · Kills {#2} · Gold {#3}
+= 存活 {0} · 等级 {#1} · 击杀 {#2} · 金币 {#3}
+In game, type /azstats to see your stats.
+= 在游戏中输入 /azstats 查看你的统计。
+Saved by the game {0}.
+= 游戏保存于：{0}。
+Azeroth Stats updated.
+= Azeroth Stats 已更新。
+Azeroth Stats installed. It records your runs from now on.
+= Azeroth Stats 已安装。从现在起它会记录你的对局。
+Could not install Azeroth Stats:\n\n{0}
+= 无法安装 Azeroth Stats：\n\n{0}

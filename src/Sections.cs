@@ -1,5 +1,5 @@
 // The section window: a WoW-whisper-style box that opens to the right of the launcher, with Cloud Save,
-// Addons (and Download More), Options, Changelog and About Launcher.
+// Addons (and Download More), Options, Changelog, Guide, Stats (StatsPanel.cs) and About Launcher.
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -134,7 +134,7 @@ namespace AzerothLauncher
         Dictionary<string, CheckBox> addonRows;
         Label addonCount;
 
-        static readonly string[] SectionNames = { "Cloud Save", "Addons", "Options", "Changelog", "Guide", "About Launcher" };
+        static readonly string[] SectionNames = { "Cloud Save", "Addons", "Options", "Changelog", "Guide", "Stats", "About Launcher" };
         int gTopic = -1, gPage = -1;                         // the guide: -1 = the topic list / the topic itself
 
         int PW { get { return panel.ClientSize.Width; } }
@@ -194,7 +194,7 @@ namespace AzerothLauncher
             body.Controls.Add(strip);
             homeBtn = new IconButton(Icons.Home, ShowWindowFront);    // bring the launcher back
             strip.Controls.Add(homeBtn);
-            var icons = new Action<Graphics, float, float, Color>[] { Icons.Cloud, Icons.AddonsIcon, Icons.Gear, Icons.Scroll, Icons.Book, Icons.Info };
+            var icons = new Action<Graphics, float, float, Color>[] { Icons.Cloud, Icons.AddonsIcon, Icons.Gear, Icons.Scroll, Icons.Book, Icons.Trophy, Icons.Info };
             for (int i = 0; i < SectionNames.Length; i++)
             {
                 string n = SectionNames[i];
@@ -222,7 +222,7 @@ namespace AzerothLauncher
             foreach (string n in SectionNames)
             {
                 var b = stripBtns[n];
-                bool show = n != "Cloud Save" || CloudEnabled();
+                bool show = NavShown(n);
                 b.Visible = show;
                 if (!show) continue;
                 b.Location = new Point(8, y);
@@ -286,8 +286,8 @@ namespace AzerothLauncher
 
         public void ShowSection(string name)
         {
-            // Options, About and the Guide work without the game; the other sections need it
-            if (name != "Home" && name != "Options" && name != "About Launcher" && name != "Guide" && !GateOpen())
+            // Options, About, the Guide and Stats work without the game; the other sections need it
+            if (name != "Home" && name != "Options" && name != "About Launcher" && name != "Guide" && name != "Stats" && !GateOpen())
             {
                 SetStatus("Press INSTALL to download the game first.");
                 ShowWindowFront();
@@ -318,6 +318,7 @@ namespace AzerothLauncher
                 else if (name == "Options") PanelOptions();
                 else if (name == "Changelog") PanelChangelog();
                 else if (name == "Guide") PanelGuide();
+                else if (name == "Stats") PanelStats();
                 else if (name == "About Launcher") PanelAbout();
             }
             finally { panel.ResumeLayout(); }
@@ -1226,7 +1227,8 @@ namespace AzerothLauncher
             var checks = new[] {
                 new object[] { "cloud_enabled", CloudEnabled(), "Cloud saving" },
                 new object[] { "close_to_tray", Cfg.Bool("close_to_tray", true), "Close button hides the launcher to the tray" },
-                new object[] { "minimize_on_play", Cfg.Bool("minimize_on_play", true), "Minimize the launcher when the game starts" } };
+                new object[] { "minimize_on_play", Cfg.Bool("minimize_on_play", true), "Minimize the launcher when the game starts" },
+                new object[] { "stats_enabled", StatsEnabled(), "Show the Stats section (your play time and run records)" } };
             foreach (var c in checks)
             {
                 string key = (string)c[0];
@@ -1237,6 +1239,12 @@ namespace AzerothLauncher
                     {
                         bool on = cb.Checked;
                         BeginInvoke(new Action(delegate { SetCloudEnabled(on); }));
+                        return;
+                    }
+                    if (key == "stats_enabled")
+                    {
+                        bool on = cb.Checked;
+                        BeginInvoke(new Action(delegate { SetStatsEnabled(on); }));
                         return;
                     }
                     Cfg.Set(key, cb.Checked);
@@ -1277,9 +1285,14 @@ namespace AzerothLauncher
                 (shared && ps.Devices > 1 ? " on " + ps.Devices + " PCs" : "") + "\n" +
                 "Last session: " + Duration(ps.LastSeconds) + " (" + ps.LastDate + ")\n" +
                 "Longest session: " + Duration(ps.Longest);
-            stats += shared ? "\nShared with your other PCs through the cloud sync folder." :
-                     CloudEnabled() ? "\nCounted on this PC (the sync folder is not reachable right now)." :
-                     "\nCounted on this PC. Turn on cloud saving to share it between your PCs.";
+            if (sessions > 0 && StatsEnabled())             // the details are on the STATS page
+                stats = "Total: " + Duration(ps.Seconds) + " over " + Util.Plural((int)sessions, "session") +
+                        (shared && ps.Devices > 1 ? " on " + ps.Devices + " PCs" : "") + "\n" +
+                        "Your sessions and records are on the STATS page.";
+            else
+                stats += shared ? "\nShared with your other PCs through the cloud sync folder." :
+                         CloudEnabled() ? "\nCounted on this PC (the sync folder is not reachable right now)." :
+                         "\nCounted on this PC. Turn on cloud saving to share it between your PCs.";
             PutText(stats, 10, FontStyle.Regular, Theme.Text, 20, BottomOf(head) + 2, PW - 40);
             if (sessions > 0)
                 Put(new WowButton("RESET PLAY TIME", delegate

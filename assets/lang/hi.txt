@@ -831,3 +831,119 @@ OPEN ›
 = खोलें ›
 New to Azeroth Survivors? Pick a topic.
 = Azeroth Survivors में नए हैं? एक विषय चुनें।
+STATS
+= आँकड़े
+Stats
+= आँकड़े
+Show the Stats section (your play time and run records)
+= आँकड़े सेक्शन दिखाएँ (खेलने का समय और रन के रिकॉर्ड)
+Your sessions and records are on the STATS page.
+= आपके सत्र और रिकॉर्ड आँकड़े पेज पर हैं।
+INSTALL STATS ADDON
+= आँकड़े ऐडऑन इंस्टॉल करें
+UPDATE STATS ADDON
+= आँकड़े ऐडऑन अपडेट करें
+Your first run is in the books!
+= आपका पहला रन पूरा हुआ!
+{#0} enemies slain in {#1} runs!
+= {#1} रन में {#0} दुश्मन हराए!
+{#0} victories, {#1} bosses defeated and {#2} gold collected.
+= {#0} जीत, {#1} बॉस हराए और {#2} सोना जमा किया।
+Time played
+= खेला गया समय
+Sessions
+= सत्र
+Longest session
+= सबसे लंबा सत्र
+Last session
+= पिछला सत्र
+Your runs
+= आपके रन
+Track every run
+= हर रन का रिकॉर्ड रखें
+The stats file could not be read ({0}).
+= आँकड़ों की फ़ाइल पढ़ी नहीं जा सकी ({0})।
+The Azeroth Stats addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
+= Azeroth Stats ऐडऑन आपके हर रन का रिकॉर्ड रखता है: जीत, किल, डैमेज, सोना और आपके निजी रिकॉर्ड। इसे इंस्टॉल करें, एक रन पूरा करें, और आपके आँकड़े यहाँ दिखेंगे।
+It is optional: without it, this page only shows your play time.
+= यह वैकल्पिक है: इसके बिना यह पेज केवल आपका खेलने का समय दिखाता है।
+The Azeroth Stats addon is turned off. Turn it on in Addons to keep recording your runs.
+= Azeroth Stats ऐडऑन बंद है। अपने रन रिकॉर्ड करते रहने के लिए इसे ऐडऑन में चालू करें।
+No runs recorded yet. Finish a run with the Azeroth Stats addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
+= अभी तक कोई रन रिकॉर्ड नहीं हुआ। Azeroth Stats चालू रखकर एक रन पूरा करें। गेम बंद करते समय ऐडऑन का डेटा सेव करता है, इसलिए गेम बंद करने के बाद आपके आँकड़े यहाँ दिखेंगे।
+Runs
+= रन
+Victories
+= जीत
+Win rate
+= जीत दर
+Time in runs
+= रन में बिताया समय
+Enemies slain
+= हराए गए दुश्मन
+Elites
+= एलीट
+Guardians
+= संरक्षक
+Bosses
+= बॉस
+Damage dealt
+= दिया गया डैमेज
+Damage taken
+= लिया गया डैमेज
+Gold collected
+= जमा किया सोना
+Caches opened
+= खोले गए संदूक
+Personal bests
+= निजी रिकॉर्ड
+Longest run
+= सबसे लंबा रन
+Fastest victory
+= सबसे तेज़ जीत
+Highest level
+= सबसे ऊँचा लेवल
+Most kills in a run
+= एक रन में सबसे ज़्यादा किल
+Most damage in a run
+= एक रन में सबसे ज़्यादा डैमेज
+Most gold in a run
+= एक रन में सबसे ज़्यादा सोना
+Most bosses in a run
+= एक रन में सबसे ज़्यादा बॉस
+Milestones
+= उपलब्धियाँ
+Hours played
+= खेले गए घंटे
+Every milestone reached!
+= सभी उपलब्धियाँ पूरी!
+Classes
+= क्लास
+Races
+= जाति
+Zones
+= ज़ोन
+Runs: {#0} · Won: {#1} · Longest: {2} · Best level: {#3}
+= रन: {#0} · जीते: {#1} · सबसे लंबा: {2} · सबसे अच्छा लेवल: {#3}
+{#0} kills
+= {#0} किल
+Recent runs
+= हाल के रन
+Victory
+= जीत
+Defeat
+= हार
+Left the run
+= छोड़ दिया
+Survived {0} · Level {#1} · Kills {#2} · Gold {#3}
+= बचे रहे {0} · लेवल {#1} · किल {#2} · सोना {#3}
+In game, type /azstats to see your stats.
+= गेम में अपने आँकड़े देखने के लिए /azstats लिखें।
+Saved by the game {0}.
+= गेम द्वारा सेव किया गया: {0}।
+Azeroth Stats updated.
+= Azeroth Stats अपडेट हुआ।
+Azeroth Stats installed. It records your runs from now on.
+= Azeroth Stats इंस्टॉल हुआ। अब से यह आपके रन रिकॉर्ड करेगा।
+Could not install Azeroth Stats:\n\n{0}
+= Azeroth Stats इंस्टॉल नहीं हो सका:\n\n{0}

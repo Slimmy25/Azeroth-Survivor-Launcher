@@ -830,3 +830,119 @@ OPEN ›
 = OPENEN ›
 New to Azeroth Survivors? Pick a topic.
 = Nieuw in Azeroth Survivors? Kies een onderwerp.
+STATS
+= STATISTIEKEN
+Stats
+= Statistieken
+Show the Stats section (your play time and run records)
+= Statistieken-sectie tonen (speeltijd en runrecords)
+Your sessions and records are on the STATS page.
+= Je sessies en records staan op de pagina STATISTIEKEN.
+INSTALL STATS ADDON
+= STATISTIEKEN-ADDON INSTALLEREN
+UPDATE STATS ADDON
+= STATISTIEKEN-ADDON BIJWERKEN
+Your first run is in the books!
+= Je eerste run zit erop!
+{#0} enemies slain in {#1} runs!
+= {#0} vijanden verslagen in {#1} runs!
+{#0} victories, {#1} bosses defeated and {#2} gold collected.
+= {#0} overwinningen, {#1} bazen verslagen en {#2} goud verzameld.
+Time played
+= Gespeelde tijd
+Sessions
+= Sessies
+Longest session
+= Langste sessie
+Last session
+= Laatste sessie
+Your runs
+= Jouw runs
+Track every run
+= Houd elke run bij
+The stats file could not be read ({0}).
+= Het statistiekenbestand kon niet worden gelezen ({0}).
+The Azeroth Stats addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
+= De addon Azeroth Stats houdt elke run bij die je speelt: overwinningen, kills, schade, goud en je persoonlijke records. Installeer hem, maak een run af en je statistieken verschijnen hier.
+It is optional: without it, this page only shows your play time.
+= Hij is optioneel: zonder de addon toont deze pagina alleen je speeltijd.
+The Azeroth Stats addon is turned off. Turn it on in Addons to keep recording your runs.
+= De addon Azeroth Stats staat uit. Zet hem aan bij Addons om je runs te blijven bijhouden.
+No runs recorded yet. Finish a run with the Azeroth Stats addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
+= Nog geen runs vastgelegd. Maak een run af met Azeroth Stats aan. Het spel slaat addongegevens op wanneer je het verlaat, dus je statistieken verschijnen hier nadat je het spel hebt gesloten.
+Runs
+= Runs
+Victories
+= Overwinningen
+Win rate
+= Winstpercentage
+Time in runs
+= Tijd in runs
+Enemies slain
+= Verslagen vijanden
+Elites
+= Elites
+Guardians
+= Bewakers
+Bosses
+= Bazen
+Damage dealt
+= Toegebrachte schade
+Damage taken
+= Ontvangen schade
+Gold collected
+= Verzameld goud
+Caches opened
+= Geopende kisten
+Personal bests
+= Persoonlijke records
+Longest run
+= Langste run
+Fastest victory
+= Snelste overwinning
+Highest level
+= Hoogste level
+Most kills in a run
+= Meeste kills in een run
+Most damage in a run
+= Meeste schade in een run
+Most gold in a run
+= Meeste goud in een run
+Most bosses in a run
+= Meeste bazen in een run
+Milestones
+= Mijlpalen
+Hours played
+= Gespeelde uren
+Every milestone reached!
+= Alle mijlpalen bereikt!
+Classes
+= Klassen
+Races
+= Rassen
+Zones
+= Zones
+Runs: {#0} · Won: {#1} · Longest: {2} · Best level: {#3}
+= Runs: {#0} · Gewonnen: {#1} · Langste: {2} · Hoogste level: {#3}
+{#0} kills
+= {#0} kills
+Recent runs
+= Recente runs
+Victory
+= Overwinning
+Defeat
+= Nederlaag
+Left the run
+= Run verlaten
+Survived {0} · Level {#1} · Kills {#2} · Gold {#3}
+= Overleefd {0} · Level {#1} · Kills {#2} · Goud {#3}
+In game, type /azstats to see your stats.
+= Typ in het spel /azstats om je statistieken te zien.
+Saved by the game {0}.
+= Door het spel opgeslagen: {0}.
+Azeroth Stats updated.
+= Azeroth Stats bijgewerkt.
+Azeroth Stats installed. It records your runs from now on.
+= Azeroth Stats geïnstalleerd. Vanaf nu worden je runs bijgehouden.
+Could not install Azeroth Stats:\n\n{0}
+= Azeroth Stats kon niet worden geïnstalleerd:\n\n{0}

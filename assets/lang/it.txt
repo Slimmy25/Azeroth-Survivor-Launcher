@@ -830,3 +830,119 @@ OPEN ›
 = APRI ›
 New to Azeroth Survivors? Pick a topic.
 = Nuovo in Azeroth Survivors? Scegli un argomento.
+STATS
+= STATISTICHE
+Stats
+= Statistiche
+Show the Stats section (your play time and run records)
+= Mostra la sezione Statistiche (tempo di gioco e record delle partite)
+Your sessions and records are on the STATS page.
+= Le tue sessioni e i tuoi record sono nella pagina STATISTICHE.
+INSTALL STATS ADDON
+= INSTALLA ADDON STATISTICHE
+UPDATE STATS ADDON
+= AGGIORNA ADDON STATISTICHE
+Your first run is in the books!
+= La tua prima partita è agli archivi!
+{#0} enemies slain in {#1} runs!
+= {#0} nemici sconfitti in {#1} partite!
+{#0} victories, {#1} bosses defeated and {#2} gold collected.
+= {#0} vittorie, {#1} boss sconfitti e {#2} oro raccolto.
+Time played
+= Tempo giocato
+Sessions
+= Sessioni
+Longest session
+= Sessione più lunga
+Last session
+= Ultima sessione
+Your runs
+= Le tue partite
+Track every run
+= Registra ogni partita
+The stats file could not be read ({0}).
+= Impossibile leggere il file delle statistiche ({0}).
+The Azeroth Stats addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
+= L'addon Azeroth Stats registra ogni partita che giochi: vittorie, uccisioni, danni, oro e i tuoi record personali. Installalo, finisci una partita e le tue statistiche compariranno qui.
+It is optional: without it, this page only shows your play time.
+= È facoltativo: senza, questa pagina mostra solo il tuo tempo di gioco.
+The Azeroth Stats addon is turned off. Turn it on in Addons to keep recording your runs.
+= L'addon Azeroth Stats è disattivato. Attivalo in Addon per continuare a registrare le tue partite.
+No runs recorded yet. Finish a run with the Azeroth Stats addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
+= Nessuna partita registrata. Finisci una partita con l'addon Azeroth Stats attivo. Il gioco salva i dati degli addon quando lo chiudi, quindi le statistiche compaiono qui dopo aver chiuso il gioco.
+Runs
+= Partite
+Victories
+= Vittorie
+Win rate
+= Percentuale di vittorie
+Time in runs
+= Tempo in partita
+Enemies slain
+= Nemici sconfitti
+Elites
+= Élite
+Guardians
+= Guardiani
+Bosses
+= Boss
+Damage dealt
+= Danni inflitti
+Damage taken
+= Danni subiti
+Gold collected
+= Oro raccolto
+Caches opened
+= Forzieri aperti
+Personal bests
+= Record personali
+Longest run
+= Partita più lunga
+Fastest victory
+= Vittoria più rapida
+Highest level
+= Livello più alto
+Most kills in a run
+= Più uccisioni in una partita
+Most damage in a run
+= Più danni in una partita
+Most gold in a run
+= Più oro in una partita
+Most bosses in a run
+= Più boss in una partita
+Milestones
+= Traguardi
+Hours played
+= Ore giocate
+Every milestone reached!
+= Tutti i traguardi raggiunti!
+Classes
+= Classi
+Races
+= Razze
+Zones
+= Zone
+Runs: {#0} · Won: {#1} · Longest: {2} · Best level: {#3}
+= Partite: {#0} · Vinte: {#1} · Più lunga: {2} · Livello migliore: {#3}
+{#0} kills
+= {#0} uccisioni
+Recent runs
+= Partite recenti
+Victory
+= Vittoria
+Defeat
+= Sconfitta
+Left the run
+= Abbandonata
+Survived {0} · Level {#1} · Kills {#2} · Gold {#3}
+= Sopravvissuto {0} · Livello {#1} · Uccisioni {#2} · Oro {#3}
+In game, type /azstats to see your stats.
+= In gioco, scrivi /azstats per vedere le tue statistiche.
+Saved by the game {0}.
+= Salvato dal gioco: {0}.
+Azeroth Stats updated.
+= Azeroth Stats aggiornato.
+Azeroth Stats installed. It records your runs from now on.
+= Azeroth Stats installato. Da ora registra le tue partite.
+Could not install Azeroth Stats:\n\n{0}
+= Impossibile installare Azeroth Stats:\n\n{0}

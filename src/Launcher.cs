@@ -40,7 +40,7 @@ namespace AzerothLauncher
 
         readonly WowButton playBtn, updateBtn, aboutBtn, discordBtn;
         readonly Dictionary<string, WowButton> nav = new Dictionary<string, WowButton>();
-        readonly string[] navNames = { "Cloud Save", "Addons", "Options", "Changelog", "Guide" };
+        readonly string[] navNames = { "Cloud Save", "Addons", "Options", "Changelog", "Guide", "Stats" };
         NotifyIcon tray;
         ToolStripMenuItem trayShow, trayPlay, trayUpload, trayCloseToTray, trayQuit;
 
@@ -273,16 +273,25 @@ namespace AzerothLauncher
             Invalidate(new Rectangle(17, 650, W - 34, 26));
         }
 
-        // stack the section buttons; the Cloud Save button is only there while cloud saving is on
+        // a section button is hidden while its feature is off: Cloud Save (cloud saving) and Stats (Options)
+        bool NavShown(string name)
+        {
+            if (name == "Cloud Save") return CloudEnabled();
+            if (name == "Stats") return StatsEnabled();
+            return true;
+        }
+
+        // stack the section buttons
         void LayoutNav()
         {
             int shown = 0;
-            foreach (string name in navNames) if (name != "Cloud Save" || CloudEnabled()) shown++;
-            // five buttons are a little slimmer so they still end above ABOUT LAUNCHER / DISCORD
-            int h = shown > 4 ? 40 : 44, step = shown > 4 ? 44 : 52, y = shown > 4 ? 398 : 402;
+            foreach (string name in navNames) if (NavShown(name)) shown++;
+            // five or six buttons are slimmer so they still end above ABOUT LAUNCHER / DISCORD
+            int h = shown > 5 ? 34 : shown > 4 ? 40 : 44, step = shown > 5 ? 37 : shown > 4 ? 44 : 52;
+            int y = shown > 5 ? 396 : shown > 4 ? 398 : 402;
             foreach (string name in navNames)
             {
-                if (name == "Cloud Save" && !CloudEnabled())
+                if (!NavShown(name))
                 {
                     nav[name].Visible = false;
                     continue;

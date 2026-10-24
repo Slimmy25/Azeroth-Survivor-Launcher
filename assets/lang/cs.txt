@@ -831,3 +831,119 @@ OPEN ›
 = OTEVŘÍT ›
 New to Azeroth Survivors? Pick a topic.
 = Nováček v Azeroth Survivors? Vyber téma.
+STATS
+= STATISTIKY
+Stats
+= Statistiky
+Show the Stats section (your play time and run records)
+= Zobrazit sekci Statistiky (odehraný čas a rekordy z běhů)
+Your sessions and records are on the STATS page.
+= Tvé relace a rekordy najdeš na stránce STATISTIKY.
+INSTALL STATS ADDON
+= NAINSTALOVAT DOPLNĚK STATISTIK
+UPDATE STATS ADDON
+= AKTUALIZOVAT DOPLNĚK STATISTIK
+Your first run is in the books!
+= Tvůj první běh je za tebou!
+{#0} enemies slain in {#1} runs!
+= {#0} poražených nepřátel v {#1} bězích!
+{#0} victories, {#1} bosses defeated and {#2} gold collected.
+= Vítězství: {#0}, poražení bossové: {#1}, sebrané zlato: {#2}.
+Time played
+= Odehraný čas
+Sessions
+= Relace
+Longest session
+= Nejdelší relace
+Last session
+= Poslední relace
+Your runs
+= Tvé běhy
+Track every run
+= Zaznamenávej každý běh
+The stats file could not be read ({0}).
+= Soubor se statistikami nelze přečíst ({0}).
+The Azeroth Stats addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
+= Doplněk Azeroth Stats zaznamenává každý tvůj běh: vítězství, zabití, poškození, zlato a osobní rekordy. Nainstaluj ho, dokonči běh a statistiky se objeví tady.
+It is optional: without it, this page only shows your play time.
+= Je volitelný: bez něj tato stránka ukazuje jen odehraný čas.
+The Azeroth Stats addon is turned off. Turn it on in Addons to keep recording your runs.
+= Doplněk Azeroth Stats je vypnutý. Zapni ho v Doplňcích, aby se tvé běhy dál zaznamenávaly.
+No runs recorded yet. Finish a run with the Azeroth Stats addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
+= Zatím žádné zaznamenané běhy. Dokonči běh se zapnutým doplňkem Azeroth Stats. Hra ukládá data doplňků při odchodu, takže se statistiky objeví tady po zavření hry.
+Runs
+= Běhy
+Victories
+= Vítězství
+Win rate
+= Podíl výher
+Time in runs
+= Čas v bězích
+Enemies slain
+= Poražení nepřátelé
+Elites
+= Elity
+Guardians
+= Strážci
+Bosses
+= Bossové
+Damage dealt
+= Způsobené poškození
+Damage taken
+= Utržené poškození
+Gold collected
+= Sebrané zlato
+Caches opened
+= Otevřené truhly
+Personal bests
+= Osobní rekordy
+Longest run
+= Nejdelší běh
+Fastest victory
+= Nejrychlejší vítězství
+Highest level
+= Nejvyšší úroveň
+Most kills in a run
+= Nejvíc zabití v jednom běhu
+Most damage in a run
+= Nejvíc poškození v jednom běhu
+Most gold in a run
+= Nejvíc zlata v jednom běhu
+Most bosses in a run
+= Nejvíc bossů v jednom běhu
+Milestones
+= Milníky
+Hours played
+= Odehrané hodiny
+Every milestone reached!
+= Všechny milníky splněny!
+Classes
+= Povolání
+Races
+= Rasy
+Zones
+= Oblasti
+Runs: {#0} · Won: {#1} · Longest: {2} · Best level: {#3}
+= Běhy: {#0} · Výhry: {#1} · Nejdelší: {2} · Nejlepší úroveň: {#3}
+{#0} kills
+= Zabití: {#0}
+Recent runs
+= Poslední běhy
+Victory
+= Vítězství
+Defeat
+= Porážka
+Left the run
+= Opuštěno
+Survived {0} · Level {#1} · Kills {#2} · Gold {#3}
+= Přežito {0} · Úroveň {#1} · Zabití {#2} · Zlato {#3}
+In game, type /azstats to see your stats.
+= Ve hře napiš /azstats a uvidíš své statistiky.
+Saved by the game {0}.
+= Uloženo hrou: {0}.
+Azeroth Stats updated.
+= Azeroth Stats aktualizován.
+Azeroth Stats installed. It records your runs from now on.
+= Azeroth Stats nainstalován. Od teď zaznamenává tvé běhy.
+Could not install Azeroth Stats:\n\n{0}
+= Azeroth Stats nelze nainstalovat:\n\n{0}
