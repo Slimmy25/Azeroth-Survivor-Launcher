@@ -1,0 +1,45 @@
+# Downloads every addon listed in addons/sources.txt from its original link and keeps a copy on this
+# repository's "addons" release, so the launcher can download all addons from GitHub.
+# Runs by itself when addons/sources.txt changes, or by hand: Actions > Mirror addons > Run workflow.
+name: Mirror addons
+
+on:
+  push:
+    branches: [main]
+    paths: ['addons/sources.txt', '.github/workflows/mirror-addons.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download the addons and put them on the "addons" release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          # a pre-release, so it never counts as the "latest" release (that one is for game updates)
+          gh release view addons >/dev/null 2>&1 || \
+            gh release create addons --prerelease --title "Addons" \
+              --notes "Copies of the addons offered in the launcher's Download More list. Each addon belongs to its author (see the file name)."
+          mkdir -p mirror
+          grep -v '^[[:space:]]*#' addons/sources.txt | grep '|' > list.txt
+          while IFS='|' read -r file url; do
+            file="$(echo "$file" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')"
+            url="$(echo "$url" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')"
+            echo "Downloading $file from $url"
+            curl -fsSL --retry 3 -A "AzerothSurvivorsLauncher/1.0" -o "mirror/$file" "$url"
+            if ! unzip -tq "mirror/$file" > /dev/null; then
+              echo "::error::$file ($url) is not a valid .zip"
+              exit 1
+            fi
+            unzip -l "mirror/$file" | tail -1
+          done < list.txt
+          gh release upload addons mirror/*.zip --clobber
+          echo "Done:"
+          gh release view addons --json assets --jq '.assets[] | .name + "  " + (.size|tostring)'
