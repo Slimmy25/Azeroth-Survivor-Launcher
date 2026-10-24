@@ -2,6 +2,13 @@ Patch notes shown in the launcher's Changelog. The launcher sorts them by versio
 Every post starts with its title on the first line. Posts are separated by a line with only === on it.
 Everything above the first === line is ignored.
 ===
+0.114.0
+-------
+Co-op parties now play on a server of their own, for smoother runs with less lag.
+
+* Your party's run goes through a dedicated co-op server, away from the site's downloads, so busy evenings no longer slow it down.
+* Co-op is between players on this version or newer: ask your friends to update.
+===
 0.113.3
 -------
 Co-op speaks your language, bigger parties find more chests, and Battle Shout and Power Word: Shield help the whole party.
