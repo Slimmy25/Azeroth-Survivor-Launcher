@@ -816,3 +816,5 @@ Could not keep a local copy of this download ({0}).
 = Tidak bisa menyimpan salinan lokal unduhan ini ({0}).
 The game is running. Close it before you restore.
 = Game sedang berjalan. Tutup dulu sebelum memulihkan.
+Cloud Save needs the game. Press INSTALL to download it first.
+= Simpan cloud membutuhkan game. Tekan INSTAL untuk mengunduhnya dulu.

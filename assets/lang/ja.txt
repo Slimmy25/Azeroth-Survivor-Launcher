@@ -817,3 +817,5 @@ Could not keep a local copy of this download ({0}).
 = このダウンロードのローカルコピーを保管できませんでした（{0}）。
 The game is running. Close it before you restore.
 = ゲームが実行中です。復元する前に閉じてください。
+Cloud Save needs the game. Press INSTALL to download it first.
+= クラウドセーブにはゲームが必要です。まず「インストール」を押してダウンロードしてください。

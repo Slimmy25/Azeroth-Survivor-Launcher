@@ -123,9 +123,10 @@ namespace AzerothLauncher
     {
         string text;
         float size;
-        bool hover, down, active, selected;
+        bool hover, down, active, selected, grayed;
         public IconPainter Icon;
         public event Action Pressed;
+        public string GrayedTip;                              // shown on hover, only while the button is grayed out
 
         public WowButton(string text, Action command, int width, int height, float size)
         {
@@ -144,12 +145,37 @@ namespace AzerothLauncher
         public bool Active { get { return active; } set { active = value; Invalidate(); } }
         public bool Selected { get { return selected; } set { selected = value; Invalidate(); } }   // filled gold: the current choice
 
-        protected override void OnMouseEnter(EventArgs e) { hover = true; Invalidate(); base.OnMouseEnter(e); }
+        // Grayed: drawn dimmed, does nothing when clicked, and explains itself with GrayedTip on hover.
+        // (Not Enabled = false: a disabled control gets no mouse events, so it could not show its tip.)
+        public bool Grayed
+        {
+            get { return grayed; }
+            set
+            {
+                if (grayed == value) return;
+                grayed = value;
+                down = false;
+                Cursor = grayed ? Cursors.Default : Cursors.Hand;
+                if (!grayed) Tips.Hide(this);
+                Invalidate();
+            }
+        }
+
+        internal static readonly ToolTip Tips = new ToolTip();
+
+        protected override void OnMouseEnter(EventArgs e)
+        {
+            hover = true;
+            Invalidate();
+            Tips.SetToolTip(this, grayed && !string.IsNullOrEmpty(GrayedTip) ? Lang.T(GrayedTip) : null);
+            base.OnMouseEnter(e);
+        }
+
         protected override void OnMouseLeave(EventArgs e) { hover = false; down = false; Invalidate(); base.OnMouseLeave(e); }
 
         protected override void OnMouseDown(MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left) { down = true; Invalidate(); }
+            if (e.Button == MouseButtons.Left && !grayed) { down = true; Invalidate(); }
             base.OnMouseDown(e);
         }
 
@@ -159,7 +185,7 @@ namespace AzerothLauncher
             down = false;
             Invalidate();
             base.OnMouseUp(e);
-            if (was && e.Button == MouseButtons.Left && ClientRectangle.Contains(e.Location)) Fire(Pressed);
+            if (was && !grayed && e.Button == MouseButtons.Left && ClientRectangle.Contains(e.Location)) Fire(Pressed);
         }
 
         // runs the button's action after the click has been fully handled, so the action may rebuild the window
@@ -175,13 +201,14 @@ namespace AzerothLauncher
         {
             Graphics g = e.Graphics;
             int w = Width, h = Height;
-            string state = down ? "down" : hover ? "hover" : active ? "active" : "normal";
+            string state = grayed ? "grayed" : down ? "down" : hover ? "hover" : active ? "active" : "normal";
             Color top, bot, border, fg, shadow = Color.Black;
-            if (state == "hover") { top = Theme.Hex("#5a4118"); bot = Theme.Hex("#241808"); border = Theme.Gold; fg = Theme.Hex("#fff2b0"); }
+            if (state == "grayed") { top = Theme.Hex("#2a2620"); bot = Theme.Hex("#12100d"); border = Theme.Hex("#5a5246"); fg = Theme.Hex("#7d7466"); }
+            else if (state == "hover") { top = Theme.Hex("#5a4118"); bot = Theme.Hex("#241808"); border = Theme.Gold; fg = Theme.Hex("#fff2b0"); }
             else if (state == "down") { top = Theme.Hex("#120b04"); bot = Theme.Hex("#2e200c"); border = Theme.Gold; fg = Theme.Gold; }
             else if (state == "active") { top = Theme.Hex("#4a3414"); bot = Theme.Hex("#1c1208"); border = Theme.Gold; fg = Theme.Hex("#fff2b0"); }
             else { top = Theme.Hex("#3a2a12"); bot = Theme.Hex("#150e06"); border = Theme.GoldDim; fg = Theme.Gold; }
-            if (selected)
+            if (selected && !grayed)
             {
                 top = Theme.Hex("#ffd966"); bot = Theme.Hex("#d48f16"); border = Theme.Hex("#fff6c8");
                 fg = Theme.Hex("#2a1706"); shadow = Theme.Hex("#ffe9a0");
@@ -191,7 +218,7 @@ namespace AzerothLauncher
             Theme.Smooth(g);
             using (var p = new Pen(border, 2)) g.DrawRectangle(p, 1, 1, w - 3, h - 3);
             g.SmoothingMode = SmoothingMode.None;
-            using (var p = new Pen(Theme.Bronze, 1)) g.DrawRectangle(p, 5, 5, w - 11, h - 11);
+            using (var p = new Pen(grayed ? Theme.Hex("#3a352d") : Theme.Bronze, 1)) g.DrawRectangle(p, 5, 5, w - 11, h - 11);
             Theme.Smooth(g);
             using (var b = new SolidBrush(border))
                 foreach (var pt in new[] { new PointF(3, 3), new PointF(w - 4, 3), new PointF(3, h - 4), new PointF(w - 4, h - 4) })
@@ -215,8 +242,9 @@ namespace AzerothLauncher
     public class IconButton : Control
     {
         readonly Action<Graphics, float, float, Color> icon;
-        bool hover, active;
+        bool hover, active, grayed;
         public event Action Pressed;
+        public string GrayedTip;
 
         public IconButton(Action<Graphics, float, float, Color> icon, Action command)
         {
@@ -229,26 +257,47 @@ namespace AzerothLauncher
         }
 
         public bool Active { get { return active; } set { active = value; Invalidate(); } }
-        protected override void OnMouseEnter(EventArgs e) { hover = true; Invalidate(); base.OnMouseEnter(e); }
+
+        public bool Grayed
+        {
+            get { return grayed; }
+            set
+            {
+                if (grayed == value) return;
+                grayed = value;
+                Cursor = grayed ? Cursors.Default : Cursors.Hand;
+                if (!grayed) WowButton.Tips.Hide(this);
+                Invalidate();
+            }
+        }
+
+        protected override void OnMouseEnter(EventArgs e)
+        {
+            hover = true;
+            Invalidate();
+            WowButton.Tips.SetToolTip(this, grayed && !string.IsNullOrEmpty(GrayedTip) ? Lang.T(GrayedTip) : null);
+            base.OnMouseEnter(e);
+        }
+
         protected override void OnMouseLeave(EventArgs e) { hover = false; Invalidate(); base.OnMouseLeave(e); }
 
         protected override void OnMouseUp(MouseEventArgs e)
         {
             base.OnMouseUp(e);
-            if (e.Button == MouseButtons.Left && ClientRectangle.Contains(e.Location)) WowButton.Fire(Pressed);
+            if (!grayed && e.Button == MouseButtons.Left && ClientRectangle.Contains(e.Location)) WowButton.Fire(Pressed);
         }
 
         protected override void OnPaint(PaintEventArgs e)
         {
             Graphics g = e.Graphics;
             int s = Width;
-            bool lit = active || hover;
+            bool lit = !grayed && (active || hover);
             g.Clear(Theme.Hex("#15100a"));
             using (var b = new SolidBrush(Theme.Hex("#1c130a"))) g.FillRectangle(b, 1, 1, s - 3, s - 3);
-            using (var p = new Pen(lit ? Theme.Gold : Theme.Hex("#7a5a22"), 2)) g.DrawRectangle(p, 1, 1, s - 3, s - 3);
+            using (var p = new Pen(lit ? Theme.Gold : grayed ? Theme.Hex("#4a443a") : Theme.Hex("#7a5a22"), 2)) g.DrawRectangle(p, 1, 1, s - 3, s - 3);
             using (var p = new Pen(Theme.Hex("#3a2a12"), 1)) g.DrawRectangle(p, 4, 4, s - 9, s - 9);
             Theme.Smooth(g);
-            icon(g, s / 2f, s / 2f, lit ? Theme.Gold : Theme.Hex("#c9a24a"));
+            icon(g, s / 2f, s / 2f, lit ? Theme.Gold : grayed ? Theme.Hex("#6e675b") : Theme.Hex("#c9a24a"));
         }
     }
 

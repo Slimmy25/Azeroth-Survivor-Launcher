@@ -816,3 +816,5 @@ Could not keep a local copy of this download ({0}).
 = Kunne ikke beholde en lokal kopi af dette download ({0}).
 The game is running. Close it before you restore.
 = Spillet kører. Luk det, før du gendanner.
+Cloud Save needs the game. Press INSTALL to download it first.
+= Skygemning kræver spillet. Tryk på INSTALLÉR for at downloade det først.

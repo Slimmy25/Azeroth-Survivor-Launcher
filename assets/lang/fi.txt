@@ -816,3 +816,5 @@ Could not keep a local copy of this download ({0}).
 = Tästä latauksesta ei voitu säilyttää paikallista kopiota ({0}).
 The game is running. Close it before you restore.
 = Peli on käynnissä. Sulje se ennen palauttamista.
+Cloud Save needs the game. Press INSTALL to download it first.
+= Pilvitallennus tarvitsee pelin. Paina ensin ASENNA ladataksesi sen.

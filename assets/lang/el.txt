@@ -817,3 +817,5 @@ Could not keep a local copy of this download ({0}).
 = Δεν ήταν δυνατό να φυλαχτεί τοπικό αντίγραφο αυτής της λήψης ({0}).
 The game is running. Close it before you restore.
 = Το παιχνίδι τρέχει. Κλείσ' το πριν από την επαναφορά.
+Cloud Save needs the game. Press INSTALL to download it first.
+= Η αποθήκευση cloud χρειάζεται το παιχνίδι. Πάτησε πρώτα ΕΓΚΑΤΑΣΤΑΣΗ για να το κατεβάσεις.
