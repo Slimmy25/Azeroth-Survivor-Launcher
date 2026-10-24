@@ -26,6 +26,14 @@ namespace AzerothLauncher
 
         static string ExePath { get { return Path.GetFullPath(Application.ExecutablePath); } }
 
+        // The new exe is downloaded into, and the replaced one parked in, the launcher's own folder (same drive, so
+        // they can be moved). When that folder is not next to the exe they stay next to the exe.
+        static string Scratch(string suffix)
+        {
+            string name = Path.GetFileName(ExePath) + suffix;
+            return Util.DataBesideExe ? Path.Combine(Util.DataDir, name) : ExePath + suffix;
+        }
+
         // the newest published (not pre-) release and its exe
         public static LauncherRelease FetchLatest()
         {
@@ -89,7 +97,7 @@ namespace AzerothLauncher
         // downloads the new exe next to this one and checks it; returns its path
         public static string Download(LauncherRelease rel, Action<long, long> progress, ManualResetEvent cancel)
         {
-            string dest = ExePath + ".download";
+            string dest = Scratch(".download");
             string digest = Net.Download(rel.ExeUrl, dest, true, "GitHub", progress, cancel, rel.Size);
             if (digest != rel.Sha256)
             {
@@ -103,7 +111,7 @@ namespace AzerothLauncher
         // this one becomes "<name>.exe.old" and is deleted by the new launcher when it starts.
         public static void InstallAndRestart(string newExe, bool tray)
         {
-            string exe = ExePath, old = exe + ".old";
+            string exe = ExePath, old = Scratch(".old");
             try
             {
                 if (File.Exists(old)) File.Delete(old);
@@ -127,7 +135,8 @@ namespace AzerothLauncher
         // run at start: removes the previous exe left behind by an update, and a half-finished download
         public static void CleanUp()
         {
-            foreach (string f in new[] { ExePath + ".old", ExePath + ".download", ExePath + ".download.part" })
+            foreach (string f in new[] { Scratch(".old"), Scratch(".download"), Scratch(".download.part"),
+                                         ExePath + ".old", ExePath + ".download", ExePath + ".download.part" })   // older versions
                 for (int i = 0; i < 10 && File.Exists(f); i++)            // the old launcher may still be closing
                 {
                     try { File.Delete(f); }

@@ -386,7 +386,11 @@ namespace AzerothLauncher
             string kind = Kind(archive);
             if (kind == null) throw new UserError("That file is not a .rar, .zip or .7z archive.");
             Directory.CreateDirectory(destDir);
-            string stage = Path.Combine(destDir, ".azeroth_install_tmp");
+            // unpacked on the same drive so the files can be moved into place: in the launcher's own folder when
+            // the game goes next to the launcher, otherwise in the game folder
+            bool besideLauncher = Util.DataBesideExe &&
+                string.Equals(Path.GetFullPath(destDir).TrimEnd('\\'), Util.LauncherDir.TrimEnd('\\'), StringComparison.OrdinalIgnoreCase);
+            string stage = besideLauncher ? Path.Combine(Util.TempDir, "install") : Path.Combine(destDir, ".azeroth_install_tmp");
             Util.DeleteTreeQuiet(stage);
             Directory.CreateDirectory(stage);
             try
@@ -411,7 +415,8 @@ namespace AzerothLauncher
         public static List<string> InstallAddonZip(string url, string addonDir)
         {
             Directory.CreateDirectory(addonDir);
-            string tmp = Path.Combine(Path.GetTempPath(), "azeroth_addon_" + Guid.NewGuid().ToString("N") + ".zip");
+            Directory.CreateDirectory(Util.TempDir);
+            string tmp = Path.Combine(Util.TempDir, "addon_" + Guid.NewGuid().ToString("N") + ".zip");
             try
             {
                 Net.Download(url, tmp, false, "addon", null, null, 0);

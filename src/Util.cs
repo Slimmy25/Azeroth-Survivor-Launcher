@@ -263,12 +263,11 @@ namespace AzerothLauncher
     }
 
     // ------------------------------------------------------------------ the settings file
-    // %APPDATA%\WoWLauncher\config.json, the same file and keys the Python launcher used, so nothing is lost.
+    // <launcher folder>\Azeroth Survivor Launcher\config.json (same keys as the Python launcher used).
     public class Config
     {
-        public static readonly string AppDir = Path.Combine(
-            Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "WoWLauncher");
-        public static readonly string FilePath = Path.Combine(AppDir, "config.json");
+        public static string AppDir { get { return Util.DataDir; } }
+        public static string FilePath { get { return Path.Combine(AppDir, "config.json"); } }
 
         public Dictionary<string, object> Data;
 
@@ -353,9 +352,109 @@ namespace AzerothLauncher
             get { return Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData); }
         }
 
-        public static string StateDir
+        // Everything the launcher writes for itself (settings, sync memory, log, backups, kept downloads, temporary
+        // files) goes into one folder next to the exe. Only when that folder can't be written (for example the exe
+        // sits in Program Files) is %LOCALAPPDATA%\Azeroth Survivor Launcher used instead.
+        public const string DataFolderName = "Azeroth Survivor Launcher";
+        static string dataDir;
+        static bool dataBesideExe;
+        static readonly object dataLock = new object();
+
+        public static string DataDir { get { InitData(); return dataDir; } }
+        public static bool DataBesideExe { get { InitData(); return dataBesideExe; } }
+        public static string StateDir { get { return DataDir; } }
+        public static string TempDir { get { return Path.Combine(DataDir, "temp"); } }
+
+        static void InitData()
         {
-            get { return Path.Combine(LocalAppData, "WoWLauncher"); }
+            lock (dataLock)
+            {
+                if (dataDir != null) return;
+                string beside = Path.Combine(LauncherDir, DataFolderName);
+                if (!InCloudDrive(LauncherDir) && Writable(beside))
+                {
+                    dataDir = beside;
+                    dataBesideExe = true;
+                }
+                else
+                {
+                    dataDir = Path.Combine(LocalAppData, DataFolderName);
+                    try { Directory.CreateDirectory(dataDir); } catch (Exception) { }
+                }
+                try { MoveOldData(dataDir); } catch (Exception) { }
+                try { DeleteTreeQuiet(Path.Combine(dataDir, "temp")); } catch (Exception) { }
+            }
+        }
+
+        // A launcher kept inside Google Drive, OneDrive, Dropbox or iCloud would have its sync memory copied to the
+        // other PCs, which breaks the "what changed since the last sync on this PC" check. Its files go to
+        // %LOCALAPPDATA% then. (A quick name check: looking for the cloud apps themselves can hang on network drives.)
+        static bool InCloudDrive(string dir)
+        {
+            try
+            {
+                string full = Path.GetFullPath(dir).TrimEnd('\\') + "\\";
+                foreach (string v in new[] { "OneDrive", "OneDriveConsumer", "OneDriveCommercial" })
+                {
+                    string root = Environment.GetEnvironmentVariable(v);
+                    if (!string.IsNullOrEmpty(root) &&
+                        full.StartsWith(Path.GetFullPath(root).TrimEnd('\\') + "\\", StringComparison.OrdinalIgnoreCase)) return true;
+                }
+                var names = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { "google drive", "my drive", "meine ablage",
+                    "mi unidad", "mon drive", "il mio drive", "mijn drive", "meu drive", "mój dysk", "мой диск", "dropbox",
+                    "onedrive", "icloud drive", "iclouddrive" };
+                foreach (string part in full.Split(new[] { '\\' }, StringSplitOptions.RemoveEmptyEntries))
+                    if (names.Contains(part) || part.StartsWith("OneDrive - ", StringComparison.OrdinalIgnoreCase) ||
+                        part.StartsWith("Dropbox (", StringComparison.OrdinalIgnoreCase)) return true;
+            }
+            catch (Exception) { }
+            return false;
+        }
+
+        static bool Writable(string dir)
+        {
+            try
+            {
+                Directory.CreateDirectory(dir);
+                string probe = Path.Combine(dir, ".write-test-" + Guid.NewGuid().ToString("N"));
+                File.WriteAllText(probe, "");
+                File.Delete(probe);
+                return true;
+            }
+            catch (Exception) { return false; }
+        }
+
+        // Earlier versions kept their files in %APPDATA%\WoWLauncher (settings) and %LOCALAPPDATA%\WoWLauncher
+        // (sync memory, log, backups). The first start of this version copies them over, so nothing is lost; the old
+        // folders are left as they were, in case an older launcher is still used.
+        static void MoveOldData(string dest)
+        {
+            if (File.Exists(Path.Combine(dest, "config.json")) || File.Exists(Path.Combine(dest, "state.json"))) return;
+            string oldCfg = Path.Combine(Path.Combine(AppData, "WoWLauncher"), "config.json");
+            string oldState = Path.Combine(LocalAppData, "WoWLauncher");
+            if (!File.Exists(oldCfg) && !File.Exists(Path.Combine(oldState, "state.json"))) return;
+            foreach (string name in new[] { "state.json", "log.txt", "log.old.txt" })
+                CopyIfThere(Path.Combine(oldState, name), Path.Combine(dest, name));
+            foreach (string sub in new[] { "backups", "downloads" })
+            {
+                string src = Path.Combine(oldState, sub);
+                if (!Directory.Exists(src)) continue;
+                foreach (string f in Directory.GetFiles(src, "*.zip"))
+                    CopyIfThere(f, Path.Combine(Path.Combine(dest, sub), Path.GetFileName(f)));
+            }
+            CopyIfThere(oldCfg, Path.Combine(dest, "config.json"));      // last: it marks the copy as done
+        }
+
+        static void CopyIfThere(string src, string dst)
+        {
+            try
+            {
+                if (!File.Exists(src) || File.Exists(dst)) return;
+                Directory.CreateDirectory(Path.GetDirectoryName(dst));
+                File.Copy(src, dst + ".tmp", true);
+                File.Move(dst + ".tmp", dst);
+            }
+            catch (Exception) { }
         }
 
         public static string DefaultSaveDir

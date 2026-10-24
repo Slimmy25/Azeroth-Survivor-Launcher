@@ -17,6 +17,19 @@ Get `Azeroth Survivors Launcher.exe` from the [Releases](../../releases) page an
 game is (or should be installed). It needs nothing else: it runs on the .NET Framework 4.8 that is part of
 Windows 10 and 11.
 
+## Where the launcher keeps its files
+
+Everything the launcher writes for itself goes into a folder named `Azeroth Survivor Launcher` next to the exe:
+settings (`config.json`), the cloud sync memory (`state.json`), `log.txt`, backups made before a sync replaces
+anything (`backups`), the last 5 cloud downloads (`downloads`) and temporary files (`temp`).
+
+It uses `%LOCALAPPDATA%\Azeroth Survivor Launcher` instead when the exe's folder can't be written to (for example
+Program Files), or when the exe sits inside Google Drive, OneDrive, Dropbox or iCloud. The sync memory belongs to one
+PC and must not be copied to the others.
+
+Some things stay where they belong: the game itself, its save folder and AddOns, the cloud sync folder, and the
+temporary undo folder of a game update, which is kept inside the game folder.
+
 ## Build it yourself
 
 Double-click `build.bat`. It uses the C# compiler that comes with Windows, so nothing has to be installed.
