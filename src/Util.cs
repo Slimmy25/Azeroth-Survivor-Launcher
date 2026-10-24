@@ -656,7 +656,32 @@ namespace AzerothLauncher
 
     public static class Data
     {
-        public static readonly string[] AddonCategories = { "AS ADDONS", "WOW 1.12 ADDONS" };
+        public static readonly string[] AddonCategories = { "AS ADDONS", "WOW 1.12 ADDONS", "MY ADDONS" };
+        public const string MyAddonsCategory = "MY ADDONS";
+
+        // MY ADDONS: your own addon .zip files, kept on this PC only (never uploaded anywhere) in
+        // <launcher folder>\Azeroth Survivor Launcher\My Addons; each one installs like a downloaded addon
+        public static string MyAddonsDir { get { return Path.Combine(Util.DataDir, "My Addons"); } }
+
+        public static List<AddonEntry> MyAddons()
+        {
+            var list = new List<AddonEntry>();
+            try
+            {
+                Directory.CreateDirectory(MyAddonsDir);
+                foreach (string f in Directory.GetFiles(MyAddonsDir, "*.zip"))
+                {
+                    var e = new AddonEntry();
+                    e.Category = MyAddonsCategory;
+                    e.Name = Path.GetFileNameWithoutExtension(f);
+                    e.Url = f;
+                    e.Description = "Your own addon, from the My Addons folder on this PC.";
+                    list.Add(e);
+                }
+            }
+            catch (Exception) { }
+            return list;
+        }
         public static readonly string[] AddonFilters = { "UI OVERHAUL", "GAMEPLAY", "COSMETIC" };
         public const int ClRows = 8;                 // buttons per column in All Patch Notes (two columns per page)
 
@@ -776,6 +801,17 @@ namespace AzerothLauncher
                     e.Category = f[0].Trim().ToUpperInvariant();
                     e.Name = f[1].Trim();
                     e.Url = f[2].Trim();
+                    // "local:<file>.zip": a zip kept on this PC, next to the launcher (or in its own folder). Such an
+                    // addon is only listed where that file is, so nothing private is downloaded from anywhere.
+                    if (e.Url.StartsWith("local:", StringComparison.OrdinalIgnoreCase))
+                    {
+                        string file = e.Url.Substring(6).Trim();
+                        string found = null;
+                        foreach (string dir in new[] { Util.LauncherDir, Util.DataDir })
+                            if (found == null && File.Exists(Path.Combine(dir, file))) found = Path.Combine(dir, file);
+                        if (found == null) continue;
+                        e.Url = found;
+                    }
                     e.Description = f.Length > 4 ? string.Join("|", f, 4, f.Length - 4).Trim() : "";
                     if (f.Length > 3)
                         foreach (string t in f[3].Split(','))
