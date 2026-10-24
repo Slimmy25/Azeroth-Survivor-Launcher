@@ -68,6 +68,8 @@ namespace AzerothLauncher
             if (current != null && current != "Home" && side.Visible) BuildPanel(current);
         }
 
+        public static bool PreviewMode;                     // rendering preview pictures: no update checks, no restarts
+
         public LauncherApp(bool startInTray)
         {
             this.startInTray = startInTray;
@@ -115,7 +117,7 @@ namespace AzerothLauncher
             Shown += delegate
             {
                 if (startInTray) Hide();
-                After(300, StartupUpdateCheck);              // a newer launcher on GitHub is installed right away
+                if (!PreviewMode) After(300, StartupUpdateCheck);   // a newer launcher on GitHub is installed right away
                 After(500, MaybeFirstRun);
                 After(900, TellUpdateRecovery);
             };
