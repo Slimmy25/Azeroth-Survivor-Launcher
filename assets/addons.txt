@@ -1,0 +1,12 @@
+# Addons offered in Addons > DOWNLOAD MORE. One addon per line:
+#   CATEGORY | Name shown | https://direct-link-to/addon.zip | FILTERS | description
+# CATEGORY is AS ADDONS or WOW 1.12 ADDONS. FILTERS: UI OVERHAUL, GAMEPLAY and/or COSMETIC
+# (several separated by commas, or empty). The description is optional. Lines starting with # are ignored.
+# FILTERS: UI OVERHAUL, GAMEPLAY, COSMETIC
+
+AS ADDONS | DBM by Gabriellus | https://files.catbox.moe/2r4n2u.zip | GAMEPLAY
+AS ADDONS | Death Recap By Fotze | https://files.catbox.moe/329wa0.zip | GAMEPLAY
+AS ADDONS | Azerloot By KindaGray | https://github.com/Kindagrey/Azerloot/releases/download/v2.5.0/Azerloot-2.5.0.zip | GAMEPLAY
+AS ADDONS | Chest GPS By Fotze | https://files.catbox.moe/riqfmy.zip | COSMETIC
+AS ADDONS | SurvivorsDragonU By Mxgwyn | https://github.com/migwynkriid13/SurvivorsDragonUi/releases/latest/download/SurvivorsDragonUi.zip | UI OVERHAUL
+AS ADDONS | Keijin UI By Keijin | https://github.com/KeijinDE/KeijinUI_modern-as-ui/releases/download/v3.7.1/KeijinUI-3.7.1.zip | UI OVERHAUL

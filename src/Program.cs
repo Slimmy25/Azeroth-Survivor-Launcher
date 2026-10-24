@@ -1,0 +1,127 @@
+// Azeroth Survivors Launcher (2006-style look), C# version.
+// Built by build.bat with the C# compiler that is part of Windows (.NET Framework 4.8), so the exe is a small,
+// plain .NET program: no packer, no self-extracting runtime, nothing unpacked to a temp folder at start.
+using System;
+using System.Reflection;
+using System.Runtime.InteropServices;
+using System.Threading;
+using System.Windows.Forms;
+
+[assembly: AssemblyTitle("Azeroth Survivors Launcher")]
+[assembly: AssemblyDescription("Azeroth Survivors Launcher")]
+[assembly: AssemblyCompany("Azeroth Survivors")]
+[assembly: AssemblyProduct("Azeroth Survivors Launcher")]
+[assembly: AssemblyCopyright("Copyright (c) 2026 Azeroth Survivors")]
+[assembly: AssemblyVersion("2.0.0.0")]
+[assembly: AssemblyFileVersion("2.0.0.0")]
+[assembly: AssemblyInformationalVersion("2.0.0")]
+[assembly: ComVisible(false)]
+[assembly: System.Runtime.Versioning.TargetFramework(".NETFramework,Version=v4.8", FrameworkDisplayName = ".NET Framework 4.8")]
+
+namespace AzerothLauncher
+{
+    static class Program
+    {
+        // Only one launcher may run at a time. A named mutex decides who is first; a named event lets a second
+        // start ask the first one to come forward. Nothing listens on the network.
+        const string MutexName = "Local\\AzerothSurvivorsLauncher";
+        const string EventName = "Local\\AzerothSurvivorsLauncherShow";
+
+        [DllImport("user32.dll")]
+        static extern bool AllowSetForegroundWindow(int processId);
+
+        [DllImport("shell32.dll", CharSet = CharSet.Unicode)]
+        static extern int SetCurrentProcessExplicitAppUserModelID(string appId);
+
+        [STAThread]
+        static void Main(string[] args)
+        {
+            bool tray = Array.IndexOf(args, "--tray") >= 0;
+            bool first;
+            using (var mutex = new Mutex(true, MutexName, out first))
+            {
+                if (!first)
+                {
+                    // already running: bring that window forward (unless this start was --tray) and quit
+                    if (!tray && !WakeExisting())
+                        MessageBox.Show("The launcher is already running.\n\nLook for its icon in the system tray (near the clock).",
+                                        "Azeroth Survivors Launcher");
+                    return;
+                }
+                try { SetCurrentProcessExplicitAppUserModelID("Aethus.AzerothSurvivors.Launcher"); }   // own taskbar identity
+                catch (Exception) { }
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.AddMessageFilter(new WheelRouter());
+                using (var show = new EventWaitHandle(false, EventResetMode.AutoReset, EventName))
+                {
+                    var app = new LauncherApp(tray);
+                    var listener = new Thread(delegate()
+                    {
+                        while (true)
+                        {
+                            try
+                            {
+                                show.WaitOne();
+                                app.Ui(app.ShowWindowFront);
+                            }
+                            catch (Exception) { return; }
+                        }
+                    });
+                    listener.IsBackground = true;
+                    listener.Start();
+                    Application.Run(app);
+                }
+                GC.KeepAlive(mutex);
+            }
+        }
+
+        // asks the running launcher to show its window; true if it answered
+        static bool WakeExisting()
+        {
+            try { AllowSetForegroundWindow(-1); } catch (Exception) { }
+            for (int i = 0; i < 3; i++)                      // the first copy may still be starting up
+            {
+                EventWaitHandle h;
+                if (EventWaitHandle.TryOpenExisting(EventName, out h))
+                {
+                    using (h) h.Set();
+                    return true;
+                }
+                Thread.Sleep(400);
+            }
+            return false;
+        }
+    }
+
+    // The mouse wheel scrolls the list under the pointer (also when the pointer is over a label inside it),
+    // like the Tk version did, instead of only the list that has the keyboard focus.
+    class WheelRouter : IMessageFilter
+    {
+        [DllImport("user32.dll")]
+        static extern IntPtr WindowFromPoint(System.Drawing.Point p);
+
+        public bool PreFilterMessage(ref Message m)
+        {
+            if (m.Msg != 0x020A) return false;               // WM_MOUSEWHEEL
+            try
+            {
+                int delta = (short)((m.WParam.ToInt64() >> 16) & 0xFFFF);
+                Control c = Control.FromChildHandle(WindowFromPoint(Cursor.Position));
+                while (c != null)
+                {
+                    if (c is TextBoxBase || c is ComboBox) return false;     // these scroll themselves
+                    var w = c as IWheel;
+                    if (w != null)
+                    {
+                        w.Wheel(delta);
+                        return true;
+                    }
+                    c = c.Parent;
+                }
+            }
+            catch (Exception) { }
+            return false;
+        }
+    }
+}

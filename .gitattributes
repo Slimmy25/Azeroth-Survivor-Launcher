@@ -1,0 +1,9 @@
+# Windows batch files must keep Windows line endings, or their labels (goto) stop working.
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.txt text eol=crlf
+*.cs text eol=crlf
+*.py text eol=lf
+*.yml text eol=lf
+*.png binary
+*.ico binary

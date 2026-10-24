@@ -1,0 +1,1416 @@
+Patch notes shown in the launcher's Changelog. The launcher sorts them by version number itself.
+Every post starts with its title on the first line. Posts are separated by a line with only === on it.
+Everything above the first === line is ignored.
+===
+0.113.3
+-------
+Co-op speaks your language, bigger parties find more chests, and Battle Shout and Power Word: Shield help the whole party.
+
+* In co-op everyone reads the game in their own language, not the host's.
+* A party finds more chests: half as many again for each extra player, three times as many with five.
+* Battle Shout also rallies friends within 30 yards.
+* Power Word: Shield also shields friends within 30 yards.
+* A downed hero now really is down on every screen: it lies where it fell and can't walk away until a friend brings it back, instead of running about on its own screen with its attacks doing nothing.
+===
+0.113.2
+-------
+Co-op runs smoother: the host now sends its friends a fraction of what it did, so parties lag less, even late in a run with a big horde.
+
+* The host's game bundles and compresses what it sends each friend: about ten times fewer messages and half the data, so a weaker connection keeps up.
+* Messages between players arrive faster.
+===
+0.113.1
+-------
+Hosts can choose how many players their lobby takes, and the lobby list scrolls.
+
+* When hosting, pick the lobby's size, from 1 to 5 players. A full lobby leaves the list, and the lobby window shows only its open slots.
+* The lobby list scrolls, so every public lobby is there, not just the first eight.
+* Some coop performance fixes
+===
+0.113.0
+-------
+Co-op is here: play a run with up to four friends. Open the Co-op window on the hero picker to host a lobby, public or private behind a code, and your friends join with their own heroes.
+
+* Up to five heroes in one run, each with their own gear, talents and perks. The host picks the zone, and everyone joins only zones they've unlocked with their class.
+* The lobby list shows each public lobby's name, description, host, zone, the classes already in it and how many have joined. In a lobby you see everyone's class and achievement points.
+* Every extra hero makes the run harder: a bigger, harder-hitting horde and tougher bosses, sized to the heroes still standing. The horde hunts whoever is nearest.
+* Experience and gold are shared; caches are each hero's own to buy.
+* Choosing a card holds only you while the others fight on; when the whole party is choosing, the horde waits.
+* A fallen hero is down, not out: stand beside them for 6 seconds to bring them back. The run ends when every hero is down.
+* Your heals also heal friends within 30 yards.
+* A guardian slain by anyone gives every hero its reward.
+* Party frames, chat between all players, a Party DPS page in the damage meter, and inspecting a friend shows their jewelry.
+* After a victory the host can take the party into endless mode. After a run the party stays together for the next one.
+* Everything you win goes to your own save: gear, talent experience, achievements and newly opened zones.
+* Your Discord status shows when you're playing co-op and with whom.
+* Addons can read the party's damage meter and revives (AZS_GetPartyMeter, AZS_GetRevive).
+* Co-op needs an internet connection; without one the game plays as always.
+* Typing in chat no longer picks or rerolls cards.
+===
+0.112.5
+-------
+Your addons and settings are back. The last update looked for them in the wrong place, so the game started as if it were new; this one finds them and brings them along.
+
+* Windows: the game now keeps your addons, their saved data, your options, key bindings, chat windows and camera in the benilla-config folder beside AzerothSurvivors.exe, where they will stay from now on.
+* On its first start it copies everything from the older folders into it, so nothing is lost. Anything you changed after the last update is kept too, and your old settings fill in the rest.
+* Your characters were never affected.
+===
+0.112.2
+-------
+Bloodlord Mandokir and the Gurubashi Champion no longer stare you down for now.
+
+* Their gaze, the circle under your hero that struck if you stepped out of it, is gone; the rest of their fights is unchanged.
+===
+0.112.0
+-------
+Two warrior talents that only made your auto-attacks stronger have been replaced. Arms gets Trauma, a reward for keeping your bleeds up, and Fury gets Bloodlust, which makes Battle Shout hit harder. Points you had in the old talents carry over to the new ones.
+
+* Trauma (Arms, replaces Improved Heroic Strike): you deal 3/6/9/12/15% more damage to enemies suffering your damage-over-time effects, such as Rend and Deep Wounds.
+* Bloodlust (Fury, replaces Unbridled Wrath): Battle Shout and your other damage, haste, shield and thorns buffs are 6/12/18/24/30% stronger.
+* Both are translated into every language.
+===
+0.111.0
+-------
+A warlock follow-up: Demonic Empowerment now works just like Battle Shout, for your demons, and the Legionlord's Medallion like The Eternal Talisman. The Doomguard's rank now raises Doom Bringer's cap, Soul Reaping hits harder, and summoning a Pit Lord no longer locks you in place. The Star of Mystaria is now a trinket.
+
+* Demonic Empowerment: +40% demon damage for 8 sec, every 16 sec (was +30%, every 25 sec), and its ranks are Battle Shout's: duration and cooldown, until it never lapses, then none. The Horn of the Warchief strengthens it once, as it does Battle Shout. It still strengthens only your demons, never you, and never makes them attack faster.
+* The Legionlord's Medallion: twice the duration, a 35% shorter cooldown and twice the strength, growing with each pick as The Eternal Talisman does. Its own demon damage and its table of 10 ranks are gone.
+* Pit Lord: Felseeker deals 25% more damage to its primary target (was 35%) and hits at most 6 enemies.
+* Infernal: its meteor's landing deals 75% of its original damage (was 80%). Its Hellfire is unchanged.
+* Doomguard: its Shadow Bolts no longer grow stronger with Summon Doomguard's rank. Instead Doom Bringer goes up to +60%, +80% or +100% at rank 1, 2 or 3 (3, 4 or 5 bolts in a row), and its tooltip shows your rank's.
+* Soul Reaping: your Death Coil deals 5/7.5/10% of what your Drain Life on its target has left to deal (was 1/3/5%). On the damage meter it now counts as your Death Coil, and a Succubus's as hers.
+* Imp: its Firebolts now gain Emberstorm's Fire damage.
+* Conflagrate's tooltip now says it starts every run with Immolate.
+* Butcher and Pact of the Annihilan: the countdown to the next demon is no longer a buff on you. It shows on its talent's icon under your build (Show Build) instead.
+* Fixed: summoning a Pit Lord no longer locks your hero in place.
+* The Star of Mystaria is now a trinket, with a new icon: +25% max health and +4% damage reduction when first picked, growing as other trinkets do. Your collection keeps it. It can be worn together with the Animated Chain Necklace.
+* Stop Hitting Yourself (King Gordok) now also counts a Paladin's Holy Shield.
+* All of the new and changed text is translated into every language.
+===
+0.110.0
+-------
+A big warlock balance pass: your demons now attack faster with your cooldown reduction, the Felguard and the Pit Lord come on their own every 30 seconds or sooner (two at once at high cooldown reduction), and Legion Gate sends three random demons every 4 seconds. Felhunters, Succubi, Voidwalkers, the Doomguard and Demonic Supremacy all play differently, and the Destruction and Affliction trees have moved a few talents. Eleven bosses also have a new achievement with a reward, among them a Defias Bandana every class can wear as a look.
+
+* Every demon attacks on one clock: its swing, its cast or its Hellfire's pulse is shorter by your cooldown reduction, never faster than one every half second. The Pit Lord's attacks and the Imps' and Succubi's speed up now too.
+* Demonic Empowerment no longer makes demons attack faster; it only adds demon damage. Its damage ranks no longer stop at +75%, so it keeps being offered. Once it is up all the time, only its damage ranks are offered, never duration or cooldown.
+* The Legionlord's Medallion follows a fixed table from rank 1 to 10: +100% duration, +60% demon damage, a 35% shorter cooldown and +100% strength at rank 1, up to +200%, +150%, 75% and +200% at rank 10. Fixed: ranks 1 to 3 gave nothing more than rank 1.
+* Butcher and Pact of the Annihilan: the Felguard or Pit Lord comes at once, stays 20 sec, and a new one comes every 30 sec, sooner with cooldown reduction (every 13 sec at most). Up to two can be out at once. A buff on you counts down to the next one. No more 10% chance per cast or wait after one leaves.
+* Pit Lord: Felseeker's first missile now always goes to the toughest enemy near it, bosses and elites first, and deals 35% more damage. Its other missiles are as before.
+* Felguard: its axe hits up to 10 enemies within 15 yd of it, farther with your area, its target among them; an echoed swing hits the same ones. Blood Frenzy now deals 50% more damage to enemies below 30% health (it used to swing faster). It goes for the boss or elite with the least health left, and otherwise the enemy nearest you. It no longer gives Soul Shards.
+* Legion Gate: every 4 sec, 3 lesser demons come, the first ones 4 sec into the run. Each wave stays 16 sec and the next 12 sec, in turn, so once it is going you have 12 out, then 9, then 12 again. Each one is an Imp, a Succubus or your companion's kind at random: Felhunters with Soul Devourer, Voidwalkers with Soul Link, never the other (three of the same can happen). Up to 12 at once; your own Imp and companion don't count. Before, it favoured Imps and your companion's kind.
+* Felhunter: Consume Magic replaces its critical strikes on cursed enemies, its bonus damage to them and Soul Fracture; its bites now grow only with how wounded their target is: 0.5/1/2% more damage for every 1% of health it is missing, by Soul Devourer's rank (was 0.75/1.5/3%). Each bite takes 10% of what is left of your highest-ranked damage over time on its target (Curse of Agony, Corruption, Immolate or Drain Life, whichever of your spells has the highest rank), which then ends 10% sooner, and deals 150% of that damage at once. No Felhunter feeds on the same enemy again for 3 sec.
+* Succubus: deals 20% more damage to enemies with your Corruption and stuns them for 1 sec (never bosses), then no Succubus stuns that enemy again for 5 sec. When her own blow kills an enemy, she hurls a Death Coil at a random enemy for half your Death Coil's damage.
+* Voidwalker: 10% more damage, and now deals 3% more damage for every 1% damage reduction you have and 2% more for every 1% bonus health (was 2% and 1%).
+* Imp: Firebolts deal 5% more damage.
+* Doomguard: with Conflagrate learned, each of its Shadow Bolts and Shadow Cleave forks that hits an enemy burning with your Immolate explodes for 3.75% of that hit on the enemies within 6 yd, a quarter of what your own Conflagrate's explosion deals. Its tooltip is shorter.
+* Doomguard: Doom Bringer now tops out at 100% more damage, after 5 bolts in a row on the same boss or elite (was 200% after 10).
+* Doomguard: its Shadow Bolt strikes 2 enemies, however many yours does, and Shadow Cleave forks each cast to 2 more for 15%, never the same enemy twice. With Nightfall learned, its bolts corrupt what they hit as yours do.
+* Infernal: its meteor's landing deals 20% less damage; its Hellfire's damage is unchanged. Its Hellfire now pulses exactly as often as yours (it pulsed about twice as fast), and its ring is drawn exactly as wide as it burns. Neither your Hellfire nor its pulses more than twice a second.
+* Demonic Supremacy no longer adds 25% damage. In its place, the four lesser demon talents do something of their own while you have it: Demonic Familiar makes your Infernal's Hellfire 1% stronger per rank, Soul Devourer makes your Doomguard deal 2/4/6% more to bosses and elites, Soul Link gives you 1/2/3% damage reduction, and Legion Gate makes your greater demons' next attack hit 50% harder every 12 sec. Their tooltips show it on a "Supremacy:" line.
+* Demons are drawn larger: the Felguard, Pit Lord, Infernal and Doomguard by half, the Imp, Felhunter, Voidwalker and Succubus by a fifth. Only their looks change, and the Doomguard and the other large demons that keep their distance stand to your side, not between you and the camera.
+* Affliction: Dark Pact is now Soul Reaping, and it swaps places with Fel Concentration (Soul Reaping in the third row, Fel Concentration in the sixth). Soul Reaping: your Death Coil also deals 1/3/5% of what your Drain Life on its target has left to deal, without using it up. A Succubus's Death Coil gets it too.
+* Destruction: Improved Searing Pain and Devastation swap places, and so do Bane and Intensity. Bane now has 3 ranks for 7/14/20% shorter Shadow Bolt and Immolate cooldowns. Intensity now has 5 ranks and adds 4% Soulfire damage per rank (it used to add health), and Soul Fire is spelled Soulfire everywhere. Scorched Earth's slow chance is 3% per rank (was 5%). Points in talents that moved may need spending again in the armory's Talents tab.
+* Demonic Embrace and Fel Stamina no longer mention the Voidwalker; Soul Link explains how it grows. Talent tooltips are shorter and show the numbers for the rank you look at; the Demonology ones say just what you need.
+* New achievements, each with a reward: Spin to Win (Herod, Whirlwind), Suck It, Hakkar! (Hakkar, Drain Life), Bad Dragon! (Nefarian, a pet's killing blow), Eye Caramba! (C'Thun, without taking damage from him), You're Fired (Edwin VanCleef, a Fire spell), Stitches Get Stitches (Stitches, a bleed), Not Today, Satan (Lord Kazzak, Holy damage), Clever Girl (King Mosh, a pet's killing blow), Bonk the Bonker (Kovork, a melee attack), Stop Hitting Yourself (King Gordok, Lightning Shield or Thorns) and Blue Screen of Death (Azuregos, an Arcane spell).
+* The Scarlet Crusade Tabard now comes only with Spin to Win (Herod, Whirlwind) and can no longer be bought. If you bought it, your 15 points are back to spend.
+* Legion Gate's tooltip now tells what its Succubi's Death Coils do.
+* Their rewards: the Scarlet Crusade Tabard, nine new companions (Swift Zulian Tiger, Mini Chromatic Drakonid, Mini Eye of C'Thun, Mini Stitches, Mini Doomguard, Baby Devilsaur, Mini Ogre, Tiny Gordok, Azure Whelpling) and the Defias Bandana, a Head look any class can show from the armory's look picker without changing what you wear.
+* Six more looks from achievements, for every class: the Zul'Gurub Mask (Suck It, Hakkar!), the Gnomish Mind Control Cap (Eye Caramba!) and the Gnomish Goggles (Blue Screen of Death) for the head, and three cloaks for a new Back slot in the armory: the Onyxia Scale Cloak (Bad Dragon!), the Glacial Cloak (no u) and the Dashing Scarlet Cloak (Spin to Win). The Back slot shows once you have earned a cloak.
+* For addon authors: your summons, for every class and spec (a Hunter's beast, Treants, Spirit Wolves, a Water Elemental, every Warlock demon), with how many are out and how long each has left: AZS_GetSummons, AZS_GetSummonCount, AZS_GetSummonGroups and the AZS_PETS table (see the addon docs).
+* New option on the Combat page: Save Combat Log. Off by default; turned on, every combat log line is written to WoWCombatLog.txt in the Logs folder of benilla-config, beside the game, as /combatlog does. Not in the browser version.
+* New Appearances page in the armory's Rewards tab: every cosmetic look, slot by slot, with the achievement that earns it. Show one on your hero with a click; the ones still to earn are dimmed.
+* The companions' looks list now scrolls instead of running off the bottom of the window.
+* Fixed: a long talent tooltip (in German, say) ran out of the bottom of the Talents tab; the talent's text now scrolls.
+* Fixed: in the armory's Character tab, a hero with many slots (a rogue's two weapons, a long weapon name) pushed the bonuses list out of the bottom of the panel. The equipment list now scrolls instead.
+* Hunters no longer start with an axe or a dagger in their hands: they carry only their bow (a gun for dwarves and tauren), and the armory shows it on them.
+* All of the new and changed text is translated into every language.
+===
+0.109.1
+-------
+Bosses no longer call for towers for now.
+
+* Lord Aliden Perenolde, Hakkar, Sapphiron and Kel'Thuzad no longer raise towers you have to stand in; the rest of their fights is unchanged.
+===
+0.109.0
+-------
+Key bindings can be changed during a run: open Options from the pause menu and they apply at once. The options also gain the settings from the original game's menus that were still missing.
+
+* Key Bindings in a run: the Options page from the pause menu now lists every key binding, and a new key works as soon as you set it. The key you press to bind no longer also does its old job.
+* New options: Player Titles (Nameplates), Multisampling, Anisotropic Filtering, Trilinear Filtering, Full Screen Glow and Death Effect (Graphics), Emote Sounds and Sound at Character (Audio). Multisampling and the two filters take effect the next time the game starts.
+* The reworked Demonology warlock talents, the Legionlord's Medallion and the bosses' new phase lines are translated into every language, and Turkish talent names are no longer in English.
+* Typing your hero's name on the main screen no longer makes the hero's portrait jump and resize.
+===
+0.108.0
+-------
+A new action bar: your six spells and your racial between the gryphons, with the experience bar framed right on top of it and its numbers always shown. Getting caught by a boss's or guardian's mechanic now hurts twice as much, and nothing roots you in place any more. Whitemane's chapel in the Scarlet Monastery is open, boots make you faster, and heroes can have two-word names.
+
+* New action bar: six spell slots, your racial in a gold-rimmed slot of its own, the character and talent buttons, and the experience bar on top with its numbers always shown. No more empty slots, page arrows, bags or latency meter. Bar addons still find every button where they look for it.
+* The talent button no longer flashes at a level-up.
+* Failed mechanics: a boss's or guardian's marker that catches you deals twice its damage before endless. In endless it is as before.
+* Roots are gone: no boss or guardian holds you in place with Frost Nova, Entangling Roots or Deep Sleep any more. The blow that followed them still comes, so step out of it.
+* Boss stances show: Mr. Smite takes up a second axe and then his hammer, Alzzin turns into a wolf, Venoxis into a snake, and Rend Blackhand rides in on Gyth and fights on foot once he comes down.
+* Boots give 2.5 times the movement speed they did.
+* Scarlet Monastery: the passage behind the altar and High Inquisitor Whitemane's chapel are part of the battlefield now.
+* Hero names can have one space (two words) and be up to 20 letters long. Long names shrink to fit the name field, the armory and your unit frame.
+* Rune pickups say their name in your language.
+* For addon authors: every banner (bosses, guardians, achievements, zones opened, magnets, caches, runes) comes as an event with its own id, its kind and its translated text, even while the run's own banners are hidden (AZS_RegisterBannerHandler, AZS_BANNERS).
+===
+0.107.0
+-------
+Every boss now has a signature of its own, and every guardian fights its own way instead of all of them charging and stomping alike. New mechanics join the ground markers: knockbacks, eggs that hatch, totems and wards that shield or heal their boss, orbs that chase you, tethers to break, a gaze you must not move under, shockwaves to step through, burning ground, dance lanes, bombs to carry into the horde, crystals that weaken a boss, and bosses that change their stance mid-fight. Every mechanic can be handled in melee range, and the fights are a little harder than before.
+
+* Knockbacks: some stomps throw you out of the circle if you are still in it when it lands. Walk back in.
+* Eggs, cocoons, totems and wards: bosses put them around themselves, on your side. Eggs hatch into enemies if left alone, healing wards slowly mend their boss, and warding totems shield it so it takes only a quarter of the damage. Your single-target spells now go for these first, and pass over a shielded boss for the enemies around it.
+* Shields: some bosses shield themselves for a few seconds (Divine Shield, Arcane Bubble, Shield Wall, the balcony). Ossirian the Unscarred is shielded most of the fight: stand in one of his crystals when it fills to break the shield and make him take 50% more damage for a while.
+* Chasing orbs roll after you, slower than you run. Keep moving.
+* Tethers: a beam from the boss drains you every half second until you step far enough away from it once. Hakkar's Blood Siphon, Morbent Fel's drain, Zevrim's Sacrifice, Sapphiron's Life Drain.
+* Gaze: a blue ring under your feet means "do not move". Stop as it settles, stay inside until it fades, and nothing happens. Step out and you are struck. Bloodlord Mandokir's Threatening Gaze.
+* Shockwaves roll out from the boss in rings: step across a ring just after it goes off.
+* Burning ground: everything beyond a circle around you burns for a few seconds. Stay inside.
+* Dance lanes: lanes across the ground go off in turns. Stand in the safe ones and switch as they alternate. High Priestess Jeklik's fire bombing, Nefarian's shadowflame.
+* Bombs: a circle rides on you and goes off a few seconds later. It hurts you if you are still in it, but it also blasts every enemy around it, so drop it in the horde.
+* Meteors bring a new enemy where each one lands.
+* Roots: Frost Nova, Entangling Roots and Deep Sleep hold you in place briefly. What follows always lands after you can move again.
+* Stances: Mr. Smite swaps weapons, Alzzin turns into a wolf, Venoxis into a snake and Rend Blackhand comes down off Gyth, each with a new set of moves.
+* Edwin VanCleef, Lar'korwi and Lord Falconcrest vanish and strike from behind you. Lord Hel'nurath, Arcanist Doan and Noth blink behind you too.
+* New moves and phases across all 60 bosses. A few highlights: Hogger charges and cleaves, Mother Fang and Naraxis lay eggs, Lupos pounces three times, Doomguard Commander's meteors bring Infernals, Kazzak puts the Mark of Kazzak on you, King Mosh shakes the crater, Jin'do raises hex totems, Executus calls his Flamewakers to shield him, C'Thun's tentacles sprout under you, Kel'Thuzad casts Frost Blast and Detonate Mana.
+* Guardians: each of the 37 guardian kinds has its own moves. Bellygrub charges and stomps, the Carrion Recluse webs you and lays eggs, the Flesh Eating Abomination hooks you in, Infernals rain fire, the Gurubashi Champion stares you down, the Scarlet Abbot heals behind a ward, Black Drakes sweep flame. Every Anubisath Sentinel has one of four ability sets, and the Four Horsemen each fight their own way. Many have a new trick at half health.
+* The outline of line and lane markers (charges, Impale, crosses, dance lanes) is a proper rectangle again: its sides no longer run past its ends like |-|.
+===
+0.106.0
+-------
+Every boss now fights with real raid mechanics: it stops to cast, and the ground shows exactly where the blow will land, filling up until it strikes. Get out of circles, cones and lines, get in close under donuts, dodge waves that march across the room, and stand in the blue towers when they fill. Bosses change their tactics as their health drops, and tell you so.
+
+* Boss attacks are marked on the ground before they land: a glowing outline that fills from its center (or its tip, or its start) and strikes what stands inside the moment it is full. The boss stands still and shows a cast bar while it winds up.
+* Orange means get out. Circles on you, around the boss, raining around you or following you before they drop; cones in front of the boss, up to half the room; lines and crosses across the arena; and rows of blasts that march across the room one after another.
+* Donuts: the safe spot is close in, under the boss. Some bosses go out, then in, one right after the other.
+* Purple puddles stay on the ground for a while after they land and keep hurting whoever stands in them.
+* Blue towers: when a boss shouts "Get in a tower!", columns of light rise around you. Stand inside any one when they fill, or take a heavy blow. The tower you are standing in turns green. "Stand still!" puts a tower under your feet instead.
+* Some bosses spin and chase you, or sweep a beam across the room.
+* All 60 bosses have new moves, and many change their tactics at set points of their health, with a yell to warn you: Sapphiron calls towers, Hakkar's Blood Siphon needs shelter, Kel'Thuzad brings towers at 25%.
+* Naxxramas is harder for it.
+===
+0.105.0
+-------
+Demonology's second pass: your casts now call the Infernal and the Doomguard by chance, the Doomguard hurls your Shadow Bolt as fast as you do and grows deadlier on a boss, the Felguard cleaves everything around it, and Demonic Echoes, Demonic Supremacy and Scorched Earth are new talents. Every demon has its own bar on the damage meter, with its attacks in the bar's tooltip, and Demonic Empowerment no longer grows without limit. Shamans keep at most 40 totems of each kind, the end-of-run damage matches the meter, and a far camera in the Scarlet Monastery's courtyard no longer goes black.
+
+* Summon Infernal and Summon Doomguard: each damaging spell you cast has a 5% chance to bring the demon for 15 sec, if it is not already out. No cooldown and no wait between them; one of each at a time.
+* New Demonology talent, Demonic Echoes (replaces Felfire Training, your points stay): your demons' attacks have a 5/10/15% chance to strike again for full damage. It is the demons' only echo; your own Echo stays yours. Imp Firebolts lose Felfire Training's bonus with it.
+* New Demonology talent, Demonic Supremacy (replaces Demonic Knowledge, whose points are refunded: spend them again in the armory's Talents tab): no more Imps, Felhunters, Voidwalkers or Succubi, so Demonic Familiar, Soul Devourer, Soul Link and Legion Gate bring none, but your Infernal and Doomguard (with their talents) stay for the whole run and deal 25% more damage.
+* New Destruction talent, Scorched Earth (replaces Aftermath, your points stay): Hellfire deals up to 25% more damage and has up to a 25% chance to slow each enemy it burns by 40% for 3 sec. Your Infernal's Hellfire too. Your other Fire spells no longer slow.
+* Doomguard: hurls your Shadow Bolt as fast as you do (down to one every half second), with its ranks, its talents and its extra targets; under Shadow Cleave its bolts fork too. It goes for bosses, then elites, and stays on them. Doom Bringer: each bolt in a row on the same boss or elite hits 20% harder, up to 200% more after 10.
+* Infernal: its landing and its Hellfire reach farther with your area, and its Hellfire pulses faster as your own Hellfire does.
+* Felguard (Butcher): its swings hit every enemy around its target, more of them with your area, instead of 5. It attacks faster with your cooldown reduction, and each swing gives you 0.2 Soul Shards toward Soul Fire, at most 2 a second. It goes for the weakest boss or elite near you first.
+* Felhunter (Soul Devourer): 0.75/1.5/3% more damage for every 1% health its target is missing, on bosses and elites as on the rest (was 0.5/1/2%). It gets 25% more critical strike chance for each Curse of Agony on its target, and goes for bosses, elites and the cursed first.
+* Soul Link: its shield shows as a buff with what it has left, and what it absorbs is on the Healing Done meter as Soul Link.
+* Damage meter: hover a demon's bar to see its attacks (the Doomguard's Shadow Bolt, Doom Bringer and Shadow Cleave; the Felguard's Brutal Momentum; Demonic Echoes). The Pit Lord's damage is under Pit Lord, with Felseeker in its tooltip.
+* Fixed: Demonic Empowerment's demon damage and attack speed grew with every rank you took, without end (runs reached over +4,800%). Its ranks now stop at +75% demon damage and +45% attack speed, its own included, and it is no longer offered for them once there.
+* The Legionlord's Medallion now goes up to rank 10, and is no longer offered past it. From rank 3 its bonuses grow evenly to +200% duration, +150% demon damage, a 75% shorter cooldown and +200% strength at rank 10. Its demon damage now really raises what Demonic Empowerment gives your demons; before, it did nothing.
+* Fixed: Imp Firebolts and Doomguard Shadow Bolts often showed no missile at nearby enemies or when cast quickly. Every one flies now.
+* Shaman: at most 40 totems of each kind stand at once (40 Searing Totems and 40 Magma Totems, say). Setting down one more removes the oldest of its kind, as if it had run out, so Call of Flame still bursts from it. Totems your talents set down count too.
+* Fixed: the end-of-run summary counted overkill in Damage dealt, so it came out higher than the damage meter's total. It now counts only the health your hits took, like the meter.
+* Addons: AZS_RUN has three new fields for the class proc with a meter: proc (bloodrage, seal_fate, soul_fire or lightwell, empty for none), pv (how full it is) and pm (full). A rogue on 3 combo points reads proc=seal_fate, pv=3, pm=5; a warlock's soul shards are no longer guesswork.
+* Fixed: in the Scarlet Monastery, zoomed far out by the courtyard's south wall, the camera rose over the wall and out of the building, and the screen went black. It now tips down more steeply over your hero instead, keeping its distance, and only comes closer if it has to.
+===
+0.104.0
+-------
+Demonology is rebuilt around a demon army: a permanent Imp, your pick of a Felhunter or a Voidwalker, a Legion Gate that keeps sending demons, an Infernal and a Doomguard, and a Pit Lord or a Felguard to finish the tree. A new warlock spell, Demonic Empowerment, drives the whole army harder, and Searing Pain hits 25% harder.
+
+* Warlock: the Demonology talent tree is new, and your Demonology points have been refunded. Spend them again in the armory's Talents tab.
+* Demonic Familiar: an Imp fights beside you for the whole run. Its Firebolts also hit every enemy burning with your Immolate.
+* At 10 points, choose one companion: Soul Devourer gives you a Felhunter that bites harder the more wounded its target is, and at rank 3 lets your Curse of Agony crit. Soul Link gives you a Voidwalker that grows with your health and damage reduction, heals you on kills and shields you with its blows.
+* Legion Gate (20 points): every 12 seconds up to 3 demons step through for 20 seconds: Imps, Succubi and more of your companion's kind. Up to 10 lesser demons can be out at once. Succubi stun enemies that carry your Corruption.
+* Summon Infernal and Summon Doomguard (25 points): an Infernal crashes down among your enemies and burns them with your Hellfire; a Doomguard hurls your Shadow Bolt at the toughest enemies. Both come back on their own every so often.
+* Capstones (30 points), pick one: Pact of the Annihilan summons a Pit Lord that hurls Felseeker, a much stronger Searing Pain. Butcher summons a Felguard whose axe hits 5 enemies at once, every third swing for double. Both come from your damaging spells: a 10% chance each cast, guaranteed by the 10th. The Pit Lord wears a smaller Lord Kazzak's look, as the game has no Pit Lord of its own.
+* The rest of the tree backs the army: Demonic Embrace (up to 20% more health) and Fel Stamina (up to 7.5% less damage taken) also make your Voidwalkers hit harder, Unholy Power and Demonic Knowledge raise all demon damage, Felfire Training strengthens the Imps' Firebolts and the Infernal's Hellfire, and Master Demonologist adds damage and critical strike chance for your demons.
+* Your demons spread out over the horde instead of all piling onto one enemy. They go first for what is closing in on you, gang up on elites and bosses, and leave an enemy alone once enough of them are on it or a missile is about to finish it. Each kind also picks targets its own way: the Felhunter goes for the wounded and the cursed, the Voidwalker guards you, the Succubus and the cleaving demons go where enemies are packed, the Doomguard goes for the toughest, and the Imp aims at enemies not yet burning with Immolate. Melee demons surround their target instead of standing in one spot.
+===
+0.103.1
+-------
+Sapphiron, Patchwerk and Kel'Thuzad are now as big as Naxxramas's bosses were meant to be, and finishing Sapphiron with a Frostbolt earns "no u" and a tiny Sapphiron of your own. Companions now sweep up everything past your pickup radius in one trip. Addons no longer hit a 48 MB memory limit.
+
+* Sapphiron is almost three times his old size: as long as Nefarian and as tall as a Doomguard Commander. Before, he stood no taller than the Four Horsemen.
+* Patchwerk is about twice his old size and Kel'Thuzad nearly twice his, so both tower over the Four Horsemen. Their bigger size gives their melee attacks a little more reach.
+* New achievement, no u (Feats, 25 points): slay Sapphiron with a Frostbolt as the killing blow. Your Water Elemental's Frostbolts count too.
+* New companion: Sapphiron, a tiny frost wyrm, unlocked by no u. Pick it in the Rewards tab.
+* Companions sweep instead of fetching one thing a trip. A companion runs out to the coins and wisps lying between your pickup radius and its reach, picks up everything within a pickup radius of its own (a quarter of yours) as it goes, moves on to the next ones from where it stands, and brings the whole load back once nothing is left or after 15 seconds out.
+* Wisp-herder now picks up wisps from twice as far, instead of carrying three a trip.
+* Priest: Shadow Weaving now strikes for 0.5% of the target's maximum health, down from 1%.
+* Fixed: with enough addons, the game warned that the interface was out of memory (48 MB) and quit 15 seconds later. Addons now have no memory limit.
+===
+0.103.0
+-------
+Dungeon and raid bosses now speak their original voice lines as they arrive. The Rewards tab asks before you leave with changes you have not confirmed, and Shadow Dance now replaces Sinister Strike with Backstab.
+
+* Bosses with a voice in the original game say their line out loud when they enter the battlefield: Rhahk'Zor, Mr. Smite and Edwin VanCleef, Houndmaster Loksey, Arcanist Doan, Herod, Scarlet Commander Mograine and High Inquisitor Whitemane, High Priestess Jeklik, High Priest Venoxis, Bloodlord Mandokir, Jin'do and Hakkar, Majordomo Executus and Nefarian, General Rajaxx, Ossirian and C'Thun, and Anub'Rekhan, Noth, Patchwerk and Kel'Thuzad.
+* Rewards: leaving the tab, closing the armory or pressing Escape with perks or tabards changed but not confirmed now opens an Unsaved changes window: Confirm them, Discard them, or Keep editing.
+* Rogue: Shadow Dance (the last Subtlety talent) now starts every run with Backstab instead of Sinister Strike, rather than alongside it.
+===
+0.102.3
+-------
+Zones lost since the new zones update open again for every class that had beaten the zone before them.
+
+* Fixed: after the new zones update, running an older copy of the game on the same computer (such as the game downloaded again from the site, before it updated itself) locked every class back to Elwynn Forest. Each class now opens again every zone after one it has beaten.
+* A class that had beaten the Gates of Ahn'Qiraj before Naxxramas came now has Naxxramas open.
+===
+0.102.2
+-------
+The web edition plays again in the Mac app (@RicksOfNFT unofficial app) and from a copy saved on your own computer.
+
+* The "Fake website detected" message no longer shows when the game is opened from your own disk or in the Mac app; only copies on other websites get it.
+* In the Mac app and from your disk, Discord, Support and Download on the main screen open the real site's pages in your browser.
+===
+0.102.1
+-------
+If you played on a fake copy of the game's website, you can now take your progress with you to the real one.
+
+* The "Fake website detected" message on copies of the game now has a Download your save button when you have progress there. Import the file on wow.aethus.pl under Options, Saves, Import Save.
+===
+0.102.0
+-------
+Korean, Chinese and Japanese text shows again in chat and on nameplates. A new key (Y, or Y on a gamepad) opens your stored level-ups, and addons can now read the end-of-run results and hide the minimap's guardian flag.
+
+* Fixed: since 0.101.0, Korean, Chinese and Japanese words were missing from the chat, nameplates and the rest of the game's own windows, leaving only numbers and punctuation behind.
+* New key binding: Level Up! opens your stored level-ups, like the button above your action bars. It is on Y by default and can be changed under Options, Key Bindings, Azeroth Survivors.
+* Gamepad: Y opens your stored level-ups too.
+* For addon authors: AZS_GetRunSummary() returns the run's results once it ends (result, time survived, level, kills, elites, guardians, bosses, damage dealt and taken, gold, caches, hero, class, race, zone), from the new AZSEND addon message.
+* For addon authors: AZS_SetHudShown("flag", false) hides the red minimap flag on the nearest guardian, and AZS_GetFlaggedLair() tells you which lair it points at, so you can draw your own. Each AZS_LAIRS entry has a new flag field.
+===
+0.101.0
+-------
+The game now runs on a newer version of its World of Warcraft client: shiny gear shows its shine, the chat fades and scrolls as in the original game, and the loading screen fits any window. Sound now works in the Linux version.
+
+* Gear and weapons with a shiny second layer now show it, in the armory and in the world.
+* Enemies fading away after death now fade evenly instead of in patches.
+* The chat at the bottom left fades out after a while and scrolls like the original game's.
+* The loading screen's picture fits inside the window whatever its shape, and its tip is written in the game's own font.
+* Letters a font has no shape for are left out instead of drawn as boxes.
+* Linux: sound plays, also when the system's default audio output will not open.
+* For addon authors: addons now run on a Lua that behaves like the 1.12 client's own (Lua 5.0). There is no _G: use getglobal and setglobal, as in the original game.
+===
+0.100.0
+-------
+Chastise now sets off a Holy Nova on every Smite that crits, the Naxxramas bosses stand taller than the Four Horsemen, and you no longer stay stuck just under the floor indoors.
+
+* Chastise (Priest): every Smite cast that lands a critical strike now sets off a free Holy Nova, once per cast however many of its targets it crits. Before, a hidden 3.5 second cooldown meant most Smite crits did nothing.
+* Naxxramas bosses are bigger: Anub'Rekhan, Noth the Plaguebringer and Patchwerk now tower over the Four Horsemen instead of standing in their shadow, and Sapphiron and Kel'Thuzad grow to match. Their larger size gives their melee attacks a little more reach.
+* Fixed: indoors (Scarlet Monastery's chapel, Naxxramas), your hero could slip just under the floor and keep running there, with the minimap blank, until the run ended. Sinking even a little into the floor now lifts you back onto it, and a spot that keeps catching you moves you a few steps toward the middle.
+===
+0.99.0
+------
+The game now speaks Czech. Your progress is backed up automatically every hour you play, and a spent immunity like Shadowmeld now shows as a debuff until it is ready again.
+
+* New language: Čeština. The whole game is translated: the main screen, options, armory, talents, achievements, every spell, enemy, boss, zone and piece of gear.
+* Automatic backups: every hour you play, the game keeps a copy of your progress, the last 5. In the downloaded game they appear in the Saves folder as Backup files you can import from Options, Saves; in the browser, Options, Saves lists them with a Restore button.
+* Shadowmeld (Night Elf), Will of the Forsaken (Undead) and Divine Shield (Paladin) now leave a debuff on you once they fire, counting down to when they can protect you again, like Cheat Death and the other second lives already do.
+===
+0.98.0
+------
+Three talent specs per class, and level-ups that can wait until you are ready (Store Level-Ups in the options). The harder zones' last minutes are tougher, and several falls through the floor are fixed.
+
+* New option, Store Level-Ups (Options, Controls, off by default): a level-up no longer stops the fight. Your levels are stored, and a Level Up! button over your action bars shows how many are waiting. Click it to choose them all, one after another. Turning the option off offers any stored levels right away.
+* Talent specs: each class keeps three talent builds. Switch between Spec 1, 2 and 3 at the top of the armory's Talents tab, for free, between runs; each shows how its points are split, and your run plays with the one that is lit. Your current talents are Spec 1.
+* For addon authors: AZS_GetStoredLevels, AZS_OpenStoredLevels, AZS_IsStoringLevels and AZS_SetStoringLevels, the stored count as AZS_RUN.sl, and AZS_SetHudShown("levels", false) to hide the Level Up! button and draw your own.
+* Armory: right-click a piece to equip it, or to take it off if you are wearing it. Shift+right-click shows it as its slot's look (again to go back). On the equipment list, right-click a slot to take off what is in it, Shift+right-click to show the worn piece again.
+* Fixed: in Warsong Gulch, walking into the tunnel entrance under the Horde's base dropped you through the map. The battlefield's edge now runs in front of the tunnel, marked by its pillars of light, and sends you back before you reach it.
+* Fixed: in the Scarlet Monastery and Naxxramas you could get stuck in the floor, running in place and going nowhere. If you hold a direction and stay in one spot for a moment and a half, you are now lifted back onto the floor, and moved a few steps toward the middle if that spot catches you again.
+* The harder zones' last minutes are tougher: from Gurubashi Arena on, the horde and its elites gain extra health as the run goes on, none at the start and the most by 20:00 (Gurubashi Arena +6%, Scarlet Monastery +12%, Alterac Valley +18%, Blackrock Mountain +25%, Gates of Ahn'Qiraj +32%, Naxxramas +40%). Elwynn Forest through Feralas are unchanged.
+* Fixed: in Arathi Basin, enemies inside the blacksmith walked under its floor, sunk into the ground. They now walk on the floor, as they do on any building floor that sits a little above the ground (also in Warsong Gulch, Feralas, Alterac Valley and a few spots elsewhere).
+* Fixed: the bursts of Seed of Corruption (Warlock), Shadowform (Priest) and Toxic Bloom (Rogue) made your hero swing as if casting Rupture, and showed as Rupture in the combat log. They now go off as Corpse Explosion (Noxious Cloud for Toxic Bloom) without moving your hero.
+* Onyxia Tooth Pendant: its critical strike splash can now go off up to 6 times a second, up from 2.
+===
+0.97.2
+------
+Running into the bones and spikes round Naxxramas's chamber no longer leaves you stuck inside them.
+
+* Fixed: in Naxxramas, running into the bone and spike piles at the chamber's walls could push you inside them, where you stood stuck or slid around, and the battlefield's edge kept sending you back in. Within a second you are now put back on the nearest open floor, and the edge never puts you inside a wall.
+===
+0.97.1
+------
+Fixes for falling through the floor in the Scarlet Monastery and getting stuck in Naxxramas's floor, and for the browser game's memory growing over a long session. A few small guardians are bigger.
+
+* Fixed: in the browser, the Scarlet Monastery could load without its floor and you fell straight through at the start. Un'Goro Crater's music was missing for the same reason. A new update now reaches the browser right away instead of up to a day later.
+* Fixed: in Naxxramas (and the Scarlet Monastery) running into a wall could sink you into the floor, where you were stuck sliding around. Within a second you are now put back on top of it.
+* Fixed: the browser game's memory kept growing the longer you played. If the game still stops with "WebGPU device lost: Out of memory", the browser's console now shows what was using the memory; please send it to us.
+* Fixed: a missing music track no longer floods the browser's console with the same warning every frame.
+* Guardians that were smaller than the Scarlet Monastery's are now at least as big: the Kobold Taskmaster, Gruff Swiftbite and Bellygrub in Elwynn Forest, the Zulian Crocolisk in Gurubashi Arena and the Obsidian Destroyer in Silithus.
+===
+0.97.0
+------
+Three new languages: Romanian, Ukrainian and Japanese. The language list now scrolls when it doesn't fit on the screen.
+
+* The whole game is translated into Română, Українська and 日本語: the main screen, options, armory, talents, achievements, every spell, enemy, boss, zone and piece of gear.
+* Japanese text uses its own Japanese font, so kanji show in their Japanese forms.
+* Romanian's ă, ș and ț and Ukrainian's є, і and ї now show in the game's fonts, the zone titles' too.
+* The language list has a scrollbar and scrolls with the mouse wheel when it is taller than the window, as on a small screen or a phone.
+* Naxxramas: Sapphiron and the Four Horsemen were far too small, easy to lose in the horde. Sapphiron is now nearly twice as big and the Horsemen are two and a half times their old size.
+* Fixed: Execute wrote nothing to the combat log, so its hits and crits never showed in the chat log or in addons that read it. Rogues' free Eviscerate at five combo points and the Shaman's totem bursts (Call of Flame) were missing there too; they now log as Eviscerate and Fire Nova.
+* Fixed: several announcements left out who they were about, like "claims its lair once more." They now name the guardian, boss or hero: a guardian taking its lair again or being slain, a boss entering the battlefield, cheating death or refusing to fall, and your Soulstone bringing you back.
+* Fixed: in Naxxramas (and the Scarlet Monastery) a hero who slipped through the floor could be stuck under the chamber. Dropping a few yards under the floor now puts you straight back on it, on the nearest floor when there is none right above you.
+* Heavy Dark Iron Ring and Lifegiving Gem no longer stop at 60% and 48% max health: they keep growing with every pick, by less and less past those marks, and keep being offered. A first pick gives a little less than before (a Common ring +25% instead of +30%). Archimtiros' Ring of Reckoning does the same for its max health; its damage reduction still stops at 10.5%, and then says "(max)".
+* Fixed: in Korean, Chinese and Japanese the main screen's class list stood too tall and pushed the spell pool out of its panel.
+* Master Dragonslayer's Ring now reads "+4% critical strike chance".
+* Addons: AZS_RUN now carries the hero's world position (px, py, pz, in the same yards as the caches' and lairs' x, y, z) and facing (pf), on every map, inside instances too, so minimap pins and guardian arrows work in the Scarlet Monastery, Blackrock Mountain, Naxxramas and Ahn'Qiraj.
+===
+0.96.0
+------
+Three new zones: Un'Goro Crater, the Scarlet Monastery and Naxxramas. Arathi Basin has new enemies and bosses, a new PvP set sits between the epic and legendary sets, and the main screen stands over the picked zone in 3D.
+
+* New zone, Un'Goro Crater (after Warsong Gulch, 16:00): ravasaur packs, pterrordax and the crater's beasts, with the Ravasaur Matriarch, Uhk'loc, Lar'korwi and a Tyrant Devilsaur before King Mosh.
+* New zone, the Scarlet Monastery (after the Gurubashi Arena, 18:00): the whole cathedral and the garden before it, its walls the edge of the fight. Houndmaster Loksey, Arcanist Doan, Herod and Commander Mograine come first, then a towering High Inquisitor Whitemane at the altar.
+* New zone, Naxxramas (last, 20:00): the Scourge in Kel'Thuzad's chamber. Anub'Rekhan, Noth, Patchwerk and Sapphiron step out of the alcoves where the abominations stand, and Kel'Thuzad comes last. Its guardians are the Four Horsemen: Highlord Mograine, Thane Korth'azz, Lady Blaumeux and Sir Zeliek.
+* Arathi Basin is no longer a Scourge invasion: Boulderfist ogres, Witherbark trolls and the Syndicate come out of the Highlands, led by Kovork, Nimar the Slayer, Marez Cowl, Lord Falconcrest and Lord Aliden Perenolde.
+* New PvP set, between Epic and Legendary: the rank 13 Field Marshal's or Warlord's armor and the rank 14 Grand Marshal's or High Warlord's weapons, epic quality. Your hero wears the look of their own faction.
+* Every zone drops a set, two zones each: Common from Elwynn Forest and Duskwood, Uncommon from Warsong Gulch and Un'Goro, Rare from Arathi Basin and Feralas, Epic from the Gurubashi Arena and the Scarlet Monastery, PvP from Alterac Valley and Blackrock Mountain, and Legendary from the Gates of Ahn'Qiraj and Naxxramas. Everything you already collected stays yours.
+* Warsong Gulch, Blackrock Mountain and the Gates of Ahn'Qiraj were retuned for the gear you now arrive in.
+* Your opened zones carry over: a class that had opened a zone also has the new zones before it open.
+* The main screen now stands over the zone you picked, in full 3D: the camera drifts slowly over it, from Goldshire's treetops to Kel'Thuzad's chamber. A slower computer or phone can show a plain black background instead (Options, Graphics, Main Menu Background; phones start with it on black).
+* The zone list on the main screen, and the zones in the armory's drop tables, now scroll, and the main screen keeps the chosen zone in view.
+* Only End Run in the pause menu still asks "Sure? Press again": Quit game and the end-of-run window's Main Menu act on the first press again.
+===
+0.95.1
+------
+Leaving a run or the game now asks first, ranged casters stop shooting at you from beyond the arena's edge, and Shred with the Medallion of the Bladestorm no longer bleeds.
+
+* End Run and Quit game in the menu, and Main Menu in the end-of-run window, now ask "Sure? Press again": press a second time within 3 seconds to go through with it, so a stray click no longer throws a run away.
+* Enemy casters now take their spot inside the arena's border instead of standing past it, out of your reach, and they no longer cast from beyond it.
+* Medallion of the Bladestorm: Shred no longer leaves a bleed. It still rips through to 2 more enemies near its target for half the hit.
+===
+0.95.0
+------
+Shadowy Apparitions, Cat Form and Dire Bear Form change your opening spell, Arcane Missiles hunt bosses and elites, and Hunters heal from their damage. Enemies no longer hang in the air, and the Staff of the Shadow Flame looks like itself.
+
+* Shadowy Apparitions: you now start with Shadow Word: Pain instead of Smite, not beside it.
+* Cat Form and Dire Bear Form: you start every run with Shred instead of Wrath.
+* Arcane Missiles: with a boss or an elite in range, every missile goes to them.
+* Hunters now heal for 0.5% of all the damage they deal.
+* Choker of the Fire Lord, Onyxia Tooth Pendant and the legendary amulets whose kills explode (Amulet of the Inferno, Pendant of the Plague, and the Paladin's for Divine Shield and the like) now go off at most twice a second. Their tooltips say so.
+* The menu's End Run (it said New Hero) now ends the run with the end-of-run window, as a fall does: its stats, its talent experience and its loot, then Try Again or Main Menu.
+* The Staff of the Shadow Flame now shows its real model, Blackwing Lair's black staff, instead of an Ahn'Qiraj polearm.
+* Fixed: enemies frozen, rooted, turned into a sheep or killed mid-step, and everyone walking when the game paused for a choice, could stop in mid-air (most often below a hero standing on higher ground) and hang there until they moved again. They now stay on the ground; pets and companions too.
+* Fixed: on some integrated graphics cards (Intel), the armory's 3D hero was covered in dotted lines along the edges of the model.
+* Fixed: a nameplate that just appeared was drawn with the default art for one frame before an addon could restyle it. It now first shows on the next frame, as in the original client, already restyled.
+===
+0.94.2
+------
+Smoother frames when the screen fills with spell effects, and the full zone music in the browser.
+
+* Performance: spell effects with shifting colours no longer rebuild their materials every frame, which cost up to about 5% of each frame in a busy fight, most noticeably in the browser.
+* Fixed: in the browser, each zone played only one or two of its music tracks and stayed silent where the others should have been. Every track now plays.
+===
+0.94.0
+------
+Feral Combat druids are rebuilt as melee fighters with a new spell, Shred, and a choice of capstone: Dire Bear Form or Cat Form.
+
+* New druid spell: Shred, a heavy single-target claw for bosses and guardians. Any druid can find it in level-up offers.
+* Shred's legendary necklace also rips through 2 more enemies near its target for half the hit.
+* Rake now thickens your hide (20% more max health, 8% less damage taken) and starts you with both Swipe and Shred. Both bleed for 100% of the hit (was 75%, Swipe only).
+* The Feral tree now ends in two capstones side by side, Dire Bear Form and Cat Form, both after Blood Frenzy. You can learn only one, and you take on the form's look for the whole run. Unlearn it to switch.
+* Dire Bear Form (formerly Leader of the Pack): 25% more max health, 10% less damage taken, a free Swipe every 3 sec (was 5), and every enemy Swipe hits heals you for 0.3% of your max health (was 0.15%). Built to outlast the horde.
+* Cat Form, new: 10% more damage, 10% more critical strike chance, 15% faster movement, and Shred's cooldown 20% shorter. Built to tear down bosses and guardians, with no extra toughness.
+* Brutal Impact is now Enrage: when an enemy hits you in melee, up to a 50% chance to answer with a free Swipe.
+* Savage Fury now makes Shred hit 15% harder per rank instead of widening Swipe.
+* Ferocity: Swipe and Shred deal 10% more damage per rank (was 6%, Swipe only).
+* Predatory Strikes: Swipe's cooldown 10% shorter per rank (was 6%).
+* Feral Aggression now regenerates 0.15% of your max health per second per rank instead of reducing damage taken.
+* Feral Instinct: 5% max health per rank (was 3%). Thick Hide: 2.5% less damage taken per rank (was 1.5%).
+* Heart of the Wild: 3.5% damage per rank (was 2%).
+* Primal Fury now heals you for 0.5% of all the damage you deal per rank instead of a flat amount per kill.
+* Opening your talents during a run (N or the talent button) now pauses the run until you close them.
+===
+0.93.1
+------
+Talents that answer your spells' hits now work with damage over time spells, and Booming Voice does what it says.
+
+* Aftermath, Blackout and Shadow Weaving now trigger when Immolate, Shadow Word: Pain, Devouring Plague and your other damage over time spells land, not only on direct hits. The same goes for every talent and necklace that reacts to a spell hitting.
+* Booming Voice makes Demoralizing Shout reach farther and both shouts last longer: Battle Shout's buff and Demoralizing Shout's weakening.
+* Talents that make a spell last longer also lengthen its slow or weakening.
+* Shadow Weaving strikes for 1% of the target's max health instead of 2%, since Shadow Word: Pain and Devouring Plague now trigger it too.
+===
+0.93.0
+------
+Loop Music now really loops, the Bloodseeker Bat no longer wails when it dies, and addons can see the debuffs on bosses and guardians. The main menu's top buttons fit on phones.
+
+* Fixed music going silent for minutes between tracks with Loop Music on: the option looked on but did nothing until you toggled it.
+* The Bloodseeker Bat in Gurubashi Arena dies quietly instead of yelling.
+* The Discord, Download Game, language and Options buttons in the main menu shrink on small screens instead of covering the top of a phone.
+* Addons: AZS_GetDebuffs(id) lists the debuffs on any boss or guardian with their name, icon, stacks, time left and dispel type, so boss and guardian frames can show them; AZS_GetBosses() and AZS_GetGuardians() carry them too.
+===
+0.92.0
+------
+Nineteen legendary necklaces got new powers, a new Graphics option turns off spell effects for slower computers, and addons can read much more of the run. Fixed Hunter's Mark and other on-kill effects doing nothing when you slay a guardian, and enemies feared through walls.
+
+* Legendary necklaces: Adrenaline Rush, Battle Shout, Slice and Dice and Ice Barrier are twice as strong, Demoralizing Shout weakens 35% more, and Ghostly Strike shields twice as much in place of its burn and bleed.
+* Kidney Shot and Gouge necklaces stun twice as long in place of their burn and bleed.
+* Bloodthirst's necklace also shields you for 30% of your max health; Holy Light's, Healing Wave's and Regrowth's for 40%.
+* Divine Shield's and Holy Shield's necklaces make the enemies you kill explode for 20% of their max health while the shield is up.
+* Bloodrage's necklace builds rage 50% faster, Redemption's bursts 50% more often, Seal Fate and Soul Fire proc twice as fast.
+* Lightwell's necklace makes each bolt also hit the 3 enemies nearest its target for 30%.
+* Call of Flame, Polymorph and Faerie Fire necklaces explode a second time for 50% of the damage.
+* Renew's and Rejuvenation's necklaces are now Vampiric: 5% of the damage you deal heals you while the heal lasts.
+* New option in Graphics: No Spell Effects hides explosions, missiles, glows and beams; your hero still casts and spells still sound.
+* Thorns (Medallion of Steadfast Might, Eye for an Eye) now hits back with a share of the full blow, so armor and shields no longer weaken it.
+* Fixed Hunter's Mark, on-kill trinkets and amulets dealing no damage when the kill was a guardian.
+* Fixed feared enemies running through walls (most easily seen in Gurubashi Arena) and getting stuck outside.
+* Anathema now has its own model, and Benediction too.
+* Addons can now read the healing and boss damage meters, the caches on the field and the guardians' lairs, with their positions on the map.
+===
+0.91.4
+------
+Fixed missing letters in the browser game: Polish, Turkish and Russian text showed empty boxes in place of letters like ę, ś, ż, ğ and the whole Cyrillic alphabet on the game's screens. Every language now reads correctly in the browser, as it already did in the Windows and Linux versions.
+
+* Level-up cards, the death and victory screens, the timer and every other screen show every letter of your language.
+===
+0.91.3
+------
+Rain and snow are much lighter on your computer: falling snowflakes and raindrops are now shaped by the graphics card instead of being rebuilt every frame. Alterac Valley's snow and the rain in Duskwood, Arathi Basin and Feralas should run smoother, especially in the browser.
+
+* Snow and rain look the same as before.
+===
+0.91.2
+------
+Fixed the browser game running out of graphics memory in Firefox, which could crash a run after a few minutes with "WebGPU device lost: Out of memory".
+
+* Graphics memory the game no longer needs is now released right away instead of piling up until the browser cleaned it, which in Firefox could take many gigabytes.
+===
+0.91.1
+------
+If the browser game loses its graphics device, the report in the browser's console now also lists what the game was holding in graphics memory, to help track down the out-of-memory crashes some Firefox players hit.
+
+* The crash report shows the game's graphics memory by kind and the largest users by name.
+===
+0.91.0
+------
+The horde now closes in from beyond your sight on every side, even from past the battlefield's edge, and comes at you in new waves. Running away no longer leaves it behind.
+
+* Enemies appear just out of view all around you, and more of them from the way you are heading.
+* Enemies can come from outside the battlefield's edge. Anything they drop out there lands just inside, where you can reach it.
+* Enemies you leave far behind come back around ahead of you.
+* New waves join the old swarm ring: a stampede that charges straight across the field and through you, a wall of enemies ahead of you, and a pack of one tougher kind closing in together. They come a little more often than the swarm did.
+* In Gurubashi Arena the horde pours in from the edge of the floor and the gates, never from the stands or behind the walls.
+===
+0.90.1
+------
+The browser version no longer slows down more and more the longer you play, with stutters that went on even after a run ended.
+
+* The game's tab no longer grows by about a megabyte every second during a run, which pushed long sessions to several gigabytes.
+* The browser's cleanup pauses, which froze the game for close to a second at a time late in a run and in the main menu afterwards, are gone.
+===
+0.90.0
+------
+The game now speaks German: pick Deutsch from the language list in the main menu's corner.
+
+* Every screen, tooltip, talent, spell and message is translated, with the German WoW names for spells, talents, zones, bosses and gear.
+* A German system or browser language picks it on its own the first time the game starts.
+===
+0.89.1
+------
+The browser version no longer eats more and more memory as a run goes on, which made phones stutter and tabs climb to several gigabytes.
+
+* The game's tab stays at a steady size during a run instead of growing by about 20 MB every second until the browser cleaned up.
+* Phones stay smoother in long runs, where the growing tab used to push the browser into swapping and stalls.
+===
+0.89.0
+------
+Chain Lightning, Searing Totem, Lightwell, melee pets and auto-attacks now go after bosses and elites first.
+
+* Chain Lightning opens on a boss or an elite in range before jumping to the enemies nearest it.
+* Searing Totem and Lightwell bolts aim at bosses and elites first.
+* Melee pets go for a boss or an elite within reach, and leave the trash they are biting when one shows up.
+* Melee auto-attacks hit a boss or an elite within reach before the trash around it.
+===
+0.88.1
+------
+Guardians chase you further from their lairs before giving up, and Bonescythe Cover no longer shaves your head. Totems keep attacking as fast however long they last.
+
+* A guardian now follows you half again as far from its lair (about 98 yards, from 65) before it turns back home.
+* Bonescythe Cover shows your hairstyle under it, as in WoW Classic, instead of cutting it short.
+* Thunderfury is sheathed on your back instead of at your side.
+* Magma and Searing Totems no longer attack more slowly when their duration grows: a longer-lasting totem now strikes as often, for more strikes.
+* Redemption's cooldown upgrade shows its burst chance to a tenth of a percent near the 20% cap, instead of reading "20% » 20%".
+===
+0.88.0
+------
+The damage meter can now show your healing and the damage you deal to bosses.
+
+* The damage meter's new ^ button beside its title switches it between Damage Done, Healing Done and Boss Damage, and it remembers your choice.
+* Healing Done shows what each spell, talent, leech, regeneration and other heal actually restored, overhealing left out.
+* Boss Damage starts over with each boss fight (bosses up at the same time count as one fight) and keeps the last fight's numbers until the next boss.
+===
+0.87.0
+------
+Every part of the run's HUD can now be hidden in Options, and addons can read the whole run, damage meter included, to draw their own.
+
+* Options > Interface: Show Run Clock, Show Boss Bars, Show Kills and Gold, Show Build, Show Banners, Show Loot Notices and Show Damage Meter turn each part of the run's HUD on or off.
+* New for addon authors: the damage meter's lines (damage, damage per second and share of each spell) and the damage you took by source, and AZS_SetHudShown to hide the run's HUD and draw your own.
+* Also for addon authors: the run's time and phase, the zone and how long it lasts, every boss alive with a unique id and its health (several at once too), the bosses still to come and when, guardians and elites with their health, what your target is, your level, health, gold, kills, spells and cooldowns and buffs. See AZS_GetRunTime, AZS_GetPhase, AZS_GetBosses, AZS_GetUpcomingBosses, AZS_GetGuardians, AZS_UnitKind and the AZS_RUN, AZS_ZONE and AZS_UNITS tables.
+===
+0.86.0
+------
+Mage and Priest talents reworked: Arcane Power makes your echoes cascade, Shadowform keeps you in Shadowform and bursts enemies, and Lightwells can stand side by side. A second of invulnerability after every level-up and item, and gamepads work in Windows builds under Wine and Proton.
+
+* Arcane Power (Mage): no more 30-second damage buff. Your spells strike twice 20% more often, and a spell that strikes twice by chance rolls again to strike once more, up to 3 more times in a row.
+* Arcane Explosion deals 50% more damage, Arcane Missiles 40% more.
+* Hot Streak casts at most 2 free Pyroblasts a second, and Pyroclasm's corpses explode at most 3 times a second.
+* Shadow Weaving (Priest): your Shadow spells now also strike what they hit for 2% of its maximum health, in place of making it take 12% more damage.
+* Improved Vampiric Embrace: in place of more maximum health, 0.5% of all the damage you deal heals you per rank (1.5% at 3/3).
+* Shadowform (Priest): you stay in Shadowform for the whole run, and an enemy that dies with Shadow Word: Pain on it bursts for 4% of its maximum health on everything within 6 yards as the pain jumps on. The 5% Shadow damage bonus is gone. The Shadowform buff's tooltip shows the talent.
+* Lightwell: its duration upgrades now make each well last longer, and a well that outlasts the wait for the next stands beside it, up to 3 at once. Cooldown upgrades now bring it down to 6 seconds instead of stopping at 12.
+* After you pick a level-up card or an item, you are immune to all damage for 1 second.
+* Shadowmeld's cooldown now counts down on its button instead of staying grey.
+* Leveling up no longer prints "You have gained 0 hit points." in chat.
+* The Windows build no longer crashes at startup under Wine, Proton or Winlator, and gamepads work there.
+===
+0.85.0
+------
+The main screen now shows every tab at once, and enemies walk around trees, rocks and walls instead of through them. Fights against several bosses show a health bar for each, and the pause menu has Options.
+
+* The main screen has a bar of tabs under the title: Character, Collection, Drop tables, Codex, Talents, Achievements and Rewards, each one click away. Tabs with points to spend light up green.
+* The Menu button is gone from the main screen: the X in the top right corner quits the game, and Windowed or Fullscreen is in Options, Graphics, Display Mode.
+* Your hero's portrait on the main screen is now your actual hero in their gear, sharp at any size. Click it to open the armory.
+* Enemies find their way around trees, rocks, fences and buildings instead of walking through them, and no longer appear inside them. A boss's charge stops at a wall.
+* When more than one boss is up (or a guardian you woke), each gets its own health bar under the clock.
+* The pause menu has Options during a run. Key Bindings, AddOns and Saves stay on the main screen's Options.
+* Footsteps no longer play while you pick a card on the level-up screen.
+* The death and victory screen no longer flickers.
+* The Options pages no longer squeeze the page list or break button labels onto two lines.
+* Bellygrub's lair in Elwynn Forest is no longer inside a tree.
+===
+0.84.5
+------
+Fixes the black screen on Android phones from 0.84.4.
+
+* On Android, the game no longer goes black a few seconds into a run. The simpler shader added in 0.84.4 for names and raid marks was rejected by the browser, which blanked the whole picture.
+===
+0.84.4
+------
+The game should no longer crash on Galaxy Z Fold8 and other Adreno phones: the shader behind the floating names that crashed their graphics driver is replaced with a simpler one.
+
+* On Android, enemy and player names, raid target marks and the placeholder box shown while a model loads draw with a simpler shader. The full one crashed the browser's graphics on Adreno 840 phones (Galaxy Z Fold8) a few seconds into a run.
+* Names and raid marks look the same as before.
+===
+0.84.3
+------
+Android phones skip building every graphics variant up front, which crashed the browser on some phones.
+
+* On Android, the loading screen no longer prepares all of the game's graphics at once. That crashed the browser's graphics on Adreno phones such as the Galaxy Z Fold8. Effects prepare the first time they appear instead, which can cause a brief stutter.
+* If the graphics still crash, the report in the browser's console now names the exact shader the phone was preparing.
+===
+0.84.2
+------
+When a phone's graphics driver crashes during a run, the game now says what happened instead of freezing.
+
+* On Android phones (seen on Galaxy Z Fold with Adreno graphics), a graphics driver crash now shows a message saying to reload the page, instead of a frozen screen.
+* The crash leaves a report in the browser's console naming the shader it happened on, so it can be fixed.
+===
+0.84.1
+------
+Picking a card with a gamepad no longer makes your hero jump.
+
+* On a gamepad, the A press that picks a card (or confirms any other screen) no longer jumps when you land back in the fight; let go of A and press it again to jump.
+===
+0.84.0
+------
+Russian now reads in the game's own fonts: Cyrillic text uses the same Friz Quadrata and Morpheus as every other language.
+
+* Russian text in menus, cards, tooltips and the HUD now uses the game's own fonts with Cyrillic letters, where it used to fall back to Arial Narrow.
+* Titles in Russian use Morpheus, like every other language.
+===
+0.83.1
+------
+Companions actually fetch now: they run twice as fast and keep up with a hasted hero.
+
+* Companions run twice your speed, and faster still as your movement speed grows, so they reach coins and wisps and bring them back instead of trailing behind you.
+* A wisp your companion is running for waits for it instead of flying off to you halfway through the trip.
+===
+0.83.0
+------
+The game now speaks Spanish too: pick Español from the language button in the main menu's corner.
+
+* Español covers every screen, tooltip, talent, achievement and boss line, with the spell, zone and boss names
+===
+0.82.0
+------
+Atiesh, Greatstaff of the Guardian is now the legendary staff of the Mage, the Warlock and the Druid, and it finally looks like Atiesh.
+
+* Mage: Atiesh now shows the real Atiesh, Medivh's staff, instead of an Ahn'Qiraj staff.
+* Warlock: the legendary staff is now Atiesh (it was the Plagueheart Greatstaff), in the Warlock's own Atiesh colors.
+* Druid: the legendary staff is now Atiesh (it was the Dreamwalker Staff), in the Druid's own Atiesh colors.
+===
+0.81.0
+------
+A new HUD Scale slider lets you make the run's own HUD bigger or smaller. The Achievements and Options windows now have scrollbars. Ice Barrier no longer gets stuck off cooldown.
+
+* Options > Interface > HUD Scale (50% to 200%): sizes the clock and the boss's bar, the kills and gold counter, the bar of your spells and jewelry, and the damage meter. Boxes you dragged somewhere stay where you put them.
+* Achievements and Options: drag the scrollbar beside the list, or click along it to jump there. It only shows when the list is longer than the window.
+* Armory: the hero no longer holds a throwing knife or gun in the same hand as their main weapon (a Rogue's two blades overlapped in one hand).
+* Silithus: General Rajaxx is about half again as big, so he no longer looks small next to his army.
+* Mage: Ice Barrier now comes back as soon as its cooldown is up. It used to stay off after running out unbroken, or while a shield from a talent or jewelry was up, until that shield was knocked away. Those shields now stack with it.
+* Paladin: Divine Shield's tooltip now says its cooldown starts when the immunity ends, and gives the full time from one cast to the next (cooldown plus immunity).
+===
+0.80.0
+------
+The game now speaks French, Turkish and Russian too: pick them from the language button in the main menu's corner.
+
+* Français, Türkçe and Русский join English, Polish, Brazilian Portuguese, Simplified Chinese and Korean, covering every screen, tooltip, talent, achievement and boss line.
+* Turkish letters (ğ, ş, İ) now show in the game's fonts, and Russian text uses a Cyrillic face that is always available.
+===
+0.79.0
+------
+A new setting lets you open caches only by clicking them, so you can chase the Thrifty achievement without buying one by accident.
+
+* Options > Controls > Open Caches by Clicking: with it on, walking over a cache no longer buys it; right-click it to buy it.
+===
+0.78.4
+------
+Fixed the browser game failing to start for players who had played shortly before an update.
+
+* The error read "WebAssembly.instantiate(): Import #... function import requires a callable": the browser kept part of the old version and mixed it with the new one. It now always fetches the current version.
+===
+0.78.2
+------
+Monster sizes are evened out across the zones, so guardians and bosses stand out from the horde again and the biggest trash no longer hides everything else.
+
+* Warsong Gulch: Fel Bats are much smaller and Felhounds half their size, so Lord Kazzak (now a bit bigger) is no longer lost behind them. The Doomguard Commander now towers over the Doomguard guardians; the Felguard Elite and Infernal guardians are bigger.
+* Duskwood: the Nightbane Worgen Alpha and Flesh Eating Abomination guardians are bigger; the Carrion Recluse guardian and Lupos are smaller, so Lupos is easier to kite around.
+* Arathi Basin: the Bone Golem guardian is about 2.5x bigger, Lord Blackwood twice his size, and Kel'Thuzad larger.
+* Feralas: the Gordunni Brute and Warpwood Treant guardians are about twice as big; Alzzin the Wildshaper is much bigger, and Zevrim Thornhoof and Tendris Warpwood a little bigger.
+* Alterac Valley: Korrak the Bloodrager is twice his size and the Winterax Warlord guardian is bigger.
+* Blackrock Mountain: Majordomo Executus is bigger, and the Black Drake guardian's lair moved out of the ruined walls onto open ground.
+* Gurubashi Arena: the guardians wait near the pit's edge, so you can start a run without pulling them all.
+* The Zergling pet is half its size.
+===
+0.78.1
+------
+Sound in the browser no longer crackles or cuts out when the game hitches for a moment.
+
+* The browser version keeps more sound ready ahead of time, so a slow frame (a busy fight, a weaker computer or phone) no longer leaves a gap in the music and effects.
+* If a longer hitch still interrupts the sound, it picks up cleanly instead of stuttering, and the game buffers a little more from then on.
+===
+0.78.0
+------
+Azeroth Survivors now speaks Polish, Brazilian Portuguese, Simplified Chinese and Korean. Pick your language from the button in the main menu's top corner.
+
+* A language button sits in the main menu's top corner, beside Options. The game switches at once, no restart needed, and remembers your choice; on first start it follows your system's language.
+* Everything the game itself writes is translated: menus, hero picker, cards, spells, talents, gear, rings, trinkets and amulets, achievements, rewards, the character pane, tooltips and battle messages.
+* Polish letters (ą, ę, ś, ż...) now show in the game's own fonts, and Chinese and Korean get their own font.
+* The translations are plain JSON files, one per language, so anyone can fix or improve them. In the downloaded game, a file in a "lang" folder beside the game replaces the built-in words for that language.
+* A few of the client's own built-in texts (key binding names, the stock options window) stay in English.
+===
+0.77.6
+------
+Arathi Basin's and Alterac Valley's guardians stand on solid ground again, and damage over time spells reach the weakest enemies too.
+
+* Arathi Basin's guardian lairs are back where they were before the arenas grew, on dry ground; the arena itself stays its new size.
+* Alterac Valley's Yeti Lord lair by the wrecked steam tank moved a little north onto open snow, so the Yeti Lord and the minions it calls no longer float in the air above the wreck.
+* Corruption, Immolate, Curse of Agony, Drain Life and every other damage over time spell now go on weak enemies like Black Widow Hatchlings: they pick fresh, unhurt enemies (nearest first) instead of always the ones with the most health.
+===
+0.77.5
+------
+Text on the menus is sharp again, most of all in the browser.
+
+* The hero picker, cards, armory, talents, options and the pause and end screens draw their text at its real size instead of stretching it, so it no longer looks blurry when the window isn't the screen's exact size.
+===
+0.77.4
+------
+The game now loads from its own server, and the browser version's first download is about half the size.
+
+* The browser game's download is about 12 MB instead of 22 MB, so it starts sooner on a slow connection.
+* Updates for the Windows and Linux game come from the new server too; nothing changes on your side.
+===
+0.77.3
+------
+The Windows game no longer opens a console window next to the game.
+
+* Starting Azeroth Survivors on Windows opens only the game window.
+===
+0.77.2
+------
+Divine Shield's button now shows its cooldown starting when the shield wears off.
+
+* While the shield is up the button stays unavailable, and its cooldown sweep starts from full the moment the shield falls off, matching when it is actually ready again.
+===
+0.77.1
+------
+Gurubashi Arena's edge now keeps you inside the ring, so you can no longer climb the stands and fall off the map.
+
+* The red light pillars around Gurubashi Arena stand just inside the arena's wall, and the fight stays on the arena floor.
+===
+0.77.0
+------
+The damage meter now stays up over the level-up and item cards and remembers being open, and your Discord status shows a lot more.
+
+* The damage meter is drawn over the level-up and jewelry cards, so you can check your damage while you pick. Turn it off with Damage Meter on Top in Options > Interface.
+* An open damage meter stays open for your next run, and after restarting the game.
+* Discord status shows your hero's name, level, race and class, and your class's crest.
+* In a run it shows what you are up to: the boss you are fighting and its health, your kills, endless mode, or the reward you are picking.
+* Hovering the class crest shows your top spell and your damage per second; hovering the logo shows the battleground.
+* The end of a run shows whether you conquered the battleground or fell, with your kills.
+* In the hero picker it shows the hero you are setting up and the battleground they are headed for.
+===
+0.76.0
+------
+Every class now keeps its own hero: race, gender and features.
+
+* Switching class in the hero picker brings back that class's race, gender and features as you last left them.
+* Features no longer carry over from one class or race to another (a face picked for one race no longer shows up on another).
+* A class you have not set up yet starts with a race of the same faction and default features.
+===
+0.75.1
+------
+Endless mode's damage climbs more slowly.
+
+* In endless, the horde, elites, guardians and returning bosses gain 20% less extra damage each minute (9.6% a minute instead of 12%)
+===
+0.75.0
+------
+Ghostly Strike's shield now shows on you and grows with every enemy it hits.
+
+* Ghostly Strike's shield appears in your buffs like Ice Barrier, and stays until it breaks.
+* Each enemy a Ghostly Strike hits adds to the shield, up to 5 enemies (40% of your max health).
+* The tooltip now says how much it absorbs per enemy and at most.
+===
+0.74.2
+------
+Sound works on Linux again.
+
+* The Linux game ran silent with "no audio device" on every system; it now plays sound through your normal audio setup, no workarounds needed.
+===
+0.74.1
+------
+Starting a run over with Again no longer blanks your hero on Discord or the end screen.
+
+* After Again on the end screen, your Discord status showed just "in" above your level; it names your class and battleground again.
+* The end screen of a retried run names your hero, race, class and battleground again.
+===
+0.74.0
+------
+Frost and Arcane mages no longer open with Fireball.
+
+* Summon Water Elemental, the Frost capstone, now starts every run with Frostbolt instead of Fireball.
+* Arcane Power, the Arcane capstone, now starts every run with Arcane Missiles instead of Fireball.
+===
+0.73.0
+------
+The character pane (C) has a new Run Stats panel beside it with the numbers that used to be hidden.
+
+* Lifesteal, kill heal, thorns, lives left, experience, gold, luck, buff power and your damage-over-time stacks and haste are now shown, each with a tooltip.
+* Bonus damage against elites and bosses, wounded, controlled or afflicted enemies, while shielded, for melee swings and for pets shows up once a talent, amulet or ring gives you some.
+===
+0.73.1
+------
+Heal and shield spells no longer talk about damage.
+
+* The legendary amulet for a heal (Holy Light, Renew, Healing Wave, Rejuvenation, Regrowth) now says how much more it heals, and for a shield (Power Word: Shield, Ice Barrier) how much more it absorbs, with the real amount it adds, instead of "+60% damage".
+* A shield spell's tooltip lists its upgrades as absorb instead of healing.
+===
+0.72.4
+------
+Hunter's Mark and Faerie Fire now land on the bosses and elites you are fighting instead of sticking to some stray enemy.
+
+* Hunter's Mark moves to an elite or a boss as soon as one comes into range, so the boss takes the bonus damage for the whole fight.
+* Faerie Fire's marks move to an elite or a boss the same way.
+* Both marks now let go of an enemy you left far behind and find a new target near you.
+* A mark's icon no longer disappears from an enemy that walked back to its spot.
+===
+0.72.3
+------
+Redemption's upgrade cards now show what they really improve.
+
+* A Redemption rank that used to read "-X% cooldown" now shows the burst chance it raises, for example "burst chance 10% » 12%". Redemption has no cooldown: that upgrade has always raised its chance to burst, up to 20%.
+===
+0.72.2
+------
+Pausing now truly freezes your hero: a jump hangs in the air and carries on when you resume, and your spell cooldowns stop ticking too.
+
+* Pausing or opening a level-up choice in the middle of a jump no longer drops you out of the air: you keep all your momentum when the game resumes.
+* Spell cooldowns on your action bar stand still while the game is paused or a choice is open, and pick up where they left off.
+===
+0.72.0
+------
+Every battlefield is half again as big, and its edge is now marked by a ring of red light.
+
+* The arenas are 50% wider, so there is more room to kite and enemies can come from farther out.
+* Red pillars of light stand where the battlefield ends, so you see the edge before you hit it.
+===
+0.71.4
+------
+The game's window is now called Azeroth Survivors and wears the game's own icon.
+
+* The window title and the taskbar show "Azeroth Survivors" with the new logo.
+* The game's exe has the logo as its icon too.
+===
+0.71.3
+------
+The Pendant of the Plague, the legendary amulet for damage-over-time spells like Shadow Word: Pain, hits much harder.
+
+* It now gives +90% damage to its spell instead of +50% duration, so the damage lands before the enemy dies.
+* Instead of leaping to new enemies on death, its victims now explode for 20% of their max health on everything within 7 yards.
+===
+0.71.2
+------
+The damage meter now shows a talent's bleed and an amulet's bleed as separate lines, even when they share a spell.
+
+* Deep Wounds and the bleed from the Medallion of the Bladestorm each get their own line, as do Ignite and the burns from The Eye of Hakkar and Breath of the Black Dragon. The amulet's damage used to be counted under the talent.
+* These bleeds and burns no longer merge into one when both hit the same target. Each runs on its own.
+===
+0.71.1
+------
+Companions now actually fetch loot when you have a big pickup radius, and they reach further.
+
+* A companion's reach now starts at the edge of your pickup radius, so pickup radius bonuses no longer leave it with nothing to fetch.
+* It fetches up to 25 yd beyond your pickup radius (was 15 yd from you in total), and Long Leash adds 10 yd per rank on top.
+===
+0.71.0
+------
+Archimtiros' Ring of Reckoning now gives health along with damage reduction.
+
+* The ring gives 70% of its old damage reduction, plus 70% of the max health a Heavy Dark Iron Ring gives (up to +42%).
+===
+0.70.0
+------
+The Windows and Linux game now shows what you are playing on your Discord profile. Turn it off under Options, Interface, Discord Status.
+
+* Discord shows when you are choosing a hero, and during a run your class, the zone, your level and the run's time.
+* Endless runs, pauses, victories and defeats show too.
+* Needs the Discord app running on the same computer. The browser version doesn't show a Discord status.
+===
+0.69.1
+------
+The damage meter now keeps a talent's damage apart from a spell of the same name.
+
+* Rogue: Blade Flurry the talent and Blade Flurry the spell now show as two separate lines on the damage meter.
+===
+0.69.0
+------
+Your achievement points can now be spent. The armory's new Rewards tab has perks, companions that fetch coins and experience for you, and tabards to wear, for every class. Plan freely, then press Confirm to lock it in; each save has 2 resets to take perk points back.
+
+* Second Thoughts (3 ranks): up to three more free rerolls every run. Unlocked by Regular.
+* Banish (3 ranks): up to three times a run, banish a card. It never comes up again that run, and you get a fresh hand. Unlocked by beating Elwynn Forest.
+* Skip: pass on any hand for some gold. Unlocked by beating Duskwood.
+* Opening Hand: your first level-up of every run deals four cards. Unlocked by Slaughterhouse.
+* Veteran's Lessons (2 ranks): classes with less talent experience than your best earn 20% or 40% more. Unlocked by beating Warsong Gulch.
+* Keen Eye (2 ranks): bosses are 5% or 10% more likely to drop each piece. Unlocked by Collector.
+* Companion: a critter follows you through every run, runs out to coins and experience wisps within 15 yd of you and carries them back. It never takes a magnet or a cache. Unlocked by Pocket Change.
+* Long Leash and Quick Paws (3 ranks each): companions reach up to 45 yd and fetch faster.
+* Instincts, one for each companion: Gold-sniffer (coins first, worth 10% more), Wisp-herder (wisps first, three a trip) and Rune-hound (battleground runes too).
+* Second Companion: a second critter with an instinct of its own. Unlocked by Treasure Hunter.
+* 12 companion looks: the Squirrel comes with the Companion perk; the Snowshoe Rabbit, Crimson Macaw, Great Horned Owl, Tree Frog, Black Kingsnake, Sprite Darter, Black Whelpling, Zergling, Westfall Chicken, Undercity Cockroach and Panda Cub come with achievements.
+* 20 tabards to wear in the tabard slot, on any class. Beating Warsong Gulch, Arathi Basin and Alterac Valley gives you both of that zone's battle tabards; the rest are bought with points and kept for good, even through a reset.
+* An imported save starts with both resets again.
+* The Achievements tab is redone: a summary page with your points in a gilded medallion, what you earned last, each category's progress and the achievements you are closest to. Earned achievements show the date you earned them, and every achievement names what it brings (a perk it unlocks, a tabard, a companion). Long categories scroll.
+* Windows and Linux: game updates now bring new models and textures as a small download beside the game, never the whole game data again. After updating to this version, the game offers a 2 MB data download for the tabards and companions.
+===
+0.68.0
+------
+Achievements are here: 66 of them across zones, classes, collection, feats and lifetime totals, each worth achievement points. Open them from the new Achievements tab in the armory. What you have already done is counted, so your points are waiting for you.
+
+* Zones: beat each zone's final boss with any class, and with all nine classes.
+* Classes: win a run with each class, beat the Gates of Ahn'Qiraj with each, and earn every talent point.
+* Collection: collect gear, a full legendary set, and fill the codex.
+* Feats: big kill counts in one run, four guardians before 8:00, surviving long into endless mode, and winning with no gear, without buying a cache, or with the Run Options at full reward.
+* Lifetime: kills, gold, guardians, bosses, caches, runs and wins add up across every run you play from now on.
+* Earning one plays a fanfare, shows a banner and says so in chat.
+* Achievement points can't be spent yet. A store to spend them in is coming.
+===
+0.67.0
+------
+The Paladin's Protection tree is rebuilt around Consecration and Hammer of Justice: your health becomes your damage, Consecration raises shields, and a broken shield bursts in holy light. Points you had in the old Protection tree are free to spend again. Your buff bar now also shows what your talents put on you.
+
+* Improved Devotion Aura, Redoubt (now 4% health a rank), Improved Consecration and Spiritual Attunement open the tree.
+* Weighted Hammer and Righteous Fury add a share of your maximum health to Hammer of Justice and to every spell.
+* Hallowed Ground (milestone): every Hammer of Justice that lands puts a free Consecration under you, at most once every 4 sec.
+* Judgement of the Crusader: enemies in your Consecration take more damage from you.
+* Ardent Defender (milestone): you start every run with Hammer of Justice, every Consecration raises a shield, and you deal 20% more damage while one holds. Blessed Life and Sacred Duty build on it.
+* Divine Intervention: a killing blow leaves you at 30% health with a free Divine Shield and Consecration, once every 90 sec.
+* Hammer of the Righteous (capstone): 15% more health, every spell deals 1% of your maximum health, Hammer of Justice strikes for 1.5% of its target's maximum health, and a shield that breaks strikes nearby enemies for half of what it absorbed.
+* A shield that bursts when it breaks (this one, and the Priest's Divine Aegis) now counts at most the most the shield held, not everything it soaked while you kept topping it up.
+* Shields from talents and amulets show as a buff named after their talent (Fortified, Ardent Defender…), with how much they still absorb on the tooltip.
+* A spent second life (Last Stand, Divine Intervention, Cheat Death, Reincarnation, the Pendant of the Fallen Dragon) shows as a debuff, counting down to when it can save you again.
+* Stacking talent buffs like the Shaman's Flurry show with their stacks and time left.
+* You can now see up to 32 buffs at once instead of 16.
+===
+0.66.0
+------
+Protection Warriors trade a little Shockwave for a heavier capstone: Titan now makes every Shield Slam bite into the target's own health.
+
+* Shockwave strikes the enemies around your Shield Slam's target for 40% of the blow, down from 45%.
+* Titan: Shield Slam also strikes for 2% of its target's maximum health. It shows as Titan on the damage meter.
+===
+0.65.0
+------
+Your talents are back in game, to look at: press N or click the talent button on the menu bar during a run. You can't spend or take back points there; that stays in the armory between runs.
+
+* The window shows your class's three trees as the armory does, with every rank you've taken and the milestones you've reached.
+* Point at a talent (or tap it) to read what it does. Escape or Close shuts the window.
+===
+0.64.2
+------
+Several level-ups in a row, like the ones after a boss, now stay paused from first card to last. The enemies no longer creep closer between picks.
+
+* Experience already flying to you is collected as soon as you pick a card. The levels it gives join the same pause.
+===
+0.64.1
+------
+Clicking or pressing a spell does nothing now, so you no longer get "Can't do that while moving". Your spells cast on their own, moving or not.
+
+* Action bar clicks, keys and controller buttons on a spell no longer show errors.
+===
+0.64.0
+------
+Endless now sends a boss every 5 minutes, picked at random from all of the battleground's bosses. The HUD counts down to the next one.
+
+* Bosses in endless no longer come back at random by chance; they arrive on a steady 5-minute clock.
+* Killing the final boss again in endless no longer resets endless's growing difficulty.
+===
+0.63.0
+------
+The Warrior's Protection tree is rebuilt: the tankier you are, the harder you hit. Max health, damage reduction and shields all turn into damage now.
+
+* Heavy Shield and Improved Thunder Clap add a share of your maximum health to Shield Slam and Thunder Clap.
+* Shockwave (milestone): each Shield Slam sends a shockwave from its first target that strikes and stuns every enemy within 8 yd.
+* Fortified (milestone): every Shield Slam raises a shield of 10% of your maximum health (stacking up to 30%), and you deal 20% more damage while any shield holds. Shield Mastery makes the shield bigger.
+* Titan (capstone): start with Shield Slam, your damage reduction can reach 70% instead of 60%, and every spell you cast deals an extra 1.5% of your maximum health.
+* Defiance gives damage for every 10% damage reduction you have, and Unbreakable turns damage reduction past the cap into damage instead of wasting it.
+* Toughness regenerates a share of your maximum health. Improved Demoralizing Shout makes shouted enemies take more damage from you.
+* Demoralizing Shout now shows as a debuff on the enemies it weakens.
+* Last Stand moves to the fifth row: it saves you once every 90 sec, then answers with a free Shield Slam and a shield.
+* Revenge, Bulwark's thorns, Concussion Blow, One-Handed Weapon Specialization and Improved Shield Wall are gone. Any points you had in them come back to spend.
+===
+0.62.1
+------
+Aimed Shot now fires at the enemy under your Hunter's Mark first.
+
+* With Hunter's Mark, Aimed Shot (and the free one from Rapid Fire) hits the marked enemy before any boss, elite or nearer foe; without a mark it picks as before.
+===
+0.62.0
+------
+Options has a new Gamepad page, with Invert Camera X and Invert Camera Y.
+
+* Gamepad page in Options: invert the right stick's left-right or up-down on the view, set how fast it turns the camera and how fast the bumpers and triggers zoom, and raise the sticks' dead zone if your hero or the view drifts on its own.
+* The settings apply at once and are kept between sessions.
+===
+0.61.4
+------
+Execute, Eviscerate and Backstab now go for elites first.
+
+* Execute, Eviscerate, Backstab and Seal Fate's free Eviscerate strike a boss or an elite first, then the most wounded enemy below 30% health, then the rest. Before, they always went for the most wounded enemy, even with an elite beside you.
+===
+0.61.3
+------
+Divine Shield's cooldown now starts when the shield falls off.
+
+* Divine Shield no longer spends its own immunity counting down its cooldown: the full wait begins once the shield ends.
+===
+0.61.2
+------
+A killing blow that should ready a spell again now does.
+
+* Mortal Wounds (Mortal Strike, Execute) and The Reaper's Amulet (Execute, Eviscerate, Backstab) now really reset the spell's cooldown when it lands the killing blow. Before, the reset was lost the moment the spell went on cooldown.
+===
+0.61.1
+------
+Proc spells no longer offer cooldown ranks that would do nothing.
+
+* Bloodrage, Redemption, Hunter's Mark, Seal Fate, Lightwell and Soul Fire stop offering "-% cooldown" once their cooldown sits at its floor (or Redemption's chance at its most); their other ranks still come up.
+===
+0.61.0
+------
+* The horde's late minutes are easier: enemy health is 25% lower at 16:00 (the curve is gentler throughout, most of all late in the run).
+* Every boss that arrives at 16:00 or later has 25% less health, final bosses included.
+* Area spells deal 20% more damage: Whirlwind, Thunder Clap, Consecration, Holy Wrath, Volley, the Explosive, Immolation and Frost Traps, Blade Flurry, Holy Nova, Mind Flay, Magma Totem, Fire Nova, Frost Nova, Arcane Explosion, Blizzard, Flamestrike, Cone of Cold, Blast Wave, Rain of Fire, Hellfire, Hurricane and Swipe.
+* Weaker spells buffed:
+   * Warrior: Whirlwind damage 29 > 48 (with the area buff), Shield Slam 98 > 150, Battle Shout +40% damage (was +30%).
+   * Paladin: Consecration 66 > 96 (with the area buff), Exorcism 114 > 135, Judgement 166 > 200, Hammer of Justice 42 > 55, Redemption 42 > 52, Holy Light heals 30% (was 25%), Divine Shield every 32 sec (was 40).
+   * Hunter: Explosive Trap 23 > 35, Immolation Trap 40 > 60 (both with the area buff), Aimed Shot 309 > 340.
+   * Rogue: Blade Flurry 13 > 24 (with the area buff), Kidney Shot 15 > 25, Slice and Dice +32% damage (was +25%).
+   * Priest: Renew heals 36% (was 22%), Power Word: Shield absorbs 32% (was 25%), Mind Flay 28 > 53 (with the area buff), Holy Fire 133 > 160.
+   * Shaman: Frost Shock 46 > 58, Searing Totem 29 > 34, Magma Totem 17 > 24 and Fire Nova 30 > 42 (both with the area buff), Call of Flame 300 > 450.
+   * Mage: Fire Blast 56 > 68, Cone of Cold 19 > 35 (with the area buff), Polymorph 80 > 115.
+   * Warlock: Searing Pain 30 > 40, Rain of Fire 37 > 53 (with the area buff), Death Coil 63 > 75.
+   * Druid: Faerie Fire 130 > 200, Thorns 17.5 > 24 a hit, Rejuvenation heals 30% (was 25%), Regrowth 42% (was 30%).
+===
+0.60.0
+------
+* Soul Fire can now gain extra targets from its upgrades (up to 3): each strikes one of the toughest enemies in range.
+* Soul Fire comes faster: shards gather every 1.2 sec (was 1.6) and it casts every 6 sec (was 8), and cooldown upgrades now bring it down to 3 sec (was 6), a shard every 0.6 sec.
+===
+0.59.1
+------
+* Elites have their pre-0.57.0 health again: the horde's tougher late minutes no longer apply to them.
+===
+0.59.0
+------
+* Area spells cover their full area again (the 0.57.0 shrink is undone); they still deal half the damage.
+* Areas now grow freely only up to 70 yards. Past that, more area adds much less reach: growing an area to twice 70 yards reaches about 91.
+===
+0.58.0
+------
+* New legendary weapons: the Warrior's is now Sulfuras, Hand of Ragnaros (in place of Might of Menethil), and the Rogue wields Thunderfury, Blessed Blade of the Windseeker in the main hand and Kingsfall in the off hand.
+===
+0.57.0
+------
+* Every class gets a new ability that never casts on its own but answers what your other spells do. Each has hard limits, so it can't snowball:
+   * Warrior: Bloodrage. Your hits fill your rage bar, and at full rage you erupt and damage everything around you.
+   * Paladin: Redemption. Enemies you slay may burst in holy light, and a burst's kills can set off one more.
+   * Hunter: Hunter's Mark. The toughest enemy nearby takes extra damage and explodes when it dies, then the mark moves on.
+   * Rogue: Seal Fate. Your strikes build combo points (shown on your energy bar), and at 5 a free Eviscerate hits the most wounded enemy.
+   * Priest: Lightwell. A Lightwell rises where you stand and fires holy bolts at nearby enemies (its countdown shows on your mana bar).
+   * Shaman: Call of Flame. Your totems explode in fire when they expire. It's only offered once you have a totem.
+   * Mage: Polymorph. Your spells can turn enemies into sheep that wander harmlessly, and the next hit pops a sheep in an arcane burst. Bosses and guardians are immune.
+   * Warlock: Soul Fire. Your kills gather soul shards (shown on your mana bar), and at 5 a free Soul Fire hits the toughest enemy.
+   * Druid: Faerie Fire. Marked enemies pass part of every hit they take on to the enemies beside them.
+* Spells that hit every enemy in an area are much weaker: they deal half the damage and cover half the area. This covers Whirlwind, Thunder Clap, Consecration, Holy Wrath, Volley, Explosive Trap, Immolation Trap, Frost Trap, Blade Flurry, Holy Nova, Mind Flay, Magma Totem, Fire Nova, Frost Nova, Arcane Explosion, Blizzard, Flamestrike, Cone of Cold, Blast Wave, Rain of Fire, Hellfire and Hurricane. Spells that hit a set number of targets, like Cleave, Multi-Shot and Chain Lightning, are unchanged.
+* Swipe deals half its damage but keeps its full reach.
+* The horde is tougher late in a run: by 16:00, enemies have half again as much health as before. Early minutes change only a little.
+* Your damage over time spells now stack on one enemy as you level, with no ring needed: one more stack at levels 15, 30 and 45.
+* The Seal of the Damned no longer stacks your damage over time spells. Instead it makes them tick faster, up to 40% faster, so they deal more damage in the same time.
+===
+0.56.1
+------
+* Leveling up now tells you in chat what you actually gained (damage, maximum health and health regeneration) instead of the old hit-point and talent-point lines.
+===
+0.56.0
+------
+* Leveling up now raises your damage by 3% per level instead of 6%.
+===
+0.55.1
+------
+* Buff timers now count down on your buffs (racials, Speed and other runes, spell buffs) instead of showing "0 s", and they are on by default (Interface options to turn them off).
+===
+0.55.0
+------
+* Warlock: Seed of Corruption now also starts every run with Corruption.
+===
+0.54.2
+------
+* Warlock: with Nightfall, Corruption's debuff icon no longer shows one stack past your cap; Nightfall's own Corruption isn't counted in it.
+* Damage meter: free spells cast by a talent (Nightfall's Shadow Bolt, Art of War's Exorcism, Arcane Concentration's Arcane Explosion...) are now listed under that talent as a proc instead of under the spell.
+===
+0.54.1
+------
+* Armory: a piece's description no longer reads "Bears the mark of the Monkey" (or Tiger, Bear, Owl...) whatever the class. It now has a flavor line that hints at what the piece's bonus does: plain words for uncommon and rare gear, and each class's own legend on epic and legendary gear.
+===
+0.54.0
+------
+* Paladin: the Retribution tree no longer leans on weapon swings, which barely hurt anything. Its swing talents are replaced with spell ones:
+   * Seal of Command: you start every run with Judgement, and every Judgement also strikes 2 more enemies near its target for 60%.
+   * Righteous Hammer (replaces Two-Handed Weapon Specialization): Hammer of Wrath has up to a 30% chance to strike its target again.
+   * Divine Storm (replaces Crusader Strike): you start every run with Exorcism, and every Exorcism bursts on its target, striking every enemy within 5 yd for 20% of it.
+* To pay for it, Retribution's other numbers are lower: Improved Blessing of Might 5% damage (was 12.5%), Conviction 7.5% crit (was 10%), Sanctity Aura 9% Holy damage (was 18%), Vindication 12% crit damage (was 24%), and The Art of War can hurl an Exorcism at most once a second.
+* Points spent on Two-Handed Weapon Specialization or Crusader Strike are refunded.
+===
+0.53.0
+------
+* The horde grows tougher faster as the run goes on: enemy health is unchanged at the start, but climbs to half again as much by 16:00 (about +9% at 4:00, +27% at 8:00, +40% at 12:00).
+===
+0.52.1
+------
+* With the Seal of the Damned, damage over time spell tooltips say how many times they stack and who gets the stacks first, instead of saying they only hit enemies that are not already afflicted.
+===
+0.52.0
+------
+* New ring: Seal of the Damned. Your damage over time spells (Corruption, Curse of Agony, Shadow Word: Pain, Rend and the rest) stack on a target: a common or uncommon pick adds 1 stack, a rare, epic or legendary pick adds 2, up to 3 extra stacks (4 of the same dot on one enemy). It is only offered to heroes with a damage over time spell.
+* Stacked dots go on elites and bosses first until they are full, then on enemies that have none, and only then add more stacks to the rest.
+* Enemy debuff icons show how many stacks of a dot they carry.
+===
+0.51.1
+------
+* Critical strike from rings, trinkets and amulets is 20% lower, and critical strike damage from them is 35% lower. Gear and talents are unchanged.
+===
+0.50.1
+------
+* The common cloth belt (Novice's, Apprentice's, Acolyte's Belt) is a real belt now. It used to draw a brown cloth panel over the legs that covered robes, so a robe worn with it looked like it had pants on top.
+===
+0.50.0
+------
+* The Max Camera Distance slider (Options, Controls) now reaches 50 yards, the farthest the camera can pull back, instead of stopping at 30.
+===
+0.49.1
+------
+* Warlocks with Nightfall: Corruption works again. Nightfall's corruption from Shadow Bolt used to replace your own Corruption, and Corruption skipped every target a Shadow Bolt had already marked. The two now run side by side, and the damage meter shows Corruption and Nightfall as separate lines.
+===
+0.49.0
+------
+* Area spells now show their true size: the ring, field or cloud a spell draws matches the area it actually hits, and grows with every Area upgrade. Frost Trap, Consecration, Hellfire, Arcane Explosion, Frost Nova, Blizzard, Flamestrike, Rain of Fire, Hurricane, Volley, Thunder Clap, Whirlwind, Holy Nova, Blast Wave, Psychic Scream, Demoralizing Shout, Swipe, War Stomp and Cone of Cold's cone.
+* Hellfire's flames were drawn wider than it burns, and Flamestrike's fire smaller than the area it hits; both now match.
+* Boss attacks that mark the ground before they land (Rain of Fire, Blizzard, Hurricane and Consecration) now mark the whole area they will hit.
+===
+0.48.0
+------
+Onyxia Tooth Pendant and Choker of the Fire Lord are now legendary amulets, offered alongside your spells' legendaries instead of among the epics. Choker of Enlightenment is now an epic amulet (was rare). All three are rarer to find, but just as strong as before, empowerings included.
+===
+0.47.0
+------
+* Rerolls for gold: once your three free rerolls are used up, you can keep rerolling cards by paying gold. The first costs 100 gold and each one after costs three times as much (300, 900, 2700 ...), for the rest of the run. The Reroll button shows the price, and turns red when you can't afford it.
+===
+0.46.0
+------
+* Huge class damage rebalance. Melee classes get the biggest boost, since they have to fight up close. Covers spells, weapon swings, pets and thorns effects:
+   * Warrior +95%, Paladin +70%, Rogue +58%, Priest +40%, Warlock +37%, Druid +10%.
+   * Hunter -12%, Mage -7%, Shaman -7%.
+* Damage over time spells reworked, so they no longer fall behind other spells:
+   * They now go on the healthiest enemies (after bosses and elites) instead of the weakest ones, which used to die before most of the damage was dealt.
+   * They deal the same damage in about half the time, ticking about once a second.
+   * Duration upgrades now add more ticks at the same pace, instead of spreading the same ticks further apart.
+===
+0.45.0
+------
+* Spell upgrades no longer offer things that do nothing:
+   * Ice Barrier and Power Word: Shield last until they break, so they no longer offer more duration. Their ranks now make the shield absorb more.
+   * Lightning Shield and Thorns are always up, so they no longer offer cooldown or duration. Their ranks now make them hit attackers harder.
+   * Holy Shield can now also rank up its damage. Once any damage, haste or thorns buff lasts as long as its cooldown, it stops offering cooldown and duration.
+* The Eternal Talisman (legendary amulet) is reworked to match:
+   * On a shield: more absorb and a shorter cooldown, and a broken shield now bursts for 50% of what it absorbed on every enemy within 10 yd.
+   * On Lightning Shield or Thorns: more damage, and a 25% chance to stun a melee attacker for 1.5 sec.
+* Upgrade cards for shields now say "absorb" instead of "healing".
+===
+0.44.1
+------
+* Fixed: pressing Later on the update window closed the game. It now puts the window away and leaves an update button in the corner, as it should.
+===
+0.44.0
+------
+* New ring: Blooddrinker's Band. A little of all the damage you deal heals you (about 1.5% from a fresh common one, up to 3% as you upgrade it).
+===
+0.43.0
+------
+* New Saves tab in Options: export your progress (heroes, opened zones, gear, talents and the codex) to a file, and import one to carry your progress to another computer or browser. Importing asks first, since it replaces your current progress.
+* On PC, exports go to a Saves folder, which the tab can open for you; drop a save file in there to import it.
+===
+0.42.0
+------
+* Enemies are much tougher everywhere: the horde has 50% more health, elites and guardians three times their health, and bosses five times theirs.
+===
+0.41.0
+------
+* The kills and gold bar and the bar with your spells and items can now be dragged anywhere on screen. Where you put them is remembered between sessions.
+===
+0.40.0
+------
+* New Codex tab in the armory: every ring, trinket and amulet you have been offered, on any hero. Each class's legendary amulets (one per spell) get their own row, and the rings, trinkets and amulets every class can find are at the bottom. Pieces you haven't seen yet stay in shadow; click a seen one to read what it does at each rarity.
+===
+0.39.3
+------
+* Enemy density counts toward the Run Options reward multiplier again, a little: 500% density is worth x1.2 on its own. Each kill still gives less, so the extra enemies don't multiply your talent experience on top of that.
+===
+0.39.2
+------
+* Fixed the light rays behind the level-up cards twisting and smearing after a few seconds on screen.
+===
+0.39.1
+------
+* Fixed a long black line through the Hunter's bow: the bowstring now runs between the bow's tips instead of far past them.
+===
+0.39.0
+------
+* Shorter runs in the earlier zones. Elwynn Forest, Duskwood and Warsong Gulch now end with their final boss at 16:00 (bosses at 3, 6, 9 and 12 minutes). Arathi Basin, Feralas and Gurubashi Arena end at 18:00 (bosses at 4, 7, 11 and 14). Alterac Valley, Blackrock Mountain and the Gates of Ahn'Qiraj still end at 20:00.
+* The hero picker shows each zone's own final boss time.
+===
+0.38.2
+------
+* Enemy density no longer gives more talent experience: a run at 500% density earns the same talent experience as the same run at 100%, and density no longer raises the Run Options reward multiplier.
+===
+0.38.1
+------
+* Feralas: you now start in a forest clearing south-west of Dire Maul, on real ground, instead of below the map under the ruins.
+===
+0.38.0
+------
+* Speed and Berserking runes now show on your buffs by the minimap, with their icon and a tooltip of what they give. Racial buffs such as Blood Fury and Berserking show there too.
+===
+0.37.1
+------
+* Gamepad: A jumps during a run (it follows your Jump key binding).
+===
+0.37.0
+------
+* Gamepad support. In a run the left stick moves your hero, the right stick turns the camera, the bumpers and triggers zoom, Start pauses and Back opens the character pane.
+* On every screen (hero picker, armory, cards, pause, the end of a run) the D-pad or left stick moves a gold highlight between the buttons: A presses, B goes back, X takes a talent point back, and left or right moves a slider in Options.
+* Touching the keyboard or mouse hands control straight back to them.
+===
+0.36.0
+------
+* AddOns: the Options window has a new AddOns page. Turn each addon on or off (for every hero, from your next run), see which ones are out of date or missing a library, and tick "Load out of date AddOns" to load them anyway.
+* In the browser you can now install addons: press Install AddOns and pick one or more addon .zip files (made for WoW 1.12). They are kept in your browser, and Remove takes one out again. Their saved settings are remembered between runs.
+* On Windows and Linux, Open AddOns Folder shows where to put an addon's folder.
+===
+0.35.3
+------
+* Run Options: enemy density no longer multiplies experience and gold. A denser horde splits the same experience and gold among more kills (at 500% each kill is worth a fifth), so it makes the run harder without making you level and earn faster.
+===
+0.35.2
+------
+* No more AFK timer: standing still no longer sits your hero down, marks you AFK or sends you back to the character screen after 30 minutes. The Auto Clear AFK option is gone.
+===
+0.35.1
+------
+* Run Options: enemy density now adds less to the rewards: full density (500%) is worth x1.2 on its own. Health, damage and speed are what take you to the x2 cap.
+===
+0.35.0
+------
+* Run Options: a new button beside the Enter button on the main screen opens a window to make your runs harder. Turn up enemy density and enemy health (100% to 500%), enemy damage (up to 300%) and enemy speed (up to 150%).
+* Harder runs pay more: talent experience and the chance of boss loot rise with the difficulty, up to double. Double comes early (density and health at 200% and 300%, say); past it you can keep making the game harder, but the rewards stop growing.
+* The end of a run lists the extra talent experience on its own line, "Run Options".
+* Your Run Options are remembered between runs; Reset puts everything back to normal.
+===
+0.34.0
+------
+* The horde gets much tougher as the minutes pass, in every zone: at 15:00 enemies have about twice the health they had, at 20:00 more than twice. Their hits grow only a little more than before, so the late game is a fight to cut them down, not a few blows and you're dead.
+* The horde answers how fast you kill, like in Vampire Survivors: mow it down quickly and enemies pour in faster (up to three times as fast), so a strong build always has something to fight. Fall behind and it eases back to its normal pace.
+* The field never empties: clear it out and a fresh wave comes at once, and the number of enemies that keep coming grows with the clock.
+* The game is harder overall: expect the horde to be the big threat from about 9:00 on.
+===
+0.33.0
+------
+* Talent overhaul: every spec of every class is now about as strong as the others. The ones that struggled (Combat, Enhancement, Feral, Fury, Discipline, Beast Mastery, Demonology, Shadow) are much stronger; the ones that ran away with it (Holy priest, Destruction, Assassination, Affliction late on) are toned down.
+* New milestones that change how you play:
+   * Warrior, Fury: Rampage (every 7th kill unleashes a Whirlwind), Flurry (Whirlwind and Bloodthirst strike twice) and Bladestorm (you never stop spinning: a Whirlwind every 3 sec).
+   * Paladin: Holy Shock's leaping bolts now come at the first Holy milestone, followed by Daybreak (Holy Shock crits call down Holy Wrath). Protection's Retribution Aura answers melee blows with Judgement; Retribution's Art of War hurls Exorcisms on crits.
+   * Hunter, Marksmanship: Rapid Fire (every 6th shot is followed by a free Aimed Shot).
+   * Rogue: Deadly Poison now comes first in Assassination, then Mutilate (Sinister Strike and Backstab strike twice). Combat's Blade Flurry sends Sinister Strike and Eviscerate on to two more enemies, every 20th kill brings a free Adrenaline Rush, and Killing Spree strikes on its own. Subtlety's Cheat Death survives a killing blow and fades you out of reach for 3 sec.
+   * Priest, Discipline: you start with Power Word: Shield; Divine Aegis makes a breaking shield burst in holy light, Rapture raises it again at once, and Penance looses bolts of holy light every few seconds. Shadow: Shadowy Apparitions (Shadow Word: Pain's ticks loose free Mind Blasts).
+   * Shaman, Enhancement: Windfury (Lightning Bolt and shocks strike twice more), Maelstrom Weapon (every 5th spell adds a free Chain Lightning) and spirit wolves whose bites carry Windfury. Restoration: Call of the Elements (you start with Searing Totem, and every totem comes with a twin).
+   * Mage, Fire: Hot Streak (every fourth Fire crit casts a free Pyroblast).
+   * Warlock: Nightfall (Shadow Bolts leave their targets corrupted), Seed of Corruption (afflicted enemies burst when they die) and Demonic Pact (kills tear open rifts that release Imps for 15 sec, up to five).
+   * Druid: Starfall (a free Starfire every 4 sec), Rake (you start with Swipe and it leaves bleeds) and Leader of the Pack (Swipe tears around you on its own and heals you for every enemy it hits).
+* Spells your talents cast for you (free Whirlwinds, Holy Wraths, Judgements, Chain Lightnings...) now hit as hard as your own copy of the spell, ranks and all. A spell you don't know grows with your other spells instead of staying at rank 1 all run.
+* Pets bite far more often: they no longer chase a running enemy without ever landing a blow.
+* Many talents' numbers retuned. Talent descriptions that showed a wrong number (Toxic Bloom, Pyroclasm, Explosive Ammunition, Presence of Mind, Tranquility...) now show the right one.
+* Talents that were replaced give their points back: spend them again in the armory's Talents tab.
+===
+0.32.0
+------
+* Azeroth Survivors now runs on Linux (x86_64): unpack the Linux download and start AzerothSurvivors.
+* The Linux version updates itself like the Windows one: a new version is offered on the hero picker.
+===
+0.31.0
+------
+* Class balance: adjustment to the previous changes
+* Rogue: spells and melee swings deal about a third less damage, and 10% less health.
+* Warlock: spells deal 16% less damage.
+* Priest: spells deal 5% less damage.
+* Mage: spells deal 36% more damage, and 20% more health.
+* Hunter: spells deal 30% more damage, and 12% more health.
+* Druid: spells deal 30% more damage, and 15% more health.
+* Paladin: spells and melee swings deal 22% more damage, and 12% more health.
+* Shaman: spells deal 18% more damage.
+===
+0.30.0
+------
+* Harder runs that ramp up: enemies grow much tougher as the clock runs, so minute 15 is far more dangerous than minute 2. Enemies also move a little faster and have more health.
+* Stronger heroes to match: armor and weapons give noticeably more, more so the rarer they are.
+* Caches are cheaper: the first costs 20 gold and the price rises more slowly.
+* Offensive rings and trinkets (damage, haste, crit, crit damage, area, echo) keep growing by nearly their full amount with every upgrade instead of slowing to a crawl. Defensive ones (damage reduction, health, regeneration, health per kill) reach their limit within a few picks.
+* Your spells finish off wounded enemies: next to their target, they go for the weakest first. Bosses and elites still come first.
+* Zone difficulty retuned around the new pace: Elwynn Forest and Duskwood are a little gentler, the Gates of Ahn'Qiraj harder.
+* Guardians grow with the clock as they did before, not as steeply as the horde.
+===
+0.29.1
+------
+* Stuns and roots can no longer chain an enemy forever: one chain holds it 3 seconds at most, then it shrugs off holds for 2 seconds. Hellfire's legendary amulet no longer stunlocks every pack.
+* Empowering an amulet now shows what changes on its card, e.g. "+16% » +24% damage", and ring and trinket upgrades read shorter ("+6% » +8% critical strike") so they fit.
+* The end-of-run screen shrinks to fit when it has a lot to show, instead of running off the top of the screen.
+* Baron Rivendare is visible again, Hakkar the Soulflayer towers as a final boss should, and Core Hounds are hound-sized instead of tiny.
+===
+0.29.0
+------
+* Hover a spell in the row under the Level Up! cards to see its full tooltip, the same one the action bar shows in combat. The jewelry row under a cache's or a guardian's cards shows each worn piece's stats the same way.
+===
+0.28.4
+------
+* An elite's arrival now names it ("<Elite> approaches!" instead of a bare "approaches!"), and the swarm warning reads "Swarm surrounds you!".
+===
+0.28.3
+------
+* Music now loops: the next track starts as soon as one ends instead of after a long silence. A new "Loop Music" checkbox under Options > Sound turns this off again.
+===
+0.28.2
+------
+* Talents: right-clicking a talent now takes a point back from it, as the hint says. No more selecting it first and reaching for the Unlearn button.
+===
+0.28.1
+------
+New pickup: the Magnet.
+
+* Walk over a magnet and every experience shard and every coin on the whole field flies to you.
+* A run has 2 or 3 magnets, spread across its 20 minutes. Bosses drop them, and so do guardians sometimes. If none has dropped for a while, one appears on the field by itself.
+* A magnet is a floating blue rune standing in a pillar of blue light, so you can spot it from across the field.
+* Magnets don't disappear. Leave one where it is and come back for it when the field is covered in gold.
+===
+0.27.0
+------
+Loot is no longer endless: rings, trinkets, amulets, soulstones and guardians all have limits.
+
+* Rings and trinkets grow toward a ceiling. Each upgrade adds less than the one before, and a piece never goes past five common picks' worth: a ring of damage tops out at +85%, a ring of damage reduction at +25%, Hand of Justice at 30%. No more 145% damage reduction.
+* A piece at its ceiling is no longer offered. If that leaves a cache or a guardian's pick short, its last card is a pouch of gold.
+* Major Soulstone holds 2 lives at most. Picking it again refills it, and it only shows up once you have used a life.
+* Amulets grow toward three times their numbers. The first empowering is as strong as before; each one after it adds less.
+* Guardians: every guardian you slay gives the later ones 25% more health and 5% more damage, and a lair fills again after 3:00 (was 2:30). They are a prize to win a few times a run, not a farm.
+===
+0.26.0
+------
+* In the armory, hovering a race's portrait shows its racial ability and bonuses, so you can compare races without going back to the main screen.
+===
+0.25.0
+------
+* Gloves now give a lot of pickup range: +30% on common gloves, up to about +115% on epic ones.
+===
+0.24.1
+------
+* Small bug fix.
+===
+0.24.0
+------
+* New Options screen on the main screen (the Options button beside Menu, or Menu > Options): change your settings and key bindings before a run, without entering the world.
+* It has the in-game Options pages: Controls, Interface, Action Bars, Combat, Chat, Key Bindings, Nameplates, Graphics and Audio. Changes save at once and apply to your next run.
+* Key Bindings: click a key, then press the key, mouse button or wheel you want. Right-click a key to unbind it. Defaults resets the page you are on.
+===
+0.23.0
+------
+* New trinket: Horn of the Warchief, buff power. Your damage, haste, shield and thorns buffs are stronger: Battle Shout, Slice and Dice, Arcane Power, Adrenaline Rush, Power Word: Shield, Ice Barrier, Lightning Shield, Thorns, and racials like Blood Fury and Berserking. A common pick adds 15%, a new legendary one over 70%.
+* It only comes up once you have a buff it can strengthen.
+* Buff tooltips show the boosted numbers and list your buff power under "Your bonuses".
+===
+0.22.0
+------
+* Item tooltips read like the real game's: health is a white "+12 Health" line and every other bonus a green "Equip:" line ("Equip: Improves your chance to get a critical strike by 2%."), in place of one quoted line listing everything. Gear, rings, trinkets and amulets alike, and they say "Binds when picked up".
+* Small bonuses show to a tenth of a percent (0.5% crit instead of 1%).
+* The armory's piece details list bonuses the same way.
+===
+0.21.0
+------
+* Empowering an amulet now grows it by its rarity: commons +60% of their numbers per empowering, uncommons +50%, rares +35%, epics +25%, legendaries +20% (all were +50%). The strongest amulets no longer run away late in a run.
+* Amulets that add targets only gain another once the empowering has fully earned it.
+* Choker of the Fire Lord: kills explode for 15% of max health (was 20%), and grow slower.
+* Onyxia Tooth Pendant: +30% critical damage (was 50%), crits splash 30% (was 40%).
+* Choker of Enlightenment: hits leap for 30% (was 35%).
+* Eye of the Splitting Sky (legendary, bolts): +1 target (was +2), leaps for 30% (was 50%).
+* Other legendaries: their spell damage bonus is a little lower.
+* Amulet of the Inferno (legendary, ground spells): now also +50% damage.
+* Medallion of the Bladestorm (legendary, cleaves): +50% damage (was 30%), bleeds for 80% (was 60%).
+* Pendant of the Fallen Dragon: the second life is ready every 60 sec (was 90), and it now adds +20% max health and +5 health per second (was 3).
+* Malice Stone Pendant: 20% echo (was 15%), -8% cooldowns (was 5%).
+* The Eye of Hakkar: +6% crit (was 3%), crits burn for 80% (was 60%).
+* Medallion of Steadfast Might: +10% damage reduction (was 5%), now +15% max health, attackers take 100% of their damage back (was 60%).
+* Commons and uncommons are stronger across the board: Mark of Fordring +15% damage, Star of Mystaria +25% health and +4% damage reduction, Talvash's Necklace -10% cooldowns, South Seas Kelp +30% luck and +25% gold, Prestor's Talisman +16% damage and +5% crit, Animated Chain +25% health and +8% damage reduction, Woven Ivy +6 health per second, +12% health and +12% speed, Amulet of the Darkmoon -12% cooldowns and +8% speed.
+===
+0.20.0
+------
+* Critical strike chance can now go past 100%. Every point above 100% is added to your critical damage instead, one for one: 120% crit with 200% critical damage becomes 100% crit with 220% critical damage.
+* Echo is no longer capped at 50%. Past 100%, every spell casts twice and the rest is your chance of a third cast: at 150% echo a spell always casts twice, and half the time three times.
+* Spell tooltips and the character pane show the new crit and echo rules.
+===
+0.19.0
+------
+Harder difficulty in every zone. The early zones climb the most.
+
+* Elwynn Forest: 0.63 → 0.95 (+51%)
+* Duskwood: 0.75 → 1.08 (+44%)
+* Warsong Gulch: 1.30 → 1.70 (+31%)
+* Arathi Basin: 1.33 → 1.74 (+31%)
+* Feralas: 2.03 → 2.35 (+16%)
+* Gurubashi Arena: 2.54 → 2.95 (+16%)
+* Alterac Valley: 2.75 → 3.10 (+13%)
+* Blackrock Mountain: 3.24 → 3.45 (+6%)
+* Gates of Ahn'Qiraj: 3.61 → 3.80 (+5%)

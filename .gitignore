@@ -1,0 +1,25 @@
+# Secrets: never upload these
+sign_config.bat
+*.pfx
+*.p12
+*.key
+metadata.json
+
+# Built files: the exe goes on the Releases page, not into the code
+dist/
+build/
+bin/
+obj/
+__pycache__/
+*.spec
+
+# Game files and update archives: attach them to a release instead (files over 100 MB are refused anyway)
+AzerothSurvivors.exe
+*.rar
+*.7z
+*.download
+*.part
+
+# Windows clutter
+Thumbs.db
+desktop.ini

@@ -1,0 +1,73 @@
+# Launcher 1.8 (current)
+- The game's "AS" emblem is now the launcher's window, taskbar, tray and exe icon
+- Setup has a second page asking whether to open the Addons section to download addons or enable/disable them
+- First start shows a setup window: cloud saving on or off, and the AddOns, game save and addon settings folders (only asks for the ones it cannot find); Options > RUN SETUP AGAIN reopens it
+- Reading an old patch note shows PREVIOUS (older) and NEXT (newer) buttons to step through the posts in version order
+- All patch notes lists the versions newest first in two columns side by side; when both are full, numbered page buttons at the bottom (or the mouse wheel) open the next page of older notes
+- A DISCORD button next to About Launcher opens the community invite link
+- Pressing PLAY no longer shows the "Cloud Sync Complete" pop-up; the game starts as soon as the cloud download is done (questions about conflicts and errors still appear)
+- Defaults: the game folder is the folder the launcher sits in, and AddOns is <that folder>\benilla-config\AddOns (change them in Options or the setup)
+- If the cloud save cannot be loaded when you press PLAY, the game is not launched and a warning box explains why (no more "play anyway" question); a failed upload after the game closes also shows a warning box
+- New layout: the launcher is a tall, narrow window; Cloud Save, Addons, Options, Changelog and About open in a WoW whisper-style box to its right (click the button again or the X to close it)
+- The all patch notes list also includes the current update (marked "current")
+- Changelog: scrolling past the bottom of a post opens the next older post, and past the top the next newer one
+- The section window now has its own taskbar button and Alt+Tab entry (named "Azeroth Survivors - <section>"), so it stays available when you switch windows
+- The section window is its own window: drag it by its title bar, keep it open after closing the launcher, and bring the launcher back with the house button (or the tray icon)
+- The section window is styled like a WoW whisper: round emblem portrait, section name in a bronze title bar, red X, a "<Azeroth Survivors> Launcher" line, and a column of small icon buttons to jump between sections
+- Removed the "Start minimized in the tray" option (Options and tray menu)
+- Options: a "Minimize the launcher when the game starts" switch (on by default); turn it off to keep the launcher open while you play
+- After the game closes, one line left of the status text reports the cloud result: "Cloud sync successfully downloaded" when PLAY has fetched your save, "Cloud sync successfully uploaded" after the game closes
+- Everything about cloud saving (Cloud Save button, Options sync folder, tray "Upload Save Now", welcome text, sync/upload at Play) only appears and runs while cloud saving is switched on; Options has a Cloud saving switch
+- The footer status text no longer shows cloud save messages; they stay in the Cloud Save log and pop-ups
+- The World of Warcraft logo is now the launcher background; the Home screen shows it with the welcome text beneath
+- Addons: REFRESH (left) and FOLDER (right) sit above Toggle All at half width each; the enabled counter is right-aligned below Toggle All, and the two profiles sit at the bottom
+- Addons: one button swaps the addon manager for a "Download More" list; each addon installs with one click
+- Changelog opens on the newest update only; an ALL PATCH NOTES button (top right) lists every post, one button per version number; click a number to read that post
+- Addons: a switch for every addon, a Toggle All button, and two saveable profiles of toggles
+- Credits added to the top right of this page, in larger print
+- Only one launcher can run at a time; starting a second one brings the first up from the tray or taskbar
+- Removed the Game folder and Sync folder lines from the welcome screen
+- The launcher pops back up in front 2 seconds after the game closes or crashes
+- Pressing PLAY shows a pop-up when the cloud sync is done; CONTINUE launches the game
+- Header now reads Azeroth Survivors, with "A game made by Aethus" beneath it
+- The status text ("Ready.") moved to the bottom right corner and is larger
+- Removed the Set Game Folder link from the footer; the game folder is set in Options
+- Changelog shows its text exactly as written, starting with the 0.113.1 notes
+- The changelog is built into the launcher and can no longer be edited from inside it
+
+# Launcher 1.7
+- Cloud Save now works like AzerothSync: save game, AddOns and addon settings are synced separately
+- Fingerprint checks decide what is newer; a real conflict asks once: Use cloud, Keep local or Cancel
+- Everything that is overwritten is backed up as a ZIP (this PC: last 20, cloud: last 10)
+- Cloud Save has Check Status, Download and Upload with a live log; Options has the folder settings
+- Cloud folder detection for Google Drive, OneDrive and Dropbox
+
+# Launcher 1.6
+- PLAY reads INSTALL when no game client is found, and downloads it from the game server
+- Download progress shows in the status line; the client is unpacked automatically
+
+# Launcher 1.5
+- Added an Options button under Addons: game, save and cloud folders, plus tray settings
+- About Launcher is now a small button in the footer, where the status text begins
+
+# Launcher 1.4
+- Changelog button shows your own messages, typed into CHANGELOG.txt
+- Added this About Launcher page for launcher updates
+- Main page opens on a welcome screen instead of the changelog
+
+# Launcher 1.3
+- Runs in the system tray and keeps running after the game closes
+- Tray menu: Show Launcher, Play, Upload Save Now, Quit
+- Start Minimized option (or launch with --tray)
+
+# Launcher 1.2
+- Play downloads the newest cloud save before the game starts
+- Saves upload when the game closes, even after a crash
+- Added Save Folder and Cloud Folder settings
+
+# Launcher 1.1
+- Play now launches AzerothSurvivors.exe
+
+# Launcher 1.0
+- First release: Play, Cloud Save, Addons and Changelog
+- 2006 World of Warcraft website theme
