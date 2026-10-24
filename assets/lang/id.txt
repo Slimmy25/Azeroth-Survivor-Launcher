@@ -830,3 +830,119 @@ OPEN ›
 = BUKA ›
 New to Azeroth Survivors? Pick a topic.
 = Baru di Azeroth Survivors? Pilih topik.
+STATS
+= STATISTIK
+Stats
+= Statistik
+Show the Stats section (your play time and run records)
+= Tampilkan bagian Statistik (waktu bermain dan rekor permainan)
+Your sessions and records are on the STATS page.
+= Sesi dan rekormu ada di halaman STATISTIK.
+INSTALL STATS ADDON
+= INSTAL ADDON STATISTIK
+UPDATE STATS ADDON
+= PERBARUI ADDON STATISTIK
+Your first run is in the books!
+= Permainan pertamamu selesai!
+{#0} enemies slain in {#1} runs!
+= {#0} musuh dikalahkan dalam {#1} permainan!
+{#0} victories, {#1} bosses defeated and {#2} gold collected.
+= {#0} kemenangan, {#1} bos dikalahkan, dan {#2} emas terkumpul.
+Time played
+= Waktu bermain
+Sessions
+= Sesi
+Longest session
+= Sesi terlama
+Last session
+= Sesi terakhir
+Your runs
+= Permainanmu
+Track every run
+= Catat setiap permainan
+The stats file could not be read ({0}).
+= File statistik tidak dapat dibaca ({0}).
+The Azeroth Stats addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
+= Addon Azeroth Stats mencatat setiap permainan yang kamu mainkan: kemenangan, kill, damage, emas, dan rekor pribadimu. Instal, selesaikan satu permainan, dan statistikmu muncul di sini.
+It is optional: without it, this page only shows your play time.
+= Ini opsional: tanpanya, halaman ini hanya menampilkan waktu bermainmu.
+The Azeroth Stats addon is turned off. Turn it on in Addons to keep recording your runs.
+= Addon Azeroth Stats dimatikan. Nyalakan di Addon agar permainanmu terus dicatat.
+No runs recorded yet. Finish a run with the Azeroth Stats addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
+= Belum ada permainan yang tercatat. Selesaikan satu permainan dengan Azeroth Stats menyala. Game menyimpan data addon saat kamu keluar, jadi statistikmu muncul di sini setelah game ditutup.
+Runs
+= Permainan
+Victories
+= Kemenangan
+Win rate
+= Rasio menang
+Time in runs
+= Waktu dalam permainan
+Enemies slain
+= Musuh dikalahkan
+Elites
+= Elite
+Guardians
+= Penjaga
+Bosses
+= Bos
+Damage dealt
+= Damage diberikan
+Damage taken
+= Damage diterima
+Gold collected
+= Emas terkumpul
+Caches opened
+= Peti dibuka
+Personal bests
+= Rekor pribadi
+Longest run
+= Permainan terlama
+Fastest victory
+= Kemenangan tercepat
+Highest level
+= Level tertinggi
+Most kills in a run
+= Kill terbanyak dalam satu permainan
+Most damage in a run
+= Damage terbanyak dalam satu permainan
+Most gold in a run
+= Emas terbanyak dalam satu permainan
+Most bosses in a run
+= Bos terbanyak dalam satu permainan
+Milestones
+= Pencapaian
+Hours played
+= Jam bermain
+Every milestone reached!
+= Semua pencapaian tercapai!
+Classes
+= Kelas
+Races
+= Ras
+Zones
+= Zona
+Runs: {#0} · Won: {#1} · Longest: {2} · Best level: {#3}
+= Permainan: {#0} · Menang: {#1} · Terlama: {2} · Level terbaik: {#3}
+{#0} kills
+= {#0} kill
+Recent runs
+= Permainan terbaru
+Victory
+= Menang
+Defeat
+= Kalah
+Left the run
+= Ditinggalkan
+Survived {0} · Level {#1} · Kills {#2} · Gold {#3}
+= Bertahan {0} · Level {#1} · Kill {#2} · Emas {#3}
+In game, type /azstats to see your stats.
+= Di dalam game, ketik /azstats untuk melihat statistikmu.
+Saved by the game {0}.
+= Disimpan oleh game: {0}.
+Azeroth Stats updated.
+= Azeroth Stats diperbarui.
+Azeroth Stats installed. It records your runs from now on.
+= Azeroth Stats terinstal. Mulai sekarang ia mencatat permainanmu.
+Could not install Azeroth Stats:\n\n{0}
+= Azeroth Stats tidak dapat diinstal:\n\n{0}

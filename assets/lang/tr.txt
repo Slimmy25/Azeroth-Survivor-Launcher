@@ -831,3 +831,119 @@ OPEN ›
 = AÇ ›
 New to Azeroth Survivors? Pick a topic.
 = Azeroth Survivors'ta yeni misin? Bir konu seç.
+STATS
+= İSTATİSTİK
+Stats
+= İstatistikler
+Show the Stats section (your play time and run records)
+= İstatistikler bölümünü göster (oynama süresi ve oyun rekorları)
+Your sessions and records are on the STATS page.
+= Oturumların ve rekorların İSTATİSTİK sayfasında.
+INSTALL STATS ADDON
+= İSTATİSTİK EKLENTİSİNİ YÜKLE
+UPDATE STATS ADDON
+= İSTATİSTİK EKLENTİSİNİ GÜNCELLE
+Your first run is in the books!
+= İlk oyununu tamamladın!
+{#0} enemies slain in {#1} runs!
+= {#1} oyunda {#0} düşman alt edildi!
+{#0} victories, {#1} bosses defeated and {#2} gold collected.
+= {#0} zafer, {#1} boss yenildi ve {#2} altın toplandı.
+Time played
+= Oynanan süre
+Sessions
+= Oturumlar
+Longest session
+= En uzun oturum
+Last session
+= Son oturum
+Your runs
+= Oyunların
+Track every run
+= Her oyunu kaydet
+The stats file could not be read ({0}).
+= İstatistik dosyası okunamadı ({0}).
+The Azeroth Stats addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
+= Azeroth Stats eklentisi oynadığın her oyunu kaydeder: zaferler, öldürmeler, hasar, altın ve kişisel rekorların. Yükle, bir oyunu bitir; istatistiklerin burada görünsün.
+It is optional: without it, this page only shows your play time.
+= İsteğe bağlıdır: o olmadan bu sayfa yalnızca oynama süreni gösterir.
+The Azeroth Stats addon is turned off. Turn it on in Addons to keep recording your runs.
+= Azeroth Stats eklentisi kapalı. Oyunlarını kaydetmeye devam etmek için Eklentiler'den aç.
+No runs recorded yet. Finish a run with the Azeroth Stats addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
+= Henüz kayıtlı oyun yok. Azeroth Stats açıkken bir oyunu bitir. Oyun, eklenti verilerini çıkarken kaydeder; bu yüzden istatistiklerin oyunu kapattıktan sonra burada görünür.
+Runs
+= Oyunlar
+Victories
+= Zaferler
+Win rate
+= Kazanma oranı
+Time in runs
+= Oyunlarda geçen süre
+Enemies slain
+= Alt edilen düşmanlar
+Elites
+= Elitler
+Guardians
+= Muhafızlar
+Bosses
+= Bosslar
+Damage dealt
+= Verilen hasar
+Damage taken
+= Alınan hasar
+Gold collected
+= Toplanan altın
+Caches opened
+= Açılan sandıklar
+Personal bests
+= Kişisel rekorlar
+Longest run
+= En uzun oyun
+Fastest victory
+= En hızlı zafer
+Highest level
+= En yüksek seviye
+Most kills in a run
+= Bir oyunda en çok öldürme
+Most damage in a run
+= Bir oyunda en çok hasar
+Most gold in a run
+= Bir oyunda en çok altın
+Most bosses in a run
+= Bir oyunda en çok boss
+Milestones
+= Kilometre taşları
+Hours played
+= Oynanan saat
+Every milestone reached!
+= Tüm kilometre taşlarına ulaşıldı!
+Classes
+= Sınıflar
+Races
+= Irklar
+Zones
+= Bölgeler
+Runs: {#0} · Won: {#1} · Longest: {2} · Best level: {#3}
+= Oyunlar: {#0} · Kazanılan: {#1} · En uzun: {2} · En iyi seviye: {#3}
+{#0} kills
+= {#0} öldürme
+Recent runs
+= Son oyunlar
+Victory
+= Zafer
+Defeat
+= Yenilgi
+Left the run
+= Terk edildi
+Survived {0} · Level {#1} · Kills {#2} · Gold {#3}
+= Hayatta kalma {0} · Seviye {#1} · Öldürme {#2} · Altın {#3}
+In game, type /azstats to see your stats.
+= Oyunda istatistiklerini görmek için /azstats yaz.
+Saved by the game {0}.
+= Oyun tarafından kaydedildi: {0}.
+Azeroth Stats updated.
+= Azeroth Stats güncellendi.
+Azeroth Stats installed. It records your runs from now on.
+= Azeroth Stats yüklendi. Artık oyunlarını kaydediyor.
+Could not install Azeroth Stats:\n\n{0}
+= Azeroth Stats yüklenemedi:\n\n{0}

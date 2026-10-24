@@ -831,3 +831,119 @@ OPEN ›
 = ΑΝΟΙΓΜΑ ›
 New to Azeroth Survivors? Pick a topic.
 = Νέος στο Azeroth Survivors; Διάλεξε ένα θέμα.
+STATS
+= ΣΤΑΤΙΣΤΙΚΑ
+Stats
+= Στατιστικά
+Show the Stats section (your play time and run records)
+= Εμφάνιση της ενότητας Στατιστικά (χρόνος παιχνιδιού και ρεκόρ γύρων)
+Your sessions and records are on the STATS page.
+= Οι συνεδρίες και τα ρεκόρ σου είναι στη σελίδα ΣΤΑΤΙΣΤΙΚΑ.
+INSTALL STATS ADDON
+= ΕΓΚΑΤΑΣΤΑΣΗ ΠΡΟΣΘΕΤΟΥ ΣΤΑΤΙΣΤΙΚΩΝ
+UPDATE STATS ADDON
+= ΕΝΗΜΕΡΩΣΗ ΠΡΟΣΘΕΤΟΥ ΣΤΑΤΙΣΤΙΚΩΝ
+Your first run is in the books!
+= Ο πρώτος σου γύρος ολοκληρώθηκε!
+{#0} enemies slain in {#1} runs!
+= {#0} εχθροί νικήθηκαν σε {#1} γύρους!
+{#0} victories, {#1} bosses defeated and {#2} gold collected.
+= {#0} νίκες, {#1} αρχηγοί νικήθηκαν και {#2} χρυσός μαζεύτηκε.
+Time played
+= Χρόνος παιχνιδιού
+Sessions
+= Συνεδρίες
+Longest session
+= Μεγαλύτερη συνεδρία
+Last session
+= Τελευταία συνεδρία
+Your runs
+= Οι γύροι σου
+Track every run
+= Κατέγραψε κάθε γύρο
+The stats file could not be read ({0}).
+= Δεν ήταν δυνατή η ανάγνωση του αρχείου στατιστικών ({0}).
+The Azeroth Stats addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
+= Το πρόσθετο Azeroth Stats καταγράφει κάθε γύρο που παίζεις: νίκες, φόνους, ζημιά, χρυσό και τα προσωπικά σου ρεκόρ. Εγκατάστησέ το, ολοκλήρωσε έναν γύρο και τα στατιστικά σου θα εμφανιστούν εδώ.
+It is optional: without it, this page only shows your play time.
+= Είναι προαιρετικό: χωρίς αυτό, η σελίδα δείχνει μόνο τον χρόνο παιχνιδιού σου.
+The Azeroth Stats addon is turned off. Turn it on in Addons to keep recording your runs.
+= Το πρόσθετο Azeroth Stats είναι απενεργοποιημένο. Ενεργοποίησέ το στα Πρόσθετα για να συνεχίσει να καταγράφει τους γύρους σου.
+No runs recorded yet. Finish a run with the Azeroth Stats addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
+= Δεν έχουν καταγραφεί γύροι ακόμα. Ολοκλήρωσε έναν γύρο με ενεργό το Azeroth Stats. Το παιχνίδι αποθηκεύει τα δεδομένα των πρόσθετων όταν βγαίνεις, οπότε τα στατιστικά εμφανίζονται εδώ αφού κλείσεις το παιχνίδι.
+Runs
+= Γύροι
+Victories
+= Νίκες
+Win rate
+= Ποσοστό νικών
+Time in runs
+= Χρόνος σε γύρους
+Enemies slain
+= Εχθροί που νικήθηκαν
+Elites
+= Επίλεκτοι
+Guardians
+= Φύλακες
+Bosses
+= Αρχηγοί
+Damage dealt
+= Ζημιά που προκλήθηκε
+Damage taken
+= Ζημιά που δέχτηκες
+Gold collected
+= Χρυσός που μαζεύτηκε
+Caches opened
+= Σεντούκια που άνοιξαν
+Personal bests
+= Προσωπικά ρεκόρ
+Longest run
+= Μεγαλύτερος γύρος
+Fastest victory
+= Ταχύτερη νίκη
+Highest level
+= Υψηλότερο επίπεδο
+Most kills in a run
+= Περισσότεροι φόνοι σε έναν γύρο
+Most damage in a run
+= Περισσότερη ζημιά σε έναν γύρο
+Most gold in a run
+= Περισσότερος χρυσός σε έναν γύρο
+Most bosses in a run
+= Περισσότεροι αρχηγοί σε έναν γύρο
+Milestones
+= Ορόσημα
+Hours played
+= Ώρες παιχνιδιού
+Every milestone reached!
+= Όλα τα ορόσημα επιτεύχθηκαν!
+Classes
+= Κλάσεις
+Races
+= Φυλές
+Zones
+= Ζώνες
+Runs: {#0} · Won: {#1} · Longest: {2} · Best level: {#3}
+= Γύροι: {#0} · Νίκες: {#1} · Μεγαλύτερος: {2} · Καλύτερο επίπεδο: {#3}
+{#0} kills
+= {#0} φόνοι
+Recent runs
+= Πρόσφατοι γύροι
+Victory
+= Νίκη
+Defeat
+= Ήττα
+Left the run
+= Εγκαταλείφθηκε
+Survived {0} · Level {#1} · Kills {#2} · Gold {#3}
+= Επιβίωσε {0} · Επίπεδο {#1} · Φόνοι {#2} · Χρυσός {#3}
+In game, type /azstats to see your stats.
+= Στο παιχνίδι, γράψε /azstats για να δεις τα στατιστικά σου.
+Saved by the game {0}.
+= Αποθηκεύτηκε από το παιχνίδι: {0}.
+Azeroth Stats updated.
+= Το Azeroth Stats ενημερώθηκε.
+Azeroth Stats installed. It records your runs from now on.
+= Το Azeroth Stats εγκαταστάθηκε. Από τώρα καταγράφει τους γύρους σου.
+Could not install Azeroth Stats:\n\n{0}
+= Δεν ήταν δυνατή η εγκατάσταση του Azeroth Stats:\n\n{0}

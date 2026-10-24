@@ -830,3 +830,119 @@ OPEN ›
 = AVAA ›
 New to Azeroth Survivors? Pick a topic.
 = Uusi Azeroth Survivorsissa? Valitse aihe.
+STATS
+= TILASTOT
+Stats
+= Tilastot
+Show the Stats section (your play time and run records)
+= Näytä Tilastot-osio (peliaika ja pelikertojen ennätykset)
+Your sessions and records are on the STATS page.
+= Pelisessiosi ja ennätyksesi ovat TILASTOT-sivulla.
+INSTALL STATS ADDON
+= ASENNA TILASTOLISÄOSA
+UPDATE STATS ADDON
+= PÄIVITÄ TILASTOLISÄOSA
+Your first run is in the books!
+= Ensimmäinen pelikertasi on takana!
+{#0} enemies slain in {#1} runs!
+= {#0} vihollista kukistettu {#1} pelikerralla!
+{#0} victories, {#1} bosses defeated and {#2} gold collected.
+= Voittoja {#0}, kukistettuja pomoja {#1} ja kerättyä kultaa {#2}.
+Time played
+= Pelattu aika
+Sessions
+= Pelisessiot
+Longest session
+= Pisin pelisessio
+Last session
+= Viimeisin pelisessio
+Your runs
+= Pelikertasi
+Track every run
+= Pidä kirjaa jokaisesta pelikerrasta
+The stats file could not be read ({0}).
+= Tilastotiedostoa ei voitu lukea ({0}).
+The Azeroth Stats addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
+= Azeroth Stats -lisäosa pitää kirjaa jokaisesta pelikerrastasi: voitot, tapot, vahinko, kulta ja henkilökohtaiset ennätyksesi. Asenna se, pelaa pelikerta loppuun, niin tilastosi näkyvät täällä.
+It is optional: without it, this page only shows your play time.
+= Se on vapaaehtoinen: ilman sitä tällä sivulla näkyy vain peliaikasi.
+The Azeroth Stats addon is turned off. Turn it on in Addons to keep recording your runs.
+= Azeroth Stats -lisäosa on pois päältä. Ota se käyttöön Lisäosat-kohdassa, jotta pelikertasi tallentuvat jatkossakin.
+No runs recorded yet. Finish a run with the Azeroth Stats addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
+= Pelikertoja ei ole vielä tallennettu. Pelaa pelikerta loppuun Azeroth Stats päällä. Peli tallentaa lisäosien tiedot, kun poistut pelistä, joten tilastosi näkyvät täällä pelin sulkemisen jälkeen.
+Runs
+= Pelikerrat
+Victories
+= Voitot
+Win rate
+= Voittoprosentti
+Time in runs
+= Aika pelikerroilla
+Enemies slain
+= Kukistetut viholliset
+Elites
+= Eliitit
+Guardians
+= Vartijat
+Bosses
+= Pomot
+Damage dealt
+= Tehty vahinko
+Damage taken
+= Otettu vahinko
+Gold collected
+= Kerätty kulta
+Caches opened
+= Avatut arkut
+Personal bests
+= Henkilökohtaiset ennätykset
+Longest run
+= Pisin pelikerta
+Fastest victory
+= Nopein voitto
+Highest level
+= Korkein taso
+Most kills in a run
+= Eniten tappoja yhdellä kerralla
+Most damage in a run
+= Eniten vahinkoa yhdellä kerralla
+Most gold in a run
+= Eniten kultaa yhdellä kerralla
+Most bosses in a run
+= Eniten pomoja yhdellä kerralla
+Milestones
+= Virstanpylväät
+Hours played
+= Pelatut tunnit
+Every milestone reached!
+= Kaikki virstanpylväät saavutettu!
+Classes
+= Luokat
+Races
+= Rodut
+Zones
+= Alueet
+Runs: {#0} · Won: {#1} · Longest: {2} · Best level: {#3}
+= Pelikerrat: {#0} · Voitot: {#1} · Pisin: {2} · Paras taso: {#3}
+{#0} kills
+= {#0} tappoa
+Recent runs
+= Viimeisimmät pelikerrat
+Victory
+= Voitto
+Defeat
+= Tappio
+Left the run
+= Keskeytetty
+Survived {0} · Level {#1} · Kills {#2} · Gold {#3}
+= Selvisi {0} · Taso {#1} · Tapot {#2} · Kulta {#3}
+In game, type /azstats to see your stats.
+= Kirjoita pelissä /azstats nähdäksesi tilastosi.
+Saved by the game {0}.
+= Pelin tallentama: {0}.
+Azeroth Stats updated.
+= Azeroth Stats päivitetty.
+Azeroth Stats installed. It records your runs from now on.
+= Azeroth Stats asennettu. Se tallentaa pelikertasi tästä lähtien.
+Could not install Azeroth Stats:\n\n{0}
+= Azeroth Statsia ei voitu asentaa:\n\n{0}

@@ -1,0 +1,7 @@
+## Interface: 11200
+## Title: Azeroth Stats
+## Notes: Keeps your Azeroth Survivors records: every run's result, kills, damage, gold and personal bests. The launcher's STATS page shows them. Type /azstats in game.
+## Author: Slimjim
+## Version: 1.0
+## SavedVariables: AzerothStatsDB
+AzerothStats.lua

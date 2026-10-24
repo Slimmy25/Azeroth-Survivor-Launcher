@@ -831,3 +831,119 @@ OPEN ›
 = MEGNYITÁS ›
 New to Azeroth Survivors? Pick a topic.
 = Új vagy az Azeroth Survivorsban? Válassz egy témát.
+STATS
+= STATISZTIKA
+Stats
+= Statisztika
+Show the Stats section (your play time and run records)
+= Statisztika rész megjelenítése (játékidő és a menetek rekordjai)
+Your sessions and records are on the STATS page.
+= A játékalkalmaid és rekordjaid a STATISZTIKA oldalon vannak.
+INSTALL STATS ADDON
+= STATISZTIKA KIEGÉSZÍTŐ TELEPÍTÉSE
+UPDATE STATS ADDON
+= STATISZTIKA KIEGÉSZÍTŐ FRISSÍTÉSE
+Your first run is in the books!
+= Az első meneted megvan!
+{#0} enemies slain in {#1} runs!
+= {#0} legyőzött ellenség {#1} menet alatt!
+{#0} victories, {#1} bosses defeated and {#2} gold collected.
+= {#0} győzelem, {#1} legyőzött főellenség és {#2} összegyűjtött arany.
+Time played
+= Játszott idő
+Sessions
+= Játékalkalmak
+Longest session
+= Leghosszabb játékalkalom
+Last session
+= Legutóbbi játékalkalom
+Your runs
+= A meneteid
+Track every run
+= Rögzíts minden menetet
+The stats file could not be read ({0}).
+= A statisztikafájl nem olvasható ({0}).
+The Azeroth Stats addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
+= Az Azeroth Stats kiegészítő minden meneted rögzíti: győzelmek, ölések, sebzés, arany és a személyes rekordjaid. Telepítsd, fejezz be egy menetet, és a statisztikád itt jelenik meg.
+It is optional: without it, this page only shows your play time.
+= Nem kötelező: nélküle ez az oldal csak a játékidődet mutatja.
+The Azeroth Stats addon is turned off. Turn it on in Addons to keep recording your runs.
+= Az Azeroth Stats kiegészítő ki van kapcsolva. Kapcsold be a Kiegészítők között, hogy továbbra is rögzítse a meneteidet.
+No runs recorded yet. Finish a run with the Azeroth Stats addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
+= Még nincs rögzített menet. Fejezz be egy menetet bekapcsolt Azeroth Stats kiegészítővel. A játék kilépéskor menti a kiegészítők adatait, így a statisztikád a játék bezárása után jelenik meg itt.
+Runs
+= Menetek
+Victories
+= Győzelmek
+Win rate
+= Győzelmi arány
+Time in runs
+= Menetekben töltött idő
+Enemies slain
+= Legyőzött ellenségek
+Elites
+= Elitek
+Guardians
+= Őrzők
+Bosses
+= Főellenségek
+Damage dealt
+= Okozott sebzés
+Damage taken
+= Elszenvedett sebzés
+Gold collected
+= Összegyűjtött arany
+Caches opened
+= Kinyitott ládák
+Personal bests
+= Személyes rekordok
+Longest run
+= Leghosszabb menet
+Fastest victory
+= Leggyorsabb győzelem
+Highest level
+= Legmagasabb szint
+Most kills in a run
+= Legtöbb ölés egy menetben
+Most damage in a run
+= Legtöbb sebzés egy menetben
+Most gold in a run
+= Legtöbb arany egy menetben
+Most bosses in a run
+= Legtöbb főellenség egy menetben
+Milestones
+= Mérföldkövek
+Hours played
+= Játszott órák
+Every milestone reached!
+= Minden mérföldkő teljesítve!
+Classes
+= Kasztok
+Races
+= Fajok
+Zones
+= Zónák
+Runs: {#0} · Won: {#1} · Longest: {2} · Best level: {#3}
+= Menetek: {#0} · Győzelmek: {#1} · Leghosszabb: {2} · Legjobb szint: {#3}
+{#0} kills
+= {#0} ölés
+Recent runs
+= Legutóbbi menetek
+Victory
+= Győzelem
+Defeat
+= Vereség
+Left the run
+= Kilépett
+Survived {0} · Level {#1} · Kills {#2} · Gold {#3}
+= Túlélt {0} · Szint {#1} · Ölések {#2} · Arany {#3}
+In game, type /azstats to see your stats.
+= A játékban írd be: /azstats, hogy lásd a statisztikádat.
+Saved by the game {0}.
+= A játék mentette: {0}.
+Azeroth Stats updated.
+= Azeroth Stats frissítve.
+Azeroth Stats installed. It records your runs from now on.
+= Azeroth Stats telepítve. Mostantól rögzíti a meneteidet.
+Could not install Azeroth Stats:\n\n{0}
+= Az Azeroth Stats nem telepíthető:\n\n{0}

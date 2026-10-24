@@ -831,3 +831,119 @@ OPEN ›
 = 開く ›
 New to Azeroth Survivors? Pick a topic.
 = Azeroth Survivors は初めてですか？トピックを選んでください。
+STATS
+= 統計
+Stats
+= 統計
+Show the Stats section (your play time and run records)
+= 統計セクションを表示（プレイ時間とランの記録）
+Your sessions and records are on the STATS page.
+= セッションと記録は「統計」ページにあります。
+INSTALL STATS ADDON
+= 統計アドオンをインストール
+UPDATE STATS ADDON
+= 統計アドオンをアップデート
+Your first run is in the books!
+= 初めてのランを達成しました！
+{#0} enemies slain in {#1} runs!
+= {#1}回のランで{#0}体の敵を撃破！
+{#0} victories, {#1} bosses defeated and {#2} gold collected.
+= 勝利{#0}回、ボス撃破{#1}体、獲得ゴールド{#2}。
+Time played
+= プレイ時間
+Sessions
+= セッション
+Longest session
+= 最長セッション
+Last session
+= 前回のセッション
+Your runs
+= あなたのラン
+Track every run
+= すべてのランを記録
+The stats file could not be read ({0}).
+= 統計ファイルを読み込めませんでした（{0}）。
+The Azeroth Stats addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
+= アドオン Azeroth Stats は、プレイしたすべてのランを記録します：勝利、撃破数、ダメージ、ゴールド、自己ベスト。インストールしてランを1回終えると、ここに統計が表示されます。
+It is optional: without it, this page only shows your play time.
+= 任意です：なくても、このページにはプレイ時間が表示されます。
+The Azeroth Stats addon is turned off. Turn it on in Addons to keep recording your runs.
+= アドオン Azeroth Stats がオフになっています。ランの記録を続けるには「アドオン」でオンにしてください。
+No runs recorded yet. Finish a run with the Azeroth Stats addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
+= まだ記録されたランはありません。Azeroth Stats をオンにしてランを1回終えてください。ゲームは終了時にアドオンのデータを保存するため、ゲームを閉じた後に統計がここに表示されます。
+Runs
+= ラン
+Victories
+= 勝利
+Win rate
+= 勝率
+Time in runs
+= ランの合計時間
+Enemies slain
+= 撃破した敵
+Elites
+= エリート
+Guardians
+= ガーディアン
+Bosses
+= ボス
+Damage dealt
+= 与ダメージ
+Damage taken
+= 被ダメージ
+Gold collected
+= 獲得ゴールド
+Caches opened
+= 開けた宝箱
+Personal bests
+= 自己ベスト
+Longest run
+= 最長ラン
+Fastest victory
+= 最速勝利
+Highest level
+= 最高レベル
+Most kills in a run
+= 1ランの最多撃破
+Most damage in a run
+= 1ランの最大ダメージ
+Most gold in a run
+= 1ランの最多ゴールド
+Most bosses in a run
+= 1ランの最多ボス
+Milestones
+= マイルストーン
+Hours played
+= プレイ時間（時間）
+Every milestone reached!
+= すべてのマイルストーンを達成！
+Classes
+= クラス
+Races
+= 種族
+Zones
+= ゾーン
+Runs: {#0} · Won: {#1} · Longest: {2} · Best level: {#3}
+= ラン: {#0} · 勝利: {#1} · 最長: {2} · 最高レベル: {#3}
+{#0} kills
+= {#0}体撃破
+Recent runs
+= 最近のラン
+Victory
+= 勝利
+Defeat
+= 敗北
+Left the run
+= 中断
+Survived {0} · Level {#1} · Kills {#2} · Gold {#3}
+= 生存 {0} · レベル {#1} · 撃破 {#2} · ゴールド {#3}
+In game, type /azstats to see your stats.
+= ゲーム内で /azstats と入力すると統計を確認できます。
+Saved by the game {0}.
+= ゲームによる保存: {0}。
+Azeroth Stats updated.
+= Azeroth Stats をアップデートしました。
+Azeroth Stats installed. It records your runs from now on.
+= Azeroth Stats をインストールしました。これからランを記録します。
+Could not install Azeroth Stats:\n\n{0}
+= Azeroth Stats をインストールできませんでした：\n\n{0}

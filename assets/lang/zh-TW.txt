@@ -831,3 +831,119 @@ OPEN ›
 = 開啟 ›
 New to Azeroth Survivors? Pick a topic.
 = 剛接觸 Azeroth Survivors？選擇一個主題。
+STATS
+= 統計
+Stats
+= 統計
+Show the Stats section (your play time and run records)
+= 顯示統計區塊（遊戲時數與每局紀錄）
+Your sessions and records are on the STATS page.
+= 你的遊玩紀錄與最佳成績在「統計」頁面。
+INSTALL STATS ADDON
+= 安裝統計插件
+UPDATE STATS ADDON
+= 更新統計插件
+Your first run is in the books!
+= 你的第一局已經完成！
+{#0} enemies slain in {#1} runs!
+= {#1} 局中共擊敗 {#0} 個敵人！
+{#0} victories, {#1} bosses defeated and {#2} gold collected.
+= 勝利 {#0} 次，擊敗首領 {#1} 個，收集金幣 {#2}。
+Time played
+= 遊玩時間
+Sessions
+= 遊玩次數
+Longest session
+= 最長一次
+Last session
+= 上一次
+Your runs
+= 你的對局
+Track every run
+= 記錄每一局
+The stats file could not be read ({0}).
+= 無法讀取統計檔案（{0}）。
+The Azeroth Stats addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
+= Azeroth Stats 插件會記錄你玩的每一局：勝利、擊殺、傷害、金幣與個人最佳成績。安裝後完成一局，你的統計就會顯示在這裡。
+It is optional: without it, this page only shows your play time.
+= 它是選用的：沒有它，此頁面只顯示你的遊戲時數。
+The Azeroth Stats addon is turned off. Turn it on in Addons to keep recording your runs.
+= Azeroth Stats 插件已關閉。請在插件中開啟，以繼續記錄你的對局。
+No runs recorded yet. Finish a run with the Azeroth Stats addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
+= 還沒有記錄任何對局。請在開啟 Azeroth Stats 的情況下完成一局。遊戲會在離開時儲存插件資料，所以關閉遊戲後統計才會顯示在這裡。
+Runs
+= 對局
+Victories
+= 勝利
+Win rate
+= 勝率
+Time in runs
+= 對局時間
+Enemies slain
+= 擊敗的敵人
+Elites
+= 精英
+Guardians
+= 守護者
+Bosses
+= 首領
+Damage dealt
+= 造成傷害
+Damage taken
+= 承受傷害
+Gold collected
+= 收集金幣
+Caches opened
+= 開啟寶箱
+Personal bests
+= 個人最佳
+Longest run
+= 最長一局
+Fastest victory
+= 最快勝利
+Highest level
+= 最高等級
+Most kills in a run
+= 單局最多擊殺
+Most damage in a run
+= 單局最高傷害
+Most gold in a run
+= 單局最多金幣
+Most bosses in a run
+= 單局最多首領
+Milestones
+= 里程碑
+Hours played
+= 遊玩小時數
+Every milestone reached!
+= 所有里程碑皆已達成！
+Classes
+= 職業
+Races
+= 種族
+Zones
+= 區域
+Runs: {#0} · Won: {#1} · Longest: {2} · Best level: {#3}
+= 對局：{#0} · 勝利：{#1} · 最長：{2} · 最高等級：{#3}
+{#0} kills
+= 擊殺 {#0}
+Recent runs
+= 最近對局
+Victory
+= 勝利
+Defeat
+= 失敗
+Left the run
+= 中途離開
+Survived {0} · Level {#1} · Kills {#2} · Gold {#3}
+= 存活 {0} · 等級 {#1} · 擊殺 {#2} · 金幣 {#3}
+In game, type /azstats to see your stats.
+= 在遊戲中輸入 /azstats 查看你的統計。
+Saved by the game {0}.
+= 遊戲儲存於：{0}。
+Azeroth Stats updated.
+= Azeroth Stats 已更新。
+Azeroth Stats installed. It records your runs from now on.
+= Azeroth Stats 已安裝。從現在起它會記錄你的對局。
+Could not install Azeroth Stats:\n\n{0}
+= 無法安裝 Azeroth Stats：\n\n{0}

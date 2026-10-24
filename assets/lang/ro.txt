@@ -831,3 +831,119 @@ OPEN ›
 = DESCHIDE ›
 New to Azeroth Survivors? Pick a topic.
 = Nou în Azeroth Survivors? Alege un subiect.
+STATS
+= STATISTICI
+Stats
+= Statistici
+Show the Stats section (your play time and run records)
+= Afișează secțiunea Statistici (timp de joc și recorduri din runde)
+Your sessions and records are on the STATS page.
+= Sesiunile și recordurile tale sunt pe pagina STATISTICI.
+INSTALL STATS ADDON
+= INSTALEAZĂ ADDON-UL DE STATISTICI
+UPDATE STATS ADDON
+= ACTUALIZEAZĂ ADDON-UL DE STATISTICI
+Your first run is in the books!
+= Prima ta rundă e gata!
+{#0} enemies slain in {#1} runs!
+= {#0} inamici învinși în {#1} runde!
+{#0} victories, {#1} bosses defeated and {#2} gold collected.
+= {#0} victorii, {#1} boși învinși și {#2} aur strâns.
+Time played
+= Timp jucat
+Sessions
+= Sesiuni
+Longest session
+= Cea mai lungă sesiune
+Last session
+= Ultima sesiune
+Your runs
+= Rundele tale
+Track every run
+= Ține evidența fiecărei runde
+The stats file could not be read ({0}).
+= Fișierul de statistici nu a putut fi citit ({0}).
+The Azeroth Stats addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
+= Addon-ul Azeroth Stats ține evidența fiecărei runde jucate: victorii, inamici uciși, daune, aur și recordurile tale personale. Instalează-l, termină o rundă și statisticile tale apar aici.
+It is optional: without it, this page only shows your play time.
+= Este opțional: fără el, pagina arată doar timpul tău de joc.
+The Azeroth Stats addon is turned off. Turn it on in Addons to keep recording your runs.
+= Addon-ul Azeroth Stats este dezactivat. Activează-l în Addon-uri ca să continui să-ți înregistrezi rundele.
+No runs recorded yet. Finish a run with the Azeroth Stats addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
+= Nicio rundă înregistrată încă. Termină o rundă cu addon-ul Azeroth Stats activat. Jocul salvează datele addon-urilor când ieși, așa că statisticile apar aici după ce închizi jocul.
+Runs
+= Runde
+Victories
+= Victorii
+Win rate
+= Rată de victorie
+Time in runs
+= Timp în runde
+Enemies slain
+= Inamici învinși
+Elites
+= Elite
+Guardians
+= Gardieni
+Bosses
+= Boși
+Damage dealt
+= Daune provocate
+Damage taken
+= Daune primite
+Gold collected
+= Aur strâns
+Caches opened
+= Cufere deschise
+Personal bests
+= Recorduri personale
+Longest run
+= Cea mai lungă rundă
+Fastest victory
+= Cea mai rapidă victorie
+Highest level
+= Cel mai mare nivel
+Most kills in a run
+= Cei mai mulți inamici într-o rundă
+Most damage in a run
+= Cele mai multe daune într-o rundă
+Most gold in a run
+= Cel mai mult aur într-o rundă
+Most bosses in a run
+= Cei mai mulți boși într-o rundă
+Milestones
+= Repere
+Hours played
+= Ore jucate
+Every milestone reached!
+= Toate reperele atinse!
+Classes
+= Clase
+Races
+= Rase
+Zones
+= Zone
+Runs: {#0} · Won: {#1} · Longest: {2} · Best level: {#3}
+= Runde: {#0} · Câștigate: {#1} · Cea mai lungă: {2} · Cel mai bun nivel: {#3}
+{#0} kills
+= {#0} inamici uciși
+Recent runs
+= Runde recente
+Victory
+= Victorie
+Defeat
+= Înfrângere
+Left the run
+= Abandonată
+Survived {0} · Level {#1} · Kills {#2} · Gold {#3}
+= A supraviețuit {0} · Nivel {#1} · Uciși {#2} · Aur {#3}
+In game, type /azstats to see your stats.
+= În joc, scrie /azstats ca să-ți vezi statisticile.
+Saved by the game {0}.
+= Salvat de joc: {0}.
+Azeroth Stats updated.
+= Azeroth Stats actualizat.
+Azeroth Stats installed. It records your runs from now on.
+= Azeroth Stats instalat. De acum îți înregistrează rundele.
+Could not install Azeroth Stats:\n\n{0}
+= Azeroth Stats nu a putut fi instalat:\n\n{0}
