@@ -139,7 +139,7 @@ namespace AzerothLauncher
     {
         public string Title;                                 // already translated (or null: no title)
         protected const int Pad = 14, TitleH = 36;
-        protected bool Framed = true;
+        public bool Framed = true;
 
         protected ArmoryBlock()
         {
@@ -206,9 +206,9 @@ namespace AzerothLauncher
 
         protected override int ContentHeight(int w)
         {
-            var r = ChipRects(Pic + 16, 0, w);
+            var r = ChipRects(0, 0, w);                      // the chips run under the portrait, the whole width
             chipRows = r.Count == 0 ? 0 : (r[r.Count - 1].Y / 32) + 1;
-            return Math.Max(Pic, 58 + chipRows * 32 - 6);
+            return Pic + (chipRows > 0 ? 12 + chipRows * 32 - 6 : 0);
         }
 
         protected override void PaintContent(Graphics g, Rectangle r)
@@ -219,9 +219,9 @@ namespace AzerothLauncher
             else if (Theme.Portrait != null) g.DrawImage(Theme.Portrait, Rectangle.Inflate(frame, -4, -4));
             using (var p = new Pen(Accent, 2)) using (var path = Armory.Round(frame, 6)) g.DrawPath(p, path);
             int x = r.X + Pic + 16;
-            Armory.Text(g, Heading, Theme.F(18, FontStyle.Bold), Accent, new Rectangle(x, r.Y - 2, r.Right - x, 30),
+            Armory.Text(g, Heading, Theme.F(18, FontStyle.Bold), Accent, new Rectangle(x, r.Y + 8, r.Right - x, 30),
                         TextFormatFlags.Left | TextFormatFlags.SingleLine | TextFormatFlags.EndEllipsis);
-            Armory.Text(g, Line, Theme.F(10), Armory.Bright, new Rectangle(x, r.Y + 30, r.Right - x, 20),
+            Armory.Text(g, Line, Theme.F(10), Armory.Bright, new Rectangle(x, r.Y + 42, r.Right - x, 20),
                         TextFormatFlags.Left | TextFormatFlags.SingleLine | TextFormatFlags.EndEllipsis);
             if (Note.Length > 0)
             {
@@ -229,7 +229,7 @@ namespace AzerothLauncher
                 Armory.Text(g, Note, Theme.F(8.5f, FontStyle.Italic), Armory.Dim, new Rectangle(r.Right - nw, r.Y + 2, nw, 16),
                             TextFormatFlags.Right | TextFormatFlags.SingleLine | TextFormatFlags.EndEllipsis);
             }
-            var rects = ChipRects(x, r.Y + 58, r.Right);
+            var rects = ChipRects(r.X, r.Y + Pic + 12, r.Right);
             for (int i = 0; i < rects.Count; i++)
             {
                 Rectangle c = rects[i];

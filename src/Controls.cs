@@ -498,6 +498,20 @@ namespace AzerothLauncher
     public class ScrollPanel : Panel, IWheel
     {
         public Action<int> Overscroll;
+        public event Action Scrolled;                         // any change of the scroll position (wheel, bar, code)
+
+        void Moved() { if (Scrolled != null) Scrolled(); }
+
+        protected override void OnScroll(ScrollEventArgs se) { base.OnScroll(se); Moved(); }
+        protected override void OnLayout(LayoutEventArgs levent) { base.OnLayout(levent); Moved(); }
+
+        // scrolls to y (0 = top), within the content
+        public void ScrollTo(int y)
+        {
+            int max = Math.Max(0, DisplayRectangle.Height - ClientSize.Height);
+            AutoScrollPosition = new Point(0, Math.Max(0, Math.Min(max, y)));
+            Moved();
+        }
 
         public ScrollPanel()
         {
@@ -516,6 +530,7 @@ namespace AzerothLauncher
                 return;
             }
             AutoScrollPosition = new Point(0, Math.Max(0, Math.Min(max, pos + d * 40)));
+            Moved();
         }
 
         protected override void OnMouseWheel(MouseEventArgs e)
@@ -528,6 +543,98 @@ namespace AzerothLauncher
         public void ScrollToEnd()
         {
             AutoScrollPosition = new Point(0, Math.Max(0, DisplayRectangle.Height - ClientSize.Height));
+            Moved();
+        }
+    }
+
+    // A slim painted scroll bar for a ScrollPanel whose own (white Windows) bar is hidden: a dark track with a
+    // rounded thumb; drag the thumb, click the track to page, the wheel works over it too.
+    public class ThinScrollBar : Control, IWheel
+    {
+        readonly ScrollPanel target;
+        readonly Color track, thumb, thumbHot;
+        bool hover, dragging;
+        int dragOffset;
+
+        public ThinScrollBar(ScrollPanel target, Color track, Color thumb, Color thumbHot)
+        {
+            SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer |
+                     ControlStyles.ResizeRedraw, true);
+            SetStyle(ControlStyles.Selectable, false);
+            this.target = target;
+            this.track = track;
+            this.thumb = thumb;
+            this.thumbHot = thumbHot;
+            BackColor = track;
+            target.Scrolled += delegate { Invalidate(); };
+        }
+
+        int Content { get { return Math.Max(1, target.DisplayRectangle.Height); } }
+        int View { get { return Math.Max(1, target.ClientSize.Height); } }
+        int Pos { get { return -target.AutoScrollPosition.Y; } }
+
+        Rectangle Thumb()
+        {
+            if (Content <= View) return Rectangle.Empty;
+            int h = Math.Max(30, Height * View / Content);
+            int y = (int)((long)(Height - h) * Pos / Math.Max(1, Content - View));
+            return new Rectangle(1, y, Width - 2, h);
+        }
+
+        public void Wheel(int delta) { target.Wheel(delta); }
+
+        protected override void OnMouseEnter(EventArgs e) { hover = true; Invalidate(); base.OnMouseEnter(e); }
+        protected override void OnMouseLeave(EventArgs e) { hover = false; Invalidate(); base.OnMouseLeave(e); }
+
+        protected override void OnMouseDown(MouseEventArgs e)
+        {
+            base.OnMouseDown(e);
+            if (e.Button != MouseButtons.Left) return;
+            Rectangle t = Thumb();
+            if (t.IsEmpty) return;
+            if (t.Contains(e.Location)) { dragging = true; dragOffset = e.Y - t.Y; Capture = true; }
+            else target.ScrollTo(Pos + (e.Y < t.Y ? -View : View) * 9 / 10);
+        }
+
+        protected override void OnMouseMove(MouseEventArgs e)
+        {
+            base.OnMouseMove(e);
+            if (!dragging) return;
+            Rectangle t = Thumb();
+            int room = Math.Max(1, Height - t.Height);
+            target.ScrollTo((int)((long)(e.Y - dragOffset) * (Content - View) / room));
+        }
+
+        protected override void OnMouseUp(MouseEventArgs e)
+        {
+            base.OnMouseUp(e);
+            dragging = false;
+            Capture = false;
+            Invalidate();
+        }
+
+        protected override void OnMouseWheel(MouseEventArgs e)
+        {
+            target.Wheel(e.Delta);
+            var h = e as HandledMouseEventArgs;
+            if (h != null) h.Handled = true;
+        }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            Graphics g = e.Graphics;
+            g.Clear(track);
+            Rectangle t = Thumb();
+            if (t.IsEmpty) return;
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+            float r = Math.Min(t.Width, 8) / 2f;
+            using (var path = new GraphicsPath())
+            {
+                path.AddArc(t.X, t.Y, 2 * r, 2 * r, 180, 180);
+                path.AddArc(t.X, t.Bottom - 2 * r, 2 * r, 2 * r, 0, 180);
+                path.CloseFigure();
+                using (var b = new SolidBrush(hover || dragging ? thumbHot : thumb)) g.FillPath(b, path);
+            }
         }
     }
 
