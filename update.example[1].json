@@ -1,9 +1,0 @@
-{
-  "version": "0.114.0",
-  "url": "https://github.com/YOUR-NAME/azeroth-survivors-updates/releases/download/v0.114.0/AzerothSurvivors-0.114.0.zip",
-  "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
-  "size": 734003200,
-  "notes": "New zone, bug fixes. (make_update.py fills in sha256 and size for you.)",
-  "installer_version": "0.113.3",
-  "delete": ["old_file.dll"]
-}
