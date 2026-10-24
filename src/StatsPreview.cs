@@ -1,4 +1,4 @@
-// A developer tool, not used by players: "--preview-stats <saved folder> <out folder>" renders the STATS page for
+﻿// A developer tool, not used by players: "--preview-stats <saved folder> <out folder>" renders the STATS page for
 // the AZS Stats file in <saved folder> into PNG pictures (every tab, overall and for the most played class),
 // so the layout can be checked without the game. Settings are only changed in memory, nothing is saved.
 using System;
@@ -14,6 +14,7 @@ namespace AzerothLauncher
         public static void RenderStatsPreview(string savedDir, string outDir)
         {
             Directory.CreateDirectory(outDir);
+            PreviewMode = true;
             var app = new LauncherApp(true);
             app.Cfg.Set("saved_dir", Path.GetFullPath(savedDir));
             app.Cfg.Set("addons_dir", Path.Combine(Path.GetFullPath(outDir), "AddOns"));
