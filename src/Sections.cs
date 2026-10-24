@@ -379,24 +379,27 @@ namespace AzerothLauncher
             return Put(l, x, y);
         }
 
-        // A scrollable area without Windows' own (white) scroll bar: a slim painted one in `thumb` colors sits over
-        // its right edge, so the content should leave about 14 px free there.
+        // A scrollable area without Windows' own (white) scroll bar: a slim painted one in `thumb` colors runs in a
+        // gutter on its right.
         ScrollPanel MakeThinScroll(Control parent, Rectangle r, Color bg, Color border, Color thumb, Color thumbHot)
         {
             var frame = new Bordered(border, 1);
+            frame.Padding = new Padding(1, 1, 10, 1);        // a gutter on the right for the slim bar
             frame.Bounds = r;
             parent.Controls.Add(frame);
             frame.BringToFront();
+            var gutter = new Panel();
+            gutter.BackColor = bg;
+            gutter.Bounds = new Rectangle(r.Width - 10, 1, 9, r.Height - 2);
+            frame.Controls.Add(gutter);
             var sp = new ScrollPanel();
             sp.HideBars = true;
             sp.BackColor = bg;
             sp.Dock = DockStyle.Fill;
             frame.Controls.Add(sp);
-            var bar = new ThinScrollBar(sp, bg, thumb, thumbHot);
-            bar.Bounds = new Rectangle(r.Width - 2 - 8, 3, 6, r.Height - 2 - 6);
-            bar.Anchor = AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Bottom;
-            frame.Controls.Add(bar);
-            bar.BringToFront();
+            var bar = new ThinScrollBar(sp, Theme.Mix(bg, border, 0.3), thumb, thumbHot);
+            bar.Bounds = new Rectangle(1, 3, 6, r.Height - 2 - 6);
+            gutter.Controls.Add(bar);
             return sp;
         }
 
