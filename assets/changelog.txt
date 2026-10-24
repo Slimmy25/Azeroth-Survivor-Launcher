@@ -2,6 +2,23 @@ Patch notes shown in the launcher's Changelog. The launcher sorts them by versio
 Every post starts with its title on the first line. Posts are separated by a line with only === on it.
 Everything above the first === line is ignored.
 ===
+0.115.0
+-------
+Co-op fixes and friendlier parties: players who drop out leave the party cleanly, Horde and Alliance fight side by side, and everyone reads the game in their own language. Raid markers work for everyone, and the first three zones are gentler for parties.
+
+* A player who disconnects mid-run now leaves the party: their hero stays down, and the enemies already alive lose the health that player added.
+* Horde and Alliance players in one party are friends to each other: no more red names on a friend's totems or pets.
+* Raid markers work, alone and in co-op, and everyone in the party can place them.
+* Co-op scaling is 30% lower in Elwynn Forest, Duskwood and Warsong Gulch.
+* Beating the final boss in co-op opens the next zone right away, for every player, even if someone leaves before the victory screen.
+* Bringing a friend back no longer resets when you level up mid-revive.
+* A boss's ground attacks now end when it dies, instead of still landing after it falls.
+* Co-op guests now unlock legendary amulets in their codex.
+* In co-op you see everything in your own language: enemy names, item tooltips, the party damage meter, boss yells, banners and a friend's jewelry.
+* New lobbies are public by default, and the lobby list has filters: zones you've unlocked, no password, and one zone.
+* For addon authors: AZS_SetHudShown("revive", false) hides the revive bar, and AZS_GetTimers() lists your talents' cooldowns, such as Butcher's and Pact of the Annihilan's next demon.
+* Added another server
+===
 0.114.2
 -------
 Boss gear for the whole party: when a boss falls in co-op, everyone rolls its loot, not just the one who landed the killing blow. Co-op is smooth again for guests.
