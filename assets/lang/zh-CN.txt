@@ -947,3 +947,25 @@ AS Time Tracker installed. It records your runs from now on.
 = AS Time Tracker 已安装。从现在起它会记录你的对局。
 Could not install AS Time Tracker:\n\n{0}
 = 无法安装 AS Time Tracker：\n\n{0}
+ALL CLASSES
+= 所有职业
+Class pick rate
+= 职业选择率
+Choose a class at the top to see its own stats.
+= 在上方选择一个职业，查看它自己的统计。
+Pick rate over time
+= 职业选择率走势
+Share of your runs each month
+= 每月在你对局中的占比
+Picks per month
+= 每月选择次数
+Abilities
+= 技能
+Abilities are recorded for runs played with the newest AS Time Tracker.
+= 技能从使用最新版 AS Time Tracker 的对局开始记录。
+Picked in {#0} runs ({#1}%) · Win rate {#2}%
+= 在 {#0} 局中选择（{#1}%）· 胜率 {#2}%
+Best rank {#0}
+= 最高等级 {#0}
+{#0} damage
+= 伤害 {#0}

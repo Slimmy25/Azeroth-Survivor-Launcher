@@ -947,3 +947,25 @@ AS Time Tracker installed. It records your runs from now on.
 = AS Time Tracker yüklendi. Artık oyunlarını kaydediyor.
 Could not install AS Time Tracker:\n\n{0}
 = AS Time Tracker yüklenemedi:\n\n{0}
+ALL CLASSES
+= TÜM SINIFLAR
+Class pick rate
+= Sınıf seçim oranı
+Choose a class at the top to see its own stats.
+= Kendi istatistiklerini görmek için üstten bir sınıf seç.
+Pick rate over time
+= Zaman içinde sınıf seçimi
+Share of your runs each month
+= Her ay oyunlarındaki payı
+Picks per month
+= Aylık seçim
+Abilities
+= Yetenekler
+Abilities are recorded for runs played with the newest AS Time Tracker.
+= Yetenekler, en yeni AS Time Tracker ile oynanan oyunlarda kaydedilir.
+Picked in {#0} runs ({#1}%) · Win rate {#2}%
+= {#0} oyunda seçildi (%{#1}) · Kazanma oranı %{#2}
+Best rank {#0}
+= En iyi seviye {#0}
+{#0} damage
+= {#0} hasar

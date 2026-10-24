@@ -946,3 +946,25 @@ AS Time Tracker installed. It records your runs from now on.
 = AS Time Tracker installerat. Det sparar dina rundor från och med nu.
 Could not install AS Time Tracker:\n\n{0}
 = AS Time Tracker kunde inte installeras:\n\n{0}
+ALL CLASSES
+= ALLA KLASSER
+Class pick rate
+= Klassval
+Choose a class at the top to see its own stats.
+= Välj en klass högst upp för att se dess egen statistik.
+Pick rate over time
+= Klassval över tid
+Share of your runs each month
+= Andel av dina rundor varje månad
+Picks per month
+= Val per månad
+Abilities
+= Förmågor
+Abilities are recorded for runs played with the newest AS Time Tracker.
+= Förmågor sparas för rundor spelade med senaste AS Time Tracker.
+Picked in {#0} runs ({#1}%) · Win rate {#2}%
+= Vald i {#0} rundor ({#1} %) · Andel segrar {#2} %
+Best rank {#0}
+= Bästa rang {#0}
+{#0} damage
+= {#0} skada

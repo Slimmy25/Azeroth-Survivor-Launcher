@@ -946,3 +946,25 @@ AS Time Tracker installed. It records your runs from now on.
 = AS Time Tracker asennettu. Se tallentaa pelikertasi tästä lähtien.
 Could not install AS Time Tracker:\n\n{0}
 = AS Time Trackeria ei voitu asentaa:\n\n{0}
+ALL CLASSES
+= KAIKKI LUOKAT
+Class pick rate
+= Luokkavalinnat
+Choose a class at the top to see its own stats.
+= Valitse luokka ylhäältä nähdäksesi sen omat tilastot.
+Pick rate over time
+= Luokkavalinnat ajan mittaan
+Share of your runs each month
+= Osuus pelikerroistasi kuukausittain
+Picks per month
+= Valinnat kuukaudessa
+Abilities
+= Kyvyt
+Abilities are recorded for runs played with the newest AS Time Tracker.
+= Kyvyt tallennetaan pelikerroista, jotka on pelattu uusimmalla AS Time Trackerilla.
+Picked in {#0} runs ({#1}%) · Win rate {#2}%
+= Valittu {#0} pelikerralla ({#1} %) · Voittoprosentti {#2} %
+Best rank {#0}
+= Paras taso {#0}
+{#0} damage
+= {#0} vahinkoa

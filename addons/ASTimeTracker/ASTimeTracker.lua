@@ -1,19 +1,29 @@
 -- AS Time Tracker: keeps a record of every Azeroth Survivors run.
 --
 -- When a run ends (the hero fell, won or left), the game sends the run's results as the AZSEND addon
--- message (the same table AZS_GetRunSummary() returns). This addon adds each run to its totals, personal
--- bests, per class / race / zone records and a history of the last runs, all kept in ASTimeTrackerDB
--- (saved with your addon settings in benilla-config\saved). The launcher's STATS page reads that file.
+-- message (the same table AZS_GetRunSummary() returns). This addon adds each run to:
+--   * the global totals and personal bests
+--   * the same totals and bests for each class on its own, with the abilities that class took
+--   * the abilities taken in each run (the spells and their ranks, from AZS_SPELLS) and the damage each dealt
+--     (from the damage meter, AZS_METER), overall and per class
+--   * how often each class was picked, month by month
+--   * per race and per zone records, and a history of the last runs
+-- all kept in ASTimeTrackerDB (saved with your addon settings in benilla-config\saved). The launcher's STATS
+-- page reads that file.
 --
 -- In game: /azstats (or /astime) shows your totals, /azstats last your last run, /azstats best your records,
--- /azstats quiet turns the end-of-run chat line off or on, /azstats reset yes clears everything.
+-- /azstats classes your classes, /azstats quiet turns the end-of-run chat line off or on, /azstats reset yes
+-- clears everything.
 --
 -- Lua 5.0 (as the 1.12 client): no _G, no # operator, table.getn, event handlers read event / arg1 / arg2.
 
-ASTIMETRACKER_VERSION = 1;
-ASTIMETRACKER_HISTORY = 100;                -- runs kept in the history (the totals keep everything)
+ASTIMETRACKER_VERSION = 2;
+ASTIMETRACKER_HISTORY = 100;               -- runs kept in the history (the totals keep everything)
+ASTIMETRACKER_RUN_ABILITIES = 12;          -- abilities kept per run in the history
 
+-- the numbers added up for every run (globally and per class); "time" comes from the run's t
 local SUM_FIELDS = { "time", "kills", "elites", "guardians", "bosses", "dmg", "taken", "gold", "chests", "magnets", "levels" };
+local COUNT_FIELDS = { "runs", "victory", "defeat", "left", "other", "wins", "bestTime", "bestLvl" };
 -- personal bests: the record's name and the run field it comes from
 local BEST_FIELDS = { { "time", "t" }, { "lvl", "lvl" }, { "kills", "kills" }, { "dmg", "dmg" }, { "gold", "gold" },
                       { "bosses", "bosses" }, { "elites", "elites" }, { "guardians", "guardians" }, { "endl", "endl" } };
@@ -47,6 +57,13 @@ local function Str(v)
 		return "";
 	end
 	return tostring(v);
+end
+
+-- "shadow_bolt" -> "Shadow Bolt"
+local function Pretty(key)
+	local s = string.gsub(Str(key), "_", " ");
+	s = string.gsub(s, "(%a)([%w']*)", function(a, b) return string.upper(a) .. b; end);
+	return s;
 end
 
 -- 754 -> "12:34", 4000 -> "1:06:40"
@@ -85,34 +102,178 @@ local function Kind(result)
 	return "other";
 end
 
-local function Fresh()
-	local db = { version = ASTIMETRACKER_VERSION, quiet = false, lastSig = "", first = "", last = "",
-	             totals = { runs = 0, victory = 0, defeat = 0, left = 0, other = 0 },
-	             best = {}, classes = {}, races = {}, zones = {}, results = {}, history = {} };
-	for i = 1, table.getn(SUM_FIELDS) do
-		db.totals[SUM_FIELDS[i]] = 0;
+-- a block of totals: used for everything together and for each class
+local function FillBlock(b)
+	for i = 1, table.getn(COUNT_FIELDS) do
+		if ( type(b[COUNT_FIELDS[i]]) ~= "number" ) then b[COUNT_FIELDS[i]] = 0; end
 	end
-	return db;
+	for i = 1, table.getn(SUM_FIELDS) do
+		if ( type(b[SUM_FIELDS[i]]) ~= "number" ) then b[SUM_FIELDS[i]] = 0; end
+	end
+	return b;
 end
 
--- fills in anything an older or damaged ASTimeTrackerDB is missing
+local function Fresh()
+	return { version = ASTIMETRACKER_VERSION, quiet = false, lastSig = "", first = "", last = "",
+	         totals = FillBlock({}), best = {}, classes = {}, races = {}, zones = {}, abilities = {}, months = {},
+	         results = {}, history = {} };
+end
+
+local function Month(when)
+	if ( string.len(Str(when)) >= 7 ) then
+		return string.sub(when, 1, 7);
+	end
+	return "unknown";
+end
+
+-- a class / race / zone entry, made when first seen
+local function Group(list, key, name)
+	key = Str(key);
+	if ( key == "" ) then
+		key = "unknown";
+	end
+	local g = list[key];
+	if ( type(g) ~= "table" ) then
+		g = { name = "" };
+		list[key] = g;
+	end
+	FillBlock(g);
+	if ( type(g.best) ~= "table" ) then g.best = {}; end
+	if ( type(g.abilities) ~= "table" ) then g.abilities = {}; end
+	if ( Str(name) ~= "" ) then
+		g.name = Str(name);
+	end
+	return g;
+end
+
+-- adds one run to a block of totals
+local function Accumulate(b, run)
+	FillBlock(b);
+	b.runs = b.runs + 1;
+	b[run.kind] = (b[run.kind] or 0) + 1;
+	if ( run.kind == "victory" ) then
+		b.wins = b.wins + 1;
+	end
+	b.time = b.time + run.t;
+	b.levels = b.levels + run.lvl;
+	for i = 1, table.getn(SUM_FIELDS) do
+		local f = SUM_FIELDS[i];
+		if ( f ~= "time" and f ~= "levels" ) then
+			b[f] = b[f] + Num(run[f]);
+		end
+	end
+	if ( run.t > b.bestTime ) then b.bestTime = run.t; end
+	if ( run.lvl > b.bestLvl ) then b.bestLvl = run.lvl; end
+end
+
+-- updates a table of personal bests; returns the names of records that were beaten
+local function Bests(best, run)
+	local beaten = {};
+	for i = 1, table.getn(BEST_FIELDS) do
+		local name, field = BEST_FIELDS[i][1], BEST_FIELDS[i][2];
+		local v = Num(run[field]);
+		local old = best[name];
+		if ( v > 0 and (type(old) ~= "table" or v > Num(old.v)) ) then
+			best[name] = { v = v, hero = run.hero, cname = run.cname, rname = run.rname, zname = run.zname, date = run.date };
+			if ( type(old) == "table" and Num(old.v) > 0 ) then
+				table.insert(beaten, name);
+			end
+		end
+	end
+	if ( run.kind == "victory" and run.t > 0 ) then
+		local fast = best.fastestWin;
+		if ( type(fast) ~= "table" or run.t < Num(fast.v) ) then
+			best.fastestWin = { v = run.t, hero = run.hero, cname = run.cname, rname = run.rname, zname = run.zname, date = run.date };
+		end
+	end
+	return beaten;
+end
+
+-- adds a run's abilities to a list of abilities (global or one class's)
+local function AddAbilities(list, run)
+	if ( type(run.abilities) ~= "table" ) then
+		return;
+	end
+	for i = 1, table.getn(run.abilities) do
+		local a = run.abilities[i];
+		local e = list[a.key];
+		if ( type(e) ~= "table" ) then
+			e = { name = a.name, picks = 0, wins = 0, dmg = 0, bestRank = 0, ranks = 0 };
+			list[a.key] = e;
+		end
+		e.name = a.name;
+		e.picks = Num(e.picks) + 1;
+		if ( run.kind == "victory" ) then
+			e.wins = Num(e.wins) + 1;
+		end
+		e.dmg = Num(e.dmg) + Num(a.dmg);
+		e.ranks = Num(e.ranks) + Num(a.rank);
+		if ( Num(a.rank) > Num(e.bestRank) ) then
+			e.bestRank = Num(a.rank);
+		end
+	end
+end
+
+local function AddMonth(db, run)
+	local m = Month(run.date);
+	local e = db.months[m];
+	if ( type(e) ~= "table" ) then
+		e = { runs = 0, classes = {} };
+		db.months[m] = e;
+	end
+	e.runs = Num(e.runs) + 1;
+	local c = run.class;
+	if ( c == "" ) then
+		c = "unknown";
+	end
+	e.classes[c] = Num(e.classes[c]) + 1;
+end
+
+-- fills in anything an older or damaged ASTimeTrackerDB is missing; version 1 kept less per class and
+-- nothing per month: both are rebuilt from the history (complete while it holds every run)
 local function Check()
 	if ( type(ASTimeTrackerDB) ~= "table" ) then
 		ASTimeTrackerDB = Fresh();
 		return;
 	end
+	local db = ASTimeTrackerDB;
 	local fresh = Fresh();
 	for k, v in pairs(fresh) do
-		if ( type(ASTimeTrackerDB[k]) ~= type(v) ) then
-			ASTimeTrackerDB[k] = v;
+		if ( type(db[k]) ~= type(v) ) then
+			db[k] = v;
 		end
 	end
-	for k, v in pairs(fresh.totals) do
-		if ( type(ASTimeTrackerDB.totals[k]) ~= "number" ) then
-			ASTimeTrackerDB.totals[k] = v;
+	FillBlock(db.totals);
+	if ( db.totals.wins == 0 and db.totals.victory > 0 ) then
+		db.totals.wins = db.totals.victory;
+	end
+	if ( Num(db.version) < 2 ) then
+		local history = db.history;
+		if ( table.getn(history) >= db.totals.runs ) then
+			local names = {};
+			for k, g in pairs(db.classes) do
+				if ( type(g) == "table" ) then names[k] = g.name; end
+			end
+			db.classes = {};
+			for i = 1, table.getn(history) do
+				local run = history[i];
+				run.kind = run.kind or Kind(run.result);
+				run.t = Num(run.t);
+				run.lvl = Num(run.lvl);
+				local g = Group(db.classes, run.class, run.cname ~= "" and run.cname or names[run.class]);
+				Accumulate(g, run);
+				Bests(g.best, run);
+			end
+		end
+		db.months = {};
+		for i = 1, table.getn(history) do
+			AddMonth(db, history[i]);
 		end
 	end
-	ASTimeTrackerDB.version = ASTIMETRACKER_VERSION;
+	for k, g in pairs(db.classes) do
+		if ( type(g) == "table" ) then Group(db.classes, k, nil); end
+	end
+	db.version = ASTIMETRACKER_VERSION;
 end
 
 -- "result=defeat;t=754;lvl=23;..." -> table (numbers as numbers)
@@ -137,22 +298,77 @@ local function Signature(s)
 	       Str(s.taken) .. "|" .. Str(s.gold) .. "|" .. Str(s.zone) .. "|" .. Str(s.class) .. "|" .. Str(s.hero);
 end
 
-local function Group(list, key, name)
-	key = Str(key);
-	if ( key == "" ) then
-		key = "unknown";
+-- ---------------------------------------------------------------- the build of the run going on
+-- The spells and the damage meter are copied every few seconds during a run, so the build is known at the
+-- end even if the game has already cleared them when the run's summary arrives.
+local lastSpells, lastMeter, lastRunTime = nil, nil, 0;
+
+local function CopyList(list, fields)
+	if ( type(list) ~= "table" or table.getn(list) == 0 ) then
+		return nil;
 	end
-	local g = list[key];
-	if ( type(g) ~= "table" ) then
-		g = { name = "", runs = 0, wins = 0, time = 0, kills = 0, bestTime = 0, bestLvl = 0 };
-		list[key] = g;
+	local out = {};
+	for i = 1, table.getn(list) do
+		local e = list[i];
+		if ( type(e) == "table" ) then
+			local c = {};
+			for j = 1, table.getn(fields) do
+				c[fields[j]] = e[fields[j]];
+			end
+			table.insert(out, c);
+		end
 	end
-	if ( Str(name) ~= "" ) then
-		g.name = Str(name);
-	end
-	return g;
+	return out;
 end
 
+local function Snapshot()
+	local now = 0;
+	if ( AZS_GetRunTime ) then
+		now = Num(AZS_GetRunTime());
+	end
+	if ( now + 1 < lastRunTime ) then           -- a new run started
+		lastSpells, lastMeter = nil, nil;
+	end
+	lastRunTime = now;
+	local s = CopyList(AZS_SPELLS, { "key", "spell", "rank" });
+	if ( s ) then lastSpells = s; end
+	local m = CopyList(AZS_METER, { "name", "dmg" });
+	if ( m ) then lastMeter = m; end
+end
+
+-- the run's abilities: { key, name, rank, dmg }, the most damage first
+local function Abilities()
+	Snapshot();
+	local spells = lastSpells or {};
+	local meter = lastMeter or {};
+	local out = {};
+	for i = 1, table.getn(spells) do
+		local e = spells[i];
+		local key = Str(e.key);
+		if ( key == "" ) then key = Str(e.spell); end
+		if ( key ~= "" ) then
+			local name = Str(e.spell);
+			if ( name == "" or tonumber(name) ) then
+				name = Pretty(key);
+			end
+			local dmg = 0;
+			for j = 1, table.getn(meter) do
+				local mn = string.lower(Str(meter[j].name));
+				if ( mn == string.lower(name) or mn == string.lower(Pretty(key)) ) then
+					dmg = dmg + Num(meter[j].dmg);
+				end
+			end
+			table.insert(out, { key = key, name = name, rank = Num(e.rank), dmg = dmg });
+		end
+	end
+	table.sort(out, function(a, b) return a.dmg > b.dmg; end);
+	while ( table.getn(out) > ASTIMETRACKER_RUN_ABILITIES ) do
+		table.remove(out);
+	end
+	return out;
+end
+
+-- ---------------------------------------------------------------- recording a run
 function ASTimeTracker_Record(s)
 	if ( type(s) ~= "table" or not s.result ) then
 		return;
@@ -166,87 +382,56 @@ function ASTimeTracker_Record(s)
 	db.lastSig = sig;
 
 	local when = Now();
-	local kind = Kind(s.result);
-	local run = { result = Str(s.result), kind = kind, date = when, t = Num(s.t), lvl = Num(s.lvl), kills = Num(s.kills),
-	              elites = Num(s.elites), guardians = Num(s.guardians), bosses = Num(s.bosses), dmg = Num(s.dmg),
-	              taken = Num(s.taken), gold = Num(s.gold), chests = Num(s.chests), magnets = Num(s.magnets),
-	              endl = Num(s.endl), hero = Str(s.hero), class = Str(s.class), cname = Str(s.cname), race = Str(s.race),
-	              rname = Str(s.rname), zone = Str(s.zone), zname = Str(s.zname) };
-	if ( run.cname == "" ) then run.cname = run.class; end
-	if ( run.rname == "" ) then run.rname = run.race; end
-	if ( run.zname == "" ) then run.zname = run.zone; end
+	local run = { result = Str(s.result), kind = Kind(s.result), date = when, t = Num(s.t), lvl = Num(s.lvl),
+	              kills = Num(s.kills), elites = Num(s.elites), guardians = Num(s.guardians), bosses = Num(s.bosses),
+	              dmg = Num(s.dmg), taken = Num(s.taken), gold = Num(s.gold), chests = Num(s.chests),
+	              magnets = Num(s.magnets), endl = Num(s.endl), hero = Str(s.hero), class = Str(s.class),
+	              cname = Str(s.cname), race = Str(s.race), rname = Str(s.rname), zone = Str(s.zone), zname = Str(s.zname) };
+	if ( run.cname == "" ) then run.cname = Pretty(run.class); end
+	if ( run.rname == "" ) then run.rname = Pretty(run.race); end
+	if ( run.zname == "" ) then run.zname = Pretty(run.zone); end
+	run.abilities = Abilities();
 
-	-- totals
-	local tot = db.totals;
-	tot.runs = tot.runs + 1;
-	tot[kind] = (tot[kind] or 0) + 1;
-	tot.time = tot.time + run.t;
-	tot.levels = tot.levels + run.lvl;
-	for i = 1, table.getn(SUM_FIELDS) do
-		local f = SUM_FIELDS[i];
-		if ( f ~= "time" and f ~= "levels" ) then
-			tot[f] = tot[f] + run[f];
-		end
-	end
+	-- everything together
+	Accumulate(db.totals, run);
 	local rk = string.lower(run.result);
-	db.results[rk] = (db.results[rk] or 0) + 1;
+	db.results[rk] = Num(db.results[rk]) + 1;
 	if ( db.first == "" ) then
 		db.first = when;
 	end
 	db.last = when;
+	local records = Bests(db.best, run);
+	AddAbilities(db.abilities, run);
+	AddMonth(db, run);
 
-	-- personal bests
-	local records = {};
-	for i = 1, table.getn(BEST_FIELDS) do
-		local name, field = BEST_FIELDS[i][1], BEST_FIELDS[i][2];
-		local v = run[field];
-		local old = db.best[name];
-		if ( v > 0 and (type(old) ~= "table" or v > Num(old.v)) ) then
-			db.best[name] = { v = v, hero = run.hero, cname = run.cname, rname = run.rname, zname = run.zname, date = when };
-			if ( type(old) == "table" and Num(old.v) > 0 ) then
-				table.insert(records, name);
-			end
-		end
-	end
-	if ( kind == "victory" ) then
-		local fast = db.best.fastestWin;
-		if ( run.t > 0 and (type(fast) ~= "table" or run.t < Num(fast.v)) ) then
-			db.best.fastestWin = { v = run.t, hero = run.hero, cname = run.cname, rname = run.rname, zname = run.zname, date = when };
-		end
-	end
-
-	-- per class, race and zone
-	local win = 0;
-	if ( kind == "victory" ) then
-		win = 1;
-	end
-	local groups = { Group(db.classes, run.class, run.cname), Group(db.races, run.race, run.rname), Group(db.zones, run.zone, run.zname) };
-	for i = 1, 3 do
-		local g = groups[i];
-		g.runs = g.runs + 1;
-		g.wins = g.wins + win;
-		g.time = g.time + run.t;
-		g.kills = g.kills + run.kills;
-		if ( run.t > g.bestTime ) then g.bestTime = run.t; end
-		if ( run.lvl > g.bestLvl ) then g.bestLvl = run.lvl; end
-	end
+	-- the class on its own, and the race and zone
+	local class = Group(db.classes, run.class, run.cname);
+	Accumulate(class, run);
+	local classRecords = Bests(class.best, run);
+	AddAbilities(class.abilities, run);
+	Accumulate(Group(db.races, run.race, run.rname), run);
+	Accumulate(Group(db.zones, run.zone, run.zname), run);
 
 	-- history, the newest last
 	table.insert(db.history, run);
 	while ( table.getn(db.history) > ASTIMETRACKER_HISTORY ) do
 		table.remove(db.history, 1);
 	end
+	lastSpells, lastMeter = nil, nil;
 
 	if ( not db.quiet ) then
-		local line = "run " .. Big(tot.runs) .. " recorded: " .. run.result .. " after " .. Clock(run.t) .. ", level " ..
+		local line = "run " .. Big(db.totals.runs) .. " recorded: " .. run.result .. " after " .. Clock(run.t) .. ", level " ..
 		             run.lvl .. ", " .. Big(run.kills) .. " kills.";
 		if ( table.getn(records) > 0 ) then
 			line = line .. " |cff40ff40New record: " .. table.concat(records, ", ") .. "!|r";
+		elseif ( table.getn(classRecords) > 0 ) then
+			line = line .. " |cff40ff40New " .. run.cname .. " record: " .. table.concat(classRecords, ", ") .. "!|r";
 		end
 		Print(line);
 	end
 end
 
+-- ---------------------------------------------------------------- chat commands
 local function ShowTotals()
 	Check();
 	local t = ASTimeTrackerDB.totals;
@@ -280,6 +465,25 @@ local function ShowBest()
 	end
 end
 
+local function ShowClasses()
+	Check();
+	local db = ASTimeTrackerDB;
+	local list = {};
+	for k, g in pairs(db.classes) do
+		if ( type(g) == "table" and g.runs > 0 ) then table.insert(list, g); end
+	end
+	if ( table.getn(list) == 0 ) then
+		Print("no runs recorded yet.");
+		return;
+	end
+	table.sort(list, function(a, b) return a.runs > b.runs; end);
+	for i = 1, table.getn(list) do
+		local g = list[i];
+		Print(g.name .. ": " .. g.runs .. " runs (" .. math.floor(100 * g.runs / db.totals.runs + 0.5) .. "%), " ..
+		      g.victory .. " won, " .. Big(g.kills) .. " kills, longest " .. Clock(g.bestTime) .. ".");
+	end
+end
+
 local function ShowLast()
 	Check();
 	local h = ASTimeTrackerDB.history;
@@ -290,6 +494,16 @@ local function ShowLast()
 	end
 	Print("last run (" .. r.date .. "): " .. r.result .. " as " .. r.cname .. " in " .. r.zname .. " after " .. Clock(r.t) ..
 	      ", level " .. r.lvl .. ", " .. Big(r.kills) .. " kills, " .. Big(r.dmg) .. " damage, " .. Big(r.gold) .. " gold.");
+	if ( type(r.abilities) == "table" and table.getn(r.abilities) > 0 ) then
+		local parts = {};
+		for i = 1, table.getn(r.abilities) do
+			local a = r.abilities[i];
+			local p = a.name;
+			if ( Num(a.rank) > 0 ) then p = p .. " " .. a.rank; end
+			table.insert(parts, p);
+		end
+		Print("abilities: " .. table.concat(parts, ", ") .. ".");
+	end
 end
 
 SLASH_ASTIMETRACKER1 = "/azstats";
@@ -304,6 +518,8 @@ SlashCmdList["ASTIMETRACKER"] = function(msg)
 		ShowLast();
 	elseif ( cmd == "best" ) then
 		ShowBest();
+	elseif ( cmd == "classes" or cmd == "class" ) then
+		ShowClasses();
 	elseif ( cmd == "quiet" ) then
 		Check();
 		ASTimeTrackerDB.quiet = not ASTimeTrackerDB.quiet;
@@ -323,7 +539,7 @@ SlashCmdList["ASTIMETRACKER"] = function(msg)
 	elseif ( cmd == "reset" ) then
 		Print("type /azstats reset yes to clear every stat (this cannot be undone).");
 	else
-		Print("/azstats, /azstats last, /azstats best, /azstats quiet, /azstats reset");
+		Print("/azstats, /azstats last, /azstats best, /azstats classes, /azstats quiet, /azstats reset");
 	end
 end
 
@@ -346,7 +562,13 @@ frame:SetScript("OnUpdate", function()
 		return;
 	end
 	waited = 0;
-	if ( AZS_GetRunSummary and ASTimeTrackerDB ) then
+	if ( not ASTimeTrackerDB ) then
+		return;
+	end
+	-- the last summary stays readable after its run (until the next one ends), so the build is copied every
+	-- time; recording an already counted summary again does nothing
+	Snapshot();
+	if ( AZS_GetRunSummary ) then
 		local s = AZS_GetRunSummary();
 		if ( s ) then
 			ASTimeTracker_Record(s);

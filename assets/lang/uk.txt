@@ -947,3 +947,25 @@ AS Time Tracker installed. It records your runs from now on.
 = AS Time Tracker встановлено. Відтепер він записує ваші забіги.
 Could not install AS Time Tracker:\n\n{0}
 = Не вдалося встановити AS Time Tracker:\n\n{0}
+ALL CLASSES
+= УСІ КЛАСИ
+Class pick rate
+= Вибір класу
+Choose a class at the top to see its own stats.
+= Виберіть клас угорі, щоб побачити його статистику.
+Pick rate over time
+= Вибір класу з часом
+Share of your runs each month
+= Частка ваших забігів щомісяця
+Picks per month
+= Виборів за місяць
+Abilities
+= Здібності
+Abilities are recorded for runs played with the newest AS Time Tracker.
+= Здібності записуються в забігах з найновішою версією AS Time Tracker.
+Picked in {#0} runs ({#1}%) · Win rate {#2}%
+= Вибрано в {#0} забігах ({#1}%) · Перемог {#2}%
+Best rank {#0}
+= Найкращий ранг {#0}
+{#0} damage
+= Шкода: {#0}

@@ -947,3 +947,25 @@ AS Time Tracker installed. It records your runs from now on.
 = AS Time Tracker nainstalován. Od teď zaznamenává tvé běhy.
 Could not install AS Time Tracker:\n\n{0}
 = AS Time Tracker nelze nainstalovat:\n\n{0}
+ALL CLASSES
+= VŠECHNA POVOLÁNÍ
+Class pick rate
+= Volba povolání
+Choose a class at the top to see its own stats.
+= Nahoře vyber povolání a uvidíš jeho vlastní statistiky.
+Pick rate over time
+= Volba povolání v čase
+Share of your runs each month
+= Podíl tvých běhů v každém měsíci
+Picks per month
+= Volby za měsíc
+Abilities
+= Schopnosti
+Abilities are recorded for runs played with the newest AS Time Tracker.
+= Schopnosti se zaznamenávají v bězích s nejnovějším AS Time Tracker.
+Picked in {#0} runs ({#1}%) · Win rate {#2}%
+= Zvoleno v {#0} bězích ({#1} %) · Výhry {#2} %
+Best rank {#0}
+= Nejlepší úroveň {#0}
+{#0} damage
+= Poškození {#0}

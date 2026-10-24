@@ -946,3 +946,25 @@ AS Time Tracker installed. It records your runs from now on.
 = AS Time Tracker installeret. Den registrerer dine runs fra nu af.
 Could not install AS Time Tracker:\n\n{0}
 = AS Time Tracker kunne ikke installeres:\n\n{0}
+ALL CLASSES
+= ALLE KLASSER
+Class pick rate
+= Klassevalg
+Choose a class at the top to see its own stats.
+= Vælg en klasse øverst for at se dens egen statistik.
+Pick rate over time
+= Klassevalg over tid
+Share of your runs each month
+= Andel af dine runs hver måned
+Picks per month
+= Valg pr. måned
+Abilities
+= Evner
+Abilities are recorded for runs played with the newest AS Time Tracker.
+= Evner registreres for runs spillet med den nyeste AS Time Tracker.
+Picked in {#0} runs ({#1}%) · Win rate {#2}%
+= Valgt i {#0} runs ({#1} %) · Sejrsprocent {#2} %
+Best rank {#0}
+= Bedste rang {#0}
+{#0} damage
+= {#0} skade

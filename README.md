@@ -9,7 +9,7 @@ The launcher for **Azeroth Survivors**, a game made by Aethus, styled after the 
 - **Changelog**: every patch note, newest first
 - **Guide**: a new player guide (classes, controls, zones, tips)
 - **Stats** (optional, can be hidden in Options): your play time, and with the built-in **AS Time Tracker** addon
-  every run's result, totals, personal bests, milestones and per class / race / zone records
+  every run's result, the abilities taken, class pick rates over time, and the same totals and records for every class on its own
 - **UPDATE**: checks this repository's latest release when the launcher starts and offers the new launcher exe
   (never forced); it downloads it, checks its SHA-256 and restarts itself. Game updates can be switched on too
 - Runs in the system tray; only one copy runs at a time

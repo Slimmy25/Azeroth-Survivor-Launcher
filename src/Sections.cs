@@ -883,7 +883,7 @@ namespace AzerothLauncher
             return false;
         }
 
-        void DownloadAddon(string name, string url)
+        void DownloadAddon(string name, string url, Action after = null)
         {
             if (AddonsLocked()) return;
             if (addonDlBusy)
@@ -910,7 +910,8 @@ namespace AzerothLauncher
                         foreach (string n in names) rec.Add(n);
                         AddonInstalls()[name] = rec;
                         Cfg.Save();
-                        if (current == "Addons") BuildPanel("Addons");
+                        if (after != null) try { after(); } catch (Exception) { }
+                        if (current == "Addons" || current == "Stats") BuildPanel(current);
                     }
                     else Msg.Show(side.Visible ? (IWin32Window)side : this, "Could not install " + name + ":\n\n" + err, "Addons",
                                          MessageBoxButtons.OK, MessageBoxIcon.Error);

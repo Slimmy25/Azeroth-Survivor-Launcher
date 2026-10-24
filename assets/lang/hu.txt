@@ -947,3 +947,25 @@ AS Time Tracker installed. It records your runs from now on.
 = AS Time Tracker telepítve. Mostantól rögzíti a meneteidet.
 Could not install AS Time Tracker:\n\n{0}
 = Az AS Time Tracker nem telepíthető:\n\n{0}
+ALL CLASSES
+= MINDEN KASZT
+Class pick rate
+= Kasztválasztás
+Choose a class at the top to see its own stats.
+= Válassz fent egy kasztot, hogy lásd a saját statisztikáját.
+Pick rate over time
+= Kasztválasztás az idő során
+Share of your runs each month
+= A meneteid aránya havonta
+Picks per month
+= Választások havonta
+Abilities
+= Képességek
+Abilities are recorded for runs played with the newest AS Time Tracker.
+= A képességeket a legújabb AS Time Trackerrel játszott menetekben rögzíti.
+Picked in {#0} runs ({#1}%) · Win rate {#2}%
+= {#0} menetben választva ({#1}%) · Győzelmi arány {#2}%
+Best rank {#0}
+= Legjobb rang {#0}
+{#0} damage
+= {#0} sebzés

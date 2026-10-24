@@ -947,3 +947,25 @@ AS Time Tracker installed. It records your runs from now on.
 = AS Time Tracker instalat. De acum îți înregistrează rundele.
 Could not install AS Time Tracker:\n\n{0}
 = AS Time Tracker nu a putut fi instalat:\n\n{0}
+ALL CLASSES
+= TOATE CLASELE
+Class pick rate
+= Alegerea clasei
+Choose a class at the top to see its own stats.
+= Alege o clasă de sus ca să-i vezi statisticile.
+Pick rate over time
+= Alegerea clasei în timp
+Share of your runs each month
+= Procentul din rundele tale în fiecare lună
+Picks per month
+= Alegeri pe lună
+Abilities
+= Abilități
+Abilities are recorded for runs played with the newest AS Time Tracker.
+= Abilitățile sunt înregistrate în rundele jucate cu cel mai nou AS Time Tracker.
+Picked in {#0} runs ({#1}%) · Win rate {#2}%
+= Aleasă în {#0} runde ({#1}%) · Rată de victorie {#2}%
+Best rank {#0}
+= Cel mai bun rang {#0}
+{#0} damage
+= {#0} daune

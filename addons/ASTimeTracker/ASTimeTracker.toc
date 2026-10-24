@@ -1,7 +1,7 @@
 ## Interface: 11200
 ## Title: AS Time Tracker
-## Notes: Keeps your Azeroth Survivors records: every run's result, kills, damage, gold and personal bests. The launcher's STATS page shows them. Type /azstats in game.
+## Notes: Keeps your Azeroth Survivors records: every run's result, kills, damage, gold, the abilities you took and personal bests, overall and for each class. The launcher's STATS page shows them. Type /azstats in game.
 ## Author: Slimjim
-## Version: 1.1
+## Version: 1.2
 ## SavedVariables: ASTimeTrackerDB
 ASTimeTracker.lua
