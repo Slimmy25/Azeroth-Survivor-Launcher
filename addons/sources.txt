@@ -13,4 +13,4 @@ Death-Recap-by-Fotze.zip        | https://files.catbox.moe/329wa0.zip
 Chest-GPS-by-Fotze.zip          | https://files.catbox.moe/riqfmy.zip
 SurvivorsDragonUi-by-Mxgwyn.zip | https://github.com/migwynkriid13/SurvivorsDragonUi/releases/latest/download/SurvivorsDragonUi.zip
 Keijin-UI-by-Keijin.zip         | https://github.com/KeijinDE/KeijinUI_modern-as-ui/releases/download/v3.7.1/KeijinUI-3.7.1.zip
-AS-Time-Tracker-by-Slimjim.zip  | local:ASTimeTracker
+AZS-Stats-by-Slimjim.zip        | local:AZSStats

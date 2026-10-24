@@ -863,14 +863,14 @@ Track every run
 = Zaznamenávej každý běh
 The stats file could not be read ({0}).
 = Soubor se statistikami nelze přečíst ({0}).
-The AS Time Tracker addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
-= Doplněk AS Time Tracker zaznamenává každý tvůj běh: vítězství, zabití, poškození, zlato a osobní rekordy. Nainstaluj ho, dokonči běh a statistiky se objeví tady.
+The AZS Stats addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
+= Doplněk AZS Stats zaznamenává každý tvůj běh: vítězství, zabití, poškození, zlato a osobní rekordy. Nainstaluj ho, dokonči běh a statistiky se objeví tady.
 It is optional: without it, this page only shows your play time.
 = Je volitelný: bez něj tato stránka ukazuje jen odehraný čas.
-The AS Time Tracker addon is turned off. Turn it on in Addons to keep recording your runs.
-= Doplněk AS Time Tracker je vypnutý. Zapni ho v Doplňcích, aby se tvé běhy dál zaznamenávaly.
-No runs recorded yet. Finish a run with the AS Time Tracker addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
-= Zatím žádné zaznamenané běhy. Dokonči běh se zapnutým doplňkem AS Time Tracker. Hra ukládá data doplňků při odchodu, takže se statistiky objeví tady po zavření hry.
+The AZS Stats addon is turned off. Turn it on in Addons to keep recording your runs.
+= Doplněk AZS Stats je vypnutý. Zapni ho v Doplňcích, aby se tvé běhy dál zaznamenávaly.
+No runs recorded yet. Finish a run with the AZS Stats addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
+= Zatím žádné zaznamenané běhy. Dokonči běh se zapnutým doplňkem AZS Stats. Hra ukládá data doplňků při odchodu, takže se statistiky objeví tady po zavření hry.
 Runs
 = Běhy
 Victories
@@ -941,12 +941,12 @@ In game, type /azstats to see your stats.
 = Ve hře napiš /azstats a uvidíš své statistiky.
 Saved by the game {0}.
 = Uloženo hrou: {0}.
-AS Time Tracker updated.
-= AS Time Tracker aktualizován.
-AS Time Tracker installed. It records your runs from now on.
-= AS Time Tracker nainstalován. Od teď zaznamenává tvé běhy.
-Could not install AS Time Tracker:\n\n{0}
-= AS Time Tracker nelze nainstalovat:\n\n{0}
+AZS Stats updated.
+= AZS Stats aktualizován.
+AZS Stats installed. It records your runs from now on.
+= AZS Stats nainstalován. Od teď zaznamenává tvé běhy.
+Could not install AZS Stats:\n\n{0}
+= AZS Stats nelze nainstalovat:\n\n{0}
 ALL CLASSES
 = VŠECHNA POVOLÁNÍ
 Class pick rate
@@ -961,8 +961,8 @@ Picks per month
 = Volby za měsíc
 Abilities
 = Schopnosti
-Abilities are recorded for runs played with the newest AS Time Tracker.
-= Schopnosti se zaznamenávají v bězích s nejnovějším AS Time Tracker.
+Abilities are recorded for runs played with the newest AZS Stats.
+= Schopnosti se zaznamenávají v bězích s nejnovějším AZS Stats.
 Picked in {#0} runs ({#1}%) · Win rate {#2}%
 = Zvoleno v {#0} bězích ({#1} %) · Výhry {#2} %
 Best rank {#0}
@@ -995,3 +995,75 @@ Level {#0}
 = Úroveň {#0}
 Runs: {#0} · Won: {#1}
 = Běhy: {#0} · Výhry: {#1}
+Nemesis
+= Nemesis
+Co-op
+= Kooperace
+Your nemesis
+= Tvůj nemesis
+Times it killed you
+= Kolikrát tě zabil
+Of your deaths
+= Z tvých smrtí
+Deaths
+= Smrti
+Last time
+= Naposledy
+Who kills you
+= Kdo tě zabíjí
+No deaths recorded yet.
+= Zatím žádné zaznamenané smrti.
+Killed you {#0} times ({#1}%)
+= Zabil tě {#0}× ({#1} %)
+Death log
+= Deník smrtí
+Slain by {0}
+= Zabit: {0}
+Survived {0} · Level {#1}
+= Přežito {0} · Úroveň {#1}
+Last hits: {0}
+= Poslední zásahy: {0}
+Most damage from: {0}
+= Nejvíc poškození od: {0}
+Runs with friends
+= Běhy s přáteli
+Co-op win rate
+= Výhry v kooperaci
+Solo win rate
+= Výhry sólo
+Time together
+= Čas spolu
+Friends
+= Přátelé
+Victories together
+= Výhry spolu
+Enemies slain together
+= Spolu poražení nepřátelé
+Bosses together
+= Bossové spolu
+Who you play with
+= S kým hraješ
+No co-op runs recorded yet. Play a run with friends and they show up here.
+= Zatím žádné kooperativní běhy. Zahraj si s přáteli a objeví se tady.
+First win together {0}
+= První společná výhra {0}
+Fastest win {0}
+= Nejrychlejší výhra {0}
+Most bosses {#0}
+= Nejvíc bossů {#0}
+Played since {0}
+= Spolu od {0}
+Accomplishments together
+= Společné úspěchy
+With {0}
+= S {0}
+No play time counted yet. AZS Stats counts it while the game runs.
+= Zatím není započítán žádný herní čas. AZS Stats ho počítá, když hra běží.
+Play time is counted in game by the AZS Stats addon. Install it on the STATS page.
+= Herní čas počítá ve hře doplněk AZS Stats. Nainstaluj ho na stránce STATISTIKY.
+Counted in game by AZS Stats; cloud saving carries it to your other PCs.
+= Počítáno ve hře doplňkem AZS Stats; ukládání do cloudu ho přenese na tvé další počítače.
+Counted in game by AZS Stats. Turn on cloud saving to take it to your other PCs.
+= Počítáno ve hře doplňkem AZS Stats. Zapni ukládání do cloudu, abys ho měl i na dalších počítačích.
+Show play time on the home screen
+= Zobrazit herní čas na úvodní obrazovce

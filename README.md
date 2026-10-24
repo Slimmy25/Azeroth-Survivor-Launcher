@@ -8,8 +8,8 @@ The launcher for **Azeroth Survivors**, a game made by Aethus, styled after the 
 - **Addons**: switch addons on and off, two saveable profiles, and **Download More** to install addons with one click
 - **Changelog**: every patch note, newest first
 - **Guide**: a new player guide (classes, controls, zones, tips)
-- **Stats** (optional, can be hidden in Options): your play time, and with the built-in **AS Time Tracker** addon
-  every run's result, the abilities taken, class pick rates over time, and the same totals and records for every class on its own
+- **Stats** (optional, can be hidden in Options): your play time, and with the built-in **AZS Stats** addon (also in game: `/azs`)
+  every run's result, the abilities taken, class pick rates over time, and the same totals and records for every class on its own, play time counted in game, a death log with your Nemesis, and co-op stats with your friends
 - **UPDATE**: checks this repository's latest release when the launcher starts and offers the new launcher exe
   (never forced); it downloads it, checks its SHA-256 and restarts itself. Game updates can be switched on too
 - Runs in the system tray; only one copy runs at a time
@@ -48,7 +48,7 @@ GitHub (see the **Actions** tab).
 | About Launcher: description | `assets/launcher-about.txt` |
 | About Launcher: launcher changelog | `assets/launcher-changelog.txt` (newest first) |
 | New player guide | `assets/guide.txt` |
-| The AS Time Tracker addon | `addons/ASTimeTracker` (built into the exe; the STATS page installs it) |
+| The AZS Stats addon | `addons/AZSStats` (built into the exe; the STATS page installs it) |
 | Where launcher updates come from | `Repo` in `src/SelfUpdate.cs` (the latest non-pre-release) |
 | Game update address | `ManifestUrl` in `src/Update.cs` |
 | Install link, Discord link | `src/Launcher.cs` |

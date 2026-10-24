@@ -863,14 +863,14 @@ Track every run
 = 記錄每一局
 The stats file could not be read ({0}).
 = 無法讀取統計檔案（{0}）。
-The AS Time Tracker addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
-= AS Time Tracker 插件會記錄你玩的每一局：勝利、擊殺、傷害、金幣與個人最佳成績。安裝後完成一局，你的統計就會顯示在這裡。
+The AZS Stats addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
+= AZS Stats 插件會記錄你玩的每一局：勝利、擊殺、傷害、金幣與個人最佳成績。安裝後完成一局，你的統計就會顯示在這裡。
 It is optional: without it, this page only shows your play time.
 = 它是選用的：沒有它，此頁面只顯示你的遊戲時數。
-The AS Time Tracker addon is turned off. Turn it on in Addons to keep recording your runs.
-= AS Time Tracker 插件已關閉。請在插件中開啟，以繼續記錄你的對局。
-No runs recorded yet. Finish a run with the AS Time Tracker addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
-= 還沒有記錄任何對局。請在開啟 AS Time Tracker 的情況下完成一局。遊戲會在離開時儲存插件資料，所以關閉遊戲後統計才會顯示在這裡。
+The AZS Stats addon is turned off. Turn it on in Addons to keep recording your runs.
+= AZS Stats 插件已關閉。請在插件中開啟，以繼續記錄你的對局。
+No runs recorded yet. Finish a run with the AZS Stats addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
+= 還沒有記錄任何對局。請在開啟 AZS Stats 的情況下完成一局。遊戲會在離開時儲存插件資料，所以關閉遊戲後統計才會顯示在這裡。
 Runs
 = 對局
 Victories
@@ -941,12 +941,12 @@ In game, type /azstats to see your stats.
 = 在遊戲中輸入 /azstats 查看你的統計。
 Saved by the game {0}.
 = 遊戲儲存於：{0}。
-AS Time Tracker updated.
-= AS Time Tracker 已更新。
-AS Time Tracker installed. It records your runs from now on.
-= AS Time Tracker 已安裝。從現在起它會記錄你的對局。
-Could not install AS Time Tracker:\n\n{0}
-= 無法安裝 AS Time Tracker：\n\n{0}
+AZS Stats updated.
+= AZS Stats 已更新。
+AZS Stats installed. It records your runs from now on.
+= AZS Stats 已安裝。從現在起它會記錄你的對局。
+Could not install AZS Stats:\n\n{0}
+= 無法安裝 AZS Stats：\n\n{0}
 ALL CLASSES
 = 所有職業
 Class pick rate
@@ -961,8 +961,8 @@ Picks per month
 = 每月選擇次數
 Abilities
 = 技能
-Abilities are recorded for runs played with the newest AS Time Tracker.
-= 技能從使用最新版 AS Time Tracker 的對局開始記錄。
+Abilities are recorded for runs played with the newest AZS Stats.
+= 技能從使用最新版 AZS Stats 的對局開始記錄。
 Picked in {#0} runs ({#1}%) · Win rate {#2}%
 = 在 {#0} 局中選擇（{#1}%）· 勝率 {#2}%
 Best rank {#0}
@@ -995,3 +995,75 @@ Level {#0}
 = 等級 {#0}
 Runs: {#0} · Won: {#1}
 = 對局：{#0} · 勝利：{#1}
+Nemesis
+= 宿敵
+Co-op
+= 合作
+Your nemesis
+= 你的宿敵
+Times it killed you
+= 擊殺你的次數
+Of your deaths
+= 占你的死亡
+Deaths
+= 死亡
+Last time
+= 上次
+Who kills you
+= 誰殺了你
+No deaths recorded yet.
+= 還沒有記錄到死亡。
+Killed you {#0} times ({#1}%)
+= 擊殺你 {#0} 次（{#1}%）
+Death log
+= 死亡紀錄
+Slain by {0}
+= 被 {0} 擊殺
+Survived {0} · Level {#1}
+= 存活 {0} · 等級 {#1}
+Last hits: {0}
+= 最後幾擊：{0}
+Most damage from: {0}
+= 傷害最高來源：{0}
+Runs with friends
+= 與好友的對局
+Co-op win rate
+= 合作勝率
+Solo win rate
+= 單人勝率
+Time together
+= 一起的時間
+Friends
+= 好友
+Victories together
+= 一起的勝利
+Enemies slain together
+= 一起擊敗的敵人
+Bosses together
+= 一起擊敗的首領
+Who you play with
+= 你和誰一起玩
+No co-op runs recorded yet. Play a run with friends and they show up here.
+= 還沒有合作對局。和好友玩一局，他們就會出現在這裡。
+First win together {0}
+= 首次共同勝利 {0}
+Fastest win {0}
+= 最快勝利 {0}
+Most bosses {#0}
+= 最多首領 {#0}
+Played since {0}
+= 自 {0} 起一起
+Accomplishments together
+= 共同成就
+With {0}
+= 一起：{0}
+No play time counted yet. AZS Stats counts it while the game runs.
+= 尚未統計遊戲時數。遊戲執行時由 AZS Stats 統計。
+Play time is counted in game by the AZS Stats addon. Install it on the STATS page.
+= 遊戲時數由遊戲內的 AZS Stats 插件統計。請在「統計」頁面安裝。
+Counted in game by AZS Stats; cloud saving carries it to your other PCs.
+= 由遊戲內的 AZS Stats 統計；雲端存檔會帶到你的其他電腦。
+Counted in game by AZS Stats. Turn on cloud saving to take it to your other PCs.
+= 由遊戲內的 AZS Stats 統計。開啟雲端存檔即可帶到你的其他電腦。
+Show play time on the home screen
+= 在主畫面顯示遊戲時數

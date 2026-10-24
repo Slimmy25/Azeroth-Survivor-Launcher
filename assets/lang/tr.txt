@@ -863,14 +863,14 @@ Track every run
 = Her oyunu kaydet
 The stats file could not be read ({0}).
 = İstatistik dosyası okunamadı ({0}).
-The AS Time Tracker addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
-= AS Time Tracker eklentisi oynadığın her oyunu kaydeder: zaferler, öldürmeler, hasar, altın ve kişisel rekorların. Yükle, bir oyunu bitir; istatistiklerin burada görünsün.
+The AZS Stats addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
+= AZS Stats eklentisi oynadığın her oyunu kaydeder: zaferler, öldürmeler, hasar, altın ve kişisel rekorların. Yükle, bir oyunu bitir; istatistiklerin burada görünsün.
 It is optional: without it, this page only shows your play time.
 = İsteğe bağlıdır: o olmadan bu sayfa yalnızca oynama süreni gösterir.
-The AS Time Tracker addon is turned off. Turn it on in Addons to keep recording your runs.
-= AS Time Tracker eklentisi kapalı. Oyunlarını kaydetmeye devam etmek için Eklentiler'den aç.
-No runs recorded yet. Finish a run with the AS Time Tracker addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
-= Henüz kayıtlı oyun yok. AS Time Tracker açıkken bir oyunu bitir. Oyun, eklenti verilerini çıkarken kaydeder; bu yüzden istatistiklerin oyunu kapattıktan sonra burada görünür.
+The AZS Stats addon is turned off. Turn it on in Addons to keep recording your runs.
+= AZS Stats eklentisi kapalı. Oyunlarını kaydetmeye devam etmek için Eklentiler'den aç.
+No runs recorded yet. Finish a run with the AZS Stats addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
+= Henüz kayıtlı oyun yok. AZS Stats açıkken bir oyunu bitir. Oyun, eklenti verilerini çıkarken kaydeder; bu yüzden istatistiklerin oyunu kapattıktan sonra burada görünür.
 Runs
 = Oyunlar
 Victories
@@ -941,12 +941,12 @@ In game, type /azstats to see your stats.
 = Oyunda istatistiklerini görmek için /azstats yaz.
 Saved by the game {0}.
 = Oyun tarafından kaydedildi: {0}.
-AS Time Tracker updated.
-= AS Time Tracker güncellendi.
-AS Time Tracker installed. It records your runs from now on.
-= AS Time Tracker yüklendi. Artık oyunlarını kaydediyor.
-Could not install AS Time Tracker:\n\n{0}
-= AS Time Tracker yüklenemedi:\n\n{0}
+AZS Stats updated.
+= AZS Stats güncellendi.
+AZS Stats installed. It records your runs from now on.
+= AZS Stats yüklendi. Artık oyunlarını kaydediyor.
+Could not install AZS Stats:\n\n{0}
+= AZS Stats yüklenemedi:\n\n{0}
 ALL CLASSES
 = TÜM SINIFLAR
 Class pick rate
@@ -961,8 +961,8 @@ Picks per month
 = Aylık seçim
 Abilities
 = Yetenekler
-Abilities are recorded for runs played with the newest AS Time Tracker.
-= Yetenekler, en yeni AS Time Tracker ile oynanan oyunlarda kaydedilir.
+Abilities are recorded for runs played with the newest AZS Stats.
+= Yetenekler, en yeni AZS Stats ile oynanan oyunlarda kaydedilir.
 Picked in {#0} runs ({#1}%) · Win rate {#2}%
 = {#0} oyunda seçildi (%{#1}) · Kazanma oranı %{#2}
 Best rank {#0}
@@ -995,3 +995,75 @@ Level {#0}
 = Seviye {#0}
 Runs: {#0} · Won: {#1}
 = Oyunlar: {#0} · Kazanılan: {#1}
+Nemesis
+= Ezeli düşman
+Co-op
+= Ortak oyun
+Your nemesis
+= Ezeli düşmanın
+Times it killed you
+= Seni öldürme sayısı
+Of your deaths
+= Ölümlerinin
+Deaths
+= Ölümler
+Last time
+= Son kez
+Who kills you
+= Seni kim öldürüyor
+No deaths recorded yet.
+= Henüz kayıtlı ölüm yok.
+Killed you {#0} times ({#1}%)
+= Seni {#0} kez öldürdü (%{#1})
+Death log
+= Ölüm kaydı
+Slain by {0}
+= Öldüren: {0}
+Survived {0} · Level {#1}
+= Hayatta kalma {0} · Seviye {#1}
+Last hits: {0}
+= Son vuruşlar: {0}
+Most damage from: {0}
+= En çok hasar: {0}
+Runs with friends
+= Arkadaşlarla oyunlar
+Co-op win rate
+= Ortak oyun kazanma oranı
+Solo win rate
+= Tek başına kazanma oranı
+Time together
+= Birlikte geçen süre
+Friends
+= Arkadaşlar
+Victories together
+= Birlikte zaferler
+Enemies slain together
+= Birlikte alt edilen düşmanlar
+Bosses together
+= Birlikte bosslar
+Who you play with
+= Kimlerle oynuyorsun
+No co-op runs recorded yet. Play a run with friends and they show up here.
+= Henüz ortak oyun yok. Arkadaşlarınla bir oyun oyna, burada görünürler.
+First win together {0}
+= Birlikte ilk zafer {0}
+Fastest win {0}
+= En hızlı zafer {0}
+Most bosses {#0}
+= En çok boss {#0}
+Played since {0}
+= Birlikte {0} tarihinden beri
+Accomplishments together
+= Birlikte başarılar
+With {0}
+= Birlikte: {0}
+No play time counted yet. AZS Stats counts it while the game runs.
+= Henüz oyun süresi sayılmadı. AZS Stats oyun açıkken sayar.
+Play time is counted in game by the AZS Stats addon. Install it on the STATS page.
+= Oyun süresi oyunda AZS Stats eklentisi tarafından sayılır. İSTATİSTİK sayfasından yükle.
+Counted in game by AZS Stats; cloud saving carries it to your other PCs.
+= Oyunda AZS Stats tarafından sayılır; bulut kaydı diğer bilgisayarlarına taşır.
+Counted in game by AZS Stats. Turn on cloud saving to take it to your other PCs.
+= Oyunda AZS Stats tarafından sayılır. Diğer bilgisayarlarına taşımak için bulut kaydını aç.
+Show play time on the home screen
+= Oyun süresini ana ekranda göster

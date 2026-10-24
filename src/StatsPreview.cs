@@ -1,5 +1,5 @@
 // A developer tool, not used by players: "--preview-stats <saved folder> <out folder>" renders the STATS page for
-// the AS Time Tracker file in <saved folder> into PNG pictures (every tab, overall and for the most played class),
+// the AZS Stats file in <saved folder> into PNG pictures (every tab, overall and for the most played class),
 // so the layout can be checked without the game. Settings are only changed in memory, nothing is saved.
 using System;
 using System.Drawing;
@@ -18,11 +18,6 @@ namespace AzerothLauncher
             app.Cfg.Set("saved_dir", Path.GetFullPath(savedDir));
             app.Cfg.Set("addons_dir", Path.Combine(Path.GetFullPath(outDir), "AddOns"));
             app.Cfg.Set("cloud_enabled", false);
-            app.Cfg.Set("play_seconds", 151200L);
-            app.Cfg.Set("play_sessions", 87L);
-            app.Cfg.Set("play_longest_seconds", 14400L);
-            app.Cfg.Set("play_last_seconds", 5400L);
-            app.Cfg.Set("play_last_date", "2026-10-23 21:40");
             app.side.StartPosition = FormStartPosition.Manual;
             app.side.Location = new Point(0, 0);
             app.side.Show();

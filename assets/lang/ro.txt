@@ -863,14 +863,14 @@ Track every run
 = Ține evidența fiecărei runde
 The stats file could not be read ({0}).
 = Fișierul de statistici nu a putut fi citit ({0}).
-The AS Time Tracker addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
-= Addon-ul AS Time Tracker ține evidența fiecărei runde jucate: victorii, inamici uciși, daune, aur și recordurile tale personale. Instalează-l, termină o rundă și statisticile tale apar aici.
+The AZS Stats addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
+= Addon-ul AZS Stats ține evidența fiecărei runde jucate: victorii, inamici uciși, daune, aur și recordurile tale personale. Instalează-l, termină o rundă și statisticile tale apar aici.
 It is optional: without it, this page only shows your play time.
 = Este opțional: fără el, pagina arată doar timpul tău de joc.
-The AS Time Tracker addon is turned off. Turn it on in Addons to keep recording your runs.
-= Addon-ul AS Time Tracker este dezactivat. Activează-l în Addon-uri ca să continui să-ți înregistrezi rundele.
-No runs recorded yet. Finish a run with the AS Time Tracker addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
-= Nicio rundă înregistrată încă. Termină o rundă cu addon-ul AS Time Tracker activat. Jocul salvează datele addon-urilor când ieși, așa că statisticile apar aici după ce închizi jocul.
+The AZS Stats addon is turned off. Turn it on in Addons to keep recording your runs.
+= Addon-ul AZS Stats este dezactivat. Activează-l în Addon-uri ca să continui să-ți înregistrezi rundele.
+No runs recorded yet. Finish a run with the AZS Stats addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
+= Nicio rundă înregistrată încă. Termină o rundă cu addon-ul AZS Stats activat. Jocul salvează datele addon-urilor când ieși, așa că statisticile apar aici după ce închizi jocul.
 Runs
 = Runde
 Victories
@@ -941,12 +941,12 @@ In game, type /azstats to see your stats.
 = În joc, scrie /azstats ca să-ți vezi statisticile.
 Saved by the game {0}.
 = Salvat de joc: {0}.
-AS Time Tracker updated.
-= AS Time Tracker actualizat.
-AS Time Tracker installed. It records your runs from now on.
-= AS Time Tracker instalat. De acum îți înregistrează rundele.
-Could not install AS Time Tracker:\n\n{0}
-= AS Time Tracker nu a putut fi instalat:\n\n{0}
+AZS Stats updated.
+= AZS Stats actualizat.
+AZS Stats installed. It records your runs from now on.
+= AZS Stats instalat. De acum îți înregistrează rundele.
+Could not install AZS Stats:\n\n{0}
+= AZS Stats nu a putut fi instalat:\n\n{0}
 ALL CLASSES
 = TOATE CLASELE
 Class pick rate
@@ -961,8 +961,8 @@ Picks per month
 = Alegeri pe lună
 Abilities
 = Abilități
-Abilities are recorded for runs played with the newest AS Time Tracker.
-= Abilitățile sunt înregistrate în rundele jucate cu cel mai nou AS Time Tracker.
+Abilities are recorded for runs played with the newest AZS Stats.
+= Abilitățile sunt înregistrate în rundele jucate cu cel mai nou AZS Stats.
 Picked in {#0} runs ({#1}%) · Win rate {#2}%
 = Aleasă în {#0} runde ({#1}%) · Rată de victorie {#2}%
 Best rank {#0}
@@ -995,3 +995,75 @@ Level {#0}
 = Nivel {#0}
 Runs: {#0} · Won: {#1}
 = Runde: {#0} · Câștigate: {#1}
+Nemesis
+= Nemesis
+Co-op
+= Cooperativ
+Your nemesis
+= Nemesisul tău
+Times it killed you
+= De câte ori te-a ucis
+Of your deaths
+= Din morțile tale
+Deaths
+= Morți
+Last time
+= Ultima dată
+Who kills you
+= Cine te ucide
+No deaths recorded yet.
+= Nicio moarte înregistrată încă.
+Killed you {#0} times ({#1}%)
+= Te-a ucis de {#0} ori ({#1}%)
+Death log
+= Jurnalul morților
+Slain by {0}
+= Ucis de {0}
+Survived {0} · Level {#1}
+= A supraviețuit {0} · Nivel {#1}
+Last hits: {0}
+= Ultimele lovituri: {0}
+Most damage from: {0}
+= Cele mai multe daune de la: {0}
+Runs with friends
+= Runde cu prietenii
+Co-op win rate
+= Rată de victorie cooperativ
+Solo win rate
+= Rată de victorie solo
+Time together
+= Timp împreună
+Friends
+= Prieteni
+Victories together
+= Victorii împreună
+Enemies slain together
+= Inamici învinși împreună
+Bosses together
+= Boși împreună
+Who you play with
+= Cu cine joci
+No co-op runs recorded yet. Play a run with friends and they show up here.
+= Nicio rundă cooperativă încă. Joacă o rundă cu prietenii și vor apărea aici.
+First win together {0}
+= Prima victorie împreună {0}
+Fastest win {0}
+= Cea mai rapidă victorie {0}
+Most bosses {#0}
+= Cei mai mulți boși {#0}
+Played since {0}
+= Împreună din {0}
+Accomplishments together
+= Realizări împreună
+With {0}
+= Cu {0}
+No play time counted yet. AZS Stats counts it while the game runs.
+= Niciun timp de joc numărat încă. AZS Stats îl numără cât timp jocul rulează.
+Play time is counted in game by the AZS Stats addon. Install it on the STATS page.
+= Timpul de joc e numărat în joc de addon-ul AZS Stats. Instalează-l pe pagina STATISTICI.
+Counted in game by AZS Stats; cloud saving carries it to your other PCs.
+= Numărat în joc de AZS Stats; salvarea în cloud îl duce pe celelalte PC-uri.
+Counted in game by AZS Stats. Turn on cloud saving to take it to your other PCs.
+= Numărat în joc de AZS Stats. Activează salvarea în cloud ca să-l duci pe celelalte PC-uri.
+Show play time on the home screen
+= Arată timpul de joc pe ecranul principal

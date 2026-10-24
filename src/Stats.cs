@@ -1,5 +1,5 @@
-// Long-term stats: the AS Time Tracker addon (built into the launcher, addons\ASTimeTracker; also in Download More)
-// records every run in its saved-variable file, ASTimeTracker.lua in the game's addon settings folder
+// Long-term stats: the AZS Stats addon (built into the launcher, addons\AZSStats; also in Download More) records
+// every run, the play time, deaths and co-op runs in its saved-variable file, AZSStats.lua in the game's addon settings folder
 // (benilla-config\saved). This file
 // reads that Lua table and installs the addon; the STATS section (Sections.cs) shows what it found, together with
 // the launcher's own play time. Everything here is optional: the section can be turned off in Options and
@@ -274,6 +274,13 @@ namespace AzerothLauncher
         }
     }
 
+    // play time: counted in game by AZS Stats (the launcher no longer counts it)
+    public class PlayStats
+    {
+        public long Seconds, Sessions, Longest, LastSeconds;
+        public string LastDate = "";
+    }
+
     // one personal best
     public class StatRecord
     {
@@ -296,6 +303,36 @@ namespace AzerothLauncher
                       Magnets, Levels, BestTime, BestLevel;
         public readonly Dictionary<string, StatRecord> Best = new Dictionary<string, StatRecord>();
         public readonly List<AbilityStat> Abilities = new List<AbilityStat>();     // the most picked first
+        public readonly List<NemesisStat> Nemesis = new List<NemesisStat>();       // the most kills first
+    }
+
+    // who killed you: how often, the damage of their killing blows, when last
+    public class NemesisStat
+    {
+        public string Name = "", Last = "";
+        public double Kills, Damage;
+    }
+
+    // one death in the death log
+    public class DeathStat
+    {
+        public string Date = "", Killer = "", Spell = "", ClassKey = "", Class = "", Race = "", Zone = "", LastHits = "", TopSources = "";
+        public double Amount, Time, Level;
+    }
+
+    // a friend you played co-op runs with
+    public class FriendStat
+    {
+        public string Name = "", ClassKey = "", Class = "", First = "", Last = "", FirstWin = "";
+        public double Runs, Wins, Time, Kills, Bosses, Damage, BestTime, BestLevel, MostBosses, FastestWin;
+    }
+
+    // co-op runs: totals, records together and the friends (most runs first)
+    public class CoopStat
+    {
+        public double Runs, Wins, Time, Kills, Bosses, Solo, SoloWins;
+        public readonly Dictionary<string, StatRecord> Best = new Dictionary<string, StatRecord>();
+        public readonly List<FriendStat> Friends = new List<FriendStat>();
     }
 
     // the runs of one month, and how many of them each class played (class key -> runs)
@@ -308,12 +345,12 @@ namespace AzerothLauncher
 
     public class StatRun
     {
-        public string Result = "", Kind = "", Date = "", Hero = "", ClassKey = "", Class = "", Race = "", Zone = "";
+        public string Result = "", Kind = "", Date = "", Hero = "", ClassKey = "", Class = "", Race = "", Zone = "", Party = "", Killer = "";
         public double Time, Level, Kills, Damage, Gold, Bosses;
         public readonly List<AbilityStat> Abilities = new List<AbilityStat>();     // Picks = its rank here
     }
 
-    // what the AS Time Tracker addon has recorded
+    // what the AZS Stats addon has recorded
     public class RunStats
     {
         public string FilePath = "", First = "", Last = "";
@@ -324,6 +361,10 @@ namespace AzerothLauncher
         public readonly List<AbilityStat> Abilities = new List<AbilityStat>();
         public readonly List<MonthStat> Months = new List<MonthStat>();          // the oldest first
         public readonly List<StatRun> History = new List<StatRun>();             // the newest first
+        public PlayStats Play = new PlayStats();                                   // time the game ran (counted in game)
+        public readonly List<DeathStat> Deaths = new List<DeathStat>();          // the newest first
+        public readonly List<NemesisStat> Nemesis = new List<NemesisStat>();
+        public CoopStat Coop = new CoopStat();
 
         public StatBlock Class(string key)
         {
@@ -334,16 +375,19 @@ namespace AzerothLauncher
 
     public static class Stats
     {
-        public const string AddonFolder = "ASTimeTracker", DbName = "ASTimeTrackerDB";
+        public const string AddonFolder = "AZSStats", DbName = "AZSStatsDB";
         public const string FileName = AddonFolder + ".lua";
-        static readonly string[] AddonFiles = { AddonFolder + ".toc", AddonFolder + ".lua" };
-        // its first name, "Azeroth Stats": replaced (and its records carried over) when the new one is installed
-        const string OldFolder = "AzerothStats", OldDbName = "AzerothStatsDB";
+        static readonly string[] AddonFiles = { AddonFolder + ".toc", AddonFolder + ".lua", AddonFolder + "UI.lua" };
+        // its earlier names ("AS Time Tracker", "Azeroth Stats"): replaced, and their records carried over, when
+        // AZS Stats is installed; until then their files are read
+        static readonly string[][] OldNames = { new[] { "ASTimeTracker", "ASTimeTrackerDB" }, new[] { "AzerothStats", "AzerothStatsDB" } };
 
-        // the newest ASTimeTracker.lua (else the first version's AzerothStats.lua) in the addon settings folder
+        // the newest AZSStats.lua (else an earlier version's file) in the addon settings folder
         public static string FindFile(string savedDir)
         {
-            return FindNamed(savedDir, FileName) ?? FindNamed(savedDir, OldFolder + ".lua");
+            string f = FindNamed(savedDir, FileName);
+            foreach (var o in OldNames) if (f == null) f = FindNamed(savedDir, o[0] + ".lua");
+            return f;
         }
 
         // the newest file with this name anywhere in the folder (account or character sub-folders too)
@@ -383,7 +427,8 @@ namespace AzerothLauncher
             using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite | FileShare.Delete))
             using (var r = new StreamReader(fs, Encoding.UTF8)) text = r.ReadToEnd();
             var vars = LuaReader.ParseFile(text);
-            var db = LuaReader.Tab(vars, DbName) ?? LuaReader.Tab(vars, OldDbName);
+            var db = LuaReader.Tab(vars, DbName);
+            foreach (var o in OldNames) if (db == null) db = LuaReader.Tab(vars, o[1]);
             if (db == null) return null;
             var st = new RunStats();
             st.FilePath = path;
@@ -433,6 +478,8 @@ namespace AzerothLauncher
                 run.Damage = LuaReader.Num(h, "dmg");
                 run.Gold = LuaReader.Num(h, "gold");
                 run.Bosses = LuaReader.Num(h, "bosses");
+                run.Party = LuaReader.Text(h, "party");
+                run.Killer = LuaReader.Text(h, "killer");
                 foreach (var a in LuaReader.List(LuaReader.Tab(h, "abilities")))
                 {
                     var ab = new AbilityStat();
@@ -445,6 +492,76 @@ namespace AzerothLauncher
                 }
                 st.History.Add(run);
             }
+
+            // play time (counted by the addon while the game runs)
+            var play = LuaReader.Tab(db, "play");
+            st.Play.Seconds = (long)LuaReader.Num(play, "seconds");
+            st.Play.Sessions = (long)LuaReader.Num(play, "sessions");
+            st.Play.Longest = (long)LuaReader.Num(play, "longest");
+            st.Play.LastSeconds = (long)LuaReader.Num(play, "last");
+            st.Play.LastDate = LuaReader.Text(play, "lastDate");
+
+            // Nemesis: the death log and who killed you
+            var deaths = LuaReader.List(LuaReader.Tab(db, "deaths"));
+            for (int i = deaths.Count - 1; i >= 0; i--)
+            {
+                var d = deaths[i];
+                var ds = new DeathStat();
+                ds.Date = LuaReader.Text(d, "date");
+                ds.Killer = LuaReader.Text(d, "killer");
+                ds.Spell = LuaReader.Text(d, "spell");
+                ds.Amount = LuaReader.Num(d, "amt");
+                ds.ClassKey = LuaReader.Text(d, "class");
+                ds.Class = LuaReader.Text(d, "cname");
+                ds.Race = LuaReader.Text(d, "rname");
+                ds.Zone = LuaReader.Text(d, "zname");
+                ds.Time = LuaReader.Num(d, "t");
+                ds.Level = LuaReader.Num(d, "lvl");
+                ds.LastHits = LuaReader.Text(d, "last");
+                ds.TopSources = LuaReader.Text(d, "top");
+                st.Deaths.Add(ds);
+            }
+            Nemeses(LuaReader.Tab(db, "nemesis"), st.Nemesis);
+
+            // co-op
+            var co = LuaReader.Tab(db, "coop");
+            st.Coop.Runs = LuaReader.Num(co, "runs");
+            st.Coop.Wins = LuaReader.Num(co, "wins");
+            st.Coop.Time = LuaReader.Num(co, "time");
+            st.Coop.Kills = LuaReader.Num(co, "kills");
+            st.Coop.Bosses = LuaReader.Num(co, "bosses");
+            st.Coop.Solo = LuaReader.Num(co, "solo");
+            st.Coop.SoloWins = LuaReader.Num(co, "soloWins");
+            Bests(LuaReader.Tab(co, "best"), st.Coop.Best);
+            var bestTab = LuaReader.Tab(co, "best");
+            if (bestTab != null)
+                foreach (var kv in st.Coop.Best) kv.Value.Hero = LuaReader.Text(LuaReader.Tab(bestTab, kv.Key), "with");
+            var friends = LuaReader.Tab(co, "friends");
+            if (friends != null)
+                foreach (var kv in friends)
+                {
+                    var f = kv.Value as Dictionary<string, object>;
+                    if (f == null) continue;
+                    var fs = new FriendStat();
+                    fs.Name = kv.Key;
+                    fs.ClassKey = LuaReader.Text(f, "class");
+                    fs.Class = LuaReader.Text(f, "cname");
+                    fs.First = LuaReader.Text(f, "first");
+                    fs.Last = LuaReader.Text(f, "last");
+                    fs.FirstWin = LuaReader.Text(f, "firstWin");
+                    fs.Runs = LuaReader.Num(f, "runs");
+                    fs.Wins = LuaReader.Num(f, "wins");
+                    fs.Time = LuaReader.Num(f, "time");
+                    fs.Kills = LuaReader.Num(f, "kills");
+                    fs.Bosses = LuaReader.Num(f, "bosses");
+                    fs.Damage = LuaReader.Num(f, "dmg");
+                    fs.BestTime = LuaReader.Num(f, "bestTime");
+                    fs.BestLevel = LuaReader.Num(f, "bestLvl");
+                    fs.MostBosses = LuaReader.Num(f, "mostBosses");
+                    fs.FastestWin = LuaReader.Num(f, "fastestWin");
+                    st.Coop.Friends.Add(fs);
+                }
+            st.Coop.Friends.Sort(delegate(FriendStat a, FriendStat b) { return b.Runs.CompareTo(a.Runs); });
             return st;
         }
 
@@ -518,6 +635,23 @@ namespace AzerothLauncher
             });
         }
 
+        static void Nemeses(Dictionary<string, object> d, List<NemesisStat> into)
+        {
+            if (d == null) return;
+            foreach (var kv in d)
+            {
+                var n = kv.Value as Dictionary<string, object>;
+                if (n == null) continue;
+                var ns = new NemesisStat();
+                ns.Name = kv.Key;
+                ns.Kills = LuaReader.Num(n, "kills");
+                ns.Damage = LuaReader.Num(n, "dmg");
+                ns.Last = LuaReader.Text(n, "last");
+                into.Add(ns);
+            }
+            into.Sort(delegate(NemesisStat a, NemesisStat b) { return b.Kills.CompareTo(a.Kills); });
+        }
+
         static void Groups(Dictionary<string, object> d, List<StatBlock> into)
         {
             if (d == null) return;
@@ -528,6 +662,7 @@ namespace AzerothLauncher
                 var b = Block(kv.Key, g);
                 Bests(LuaReader.Tab(g, "best"), b.Best);
                 Abilities(LuaReader.Tab(g, "abilities"), b.Abilities);
+                Nemeses(LuaReader.Tab(g, "nemesis"), b.Nemesis);
                 into.Add(b);
             }
             into.Sort(delegate(StatBlock a, StatBlock b)
@@ -549,10 +684,12 @@ namespace AzerothLauncher
         // ---- the addon, built into the launcher (Download More offers the same files as a zip)
         static string Embedded(string file) { return Util.ReadResource("AS.addon." + file); }
 
-        // the addon's folder in AddOns (also when it is turned off; else the first version's folder), or null
+        // the addon's folder in AddOns (also when it is turned off; else an earlier version's folder), or null
         public static string AddonPath(string addonsDir)
         {
-            return Folder(addonsDir, AddonFolder) ?? Folder(addonsDir, OldFolder);
+            string f = Folder(addonsDir, AddonFolder);
+            foreach (var o in OldNames) if (f == null) f = Folder(addonsDir, o[0]);
+            return f;
         }
 
         static string Folder(string addonsDir, string name)
@@ -571,7 +708,8 @@ namespace AzerothLauncher
         {
             string dir = AddonPath(addonsDir);
             if (dir == null) return false;
-            if (Folder(addonsDir, AddonFolder) == null) return true;
+            if (Folder(addonsDir, AddonFolder) == null) return true;     // still an earlier version
+            foreach (var o in OldNames) if (Folder(addonsDir, o[0]) != null) return true;
             foreach (string f in AddonFiles)
             {
                 string p = Path.Combine(dir, f);
@@ -587,44 +725,56 @@ namespace AzerothLauncher
         static string Norm(string t) { return (t ?? "").Replace("\r\n", "\n").TrimEnd(); }
 
         // writes the addon into AddOns (or updates it where it is, turned off or not); its saved stats are kept.
-        // The first version ("Azeroth Stats") is replaced: its folder goes, its records move to the new name.
+        // Earlier versions are replaced: their folders go, their records move to the new name.
         public static void InstallAddon(string addonsDir, string savedDir)
         {
             if (string.IsNullOrEmpty(addonsDir)) throw new UserError("The AddOns folder is not set. Set the game config folder in Options.");
-            string old = Folder(addonsDir, OldFolder);
+            var olds = new List<string>();
+            foreach (var o in OldNames)
+            {
+                string f = Folder(addonsDir, o[0]);
+                if (f != null) olds.Add(f);
+            }
             string dir = Folder(addonsDir, AddonFolder);
             if (dir == null)                                 // keep it turned off if the old one was
-                dir = Path.Combine(addonsDir, AddonFolder) + (old != null && old.EndsWith(Addons.DisabledSuffix) ? Addons.DisabledSuffix : "");
+                dir = Path.Combine(addonsDir, AddonFolder) +
+                      (olds.Count > 0 && olds[0].EndsWith(Addons.DisabledSuffix) ? Addons.DisabledSuffix : "");
             Directory.CreateDirectory(dir);
             foreach (string f in AddonFiles)
             {
                 string text = Embedded(f);
-                if (text.Length == 0) throw new UserError("This launcher was built without the AS Time Tracker addon.");
+                if (text.Length == 0) throw new UserError("This launcher was built without the AZS Stats addon.");
                 File.WriteAllText(Path.Combine(dir, f), text.Replace("\r\n", "\n").Replace("\n", "\r\n"), new UTF8Encoding(false));
             }
             MoveOldRecords(savedDir);
-            if (old != null) Util.DeleteTreeQuiet(old);
+            foreach (string o in olds) Util.DeleteTreeQuiet(o);
         }
 
-        // AzerothStats.lua -> ASTimeTracker.lua next to it (with the variable renamed), where there is none yet
+        // ASTimeTracker.lua / AzerothStats.lua -> AZSStats.lua next to it (the variable renamed), where there is none
+        // yet; the newest name first
         static void MoveOldRecords(string savedDir)
         {
             if (string.IsNullOrEmpty(savedDir) || !Directory.Exists(savedDir)) return;
-            string[] olds;
-            try { olds = Directory.GetFiles(savedDir, OldFolder + ".lua", SearchOption.AllDirectories); }
-            catch (Exception) { return; }
-            foreach (string f in olds)
-                try
-                {
-                    string target = Path.Combine(Path.GetDirectoryName(f), FileName);
-                    if (File.Exists(target)) continue;
-                    string text = File.ReadAllText(f, Encoding.UTF8);
-                    text = System.Text.RegularExpressions.Regex.Replace(text, @"^(\s*)" + OldDbName + @"\b", "$1" + DbName,
-                                                                         System.Text.RegularExpressions.RegexOptions.Multiline);
-                    File.WriteAllText(target, text, new UTF8Encoding(false));
-                    File.Delete(f);
-                }
-                catch (Exception) { }
+            foreach (var o in OldNames)
+            {
+                string[] files;
+                try { files = Directory.GetFiles(savedDir, o[0] + ".lua", SearchOption.AllDirectories); }
+                catch (Exception) { continue; }
+                foreach (string f in files)
+                    try
+                    {
+                        string target = Path.Combine(Path.GetDirectoryName(f), FileName);
+                        if (!File.Exists(target))
+                        {
+                            string text = File.ReadAllText(f, Encoding.UTF8);
+                            text = System.Text.RegularExpressions.Regex.Replace(text, @"^(\s*)" + o[1] + @"\b", "$1" + DbName,
+                                                                                 System.Text.RegularExpressions.RegexOptions.Multiline);
+                            File.WriteAllText(target, text, new UTF8Encoding(false));
+                        }
+                        File.Delete(f);
+                    }
+                    catch (Exception) { }
+            }
         }
     }
 }

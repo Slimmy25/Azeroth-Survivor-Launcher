@@ -1,25 +1,28 @@
--- AS Time Tracker: keeps a record of every Azeroth Survivors run.
+-- AZS Stats: keeps a record of every Azeroth Survivors run, your play time, who kills you and who you play with.
+-- (It replaces "AS Time Tracker" and "Azeroth Stats"; the launcher carries their records over.)
 --
 -- When a run ends (the hero fell, won or left), the game sends the run's results as the AZSEND addon
 -- message (the same table AZS_GetRunSummary() returns). This addon adds each run to:
---   * the global totals and personal bests
---   * the same totals and bests for each class on its own, with the abilities that class took
---   * the abilities taken in each run (the spells and their ranks, from AZS_SPELLS) and the damage each dealt
---     (from the damage meter, AZS_METER), overall and per class
---   * how often each class was picked, month by month
---   * per race and per zone records, and a history of the last runs
--- all kept in ASTimeTrackerDB (saved with your addon settings in benilla-config\saved). The launcher's STATS
--- page reads that file.
+--   * the global totals and personal bests, and the same for each class on its own
+--   * the abilities taken in each run (spells and ranks from AZS_SPELLS, their damage from AZS_METER)
+--   * how often each class was picked, month by month; per race and per zone records; a history of runs
+--   * Nemesis: a death log (the killing blow and the hits before it, from the combat log; the biggest damage
+--     sources from AZS_TAKEN) and who killed you how often
+--   * Co-op: who you played with (AZS_PARTY and your party), how often, your wins and records together
+-- and it counts your play time: the time the game is running, by session (a /reload is not a new session).
+-- Everything is kept in AZSStatsDB (saved with your addon settings in benilla-config\saved, which the
+-- launcher's cloud save uploads). The launcher's STATS page reads that file; in game, /azs opens the same
+-- stats in a window (AZSStatsUI.lua).
 --
--- In game: /azstats (or /astime) shows your totals, /azstats last your last run, /azstats best your records,
--- /azstats classes your classes, /azstats quiet turns the end-of-run chat line off or on, /azstats reset yes
--- clears everything.
+-- Chat commands: /azstats (or /astime) your totals, /azstats last, best, classes, deaths, nemesis, coop,
+-- /azstats quiet turns the end-of-run chat lines off or on, /azstats reset yes clears everything.
 --
 -- Lua 5.0 (as the 1.12 client): no _G, no # operator, table.getn, event handlers read event / arg1 / arg2.
 
-ASTIMETRACKER_VERSION = 2;
-ASTIMETRACKER_HISTORY = 100;               -- runs kept in the history (the totals keep everything)
-ASTIMETRACKER_RUN_ABILITIES = 12;          -- abilities kept per run in the history
+AZSSTATS_VERSION = 4;
+AZSSTATS_DEATHS = 50;                 -- deaths kept in the death log
+AZSSTATS_HISTORY = 100;               -- runs kept in the history (the totals keep everything)
+AZSSTATS_RUN_ABILITIES = 12;          -- abilities kept per run in the history
 
 -- the numbers added up for every run (globally and per class); "time" comes from the run's t
 local SUM_FIELDS = { "time", "kills", "elites", "guardians", "bosses", "dmg", "taken", "gold", "chests", "magnets", "levels" };
@@ -30,7 +33,7 @@ local BEST_FIELDS = { { "time", "t" }, { "lvl", "lvl" }, { "kills", "kills" }, {
 
 local function Print(msg)
 	if ( DEFAULT_CHAT_FRAME ) then
-		DEFAULT_CHAT_FRAME:AddMessage("|cffffd100AS Time Tracker:|r " .. msg);
+		DEFAULT_CHAT_FRAME:AddMessage("|cffffd100AZS Stats:|r " .. msg);
 	end
 end
 
@@ -114,9 +117,11 @@ local function FillBlock(b)
 end
 
 local function Fresh()
-	return { version = ASTIMETRACKER_VERSION, quiet = false, lastSig = "", first = "", last = "",
+	return { version = AZSSTATS_VERSION, quiet = false, lastSig = "", first = "", last = "",
 	         totals = FillBlock({}), best = {}, classes = {}, races = {}, zones = {}, abilities = {}, months = {},
-	         results = {}, history = {} };
+	         results = {}, history = {}, deaths = {}, nemesis = {},
+	         play = { seconds = 0, sessions = 0, longest = 0, last = 0, lastDate = "", seen = 0 },
+	         coop = { runs = 0, wins = 0, time = 0, kills = 0, bosses = 0, solo = 0, soloWins = 0, best = {}, friends = {} } };
 end
 
 local function Month(when)
@@ -140,6 +145,7 @@ local function Group(list, key, name)
 	FillBlock(g);
 	if ( type(g.best) ~= "table" ) then g.best = {}; end
 	if ( type(g.abilities) ~= "table" ) then g.abilities = {}; end
+	if ( type(g.nemesis) ~= "table" ) then g.nemesis = {}; end
 	if ( Str(name) ~= "" ) then
 		g.name = Str(name);
 	end
@@ -229,14 +235,14 @@ local function AddMonth(db, run)
 	e.classes[c] = Num(e.classes[c]) + 1;
 end
 
--- fills in anything an older or damaged ASTimeTrackerDB is missing; version 1 kept less per class and
+-- fills in anything an older or damaged AZSStatsDB is missing; version 1 kept less per class and
 -- nothing per month: both are rebuilt from the history (complete while it holds every run)
 local function Check()
-	if ( type(ASTimeTrackerDB) ~= "table" ) then
-		ASTimeTrackerDB = Fresh();
+	if ( type(AZSStatsDB) ~= "table" ) then
+		AZSStatsDB = Fresh();
 		return;
 	end
-	local db = ASTimeTrackerDB;
+	local db = AZSStatsDB;
 	local fresh = Fresh();
 	for k, v in pairs(fresh) do
 		if ( type(db[k]) ~= type(v) ) then
@@ -244,6 +250,12 @@ local function Check()
 		end
 	end
 	FillBlock(db.totals);
+	for k, v in pairs(fresh.play) do
+		if ( type(db.play[k]) ~= type(v) ) then db.play[k] = v; end
+	end
+	for k, v in pairs(fresh.coop) do
+		if ( type(db.coop[k]) ~= type(v) ) then db.coop[k] = v; end
+	end
 	if ( db.totals.wins == 0 and db.totals.victory > 0 ) then
 		db.totals.wins = db.totals.victory;
 	end
@@ -273,7 +285,7 @@ local function Check()
 	for k, g in pairs(db.classes) do
 		if ( type(g) == "table" ) then Group(db.classes, k, nil); end
 	end
-	db.version = ASTIMETRACKER_VERSION;
+	db.version = AZSSTATS_VERSION;
 end
 
 -- "result=defeat;t=754;lvl=23;..." -> table (numbers as numbers)
@@ -301,7 +313,36 @@ end
 -- ---------------------------------------------------------------- the build of the run going on
 -- The spells and the damage meter are copied every few seconds during a run, so the build is known at the
 -- end even if the game has already cleared them when the run's summary arrives.
-local lastSpells, lastMeter, lastRunTime = nil, nil, 0;
+local lastSpells, lastMeter, lastTaken, lastParty, lastRunTime = nil, nil, nil, nil, 0;
+
+-- ---------------------------------------------------------------- Nemesis: who hits you, who kills you
+-- The last hits you took (from the combat log), newest last: { src, spell, amt, at }.
+local hits = {};
+
+local HIT_PATTERNS = {
+	{ "^(.+)'s (.+) crits you for (%d+)", true }, { "^(.+)'s (.+) hits you for (%d+)", true },
+	{ "^(.+) crits you for (%d+)", false }, { "^(.+) hits you for (%d+)", false },
+	{ "^You suffer (%d+) .- damage from (.+)'s (.+)%.", "dot" } };
+
+local function OnHit(msg)
+	if ( type(msg) ~= "string" ) then
+		return;
+	end
+	for i = 1, table.getn(HIT_PATTERNS) do
+		local p = HIT_PATTERNS[i];
+		local _, _, a, b, c = string.find(msg, p[1]);
+		if ( a ) then
+			local h;
+			if ( p[2] == "dot" ) then h = { src = b, spell = c, amt = tonumber(a) or 0 };
+			elseif ( p[2] ) then h = { src = a, spell = b, amt = tonumber(c) or 0 };
+			else h = { src = a, spell = "", amt = tonumber(b) or 0 }; end
+			h.at = GetTime();
+			table.insert(hits, h);
+			while ( table.getn(hits) > 8 ) do table.remove(hits, 1); end
+			return;
+		end
+	end
+end
 
 local function CopyList(list, fields)
 	if ( type(list) ~= "table" or table.getn(list) == 0 ) then
@@ -327,9 +368,14 @@ local function Snapshot()
 		now = Num(AZS_GetRunTime());
 	end
 	if ( now + 1 < lastRunTime ) then           -- a new run started
-		lastSpells, lastMeter = nil, nil;
+		lastSpells, lastMeter, lastTaken, lastParty = nil, nil, nil, nil;
+		hits = {};
 	end
 	lastRunTime = now;
+	local tk = CopyList(AZS_TAKEN, { "source", "dmg" });
+	if ( tk ) then lastTaken = tk; end
+	local pt = CopyList(AZS_PARTY, { "name", "class", "dmg", "top" });
+	if ( pt ) then lastParty = pt; end
 	local s = CopyList(AZS_SPELLS, { "key", "spell", "rank" });
 	if ( s ) then lastSpells = s; end
 	local m = CopyList(AZS_METER, { "name", "dmg" });
@@ -362,19 +408,49 @@ local function Abilities()
 		end
 	end
 	table.sort(out, function(a, b) return a.dmg > b.dmg; end);
-	while ( table.getn(out) > ASTIMETRACKER_RUN_ABILITIES ) do
+	while ( table.getn(out) > AZSSTATS_RUN_ABILITIES ) do
 		table.remove(out);
 	end
 	return out;
 end
 
+-- the friends in a run: the party meter's heroes and your party, without yourself: { name, class, dmg }
+local function PartyOf(run)
+	local out, seen = {}, {};
+	local me = string.lower(Str(run.hero));
+	local player = "";
+	if ( UnitName ) then player = string.lower(Str(UnitName("player"))); end
+	local function add(name, class, dmg)
+		name = Str(name);
+		if ( name == "" or name == "Unknown" ) then return; end
+		local l = string.lower(name);
+		if ( l == me or l == player ) then return; end
+		if ( seen[l] ) then
+			if ( Str(class) ~= "" and seen[l].class == "" ) then seen[l].class = Str(class); end
+			return;
+		end
+		local f = { name = name, class = Str(class), dmg = Num(dmg) };
+		seen[l] = f;
+		table.insert(out, f);
+	end
+	local list = lastParty or CopyList(AZS_PARTY, { "name", "class", "dmg", "top" }) or {};
+	for i = 1, table.getn(list) do add(list[i].name, list[i].class, list[i].dmg); end
+	if ( GetNumPartyMembers ) then
+		local ok, n = pcall(GetNumPartyMembers);
+		if ( ok and n ) then
+			for i = 1, n do add(UnitName("party" .. i), "", 0); end
+		end
+	end
+	return out;
+end
+
 -- ---------------------------------------------------------------- recording a run
-function ASTimeTracker_Record(s)
+function AZSStats_Record(s)
 	if ( type(s) ~= "table" or not s.result ) then
 		return;
 	end
 	Check();
-	local db = ASTimeTrackerDB;
+	local db = AZSStatsDB;
 	local sig = Signature(s);
 	if ( sig == db.lastSig ) then
 		return;
@@ -412,9 +488,109 @@ function ASTimeTracker_Record(s)
 	Accumulate(Group(db.races, run.race, run.rname), run);
 	Accumulate(Group(db.zones, run.zone, run.zname), run);
 
+	-- a death: who did it, how, and the hits before it
+	if ( run.kind == "defeat" ) then
+		local d = { date = when, hero = run.hero, class = run.class, cname = run.cname, rname = run.rname, zname = run.zname,
+		            t = run.t, lvl = run.lvl, killer = "", spell = "", amt = 0, last = "", top = "" };
+		local now = GetTime();
+		local recent = {};
+		for i = 1, table.getn(hits) do
+			if ( now - hits[i].at < 20 ) then table.insert(recent, hits[i]); end
+		end
+		local k = recent[table.getn(recent)];
+		if ( k ) then d.killer = k.src; d.spell = k.spell; d.amt = k.amt; end
+		local parts = {};
+		for i = table.getn(recent), math.max(1, table.getn(recent) - 4), -1 do
+			local h = recent[i];
+			local p = h.src;
+			if ( h.spell ~= "" ) then p = p .. " (" .. h.spell .. ")"; end
+			table.insert(parts, p .. " " .. Big(h.amt));
+		end
+		d.last = table.concat(parts, ", ");
+		local taken = lastTaken or {};
+		table.sort(taken, function(a, b) return Num(a.dmg) > Num(b.dmg); end);
+		local tops = {};
+		for i = 1, math.min(3, table.getn(taken)) do
+			table.insert(tops, Str(taken[i].source) .. " " .. Big(taken[i].dmg));
+		end
+		d.top = table.concat(tops, ", ");
+		if ( d.killer == "" and taken[1] ) then d.killer = Str(taken[1].source); end
+		if ( d.killer == "" ) then d.killer = "Unknown"; end
+		table.insert(db.deaths, d);
+		while ( table.getn(db.deaths) > AZSSTATS_DEATHS ) do table.remove(db.deaths, 1); end
+		for _, list in ipairs({ db.nemesis, class.nemesis }) do
+			local n = list[d.killer];
+			if ( type(n) ~= "table" ) then n = { kills = 0, dmg = 0, last = "" }; list[d.killer] = n; end
+			n.kills = Num(n.kills) + 1;
+			n.dmg = Num(n.dmg) + d.amt;
+			n.last = when;
+		end
+		run.killer = d.killer;
+	end
+	hits = {};
+	lastTaken = nil;
+
+	-- co-op: the friends in this run
+	local party = PartyOf(run);
+	local co = db.coop;
+	local coopNews = {};
+	if ( table.getn(party) > 0 ) then
+		local names = {};
+		for i = 1, table.getn(party) do table.insert(names, party[i].name); end
+		run.party = table.concat(names, ", ");
+		co.runs = co.runs + 1;
+		co.time = co.time + run.t;
+		co.kills = co.kills + run.kills;
+		co.bosses = co.bosses + run.bosses;
+		if ( run.kind == "victory" ) then co.wins = co.wins + 1; end
+		Bests(co.best, run);
+		for k, v in pairs(co.best) do
+			if ( type(v) == "table" and v.date == when and v.with == nil ) then v.with = run.party; end
+		end
+		for i = 1, table.getn(party) do
+			local f = party[i];
+			local e = co.friends[f.name];
+			if ( type(e) ~= "table" ) then
+				e = { runs = 0, wins = 0, time = 0, kills = 0, bosses = 0, dmg = 0, bestTime = 0, bestLvl = 0, mostBosses = 0,
+				      fastestWin = 0, first = when, last = "", firstWin = "", class = "", cname = "", classes = {} };
+				co.friends[f.name] = e;
+			end
+			e.runs = Num(e.runs) + 1;
+			e.time = Num(e.time) + run.t;
+			e.kills = Num(e.kills) + run.kills;
+			e.bosses = Num(e.bosses) + run.bosses;
+			e.dmg = Num(e.dmg) + Num(f.dmg);
+			e.last = when;
+			if ( f.class ~= "" ) then
+				e.class = f.class;
+				e.cname = Pretty(f.class);
+				e.classes[f.class] = Num(e.classes[f.class]) + 1;
+			end
+			if ( run.t > Num(e.bestTime) ) then e.bestTime = run.t; end
+			if ( run.lvl > Num(e.bestLvl) ) then e.bestLvl = run.lvl; end
+			if ( run.bosses > Num(e.mostBosses) ) then e.mostBosses = run.bosses; end
+			if ( run.kind == "victory" ) then
+				e.wins = Num(e.wins) + 1;
+				if ( Str(e.firstWin) == "" ) then
+					e.firstWin = when;
+					table.insert(coopNews, "First victory together with " .. f.name .. "!");
+				end
+				if ( Num(e.fastestWin) == 0 or run.t < Num(e.fastestWin) ) then e.fastestWin = run.t; end
+			end
+			local steps = { 10, 25, 50, 100, 250, 500, 1000 };
+			for j = 1, table.getn(steps) do
+				if ( e.runs == steps[j] ) then table.insert(coopNews, e.runs .. " runs together with " .. f.name .. "!"); end
+			end
+		end
+	else
+		co.solo = Num(co.solo) + 1;
+		if ( run.kind == "victory" ) then co.soloWins = Num(co.soloWins) + 1; end
+	end
+	lastParty = nil;
+
 	-- history, the newest last
 	table.insert(db.history, run);
-	while ( table.getn(db.history) > ASTIMETRACKER_HISTORY ) do
+	while ( table.getn(db.history) > AZSSTATS_HISTORY ) do
 		table.remove(db.history, 1);
 	end
 	lastSpells, lastMeter = nil, nil;
@@ -428,13 +604,22 @@ function ASTimeTracker_Record(s)
 			line = line .. " |cff40ff40New " .. run.cname .. " record: " .. table.concat(classRecords, ", ") .. "!|r";
 		end
 		Print(line);
+		for i = 1, table.getn(coopNews) do Print("|cff40c0ff" .. coopNews[i] .. "|r"); end
+		if ( run.killer ) then
+			local n = db.nemesis[run.killer];
+			local d = db.deaths[table.getn(db.deaths)];
+			local how = "";
+			if ( d.spell ~= "" ) then how = " with " .. d.spell; end
+			if ( d.amt > 0 ) then how = how .. " (" .. Big(d.amt) .. ")"; end
+			Print("|cffff4040Slain by " .. run.killer .. how .. ".|r It has killed you " .. Big(n.kills) .. " time(s). /azstats nemesis");
+		end
 	end
 end
 
 -- ---------------------------------------------------------------- chat commands
 local function ShowTotals()
 	Check();
-	local t = ASTimeTrackerDB.totals;
+	local t = AZSStatsDB.totals;
 	if ( t.runs == 0 ) then
 		Print("no runs recorded yet. Finish a run and it shows up here and on the launcher's STATS page.");
 		return;
@@ -447,7 +632,7 @@ end
 
 local function ShowBest()
 	Check();
-	local b = ASTimeTrackerDB.best;
+	local b = AZSStatsDB.best;
 	local names = { { "time", "Longest run", true }, { "lvl", "Highest level" }, { "kills", "Most kills" },
 	                { "dmg", "Most damage" }, { "gold", "Most gold" }, { "bosses", "Most bosses" }, { "fastestWin", "Fastest win", true } };
 	local any = false;
@@ -467,7 +652,7 @@ end
 
 local function ShowClasses()
 	Check();
-	local db = ASTimeTrackerDB;
+	local db = AZSStatsDB;
 	local list = {};
 	for k, g in pairs(db.classes) do
 		if ( type(g) == "table" and g.runs > 0 ) then table.insert(list, g); end
@@ -484,9 +669,47 @@ local function ShowClasses()
 	end
 end
 
+local function ShowDeaths()
+	Check();
+	local d = AZSStatsDB.deaths;
+	if ( table.getn(d) == 0 ) then Print("no deaths recorded yet."); return; end
+	Print("your last deaths:");
+	for i = table.getn(d), math.max(1, table.getn(d) - 4), -1 do
+		local e = d[i];
+		Print(e.date .. ": |cffff4040" .. e.killer .. "|r" .. (e.spell ~= "" and (" (" .. e.spell .. " " .. Big(e.amt) .. ")") or "") ..
+		      ", " .. e.cname .. " level " .. e.lvl .. " in " .. e.zname .. " after " .. Clock(e.t) .. ".");
+		if ( e.last ~= "" ) then Print("   last hits: " .. e.last); end
+	end
+end
+
+local function ShowNemesis()
+	Check();
+	local list = {};
+	for name, n in pairs(AZSStatsDB.nemesis) do table.insert(list, { name = name, kills = Num(n.kills) }); end
+	if ( table.getn(list) == 0 ) then Print("no one has killed you yet."); return; end
+	table.sort(list, function(a, b) return a.kills > b.kills; end);
+	Print("your nemesis: |cffff4040" .. list[1].name .. "|r, " .. Big(list[1].kills) .. " kill(s).");
+	for i = 2, math.min(5, table.getn(list)) do Print("   " .. list[i].name .. ": " .. Big(list[i].kills)); end
+end
+
+local function ShowCoop()
+	Check();
+	local co = AZSStatsDB.coop;
+	if ( co.runs == 0 ) then Print("no co-op runs recorded yet."); return; end
+	Print(Big(co.runs) .. " co-op runs, " .. Big(co.wins) .. " won (" .. math.floor(100 * co.wins / co.runs + 0.5) ..
+	      "%); solo " .. Big(co.solo) .. " runs, " .. Big(co.soloWins) .. " won.");
+	local list = {};
+	for name, e in pairs(co.friends) do table.insert(list, { name = name, e = e }); end
+	table.sort(list, function(a, b) return Num(a.e.runs) > Num(b.e.runs); end);
+	for i = 1, math.min(5, table.getn(list)) do
+		local e = list[i].e;
+		Print("   " .. list[i].name .. ": " .. Big(e.runs) .. " runs together, " .. Big(e.wins) .. " won, last " .. Str(e.last) .. ".");
+	end
+end
+
 local function ShowLast()
 	Check();
-	local h = ASTimeTrackerDB.history;
+	local h = AZSStatsDB.history;
 	local r = h[table.getn(h)];
 	if ( not r ) then
 		Print("no runs recorded yet.");
@@ -506,9 +729,9 @@ local function ShowLast()
 	end
 end
 
-SLASH_ASTIMETRACKER1 = "/azstats";
-SLASH_ASTIMETRACKER2 = "/astime";
-SlashCmdList["ASTIMETRACKER"] = function(msg)
+SLASH_AZSSTATS1 = "/azstats";
+SLASH_AZSSTATS2 = "/astime";
+SlashCmdList["AZSSTATS"] = function(msg)
 	local cmd = string.lower(Str(msg));
 	cmd = string.gsub(cmd, "^%s+", "");
 	cmd = string.gsub(cmd, "%s+$", "");
@@ -518,51 +741,104 @@ SlashCmdList["ASTIMETRACKER"] = function(msg)
 		ShowLast();
 	elseif ( cmd == "best" ) then
 		ShowBest();
+	elseif ( cmd == "deaths" or cmd == "death" ) then
+		ShowDeaths();
+	elseif ( cmd == "coop" or cmd == "co-op" or cmd == "friends" ) then
+		ShowCoop();
+	elseif ( cmd == "window" or cmd == "show" ) then
+		if ( AZSStats_Toggle ) then AZSStats_Toggle(); end
+	elseif ( cmd == "nemesis" ) then
+		ShowNemesis();
 	elseif ( cmd == "classes" or cmd == "class" ) then
 		ShowClasses();
 	elseif ( cmd == "quiet" ) then
 		Check();
-		ASTimeTrackerDB.quiet = not ASTimeTrackerDB.quiet;
-		if ( ASTimeTrackerDB.quiet ) then
+		AZSStatsDB.quiet = not AZSStatsDB.quiet;
+		if ( AZSStatsDB.quiet ) then
 			Print("the end-of-run line is off.");
 		else
 			Print("the end-of-run line is on.");
 		end
 	elseif ( cmd == "reset yes" ) then
 		local last = "";
-		if ( type(ASTimeTrackerDB) == "table" ) then
-			last = Str(ASTimeTrackerDB.lastSig);
+		if ( type(AZSStatsDB) == "table" ) then
+			last = Str(AZSStatsDB.lastSig);
 		end
-		ASTimeTrackerDB = Fresh();
-		ASTimeTrackerDB.lastSig = last;             -- the run on the end screen is not counted again
+		AZSStatsDB = Fresh();
+		AZSStatsDB.lastSig = last;             -- the run on the end screen is not counted again
 		Print("all stats cleared.");
 	elseif ( cmd == "reset" ) then
 		Print("type /azstats reset yes to clear every stat (this cannot be undone).");
 	else
-		Print("/azstats, /azstats last, /azstats best, /azstats classes, /azstats quiet, /azstats reset");
+		Print("/azstats, /azstats last, /azstats best, /azstats classes, /azstats deaths, /azstats nemesis, /azstats coop, /azstats quiet; /azs opens the window, /azstats reset");
 	end
 end
 
 -- the run's end arrives as an addon message; AZS_GetRunSummary() is checked too, now and then, in case
 -- the message came before this addon was listening (each run is counted once either way)
-local frame = CreateFrame("Frame", "ASTimeTrackerFrame");
+local frame = CreateFrame("Frame", "AZSStatsEventFrame");
 local waited = 0;
 frame:RegisterEvent("VARIABLES_LOADED");
 frame:RegisterEvent("CHAT_MSG_ADDON");
+frame:RegisterEvent("CHAT_MSG_COMBAT_CREATURE_VS_SELF_HITS");
+frame:RegisterEvent("CHAT_MSG_SPELL_CREATURE_VS_SELF_DAMAGE");
+frame:RegisterEvent("CHAT_MSG_SPELL_PERIODIC_SELF_DAMAGE");
+frame:RegisterEvent("CHAT_MSG_COMBAT_HOSTILEPLAYER_HITS");
+frame:RegisterEvent("CHAT_MSG_SPELL_HOSTILEPLAYER_DAMAGE");
+-- play time: the time the game runs, added every frame. A session starts when the interface loads, unless the
+-- game was seen less than two minutes ago (a /reload, not a new start).
+local session, playing = 0, false;
+
+local function Clock0()
+	if ( time ) then
+		local ok, t = pcall(time);
+		if ( ok and t ) then return t; end
+	end
+	return 0;
+end
+
+local function StartSession()
+	Check();
+	local p = AZSStatsDB.play;
+	local now = Clock0();
+	if ( now > 0 and Num(p.seen) > 0 and now - Num(p.seen) < 120 ) then
+		session = Num(p.last);                     -- a /reload: the same session goes on
+	else
+		p.sessions = Num(p.sessions) + 1;
+		p.last = 0;
+		p.lastDate = Now();
+		session = 0;
+	end
+	p.seen = now;
+	playing = true;
+end
+
 frame:SetScript("OnEvent", function()
 	if ( event == "VARIABLES_LOADED" ) then
-		Check();
-	elseif ( event == "CHAT_MSG_ADDON" and arg1 == "AZSEND" and arg2 ) then
-		ASTimeTracker_Record(Parse(arg2));
+		StartSession();
+	elseif ( event == "CHAT_MSG_ADDON" ) then
+		if ( arg1 == "AZSEND" and arg2 ) then AZSStats_Record(Parse(arg2)); end
+	else
+		OnHit(arg1);
 	end
 end);
+local seenTick = 0;
 frame:SetScript("OnUpdate", function()
+	if ( playing and AZSStatsDB and arg1 and arg1 > 0 and arg1 < 10 ) then
+		local p = AZSStatsDB.play;
+		session = session + arg1;
+		p.seconds = Num(p.seconds) + arg1;
+		p.last = session;
+		if ( session > Num(p.longest) ) then p.longest = session; end
+		seenTick = seenTick + arg1;
+		if ( seenTick > 20 ) then seenTick = 0; p.seen = Clock0(); end
+	end
 	waited = waited + (arg1 or 0);
 	if ( waited < 2 ) then
 		return;
 	end
 	waited = 0;
-	if ( not ASTimeTrackerDB ) then
+	if ( not AZSStatsDB ) then
 		return;
 	end
 	-- the last summary stays readable after its run (until the next one ends), so the build is copied every
@@ -571,7 +847,10 @@ frame:SetScript("OnUpdate", function()
 	if ( AZS_GetRunSummary ) then
 		local s = AZS_GetRunSummary();
 		if ( s ) then
-			ASTimeTracker_Record(s);
+			AZSStats_Record(s);
 		end
 	end
 end);
+
+-- for the window (AZSStatsUI.lua)
+AZSStats = { Check = Check, Big = Big, Clock = Clock, Pretty = Pretty, Kind = Kind, Print = Print };

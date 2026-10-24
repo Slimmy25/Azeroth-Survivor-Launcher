@@ -863,14 +863,14 @@ Track every run
 = บันทึกทุกรอบที่เล่น
 The stats file could not be read ({0}).
 = อ่านไฟล์สถิติไม่ได้ ({0})
-The AS Time Tracker addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
-= แอดออน AS Time Tracker จะบันทึกทุกรอบที่คุณเล่น ทั้งชัยชนะ การสังหาร ดาเมจ ทอง และสถิติสูงสุดส่วนตัว ติดตั้งแล้วเล่นให้จบหนึ่งรอบ สถิติของคุณจะปรากฏที่นี่
+The AZS Stats addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
+= แอดออน AZS Stats จะบันทึกทุกรอบที่คุณเล่น ทั้งชัยชนะ การสังหาร ดาเมจ ทอง และสถิติสูงสุดส่วนตัว ติดตั้งแล้วเล่นให้จบหนึ่งรอบ สถิติของคุณจะปรากฏที่นี่
 It is optional: without it, this page only shows your play time.
 = ไม่บังคับ: หากไม่มีแอดออนนี้ หน้านี้จะแสดงเฉพาะเวลาเล่นของคุณ
-The AS Time Tracker addon is turned off. Turn it on in Addons to keep recording your runs.
-= แอดออน AS Time Tracker ปิดอยู่ เปิดได้ในแอดออนเพื่อบันทึกรอบที่เล่นต่อไป
-No runs recorded yet. Finish a run with the AS Time Tracker addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
-= ยังไม่มีรอบที่บันทึกไว้ เล่นให้จบหนึ่งรอบโดยเปิด AS Time Tracker ไว้ เกมจะบันทึกข้อมูลแอดออนเมื่อคุณออกจากเกม สถิติจึงจะปรากฏที่นี่หลังจากปิดเกม
+The AZS Stats addon is turned off. Turn it on in Addons to keep recording your runs.
+= แอดออน AZS Stats ปิดอยู่ เปิดได้ในแอดออนเพื่อบันทึกรอบที่เล่นต่อไป
+No runs recorded yet. Finish a run with the AZS Stats addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
+= ยังไม่มีรอบที่บันทึกไว้ เล่นให้จบหนึ่งรอบโดยเปิด AZS Stats ไว้ เกมจะบันทึกข้อมูลแอดออนเมื่อคุณออกจากเกม สถิติจึงจะปรากฏที่นี่หลังจากปิดเกม
 Runs
 = รอบ
 Victories
@@ -941,12 +941,12 @@ In game, type /azstats to see your stats.
 = ในเกม พิมพ์ /azstats เพื่อดูสถิติของคุณ
 Saved by the game {0}.
 = เกมบันทึกเมื่อ: {0}
-AS Time Tracker updated.
-= อัปเดต AS Time Tracker แล้ว
-AS Time Tracker installed. It records your runs from now on.
-= ติดตั้ง AS Time Tracker แล้ว จากนี้ไปจะบันทึกรอบที่คุณเล่น
-Could not install AS Time Tracker:\n\n{0}
-= ติดตั้ง AS Time Tracker ไม่ได้:\n\n{0}
+AZS Stats updated.
+= อัปเดต AZS Stats แล้ว
+AZS Stats installed. It records your runs from now on.
+= ติดตั้ง AZS Stats แล้ว จากนี้ไปจะบันทึกรอบที่คุณเล่น
+Could not install AZS Stats:\n\n{0}
+= ติดตั้ง AZS Stats ไม่ได้:\n\n{0}
 ALL CLASSES
 = ทุกคลาส
 Class pick rate
@@ -961,8 +961,8 @@ Picks per month
 = จำนวนครั้งที่เลือกต่อเดือน
 Abilities
 = ความสามารถ
-Abilities are recorded for runs played with the newest AS Time Tracker.
-= ความสามารถจะถูกบันทึกในรอบที่เล่นด้วย AS Time Tracker เวอร์ชันล่าสุด
+Abilities are recorded for runs played with the newest AZS Stats.
+= ความสามารถจะถูกบันทึกในรอบที่เล่นด้วย AZS Stats เวอร์ชันล่าสุด
 Picked in {#0} runs ({#1}%) · Win rate {#2}%
 = เลือกใน {#0} รอบ ({#1}%) · อัตราชนะ {#2}%
 Best rank {#0}
@@ -995,3 +995,75 @@ Level {#0}
 = เลเวล {#0}
 Runs: {#0} · Won: {#1}
 = รอบ: {#0} · ชนะ: {#1}
+Nemesis
+= ศัตรูคู่แค้น
+Co-op
+= เล่นร่วมกัน
+Your nemesis
+= ศัตรูคู่แค้นของคุณ
+Times it killed you
+= จำนวนครั้งที่ฆ่าคุณ
+Of your deaths
+= ของการตายทั้งหมด
+Deaths
+= การตาย
+Last time
+= ครั้งล่าสุด
+Who kills you
+= ใครฆ่าคุณ
+No deaths recorded yet.
+= ยังไม่มีการตายที่บันทึกไว้
+Killed you {#0} times ({#1}%)
+= ฆ่าคุณ {#0} ครั้ง ({#1}%)
+Death log
+= บันทึกการตาย
+Slain by {0}
+= ถูกสังหารโดย {0}
+Survived {0} · Level {#1}
+= รอด {0} · เลเวล {#1}
+Last hits: {0}
+= การโจมตีสุดท้าย: {0}
+Most damage from: {0}
+= ดาเมจมากที่สุดจาก: {0}
+Runs with friends
+= รอบที่เล่นกับเพื่อน
+Co-op win rate
+= อัตราชนะเมื่อเล่นร่วมกัน
+Solo win rate
+= อัตราชนะเมื่อเล่นคนเดียว
+Time together
+= เวลาที่เล่นด้วยกัน
+Friends
+= เพื่อน
+Victories together
+= ชัยชนะร่วมกัน
+Enemies slain together
+= ศัตรูที่กำจัดร่วมกัน
+Bosses together
+= บอสที่ปราบร่วมกัน
+Who you play with
+= คุณเล่นกับใคร
+No co-op runs recorded yet. Play a run with friends and they show up here.
+= ยังไม่มีรอบที่เล่นร่วมกัน เล่นกับเพื่อนแล้วพวกเขาจะปรากฏที่นี่
+First win together {0}
+= ชัยชนะแรกร่วมกัน {0}
+Fastest win {0}
+= ชนะเร็วที่สุด {0}
+Most bosses {#0}
+= บอสมากที่สุด {#0}
+Played since {0}
+= เล่นด้วยกันตั้งแต่ {0}
+Accomplishments together
+= ความสำเร็จร่วมกัน
+With {0}
+= กับ {0}
+No play time counted yet. AZS Stats counts it while the game runs.
+= ยังไม่มีเวลาเล่นที่นับไว้ AZS Stats จะนับขณะที่เกมทำงาน
+Play time is counted in game by the AZS Stats addon. Install it on the STATS page.
+= เวลาเล่นนับในเกมโดยแอดออน AZS Stats ติดตั้งได้ที่หน้า สถิติ
+Counted in game by AZS Stats; cloud saving carries it to your other PCs.
+= นับในเกมโดย AZS Stats เซฟบนคลาวด์จะพาไปยังพีซีเครื่องอื่นของคุณ
+Counted in game by AZS Stats. Turn on cloud saving to take it to your other PCs.
+= นับในเกมโดย AZS Stats เปิดเซฟบนคลาวด์เพื่อพาไปยังพีซีเครื่องอื่นของคุณ
+Show play time on the home screen
+= แสดงเวลาเล่นบนหน้าจอหลัก

@@ -863,14 +863,14 @@ Track every run
 = Κατέγραψε κάθε γύρο
 The stats file could not be read ({0}).
 = Δεν ήταν δυνατή η ανάγνωση του αρχείου στατιστικών ({0}).
-The AS Time Tracker addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
-= Το πρόσθετο AS Time Tracker καταγράφει κάθε γύρο που παίζεις: νίκες, φόνους, ζημιά, χρυσό και τα προσωπικά σου ρεκόρ. Εγκατάστησέ το, ολοκλήρωσε έναν γύρο και τα στατιστικά σου θα εμφανιστούν εδώ.
+The AZS Stats addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
+= Το πρόσθετο AZS Stats καταγράφει κάθε γύρο που παίζεις: νίκες, φόνους, ζημιά, χρυσό και τα προσωπικά σου ρεκόρ. Εγκατάστησέ το, ολοκλήρωσε έναν γύρο και τα στατιστικά σου θα εμφανιστούν εδώ.
 It is optional: without it, this page only shows your play time.
 = Είναι προαιρετικό: χωρίς αυτό, η σελίδα δείχνει μόνο τον χρόνο παιχνιδιού σου.
-The AS Time Tracker addon is turned off. Turn it on in Addons to keep recording your runs.
-= Το πρόσθετο AS Time Tracker είναι απενεργοποιημένο. Ενεργοποίησέ το στα Πρόσθετα για να συνεχίσει να καταγράφει τους γύρους σου.
-No runs recorded yet. Finish a run with the AS Time Tracker addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
-= Δεν έχουν καταγραφεί γύροι ακόμα. Ολοκλήρωσε έναν γύρο με ενεργό το AS Time Tracker. Το παιχνίδι αποθηκεύει τα δεδομένα των πρόσθετων όταν βγαίνεις, οπότε τα στατιστικά εμφανίζονται εδώ αφού κλείσεις το παιχνίδι.
+The AZS Stats addon is turned off. Turn it on in Addons to keep recording your runs.
+= Το πρόσθετο AZS Stats είναι απενεργοποιημένο. Ενεργοποίησέ το στα Πρόσθετα για να συνεχίσει να καταγράφει τους γύρους σου.
+No runs recorded yet. Finish a run with the AZS Stats addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
+= Δεν έχουν καταγραφεί γύροι ακόμα. Ολοκλήρωσε έναν γύρο με ενεργό το AZS Stats. Το παιχνίδι αποθηκεύει τα δεδομένα των πρόσθετων όταν βγαίνεις, οπότε τα στατιστικά εμφανίζονται εδώ αφού κλείσεις το παιχνίδι.
 Runs
 = Γύροι
 Victories
@@ -941,12 +941,12 @@ In game, type /azstats to see your stats.
 = Στο παιχνίδι, γράψε /azstats για να δεις τα στατιστικά σου.
 Saved by the game {0}.
 = Αποθηκεύτηκε από το παιχνίδι: {0}.
-AS Time Tracker updated.
-= Το AS Time Tracker ενημερώθηκε.
-AS Time Tracker installed. It records your runs from now on.
-= Το AS Time Tracker εγκαταστάθηκε. Από τώρα καταγράφει τους γύρους σου.
-Could not install AS Time Tracker:\n\n{0}
-= Δεν ήταν δυνατή η εγκατάσταση του AS Time Tracker:\n\n{0}
+AZS Stats updated.
+= Το AZS Stats ενημερώθηκε.
+AZS Stats installed. It records your runs from now on.
+= Το AZS Stats εγκαταστάθηκε. Από τώρα καταγράφει τους γύρους σου.
+Could not install AZS Stats:\n\n{0}
+= Δεν ήταν δυνατή η εγκατάσταση του AZS Stats:\n\n{0}
 ALL CLASSES
 = ΟΛΕΣ ΟΙ ΚΛΑΣΕΙΣ
 Class pick rate
@@ -961,8 +961,8 @@ Picks per month
 = Επιλογές ανά μήνα
 Abilities
 = Ικανότητες
-Abilities are recorded for runs played with the newest AS Time Tracker.
-= Οι ικανότητες καταγράφονται στους γύρους με το νεότερο AS Time Tracker.
+Abilities are recorded for runs played with the newest AZS Stats.
+= Οι ικανότητες καταγράφονται στους γύρους με το νεότερο AZS Stats.
 Picked in {#0} runs ({#1}%) · Win rate {#2}%
 = Επιλέχθηκε σε {#0} γύρους ({#1}%) · Ποσοστό νικών {#2}%
 Best rank {#0}
@@ -995,3 +995,75 @@ Level {#0}
 = Επίπεδο {#0}
 Runs: {#0} · Won: {#1}
 = Γύροι: {#0} · Νίκες: {#1}
+Nemesis
+= Νέμεσις
+Co-op
+= Συνεργατικό
+Your nemesis
+= Η νέμεσή σου
+Times it killed you
+= Φορές που σε σκότωσε
+Of your deaths
+= Των θανάτων σου
+Deaths
+= Θάνατοι
+Last time
+= Τελευταία φορά
+Who kills you
+= Ποιος σε σκοτώνει
+No deaths recorded yet.
+= Δεν έχουν καταγραφεί θάνατοι ακόμα.
+Killed you {#0} times ({#1}%)
+= Σε σκότωσε {#0} φορές ({#1}%)
+Death log
+= Ημερολόγιο θανάτων
+Slain by {0}
+= Σε σκότωσε: {0}
+Survived {0} · Level {#1}
+= Επιβίωσε {0} · Επίπεδο {#1}
+Last hits: {0}
+= Τελευταία χτυπήματα: {0}
+Most damage from: {0}
+= Περισσότερη ζημιά από: {0}
+Runs with friends
+= Γύροι με φίλους
+Co-op win rate
+= Ποσοστό νικών συνεργατικά
+Solo win rate
+= Ποσοστό νικών μόνος
+Time together
+= Χρόνος μαζί
+Friends
+= Φίλοι
+Victories together
+= Νίκες μαζί
+Enemies slain together
+= Εχθροί που νικήσατε μαζί
+Bosses together
+= Αρχηγοί μαζί
+Who you play with
+= Με ποιους παίζεις
+No co-op runs recorded yet. Play a run with friends and they show up here.
+= Δεν υπάρχουν ακόμα συνεργατικοί γύροι. Παίξε με φίλους και θα εμφανιστούν εδώ.
+First win together {0}
+= Πρώτη νίκη μαζί {0}
+Fastest win {0}
+= Ταχύτερη νίκη {0}
+Most bosses {#0}
+= Περισσότεροι αρχηγοί {#0}
+Played since {0}
+= Μαζί από {0}
+Accomplishments together
+= Επιτεύγματα μαζί
+With {0}
+= Με {0}
+No play time counted yet. AZS Stats counts it while the game runs.
+= Δεν έχει μετρηθεί ακόμα χρόνος παιχνιδιού. Το AZS Stats τον μετρά όσο τρέχει το παιχνίδι.
+Play time is counted in game by the AZS Stats addon. Install it on the STATS page.
+= Τον χρόνο παιχνιδιού τον μετρά μέσα στο παιχνίδι το πρόσθετο AZS Stats. Εγκατάστησέ το στη σελίδα ΣΤΑΤΙΣΤΙΚΑ.
+Counted in game by AZS Stats; cloud saving carries it to your other PCs.
+= Μετριέται στο παιχνίδι από το AZS Stats· η αποθήκευση cloud τον μεταφέρει στους άλλους υπολογιστές σου.
+Counted in game by AZS Stats. Turn on cloud saving to take it to your other PCs.
+= Μετριέται στο παιχνίδι από το AZS Stats. Ενεργοποίησε την αποθήκευση cloud για να τον μεταφέρεις στους άλλους υπολογιστές σου.
+Show play time on the home screen
+= Εμφάνιση χρόνου παιχνιδιού στην αρχική οθόνη

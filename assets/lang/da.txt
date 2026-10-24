@@ -862,14 +862,14 @@ Track every run
 = Hold styr på hvert run
 The stats file could not be read ({0}).
 = Statistikfilen kunne ikke læses ({0}).
-The AS Time Tracker addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
-= Tilføjelsen AS Time Tracker registrerer hvert run, du spiller: sejre, drab, skade, guld og dine personlige rekorder. Installér den, gennemfør et run, og din statistik vises her.
+The AZS Stats addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
+= Tilføjelsen AZS Stats registrerer hvert run, du spiller: sejre, drab, skade, guld og dine personlige rekorder. Installér den, gennemfør et run, og din statistik vises her.
 It is optional: without it, this page only shows your play time.
 = Den er valgfri: uden den viser siden kun din spilletid.
-The AS Time Tracker addon is turned off. Turn it on in Addons to keep recording your runs.
-= Tilføjelsen AS Time Tracker er slået fra. Slå den til under Tilføjelser for at blive ved med at registrere dine runs.
-No runs recorded yet. Finish a run with the AS Time Tracker addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
-= Ingen runs registreret endnu. Gennemfør et run med AS Time Tracker slået til. Spillet gemmer tilføjelsesdata, når du forlader det, så din statistik vises her, når du har lukket spillet.
+The AZS Stats addon is turned off. Turn it on in Addons to keep recording your runs.
+= Tilføjelsen AZS Stats er slået fra. Slå den til under Tilføjelser for at blive ved med at registrere dine runs.
+No runs recorded yet. Finish a run with the AZS Stats addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
+= Ingen runs registreret endnu. Gennemfør et run med AZS Stats slået til. Spillet gemmer tilføjelsesdata, når du forlader det, så din statistik vises her, når du har lukket spillet.
 Runs
 = Runs
 Victories
@@ -940,12 +940,12 @@ In game, type /azstats to see your stats.
 = Skriv /azstats i spillet for at se din statistik.
 Saved by the game {0}.
 = Gemt af spillet: {0}.
-AS Time Tracker updated.
-= AS Time Tracker opdateret.
-AS Time Tracker installed. It records your runs from now on.
-= AS Time Tracker installeret. Den registrerer dine runs fra nu af.
-Could not install AS Time Tracker:\n\n{0}
-= AS Time Tracker kunne ikke installeres:\n\n{0}
+AZS Stats updated.
+= AZS Stats opdateret.
+AZS Stats installed. It records your runs from now on.
+= AZS Stats installeret. Den registrerer dine runs fra nu af.
+Could not install AZS Stats:\n\n{0}
+= AZS Stats kunne ikke installeres:\n\n{0}
 ALL CLASSES
 = ALLE KLASSER
 Class pick rate
@@ -960,8 +960,8 @@ Picks per month
 = Valg pr. måned
 Abilities
 = Evner
-Abilities are recorded for runs played with the newest AS Time Tracker.
-= Evner registreres for runs spillet med den nyeste AS Time Tracker.
+Abilities are recorded for runs played with the newest AZS Stats.
+= Evner registreres for runs spillet med den nyeste AZS Stats.
 Picked in {#0} runs ({#1}%) · Win rate {#2}%
 = Valgt i {#0} runs ({#1} %) · Sejrsprocent {#2} %
 Best rank {#0}
@@ -994,3 +994,75 @@ Level {#0}
 = Niveau {#0}
 Runs: {#0} · Won: {#1}
 = Runs: {#0} · Vundet: {#1}
+Nemesis
+= Nemesis
+Co-op
+= Co-op
+Your nemesis
+= Din nemesis
+Times it killed you
+= Gange den dræbte dig
+Of your deaths
+= Af dine dødsfald
+Deaths
+= Dødsfald
+Last time
+= Sidste gang
+Who kills you
+= Hvem dræber dig
+No deaths recorded yet.
+= Ingen dødsfald registreret endnu.
+Killed you {#0} times ({#1}%)
+= Dræbte dig {#0} gange ({#1} %)
+Death log
+= Dødslog
+Slain by {0}
+= Dræbt af {0}
+Survived {0} · Level {#1}
+= Overlevede {0} · Niveau {#1}
+Last hits: {0}
+= Sidste slag: {0}
+Most damage from: {0}
+= Mest skade fra: {0}
+Runs with friends
+= Runs med venner
+Co-op win rate
+= Co-op sejrsprocent
+Solo win rate
+= Solo sejrsprocent
+Time together
+= Tid sammen
+Friends
+= Venner
+Victories together
+= Sejre sammen
+Enemies slain together
+= Fjender nedkæmpet sammen
+Bosses together
+= Bosser sammen
+Who you play with
+= Hvem du spiller med
+No co-op runs recorded yet. Play a run with friends and they show up here.
+= Ingen co-op runs endnu. Spil et run med venner, så dukker de op her.
+First win together {0}
+= Første sejr sammen {0}
+Fastest win {0}
+= Hurtigste sejr {0}
+Most bosses {#0}
+= Flest bosser {#0}
+Played since {0}
+= Sammen siden {0}
+Accomplishments together
+= Bedrifter sammen
+With {0}
+= Med {0}
+No play time counted yet. AZS Stats counts it while the game runs.
+= Ingen spilletid talt endnu. AZS Stats tæller den, mens spillet kører.
+Play time is counted in game by the AZS Stats addon. Install it on the STATS page.
+= Spilletiden tælles i spillet af tilføjelsen AZS Stats. Installér den på siden STATISTIK.
+Counted in game by AZS Stats; cloud saving carries it to your other PCs.
+= Talt i spillet af AZS Stats; skygemning tager den med til dine andre pc'er.
+Counted in game by AZS Stats. Turn on cloud saving to take it to your other PCs.
+= Talt i spillet af AZS Stats. Slå skygemning til for at tage den med til dine andre pc'er.
+Show play time on the home screen
+= Vis spilletid på startskærmen

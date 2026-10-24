@@ -862,14 +862,14 @@ Track every run
 = Catat setiap permainan
 The stats file could not be read ({0}).
 = File statistik tidak dapat dibaca ({0}).
-The AS Time Tracker addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
-= Addon AS Time Tracker mencatat setiap permainan yang kamu mainkan: kemenangan, kill, damage, emas, dan rekor pribadimu. Instal, selesaikan satu permainan, dan statistikmu muncul di sini.
+The AZS Stats addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
+= Addon AZS Stats mencatat setiap permainan yang kamu mainkan: kemenangan, kill, damage, emas, dan rekor pribadimu. Instal, selesaikan satu permainan, dan statistikmu muncul di sini.
 It is optional: without it, this page only shows your play time.
 = Ini opsional: tanpanya, halaman ini hanya menampilkan waktu bermainmu.
-The AS Time Tracker addon is turned off. Turn it on in Addons to keep recording your runs.
-= Addon AS Time Tracker dimatikan. Nyalakan di Addon agar permainanmu terus dicatat.
-No runs recorded yet. Finish a run with the AS Time Tracker addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
-= Belum ada permainan yang tercatat. Selesaikan satu permainan dengan AS Time Tracker menyala. Game menyimpan data addon saat kamu keluar, jadi statistikmu muncul di sini setelah game ditutup.
+The AZS Stats addon is turned off. Turn it on in Addons to keep recording your runs.
+= Addon AZS Stats dimatikan. Nyalakan di Addon agar permainanmu terus dicatat.
+No runs recorded yet. Finish a run with the AZS Stats addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
+= Belum ada permainan yang tercatat. Selesaikan satu permainan dengan AZS Stats menyala. Game menyimpan data addon saat kamu keluar, jadi statistikmu muncul di sini setelah game ditutup.
 Runs
 = Permainan
 Victories
@@ -940,12 +940,12 @@ In game, type /azstats to see your stats.
 = Di dalam game, ketik /azstats untuk melihat statistikmu.
 Saved by the game {0}.
 = Disimpan oleh game: {0}.
-AS Time Tracker updated.
-= AS Time Tracker diperbarui.
-AS Time Tracker installed. It records your runs from now on.
-= AS Time Tracker terinstal. Mulai sekarang ia mencatat permainanmu.
-Could not install AS Time Tracker:\n\n{0}
-= AS Time Tracker tidak dapat diinstal:\n\n{0}
+AZS Stats updated.
+= AZS Stats diperbarui.
+AZS Stats installed. It records your runs from now on.
+= AZS Stats terinstal. Mulai sekarang ia mencatat permainanmu.
+Could not install AZS Stats:\n\n{0}
+= AZS Stats tidak dapat diinstal:\n\n{0}
 ALL CLASSES
 = SEMUA KELAS
 Class pick rate
@@ -960,8 +960,8 @@ Picks per month
 = Pilihan per bulan
 Abilities
 = Kemampuan
-Abilities are recorded for runs played with the newest AS Time Tracker.
-= Kemampuan dicatat untuk permainan dengan AS Time Tracker terbaru.
+Abilities are recorded for runs played with the newest AZS Stats.
+= Kemampuan dicatat untuk permainan dengan AZS Stats terbaru.
 Picked in {#0} runs ({#1}%) · Win rate {#2}%
 = Dipilih di {#0} permainan ({#1}%) · Rasio menang {#2}%
 Best rank {#0}
@@ -994,3 +994,75 @@ Level {#0}
 = Level {#0}
 Runs: {#0} · Won: {#1}
 = Permainan: {#0} · Menang: {#1}
+Nemesis
+= Musuh bebuyutan
+Co-op
+= Co-op
+Your nemesis
+= Musuh bebuyutanmu
+Times it killed you
+= Kali ia membunuhmu
+Of your deaths
+= Dari kematianmu
+Deaths
+= Kematian
+Last time
+= Terakhir kali
+Who kills you
+= Siapa yang membunuhmu
+No deaths recorded yet.
+= Belum ada kematian yang tercatat.
+Killed you {#0} times ({#1}%)
+= Membunuhmu {#0} kali ({#1}%)
+Death log
+= Log kematian
+Slain by {0}
+= Dibunuh oleh {0}
+Survived {0} · Level {#1}
+= Bertahan {0} · Level {#1}
+Last hits: {0}
+= Serangan terakhir: {0}
+Most damage from: {0}
+= Damage terbanyak dari: {0}
+Runs with friends
+= Permainan bersama teman
+Co-op win rate
+= Rasio menang co-op
+Solo win rate
+= Rasio menang solo
+Time together
+= Waktu bersama
+Friends
+= Teman
+Victories together
+= Kemenangan bersama
+Enemies slain together
+= Musuh dikalahkan bersama
+Bosses together
+= Bos bersama
+Who you play with
+= Dengan siapa kamu bermain
+No co-op runs recorded yet. Play a run with friends and they show up here.
+= Belum ada permainan co-op. Bermainlah bersama teman dan mereka akan muncul di sini.
+First win together {0}
+= Kemenangan pertama bersama {0}
+Fastest win {0}
+= Kemenangan tercepat {0}
+Most bosses {#0}
+= Bos terbanyak {#0}
+Played since {0}
+= Bersama sejak {0}
+Accomplishments together
+= Pencapaian bersama
+With {0}
+= Dengan {0}
+No play time counted yet. AZS Stats counts it while the game runs.
+= Belum ada waktu bermain yang dihitung. AZS Stats menghitungnya saat game berjalan.
+Play time is counted in game by the AZS Stats addon. Install it on the STATS page.
+= Waktu bermain dihitung di dalam game oleh addon AZS Stats. Instal di halaman STATISTIK.
+Counted in game by AZS Stats; cloud saving carries it to your other PCs.
+= Dihitung di dalam game oleh AZS Stats; simpan cloud membawanya ke PC-mu yang lain.
+Counted in game by AZS Stats. Turn on cloud saving to take it to your other PCs.
+= Dihitung di dalam game oleh AZS Stats. Nyalakan simpan cloud untuk membawanya ke PC-mu yang lain.
+Show play time on the home screen
+= Tampilkan waktu bermain di layar utama

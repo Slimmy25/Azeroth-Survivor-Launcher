@@ -1,6 +1,6 @@
 // The STATS section, laid out like a WoW armory page: a character header (every class together, or one class),
 // tabs (Overview, Classes, Abilities, Records, History) and rounded cards (ArmoryUI.cs). The launcher's own play
-// time is always there; the run records come from the optional AS Time Tracker addon (see Stats.cs). Turned off
+// time is always there; the run records come from the optional AZS Stats addon (see Stats.cs). Turned off
 // in Options, the section and its buttons disappear.
 using System;
 using System.Collections.Generic;
@@ -53,7 +53,7 @@ namespace AzerothLauncher
         static readonly double[] GoldSteps = { 100, 1000, 5000, 10000, 50000, 100000, 500000, 1000000, 5000000 };
         static readonly double[] HourSteps = { 1, 5, 10, 25, 50, 100, 250, 500, 1000, 2500 };
 
-        static readonly string[] StatTabs = { "Overview", "Classes", "Abilities", "Records", "History" };
+        static readonly string[] StatTabs = { "Overview", "Classes", "Abilities", "Records", "Nemesis", "Co-op", "History" };
         string statsClass;                                   // null = every class, else a class key
         int statsTab;
 
@@ -162,19 +162,19 @@ namespace AzerothLauncher
                 if (err != null) info = Note("Your runs", "The stats file could not be read (" + err + ").", Theme.Bad);
                 else if (!have)
                 {
-                    info = Note("Track every run", "The AS Time Tracker addon keeps a record of every run you play: victories, kills, " +
+                    info = Note("Track every run", "The AZS Stats addon keeps a record of every run you play: victories, kills, " +
                                 "damage, gold and your personal bests. Install it, finish a run, and your stats appear here.", Armory.Bright);
                     info.Lines.Add(new object[] { Lang.T("It is optional: without it, this page only shows your play time."), Armory.Dim, 9f, true });
                     info.Button = new WowButton("INSTALL STATS ADDON", InstallStatsAddon, 230, 32, 10);
                 }
-                else if (off) info = Note("Your runs", "The AS Time Tracker addon is turned off. Turn it on in Addons to keep recording your runs.", Armory.Bright);
-                else info = Note("Your runs", "No runs recorded yet. Finish a run with the AS Time Tracker addon turned on. The game saves " +
+                else if (off) info = Note("Your runs", "The AZS Stats addon is turned off. Turn it on in Addons to keep recording your runs.", Armory.Bright);
+                else info = Note("Your runs", "No runs recorded yet. Finish a run with the AZS Stats addon turned on. The game saves " +
                                  "addon data when you leave it, so your stats show up here after you close the game.", Armory.Bright);
                 y = Place(sp, info, w, y);
                 Pad(sp, y);
                 return;
             }
-            if (off) y = Place(sp, Note(null, "The AS Time Tracker addon is turned off. Turn it on in Addons to keep recording your runs.", Theme.Bad), w, y);
+            if (off) y = Place(sp, Note(null, "The AZS Stats addon is turned off. Turn it on in Addons to keep recording your runs.", Theme.Bad), w, y);
 
             // --- the tabs
             var tabs = new TabsBlock();
@@ -257,6 +257,10 @@ namespace AzerothLauncher
             }
             else if (statsTab == 3)                          // Records
                 y = Place(sp, Records(b.Best), w, y);
+            else if (statsTab == 4)                          // Nemesis
+                y = NemesisTab(sp, w, y, st, cls);
+            else if (statsTab == 5)                          // Co-op
+                y = CoopTab(sp, w, y, st);
             else                                             // History
                 y = Place(sp, History(runs), w, y);
 
@@ -265,6 +269,137 @@ namespace AzerothLauncher
             foot.Lines[0][3] = true;
             y = Place(sp, foot, w, y);
             Pad(sp, y);
+        }
+
+        // ------------------------------------------------------------------ Nemesis: who kills you, and the death log
+        int NemesisTab(ScrollPanel sp, int w, int y, RunStats st, StatBlock cls)
+        {
+            List<NemesisStat> killers = cls != null ? cls.Nemesis : st.Nemesis;
+            List<DeathStat> deaths = cls == null ? st.Deaths : st.Deaths.FindAll(delegate(DeathStat d) { return d.ClassKey == cls.Key; });
+            double total = 0;
+            foreach (var k in killers) total += k.Kills;
+            if (killers.Count > 0)
+            {
+                var top = killers[0];
+                var hero = new TilesBlock();
+                hero.Title = Lang.T("Your nemesis") + ": " + top.Name;
+                hero.Items.Add(new[] { Big(top.Kills), Lang.T("Times it killed you") });
+                hero.Items.Add(new[] { Pct(top.Kills, total) + "%", Lang.T("Of your deaths") });
+                hero.Items.Add(new[] { Big(total), Lang.T("Deaths") });
+                hero.Items.Add(new[] { top.Last.Length >= 10 ? top.Last.Substring(0, 10) : top.Last, Lang.T("Last time") });
+                y = Place(sp, hero, w, y);
+            }
+            var rows = new RowsBlock();
+            rows.Title = Lang.T("Who kills you");
+            rows.Empty = Lang.T("No deaths recorded yet.");
+            foreach (var k in killers)
+            {
+                var row = new ArmoryRow();
+                row.Icon = Armory.Initials(k.Name);
+                row.IconColor = Theme.Hex("#c41f3b");
+                row.Name = k.Name;
+                row.NameColor = Theme.Hex("#ff5a4a");
+                row.Sub = Lang.T("Killed you " + Big(k.Kills) + " times (" + Pct(k.Kills, total) + "%)");
+                row.Value = Big(k.Kills);
+                row.ValueSub = k.Last;
+                row.Bar = total > 0 ? k.Kills / total : 0;
+                rows.Rows.Add(row);
+                if (rows.Rows.Count >= 15) break;
+            }
+            y = Place(sp, rows, w, y);
+            var log = new RowsBlock();
+            log.Title = Lang.T("Death log");
+            log.Empty = Lang.T("No deaths recorded yet.");
+            foreach (var d in deaths)
+            {
+                var row = new ArmoryRow();
+                row.Icon = "X";
+                row.IconColor = ClassColor(d.ClassKey);
+                row.RoundIcon = true;
+                row.Name = Lang.T("Slain by " + d.Killer) + (d.Spell.Length > 0 ? " · " + d.Spell : "") +
+                           (d.Amount > 0 ? " " + Big(d.Amount) : "");
+                row.NameColor = Theme.Hex("#ff5a4a");
+                row.Sub = Dots(Pair(d.Class, d.Race.Length > 0 ? "(" + d.Race + ")" : ""), d.Zone,
+                               Lang.T("Survived " + Clock(d.Time) + " · Level " + Big(d.Level)));
+                row.Sub2 = d.LastHits.Length > 0 ? Lang.T("Last hits: " + d.LastHits)
+                         : d.TopSources.Length > 0 ? Lang.T("Most damage from: " + d.TopSources) : "";
+                row.Value = Clock(d.Time);
+                row.ValueSub = d.Date;
+                log.Rows.Add(row);
+                if (log.Rows.Count >= 30) break;
+            }
+            return Place(sp, log, w, y);
+        }
+
+        // ------------------------------------------------------------------ Co-op: who you play with
+        int CoopTab(ScrollPanel sp, int w, int y, RunStats st)
+        {
+            CoopStat co = st.Coop;
+            var tiles = new TilesBlock();
+            tiles.Title = Lang.T("Co-op");
+            tiles.Items.Add(new[] { Big(co.Runs), Lang.T("Runs with friends") });
+            tiles.Items.Add(new[] { Pct(co.Wins, co.Runs) + "%", Lang.T("Co-op win rate") });
+            tiles.Items.Add(new[] { Pct(co.SoloWins, co.Solo) + "%", Lang.T("Solo win rate") });
+            tiles.Items.Add(new[] { Duration((long)co.Time), Lang.T("Time together") });
+            tiles.Items.Add(new[] { Big(co.Friends.Count), Lang.T("Friends") });
+            tiles.Items.Add(new[] { Big(co.Wins), Lang.T("Victories together") });
+            tiles.Items.Add(new[] { Big(co.Kills), Lang.T("Enemies slain together") });
+            tiles.Items.Add(new[] { Big(co.Bosses), Lang.T("Bosses together") });
+            y = Place(sp, tiles, w, y);
+
+            var friends = new RowsBlock();
+            friends.Title = Lang.T("Who you play with");
+            friends.Empty = Lang.T("No co-op runs recorded yet. Play a run with friends and they show up here.");
+            double most = co.Friends.Count > 0 ? co.Friends[0].Runs : 1;
+            foreach (var f in co.Friends)
+            {
+                var row = new ArmoryRow();
+                row.Icon = Armory.Initials(f.Name);
+                row.RoundIcon = true;
+                row.IconColor = f.ClassKey.Length > 0 ? ClassColor(f.ClassKey) : Theme.Hex("#5fb0d3");
+                row.Name = f.Name + (f.Class.Length > 0 ? "  (" + f.Class + ")" : "");
+                row.NameColor = row.IconColor;
+                row.Sub = Lang.T("Runs: " + Big(f.Runs) + " · Won: " + Big(f.Wins) + " · Longest: " + Clock(f.BestTime) +
+                                 " · Best level: " + Big(f.BestLevel));
+                var acc = new List<string>();
+                if (f.FirstWin.Length > 0) acc.Add(Lang.T("First win together " + f.FirstWin));
+                if (f.FastestWin > 0) acc.Add(Lang.T("Fastest win " + Clock(f.FastestWin)));
+                if (f.MostBosses > 0) acc.Add(Lang.T("Most bosses " + Big(f.MostBosses)));
+                acc.Add(Lang.T("Played since " + f.First));
+                row.Sub2 = string.Join(" · ", acc.ToArray());
+                row.Value = Big(f.Runs);
+                row.ValueSub = f.Last;
+                row.Bar = most > 0 ? f.Runs / most : 0;
+                friends.Rows.Add(row);
+                if (friends.Rows.Count >= 30) break;
+            }
+            y = Place(sp, friends, w, y);
+
+            if (co.Best.Count > 0)
+            {
+                var best = new RowsBlock();
+                best.Title = Lang.T("Accomplishments together");
+                var order = new[] {
+                    new[] { "time", "Longest run", "clock" }, new[] { "fastestWin", "Fastest victory", "clock" },
+                    new[] { "lvl", "Highest level", "" }, new[] { "kills", "Most kills in a run", "" },
+                    new[] { "bosses", "Most bosses in a run", "" }, new[] { "gold", "Most gold in a run", "" } };
+                foreach (var o in order)
+                {
+                    StatRecord r;
+                    if (!co.Best.TryGetValue(o[0], out r) || r.Value <= 0) continue;
+                    var row = new ArmoryRow();
+                    row.Icon = Armory.Initials(Lang.T(o[1]));
+                    row.IconColor = Theme.Hex("#5fb0d3");
+                    row.Name = Lang.T(o[1]);
+                    row.NameColor = Theme.Hex("#8fd0ff");
+                    row.Sub = Lang.T("With " + r.Hero);
+                    row.Value = o[2] == "clock" ? Clock(r.Value) : Big(r.Value);
+                    row.ValueSub = r.Date;
+                    best.Rows.Add(row);
+                }
+                y = Place(sp, best, w, y);
+            }
+            return y;
         }
 
         // the header's chips: kills, bosses, gold, win rate and time (play time on the overall page)
@@ -283,7 +418,7 @@ namespace AzerothLauncher
 
         int PlayTimeBlocks(ScrollPanel sp, int w, int y, PlayStats ps)
         {
-            if (ps.Sessions == 0) return Place(sp, Note("Play time", "No games played with this launcher yet.", Armory.Dim), w, y);
+            if (ps.Sessions == 0) return Place(sp, Note("Play time", "No play time counted yet. AZS Stats counts it while the game runs.", Armory.Dim), w, y);
             var tiles = new TilesBlock();
             tiles.Title = Lang.T("Play time");
             tiles.Items.Add(new[] { Duration(ps.Seconds), Lang.T("Time played") });
@@ -291,10 +426,8 @@ namespace AzerothLauncher
             tiles.Items.Add(new[] { Duration(ps.Longest), Lang.T("Longest session") });
             tiles.Items.Add(new[] { Duration(ps.LastSeconds), Lang.T("Last session") });
             y = Place(sp, tiles, w, y);
-            bool shared = CloudEnabled() && cloudPlay != null;
-            string note = shared ? "Shared with your other PCs through the cloud sync folder." :
-                          CloudEnabled() ? "Counted on this PC (the sync folder is not reachable right now)." :
-                          "Counted on this PC. Turn on cloud saving to share it between your PCs.";
+            string note = CloudEnabled() ? "Counted in game by AZS Stats; cloud saving carries it to your other PCs."
+                                         : "Counted in game by AZS Stats. Turn on cloud saving to take it to your other PCs.";
             var n = Note(null, note, Armory.Dim);
             n.Lines[0][2] = 9f;
             n.Lines[0][3] = true;
@@ -346,7 +479,7 @@ namespace AzerothLauncher
         static RowsBlock AbilityRows(List<AbilityStat> list, double runs, int max)
         {
             var rows = new RowsBlock();
-            rows.Empty = Lang.T("Abilities are recorded for runs played with the newest AS Time Tracker.");
+            rows.Empty = Lang.T("Abilities are recorded for runs played with the newest AZS Stats.");
             for (int i = 0; i < Math.Min(max, list.Count); i++)
             {
                 AbilityStat a = list[i];
@@ -470,7 +603,7 @@ namespace AzerothLauncher
             return string.Join(sep, keep.ToArray());
         }
 
-        // installs (or updates) the AS Time Tracker built into the launcher
+        // installs (or updates) the AZS Stats built into the launcher
         void InstallStatsAddon()
         {
             if (AddonsLocked()) return;
@@ -479,11 +612,11 @@ namespace AzerothLauncher
             try
             {
                 Stats.InstallAddon(dir, SyncSettings().SavedDir);
-                SetStatus(had ? "AS Time Tracker updated." : "AS Time Tracker installed. It records your runs from now on.");
+                SetStatus(had ? "AZS Stats updated." : "AZS Stats installed. It records your runs from now on.");
             }
             catch (Exception e)
             {
-                Msg.Show(side.Visible ? (IWin32Window)side : this, "Could not install AS Time Tracker:\n\n" + e.Message, "Stats",
+                Msg.Show(side.Visible ? (IWin32Window)side : this, "Could not install AZS Stats:\n\n" + e.Message, "Stats",
                          MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             if (current == "Stats") BuildPanel("Stats");

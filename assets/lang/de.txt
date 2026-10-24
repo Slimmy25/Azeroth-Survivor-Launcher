@@ -862,14 +862,14 @@ Track every run
 = Jeden Run festhalten
 The stats file could not be read ({0}).
 = Die Statistikdatei konnte nicht gelesen werden ({0}).
-The AS Time Tracker addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
-= Das Addon AS Time Tracker hält jeden deiner Runs fest: Siege, Kills, Schaden, Gold und deine persönlichen Bestwerte. Installiere es, beende einen Run, und deine Statistik erscheint hier.
+The AZS Stats addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
+= Das Addon AZS Stats hält jeden deiner Runs fest: Siege, Kills, Schaden, Gold und deine persönlichen Bestwerte. Installiere es, beende einen Run, und deine Statistik erscheint hier.
 It is optional: without it, this page only shows your play time.
 = Es ist optional: Ohne das Addon zeigt diese Seite nur deine Spielzeit.
-The AS Time Tracker addon is turned off. Turn it on in Addons to keep recording your runs.
-= Das Addon AS Time Tracker ist ausgeschaltet. Schalte es unter Addons ein, um deine Runs weiter aufzuzeichnen.
-No runs recorded yet. Finish a run with the AS Time Tracker addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
-= Noch keine Runs aufgezeichnet. Beende einen Run mit eingeschaltetem AS Time Tracker. Das Spiel speichert Addon-Daten beim Verlassen, deshalb erscheint deine Statistik hier, nachdem du das Spiel geschlossen hast.
+The AZS Stats addon is turned off. Turn it on in Addons to keep recording your runs.
+= Das Addon AZS Stats ist ausgeschaltet. Schalte es unter Addons ein, um deine Runs weiter aufzuzeichnen.
+No runs recorded yet. Finish a run with the AZS Stats addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
+= Noch keine Runs aufgezeichnet. Beende einen Run mit eingeschaltetem AZS Stats. Das Spiel speichert Addon-Daten beim Verlassen, deshalb erscheint deine Statistik hier, nachdem du das Spiel geschlossen hast.
 Runs
 = Runs
 Victories
@@ -940,12 +940,12 @@ In game, type /azstats to see your stats.
 = Tippe im Spiel /azstats, um deine Statistik zu sehen.
 Saved by the game {0}.
 = Vom Spiel gespeichert: {0}.
-AS Time Tracker updated.
-= AS Time Tracker aktualisiert.
-AS Time Tracker installed. It records your runs from now on.
-= AS Time Tracker installiert. Es zeichnet ab jetzt deine Runs auf.
-Could not install AS Time Tracker:\n\n{0}
-= AS Time Tracker konnte nicht installiert werden:\n\n{0}
+AZS Stats updated.
+= AZS Stats aktualisiert.
+AZS Stats installed. It records your runs from now on.
+= AZS Stats installiert. Es zeichnet ab jetzt deine Runs auf.
+Could not install AZS Stats:\n\n{0}
+= AZS Stats konnte nicht installiert werden:\n\n{0}
 ALL CLASSES
 = ALLE KLASSEN
 Class pick rate
@@ -960,8 +960,8 @@ Picks per month
 = Gewählt pro Monat
 Abilities
 = Fähigkeiten
-Abilities are recorded for runs played with the newest AS Time Tracker.
-= Fähigkeiten werden für Runs mit dem neuesten AS Time Tracker aufgezeichnet.
+Abilities are recorded for runs played with the newest AZS Stats.
+= Fähigkeiten werden für Runs mit dem neuesten AZS Stats aufgezeichnet.
 Picked in {#0} runs ({#1}%) · Win rate {#2}%
 = In {#0} Runs gewählt ({#1}%) · Siegquote {#2}%
 Best rank {#0}
@@ -994,3 +994,75 @@ Level {#0}
 = Stufe {#0}
 Runs: {#0} · Won: {#1}
 = Runs: {#0} · Siege: {#1}
+Nemesis
+= Nemesis
+Co-op
+= Koop
+Your nemesis
+= Deine Nemesis
+Times it killed you
+= So oft hat sie dich getötet
+Of your deaths
+= Deiner Tode
+Deaths
+= Tode
+Last time
+= Zuletzt
+Who kills you
+= Wer dich tötet
+No deaths recorded yet.
+= Noch keine Tode aufgezeichnet.
+Killed you {#0} times ({#1}%)
+= Hat dich {#0}-mal getötet ({#1}%)
+Death log
+= Todesprotokoll
+Slain by {0}
+= Getötet von {0}
+Survived {0} · Level {#1}
+= Überlebt {0} · Stufe {#1}
+Last hits: {0}
+= Letzte Treffer: {0}
+Most damage from: {0}
+= Höchster Schaden von: {0}
+Runs with friends
+= Runs mit Freunden
+Co-op win rate
+= Koop-Siegquote
+Solo win rate
+= Solo-Siegquote
+Time together
+= Gemeinsame Zeit
+Friends
+= Freunde
+Victories together
+= Gemeinsame Siege
+Enemies slain together
+= Gemeinsam besiegte Gegner
+Bosses together
+= Gemeinsame Bosse
+Who you play with
+= Mit wem du spielst
+No co-op runs recorded yet. Play a run with friends and they show up here.
+= Noch keine Koop-Runs aufgezeichnet. Spiele einen Run mit Freunden, dann erscheinen sie hier.
+First win together {0}
+= Erster gemeinsamer Sieg {0}
+Fastest win {0}
+= Schnellster Sieg {0}
+Most bosses {#0}
+= Meiste Bosse {#0}
+Played since {0}
+= Zusammen seit {0}
+Accomplishments together
+= Gemeinsame Erfolge
+With {0}
+= Mit {0}
+No play time counted yet. AZS Stats counts it while the game runs.
+= Noch keine Spielzeit gezählt. AZS Stats zählt sie, während das Spiel läuft.
+Play time is counted in game by the AZS Stats addon. Install it on the STATS page.
+= Die Spielzeit zählt das Addon AZS Stats im Spiel. Installiere es auf der Seite STATISTIK.
+Counted in game by AZS Stats; cloud saving carries it to your other PCs.
+= Im Spiel von AZS Stats gezählt; die Cloud-Speicherung bringt sie auf deine anderen PCs.
+Counted in game by AZS Stats. Turn on cloud saving to take it to your other PCs.
+= Im Spiel von AZS Stats gezählt. Schalte die Cloud-Speicherung ein, um sie auf deine anderen PCs mitzunehmen.
+Show play time on the home screen
+= Spielzeit auf dem Startbildschirm zeigen
