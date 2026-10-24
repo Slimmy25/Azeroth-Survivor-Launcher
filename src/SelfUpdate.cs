@@ -1,4 +1,4 @@
-// Launcher updates: the UPDATE button (and a quiet check at start-up) compares this exe with the exe on the
+﻿// Launcher updates: the UPDATE button (and a quiet check at start-up) compares this exe with the exe on the
 // latest release of the GitHub repository. When they differ, it offers the new one (never forced); the new exe is
 // downloaded next to this one, checked against the release's SHA-256, swapped in, and the launcher restarts.
 // Pre-releases (such as "test" and "addons") are never offered: GitHub's "latest release" skips them.
@@ -110,7 +110,7 @@ namespace AzerothLauncher
 
         // Swaps the new exe in and starts it. A running exe cannot be overwritten, but it can be renamed:
         // this one becomes "<name>.exe.old" and is deleted by the new launcher when it starts.
-        public static void InstallAndRestart(string newExe, bool tray)
+        public static void InstallAndRestart(string newExe)
         {
             string exe = ExePath, old = Scratch(".old");
             try
@@ -130,7 +130,8 @@ namespace AzerothLauncher
                 try { File.Move(old, exe); } catch (Exception) { }
                 throw new UserError("The new launcher could not be put in place (" + e.Message + "). Nothing was changed.");
             }
-            Process.Start(new ProcessStartInfo(exe, tray ? "--after-update --tray" : "--after-update") { UseShellExecute = false, WorkingDirectory = Path.GetDirectoryName(exe) });
+            // the new launcher waits until this process has fully exited (tray icon included), then opens its window
+            Process.Start(new ProcessStartInfo(exe, "--after-update " + Process.GetCurrentProcess().Id) { UseShellExecute = false, WorkingDirectory = Path.GetDirectoryName(exe) });
         }
 
         // run at start: removes the previous exe left behind by an update, and a half-finished download
