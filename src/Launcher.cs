@@ -23,7 +23,7 @@ namespace AzerothLauncher
         public const string ClientUrl = "https://budapestmix.hu:5000/download";
         public const string DiscordUrl = "https://discord.com/invite/UzxaZuSAk";
 
-        const int W = 330, H = 710;                          // the main launcher is a tall, narrow window
+        const int W = 1100, H = 690;                         // retro launcher window: sections open on the left, News on the right
 
         public Config Cfg;
         public bool GameRunningFlag, Installing, SyncBusy, Updating, UpdateChecking, UpdateAvailable;
@@ -85,19 +85,25 @@ namespace AzerothLauncher
             DoubleBuffered = true;
             StartPosition = FormStartPosition.CenterScreen;
 
-            int bw = 250, bx = (W - 250) / 2;
-            playBtn = Place(new WowButton("PLAY", Play, bw, 64, 22), bx, 326);
+            // layout: PLAY in the box at the bottom right, the sections under the news, the rest in the bottom bar
+            playBtn = Place(new WowButton("PLAY", Play, 130, 74, 16), 956, 603);
+            playBtn.Skin = Retro.Play;
             foreach (string name in navNames)
             {
                 string n = name;
-                nav[n] = Place(new WowButton(n.ToUpperInvariant(), delegate { ShowSection(n); }, bw, 44, 13), bx, 402);
+                bool low = n == "Guide" || n == "Addons";       // these two sit in the bottom bar
+                nav[n] = Place(new WowButton(n.ToUpperInvariant(), delegate { ShowSection(n); }, low ? 159 : 128, 27, 8.5f),
+                               low ? 775 : 693, low ? (n == "Guide" ? 598 : 634) : 480);
+                nav[n].Skin = low ? Retro.Long : Retro.Button;
             }
-            aboutBtn = Place(new WowButton("ABOUT LAUNCHER", delegate { ShowSection("About Launcher"); }, 115, 26, 8), 45, 636 - 13);
+            aboutBtn = Place(new WowButton("ABOUT LAUNCHER", delegate { ShowSection("About Launcher"); }, 159, 27, 8), W - 8 - 159 - 6, 64);
+            aboutBtn.Skin = Retro.Long;
             nav["About Launcher"] = aboutBtn;
-            discordBtn = Place(new WowButton("DISCORD", delegate { Util.OpenInShell(DiscordUrl); }, 115, 26, 8), 170, 636 - 13);
+            discordBtn = Place(new WowButton("DISCORD", delegate { Util.OpenInShell(DiscordUrl); }, 128, 27, 8.5f), 693, 480);
+            discordBtn.Skin = Retro.Button;
             discordBtn.Icon = Icons.Chat;
-            // top left corner: checks for a game update (turns gold while one is waiting)
-            updateBtn = Place(new WowButton("UPDATE", delegate { CheckLauncherUpdate(true); }, 78, 24, 8), 24, 24);
+            updateBtn = Place(new WowButton("UPDATE LAUNCHER", delegate { CheckLauncherUpdate(true); }, 159, 27, 8), W - 8 - 2 * 159 - 14, 64);
+            updateBtn.Skin = Retro.Long;
             LayoutNav();
 
             BuildSide();
@@ -214,62 +220,88 @@ namespace AzerothLauncher
         }
 
         // ------------------------------------------------------------------ drawing the launcher
+        // the launcher art (layout after the WoW Retro Launcher); the newest patch notes in the News panel
         protected override void OnPaint(PaintEventArgs e)
         {
             Graphics g = e.Graphics;
-            using (var lg = new LinearGradientBrush(new Rectangle(0, 0, W, H), Theme.BgTop, Theme.BgBottom, LinearGradientMode.Vertical))
-                g.FillRectangle(lg, 0, 0, W, H);
+            Image bg = Retro.Get("background");
+            if (bg != null) g.DrawImage(bg, 0, 0, W, H);
+            else g.Clear(Theme.BgBottom);
             Theme.Smooth(g);
-            using (var p = new Pen(Theme.GoldDim, 3)) g.DrawRectangle(p, 8, 8, W - 16, H - 16);       // outer double gold frame
-            using (var p = new Pen(Theme.Bronze, 1)) g.DrawRectangle(p, 16, 16, W - 32, H - 32);
-            using (var b = new SolidBrush(Theme.Gold))
-            using (var p = new Pen(Theme.GoldDim, 1))
-                foreach (var pt in new[] { new Point(8, 8), new Point(W - 8, 8), new Point(8, H - 8), new Point(W - 8, H - 8) })
-                {
-                    g.FillEllipse(b, pt.X - 6, pt.Y - 6, 12, 12);
-                    g.DrawEllipse(p, pt.X - 6, pt.Y - 6, 12, 12);
-                }
-            Image logo = Theme.Logo;                          // emblem at the top, the game's name beneath it
-            if (logo != null) g.DrawImage(logo, (W - logo.Width) / 2, 20, logo.Width, logo.Height);
-            Theme.CenterText(g, "AZEROTH SURVIVORS", Theme.F(20, FontStyle.Bold), Theme.Gold, new RectangleF(0, 175, W, 32), Color.Black);
-            Theme.CenterText(g, Lang.T("A game made by Aethus"), Theme.F(11, FontStyle.Italic), Theme.GoldDim, new RectangleF(0, 205, W, 22), null);
-            string version = Data.GameVersion;                // the newest patch note in the changelog
-            if (version.Length > 0)
-                Theme.CenterText(g, Lang.T("Version " + version), Theme.F(9, FontStyle.Italic), Theme.GoldDim, new RectangleF(0, 225, W, 18), null);
-            // short welcome text between the logo and the buttons
-            string body = ClientPresent() ? "Press PLAY to enter Azeroth." :
-                (RequireLauncherInstall ? "Game client not found.\nPress INSTALL to download it first."
-                                        : "Game client not found.\nPress INSTALL to download it, or set the game folder in Options.");
-            if (CloudEnabled()) body += "\nYour cloud save syncs automatically.";
-            body = Lang.T(body);
-            using (var sf = new StringFormat())
+            g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
+            // News: the newest patch note
+            var posts = Data.Changelog;
+            if (posts.Count > 0)
             {
-                sf.Alignment = StringAlignment.Center;
-                Font f = Theme.F(10);
-                var box = new RectangleF(35, 246, W - 70, 75);
-                using (var b = new SolidBrush(Color.Black)) g.DrawString(body, f, b, new RectangleF(box.X + 1, box.Y + 1, box.Width, box.Height), sf);
-                using (var b = new SolidBrush(Theme.Text)) g.DrawString(body, f, b, box, sf);
+                string[] lines = posts[0].Trim('\n').Split('\n');
+                using (var title = new SolidBrush(Retro.Gold))
+                using (var body = new SolidBrush(Theme.Hex("#e8dcc0")))
+                using (var shadow = new SolidBrush(Color.Black))
+                {
+                    float y = 236;
+                    Font tf = Theme.F(11, FontStyle.Bold), bf = Theme.F(9);
+                    g.DrawString(Lang.T("Patch ") + lines[0].Trim(), tf, shadow, 698, y + 1);
+                    g.DrawString(Lang.T("Patch ") + lines[0].Trim(), tf, title, 697, y);
+                    y += 22;
+                    for (int i = 1; i < lines.Length; i++)
+                    {
+                        string l = lines[i].Trim();
+                        if (l.Length == 0 || l.Trim('-', '=', '_', '\u2014', '\u2013').Length == 0) continue;   // blank or a rule
+                        if (l.StartsWith("- ") || l.StartsWith("* ")) l = "\u2022 " + l.Substring(2);
+                        var box = new RectangleF(700, y, 385, 442 - y);
+                        SizeF sz = g.MeasureString(l, bf, 385);
+                        if (y + sz.Height > 442) break;                   // only whole entries above "Launcher"
+                        g.DrawString(l, bf, shadow, new RectangleF(box.X + 1, box.Y + 1, box.Width, box.Height));
+                        g.DrawString(l, bf, body, box);
+                        y += sz.Height + 1;
+                    }
+                }
             }
-            // play time, at the bottom of the welcome area
+            using (var gold = new SolidBrush(Retro.Gold))
+            using (var shadow = new SolidBrush(Color.Black))
+            {
+                Font hf = Theme.F(11);
+                g.DrawString(Lang.T("News"), hf, shadow, 698, 205);
+                g.DrawString(Lang.T("News"), hf, gold, 697, 204);
+                g.DrawString(Lang.T("Launcher"), hf, shadow, 698, 447);
+                g.DrawString(Lang.T("Launcher"), hf, gold, 697, 446);
+                // bottom bar: game version, the welcome line, play time, cloud note, status
+                string version = Data.GameVersion;
+                string gv = Lang.T("Game version") + (version.Length > 0 ? ":  " + version : "");
+                g.DrawString(gv, hf, shadow, 33, 591);
+                g.DrawString(gv, hf, gold, 32, 590);
+            }
+            string bodyText = ClientPresent() ? "Press PLAY to enter Azeroth." :
+                (RequireLauncherInstall ? "Game client not found. Press INSTALL to download it first."
+                                        : "Game client not found. Press INSTALL, or set the game folder in Options.");
+            if (CloudEnabled()) bodyText += " Your cloud save syncs automatically.";
+            using (var b = new SolidBrush(Theme.Hex("#d7cea4")))
+            using (var sh = new SolidBrush(Color.Black))
+            {
+                var box = new RectangleF(32, 614, 720, 34);
+                g.DrawString(Lang.T(bodyText), Theme.F(9), sh, new RectangleF(box.X + 1, box.Y + 1, box.Width, box.Height));
+                g.DrawString(Lang.T(bodyText), Theme.F(9), b, box);
+            }
             PlayStats ps = ShownPlayStats();
+            string line = "";
             if (ps.Sessions > 0 && StatsEnabled() && Cfg.Bool("home_playtime", true))
-                Theme.CenterText(g, Lang.T("Time played: " + Duration(ps.Seconds) + "   |   Last session: " + Duration(ps.LastSeconds)),
-                                 Theme.F(9, FontStyle.Italic), Theme.GoldDim, new RectangleF(20, 300, W - 40, 18), null);
-            // footer text: cloud result, then the status
-            Theme.CenterText(g, Lang.T(cloudNote), Theme.F(10, FontStyle.Italic), Theme.Gold, new RectangleF(25, 652, W - 50, 24), null);
-            Theme.CenterText(g, Lang.T(status), Theme.F(12, FontStyle.Italic), Theme.Text, new RectangleF(25, 674, W - 50, 26), null);
+                line = Lang.T("Time played: " + Duration(ps.Seconds) + "   |   Last session: " + Duration(ps.LastSeconds));
+            if (cloudNote.Length > 0) line = (line.Length > 0 ? line + "   |   " : "") + Lang.T(cloudNote);
+            if (line.Length > 0)
+                g.DrawString(line, Theme.F(8, FontStyle.Italic), new SolidBrush(Retro.Gold), new RectangleF(32, 646, 720, 16));
+            g.DrawString(Lang.T(status), Theme.F(9, FontStyle.Italic), new SolidBrush(Theme.Hex("#fff2b0")), new RectangleF(32, 663, 720, 18));
         }
 
         public void SetStatus(string msg)
         {
             status = msg ?? "";
-            Invalidate(new Rectangle(17, 672, W - 34, 30));
+            Invalidate(new Rectangle(20, 643, 740, 42));
         }
 
         public void SetCloudNote(string text)
         {
             cloudNote = text ?? "";
-            Invalidate(new Rectangle(17, 650, W - 34, 26));
+            Invalidate(new Rectangle(20, 643, 740, 42));
         }
 
         // a section button is hidden while its feature is off: Cloud Save (cloud saving) and Stats (Options)
@@ -283,23 +315,16 @@ namespace AzerothLauncher
         // stack the section buttons
         void LayoutNav()
         {
-            int shown = 0;
-            foreach (string name in navNames) if (NavShown(name)) shown++;
-            // five or six buttons are slimmer so they still end above ABOUT LAUNCHER / DISCORD
-            int h = shown > 5 ? 34 : shown > 4 ? 40 : 44, step = shown > 5 ? 37 : shown > 4 ? 44 : 52;
-            int y = shown > 5 ? 396 : shown > 4 ? 398 : 402;
+            int k = 0;                                       // three per row under "Launcher"; Guide and Addons are in the bottom bar
             foreach (string name in navNames)
             {
-                if (!NavShown(name))
-                {
-                    nav[name].Visible = false;
-                    continue;
-                }
+                if (!NavShown(name)) { nav[name].Visible = false; continue; }
                 nav[name].Visible = true;
-                nav[name].Size = new Size(250, h);
-                nav[name].Location = new Point((W - 250) / 2, y);
-                y += step;
+                if (name == "Guide" || name == "Addons") continue;
+                nav[name].Location = new Point(693 + (k % 3) * 134, 480 + (k / 3) * 34);
+                k++;
             }
+            discordBtn.Location = new Point(693 + (k % 3) * 134, 480 + (k / 3) * 34);
             if (strip != null) LayoutStrip();
         }
 
@@ -309,7 +334,7 @@ namespace AzerothLauncher
             else if (Installing) { playBtn.Label = "INSTALLING"; playBtn.FontSize = 18; }
             else if (Updating) { playBtn.Label = "UPDATING"; playBtn.FontSize = 20; }
             else { playBtn.Label = ClientPresent() ? "PLAY" : "INSTALL"; playBtn.FontSize = 24; }
-            Invalidate(new Rectangle(17, 240, W - 34, 84));
+            Invalidate(new Rectangle(20, 584, 740, 102));
             RefreshGates();
         }
 
@@ -425,16 +450,6 @@ namespace AzerothLauncher
         {
             if (quitting || e.CloseReason != CloseReason.UserClosing) return;
             e.Cancel = true;
-            if (side.Visible)                                // a section window is open: close only the launcher
-            {
-                Hide();
-                if (!trayNotified)
-                {
-                    trayNotified = true;
-                    Notify("The launcher is in the tray; the open window stays. Right-click the icon to quit.");
-                }
-                return;
-            }
             if (Cfg.Bool("close_to_tray", true))
             {
                 HideToTray();
@@ -554,7 +569,7 @@ namespace AzerothLauncher
 
         public void ChooseCloudDir()
         {
-            string d = PickCloudDir(side.Visible ? (IWin32Window)side : this, null);
+            string d = PickCloudDir(this, null);
             if (d != null)
             {
                 Cfg.Set("cloud_dir", d);
@@ -937,7 +952,7 @@ namespace AzerothLauncher
 
         void RefreshUpdateBtn()
         {
-            updateBtn.Label = UpdateChecking ? "CHECKING" : Updating ? "UPDATING" : "UPDATE";
+            updateBtn.Label = UpdateChecking ? "CHECKING" : Updating ? "UPDATING" : "UPDATE LAUNCHER";
             updateBtn.Selected = (UpdateAvailable || launcherRelease != null) && !Updating;   // gold: an update is waiting
         }
 

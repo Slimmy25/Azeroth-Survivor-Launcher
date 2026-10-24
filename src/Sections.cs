@@ -146,7 +146,8 @@ namespace AzerothLauncher
             Color bronzeD = Theme.Hex("#3a2a12"), dark = Theme.Hex("#15100a");
             side = new Form();
             side.FormBorderStyle = FormBorderStyle.None;
-            side.ShowInTaskbar = true;                       // its own taskbar button and Alt+Tab entry
+            side.ShowInTaskbar = false;                      // the sections open inside the launcher, on its left side
+            side.TopLevel = false;
             side.StartPosition = FormStartPosition.Manual;
             side.BackColor = bronzeD;
             side.Icon = Theme.AppIcon;
@@ -177,7 +178,7 @@ namespace AzerothLauncher
             inner.Controls.Add(body);
             sideHead = new SideHead();
             sideHead.Dock = DockStyle.Top;
-            sideHead.Owner2 = side;
+            // (no Owner2: the section area does not move)
             sideHead.CloseClicked = CloseSide;
             sideHead.Moved = delegate(Point p)
             {
@@ -192,7 +193,7 @@ namespace AzerothLauncher
             strip.Width = 42;
             strip.BackColor = dark;
             body.Controls.Add(strip);
-            homeBtn = new IconButton(Icons.Home, ShowWindowFront);    // bring the launcher back
+            homeBtn = new IconButton(Icons.Home, CloseSide);          // back to the plain launcher
             strip.Controls.Add(homeBtn);
             var icons = new Action<Graphics, float, float, Color>[] { Icons.Book, Icons.Cloud, Icons.AddonsIcon, Icons.Scroll, Icons.Trophy, Icons.Gear, Icons.Info };
             for (int i = 0; i < SectionNames.Length; i++)
@@ -212,6 +213,8 @@ namespace AzerothLauncher
             panel.BackColor = Theme.Panel;
             chat.Controls.Add(panel);
             LayoutStrip();
+            Controls.Add(side);
+            PlaceSide();
             side.PerformLayout();
         }
 
@@ -241,34 +244,18 @@ namespace AzerothLauncher
             side.Text = Lang.T(Array.IndexOf(SectionNames, current) >= 0 ? current : text);    // the taskbar and Alt+Tab name
         }
 
-        // opens at its remembered spot, or the first time to the right of the launcher
+        // the open section fills the left side of the launcher window
         void PlaceSide()
         {
-            int h = Math.Min(SideH, Screen.PrimaryScreen.Bounds.Height - 60);
-            var pos = Json.AsList(Json.Get(Cfg.Data, "side_pos"));
-            int x, y;
-            if (pos != null && pos.Count == 2)
-            {
-                x = Convert.ToInt32(pos[0]);
-                y = Convert.ToInt32(pos[1]);
-            }
-            else
-            {
-                x = Left + Width + 6;
-                y = Top;
-            }
-            Rectangle all = SystemInformation.VirtualScreen;
-            x = Math.Max(all.Left - SideW + 120, Math.Min(x, all.Right - 120));     // keep a grabbable part on screen
-            y = Math.Max(all.Top, Math.Min(y, all.Bottom - 80));
-            side.Bounds = new Rectangle(x, y, SideW, h);
+            side.Bounds = new Rectangle(8, 58, 670, 520);
+            side.BringToFront();
         }
 
         void ShowSide()
         {
-            if (!side.Visible) PlaceSide();
+            PlaceSide();
             side.Show();
-            side.WindowState = FormWindowState.Normal;
-            side.Activate();
+            side.BringToFront();
         }
 
         void HideSide()
@@ -970,7 +957,7 @@ namespace AzerothLauncher
                         if (after != null) try { after(); } catch (Exception) { }
                         if (current == "Addons" || current == "Stats") BuildPanel(current);
                     }
-                    else Msg.Show(side.Visible ? (IWin32Window)side : this, "Could not install " + name + ":\n\n" + err, "Addons",
+                    else Msg.Show(this, "Could not install " + name + ":\n\n" + err, "Addons",
                                          MessageBoxButtons.OK, MessageBoxIcon.Error);
                 });
             });

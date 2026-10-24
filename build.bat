@@ -41,6 +41,7 @@ if exist "%OUT%" del "%OUT%"
 rem every language file in assets\lang is built in (see assets\lang\README.md)
 set "LANGRES="
 for %%f in (assets\lang\*.txt) do set "LANGRES=!LANGRES! /resource:assets\lang\%%~nxf,AS.lang.%%~nf.txt"
+for %%f in (assets\retro\*.png) do set "LANGRES=!LANGRES! /resource:assets\retro\%%~nxf,AS.retro.%%~nxf"
 
 echo Building %OUT% ...
 "%CSC%" /nologo /target:winexe /platform:anycpu /optimize+ /langversion:5 /warn:3 /nowarn:162,429 ^

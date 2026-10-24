@@ -1,4 +1,6 @@
 # Next update (after v0.3)
+- New look: a wide window in the style of the classic WoW launchers, with original art. News shows the newest patch; the sections open inside the launcher on the left instead of in a second window
+- UPDATE LAUNCHER and ABOUT LAUNCHER sit at the top right; GUIDE and ADDONS in the bottom bar; DISCORD with the section buttons
 - Launcher updates now close the launcher completely (tray icon too) and then reopen it with its window open
 - AZS Stats: in co-op, going down no longer spams the chat; each run is recorded once, when it is really over
 - AZS Stats replaces AS Time Tracker: one addon for every stat, also in game (/azs opens a window with Overview, Classes, Abilities, Records, Nemesis, Co-op and History)

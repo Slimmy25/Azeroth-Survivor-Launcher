@@ -616,7 +616,7 @@ namespace AzerothLauncher
             }
             catch (Exception e)
             {
-                Msg.Show(side.Visible ? (IWin32Window)side : this, "Could not install AZS Stats:\n\n" + e.Message, "Stats",
+                Msg.Show(this, "Could not install AZS Stats:\n\n" + e.Message, "Stats",
                          MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             if (current == "Stats") BuildPanel("Stats");

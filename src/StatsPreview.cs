@@ -18,9 +18,10 @@ namespace AzerothLauncher
             app.Cfg.Set("saved_dir", Path.GetFullPath(savedDir));
             app.Cfg.Set("addons_dir", Path.Combine(Path.GetFullPath(outDir), "AddOns"));
             app.Cfg.Set("cloud_enabled", false);
-            app.side.StartPosition = FormStartPosition.Manual;
-            app.side.Location = new Point(0, 0);
-            app.side.Show();
+            app.StartPosition = FormStartPosition.Manual;
+            app.Location = new Point(0, 0);
+            app.Show();
+            app.ShowSide();
             RunStats st = Stats.Load(app.SyncSettings().SavedDir);
             string topClass = st != null && st.Classes.Count > 0 ? st.Classes[0].Key : null;
             foreach (string cls in new[] { null, topClass })
@@ -53,6 +54,25 @@ namespace AzerothLauncher
                     }
                 }
                 if (topClass == null) break;
+            }
+            // the main window with a section open, then with none
+            foreach (string shot in new[] { "home-section", "home" })
+            {
+                if (shot == "home") app.side.Hide();
+                app.Show();                                  // the preview starts as if in the tray
+                Application.DoEvents();
+                // painted by hand: the build machine's screen is smaller than the window, so it would be cut off
+                using (var home = new Bitmap(W, H))
+                {
+                    using (var g = Graphics.FromImage(home))
+                        app.OnPaint(new PaintEventArgs(g, new Rectangle(0, 0, W, H)));
+                    for (int i = app.Controls.Count - 1; i >= 0; i--)
+                    {
+                        Control c = app.Controls[i];
+                        if (c.Visible && c.Width > 0 && c.Height > 0) c.DrawToBitmap(home, c.Bounds);
+                    }
+                    home.Save(Path.Combine(outDir, shot + ".png"), ImageFormat.Png);
+                }
             }
             app.tray.Visible = false;
         }
