@@ -809,9 +809,10 @@ namespace AzerothLauncher
                 for (int i = 0; i < Data.AddonCategories.Length; i++)
                 {
                     int n = i;
-                    var b = new WowButton(Data.AddonCategories[i], delegate { addonCategory = n; BuildPanel("Addons"); }, 190, 32, 10);
+                    int bw = Math.Min(190, cw - 6);
+                    var b = new WowButton(Data.AddonCategories[i], delegate { addonCategory = n; BuildPanel("Addons"); }, bw, 32, 10);
                     b.Selected = i == addonCategory;          // the open category: filled gold
-                    Put(b, x0 + i * cw + (cw - 190) / 2, 12);
+                    Put(b, x0 + i * cw + (cw - bw) / 2, 12);
                 }
                 // second row: filter by kind of addon (click the open one again to show everything)
                 var labels = new List<string> { "ALL" };
@@ -867,19 +868,35 @@ namespace AzerothLauncher
             var sp = MakeScroll(panel, new Rectangle(20, top, PW - 40, PH - 12 - top), listbg, Theme.Bronze);
             int cat = Math.Min(Math.Max(addonCategory, 0), Data.AddonCategories.Length - 1);
             var items = new List<AddonEntry>();
-            foreach (var a in Data.Addons)
-                if (a.Category == Data.AddonCategories[cat] && (addonFilter == null || a.Tags.Contains(addonFilter))) items.Add(a);
+            var all = new List<AddonEntry>(Data.Addons);
+            all.AddRange(Data.MyAddons());
+            foreach (var a in all)
+                if (a.Category == Data.AddonCategories[cat] && (addonFilter == null || a.Tags.Contains(addonFilter) ||
+                                                                 a.Category == Data.MyAddonsCategory)) items.Add(a);
             items.Sort(delegate(AddonEntry a, AddonEntry b) { return string.Compare(a.Name, b.Name, StringComparison.OrdinalIgnoreCase); });   // A to Z
+            int y0 = 4;
+            if (Data.AddonCategories[cat] == Data.MyAddonsCategory)
+            {
+                var hint = UI.Text("Put addon .zip files in the My Addons folder; they stay on this PC.", 9, FontStyle.Italic,
+                                   Theme.GoldDim, listbg, sp.ClientSize.Width - 160);
+                hint.Size = VStack.Measure(hint);
+                hint.Location = new Point(10, 8);
+                sp.Controls.Add(hint);
+                var open = new WowButton("OPEN FOLDER", delegate { Directory.CreateDirectory(Data.MyAddonsDir); Util.OpenInShell(Data.MyAddonsDir); }, 130, 28, 9);
+                open.Location = new Point(sp.ClientSize.Width - SystemInformation.VerticalScrollBarWidth - 140, 6);
+                sp.Controls.Add(open);
+                y0 = Math.Max(hint.Bottom, open.Bottom) + 8;
+            }
             if (items.Count == 0)
             {
                 var l = UI.Text(addonFilter != null ? "No addons in this filter yet." : "No downloadable addons listed yet.",
                                 11, FontStyle.Italic, Theme.GoldDim, listbg, 0);
-                l.Location = new Point(10, 8);
+                l.Location = new Point(10, y0 + 4);
                 sp.Controls.Add(l);
                 return;
             }
             int w = sp.ClientSize.Width - SystemInformation.VerticalScrollBarWidth - 8;
-            int y = 4;
+            int y = y0;
             foreach (var item in items)
             {
                 var it = item;
