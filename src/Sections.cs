@@ -1053,16 +1053,23 @@ namespace AzerothLauncher
             Put(UI.Line(Theme.Bronze, PW - 40, 1), 20, y + 4);
             y += 15;
             var head = PutText("Play time", 11, FontStyle.Bold, Theme.Gold, 20, y, 0);
-            long sessions = PlayLong("play_sessions");
+            PlayStats ps = ShownPlayStats();
+            long sessions = ps.Sessions;
+            bool shared = CloudEnabled() && cloudPlay != null;
             string stats = sessions == 0 ? "No games played with this launcher yet." :
-                "Total: " + Duration(PlayLong("play_seconds")) + " over " + Util.Plural((int)sessions, "session") + "\n" +
-                "Last session: " + Duration(PlayLong("play_last_seconds")) + " (" + Cfg.Str("play_last_date") + ")\n" +
-                "Longest session: " + Duration(PlayLong("play_longest_seconds"));
+                "Total: " + Duration(ps.Seconds) + " over " + Util.Plural((int)sessions, "session") +
+                (shared && ps.Devices > 1 ? " on " + ps.Devices + " PCs" : "") + "\n" +
+                "Last session: " + Duration(ps.LastSeconds) + " (" + ps.LastDate + ")\n" +
+                "Longest session: " + Duration(ps.Longest);
+            stats += shared ? "\nShared with your other PCs through the cloud sync folder." :
+                     CloudEnabled() ? "\nCounted on this PC (the sync folder is not reachable right now)." :
+                     "\nCounted on this PC. Turn on cloud saving to share it between your PCs.";
             PutText(stats, 10, FontStyle.Regular, Theme.Text, 20, BottomOf(head) + 2, PW - 40);
             if (sessions > 0)
                 Put(new WowButton("RESET PLAY TIME", delegate
                 {
-                    if (MessageBox.Show(side, "Set the play time back to zero?", "Play time", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    if (MessageBox.Show(side, shared ? "Set the play time back to zero on all your PCs?" : "Set the play time back to zero?",
+                                        "Play time", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
                         ResetPlayTime();
                         BuildPanel("Options");
