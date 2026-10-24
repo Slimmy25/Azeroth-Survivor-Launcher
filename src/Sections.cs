@@ -379,6 +379,30 @@ namespace AzerothLauncher
             return Put(l, x, y);
         }
 
+        // A scrollable area whose Windows scroll bar is hidden (clipped off to the right) and replaced by a slim
+        // painted one in `thumb` colors. The content keeps the same width as with MakeScroll.
+        ScrollPanel MakeThinScroll(Control parent, Rectangle r, Color bg, Color border, Color thumb, Color thumbHot)
+        {
+            var frame = new Bordered(border, 1);
+            frame.Bounds = r;
+            parent.Controls.Add(frame);
+            frame.BringToFront();
+            var clip = new Panel();                          // clips the native bar off
+            clip.Dock = DockStyle.Fill;
+            clip.BackColor = bg;
+            frame.Controls.Add(clip);
+            var sp = new ScrollPanel();
+            sp.BackColor = bg;
+            int cw = r.Width - 2, ch = r.Height - 2;
+            sp.Bounds = new Rectangle(0, 0, cw + SystemInformation.VerticalScrollBarWidth, ch);
+            clip.Controls.Add(sp);
+            var bar = new ThinScrollBar(sp, Theme.Mix(bg, Color.Black, 0.3), thumb, thumbHot);
+            bar.Bounds = new Rectangle(cw - 7, 2, 6, ch - 4);
+            clip.Controls.Add(bar);
+            bar.BringToFront();
+            return sp;
+        }
+
         // a scrollable area with a 1 px border; returns the scrolling panel
         ScrollPanel MakeScroll(Control parent, Rectangle r, Color bg, Color border)
         {

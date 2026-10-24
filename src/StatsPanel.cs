@@ -126,8 +126,9 @@ namespace AzerothLauncher
             if (statsTab < 0 || statsTab >= StatTabs.Length) statsTab = 0;
             if (cls != null) Put(new WowButton("‹ ALL CLASSES", delegate { SetStatsView(null, 1); }, 170, 32, 10), 84, 12);
 
-            var sp = MakeScroll(panel, new Rectangle(20, 56, PW - 40, PH - 12 - 56), Armory.Page, Theme.Bronze);
-            int w = sp.ClientSize.Width - SystemInformation.VerticalScrollBarWidth - 8;
+            var sp = MakeThinScroll(panel, new Rectangle(20, 56, PW - 40, PH - 12 - 56), Armory.Page, Theme.Bronze,
+                                    Armory.SlotEdge, Theme.GoldDim);
+            int w = sp.ClientSize.Width - SystemInformation.VerticalScrollBarWidth - 16;     // room for the slim bar
             int y = 4;
             PlayStats ps = ShownPlayStats();
 
