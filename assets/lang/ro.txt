@@ -1,0 +1,791 @@
+@name Română
+@font Palatino Linotype, Georgia
+# Each English text is followed by its translation on the line below (starting with "= ").
+# {0}, {1} ... are filled in by the launcher; keep them. \n is a line break.
+
+PLAY
+= JOACĂ
+INSTALL
+= INSTALEAZĂ
+PLAYING...
+= ÎN JOC...
+INSTALLING
+= SE INSTALEAZĂ
+UPDATING
+= SE ACTUALIZEAZĂ
+UPDATE
+= ACTUALIZEAZĂ
+CHECKING
+= SE VERIFICĂ
+CLOUD SAVE
+= SALVARE ÎN CLOUD
+ADDONS
+= ADDON-URI
+OPTIONS
+= OPȚIUNI
+CHANGELOG
+= NOTE DE PATCH
+ABOUT LAUNCHER
+= DESPRE LAUNCHER
+A game made by Aethus
+= Un joc creat de Aethus
+Version {0}
+= Versiunea {0}
+Press PLAY to enter Azeroth.
+= Apasă JOACĂ pentru a intra în Azeroth.
+Game client not found.
+= Jocul nu a fost găsit.
+Press INSTALL to download it first.
+= Apasă INSTALEAZĂ pentru a-l descărca mai întâi.
+Press INSTALL to download it, or set the game folder in Options.
+= Apasă INSTALEAZĂ pentru a-l descărca sau setează folderul jocului în Opțiuni.
+Your cloud save syncs automatically.
+= Salvarea ta în cloud se sincronizează automat.
+Time played: {0}   |   Last session: {1}
+= Timp de joc: {0}   |   Ultima sesiune: {1}
+Ready.
+= Gata.
+Cloud Save
+= Salvare în cloud
+Addons
+= Addon-uri
+Options
+= Opțiuni
+Changelog
+= Note de patch
+About Launcher
+= Despre launcher
+Download More
+= Descarcă mai multe
+All Patch Notes
+= Toate notele de patch
+Show Launcher
+= Arată launcherul
+Play
+= Joacă
+Upload Save Now
+= Încarcă salvarea acum
+Close Button Hides to Tray
+= Butonul Închide ascunde în zona de notificare
+Quit
+= Ieșire
+Game running
+= Jocul rulează
+Idle
+= Inactiv
+Game running - {0}
+= Jocul rulează - {0}
+The launcher is in the tray; the open window stays. Right-click the icon to quit.
+= Launcherul este în zona de notificare; fereastra deschisă rămâne. Clic dreapta pe pictogramă pentru a ieși.
+Still running in the tray. Right-click the icon to quit.
+= Încă rulează în zona de notificare. Clic dreapta pe pictogramă pentru a ieși.
+Cloud sync running
+= Sincronizare cloud în curs
+A cloud sync is still running. If you quit now it is cut short; the next sync repairs any half-finished copy.
+= O sincronizare cloud este încă în curs. Dacă ieși acum, va fi întreruptă; următoarea sincronizare repară orice copie neterminată.
+Quit anyway?
+= Ieși oricum?
+Installing
+= Instalare în curs
+The game client is still being installed. If you quit now, it is cut short.
+= Jocul încă se instalează. Dacă ieși acum, instalarea va fi întreruptă.
+Updating
+= Actualizare în curs
+The game is still being updated. If you quit now, the update is cut short. Nothing is lost: a half-finished change is undone the next time the launcher starts.
+= Jocul încă se actualizează. Dacă ieși acum, actualizarea va fi întreruptă. Nu se pierde nimic: o modificare neterminată este anulată la următoarea pornire a launcherului.
+The game is still running. If you quit the launcher now, your saves will NOT be uploaded automatically.
+= Jocul încă rulează. Dacă închizi launcherul acum, salvările tale NU vor fi încărcate automat.
+Setup saved.
+= Configurare salvată.
+First-time setup
+= Prima configurare
+Welcome, Adventurer
+= Bine ai venit, aventurierule
+Step 1 of 2
+= Pasul 1 din 2
+Step 2 of 2
+= Pasul 2 din 2
+A.  Cloud saving
+= A.  Salvare în cloud
+Keep my progress in the cloud (Google Drive, OneDrive, Dropbox ...)\nand share it between my PCs
+= Păstrează progresul meu în cloud (Google Drive, OneDrive, Dropbox ...)\nși partajează-l între PC-urile mele
+Sync folder (inside your cloud drive)
+= Folder de sincronizare (în drive-ul tău cloud)
+Cloud saving stays off. You can turn it on later in Cloud Save.
+= Salvarea în cloud rămâne oprită. O poți porni mai târziu din Salvare în cloud.
+B.  Where are your files?
+= B.  Unde sunt fișierele tale?
+Folders found at their usual place are used as they are. Choose the ones that are missing.
+= Folderele găsite la locul obișnuit sunt folosite așa cum sunt. Alege-le pe cele care lipsesc.
+AddOns
+= AddOns
+Game saves
+= Salvări de joc
+Addon settings
+= Setări addon-uri
+Select your AddOns folder
+= Selectează folderul AddOns
+Select the folder that holds your save game (normally %APPDATA%\wenilla-rogue)
+= Selectează folderul care conține salvarea (de obicei %APPDATA%\wenilla-rogue)
+Select your addon settings folder (the 'saved' folder in benilla-config)
+= Selectează folderul cu setările addon-urilor (folderul 'saved' din benilla-config)
+FINISH
+= FINALIZEAZĂ
+LATER
+= MAI TÂRZIU
+✓ found
+= ✓ găsit
+✓ chosen
+= ✓ ales
+not chosen yet
+= neales încă
+not found - please choose it
+= negăsit - alege-l
+(not set)
+= (nesetat)
+CHANGE
+= SCHIMBĂ
+CHOOSE
+= ALEGE
+Choose a sync folder for cloud saving, or untick\n"Keep my progress in the cloud".
+= Alege un folder de sincronizare pentru salvarea în cloud sau debifează\n„Păstrează progresul meu în cloud”.
+Setup
+= Configurare
+These folders were not found:
+= Aceste foldere nu au fost găsite:
+Finish anyway? You can change them later in Options.
+= Finalizezi oricum? Le poți schimba mai târziu în Opțiuni.
+Your settings are saved.\n\nWould you like to go to the Addons section now\nto download some addons, or to enable or disable the ones you have?
+= Setările tale sunt salvate.\n\nVrei să mergi acum la secțiunea Addon-uri\npentru a descărca addon-uri sau a le activa și dezactiva pe cele pe care le ai?
+DOWNLOAD ADDONS
+= DESCARCĂ ADDON-URI
+ENABLE / DISABLE ADDONS
+= ACTIVEAZĂ / DEZACTIVEAZĂ
+NO THANKS
+= NU, MULȚUMESC
+Install the game
+= Instalează jocul
+Install Azeroth Survivors
+= Instalează Azeroth Survivors
+Step 1
+= Pasul 1
+Download the game in your web browser.
+= Descarcă jocul în browserul tău.
+OPEN DOWNLOAD
+= DESCHIDE DESCĂRCAREA
+Download opened in your browser.
+= Descărcarea a fost deschisă în browser.
+Step 2
+= Pasul 2
+When the download has finished, come back here.
+= Când descărcarea s-a terminat, revino aici.
+IT'S IN MY DOWNLOADS
+= E ÎN DESCĂRCĂRILE MELE
+The launcher finds the file (in its own folder or Downloads), unpacks the game here and deletes the download.
+= Launcherul găsește fișierul (în propriul folder sau în Descărcări), dezarhivează jocul aici și șterge descărcarea.
+CANCEL
+= ANULEAZĂ
+Which progress do you want to keep?
+= Ce progres vrei să păstrezi?
+Both sides changed
+= Ambele părți s-au schimbat
+This PC and the cloud both changed since the last sync:
+= Acest PC și cloudul s-au schimbat amândouă de la ultima sincronizare:
+• {0}:  this PC {1}   |   cloud {2}
+= • {0}:  acest PC {1}   |   cloud {2}
+One complete state wins, the other is backed up first.
+= Câștigă o stare completă, cealaltă este salvată mai întâi ca backup.
+First time on this PC? Choose USE CLOUD.
+= Prima dată pe acest PC? Alege FOLOSEȘTE CLOUDUL.
+USE CLOUD replaces your local data. KEEP LOCAL keeps it and uploads it later.
+= FOLOSEȘTE CLOUDUL înlocuiește datele locale. PĂSTREAZĂ LOCAL le păstrează și le încarcă mai târziu.
+KEEP LOCAL replaces the cloud. USE CLOUD leaves the cloud and skips your upload.
+= PĂSTREAZĂ LOCAL înlocuiește cloudul. FOLOSEȘTE CLOUDUL lasă cloudul neschimbat și sare peste încărcare.
+USE CLOUD
+= FOLOSEȘTE CLOUDUL
+KEEP LOCAL
+= PĂSTREAZĂ LOCAL
+Save game
+= Salvare de joc
+Game update
+= Actualizare joc
+Update available
+= Actualizare disponibilă
+New version:
+= Versiune nouă:
+Your version:
+= Versiunea ta:
+not recorded yet
+= neînregistrată încă
+Download size:
+= Mărimea descărcării:
+What is new
+= Ce este nou
+Your addons, settings and saves are left alone. If anything goes wrong, the old game files are put back.
+= Addon-urile, setările și salvările tale rămân neatinse. Dacă ceva nu merge, fișierele vechi ale jocului sunt puse la loc.
+UPDATE NOW
+= ACTUALIZEAZĂ ACUM
+NOT NOW
+= NU ACUM
+SKIP THIS VERSION
+= SARI PESTE ACEASTĂ VERSIUNE
+I ALREADY HAVE THIS VERSION
+= AM DEJA ACEASTĂ VERSIUNE
+The update is being installed. Please wait until it has finished.
+= Actualizarea se instalează. Așteaptă până se termină.
+Downloading the update...
+= Se descarcă actualizarea...
+Download the update
+= Descarcă actualizarea
+Step 1: download the update in your web browser.
+= Pasul 1: descarcă actualizarea în browserul tău.
+OPEN DOWNLOAD AGAIN
+= DESCHIDE DIN NOU DESCĂRCAREA
+Step 2: when the download has finished, come back here.
+= Pasul 2: când descărcarea s-a terminat, revino aici.
+The launcher finds the file (in its own folder or Downloads), installs it and deletes it.
+= Launcherul găsește fișierul (în propriul folder sau în Descărcări), îl instalează și îl șterge.
+Checking the file...
+= Se verifică fișierul...
+CANCELLING...
+= SE ANULEAZĂ...
+Updating to {0}
+= Actualizare la {0}
+Please keep the launcher open until this has finished.
+= Ține launcherul deschis până se termină.
+{0} of {1}  ({#2}%)
+= {0} din {1}  ({2}%)
+{0} downloaded
+= {0} descărcați
+Update installed
+= Actualizare instalată
+Update failed
+= Actualizarea a eșuat
+CLOSE
+= ÎNCHIDE
+TRY AGAIN
+= ÎNCEARCĂ DIN NOU
+Version {0} is installed.
+= Versiunea {0} este instalată.
+{#0} files updated.
+= {0} fișiere actualizate.
+{#0} file updated.
+= {0} fișier actualizat.
+{#0} files updated, {#1} removed.
+= {0} fișiere actualizate, {1} eliminate.
+{#0} file updated, {#1} removed.
+= {0} fișier actualizat, {1} eliminate.
+Install
+= Instalare
+Install the game from this file?
+= Instalezi jocul din acest fișier?
+{0}  ({#1} MB)
+= {0}  ({1} MB)
+in {0}
+= în {0}
+Choose the game file you downloaded (.rar)
+= Alege fișierul jocului pe care l-ai descărcat (.rar)
+Game archive (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|All files (*.*)|*.*
+= Arhivă joc (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|Toate fișierele (*.*)|*.*
+Install cancelled.
+= Instalare anulată.
+Unpacking the game client...
+= Se dezarhivează jocul...
+Install failed.
+= Instalarea a eșuat.
+Install complete - press PLAY.
+= Instalare completă - apasă JOACĂ.
+Install complete. Press PLAY to enter Azeroth.
+= Instalare completă. Apasă JOACĂ pentru a intra în Azeroth.
+The last game update was cut off before it finished. Your game files were put back exactly as they were.
+= Ultima actualizare a jocului a fost întreruptă înainte de final. Fișierele jocului au fost puse la loc exact cum erau.
+You can run the update again with the UPDATE button.
+= Poți rula din nou actualizarea cu butonul ACTUALIZEAZĂ.
+The last game update was cut off, and some game files could not be put back automatically.
+= Ultima actualizare a jocului a fost întreruptă și unele fișiere nu au putut fi puse la loc automat.
+The old versions are kept in the folder "{0}" inside the game folder. Copy them back over the game files, or reinstall the game.
+= Versiunile vechi sunt în folderul „{0}” din folderul jocului. Copiază-le înapoi peste fișierele jocului sau reinstalează jocul.
+Checking for updates...
+= Se caută actualizări...
+The update check failed ({0}).
+= Verificarea actualizărilor a eșuat ({0}).
+Could not check for launcher updates.
+= Nu s-au putut verifica actualizările launcherului.
+Launcher update
+= Actualizare launcher
+Launcher {0} is available.
+= Launcherul {0} este disponibil.
+The launcher is up to date ({0}).
+= Launcherul este la zi ({0}).
+You have the newest launcher ({0}).
+= Ai cel mai nou launcher ({0}).
+A new launcher ({0}) is available. Open the launcher and press UPDATE.
+= Un launcher nou ({0}) este disponibil. Deschide launcherul și apasă ACTUALIZEAZĂ.
+Finish what is running first (the game, an install or a cloud sync), then press UPDATE again.
+= Termină mai întâi ce rulează (jocul, o instalare sau o sincronizare cloud), apoi apasă din nou ACTUALIZEAZĂ.
+A new version of the launcher is on GitHub: {0}.
+= O versiune nouă a launcherului este pe GitHub: {0}.
+Update now? The new launcher ({0}) is downloaded, checked and started in place of this one. Your settings stay as they are.
+= Actualizezi acum? Noul launcher ({0}) este descărcat, verificat și pornit în locul acestuia. Setările tale rămân la fel.
+Update now? The new launcher is downloaded, checked and started in place of this one. Your settings stay as they are.
+= Actualizezi acum? Noul launcher este descărcat, verificat și pornit în locul acestuia. Setările tale rămân la fel.
+Launcher update postponed. Press UPDATE when you want it.
+= Actualizarea launcherului amânată. Apasă ACTUALIZEAZĂ când vrei.
+Downloading the new launcher...
+= Se descarcă noul launcher...
+Downloading the new launcher... {0}
+= Se descarcă noul launcher... {0}
+Launcher update failed.
+= Actualizarea launcherului a eșuat.
+Update checking is not switched on in this launcher yet (it has no update address).
+= Verificarea actualizărilor nu este încă activată în acest launcher (nu are adresă de actualizare).
+The game is not installed yet. Press INSTALL first.
+= Jocul nu este încă instalat. Apasă mai întâi INSTALEAZĂ.
+Could not check for updates.
+= Nu s-au putut verifica actualizările.
+You have the newest version ({0}).
+= Ai cea mai nouă versiune ({0}).
+Update {0} is available.
+= Actualizarea {0} este disponibilă.
+A game update ({0}) is available.
+= O actualizare a jocului ({0}) este disponibilă.
+Version {0} skipped. The UPDATE button still offers it.
+= Versiunea {0} a fost sărită. Butonul ACTUALIZEAZĂ încă o oferă.
+Noted: you have version {0}.
+= Notat: ai versiunea {0}.
+Install the update from this file?
+= Instalezi actualizarea din acest fișier?
+Choose the update file you downloaded
+= Alege fișierul de actualizare descărcat
+Update archive (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|All files (*.*)|*.*
+= Arhivă actualizare (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|Toate fișierele (*.*)|*.*
+Close the game first, then try again.
+= Închide mai întâi jocul, apoi încearcă din nou.
+Checking the download...
+= Se verifică descărcarea...
+The downloaded file does not match its checksum, so nothing was installed. Please try again later.
+= Fișierul descărcat nu corespunde sumei de control, așa că nu s-a instalat nimic. Încearcă din nou mai târziu.
+That file is not this update (its checksum does not match), so nothing was installed. Download it again from the update page.
+= Acel fișier nu este această actualizare (suma de control nu corespunde), așa că nu s-a instalat nimic. Descarcă-l din nou de pe pagina actualizării.
+The update failed ({0}).
+= Actualizarea a eșuat ({0}).
+Updated to {0} - press PLAY.
+= Actualizat la {0} - apasă JOACĂ.
+Game updated to {0}. Press PLAY to enter Azeroth.
+= Joc actualizat la {0}. Apasă JOACĂ pentru a intra în Azeroth.
+Update cancelled.
+= Actualizare anulată.
+Update failed.
+= Actualizarea a eșuat.
+Another task is still running - wait for it to finish.
+= O altă sarcină încă rulează - așteaptă să se termine.
+Choose a sync folder inside your cloud drive first (Cloud Save or Options).
+= Alege mai întâi un folder de sincronizare în drive-ul tău cloud (Salvare în cloud sau Opțiuni).
+Cloud sync failed.
+= Sincronizarea cloud a eșuat.
+Status checked at {0}
+= Stare verificată la {0}
+Downloaded from the cloud at {0}
+= Descărcat din cloud la {0}
+Saves uploaded at {0}
+= Salvări încărcate la {0}
+Not everything was synced - see the Cloud Save log.
+= Nu s-a sincronizat tot - vezi jurnalul Salvare în cloud.
+The game is being updated. Please wait until that has finished.
+= Jocul se actualizează. Așteaptă până se termină.
+The cloud save could NOT be loaded, so the game was not launched.
+= Salvarea din cloud NU a putut fi încărcată, așa că jocul nu a pornit.
+See the log in Cloud Save. If your cloud drive is still syncing, wait for it to finish and press PLAY again.
+= Vezi jurnalul din Salvare în cloud. Dacă drive-ul tău cloud încă sincronizează, așteaptă să termine și apasă din nou JOACĂ.
+Cloud sync failed - game not launched
+= Sincronizarea cloud a eșuat - jocul nu a pornit
+Cloud save was not loaded - game not launched.
+= Salvarea din cloud nu a fost încărcată - jocul nu a pornit.
+Cloud sync successfully downloaded
+= Sincronizare cloud descărcată cu succes
+No sync folder set - launched without cloud sync.
+= Niciun folder de sincronizare - pornit fără sincronizare cloud.
+Starting Azeroth Survivors ...
+= Se pornește Azeroth Survivors ...
+Game running.
+= Jocul rulează.
+Could not start the game: {0}
+= Jocul nu a putut fi pornit: {0}
+Game closed.
+= Joc închis.
+Game has closed.
+= Jocul s-a închis.
+Cloud sync successfully uploaded
+= Sincronizare cloud încărcată cu succes
+Some of your progress was NOT uploaded. See the log in Cloud Save.
+= O parte din progresul tău NU a fost încărcată. Vezi jurnalul din Salvare în cloud.
+Cloud sync NOT completed - see the Cloud Save log
+= Sincronizarea cloud NU s-a terminat - vezi jurnalul Salvare în cloud
+Cloud upload failed: {0}
+= Încărcarea în cloud a eșuat: {0}
+Cloud sync failed - see the Cloud Save log
+= Sincronizarea cloud a eșuat - vezi jurnalul Salvare în cloud
+Launcher
+= Launcher
+Select a folder inside your cloud drive (Google Drive, OneDrive, Dropbox ...)
+= Selectează un folder în drive-ul tău cloud (Google Drive, OneDrive, Dropbox ...)
+That is the top level of your cloud drive.
+= Acesta este nivelul de sus al drive-ului tău cloud.
+Create and use a subfolder named AzerothSync inside it?
+= Creezi și folosești în el un subfolder numit AzerothSync?
+Sync folder
+= Folder de sincronizare
+Play time reset.
+= Timpul de joc a fost resetat.
+Play time
+= Timp de joc
+No games played with this launcher yet.
+= Niciun joc jucat încă cu acest launcher.
+Total: {0} over {#1} sessions
+= Total: {0} în {1} sesiuni
+Total: {0} over {#1} session
+= Total: {0} în {1} sesiune
+Total: {0} over {#1} sessions on {#2} PCs
+= Total: {0} în {1} sesiuni pe {2} PC-uri
+Last session: {0} ({1})
+= Ultima sesiune: {0} ({1})
+Longest session: {0}
+= Cea mai lungă sesiune: {0}
+Shared with your other PCs through the cloud sync folder.
+= Partajat cu celelalte PC-uri prin folderul de sincronizare.
+Counted on this PC (the sync folder is not reachable right now).
+= Contorizat pe acest PC (folderul de sincronizare nu este accesibil acum).
+Counted on this PC. Turn on cloud saving to share it between your PCs.
+= Contorizat pe acest PC. Pornește salvarea în cloud pentru a-l partaja între PC-uri.
+RESET PLAY TIME
+= RESETEAZĂ TIMPUL DE JOC
+Set the play time back to zero on all your PCs?
+= Readuci timpul de joc la zero pe toate PC-urile tale?
+Set the play time back to zero?
+= Readuci timpul de joc la zero?
+Game folder
+= Folderul jocului
+Save game folder
+= Folderul salvărilor
+Game config folder (AddOns, addon settings)
+= Folderul de configurare al jocului (AddOns, setări addon-uri)
+Cloud saving
+= Salvare în cloud
+Close button hides the launcher to the tray
+= Butonul Închide ascunde launcherul în zona de notificare
+Minimize the launcher when the game starts
+= Minimizează launcherul când pornește jocul
+RUN SETUP AGAIN
+= RULEAZĂ DIN NOU CONFIGURAREA
+Select your Azeroth Survivors game folder
+= Selectează folderul jocului Azeroth Survivors
+Game folder set: {0}
+= Folderul jocului setat: {0}
+Select the game's benilla-config folder (contains AddOns and saved)
+= Selectează folderul benilla-config al jocului (conține AddOns și saved)
+Language
+= Limbă
+ALL PATCH NOTES ›
+= TOATE NOTELE ›
+‹ LATEST
+= ‹ CEA MAI NOUĂ
+‹ ALL PATCH NOTES
+= ‹ TOATE NOTELE
+‹ PREVIOUS
+= ‹ ANTERIOARA
+NEXT ›
+= URMĂTOAREA ›
+{#0} of {#1}
+= {0} din {1}
+PAGE
+= PAGINA
+No patch notes yet.
+= Încă nu există note de patch.
+{0} (current)
+= {0} (actuală)
+Vibe coded by Slimjim\nCloud save code established by Keijin
+= Codat pe vibe de Slimjim\nCod salvare cloud de Keijin
+DOWNLOAD MORE ›
+= DESCARCĂ MAI MULTE ›
+ALL
+= TOATE
+UI OVERHAUL
+= INTERFAȚĂ NOUĂ
+GAMEPLAY
+= GAMEPLAY
+COSMETIC
+= COSMETIC
+No addons in this filter yet.
+= Încă nu sunt addon-uri în acest filtru.
+No downloadable addons listed yet.
+= Încă nu sunt addon-uri de descărcat.
+UNINSTALL
+= DEZINSTALEAZĂ
+Addons can't be changed while the game runs or a sync is running.
+= Addon-urile nu pot fi modificate cât timp jocul sau o sincronizare rulează.
+Another addon is still downloading.
+= Un alt addon încă se descarcă.
+Installing {0}...
+= Se instalează {0}...
+{0} installed.
+= {0} instalat.
+{0} failed.
+= {0} a eșuat.
+Could not install {0}:
+= {0} nu a putut fi instalat:
+{0} is not installed.
+= {0} nu este instalat.
+Remove {0} from your AddOns folder?
+= Elimini {0} din folderul AddOns?
+Folders: {0}
+= Foldere: {0}
+This deletes everything it added, including the settings it saved.
+= Aceasta șterge tot ce a adăugat, inclusiv setările salvate.
+Uninstall
+= Dezinstalare
+Could not uninstall {0}:
+= {0} nu a putut fi dezinstalat:
+{0} uninstalled.
+= {0} dezinstalat.
+{0} was not installed.
+= {0} nu era instalat.
+No AddOns folder found.\nSet the game config folder in Options\n(the benilla-config folder).
+= Nu s-a găsit niciun folder AddOns.\nSetează folderul de configurare al jocului în Opțiuni\n(folderul benilla-config).
+REFRESH
+= REÎMPROSPĂTEAZĂ
+FOLDER
+= FOLDER
+TOGGLE ALL
+= COMUTĂ TOATE
+SAVE
+= SALVEAZĂ
+LOAD
+= ÎNCARCĂ
+empty
+= gol
+{#0} on, {#1} off
+= {0} pornite, {1} oprite
+saved {0}
+= salvat {0}
+Profile {0}
+= Profilul {0}
+No addons installed.
+= Niciun addon instalat.
+{#0} of {#1} enabled
+= {0} din {1} activate
+Could not enable {0}:
+= {0} nu a putut fi activat:
+Could not disable {0}:
+= {0} nu a putut fi dezactivat:
+{0} enabled.
+= {0} activat.
+{0} disabled.
+= {0} dezactivat.
+All addons enabled.
+= Toate addon-urile activate.
+All addons disabled.
+= Toate addon-urile dezactivate.
+Some addons could not be changed:
+= Unele addon-uri nu au putut fi modificate:
+Replace the saved Profile {0} with the current toggles?
+= Înlocuiești Profilul {0} salvat cu comutatoarele actuale?
+Profile {0} saved.
+= Profilul {0} salvat.
+Profile {0} is empty - press SAVE to store the current toggles.
+= Profilul {0} este gol - apasă SALVEAZĂ pentru a păstra comutatoarele actuale.
+Profile {0} loaded: {#1} changed.
+= Profilul {0} încărcat: {1} modificate.
+Profile {0} loaded: {#1} changed. {#2} newer addon(s) left as they were.
+= Profilul {0} încărcat: {1} modificate. {2} addon-uri mai noi lăsate neschimbate.
+Cloud saving is turned off.\nYour progress stays on this PC only.
+= Salvarea în cloud este oprită.\nProgresul tău rămâne doar pe acest PC.
+TURN ON CLOUD SAVING
+= PORNEȘTE SALVAREA ÎN CLOUD
+PLAY downloads the newest state, starts the game and uploads your progress after you close it. One complete state wins; the overwritten one is backed up as a ZIP first.
+= JOACĂ descarcă cea mai nouă stare, pornește jocul și încarcă progresul după ce îl închizi. Câștigă o stare completă; cea suprascrisă este salvată mai întâi ca ZIP.
+(not set - choose a folder inside Google Drive, OneDrive or Dropbox)
+= (nesetat - alege un folder în Google Drive, OneDrive sau Dropbox)
+Not synced yet.
+= Nesincronizat încă.
+Cloud: {0}
+= Cloud: {0}
+last uploaded by {0} on {1}
+= ultima încărcare de {0} pe {1}
+no upload info
+= fără informații de încărcare
+CHECK STATUS
+= VERIFICĂ STAREA
+DOWNLOAD
+= DESCARCĂ
+UPLOAD
+= ÎNCARCĂ ÎN CLOUD
+The launcher is already running.
+= Launcherul rulează deja.
+Look for its icon in the system tray (near the clock).
+= Caută pictograma lui în zona de notificare (lângă ceas).
+Press INSTALL to download the game first.
+= Apasă INSTALEAZĂ pentru a descărca mai întâi jocul.
+No launcher release has been published on GitHub yet.
+= Nicio versiune a launcherului nu a fost publicată încă pe GitHub.
+GitHub's answer could not be read.
+= Răspunsul GitHub nu a putut fi citit.
+The latest release on GitHub ({0}) has no launcher exe attached.
+= Cea mai nouă versiune de pe GitHub ({0}) nu are atașat exe-ul launcherului.
+The latest release on GitHub has no checksum for its exe, so it is not installed.
+= Cea mai nouă versiune de pe GitHub nu are sumă de control pentru exe, așa că nu este instalată.
+The downloaded launcher does not match its checksum, so it was not installed. Please try again later.
+= Launcherul descărcat nu corespunde sumei de control, așa că nu a fost instalat. Încearcă din nou mai târziu.
+The launcher could not replace itself in this folder ({0}).
+= Launcherul nu s-a putut înlocui în acest folder ({0}).
+Download the new version from GitHub instead:
+= Descarcă în schimb noua versiune de pe GitHub:
+The new launcher could not be put in place ({0}). Nothing was changed.
+= Noul launcher nu a putut fi pus la loc ({0}). Nu s-a schimbat nimic.
+The {0} address must start with https://
+= Adresa serverului {0} trebuie să înceapă cu https://
+The {0} server redirected to an address that is not secure (https).
+= Serverul {0} a redirecționat către o adresă care nu este sigură (https).
+The {0} server sent a broken redirect.
+= Serverul {0} a trimis o redirecționare greșită.
+The {0} server answered with error {#1}.
+= Serverul {0} a răspuns cu eroarea {1}.
+The {0} server's security certificate was not accepted. It needs a normal, trusted https certificate.
+= Certificatul de securitate al serverului {0} nu a fost acceptat. Are nevoie de un certificat https normal, de încredere.
+The {0} server did not answer in time. Check your internet connection and try again.
+= Serverul {0} nu a răspuns la timp. Verifică conexiunea la internet și încearcă din nou.
+Could not reach the {0} server. Check your internet connection and try again.
+= Serverul {0} nu a putut fi accesat. Verifică conexiunea la internet și încearcă din nou.
+The {0} server redirected too many times.
+= Serverul {0} a redirecționat de prea multe ori.
+update
+= de actualizări
+addon
+= de addon-uri
+The download link gave a web page instead of the file. It must be a direct download link.
+= Linkul de descărcare a dat o pagină web în loc de fișier. Trebuie să fie un link de descărcare directă.
+The download was interrupted. Check your connection and try again.
+= Descărcarea a fost întreruptă. Verifică conexiunea și încearcă din nou.
+The download was cut off before it finished. Please try again.
+= Descărcarea s-a oprit înainte de final. Încearcă din nou.
+The .zip contains an unsafe path; nothing was installed.
+= Fișierul .zip conține o cale nesigură; nu s-a instalat nimic.
+The file is damaged or incomplete.
+= Fișierul este deteriorat sau incomplet.
+The file is a .{0} archive, and no program to unpack it was found.
+= Fișierul este o arhivă .{0} și nu s-a găsit niciun program pentru a o dezarhiva.
+Install the free 7-Zip (7-zip.org) or WinRAR and try again.
+= Instalează gratuit 7-Zip (7-zip.org) sau WinRAR și încearcă din nou.
+The archive could not be unpacked.
+= Arhiva nu a putut fi dezarhivată.
+That file is not a .rar, .zip or .7z archive.
+= Acel fișier nu este o arhivă .rar, .zip sau .7z.
+The archive was unpacked, but {0} was not inside it.
+= Arhiva a fost dezarhivată, dar {0} nu era în ea.
+The install finished, but {0} is not in {1}.
+= Instalarea s-a terminat, dar {0} nu este în {1}.
+The link did not give a .zip file. It must be a direct download link (share pages such as LimeWire do not work).
+= Linkul nu a dat un fișier .zip. Trebuie să fie un link de descărcare directă (paginile de partajare precum LimeWire nu funcționează).
+There is not enough free disk space.
+= Nu există suficient spațiu liber pe disc.
+Not enough free disk space for the update: about {0} is needed on the drive with the game, {1} is free.
+= Spațiu insuficient pentru actualizare: sunt necesari aproximativ {0} pe unitatea jocului, {1} sunt liberi.
+The update file is not a .rar, .zip or .7z archive.
+= Fișierul de actualizare nu este o arhivă .rar, .zip sau .7z.
+An earlier update was cut off and its files could not be put back yet.
+= O actualizare anterioară a fost întreruptă și fișierele ei nu au putut fi încă puse la loc.
+The old files are kept in:
+= Fișierele vechi sunt păstrate în:
+Unpacking the update. This can take a few minutes...
+= Se dezarhivează actualizarea. Poate dura câteva minute...
+Installing the new files...
+= Se instalează fișierele noi...
+The update did not contain any files to install.
+= Actualizarea nu conținea fișiere de instalat.
+{0} is missing after the update.
+= {0} lipsește după actualizare.
+A game file is in use. Close the game and anything else using its folder, then try again.
+= Un fișier al jocului este folosit. Închide jocul și orice altceva folosește folderul lui, apoi încearcă din nou.
+There is not enough free disk space for the update. Free some space and try again.
+= Spațiu insuficient pentru actualizare. Eliberează spațiu și încearcă din nou.
+The update could not be installed ({0}).
+= Actualizarea nu a putut fi instalată ({0}).
+No game files were changed.
+= Niciun fișier al jocului nu a fost modificat.
+Some files could not be put back. The old versions are kept in:
+= Unele fișiere nu au putut fi puse la loc. Versiunile vechi sunt păstrate în:
+Sync folder not reachable: {0} (is your cloud drive running?)
+= Folderul de sincronizare nu este accesibil: {0} (rulează drive-ul tău cloud?)
+The game is running. Close it before you download.
+= Jocul rulează. Închide-l înainte de descărcare.
+The game is running. Close it before you upload.
+= Jocul rulează. Închide-l înainte de încărcare.
+The folder is in use and was not replaced: {0} ({1}). Close programs or Explorer windows that use it and try again.
+= Folderul este folosit și nu a fost înlocuit: {0} ({1}). Închide programele sau ferestrele Explorer care îl folosesc și încearcă din nou.
+The source changed while copying ({0}). Nothing was replaced, please sync again.
+= Sursa s-a schimbat în timpul copierii ({0}). Nu s-a înlocuit nimic, sincronizează din nou.
+No sync folder set. Choose a folder in Google Drive, OneDrive, Dropbox or similar in Options.
+= Niciun folder de sincronizare setat. Alege un folder în Google Drive, OneDrive, Dropbox sau similar în Opțiuni.
+Sync folder: {0}
+= Folder de sincronizare: {0}
+The sync folder does not exist yet. It is created on the first upload.
+= Folderul de sincronizare nu există încă. Este creat la prima încărcare.
+{0}: in sync (local {1}, cloud {2})
+= {0}: sincronizat (local {1}, cloud {2})
+{0}: cloud empty, upload (local {1}, cloud {2})
+= {0}: cloud gol, de încărcat (local {1}, cloud {2})
+{0}: cloud copy incomplete or still syncing, wait (local {1}, cloud {2})
+= {0}: copia din cloud incompletă sau încă se sincronizează, așteaptă (local {1}, cloud {2})
+{0}: local is newer, upload (local {1}, cloud {2})
+= {0}: localul e mai nou, de încărcat (local {1}, cloud {2})
+{0}: cloud is newer, download (local {1}, cloud {2})
+= {0}: cloudul e mai nou, de descărcat (local {1}, cloud {2})
+{0}: both changed or never synced (local {1}, cloud {2})
+= {0}: ambele modificate sau niciodată sincronizate (local {1}, cloud {2})
+{0}: {1} not found, skipped. Set the game config folder in Options.
+= {0}: {1} negăsit, sărit. Setează folderul de configurare al jocului în Opțiuni.
+Downloading from the cloud ...
+= Se descarcă din cloud ...
+The sync folder does not exist yet, nothing to download.
+= Folderul de sincronizare nu există încă, nimic de descărcat.
+{0}: cloud is empty, nothing to download.
+= {0}: cloudul este gol, nimic de descărcat.
+{0}: up to date.
+= {0}: la zi.
+{0}: the cloud copy does not match the last upload yet (incomplete or still syncing). Nothing replaced, try again in a moment.
+= {0}: copia din cloud nu corespunde încă ultimei încărcări (incompletă sau încă se sincronizează). Nimic înlocuit, încearcă din nou peste puțin timp.
+{0}: local is newer, kept.
+= {0}: localul e mai nou, păstrat.
+Replace your local data with the cloud state?
+= Înlocuiești datele locale cu starea din cloud?
+A backup is made first.
+= Mai întâi se face un backup.
+Cancelled, nothing changed.
+= Anulat, nu s-a schimbat nimic.
+{0}: local state kept, it will replace the cloud on the next upload.
+= {0}: starea locală păstrată, va înlocui cloudul la următoarea încărcare.
+{0}: downloaded from the cloud.
+= {0}: descărcat din cloud.
+Cloud state: {0}
+= Starea cloudului: {0}
+Uploading to the cloud ...
+= Se încarcă în cloud ...
+{0}: nothing local, nothing uploaded.
+= {0}: nimic local, nimic încărcat.
+{0}: cloud is up to date.
+= {0}: cloudul este la zi.
+Replace the cloud state with your local data?
+= Înlocuiești starea din cloud cu datele locale?
+{0}: cloud kept, your local changes were NOT uploaded. Use "Download" to get the cloud state.
+= {0}: cloud păstrat, modificările tale locale NU au fost încărcate. Folosește „Descarcă” pentru a obține starea din cloud.
+Cancelled, your local changes were NOT uploaded.
+= Anulat, modificările tale locale NU au fost încărcate.
+{0}: the cloud changed during this sync, NOT uploaded. Sync again to decide.
+= {0}: cloudul s-a schimbat în timpul acestei sincronizări, NU s-a încărcat. Sincronizează din nou pentru a decide.
+{0}: uploaded.
+= {0}: încărcat.
+Written to the sync folder. Your cloud app uploads it in the background, wait until it is done before you switch PCs.
+= Scris în folderul de sincronizare. Aplicația ta cloud îl încarcă în fundal; așteaptă să termine înainte să schimbi PC-ul.
+Backup: {0}
+= Backup: {0}
+Restored {0} after an interrupted sync.
+= {0} restaurat după o sincronizare întreruptă.

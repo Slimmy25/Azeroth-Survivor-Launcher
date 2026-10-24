@@ -1,5 +1,5 @@
 @echo off
-setlocal
+setlocal EnableDelayedExpansion
 cd /d "%~dp0"
 
 rem Builds "Azeroth Survivors Launcher.exe" with the C# compiler that is already part of Windows
@@ -38,6 +38,10 @@ if not exist dist mkdir dist
 set "OUT=dist\Azeroth Survivors Launcher.exe"
 if exist "%OUT%" del "%OUT%"
 
+rem every language file in assets\lang is built in (see assets\lang\README.md)
+set "LANGRES="
+for %%f in (assets\lang\*.txt) do set "LANGRES=!LANGRES! /resource:assets\lang\%%~nxf,AS.lang.%%~nf.txt"
+
 echo Building %OUT% ...
 "%CSC%" /nologo /target:winexe /platform:anycpu /optimize+ /langversion:5 /warn:3 /nowarn:162,429 ^
   /out:"%OUT%" /win32icon:assets\AzerothSurvivors.ico /win32manifest:app.manifest ^
@@ -45,7 +49,7 @@ echo Building %OUT% ...
   /r:System.IO.Compression.dll /r:System.IO.Compression.FileSystem.dll ^
   /resource:assets\logo.png,AS.logo.png /resource:assets\portrait.png,AS.portrait.png ^
   /resource:assets\AzerothSurvivors.ico,AS.app.ico /resource:assets\changelog.txt,AS.changelog.txt ^
-  /resource:assets\addons.txt,AS.addons.txt /resource:assets\about.txt,AS.about.txt ^
+  /resource:assets\addons.txt,AS.addons.txt /resource:assets\about.txt,AS.about.txt !LANGRES! ^
   src\*.cs
 if errorlevel 1 goto fail
 
@@ -55,7 +59,7 @@ if errorlevel 1 goto fail
 powershell -NoProfile -Command "Get-FileHash -Algorithm SHA256 '%OUT%' | ForEach-Object { $_.Hash.ToLower() + '  ' + (Split-Path $_.Path -Leaf) } | Set-Content -Encoding ascii 'dist\Azeroth Survivors Launcher.sha256.txt'"
 
 echo.
-echo Done!  %~dp0%OUT%
+echo Done.  %~dp0%OUT%
 echo It is a single file: share just the exe (or zip it). Players put it in the folder where the game is (or should be installed).
 if not defined CI explorer "%~dp0dist"
 %PAUSE%

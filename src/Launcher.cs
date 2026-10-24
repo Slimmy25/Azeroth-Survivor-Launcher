@@ -42,7 +42,31 @@ namespace AzerothLauncher
         readonly Dictionary<string, WowButton> nav = new Dictionary<string, WowButton>();
         readonly string[] navNames = { "Cloud Save", "Addons", "Options", "Changelog" };
         NotifyIcon tray;
-        ToolStripMenuItem trayPlay, trayUpload, trayCloseToTray;
+        ToolStripMenuItem trayShow, trayPlay, trayUpload, trayCloseToTray, trayQuit;
+
+        void TrayTexts()
+        {
+            trayShow.Text = Lang.T("Show Launcher");
+            trayPlay.Text = Lang.T("Play");
+            trayUpload.Text = Lang.T("Upload Save Now");
+            trayCloseToTray.Text = Lang.T("Close Button Hides to Tray");
+            trayQuit.Text = Lang.T("Quit");
+        }
+
+        // Options > Language
+        public void SetLanguage(string code)
+        {
+            Cfg.Set("language", code);
+            Cfg.Save();
+            Lang.Load(code);
+            Theme.PickFont();
+            TrayTexts();
+            foreach (Control c in Controls) c.Invalidate();
+            Invalidate();
+            sideHead.Invalidate();
+            SetSideTitle(sideHead.Title);
+            if (current != null && current != "Home" && side.Visible) BuildPanel(current);
+        }
 
         public LauncherApp(bool startInTray)
         {
@@ -145,7 +169,7 @@ namespace AzerothLauncher
         {
             using (var d = new FolderBrowserDialog())
             {
-                d.Description = title;
+                d.Description = Lang.T(title);
                 d.ShowNewFolderButton = true;
                 if (!string.IsNullOrEmpty(start) && Directory.Exists(start)) d.SelectedPath = start;
                 return d.ShowDialog(owner) == DialogResult.OK && d.SelectedPath.Length > 0 ? d.SelectedPath : null;
@@ -154,12 +178,12 @@ namespace AzerothLauncher
 
         public bool Ask(string title, string msg)
         {
-            return MessageBox.Show(this, msg, title, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
+            return Msg.Show(this, msg, title, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
         }
 
-        public void Info(string title, string msg) { MessageBox.Show(this, msg, title, MessageBoxButtons.OK, MessageBoxIcon.Information); }
-        public void Warn(string title, string msg) { MessageBox.Show(this, msg, title, MessageBoxButtons.OK, MessageBoxIcon.Warning); }
-        public void Error(string title, string msg) { MessageBox.Show(this, msg, title, MessageBoxButtons.OK, MessageBoxIcon.Error); }
+        public void Info(string title, string msg) { Msg.Show(this, msg, title, MessageBoxButtons.OK, MessageBoxIcon.Information); }
+        public void Warn(string title, string msg) { Msg.Show(this, msg, title, MessageBoxButtons.OK, MessageBoxIcon.Warning); }
+        public void Error(string title, string msg) { Msg.Show(this, msg, title, MessageBoxButtons.OK, MessageBoxIcon.Error); }
 
         // ------------------------------------------------------------------ settings
         public string GameDir()
@@ -209,15 +233,16 @@ namespace AzerothLauncher
             Image logo = Theme.Logo;                          // emblem at the top, the game's name beneath it
             if (logo != null) g.DrawImage(logo, (W - logo.Width) / 2, 20, logo.Width, logo.Height);
             Theme.CenterText(g, "AZEROTH SURVIVORS", Theme.F(20, FontStyle.Bold), Theme.Gold, new RectangleF(0, 175, W, 32), Color.Black);
-            Theme.CenterText(g, "A game made by Aethus", Theme.F(11, FontStyle.Italic), Theme.GoldDim, new RectangleF(0, 205, W, 22), null);
+            Theme.CenterText(g, Lang.T("A game made by Aethus"), Theme.F(11, FontStyle.Italic), Theme.GoldDim, new RectangleF(0, 205, W, 22), null);
             string version = Data.GameVersion;                // the newest patch note in the changelog
             if (version.Length > 0)
-                Theme.CenterText(g, "Version " + version, Theme.F(9, FontStyle.Italic), Theme.GoldDim, new RectangleF(0, 225, W, 18), null);
+                Theme.CenterText(g, Lang.T("Version " + version), Theme.F(9, FontStyle.Italic), Theme.GoldDim, new RectangleF(0, 225, W, 18), null);
             // short welcome text between the logo and the buttons
             string body = ClientPresent() ? "Press PLAY to enter Azeroth." :
                 (RequireLauncherInstall ? "Game client not found.\nPress INSTALL to download it first."
                                         : "Game client not found.\nPress INSTALL to download it, or set the game folder in Options.");
             if (CloudEnabled()) body += "\nYour cloud save syncs automatically.";
+            body = Lang.T(body);
             using (var sf = new StringFormat())
             {
                 sf.Alignment = StringAlignment.Center;
@@ -229,11 +254,11 @@ namespace AzerothLauncher
             // play time, at the bottom of the welcome area
             PlayStats ps = ShownPlayStats();
             if (ps.Sessions > 0)
-                Theme.CenterText(g, "Time played: " + Duration(ps.Seconds) + "   |   Last session: " + Duration(ps.LastSeconds),
+                Theme.CenterText(g, Lang.T("Time played: " + Duration(ps.Seconds) + "   |   Last session: " + Duration(ps.LastSeconds)),
                                  Theme.F(9, FontStyle.Italic), Theme.GoldDim, new RectangleF(20, 300, W - 40, 18), null);
             // footer text: cloud result, then the status
-            Theme.CenterText(g, cloudNote, Theme.F(10, FontStyle.Italic), Theme.Gold, new RectangleF(25, 652, W - 50, 24), null);
-            Theme.CenterText(g, status, Theme.F(12, FontStyle.Italic), Theme.Text, new RectangleF(25, 674, W - 50, 26), null);
+            Theme.CenterText(g, Lang.T(cloudNote), Theme.F(10, FontStyle.Italic), Theme.Gold, new RectangleF(25, 652, W - 50, 24), null);
+            Theme.CenterText(g, Lang.T(status), Theme.F(12, FontStyle.Italic), Theme.Text, new RectangleF(25, 674, W - 50, 26), null);
         }
 
         public void SetStatus(string msg)
@@ -305,7 +330,7 @@ namespace AzerothLauncher
             tray.Icon = Theme.AppIcon;
             tray.Text = "Azeroth Survivors Launcher";
             var menu = new ContextMenuStrip();
-            var show = new ToolStripMenuItem("Show Launcher", null, delegate { ShowWindowFront(); });
+            var show = trayShow = new ToolStripMenuItem("Show Launcher", null, delegate { ShowWindowFront(); });
             show.Font = new Font(show.Font, FontStyle.Bold);
             trayPlay = new ToolStripMenuItem("Play", null, delegate { Play(); });
             trayUpload = new ToolStripMenuItem("Upload Save Now", null, delegate { RunSync("push", false, true); });
@@ -320,7 +345,8 @@ namespace AzerothLauncher
             menu.Items.Add(new ToolStripSeparator());
             menu.Items.Add(trayCloseToTray);
             menu.Items.Add(new ToolStripSeparator());
-            menu.Items.Add(new ToolStripMenuItem("Quit", null, delegate { QuitApp(); }));
+            menu.Items.Add(trayQuit = new ToolStripMenuItem("Quit", null, delegate { QuitApp(); }));
+            TrayTexts();
             menu.Opening += delegate
             {
                 trayPlay.Enabled = !GameRunningFlag;
@@ -335,14 +361,14 @@ namespace AzerothLauncher
 
         public void Notify(string msg)
         {
-            try { if (tray != null) tray.ShowBalloonTip(5000, "Azeroth Survivors Launcher", msg, ToolTipIcon.Info); }
+            try { if (tray != null) tray.ShowBalloonTip(5000, "Azeroth Survivors Launcher", Lang.T(msg), ToolTipIcon.Info); }
             catch (Exception) { }
         }
 
         void SetTrayTitle(string text)
         {
             if (tray == null) return;
-            string t = "Azeroth Survivors Launcher - " + text;
+            string t = "Azeroth Survivors Launcher - " + Lang.T(text);
             tray.Text = t.Length > 63 ? t.Substring(0, 63) : t;
         }
 
@@ -483,7 +509,7 @@ namespace AzerothLauncher
             d = Path.GetFullPath(d);
             bool topLevel = Util.IsDriveRoot(d);
             foreach (var c in clouds) if (Util.SamePath(d, c.Value)) topLevel = true;
-            if (topLevel && MessageBox.Show(owner, "That is the top level of your cloud drive.\n\nCreate and use a subfolder named " +
+            if (topLevel && Msg.Show(owner, "That is the top level of your cloud drive.\n\nCreate and use a subfolder named " +
                                             "AzerothSync inside it?", "Sync folder", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 d = Path.Combine(d, "AzerothSync");
             return d;
@@ -551,7 +577,7 @@ namespace AzerothLauncher
             {
                 if (logBox != null && !logBox.IsDisposed)
                 {
-                    UI.Append(logBox, msg + "\n", UI.LevelColor(level), null);
+                    UI.Append(logBox, Lang.T(msg) + "\n", UI.LevelColor(level), null);
                     logBox.ScrollToCaret();
                 }
             });
@@ -904,9 +930,9 @@ namespace AzerothLauncher
             {
                 using (var d = new OpenFileDialog())
                 {
-                    d.Title = "Choose the game file you downloaded (.rar)";
+                    d.Title = Lang.T("Choose the game file you downloaded (.rar)");
                     d.InitialDirectory = Util.DownloadsDir;
-                    d.Filter = "Game archive (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|All files (*.*)|*.*";
+                    d.Filter = Lang.T("Game archive (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|All files (*.*)|*.*");
                     if (d.ShowDialog(this) != DialogResult.OK)
                     {
                         SetStatus("Install cancelled.");
@@ -1255,16 +1281,16 @@ namespace AzerothLauncher
             if (archive != null)
             {
                 var fi = new FileInfo(archive);
-                if (MessageBox.Show(owner, "Install the update from this file?\n\n" + fi.Name + "  (" + (fi.Length >> 20) + " MB)\nin " +
+                if (Msg.Show(owner, "Install the update from this file?\n\n" + fi.Name + "  (" + (fi.Length >> 20) + " MB)\nin " +
                                     fi.DirectoryName, "Game update", MessageBoxButtons.YesNo) != DialogResult.Yes)
                     archive = null;
             }
             if (archive == null)
                 using (var d = new OpenFileDialog())
                 {
-                    d.Title = "Choose the update file you downloaded";
+                    d.Title = Lang.T("Choose the update file you downloaded");
                     d.InitialDirectory = Util.DownloadsDir;
-                    d.Filter = "Update archive (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|All files (*.*)|*.*";
+                    d.Filter = Lang.T("Update archive (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|All files (*.*)|*.*");
                     archive = d.ShowDialog(owner) == DialogResult.OK ? d.FileName : null;
                 }
             return archive;
@@ -1277,7 +1303,7 @@ namespace AzerothLauncher
             string game = GameDir();
             if (GameRunningFlag || Util.GameRunning())
             {
-                MessageBox.Show(dlg, "Close the game first, then try again.", "Game running");
+                Msg.Show(dlg, "Close the game first, then try again.", "Game running");
                 return false;
             }
             try
@@ -1289,7 +1315,7 @@ namespace AzerothLauncher
             }
             catch (UserError e)
             {
-                MessageBox.Show(dlg, e.Message, "Game update");
+                Msg.Show(dlg, e.Message, "Game update");
                 return false;
             }
             catch (Exception) { }

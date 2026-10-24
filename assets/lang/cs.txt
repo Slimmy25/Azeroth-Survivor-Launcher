@@ -1,0 +1,791 @@
+@name Čeština
+@font Palatino Linotype, Georgia
+# Each English text is followed by its translation on the line below (starting with "= ").
+# {0}, {1} ... are filled in by the launcher; keep them. \n is a line break.
+
+PLAY
+= HRÁT
+INSTALL
+= NAINSTALOVAT
+PLAYING...
+= HRAJE SE...
+INSTALLING
+= INSTALACE
+UPDATING
+= AKTUALIZACE
+UPDATE
+= AKTUALIZOVAT
+CHECKING
+= KONTROLA
+CLOUD SAVE
+= ULOŽENÍ DO CLOUDU
+ADDONS
+= DOPLŇKY
+OPTIONS
+= MOŽNOSTI
+CHANGELOG
+= SEZNAM ZMĚN
+ABOUT LAUNCHER
+= O LAUNCHERU
+A game made by Aethus
+= Hra od tvůrce Aethus
+Version {0}
+= Verze {0}
+Press PLAY to enter Azeroth.
+= Stiskni HRÁT a vstup do Azerothu.
+Game client not found.
+= Hra nebyla nalezena.
+Press INSTALL to download it first.
+= Nejdřív ji stáhni tlačítkem NAINSTALOVAT.
+Press INSTALL to download it, or set the game folder in Options.
+= Stáhni ji tlačítkem NAINSTALOVAT, nebo nastav složku hry v Možnostech.
+Your cloud save syncs automatically.
+= Tvé uložení v cloudu se synchronizuje automaticky.
+Time played: {0}   |   Last session: {1}
+= Odehraný čas: {0}   |   Poslední relace: {1}
+Ready.
+= Připraveno.
+Cloud Save
+= Uložení do cloudu
+Addons
+= Doplňky
+Options
+= Možnosti
+Changelog
+= Seznam změn
+About Launcher
+= O launcheru
+Download More
+= Stáhnout další
+All Patch Notes
+= Všechny poznámky k verzím
+Show Launcher
+= Zobrazit launcher
+Play
+= Hrát
+Upload Save Now
+= Nahrát uložení teď
+Close Button Hides to Tray
+= Tlačítko Zavřít skryje do oznamovací oblasti
+Quit
+= Ukončit
+Game running
+= Hra běží
+Idle
+= Nečinný
+Game running - {0}
+= Hra běží - {0}
+The launcher is in the tray; the open window stays. Right-click the icon to quit.
+= Launcher je v oznamovací oblasti; otevřené okno zůstává. Pro ukončení klikni pravým tlačítkem na ikonu.
+Still running in the tray. Right-click the icon to quit.
+= Stále běží v oznamovací oblasti. Pro ukončení klikni pravým tlačítkem na ikonu.
+Cloud sync running
+= Probíhá synchronizace s cloudem
+A cloud sync is still running. If you quit now it is cut short; the next sync repairs any half-finished copy.
+= Synchronizace s cloudem stále probíhá. Pokud teď skončíš, bude přerušena; příští synchronizace opraví nedokončenou kopii.
+Quit anyway?
+= Přesto ukončit?
+Installing
+= Probíhá instalace
+The game client is still being installed. If you quit now, it is cut short.
+= Hra se stále instaluje. Pokud teď skončíš, instalace bude přerušena.
+Updating
+= Probíhá aktualizace
+The game is still being updated. If you quit now, the update is cut short. Nothing is lost: a half-finished change is undone the next time the launcher starts.
+= Hra se stále aktualizuje. Pokud teď skončíš, aktualizace bude přerušena. Nic se neztratí: nedokončená změna se vrátí při příštím spuštění launcheru.
+The game is still running. If you quit the launcher now, your saves will NOT be uploaded automatically.
+= Hra stále běží. Pokud teď ukončíš launcher, tvá uložení se NEnahrají automaticky.
+Setup saved.
+= Nastavení uloženo.
+First-time setup
+= První nastavení
+Welcome, Adventurer
+= Vítej, dobrodruhu
+Step 1 of 2
+= Krok 1 ze 2
+Step 2 of 2
+= Krok 2 ze 2
+A.  Cloud saving
+= A.  Ukládání do cloudu
+Keep my progress in the cloud (Google Drive, OneDrive, Dropbox ...)\nand share it between my PCs
+= Uchovávat můj postup v cloudu (Google Drive, OneDrive, Dropbox ...)\na sdílet ho mezi mými počítači
+Sync folder (inside your cloud drive)
+= Složka synchronizace (ve tvém cloudovém disku)
+Cloud saving stays off. You can turn it on later in Cloud Save.
+= Ukládání do cloudu zůstává vypnuté. Můžeš ho zapnout později v sekci Uložení do cloudu.
+B.  Where are your files?
+= B.  Kde jsou tvé soubory?
+Folders found at their usual place are used as they are. Choose the ones that are missing.
+= Složky nalezené na obvyklém místě se použijí tak, jak jsou. Vyber ty, které chybí.
+AddOns
+= AddOns
+Game saves
+= Uložené hry
+Addon settings
+= Nastavení doplňků
+Select your AddOns folder
+= Vyber svou složku AddOns
+Select the folder that holds your save game (normally %APPDATA%\wenilla-rogue)
+= Vyber složku s uloženou hrou (obvykle %APPDATA%\wenilla-rogue)
+Select your addon settings folder (the 'saved' folder in benilla-config)
+= Vyber složku nastavení doplňků (složka 'saved' v benilla-config)
+FINISH
+= DOKONČIT
+LATER
+= POZDĚJI
+✓ found
+= ✓ nalezeno
+✓ chosen
+= ✓ vybráno
+not chosen yet
+= zatím nevybráno
+not found - please choose it
+= nenalezeno - vyber ji
+(not set)
+= (nenastaveno)
+CHANGE
+= ZMĚNIT
+CHOOSE
+= VYBRAT
+Choose a sync folder for cloud saving, or untick\n"Keep my progress in the cloud".
+= Vyber složku synchronizace pro ukládání do cloudu, nebo zruš zaškrtnutí\n„Uchovávat můj postup v cloudu“.
+Setup
+= Nastavení
+These folders were not found:
+= Tyto složky nebyly nalezeny:
+Finish anyway? You can change them later in Options.
+= Přesto dokončit? Můžeš je později změnit v Možnostech.
+Your settings are saved.\n\nWould you like to go to the Addons section now\nto download some addons, or to enable or disable the ones you have?
+= Tvá nastavení jsou uložena.\n\nChceš teď přejít do sekce Doplňky\na stáhnout doplňky, nebo zapnout či vypnout ty, které máš?
+DOWNLOAD ADDONS
+= STÁHNOUT DOPLŇKY
+ENABLE / DISABLE ADDONS
+= ZAPNOUT / VYPNOUT DOPLŇKY
+NO THANKS
+= NE, DÍKY
+Install the game
+= Nainstalovat hru
+Install Azeroth Survivors
+= Nainstalovat Azeroth Survivors
+Step 1
+= Krok 1
+Download the game in your web browser.
+= Stáhni hru ve webovém prohlížeči.
+OPEN DOWNLOAD
+= OTEVŘÍT STAHOVÁNÍ
+Download opened in your browser.
+= Stahování otevřeno v prohlížeči.
+Step 2
+= Krok 2
+When the download has finished, come back here.
+= Až se stahování dokončí, vrať se sem.
+IT'S IN MY DOWNLOADS
+= JE TO V MÝCH STAŽENÝCH
+The launcher finds the file (in its own folder or Downloads), unpacks the game here and deletes the download.
+= Launcher najde soubor (ve své složce nebo ve Stažených souborech), rozbalí sem hru a stažený soubor smaže.
+CANCEL
+= ZRUŠIT
+Which progress do you want to keep?
+= Který postup chceš zachovat?
+Both sides changed
+= Změnily se obě strany
+This PC and the cloud both changed since the last sync:
+= Tento počítač i cloud se od poslední synchronizace změnily:
+• {0}:  this PC {1}   |   cloud {2}
+= • {0}:  tento počítač {1}   |   cloud {2}
+One complete state wins, the other is backed up first.
+= Vyhraje jeden úplný stav, druhý se nejdřív zálohuje.
+First time on this PC? Choose USE CLOUD.
+= Poprvé na tomto počítači? Vyber POUŽÍT CLOUD.
+USE CLOUD replaces your local data. KEEP LOCAL keeps it and uploads it later.
+= POUŽÍT CLOUD nahradí tvá místní data. PONECHAT MÍSTNÍ je zachová a nahraje je později.
+KEEP LOCAL replaces the cloud. USE CLOUD leaves the cloud and skips your upload.
+= PONECHAT MÍSTNÍ nahradí cloud. POUŽÍT CLOUD nechá cloud být a vynechá tvé nahrání.
+USE CLOUD
+= POUŽÍT CLOUD
+KEEP LOCAL
+= PONECHAT MÍSTNÍ
+Save game
+= Uložená hra
+Game update
+= Aktualizace hry
+Update available
+= Dostupná aktualizace
+New version:
+= Nová verze:
+Your version:
+= Tvá verze:
+not recorded yet
+= zatím nezaznamenáno
+Download size:
+= Velikost stahování:
+What is new
+= Co je nového
+Your addons, settings and saves are left alone. If anything goes wrong, the old game files are put back.
+= Tvých doplňků, nastavení a uložení se to nedotkne. Pokud se něco pokazí, vrátí se staré soubory hry.
+UPDATE NOW
+= AKTUALIZOVAT TEĎ
+NOT NOW
+= TEĎ NE
+SKIP THIS VERSION
+= PŘESKOČIT TUTO VERZI
+I ALREADY HAVE THIS VERSION
+= TUTO VERZI UŽ MÁM
+The update is being installed. Please wait until it has finished.
+= Aktualizace se instaluje. Počkej, až skončí.
+Downloading the update...
+= Stahování aktualizace...
+Download the update
+= Stáhnout aktualizaci
+Step 1: download the update in your web browser.
+= Krok 1: stáhni aktualizaci ve webovém prohlížeči.
+OPEN DOWNLOAD AGAIN
+= ZNOVU OTEVŘÍT STAHOVÁNÍ
+Step 2: when the download has finished, come back here.
+= Krok 2: až se stahování dokončí, vrať se sem.
+The launcher finds the file (in its own folder or Downloads), installs it and deletes it.
+= Launcher najde soubor (ve své složce nebo ve Stažených souborech), nainstaluje ho a smaže.
+Checking the file...
+= Kontrola souboru...
+CANCELLING...
+= RUŠENÍ...
+Updating to {0}
+= Aktualizace na {0}
+Please keep the launcher open until this has finished.
+= Nech launcher otevřený, dokud to neskončí.
+{0} of {1}  ({#2}%)
+= {0} z {1}  ({2} %)
+{0} downloaded
+= Staženo {0}
+Update installed
+= Aktualizace nainstalována
+Update failed
+= Aktualizace selhala
+CLOSE
+= ZAVŘÍT
+TRY AGAIN
+= ZKUSIT ZNOVU
+Version {0} is installed.
+= Je nainstalována verze {0}.
+{#0} files updated.
+= Aktualizováno souborů: {0}.
+{#0} file updated.
+= Aktualizováno souborů: {0}.
+{#0} files updated, {#1} removed.
+= Aktualizováno souborů: {0}, odstraněno: {1}.
+{#0} file updated, {#1} removed.
+= Aktualizováno souborů: {0}, odstraněno: {1}.
+Install
+= Instalace
+Install the game from this file?
+= Nainstalovat hru z tohoto souboru?
+{0}  ({#1} MB)
+= {0}  ({1} MB)
+in {0}
+= v {0}
+Choose the game file you downloaded (.rar)
+= Vyber stažený soubor hry (.rar)
+Game archive (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|All files (*.*)|*.*
+= Archiv hry (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|Všechny soubory (*.*)|*.*
+Install cancelled.
+= Instalace zrušena.
+Unpacking the game client...
+= Rozbalování hry...
+Install failed.
+= Instalace selhala.
+Install complete - press PLAY.
+= Instalace dokončena - stiskni HRÁT.
+Install complete. Press PLAY to enter Azeroth.
+= Instalace dokončena. Stiskni HRÁT a vstup do Azerothu.
+The last game update was cut off before it finished. Your game files were put back exactly as they were.
+= Poslední aktualizace hry byla přerušena před dokončením. Soubory hry byly vráceny přesně do původního stavu.
+You can run the update again with the UPDATE button.
+= Aktualizaci můžeš spustit znovu tlačítkem AKTUALIZOVAT.
+The last game update was cut off, and some game files could not be put back automatically.
+= Poslední aktualizace hry byla přerušena a některé soubory hry se nepodařilo automaticky vrátit.
+The old versions are kept in the folder "{0}" inside the game folder. Copy them back over the game files, or reinstall the game.
+= Staré verze jsou ve složce „{0}“ uvnitř složky hry. Zkopíruj je zpět přes soubory hry, nebo hru přeinstaluj.
+Checking for updates...
+= Hledání aktualizací...
+The update check failed ({0}).
+= Kontrola aktualizací selhala ({0}).
+Could not check for launcher updates.
+= Nepodařilo se zkontrolovat aktualizace launcheru.
+Launcher update
+= Aktualizace launcheru
+Launcher {0} is available.
+= Je dostupný launcher {0}.
+The launcher is up to date ({0}).
+= Launcher je aktuální ({0}).
+You have the newest launcher ({0}).
+= Máš nejnovější launcher ({0}).
+A new launcher ({0}) is available. Open the launcher and press UPDATE.
+= Je dostupný nový launcher ({0}). Otevři launcher a stiskni AKTUALIZOVAT.
+Finish what is running first (the game, an install or a cloud sync), then press UPDATE again.
+= Nejdřív dokonči, co právě běží (hru, instalaci nebo synchronizaci), a pak znovu stiskni AKTUALIZOVAT.
+A new version of the launcher is on GitHub: {0}.
+= Na GitHubu je nová verze launcheru: {0}.
+Update now? The new launcher ({0}) is downloaded, checked and started in place of this one. Your settings stay as they are.
+= Aktualizovat teď? Nový launcher ({0}) se stáhne, zkontroluje a spustí místo tohoto. Tvá nastavení zůstanou beze změny.
+Update now? The new launcher is downloaded, checked and started in place of this one. Your settings stay as they are.
+= Aktualizovat teď? Nový launcher se stáhne, zkontroluje a spustí místo tohoto. Tvá nastavení zůstanou beze změny.
+Launcher update postponed. Press UPDATE when you want it.
+= Aktualizace launcheru odložena. Stiskni AKTUALIZOVAT, kdy budeš chtít.
+Downloading the new launcher...
+= Stahování nového launcheru...
+Downloading the new launcher... {0}
+= Stahování nového launcheru... {0}
+Launcher update failed.
+= Aktualizace launcheru selhala.
+Update checking is not switched on in this launcher yet (it has no update address).
+= Kontrola aktualizací v tomto launcheru zatím není zapnutá (nemá adresu aktualizací).
+The game is not installed yet. Press INSTALL first.
+= Hra zatím není nainstalovaná. Nejdřív stiskni NAINSTALOVAT.
+Could not check for updates.
+= Nepodařilo se zkontrolovat aktualizace.
+You have the newest version ({0}).
+= Máš nejnovější verzi ({0}).
+Update {0} is available.
+= Je dostupná aktualizace {0}.
+A game update ({0}) is available.
+= Je dostupná aktualizace hry ({0}).
+Version {0} skipped. The UPDATE button still offers it.
+= Verze {0} přeskočena. Tlačítko AKTUALIZOVAT ji stále nabízí.
+Noted: you have version {0}.
+= Zaznamenáno: máš verzi {0}.
+Install the update from this file?
+= Nainstalovat aktualizaci z tohoto souboru?
+Choose the update file you downloaded
+= Vyber stažený soubor aktualizace
+Update archive (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|All files (*.*)|*.*
+= Archiv aktualizace (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|Všechny soubory (*.*)|*.*
+Close the game first, then try again.
+= Nejdřív zavři hru a pak to zkus znovu.
+Checking the download...
+= Kontrola staženého souboru...
+The downloaded file does not match its checksum, so nothing was installed. Please try again later.
+= Stažený soubor neodpovídá kontrolnímu součtu, takže se nic nenainstalovalo. Zkus to později.
+That file is not this update (its checksum does not match), so nothing was installed. Download it again from the update page.
+= Tento soubor není tato aktualizace (kontrolní součet nesouhlasí), takže se nic nenainstalovalo. Stáhni ho znovu ze stránky aktualizace.
+The update failed ({0}).
+= Aktualizace selhala ({0}).
+Updated to {0} - press PLAY.
+= Aktualizováno na {0} - stiskni HRÁT.
+Game updated to {0}. Press PLAY to enter Azeroth.
+= Hra aktualizována na {0}. Stiskni HRÁT a vstup do Azerothu.
+Update cancelled.
+= Aktualizace zrušena.
+Update failed.
+= Aktualizace selhala.
+Another task is still running - wait for it to finish.
+= Stále běží jiná úloha - počkej, až skončí.
+Choose a sync folder inside your cloud drive first (Cloud Save or Options).
+= Nejdřív vyber složku synchronizace ve svém cloudovém disku (Uložení do cloudu nebo Možnosti).
+Cloud sync failed.
+= Synchronizace s cloudem selhala.
+Status checked at {0}
+= Stav zkontrolován v {0}
+Downloaded from the cloud at {0}
+= Staženo z cloudu v {0}
+Saves uploaded at {0}
+= Uložení nahrána v {0}
+Not everything was synced - see the Cloud Save log.
+= Ne vše bylo synchronizováno - viz protokol v sekci Uložení do cloudu.
+The game is being updated. Please wait until that has finished.
+= Hra se aktualizuje. Počkej, až to skončí.
+The cloud save could NOT be loaded, so the game was not launched.
+= Uložení z cloudu se NEpodařilo načíst, takže hra nebyla spuštěna.
+See the log in Cloud Save. If your cloud drive is still syncing, wait for it to finish and press PLAY again.
+= Viz protokol v sekci Uložení do cloudu. Pokud se tvůj cloudový disk stále synchronizuje, počkej a stiskni znovu HRÁT.
+Cloud sync failed - game not launched
+= Synchronizace selhala - hra nebyla spuštěna
+Cloud save was not loaded - game not launched.
+= Uložení z cloudu nebylo načteno - hra nebyla spuštěna.
+Cloud sync successfully downloaded
+= Synchronizace z cloudu úspěšně stažena
+No sync folder set - launched without cloud sync.
+= Není nastavena složka synchronizace - spuštěno bez synchronizace s cloudem.
+Starting Azeroth Survivors ...
+= Spouštění Azeroth Survivors ...
+Game running.
+= Hra běží.
+Could not start the game: {0}
+= Hru se nepodařilo spustit: {0}
+Game closed.
+= Hra zavřena.
+Game has closed.
+= Hra byla zavřena.
+Cloud sync successfully uploaded
+= Synchronizace do cloudu úspěšně nahrána
+Some of your progress was NOT uploaded. See the log in Cloud Save.
+= Část tvého postupu NEbyla nahrána. Viz protokol v sekci Uložení do cloudu.
+Cloud sync NOT completed - see the Cloud Save log
+= Synchronizace NEbyla dokončena - viz protokol v sekci Uložení do cloudu
+Cloud upload failed: {0}
+= Nahrání do cloudu selhalo: {0}
+Cloud sync failed - see the Cloud Save log
+= Synchronizace selhala - viz protokol v sekci Uložení do cloudu
+Launcher
+= Launcher
+Select a folder inside your cloud drive (Google Drive, OneDrive, Dropbox ...)
+= Vyber složku ve svém cloudovém disku (Google Drive, OneDrive, Dropbox ...)
+That is the top level of your cloud drive.
+= To je nejvyšší úroveň tvého cloudového disku.
+Create and use a subfolder named AzerothSync inside it?
+= Vytvořit v ní podsložku AzerothSync a používat ji?
+Sync folder
+= Složka synchronizace
+Play time reset.
+= Odehraný čas vynulován.
+Play time
+= Odehraný čas
+No games played with this launcher yet.
+= S tímto launcherem zatím nebylo nic odehráno.
+Total: {0} over {#1} sessions
+= Celkem: {0}, relací: {1}
+Total: {0} over {#1} session
+= Celkem: {0}, relací: {1}
+Total: {0} over {#1} sessions on {#2} PCs
+= Celkem: {0}, relací: {1}, počítačů: {2}
+Last session: {0} ({1})
+= Poslední relace: {0} ({1})
+Longest session: {0}
+= Nejdelší relace: {0}
+Shared with your other PCs through the cloud sync folder.
+= Sdíleno s tvými dalšími počítači přes složku synchronizace.
+Counted on this PC (the sync folder is not reachable right now).
+= Počítáno na tomto počítači (složka synchronizace teď není dostupná).
+Counted on this PC. Turn on cloud saving to share it between your PCs.
+= Počítáno na tomto počítači. Zapni ukládání do cloudu, abys ho sdílel mezi počítači.
+RESET PLAY TIME
+= VYNULOVAT ODEHRANÝ ČAS
+Set the play time back to zero on all your PCs?
+= Vynulovat odehraný čas na všech tvých počítačích?
+Set the play time back to zero?
+= Vynulovat odehraný čas?
+Game folder
+= Složka hry
+Save game folder
+= Složka uložených her
+Game config folder (AddOns, addon settings)
+= Složka konfigurace hry (AddOns, nastavení doplňků)
+Cloud saving
+= Ukládání do cloudu
+Close button hides the launcher to the tray
+= Tlačítko Zavřít skryje launcher do oznamovací oblasti
+Minimize the launcher when the game starts
+= Minimalizovat launcher při spuštění hry
+RUN SETUP AGAIN
+= SPUSTIT NASTAVENÍ ZNOVU
+Select your Azeroth Survivors game folder
+= Vyber složku hry Azeroth Survivors
+Game folder set: {0}
+= Složka hry nastavena: {0}
+Select the game's benilla-config folder (contains AddOns and saved)
+= Vyber složku benilla-config hry (obsahuje AddOns a saved)
+Language
+= Jazyk
+ALL PATCH NOTES ›
+= VŠECHNY POZNÁMKY ›
+‹ LATEST
+= ‹ NEJNOVĚJŠÍ
+‹ ALL PATCH NOTES
+= ‹ VŠECHNY POZNÁMKY
+‹ PREVIOUS
+= ‹ PŘEDCHOZÍ
+NEXT ›
+= DALŠÍ ›
+{#0} of {#1}
+= {0} z {1}
+PAGE
+= STRANA
+No patch notes yet.
+= Zatím žádné poznámky k verzím.
+{0} (current)
+= {0} (aktuální)
+Vibe coded by Slimjim\nCloud save code established by Keijin
+= Nakódováno na vibe od Slimjim\nKód ukládání do cloudu: Keijin
+DOWNLOAD MORE ›
+= STÁHNOUT DALŠÍ ›
+ALL
+= VŠE
+UI OVERHAUL
+= NOVÉ ROZHRANÍ
+GAMEPLAY
+= HRATELNOST
+COSMETIC
+= KOSMETICKÉ
+No addons in this filter yet.
+= V tomto filtru zatím nejsou žádné doplňky.
+No downloadable addons listed yet.
+= Zatím nejsou k dispozici žádné doplňky ke stažení.
+UNINSTALL
+= ODINSTALOVAT
+Addons can't be changed while the game runs or a sync is running.
+= Doplňky nelze měnit, když běží hra nebo synchronizace.
+Another addon is still downloading.
+= Jiný doplněk se stále stahuje.
+Installing {0}...
+= Instalace {0}...
+{0} installed.
+= {0} nainstalováno.
+{0} failed.
+= {0} selhalo.
+Could not install {0}:
+= Nepodařilo se nainstalovat {0}:
+{0} is not installed.
+= {0} není nainstalováno.
+Remove {0} from your AddOns folder?
+= Odebrat {0} ze složky AddOns?
+Folders: {0}
+= Složky: {0}
+This deletes everything it added, including the settings it saved.
+= Tím se smaže vše, co přidal, včetně uložených nastavení.
+Uninstall
+= Odinstalovat
+Could not uninstall {0}:
+= Nepodařilo se odinstalovat {0}:
+{0} uninstalled.
+= {0} odinstalováno.
+{0} was not installed.
+= {0} nebylo nainstalováno.
+No AddOns folder found.\nSet the game config folder in Options\n(the benilla-config folder).
+= Složka AddOns nebyla nalezena.\nNastav složku konfigurace hry v Možnostech\n(složka benilla-config).
+REFRESH
+= OBNOVIT
+FOLDER
+= SLOŽKA
+TOGGLE ALL
+= PŘEPNOUT VŠE
+SAVE
+= ULOŽIT
+LOAD
+= NAČÍST
+empty
+= prázdný
+{#0} on, {#1} off
+= zapnuto {0}, vypnuto {1}
+saved {0}
+= uloženo {0}
+Profile {0}
+= Profil {0}
+No addons installed.
+= Nejsou nainstalovány žádné doplňky.
+{#0} of {#1} enabled
+= Zapnuto {0} z {1}
+Could not enable {0}:
+= Nepodařilo se zapnout {0}:
+Could not disable {0}:
+= Nepodařilo se vypnout {0}:
+{0} enabled.
+= {0} zapnuto.
+{0} disabled.
+= {0} vypnuto.
+All addons enabled.
+= Všechny doplňky zapnuty.
+All addons disabled.
+= Všechny doplňky vypnuty.
+Some addons could not be changed:
+= Některé doplňky se nepodařilo změnit:
+Replace the saved Profile {0} with the current toggles?
+= Nahradit uložený Profil {0} aktuálními přepínači?
+Profile {0} saved.
+= Profil {0} uložen.
+Profile {0} is empty - press SAVE to store the current toggles.
+= Profil {0} je prázdný - stiskni ULOŽIT pro uložení aktuálních přepínačů.
+Profile {0} loaded: {#1} changed.
+= Profil {0} načten: změněno {1}.
+Profile {0} loaded: {#1} changed. {#2} newer addon(s) left as they were.
+= Profil {0} načten: změněno {1}. Novější doplňky ({2}) ponechány beze změny.
+Cloud saving is turned off.\nYour progress stays on this PC only.
+= Ukládání do cloudu je vypnuté.\nTvůj postup zůstává jen na tomto počítači.
+TURN ON CLOUD SAVING
+= ZAPNOUT UKLÁDÁNÍ DO CLOUDU
+PLAY downloads the newest state, starts the game and uploads your progress after you close it. One complete state wins; the overwritten one is backed up as a ZIP first.
+= HRÁT stáhne nejnovější stav, spustí hru a po jejím zavření nahraje tvůj postup. Vyhraje jeden úplný stav; přepisovaný se nejdřív zálohuje jako ZIP.
+(not set - choose a folder inside Google Drive, OneDrive or Dropbox)
+= (nenastaveno - vyber složku v Google Drive, OneDrive nebo Dropbox)
+Not synced yet.
+= Zatím nesynchronizováno.
+Cloud: {0}
+= Cloud: {0}
+last uploaded by {0} on {1}
+= naposledy nahrál {0} dne {1}
+no upload info
+= žádné informace o nahrání
+CHECK STATUS
+= ZKONTROLOVAT STAV
+DOWNLOAD
+= STÁHNOUT
+UPLOAD
+= NAHRÁT
+The launcher is already running.
+= Launcher už běží.
+Look for its icon in the system tray (near the clock).
+= Hledej jeho ikonu v oznamovací oblasti (u hodin).
+Press INSTALL to download the game first.
+= Nejdřív stáhni hru tlačítkem NAINSTALOVAT.
+No launcher release has been published on GitHub yet.
+= Na GitHubu zatím nebyla zveřejněna žádná verze launcheru.
+GitHub's answer could not be read.
+= Odpověď GitHubu se nepodařilo přečíst.
+The latest release on GitHub ({0}) has no launcher exe attached.
+= Nejnovější vydání na GitHubu ({0}) nemá přiložený exe soubor launcheru.
+The latest release on GitHub has no checksum for its exe, so it is not installed.
+= Nejnovější vydání na GitHubu nemá kontrolní součet pro svůj exe, takže se neinstaluje.
+The downloaded launcher does not match its checksum, so it was not installed. Please try again later.
+= Stažený launcher neodpovídá kontrolnímu součtu, takže nebyl nainstalován. Zkus to později.
+The launcher could not replace itself in this folder ({0}).
+= Launcher se v této složce nemohl nahradit ({0}).
+Download the new version from GitHub instead:
+= Místo toho stáhni novou verzi z GitHubu:
+The new launcher could not be put in place ({0}). Nothing was changed.
+= Nový launcher se nepodařilo umístit ({0}). Nic se nezměnilo.
+The {0} address must start with https://
+= Adresa serveru {0} musí začínat https://
+The {0} server redirected to an address that is not secure (https).
+= Server {0} přesměroval na adresu, která není zabezpečená (https).
+The {0} server sent a broken redirect.
+= Server {0} poslal chybné přesměrování.
+The {0} server answered with error {#1}.
+= Server {0} odpověděl chybou {1}.
+The {0} server's security certificate was not accepted. It needs a normal, trusted https certificate.
+= Bezpečnostní certifikát serveru {0} nebyl přijat. Je potřeba běžný důvěryhodný certifikát https.
+The {0} server did not answer in time. Check your internet connection and try again.
+= Server {0} neodpověděl včas. Zkontroluj připojení k internetu a zkus to znovu.
+Could not reach the {0} server. Check your internet connection and try again.
+= Nepodařilo se spojit se serverem {0}. Zkontroluj připojení k internetu a zkus to znovu.
+The {0} server redirected too many times.
+= Server {0} přesměroval příliš mnohokrát.
+update
+= aktualizací
+addon
+= doplňků
+The download link gave a web page instead of the file. It must be a direct download link.
+= Odkaz ke stažení vrátil webovou stránku místo souboru. Musí to být přímý odkaz ke stažení.
+The download was interrupted. Check your connection and try again.
+= Stahování bylo přerušeno. Zkontroluj připojení a zkus to znovu.
+The download was cut off before it finished. Please try again.
+= Stahování se zastavilo před dokončením. Zkus to znovu.
+The .zip contains an unsafe path; nothing was installed.
+= Soubor .zip obsahuje nebezpečnou cestu; nic se nenainstalovalo.
+The file is damaged or incomplete.
+= Soubor je poškozený nebo neúplný.
+The file is a .{0} archive, and no program to unpack it was found.
+= Soubor je archiv .{0} a nebyl nalezen žádný program k jeho rozbalení.
+Install the free 7-Zip (7-zip.org) or WinRAR and try again.
+= Nainstaluj zdarma 7-Zip (7-zip.org) nebo WinRAR a zkus to znovu.
+The archive could not be unpacked.
+= Archiv se nepodařilo rozbalit.
+That file is not a .rar, .zip or .7z archive.
+= Tento soubor není archiv .rar, .zip ani .7z.
+The archive was unpacked, but {0} was not inside it.
+= Archiv byl rozbalen, ale {0} v něm nebyl.
+The install finished, but {0} is not in {1}.
+= Instalace skončila, ale {0} není v {1}.
+The link did not give a .zip file. It must be a direct download link (share pages such as LimeWire do not work).
+= Odkaz nevrátil soubor .zip. Musí to být přímý odkaz ke stažení (stránky pro sdílení jako LimeWire nefungují).
+There is not enough free disk space.
+= Na disku není dost volného místa.
+Not enough free disk space for the update: about {0} is needed on the drive with the game, {1} is free.
+= Na aktualizaci není dost volného místa: na disku s hrou je potřeba asi {0}, volné je {1}.
+The update file is not a .rar, .zip or .7z archive.
+= Soubor aktualizace není archiv .rar, .zip ani .7z.
+An earlier update was cut off and its files could not be put back yet.
+= Dřívější aktualizace byla přerušena a její soubory se zatím nepodařilo vrátit.
+The old files are kept in:
+= Staré soubory jsou v:
+Unpacking the update. This can take a few minutes...
+= Rozbalování aktualizace. Může to trvat několik minut...
+Installing the new files...
+= Instalace nových souborů...
+The update did not contain any files to install.
+= Aktualizace neobsahovala žádné soubory k instalaci.
+{0} is missing after the update.
+= Po aktualizaci chybí {0}.
+A game file is in use. Close the game and anything else using its folder, then try again.
+= Soubor hry se používá. Zavři hru a vše, co používá její složku, a zkus to znovu.
+There is not enough free disk space for the update. Free some space and try again.
+= Na aktualizaci není dost volného místa. Uvolni místo a zkus to znovu.
+The update could not be installed ({0}).
+= Aktualizaci se nepodařilo nainstalovat ({0}).
+No game files were changed.
+= Žádné soubory hry nebyly změněny.
+Some files could not be put back. The old versions are kept in:
+= Některé soubory se nepodařilo vrátit. Staré verze jsou v:
+Sync folder not reachable: {0} (is your cloud drive running?)
+= Složka synchronizace není dostupná: {0} (běží tvůj cloudový disk?)
+The game is running. Close it before you download.
+= Hra běží. Před stahováním ji zavři.
+The game is running. Close it before you upload.
+= Hra běží. Před nahráváním ji zavři.
+The folder is in use and was not replaced: {0} ({1}). Close programs or Explorer windows that use it and try again.
+= Složka se používá a nebyla nahrazena: {0} ({1}). Zavři programy nebo okna Průzkumníka, které ji používají, a zkus to znovu.
+The source changed while copying ({0}). Nothing was replaced, please sync again.
+= Zdroj se během kopírování změnil ({0}). Nic nebylo nahrazeno, synchronizuj znovu.
+No sync folder set. Choose a folder in Google Drive, OneDrive, Dropbox or similar in Options.
+= Není nastavena složka synchronizace. V Možnostech vyber složku v Google Drive, OneDrive, Dropbox nebo podobném.
+Sync folder: {0}
+= Složka synchronizace: {0}
+The sync folder does not exist yet. It is created on the first upload.
+= Složka synchronizace zatím neexistuje. Vytvoří se při prvním nahrání.
+{0}: in sync (local {1}, cloud {2})
+= {0}: synchronizováno (místní {1}, cloud {2})
+{0}: cloud empty, upload (local {1}, cloud {2})
+= {0}: cloud prázdný, nahrát (místní {1}, cloud {2})
+{0}: cloud copy incomplete or still syncing, wait (local {1}, cloud {2})
+= {0}: kopie v cloudu neúplná nebo se stále synchronizuje, počkej (místní {1}, cloud {2})
+{0}: local is newer, upload (local {1}, cloud {2})
+= {0}: místní je novější, nahrát (místní {1}, cloud {2})
+{0}: cloud is newer, download (local {1}, cloud {2})
+= {0}: cloud je novější, stáhnout (místní {1}, cloud {2})
+{0}: both changed or never synced (local {1}, cloud {2})
+= {0}: obojí se změnilo nebo nikdy nesynchronizováno (místní {1}, cloud {2})
+{0}: {1} not found, skipped. Set the game config folder in Options.
+= {0}: {1} nenalezeno, přeskočeno. Nastav složku konfigurace hry v Možnostech.
+Downloading from the cloud ...
+= Stahování z cloudu ...
+The sync folder does not exist yet, nothing to download.
+= Složka synchronizace zatím neexistuje, není co stáhnout.
+{0}: cloud is empty, nothing to download.
+= {0}: cloud je prázdný, není co stáhnout.
+{0}: up to date.
+= {0}: aktuální.
+{0}: the cloud copy does not match the last upload yet (incomplete or still syncing). Nothing replaced, try again in a moment.
+= {0}: kopie v cloudu zatím neodpovídá poslednímu nahrání (neúplná nebo se stále synchronizuje). Nic nenahrazeno, zkus to za chvíli.
+{0}: local is newer, kept.
+= {0}: místní je novější, ponecháno.
+Replace your local data with the cloud state?
+= Nahradit tvá místní data stavem z cloudu?
+A backup is made first.
+= Nejdřív se vytvoří záloha.
+Cancelled, nothing changed.
+= Zrušeno, nic se nezměnilo.
+{0}: local state kept, it will replace the cloud on the next upload.
+= {0}: místní stav ponechán, při příštím nahrání nahradí cloud.
+{0}: downloaded from the cloud.
+= {0}: staženo z cloudu.
+Cloud state: {0}
+= Stav cloudu: {0}
+Uploading to the cloud ...
+= Nahrávání do cloudu ...
+{0}: nothing local, nothing uploaded.
+= {0}: nic místního, nic nenahráno.
+{0}: cloud is up to date.
+= {0}: cloud je aktuální.
+Replace the cloud state with your local data?
+= Nahradit stav cloudu tvými místními daty?
+{0}: cloud kept, your local changes were NOT uploaded. Use "Download" to get the cloud state.
+= {0}: cloud ponechán, tvé místní změny NEbyly nahrány. Použij „Stáhnout“ pro získání stavu z cloudu.
+Cancelled, your local changes were NOT uploaded.
+= Zrušeno, tvé místní změny NEbyly nahrány.
+{0}: the cloud changed during this sync, NOT uploaded. Sync again to decide.
+= {0}: cloud se během této synchronizace změnil, NEnahráno. Synchronizuj znovu a rozhodni se.
+{0}: uploaded.
+= {0}: nahráno.
+Written to the sync folder. Your cloud app uploads it in the background, wait until it is done before you switch PCs.
+= Zapsáno do složky synchronizace. Tvá cloudová aplikace to nahraje na pozadí; počkej, až skončí, než přejdeš na jiný počítač.
+Backup: {0}
+= Záloha: {0}
+Restored {0} after an interrupted sync.
+= {0} obnoveno po přerušené synchronizaci.

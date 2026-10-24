@@ -1,0 +1,790 @@
+@name Norsk (bokmål)
+# Each English text is followed by its translation on the line below (starting with "= ").
+# {0}, {1} ... are filled in by the launcher; keep them. \n is a line break.
+
+PLAY
+= SPILL
+INSTALL
+= INSTALLER
+PLAYING...
+= SPILLER...
+INSTALLING
+= INSTALLERER
+UPDATING
+= OPPDATERER
+UPDATE
+= OPPDATER
+CHECKING
+= SJEKKER
+CLOUD SAVE
+= SKYLAGRING
+ADDONS
+= TILLEGG
+OPTIONS
+= ALTERNATIVER
+CHANGELOG
+= OPPDATERINGSNOTATER
+ABOUT LAUNCHER
+= OM LAUNCHEREN
+A game made by Aethus
+= Et spill laget av Aethus
+Version {0}
+= Versjon {0}
+Press PLAY to enter Azeroth.
+= Trykk SPILL for å gå inn i Azeroth.
+Game client not found.
+= Fant ikke spillet.
+Press INSTALL to download it first.
+= Trykk INSTALLER for å laste det ned først.
+Press INSTALL to download it, or set the game folder in Options.
+= Trykk INSTALLER for å laste det ned, eller angi spillmappen under Alternativer.
+Your cloud save syncs automatically.
+= Skylagringen din synkroniseres automatisk.
+Time played: {0}   |   Last session: {1}
+= Spilletid: {0}   |   Siste økt: {1}
+Ready.
+= Klar.
+Cloud Save
+= Skylagring
+Addons
+= Tillegg
+Options
+= Alternativer
+Changelog
+= Oppdateringsnotater
+About Launcher
+= Om launcheren
+Download More
+= Last ned flere
+All Patch Notes
+= Alle oppdateringsnotater
+Show Launcher
+= Vis launcheren
+Play
+= Spill
+Upload Save Now
+= Last opp lagring nå
+Close Button Hides to Tray
+= Lukk-knappen skjuler i systemstatusfeltet
+Quit
+= Avslutt
+Game running
+= Spillet kjører
+Idle
+= Inaktiv
+Game running - {0}
+= Spillet kjører - {0}
+The launcher is in the tray; the open window stays. Right-click the icon to quit.
+= Launcheren ligger i systemstatusfeltet; det åpne vinduet blir værende. Høyreklikk på ikonet for å avslutte.
+Still running in the tray. Right-click the icon to quit.
+= Kjører fortsatt i systemstatusfeltet. Høyreklikk på ikonet for å avslutte.
+Cloud sync running
+= Skysynkronisering pågår
+A cloud sync is still running. If you quit now it is cut short; the next sync repairs any half-finished copy.
+= En skysynkronisering pågår fortsatt. Hvis du avslutter nå, blir den avbrutt; neste synkronisering reparerer en halvferdig kopi.
+Quit anyway?
+= Avslutte likevel?
+Installing
+= Installerer
+The game client is still being installed. If you quit now, it is cut short.
+= Spillet installeres fortsatt. Hvis du avslutter nå, blir installasjonen avbrutt.
+Updating
+= Oppdaterer
+The game is still being updated. If you quit now, the update is cut short. Nothing is lost: a half-finished change is undone the next time the launcher starts.
+= Spillet oppdateres fortsatt. Hvis du avslutter nå, blir oppdateringen avbrutt. Ingenting går tapt: en halvferdig endring angres neste gang launcheren starter.
+The game is still running. If you quit the launcher now, your saves will NOT be uploaded automatically.
+= Spillet kjører fortsatt. Hvis du avslutter launcheren nå, blir lagringene dine IKKE lastet opp automatisk.
+Setup saved.
+= Oppsettet er lagret.
+First-time setup
+= Førstegangsoppsett
+Welcome, Adventurer
+= Velkommen, eventyrer
+Step 1 of 2
+= Trinn 1 av 2
+Step 2 of 2
+= Trinn 2 av 2
+A.  Cloud saving
+= A.  Skylagring
+Keep my progress in the cloud (Google Drive, OneDrive, Dropbox ...)\nand share it between my PCs
+= Ta vare på fremgangen min i skyen (Google Drive, OneDrive, Dropbox ...)\nog del den mellom PC-ene mine
+Sync folder (inside your cloud drive)
+= Synkroniseringsmappe (i skylagringen din)
+Cloud saving stays off. You can turn it on later in Cloud Save.
+= Skylagring forblir av. Du kan slå den på senere under Skylagring.
+B.  Where are your files?
+= B.  Hvor er filene dine?
+Folders found at their usual place are used as they are. Choose the ones that are missing.
+= Mapper som finnes på det vanlige stedet, brukes som de er. Velg de som mangler.
+AddOns
+= AddOns
+Game saves
+= Lagrede spill
+Addon settings
+= Tilleggsinnstillinger
+Select your AddOns folder
+= Velg AddOns-mappen din
+Select the folder that holds your save game (normally %APPDATA%\wenilla-rogue)
+= Velg mappen med det lagrede spillet ditt (vanligvis %APPDATA%\wenilla-rogue)
+Select your addon settings folder (the 'saved' folder in benilla-config)
+= Velg mappen for tilleggsinnstillinger (mappen 'saved' i benilla-config)
+FINISH
+= FULLFØR
+LATER
+= SENERE
+✓ found
+= ✓ funnet
+✓ chosen
+= ✓ valgt
+not chosen yet
+= ikke valgt ennå
+not found - please choose it
+= ikke funnet - velg den
+(not set)
+= (ikke angitt)
+CHANGE
+= ENDRE
+CHOOSE
+= VELG
+Choose a sync folder for cloud saving, or untick\n"Keep my progress in the cloud".
+= Velg en synkroniseringsmappe for skylagring, eller fjern haken for\n"Ta vare på fremgangen min i skyen".
+Setup
+= Oppsett
+These folders were not found:
+= Disse mappene ble ikke funnet:
+Finish anyway? You can change them later in Options.
+= Fullføre likevel? Du kan endre dem senere under Alternativer.
+Your settings are saved.\n\nWould you like to go to the Addons section now\nto download some addons, or to enable or disable the ones you have?
+= Innstillingene dine er lagret.\n\nVil du gå til Tillegg-delen nå\nfor å laste ned tillegg, eller slå av og på de du har?
+DOWNLOAD ADDONS
+= LAST NED TILLEGG
+ENABLE / DISABLE ADDONS
+= SLÅ TILLEGG AV / PÅ
+NO THANKS
+= NEI TAKK
+Install the game
+= Installer spillet
+Install Azeroth Survivors
+= Installer Azeroth Survivors
+Step 1
+= Trinn 1
+Download the game in your web browser.
+= Last ned spillet i nettleseren din.
+OPEN DOWNLOAD
+= ÅPNE NEDLASTING
+Download opened in your browser.
+= Nedlastingen ble åpnet i nettleseren.
+Step 2
+= Trinn 2
+When the download has finished, come back here.
+= Kom tilbake hit når nedlastingen er ferdig.
+IT'S IN MY DOWNLOADS
+= DEN LIGGER I NEDLASTINGER
+The launcher finds the file (in its own folder or Downloads), unpacks the game here and deletes the download.
+= Launcheren finner filen (i sin egen mappe eller i Nedlastinger), pakker ut spillet her og sletter nedlastingen.
+CANCEL
+= AVBRYT
+Which progress do you want to keep?
+= Hvilken fremgang vil du beholde?
+Both sides changed
+= Begge sider er endret
+This PC and the cloud both changed since the last sync:
+= Denne PC-en og skyen har begge endret seg siden siste synkronisering:
+• {0}:  this PC {1}   |   cloud {2}
+= • {0}:  denne PC-en {1}   |   skyen {2}
+One complete state wins, the other is backed up first.
+= Én fullstendig tilstand vinner, den andre sikkerhetskopieres først.
+First time on this PC? Choose USE CLOUD.
+= Første gang på denne PC-en? Velg BRUK SKYEN.
+USE CLOUD replaces your local data. KEEP LOCAL keeps it and uploads it later.
+= BRUK SKYEN erstatter de lokale dataene dine. BEHOLD LOKALT beholder dem og laster dem opp senere.
+KEEP LOCAL replaces the cloud. USE CLOUD leaves the cloud and skips your upload.
+= BEHOLD LOKALT erstatter skyen. BRUK SKYEN lar skyen være og hopper over opplastingen din.
+USE CLOUD
+= BRUK SKYEN
+KEEP LOCAL
+= BEHOLD LOKALT
+Save game
+= Lagret spill
+Game update
+= Spilloppdatering
+Update available
+= Oppdatering tilgjengelig
+New version:
+= Ny versjon:
+Your version:
+= Din versjon:
+not recorded yet
+= ikke registrert ennå
+Download size:
+= Nedlastingsstørrelse:
+What is new
+= Nyheter
+Your addons, settings and saves are left alone. If anything goes wrong, the old game files are put back.
+= Tilleggene, innstillingene og lagringene dine blir ikke rørt. Hvis noe går galt, legges de gamle spillfilene tilbake.
+UPDATE NOW
+= OPPDATER NÅ
+NOT NOW
+= IKKE NÅ
+SKIP THIS VERSION
+= HOPP OVER DENNE VERSJONEN
+I ALREADY HAVE THIS VERSION
+= JEG HAR ALLEREDE DENNE VERSJONEN
+The update is being installed. Please wait until it has finished.
+= Oppdateringen installeres. Vent til den er ferdig.
+Downloading the update...
+= Laster ned oppdateringen...
+Download the update
+= Last ned oppdateringen
+Step 1: download the update in your web browser.
+= Trinn 1: last ned oppdateringen i nettleseren din.
+OPEN DOWNLOAD AGAIN
+= ÅPNE NEDLASTING IGJEN
+Step 2: when the download has finished, come back here.
+= Trinn 2: kom tilbake hit når nedlastingen er ferdig.
+The launcher finds the file (in its own folder or Downloads), installs it and deletes it.
+= Launcheren finner filen (i sin egen mappe eller i Nedlastinger), installerer den og sletter den.
+Checking the file...
+= Sjekker filen...
+CANCELLING...
+= AVBRYTER...
+Updating to {0}
+= Oppdaterer til {0}
+Please keep the launcher open until this has finished.
+= Hold launcheren åpen til dette er ferdig.
+{0} of {1}  ({#2}%)
+= {0} av {1}  ({2} %)
+{0} downloaded
+= {0} lastet ned
+Update installed
+= Oppdatering installert
+Update failed
+= Oppdateringen mislyktes
+CLOSE
+= LUKK
+TRY AGAIN
+= PRØV IGJEN
+Version {0} is installed.
+= Versjon {0} er installert.
+{#0} files updated.
+= {0} filer oppdatert.
+{#0} file updated.
+= {0} fil oppdatert.
+{#0} files updated, {#1} removed.
+= {0} filer oppdatert, {1} fjernet.
+{#0} file updated, {#1} removed.
+= {0} fil oppdatert, {1} fjernet.
+Install
+= Installer
+Install the game from this file?
+= Installere spillet fra denne filen?
+{0}  ({#1} MB)
+= {0}  ({1} MB)
+in {0}
+= i {0}
+Choose the game file you downloaded (.rar)
+= Velg spillfilen du lastet ned (.rar)
+Game archive (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|All files (*.*)|*.*
+= Spillarkiv (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|Alle filer (*.*)|*.*
+Install cancelled.
+= Installasjonen ble avbrutt.
+Unpacking the game client...
+= Pakker ut spillet...
+Install failed.
+= Installasjonen mislyktes.
+Install complete - press PLAY.
+= Installasjonen er ferdig - trykk SPILL.
+Install complete. Press PLAY to enter Azeroth.
+= Installasjonen er ferdig. Trykk SPILL for å gå inn i Azeroth.
+The last game update was cut off before it finished. Your game files were put back exactly as they were.
+= Den siste spilloppdateringen ble avbrutt før den var ferdig. Spillfilene dine ble satt tilbake akkurat slik de var.
+You can run the update again with the UPDATE button.
+= Du kan kjøre oppdateringen på nytt med OPPDATER-knappen.
+The last game update was cut off, and some game files could not be put back automatically.
+= Den siste spilloppdateringen ble avbrutt, og noen spillfiler kunne ikke settes tilbake automatisk.
+The old versions are kept in the folder "{0}" inside the game folder. Copy them back over the game files, or reinstall the game.
+= De gamle versjonene ligger i mappen "{0}" i spillmappen. Kopier dem tilbake over spillfilene, eller installer spillet på nytt.
+Checking for updates...
+= Ser etter oppdateringer...
+The update check failed ({0}).
+= Søket etter oppdateringer mislyktes ({0}).
+Could not check for launcher updates.
+= Kunne ikke se etter launcher-oppdateringer.
+Launcher update
+= Launcher-oppdatering
+Launcher {0} is available.
+= Launcher {0} er tilgjengelig.
+The launcher is up to date ({0}).
+= Launcheren er oppdatert ({0}).
+You have the newest launcher ({0}).
+= Du har den nyeste launcheren ({0}).
+A new launcher ({0}) is available. Open the launcher and press UPDATE.
+= En ny launcher ({0}) er tilgjengelig. Åpne launcheren og trykk OPPDATER.
+Finish what is running first (the game, an install or a cloud sync), then press UPDATE again.
+= Fullfør det som kjører først (spillet, en installasjon eller en skysynkronisering), og trykk deretter OPPDATER igjen.
+A new version of the launcher is on GitHub: {0}.
+= En ny versjon av launcheren ligger på GitHub: {0}.
+Update now? The new launcher ({0}) is downloaded, checked and started in place of this one. Your settings stay as they are.
+= Oppdatere nå? Den nye launcheren ({0}) lastes ned, sjekkes og startes i stedet for denne. Innstillingene dine blir som de er.
+Update now? The new launcher is downloaded, checked and started in place of this one. Your settings stay as they are.
+= Oppdatere nå? Den nye launcheren lastes ned, sjekkes og startes i stedet for denne. Innstillingene dine blir som de er.
+Launcher update postponed. Press UPDATE when you want it.
+= Launcher-oppdateringen er utsatt. Trykk OPPDATER når du vil.
+Downloading the new launcher...
+= Laster ned den nye launcheren...
+Downloading the new launcher... {0}
+= Laster ned den nye launcheren... {0}
+Launcher update failed.
+= Launcher-oppdateringen mislyktes.
+Update checking is not switched on in this launcher yet (it has no update address).
+= Oppdateringssjekk er ikke slått på i denne launcheren ennå (den har ingen oppdateringsadresse).
+The game is not installed yet. Press INSTALL first.
+= Spillet er ikke installert ennå. Trykk INSTALLER først.
+Could not check for updates.
+= Kunne ikke se etter oppdateringer.
+You have the newest version ({0}).
+= Du har den nyeste versjonen ({0}).
+Update {0} is available.
+= Oppdatering {0} er tilgjengelig.
+A game update ({0}) is available.
+= En spilloppdatering ({0}) er tilgjengelig.
+Version {0} skipped. The UPDATE button still offers it.
+= Versjon {0} hoppet over. OPPDATER-knappen tilbyr den fortsatt.
+Noted: you have version {0}.
+= Notert: du har versjon {0}.
+Install the update from this file?
+= Installere oppdateringen fra denne filen?
+Choose the update file you downloaded
+= Velg oppdateringsfilen du lastet ned
+Update archive (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|All files (*.*)|*.*
+= Oppdateringsarkiv (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|Alle filer (*.*)|*.*
+Close the game first, then try again.
+= Lukk spillet først, og prøv igjen.
+Checking the download...
+= Sjekker nedlastingen...
+The downloaded file does not match its checksum, so nothing was installed. Please try again later.
+= Den nedlastede filen stemmer ikke med kontrollsummen, så ingenting ble installert. Prøv igjen senere.
+That file is not this update (its checksum does not match), so nothing was installed. Download it again from the update page.
+= Den filen er ikke denne oppdateringen (kontrollsummen stemmer ikke), så ingenting ble installert. Last den ned igjen fra oppdateringssiden.
+The update failed ({0}).
+= Oppdateringen mislyktes ({0}).
+Updated to {0} - press PLAY.
+= Oppdatert til {0} - trykk SPILL.
+Game updated to {0}. Press PLAY to enter Azeroth.
+= Spillet er oppdatert til {0}. Trykk SPILL for å gå inn i Azeroth.
+Update cancelled.
+= Oppdateringen ble avbrutt.
+Update failed.
+= Oppdateringen mislyktes.
+Another task is still running - wait for it to finish.
+= En annen oppgave kjører fortsatt - vent til den er ferdig.
+Choose a sync folder inside your cloud drive first (Cloud Save or Options).
+= Velg først en synkroniseringsmappe i skylagringen din (Skylagring eller Alternativer).
+Cloud sync failed.
+= Skysynkroniseringen mislyktes.
+Status checked at {0}
+= Status sjekket kl. {0}
+Downloaded from the cloud at {0}
+= Lastet ned fra skyen kl. {0}
+Saves uploaded at {0}
+= Lagringer lastet opp kl. {0}
+Not everything was synced - see the Cloud Save log.
+= Ikke alt ble synkronisert - se loggen under Skylagring.
+The game is being updated. Please wait until that has finished.
+= Spillet oppdateres. Vent til det er ferdig.
+The cloud save could NOT be loaded, so the game was not launched.
+= Skylagringen kunne IKKE lastes inn, så spillet ble ikke startet.
+See the log in Cloud Save. If your cloud drive is still syncing, wait for it to finish and press PLAY again.
+= Se loggen under Skylagring. Hvis skylagringen fortsatt synkroniserer, vent til den er ferdig og trykk SPILL igjen.
+Cloud sync failed - game not launched
+= Skysynkroniseringen mislyktes - spillet ble ikke startet
+Cloud save was not loaded - game not launched.
+= Skylagringen ble ikke lastet inn - spillet ble ikke startet.
+Cloud sync successfully downloaded
+= Skysynkronisering lastet ned
+No sync folder set - launched without cloud sync.
+= Ingen synkroniseringsmappe angitt - startet uten skysynkronisering.
+Starting Azeroth Survivors ...
+= Starter Azeroth Survivors ...
+Game running.
+= Spillet kjører.
+Could not start the game: {0}
+= Kunne ikke starte spillet: {0}
+Game closed.
+= Spillet er lukket.
+Game has closed.
+= Spillet har lukket seg.
+Cloud sync successfully uploaded
+= Skysynkronisering lastet opp
+Some of your progress was NOT uploaded. See the log in Cloud Save.
+= Noe av fremgangen din ble IKKE lastet opp. Se loggen under Skylagring.
+Cloud sync NOT completed - see the Cloud Save log
+= Skysynkroniseringen ble IKKE fullført - se loggen under Skylagring
+Cloud upload failed: {0}
+= Opplasting til skyen mislyktes: {0}
+Cloud sync failed - see the Cloud Save log
+= Skysynkroniseringen mislyktes - se loggen under Skylagring
+Launcher
+= Launcher
+Select a folder inside your cloud drive (Google Drive, OneDrive, Dropbox ...)
+= Velg en mappe i skylagringen din (Google Drive, OneDrive, Dropbox ...)
+That is the top level of your cloud drive.
+= Det er øverste nivå i skylagringen din.
+Create and use a subfolder named AzerothSync inside it?
+= Opprette og bruke en undermappe kalt AzerothSync der?
+Sync folder
+= Synkroniseringsmappe
+Play time reset.
+= Spilletiden er nullstilt.
+Play time
+= Spilletid
+No games played with this launcher yet.
+= Ingen spill spilt med denne launcheren ennå.
+Total: {0} over {#1} sessions
+= Totalt: {0} over {1} økter
+Total: {0} over {#1} session
+= Totalt: {0} over {1} økt
+Total: {0} over {#1} sessions on {#2} PCs
+= Totalt: {0} over {1} økter på {2} PC-er
+Last session: {0} ({1})
+= Siste økt: {0} ({1})
+Longest session: {0}
+= Lengste økt: {0}
+Shared with your other PCs through the cloud sync folder.
+= Delt med de andre PC-ene dine via synkroniseringsmappen.
+Counted on this PC (the sync folder is not reachable right now).
+= Telt på denne PC-en (synkroniseringsmappen kan ikke nås akkurat nå).
+Counted on this PC. Turn on cloud saving to share it between your PCs.
+= Telt på denne PC-en. Slå på skylagring for å dele den mellom PC-ene dine.
+RESET PLAY TIME
+= NULLSTILL SPILLETID
+Set the play time back to zero on all your PCs?
+= Nullstille spilletiden på alle PC-ene dine?
+Set the play time back to zero?
+= Nullstille spilletiden?
+Game folder
+= Spillmappe
+Save game folder
+= Mappe for lagrede spill
+Game config folder (AddOns, addon settings)
+= Spillets konfigurasjonsmappe (AddOns, tilleggsinnstillinger)
+Cloud saving
+= Skylagring
+Close button hides the launcher to the tray
+= Lukk-knappen skjuler launcheren i systemstatusfeltet
+Minimize the launcher when the game starts
+= Minimer launcheren når spillet starter
+RUN SETUP AGAIN
+= KJØR OPPSETTET IGJEN
+Select your Azeroth Survivors game folder
+= Velg spillmappen for Azeroth Survivors
+Game folder set: {0}
+= Spillmappe angitt: {0}
+Select the game's benilla-config folder (contains AddOns and saved)
+= Velg spillets mappe benilla-config (inneholder AddOns og saved)
+Language
+= Språk
+ALL PATCH NOTES ›
+= ALLE NOTATER ›
+‹ LATEST
+= ‹ NYESTE
+‹ ALL PATCH NOTES
+= ‹ ALLE NOTATER
+‹ PREVIOUS
+= ‹ FORRIGE
+NEXT ›
+= NESTE ›
+{#0} of {#1}
+= {0} av {1}
+PAGE
+= SIDE
+No patch notes yet.
+= Ingen oppdateringsnotater ennå.
+{0} (current)
+= {0} (gjeldende)
+Vibe coded by Slimjim\nCloud save code established by Keijin
+= Vibe-kodet av Slimjim\nSkylagringskode av Keijin
+DOWNLOAD MORE ›
+= LAST NED FLERE ›
+ALL
+= ALLE
+UI OVERHAUL
+= NYTT GRENSESNITT
+GAMEPLAY
+= SPILLMEKANIKK
+COSMETIC
+= KOSMETISK
+No addons in this filter yet.
+= Ingen tillegg i dette filteret ennå.
+No downloadable addons listed yet.
+= Ingen nedlastbare tillegg ennå.
+UNINSTALL
+= AVINSTALLER
+Addons can't be changed while the game runs or a sync is running.
+= Tillegg kan ikke endres mens spillet eller en synkronisering kjører.
+Another addon is still downloading.
+= Et annet tillegg lastes fortsatt ned.
+Installing {0}...
+= Installerer {0}...
+{0} installed.
+= {0} installert.
+{0} failed.
+= {0} mislyktes.
+Could not install {0}:
+= Kunne ikke installere {0}:
+{0} is not installed.
+= {0} er ikke installert.
+Remove {0} from your AddOns folder?
+= Fjerne {0} fra AddOns-mappen din?
+Folders: {0}
+= Mapper: {0}
+This deletes everything it added, including the settings it saved.
+= Dette sletter alt det la til, inkludert innstillingene det lagret.
+Uninstall
+= Avinstaller
+Could not uninstall {0}:
+= Kunne ikke avinstallere {0}:
+{0} uninstalled.
+= {0} avinstallert.
+{0} was not installed.
+= {0} var ikke installert.
+No AddOns folder found.\nSet the game config folder in Options\n(the benilla-config folder).
+= Fant ingen AddOns-mappe.\nAngi spillets konfigurasjonsmappe under Alternativer\n(mappen benilla-config).
+REFRESH
+= OPPDATER LISTE
+FOLDER
+= MAPPE
+TOGGLE ALL
+= VEKSLE ALLE
+SAVE
+= LAGRE
+LOAD
+= LAST INN
+empty
+= tom
+{#0} on, {#1} off
+= {0} på, {1} av
+saved {0}
+= lagret {0}
+Profile {0}
+= Profil {0}
+No addons installed.
+= Ingen tillegg installert.
+{#0} of {#1} enabled
+= {0} av {1} på
+Could not enable {0}:
+= Kunne ikke slå på {0}:
+Could not disable {0}:
+= Kunne ikke slå av {0}:
+{0} enabled.
+= {0} slått på.
+{0} disabled.
+= {0} slått av.
+All addons enabled.
+= Alle tillegg slått på.
+All addons disabled.
+= Alle tillegg slått av.
+Some addons could not be changed:
+= Noen tillegg kunne ikke endres:
+Replace the saved Profile {0} with the current toggles?
+= Erstatte den lagrede Profil {0} med de nåværende valgene?
+Profile {0} saved.
+= Profil {0} lagret.
+Profile {0} is empty - press SAVE to store the current toggles.
+= Profil {0} er tom - trykk LAGRE for å lagre de nåværende valgene.
+Profile {0} loaded: {#1} changed.
+= Profil {0} lastet inn: {1} endret.
+Profile {0} loaded: {#1} changed. {#2} newer addon(s) left as they were.
+= Profil {0} lastet inn: {1} endret. {2} nyere tillegg ble latt være.
+Cloud saving is turned off.\nYour progress stays on this PC only.
+= Skylagring er slått av.\nFremgangen din blir bare på denne PC-en.
+TURN ON CLOUD SAVING
+= SLÅ PÅ SKYLAGRING
+PLAY downloads the newest state, starts the game and uploads your progress after you close it. One complete state wins; the overwritten one is backed up as a ZIP first.
+= SPILL laster ned den nyeste tilstanden, starter spillet og laster opp fremgangen din når du lukker det. Én fullstendig tilstand vinner; den som overskrives, sikkerhetskopieres først som ZIP.
+(not set - choose a folder inside Google Drive, OneDrive or Dropbox)
+= (ikke angitt - velg en mappe i Google Drive, OneDrive eller Dropbox)
+Not synced yet.
+= Ikke synkronisert ennå.
+Cloud: {0}
+= Sky: {0}
+last uploaded by {0} on {1}
+= sist lastet opp av {0} den {1}
+no upload info
+= ingen opplastingsinfo
+CHECK STATUS
+= SJEKK STATUS
+DOWNLOAD
+= LAST NED
+UPLOAD
+= LAST OPP
+The launcher is already running.
+= Launcheren kjører allerede.
+Look for its icon in the system tray (near the clock).
+= Se etter ikonet i systemstatusfeltet (ved klokken).
+Press INSTALL to download the game first.
+= Trykk INSTALLER for å laste ned spillet først.
+No launcher release has been published on GitHub yet.
+= Ingen launcher-versjon er publisert på GitHub ennå.
+GitHub's answer could not be read.
+= Svaret fra GitHub kunne ikke leses.
+The latest release on GitHub ({0}) has no launcher exe attached.
+= Den nyeste versjonen på GitHub ({0}) har ingen launcher-exe vedlagt.
+The latest release on GitHub has no checksum for its exe, so it is not installed.
+= Den nyeste versjonen på GitHub har ingen kontrollsum for exe-filen, så den installeres ikke.
+The downloaded launcher does not match its checksum, so it was not installed. Please try again later.
+= Den nedlastede launcheren stemmer ikke med kontrollsummen, så den ble ikke installert. Prøv igjen senere.
+The launcher could not replace itself in this folder ({0}).
+= Launcheren kunne ikke erstatte seg selv i denne mappen ({0}).
+Download the new version from GitHub instead:
+= Last ned den nye versjonen fra GitHub i stedet:
+The new launcher could not be put in place ({0}). Nothing was changed.
+= Den nye launcheren kunne ikke settes på plass ({0}). Ingenting ble endret.
+The {0} address must start with https://
+= Adressen til serveren for {0} må begynne med https://
+The {0} server redirected to an address that is not secure (https).
+= Serveren for {0} videresendte til en adresse som ikke er sikker (https).
+The {0} server sent a broken redirect.
+= Serveren for {0} sendte en ødelagt videresending.
+The {0} server answered with error {#1}.
+= Serveren for {0} svarte med feil {1}.
+The {0} server's security certificate was not accepted. It needs a normal, trusted https certificate.
+= Sikkerhetssertifikatet til serveren for {0} ble ikke godtatt. Det trenger et vanlig, klarert https-sertifikat.
+The {0} server did not answer in time. Check your internet connection and try again.
+= Serveren for {0} svarte ikke i tide. Sjekk internettforbindelsen og prøv igjen.
+Could not reach the {0} server. Check your internet connection and try again.
+= Kunne ikke nå serveren for {0}. Sjekk internettforbindelsen og prøv igjen.
+The {0} server redirected too many times.
+= Serveren for {0} videresendte for mange ganger.
+update
+= oppdateringer
+addon
+= tillegg
+The download link gave a web page instead of the file. It must be a direct download link.
+= Nedlastingslenken ga en nettside i stedet for filen. Den må være en direkte nedlastingslenke.
+The download was interrupted. Check your connection and try again.
+= Nedlastingen ble avbrutt. Sjekk forbindelsen og prøv igjen.
+The download was cut off before it finished. Please try again.
+= Nedlastingen stoppet før den var ferdig. Prøv igjen.
+The .zip contains an unsafe path; nothing was installed.
+= .zip-filen inneholder en usikker bane; ingenting ble installert.
+The file is damaged or incomplete.
+= Filen er skadet eller ufullstendig.
+The file is a .{0} archive, and no program to unpack it was found.
+= Filen er et .{0}-arkiv, og det ble ikke funnet noe program for å pakke det ut.
+Install the free 7-Zip (7-zip.org) or WinRAR and try again.
+= Installer gratisprogrammet 7-Zip (7-zip.org) eller WinRAR og prøv igjen.
+The archive could not be unpacked.
+= Arkivet kunne ikke pakkes ut.
+That file is not a .rar, .zip or .7z archive.
+= Den filen er ikke et .rar-, .zip- eller .7z-arkiv.
+The archive was unpacked, but {0} was not inside it.
+= Arkivet ble pakket ut, men {0} var ikke i det.
+The install finished, but {0} is not in {1}.
+= Installasjonen er ferdig, men {0} er ikke i {1}.
+The link did not give a .zip file. It must be a direct download link (share pages such as LimeWire do not work).
+= Lenken ga ikke en .zip-fil. Den må være en direkte nedlastingslenke (delingssider som LimeWire fungerer ikke).
+There is not enough free disk space.
+= Det er ikke nok ledig diskplass.
+Not enough free disk space for the update: about {0} is needed on the drive with the game, {1} is free.
+= Ikke nok ledig diskplass til oppdateringen: omtrent {0} trengs på stasjonen med spillet, {1} er ledig.
+The update file is not a .rar, .zip or .7z archive.
+= Oppdateringsfilen er ikke et .rar-, .zip- eller .7z-arkiv.
+An earlier update was cut off and its files could not be put back yet.
+= En tidligere oppdatering ble avbrutt, og filene kunne ikke settes tilbake ennå.
+The old files are kept in:
+= De gamle filene ligger i:
+Unpacking the update. This can take a few minutes...
+= Pakker ut oppdateringen. Dette kan ta noen minutter...
+Installing the new files...
+= Installerer de nye filene...
+The update did not contain any files to install.
+= Oppdateringen inneholdt ingen filer å installere.
+{0} is missing after the update.
+= {0} mangler etter oppdateringen.
+A game file is in use. Close the game and anything else using its folder, then try again.
+= En spillfil er i bruk. Lukk spillet og alt annet som bruker mappen, og prøv igjen.
+There is not enough free disk space for the update. Free some space and try again.
+= Ikke nok ledig diskplass til oppdateringen. Frigjør plass og prøv igjen.
+The update could not be installed ({0}).
+= Oppdateringen kunne ikke installeres ({0}).
+No game files were changed.
+= Ingen spillfiler ble endret.
+Some files could not be put back. The old versions are kept in:
+= Noen filer kunne ikke settes tilbake. De gamle versjonene ligger i:
+Sync folder not reachable: {0} (is your cloud drive running?)
+= Synkroniseringsmappen kan ikke nås: {0} (kjører skylagringen din?)
+The game is running. Close it before you download.
+= Spillet kjører. Lukk det før du laster ned.
+The game is running. Close it before you upload.
+= Spillet kjører. Lukk det før du laster opp.
+The folder is in use and was not replaced: {0} ({1}). Close programs or Explorer windows that use it and try again.
+= Mappen er i bruk og ble ikke erstattet: {0} ({1}). Lukk programmer eller Utforsker-vinduer som bruker den, og prøv igjen.
+The source changed while copying ({0}). Nothing was replaced, please sync again.
+= Kilden endret seg under kopieringen ({0}). Ingenting ble erstattet, synkroniser igjen.
+No sync folder set. Choose a folder in Google Drive, OneDrive, Dropbox or similar in Options.
+= Ingen synkroniseringsmappe angitt. Velg en mappe i Google Drive, OneDrive, Dropbox eller lignende under Alternativer.
+Sync folder: {0}
+= Synkroniseringsmappe: {0}
+The sync folder does not exist yet. It is created on the first upload.
+= Synkroniseringsmappen finnes ikke ennå. Den opprettes ved første opplasting.
+{0}: in sync (local {1}, cloud {2})
+= {0}: synkronisert (lokalt {1}, sky {2})
+{0}: cloud empty, upload (local {1}, cloud {2})
+= {0}: skyen er tom, last opp (lokalt {1}, sky {2})
+{0}: cloud copy incomplete or still syncing, wait (local {1}, cloud {2})
+= {0}: skykopien er ufullstendig eller synkroniserer fortsatt, vent (lokalt {1}, sky {2})
+{0}: local is newer, upload (local {1}, cloud {2})
+= {0}: lokalt er nyere, last opp (lokalt {1}, sky {2})
+{0}: cloud is newer, download (local {1}, cloud {2})
+= {0}: skyen er nyere, last ned (lokalt {1}, sky {2})
+{0}: both changed or never synced (local {1}, cloud {2})
+= {0}: begge endret eller aldri synkronisert (lokalt {1}, sky {2})
+{0}: {1} not found, skipped. Set the game config folder in Options.
+= {0}: {1} ble ikke funnet, hoppet over. Angi spillets konfigurasjonsmappe under Alternativer.
+Downloading from the cloud ...
+= Laster ned fra skyen ...
+The sync folder does not exist yet, nothing to download.
+= Synkroniseringsmappen finnes ikke ennå, ingenting å laste ned.
+{0}: cloud is empty, nothing to download.
+= {0}: skyen er tom, ingenting å laste ned.
+{0}: up to date.
+= {0}: oppdatert.
+{0}: the cloud copy does not match the last upload yet (incomplete or still syncing). Nothing replaced, try again in a moment.
+= {0}: skykopien stemmer ikke med siste opplasting ennå (ufullstendig eller synkroniserer fortsatt). Ingenting erstattet, prøv igjen om litt.
+{0}: local is newer, kept.
+= {0}: lokalt er nyere, beholdt.
+Replace your local data with the cloud state?
+= Erstatte de lokale dataene dine med skyens tilstand?
+A backup is made first.
+= Det tas en sikkerhetskopi først.
+Cancelled, nothing changed.
+= Avbrutt, ingenting ble endret.
+{0}: local state kept, it will replace the cloud on the next upload.
+= {0}: lokal tilstand beholdt, den erstatter skyen ved neste opplasting.
+{0}: downloaded from the cloud.
+= {0}: lastet ned fra skyen.
+Cloud state: {0}
+= Skyens tilstand: {0}
+Uploading to the cloud ...
+= Laster opp til skyen ...
+{0}: nothing local, nothing uploaded.
+= {0}: ingenting lokalt, ingenting lastet opp.
+{0}: cloud is up to date.
+= {0}: skyen er oppdatert.
+Replace the cloud state with your local data?
+= Erstatte skyens tilstand med de lokale dataene dine?
+{0}: cloud kept, your local changes were NOT uploaded. Use "Download" to get the cloud state.
+= {0}: skyen beholdt, de lokale endringene dine ble IKKE lastet opp. Bruk "Last ned" for å hente skyens tilstand.
+Cancelled, your local changes were NOT uploaded.
+= Avbrutt, de lokale endringene dine ble IKKE lastet opp.
+{0}: the cloud changed during this sync, NOT uploaded. Sync again to decide.
+= {0}: skyen endret seg under denne synkroniseringen, IKKE lastet opp. Synkroniser igjen for å avgjøre.
+{0}: uploaded.
+= {0}: lastet opp.
+Written to the sync folder. Your cloud app uploads it in the background, wait until it is done before you switch PCs.
+= Skrevet til synkroniseringsmappen. Sky-appen din laster det opp i bakgrunnen; vent til den er ferdig før du bytter PC.
+Backup: {0}
+= Sikkerhetskopi: {0}
+Restored {0} after an interrupted sync.
+= {0} gjenopprettet etter en avbrutt synkronisering.

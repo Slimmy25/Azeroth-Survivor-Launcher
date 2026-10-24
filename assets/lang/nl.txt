@@ -1,0 +1,790 @@
+@name Nederlands
+# Each English text is followed by its translation on the line below (starting with "= ").
+# {0}, {1} ... are filled in by the launcher; keep them. \n is a line break.
+
+PLAY
+= SPELEN
+INSTALL
+= INSTALLEREN
+PLAYING...
+= SPEELT...
+INSTALLING
+= INSTALLEREN
+UPDATING
+= BIJWERKEN
+UPDATE
+= UPDATE
+CHECKING
+= CONTROLEREN
+CLOUD SAVE
+= CLOUDOPSLAG
+ADDONS
+= ADDONS
+OPTIONS
+= OPTIES
+CHANGELOG
+= PATCHNOTITIES
+ABOUT LAUNCHER
+= OVER DE LAUNCHER
+A game made by Aethus
+= Een spel gemaakt door Aethus
+Version {0}
+= Versie {0}
+Press PLAY to enter Azeroth.
+= Druk op SPELEN om Azeroth te betreden.
+Game client not found.
+= Spel niet gevonden.
+Press INSTALL to download it first.
+= Druk eerst op INSTALLEREN om het te downloaden.
+Press INSTALL to download it, or set the game folder in Options.
+= Druk op INSTALLEREN om het te downloaden, of stel de spelmap in bij Opties.
+Your cloud save syncs automatically.
+= Je cloudopslag synchroniseert automatisch.
+Time played: {0}   |   Last session: {1}
+= Speeltijd: {0}   |   Laatste sessie: {1}
+Ready.
+= Klaar.
+Cloud Save
+= Cloudopslag
+Addons
+= Addons
+Options
+= Opties
+Changelog
+= Patchnotities
+About Launcher
+= Over de launcher
+Download More
+= Meer downloaden
+All Patch Notes
+= Alle patchnotities
+Show Launcher
+= Launcher tonen
+Play
+= Spelen
+Upload Save Now
+= Opslag nu uploaden
+Close Button Hides to Tray
+= Sluitknop verbergt naar systeemvak
+Quit
+= Afsluiten
+Game running
+= Spel actief
+Idle
+= Inactief
+Game running - {0}
+= Spel actief - {0}
+The launcher is in the tray; the open window stays. Right-click the icon to quit.
+= De launcher staat in het systeemvak; het open venster blijft. Klik met rechts op het pictogram om af te sluiten.
+Still running in the tray. Right-click the icon to quit.
+= Nog actief in het systeemvak. Klik met rechts op het pictogram om af te sluiten.
+Cloud sync running
+= Cloudsynchronisatie bezig
+A cloud sync is still running. If you quit now it is cut short; the next sync repairs any half-finished copy.
+= Er loopt nog een cloudsynchronisatie. Als je nu afsluit, wordt die afgebroken; de volgende synchronisatie herstelt een half afgemaakte kopie.
+Quit anyway?
+= Toch afsluiten?
+Installing
+= Bezig met installeren
+The game client is still being installed. If you quit now, it is cut short.
+= Het spel wordt nog geïnstalleerd. Als je nu afsluit, wordt dat afgebroken.
+Updating
+= Bezig met bijwerken
+The game is still being updated. If you quit now, the update is cut short. Nothing is lost: a half-finished change is undone the next time the launcher starts.
+= Het spel wordt nog bijgewerkt. Als je nu afsluit, wordt de update afgebroken. Er gaat niets verloren: een half afgemaakte wijziging wordt de volgende keer dat de launcher start ongedaan gemaakt.
+The game is still running. If you quit the launcher now, your saves will NOT be uploaded automatically.
+= Het spel draait nog. Als je de launcher nu afsluit, worden je opslagbestanden NIET automatisch geüpload.
+Setup saved.
+= Instellingen opgeslagen.
+First-time setup
+= Eerste installatie
+Welcome, Adventurer
+= Welkom, avonturier
+Step 1 of 2
+= Stap 1 van 2
+Step 2 of 2
+= Stap 2 van 2
+A.  Cloud saving
+= A.  Cloudopslag
+Keep my progress in the cloud (Google Drive, OneDrive, Dropbox ...)\nand share it between my PCs
+= Mijn voortgang in de cloud bewaren (Google Drive, OneDrive, Dropbox ...)\nen delen tussen mijn pc's
+Sync folder (inside your cloud drive)
+= Synchronisatiemap (in je clouddrive)
+Cloud saving stays off. You can turn it on later in Cloud Save.
+= Cloudopslag blijft uit. Je kunt het later aanzetten bij Cloudopslag.
+B.  Where are your files?
+= B.  Waar staan je bestanden?
+Folders found at their usual place are used as they are. Choose the ones that are missing.
+= Mappen die op hun gebruikelijke plek staan, worden zo gebruikt. Kies de mappen die ontbreken.
+AddOns
+= AddOns
+Game saves
+= Spelopslag
+Addon settings
+= Addon-instellingen
+Select your AddOns folder
+= Kies je AddOns-map
+Select the folder that holds your save game (normally %APPDATA%\wenilla-rogue)
+= Kies de map met je opgeslagen spel (normaal %APPDATA%\wenilla-rogue)
+Select your addon settings folder (the 'saved' folder in benilla-config)
+= Kies je map met addon-instellingen (de map 'saved' in benilla-config)
+FINISH
+= VOLTOOIEN
+LATER
+= LATER
+✓ found
+= ✓ gevonden
+✓ chosen
+= ✓ gekozen
+not chosen yet
+= nog niet gekozen
+not found - please choose it
+= niet gevonden - kies hem
+(not set)
+= (niet ingesteld)
+CHANGE
+= WIJZIGEN
+CHOOSE
+= KIEZEN
+Choose a sync folder for cloud saving, or untick\n"Keep my progress in the cloud".
+= Kies een synchronisatiemap voor cloudopslag, of vink\n"Mijn voortgang in de cloud bewaren" uit.
+Setup
+= Instellen
+These folders were not found:
+= Deze mappen zijn niet gevonden:
+Finish anyway? You can change them later in Options.
+= Toch voltooien? Je kunt ze later wijzigen bij Opties.
+Your settings are saved.\n\nWould you like to go to the Addons section now\nto download some addons, or to enable or disable the ones you have?
+= Je instellingen zijn opgeslagen.\n\nWil je nu naar de Addons-sectie\nom addons te downloaden, of de addons die je hebt aan of uit te zetten?
+DOWNLOAD ADDONS
+= ADDONS DOWNLOADEN
+ENABLE / DISABLE ADDONS
+= ADDONS AAN / UIT
+NO THANKS
+= NEE, BEDANKT
+Install the game
+= Het spel installeren
+Install Azeroth Survivors
+= Azeroth Survivors installeren
+Step 1
+= Stap 1
+Download the game in your web browser.
+= Download het spel in je webbrowser.
+OPEN DOWNLOAD
+= DOWNLOAD OPENEN
+Download opened in your browser.
+= Download geopend in je browser.
+Step 2
+= Stap 2
+When the download has finished, come back here.
+= Kom hier terug als de download klaar is.
+IT'S IN MY DOWNLOADS
+= HET STAAT IN MIJN DOWNLOADS
+The launcher finds the file (in its own folder or Downloads), unpacks the game here and deletes the download.
+= De launcher vindt het bestand (in zijn eigen map of in Downloads), pakt het spel hier uit en verwijdert de download.
+CANCEL
+= ANNULEREN
+Which progress do you want to keep?
+= Welke voortgang wil je houden?
+Both sides changed
+= Beide kanten zijn gewijzigd
+This PC and the cloud both changed since the last sync:
+= Deze pc en de cloud zijn allebei gewijzigd sinds de laatste synchronisatie:
+• {0}:  this PC {1}   |   cloud {2}
+= • {0}:  deze pc {1}   |   cloud {2}
+One complete state wins, the other is backed up first.
+= Eén volledige staat wint, van de andere wordt eerst een back-up gemaakt.
+First time on this PC? Choose USE CLOUD.
+= Eerste keer op deze pc? Kies CLOUD GEBRUIKEN.
+USE CLOUD replaces your local data. KEEP LOCAL keeps it and uploads it later.
+= CLOUD GEBRUIKEN vervangt je lokale gegevens. LOKAAL HOUDEN bewaart ze en uploadt ze later.
+KEEP LOCAL replaces the cloud. USE CLOUD leaves the cloud and skips your upload.
+= LOKAAL HOUDEN vervangt de cloud. CLOUD GEBRUIKEN laat de cloud zoals hij is en slaat je upload over.
+USE CLOUD
+= CLOUD GEBRUIKEN
+KEEP LOCAL
+= LOKAAL HOUDEN
+Save game
+= Opgeslagen spel
+Game update
+= Spelupdate
+Update available
+= Update beschikbaar
+New version:
+= Nieuwe versie:
+Your version:
+= Jouw versie:
+not recorded yet
+= nog niet vastgelegd
+Download size:
+= Downloadgrootte:
+What is new
+= Wat is er nieuw
+Your addons, settings and saves are left alone. If anything goes wrong, the old game files are put back.
+= Je addons, instellingen en opslagbestanden blijven onaangeroerd. Als er iets misgaat, worden de oude spelbestanden teruggezet.
+UPDATE NOW
+= NU BIJWERKEN
+NOT NOW
+= NIET NU
+SKIP THIS VERSION
+= DEZE VERSIE OVERSLAAN
+I ALREADY HAVE THIS VERSION
+= IK HEB DEZE VERSIE AL
+The update is being installed. Please wait until it has finished.
+= De update wordt geïnstalleerd. Wacht tot dat klaar is.
+Downloading the update...
+= Update downloaden...
+Download the update
+= De update downloaden
+Step 1: download the update in your web browser.
+= Stap 1: download de update in je webbrowser.
+OPEN DOWNLOAD AGAIN
+= DOWNLOAD OPNIEUW OPENEN
+Step 2: when the download has finished, come back here.
+= Stap 2: kom hier terug als de download klaar is.
+The launcher finds the file (in its own folder or Downloads), installs it and deletes it.
+= De launcher vindt het bestand (in zijn eigen map of in Downloads), installeert het en verwijdert het.
+Checking the file...
+= Bestand controleren...
+CANCELLING...
+= ANNULEREN...
+Updating to {0}
+= Bijwerken naar {0}
+Please keep the launcher open until this has finished.
+= Houd de launcher open tot dit klaar is.
+{0} of {1}  ({#2}%)
+= {0} van {1}  ({2}%)
+{0} downloaded
+= {0} gedownload
+Update installed
+= Update geïnstalleerd
+Update failed
+= Update mislukt
+CLOSE
+= SLUITEN
+TRY AGAIN
+= OPNIEUW
+Version {0} is installed.
+= Versie {0} is geïnstalleerd.
+{#0} files updated.
+= {0} bestanden bijgewerkt.
+{#0} file updated.
+= {0} bestand bijgewerkt.
+{#0} files updated, {#1} removed.
+= {0} bestanden bijgewerkt, {1} verwijderd.
+{#0} file updated, {#1} removed.
+= {0} bestand bijgewerkt, {1} verwijderd.
+Install
+= Installeren
+Install the game from this file?
+= Het spel installeren vanuit dit bestand?
+{0}  ({#1} MB)
+= {0}  ({1} MB)
+in {0}
+= in {0}
+Choose the game file you downloaded (.rar)
+= Kies het spelbestand dat je hebt gedownload (.rar)
+Game archive (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|All files (*.*)|*.*
+= Spelarchief (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|Alle bestanden (*.*)|*.*
+Install cancelled.
+= Installatie geannuleerd.
+Unpacking the game client...
+= Spel uitpakken...
+Install failed.
+= Installatie mislukt.
+Install complete - press PLAY.
+= Installatie voltooid - druk op SPELEN.
+Install complete. Press PLAY to enter Azeroth.
+= Installatie voltooid. Druk op SPELEN om Azeroth te betreden.
+The last game update was cut off before it finished. Your game files were put back exactly as they were.
+= De laatste spelupdate werd afgebroken voordat hij klaar was. Je spelbestanden zijn precies teruggezet zoals ze waren.
+You can run the update again with the UPDATE button.
+= Je kunt de update opnieuw uitvoeren met de knop UPDATE.
+The last game update was cut off, and some game files could not be put back automatically.
+= De laatste spelupdate werd afgebroken, en sommige spelbestanden konden niet automatisch worden teruggezet.
+The old versions are kept in the folder "{0}" inside the game folder. Copy them back over the game files, or reinstall the game.
+= De oude versies staan in de map "{0}" in de spelmap. Kopieer ze terug over de spelbestanden, of installeer het spel opnieuw.
+Checking for updates...
+= Zoeken naar updates...
+The update check failed ({0}).
+= Zoeken naar updates mislukt ({0}).
+Could not check for launcher updates.
+= Kon niet zoeken naar launcher-updates.
+Launcher update
+= Launcher-update
+Launcher {0} is available.
+= Launcher {0} is beschikbaar.
+The launcher is up to date ({0}).
+= De launcher is up-to-date ({0}).
+You have the newest launcher ({0}).
+= Je hebt de nieuwste launcher ({0}).
+A new launcher ({0}) is available. Open the launcher and press UPDATE.
+= Er is een nieuwe launcher ({0}) beschikbaar. Open de launcher en druk op UPDATE.
+Finish what is running first (the game, an install or a cloud sync), then press UPDATE again.
+= Rond eerst af wat er loopt (het spel, een installatie of een cloudsynchronisatie) en druk dan opnieuw op UPDATE.
+A new version of the launcher is on GitHub: {0}.
+= Er staat een nieuwe versie van de launcher op GitHub: {0}.
+Update now? The new launcher ({0}) is downloaded, checked and started in place of this one. Your settings stay as they are.
+= Nu bijwerken? De nieuwe launcher ({0}) wordt gedownload, gecontroleerd en in plaats van deze gestart. Je instellingen blijven zoals ze zijn.
+Update now? The new launcher is downloaded, checked and started in place of this one. Your settings stay as they are.
+= Nu bijwerken? De nieuwe launcher wordt gedownload, gecontroleerd en in plaats van deze gestart. Je instellingen blijven zoals ze zijn.
+Launcher update postponed. Press UPDATE when you want it.
+= Launcher-update uitgesteld. Druk op UPDATE wanneer je wilt.
+Downloading the new launcher...
+= Nieuwe launcher downloaden...
+Downloading the new launcher... {0}
+= Nieuwe launcher downloaden... {0}
+Launcher update failed.
+= Launcher-update mislukt.
+Update checking is not switched on in this launcher yet (it has no update address).
+= Zoeken naar updates is in deze launcher nog niet ingeschakeld (er is geen updateadres).
+The game is not installed yet. Press INSTALL first.
+= Het spel is nog niet geïnstalleerd. Druk eerst op INSTALLEREN.
+Could not check for updates.
+= Kon niet zoeken naar updates.
+You have the newest version ({0}).
+= Je hebt de nieuwste versie ({0}).
+Update {0} is available.
+= Update {0} is beschikbaar.
+A game update ({0}) is available.
+= Er is een spelupdate ({0}) beschikbaar.
+Version {0} skipped. The UPDATE button still offers it.
+= Versie {0} overgeslagen. De knop UPDATE biedt hem nog steeds aan.
+Noted: you have version {0}.
+= Genoteerd: je hebt versie {0}.
+Install the update from this file?
+= De update installeren vanuit dit bestand?
+Choose the update file you downloaded
+= Kies het updatebestand dat je hebt gedownload
+Update archive (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|All files (*.*)|*.*
+= Updatearchief (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|Alle bestanden (*.*)|*.*
+Close the game first, then try again.
+= Sluit eerst het spel en probeer het opnieuw.
+Checking the download...
+= Download controleren...
+The downloaded file does not match its checksum, so nothing was installed. Please try again later.
+= Het gedownloade bestand komt niet overeen met de controlesom, dus er is niets geïnstalleerd. Probeer het later opnieuw.
+That file is not this update (its checksum does not match), so nothing was installed. Download it again from the update page.
+= Dat bestand is niet deze update (de controlesom komt niet overeen), dus er is niets geïnstalleerd. Download het opnieuw van de updatepagina.
+The update failed ({0}).
+= De update is mislukt ({0}).
+Updated to {0} - press PLAY.
+= Bijgewerkt naar {0} - druk op SPELEN.
+Game updated to {0}. Press PLAY to enter Azeroth.
+= Spel bijgewerkt naar {0}. Druk op SPELEN om Azeroth te betreden.
+Update cancelled.
+= Update geannuleerd.
+Update failed.
+= Update mislukt.
+Another task is still running - wait for it to finish.
+= Er loopt nog een andere taak - wacht tot die klaar is.
+Choose a sync folder inside your cloud drive first (Cloud Save or Options).
+= Kies eerst een synchronisatiemap in je clouddrive (Cloudopslag of Opties).
+Cloud sync failed.
+= Cloudsynchronisatie mislukt.
+Status checked at {0}
+= Status gecontroleerd om {0}
+Downloaded from the cloud at {0}
+= Uit de cloud gedownload om {0}
+Saves uploaded at {0}
+= Opslag geüpload om {0}
+Not everything was synced - see the Cloud Save log.
+= Niet alles is gesynchroniseerd - zie het logboek van Cloudopslag.
+The game is being updated. Please wait until that has finished.
+= Het spel wordt bijgewerkt. Wacht tot dat klaar is.
+The cloud save could NOT be loaded, so the game was not launched.
+= De cloudopslag kon NIET worden geladen, dus het spel is niet gestart.
+See the log in Cloud Save. If your cloud drive is still syncing, wait for it to finish and press PLAY again.
+= Zie het logboek bij Cloudopslag. Als je clouddrive nog synchroniseert, wacht tot hij klaar is en druk opnieuw op SPELEN.
+Cloud sync failed - game not launched
+= Cloudsynchronisatie mislukt - spel niet gestart
+Cloud save was not loaded - game not launched.
+= Cloudopslag niet geladen - spel niet gestart.
+Cloud sync successfully downloaded
+= Cloudsynchronisatie gedownload
+No sync folder set - launched without cloud sync.
+= Geen synchronisatiemap ingesteld - gestart zonder cloudsynchronisatie.
+Starting Azeroth Survivors ...
+= Azeroth Survivors wordt gestart ...
+Game running.
+= Spel actief.
+Could not start the game: {0}
+= Kon het spel niet starten: {0}
+Game closed.
+= Spel gesloten.
+Game has closed.
+= Het spel is gesloten.
+Cloud sync successfully uploaded
+= Cloudsynchronisatie geüpload
+Some of your progress was NOT uploaded. See the log in Cloud Save.
+= Een deel van je voortgang is NIET geüpload. Zie het logboek bij Cloudopslag.
+Cloud sync NOT completed - see the Cloud Save log
+= Cloudsynchronisatie NIET voltooid - zie het logboek van Cloudopslag
+Cloud upload failed: {0}
+= Uploaden naar de cloud mislukt: {0}
+Cloud sync failed - see the Cloud Save log
+= Cloudsynchronisatie mislukt - zie het logboek van Cloudopslag
+Launcher
+= Launcher
+Select a folder inside your cloud drive (Google Drive, OneDrive, Dropbox ...)
+= Kies een map in je clouddrive (Google Drive, OneDrive, Dropbox ...)
+That is the top level of your cloud drive.
+= Dat is het hoogste niveau van je clouddrive.
+Create and use a subfolder named AzerothSync inside it?
+= Een submap met de naam AzerothSync erin maken en gebruiken?
+Sync folder
+= Synchronisatiemap
+Play time reset.
+= Speeltijd op nul gezet.
+Play time
+= Speeltijd
+No games played with this launcher yet.
+= Nog geen spellen gespeeld met deze launcher.
+Total: {0} over {#1} sessions
+= Totaal: {0} in {1} sessies
+Total: {0} over {#1} session
+= Totaal: {0} in {1} sessie
+Total: {0} over {#1} sessions on {#2} PCs
+= Totaal: {0} in {1} sessies op {2} pc's
+Last session: {0} ({1})
+= Laatste sessie: {0} ({1})
+Longest session: {0}
+= Langste sessie: {0}
+Shared with your other PCs through the cloud sync folder.
+= Gedeeld met je andere pc's via de synchronisatiemap.
+Counted on this PC (the sync folder is not reachable right now).
+= Geteld op deze pc (de synchronisatiemap is nu niet bereikbaar).
+Counted on this PC. Turn on cloud saving to share it between your PCs.
+= Geteld op deze pc. Zet cloudopslag aan om het tussen je pc's te delen.
+RESET PLAY TIME
+= SPEELTIJD RESETTEN
+Set the play time back to zero on all your PCs?
+= De speeltijd op al je pc's op nul zetten?
+Set the play time back to zero?
+= De speeltijd op nul zetten?
+Game folder
+= Spelmap
+Save game folder
+= Map met opgeslagen spellen
+Game config folder (AddOns, addon settings)
+= Spelconfiguratiemap (AddOns, addon-instellingen)
+Cloud saving
+= Cloudopslag
+Close button hides the launcher to the tray
+= Sluitknop verbergt de launcher naar het systeemvak
+Minimize the launcher when the game starts
+= Launcher minimaliseren als het spel start
+RUN SETUP AGAIN
+= INSTALLATIE OPNIEUW
+Select your Azeroth Survivors game folder
+= Kies je Azeroth Survivors-spelmap
+Game folder set: {0}
+= Spelmap ingesteld: {0}
+Select the game's benilla-config folder (contains AddOns and saved)
+= Kies de map benilla-config van het spel (bevat AddOns en saved)
+Language
+= Taal
+ALL PATCH NOTES ›
+= ALLE PATCHNOTITIES ›
+‹ LATEST
+= ‹ NIEUWSTE
+‹ ALL PATCH NOTES
+= ‹ ALLE PATCHNOTITIES
+‹ PREVIOUS
+= ‹ VORIGE
+NEXT ›
+= VOLGENDE ›
+{#0} of {#1}
+= {0} van {1}
+PAGE
+= PAGINA
+No patch notes yet.
+= Nog geen patchnotities.
+{0} (current)
+= {0} (huidig)
+Vibe coded by Slimjim\nCloud save code established by Keijin
+= Op gevoel gecodeerd door Slimjim\nCloudopslagcode door Keijin
+DOWNLOAD MORE ›
+= MEER DOWNLOADEN ›
+ALL
+= ALLE
+UI OVERHAUL
+= UI-VERNIEUWING
+GAMEPLAY
+= GAMEPLAY
+COSMETIC
+= COSMETISCH
+No addons in this filter yet.
+= Nog geen addons in dit filter.
+No downloadable addons listed yet.
+= Nog geen downloadbare addons.
+UNINSTALL
+= VERWIJDEREN
+Addons can't be changed while the game runs or a sync is running.
+= Addons kunnen niet worden gewijzigd terwijl het spel of een synchronisatie loopt.
+Another addon is still downloading.
+= Er wordt nog een andere addon gedownload.
+Installing {0}...
+= {0} installeren...
+{0} installed.
+= {0} geïnstalleerd.
+{0} failed.
+= {0} mislukt.
+Could not install {0}:
+= Kon {0} niet installeren:
+{0} is not installed.
+= {0} is niet geïnstalleerd.
+Remove {0} from your AddOns folder?
+= {0} uit je AddOns-map verwijderen?
+Folders: {0}
+= Mappen: {0}
+This deletes everything it added, including the settings it saved.
+= Dit verwijdert alles wat het heeft toegevoegd, inclusief de instellingen die het heeft opgeslagen.
+Uninstall
+= Verwijderen
+Could not uninstall {0}:
+= Kon {0} niet verwijderen:
+{0} uninstalled.
+= {0} verwijderd.
+{0} was not installed.
+= {0} was niet geïnstalleerd.
+No AddOns folder found.\nSet the game config folder in Options\n(the benilla-config folder).
+= Geen AddOns-map gevonden.\nStel de spelconfiguratiemap in bij Opties\n(de map benilla-config).
+REFRESH
+= VERNIEUWEN
+FOLDER
+= MAP
+TOGGLE ALL
+= ALLES OMZETTEN
+SAVE
+= OPSLAAN
+LOAD
+= LADEN
+empty
+= leeg
+{#0} on, {#1} off
+= {0} aan, {1} uit
+saved {0}
+= opgeslagen {0}
+Profile {0}
+= Profiel {0}
+No addons installed.
+= Geen addons geïnstalleerd.
+{#0} of {#1} enabled
+= {0} van {1} aan
+Could not enable {0}:
+= Kon {0} niet inschakelen:
+Could not disable {0}:
+= Kon {0} niet uitschakelen:
+{0} enabled.
+= {0} ingeschakeld.
+{0} disabled.
+= {0} uitgeschakeld.
+All addons enabled.
+= Alle addons ingeschakeld.
+All addons disabled.
+= Alle addons uitgeschakeld.
+Some addons could not be changed:
+= Sommige addons konden niet worden gewijzigd:
+Replace the saved Profile {0} with the current toggles?
+= Het opgeslagen Profiel {0} vervangen door de huidige keuzes?
+Profile {0} saved.
+= Profiel {0} opgeslagen.
+Profile {0} is empty - press SAVE to store the current toggles.
+= Profiel {0} is leeg - druk op OPSLAAN om de huidige keuzes te bewaren.
+Profile {0} loaded: {#1} changed.
+= Profiel {0} geladen: {1} gewijzigd.
+Profile {0} loaded: {#1} changed. {#2} newer addon(s) left as they were.
+= Profiel {0} geladen: {1} gewijzigd. {2} nieuwere addon(s) ongewijzigd gelaten.
+Cloud saving is turned off.\nYour progress stays on this PC only.
+= Cloudopslag staat uit.\nJe voortgang blijft alleen op deze pc.
+TURN ON CLOUD SAVING
+= CLOUDOPSLAG AANZETTEN
+PLAY downloads the newest state, starts the game and uploads your progress after you close it. One complete state wins; the overwritten one is backed up as a ZIP first.
+= SPELEN downloadt de nieuwste staat, start het spel en uploadt je voortgang nadat je het sluit. Eén volledige staat wint; van de overschreven staat wordt eerst een ZIP-back-up gemaakt.
+(not set - choose a folder inside Google Drive, OneDrive or Dropbox)
+= (niet ingesteld - kies een map in Google Drive, OneDrive of Dropbox)
+Not synced yet.
+= Nog niet gesynchroniseerd.
+Cloud: {0}
+= Cloud: {0}
+last uploaded by {0} on {1}
+= laatst geüpload door {0} op {1}
+no upload info
+= geen uploadinfo
+CHECK STATUS
+= STATUS CONTROLEREN
+DOWNLOAD
+= DOWNLOADEN
+UPLOAD
+= UPLOADEN
+The launcher is already running.
+= De launcher draait al.
+Look for its icon in the system tray (near the clock).
+= Zoek het pictogram in het systeemvak (bij de klok).
+Press INSTALL to download the game first.
+= Druk eerst op INSTALLEREN om het spel te downloaden.
+No launcher release has been published on GitHub yet.
+= Er is nog geen launcher-release op GitHub gepubliceerd.
+GitHub's answer could not be read.
+= Het antwoord van GitHub kon niet worden gelezen.
+The latest release on GitHub ({0}) has no launcher exe attached.
+= De nieuwste release op GitHub ({0}) heeft geen launcher-exe bijgevoegd.
+The latest release on GitHub has no checksum for its exe, so it is not installed.
+= De nieuwste release op GitHub heeft geen controlesom voor de exe, dus hij wordt niet geïnstalleerd.
+The downloaded launcher does not match its checksum, so it was not installed. Please try again later.
+= De gedownloade launcher komt niet overeen met de controlesom, dus hij is niet geïnstalleerd. Probeer het later opnieuw.
+The launcher could not replace itself in this folder ({0}).
+= De launcher kon zichzelf niet vervangen in deze map ({0}).
+Download the new version from GitHub instead:
+= Download de nieuwe versie in plaats daarvan van GitHub:
+The new launcher could not be put in place ({0}). Nothing was changed.
+= De nieuwe launcher kon niet worden geplaatst ({0}). Er is niets gewijzigd.
+The {0} address must start with https://
+= Het adres van de {0}server moet beginnen met https://
+The {0} server redirected to an address that is not secure (https).
+= De {0}server stuurde door naar een adres dat niet veilig is (https).
+The {0} server sent a broken redirect.
+= De {0}server stuurde een ongeldige doorverwijzing.
+The {0} server answered with error {#1}.
+= De {0}server antwoordde met fout {1}.
+The {0} server's security certificate was not accepted. It needs a normal, trusted https certificate.
+= Het beveiligingscertificaat van de {0}server is niet geaccepteerd. Er is een normaal, vertrouwd https-certificaat nodig.
+The {0} server did not answer in time. Check your internet connection and try again.
+= De {0}server antwoordde niet op tijd. Controleer je internetverbinding en probeer het opnieuw.
+Could not reach the {0} server. Check your internet connection and try again.
+= Kon de {0}server niet bereiken. Controleer je internetverbinding en probeer het opnieuw.
+The {0} server redirected too many times.
+= De {0}server stuurde te vaak door.
+update
+= update
+addon
+= addon
+The download link gave a web page instead of the file. It must be a direct download link.
+= De downloadlink gaf een webpagina in plaats van het bestand. Het moet een directe downloadlink zijn.
+The download was interrupted. Check your connection and try again.
+= De download werd onderbroken. Controleer je verbinding en probeer het opnieuw.
+The download was cut off before it finished. Please try again.
+= De download stopte voordat hij klaar was. Probeer het opnieuw.
+The .zip contains an unsafe path; nothing was installed.
+= De .zip bevat een onveilig pad; er is niets geïnstalleerd.
+The file is damaged or incomplete.
+= Het bestand is beschadigd of onvolledig.
+The file is a .{0} archive, and no program to unpack it was found.
+= Het bestand is een .{0}-archief, en er is geen programma gevonden om het uit te pakken.
+Install the free 7-Zip (7-zip.org) or WinRAR and try again.
+= Installeer het gratis 7-Zip (7-zip.org) of WinRAR en probeer het opnieuw.
+The archive could not be unpacked.
+= Het archief kon niet worden uitgepakt.
+That file is not a .rar, .zip or .7z archive.
+= Dat bestand is geen .rar-, .zip- of .7z-archief.
+The archive was unpacked, but {0} was not inside it.
+= Het archief is uitgepakt, maar {0} zat er niet in.
+The install finished, but {0} is not in {1}.
+= De installatie is klaar, maar {0} staat niet in {1}.
+The link did not give a .zip file. It must be a direct download link (share pages such as LimeWire do not work).
+= De link gaf geen .zip-bestand. Het moet een directe downloadlink zijn (deelpagina's zoals LimeWire werken niet).
+There is not enough free disk space.
+= Er is niet genoeg vrije schijfruimte.
+Not enough free disk space for the update: about {0} is needed on the drive with the game, {1} is free.
+= Niet genoeg vrije schijfruimte voor de update: er is ongeveer {0} nodig op de schijf met het spel, {1} is vrij.
+The update file is not a .rar, .zip or .7z archive.
+= Het updatebestand is geen .rar-, .zip- of .7z-archief.
+An earlier update was cut off and its files could not be put back yet.
+= Een eerdere update werd afgebroken en de bestanden konden nog niet worden teruggezet.
+The old files are kept in:
+= De oude bestanden staan in:
+Unpacking the update. This can take a few minutes...
+= Update uitpakken. Dit kan een paar minuten duren...
+Installing the new files...
+= Nieuwe bestanden installeren...
+The update did not contain any files to install.
+= De update bevatte geen bestanden om te installeren.
+{0} is missing after the update.
+= {0} ontbreekt na de update.
+A game file is in use. Close the game and anything else using its folder, then try again.
+= Een spelbestand is in gebruik. Sluit het spel en alles wat de map gebruikt en probeer het opnieuw.
+There is not enough free disk space for the update. Free some space and try again.
+= Niet genoeg vrije schijfruimte voor de update. Maak ruimte vrij en probeer het opnieuw.
+The update could not be installed ({0}).
+= De update kon niet worden geïnstalleerd ({0}).
+No game files were changed.
+= Er zijn geen spelbestanden gewijzigd.
+Some files could not be put back. The old versions are kept in:
+= Sommige bestanden konden niet worden teruggezet. De oude versies staan in:
+Sync folder not reachable: {0} (is your cloud drive running?)
+= Synchronisatiemap niet bereikbaar: {0} (draait je clouddrive?)
+The game is running. Close it before you download.
+= Het spel draait. Sluit het voordat je downloadt.
+The game is running. Close it before you upload.
+= Het spel draait. Sluit het voordat je uploadt.
+The folder is in use and was not replaced: {0} ({1}). Close programs or Explorer windows that use it and try again.
+= De map is in gebruik en is niet vervangen: {0} ({1}). Sluit programma's of Verkenner-vensters die hem gebruiken en probeer het opnieuw.
+The source changed while copying ({0}). Nothing was replaced, please sync again.
+= De bron is tijdens het kopiëren gewijzigd ({0}). Er is niets vervangen, synchroniseer opnieuw.
+No sync folder set. Choose a folder in Google Drive, OneDrive, Dropbox or similar in Options.
+= Geen synchronisatiemap ingesteld. Kies bij Opties een map in Google Drive, OneDrive, Dropbox of iets vergelijkbaars.
+Sync folder: {0}
+= Synchronisatiemap: {0}
+The sync folder does not exist yet. It is created on the first upload.
+= De synchronisatiemap bestaat nog niet. Hij wordt bij de eerste upload gemaakt.
+{0}: in sync (local {1}, cloud {2})
+= {0}: gesynchroniseerd (lokaal {1}, cloud {2})
+{0}: cloud empty, upload (local {1}, cloud {2})
+= {0}: cloud leeg, uploaden (lokaal {1}, cloud {2})
+{0}: cloud copy incomplete or still syncing, wait (local {1}, cloud {2})
+= {0}: cloudkopie onvolledig of nog bezig, wachten (lokaal {1}, cloud {2})
+{0}: local is newer, upload (local {1}, cloud {2})
+= {0}: lokaal is nieuwer, uploaden (lokaal {1}, cloud {2})
+{0}: cloud is newer, download (local {1}, cloud {2})
+= {0}: cloud is nieuwer, downloaden (lokaal {1}, cloud {2})
+{0}: both changed or never synced (local {1}, cloud {2})
+= {0}: beide gewijzigd of nooit gesynchroniseerd (lokaal {1}, cloud {2})
+{0}: {1} not found, skipped. Set the game config folder in Options.
+= {0}: {1} niet gevonden, overgeslagen. Stel de spelconfiguratiemap in bij Opties.
+Downloading from the cloud ...
+= Downloaden uit de cloud ...
+The sync folder does not exist yet, nothing to download.
+= De synchronisatiemap bestaat nog niet, niets te downloaden.
+{0}: cloud is empty, nothing to download.
+= {0}: de cloud is leeg, niets te downloaden.
+{0}: up to date.
+= {0}: up-to-date.
+{0}: the cloud copy does not match the last upload yet (incomplete or still syncing). Nothing replaced, try again in a moment.
+= {0}: de cloudkopie komt nog niet overeen met de laatste upload (onvolledig of nog bezig). Niets vervangen, probeer het zo opnieuw.
+{0}: local is newer, kept.
+= {0}: lokaal is nieuwer, behouden.
+Replace your local data with the cloud state?
+= Je lokale gegevens vervangen door de cloudstaat?
+A backup is made first.
+= Er wordt eerst een back-up gemaakt.
+Cancelled, nothing changed.
+= Geannuleerd, er is niets gewijzigd.
+{0}: local state kept, it will replace the cloud on the next upload.
+= {0}: lokale staat behouden, die vervangt de cloud bij de volgende upload.
+{0}: downloaded from the cloud.
+= {0}: uit de cloud gedownload.
+Cloud state: {0}
+= Cloudstaat: {0}
+Uploading to the cloud ...
+= Uploaden naar de cloud ...
+{0}: nothing local, nothing uploaded.
+= {0}: lokaal niets, niets geüpload.
+{0}: cloud is up to date.
+= {0}: de cloud is up-to-date.
+Replace the cloud state with your local data?
+= De cloudstaat vervangen door je lokale gegevens?
+{0}: cloud kept, your local changes were NOT uploaded. Use "Download" to get the cloud state.
+= {0}: cloud behouden, je lokale wijzigingen zijn NIET geüpload. Gebruik "Downloaden" om de cloudstaat op te halen.
+Cancelled, your local changes were NOT uploaded.
+= Geannuleerd, je lokale wijzigingen zijn NIET geüpload.
+{0}: the cloud changed during this sync, NOT uploaded. Sync again to decide.
+= {0}: de cloud is tijdens deze synchronisatie gewijzigd, NIET geüpload. Synchroniseer opnieuw om te beslissen.
+{0}: uploaded.
+= {0}: geüpload.
+Written to the sync folder. Your cloud app uploads it in the background, wait until it is done before you switch PCs.
+= Naar de synchronisatiemap geschreven. Je cloud-app uploadt het op de achtergrond; wacht tot dat klaar is voordat je van pc wisselt.
+Backup: {0}
+= Back-up: {0}
+Restored {0} after an interrupted sync.
+= {0} hersteld na een onderbroken synchronisatie.

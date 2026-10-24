@@ -1,0 +1,791 @@
+@name Ελληνικά
+@font Palatino Linotype, Georgia
+# Each English text is followed by its translation on the line below (starting with "= ").
+# {0}, {1} ... are filled in by the launcher; keep them. \n is a line break.
+
+PLAY
+= ΠΑΙΞΕ
+INSTALL
+= ΕΓΚΑΤΑΣΤΑΣΗ
+PLAYING...
+= ΠΑΙΖΕΙΣ...
+INSTALLING
+= ΕΓΚΑΤΑΣΤΑΣΗ...
+UPDATING
+= ΕΝΗΜΕΡΩΣΗ...
+UPDATE
+= ΕΝΗΜΕΡΩΣΗ
+CHECKING
+= ΕΛΕΓΧΟΣ
+CLOUD SAVE
+= ΑΠΟΘΗΚΕΥΣΗ CLOUD
+ADDONS
+= ΠΡΟΣΘΕΤΑ
+OPTIONS
+= ΕΠΙΛΟΓΕΣ
+CHANGELOG
+= ΣΗΜΕΙΩΣΕΙΣ ΕΚΔΟΣΗΣ
+ABOUT LAUNCHER
+= ΣΧΕΤΙΚΑ ΜΕ ΤΟΝ LAUNCHER
+A game made by Aethus
+= Ένα παιχνίδι του Aethus
+Version {0}
+= Έκδοση {0}
+Press PLAY to enter Azeroth.
+= Πάτησε ΠΑΙΞΕ για να μπεις στο Azeroth.
+Game client not found.
+= Το παιχνίδι δεν βρέθηκε.
+Press INSTALL to download it first.
+= Πάτησε ΕΓΚΑΤΑΣΤΑΣΗ για να το κατεβάσεις πρώτα.
+Press INSTALL to download it, or set the game folder in Options.
+= Πάτησε ΕΓΚΑΤΑΣΤΑΣΗ για να το κατεβάσεις ή όρισε τον φάκελο του παιχνιδιού στις Επιλογές.
+Your cloud save syncs automatically.
+= Η αποθήκευσή σου στο cloud συγχρονίζεται αυτόματα.
+Time played: {0}   |   Last session: {1}
+= Χρόνος παιχνιδιού: {0}   |   Τελευταία συνεδρία: {1}
+Ready.
+= Έτοιμο.
+Cloud Save
+= Αποθήκευση cloud
+Addons
+= Πρόσθετα
+Options
+= Επιλογές
+Changelog
+= Σημειώσεις έκδοσης
+About Launcher
+= Σχετικά με τον launcher
+Download More
+= Λήψη περισσότερων
+All Patch Notes
+= Όλες οι σημειώσεις έκδοσης
+Show Launcher
+= Εμφάνιση launcher
+Play
+= Παίξε
+Upload Save Now
+= Αποστολή αποθήκευσης τώρα
+Close Button Hides to Tray
+= Το Κλείσιμο κρύβει στην περιοχή ειδοποιήσεων
+Quit
+= Έξοδος
+Game running
+= Το παιχνίδι τρέχει
+Idle
+= Αδρανής
+Game running - {0}
+= Το παιχνίδι τρέχει - {0}
+The launcher is in the tray; the open window stays. Right-click the icon to quit.
+= Ο launcher είναι στην περιοχή ειδοποιήσεων· το ανοιχτό παράθυρο μένει. Κάνε δεξί κλικ στο εικονίδιο για έξοδο.
+Still running in the tray. Right-click the icon to quit.
+= Τρέχει ακόμα στην περιοχή ειδοποιήσεων. Κάνε δεξί κλικ στο εικονίδιο για έξοδο.
+Cloud sync running
+= Συγχρονισμός cloud σε εξέλιξη
+A cloud sync is still running. If you quit now it is cut short; the next sync repairs any half-finished copy.
+= Ένας συγχρονισμός cloud είναι ακόμα σε εξέλιξη. Αν βγεις τώρα θα διακοπεί· ο επόμενος συγχρονισμός επιδιορθώνει κάθε μισοτελειωμένο αντίγραφο.
+Quit anyway?
+= Έξοδος παρ' όλα αυτά;
+Installing
+= Εγκατάσταση σε εξέλιξη
+The game client is still being installed. If you quit now, it is cut short.
+= Το παιχνίδι εγκαθίσταται ακόμα. Αν βγεις τώρα, η εγκατάσταση θα διακοπεί.
+Updating
+= Ενημέρωση σε εξέλιξη
+The game is still being updated. If you quit now, the update is cut short. Nothing is lost: a half-finished change is undone the next time the launcher starts.
+= Το παιχνίδι ενημερώνεται ακόμα. Αν βγεις τώρα, η ενημέρωση θα διακοπεί. Τίποτα δεν χάνεται: μια μισοτελειωμένη αλλαγή αναιρείται την επόμενη φορά που ξεκινά ο launcher.
+The game is still running. If you quit the launcher now, your saves will NOT be uploaded automatically.
+= Το παιχνίδι τρέχει ακόμα. Αν κλείσεις τον launcher τώρα, οι αποθηκεύσεις σου ΔΕΝ θα ανέβουν αυτόματα.
+Setup saved.
+= Οι ρυθμίσεις αποθηκεύτηκαν.
+First-time setup
+= Πρώτη ρύθμιση
+Welcome, Adventurer
+= Καλώς ήρθες, τυχοδιώκτη
+Step 1 of 2
+= Βήμα 1 από 2
+Step 2 of 2
+= Βήμα 2 από 2
+A.  Cloud saving
+= A.  Αποθήκευση cloud
+Keep my progress in the cloud (Google Drive, OneDrive, Dropbox ...)\nand share it between my PCs
+= Κράτα την πρόοδό μου στο cloud (Google Drive, OneDrive, Dropbox ...)\nκαι μοιράσου τη μεταξύ των υπολογιστών μου
+Sync folder (inside your cloud drive)
+= Φάκελος συγχρονισμού (μέσα στον χώρο cloud σου)
+Cloud saving stays off. You can turn it on later in Cloud Save.
+= Η αποθήκευση cloud μένει απενεργοποιημένη. Μπορείς να την ενεργοποιήσεις αργότερα στην Αποθήκευση cloud.
+B.  Where are your files?
+= B.  Πού είναι τα αρχεία σου;
+Folders found at their usual place are used as they are. Choose the ones that are missing.
+= Οι φάκελοι που βρέθηκαν στη συνηθισμένη θέση χρησιμοποιούνται ως έχουν. Διάλεξε αυτούς που λείπουν.
+AddOns
+= AddOns
+Game saves
+= Αποθηκεύσεις παιχνιδιού
+Addon settings
+= Ρυθμίσεις πρόσθετων
+Select your AddOns folder
+= Επίλεξε τον φάκελο AddOns
+Select the folder that holds your save game (normally %APPDATA%\wenilla-rogue)
+= Επίλεξε τον φάκελο με την αποθήκευσή σου (συνήθως %APPDATA%\wenilla-rogue)
+Select your addon settings folder (the 'saved' folder in benilla-config)
+= Επίλεξε τον φάκελο ρυθμίσεων πρόσθετων (ο φάκελος 'saved' στο benilla-config)
+FINISH
+= ΟΛΟΚΛΗΡΩΣΗ
+LATER
+= ΑΡΓΟΤΕΡΑ
+✓ found
+= ✓ βρέθηκε
+✓ chosen
+= ✓ επιλέχθηκε
+not chosen yet
+= δεν έχει επιλεγεί ακόμα
+not found - please choose it
+= δεν βρέθηκε - επίλεξέ τον
+(not set)
+= (δεν έχει οριστεί)
+CHANGE
+= ΑΛΛΑΓΗ
+CHOOSE
+= ΕΠΙΛΟΓΗ
+Choose a sync folder for cloud saving, or untick\n"Keep my progress in the cloud".
+= Επίλεξε φάκελο συγχρονισμού για την αποθήκευση cloud ή ξετσέκαρε το\n«Κράτα την πρόοδό μου στο cloud».
+Setup
+= Ρύθμιση
+These folders were not found:
+= Αυτοί οι φάκελοι δεν βρέθηκαν:
+Finish anyway? You can change them later in Options.
+= Ολοκλήρωση παρ' όλα αυτά; Μπορείς να τους αλλάξεις αργότερα στις Επιλογές.
+Your settings are saved.\n\nWould you like to go to the Addons section now\nto download some addons, or to enable or disable the ones you have?
+= Οι ρυθμίσεις σου αποθηκεύτηκαν.\n\nΘέλεις να πας τώρα στην ενότητα Πρόσθετα\nγια να κατεβάσεις πρόσθετα ή να ενεργοποιήσεις και να απενεργοποιήσεις όσα έχεις;
+DOWNLOAD ADDONS
+= ΛΗΨΗ ΠΡΟΣΘΕΤΩΝ
+ENABLE / DISABLE ADDONS
+= ΕΝΕΡΓΟΠΟΙΗΣΗ / ΑΠΕΝΕΡΓΟΠΟΙΗΣΗ
+NO THANKS
+= ΟΧΙ, ΕΥΧΑΡΙΣΤΩ
+Install the game
+= Εγκατάσταση του παιχνιδιού
+Install Azeroth Survivors
+= Εγκατάσταση Azeroth Survivors
+Step 1
+= Βήμα 1
+Download the game in your web browser.
+= Κατέβασε το παιχνίδι στον περιηγητή σου.
+OPEN DOWNLOAD
+= ΑΝΟΙΓΜΑ ΛΗΨΗΣ
+Download opened in your browser.
+= Η λήψη άνοιξε στον περιηγητή σου.
+Step 2
+= Βήμα 2
+When the download has finished, come back here.
+= Όταν τελειώσει η λήψη, γύρνα εδώ.
+IT'S IN MY DOWNLOADS
+= ΕΙΝΑΙ ΣΤΙΣ ΛΗΨΕΙΣ ΜΟΥ
+The launcher finds the file (in its own folder or Downloads), unpacks the game here and deletes the download.
+= Ο launcher βρίσκει το αρχείο (στον δικό του φάκελο ή στις Λήψεις), αποσυμπιέζει το παιχνίδι εδώ και διαγράφει τη λήψη.
+CANCEL
+= ΑΚΥΡΟ
+Which progress do you want to keep?
+= Ποια πρόοδο θέλεις να κρατήσεις;
+Both sides changed
+= Άλλαξαν και οι δύο πλευρές
+This PC and the cloud both changed since the last sync:
+= Αυτός ο υπολογιστής και το cloud άλλαξαν από τον τελευταίο συγχρονισμό:
+• {0}:  this PC {1}   |   cloud {2}
+= • {0}:  αυτός ο υπολογιστής {1}   |   cloud {2}
+One complete state wins, the other is backed up first.
+= Μία πλήρης κατάσταση κερδίζει, η άλλη αποθηκεύεται πρώτα ως αντίγραφο ασφαλείας.
+First time on this PC? Choose USE CLOUD.
+= Πρώτη φορά σε αυτόν τον υπολογιστή; Διάλεξε ΧΡΗΣΗ CLOUD.
+USE CLOUD replaces your local data. KEEP LOCAL keeps it and uploads it later.
+= Η ΧΡΗΣΗ CLOUD αντικαθιστά τα τοπικά σου δεδομένα. Η ΔΙΑΤΗΡΗΣΗ ΤΟΠΙΚΩΝ τα κρατά και τα ανεβάζει αργότερα.
+KEEP LOCAL replaces the cloud. USE CLOUD leaves the cloud and skips your upload.
+= Η ΔΙΑΤΗΡΗΣΗ ΤΟΠΙΚΩΝ αντικαθιστά το cloud. Η ΧΡΗΣΗ CLOUD αφήνει το cloud ως έχει και παραλείπει την αποστολή σου.
+USE CLOUD
+= ΧΡΗΣΗ CLOUD
+KEEP LOCAL
+= ΔΙΑΤΗΡΗΣΗ ΤΟΠΙΚΩΝ
+Save game
+= Αποθήκευση παιχνιδιού
+Game update
+= Ενημέρωση παιχνιδιού
+Update available
+= Διαθέσιμη ενημέρωση
+New version:
+= Νέα έκδοση:
+Your version:
+= Η έκδοσή σου:
+not recorded yet
+= δεν έχει καταγραφεί ακόμα
+Download size:
+= Μέγεθος λήψης:
+What is new
+= Τι νέο υπάρχει
+Your addons, settings and saves are left alone. If anything goes wrong, the old game files are put back.
+= Τα πρόσθετα, οι ρυθμίσεις και οι αποθηκεύσεις σου μένουν ανέγγιχτα. Αν κάτι πάει στραβά, τα παλιά αρχεία του παιχνιδιού επανέρχονται.
+UPDATE NOW
+= ΕΝΗΜΕΡΩΣΗ ΤΩΡΑ
+NOT NOW
+= ΟΧΙ ΤΩΡΑ
+SKIP THIS VERSION
+= ΠΑΡΑΛΕΙΨΗ ΑΥΤΗΣ ΤΗΣ ΕΚΔΟΣΗΣ
+I ALREADY HAVE THIS VERSION
+= ΕΧΩ ΗΔΗ ΑΥΤΗ ΤΗΝ ΕΚΔΟΣΗ
+The update is being installed. Please wait until it has finished.
+= Η ενημέρωση εγκαθίσταται. Περίμενε μέχρι να τελειώσει.
+Downloading the update...
+= Λήψη της ενημέρωσης...
+Download the update
+= Λήψη της ενημέρωσης
+Step 1: download the update in your web browser.
+= Βήμα 1: κατέβασε την ενημέρωση στον περιηγητή σου.
+OPEN DOWNLOAD AGAIN
+= ΑΝΟΙΓΜΑ ΛΗΨΗΣ ΞΑΝΑ
+Step 2: when the download has finished, come back here.
+= Βήμα 2: όταν τελειώσει η λήψη, γύρνα εδώ.
+The launcher finds the file (in its own folder or Downloads), installs it and deletes it.
+= Ο launcher βρίσκει το αρχείο (στον δικό του φάκελο ή στις Λήψεις), το εγκαθιστά και το διαγράφει.
+Checking the file...
+= Έλεγχος του αρχείου...
+CANCELLING...
+= ΑΚΥΡΩΣΗ...
+Updating to {0}
+= Ενημέρωση σε {0}
+Please keep the launcher open until this has finished.
+= Κράτα τον launcher ανοιχτό μέχρι να τελειώσει.
+{0} of {1}  ({#2}%)
+= {0} από {1}  ({2}%)
+{0} downloaded
+= {0} κατέβηκαν
+Update installed
+= Η ενημέρωση εγκαταστάθηκε
+Update failed
+= Η ενημέρωση απέτυχε
+CLOSE
+= ΚΛΕΙΣΙΜΟ
+TRY AGAIN
+= ΞΑΝΑ
+Version {0} is installed.
+= Η έκδοση {0} είναι εγκατεστημένη.
+{#0} files updated.
+= {0} αρχεία ενημερώθηκαν.
+{#0} file updated.
+= {0} αρχείο ενημερώθηκε.
+{#0} files updated, {#1} removed.
+= {0} αρχεία ενημερώθηκαν, {1} αφαιρέθηκαν.
+{#0} file updated, {#1} removed.
+= {0} αρχείο ενημερώθηκε, {1} αφαιρέθηκαν.
+Install
+= Εγκατάσταση
+Install the game from this file?
+= Εγκατάσταση του παιχνιδιού από αυτό το αρχείο;
+{0}  ({#1} MB)
+= {0}  ({1} MB)
+in {0}
+= στο {0}
+Choose the game file you downloaded (.rar)
+= Επίλεξε το αρχείο του παιχνιδιού που κατέβασες (.rar)
+Game archive (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|All files (*.*)|*.*
+= Αρχείο παιχνιδιού (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|Όλα τα αρχεία (*.*)|*.*
+Install cancelled.
+= Η εγκατάσταση ακυρώθηκε.
+Unpacking the game client...
+= Αποσυμπίεση του παιχνιδιού...
+Install failed.
+= Η εγκατάσταση απέτυχε.
+Install complete - press PLAY.
+= Η εγκατάσταση ολοκληρώθηκε - πάτησε ΠΑΙΞΕ.
+Install complete. Press PLAY to enter Azeroth.
+= Η εγκατάσταση ολοκληρώθηκε. Πάτησε ΠΑΙΞΕ για να μπεις στο Azeroth.
+The last game update was cut off before it finished. Your game files were put back exactly as they were.
+= Η τελευταία ενημέρωση του παιχνιδιού διακόπηκε πριν τελειώσει. Τα αρχεία του παιχνιδιού επανήλθαν ακριβώς όπως ήταν.
+You can run the update again with the UPDATE button.
+= Μπορείς να τρέξεις ξανά την ενημέρωση με το κουμπί ΕΝΗΜΕΡΩΣΗ.
+The last game update was cut off, and some game files could not be put back automatically.
+= Η τελευταία ενημέρωση του παιχνιδιού διακόπηκε και κάποια αρχεία δεν μπόρεσαν να επανέλθουν αυτόματα.
+The old versions are kept in the folder "{0}" inside the game folder. Copy them back over the game files, or reinstall the game.
+= Οι παλιές εκδόσεις βρίσκονται στον φάκελο «{0}» μέσα στον φάκελο του παιχνιδιού. Αντίγραψέ τες πίσω πάνω από τα αρχεία του παιχνιδιού ή εγκατάστησε ξανά το παιχνίδι.
+Checking for updates...
+= Έλεγχος για ενημερώσεις...
+The update check failed ({0}).
+= Ο έλεγχος για ενημερώσεις απέτυχε ({0}).
+Could not check for launcher updates.
+= Δεν ήταν δυνατός ο έλεγχος για ενημερώσεις του launcher.
+Launcher update
+= Ενημέρωση launcher
+Launcher {0} is available.
+= Ο launcher {0} είναι διαθέσιμος.
+The launcher is up to date ({0}).
+= Ο launcher είναι ενημερωμένος ({0}).
+You have the newest launcher ({0}).
+= Έχεις τον νεότερο launcher ({0}).
+A new launcher ({0}) is available. Open the launcher and press UPDATE.
+= Ένας νέος launcher ({0}) είναι διαθέσιμος. Άνοιξε τον launcher και πάτησε ΕΝΗΜΕΡΩΣΗ.
+Finish what is running first (the game, an install or a cloud sync), then press UPDATE again.
+= Ολοκλήρωσε πρώτα ό,τι τρέχει (το παιχνίδι, μια εγκατάσταση ή έναν συγχρονισμό), μετά πάτησε ξανά ΕΝΗΜΕΡΩΣΗ.
+A new version of the launcher is on GitHub: {0}.
+= Μια νέα έκδοση του launcher υπάρχει στο GitHub: {0}.
+Update now? The new launcher ({0}) is downloaded, checked and started in place of this one. Your settings stay as they are.
+= Ενημέρωση τώρα; Ο νέος launcher ({0}) κατεβαίνει, ελέγχεται και ξεκινά στη θέση αυτού. Οι ρυθμίσεις σου μένουν ως έχουν.
+Update now? The new launcher is downloaded, checked and started in place of this one. Your settings stay as they are.
+= Ενημέρωση τώρα; Ο νέος launcher κατεβαίνει, ελέγχεται και ξεκινά στη θέση αυτού. Οι ρυθμίσεις σου μένουν ως έχουν.
+Launcher update postponed. Press UPDATE when you want it.
+= Η ενημέρωση του launcher αναβλήθηκε. Πάτησε ΕΝΗΜΕΡΩΣΗ όποτε θέλεις.
+Downloading the new launcher...
+= Λήψη του νέου launcher...
+Downloading the new launcher... {0}
+= Λήψη του νέου launcher... {0}
+Launcher update failed.
+= Η ενημέρωση του launcher απέτυχε.
+Update checking is not switched on in this launcher yet (it has no update address).
+= Ο έλεγχος ενημερώσεων δεν έχει ενεργοποιηθεί ακόμα σε αυτόν τον launcher (δεν έχει διεύθυνση ενημερώσεων).
+The game is not installed yet. Press INSTALL first.
+= Το παιχνίδι δεν έχει εγκατασταθεί ακόμα. Πάτησε πρώτα ΕΓΚΑΤΑΣΤΑΣΗ.
+Could not check for updates.
+= Δεν ήταν δυνατός ο έλεγχος για ενημερώσεις.
+You have the newest version ({0}).
+= Έχεις τη νεότερη έκδοση ({0}).
+Update {0} is available.
+= Η ενημέρωση {0} είναι διαθέσιμη.
+A game update ({0}) is available.
+= Μια ενημέρωση παιχνιδιού ({0}) είναι διαθέσιμη.
+Version {0} skipped. The UPDATE button still offers it.
+= Η έκδοση {0} παραλείφθηκε. Το κουμπί ΕΝΗΜΕΡΩΣΗ εξακολουθεί να την προσφέρει.
+Noted: you have version {0}.
+= Σημειώθηκε: έχεις την έκδοση {0}.
+Install the update from this file?
+= Εγκατάσταση της ενημέρωσης από αυτό το αρχείο;
+Choose the update file you downloaded
+= Επίλεξε το αρχείο ενημέρωσης που κατέβασες
+Update archive (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|All files (*.*)|*.*
+= Αρχείο ενημέρωσης (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|Όλα τα αρχεία (*.*)|*.*
+Close the game first, then try again.
+= Κλείσε πρώτα το παιχνίδι και δοκίμασε ξανά.
+Checking the download...
+= Έλεγχος της λήψης...
+The downloaded file does not match its checksum, so nothing was installed. Please try again later.
+= Το αρχείο που κατέβηκε δεν ταιριάζει με το άθροισμα ελέγχου του, οπότε δεν εγκαταστάθηκε τίποτα. Δοκίμασε ξανά αργότερα.
+That file is not this update (its checksum does not match), so nothing was installed. Download it again from the update page.
+= Αυτό το αρχείο δεν είναι αυτή η ενημέρωση (το άθροισμα ελέγχου δεν ταιριάζει), οπότε δεν εγκαταστάθηκε τίποτα. Κατέβασέ το ξανά από τη σελίδα της ενημέρωσης.
+The update failed ({0}).
+= Η ενημέρωση απέτυχε ({0}).
+Updated to {0} - press PLAY.
+= Ενημερώθηκε σε {0} - πάτησε ΠΑΙΞΕ.
+Game updated to {0}. Press PLAY to enter Azeroth.
+= Το παιχνίδι ενημερώθηκε σε {0}. Πάτησε ΠΑΙΞΕ για να μπεις στο Azeroth.
+Update cancelled.
+= Η ενημέρωση ακυρώθηκε.
+Update failed.
+= Η ενημέρωση απέτυχε.
+Another task is still running - wait for it to finish.
+= Μια άλλη εργασία τρέχει ακόμα - περίμενε να τελειώσει.
+Choose a sync folder inside your cloud drive first (Cloud Save or Options).
+= Επίλεξε πρώτα φάκελο συγχρονισμού μέσα στον χώρο cloud σου (Αποθήκευση cloud ή Επιλογές).
+Cloud sync failed.
+= Ο συγχρονισμός cloud απέτυχε.
+Status checked at {0}
+= Η κατάσταση ελέγχθηκε στις {0}
+Downloaded from the cloud at {0}
+= Λήφθηκε από το cloud στις {0}
+Saves uploaded at {0}
+= Οι αποθηκεύσεις ανέβηκαν στις {0}
+Not everything was synced - see the Cloud Save log.
+= Δεν συγχρονίστηκαν όλα - δες το αρχείο καταγραφής της Αποθήκευσης cloud.
+The game is being updated. Please wait until that has finished.
+= Το παιχνίδι ενημερώνεται. Περίμενε μέχρι να τελειώσει.
+The cloud save could NOT be loaded, so the game was not launched.
+= Η αποθήκευση cloud ΔΕΝ φορτώθηκε, οπότε το παιχνίδι δεν ξεκίνησε.
+See the log in Cloud Save. If your cloud drive is still syncing, wait for it to finish and press PLAY again.
+= Δες το αρχείο καταγραφής στην Αποθήκευση cloud. Αν ο χώρος cloud σου συγχρονίζεται ακόμα, περίμενε να τελειώσει και πάτησε ξανά ΠΑΙΞΕ.
+Cloud sync failed - game not launched
+= Ο συγχρονισμός απέτυχε - το παιχνίδι δεν ξεκίνησε
+Cloud save was not loaded - game not launched.
+= Η αποθήκευση cloud δεν φορτώθηκε - το παιχνίδι δεν ξεκίνησε.
+Cloud sync successfully downloaded
+= Ο συγχρονισμός cloud λήφθηκε επιτυχώς
+No sync folder set - launched without cloud sync.
+= Δεν έχει οριστεί φάκελος συγχρονισμού - ξεκίνησε χωρίς συγχρονισμό cloud.
+Starting Azeroth Survivors ...
+= Εκκίνηση του Azeroth Survivors ...
+Game running.
+= Το παιχνίδι τρέχει.
+Could not start the game: {0}
+= Δεν ήταν δυνατή η εκκίνηση του παιχνιδιού: {0}
+Game closed.
+= Το παιχνίδι έκλεισε.
+Game has closed.
+= Το παιχνίδι έκλεισε.
+Cloud sync successfully uploaded
+= Ο συγχρονισμός cloud ανέβηκε επιτυχώς
+Some of your progress was NOT uploaded. See the log in Cloud Save.
+= Μέρος της προόδου σου ΔΕΝ ανέβηκε. Δες το αρχείο καταγραφής στην Αποθήκευση cloud.
+Cloud sync NOT completed - see the Cloud Save log
+= Ο συγχρονισμός ΔΕΝ ολοκληρώθηκε - δες το αρχείο καταγραφής της Αποθήκευσης cloud
+Cloud upload failed: {0}
+= Η αποστολή στο cloud απέτυχε: {0}
+Cloud sync failed - see the Cloud Save log
+= Ο συγχρονισμός απέτυχε - δες το αρχείο καταγραφής της Αποθήκευσης cloud
+Launcher
+= Launcher
+Select a folder inside your cloud drive (Google Drive, OneDrive, Dropbox ...)
+= Επίλεξε έναν φάκελο μέσα στον χώρο cloud σου (Google Drive, OneDrive, Dropbox ...)
+That is the top level of your cloud drive.
+= Αυτό είναι το ανώτατο επίπεδο του χώρου cloud σου.
+Create and use a subfolder named AzerothSync inside it?
+= Δημιουργία και χρήση υποφακέλου με όνομα AzerothSync μέσα σε αυτό;
+Sync folder
+= Φάκελος συγχρονισμού
+Play time reset.
+= Ο χρόνος παιχνιδιού μηδενίστηκε.
+Play time
+= Χρόνος παιχνιδιού
+No games played with this launcher yet.
+= Δεν έχεις παίξει ακόμα με αυτόν τον launcher.
+Total: {0} over {#1} sessions
+= Σύνολο: {0} σε {1} συνεδρίες
+Total: {0} over {#1} session
+= Σύνολο: {0} σε {1} συνεδρία
+Total: {0} over {#1} sessions on {#2} PCs
+= Σύνολο: {0} σε {1} συνεδρίες σε {2} υπολογιστές
+Last session: {0} ({1})
+= Τελευταία συνεδρία: {0} ({1})
+Longest session: {0}
+= Μεγαλύτερη συνεδρία: {0}
+Shared with your other PCs through the cloud sync folder.
+= Κοινόχρηστο με τους άλλους υπολογιστές σου μέσω του φακέλου συγχρονισμού.
+Counted on this PC (the sync folder is not reachable right now).
+= Μετρήθηκε σε αυτόν τον υπολογιστή (ο φάκελος συγχρονισμού δεν είναι προσβάσιμος τώρα).
+Counted on this PC. Turn on cloud saving to share it between your PCs.
+= Μετρήθηκε σε αυτόν τον υπολογιστή. Ενεργοποίησε την αποθήκευση cloud για να τον μοιράζεσαι μεταξύ των υπολογιστών σου.
+RESET PLAY TIME
+= ΜΗΔΕΝΙΣΜΟΣ ΧΡΟΝΟΥ
+Set the play time back to zero on all your PCs?
+= Μηδενισμός του χρόνου παιχνιδιού σε όλους τους υπολογιστές σου;
+Set the play time back to zero?
+= Μηδενισμός του χρόνου παιχνιδιού;
+Game folder
+= Φάκελος παιχνιδιού
+Save game folder
+= Φάκελος αποθηκεύσεων
+Game config folder (AddOns, addon settings)
+= Φάκελος ρυθμίσεων παιχνιδιού (AddOns, ρυθμίσεις πρόσθετων)
+Cloud saving
+= Αποθήκευση cloud
+Close button hides the launcher to the tray
+= Το κουμπί κλεισίματος κρύβει τον launcher στην περιοχή ειδοποιήσεων
+Minimize the launcher when the game starts
+= Ελαχιστοποίηση του launcher όταν ξεκινά το παιχνίδι
+RUN SETUP AGAIN
+= ΕΚΤΕΛΕΣΗ ΡΥΘΜΙΣΗΣ ΞΑΝΑ
+Select your Azeroth Survivors game folder
+= Επίλεξε τον φάκελο του παιχνιδιού Azeroth Survivors
+Game folder set: {0}
+= Ο φάκελος παιχνιδιού ορίστηκε: {0}
+Select the game's benilla-config folder (contains AddOns and saved)
+= Επίλεξε τον φάκελο benilla-config του παιχνιδιού (περιέχει AddOns και saved)
+Language
+= Γλώσσα
+ALL PATCH NOTES ›
+= ΟΛΕΣ ΟΙ ΣΗΜΕΙΩΣΕΙΣ ›
+‹ LATEST
+= ‹ ΝΕΟΤΕΡΗ
+‹ ALL PATCH NOTES
+= ‹ ΟΛΕΣ ΟΙ ΣΗΜΕΙΩΣΕΙΣ
+‹ PREVIOUS
+= ‹ ΠΡΟΗΓΟΥΜΕΝΗ
+NEXT ›
+= ΕΠΟΜΕΝΗ ›
+{#0} of {#1}
+= {0} από {1}
+PAGE
+= ΣΕΛΙΔΑ
+No patch notes yet.
+= Δεν υπάρχουν ακόμα σημειώσεις έκδοσης.
+{0} (current)
+= {0} (τρέχουσα)
+Vibe coded by Slimjim\nCloud save code established by Keijin
+= Γραμμένο με vibe από τον Slimjim\nΚώδικας αποθήκευσης cloud από τον Keijin
+DOWNLOAD MORE ›
+= ΛΗΨΗ ΠΕΡΙΣΣΟΤΕΡΩΝ ›
+ALL
+= ΟΛΑ
+UI OVERHAUL
+= ΝΕΟ UI
+GAMEPLAY
+= GAMEPLAY
+COSMETIC
+= ΕΜΦΑΝΙΣΗ
+No addons in this filter yet.
+= Δεν υπάρχουν ακόμα πρόσθετα σε αυτό το φίλτρο.
+No downloadable addons listed yet.
+= Δεν υπάρχουν ακόμα πρόσθετα για λήψη.
+UNINSTALL
+= ΑΠΕΓΚΑΤΑΣΤΑΣΗ
+Addons can't be changed while the game runs or a sync is running.
+= Τα πρόσθετα δεν αλλάζουν όσο τρέχει το παιχνίδι ή ένας συγχρονισμός.
+Another addon is still downloading.
+= Ένα άλλο πρόσθετο κατεβαίνει ακόμα.
+Installing {0}...
+= Εγκατάσταση {0}...
+{0} installed.
+= Το {0} εγκαταστάθηκε.
+{0} failed.
+= Το {0} απέτυχε.
+Could not install {0}:
+= Δεν ήταν δυνατή η εγκατάσταση του {0}:
+{0} is not installed.
+= Το {0} δεν είναι εγκατεστημένο.
+Remove {0} from your AddOns folder?
+= Αφαίρεση του {0} από τον φάκελο AddOns;
+Folders: {0}
+= Φάκελοι: {0}
+This deletes everything it added, including the settings it saved.
+= Αυτό διαγράφει ό,τι πρόσθεσε, μαζί με τις ρυθμίσεις που αποθήκευσε.
+Uninstall
+= Απεγκατάσταση
+Could not uninstall {0}:
+= Δεν ήταν δυνατή η απεγκατάσταση του {0}:
+{0} uninstalled.
+= Το {0} απεγκαταστάθηκε.
+{0} was not installed.
+= Το {0} δεν ήταν εγκατεστημένο.
+No AddOns folder found.\nSet the game config folder in Options\n(the benilla-config folder).
+= Δεν βρέθηκε φάκελος AddOns.\nΌρισε τον φάκελο ρυθμίσεων του παιχνιδιού στις Επιλογές\n(ο φάκελος benilla-config).
+REFRESH
+= ΑΝΑΝΕΩΣΗ
+FOLDER
+= ΦΑΚΕΛΟΣ
+TOGGLE ALL
+= ΕΝΑΛΛΑΓΗ ΟΛΩΝ
+SAVE
+= ΑΠΟΘΗΚΕΥΣΗ
+LOAD
+= ΦΟΡΤΩΣΗ
+empty
+= κενό
+{#0} on, {#1} off
+= {0} ενεργά, {1} ανενεργά
+saved {0}
+= αποθηκεύτηκε {0}
+Profile {0}
+= Προφίλ {0}
+No addons installed.
+= Δεν υπάρχουν εγκατεστημένα πρόσθετα.
+{#0} of {#1} enabled
+= {0} από {1} ενεργά
+Could not enable {0}:
+= Δεν ήταν δυνατή η ενεργοποίηση του {0}:
+Could not disable {0}:
+= Δεν ήταν δυνατή η απενεργοποίηση του {0}:
+{0} enabled.
+= Το {0} ενεργοποιήθηκε.
+{0} disabled.
+= Το {0} απενεργοποιήθηκε.
+All addons enabled.
+= Όλα τα πρόσθετα ενεργοποιήθηκαν.
+All addons disabled.
+= Όλα τα πρόσθετα απενεργοποιήθηκαν.
+Some addons could not be changed:
+= Κάποια πρόσθετα δεν μπόρεσαν να αλλάξουν:
+Replace the saved Profile {0} with the current toggles?
+= Αντικατάσταση του αποθηκευμένου Προφίλ {0} με τις τρέχουσες επιλογές;
+Profile {0} saved.
+= Το Προφίλ {0} αποθηκεύτηκε.
+Profile {0} is empty - press SAVE to store the current toggles.
+= Το Προφίλ {0} είναι κενό - πάτησε ΑΠΟΘΗΚΕΥΣΗ για να κρατήσεις τις τρέχουσες επιλογές.
+Profile {0} loaded: {#1} changed.
+= Το Προφίλ {0} φορτώθηκε: {1} άλλαξαν.
+Profile {0} loaded: {#1} changed. {#2} newer addon(s) left as they were.
+= Το Προφίλ {0} φορτώθηκε: {1} άλλαξαν. {2} νεότερα πρόσθετα έμειναν ως είχαν.
+Cloud saving is turned off.\nYour progress stays on this PC only.
+= Η αποθήκευση cloud είναι απενεργοποιημένη.\nΗ πρόοδός σου μένει μόνο σε αυτόν τον υπολογιστή.
+TURN ON CLOUD SAVING
+= ΕΝΕΡΓΟΠΟΙΗΣΗ CLOUD
+PLAY downloads the newest state, starts the game and uploads your progress after you close it. One complete state wins; the overwritten one is backed up as a ZIP first.
+= Το ΠΑΙΞΕ κατεβάζει την πιο πρόσφατη κατάσταση, ξεκινά το παιχνίδι και ανεβάζει την πρόοδό σου όταν το κλείσεις. Μία πλήρης κατάσταση κερδίζει· αυτή που αντικαθίσταται αποθηκεύεται πρώτα ως ZIP.
+(not set - choose a folder inside Google Drive, OneDrive or Dropbox)
+= (δεν έχει οριστεί - επίλεξε φάκελο στο Google Drive, OneDrive ή Dropbox)
+Not synced yet.
+= Δεν έχει συγχρονιστεί ακόμα.
+Cloud: {0}
+= Cloud: {0}
+last uploaded by {0} on {1}
+= τελευταία αποστολή από {0} στις {1}
+no upload info
+= καμία πληροφορία αποστολής
+CHECK STATUS
+= ΕΛΕΓΧΟΣ ΚΑΤΑΣΤΑΣΗΣ
+DOWNLOAD
+= ΛΗΨΗ
+UPLOAD
+= ΑΠΟΣΤΟΛΗ
+The launcher is already running.
+= Ο launcher τρέχει ήδη.
+Look for its icon in the system tray (near the clock).
+= Ψάξε το εικονίδιό του στην περιοχή ειδοποιήσεων (κοντά στο ρολόι).
+Press INSTALL to download the game first.
+= Πάτησε ΕΓΚΑΤΑΣΤΑΣΗ για να κατεβάσεις πρώτα το παιχνίδι.
+No launcher release has been published on GitHub yet.
+= Δεν έχει δημοσιευτεί ακόμα έκδοση του launcher στο GitHub.
+GitHub's answer could not be read.
+= Η απάντηση του GitHub δεν μπόρεσε να διαβαστεί.
+The latest release on GitHub ({0}) has no launcher exe attached.
+= Η τελευταία έκδοση στο GitHub ({0}) δεν έχει συνημμένο το exe του launcher.
+The latest release on GitHub has no checksum for its exe, so it is not installed.
+= Η τελευταία έκδοση στο GitHub δεν έχει άθροισμα ελέγχου για το exe της, οπότε δεν εγκαθίσταται.
+The downloaded launcher does not match its checksum, so it was not installed. Please try again later.
+= Ο launcher που κατέβηκε δεν ταιριάζει με το άθροισμα ελέγχου του, οπότε δεν εγκαταστάθηκε. Δοκίμασε ξανά αργότερα.
+The launcher could not replace itself in this folder ({0}).
+= Ο launcher δεν μπόρεσε να αντικαταστήσει τον εαυτό του σε αυτόν τον φάκελο ({0}).
+Download the new version from GitHub instead:
+= Κατέβασε τη νέα έκδοση από το GitHub:
+The new launcher could not be put in place ({0}). Nothing was changed.
+= Ο νέος launcher δεν μπόρεσε να μπει στη θέση του ({0}). Δεν άλλαξε τίποτα.
+The {0} address must start with https://
+= Η διεύθυνση του διακομιστή {0} πρέπει να αρχίζει με https://
+The {0} server redirected to an address that is not secure (https).
+= Ο διακομιστής {0} ανακατεύθυνε σε διεύθυνση που δεν είναι ασφαλής (https).
+The {0} server sent a broken redirect.
+= Ο διακομιστής {0} έστειλε χαλασμένη ανακατεύθυνση.
+The {0} server answered with error {#1}.
+= Ο διακομιστής {0} απάντησε με σφάλμα {1}.
+The {0} server's security certificate was not accepted. It needs a normal, trusted https certificate.
+= Το πιστοποιητικό ασφαλείας του διακομιστή {0} δεν έγινε δεκτό. Χρειάζεται ένα κανονικό, έμπιστο πιστοποιητικό https.
+The {0} server did not answer in time. Check your internet connection and try again.
+= Ο διακομιστής {0} δεν απάντησε εγκαίρως. Έλεγξε τη σύνδεσή σου στο internet και δοκίμασε ξανά.
+Could not reach the {0} server. Check your internet connection and try again.
+= Δεν ήταν δυνατή η σύνδεση με τον διακομιστή {0}. Έλεγξε τη σύνδεσή σου στο internet και δοκίμασε ξανά.
+The {0} server redirected too many times.
+= Ο διακομιστής {0} ανακατεύθυνε πάρα πολλές φορές.
+update
+= ενημερώσεων
+addon
+= πρόσθετων
+The download link gave a web page instead of the file. It must be a direct download link.
+= Ο σύνδεσμος λήψης έδωσε ιστοσελίδα αντί για το αρχείο. Πρέπει να είναι άμεσος σύνδεσμος λήψης.
+The download was interrupted. Check your connection and try again.
+= Η λήψη διακόπηκε. Έλεγξε τη σύνδεσή σου και δοκίμασε ξανά.
+The download was cut off before it finished. Please try again.
+= Η λήψη σταμάτησε πριν τελειώσει. Δοκίμασε ξανά.
+The .zip contains an unsafe path; nothing was installed.
+= Το .zip περιέχει μη ασφαλή διαδρομή· δεν εγκαταστάθηκε τίποτα.
+The file is damaged or incomplete.
+= Το αρχείο είναι κατεστραμμένο ή ελλιπές.
+The file is a .{0} archive, and no program to unpack it was found.
+= Το αρχείο είναι αρχείο .{0} και δεν βρέθηκε πρόγραμμα για την αποσυμπίεσή του.
+Install the free 7-Zip (7-zip.org) or WinRAR and try again.
+= Εγκατάστησε το δωρεάν 7-Zip (7-zip.org) ή το WinRAR και δοκίμασε ξανά.
+The archive could not be unpacked.
+= Το αρχείο δεν μπόρεσε να αποσυμπιεστεί.
+That file is not a .rar, .zip or .7z archive.
+= Αυτό το αρχείο δεν είναι αρχείο .rar, .zip ή .7z.
+The archive was unpacked, but {0} was not inside it.
+= Το αρχείο αποσυμπιέστηκε, αλλά το {0} δεν ήταν μέσα.
+The install finished, but {0} is not in {1}.
+= Η εγκατάσταση τελείωσε, αλλά το {0} δεν βρίσκεται στο {1}.
+The link did not give a .zip file. It must be a direct download link (share pages such as LimeWire do not work).
+= Ο σύνδεσμος δεν έδωσε αρχείο .zip. Πρέπει να είναι άμεσος σύνδεσμος λήψης (σελίδες κοινής χρήσης όπως το LimeWire δεν λειτουργούν).
+There is not enough free disk space.
+= Δεν υπάρχει αρκετός ελεύθερος χώρος στον δίσκο.
+Not enough free disk space for the update: about {0} is needed on the drive with the game, {1} is free.
+= Δεν υπάρχει αρκετός χώρος για την ενημέρωση: χρειάζονται περίπου {0} στον δίσκο του παιχνιδιού, ελεύθερα είναι {1}.
+The update file is not a .rar, .zip or .7z archive.
+= Το αρχείο ενημέρωσης δεν είναι αρχείο .rar, .zip ή .7z.
+An earlier update was cut off and its files could not be put back yet.
+= Μια προηγούμενη ενημέρωση διακόπηκε και τα αρχεία της δεν έχουν επανέλθει ακόμα.
+The old files are kept in:
+= Τα παλιά αρχεία βρίσκονται στο:
+Unpacking the update. This can take a few minutes...
+= Αποσυμπίεση της ενημέρωσης. Μπορεί να πάρει λίγα λεπτά...
+Installing the new files...
+= Εγκατάσταση των νέων αρχείων...
+The update did not contain any files to install.
+= Η ενημέρωση δεν περιείχε αρχεία για εγκατάσταση.
+{0} is missing after the update.
+= Το {0} λείπει μετά την ενημέρωση.
+A game file is in use. Close the game and anything else using its folder, then try again.
+= Ένα αρχείο του παιχνιδιού χρησιμοποιείται. Κλείσε το παιχνίδι και οτιδήποτε χρησιμοποιεί τον φάκελό του και δοκίμασε ξανά.
+There is not enough free disk space for the update. Free some space and try again.
+= Δεν υπάρχει αρκετός χώρος για την ενημέρωση. Ελευθέρωσε χώρο και δοκίμασε ξανά.
+The update could not be installed ({0}).
+= Η ενημέρωση δεν μπόρεσε να εγκατασταθεί ({0}).
+No game files were changed.
+= Δεν άλλαξε κανένα αρχείο του παιχνιδιού.
+Some files could not be put back. The old versions are kept in:
+= Κάποια αρχεία δεν μπόρεσαν να επανέλθουν. Οι παλιές εκδόσεις βρίσκονται στο:
+Sync folder not reachable: {0} (is your cloud drive running?)
+= Ο φάκελος συγχρονισμού δεν είναι προσβάσιμος: {0} (τρέχει ο χώρος cloud σου;)
+The game is running. Close it before you download.
+= Το παιχνίδι τρέχει. Κλείσ' το πριν από τη λήψη.
+The game is running. Close it before you upload.
+= Το παιχνίδι τρέχει. Κλείσ' το πριν από την αποστολή.
+The folder is in use and was not replaced: {0} ({1}). Close programs or Explorer windows that use it and try again.
+= Ο φάκελος χρησιμοποιείται και δεν αντικαταστάθηκε: {0} ({1}). Κλείσε τα προγράμματα ή τα παράθυρα της Εξερεύνησης που τον χρησιμοποιούν και δοκίμασε ξανά.
+The source changed while copying ({0}). Nothing was replaced, please sync again.
+= Η πηγή άλλαξε κατά την αντιγραφή ({0}). Δεν αντικαταστάθηκε τίποτα, συγχρόνισε ξανά.
+No sync folder set. Choose a folder in Google Drive, OneDrive, Dropbox or similar in Options.
+= Δεν έχει οριστεί φάκελος συγχρονισμού. Επίλεξε φάκελο στο Google Drive, OneDrive, Dropbox ή παρόμοιο στις Επιλογές.
+Sync folder: {0}
+= Φάκελος συγχρονισμού: {0}
+The sync folder does not exist yet. It is created on the first upload.
+= Ο φάκελος συγχρονισμού δεν υπάρχει ακόμα. Δημιουργείται στην πρώτη αποστολή.
+{0}: in sync (local {1}, cloud {2})
+= {0}: συγχρονισμένο (τοπικό {1}, cloud {2})
+{0}: cloud empty, upload (local {1}, cloud {2})
+= {0}: κενό cloud, αποστολή (τοπικό {1}, cloud {2})
+{0}: cloud copy incomplete or still syncing, wait (local {1}, cloud {2})
+= {0}: το αντίγραφο cloud είναι ελλιπές ή συγχρονίζεται ακόμα, περίμενε (τοπικό {1}, cloud {2})
+{0}: local is newer, upload (local {1}, cloud {2})
+= {0}: το τοπικό είναι νεότερο, αποστολή (τοπικό {1}, cloud {2})
+{0}: cloud is newer, download (local {1}, cloud {2})
+= {0}: το cloud είναι νεότερο, λήψη (τοπικό {1}, cloud {2})
+{0}: both changed or never synced (local {1}, cloud {2})
+= {0}: άλλαξαν και τα δύο ή δεν συγχρονίστηκαν ποτέ (τοπικό {1}, cloud {2})
+{0}: {1} not found, skipped. Set the game config folder in Options.
+= {0}: το {1} δεν βρέθηκε, παραλείφθηκε. Όρισε τον φάκελο ρυθμίσεων του παιχνιδιού στις Επιλογές.
+Downloading from the cloud ...
+= Λήψη από το cloud ...
+The sync folder does not exist yet, nothing to download.
+= Ο φάκελος συγχρονισμού δεν υπάρχει ακόμα, τίποτα για λήψη.
+{0}: cloud is empty, nothing to download.
+= {0}: το cloud είναι κενό, τίποτα για λήψη.
+{0}: up to date.
+= {0}: ενημερωμένο.
+{0}: the cloud copy does not match the last upload yet (incomplete or still syncing). Nothing replaced, try again in a moment.
+= {0}: το αντίγραφο cloud δεν ταιριάζει ακόμα με την τελευταία αποστολή (ελλιπές ή συγχρονίζεται ακόμα). Δεν αντικαταστάθηκε τίποτα, δοκίμασε ξανά σε λίγο.
+{0}: local is newer, kept.
+= {0}: το τοπικό είναι νεότερο, κρατήθηκε.
+Replace your local data with the cloud state?
+= Αντικατάσταση των τοπικών σου δεδομένων με την κατάσταση του cloud;
+A backup is made first.
+= Δημιουργείται πρώτα αντίγραφο ασφαλείας.
+Cancelled, nothing changed.
+= Ακυρώθηκε, δεν άλλαξε τίποτα.
+{0}: local state kept, it will replace the cloud on the next upload.
+= {0}: η τοπική κατάσταση κρατήθηκε, θα αντικαταστήσει το cloud στην επόμενη αποστολή.
+{0}: downloaded from the cloud.
+= {0}: λήφθηκε από το cloud.
+Cloud state: {0}
+= Κατάσταση cloud: {0}
+Uploading to the cloud ...
+= Αποστολή στο cloud ...
+{0}: nothing local, nothing uploaded.
+= {0}: τίποτα τοπικά, δεν στάλθηκε τίποτα.
+{0}: cloud is up to date.
+= {0}: το cloud είναι ενημερωμένο.
+Replace the cloud state with your local data?
+= Αντικατάσταση της κατάστασης του cloud με τα τοπικά σου δεδομένα;
+{0}: cloud kept, your local changes were NOT uploaded. Use "Download" to get the cloud state.
+= {0}: το cloud κρατήθηκε, οι τοπικές σου αλλαγές ΔΕΝ στάλθηκαν. Χρησιμοποίησε τη «Λήψη» για να πάρεις την κατάσταση του cloud.
+Cancelled, your local changes were NOT uploaded.
+= Ακυρώθηκε, οι τοπικές σου αλλαγές ΔΕΝ στάλθηκαν.
+{0}: the cloud changed during this sync, NOT uploaded. Sync again to decide.
+= {0}: το cloud άλλαξε κατά τη διάρκεια αυτού του συγχρονισμού, ΔΕΝ στάλθηκε. Συγχρόνισε ξανά για να αποφασίσεις.
+{0}: uploaded.
+= {0}: στάλθηκε.
+Written to the sync folder. Your cloud app uploads it in the background, wait until it is done before you switch PCs.
+= Γράφτηκε στον φάκελο συγχρονισμού. Η εφαρμογή cloud σου το ανεβάζει στο παρασκήνιο· περίμενε να τελειώσει πριν αλλάξεις υπολογιστή.
+Backup: {0}
+= Αντίγραφο ασφαλείας: {0}
+Restored {0} after an interrupted sync.
+= Το {0} επαναφέρθηκε μετά από διακοπή συγχρονισμού.

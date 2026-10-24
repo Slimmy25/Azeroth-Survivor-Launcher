@@ -1,0 +1,791 @@
+@name Magyar
+@font Palatino Linotype, Georgia
+# Each English text is followed by its translation on the line below (starting with "= ").
+# {0}, {1} ... are filled in by the launcher; keep them. \n is a line break.
+
+PLAY
+= JÁTÉK
+INSTALL
+= TELEPÍTÉS
+PLAYING...
+= JÁTÉKBAN...
+INSTALLING
+= TELEPÍTÉS...
+UPDATING
+= FRISSÍTÉS...
+UPDATE
+= FRISSÍTÉS
+CHECKING
+= ELLENŐRZÉS
+CLOUD SAVE
+= FELHŐMENTÉS
+ADDONS
+= KIEGÉSZÍTŐK
+OPTIONS
+= BEÁLLÍTÁSOK
+CHANGELOG
+= VÁLTOZÁSNAPLÓ
+ABOUT LAUNCHER
+= A LAUNCHERRŐL
+A game made by Aethus
+= Aethus játéka
+Version {0}
+= Verzió: {0}
+Press PLAY to enter Azeroth.
+= Nyomd meg a JÁTÉK gombot, és lépj be Azerothba.
+Game client not found.
+= A játék nem található.
+Press INSTALL to download it first.
+= Előbb töltsd le a TELEPÍTÉS gombbal.
+Press INSTALL to download it, or set the game folder in Options.
+= Töltsd le a TELEPÍTÉS gombbal, vagy állítsd be a játék mappáját a Beállításokban.
+Your cloud save syncs automatically.
+= A felhőmentésed automatikusan szinkronizálódik.
+Time played: {0}   |   Last session: {1}
+= Játékidő: {0}   |   Utolsó játékmenet: {1}
+Ready.
+= Kész.
+Cloud Save
+= Felhőmentés
+Addons
+= Kiegészítők
+Options
+= Beállítások
+Changelog
+= Változásnapló
+About Launcher
+= A launcherről
+Download More
+= További letöltése
+All Patch Notes
+= Összes javítási jegyzet
+Show Launcher
+= Launcher megjelenítése
+Play
+= Játék
+Upload Save Now
+= Mentés feltöltése most
+Close Button Hides to Tray
+= A Bezárás gomb a tálcára rejt
+Quit
+= Kilépés
+Game running
+= A játék fut
+Idle
+= Tétlen
+Game running - {0}
+= A játék fut - {0}
+The launcher is in the tray; the open window stays. Right-click the icon to quit.
+= A launcher az értesítési területen van; a megnyitott ablak marad. A kilépéshez kattints jobb gombbal az ikonra.
+Still running in the tray. Right-click the icon to quit.
+= Továbbra is fut az értesítési területen. A kilépéshez kattints jobb gombbal az ikonra.
+Cloud sync running
+= Felhőszinkronizálás folyamatban
+A cloud sync is still running. If you quit now it is cut short; the next sync repairs any half-finished copy.
+= Egy felhőszinkronizálás még folyamatban van. Ha most kilépsz, megszakad; a következő szinkronizálás kijavítja a félbemaradt másolatot.
+Quit anyway?
+= Mégis kilépsz?
+Installing
+= Telepítés folyamatban
+The game client is still being installed. If you quit now, it is cut short.
+= A játék telepítése még folyamatban van. Ha most kilépsz, megszakad.
+Updating
+= Frissítés folyamatban
+The game is still being updated. If you quit now, the update is cut short. Nothing is lost: a half-finished change is undone the next time the launcher starts.
+= A játék frissítése még folyamatban van. Ha most kilépsz, a frissítés megszakad. Semmi sem vész el: a félbemaradt változtatás a launcher következő indításakor visszavonódik.
+The game is still running. If you quit the launcher now, your saves will NOT be uploaded automatically.
+= A játék még fut. Ha most kilépsz a launcherből, a mentéseid NEM töltődnek fel automatikusan.
+Setup saved.
+= Beállítás elmentve.
+First-time setup
+= Első beállítás
+Welcome, Adventurer
+= Üdv, kalandor
+Step 1 of 2
+= 1. lépés / 2
+Step 2 of 2
+= 2. lépés / 2
+A.  Cloud saving
+= A.  Felhőmentés
+Keep my progress in the cloud (Google Drive, OneDrive, Dropbox ...)\nand share it between my PCs
+= A haladásom tárolása a felhőben (Google Drive, OneDrive, Dropbox ...)\nés megosztása a gépeim között
+Sync folder (inside your cloud drive)
+= Szinkronizálási mappa (a felhőtárhelyeden belül)
+Cloud saving stays off. You can turn it on later in Cloud Save.
+= A felhőmentés kikapcsolva marad. Később bekapcsolhatod a Felhőmentés részben.
+B.  Where are your files?
+= B.  Hol vannak a fájljaid?
+Folders found at their usual place are used as they are. Choose the ones that are missing.
+= A szokásos helyen talált mappák változatlanul használatosak. Válaszd ki a hiányzókat.
+AddOns
+= AddOns
+Game saves
+= Játékmentések
+Addon settings
+= Kiegészítők beállításai
+Select your AddOns folder
+= Válaszd ki az AddOns mappádat
+Select the folder that holds your save game (normally %APPDATA%\wenilla-rogue)
+= Válaszd ki a mentésedet tartalmazó mappát (általában %APPDATA%\wenilla-rogue)
+Select your addon settings folder (the 'saved' folder in benilla-config)
+= Válaszd ki a kiegészítők beállításainak mappáját (a 'saved' mappa a benilla-config-ban)
+FINISH
+= BEFEJEZÉS
+LATER
+= KÉSŐBB
+✓ found
+= ✓ megtalálva
+✓ chosen
+= ✓ kiválasztva
+not chosen yet
+= még nincs kiválasztva
+not found - please choose it
+= nem található - válaszd ki
+(not set)
+= (nincs beállítva)
+CHANGE
+= MÓDOSÍTÁS
+CHOOSE
+= KIVÁLASZTÁS
+Choose a sync folder for cloud saving, or untick\n"Keep my progress in the cloud".
+= Válassz szinkronizálási mappát a felhőmentéshez, vagy vedd ki a pipát:\n„A haladásom tárolása a felhőben”.
+Setup
+= Beállítás
+These folders were not found:
+= Ezek a mappák nem találhatók:
+Finish anyway? You can change them later in Options.
+= Mégis befejezed? Később módosíthatod őket a Beállításokban.
+Your settings are saved.\n\nWould you like to go to the Addons section now\nto download some addons, or to enable or disable the ones you have?
+= A beállításaid elmentve.\n\nSzeretnél most a Kiegészítők részre menni,\nhogy kiegészítőket tölts le, vagy be- és kikapcsold a meglévőket?
+DOWNLOAD ADDONS
+= KIEGÉSZÍTŐK LETÖLTÉSE
+ENABLE / DISABLE ADDONS
+= KIEGÉSZÍTŐK BE / KI
+NO THANKS
+= NEM, KÖSZÖNÖM
+Install the game
+= A játék telepítése
+Install Azeroth Survivors
+= Azeroth Survivors telepítése
+Step 1
+= 1. lépés
+Download the game in your web browser.
+= Töltsd le a játékot a böngésződben.
+OPEN DOWNLOAD
+= LETÖLTÉS MEGNYITÁSA
+Download opened in your browser.
+= A letöltés megnyílt a böngészőben.
+Step 2
+= 2. lépés
+When the download has finished, come back here.
+= Ha a letöltés befejeződött, gyere vissza ide.
+IT'S IN MY DOWNLOADS
+= MEGVAN A LETÖLTÉSEKBEN
+The launcher finds the file (in its own folder or Downloads), unpacks the game here and deletes the download.
+= A launcher megkeresi a fájlt (a saját mappájában vagy a Letöltésekben), ide kicsomagolja a játékot, és törli a letöltést.
+CANCEL
+= MÉGSE
+Which progress do you want to keep?
+= Melyik haladást szeretnéd megtartani?
+Both sides changed
+= Mindkét oldal megváltozott
+This PC and the cloud both changed since the last sync:
+= Ez a gép és a felhő is megváltozott az utolsó szinkronizálás óta:
+• {0}:  this PC {1}   |   cloud {2}
+= • {0}:  ez a gép {1}   |   felhő {2}
+One complete state wins, the other is backed up first.
+= Egy teljes állapot nyer, a másikról előbb biztonsági mentés készül.
+First time on this PC? Choose USE CLOUD.
+= Először ezen a gépen? Válaszd a FELHŐ HASZNÁLATA lehetőséget.
+USE CLOUD replaces your local data. KEEP LOCAL keeps it and uploads it later.
+= A FELHŐ HASZNÁLATA lecseréli a helyi adataidat. A HELYI MEGTARTÁSA megőrzi és később feltölti őket.
+KEEP LOCAL replaces the cloud. USE CLOUD leaves the cloud and skips your upload.
+= A HELYI MEGTARTÁSA lecseréli a felhőt. A FELHŐ HASZNÁLATA békén hagyja a felhőt és kihagyja a feltöltést.
+USE CLOUD
+= FELHŐ HASZNÁLATA
+KEEP LOCAL
+= HELYI MEGTARTÁSA
+Save game
+= Játékmentés
+Game update
+= Játékfrissítés
+Update available
+= Frissítés érhető el
+New version:
+= Új verzió:
+Your version:
+= A te verziód:
+not recorded yet
+= még nincs rögzítve
+Download size:
+= Letöltési méret:
+What is new
+= Újdonságok
+Your addons, settings and saves are left alone. If anything goes wrong, the old game files are put back.
+= A kiegészítőidhez, beállításaidhoz és mentéseidhez nem nyúl. Ha valami hiba történik, a régi játékfájlok visszakerülnek.
+UPDATE NOW
+= FRISSÍTÉS MOST
+NOT NOW
+= MOST NEM
+SKIP THIS VERSION
+= EZ A VERZIÓ KIHAGYÁSA
+I ALREADY HAVE THIS VERSION
+= MÁR MEGVAN EZ A VERZIÓ
+The update is being installed. Please wait until it has finished.
+= A frissítés települ. Várj, amíg befejeződik.
+Downloading the update...
+= Frissítés letöltése...
+Download the update
+= A frissítés letöltése
+Step 1: download the update in your web browser.
+= 1. lépés: töltsd le a frissítést a böngésződben.
+OPEN DOWNLOAD AGAIN
+= LETÖLTÉS ÚJRA MEGNYITÁSA
+Step 2: when the download has finished, come back here.
+= 2. lépés: ha a letöltés befejeződött, gyere vissza ide.
+The launcher finds the file (in its own folder or Downloads), installs it and deletes it.
+= A launcher megkeresi a fájlt (a saját mappájában vagy a Letöltésekben), telepíti és törli.
+Checking the file...
+= Fájl ellenőrzése...
+CANCELLING...
+= MEGSZAKÍTÁS...
+Updating to {0}
+= Frissítés erre: {0}
+Please keep the launcher open until this has finished.
+= Tartsd nyitva a launchert, amíg ez befejeződik.
+{0} of {1}  ({#2}%)
+= {0} / {1}  ({2}%)
+{0} downloaded
+= {0} letöltve
+Update installed
+= Frissítés telepítve
+Update failed
+= A frissítés sikertelen
+CLOSE
+= BEZÁRÁS
+TRY AGAIN
+= ÚJRA
+Version {0} is installed.
+= A(z) {0} verzió telepítve van.
+{#0} files updated.
+= {0} fájl frissítve.
+{#0} file updated.
+= {0} fájl frissítve.
+{#0} files updated, {#1} removed.
+= {0} fájl frissítve, {1} eltávolítva.
+{#0} file updated, {#1} removed.
+= {0} fájl frissítve, {1} eltávolítva.
+Install
+= Telepítés
+Install the game from this file?
+= Telepíted a játékot ebből a fájlból?
+{0}  ({#1} MB)
+= {0}  ({1} MB)
+in {0}
+= itt: {0}
+Choose the game file you downloaded (.rar)
+= Válaszd ki a letöltött játékfájlt (.rar)
+Game archive (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|All files (*.*)|*.*
+= Játékarchívum (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|Minden fájl (*.*)|*.*
+Install cancelled.
+= Telepítés megszakítva.
+Unpacking the game client...
+= A játék kicsomagolása...
+Install failed.
+= A telepítés sikertelen.
+Install complete - press PLAY.
+= Telepítés kész - nyomd meg a JÁTÉK gombot.
+Install complete. Press PLAY to enter Azeroth.
+= Telepítés kész. Nyomd meg a JÁTÉK gombot, és lépj be Azerothba.
+The last game update was cut off before it finished. Your game files were put back exactly as they were.
+= Az utolsó játékfrissítés befejezés előtt megszakadt. A játékfájljaid pontosan úgy kerültek vissza, ahogy voltak.
+You can run the update again with the UPDATE button.
+= A frissítést újra futtathatod a FRISSÍTÉS gombbal.
+The last game update was cut off, and some game files could not be put back automatically.
+= Az utolsó játékfrissítés megszakadt, és néhány játékfájlt nem sikerült automatikusan visszaállítani.
+The old versions are kept in the folder "{0}" inside the game folder. Copy them back over the game files, or reinstall the game.
+= A régi verziók a játék mappáján belüli „{0}” mappában vannak. Másold vissza őket a játékfájlok fölé, vagy telepítsd újra a játékot.
+Checking for updates...
+= Frissítések keresése...
+The update check failed ({0}).
+= A frissítések ellenőrzése sikertelen ({0}).
+Could not check for launcher updates.
+= Nem sikerült ellenőrizni a launcher frissítéseit.
+Launcher update
+= Launcher-frissítés
+Launcher {0} is available.
+= Elérhető a(z) {0} launcher.
+The launcher is up to date ({0}).
+= A launcher naprakész ({0}).
+You have the newest launcher ({0}).
+= A legújabb launcher van meg ({0}).
+A new launcher ({0}) is available. Open the launcher and press UPDATE.
+= Új launcher ({0}) érhető el. Nyisd meg a launchert, és nyomd meg a FRISSÍTÉS gombot.
+Finish what is running first (the game, an install or a cloud sync), then press UPDATE again.
+= Előbb fejezd be, ami fut (a játék, egy telepítés vagy egy felhőszinkronizálás), aztán nyomd meg újra a FRISSÍTÉS gombot.
+A new version of the launcher is on GitHub: {0}.
+= A launcher új verziója elérhető a GitHubon: {0}.
+Update now? The new launcher ({0}) is downloaded, checked and started in place of this one. Your settings stay as they are.
+= Frissítesz most? Az új launcher ({0}) letöltődik, ellenőrződik, és ennek a helyén indul. A beállításaid változatlanok maradnak.
+Update now? The new launcher is downloaded, checked and started in place of this one. Your settings stay as they are.
+= Frissítesz most? Az új launcher letöltődik, ellenőrződik, és ennek a helyén indul. A beállításaid változatlanok maradnak.
+Launcher update postponed. Press UPDATE when you want it.
+= Launcher-frissítés elhalasztva. Nyomd meg a FRISSÍTÉS gombot, amikor szeretnéd.
+Downloading the new launcher...
+= Az új launcher letöltése...
+Downloading the new launcher... {0}
+= Az új launcher letöltése... {0}
+Launcher update failed.
+= A launcher frissítése sikertelen.
+Update checking is not switched on in this launcher yet (it has no update address).
+= A frissítések ellenőrzése még nincs bekapcsolva ebben a launcherben (nincs frissítési címe).
+The game is not installed yet. Press INSTALL first.
+= A játék még nincs telepítve. Előbb nyomd meg a TELEPÍTÉS gombot.
+Could not check for updates.
+= Nem sikerült ellenőrizni a frissítéseket.
+You have the newest version ({0}).
+= A legújabb verzió van meg ({0}).
+Update {0} is available.
+= Elérhető a(z) {0} frissítés.
+A game update ({0}) is available.
+= Játékfrissítés ({0}) érhető el.
+Version {0} skipped. The UPDATE button still offers it.
+= A(z) {0} verzió kihagyva. A FRISSÍTÉS gomb továbbra is felajánlja.
+Noted: you have version {0}.
+= Feljegyezve: a(z) {0} verzió van meg.
+Install the update from this file?
+= Telepíted a frissítést ebből a fájlból?
+Choose the update file you downloaded
+= Válaszd ki a letöltött frissítési fájlt
+Update archive (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|All files (*.*)|*.*
+= Frissítési archívum (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|Minden fájl (*.*)|*.*
+Close the game first, then try again.
+= Előbb zárd be a játékot, aztán próbáld újra.
+Checking the download...
+= A letöltés ellenőrzése...
+The downloaded file does not match its checksum, so nothing was installed. Please try again later.
+= A letöltött fájl nem egyezik az ellenőrzőösszegével, ezért semmi sem települt. Próbáld újra később.
+That file is not this update (its checksum does not match), so nothing was installed. Download it again from the update page.
+= Ez a fájl nem ez a frissítés (az ellenőrzőösszeg nem egyezik), ezért semmi sem települt. Töltsd le újra a frissítés oldaláról.
+The update failed ({0}).
+= A frissítés sikertelen ({0}).
+Updated to {0} - press PLAY.
+= Frissítve erre: {0} - nyomd meg a JÁTÉK gombot.
+Game updated to {0}. Press PLAY to enter Azeroth.
+= A játék frissítve erre: {0}. Nyomd meg a JÁTÉK gombot, és lépj be Azerothba.
+Update cancelled.
+= Frissítés megszakítva.
+Update failed.
+= A frissítés sikertelen.
+Another task is still running - wait for it to finish.
+= Egy másik feladat még fut - várd meg, amíg befejeződik.
+Choose a sync folder inside your cloud drive first (Cloud Save or Options).
+= Előbb válassz szinkronizálási mappát a felhőtárhelyeden (Felhőmentés vagy Beállítások).
+Cloud sync failed.
+= A felhőszinkronizálás sikertelen.
+Status checked at {0}
+= Állapot ellenőrizve: {0}
+Downloaded from the cloud at {0}
+= Letöltve a felhőből: {0}
+Saves uploaded at {0}
+= Mentések feltöltve: {0}
+Not everything was synced - see the Cloud Save log.
+= Nem minden szinkronizálódott - lásd a Felhőmentés naplóját.
+The game is being updated. Please wait until that has finished.
+= A játék frissítése folyamatban. Várj, amíg befejeződik.
+The cloud save could NOT be loaded, so the game was not launched.
+= A felhőmentést NEM sikerült betölteni, ezért a játék nem indult el.
+See the log in Cloud Save. If your cloud drive is still syncing, wait for it to finish and press PLAY again.
+= Lásd a naplót a Felhőmentés részben. Ha a felhőtárhelyed még szinkronizál, várd meg, és nyomd meg újra a JÁTÉK gombot.
+Cloud sync failed - game not launched
+= A felhőszinkronizálás sikertelen - a játék nem indult el
+Cloud save was not loaded - game not launched.
+= A felhőmentés nem töltődött be - a játék nem indult el.
+Cloud sync successfully downloaded
+= Felhőszinkronizálás sikeresen letöltve
+No sync folder set - launched without cloud sync.
+= Nincs beállítva szinkronizálási mappa - felhőszinkronizálás nélkül indítva.
+Starting Azeroth Survivors ...
+= Az Azeroth Survivors indítása ...
+Game running.
+= A játék fut.
+Could not start the game: {0}
+= Nem sikerült elindítani a játékot: {0}
+Game closed.
+= A játék bezárult.
+Game has closed.
+= A játék bezárult.
+Cloud sync successfully uploaded
+= Felhőszinkronizálás sikeresen feltöltve
+Some of your progress was NOT uploaded. See the log in Cloud Save.
+= A haladásod egy része NEM töltődött fel. Lásd a naplót a Felhőmentés részben.
+Cloud sync NOT completed - see the Cloud Save log
+= A felhőszinkronizálás NEM fejeződött be - lásd a Felhőmentés naplóját
+Cloud upload failed: {0}
+= A feltöltés a felhőbe sikertelen: {0}
+Cloud sync failed - see the Cloud Save log
+= A felhőszinkronizálás sikertelen - lásd a Felhőmentés naplóját
+Launcher
+= Launcher
+Select a folder inside your cloud drive (Google Drive, OneDrive, Dropbox ...)
+= Válassz egy mappát a felhőtárhelyeden belül (Google Drive, OneDrive, Dropbox ...)
+That is the top level of your cloud drive.
+= Ez a felhőtárhelyed legfelső szintje.
+Create and use a subfolder named AzerothSync inside it?
+= Létrehozol és használsz benne egy AzerothSync nevű almappát?
+Sync folder
+= Szinkronizálási mappa
+Play time reset.
+= Játékidő nullázva.
+Play time
+= Játékidő
+No games played with this launcher yet.
+= Ezzel a launcherrel még nem játszottál.
+Total: {0} over {#1} sessions
+= Összesen: {0}, {1} játékmenet
+Total: {0} over {#1} session
+= Összesen: {0}, {1} játékmenet
+Total: {0} over {#1} sessions on {#2} PCs
+= Összesen: {0}, {1} játékmenet, {2} gépen
+Last session: {0} ({1})
+= Utolsó játékmenet: {0} ({1})
+Longest session: {0}
+= Leghosszabb játékmenet: {0}
+Shared with your other PCs through the cloud sync folder.
+= Megosztva a többi gépeddel a szinkronizálási mappán keresztül.
+Counted on this PC (the sync folder is not reachable right now).
+= Ezen a gépen számolva (a szinkronizálási mappa most nem érhető el).
+Counted on this PC. Turn on cloud saving to share it between your PCs.
+= Ezen a gépen számolva. Kapcsold be a felhőmentést, hogy megoszd a gépeid között.
+RESET PLAY TIME
+= JÁTÉKIDŐ NULLÁZÁSA
+Set the play time back to zero on all your PCs?
+= Nullázod a játékidőt az összes gépeden?
+Set the play time back to zero?
+= Nullázod a játékidőt?
+Game folder
+= Játék mappája
+Save game folder
+= Mentések mappája
+Game config folder (AddOns, addon settings)
+= Játék konfigurációs mappája (AddOns, kiegészítők beállításai)
+Cloud saving
+= Felhőmentés
+Close button hides the launcher to the tray
+= A Bezárás gomb az értesítési területre rejti a launchert
+Minimize the launcher when the game starts
+= A launcher kis méretre állítása a játék indulásakor
+RUN SETUP AGAIN
+= BEÁLLÍTÁS ÚJRA
+Select your Azeroth Survivors game folder
+= Válaszd ki az Azeroth Survivors játék mappáját
+Game folder set: {0}
+= Játék mappája beállítva: {0}
+Select the game's benilla-config folder (contains AddOns and saved)
+= Válaszd ki a játék benilla-config mappáját (tartalmazza az AddOns és saved mappát)
+Language
+= Nyelv
+ALL PATCH NOTES ›
+= ÖSSZES JEGYZET ›
+‹ LATEST
+= ‹ LEGÚJABB
+‹ ALL PATCH NOTES
+= ‹ ÖSSZES JEGYZET
+‹ PREVIOUS
+= ‹ ELŐZŐ
+NEXT ›
+= KÖVETKEZŐ ›
+{#0} of {#1}
+= {0} / {1}
+PAGE
+= OLDAL
+No patch notes yet.
+= Még nincsenek javítási jegyzetek.
+{0} (current)
+= {0} (jelenlegi)
+Vibe coded by Slimjim\nCloud save code established by Keijin
+= Vibe-kódolta: Slimjim\nFelhőmentés kódja: Keijin
+DOWNLOAD MORE ›
+= TOVÁBBIAK LETÖLTÉSE ›
+ALL
+= MIND
+UI OVERHAUL
+= FELÜLET
+GAMEPLAY
+= JÁTÉKMENET
+COSMETIC
+= KOZMETIKAI
+No addons in this filter yet.
+= Még nincsenek kiegészítők ebben a szűrőben.
+No downloadable addons listed yet.
+= Még nincsenek letölthető kiegészítők.
+UNINSTALL
+= ELTÁVOLÍTÁS
+Addons can't be changed while the game runs or a sync is running.
+= A kiegészítők nem módosíthatók, amíg a játék vagy egy szinkronizálás fut.
+Another addon is still downloading.
+= Egy másik kiegészítő még töltődik.
+Installing {0}...
+= {0} telepítése...
+{0} installed.
+= {0} telepítve.
+{0} failed.
+= {0} sikertelen.
+Could not install {0}:
+= Nem sikerült telepíteni: {0}
+{0} is not installed.
+= {0} nincs telepítve.
+Remove {0} from your AddOns folder?
+= Eltávolítod a(z) {0} kiegészítőt az AddOns mappából?
+Folders: {0}
+= Mappák: {0}
+This deletes everything it added, including the settings it saved.
+= Ez mindent töröl, amit hozzáadott, a mentett beállításait is.
+Uninstall
+= Eltávolítás
+Could not uninstall {0}:
+= Nem sikerült eltávolítani: {0}
+{0} uninstalled.
+= {0} eltávolítva.
+{0} was not installed.
+= {0} nem volt telepítve.
+No AddOns folder found.\nSet the game config folder in Options\n(the benilla-config folder).
+= Nem található AddOns mappa.\nÁllítsd be a játék konfigurációs mappáját a Beállításokban\n(a benilla-config mappa).
+REFRESH
+= FRISSÍT
+FOLDER
+= MAPPA
+TOGGLE ALL
+= MIND ÁTVÁLT
+SAVE
+= MENTÉS
+LOAD
+= BETÖLTÉS
+empty
+= üres
+{#0} on, {#1} off
+= {0} be, {1} ki
+saved {0}
+= mentve {0}
+Profile {0}
+= {0}. profil
+No addons installed.
+= Nincsenek telepített kiegészítők.
+{#0} of {#1} enabled
+= {0} / {1} bekapcsolva
+Could not enable {0}:
+= Nem sikerült bekapcsolni: {0}
+Could not disable {0}:
+= Nem sikerült kikapcsolni: {0}
+{0} enabled.
+= {0} bekapcsolva.
+{0} disabled.
+= {0} kikapcsolva.
+All addons enabled.
+= Minden kiegészítő bekapcsolva.
+All addons disabled.
+= Minden kiegészítő kikapcsolva.
+Some addons could not be changed:
+= Néhány kiegészítőt nem sikerült módosítani:
+Replace the saved Profile {0} with the current toggles?
+= Lecseréled a mentett {0}. profilt a jelenlegi kapcsolókra?
+Profile {0} saved.
+= {0}. profil mentve.
+Profile {0} is empty - press SAVE to store the current toggles.
+= A(z) {0}. profil üres - nyomd meg a MENTÉS gombot a jelenlegi kapcsolók tárolásához.
+Profile {0} loaded: {#1} changed.
+= {0}. profil betöltve: {1} módosítva.
+Profile {0} loaded: {#1} changed. {#2} newer addon(s) left as they were.
+= {0}. profil betöltve: {1} módosítva. {2} újabb kiegészítő változatlan maradt.
+Cloud saving is turned off.\nYour progress stays on this PC only.
+= A felhőmentés ki van kapcsolva.\nA haladásod csak ezen a gépen marad.
+TURN ON CLOUD SAVING
+= FELHŐMENTÉS BEKAPCSOLÁSA
+PLAY downloads the newest state, starts the game and uploads your progress after you close it. One complete state wins; the overwritten one is backed up as a ZIP first.
+= A JÁTÉK letölti a legújabb állapotot, elindítja a játékot, és bezárás után feltölti a haladásodat. Egy teljes állapot nyer; a felülírtról előbb ZIP biztonsági mentés készül.
+(not set - choose a folder inside Google Drive, OneDrive or Dropbox)
+= (nincs beállítva - válassz mappát a Google Drive-on, OneDrive-on vagy Dropboxon)
+Not synced yet.
+= Még nincs szinkronizálva.
+Cloud: {0}
+= Felhő: {0}
+last uploaded by {0} on {1}
+= utoljára feltöltötte: {0}, {1}
+no upload info
+= nincs feltöltési adat
+CHECK STATUS
+= ÁLLAPOT ELLENŐRZÉSE
+DOWNLOAD
+= LETÖLTÉS
+UPLOAD
+= FELTÖLTÉS
+The launcher is already running.
+= A launcher már fut.
+Look for its icon in the system tray (near the clock).
+= Keresd az ikonját az értesítési területen (az óra mellett).
+Press INSTALL to download the game first.
+= Előbb töltsd le a játékot a TELEPÍTÉS gombbal.
+No launcher release has been published on GitHub yet.
+= A GitHubon még nincs közzétett launcher-kiadás.
+GitHub's answer could not be read.
+= A GitHub válaszát nem sikerült beolvasni.
+The latest release on GitHub ({0}) has no launcher exe attached.
+= A GitHub legújabb kiadásához ({0}) nincs launcher exe csatolva.
+The latest release on GitHub has no checksum for its exe, so it is not installed.
+= A GitHub legújabb kiadásában nincs ellenőrzőösszeg az exe-hez, ezért nem települ.
+The downloaded launcher does not match its checksum, so it was not installed. Please try again later.
+= A letöltött launcher nem egyezik az ellenőrzőösszegével, ezért nem települt. Próbáld újra később.
+The launcher could not replace itself in this folder ({0}).
+= A launcher nem tudta lecserélni önmagát ebben a mappában ({0}).
+Download the new version from GitHub instead:
+= Töltsd le inkább az új verziót a GitHubról:
+The new launcher could not be put in place ({0}). Nothing was changed.
+= Az új launchert nem sikerült a helyére tenni ({0}). Semmi sem változott.
+The {0} address must start with https://
+= A(z) {0} szerver címének https:// előtaggal kell kezdődnie
+The {0} server redirected to an address that is not secure (https).
+= A(z) {0} szerver nem biztonságos (https nélküli) címre irányított át.
+The {0} server sent a broken redirect.
+= A(z) {0} szerver hibás átirányítást küldött.
+The {0} server answered with error {#1}.
+= A(z) {0} szerver {1} hibával válaszolt.
+The {0} server's security certificate was not accepted. It needs a normal, trusted https certificate.
+= A(z) {0} szerver biztonsági tanúsítványát nem fogadta el a rendszer. Normál, megbízható https-tanúsítvány kell.
+The {0} server did not answer in time. Check your internet connection and try again.
+= A(z) {0} szerver nem válaszolt időben. Ellenőrizd az internetkapcsolatot, és próbáld újra.
+Could not reach the {0} server. Check your internet connection and try again.
+= Nem sikerült elérni a(z) {0} szervert. Ellenőrizd az internetkapcsolatot, és próbáld újra.
+The {0} server redirected too many times.
+= A(z) {0} szerver túl sokszor irányított át.
+update
+= frissítési
+addon
+= kiegészítő
+The download link gave a web page instead of the file. It must be a direct download link.
+= A letöltési link fájl helyett weboldalt adott. Közvetlen letöltési linknek kell lennie.
+The download was interrupted. Check your connection and try again.
+= A letöltés megszakadt. Ellenőrizd a kapcsolatot, és próbáld újra.
+The download was cut off before it finished. Please try again.
+= A letöltés befejezés előtt megszakadt. Próbáld újra.
+The .zip contains an unsafe path; nothing was installed.
+= A .zip nem biztonságos útvonalat tartalmaz; semmi sem települt.
+The file is damaged or incomplete.
+= A fájl sérült vagy hiányos.
+The file is a .{0} archive, and no program to unpack it was found.
+= A fájl .{0} archívum, és nem található program a kicsomagolásához.
+Install the free 7-Zip (7-zip.org) or WinRAR and try again.
+= Telepítsd az ingyenes 7-Zip (7-zip.org) vagy WinRAR programot, és próbáld újra.
+The archive could not be unpacked.
+= Az archívumot nem sikerült kicsomagolni.
+That file is not a .rar, .zip or .7z archive.
+= Ez a fájl nem .rar, .zip vagy .7z archívum.
+The archive was unpacked, but {0} was not inside it.
+= Az archívum ki lett csomagolva, de {0} nem volt benne.
+The install finished, but {0} is not in {1}.
+= A telepítés befejeződött, de {0} nincs itt: {1}.
+The link did not give a .zip file. It must be a direct download link (share pages such as LimeWire do not work).
+= A link nem adott .zip fájlt. Közvetlen letöltési linknek kell lennie (a megosztóoldalak, például a LimeWire, nem működnek).
+There is not enough free disk space.
+= Nincs elég szabad lemezterület.
+Not enough free disk space for the update: about {0} is needed on the drive with the game, {1} is free.
+= Nincs elég szabad lemezterület a frissítéshez: körülbelül {0} kell a játékot tartalmazó meghajtón, {1} szabad.
+The update file is not a .rar, .zip or .7z archive.
+= A frissítési fájl nem .rar, .zip vagy .7z archívum.
+An earlier update was cut off and its files could not be put back yet.
+= Egy korábbi frissítés megszakadt, és a fájljait még nem sikerült visszaállítani.
+The old files are kept in:
+= A régi fájlok itt vannak:
+Unpacking the update. This can take a few minutes...
+= A frissítés kicsomagolása. Ez néhány percig tarthat...
+Installing the new files...
+= Az új fájlok telepítése...
+The update did not contain any files to install.
+= A frissítés nem tartalmazott telepítendő fájlokat.
+{0} is missing after the update.
+= {0} hiányzik a frissítés után.
+A game file is in use. Close the game and anything else using its folder, then try again.
+= Egy játékfájl használatban van. Zárd be a játékot és mindent, ami a mappáját használja, aztán próbáld újra.
+There is not enough free disk space for the update. Free some space and try again.
+= Nincs elég szabad lemezterület a frissítéshez. Szabadíts fel helyet, és próbáld újra.
+The update could not be installed ({0}).
+= A frissítést nem sikerült telepíteni ({0}).
+No game files were changed.
+= Egyetlen játékfájl sem változott.
+Some files could not be put back. The old versions are kept in:
+= Néhány fájlt nem sikerült visszaállítani. A régi verziók itt vannak:
+Sync folder not reachable: {0} (is your cloud drive running?)
+= A szinkronizálási mappa nem érhető el: {0} (fut a felhőtárhelyed?)
+The game is running. Close it before you download.
+= A játék fut. Zárd be letöltés előtt.
+The game is running. Close it before you upload.
+= A játék fut. Zárd be feltöltés előtt.
+The folder is in use and was not replaced: {0} ({1}). Close programs or Explorer windows that use it and try again.
+= A mappa használatban van, ezért nem lett lecserélve: {0} ({1}). Zárd be az azt használó programokat vagy Intéző-ablakokat, és próbáld újra.
+The source changed while copying ({0}). Nothing was replaced, please sync again.
+= A forrás másolás közben megváltozott ({0}). Semmi sem lett lecserélve, szinkronizálj újra.
+No sync folder set. Choose a folder in Google Drive, OneDrive, Dropbox or similar in Options.
+= Nincs beállítva szinkronizálási mappa. Válassz mappát a Google Drive-on, OneDrive-on, Dropboxon vagy hasonlóban a Beállításokban.
+Sync folder: {0}
+= Szinkronizálási mappa: {0}
+The sync folder does not exist yet. It is created on the first upload.
+= A szinkronizálási mappa még nem létezik. Az első feltöltéskor jön létre.
+{0}: in sync (local {1}, cloud {2})
+= {0}: szinkronban (helyi {1}, felhő {2})
+{0}: cloud empty, upload (local {1}, cloud {2})
+= {0}: a felhő üres, feltöltés (helyi {1}, felhő {2})
+{0}: cloud copy incomplete or still syncing, wait (local {1}, cloud {2})
+= {0}: a felhőmásolat hiányos vagy még szinkronizál, várj (helyi {1}, felhő {2})
+{0}: local is newer, upload (local {1}, cloud {2})
+= {0}: a helyi újabb, feltöltés (helyi {1}, felhő {2})
+{0}: cloud is newer, download (local {1}, cloud {2})
+= {0}: a felhő újabb, letöltés (helyi {1}, felhő {2})
+{0}: both changed or never synced (local {1}, cloud {2})
+= {0}: mindkettő változott, vagy még sosem szinkronizált (helyi {1}, felhő {2})
+{0}: {1} not found, skipped. Set the game config folder in Options.
+= {0}: {1} nem található, kihagyva. Állítsd be a játék konfigurációs mappáját a Beállításokban.
+Downloading from the cloud ...
+= Letöltés a felhőből ...
+The sync folder does not exist yet, nothing to download.
+= A szinkronizálási mappa még nem létezik, nincs mit letölteni.
+{0}: cloud is empty, nothing to download.
+= {0}: a felhő üres, nincs mit letölteni.
+{0}: up to date.
+= {0}: naprakész.
+{0}: the cloud copy does not match the last upload yet (incomplete or still syncing). Nothing replaced, try again in a moment.
+= {0}: a felhőmásolat még nem egyezik az utolsó feltöltéssel (hiányos vagy még szinkronizál). Semmi sem lett lecserélve, próbáld újra egy kicsit később.
+{0}: local is newer, kept.
+= {0}: a helyi újabb, megtartva.
+Replace your local data with the cloud state?
+= Lecseréled a helyi adataidat a felhő állapotára?
+A backup is made first.
+= Előbb biztonsági mentés készül.
+Cancelled, nothing changed.
+= Megszakítva, semmi sem változott.
+{0}: local state kept, it will replace the cloud on the next upload.
+= {0}: helyi állapot megtartva, a következő feltöltéskor lecseréli a felhőt.
+{0}: downloaded from the cloud.
+= {0}: letöltve a felhőből.
+Cloud state: {0}
+= Felhő állapota: {0}
+Uploading to the cloud ...
+= Feltöltés a felhőbe ...
+{0}: nothing local, nothing uploaded.
+= {0}: nincs helyi adat, semmi sem lett feltöltve.
+{0}: cloud is up to date.
+= {0}: a felhő naprakész.
+Replace the cloud state with your local data?
+= Lecseréled a felhő állapotát a helyi adataidra?
+{0}: cloud kept, your local changes were NOT uploaded. Use "Download" to get the cloud state.
+= {0}: felhő megtartva, a helyi változtatásaid NEM lettek feltöltve. A felhő állapotának lekéréséhez használd a „Letöltés” gombot.
+Cancelled, your local changes were NOT uploaded.
+= Megszakítva, a helyi változtatásaid NEM lettek feltöltve.
+{0}: the cloud changed during this sync, NOT uploaded. Sync again to decide.
+= {0}: a felhő megváltozott e szinkronizálás közben, NEM lett feltöltve. Szinkronizálj újra a döntéshez.
+{0}: uploaded.
+= {0}: feltöltve.
+Written to the sync folder. Your cloud app uploads it in the background, wait until it is done before you switch PCs.
+= Beírva a szinkronizálási mappába. A felhőalkalmazásod a háttérben feltölti; várd meg, amíg végez, mielőtt gépet váltasz.
+Backup: {0}
+= Biztonsági mentés: {0}
+Restored {0} after an interrupted sync.
+= {0} visszaállítva egy megszakadt szinkronizálás után.

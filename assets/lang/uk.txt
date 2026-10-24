@@ -1,0 +1,791 @@
+@name Українська
+@font Palatino Linotype, Georgia
+# Each English text is followed by its translation on the line below (starting with "= ").
+# {0}, {1} ... are filled in by the launcher; keep them. \n is a line break.
+
+PLAY
+= ГРАТИ
+INSTALL
+= ВСТАНОВИТИ
+PLAYING...
+= У ГРІ...
+INSTALLING
+= ВСТАНОВЛЕННЯ
+UPDATING
+= ОНОВЛЕННЯ
+UPDATE
+= ОНОВИТИ
+CHECKING
+= ПЕРЕВІРКА
+CLOUD SAVE
+= ХМАРНЕ ЗБЕРЕЖЕННЯ
+ADDONS
+= АДДОНИ
+OPTIONS
+= НАЛАШТУВАННЯ
+CHANGELOG
+= СПИСОК ЗМІН
+ABOUT LAUNCHER
+= ПРО ЛАУНЧЕР
+A game made by Aethus
+= Гра від Aethus
+Version {0}
+= Версія {0}
+Press PLAY to enter Azeroth.
+= Натисни ГРАТИ, щоб увійти в Азерот.
+Game client not found.
+= Гру не знайдено.
+Press INSTALL to download it first.
+= Спершу натисни ВСТАНОВИТИ, щоб завантажити її.
+Press INSTALL to download it, or set the game folder in Options.
+= Натисни ВСТАНОВИТИ, щоб завантажити її, або вкажи теку гри в Налаштуваннях.
+Your cloud save syncs automatically.
+= Твоє хмарне збереження синхронізується автоматично.
+Time played: {0}   |   Last session: {1}
+= Час у грі: {0}   |   Останній сеанс: {1}
+Ready.
+= Готово.
+Cloud Save
+= Хмарне збереження
+Addons
+= Аддони
+Options
+= Налаштування
+Changelog
+= Список змін
+About Launcher
+= Про лаунчер
+Download More
+= Завантажити ще
+All Patch Notes
+= Усі списки змін
+Show Launcher
+= Показати лаунчер
+Play
+= Грати
+Upload Save Now
+= Вивантажити збереження зараз
+Close Button Hides to Tray
+= Кнопка «Закрити» ховає в трей
+Quit
+= Вийти
+Game running
+= Гра запущена
+Idle
+= Очікування
+Game running - {0}
+= Гра запущена - {0}
+The launcher is in the tray; the open window stays. Right-click the icon to quit.
+= Лаунчер у системному треї; відкрите вікно залишається. Клацни по значку правою кнопкою, щоб вийти.
+Still running in the tray. Right-click the icon to quit.
+= Досі працює в системному треї. Клацни по значку правою кнопкою, щоб вийти.
+Cloud sync running
+= Триває хмарна синхронізація
+A cloud sync is still running. If you quit now it is cut short; the next sync repairs any half-finished copy.
+= Хмарна синхронізація ще триває. Якщо вийти зараз, її буде перервано; наступна синхронізація виправить недороблену копію.
+Quit anyway?
+= Усе одно вийти?
+Installing
+= Триває встановлення
+The game client is still being installed. If you quit now, it is cut short.
+= Гра ще встановлюється. Якщо вийти зараз, встановлення буде перервано.
+Updating
+= Триває оновлення
+The game is still being updated. If you quit now, the update is cut short. Nothing is lost: a half-finished change is undone the next time the launcher starts.
+= Гра ще оновлюється. Якщо вийти зараз, оновлення буде перервано. Нічого не втратиться: недороблена зміна скасується під час наступного запуску лаунчера.
+The game is still running. If you quit the launcher now, your saves will NOT be uploaded automatically.
+= Гра досі запущена. Якщо закрити лаунчер зараз, твої збереження НЕ буде вивантажено автоматично.
+Setup saved.
+= Налаштування збережено.
+First-time setup
+= Перше налаштування
+Welcome, Adventurer
+= Ласкаво просимо, шукачу пригод
+Step 1 of 2
+= Крок 1 з 2
+Step 2 of 2
+= Крок 2 з 2
+A.  Cloud saving
+= A.  Хмарне збереження
+Keep my progress in the cloud (Google Drive, OneDrive, Dropbox ...)\nand share it between my PCs
+= Зберігати мій прогрес у хмарі (Google Drive, OneDrive, Dropbox ...)\nі ділитися ним між моїми ПК
+Sync folder (inside your cloud drive)
+= Тека синхронізації (усередині твого хмарного диска)
+Cloud saving stays off. You can turn it on later in Cloud Save.
+= Хмарне збереження залишається вимкненим. Його можна ввімкнути пізніше в розділі «Хмарне збереження».
+B.  Where are your files?
+= B.  Де твої файли?
+Folders found at their usual place are used as they are. Choose the ones that are missing.
+= Теки, знайдені у звичайному місці, використовуються як є. Вибери ті, яких бракує.
+AddOns
+= AddOns
+Game saves
+= Збереження гри
+Addon settings
+= Налаштування аддонів
+Select your AddOns folder
+= Вибери теку AddOns
+Select the folder that holds your save game (normally %APPDATA%\wenilla-rogue)
+= Вибери теку зі збереженням гри (зазвичай %APPDATA%\wenilla-rogue)
+Select your addon settings folder (the 'saved' folder in benilla-config)
+= Вибери теку налаштувань аддонів (тека 'saved' у benilla-config)
+FINISH
+= ГОТОВО
+LATER
+= ПІЗНІШЕ
+✓ found
+= ✓ знайдено
+✓ chosen
+= ✓ вибрано
+not chosen yet
+= ще не вибрано
+not found - please choose it
+= не знайдено - вибери вручну
+(not set)
+= (не задано)
+CHANGE
+= ЗМІНИТИ
+CHOOSE
+= ВИБРАТИ
+Choose a sync folder for cloud saving, or untick\n"Keep my progress in the cloud".
+= Вибери теку синхронізації для хмарного збереження або зніми позначку\n«Зберігати мій прогрес у хмарі».
+Setup
+= Налаштування
+These folders were not found:
+= Ці теки не знайдено:
+Finish anyway? You can change them later in Options.
+= Усе одно завершити? Їх можна змінити пізніше в Налаштуваннях.
+Your settings are saved.\n\nWould you like to go to the Addons section now\nto download some addons, or to enable or disable the ones you have?
+= Твої налаштування збережено.\n\nПерейти зараз до розділу «Аддони»,\nщоб завантажити аддони або ввімкнути й вимкнути наявні?
+DOWNLOAD ADDONS
+= ЗАВАНТАЖИТИ АДДОНИ
+ENABLE / DISABLE ADDONS
+= УВІМК / ВИМК АДДОНИ
+NO THANKS
+= НІ, ДЯКУЮ
+Install the game
+= Встановлення гри
+Install Azeroth Survivors
+= Встановити Azeroth Survivors
+Step 1
+= Крок 1
+Download the game in your web browser.
+= Завантаж гру в браузері.
+OPEN DOWNLOAD
+= ВІДКРИТИ ЗАВАНТАЖЕННЯ
+Download opened in your browser.
+= Завантаження відкрито в браузері.
+Step 2
+= Крок 2
+When the download has finished, come back here.
+= Коли завантаження завершиться, повернися сюди.
+IT'S IN MY DOWNLOADS
+= ФАЙЛ У ЗАВАНТАЖЕННЯХ
+The launcher finds the file (in its own folder or Downloads), unpacks the game here and deletes the download.
+= Лаунчер знайде файл (у своїй теці або в «Завантаженнях»), розпакує гру сюди й видалить завантажений файл.
+CANCEL
+= СКАСУВАТИ
+Which progress do you want to keep?
+= Який прогрес зберегти?
+Both sides changed
+= Змінилися обидві сторони
+This PC and the cloud both changed since the last sync:
+= І цей ПК, і хмара змінилися з часу останньої синхронізації:
+• {0}:  this PC {1}   |   cloud {2}
+= • {0}:  цей ПК {1}   |   хмара {2}
+One complete state wins, the other is backed up first.
+= Перемагає один повний стан, інший спершу зберігається в резервну копію.
+First time on this PC? Choose USE CLOUD.
+= Уперше на цьому ПК? Вибери ВЗЯТИ З ХМАРИ.
+USE CLOUD replaces your local data. KEEP LOCAL keeps it and uploads it later.
+= ВЗЯТИ З ХМАРИ замінює твої локальні дані. ЛИШИТИ ЛОКАЛЬНІ зберігає їх і вивантажує пізніше.
+KEEP LOCAL replaces the cloud. USE CLOUD leaves the cloud and skips your upload.
+= ЛИШИТИ ЛОКАЛЬНІ замінює хмару. ВЗЯТИ З ХМАРИ лишає хмару як є і пропускає твоє вивантаження.
+USE CLOUD
+= ВЗЯТИ З ХМАРИ
+KEEP LOCAL
+= ЛИШИТИ ЛОКАЛЬНІ
+Save game
+= Збереження гри
+Game update
+= Оновлення гри
+Update available
+= Доступне оновлення
+New version:
+= Нова версія:
+Your version:
+= Твоя версія:
+not recorded yet
+= ще не записано
+Download size:
+= Розмір завантаження:
+What is new
+= Що нового
+Your addons, settings and saves are left alone. If anything goes wrong, the old game files are put back.
+= Твої аддони, налаштування та збереження не чіпаються. Якщо щось піде не так, старі файли гри повернуться на місце.
+UPDATE NOW
+= ОНОВИТИ ЗАРАЗ
+NOT NOW
+= НЕ ЗАРАЗ
+SKIP THIS VERSION
+= ПРОПУСТИТИ ВЕРСІЮ
+I ALREADY HAVE THIS VERSION
+= У МЕНЕ ВЖЕ Є ЦЯ ВЕРСІЯ
+The update is being installed. Please wait until it has finished.
+= Оновлення встановлюється. Зачекай, доки воно завершиться.
+Downloading the update...
+= Завантаження оновлення...
+Download the update
+= Завантажити оновлення
+Step 1: download the update in your web browser.
+= Крок 1: завантаж оновлення в браузері.
+OPEN DOWNLOAD AGAIN
+= ВІДКРИТИ ЗАВАНТАЖЕННЯ ЗНОВУ
+Step 2: when the download has finished, come back here.
+= Крок 2: коли завантаження завершиться, повернися сюди.
+The launcher finds the file (in its own folder or Downloads), installs it and deletes it.
+= Лаунчер знайде файл (у своїй теці або в «Завантаженнях»), встановить його й видалить.
+Checking the file...
+= Перевірка файлу...
+CANCELLING...
+= СКАСУВАННЯ...
+Updating to {0}
+= Оновлення до {0}
+Please keep the launcher open until this has finished.
+= Не закривай лаунчер, доки це не завершиться.
+{0} of {1}  ({#2}%)
+= {0} з {1}  ({2}%)
+{0} downloaded
+= Завантажено {0}
+Update installed
+= Оновлення встановлено
+Update failed
+= Помилка оновлення
+CLOSE
+= ЗАКРИТИ
+TRY AGAIN
+= ПОВТОРИТИ
+Version {0} is installed.
+= Встановлено версію {0}.
+{#0} files updated.
+= Оновлено файлів: {0}.
+{#0} file updated.
+= Оновлено файлів: {0}.
+{#0} files updated, {#1} removed.
+= Оновлено файлів: {0}, видалено: {1}.
+{#0} file updated, {#1} removed.
+= Оновлено файлів: {0}, видалено: {1}.
+Install
+= Встановлення
+Install the game from this file?
+= Встановити гру з цього файлу?
+{0}  ({#1} MB)
+= {0}  ({1} МБ)
+in {0}
+= у {0}
+Choose the game file you downloaded (.rar)
+= Вибери завантажений файл гри (.rar)
+Game archive (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|All files (*.*)|*.*
+= Архів гри (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|Усі файли (*.*)|*.*
+Install cancelled.
+= Встановлення скасовано.
+Unpacking the game client...
+= Розпакування гри...
+Install failed.
+= Помилка встановлення.
+Install complete - press PLAY.
+= Встановлення завершено - натисни ГРАТИ.
+Install complete. Press PLAY to enter Azeroth.
+= Встановлення завершено. Натисни ГРАТИ, щоб увійти в Азерот.
+The last game update was cut off before it finished. Your game files were put back exactly as they were.
+= Останнє оновлення гри перервалося до завершення. Файли гри повернуто точно в попередній стан.
+You can run the update again with the UPDATE button.
+= Оновлення можна запустити знову кнопкою ОНОВИТИ.
+The last game update was cut off, and some game files could not be put back automatically.
+= Останнє оновлення гри перервалося, і деякі файли гри не вдалося повернути автоматично.
+The old versions are kept in the folder "{0}" inside the game folder. Copy them back over the game files, or reinstall the game.
+= Старі версії лежать у теці «{0}» усередині теки гри. Скопіюй їх назад поверх файлів гри або перевстанови гру.
+Checking for updates...
+= Перевірка оновлень...
+The update check failed ({0}).
+= Не вдалося перевірити оновлення ({0}).
+Could not check for launcher updates.
+= Не вдалося перевірити оновлення лаунчера.
+Launcher update
+= Оновлення лаунчера
+Launcher {0} is available.
+= Доступний лаунчер {0}.
+The launcher is up to date ({0}).
+= Лаунчер актуальний ({0}).
+You have the newest launcher ({0}).
+= У тебе найновіший лаунчер ({0}).
+A new launcher ({0}) is available. Open the launcher and press UPDATE.
+= Доступний новий лаунчер ({0}). Відкрий лаунчер і натисни ОНОВИТИ.
+Finish what is running first (the game, an install or a cloud sync), then press UPDATE again.
+= Спершу заверши те, що виконується (гру, встановлення або хмарну синхронізацію), потім знову натисни ОНОВИТИ.
+A new version of the launcher is on GitHub: {0}.
+= На GitHub є нова версія лаунчера: {0}.
+Update now? The new launcher ({0}) is downloaded, checked and started in place of this one. Your settings stay as they are.
+= Оновити зараз? Новий лаунчер ({0}) буде завантажено, перевірено й запущено замість цього. Твої налаштування залишаться такими самими.
+Update now? The new launcher is downloaded, checked and started in place of this one. Your settings stay as they are.
+= Оновити зараз? Новий лаунчер буде завантажено, перевірено й запущено замість цього. Твої налаштування залишаться такими самими.
+Launcher update postponed. Press UPDATE when you want it.
+= Оновлення лаунчера відкладено. Натисни ОНОВИТИ, коли захочеш.
+Downloading the new launcher...
+= Завантаження нового лаунчера...
+Downloading the new launcher... {0}
+= Завантаження нового лаунчера... {0}
+Launcher update failed.
+= Помилка оновлення лаунчера.
+Update checking is not switched on in this launcher yet (it has no update address).
+= Перевірку оновлень у цьому лаунчері ще не ввімкнено (немає адреси оновлень).
+The game is not installed yet. Press INSTALL first.
+= Гру ще не встановлено. Спершу натисни ВСТАНОВИТИ.
+Could not check for updates.
+= Не вдалося перевірити оновлення.
+You have the newest version ({0}).
+= У тебе найновіша версія ({0}).
+Update {0} is available.
+= Доступне оновлення {0}.
+A game update ({0}) is available.
+= Доступне оновлення гри ({0}).
+Version {0} skipped. The UPDATE button still offers it.
+= Версію {0} пропущено. Кнопка ОНОВИТИ досі її пропонує.
+Noted: you have version {0}.
+= Позначено: у тебе версія {0}.
+Install the update from this file?
+= Встановити оновлення з цього файлу?
+Choose the update file you downloaded
+= Вибери завантажений файл оновлення
+Update archive (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|All files (*.*)|*.*
+= Архів оновлення (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|Усі файли (*.*)|*.*
+Close the game first, then try again.
+= Спершу закрий гру, потім спробуй знову.
+Checking the download...
+= Перевірка завантаження...
+The downloaded file does not match its checksum, so nothing was installed. Please try again later.
+= Завантажений файл не збігається зі своєю контрольною сумою, тому нічого не встановлено. Спробуй пізніше.
+That file is not this update (its checksum does not match), so nothing was installed. Download it again from the update page.
+= Цей файл не є цим оновленням (контрольна сума не збігається), тому нічого не встановлено. Завантаж його знову зі сторінки оновлення.
+The update failed ({0}).
+= Помилка оновлення ({0}).
+Updated to {0} - press PLAY.
+= Оновлено до {0} - натисни ГРАТИ.
+Game updated to {0}. Press PLAY to enter Azeroth.
+= Гру оновлено до {0}. Натисни ГРАТИ, щоб увійти в Азерот.
+Update cancelled.
+= Оновлення скасовано.
+Update failed.
+= Помилка оновлення.
+Another task is still running - wait for it to finish.
+= Ще виконується інше завдання - дочекайся його завершення.
+Choose a sync folder inside your cloud drive first (Cloud Save or Options).
+= Спершу вибери теку синхронізації на хмарному диску (Хмарне збереження або Налаштування).
+Cloud sync failed.
+= Помилка хмарної синхронізації.
+Status checked at {0}
+= Стан перевірено о {0}
+Downloaded from the cloud at {0}
+= Завантажено з хмари о {0}
+Saves uploaded at {0}
+= Збереження вивантажено о {0}
+Not everything was synced - see the Cloud Save log.
+= Синхронізовано не все - дивись журнал у розділі «Хмарне збереження».
+The game is being updated. Please wait until that has finished.
+= Гра оновлюється. Зачекай, доки це завершиться.
+The cloud save could NOT be loaded, so the game was not launched.
+= Хмарне збереження НЕ вдалося завантажити, тому гру не запущено.
+See the log in Cloud Save. If your cloud drive is still syncing, wait for it to finish and press PLAY again.
+= Дивись журнал у розділі «Хмарне збереження». Якщо хмарний диск ще синхронізується, дочекайся завершення й знову натисни ГРАТИ.
+Cloud sync failed - game not launched
+= Помилка хмарної синхронізації - гру не запущено
+Cloud save was not loaded - game not launched.
+= Хмарне збереження не завантажено - гру не запущено.
+Cloud sync successfully downloaded
+= Хмарну синхронізацію успішно завантажено
+No sync folder set - launched without cloud sync.
+= Теку синхронізації не задано - запуск без хмарної синхронізації.
+Starting Azeroth Survivors ...
+= Запуск Azeroth Survivors ...
+Game running.
+= Гра запущена.
+Could not start the game: {0}
+= Не вдалося запустити гру: {0}
+Game closed.
+= Гру закрито.
+Game has closed.
+= Гра закрилася.
+Cloud sync successfully uploaded
+= Хмарну синхронізацію успішно вивантажено
+Some of your progress was NOT uploaded. See the log in Cloud Save.
+= Частину твого прогресу НЕ вивантажено. Дивись журнал у розділі «Хмарне збереження».
+Cloud sync NOT completed - see the Cloud Save log
+= Хмарну синхронізацію НЕ завершено - дивись журнал у розділі «Хмарне збереження»
+Cloud upload failed: {0}
+= Помилка вивантаження в хмару: {0}
+Cloud sync failed - see the Cloud Save log
+= Помилка хмарної синхронізації - дивись журнал у розділі «Хмарне збереження»
+Launcher
+= Лаунчер
+Select a folder inside your cloud drive (Google Drive, OneDrive, Dropbox ...)
+= Вибери теку на своєму хмарному диску (Google Drive, OneDrive, Dropbox ...)
+That is the top level of your cloud drive.
+= Це верхній рівень твого хмарного диска.
+Create and use a subfolder named AzerothSync inside it?
+= Створити всередині нього теку AzerothSync і використовувати її?
+Sync folder
+= Тека синхронізації
+Play time reset.
+= Час у грі скинуто.
+Play time
+= Час у грі
+No games played with this launcher yet.
+= З цим лаунчером ще не було ігор.
+Total: {0} over {#1} sessions
+= Усього: {0}, сеансів: {1}
+Total: {0} over {#1} session
+= Усього: {0}, сеансів: {1}
+Total: {0} over {#1} sessions on {#2} PCs
+= Усього: {0}, сеансів: {1}, ПК: {2}
+Last session: {0} ({1})
+= Останній сеанс: {0} ({1})
+Longest session: {0}
+= Найдовший сеанс: {0}
+Shared with your other PCs through the cloud sync folder.
+= Спільний для твоїх ПК через теку хмарної синхронізації.
+Counted on this PC (the sync folder is not reachable right now).
+= Рахується на цьому ПК (тека синхронізації зараз недоступна).
+Counted on this PC. Turn on cloud saving to share it between your PCs.
+= Рахується на цьому ПК. Увімкни хмарне збереження, щоб ділитися ним між ПК.
+RESET PLAY TIME
+= СКИНУТИ ЧАС У ГРІ
+Set the play time back to zero on all your PCs?
+= Обнулити час у грі на всіх твоїх ПК?
+Set the play time back to zero?
+= Обнулити час у грі?
+Game folder
+= Тека гри
+Save game folder
+= Тека збережень
+Game config folder (AddOns, addon settings)
+= Тека конфігурації гри (AddOns, налаштування аддонів)
+Cloud saving
+= Хмарне збереження
+Close button hides the launcher to the tray
+= Кнопка «Закрити» ховає лаунчер у системний трей
+Minimize the launcher when the game starts
+= Згортати лаунчер під час запуску гри
+RUN SETUP AGAIN
+= ЗАПУСТИТИ НАЛАШТУВАННЯ ЗНОВУ
+Select your Azeroth Survivors game folder
+= Вибери теку гри Azeroth Survivors
+Game folder set: {0}
+= Теку гри задано: {0}
+Select the game's benilla-config folder (contains AddOns and saved)
+= Вибери теку гри benilla-config (містить AddOns і saved)
+Language
+= Мова
+ALL PATCH NOTES ›
+= УСІ ЗМІНИ ›
+‹ LATEST
+= ‹ ОСТАННЄ
+‹ ALL PATCH NOTES
+= ‹ УСІ ЗМІНИ
+‹ PREVIOUS
+= ‹ ПОПЕРЕДНЄ
+NEXT ›
+= НАСТУПНЕ ›
+{#0} of {#1}
+= {0} з {1}
+PAGE
+= СТОРІНКА
+No patch notes yet.
+= Списків змін поки немає.
+{0} (current)
+= {0} (поточна)
+Vibe coded by Slimjim\nCloud save code established by Keijin
+= Навайбкодив Slimjim\nКод хмарного збереження: Keijin
+DOWNLOAD MORE ›
+= ЗАВАНТАЖИТИ ЩЕ ›
+ALL
+= УСІ
+UI OVERHAUL
+= НОВИЙ ІНТЕРФЕЙС
+GAMEPLAY
+= ГЕЙМПЛЕЙ
+COSMETIC
+= КОСМЕТИКА
+No addons in this filter yet.
+= У цьому фільтрі поки немає аддонів.
+No downloadable addons listed yet.
+= Аддонів для завантаження поки немає.
+UNINSTALL
+= ВИДАЛИТИ
+Addons can't be changed while the game runs or a sync is running.
+= Аддони не можна змінювати, поки запущена гра або триває синхронізація.
+Another addon is still downloading.
+= Інший аддон ще завантажується.
+Installing {0}...
+= Встановлення {0}...
+{0} installed.
+= {0} встановлено.
+{0} failed.
+= {0}: помилка.
+Could not install {0}:
+= Не вдалося встановити {0}:
+{0} is not installed.
+= {0} не встановлено.
+Remove {0} from your AddOns folder?
+= Видалити {0} з теки AddOns?
+Folders: {0}
+= Теки: {0}
+This deletes everything it added, including the settings it saved.
+= Це видалить усе, що він додав, разом зі збереженими ним налаштуваннями.
+Uninstall
+= Видалення
+Could not uninstall {0}:
+= Не вдалося видалити {0}:
+{0} uninstalled.
+= {0} видалено.
+{0} was not installed.
+= {0} не було встановлено.
+No AddOns folder found.\nSet the game config folder in Options\n(the benilla-config folder).
+= Теку AddOns не знайдено.\nВкажи теку конфігурації гри в Налаштуваннях\n(тека benilla-config).
+REFRESH
+= ОНОВИТИ СПИСОК
+FOLDER
+= ТЕКА
+TOGGLE ALL
+= ПЕРЕМКНУТИ ВСІ
+SAVE
+= ЗБЕРЕГТИ
+LOAD
+= ВІДКРИТИ
+empty
+= порожньо
+{#0} on, {#1} off
+= увімк.: {0}, вимк.: {1}
+saved {0}
+= збережено {0}
+Profile {0}
+= Профіль {0}
+No addons installed.
+= Аддони не встановлено.
+{#0} of {#1} enabled
+= Увімкнено {0} з {1}
+Could not enable {0}:
+= Не вдалося ввімкнути {0}:
+Could not disable {0}:
+= Не вдалося вимкнути {0}:
+{0} enabled.
+= {0} увімкнено.
+{0} disabled.
+= {0} вимкнено.
+All addons enabled.
+= Усі аддони ввімкнено.
+All addons disabled.
+= Усі аддони вимкнено.
+Some addons could not be changed:
+= Деякі аддони не вдалося змінити:
+Replace the saved Profile {0} with the current toggles?
+= Замінити збережений Профіль {0} поточними перемикачами?
+Profile {0} saved.
+= Профіль {0} збережено.
+Profile {0} is empty - press SAVE to store the current toggles.
+= Профіль {0} порожній - натисни ЗБЕРЕГТИ, щоб запам'ятати поточні перемикачі.
+Profile {0} loaded: {#1} changed.
+= Профіль {0} завантажено: змінено {1}.
+Profile {0} loaded: {#1} changed. {#2} newer addon(s) left as they were.
+= Профіль {0} завантажено: змінено {1}. Новіші аддони ({2}) залишено як є.
+Cloud saving is turned off.\nYour progress stays on this PC only.
+= Хмарне збереження вимкнено.\nТвій прогрес залишається лише на цьому ПК.
+TURN ON CLOUD SAVING
+= УВІМКНУТИ ХМАРНЕ ЗБЕРЕЖЕННЯ
+PLAY downloads the newest state, starts the game and uploads your progress after you close it. One complete state wins; the overwritten one is backed up as a ZIP first.
+= ГРАТИ завантажує найновіший стан, запускає гру й вивантажує твій прогрес після її закриття. Перемагає один повний стан; той, що перезаписується, спершу зберігається в ZIP.
+(not set - choose a folder inside Google Drive, OneDrive or Dropbox)
+= (не задано - вибери теку в Google Drive, OneDrive або Dropbox)
+Not synced yet.
+= Ще не синхронізовано.
+Cloud: {0}
+= Хмара: {0}
+last uploaded by {0} on {1}
+= останнє вивантаження: {0}, {1}
+no upload info
+= немає даних про вивантаження
+CHECK STATUS
+= ПЕРЕВІРИТИ СТАН
+DOWNLOAD
+= ЗАВАНТАЖИТИ
+UPLOAD
+= ВИВАНТАЖИТИ
+The launcher is already running.
+= Лаунчер уже запущено.
+Look for its icon in the system tray (near the clock).
+= Знайди його значок у системному треї (біля годинника).
+Press INSTALL to download the game first.
+= Спершу натисни ВСТАНОВИТИ, щоб завантажити гру.
+No launcher release has been published on GitHub yet.
+= На GitHub ще не опубліковано жодної версії лаунчера.
+GitHub's answer could not be read.
+= Не вдалося прочитати відповідь GitHub.
+The latest release on GitHub ({0}) has no launcher exe attached.
+= До останнього релізу на GitHub ({0}) не додано exe лаунчера.
+The latest release on GitHub has no checksum for its exe, so it is not installed.
+= Останній реліз на GitHub не має контрольної суми для exe, тому його не встановлено.
+The downloaded launcher does not match its checksum, so it was not installed. Please try again later.
+= Завантажений лаунчер не збігається зі своєю контрольною сумою, тому його не встановлено. Спробуй пізніше.
+The launcher could not replace itself in this folder ({0}).
+= Лаунчер не зміг замінити себе в цій теці ({0}).
+Download the new version from GitHub instead:
+= Завантаж нову версію з GitHub вручну:
+The new launcher could not be put in place ({0}). Nothing was changed.
+= Не вдалося поставити новий лаунчер на місце ({0}). Нічого не змінено.
+The {0} address must start with https://
+= Адреса сервера {0} має починатися з https://
+The {0} server redirected to an address that is not secure (https).
+= Сервер {0} переспрямував на небезпечну адресу (не https).
+The {0} server sent a broken redirect.
+= Сервер {0} надіслав некоректне переспрямування.
+The {0} server answered with error {#1}.
+= Сервер {0} відповів помилкою {1}.
+The {0} server's security certificate was not accepted. It needs a normal, trusted https certificate.
+= Сертифікат безпеки сервера {0} не прийнято. Потрібен звичайний довірений сертифікат https.
+The {0} server did not answer in time. Check your internet connection and try again.
+= Сервер {0} не відповів вчасно. Перевір підключення до інтернету й спробуй знову.
+Could not reach the {0} server. Check your internet connection and try again.
+= Не вдалося зв'язатися із сервером {0}. Перевір підключення до інтернету й спробуй знову.
+The {0} server redirected too many times.
+= Сервер {0} переспрямував забагато разів.
+update
+= оновлень
+addon
+= аддонів
+The download link gave a web page instead of the file. It must be a direct download link.
+= Посилання для завантаження повернуло вебсторінку замість файлу. Потрібне пряме посилання на завантаження.
+The download was interrupted. Check your connection and try again.
+= Завантаження перервано. Перевір підключення й спробуй знову.
+The download was cut off before it finished. Please try again.
+= Завантаження обірвалося до завершення. Спробуй знову.
+The .zip contains an unsafe path; nothing was installed.
+= У .zip є небезпечний шлях; нічого не встановлено.
+The file is damaged or incomplete.
+= Файл пошкоджений або неповний.
+The file is a .{0} archive, and no program to unpack it was found.
+= Файл є архівом .{0}, і програму для його розпакування не знайдено.
+Install the free 7-Zip (7-zip.org) or WinRAR and try again.
+= Встанови безкоштовний 7-Zip (7-zip.org) або WinRAR і спробуй знову.
+The archive could not be unpacked.
+= Не вдалося розпакувати архів.
+That file is not a .rar, .zip or .7z archive.
+= Цей файл не є архівом .rar, .zip або .7z.
+The archive was unpacked, but {0} was not inside it.
+= Архів розпаковано, але {0} у ньому не було.
+The install finished, but {0} is not in {1}.
+= Встановлення завершено, але {0} немає в {1}.
+The link did not give a .zip file. It must be a direct download link (share pages such as LimeWire do not work).
+= Посилання не повернуло файл .zip. Потрібне пряме посилання на завантаження (сторінки обміну на кшталт LimeWire не підходять).
+There is not enough free disk space.
+= Недостатньо вільного місця на диску.
+Not enough free disk space for the update: about {0} is needed on the drive with the game, {1} is free.
+= Недостатньо місця для оновлення: на диску з грою потрібно близько {0}, вільно {1}.
+The update file is not a .rar, .zip or .7z archive.
+= Файл оновлення не є архівом .rar, .zip або .7z.
+An earlier update was cut off and its files could not be put back yet.
+= Попереднє оновлення перервалося, і його файли поки не вдалося повернути.
+The old files are kept in:
+= Старі файли лежать у:
+Unpacking the update. This can take a few minutes...
+= Розпакування оновлення. Це може тривати кілька хвилин...
+Installing the new files...
+= Встановлення нових файлів...
+The update did not contain any files to install.
+= В оновленні не було файлів для встановлення.
+{0} is missing after the update.
+= Після оновлення бракує {0}.
+A game file is in use. Close the game and anything else using its folder, then try again.
+= Файл гри використовується. Закрий гру й усе, що використовує її теку, і спробуй знову.
+There is not enough free disk space for the update. Free some space and try again.
+= Недостатньо місця для оновлення. Звільни місце й спробуй знову.
+The update could not be installed ({0}).
+= Не вдалося встановити оновлення ({0}).
+No game files were changed.
+= Файли гри не змінено.
+Some files could not be put back. The old versions are kept in:
+= Деякі файли не вдалося повернути. Старі версії лежать у:
+Sync folder not reachable: {0} (is your cloud drive running?)
+= Тека синхронізації недоступна: {0} (чи запущено хмарний диск?)
+The game is running. Close it before you download.
+= Гра запущена. Закрий її перед завантаженням.
+The game is running. Close it before you upload.
+= Гра запущена. Закрий її перед вивантаженням.
+The folder is in use and was not replaced: {0} ({1}). Close programs or Explorer windows that use it and try again.
+= Тека використовується й не була замінена: {0} ({1}). Закрий програми або вікна Провідника, що її використовують, і спробуй знову.
+The source changed while copying ({0}). Nothing was replaced, please sync again.
+= Джерело змінилося під час копіювання ({0}). Нічого не замінено, синхронізуй знову.
+No sync folder set. Choose a folder in Google Drive, OneDrive, Dropbox or similar in Options.
+= Теку синхронізації не задано. Вибери теку в Google Drive, OneDrive, Dropbox або подібному сервісі в Налаштуваннях.
+Sync folder: {0}
+= Тека синхронізації: {0}
+The sync folder does not exist yet. It is created on the first upload.
+= Теки синхронізації ще немає. Вона створюється під час першого вивантаження.
+{0}: in sync (local {1}, cloud {2})
+= {0}: синхронізовано (локально {1}, хмара {2})
+{0}: cloud empty, upload (local {1}, cloud {2})
+= {0}: хмара порожня, вивантажити (локально {1}, хмара {2})
+{0}: cloud copy incomplete or still syncing, wait (local {1}, cloud {2})
+= {0}: копія в хмарі неповна або ще синхронізується, зачекай (локально {1}, хмара {2})
+{0}: local is newer, upload (local {1}, cloud {2})
+= {0}: локальна новіша, вивантажити (локально {1}, хмара {2})
+{0}: cloud is newer, download (local {1}, cloud {2})
+= {0}: хмара новіша, завантажити (локально {1}, хмара {2})
+{0}: both changed or never synced (local {1}, cloud {2})
+= {0}: змінилися обидві або жодного разу не синхронізувалися (локально {1}, хмара {2})
+{0}: {1} not found, skipped. Set the game config folder in Options.
+= {0}: {1} не знайдено, пропущено. Вкажи теку конфігурації гри в Налаштуваннях.
+Downloading from the cloud ...
+= Завантаження з хмари ...
+The sync folder does not exist yet, nothing to download.
+= Теки синхронізації ще немає, завантажувати нічого.
+{0}: cloud is empty, nothing to download.
+= {0}: хмара порожня, завантажувати нічого.
+{0}: up to date.
+= {0}: актуально.
+{0}: the cloud copy does not match the last upload yet (incomplete or still syncing). Nothing replaced, try again in a moment.
+= {0}: копія в хмарі поки не збігається з останнім вивантаженням (неповна або ще синхронізується). Нічого не замінено, спробуй трохи згодом.
+{0}: local is newer, kept.
+= {0}: локальна новіша, залишено.
+Replace your local data with the cloud state?
+= Замінити твої локальні дані станом із хмари?
+A backup is made first.
+= Спершу створюється резервна копія.
+Cancelled, nothing changed.
+= Скасовано, нічого не змінилося.
+{0}: local state kept, it will replace the cloud on the next upload.
+= {0}: локальний стан залишено, він замінить хмару під час наступного вивантаження.
+{0}: downloaded from the cloud.
+= {0}: завантажено з хмари.
+Cloud state: {0}
+= Стан хмари: {0}
+Uploading to the cloud ...
+= Вивантаження в хмару ...
+{0}: nothing local, nothing uploaded.
+= {0}: локально нічого немає, нічого не вивантажено.
+{0}: cloud is up to date.
+= {0}: хмара актуальна.
+Replace the cloud state with your local data?
+= Замінити стан хмари твоїми локальними даними?
+{0}: cloud kept, your local changes were NOT uploaded. Use "Download" to get the cloud state.
+= {0}: хмару залишено, твої локальні зміни НЕ вивантажено. Скористайся «Завантажити», щоб отримати стан хмари.
+Cancelled, your local changes were NOT uploaded.
+= Скасовано, твої локальні зміни НЕ вивантажено.
+{0}: the cloud changed during this sync, NOT uploaded. Sync again to decide.
+= {0}: хмара змінилася під час цієї синхронізації, НЕ вивантажено. Синхронізуй знову, щоб вирішити.
+{0}: uploaded.
+= {0}: вивантажено.
+Written to the sync folder. Your cloud app uploads it in the background, wait until it is done before you switch PCs.
+= Записано в теку синхронізації. Хмарний застосунок вивантажує його у фоні; дочекайся завершення, перш ніж змінити ПК.
+Backup: {0}
+= Резервна копія: {0}
+Restored {0} after an interrupted sync.
+= {0} відновлено після перерваної синхронізації.
