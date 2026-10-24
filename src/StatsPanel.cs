@@ -369,7 +369,7 @@ namespace AzerothLauncher
         {
             var rows = new RowsBlock();
             rows.Title = Lang.T("Personal bests");
-            rows.Cols = 2;
+            rows.Cols = 1;                                   // one a row: the names stay whole
             rows.Empty = Lang.T("No runs recorded yet.");
             var order = new[] {
                 new[] { "time", "Longest run", "clock", "#a335ee" }, new[] { "fastestWin", "Fastest victory", "clock", "#ff8000" },
