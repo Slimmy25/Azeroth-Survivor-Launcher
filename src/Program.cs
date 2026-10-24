@@ -1,7 +1,8 @@
-// Azeroth Survivors Launcher (2006-style look), C# version.
+﻿// Azeroth Survivors Launcher (2006-style look), C# version.
 // Built by build.bat with the C# compiler that is part of Windows (.NET Framework 4.8), so the exe is a small,
 // plain .NET program: no packer, no self-extracting runtime, nothing unpacked to a temp folder at start.
 using System;
+using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading;
@@ -46,7 +47,18 @@ namespace AzerothLauncher
             }
             bool tray = Array.IndexOf(args, "--tray") >= 0;
             Lang.Load(Lang.Default(Config.Load().Str("language")));     // the player's language (Options > Language)
-            bool afterUpdate = Array.IndexOf(args, "--after-update") >= 0;
+            int au = Array.IndexOf(args, "--after-update");
+            bool afterUpdate = au >= 0;
+            if (afterUpdate)
+            {
+                tray = false;                                // after an update the launcher always reopens fully
+                int oldPid;
+                if (args.Length > au + 1 && int.TryParse(args[au + 1], out oldPid))
+                {
+                    try { Process.GetProcessById(oldPid).WaitForExit(30000); }   // the old launcher, tray icon and all, is gone
+                    catch (Exception) { }                    // already exited
+                }
+            }
             bool first;
             using (var mutex = new Mutex(true, MutexName, out first))
             {

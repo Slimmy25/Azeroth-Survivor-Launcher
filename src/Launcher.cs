@@ -1,4 +1,4 @@
-// The main launcher window: the tall narrow window with PLAY and the section buttons, the tray icon, playing
+﻿// The main launcher window: the tall narrow window with PLAY and the section buttons, the tray icon, playing
 // (cloud download -> game -> cloud upload), installing the game, cloud sync runs and game updates.
 using System;
 using System.Collections.Generic;
@@ -1115,7 +1115,7 @@ namespace AzerothLauncher
         {
             if (err == null)
             {
-                try { SelfUpdate.InstallAndRestart(path, !Visible); }   // hidden in the tray: the new one starts there too
+                try { SelfUpdate.InstallAndRestart(path); }        // the new one opens its window once this one is gone
                 catch (Exception e) { err = e.Message; }
             }
             if (err != null)
@@ -1141,6 +1141,10 @@ namespace AzerothLauncher
                 tray = null;
             }
             Application.Exit();
+            // shut down completely even if a window or background thread holds on: the new launcher is waiting
+            var kill = new System.Threading.Thread(delegate() { System.Threading.Thread.Sleep(3000); Environment.Exit(0); });
+            kill.IsBackground = true;
+            kill.Start();
         }
 
         // Reads update.json in the background. At start-up it stays quiet unless there is an update to offer;
