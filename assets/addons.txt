@@ -10,3 +10,4 @@ AS ADDONS | Azerloot By KindaGray | https://github.com/Slimmy25/Azeroth-Survivor
 AS ADDONS | Chest GPS By Fotze | https://github.com/Slimmy25/Azeroth-Survivor-Launcher-Releases/releases/download/addons/Chest-GPS-by-Fotze.zip | COSMETIC
 AS ADDONS | SurvivorsDragonU By Mxgwyn | https://github.com/Slimmy25/Azeroth-Survivor-Launcher-Releases/releases/download/addons/SurvivorsDragonUi-by-Mxgwyn.zip | UI OVERHAUL
 AS ADDONS | Keijin UI By Keijin | https://github.com/Slimmy25/Azeroth-Survivor-Launcher-Releases/releases/download/addons/Keijin-UI-by-Keijin.zip | UI OVERHAUL
+AS ADDONS | AS Time Tracker By Slimjim | https://github.com/Slimmy25/Azeroth-Survivor-Launcher-Releases/releases/download/addons/AS-Time-Tracker-by-Slimjim.zip | GAMEPLAY | Records every run: totals, personal bests, the abilities you took and how often you pick each class. The launcher's STATS page shows them.

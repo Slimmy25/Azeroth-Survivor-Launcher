@@ -947,3 +947,25 @@ AS Time Tracker installed. It records your runs from now on.
 = Đã cài AS Time Tracker. Từ giờ nó sẽ ghi lại các lượt chơi của bạn.
 Could not install AS Time Tracker:\n\n{0}
 = Không thể cài AS Time Tracker:\n\n{0}
+ALL CLASSES
+= MỌI LỚP NHÂN VẬT
+Class pick rate
+= Tỉ lệ chọn lớp
+Choose a class at the top to see its own stats.
+= Chọn một lớp ở trên để xem thống kê riêng của lớp đó.
+Pick rate over time
+= Tỉ lệ chọn lớp theo thời gian
+Share of your runs each month
+= Tỉ lệ trong các lượt chơi mỗi tháng
+Picks per month
+= Số lần chọn mỗi tháng
+Abilities
+= Kỹ năng
+Abilities are recorded for runs played with the newest AS Time Tracker.
+= Kỹ năng được ghi lại cho các lượt chơi với AS Time Tracker mới nhất.
+Picked in {#0} runs ({#1}%) · Win rate {#2}%
+= Được chọn trong {#0} lượt ({#1}%) · Tỉ lệ thắng {#2}%
+Best rank {#0}
+= Bậc cao nhất {#0}
+{#0} damage
+= {#0} sát thương

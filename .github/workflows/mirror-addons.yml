@@ -1,4 +1,5 @@
-# Downloads every addon listed in addons/sources.txt from its original link and keeps a copy on the "addons"
+# Downloads every addon listed in addons/sources.txt from its original link (or zips the ones kept in this
+# repository) and keeps a copy on the "addons"
 # release of the PUBLIC downloads repository, so players can download all addons from GitHub.
 # Needs the secret RELEASES_TOKEN (see build.yml).
 # Runs by itself when addons/sources.txt changes, or by hand: Actions > Mirror addons > Run workflow.
@@ -7,7 +8,7 @@ name: Mirror addons
 on:
   push:
     branches: [main]
-    paths: ['addons/sources.txt', '.github/workflows/mirror-addons.yml']
+    paths: ['addons/**', '.github/workflows/mirror-addons.yml']
   workflow_dispatch:
 
 permissions:
@@ -35,8 +36,17 @@ jobs:
           while IFS='|' read -r file url; do
             file="$(echo "$file" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')"
             url="$(echo "$url" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')"
-            echo "Downloading $file from $url"
-            curl -fsSL --retry 3 -A "AzerothSurvivorsLauncher/1.0" -o "mirror/$file" "$url"
+            case "$url" in
+              local:*)                                   # an addon kept in this repository: zip its folder
+                folder="${url#local:}"
+                echo "Zipping addons/$folder as $file"
+                (cd addons && zip -qr "../mirror/$file" "$folder")
+                ;;
+              *)
+                echo "Downloading $file from $url"
+                curl -fsSL --retry 3 -A "AzerothSurvivorsLauncher/1.0" -o "mirror/$file" "$url"
+                ;;
+            esac
             if ! unzip -tq "mirror/$file" > /dev/null; then
               echo "::error::$file ($url) is not a valid .zip"
               exit 1

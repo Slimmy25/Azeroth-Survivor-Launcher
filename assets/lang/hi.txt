@@ -947,3 +947,25 @@ AS Time Tracker installed. It records your runs from now on.
 = AS Time Tracker इंस्टॉल हुआ। अब से यह आपके रन रिकॉर्ड करेगा।
 Could not install AS Time Tracker:\n\n{0}
 = AS Time Tracker इंस्टॉल नहीं हो सका:\n\n{0}
+ALL CLASSES
+= सभी क्लास
+Class pick rate
+= क्लास चुनने की दर
+Choose a class at the top to see its own stats.
+= किसी क्लास के अपने आँकड़े देखने के लिए ऊपर उसे चुनें।
+Pick rate over time
+= समय के साथ क्लास चुनने की दर
+Share of your runs each month
+= हर महीने आपके रन में हिस्सा
+Picks per month
+= प्रति माह चुनाव
+Abilities
+= क्षमताएँ
+Abilities are recorded for runs played with the newest AS Time Tracker.
+= क्षमताएँ नवीनतम AS Time Tracker के साथ खेले गए रन में रिकॉर्ड होती हैं।
+Picked in {#0} runs ({#1}%) · Win rate {#2}%
+= {#0} रन में चुना गया ({#1}%) · जीत दर {#2}%
+Best rank {#0}
+= सबसे अच्छा रैंक {#0}
+{#0} damage
+= {#0} डैमेज

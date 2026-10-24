@@ -946,3 +946,25 @@ AS Time Tracker installed. It records your runs from now on.
 = AS Time Tracker terinstal. Mulai sekarang ia mencatat permainanmu.
 Could not install AS Time Tracker:\n\n{0}
 = AS Time Tracker tidak dapat diinstal:\n\n{0}
+ALL CLASSES
+= SEMUA KELAS
+Class pick rate
+= Rasio pilihan kelas
+Choose a class at the top to see its own stats.
+= Pilih kelas di atas untuk melihat statistiknya sendiri.
+Pick rate over time
+= Pilihan kelas dari waktu ke waktu
+Share of your runs each month
+= Bagian dari permainanmu setiap bulan
+Picks per month
+= Pilihan per bulan
+Abilities
+= Kemampuan
+Abilities are recorded for runs played with the newest AS Time Tracker.
+= Kemampuan dicatat untuk permainan dengan AS Time Tracker terbaru.
+Picked in {#0} runs ({#1}%) · Win rate {#2}%
+= Dipilih di {#0} permainan ({#1}%) · Rasio menang {#2}%
+Best rank {#0}
+= Peringkat terbaik {#0}
+{#0} damage
+= {#0} damage

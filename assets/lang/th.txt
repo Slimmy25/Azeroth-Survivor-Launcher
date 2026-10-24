@@ -947,3 +947,25 @@ AS Time Tracker installed. It records your runs from now on.
 = ติดตั้ง AS Time Tracker แล้ว จากนี้ไปจะบันทึกรอบที่คุณเล่น
 Could not install AS Time Tracker:\n\n{0}
 = ติดตั้ง AS Time Tracker ไม่ได้:\n\n{0}
+ALL CLASSES
+= ทุกคลาส
+Class pick rate
+= อัตราการเลือกคลาส
+Choose a class at the top to see its own stats.
+= เลือกคลาสด้านบนเพื่อดูสถิติของคลาสนั้น
+Pick rate over time
+= การเลือกคลาสตามช่วงเวลา
+Share of your runs each month
+= สัดส่วนจากรอบที่คุณเล่นในแต่ละเดือน
+Picks per month
+= จำนวนครั้งที่เลือกต่อเดือน
+Abilities
+= ความสามารถ
+Abilities are recorded for runs played with the newest AS Time Tracker.
+= ความสามารถจะถูกบันทึกในรอบที่เล่นด้วย AS Time Tracker เวอร์ชันล่าสุด
+Picked in {#0} runs ({#1}%) · Win rate {#2}%
+= เลือกใน {#0} รอบ ({#1}%) · อัตราชนะ {#2}%
+Best rank {#0}
+= ระดับสูงสุด {#0}
+{#0} damage
+= ดาเมจ {#0}

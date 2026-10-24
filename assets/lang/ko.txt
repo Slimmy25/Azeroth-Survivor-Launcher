@@ -947,3 +947,25 @@ AS Time Tracker installed. It records your runs from now on.
 = AS Time Tracker를 설치했습니다. 이제부터 런을 기록합니다.
 Could not install AS Time Tracker:\n\n{0}
 = AS Time Tracker를 설치할 수 없습니다:\n\n{0}
+ALL CLASSES
+= 모든 직업
+Class pick rate
+= 직업 선택률
+Choose a class at the top to see its own stats.
+= 위에서 직업을 고르면 그 직업만의 통계를 볼 수 있습니다.
+Pick rate over time
+= 기간별 직업 선택률
+Share of your runs each month
+= 매달 런에서 차지하는 비율
+Picks per month
+= 월별 선택 수
+Abilities
+= 능력
+Abilities are recorded for runs played with the newest AS Time Tracker.
+= 능력은 최신 AS Time Tracker로 플레이한 런부터 기록됩니다.
+Picked in {#0} runs ({#1}%) · Win rate {#2}%
+= {#0}번의 런에서 선택 ({#1}%) · 승률 {#2}%
+Best rank {#0}
+= 최고 등급 {#0}
+{#0} damage
+= 피해 {#0}

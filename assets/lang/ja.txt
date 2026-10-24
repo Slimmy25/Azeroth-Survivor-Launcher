@@ -947,3 +947,25 @@ AS Time Tracker installed. It records your runs from now on.
 = AS Time Tracker をインストールしました。これからランを記録します。
 Could not install AS Time Tracker:\n\n{0}
 = AS Time Tracker をインストールできませんでした：\n\n{0}
+ALL CLASSES
+= 全クラス
+Class pick rate
+= クラス選択率
+Choose a class at the top to see its own stats.
+= 上でクラスを選ぶと、そのクラスだけの統計が見られます。
+Pick rate over time
+= クラス選択率の推移
+Share of your runs each month
+= 毎月のランに占める割合
+Picks per month
+= 月ごとの選択数
+Abilities
+= アビリティ
+Abilities are recorded for runs played with the newest AS Time Tracker.
+= アビリティは最新の AS Time Tracker でプレイしたランから記録されます。
+Picked in {#0} runs ({#1}%) · Win rate {#2}%
+= {#0}回のランで選択（{#1}%）· 勝率 {#2}%
+Best rank {#0}
+= 最高ランク {#0}
+{#0} damage
+= {#0} ダメージ

@@ -1,5 +1,6 @@
-// Long-term stats: the AS Time Tracker addon (built into the launcher, addons\ASTimeTracker) records every run in
-// its saved-variable file, ASTimeTracker.lua in the game's addon settings folder (benilla-config\saved). This file
+// Long-term stats: the AS Time Tracker addon (built into the launcher, addons\ASTimeTracker; also in Download More)
+// records every run in its saved-variable file, ASTimeTracker.lua in the game's addon settings folder
+// (benilla-config\saved). This file
 // reads that Lua table and installs the addon; the STATS section (Sections.cs) shows what it found, together with
 // the launcher's own play time. Everything here is optional: the section can be turned off in Options and
 // the addon is only installed when the player asks for it.
@@ -273,17 +274,43 @@ namespace AzerothLauncher
         }
     }
 
-    // one personal best or one class / race / zone line
+    // one personal best
     public class StatRecord
     {
-        public string Key = "", Name = "", Hero = "", Class = "", Race = "", Zone = "", Date = "";
-        public double Value, Runs, Wins, Time, Kills, BestTime, BestLevel;
+        public string Key = "", Hero = "", Class = "", Race = "", Zone = "", Date = "";
+        public double Value;
+    }
+
+    // an ability (spell) as taken in runs: how often, with what result, and the damage it dealt
+    public class AbilityStat
+    {
+        public string Key = "", Name = "";
+        public double Picks, Wins, Damage, BestRank, Ranks;
+    }
+
+    // totals: of every run together, of one class, race or zone
+    public class StatBlock
+    {
+        public string Key = "", Name = "";
+        public double Runs, Victories, Defeats, Left, Time, Kills, Elites, Guardians, Bosses, Damage, Taken, Gold, Chests,
+                      Magnets, Levels, BestTime, BestLevel;
+        public readonly Dictionary<string, StatRecord> Best = new Dictionary<string, StatRecord>();
+        public readonly List<AbilityStat> Abilities = new List<AbilityStat>();     // the most picked first
+    }
+
+    // the runs of one month, and how many of them each class played (class key -> runs)
+    public class MonthStat
+    {
+        public string Month = "";
+        public double Runs;
+        public readonly Dictionary<string, double> Classes = new Dictionary<string, double>();
     }
 
     public class StatRun
     {
-        public string Result = "", Kind = "", Date = "", Hero = "", Class = "", Race = "", Zone = "";
+        public string Result = "", Kind = "", Date = "", Hero = "", ClassKey = "", Class = "", Race = "", Zone = "";
         public double Time, Level, Kills, Damage, Gold, Bosses;
+        public readonly List<AbilityStat> Abilities = new List<AbilityStat>();     // Picks = its rank here
     }
 
     // what the AS Time Tracker addon has recorded
@@ -291,11 +318,18 @@ namespace AzerothLauncher
     {
         public string FilePath = "", First = "", Last = "";
         public DateTime Written;
-        public double Runs, Victories, Defeats, Left, Time, Kills, Elites, Guardians, Bosses, Damage, Taken, Gold, Chests,
-                      Magnets, Levels;
-        public readonly Dictionary<string, StatRecord> Best = new Dictionary<string, StatRecord>();
-        public readonly List<StatRecord> Classes = new List<StatRecord>(), Races = new List<StatRecord>(), Zones = new List<StatRecord>();
-        public readonly List<StatRun> History = new List<StatRun>();     // the newest first
+        public int Version;
+        public StatBlock Total = new StatBlock();
+        public readonly List<StatBlock> Classes = new List<StatBlock>(), Races = new List<StatBlock>(), Zones = new List<StatBlock>();
+        public readonly List<AbilityStat> Abilities = new List<AbilityStat>();
+        public readonly List<MonthStat> Months = new List<MonthStat>();          // the oldest first
+        public readonly List<StatRun> History = new List<StatRun>();             // the newest first
+
+        public StatBlock Class(string key)
+        {
+            foreach (var c in Classes) if (c.Key == key) return c;
+            return null;
+        }
     }
 
     public static class Stats
@@ -354,43 +388,29 @@ namespace AzerothLauncher
             var st = new RunStats();
             st.FilePath = path;
             st.Written = File.GetLastWriteTime(path);
+            st.Version = (int)LuaReader.Num(db, "version");
             st.First = LuaReader.Text(db, "first");
             st.Last = LuaReader.Text(db, "last");
-            var t = LuaReader.Tab(db, "totals");
-            st.Runs = LuaReader.Num(t, "runs");
-            st.Victories = LuaReader.Num(t, "victory");
-            st.Defeats = LuaReader.Num(t, "defeat");
-            st.Left = LuaReader.Num(t, "left");
-            st.Time = LuaReader.Num(t, "time");
-            st.Kills = LuaReader.Num(t, "kills");
-            st.Elites = LuaReader.Num(t, "elites");
-            st.Guardians = LuaReader.Num(t, "guardians");
-            st.Bosses = LuaReader.Num(t, "bosses");
-            st.Damage = LuaReader.Num(t, "dmg");
-            st.Taken = LuaReader.Num(t, "taken");
-            st.Gold = LuaReader.Num(t, "gold");
-            st.Chests = LuaReader.Num(t, "chests");
-            st.Magnets = LuaReader.Num(t, "magnets");
-            st.Levels = LuaReader.Num(t, "levels");
-            var best = LuaReader.Tab(db, "best");
-            if (best != null)
-                foreach (var kv in best)
-                {
-                    var b = kv.Value as Dictionary<string, object>;
-                    if (b == null) continue;
-                    var rec = new StatRecord();
-                    rec.Key = kv.Key;
-                    rec.Value = LuaReader.Num(b, "v");
-                    rec.Hero = LuaReader.Text(b, "hero");
-                    rec.Class = LuaReader.Text(b, "cname");
-                    rec.Race = LuaReader.Text(b, "rname");
-                    rec.Zone = LuaReader.Text(b, "zname");
-                    rec.Date = LuaReader.Text(b, "date");
-                    st.Best[kv.Key] = rec;
-                }
+            st.Total = Block("", LuaReader.Tab(db, "totals"));
+            Bests(LuaReader.Tab(db, "best"), st.Total.Best);
+            Abilities(LuaReader.Tab(db, "abilities"), st.Abilities);
             Groups(LuaReader.Tab(db, "classes"), st.Classes);
             Groups(LuaReader.Tab(db, "races"), st.Races);
             Groups(LuaReader.Tab(db, "zones"), st.Zones);
+            var months = LuaReader.Tab(db, "months");
+            if (months != null)
+                foreach (var kv in months)
+                {
+                    var m = kv.Value as Dictionary<string, object>;
+                    if (m == null) continue;
+                    var ms = new MonthStat();
+                    ms.Month = kv.Key;
+                    ms.Runs = LuaReader.Num(m, "runs");
+                    var cl = LuaReader.Tab(m, "classes");
+                    if (cl != null) foreach (var c in cl) ms.Classes[c.Key] = LuaReader.Num(cl, c.Key);
+                    st.Months.Add(ms);
+                }
+            st.Months.Sort(delegate(MonthStat a, MonthStat b) { return string.CompareOrdinal(a.Month, b.Month); });
             var hist = LuaReader.List(LuaReader.Tab(db, "history"));
             for (int i = hist.Count - 1; i >= 0; i--)
             {
@@ -400,6 +420,7 @@ namespace AzerothLauncher
                 run.Kind = LuaReader.Text(h, "kind");
                 run.Date = LuaReader.Text(h, "date");
                 run.Hero = LuaReader.Text(h, "hero");
+                run.ClassKey = LuaReader.Text(h, "class");
                 run.Class = LuaReader.Text(h, "cname");
                 run.Race = LuaReader.Text(h, "rname");
                 run.Zone = LuaReader.Text(h, "zname");
@@ -409,31 +430,104 @@ namespace AzerothLauncher
                 run.Damage = LuaReader.Num(h, "dmg");
                 run.Gold = LuaReader.Num(h, "gold");
                 run.Bosses = LuaReader.Num(h, "bosses");
+                foreach (var a in LuaReader.List(LuaReader.Tab(h, "abilities")))
+                {
+                    var ab = new AbilityStat();
+                    ab.Key = LuaReader.Text(a, "key");
+                    ab.Name = LuaReader.Text(a, "name");
+                    if (ab.Name.Length == 0) ab.Name = Pretty(ab.Key);
+                    ab.Picks = LuaReader.Num(a, "rank");
+                    ab.Damage = LuaReader.Num(a, "dmg");
+                    run.Abilities.Add(ab);
+                }
                 st.History.Add(run);
             }
             return st;
         }
 
-        static void Groups(Dictionary<string, object> d, List<StatRecord> into)
+        static StatBlock Block(string key, Dictionary<string, object> t)
+        {
+            var b = new StatBlock();
+            b.Key = key;
+            b.Name = LuaReader.Text(t, "name");
+            if (b.Name.Length == 0) b.Name = Pretty(key);
+            b.Runs = LuaReader.Num(t, "runs");
+            b.Victories = Math.Max(LuaReader.Num(t, "victory"), LuaReader.Num(t, "wins"));
+            b.Defeats = LuaReader.Num(t, "defeat");
+            b.Left = LuaReader.Num(t, "left");
+            b.Time = LuaReader.Num(t, "time");
+            b.Kills = LuaReader.Num(t, "kills");
+            b.Elites = LuaReader.Num(t, "elites");
+            b.Guardians = LuaReader.Num(t, "guardians");
+            b.Bosses = LuaReader.Num(t, "bosses");
+            b.Damage = LuaReader.Num(t, "dmg");
+            b.Taken = LuaReader.Num(t, "taken");
+            b.Gold = LuaReader.Num(t, "gold");
+            b.Chests = LuaReader.Num(t, "chests");
+            b.Magnets = LuaReader.Num(t, "magnets");
+            b.Levels = LuaReader.Num(t, "levels");
+            b.BestTime = LuaReader.Num(t, "bestTime");
+            b.BestLevel = LuaReader.Num(t, "bestLvl");
+            return b;
+        }
+
+        static void Bests(Dictionary<string, object> best, Dictionary<string, StatRecord> into)
+        {
+            if (best == null) return;
+            foreach (var kv in best)
+            {
+                var b = kv.Value as Dictionary<string, object>;
+                if (b == null) continue;
+                var rec = new StatRecord();
+                rec.Key = kv.Key;
+                rec.Value = LuaReader.Num(b, "v");
+                rec.Hero = LuaReader.Text(b, "hero");
+                rec.Class = LuaReader.Text(b, "cname");
+                rec.Race = LuaReader.Text(b, "rname");
+                rec.Zone = LuaReader.Text(b, "zname");
+                rec.Date = LuaReader.Text(b, "date");
+                into[kv.Key] = rec;
+            }
+        }
+
+        static void Abilities(Dictionary<string, object> d, List<AbilityStat> into)
+        {
+            if (d == null) return;
+            foreach (var kv in d)
+            {
+                var a = kv.Value as Dictionary<string, object>;
+                if (a == null) continue;
+                var ab = new AbilityStat();
+                ab.Key = kv.Key;
+                ab.Name = LuaReader.Text(a, "name");
+                if (ab.Name.Length == 0) ab.Name = Pretty(kv.Key);
+                ab.Picks = LuaReader.Num(a, "picks");
+                ab.Wins = LuaReader.Num(a, "wins");
+                ab.Damage = LuaReader.Num(a, "dmg");
+                ab.BestRank = LuaReader.Num(a, "bestRank");
+                ab.Ranks = LuaReader.Num(a, "ranks");
+                into.Add(ab);
+            }
+            into.Sort(delegate(AbilityStat x, AbilityStat y)
+            {
+                int c = y.Picks.CompareTo(x.Picks);
+                return c != 0 ? c : y.Damage.CompareTo(x.Damage);
+            });
+        }
+
+        static void Groups(Dictionary<string, object> d, List<StatBlock> into)
         {
             if (d == null) return;
             foreach (var kv in d)
             {
                 var g = kv.Value as Dictionary<string, object>;
                 if (g == null) continue;
-                var rec = new StatRecord();
-                rec.Key = kv.Key;
-                rec.Name = LuaReader.Text(g, "name");
-                if (rec.Name.Length == 0) rec.Name = Pretty(kv.Key);
-                rec.Runs = LuaReader.Num(g, "runs");
-                rec.Wins = LuaReader.Num(g, "wins");
-                rec.Time = LuaReader.Num(g, "time");
-                rec.Kills = LuaReader.Num(g, "kills");
-                rec.BestTime = LuaReader.Num(g, "bestTime");
-                rec.BestLevel = LuaReader.Num(g, "bestLvl");
-                into.Add(rec);
+                var b = Block(kv.Key, g);
+                Bests(LuaReader.Tab(g, "best"), b.Best);
+                Abilities(LuaReader.Tab(g, "abilities"), b.Abilities);
+                into.Add(b);
             }
-            into.Sort(delegate(StatRecord a, StatRecord b)
+            into.Sort(delegate(StatBlock a, StatBlock b)
             {
                 int c = b.Runs.CompareTo(a.Runs);
                 return c != 0 ? c : string.Compare(a.Name, b.Name, StringComparison.CurrentCultureIgnoreCase);
@@ -441,7 +535,7 @@ namespace AzerothLauncher
         }
 
         // "death_knight" -> "Death Knight"
-        static string Pretty(string key)
+        public static string Pretty(string key)
         {
             var parts = key.Replace('_', ' ').Split(' ');
             for (int i = 0; i < parts.Length; i++)
@@ -449,7 +543,7 @@ namespace AzerothLauncher
             return string.Join(" ", parts);
         }
 
-        // ---- the addon, built into the launcher
+        // ---- the addon, built into the launcher (Download More offers the same files as a zip)
         static string Embedded(string file) { return Util.ReadResource("AS.addon." + file); }
 
         // the addon's folder in AddOns (also when it is turned off; else the first version's folder), or null
@@ -469,12 +563,12 @@ namespace AzerothLauncher
 
         public static bool AddonInstalled(string addonsDir) { return AddonPath(addonsDir) != null; }
 
-        // installed, but not the version built into this launcher
+        // installed, but not the version built into this launcher (or still the old "Azeroth Stats")
         public static bool AddonOutdated(string addonsDir)
         {
             string dir = AddonPath(addonsDir);
             if (dir == null) return false;
-            if (Folder(addonsDir, AddonFolder) == null) return true;     // still the old "Azeroth Stats"
+            if (Folder(addonsDir, AddonFolder) == null) return true;
             foreach (string f in AddonFiles)
             {
                 string p = Path.Combine(dir, f);
