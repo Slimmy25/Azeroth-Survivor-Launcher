@@ -24,7 +24,7 @@ namespace AzerothLauncher
             SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer |
                      ControlStyles.ResizeRedraw, true);
             Height = 50;
-            BackColor = Theme.Hex("#15100a");
+            BackColor = Theme.Hex("#0e0d14");
         }
 
         public string Title { get { return title; } set { title = value; Invalidate(); } }
@@ -36,13 +36,9 @@ namespace AzerothLauncher
             Graphics g = e.Graphics;
             g.Clear(BackColor);
             int w = Math.Max(Width, 200);
-            for (int i = 0; i < 30; i++)                     // bronze bar with a gradient
-            {
-                float y = 11 + i * 0.9f;
-                using (var p = new Pen(Theme.Mix(Theme.Hex("#6a5026"), Theme.Hex("#241908"), i / 29.0), 1.5f))
-                    g.DrawLine(p, 30, y, w - 4, y);
-            }
-            using (var p = new Pen(Theme.Hex("#b8893a"), 2)) g.DrawRectangle(p, 30, 11, w - 34, 27);
+            Image bar = Retro.Get("long");                  // the launcher's blue stone, framed in gold
+            if (bar != null) g.DrawImage(bar, new Rectangle(30, 11, w - 34, 28));
+            using (var p = new Pen(Theme.Hex("#c49a48"), 2)) g.DrawRectangle(p, 30, 11, w - 34, 27);
             Theme.Smooth(g);
             using (var sf = new StringFormat())
             using (var b = new SolidBrush(Theme.Hex("#fff0b0")))
@@ -143,7 +139,7 @@ namespace AzerothLauncher
         // ------------------------------------------------------------------ the window itself
         void BuildSide()
         {
-            Color bronzeD = Theme.Hex("#3a2a12"), dark = Theme.Hex("#15100a");
+            Color bronzeD = Theme.Hex("#2a2620"), dark = Theme.Hex("#0e0d14");   // night stone, like the launcher
             side = new Form();
             side.FormBorderStyle = FormBorderStyle.None;
             side.ShowInTaskbar = false;                      // the sections open inside the launcher, on its left side
@@ -163,7 +159,7 @@ namespace AzerothLauncher
                     CloseSide();
                 }
             };
-            var frame = new Bordered(Theme.Hex("#b8893a"), 2);
+            var frame = new Bordered(Theme.Hex("#c49a48"), 2);
             frame.Dock = DockStyle.Fill;
             side.Controls.Add(frame);
             var inner = new Panel();
@@ -204,7 +200,7 @@ namespace AzerothLauncher
                 strip.Controls.Add(b);
             }
             // left: the chat-style area that holds the section
-            var chat = new Bordered(Theme.Hex("#6b4a1c"), 2);
+            var chat = new Bordered(Theme.Hex("#8a7040"), 2);
             chat.Dock = DockStyle.Fill;
             body.Controls.Add(chat);
             chat.BringToFront();

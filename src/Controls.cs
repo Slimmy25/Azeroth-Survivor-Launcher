@@ -1,4 +1,4 @@
-// The look: 2006 wow.com colours, the gold bevel buttons, small icon buttons and shared UI helpers.
+﻿// The look: 2006 wow.com colours, the gold bevel buttons, small icon buttons and shared UI helpers.
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -334,8 +334,10 @@ namespace AzerothLauncher
             Graphics g = e.Graphics;
             int s = Width;
             bool lit = !grayed && (active || hover);
-            g.Clear(Theme.Hex("#15100a"));
-            using (var b = new SolidBrush(Theme.Hex("#1c130a"))) g.FillRectangle(b, 1, 1, s - 3, s - 3);
+            g.Clear(Theme.Hex("#0e0d14"));
+            Image stone = Retro.Get(lit ? "btn_hover" : "btn");    // the launcher's blue stone
+            if (stone != null && !grayed) g.DrawImage(stone, new Rectangle(1, 1, s - 2, s - 2));
+            else using (var b = new SolidBrush(Theme.Hex("#1c1a20"))) g.FillRectangle(b, 1, 1, s - 3, s - 3);
             using (var p = new Pen(lit ? Theme.Gold : grayed ? Theme.Hex("#4a443a") : Theme.Hex("#7a5a22"), 2)) g.DrawRectangle(p, 1, 1, s - 3, s - 3);
             using (var p = new Pen(Theme.Hex("#3a2a12"), 1)) g.DrawRectangle(p, 4, 4, s - 9, s - 9);
             Theme.Smooth(g);
