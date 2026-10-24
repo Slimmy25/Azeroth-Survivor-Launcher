@@ -817,3 +817,5 @@ Could not keep a local copy of this download ({0}).
 = Bu indirmenin yerel kopyası tutulamadı ({0}).
 The game is running. Close it before you restore.
 = Oyun çalışıyor. Geri yüklemeden önce kapat.
+Cloud Save needs the game. Press INSTALL to download it first.
+= Bulut kaydı için oyun gerekli. Önce indirmek için YÜKLE'ye bas.

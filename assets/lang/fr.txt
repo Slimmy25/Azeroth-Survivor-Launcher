@@ -816,3 +816,5 @@ Could not keep a local copy of this download ({0}).
 = Impossible de garder une copie locale de ce téléchargement ({0}).
 The game is running. Close it before you restore.
 = Le jeu est lancé. Ferme-le avant de restaurer.
+Cloud Save needs the game. Press INSTALL to download it first.
+= La sauvegarde cloud a besoin du jeu. Appuie d'abord sur INSTALLER pour le télécharger.

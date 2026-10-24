@@ -298,6 +298,27 @@ namespace AzerothLauncher
             else if (Updating) { playBtn.Label = "UPDATING"; playBtn.FontSize = 20; }
             else { playBtn.Label = ClientPresent() ? "PLAY" : "INSTALL"; playBtn.FontSize = 24; }
             Invalidate(new Rectangle(17, 240, W - 34, 84));
+            RefreshGates();
+        }
+
+        // Cloud Save is grayed out (and says why on hover) until the game is installed
+        const string CloudNeedsGame = "Cloud Save needs the game. Press INSTALL to download it first.";
+
+        void RefreshGates()
+        {
+            bool off = !GateOpen();
+            WowButton b;
+            if (nav.TryGetValue("Cloud Save", out b))
+            {
+                b.GrayedTip = CloudNeedsGame;
+                b.Grayed = off;
+            }
+            IconButton s;
+            if (stripBtns != null && stripBtns.TryGetValue("Cloud Save", out s))
+            {
+                s.GrayedTip = CloudNeedsGame;
+                s.Grayed = off;
+            }
         }
 
         // call after cloud saving is turned on or off: show/hide every cloud reference
@@ -602,6 +623,11 @@ namespace AzerothLauncher
                 return;
             }
             if (!CloudEnabled()) return;
+            if (!GateOpen())                                 // no cloud sync before the game is installed
+            {
+                if (quiet) Notify(CloudNeedsGame); else SetStatus(CloudNeedsGame);
+                return;
+            }
             if (Cfg.Str("cloud_dir").Trim().Length == 0)
             {
                 string msg = "Choose a sync folder inside your cloud drive first (Cloud Save or Options).";

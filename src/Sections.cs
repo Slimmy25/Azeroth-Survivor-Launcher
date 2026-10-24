@@ -285,7 +285,8 @@ namespace AzerothLauncher
 
         public void ShowSection(string name)
         {
-            if (name != "Home" && !GateOpen())
+            // Options and About work without the game; the other sections need it
+            if (name != "Home" && name != "Options" && name != "About Launcher" && !GateOpen())
             {
                 SetStatus("Press INSTALL to download the game first.");
                 ShowWindowFront();
@@ -1139,6 +1140,8 @@ namespace AzerothLauncher
             Cfg.Set("game_dir", d);
             Cfg.Save();
             SetStatus("Game folder set: " + d);
+            RefreshPlayLabel();                              // PLAY/INSTALL and the Cloud Save button follow the new folder
+            Invalidate();
             RebuildCurrent();
         }
 

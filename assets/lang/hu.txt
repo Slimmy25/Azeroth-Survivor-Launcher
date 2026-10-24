@@ -817,3 +817,5 @@ Could not keep a local copy of this download ({0}).
 = Nem sikerült helyi másolatot megőrizni erről a letöltésről ({0}).
 The game is running. Close it before you restore.
 = A játék fut. Zárd be a visszaállítás előtt.
+Cloud Save needs the game. Press INSTALL to download it first.
+= A felhőmentéshez kell a játék. Előbb töltsd le a TELEPÍTÉS gombbal.

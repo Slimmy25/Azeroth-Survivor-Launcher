@@ -817,3 +817,5 @@ Could not keep a local copy of this download ({0}).
 = Не удалось сохранить локальную копию этой загрузки ({0}).
 The game is running. Close it before you restore.
 = Игра запущена. Закрой её перед восстановлением.
+Cloud Save needs the game. Press INSTALL to download it first.
+= Для облачного сохранения нужна игра. Сначала нажми УСТАНОВИТЬ, чтобы скачать её.

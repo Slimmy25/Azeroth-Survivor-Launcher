@@ -817,3 +817,5 @@ Could not keep a local copy of this download ({0}).
 = Nu s-a putut păstra o copie locală a acestei descărcări ({0}).
 The game is running. Close it before you restore.
 = Jocul rulează. Închide-l înainte de restaurare.
+Cloud Save needs the game. Press INSTALL to download it first.
+= Salvarea în cloud are nevoie de joc. Apasă INSTALEAZĂ pentru a-l descărca mai întâi.

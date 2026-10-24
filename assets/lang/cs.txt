@@ -817,3 +817,5 @@ Could not keep a local copy of this download ({0}).
 = Z tohoto stažení se nepodařilo ponechat místní kopii ({0}).
 The game is running. Close it before you restore.
 = Hra běží. Před obnovením ji zavři.
+Cloud Save needs the game. Press INSTALL to download it first.
+= Ukládání do cloudu potřebuje hru. Nejdřív ji stáhni tlačítkem NAINSTALOVAT.

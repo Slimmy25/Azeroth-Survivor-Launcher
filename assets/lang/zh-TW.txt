@@ -817,3 +817,5 @@ Could not keep a local copy of this download ({0}).
 = 無法保留這次下載的本機副本（{0}）。
 The game is running. Close it before you restore.
 = 遊戲正在執行。還原前請先關閉遊戲。
+Cloud Save needs the game. Press INSTALL to download it first.
+= 雲端存檔需要先安裝遊戲。請先按「安裝」下載遊戲。

@@ -817,3 +817,5 @@ Could not keep a local copy of this download ({0}).
 = ไม่สามารถเก็บสำเนาในเครื่องของการดาวน์โหลดนี้ ({0})
 The game is running. Close it before you restore.
 = เกมกำลังทำงาน ปิดก่อนกู้คืน
+Cloud Save needs the game. Press INSTALL to download it first.
+= เซฟบนคลาวด์ต้องมีเกมก่อน กด ติดตั้ง เพื่อดาวน์โหลดก่อน

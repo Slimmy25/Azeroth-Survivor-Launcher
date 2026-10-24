@@ -816,3 +816,5 @@ Could not keep a local copy of this download ({0}).
 = Kunde inte spara en lokal kopia av den här nedladdningen ({0}).
 The game is running. Close it before you restore.
 = Spelet körs. Stäng det innan du återställer.
+Cloud Save needs the game. Press INSTALL to download it first.
+= Molnsparning kräver spelet. Tryck på INSTALLERA för att ladda ner det först.

@@ -817,3 +817,5 @@ Could not keep a local copy of this download ({0}).
 = Không thể giữ bản sao trên máy của lần tải này ({0}).
 The game is running. Close it before you restore.
 = Trò chơi đang chạy. Hãy đóng trước khi khôi phục.
+Cloud Save needs the game. Press INSTALL to download it first.
+= Lưu trên mây cần có trò chơi. Hãy nhấn CÀI ĐẶT để tải về trước.
