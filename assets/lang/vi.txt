@@ -431,8 +431,8 @@ Select a folder inside your cloud drive (Google Drive, OneDrive, Dropbox ...)
 = Chọn một thư mục trong ổ mây của bạn (Google Drive, OneDrive, Dropbox ...)
 That is the top level of your cloud drive.
 = Đó là cấp cao nhất của ổ mây.
-Create and use a subfolder named AzerothSync inside it?
-= Tạo và dùng thư mục con tên AzerothSync bên trong?
+Create and use a subfolder named Azeroth Survivor Launcher inside it?
+= Tạo và dùng thư mục con tên Azeroth Survivor Launcher bên trong?
 Sync folder
 = Thư mục đồng bộ
 Play time reset.

@@ -431,8 +431,8 @@ Select a folder inside your cloud drive (Google Drive, OneDrive, Dropbox ...)
 = クラウドドライブ内のフォルダーを選択（Google Drive、OneDrive、Dropbox ...）
 That is the top level of your cloud drive.
 = そこはクラウドドライブの最上位です。
-Create and use a subfolder named AzerothSync inside it?
-= その中に AzerothSync というサブフォルダーを作成して使いますか？
+Create and use a subfolder named Azeroth Survivor Launcher inside it?
+= その中に Azeroth Survivor Launcher というサブフォルダーを作成して使いますか？
 Sync folder
 = 同期フォルダー
 Play time reset.

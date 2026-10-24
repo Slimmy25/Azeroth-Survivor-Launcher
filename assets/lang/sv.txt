@@ -430,8 +430,8 @@ Select a folder inside your cloud drive (Google Drive, OneDrive, Dropbox ...)
 = Välj en mapp i din molnlagring (Google Drive, OneDrive, Dropbox ...)
 That is the top level of your cloud drive.
 = Det är den översta nivån i din molnlagring.
-Create and use a subfolder named AzerothSync inside it?
-= Skapa och använda en undermapp som heter AzerothSync där?
+Create and use a subfolder named Azeroth Survivor Launcher inside it?
+= Skapa och använda en undermapp som heter Azeroth Survivor Launcher där?
 Sync folder
 = Synkmapp
 Play time reset.

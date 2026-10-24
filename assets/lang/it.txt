@@ -430,8 +430,8 @@ Select a folder inside your cloud drive (Google Drive, OneDrive, Dropbox ...)
 = Seleziona una cartella nel tuo cloud (Google Drive, OneDrive, Dropbox ...)
 That is the top level of your cloud drive.
 = Questa è la cartella principale del tuo cloud.
-Create and use a subfolder named AzerothSync inside it?
-= Creare e usare al suo interno una sottocartella chiamata AzerothSync?
+Create and use a subfolder named Azeroth Survivor Launcher inside it?
+= Creare e usare al suo interno una sottocartella chiamata Azeroth Survivor Launcher?
 Sync folder
 = Cartella di sincronizzazione
 Play time reset.

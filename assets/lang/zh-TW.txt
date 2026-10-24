@@ -431,8 +431,8 @@ Select a folder inside your cloud drive (Google Drive, OneDrive, Dropbox ...)
 = 在你的雲端硬碟中選擇一個資料夾（Google Drive、OneDrive、Dropbox ...）
 That is the top level of your cloud drive.
 = 這是你雲端硬碟的最上層。
-Create and use a subfolder named AzerothSync inside it?
-= 在其中建立並使用名為 AzerothSync 的子資料夾嗎？
+Create and use a subfolder named Azeroth Survivor Launcher inside it?
+= 在其中建立並使用名為 Azeroth Survivor Launcher 的子資料夾嗎？
 Sync folder
 = 同步資料夾
 Play time reset.

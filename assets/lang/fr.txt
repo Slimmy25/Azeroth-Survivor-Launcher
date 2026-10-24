@@ -430,8 +430,8 @@ Select a folder inside your cloud drive (Google Drive, OneDrive, Dropbox ...)
 = Choisis un dossier dans ton disque cloud (Google Drive, OneDrive, Dropbox ...)
 That is the top level of your cloud drive.
 = C'est la racine de ton disque cloud.
-Create and use a subfolder named AzerothSync inside it?
-= Créer et utiliser un sous-dossier nommé AzerothSync dedans ?
+Create and use a subfolder named Azeroth Survivor Launcher inside it?
+= Créer et utiliser un sous-dossier nommé Azeroth Survivor Launcher dedans ?
 Sync folder
 = Dossier de synchronisation
 Play time reset.

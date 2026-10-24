@@ -431,8 +431,8 @@ Select a folder inside your cloud drive (Google Drive, OneDrive, Dropbox ...)
 = Vyber složku ve svém cloudovém disku (Google Drive, OneDrive, Dropbox ...)
 That is the top level of your cloud drive.
 = To je nejvyšší úroveň tvého cloudového disku.
-Create and use a subfolder named AzerothSync inside it?
-= Vytvořit v ní podsložku AzerothSync a používat ji?
+Create and use a subfolder named Azeroth Survivor Launcher inside it?
+= Vytvořit v ní podsložku Azeroth Survivor Launcher a používat ji?
 Sync folder
 = Složka synchronizace
 Play time reset.

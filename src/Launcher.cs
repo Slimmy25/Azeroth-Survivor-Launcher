@@ -547,8 +547,8 @@ namespace AzerothLauncher
             bool topLevel = Util.IsDriveRoot(d);
             foreach (var c in clouds) if (Util.SamePath(d, c.Value)) topLevel = true;
             if (topLevel && Msg.Show(owner, "That is the top level of your cloud drive.\n\nCreate and use a subfolder named " +
-                                            "AzerothSync inside it?", "Sync folder", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                d = Path.Combine(d, "AzerothSync");
+                                            "Azeroth Survivor Launcher inside it?", "Sync folder", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                d = Path.Combine(d, "Azeroth Survivor Launcher");
             return d;
         }
 

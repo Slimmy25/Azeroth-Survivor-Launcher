@@ -430,8 +430,8 @@ Select a folder inside your cloud drive (Google Drive, OneDrive, Dropbox ...)
 = Kies een map in je clouddrive (Google Drive, OneDrive, Dropbox ...)
 That is the top level of your cloud drive.
 = Dat is het hoogste niveau van je clouddrive.
-Create and use a subfolder named AzerothSync inside it?
-= Een submap met de naam AzerothSync erin maken en gebruiken?
+Create and use a subfolder named Azeroth Survivor Launcher inside it?
+= Een submap met de naam Azeroth Survivor Launcher erin maken en gebruiken?
 Sync folder
 = Synchronisatiemap
 Play time reset.

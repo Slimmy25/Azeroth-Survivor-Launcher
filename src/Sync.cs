@@ -1,10 +1,10 @@
-// Cloud sync engine: a port of the sync engine of AzerothSync by KeijinDE
-// (https://github.com/KeijinDE/ASDataSync, MIT License, Copyright (c) 2026 KeijinDE).
-// Same sync folder layout, fingerprints and rules as AzerothSync and the earlier Python launcher, so all of
+// Cloud sync engine of the Azeroth Survivor Launcher. Its framework comes from KeijinDE's sync engine, used with
+// his blessing (MIT License, Copyright (c) 2026 KeijinDE, see THIRD-PARTY-NOTICES.md).
+// Same sync folder layout, fingerprints and rules as that engine and the earlier Python launcher, so all of
 // them can share one folder and this launcher keeps the sync memory of the old one.
 //
 // No merging: per area one complete state wins and the overwritten one is backed up as a ZIP first.
-// Areas: save game, AddOns, addon settings. Uploads update the cloud folder in place (no .azsync-new / .azsync-old
+// Areas: save game, AddOns, addon settings. Uploads update the cloud folder in place (no .asl-new / .asl-old
 // folders inside the cloud drive); downloads swap the local folder through a staging copy.
 //   <sync folder>\manifest.json   fingerprints of the last upload
 //   <sync folder>\data\save|addons|saved
@@ -74,7 +74,9 @@ namespace AzerothLauncher
     public class SyncEngine
     {
         public const string NoneHash = "NONE", EmptyHash = "EMPTY";
-        const string StageSuffix = ".azsync-new", OldSuffix = ".azsync-old", HashPrefix = "2:";
+        const string StageSuffix = ".asl-new", OldSuffix = ".asl-old", HashPrefix = "2:";
+        // the names the first versions used for the same leftovers; still cleaned up
+        static readonly string[][] EarlierSuffixes = { new[] { ".azsync-new", ".azsync-old" } };
         const int KeepLocalBackups = 20, KeepCloudBackups = 10, KeepDownloads = 5;
         public static readonly string Machine = Environment.MachineName;
 
@@ -115,7 +117,7 @@ namespace AzerothLauncher
         string DownloadsDir { get { return Path.Combine(S.StateDir, "downloads"); } }
 
         // ---------- listing ----------
-        // All files below directory (relative paths use backslashes, like AzerothSync).
+        // All files below directory (relative paths use backslashes, as the sync folder format expects).
         public static List<FileEntry> ListFiles(string directory, string[] exclude)
         {
             var output = new List<FileEntry>();
@@ -301,12 +303,17 @@ namespace AzerothLauncher
         static bool IsEmpty(string h) { return h == NoneHash || h == EmptyHash; }
 
         // ---------- copy with staging ----------
-        // Leftovers of an interrupted sync (this launcher's or AzerothSync's): "<folder>.azsync-old" is put back
-        // when the folder itself is missing, otherwise it and "<folder>.azsync-new" are removed. A leftover that
+        // Leftovers of an interrupted sync: "<folder>.asl-old" is put back when the folder itself is missing,
+        // otherwise it and "<folder>.asl-new" are removed (also under the first versions' names). A leftover that
         // cannot be removed (no permission, locked by the cloud app) never stops the sync: it is only reported.
         void Recover(string directory)
         {
-            string stage = directory + StageSuffix, old = directory + OldSuffix;
+            foreach (var e in EarlierSuffixes) Recover(directory, directory + e[0], directory + e[1]);
+            Recover(directory, directory + StageSuffix, directory + OldSuffix);
+        }
+
+        void Recover(string directory, string stage, string old)
+        {
             if (Directory.Exists(old))
             {
                 if (!Directory.Exists(directory))
@@ -427,7 +434,7 @@ namespace AzerothLauncher
 
         // Makes the cloud folder dst an exact copy of src without a second folder next to it: cloud drives (Google
         // Drive, OneDrive ...) upload every folder they see and may not let a folder be renamed or removed, so the
-        // swap that Mirror does (dst.azsync-new / dst.azsync-old) is not used there. The files are first copied to the
+        // swap that Mirror does (dst.asl-new / dst.asl-old) is not used there. The files are first copied to the
         // launcher's temp folder and checked (the game may still be writing), then only the changed files are
         // written into dst and the ones that are gone are removed; finally dst is checked against expectedHash.
         void UpdateInPlace(string src, string dst, string[] exclude, string expectedHash)

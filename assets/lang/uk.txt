@@ -431,8 +431,8 @@ Select a folder inside your cloud drive (Google Drive, OneDrive, Dropbox ...)
 = Вибери теку на своєму хмарному диску (Google Drive, OneDrive, Dropbox ...)
 That is the top level of your cloud drive.
 = Це верхній рівень твого хмарного диска.
-Create and use a subfolder named AzerothSync inside it?
-= Створити всередині нього теку AzerothSync і використовувати її?
+Create and use a subfolder named Azeroth Survivor Launcher inside it?
+= Створити всередині нього теку Azeroth Survivor Launcher і використовувати її?
 Sync folder
 = Тека синхронізації
 Play time reset.
