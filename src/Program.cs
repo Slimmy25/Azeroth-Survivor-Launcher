@@ -36,6 +36,14 @@ namespace AzerothLauncher
         [STAThread]
         static void Main(string[] args)
         {
+            int preview = Array.IndexOf(args, "--preview-stats");     // developer tool, see StatsPreview.cs
+            if (preview >= 0 && args.Length > preview + 2)
+            {
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                LauncherApp.RenderStatsPreview(args[preview + 1], args[preview + 2]);
+                Environment.Exit(0);
+            }
             bool tray = Array.IndexOf(args, "--tray") >= 0;
             Lang.Load(Lang.Default(Config.Load().Str("language")));     // the player's language (Options > Language)
             bool afterUpdate = Array.IndexOf(args, "--after-update") >= 0;

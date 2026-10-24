@@ -1,0 +1,42 @@
+# Developer tool: renders the STATS page for the sample data in tools/preview into PNG pictures and puts them on
+# the "previews" branch (folder stats/), to check the layout without the game. Run it by hand: Actions >
+# Preview stats > Run workflow. Nothing here is released.
+name: Preview stats
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  preview:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build the launcher
+        shell: cmd
+        run: call build.bat
+
+      - name: Render the STATS page
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path preview-out | Out-Null
+          $p = Start-Process -FilePath "dist\Azeroth Survivors Launcher.exe" -ArgumentList "--preview-stats","tools\preview","preview-out" -PassThru -Wait
+          Get-ChildItem preview-out -Filter *.png | ForEach-Object { $_.Name }
+          if ((Get-ChildItem preview-out -Filter *.png).Count -eq 0) { throw "no pictures were made (exit code $($p.ExitCode))" }
+
+      - name: Put the pictures on the previews branch
+        shell: bash
+        run: |
+          set -e
+          mkdir -p /tmp/pv && cp preview-out/*.png /tmp/pv/
+          git config user.name "preview-bot"
+          git config user.email "preview-bot@users.noreply.github.com"
+          git checkout --orphan previews-tmp
+          git rm -rfq . || true
+          mkdir -p stats && cp /tmp/pv/*.png stats/
+          git add stats
+          git commit -qm "STATS preview of ${GITHUB_SHA::7}"
+          git push -f origin HEAD:previews
