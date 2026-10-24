@@ -4,9 +4,9 @@
 # (several separated by commas, or empty). The description is optional. Lines starting with # are ignored.
 # FILTERS: UI OVERHAUL, GAMEPLAY, COSMETIC
 
-AS ADDONS | DBM by Gabriellus | https://files.catbox.moe/2r4n2u.zip | GAMEPLAY
-AS ADDONS | Death Recap By Fotze | https://files.catbox.moe/329wa0.zip | GAMEPLAY
-AS ADDONS | Azerloot By KindaGray | https://github.com/Kindagrey/Azerloot/releases/download/v2.5.0/Azerloot-2.5.0.zip | GAMEPLAY
-AS ADDONS | Chest GPS By Fotze | https://files.catbox.moe/riqfmy.zip | COSMETIC
-AS ADDONS | SurvivorsDragonU By Mxgwyn | https://github.com/migwynkriid13/SurvivorsDragonUi/releases/latest/download/SurvivorsDragonUi.zip | UI OVERHAUL
-AS ADDONS | Keijin UI By Keijin | https://github.com/KeijinDE/KeijinUI_modern-as-ui/releases/download/v3.7.1/KeijinUI-3.7.1.zip | UI OVERHAUL
+AS ADDONS | DBM by Gabriellus | https://github.com/Slimmy25/Azeroth-Survivor-Launcher/releases/download/addons/DBM-by-Gabriellus.zip | GAMEPLAY
+AS ADDONS | Death Recap By Fotze | https://github.com/Slimmy25/Azeroth-Survivor-Launcher/releases/download/addons/Death-Recap-by-Fotze.zip | GAMEPLAY
+AS ADDONS | Azerloot By KindaGray | https://github.com/Slimmy25/Azeroth-Survivor-Launcher/releases/download/addons/Azerloot-by-KindaGray.zip | GAMEPLAY
+AS ADDONS | Chest GPS By Fotze | https://github.com/Slimmy25/Azeroth-Survivor-Launcher/releases/download/addons/Chest-GPS-by-Fotze.zip | COSMETIC
+AS ADDONS | SurvivorsDragonU By Mxgwyn | https://github.com/Slimmy25/Azeroth-Survivor-Launcher/releases/download/addons/SurvivorsDragonUi-by-Mxgwyn.zip | UI OVERHAUL
+AS ADDONS | Keijin UI By Keijin | https://github.com/Slimmy25/Azeroth-Survivor-Launcher/releases/download/addons/Keijin-UI-by-Keijin.zip | UI OVERHAUL
