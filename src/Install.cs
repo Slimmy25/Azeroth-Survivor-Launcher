@@ -419,7 +419,8 @@ namespace AzerothLauncher
             string tmp = Path.Combine(Util.TempDir, "addon_" + Guid.NewGuid().ToString("N") + ".zip");
             try
             {
-                Net.Download(url, tmp, false, "addon", null, null, 0);
+                if (File.Exists(url)) File.Copy(url, tmp, true);      // MY ADDONS: a .zip on this PC
+                else Net.Download(url, tmp, false, "addon", null, null, 0);
                 if (Kind(tmp) != "zip")
                     throw new UserError("The link did not give a .zip file. It must be a direct download link " +
                                         "(share pages such as LimeWire do not work).");
