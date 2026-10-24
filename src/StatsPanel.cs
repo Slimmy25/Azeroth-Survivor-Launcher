@@ -128,7 +128,7 @@ namespace AzerothLauncher
 
             var sp = MakeThinScroll(panel, new Rectangle(20, 56, PW - 40, PH - 12 - 56), Armory.Page, Theme.Bronze,
                                     Armory.SlotEdge, Theme.GoldDim);
-            int w = sp.ClientSize.Width - SystemInformation.VerticalScrollBarWidth - 16;     // room for the slim bar
+            int w = sp.ClientSize.Width - 22;                    // room for the slim bar on the right
             int y = 4;
             PlayStats ps = ShownPlayStats();
 

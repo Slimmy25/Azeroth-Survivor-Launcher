@@ -379,26 +379,23 @@ namespace AzerothLauncher
             return Put(l, x, y);
         }
 
-        // A scrollable area whose Windows scroll bar is hidden (clipped off to the right) and replaced by a slim
-        // painted one in `thumb` colors. The content keeps the same width as with MakeScroll.
+        // A scrollable area without Windows' own (white) scroll bar: a slim painted one in `thumb` colors sits over
+        // its right edge, so the content should leave about 14 px free there.
         ScrollPanel MakeThinScroll(Control parent, Rectangle r, Color bg, Color border, Color thumb, Color thumbHot)
         {
             var frame = new Bordered(border, 1);
             frame.Bounds = r;
             parent.Controls.Add(frame);
             frame.BringToFront();
-            var clip = new Panel();                          // clips the native bar off
-            clip.Dock = DockStyle.Fill;
-            clip.BackColor = bg;
-            frame.Controls.Add(clip);
             var sp = new ScrollPanel();
+            sp.HideBars = true;
             sp.BackColor = bg;
-            int cw = r.Width - 2, ch = r.Height - 2;
-            sp.Bounds = new Rectangle(0, 0, cw + SystemInformation.VerticalScrollBarWidth, ch);
-            clip.Controls.Add(sp);
-            var bar = new ThinScrollBar(sp, Theme.Mix(bg, Color.Black, 0.3), thumb, thumbHot);
-            bar.Bounds = new Rectangle(cw - 7, 2, 6, ch - 4);
-            clip.Controls.Add(bar);
+            sp.Dock = DockStyle.Fill;
+            frame.Controls.Add(sp);
+            var bar = new ThinScrollBar(sp, bg, thumb, thumbHot);
+            bar.Bounds = new Rectangle(r.Width - 2 - 8, 3, 6, r.Height - 2 - 6);
+            bar.Anchor = AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Bottom;
+            frame.Controls.Add(bar);
             bar.BringToFront();
             return sp;
         }
