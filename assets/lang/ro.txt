@@ -969,3 +969,7 @@ Best rank {#0}
 = Cel mai bun rang {#0}
 {#0} damage
 = {#0} daune
+ABOUT
+= DESPRE
+LAUNCHER CHANGELOG
+= MODIFICĂRILE LAUNCHERULUI

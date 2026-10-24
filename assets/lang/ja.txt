@@ -969,3 +969,7 @@ Best rank {#0}
 = 最高ランク {#0}
 {#0} damage
 = {#0} ダメージ
+ABOUT
+= 概要
+LAUNCHER CHANGELOG
+= ランチャー更新履歴

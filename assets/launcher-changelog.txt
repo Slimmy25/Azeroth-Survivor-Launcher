@@ -1,4 +1,29 @@
-# Launcher 1.8 (current)
+# Next update (after v0.3)
+- About Launcher has two buttons: ABOUT (a description of the launcher) and LAUNCHER CHANGELOG (this list)
+- New STATS section (can be hidden in Options): your play time, and with the AS Time Tracker addon every run's result, totals, personal bests, milestones and recent runs
+- STATS: a class selector shows the same stats for each class on its own; class pick rate, pick rate month by month, and the abilities you took with their pick rate, win rate, best rank and damage
+- AS Time Tracker is built into the launcher (INSTALL STATS ADDON on the STATS page) and also listed in Download More; /azstats in game
+- New GUIDE: a new player guide with classes, controls, zones, bosses, level-ups, gear, talents and tips
+- Buttons, top to bottom: GUIDE, Cloud Save, Addons, Changelog, Stats, Options
+- Cloud Save: uploads write straight into the one cloud folder (no more "save.azsync-old" / "save.azsync-new" folders), and an old leftover folder that cannot be removed no longer stops a sync
+- Guide, Options, About Launcher and Discord work before the game is installed; Cloud Save is grayed out until then and says why when you point at it
+- Launcher updates and addon downloads now come from a public downloads page, so every player can get them
+
+# v0.3
+- Installs a newer launcher by itself when it starts (it waits while the game, an install, a sync or setup is running)
+- The launcher keeps its own files in an "Azeroth Survivor Launcher" folder next to the exe (or in %LOCALAPPDATA% when that folder cannot be written to or sits in a cloud drive)
+- Keeps a copy of the last 5 cloud downloads on this PC; Cloud Save > EARLIER DOWNLOADS restores one as a last resort
+- The addon list no longer shows download addresses
+
+# v0.2
+- The launcher was rebuilt as one small exe that needs nothing else installed
+- 26 languages (Options > Language); the Windows language is used by default
+- UPDATE: updates the launcher from the latest release
+- Play time: total, sessions, last and longest session, shared between your PCs through the cloud sync folder
+- The game's version is shown under "A game made by Aethus"
+- Download More gets the AS addons from the launcher's own downloads
+
+# Python launcher 1.8
 - The game's "AS" emblem is now the launcher's window, taskbar, tray and exe icon
 - Setup has a second page asking whether to open the Addons section to download addons or enable/disable them
 - First start shows a setup window: cloud saving on or off, and the AddOns, game save and addon settings folders (only asks for the ones it cannot find); Options > RUN SETUP AGAIN reopens it
@@ -35,39 +60,39 @@
 - Changelog shows its text exactly as written, starting with the 0.113.1 notes
 - The changelog is built into the launcher and can no longer be edited from inside it
 
-# Launcher 1.7
+# Python launcher 1.7
 - Cloud Save now works like AzerothSync: save game, AddOns and addon settings are synced separately
 - Fingerprint checks decide what is newer; a real conflict asks once: Use cloud, Keep local or Cancel
 - Everything that is overwritten is backed up as a ZIP (this PC: last 20, cloud: last 10)
 - Cloud Save has Check Status, Download and Upload with a live log; Options has the folder settings
 - Cloud folder detection for Google Drive, OneDrive and Dropbox
 
-# Launcher 1.6
+# Python launcher 1.6
 - PLAY reads INSTALL when no game client is found, and downloads it from the game server
 - Download progress shows in the status line; the client is unpacked automatically
 
-# Launcher 1.5
+# Python launcher 1.5
 - Added an Options button under Addons: game, save and cloud folders, plus tray settings
 - About Launcher is now a small button in the footer, where the status text begins
 
-# Launcher 1.4
+# Python launcher 1.4
 - Changelog button shows your own messages, typed into CHANGELOG.txt
 - Added this About Launcher page for launcher updates
 - Main page opens on a welcome screen instead of the changelog
 
-# Launcher 1.3
+# Python launcher 1.3
 - Runs in the system tray and keeps running after the game closes
 - Tray menu: Show Launcher, Play, Upload Save Now, Quit
 - Start Minimized option (or launch with --tray)
 
-# Launcher 1.2
+# Python launcher 1.2
 - Play downloads the newest cloud save before the game starts
 - Saves upload when the game closes, even after a crash
 - Added Save Folder and Cloud Folder settings
 
-# Launcher 1.1
+# Python launcher 1.1
 - Play now launches AzerothSurvivors.exe
 
-# Launcher 1.0
+# Python launcher 1.0
 - First release: Play, Cloud Save, Addons and Changelog
 - 2006 World of Warcraft website theme

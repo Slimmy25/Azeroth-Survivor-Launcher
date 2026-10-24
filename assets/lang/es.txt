@@ -968,3 +968,7 @@ Best rank {#0}
 = Mejor rango {#0}
 {#0} damage
 = {#0} de daño
+ABOUT
+= ACERCA DE
+LAUNCHER CHANGELOG
+= CAMBIOS DEL LAUNCHER

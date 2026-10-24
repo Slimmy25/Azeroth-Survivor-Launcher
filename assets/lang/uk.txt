@@ -969,3 +969,7 @@ Best rank {#0}
 = Найкращий ранг {#0}
 {#0} damage
 = Шкода: {#0}
+ABOUT
+= ПРО ЛАУНЧЕР
+LAUNCHER CHANGELOG
+= ЗМІНИ ЛАУНЧЕРА

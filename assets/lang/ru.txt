@@ -969,3 +969,7 @@ Best rank {#0}
 = Лучший ранг {#0}
 {#0} damage
 = Урон: {#0}
+ABOUT
+= О ЛАУНЧЕРЕ
+LAUNCHER CHANGELOG
+= ИЗМЕНЕНИЯ ЛАУНЧЕРА

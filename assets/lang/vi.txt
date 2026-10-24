@@ -969,3 +969,7 @@ Best rank {#0}
 = Bậc cao nhất {#0}
 {#0} damage
 = {#0} sát thương
+ABOUT
+= GIỚI THIỆU
+LAUNCHER CHANGELOG
+= NHẬT KÝ LAUNCHER

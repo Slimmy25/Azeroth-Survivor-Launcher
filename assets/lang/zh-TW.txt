@@ -969,3 +969,7 @@ Best rank {#0}
 = 最高等級 {#0}
 {#0} damage
 = 傷害 {#0}
+ABOUT
+= 關於
+LAUNCHER CHANGELOG
+= 啟動器更新紀錄

@@ -969,3 +969,7 @@ Best rank {#0}
 = 최고 등급 {#0}
 {#0} damage
 = 피해 {#0}
+ABOUT
+= 소개
+LAUNCHER CHANGELOG
+= 런처 변경 내역

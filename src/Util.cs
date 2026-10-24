@@ -662,7 +662,7 @@ namespace AzerothLauncher
 
         static List<string> changelog;
         static List<AddonEntry> addons;
-        static string about;
+        static string about, launcherLog;
         static List<GuideTopic> guide;
 
         // guide.txt: "@topic Title | description", "@page Title | description", then the text of each
@@ -786,12 +786,22 @@ namespace AzerothLauncher
             }
         }
 
+        // About Launcher: the description (launcher-about.txt) and the launcher's own changelog (launcher-changelog.txt)
         public static string About
         {
             get
             {
-                if (about == null) about = Util.ReadResource("AS.about.txt").Replace("\r\n", "\n");
+                if (about == null) about = Util.ReadResource("AS.launcher-about.txt").Replace("\r\n", "\n");
                 return about;
+            }
+        }
+
+        public static string LauncherChangelog
+        {
+            get
+            {
+                if (launcherLog == null) launcherLog = Util.ReadResource("AS.launcher-changelog.txt").Replace("\r\n", "\n");
+                return launcherLog;
             }
         }
     }

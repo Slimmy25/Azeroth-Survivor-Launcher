@@ -968,3 +968,7 @@ Best rank {#0}
 = Beste rang {#0}
 {#0} damage
 = {#0} skade
+ABOUT
+= OM
+LAUNCHER CHANGELOG
+= ENDRINGER I LAUNCHEREN

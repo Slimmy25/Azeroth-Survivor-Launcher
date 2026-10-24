@@ -969,3 +969,7 @@ Best rank {#0}
 = सबसे अच्छा रैंक {#0}
 {#0} damage
 = {#0} डैमेज
+ABOUT
+= परिचय
+LAUNCHER CHANGELOG
+= लॉन्चर बदलाव

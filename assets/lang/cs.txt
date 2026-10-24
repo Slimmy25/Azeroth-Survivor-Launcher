@@ -969,3 +969,7 @@ Best rank {#0}
 = Nejlepší úroveň {#0}
 {#0} damage
 = Poškození {#0}
+ABOUT
+= O SPOUŠTĚČI
+LAUNCHER CHANGELOG
+= ZMĚNY SPOUŠTĚČE

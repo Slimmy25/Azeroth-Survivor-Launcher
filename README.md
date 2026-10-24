@@ -45,7 +45,8 @@ GitHub (see the **Actions** tab).
 | --- | --- |
 | Patch notes | `assets/changelog.txt` (posts separated by a line with only `===`) |
 | Download More list | `assets/addons.txt` (format explained at the top) |
-| About Launcher page | `assets/about.txt` |
+| About Launcher: description | `assets/launcher-about.txt` |
+| About Launcher: launcher changelog | `assets/launcher-changelog.txt` (newest first) |
 | New player guide | `assets/guide.txt` |
 | The AS Time Tracker addon | `addons/ASTimeTracker` (built into the exe; the STATS page installs it) |
 | Where launcher updates come from | `Repo` in `src/SelfUpdate.cs` (the latest non-pre-release) |
