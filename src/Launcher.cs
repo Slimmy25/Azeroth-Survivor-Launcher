@@ -229,6 +229,34 @@ namespace AzerothLauncher
             else g.Clear(Theme.BgBottom);
             Theme.Smooth(g);
             g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
+            // title: "Azeroth Survivors" in big gold letters over the section area, the emblem to its right
+            using (var path = new GraphicsPath())
+            using (var sf = new StringFormat())
+            {
+                var font = Theme.F(46, FontStyle.Bold);
+                path.AddString("Azeroth Survivors", font.FontFamily, (int)FontStyle.Bold, 58f, new PointF(0, 0), sf);
+                RectangleF b = path.GetBounds();
+                Image em = Theme.Logo;
+                int emW = em != null ? 128 : 0, emH = em != null ? em.Height * 128 / em.Width : 0;
+                float total = b.Width + (em != null ? 16 + emW : 0);
+                float x0 = 8 + (670 - total) / 2, y0 = 70 + (120 - b.Height) / 2;
+                using (var m = new Matrix())
+                {
+                    m.Translate(x0 - b.X, y0 - b.Y);
+                    path.Transform(m);
+                }
+                using (var sh = new GraphicsPath())
+                {
+                    sh.AddPath(path, false);
+                    using (var m = new Matrix()) { m.Translate(3, 4); sh.Transform(m); }
+                    using (var sb = new SolidBrush(Color.FromArgb(200, 0, 0, 0))) g.FillPath(sb, sh);
+                }
+                RectangleF pb = path.GetBounds();
+                using (var lg = new LinearGradientBrush(pb, Theme.Hex("#fff1b8"), Theme.Hex("#c9821a"), LinearGradientMode.Vertical))
+                    g.FillPath(lg, path);
+                using (var pen = new Pen(Theme.Hex("#4a2a08"), 2f)) g.DrawPath(pen, path);
+                if (em != null) g.DrawImage(em, pb.Right + 16, 70 + (120 - emH) / 2, emW, emH);
+            }
             // News: the newest patch note
             var posts = Data.Changelog;
             if (posts.Count > 0)
