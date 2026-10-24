@@ -693,7 +693,6 @@ namespace AzerothLauncher
                 var labels = new List<Label>();
                 labels.Add(UI.Text(it.Name, 12, FontStyle.Bold, Theme.Gold, listbg, textW, false));
                 if (it.Description.Length > 0) labels.Add(UI.Text(it.Description, 9, FontStyle.Regular, Theme.Text, listbg, textW, false));
-                labels.Add(UI.Text(it.Url, 8, FontStyle.Regular, Theme.LinkBlue, listbg, textW, false));
                 foreach (var l in labels)
                 {
                     l.Size = VStack.Measure(l);
