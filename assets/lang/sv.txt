@@ -818,3 +818,15 @@ The game is running. Close it before you restore.
 = Spelet körs. Stäng det innan du återställer.
 Cloud Save needs the game. Press INSTALL to download it first.
 = Molnsparning kräver spelet. Tryck på INSTALLERA för att ladda ner det först.
+GUIDE
+= GUIDE
+Guide
+= Guide
+‹ ALL TOPICS
+= ‹ ALLA ÄMNEN
+‹ BACK
+= ‹ TILLBAKA
+OPEN ›
+= ÖPPNA ›
+New to Azeroth Survivors? Pick a topic.
+= Ny i Azeroth Survivors? Välj ett ämne.

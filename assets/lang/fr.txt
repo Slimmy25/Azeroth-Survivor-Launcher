@@ -818,3 +818,15 @@ The game is running. Close it before you restore.
 = Le jeu est lancé. Ferme-le avant de restaurer.
 Cloud Save needs the game. Press INSTALL to download it first.
 = La sauvegarde cloud a besoin du jeu. Appuie d'abord sur INSTALLER pour le télécharger.
+GUIDE
+= GUIDE
+Guide
+= Guide
+‹ ALL TOPICS
+= ‹ TOUS LES SUJETS
+‹ BACK
+= ‹ RETOUR
+OPEN ›
+= OUVRIR ›
+New to Azeroth Survivors? Pick a topic.
+= Nouveau sur Azeroth Survivors ? Choisis un sujet.

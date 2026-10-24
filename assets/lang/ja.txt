@@ -819,3 +819,15 @@ The game is running. Close it before you restore.
 = ゲームが実行中です。復元する前に閉じてください。
 Cloud Save needs the game. Press INSTALL to download it first.
 = クラウドセーブにはゲームが必要です。まず「インストール」を押してダウンロードしてください。
+GUIDE
+= ガイド
+Guide
+= ガイド
+‹ ALL TOPICS
+= ‹ すべてのトピック
+‹ BACK
+= ‹ 戻る
+OPEN ›
+= 開く ›
+New to Azeroth Survivors? Pick a topic.
+= Azeroth Survivors は初めてですか？トピックを選んでください。

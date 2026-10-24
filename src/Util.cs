@@ -644,6 +644,16 @@ namespace AzerothLauncher
         public List<string> Tags = new List<string>();
     }
 
+    public class GuidePage
+    {
+        public string Title = "", Desc = "", Body = "";
+    }
+
+    public class GuideTopic : GuidePage
+    {
+        public List<GuidePage> Pages = new List<GuidePage>();
+    }
+
     public static class Data
     {
         public static readonly string[] AddonCategories = { "AS ADDONS", "WOW 1.12 ADDONS" };
@@ -653,6 +663,50 @@ namespace AzerothLauncher
         static List<string> changelog;
         static List<AddonEntry> addons;
         static string about;
+        static List<GuideTopic> guide;
+
+        // guide.txt: "@topic Title | description", "@page Title | description", then the text of each
+        public static List<GuideTopic> Guide
+        {
+            get
+            {
+                if (guide != null) return guide;
+                var list = new List<GuideTopic>();
+                GuideTopic topic = null;
+                GuidePage target = null;
+                foreach (string raw in Util.ReadResource("AS.guide.txt").Replace("\r\n", "\n").Split('\n'))
+                {
+                    string line = raw.TrimEnd();
+                    bool isTopic = line.StartsWith("@topic ", StringComparison.Ordinal);
+                    bool isPage = line.StartsWith("@page ", StringComparison.Ordinal);
+                    if (isTopic || isPage)
+                    {
+                        string rest = line.Substring(isTopic ? 7 : 6);
+                        int bar = rest.IndexOf('|');
+                        var p = new GuidePage();
+                        p.Title = (bar >= 0 ? rest.Substring(0, bar) : rest).Trim();
+                        p.Desc = bar >= 0 ? rest.Substring(bar + 1).Trim() : "";
+                        if (isTopic)
+                        {
+                            topic = new GuideTopic();
+                            topic.Title = p.Title;
+                            topic.Desc = p.Desc;
+                            list.Add(topic);
+                            target = topic;
+                        }
+                        else if (topic != null)
+                        {
+                            topic.Pages.Add(p);
+                            target = p;
+                        }
+                        continue;
+                    }
+                    if (target != null) target.Body += line + "\n";
+                }
+                guide = list;
+                return guide;
+            }
+        }
 
         // the posts of changelog.txt, highest version first (a post whose title is not a number goes last)
         public static List<string> Changelog

@@ -353,6 +353,19 @@ namespace AzerothLauncher
             }
         }
 
+        // an open book (the guide)
+        public static void Book(Graphics g, float x, float y, Color c)
+        {
+            using (var p = new Pen(c, 2))
+            {
+                g.DrawLine(p, x, y - 7, x, y + 9);
+                g.DrawLines(p, new[] { new PointF(x, y - 7), new PointF(x - 4, y - 9), new PointF(x - 11, y - 8),
+                                       new PointF(x - 11, y + 7), new PointF(x - 4, y + 6), new PointF(x, y + 9) });
+                g.DrawLines(p, new[] { new PointF(x, y - 7), new PointF(x + 4, y - 9), new PointF(x + 11, y - 8),
+                                       new PointF(x + 11, y + 7), new PointF(x + 4, y + 6), new PointF(x, y + 9) });
+            }
+        }
+
         public static void Info(Graphics g, float x, float y, Color c)
         {
             using (var p = new Pen(c, 2)) g.DrawEllipse(p, x - 10, y - 10, 20, 20);

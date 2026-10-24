@@ -40,7 +40,7 @@ namespace AzerothLauncher
 
         readonly WowButton playBtn, updateBtn, aboutBtn, discordBtn;
         readonly Dictionary<string, WowButton> nav = new Dictionary<string, WowButton>();
-        readonly string[] navNames = { "Cloud Save", "Addons", "Options", "Changelog" };
+        readonly string[] navNames = { "Cloud Save", "Addons", "Options", "Changelog", "Guide" };
         NotifyIcon tray;
         ToolStripMenuItem trayShow, trayPlay, trayUpload, trayCloseToTray, trayQuit;
 
@@ -276,7 +276,10 @@ namespace AzerothLauncher
         // stack the section buttons; the Cloud Save button is only there while cloud saving is on
         void LayoutNav()
         {
-            int y = 402;
+            int shown = 0;
+            foreach (string name in navNames) if (name != "Cloud Save" || CloudEnabled()) shown++;
+            // five buttons are a little slimmer so they still end above ABOUT LAUNCHER / DISCORD
+            int h = shown > 4 ? 40 : 44, step = shown > 4 ? 44 : 52, y = shown > 4 ? 398 : 402;
             foreach (string name in navNames)
             {
                 if (name == "Cloud Save" && !CloudEnabled())
@@ -285,8 +288,9 @@ namespace AzerothLauncher
                     continue;
                 }
                 nav[name].Visible = true;
+                nav[name].Size = new Size(250, h);
                 nav[name].Location = new Point((W - 250) / 2, y);
-                y += 52;
+                y += step;
             }
             if (strip != null) LayoutStrip();
         }

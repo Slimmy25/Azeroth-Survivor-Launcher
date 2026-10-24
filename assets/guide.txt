@@ -1,0 +1,430 @@
+New player guide shown in the launcher's GUIDE section.
+Format:
+  @topic Title | short description        a topic on the guide's first page
+  @page Title | short description         a page inside the topic above (a topic with pages shows a list of them)
+  # Heading                               a heading inside a page
+  - text                                  a bullet point
+  any other line                          a paragraph (an empty line starts a new one)
+Everything above the first @topic line is ignored. Gathered from the game itself (version 0.114.2); numbers can change with game updates.
+
+@topic Getting Started | What Azeroth Survivors is and how a run works
+# What is Azeroth Survivors?
+Azeroth Survivors is a survivors-style game set in classic World of Warcraft, made by Aethus. You pick a hero, enter a zone and stay alive while an ever-growing horde closes in. Your spells cast on their own: you move, dodge and choose how your hero grows.
+
+# How a run works
+- Pick a class and a zone on the main screen, then press Enter (or the big Enter button).
+- Move to begin. Monsters pour in from every side and your spells fire at them automatically.
+- Slain enemies drop experience and gold. Every level-up deals you cards: pick one to learn a new spell, upgrade one you have, or take a bonus.
+- Bosses arrive on a fixed clock. The zone's timeline on the main screen shows who comes and when.
+- Beat the final boss to win the zone. That opens the next zone for the class you played.
+
+# What you keep after a run
+Even a lost run counts. Talent experience, boss gear, achievements and newly opened zones stay with you. Gear and looks are kept per class, and achievements and rewards count for your whole account.
+
+@topic Controls | Keys, mouse and gamepad
+# Moving
+- W, A, S, D: run forward, turn left, run back, turn right (arrow keys work too).
+- Q and E: strafe left and right.
+- Hold both mouse buttons to run where the camera points.
+- Space: jump. Num Lock: auto-run.
+
+# During a run
+- Your spells and your racial ability cast on their own. Your job is to move, dodge and pick upgrades.
+- 1, 2, 3: pick a card when you level up. R: reroll the cards.
+- Y: open your stored level-ups (when Store Level-Ups is on).
+- Escape: the menu (Back, Options, End Run).
+
+# On the main screen
+- Enter starts the run in the selected zone.
+- Every key can be changed in Options > Key Bindings.
+
+# Gamepad
+Gamepads are supported. On menus, the D-pad or left stick moves between buttons, A presses and B goes back. Y opens stored level-ups.
+
+# Useful options
+- Controls > Store Level-Ups: level-ups no longer pause the fight. They are saved for later and a Level Up! button shows how many are waiting.
+- Controls > Open Caches by Clicking: walking over a cache no longer buys it; right-click it instead.
+- Interface: turn parts of the run's screen on or off (run clock, boss bars, kills and gold, damage meter and more).
+
+@topic Your First Run | A step-by-step start for new heroes
+# Before you start
+- Pick a class on the main screen. Hover the spells in its Spell Pool to see what it can learn.
+- Your hero's race is chosen in Armory > Character. Each race has its own racial bonuses.
+- Elwynn Forest is the first zone. Every other zone opens by beating the one before it, separately for each class.
+
+# In the run
+- Keep moving. Standing still lets the horde surround you.
+- Walk over gold coins and experience. They fly to you once you are close enough.
+- Read each level-up card before you pick. A new spell fills one of your six spell slots; an upgrade makes one of your spells stronger.
+- Watch the clock and the "next boss" timer under it. Bosses hit hard and mark the ground before big attacks: step out of the markers.
+- Caches cost gold and offer jewelry. Guardians wait in lairs and give a reward when slain.
+
+# After the run
+- Open Talents to spend the talent points you earned.
+- Check Drop Tables to see which boss drops which piece of your class's gear.
+- New achievements give points to spend on perks in Rewards.
+
+@topic Classes | The nine classes, their spells and talents
+@page Warrior | Huge health, cleaving swings, fury on every kill
+"Unstoppable in the thick of it. Huge health, cleaving swings, and every kill feeds the fury."
+- Health: 230
+- Starts with: Cleave
+- Plays best: in melee range, in the middle of the horde.
+
+# Spell pool
+- Cleave (starting spell): hits up to 3 enemies in front of you. Bosses and elites are targeted first.
+- Whirlwind: hits every enemy close around you.
+- Thunder Clap: hits every enemy around you and slows them.
+- Mortal Strike: a heavy blow on the nearest enemy.
+- Execute: a strike that deals double damage to enemies below 30% health.
+- Demoralizing Shout: hits everything around you; enemies hit deal less damage for a few seconds.
+- Battle Shout: a big damage boost for a few seconds, used once enemies are near.
+- Bloodthirst: strikes the nearest enemy and heals you for half the damage dealt.
+- Rend: makes the healthiest enemies nearby bleed over time.
+- Shield Slam: strikes up to 2 enemies and stuns them briefly.
+- Bloodrage: your hits build rage; at full rage you erupt and damage every enemy around you.
+
+# Talent trees
+- Arms: Deep Wounds, Sweeping Strikes, Mortal Wounds
+- Fury: Rampage, Fury, Bladestorm
+- Protection: Shockwave, Fortified, Titan
+
+@page Paladin | Holy ground, righteous hammers, self-healing
+"Holy ground and righteous hammers. Heals himself, shrugs off death once in a while."
+- Health: 245
+- Starts with: Consecration
+- Plays best: close to the horde, with heals and a shield to fall back on.
+
+# Spell pool
+- Consecration (starting spell): blesses the ground where you stand; every enemy on it takes Holy damage over time.
+- Exorcism: a strong strike on the nearest enemy.
+- Hammer of Wrath: strikes the nearest enemy from range.
+- Holy Shock: fires missiles at random enemies; each hit heals you.
+- Holy Wrath: hits every enemy around you.
+- Judgement: a very heavy strike on the nearest enemy.
+- Hammer of Justice: strikes the 2 nearest enemies and stuns them.
+- Holy Light: a big heal when your health falls low.
+- Divine Shield: makes you immune to all damage for a few seconds when your health falls low.
+- Holy Shield: for a while, enemies that hit you in melee take damage.
+- Redemption: slain enemies sometimes burst in holy light, damaging everything near them.
+
+# Talent trees
+- Holy: Divine Favor, Daybreak, Light's Grace
+- Protection: Hallowed Ground, Ardent Defender, Hammer of the Righteous
+- Retribution: Seal of Command, The Art of War, Divine Storm
+
+@page Hunter | Arrows, traps and volleys from range
+"Death from range. Arrows, traps and volleys, as long as you keep your distance."
+- Health: 240
+- Starts with: Auto Shot
+- Plays best: at a distance. Keep running and let your shots and traps work.
+
+# Spell pool
+- Auto Shot (starting spell): shoots the 2 nearest enemies.
+- Arcane Shot: a strong shot at the nearest enemy.
+- Multi-Shot: shoots the 3 nearest enemies.
+- Serpent Sting: poisons the healthiest enemies over time.
+- Volley: rains arrows on the thickest group of enemies.
+- Explosive Trap: damages every enemy around you.
+- Concussive Shot: hits the 2 nearest enemies and slows them a lot.
+- Aimed Shot: a huge shot at the nearest enemy (your Hunter's Mark target comes first).
+- Immolation Trap: sets the ground where you stand on fire.
+- Frost Trap: freezes the ground where you stand, damaging and rooting enemies.
+- Hunter's Mark: marks the toughest enemy so it takes more damage; when it dies the mark explodes and moves on.
+
+# Talent trees
+- Beast Mastery: Tame Beast, Frenzy, Bestial Wrath
+- Marksmanship: Piercing Shots, Rapid Fire, Kill Shot
+- Survival: Entrapment, Explosive Ammunition, Wyvern Sting
+
+@page Rogue | The fastest hero, with crits that delete elites
+"Fast, fragile and lethal. The quickest hero, with crits that delete elites."
+- Health: 190
+- Starts with: Sinister Strike
+- Plays best: darting in and out. Low health, so do not stand in the crowd for long.
+
+# Spell pool
+- Sinister Strike (starting spell): strikes up to 2 enemies next to you.
+- Eviscerate: a strong strike that deals double damage to enemies below 30% health.
+- Blade Flurry: hits every enemy close around you.
+- Rupture: makes the healthiest enemies nearby bleed over time.
+- Kidney Shot: strikes up to 2 enemies and stuns them.
+- Gouge: strikes up to 3 enemies and stuns them briefly.
+- Ghostly Strike: strikes the nearest enemy and shields you for each enemy hit.
+- Adrenaline Rush: your cooldowns recover much faster for a while.
+- Backstab: strikes up to 2 enemies, double damage below 30% health.
+- Slice and Dice: a damage boost for a while, used once enemies are near.
+- Seal Fate: critical strikes build combo points; at 5 points you get a free Eviscerate.
+
+# Talent trees
+- Assassination: Deadly Poison, Mutilate, Toxic Bloom
+- Combat: Blade Flurry, Adrenaline Rush, Killing Spree
+- Subtlety: Cheat Death, Preparation, Shadow Dance
+
+@page Priest | Shields and heals, with shadow that spreads
+"Light and Shadow. Shields and heals keep you alive while pain spreads through the horde."
+- Health: 170
+- Starts with: Smite
+- Plays best: from range, keeping shields and heals rolling.
+
+# Spell pool
+- Smite (starting spell): strikes the nearest enemy.
+- Shadow Word: Pain: shadow damage over time on the healthiest enemies.
+- Mind Blast: a strong strike on the nearest enemy.
+- Holy Nova: hits every enemy around you and heals you for each one hit.
+- Power Word: Shield: absorbs a large part of your health in damage, recast when it breaks.
+- Renew: heals you over time when your health drops.
+- Holy Fire: a heavy strike on the nearest enemy.
+- Mind Flay: hits every enemy in a cone in front of you and slows them.
+- Psychic Scream: hits everything around you and makes them flee (bosses are unaffected).
+- Devouring Plague: damage over time on the healthiest enemies that also heals you.
+- Lightwell: a Lightwell rises where you stand and strikes the nearest enemies for a while.
+
+# Talent trees
+- Discipline: Divine Aegis, Rapture, Penance
+- Holy: Radiance, Purifying Flame, Chastise
+- Shadow: Shadow Weaving, Shadowy Apparitions, Shadowform
+
+@page Shaman | Chain lightning and totems that fight beside you
+"Storms that jump from foe to foe, and totems that fight beside you."
+- Health: 195
+- Starts with: Lightning Bolt
+- Plays best: in the middle distance, dropping totems and letting lightning jump through the horde.
+
+# Spell pool
+- Lightning Bolt (starting spell): strikes the 2 nearest enemies.
+- Chain Lightning: strikes an enemy, then jumps to up to 4 more.
+- Earth Shock: a strong strike on the nearest enemy.
+- Flame Shock: fire damage over time on the healthiest enemies.
+- Frost Shock: strikes the 2 nearest enemies and slows them.
+- Lightning Shield: for a while, enemies that hit you in melee take damage.
+- Magma Totem: drops a totem beside you that burns every enemy near it.
+- Searing Totem: drops a totem beside you that shoots the nearest enemies.
+- Fire Nova: hits every enemy around you.
+- Healing Wave: a big heal when your health drops.
+- Call of Flame: your totems explode in flame when they expire.
+
+# Talent trees
+- Elemental: Lightning Overload, Elemental Fury, Elemental Mastery
+- Enhancement: Windfury, Maelstrom Weapon, Feral Spirit
+- Restoration: Call of the Elements, Reincarnation, Totemic Wrath
+
+@page Mage | The glass cannon with the biggest area damage
+"The glass cannon. The biggest area damage in Azeroth, and nothing to hide behind."
+- Health: 215
+- Starts with: Fireball
+- Plays best: kiting the horde into your blizzards and flamestrikes. Keep your distance.
+
+# Spell pool
+- Fireball (starting spell): strikes the nearest enemy.
+- Frostbolt: strikes the nearest enemy and slows it.
+- Arcane Missiles: fires missiles at random enemies, at bosses and elites when any are near.
+- Frost Nova: hits every enemy around you and roots them in place.
+- Arcane Explosion: hits every enemy around you.
+- Blizzard: freezes the ground under the thickest group of enemies and slows them.
+- Flamestrike: sets the ground under the thickest group of enemies on fire.
+- Fire Blast: strikes a random enemy nearby.
+- Cone of Cold: hits every enemy in a cone in front of you and slows them a lot.
+- Blast Wave: hits every enemy around you and slows them.
+- Pyroblast: a huge strike on the nearest enemy.
+- Ice Barrier: absorbs a large part of your health in damage, recast when it breaks.
+
+# Talent trees
+- Arcane: Arcane Concentration, Presence of Mind, Arcane Power
+- Fire: Ignite, Hot Streak, Pyroclasm
+- Frost: Frostbite, Splitting Ice, Summon Water Elemental
+
+@page Warlock | Curses, fire and demons
+"Curses and fire. Damage over time stacks up on everything that chases you."
+- Health: 165 (the lowest)
+- Starts with: Shadow Bolt
+- Plays best: spreading damage over time and staying out of reach while it works.
+
+# Spell pool
+- Shadow Bolt (starting spell): strikes the nearest enemy.
+- Corruption: shadow damage over time on the healthiest enemies.
+- Immolate: fire damage over time on the healthiest enemy.
+- Curse of Agony: long damage over time on the healthiest enemies.
+- Rain of Fire: rains fire on the thickest group of enemies.
+- Hellfire: burns every enemy close around you.
+- Death Coil: strikes the nearest enemy and heals you for all the damage dealt.
+- Searing Pain: strikes a random enemy nearby.
+- Drain Life: drains the healthiest enemy and heals you.
+- Fear: strikes the 3 nearest enemies and makes them flee (bosses are unaffected).
+- Soulfire: kills gather soul shards; at 5 shards a free Soulfire strikes the toughest enemy.
+- Demonic Empowerment: your demons deal much more damage for a while.
+
+# Talent trees
+- Affliction: Nightfall, Contagion, Seed of Corruption
+- Demonology: Soul Devourer / Soul Link, Legion Gate, Pact of the Annihilan / Butcher. Demonology brings demons that fight for you.
+- Destruction: Shadow Cleave, Conflagrate, Rain of Chaos
+
+@page Druid | Moon, storm and growth, with steady self-healing
+"Moon, storm and growth. Roots, hurricanes and the steadiest self-healing."
+- Health: 205
+- Starts with: Wrath
+- Plays best: rooting the horde and healing through the damage. Talents can turn you into a cat or a bear.
+
+# Spell pool
+- Wrath (starting spell): strikes the 2 nearest enemies.
+- Moonfire: arcane damage over time on the healthiest enemies.
+- Starfire: a heavy strike on the nearest enemy.
+- Hurricane: a storm on the thickest group of enemies that slows them.
+- Insect Swarm: damage over time on the healthiest enemies; they deal less damage.
+- Entangling Roots: strikes the 3 nearest enemies and roots them.
+- Rejuvenation: heals you over time when your health drops.
+- Regrowth: a big heal when your health drops.
+- Thorns: for a while, enemies that hit you in melee take damage.
+- Swipe: hits every enemy close around you.
+- Faerie Fire: marks a boss or elite; your hits on it arc to enemies near it.
+- Shred: a heavy claw on the nearest enemy, great against bosses and guardians.
+
+# Talent trees
+- Balance: Omen of Clarity, Starfall, Force of Nature
+- Feral Combat: Rake, Blood Frenzy, Dire Bear Form / Cat Form
+- Restoration: Swiftmend, Tranquility, Tree of Life
+
+@topic Races | The eight races and their racial abilities
+Choose your race, gender and looks in Armory > Character. Each race has a racial ability that casts on its own, plus passive bonuses. Not every race is open to every class: hover a race portrait to see.
+
+# Alliance
+- Human: Perception (every 30 sec, more damage for a short time), The Human Spirit (+10% experience), Diplomacy (+20% gold).
+- Dwarf: Stoneform (every 45 sec, a shield worth 30% of your max health), Gun Specialization (+6% damage), Treasure Finding (+30% pickup range).
+- Night Elf: Shadowmeld (near death, 3 sec of immunity, long cooldown), Quickness (+8% movement speed), Nature Resistance (+5% damage reduction).
+- Gnome: Escape Artist (every 20 sec, roots nearby enemies), Expansive Mind (-8% cooldowns), Engineering Specialization (+20% luck).
+
+# Horde
+- Orc: Blood Fury (every 40 sec, +35% damage for a while), Hardiness (+10% max health).
+- Undead: Will of the Forsaken (near death, 4 sec of immunity), Cannibalize (every kill heals you a little), Shadow Resistance (+4% damage reduction).
+- Tauren: War Stomp (every 15 sec, stuns nearby enemies), Endurance (+15% max health).
+- Troll: Berserking (every 35 sec, faster cooldowns for 10 sec), Regeneration (+1.5 health per second), Throwing Specialization (+3% critical strike).
+
+@topic Zones & Bosses | All twelve zones, how to open them and who you face
+Every zone ends with a final boss. Beat it to open the next zone, for that class. The bosses before it arrive on a fixed clock, and each boss can drop one piece of your class's gear.
+
+# Short zones (final boss at 16:00)
+- Elwynn Forest (common gear): Hogger 3:00, Mother Fang 6:00, Rhahk'Zor 9:00, Mr. Smite 12:00, Edwin VanCleef 16:00. Open from the start.
+- Duskwood (common gear): Naraxis 3:00, Mor'Ladim 6:00, Stitches 9:00, Lupos 12:00, Morbent Fel 16:00. Beat Edwin VanCleef to open.
+- Warsong Gulch (uncommon gear): Doomguard Commander, Mannoroth's Herald, Varimathras, Lord Hel'nurath, Lord Kazzak at 16:00. Beat Morbent Fel to open.
+- Un'Goro Crater (uncommon gear): Ravasaur Matriarch 3:00, Uhk'loc 6:00, Lar'korwi 9:00, Tyrant Devilsaur 12:00, King Mosh 16:00. Beat Lord Kazzak to open.
+
+# Middle zones (final boss at 18:00)
+- Arathi Basin (rare gear): Kovork 4:00, Nimar the Slayer 7:00, Marez Cowl 11:00, Lord Falconcrest 14:00, Lord Aliden Perenolde 18:00. Beat King Mosh to open.
+- Feralas (rare gear): Zevrim Thornhoof 4:00, Alzzin the Wildshaper 7:00, Tendris Warpwood 11:00, Immol'thar 14:00, King Gordok 18:00. Beat Lord Aliden Perenolde to open.
+- Gurubashi Arena (epic gear): High Priestess Jeklik 4:00, High Priest Venoxis 7:00, Bloodlord Mandokir 11:00, Jin'do the Hexxer 14:00, Hakkar the Soulflayer 18:00. Beat King Gordok to open.
+- Scarlet Monastery (epic gear): Houndmaster Loksey 4:00, Arcanist Doan 7:00, Herod 11:00, Scarlet Commander Mograine 14:00, High Inquisitor Whitemane 18:00. Beat Hakkar to open.
+
+# Long zones (final boss at 20:00)
+- Alterac Valley (PvP gear): Korrak the Bloodrager 4:00, Ivus the Forest Lord 8:00, Lokholar the Ice Lord 12:00, Glacius the Frozen Titan 16:00, Azuregos 20:00. Beat Whitemane to open.
+- Blackrock Mountain (PvP gear): General Angerforge 4:00, Warchief Rend Blackhand 8:00, Emperor Dagran Thaurissan 12:00, Majordomo Executus 16:00, Nefarian 20:00. Beat Azuregos to open.
+- Gates of Ahn'Qiraj (legendary gear): Kurinnaxx 4:00, General Rajaxx 8:00, Princess Huhuran 12:00, Ossirian the Unscarred 16:00, C'Thun 20:00. Beat Nefarian to open.
+- Naxxramas (legendary gear): Anub'Rekhan 4:00, Noth the Plaguebringer 8:00, Patchwerk 12:00, Sapphiron 16:00, Kel'Thuzad 20:00. Beat C'Thun to open.
+
+# Boss fights
+Every boss has its own moves: charges, blinks behind you, eggs that hatch, totems and more. Before a big attack the ground is marked. Step out of the marker: getting caught hurts twice as much. The horde also grows tougher as the minutes pass, so the last bosses are the real test.
+
+@topic Level-Ups & Cards | How your hero grows during a run
+# Picking cards
+Each level-up deals you three cards. Pick one with the mouse or with 1, 2 or 3. A card can teach you a new spell from your class's spell pool, upgrade a spell you already have, or give you a bonus. You have six spell slots, so choose which spells you build around. Hover the spells shown under the cards to read their full tooltips.
+
+# Rerolls
+- Press R (or the Reroll button) for a fresh hand.
+- Every run gives you three free rerolls. After that, rerolls cost gold, and the price rises with each one.
+- Perks from the Rewards tab add more free rerolls, let you banish a card for the rest of the run, or skip a hand for gold.
+
+# Stored level-ups
+With Options > Controls > Store Level-Ups switched on, a level-up no longer pauses the fight. Your levels wait until you open them with the Level Up! button above your action bar, or with Y.
+
+# A moment of safety
+After you pick a card or an item you are immune to damage for one second.
+
+@topic Pickups, Caches & Guardians | Gold, experience, jewelry and the monsters worth hunting
+# Gold and experience
+Slain enemies drop gold coins and experience. Walk close and they fly to you; more pickup range pulls them from further away. Gold buys caches and rerolls.
+
+# Magnets
+A floating blue rune in a pillar of blue light. Walk over it and every coin and every bit of experience on the whole field flies to you. A run has two or three. Bosses drop them, and they never disappear, so you can save one for when the field is covered in gold.
+
+# Caches
+Caches are chests on the field that cost gold to open, and the price rises as you buy more (the run's screen shows the next price). A cache offers jewelry cards: rings, trinkets and amulets. Elites and guardians offer jewelry too. Each class also has legendary amulets of its own, one for every spell. The Codex in the Armory shows every piece the game has offered you so far. In co-op, every hero buys their own caches.
+
+# Guardians
+Guardians are big monsters that wait in their lairs. A red flag on the minimap points to the nearest lair. Slay a guardian for a reward pick. Each one you slay makes the later ones tougher, and an empty lair fills again after a few minutes. They also have their own moves, so treat them like small bosses.
+
+# Elites, runes and soulstones
+- Elites are stronger enemies in the horde, worth a jewelry pick. Many spells aim at bosses and elites first.
+- Battleground zones have runes on the field, such as Speed and Berserking, that give a short buff.
+- A Major Soulstone holds an extra life (two at most).
+
+@topic Gear & the Armory | Boss loot, your collection and how your hero looks
+# Boss gear
+Each boss drops one piece of gear for your class, on its own roll. The zone decides the rarity: common, uncommon, rare, epic, PvP and legendary. The rarer the gear, the lower the chance: from 60% in Elwynn Forest down to 20% in the last two zones. A piece you already own adds nothing. Gear is kept per class.
+
+# Slots
+Head, Shoulders, Chest, Hands, Wrist, Waist, Legs, Feet and Main Hand. The final boss of a zone drops the main-hand weapon.
+
+# The Armory tabs
+- Character: race, gender, looks, and the gear you wear.
+- Collection: every piece for your class by rarity. Click a piece to see its bonuses and the bosses that drop it. A piece can be worn, or only shown as a look.
+- Drop Tables: every zone's bosses, their arrival times, and the piece and chance each one drops.
+- Codex: every ring, trinket and amulet the game has offered you.
+- Talents, Achievements and Rewards: see their own topics.
+
+@topic Talents | Talent points, trees and specs
+# Earning points
+Every run pays talent experience to the class you played: for time survived, kills, bosses and a win, and more in harder zones. Run Options can raise it too.
+
+# Spending points
+- Each class has three talent trees.
+- Point at a talent to read it. Click to spend a point; right-click to take one back.
+- A new row opens for every 5 points spent in a tree.
+- At 10, 20 and 30 points in a tree you reach its milestones, which change how your spells play.
+- You can have three specs (saved setups) per class, and respecs are free.
+
+The Classes topic lists every tree with its three milestones.
+
+@topic Achievements & Rewards | Account-wide goals and what they unlock
+# Achievements
+Achievements are earned by every hero of every class, for your whole account. They come in five groups: Zones, Classes, Collection, Feats and Lifetime. Win zones, collect gear, survive long into a run, or chase special feats like big kill counts and winning without gear.
+
+# Rewards
+Achievements give points to spend on the Rewards tab. Rewards are account-wide too.
+- Perks: Second Thoughts (more free rerolls), Skip (pass on a hand and take gold instead), Veteran's Lessons (more talent experience for a class behind your best), Banish (remove a card for the rest of the run), Opening Hand (your first level-up deals four cards) and Keen Eye (bosses drop their piece more often). Each perk is unlocked by an achievement.
+- Companions: a critter that follows every hero and fetches coins and experience for you. Instincts make it prefer gold, experience or battleground runes, and you can unlock a second companion and many looks.
+- Tabards and appearances: looks only. Battleground tabards come with their zone's achievement.
+You can take back points spent on perks and spend them again; the panel shows how many resets you have left.
+
+@topic Run Options & Endless | Harder runs for better rewards, and what comes after a win
+# Run Options
+On the main screen, Run Options makes the horde harder: more enemies, more health, harder hits, faster movement. In return you get more talent experience and better odds of boss loot, up to x2. Past that the run only gets harder.
+
+# Endless mode
+After you beat a zone's final boss you can keep going in endless mode. A random boss from the zone arrives every five minutes and the horde keeps growing stronger. See how long you can last; some achievements ask for it.
+
+@topic Co-op | Playing with friends
+# Joining and hosting
+Press Co-op on the main screen.
+- Lobbies: public games of your version. Click one to join (some need a password).
+- Host: name your lobby, choose who can find it (public, or private by code), set the number of players (up to 5) and an optional password.
+- Join by code: type a friend's lobby code.
+You play the hero on your own picker. The host chooses the zone, and you can only join zones you have opened with the class you bring.
+
+# How co-op plays
+- Experience and gold are shared; caches are each hero's own to buy.
+- Every extra hero makes the horde bigger and the bosses tougher, but the party also finds more chests.
+- When you pick a card, only you pause while the others fight on.
+- A fallen hero is down, not out: stand next to them for 6 seconds to bring them back. The run ends when every hero is down.
+- Your heals, Battle Shout and Power Word: Shield also help friends within 30 yards.
+- Every hero rolls on a slain boss's gear for their own class, and a guardian slain by anyone rewards everyone.
+- Everything you win goes to your own save.
+
+@topic Tips for New Players | Small things that make a big difference
+- Never stop moving. Walk in wide circles so the horde follows you in a line instead of surrounding you.
+- Learn your starting spell's range. Melee classes want to be close; casters and hunters want room.
+- Area spells (Consecration, Blizzard, Volley, Rain of Fire and friends) win the early minutes. Strong single-target spells win boss fights.
+- Take a heal or a shield when your class offers one. Staying alive beats a few percent more damage.
+- Save a magnet for later: it never disappears, and it is worth more when the field is full of gold.
+- Buy caches early. Jewelry snowballs over the run.
+- Hunt guardians when you feel strong. Their rewards are worth the detour.
+- Lost a run? You still earned talent experience. Spend it in Talents and go again.
+- Try every class. Talent experience and gear are kept per class, and achievements count for your whole account.

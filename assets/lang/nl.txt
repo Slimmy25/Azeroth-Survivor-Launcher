@@ -818,3 +818,15 @@ The game is running. Close it before you restore.
 = Het spel draait. Sluit het voordat je terugzet.
 Cloud Save needs the game. Press INSTALL to download it first.
 = Cloudopslag heeft het spel nodig. Druk eerst op INSTALLEREN om het te downloaden.
+GUIDE
+= GIDS
+Guide
+= Gids
+‹ ALL TOPICS
+= ‹ ALLE ONDERWERPEN
+‹ BACK
+= ‹ TERUG
+OPEN ›
+= OPENEN ›
+New to Azeroth Survivors? Pick a topic.
+= Nieuw in Azeroth Survivors? Kies een onderwerp.

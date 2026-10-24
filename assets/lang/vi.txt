@@ -819,3 +819,15 @@ The game is running. Close it before you restore.
 = Trò chơi đang chạy. Hãy đóng trước khi khôi phục.
 Cloud Save needs the game. Press INSTALL to download it first.
 = Lưu trên mây cần có trò chơi. Hãy nhấn CÀI ĐẶT để tải về trước.
+GUIDE
+= HƯỚNG DẪN
+Guide
+= Hướng dẫn
+‹ ALL TOPICS
+= ‹ TẤT CẢ CHỦ ĐỀ
+‹ BACK
+= ‹ QUAY LẠI
+OPEN ›
+= MỞ ›
+New to Azeroth Survivors? Pick a topic.
+= Mới chơi Azeroth Survivors? Hãy chọn một chủ đề.

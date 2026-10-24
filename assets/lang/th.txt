@@ -819,3 +819,15 @@ The game is running. Close it before you restore.
 = เกมกำลังทำงาน ปิดก่อนกู้คืน
 Cloud Save needs the game. Press INSTALL to download it first.
 = เซฟบนคลาวด์ต้องมีเกมก่อน กด ติดตั้ง เพื่อดาวน์โหลดก่อน
+GUIDE
+= คู่มือ
+Guide
+= คู่มือ
+‹ ALL TOPICS
+= ‹ หัวข้อทั้งหมด
+‹ BACK
+= ‹ กลับ
+OPEN ›
+= เปิด ›
+New to Azeroth Survivors? Pick a topic.
+= เพิ่งเริ่มเล่น Azeroth Survivors? เลือกหัวข้อ
