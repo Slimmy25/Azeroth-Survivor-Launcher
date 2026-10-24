@@ -58,7 +58,7 @@ namespace AzerothLauncher
 
         // Opens a web address and follows redirects itself (GitHub and most file hosts use them).
         // httpsOnly: every step must be https (the game updates).
-        public static HttpWebResponse Open(string url, int timeoutMs, bool httpsOnly, string what)
+        public static HttpWebResponse Open(string url, int timeoutMs, bool httpsOnly, string what, string accept = null)
         {
             for (int hop = 0; hop < 10; hop++)
             {
@@ -72,6 +72,7 @@ namespace AzerothLauncher
                 req.ReadWriteTimeout = Math.Max(timeoutMs, 30000);
                 req.Headers["Cache-Control"] = "no-cache";
                 req.AutomaticDecompression = DecompressionMethods.None;
+                if (accept != null) req.Accept = accept;
                 HttpWebResponse resp;
                 try
                 {
