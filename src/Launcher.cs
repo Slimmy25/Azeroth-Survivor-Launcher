@@ -590,6 +590,12 @@ namespace AzerothLauncher
 
         public void RunSync(string kind, bool force, bool quiet)
         {
+            RunSync(kind, force, quiet, null);
+        }
+
+        // kind: status, pull, push, or restore (stamp = which kept download)
+        public void RunSync(string kind, bool force, bool quiet, string stamp)
+        {
             if (SyncBusy || GameRunningFlag || Installing)
             {
                 SetStatus("Another task is still running - wait for it to finish.");
@@ -610,7 +616,8 @@ namespace AzerothLauncher
                 string err = null;
                 try
                 {
-                    ok = kind == "status" ? eng.Status() : kind == "pull" ? eng.Pull(force) : eng.Push(force);
+                    ok = kind == "status" ? eng.Status() : kind == "pull" ? eng.Pull(force) :
+                         kind == "restore" ? eng.RestoreDownload(stamp) : eng.Push(force);
                 }
                 catch (Exception e)
                 {
@@ -627,6 +634,7 @@ namespace AzerothLauncher
             SyncBusy = false;
             string stamp = DateTime.Now.ToString("HH:mm:ss", CultureInfo.InvariantCulture);
             string text = err != null ? "Cloud sync failed." : kind == "status" ? "Status checked at " + stamp :
+                          kind == "restore" ? (ok ? "Earlier download restored." : "Cancelled, nothing changed.") :
                           ok ? (kind == "pull" ? "Downloaded from the cloud" : "Saves uploaded") + " at " + stamp
                              : "Not everything was synced - see the Cloud Save log.";
             SetStatus("Ready.");                             // cloud results stay in the Cloud Save log

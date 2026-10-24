@@ -794,3 +794,25 @@ Updating the launcher to {0}...
 = Päivitetään launcher versioon {0}...
 You can keep using this version for now. The launcher tries again the next time it starts.
 = Voit jatkaa tämän version käyttöä toistaiseksi. Launcher yrittää uudelleen seuraavan käynnistyksen yhteydessä.
+EARLIER DOWNLOADS
+= AIEMMAT LATAUKSET
+Restore a download kept on this PC (last resort):
+= Palauta tälle tietokoneelle säilytetty lataus (viimeinen keino):
+No downloads kept yet.
+= Latauksia ei ole vielä säilytetty.
+Earlier download restored.
+= Aiempi lataus palautettu.
+Restoring an earlier download ...
+= Palautetaan aiempaa latausta ...
+Replace your local data with the download from {0}?\n\n{1}\n\nA backup of the current files is made first. Only do this if your save is broken and the cloud copy cannot fix it.
+= Korvataanko paikalliset tietosi latauksella {0}?\n\n{1}\n\nNykyisistä tiedostoista otetaan ensin varmuuskopio. Tee tämä vain, jos tallennuksesi on rikki eikä pilvikopio voi korjata sitä.
+That kept download is no longer there.
+= Säilytettyä latausta ei enää ole.
+{0}: restored from the download of {1}.
+= {0}: palautettu latauksesta {1}.
+The next upload puts this state in the cloud.
+= Seuraava lähetys vie tämän tilan pilveen.
+Could not keep a local copy of this download ({0}).
+= Tästä latauksesta ei voitu säilyttää paikallista kopiota ({0}).
+The game is running. Close it before you restore.
+= Peli on käynnissä. Sulje se ennen palauttamista.

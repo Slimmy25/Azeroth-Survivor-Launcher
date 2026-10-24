@@ -795,3 +795,25 @@ Updating the launcher to {0}...
 = 正在將啟動器更新到 {0}...
 You can keep using this version for now. The launcher tries again the next time it starts.
 = 你可以暫時繼續使用此版本。啟動器會在下次啟動時重試。
+EARLIER DOWNLOADS
+= 先前的下載
+Restore a download kept on this PC (last resort):
+= 還原保存在這台電腦上的下載（最後手段）：
+No downloads kept yet.
+= 尚未保存任何下載。
+Earlier download restored.
+= 已還原先前的下載。
+Restoring an earlier download ...
+= 正在還原先前的下載 ...
+Replace your local data with the download from {0}?\n\n{1}\n\nA backup of the current files is made first. Only do this if your save is broken and the cloud copy cannot fix it.
+= 以 {0} 的下載取代你的本機資料？\n\n{1}\n\n會先備份目前的檔案。只有在存檔損毀且雲端副本無法修復時才這樣做。
+That kept download is no longer there.
+= 該保存的下載已不存在。
+{0}: restored from the download of {1}.
+= {0}：已從 {1} 的下載還原。
+The next upload puts this state in the cloud.
+= 下次上傳會將此狀態放到雲端。
+Could not keep a local copy of this download ({0}).
+= 無法保留這次下載的本機副本（{0}）。
+The game is running. Close it before you restore.
+= 遊戲正在執行。還原前請先關閉遊戲。

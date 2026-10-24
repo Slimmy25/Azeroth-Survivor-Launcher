@@ -795,3 +795,25 @@ Updating the launcher to {0}...
 = กำลังอัปเดตลันเชอร์เป็น {0}...
 You can keep using this version for now. The launcher tries again the next time it starts.
 = คุณยังใช้เวอร์ชันนี้ต่อได้ในตอนนี้ ลันเชอร์จะลองอีกครั้งเมื่อเปิดครั้งถัดไป
+EARLIER DOWNLOADS
+= การดาวน์โหลดก่อนหน้า
+Restore a download kept on this PC (last resort):
+= กู้คืนการดาวน์โหลดที่เก็บไว้บนพีซีนี้ (ทางเลือกสุดท้าย):
+No downloads kept yet.
+= ยังไม่มีการดาวน์โหลดที่เก็บไว้
+Earlier download restored.
+= กู้คืนการดาวน์โหลดก่อนหน้าแล้ว
+Restoring an earlier download ...
+= กำลังกู้คืนการดาวน์โหลดก่อนหน้า ...
+Replace your local data with the download from {0}?\n\n{1}\n\nA backup of the current files is made first. Only do this if your save is broken and the cloud copy cannot fix it.
+= แทนที่ข้อมูลในเครื่องด้วยการดาวน์โหลดเมื่อ {0} หรือไม่?\n\n{1}\n\nจะสำรองไฟล์ปัจจุบันไว้ก่อน ทำเช่นนี้เฉพาะเมื่อเซฟเสียและสำเนาบนคลาวด์แก้ไม่ได้
+That kept download is no longer there.
+= การดาวน์โหลดที่เก็บไว้นั้นไม่มีแล้ว
+{0}: restored from the download of {1}.
+= {0}: กู้คืนจากการดาวน์โหลดเมื่อ {1} แล้ว
+The next upload puts this state in the cloud.
+= การอัปโหลดครั้งถัดไปจะนำสถานะนี้ขึ้นคลาวด์
+Could not keep a local copy of this download ({0}).
+= ไม่สามารถเก็บสำเนาในเครื่องของการดาวน์โหลดนี้ ({0})
+The game is running. Close it before you restore.
+= เกมกำลังทำงาน ปิดก่อนกู้คืน

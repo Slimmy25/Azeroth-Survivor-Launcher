@@ -795,3 +795,25 @@ Updating the launcher to {0}...
 = 런처를 {0}(으)로 업데이트하는 중...
 You can keep using this version for now. The launcher tries again the next time it starts.
 = 당분간 이 버전을 계속 사용할 수 있습니다. 다음에 시작할 때 런처가 다시 시도합니다.
+EARLIER DOWNLOADS
+= 이전 다운로드
+Restore a download kept on this PC (last resort):
+= 이 PC에 보관된 다운로드 복원 (최후의 수단):
+No downloads kept yet.
+= 아직 보관된 다운로드가 없습니다.
+Earlier download restored.
+= 이전 다운로드를 복원했습니다.
+Restoring an earlier download ...
+= 이전 다운로드 복원 중 ...
+Replace your local data with the download from {0}?\n\n{1}\n\nA backup of the current files is made first. Only do this if your save is broken and the cloud copy cannot fix it.
+= 로컬 데이터를 {0} 다운로드로 바꿀까요?\n\n{1}\n\n먼저 현재 파일을 백업합니다. 저장 파일이 망가졌고 클라우드 사본으로도 고칠 수 없을 때만 사용하세요.
+That kept download is no longer there.
+= 보관된 다운로드가 더 이상 없습니다.
+{0}: restored from the download of {1}.
+= {0}: {1} 다운로드에서 복원함.
+The next upload puts this state in the cloud.
+= 다음 업로드 때 이 상태가 클라우드에 올라갑니다.
+Could not keep a local copy of this download ({0}).
+= 이 다운로드의 로컬 사본을 보관할 수 없습니다 ({0}).
+The game is running. Close it before you restore.
+= 게임이 실행 중입니다. 복원하기 전에 닫으세요.

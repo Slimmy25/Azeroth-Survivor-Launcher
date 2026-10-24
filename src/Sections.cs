@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
 
@@ -958,6 +959,37 @@ namespace AzerothLauncher
         }
 
         // ------------------------------------------------------------------ Cloud Save
+        // The last 5 cloud downloads are kept as ZIPs on this PC. Nothing uses them on its own: this menu is the only
+        // way back to one, for when the save is broken and the cloud copy cannot fix it.
+        void ShowKeptDownloads(Control anchor)
+        {
+            List<SyncEngine.KeptDownload> kept;
+            try { kept = new SyncEngine(SyncSettings()).KeptDownloads(); }
+            catch (Exception) { kept = new List<SyncEngine.KeptDownload>(); }
+            var menu = new ContextMenuStrip();
+            menu.Font = Theme.F(9, FontStyle.Regular);
+            var head = new ToolStripMenuItem(Lang.T("Restore a download kept on this PC (last resort):"));
+            head.Enabled = false;
+            menu.Items.Add(head);
+            if (kept.Count == 0)
+            {
+                var none = new ToolStripMenuItem(Lang.T("No downloads kept yet."));
+                none.Enabled = false;
+                menu.Items.Add(none);
+            }
+            foreach (var k in kept)
+            {
+                var areas = new List<string>();
+                foreach (var a in k.Areas) areas.Add(Lang.T(a.Key.Label));
+                string stamp = k.Stamp;
+                menu.Items.Add(new ToolStripMenuItem(k.Time.ToString("yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture) + "   (" +
+                                                     string.Join(", ", areas) + ")", null,
+                                                     delegate { RunSync("restore", false, false, stamp); }));
+            }
+            if (anchor != null && !anchor.IsDisposed) menu.Show(anchor, new Point(0, anchor.Height));
+            else menu.Show(Cursor.Position);
+        }
+
         void PanelCloud()
         {
             ClearPanel("Cloud Save");
@@ -981,8 +1013,12 @@ namespace AzerothLauncher
             string info = "Not synced yet.";
             try { if (cloud.Length > 0 && Directory.Exists(cloud)) info = "Cloud: " + new SyncEngine(SyncSettings()).CloudInfo(); }
             catch (Exception) { }
-            var infoL = PutText(info, 9, FontStyle.Italic, Theme.GoldDim, 20, Math.Max(BottomOf(path), y + 30) + 2, 0);
-            y = BottomOf(infoL) + 4;
+            var infoL = PutText(info, 9, FontStyle.Italic, Theme.GoldDim, 20, Math.Max(BottomOf(path), y + 30) + 2, PW - 20 - 170 - 30);
+            // last resort: put back one of the last 5 downloads kept on this PC (small, out of the way)
+            WowButton keptBtn = null;
+            keptBtn = new WowButton("EARLIER DOWNLOADS", delegate { ShowKeptDownloads(keptBtn); }, 170, 24, 8);
+            Put(keptBtn, PW - 20 - 170, infoL.Top - 3);
+            y = Math.Max(BottomOf(infoL), infoL.Top + 21) + 4;
             Put(new WowButton("CHECK STATUS", delegate { RunSync("status", false, false); }, 170, 34, 10), 20, y);
             Put(new WowButton("DOWNLOAD", delegate { RunSync("pull", true, false); }, 170, 34, 10), 20 + 182, y);
             Put(new WowButton("UPLOAD", delegate { RunSync("push", true, false); }, 170, 34, 10), 20 + 364, y);

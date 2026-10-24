@@ -10,6 +10,7 @@
 //   <sync folder>\history\        cloud backups (last 10 per area)
 //   <state folder>\state.json     fingerprints of the last sync on this PC
 //   <state folder>\backups\       local backups (last 20 per area)
+//   <state folder>\downloads\     copies of the last 5 cloud downloads (last resort, restored only by hand)
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -73,7 +74,7 @@ namespace AzerothLauncher
     {
         public const string NoneHash = "NONE", EmptyHash = "EMPTY";
         const string StageSuffix = ".azsync-new", OldSuffix = ".azsync-old", HashPrefix = "2:";
-        const int KeepLocalBackups = 20, KeepCloudBackups = 10;
+        const int KeepLocalBackups = 20, KeepCloudBackups = 10, KeepDownloads = 5;
         public static readonly string Machine = Environment.MachineName;
 
         class Eval
@@ -110,6 +111,7 @@ namespace AzerothLauncher
         string History { get { return Path.Combine(S.CloudDir, "history"); } }
         string ManifestPath { get { return Path.Combine(S.CloudDir, "manifest.json"); } }
         string StateFile { get { return Path.Combine(S.StateDir, "state.json"); } }
+        string DownloadsDir { get { return Path.Combine(S.StateDir, "downloads"); } }
 
         // ---------- listing ----------
         // All files below directory (relative paths use backslashes, like AzerothSync).
@@ -400,13 +402,22 @@ namespace AzerothLauncher
             }
         }
 
+        static string Stamp()
+        {
+            DateTime now = DateTime.Now;
+            return now.ToString("yyyy-MM-dd_HH-mm-ss-", CultureInfo.InvariantCulture) + now.Millisecond.ToString("000");
+        }
+
         void Backup(string src, string[] exclude, string backupDir, string prefix, int keep)
+        {
+            Backup(src, exclude, backupDir, prefix, keep, Stamp());
+        }
+
+        void Backup(string src, string[] exclude, string backupDir, string prefix, int keep, string stamp)
         {
             var files = ListFiles(src, exclude);
             if (files.Count == 0) return;
             Directory.CreateDirectory(backupDir);
-            DateTime now = DateTime.Now;
-            string stamp = now.ToString("yyyy-MM-dd_HH-mm-ss-", CultureInfo.InvariantCulture) + now.Millisecond.ToString("000");
             string zpath = Path.Combine(backupDir, prefix + "_" + stamp + "_" + Machine + ".zip");
             int n = 2;
             while (File.Exists(zpath))
@@ -720,16 +731,116 @@ namespace AzerothLauncher
             if (take.Count == 0) return complete;
             AssertNotRunning("download");
             BeginProgress("Downloading", AllFiles(SetsOf(take)));
+            string stamp = Stamp();                          // one name for all areas of this download
             foreach (var e in take)
             {
                 Backup(e.Set.Dir, e.Set.Exclude, Path.Combine(S.StateDir, "backups"), e.Set.Name, KeepLocalBackups);
                 Mirror(e.Set.Cloud, e.Set.Dir, e.Set.Exclude, e.Cloud);
                 SetLastHash(e.Set.Name, e.Cloud);
                 Log("  " + e.Set.Label + ": downloaded from the cloud.", Level.Good);
+                KeepDownload(e.Set, stamp);
             }
             EndProgress();
             Log("  Cloud state: " + CloudInfo(), Level.Dim);
             return complete;
+        }
+
+        // ---------- last-resort copies of downloads ----------
+        // After a download has been checked against its fingerprint, a ZIP of what arrived is kept on this PC
+        // (last 5 per area). Sync never reads them; they are only restored by hand from the Cloud Save page.
+        void KeepDownload(SyncSet set, string stamp)
+        {
+            try { Backup(set.Dir, set.Exclude, DownloadsDir, set.Name, KeepDownloads, stamp); }
+            catch (Exception ex)
+            {
+                Log("    Could not keep a local copy of this download (" + ex.Message + ").", Level.Dim);
+            }
+        }
+
+        public class KeptDownload
+        {
+            public string Stamp;                             // shared by all areas of one download
+            public DateTime Time;
+            public List<KeyValuePair<SyncSet, string>> Areas = new List<KeyValuePair<SyncSet, string>>();
+        }
+
+        // The kept downloads, newest first.
+        public List<KeptDownload> KeptDownloads()
+        {
+            var byStamp = new Dictionary<string, KeptDownload>();
+            var list = new List<KeptDownload>();
+            if (!Directory.Exists(DownloadsDir)) return list;
+            foreach (string f in Directory.GetFiles(DownloadsDir, "*.zip"))
+            {
+                string name = Path.GetFileNameWithoutExtension(f);
+                foreach (var s in Sets)
+                {
+                    if (!name.StartsWith(s.Name + "_", StringComparison.Ordinal)) continue;
+                    string rest = name.Substring(s.Name.Length + 1);
+                    if (rest.Length < 23) break;
+                    string stamp = rest.Substring(0, 23);           // yyyy-MM-dd_HH-mm-ss-fff
+                    DateTime t;
+                    if (!DateTime.TryParseExact(stamp, "yyyy-MM-dd_HH-mm-ss-fff", CultureInfo.InvariantCulture,
+                                                DateTimeStyles.None, out t)) break;
+                    KeptDownload k;
+                    if (!byStamp.TryGetValue(stamp, out k))
+                    {
+                        k = new KeptDownload();
+                        k.Stamp = stamp;
+                        k.Time = t;
+                        byStamp[stamp] = k;
+                        list.Add(k);
+                    }
+                    k.Areas.Add(new KeyValuePair<SyncSet, string>(s, f));
+                    break;
+                }
+            }
+            list.Sort(delegate(KeptDownload a, KeptDownload b) { return b.Time.CompareTo(a.Time); });
+            return list;
+        }
+
+        // Puts a kept download back in place. The current local state is backed up first, and the sync memory is
+        // left alone, so the next sync treats the restored files as a local change (and asks if the cloud changed too).
+        public bool RestoreDownload(string stamp)
+        {
+            Log("Restoring an earlier download ...", Level.Info);
+            Validate();
+            AssertNotRunning("restore");
+            KeptDownload k = KeptDownloads().Find(delegate(KeptDownload x) { return x.Stamp == stamp; });
+            if (k == null) throw new SyncError("That kept download is no longer there.");
+            var names = new List<string>();
+            foreach (var a in k.Areas) names.Add(a.Key.Label);
+            if (!Confirm("Replace your local data with the download from " +
+                         k.Time.ToString("yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture) + "?\n\n" + string.Join(", ", names) +
+                         "\n\nA backup of the current files is made first. Only do this if your save is broken and the cloud " +
+                         "copy cannot fix it."))
+            {
+                Log("  Cancelled, nothing changed.", Level.Warn);
+                return false;
+            }
+            string work = Path.Combine(S.StateDir, "restore.tmp");
+            foreach (var a in k.Areas)
+            {
+                SyncSet set = a.Key;
+                if (!Available(set, true)) continue;
+                AssertNotRunning("restore");
+                Util.DeleteTree(work);
+                Directory.CreateDirectory(work);
+                try
+                {
+                    Archive.ExtractZip(a.Value, work);
+                    var files = ListFiles(work, set.Exclude);
+                    BeginProgress("Restoring", files);
+                    Backup(set.Dir, set.Exclude, Path.Combine(S.StateDir, "backups"), set.Name, KeepLocalBackups);
+                    Mirror(work, set.Dir, set.Exclude, TreeHash(work, set.Exclude, false));
+                    EndProgress();
+                }
+                finally { Util.DeleteTreeQuiet(work); }
+                Log("  " + set.Label + ": restored from the download of " +
+                    k.Time.ToString("yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture) + ".", Level.Good);
+            }
+            Log("  The next upload puts this state in the cloud.", Level.Dim);
+            return true;
         }
 
         // ---------- upload ----------

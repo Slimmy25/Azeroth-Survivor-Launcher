@@ -795,3 +795,25 @@ Updating the launcher to {0}...
 = Aktualizace launcheru na {0}...
 You can keep using this version for now. The launcher tries again the next time it starts.
 = Zatím můžeš dál používat tuto verzi. Launcher to zkusí znovu při příštím spuštění.
+EARLIER DOWNLOADS
+= DŘÍVĚJŠÍ STAŽENÍ
+Restore a download kept on this PC (last resort):
+= Obnovit stažení uložené na tomto počítači (poslední možnost):
+No downloads kept yet.
+= Zatím nejsou uložena žádná stažení.
+Earlier download restored.
+= Dřívější stažení obnoveno.
+Restoring an earlier download ...
+= Obnovování dřívějšího stažení ...
+Replace your local data with the download from {0}?\n\n{1}\n\nA backup of the current files is made first. Only do this if your save is broken and the cloud copy cannot fix it.
+= Nahradit tvá místní data stažením z {0}?\n\n{1}\n\nNejdřív se vytvoří záloha současných souborů. Udělej to jen tehdy, když je tvé uložení poškozené a kopie v cloudu ho nemůže opravit.
+That kept download is no longer there.
+= Toto uložené stažení už neexistuje.
+{0}: restored from the download of {1}.
+= {0}: obnoveno ze stažení z {1}.
+The next upload puts this state in the cloud.
+= Příští nahrání dá tento stav do cloudu.
+Could not keep a local copy of this download ({0}).
+= Z tohoto stažení se nepodařilo ponechat místní kopii ({0}).
+The game is running. Close it before you restore.
+= Hra běží. Před obnovením ji zavři.

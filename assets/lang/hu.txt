@@ -795,3 +795,25 @@ Updating the launcher to {0}...
 = A launcher frissítése erre: {0}...
 You can keep using this version for now. The launcher tries again the next time it starts.
 = Egyelőre tovább használhatod ezt a verziót. A launcher a következő indításkor újrapróbálja.
+EARLIER DOWNLOADS
+= KORÁBBI LETÖLTÉSEK
+Restore a download kept on this PC (last resort):
+= Ezen a gépen megőrzött letöltés visszaállítása (végső megoldás):
+No downloads kept yet.
+= Még nincs megőrzött letöltés.
+Earlier download restored.
+= Korábbi letöltés visszaállítva.
+Restoring an earlier download ...
+= Korábbi letöltés visszaállítása ...
+Replace your local data with the download from {0}?\n\n{1}\n\nA backup of the current files is made first. Only do this if your save is broken and the cloud copy cannot fix it.
+= Lecseréled a helyi adataidat a(z) {0} letöltésre?\n\n{1}\n\nElőbb biztonsági mentés készül a jelenlegi fájlokról. Csak akkor tedd, ha a mentésed sérült, és a felhőmásolat nem tudja helyrehozni.
+That kept download is no longer there.
+= Ez a megőrzött letöltés már nem létezik.
+{0}: restored from the download of {1}.
+= {0}: visszaállítva a(z) {1} letöltésből.
+The next upload puts this state in the cloud.
+= A következő feltöltés ezt az állapotot teszi a felhőbe.
+Could not keep a local copy of this download ({0}).
+= Nem sikerült helyi másolatot megőrizni erről a letöltésről ({0}).
+The game is running. Close it before you restore.
+= A játék fut. Zárd be a visszaállítás előtt.

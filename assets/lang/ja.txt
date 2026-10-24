@@ -795,3 +795,25 @@ Updating the launcher to {0}...
 = ランチャーを {0} に更新中...
 You can keep using this version for now. The launcher tries again the next time it starts.
 = 当面はこのバージョンをそのまま使えます。次回の起動時にランチャーが再試行します。
+EARLIER DOWNLOADS
+= 以前のダウンロード
+Restore a download kept on this PC (last resort):
+= この PC に保管したダウンロードを復元（最終手段）:
+No downloads kept yet.
+= 保管されたダウンロードはまだありません。
+Earlier download restored.
+= 以前のダウンロードを復元しました。
+Restoring an earlier download ...
+= 以前のダウンロードを復元中 ...
+Replace your local data with the download from {0}?\n\n{1}\n\nA backup of the current files is made first. Only do this if your save is broken and the cloud copy cannot fix it.
+= ローカルデータを {0} のダウンロードで置き換えますか？\n\n{1}\n\n先に現在のファイルをバックアップします。セーブが壊れていて、クラウドのコピーでも直せない場合にだけ行ってください。
+That kept download is no longer there.
+= その保管済みダウンロードはもうありません。
+{0}: restored from the download of {1}.
+= {0}: {1} のダウンロードから復元しました。
+The next upload puts this state in the cloud.
+= 次回のアップロードでこの状態がクラウドに送られます。
+Could not keep a local copy of this download ({0}).
+= このダウンロードのローカルコピーを保管できませんでした（{0}）。
+The game is running. Close it before you restore.
+= ゲームが実行中です。復元する前に閉じてください。

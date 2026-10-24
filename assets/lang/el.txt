@@ -795,3 +795,25 @@ Updating the launcher to {0}...
 = Ενημέρωση του launcher σε {0}...
 You can keep using this version for now. The launcher tries again the next time it starts.
 = Μπορείς να συνεχίσεις να χρησιμοποιείς αυτή την έκδοση προς το παρόν. Ο launcher θα ξαναδοκιμάσει την επόμενη φορά που θα ξεκινήσει.
+EARLIER DOWNLOADS
+= ΠΡΟΗΓΟΥΜΕΝΕΣ ΛΗΨΕΙΣ
+Restore a download kept on this PC (last resort):
+= Επαναφορά λήψης που φυλάχτηκε σε αυτόν τον υπολογιστή (έσχατη λύση):
+No downloads kept yet.
+= Δεν έχουν φυλαχτεί ακόμα λήψεις.
+Earlier download restored.
+= Η προηγούμενη λήψη επαναφέρθηκε.
+Restoring an earlier download ...
+= Επαναφορά προηγούμενης λήψης ...
+Replace your local data with the download from {0}?\n\n{1}\n\nA backup of the current files is made first. Only do this if your save is broken and the cloud copy cannot fix it.
+= Αντικατάσταση των τοπικών σου δεδομένων με τη λήψη της {0};\n\n{1}\n\nΔημιουργείται πρώτα αντίγραφο ασφαλείας των τρεχόντων αρχείων. Κάν' το μόνο αν η αποθήκευσή σου έχει χαλάσει και το αντίγραφο cloud δεν μπορεί να τη διορθώσει.
+That kept download is no longer there.
+= Αυτή η φυλαγμένη λήψη δεν υπάρχει πια.
+{0}: restored from the download of {1}.
+= {0}: επαναφέρθηκε από τη λήψη της {1}.
+The next upload puts this state in the cloud.
+= Η επόμενη αποστολή θα βάλει αυτή την κατάσταση στο cloud.
+Could not keep a local copy of this download ({0}).
+= Δεν ήταν δυνατό να φυλαχτεί τοπικό αντίγραφο αυτής της λήψης ({0}).
+The game is running. Close it before you restore.
+= Το παιχνίδι τρέχει. Κλείσ' το πριν από την επαναφορά.

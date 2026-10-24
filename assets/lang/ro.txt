@@ -795,3 +795,25 @@ Updating the launcher to {0}...
 = Se actualizează launcherul la {0}...
 You can keep using this version for now. The launcher tries again the next time it starts.
 = Poți folosi în continuare această versiune deocamdată. Launcherul va încerca din nou la următoarea pornire.
+EARLIER DOWNLOADS
+= DESCĂRCĂRI ANTERIOARE
+Restore a download kept on this PC (last resort):
+= Restaurează o descărcare păstrată pe acest PC (ultimă soluție):
+No downloads kept yet.
+= Încă nu sunt descărcări păstrate.
+Earlier download restored.
+= Descărcare anterioară restaurată.
+Restoring an earlier download ...
+= Se restaurează o descărcare anterioară ...
+Replace your local data with the download from {0}?\n\n{1}\n\nA backup of the current files is made first. Only do this if your save is broken and the cloud copy cannot fix it.
+= Înlocuiești datele locale cu descărcarea din {0}?\n\n{1}\n\nMai întâi se face un backup al fișierelor actuale. Fă asta doar dacă salvarea ta e stricată și copia din cloud nu o poate repara.
+That kept download is no longer there.
+= Acea descărcare păstrată nu mai există.
+{0}: restored from the download of {1}.
+= {0}: restaurat din descărcarea din {1}.
+The next upload puts this state in the cloud.
+= Următoarea încărcare va pune această stare în cloud.
+Could not keep a local copy of this download ({0}).
+= Nu s-a putut păstra o copie locală a acestei descărcări ({0}).
+The game is running. Close it before you restore.
+= Jocul rulează. Închide-l înainte de restaurare.
