@@ -209,6 +209,9 @@ namespace AzerothLauncher
             if (logo != null) g.DrawImage(logo, (W - logo.Width) / 2, 20, logo.Width, logo.Height);
             Theme.CenterText(g, "AZEROTH SURVIVORS", Theme.F(20, FontStyle.Bold), Theme.Gold, new RectangleF(0, 175, W, 32), Color.Black);
             Theme.CenterText(g, "A game made by Aethus", Theme.F(11, FontStyle.Italic), Theme.GoldDim, new RectangleF(0, 205, W, 22), null);
+            string version = Data.GameVersion;                // the newest patch note in the changelog
+            if (version.Length > 0)
+                Theme.CenterText(g, "Version " + version, Theme.F(9, FontStyle.Italic), Theme.GoldDim, new RectangleF(0, 225, W, 18), null);
             // short welcome text between the logo and the buttons
             string body = ClientPresent() ? "Press PLAY to enter Azeroth." :
                 (RequireLauncherInstall ? "Game client not found.\nPress INSTALL to download it first."

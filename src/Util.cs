@@ -586,6 +586,21 @@ namespace AzerothLauncher
             }
         }
 
+        // the game's current version: the title of the newest patch note that is a version number ("" if none)
+        public static string GameVersion
+        {
+            get
+            {
+                foreach (string post in Changelog)
+                {
+                    string t = PostTitle(post);
+                    var m = Regex.Match(t, @"^v?(\d+(?:\.\d+)*)");
+                    if (m.Success) return m.Groups[1].Value;
+                }
+                return "";
+            }
+        }
+
         public static string PostTitle(string post)
         {
             return post.Trim('\n').Split('\n')[0].Trim();
