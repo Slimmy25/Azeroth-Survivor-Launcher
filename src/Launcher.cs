@@ -88,14 +88,14 @@ namespace AzerothLauncher
             StartPosition = FormStartPosition.CenterScreen;
 
             // layout: PLAY in the box at the bottom right, the sections under the news, the rest in the bottom bar
-            playBtn = Place(new WowButton("PLAY", Play, 130, 74, 16), 956, 603);
+            playBtn = Place(new WowButton("PLAY", Play, 104, 58, 14), 969, 598);         // smaller: status above, time played below
             playBtn.Skin = Retro.Play;
             foreach (string name in navNames)
             {
                 string n = name;
                 bool low = n == "Guide" || n == "Addons";       // these two sit in the bottom bar
                 nav[n] = Place(new WowButton(n.ToUpperInvariant(), delegate { ShowSection(n); }, low ? 159 : 128, 27, 8.5f),
-                               low ? (n == "Guide" ? 612 : 779) : 693, low ? H - 8 - 27 : 480);   // Guide and Addons: along the very bottom
+                               low ? (n == "Guide" ? 445 : 612) : 693, low ? H - 8 - 27 : 480);   // Guide and Addons: along the very bottom
                 nav[n].Skin = low ? Retro.Long : Retro.Button;
             }
             aboutBtn = Place(new WowButton("ABOUT LAUNCHER", delegate { ShowSection("About Launcher"); }, 159, 27, 8), W - 8 - 159 - 6, 98);         // under UPDATE LAUNCHER
@@ -295,12 +295,8 @@ namespace AzerothLauncher
                 g.DrawString(Lang.T("News"), hf, gold, 697, 204);
                 g.DrawString(Lang.T("Launcher"), hf, shadow, 698, 447);
                 g.DrawString(Lang.T("Launcher"), hf, gold, 697, 446);
-                // bottom bar: game version, the welcome line, play time, cloud note, status
-                string version = Data.GameVersion;
-                string gv = Lang.T("Game version") + (version.Length > 0 ? ":  " + version : "");
-                g.DrawString(gv, hf, shadow, 33, 591);
-                g.DrawString(gv, hf, gold, 32, 590);
             }
+            // bottom bar, left: the welcome line and the cloud note
             string bodyText = ClientPresent() ? "Press PLAY to enter Azeroth." :
                 (RequireLauncherInstall ? "Game client not found. Press INSTALL to download it first."
                                         : "Game client not found. Press INSTALL, or set the game folder in Options.");
@@ -308,30 +304,42 @@ namespace AzerothLauncher
             using (var b = new SolidBrush(Theme.Hex("#d7cea4")))
             using (var sh = new SolidBrush(Color.Black))
             {
-                var box = new RectangleF(32, 614, 560, 34);
+                var box = new RectangleF(32, 594, 395, 50);
                 g.DrawString(Lang.T(bodyText), Theme.F(9), sh, new RectangleF(box.X + 1, box.Y + 1, box.Width, box.Height));
                 g.DrawString(Lang.T(bodyText), Theme.F(9), b, box);
             }
-            PlayStats ps = ShownPlayStats();
-            string line = "";
-            if (ps.Sessions > 0 && StatsEnabled() && Cfg.Bool("home_playtime", true))
-                line = Lang.T("Time played: " + Duration(ps.Seconds) + "   |   Last session: " + Duration(ps.LastSeconds));
-            if (cloudNote.Length > 0) line = (line.Length > 0 ? line + "   |   " : "") + Lang.T(cloudNote);
-            if (line.Length > 0)
-                g.DrawString(line, Theme.F(8, FontStyle.Italic), new SolidBrush(Retro.Gold), new RectangleF(32, 646, 560, 16));
-            g.DrawString(Lang.T(status), Theme.F(9, FontStyle.Italic), new SolidBrush(Theme.Hex("#fff2b0")), new RectangleF(32, 663, 560, 18));
+            using (var gb = new SolidBrush(Retro.Gold))
+            using (var sf = new StringFormat())
+            {
+                if (cloudNote.Length > 0)
+                    g.DrawString(Lang.T(cloudNote), Theme.F(8, FontStyle.Italic), gb, new RectangleF(32, 640, 395, 16));
+                // bottom bar, right: status above PLAY, time played below it, the game version in the corner
+                sf.Alignment = StringAlignment.Center;
+                var rc = new RectangleF(800, 0, 292, 16);
+                using (var sb = new SolidBrush(Theme.Hex("#fff2b0")))
+                    g.DrawString(Lang.T(status), Theme.F(9, FontStyle.Italic), sb, new RectangleF(rc.X, 580, rc.Width, 16), sf);
+                PlayStats ps = ShownPlayStats();
+                if (ps.Sessions > 0 && StatsEnabled() && Cfg.Bool("home_playtime", true))
+                    g.DrawString(Lang.T("Time played: " + Duration(ps.Seconds) + "   |   Last session: " + Duration(ps.LastSeconds)),
+                                 Theme.F(8, FontStyle.Italic), gb, new RectangleF(rc.X, 658, rc.Width, 14), sf);
+                string version = Data.GameVersion;
+                sf.Alignment = StringAlignment.Far;
+                using (var vb = new SolidBrush(Theme.Hex("#b8a27a")))
+                    g.DrawString(Lang.T("Game version") + (version.Length > 0 ? ": " + version : ""), Theme.F(8), vb,
+                                 new RectangleF(rc.X, 673, rc.Width - 2, 14), sf);
+            }
         }
 
         public void SetStatus(string msg)
         {
             status = msg ?? "";
-            Invalidate(new Rectangle(20, 643, 740, 42));
+            Invalidate(new Rectangle(0, 578, W, H - 578));
         }
 
         public void SetCloudNote(string text)
         {
             cloudNote = text ?? "";
-            Invalidate(new Rectangle(20, 643, 740, 42));
+            Invalidate(new Rectangle(0, 578, W, H - 578));
         }
 
         // a section button is hidden while its feature is off: Cloud Save (cloud saving) and Stats (Options)
@@ -364,7 +372,7 @@ namespace AzerothLauncher
             else if (Installing) { playBtn.Label = "INSTALLING"; playBtn.FontSize = 18; }
             else if (Updating) { playBtn.Label = "UPDATING"; playBtn.FontSize = 20; }
             else { playBtn.Label = ClientPresent() ? "PLAY" : "INSTALL"; playBtn.FontSize = 24; }
-            Invalidate(new Rectangle(20, 584, 740, 102));
+            Invalidate(new Rectangle(0, 578, W, H - 578));
             RefreshGates();
         }
 
