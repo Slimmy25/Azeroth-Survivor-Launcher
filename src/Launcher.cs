@@ -95,7 +95,7 @@ namespace AzerothLauncher
                 string n = name;
                 bool low = n == "Guide" || n == "Addons";       // these two sit in the bottom bar
                 nav[n] = Place(new WowButton(n.ToUpperInvariant(), delegate { ShowSection(n); }, low ? 159 : 128, 27, 8.5f),
-                               low ? 775 : 693, low ? (n == "Guide" ? 598 : 634) : 480);
+                               low ? (n == "Guide" ? 612 : 779) : 693, low ? H - 8 - 27 : 480);   // Guide and Addons: along the very bottom
                 nav[n].Skin = low ? Retro.Long : Retro.Button;
             }
             aboutBtn = Place(new WowButton("ABOUT LAUNCHER", delegate { ShowSection("About Launcher"); }, 159, 27, 8), W - 8 - 159 - 6, 98);         // under UPDATE LAUNCHER
@@ -308,7 +308,7 @@ namespace AzerothLauncher
             using (var b = new SolidBrush(Theme.Hex("#d7cea4")))
             using (var sh = new SolidBrush(Color.Black))
             {
-                var box = new RectangleF(32, 614, 720, 34);
+                var box = new RectangleF(32, 614, 560, 34);
                 g.DrawString(Lang.T(bodyText), Theme.F(9), sh, new RectangleF(box.X + 1, box.Y + 1, box.Width, box.Height));
                 g.DrawString(Lang.T(bodyText), Theme.F(9), b, box);
             }
@@ -318,8 +318,8 @@ namespace AzerothLauncher
                 line = Lang.T("Time played: " + Duration(ps.Seconds) + "   |   Last session: " + Duration(ps.LastSeconds));
             if (cloudNote.Length > 0) line = (line.Length > 0 ? line + "   |   " : "") + Lang.T(cloudNote);
             if (line.Length > 0)
-                g.DrawString(line, Theme.F(8, FontStyle.Italic), new SolidBrush(Retro.Gold), new RectangleF(32, 646, 720, 16));
-            g.DrawString(Lang.T(status), Theme.F(9, FontStyle.Italic), new SolidBrush(Theme.Hex("#fff2b0")), new RectangleF(32, 663, 720, 18));
+                g.DrawString(line, Theme.F(8, FontStyle.Italic), new SolidBrush(Retro.Gold), new RectangleF(32, 646, 560, 16));
+            g.DrawString(Lang.T(status), Theme.F(9, FontStyle.Italic), new SolidBrush(Theme.Hex("#fff2b0")), new RectangleF(32, 663, 560, 18));
         }
 
         public void SetStatus(string msg)
