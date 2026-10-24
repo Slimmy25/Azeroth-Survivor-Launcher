@@ -9,3 +9,6 @@ This page is a placeholder. Replace this text with your description of the launc
 - A line starting with # is a heading
 - A line starting with - is a bullet point
 - Any other line is a paragraph
+
+# Look
+The launcher layout is inspired by the WoW Retro Launcher by Parquelle (https://github.com/Parquelle/WoWRetroLauncher). All of its artwork is original, drawn for this launcher.

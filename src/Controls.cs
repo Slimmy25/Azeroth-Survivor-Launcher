@@ -83,7 +83,7 @@ namespace AzerothLauncher
             }
         }
 
-        static Image LoadImage(string name)
+        public static Image LoadImage(string name)
         {
             try
             {
@@ -125,6 +125,7 @@ namespace AzerothLauncher
         float size;
         bool hover, down, active, selected, grayed;
         public IconPainter Icon;
+        public Image[] Skin;                                  // launcher art {normal, hover, down, grayed}
         public event Action Pressed;
         public string GrayedTip;                              // shown on hover, only while the button is grayed out
 
@@ -201,6 +202,7 @@ namespace AzerothLauncher
         {
             Graphics g = e.Graphics;
             int w = Width, h = Height;
+            if (Skin != null) { PaintSkin(g, w, h); return; }
             string state = grayed ? "grayed" : down ? "down" : hover ? "hover" : active ? "active" : "normal";
             Color top, bot, border, fg, shadow = Color.Black;
             if (state == "grayed") { top = Theme.Hex("#2a2620"); bot = Theme.Hex("#12100d"); border = Theme.Hex("#5a5246"); fg = Theme.Hex("#7d7466"); }
@@ -236,6 +238,46 @@ namespace AzerothLauncher
             while (fs > 6 && g.MeasureString(label, Theme.F(fs, FontStyle.Bold)).Width > tw - 10) fs -= 0.5f;
             Theme.CenterText(g, label, Theme.F(fs, FontStyle.Bold), fg, new RectangleF(tx, 0, tw, h), shadow);
         }
+
+        // the button is a picture from the launcher art, the label drawn on it
+        void PaintSkin(Graphics g, int w, int h)
+        {
+            int i = grayed ? 3 : down ? 2 : (hover || active || selected) ? 1 : 0;
+            Image img = Skin.Length > i && Skin[i] != null ? Skin[i] : Skin[0];
+            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+            g.PixelOffsetMode = PixelOffsetMode.HighQuality;
+            g.DrawImage(img, new Rectangle(0, 0, w, h));
+            Theme.Smooth(g);
+            Color fg = grayed ? Theme.Hex("#9a948a") : (hover || selected) ? Theme.Hex("#fff2b0") : Theme.Hex("#f2c14e");
+            float tx = 0, tw = w;
+            if (Icon != null)
+            {
+                float isz = h - 12;
+                Icon(g, 10 + isz / 2, h / 2f, isz, fg);
+                tx = 10 + isz + 4;
+                tw = w - 8 - tx;
+            }
+            string label = Lang.T(text);
+            float fs = size;
+            while (fs > 6 && g.MeasureString(label, Theme.F(fs, FontStyle.Bold)).Width > tw - 10) fs -= 0.5f;
+            Theme.CenterText(g, label, Theme.F(fs, FontStyle.Bold), fg, new RectangleF(tx, down ? 1 : 0, tw, h), Color.Black);
+        }
+    }
+
+    // the launcher art (assets/retro, drawn by tools/make_launcher_art.py); layout after the WoW Retro Launcher (Parquelle)
+    public static class Retro
+    {
+        static readonly Dictionary<string, Image> cache = new Dictionary<string, Image>();
+        public static Image Get(string name)
+        {
+            Image img;
+            if (!cache.TryGetValue(name, out img)) cache[name] = img = Theme.LoadImage("AS.retro." + name + ".png");
+            return img;
+        }
+        public static Image[] Play { get { return new[] { Get("play"), Get("play_hover"), Get("play_down"), Get("play_off") }; } }
+        public static Image[] Button { get { return new[] { Get("btn"), Get("btn_hover"), Get("btn_down"), Get("btn") }; } }
+        public static Image[] Long { get { return new[] { Get("long"), Get("long_hover"), Get("long_down"), Get("long") }; } }
+        public static readonly Color Gold = Color.FromArgb(238, 190, 83);
     }
 
     // Small square bronze button with a drawn icon (the section window's side strip).
