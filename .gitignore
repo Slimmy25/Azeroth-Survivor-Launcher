@@ -20,6 +20,9 @@ AzerothSurvivors.exe
 *.download
 *.part
 
+# The launcher's own files when it is run from this folder
+Azeroth Survivor Launcher/
+
 # Windows clutter
 Thumbs.db
 desktop.ini
