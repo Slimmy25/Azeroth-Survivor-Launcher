@@ -431,8 +431,8 @@ Select a folder inside your cloud drive (Google Drive, OneDrive, Dropbox ...)
 = अपनी क्लाउड ड्राइव के अंदर एक फ़ोल्डर चुनें (Google Drive, OneDrive, Dropbox ...)
 That is the top level of your cloud drive.
 = यह आपकी क्लाउड ड्राइव का सबसे ऊपरी स्तर है।
-Create and use a subfolder named AzerothSync inside it?
-= इसके अंदर AzerothSync नाम का सबफ़ोल्डर बनाकर इस्तेमाल करें?
+Create and use a subfolder named Azeroth Survivor Launcher inside it?
+= इसके अंदर Azeroth Survivor Launcher नाम का सबफ़ोल्डर बनाकर इस्तेमाल करें?
 Sync folder
 = सिंक फ़ोल्डर
 Play time reset.

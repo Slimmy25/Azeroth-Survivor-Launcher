@@ -67,7 +67,7 @@ signs the exe automatically.
 ## Credits
 
 - Launcher: Slimjim
-- Cloud save engine: ported from [AzerothSync](https://github.com/KeijinDE/ASDataSync) by KeijinDE (MIT)
+- Cloud save engine: built on the sync framework by KeijinDE, used with his blessing (MIT, see THIRD-PARTY-NOTICES.md)
 
 ## License
 

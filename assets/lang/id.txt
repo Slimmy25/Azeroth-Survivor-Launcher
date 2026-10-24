@@ -430,8 +430,8 @@ Select a folder inside your cloud drive (Google Drive, OneDrive, Dropbox ...)
 = Pilih folder di dalam drive cloud kamu (Google Drive, OneDrive, Dropbox ...)
 That is the top level of your cloud drive.
 = Itu adalah tingkat teratas drive cloud kamu.
-Create and use a subfolder named AzerothSync inside it?
-= Buat dan pakai subfolder bernama AzerothSync di dalamnya?
+Create and use a subfolder named Azeroth Survivor Launcher inside it?
+= Buat dan pakai subfolder bernama Azeroth Survivor Launcher di dalamnya?
 Sync folder
 = Folder sinkronisasi
 Play time reset.

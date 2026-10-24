@@ -1,9 +1,9 @@
 # Third-party notices
 
-## AzerothSync (cloud sync engine)
+## Cloud sync framework (KeijinDE)
 
-`src/Sync.cs` is a port of the sync engine of AzerothSync by KeijinDE:
-https://github.com/KeijinDE/ASDataSync
+The Azeroth Survivor Launcher's cloud sync (`src/Sync.cs`) is built on the sync framework by KeijinDE, used with
+his blessing. Original project: https://github.com/KeijinDE/ASDataSync
 
 ```
 MIT License

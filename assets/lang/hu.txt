@@ -431,8 +431,8 @@ Select a folder inside your cloud drive (Google Drive, OneDrive, Dropbox ...)
 = Válassz egy mappát a felhőtárhelyeden belül (Google Drive, OneDrive, Dropbox ...)
 That is the top level of your cloud drive.
 = Ez a felhőtárhelyed legfelső szintje.
-Create and use a subfolder named AzerothSync inside it?
-= Létrehozol és használsz benne egy AzerothSync nevű almappát?
+Create and use a subfolder named Azeroth Survivor Launcher inside it?
+= Létrehozol és használsz benne egy Azeroth Survivor Launcher nevű almappát?
 Sync folder
 = Szinkronizálási mappa
 Play time reset.

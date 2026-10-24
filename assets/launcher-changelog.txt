@@ -12,7 +12,7 @@
 - AS Time Tracker is built into the launcher (INSTALL STATS ADDON on the STATS page) and also listed in Download More; /azstats in game
 - New GUIDE: a new player guide with classes, controls, zones, bosses, level-ups, gear, talents and tips
 - Buttons, top to bottom: GUIDE, Cloud Save, Addons, Changelog, Stats, Options
-- Cloud Save: uploads write straight into the one cloud folder (no more "save.azsync-old" / "save.azsync-new" folders), and an old leftover folder that cannot be removed no longer stops a sync
+- Cloud Save: uploads write straight into the one cloud folder (no more extra "-old" / "-new" copies of the save folder), and an old leftover folder that cannot be removed no longer stops a sync
 - Guide, Options, About Launcher and Discord work before the game is installed; Cloud Save is grayed out until then and says why when you point at it
 - Launcher updates and addon downloads now come from a public downloads page, so every player can get them
 
@@ -68,7 +68,7 @@
 - The changelog is built into the launcher and can no longer be edited from inside it
 
 # Python launcher 1.7
-- Cloud Save now works like AzerothSync: save game, AddOns and addon settings are synced separately
+- Cloud Save syncs the save game, AddOns and addon settings are synced separately
 - Fingerprint checks decide what is newer; a real conflict asks once: Use cloud, Keep local or Cancel
 - Everything that is overwritten is backed up as a ZIP (this PC: last 20, cloud: last 10)
 - Cloud Save has Check Status, Download and Upload with a live log; Options has the folder settings

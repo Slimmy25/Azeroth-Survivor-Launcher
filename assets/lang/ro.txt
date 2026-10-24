@@ -431,8 +431,8 @@ Select a folder inside your cloud drive (Google Drive, OneDrive, Dropbox ...)
 = Selectează un folder în drive-ul tău cloud (Google Drive, OneDrive, Dropbox ...)
 That is the top level of your cloud drive.
 = Acesta este nivelul de sus al drive-ului tău cloud.
-Create and use a subfolder named AzerothSync inside it?
-= Creezi și folosești în el un subfolder numit AzerothSync?
+Create and use a subfolder named Azeroth Survivor Launcher inside it?
+= Creezi și folosești în el un subfolder numit Azeroth Survivor Launcher?
 Sync folder
 = Folder de sincronizare
 Play time reset.

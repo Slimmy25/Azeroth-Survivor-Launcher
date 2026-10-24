@@ -430,8 +430,8 @@ Select a folder inside your cloud drive (Google Drive, OneDrive, Dropbox ...)
 = Valitse kansio pilvitallennustilastasi (Google Drive, OneDrive, Dropbox ...)
 That is the top level of your cloud drive.
 = Tämä on pilvitallennustilasi ylin taso.
-Create and use a subfolder named AzerothSync inside it?
-= Luodaanko sen sisään alikansio nimeltä AzerothSync ja käytetäänkö sitä?
+Create and use a subfolder named Azeroth Survivor Launcher inside it?
+= Luodaanko sen sisään alikansio nimeltä Azeroth Survivor Launcher ja käytetäänkö sitä?
 Sync folder
 = Synkronointikansio
 Play time reset.

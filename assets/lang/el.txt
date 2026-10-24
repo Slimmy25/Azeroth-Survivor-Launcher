@@ -431,8 +431,8 @@ Select a folder inside your cloud drive (Google Drive, OneDrive, Dropbox ...)
 = Επίλεξε έναν φάκελο μέσα στον χώρο cloud σου (Google Drive, OneDrive, Dropbox ...)
 That is the top level of your cloud drive.
 = Αυτό είναι το ανώτατο επίπεδο του χώρου cloud σου.
-Create and use a subfolder named AzerothSync inside it?
-= Δημιουργία και χρήση υποφακέλου με όνομα AzerothSync μέσα σε αυτό;
+Create and use a subfolder named Azeroth Survivor Launcher inside it?
+= Δημιουργία και χρήση υποφακέλου με όνομα Azeroth Survivor Launcher μέσα σε αυτό;
 Sync folder
 = Φάκελος συγχρονισμού
 Play time reset.

@@ -431,8 +431,8 @@ Select a folder inside your cloud drive (Google Drive, OneDrive, Dropbox ...)
 = Bulut sürücünün içinde bir klasör seç (Google Drive, OneDrive, Dropbox ...)
 That is the top level of your cloud drive.
 = Bu, bulut sürücünün en üst düzeyi.
-Create and use a subfolder named AzerothSync inside it?
-= İçinde AzerothSync adlı bir alt klasör oluşturulup kullanılsın mı?
+Create and use a subfolder named Azeroth Survivor Launcher inside it?
+= İçinde Azeroth Survivor Launcher adlı bir alt klasör oluşturulup kullanılsın mı?
 Sync folder
 = Eşitleme klasörü
 Play time reset.

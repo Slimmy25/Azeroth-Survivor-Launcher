@@ -431,8 +431,8 @@ Select a folder inside your cloud drive (Google Drive, OneDrive, Dropbox ...)
 = Выбери папку на своём облачном диске (Google Drive, OneDrive, Dropbox ...)
 That is the top level of your cloud drive.
 = Это верхний уровень твоего облачного диска.
-Create and use a subfolder named AzerothSync inside it?
-= Создать внутри него папку AzerothSync и использовать её?
+Create and use a subfolder named Azeroth Survivor Launcher inside it?
+= Создать внутри него папку Azeroth Survivor Launcher и использовать её?
 Sync folder
 = Папка синхронизации
 Play time reset.
