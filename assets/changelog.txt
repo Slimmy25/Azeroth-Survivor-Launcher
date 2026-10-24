@@ -2,6 +2,20 @@ Patch notes shown in the launcher's Changelog. The launcher sorts them by versio
 Every post starts with its title on the first line. Posts are separated by a line with only === on it.
 Everything above the first === line is ignored.
 ===
+0.114.2
+-------
+Boss gear for the whole party: when a boss falls in co-op, everyone rolls its loot, not just the one who landed the killing blow. Co-op is smooth again for guests.
+
+* In co-op every hero gets a roll on a slain boss's gear for their own class, even if they're down at the time.
+   * Guests see the host's world update up to 60 times a second again, and what they do reaches the host at once: 0.114.1's bundling made co-op feel choppy.
+   * A guest who ends their run now leaves the lobby too, back at the lobby list, instead of staying listed in the host's lobby.
+===
+0.114.1
+-------
+Smoother co-op: parties send their updates in fewer, bigger packets.
+
+* Co-op parties send their updates bundled, up to 20 times a second, so the co-op servers stay quick with many parties at once.
+===
 0.114.0
 -------
 Co-op parties now play on a server of their own, for smoother runs with less lag.
