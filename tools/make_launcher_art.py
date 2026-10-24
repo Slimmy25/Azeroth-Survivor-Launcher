@@ -158,8 +158,7 @@ def background(emblem):
     d.rectangle((950, 596, 1092, 683), fill=(8, 7, 6), outline=(176, 140, 64), width=2)
     d.rectangle((954, 600, 1088, 679), outline=(70, 55, 28), width=1)
     # the game's emblem (Azeroth Survivors / Aethus) at the top
-    e = Image.open(emblem).convert('RGBA'); e.thumbnail((150, 104))
-    im.paste(e, (889 - e.width // 2 + 15, 97), e)           # above the News column, under the top buttons
+    # (the emblem is drawn by the launcher, next to the title)
     return im
 
 def slab(w, h, tint, seed, state):

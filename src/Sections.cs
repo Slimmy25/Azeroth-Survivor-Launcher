@@ -1,4 +1,4 @@
-// The section window: a WoW-whisper-style box that opens to the right of the launcher, with Cloud Save,
+﻿// The section window: a WoW-whisper-style box that opens to the right of the launcher, with Cloud Save,
 // Addons (and Download More), Options, Changelog, Guide, Stats (StatsPanel.cs) and About Launcher.
 using System;
 using System.Collections.Generic;
@@ -247,7 +247,7 @@ namespace AzerothLauncher
         // the open section fills the left side of the launcher window
         void PlaceSide()
         {
-            side.Bounds = new Rectangle(8, 58, 670, 520);
+            side.Bounds = new Rectangle(8, 200, 670, 378);          // top level with "News", under the title
             side.BringToFront();
         }
 
