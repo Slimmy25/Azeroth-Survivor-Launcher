@@ -863,14 +863,14 @@ Track every run
 = Κατέγραψε κάθε γύρο
 The stats file could not be read ({0}).
 = Δεν ήταν δυνατή η ανάγνωση του αρχείου στατιστικών ({0}).
-The Azeroth Stats addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
-= Το πρόσθετο Azeroth Stats καταγράφει κάθε γύρο που παίζεις: νίκες, φόνους, ζημιά, χρυσό και τα προσωπικά σου ρεκόρ. Εγκατάστησέ το, ολοκλήρωσε έναν γύρο και τα στατιστικά σου θα εμφανιστούν εδώ.
+The AS Time Tracker addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
+= Το πρόσθετο AS Time Tracker καταγράφει κάθε γύρο που παίζεις: νίκες, φόνους, ζημιά, χρυσό και τα προσωπικά σου ρεκόρ. Εγκατάστησέ το, ολοκλήρωσε έναν γύρο και τα στατιστικά σου θα εμφανιστούν εδώ.
 It is optional: without it, this page only shows your play time.
 = Είναι προαιρετικό: χωρίς αυτό, η σελίδα δείχνει μόνο τον χρόνο παιχνιδιού σου.
-The Azeroth Stats addon is turned off. Turn it on in Addons to keep recording your runs.
-= Το πρόσθετο Azeroth Stats είναι απενεργοποιημένο. Ενεργοποίησέ το στα Πρόσθετα για να συνεχίσει να καταγράφει τους γύρους σου.
-No runs recorded yet. Finish a run with the Azeroth Stats addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
-= Δεν έχουν καταγραφεί γύροι ακόμα. Ολοκλήρωσε έναν γύρο με ενεργό το Azeroth Stats. Το παιχνίδι αποθηκεύει τα δεδομένα των πρόσθετων όταν βγαίνεις, οπότε τα στατιστικά εμφανίζονται εδώ αφού κλείσεις το παιχνίδι.
+The AS Time Tracker addon is turned off. Turn it on in Addons to keep recording your runs.
+= Το πρόσθετο AS Time Tracker είναι απενεργοποιημένο. Ενεργοποίησέ το στα Πρόσθετα για να συνεχίσει να καταγράφει τους γύρους σου.
+No runs recorded yet. Finish a run with the AS Time Tracker addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
+= Δεν έχουν καταγραφεί γύροι ακόμα. Ολοκλήρωσε έναν γύρο με ενεργό το AS Time Tracker. Το παιχνίδι αποθηκεύει τα δεδομένα των πρόσθετων όταν βγαίνεις, οπότε τα στατιστικά εμφανίζονται εδώ αφού κλείσεις το παιχνίδι.
 Runs
 = Γύροι
 Victories
@@ -941,9 +941,9 @@ In game, type /azstats to see your stats.
 = Στο παιχνίδι, γράψε /azstats για να δεις τα στατιστικά σου.
 Saved by the game {0}.
 = Αποθηκεύτηκε από το παιχνίδι: {0}.
-Azeroth Stats updated.
-= Το Azeroth Stats ενημερώθηκε.
-Azeroth Stats installed. It records your runs from now on.
-= Το Azeroth Stats εγκαταστάθηκε. Από τώρα καταγράφει τους γύρους σου.
-Could not install Azeroth Stats:\n\n{0}
-= Δεν ήταν δυνατή η εγκατάσταση του Azeroth Stats:\n\n{0}
+AS Time Tracker updated.
+= Το AS Time Tracker ενημερώθηκε.
+AS Time Tracker installed. It records your runs from now on.
+= Το AS Time Tracker εγκαταστάθηκε. Από τώρα καταγράφει τους γύρους σου.
+Could not install AS Time Tracker:\n\n{0}
+= Δεν ήταν δυνατή η εγκατάσταση του AS Time Tracker:\n\n{0}

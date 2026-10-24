@@ -40,7 +40,7 @@ namespace AzerothLauncher
 
         readonly WowButton playBtn, updateBtn, aboutBtn, discordBtn;
         readonly Dictionary<string, WowButton> nav = new Dictionary<string, WowButton>();
-        readonly string[] navNames = { "Cloud Save", "Addons", "Options", "Changelog", "Guide", "Stats" };
+        readonly string[] navNames = { "Guide", "Cloud Save", "Addons", "Changelog", "Stats", "Options" };   // top to bottom
         NotifyIcon tray;
         ToolStripMenuItem trayShow, trayPlay, trayUpload, trayCloseToTray, trayQuit;
 

@@ -863,14 +863,14 @@ Track every run
 = Zaznamenávej každý běh
 The stats file could not be read ({0}).
 = Soubor se statistikami nelze přečíst ({0}).
-The Azeroth Stats addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
-= Doplněk Azeroth Stats zaznamenává každý tvůj běh: vítězství, zabití, poškození, zlato a osobní rekordy. Nainstaluj ho, dokonči běh a statistiky se objeví tady.
+The AS Time Tracker addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
+= Doplněk AS Time Tracker zaznamenává každý tvůj běh: vítězství, zabití, poškození, zlato a osobní rekordy. Nainstaluj ho, dokonči běh a statistiky se objeví tady.
 It is optional: without it, this page only shows your play time.
 = Je volitelný: bez něj tato stránka ukazuje jen odehraný čas.
-The Azeroth Stats addon is turned off. Turn it on in Addons to keep recording your runs.
-= Doplněk Azeroth Stats je vypnutý. Zapni ho v Doplňcích, aby se tvé běhy dál zaznamenávaly.
-No runs recorded yet. Finish a run with the Azeroth Stats addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
-= Zatím žádné zaznamenané běhy. Dokonči běh se zapnutým doplňkem Azeroth Stats. Hra ukládá data doplňků při odchodu, takže se statistiky objeví tady po zavření hry.
+The AS Time Tracker addon is turned off. Turn it on in Addons to keep recording your runs.
+= Doplněk AS Time Tracker je vypnutý. Zapni ho v Doplňcích, aby se tvé běhy dál zaznamenávaly.
+No runs recorded yet. Finish a run with the AS Time Tracker addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
+= Zatím žádné zaznamenané běhy. Dokonči běh se zapnutým doplňkem AS Time Tracker. Hra ukládá data doplňků při odchodu, takže se statistiky objeví tady po zavření hry.
 Runs
 = Běhy
 Victories
@@ -941,9 +941,9 @@ In game, type /azstats to see your stats.
 = Ve hře napiš /azstats a uvidíš své statistiky.
 Saved by the game {0}.
 = Uloženo hrou: {0}.
-Azeroth Stats updated.
-= Azeroth Stats aktualizován.
-Azeroth Stats installed. It records your runs from now on.
-= Azeroth Stats nainstalován. Od teď zaznamenává tvé běhy.
-Could not install Azeroth Stats:\n\n{0}
-= Azeroth Stats nelze nainstalovat:\n\n{0}
+AS Time Tracker updated.
+= AS Time Tracker aktualizován.
+AS Time Tracker installed. It records your runs from now on.
+= AS Time Tracker nainstalován. Od teď zaznamenává tvé běhy.
+Could not install AS Time Tracker:\n\n{0}
+= AS Time Tracker nelze nainstalovat:\n\n{0}

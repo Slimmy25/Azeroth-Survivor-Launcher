@@ -863,14 +863,14 @@ Track every run
 = Записуйте кожен забіг
 The stats file could not be read ({0}).
 = Не вдалося прочитати файл статистики ({0}).
-The Azeroth Stats addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
-= Аддон Azeroth Stats записує кожен ваш забіг: перемоги, вбивства, шкоду, золото та особисті рекорди. Встановіть його, завершіть забіг — і статистика з'явиться тут.
+The AS Time Tracker addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
+= Аддон AS Time Tracker записує кожен ваш забіг: перемоги, вбивства, шкоду, золото та особисті рекорди. Встановіть його, завершіть забіг — і статистика з'явиться тут.
 It is optional: without it, this page only shows your play time.
 = Він необов'язковий: без нього ця сторінка показує лише час у грі.
-The Azeroth Stats addon is turned off. Turn it on in Addons to keep recording your runs.
-= Аддон Azeroth Stats вимкнено. Увімкніть його в розділі «Аддони», щоб і далі записувати забіги.
-No runs recorded yet. Finish a run with the Azeroth Stats addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
-= Забігів ще немає. Завершіть забіг з увімкненим аддоном Azeroth Stats. Гра зберігає дані аддонів під час виходу, тож статистика з'явиться тут після закриття гри.
+The AS Time Tracker addon is turned off. Turn it on in Addons to keep recording your runs.
+= Аддон AS Time Tracker вимкнено. Увімкніть його в розділі «Аддони», щоб і далі записувати забіги.
+No runs recorded yet. Finish a run with the AS Time Tracker addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
+= Забігів ще немає. Завершіть забіг з увімкненим аддоном AS Time Tracker. Гра зберігає дані аддонів під час виходу, тож статистика з'явиться тут після закриття гри.
 Runs
 = Забіги
 Victories
@@ -941,9 +941,9 @@ In game, type /azstats to see your stats.
 = У грі введіть /azstats, щоб побачити статистику.
 Saved by the game {0}.
 = Збережено грою: {0}.
-Azeroth Stats updated.
-= Azeroth Stats оновлено.
-Azeroth Stats installed. It records your runs from now on.
-= Azeroth Stats встановлено. Відтепер він записує ваші забіги.
-Could not install Azeroth Stats:\n\n{0}
-= Не вдалося встановити Azeroth Stats:\n\n{0}
+AS Time Tracker updated.
+= AS Time Tracker оновлено.
+AS Time Tracker installed. It records your runs from now on.
+= AS Time Tracker встановлено. Відтепер він записує ваші забіги.
+Could not install AS Time Tracker:\n\n{0}
+= Не вдалося встановити AS Time Tracker:\n\n{0}

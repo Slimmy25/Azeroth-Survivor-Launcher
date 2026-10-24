@@ -1,5 +1,5 @@
-// Long-term stats: the Azeroth Stats addon (built into the launcher, addons\AzerothStats) records every run in its
-// saved-variable file, AzerothStats.lua in the game's addon settings folder (benilla-config\saved). This file
+// Long-term stats: the AS Time Tracker addon (built into the launcher, addons\ASTimeTracker) records every run in
+// its saved-variable file, ASTimeTracker.lua in the game's addon settings folder (benilla-config\saved). This file
 // reads that Lua table and installs the addon; the STATS section (Sections.cs) shows what it found, together with
 // the launcher's own play time. Everything here is optional: the section can be turned off in Options and
 // the addon is only installed when the player asks for it.
@@ -286,7 +286,7 @@ namespace AzerothLauncher
         public double Time, Level, Kills, Damage, Gold, Bosses;
     }
 
-    // what the Azeroth Stats addon has recorded
+    // what the AS Time Tracker addon has recorded
     public class RunStats
     {
         public string FilePath = "", First = "", Last = "";
@@ -300,12 +300,20 @@ namespace AzerothLauncher
 
     public static class Stats
     {
-        public const string AddonFolder = "AzerothStats";
-        public const string FileName = "AzerothStats.lua";
-        static readonly string[] AddonFiles = { "AzerothStats.toc", "AzerothStats.lua" };
+        public const string AddonFolder = "ASTimeTracker", DbName = "ASTimeTrackerDB";
+        public const string FileName = AddonFolder + ".lua";
+        static readonly string[] AddonFiles = { AddonFolder + ".toc", AddonFolder + ".lua" };
+        // its first name, "Azeroth Stats": replaced (and its records carried over) when the new one is installed
+        const string OldFolder = "AzerothStats", OldDbName = "AzerothStatsDB";
 
-        // the newest AzerothStats.lua anywhere in the addon settings folder (account or character sub-folders too)
+        // the newest ASTimeTracker.lua (else the first version's AzerothStats.lua) in the addon settings folder
         public static string FindFile(string savedDir)
+        {
+            return FindNamed(savedDir, FileName) ?? FindNamed(savedDir, OldFolder + ".lua");
+        }
+
+        // the newest file with this name anywhere in the folder (account or character sub-folders too)
+        static string FindNamed(string savedDir, string fileName)
         {
             if (string.IsNullOrEmpty(savedDir) || !Directory.Exists(savedDir)) return null;
             string best = null;
@@ -318,7 +326,7 @@ namespace AzerothLauncher
                 try
                 {
                     foreach (string f in Directory.GetFiles(cur.Key))
-                        if (string.Equals(Path.GetFileName(f), FileName, StringComparison.OrdinalIgnoreCase))
+                        if (string.Equals(Path.GetFileName(f), fileName, StringComparison.OrdinalIgnoreCase))
                         {
                             DateTime t = File.GetLastWriteTimeUtc(f);
                             if (best == null || t > when) { best = f; when = t; }
@@ -340,7 +348,8 @@ namespace AzerothLauncher
             string text;
             using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite | FileShare.Delete))
             using (var r = new StreamReader(fs, Encoding.UTF8)) text = r.ReadToEnd();
-            var db = LuaReader.Tab(LuaReader.ParseFile(text), "AzerothStatsDB");
+            var vars = LuaReader.ParseFile(text);
+            var db = LuaReader.Tab(vars, DbName) ?? LuaReader.Tab(vars, OldDbName);
             if (db == null) return null;
             var st = new RunStats();
             st.FilePath = path;
@@ -443,11 +452,16 @@ namespace AzerothLauncher
         // ---- the addon, built into the launcher
         static string Embedded(string file) { return Util.ReadResource("AS.addon." + file); }
 
-        // the addon's folder in AddOns (also when it is turned off), or null
+        // the addon's folder in AddOns (also when it is turned off; else the first version's folder), or null
         public static string AddonPath(string addonsDir)
         {
+            return Folder(addonsDir, AddonFolder) ?? Folder(addonsDir, OldFolder);
+        }
+
+        static string Folder(string addonsDir, string name)
+        {
             if (string.IsNullOrEmpty(addonsDir)) return null;
-            string on = Path.Combine(addonsDir, AddonFolder), off = on + Addons.DisabledSuffix;
+            string on = Path.Combine(addonsDir, name), off = on + Addons.DisabledSuffix;
             if (Directory.Exists(on)) return on;
             if (Directory.Exists(off)) return off;
             return null;
@@ -460,6 +474,7 @@ namespace AzerothLauncher
         {
             string dir = AddonPath(addonsDir);
             if (dir == null) return false;
+            if (Folder(addonsDir, AddonFolder) == null) return true;     // still the old "Azeroth Stats"
             foreach (string f in AddonFiles)
             {
                 string p = Path.Combine(dir, f);
@@ -474,18 +489,45 @@ namespace AzerothLauncher
 
         static string Norm(string t) { return (t ?? "").Replace("\r\n", "\n").TrimEnd(); }
 
-        // writes the addon into AddOns (or updates it where it is, turned off or not); its saved stats are kept
-        public static void InstallAddon(string addonsDir)
+        // writes the addon into AddOns (or updates it where it is, turned off or not); its saved stats are kept.
+        // The first version ("Azeroth Stats") is replaced: its folder goes, its records move to the new name.
+        public static void InstallAddon(string addonsDir, string savedDir)
         {
             if (string.IsNullOrEmpty(addonsDir)) throw new UserError("The AddOns folder is not set. Set the game config folder in Options.");
-            string dir = AddonPath(addonsDir) ?? Path.Combine(addonsDir, AddonFolder);
+            string old = Folder(addonsDir, OldFolder);
+            string dir = Folder(addonsDir, AddonFolder);
+            if (dir == null)                                 // keep it turned off if the old one was
+                dir = Path.Combine(addonsDir, AddonFolder) + (old != null && old.EndsWith(Addons.DisabledSuffix) ? Addons.DisabledSuffix : "");
             Directory.CreateDirectory(dir);
             foreach (string f in AddonFiles)
             {
                 string text = Embedded(f);
-                if (text.Length == 0) throw new UserError("This launcher was built without the Azeroth Stats addon.");
+                if (text.Length == 0) throw new UserError("This launcher was built without the AS Time Tracker addon.");
                 File.WriteAllText(Path.Combine(dir, f), text.Replace("\r\n", "\n").Replace("\n", "\r\n"), new UTF8Encoding(false));
             }
+            MoveOldRecords(savedDir);
+            if (old != null) Util.DeleteTreeQuiet(old);
+        }
+
+        // AzerothStats.lua -> ASTimeTracker.lua next to it (with the variable renamed), where there is none yet
+        static void MoveOldRecords(string savedDir)
+        {
+            if (string.IsNullOrEmpty(savedDir) || !Directory.Exists(savedDir)) return;
+            string[] olds;
+            try { olds = Directory.GetFiles(savedDir, OldFolder + ".lua", SearchOption.AllDirectories); }
+            catch (Exception) { return; }
+            foreach (string f in olds)
+                try
+                {
+                    string target = Path.Combine(Path.GetDirectoryName(f), FileName);
+                    if (File.Exists(target)) continue;
+                    string text = File.ReadAllText(f, Encoding.UTF8);
+                    text = System.Text.RegularExpressions.Regex.Replace(text, @"^(\s*)" + OldDbName + @"\b", "$1" + DbName,
+                                                                         System.Text.RegularExpressions.RegexOptions.Multiline);
+                    File.WriteAllText(target, text, new UTF8Encoding(false));
+                    File.Delete(f);
+                }
+                catch (Exception) { }
         }
     }
 }

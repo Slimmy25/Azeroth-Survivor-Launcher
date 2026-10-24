@@ -863,14 +863,14 @@ Track every run
 = Zapisuj każdą rozgrywkę
 The stats file could not be read ({0}).
 = Nie udało się odczytać pliku statystyk ({0}).
-The Azeroth Stats addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
-= Dodatek Azeroth Stats zapisuje każdą twoją rozgrywkę: zwycięstwa, zabójstwa, obrażenia, złoto i twoje rekordy. Zainstaluj go, ukończ rozgrywkę, a statystyki pojawią się tutaj.
+The AS Time Tracker addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
+= Dodatek AS Time Tracker zapisuje każdą twoją rozgrywkę: zwycięstwa, zabójstwa, obrażenia, złoto i twoje rekordy. Zainstaluj go, ukończ rozgrywkę, a statystyki pojawią się tutaj.
 It is optional: without it, this page only shows your play time.
 = Jest opcjonalny: bez niego ta strona pokazuje tylko twój czas gry.
-The Azeroth Stats addon is turned off. Turn it on in Addons to keep recording your runs.
-= Dodatek Azeroth Stats jest wyłączony. Włącz go w Dodatkach, aby dalej zapisywać rozgrywki.
-No runs recorded yet. Finish a run with the Azeroth Stats addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
-= Brak zapisanych rozgrywek. Ukończ rozgrywkę z włączonym dodatkiem Azeroth Stats. Gra zapisuje dane dodatków przy wyjściu, więc statystyki pojawią się tutaj po zamknięciu gry.
+The AS Time Tracker addon is turned off. Turn it on in Addons to keep recording your runs.
+= Dodatek AS Time Tracker jest wyłączony. Włącz go w Dodatkach, aby dalej zapisywać rozgrywki.
+No runs recorded yet. Finish a run with the AS Time Tracker addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
+= Brak zapisanych rozgrywek. Ukończ rozgrywkę z włączonym dodatkiem AS Time Tracker. Gra zapisuje dane dodatków przy wyjściu, więc statystyki pojawią się tutaj po zamknięciu gry.
 Runs
 = Rozgrywki
 Victories
@@ -941,9 +941,9 @@ In game, type /azstats to see your stats.
 = W grze wpisz /azstats, aby zobaczyć statystyki.
 Saved by the game {0}.
 = Zapisane przez grę: {0}.
-Azeroth Stats updated.
-= Zaktualizowano Azeroth Stats.
-Azeroth Stats installed. It records your runs from now on.
-= Zainstalowano Azeroth Stats. Od teraz zapisuje twoje rozgrywki.
-Could not install Azeroth Stats:\n\n{0}
-= Nie udało się zainstalować Azeroth Stats:\n\n{0}
+AS Time Tracker updated.
+= Zaktualizowano AS Time Tracker.
+AS Time Tracker installed. It records your runs from now on.
+= Zainstalowano AS Time Tracker. Od teraz zapisuje twoje rozgrywki.
+Could not install AS Time Tracker:\n\n{0}
+= Nie udało się zainstalować AS Time Tracker:\n\n{0}

@@ -863,14 +863,14 @@ Track every run
 = Записывайте каждый забег
 The stats file could not be read ({0}).
 = Не удалось прочитать файл статистики ({0}).
-The Azeroth Stats addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
-= Аддон Azeroth Stats записывает каждый ваш забег: победы, убийства, урон, золото и личные рекорды. Установите его, завершите забег — и статистика появится здесь.
+The AS Time Tracker addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
+= Аддон AS Time Tracker записывает каждый ваш забег: победы, убийства, урон, золото и личные рекорды. Установите его, завершите забег — и статистика появится здесь.
 It is optional: without it, this page only shows your play time.
 = Он необязателен: без него эта страница показывает только время в игре.
-The Azeroth Stats addon is turned off. Turn it on in Addons to keep recording your runs.
-= Аддон Azeroth Stats выключен. Включите его в разделе «Аддоны», чтобы и дальше записывать забеги.
-No runs recorded yet. Finish a run with the Azeroth Stats addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
-= Забегов пока нет. Завершите забег с включённым аддоном Azeroth Stats. Игра сохраняет данные аддонов при выходе, поэтому статистика появится здесь после закрытия игры.
+The AS Time Tracker addon is turned off. Turn it on in Addons to keep recording your runs.
+= Аддон AS Time Tracker выключен. Включите его в разделе «Аддоны», чтобы и дальше записывать забеги.
+No runs recorded yet. Finish a run with the AS Time Tracker addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
+= Забегов пока нет. Завершите забег с включённым аддоном AS Time Tracker. Игра сохраняет данные аддонов при выходе, поэтому статистика появится здесь после закрытия игры.
 Runs
 = Забеги
 Victories
@@ -941,9 +941,9 @@ In game, type /azstats to see your stats.
 = В игре введите /azstats, чтобы увидеть статистику.
 Saved by the game {0}.
 = Сохранено игрой: {0}.
-Azeroth Stats updated.
-= Azeroth Stats обновлён.
-Azeroth Stats installed. It records your runs from now on.
-= Azeroth Stats установлен. Теперь он записывает ваши забеги.
-Could not install Azeroth Stats:\n\n{0}
-= Не удалось установить Azeroth Stats:\n\n{0}
+AS Time Tracker updated.
+= AS Time Tracker обновлён.
+AS Time Tracker installed. It records your runs from now on.
+= AS Time Tracker установлен. Теперь он записывает ваши забеги.
+Could not install AS Time Tracker:\n\n{0}
+= Не удалось установить AS Time Tracker:\n\n{0}

@@ -862,14 +862,14 @@ Track every run
 = Pidä kirjaa jokaisesta pelikerrasta
 The stats file could not be read ({0}).
 = Tilastotiedostoa ei voitu lukea ({0}).
-The Azeroth Stats addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
-= Azeroth Stats -lisäosa pitää kirjaa jokaisesta pelikerrastasi: voitot, tapot, vahinko, kulta ja henkilökohtaiset ennätyksesi. Asenna se, pelaa pelikerta loppuun, niin tilastosi näkyvät täällä.
+The AS Time Tracker addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
+= AS Time Tracker -lisäosa pitää kirjaa jokaisesta pelikerrastasi: voitot, tapot, vahinko, kulta ja henkilökohtaiset ennätyksesi. Asenna se, pelaa pelikerta loppuun, niin tilastosi näkyvät täällä.
 It is optional: without it, this page only shows your play time.
 = Se on vapaaehtoinen: ilman sitä tällä sivulla näkyy vain peliaikasi.
-The Azeroth Stats addon is turned off. Turn it on in Addons to keep recording your runs.
-= Azeroth Stats -lisäosa on pois päältä. Ota se käyttöön Lisäosat-kohdassa, jotta pelikertasi tallentuvat jatkossakin.
-No runs recorded yet. Finish a run with the Azeroth Stats addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
-= Pelikertoja ei ole vielä tallennettu. Pelaa pelikerta loppuun Azeroth Stats päällä. Peli tallentaa lisäosien tiedot, kun poistut pelistä, joten tilastosi näkyvät täällä pelin sulkemisen jälkeen.
+The AS Time Tracker addon is turned off. Turn it on in Addons to keep recording your runs.
+= AS Time Tracker -lisäosa on pois päältä. Ota se käyttöön Lisäosat-kohdassa, jotta pelikertasi tallentuvat jatkossakin.
+No runs recorded yet. Finish a run with the AS Time Tracker addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
+= Pelikertoja ei ole vielä tallennettu. Pelaa pelikerta loppuun AS Time Tracker päällä. Peli tallentaa lisäosien tiedot, kun poistut pelistä, joten tilastosi näkyvät täällä pelin sulkemisen jälkeen.
 Runs
 = Pelikerrat
 Victories
@@ -940,9 +940,9 @@ In game, type /azstats to see your stats.
 = Kirjoita pelissä /azstats nähdäksesi tilastosi.
 Saved by the game {0}.
 = Pelin tallentama: {0}.
-Azeroth Stats updated.
-= Azeroth Stats päivitetty.
-Azeroth Stats installed. It records your runs from now on.
-= Azeroth Stats asennettu. Se tallentaa pelikertasi tästä lähtien.
-Could not install Azeroth Stats:\n\n{0}
-= Azeroth Statsia ei voitu asentaa:\n\n{0}
+AS Time Tracker updated.
+= AS Time Tracker päivitetty.
+AS Time Tracker installed. It records your runs from now on.
+= AS Time Tracker asennettu. Se tallentaa pelikertasi tästä lähtien.
+Could not install AS Time Tracker:\n\n{0}
+= AS Time Trackeria ei voitu asentaa:\n\n{0}

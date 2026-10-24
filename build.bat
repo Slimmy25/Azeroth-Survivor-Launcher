@@ -50,7 +50,7 @@ echo Building %OUT% ...
   /resource:assets\logo.png,AS.logo.png /resource:assets\portrait.png,AS.portrait.png ^
   /resource:assets\AzerothSurvivors.ico,AS.app.ico /resource:assets\changelog.txt,AS.changelog.txt ^
   /resource:assets\addons.txt,AS.addons.txt /resource:assets\about.txt,AS.about.txt /resource:assets\guide.txt,AS.guide.txt !LANGRES! ^
-  /resource:addons\AzerothStats\AzerothStats.toc,AS.addon.AzerothStats.toc /resource:addons\AzerothStats\AzerothStats.lua,AS.addon.AzerothStats.lua ^
+  /resource:addons\ASTimeTracker\ASTimeTracker.toc,AS.addon.ASTimeTracker.toc /resource:addons\ASTimeTracker\ASTimeTracker.lua,AS.addon.ASTimeTracker.lua ^
   src\*.cs
 if errorlevel 1 goto fail
 

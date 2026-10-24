@@ -863,14 +863,14 @@ Track every run
 = Ține evidența fiecărei runde
 The stats file could not be read ({0}).
 = Fișierul de statistici nu a putut fi citit ({0}).
-The Azeroth Stats addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
-= Addon-ul Azeroth Stats ține evidența fiecărei runde jucate: victorii, inamici uciși, daune, aur și recordurile tale personale. Instalează-l, termină o rundă și statisticile tale apar aici.
+The AS Time Tracker addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
+= Addon-ul AS Time Tracker ține evidența fiecărei runde jucate: victorii, inamici uciși, daune, aur și recordurile tale personale. Instalează-l, termină o rundă și statisticile tale apar aici.
 It is optional: without it, this page only shows your play time.
 = Este opțional: fără el, pagina arată doar timpul tău de joc.
-The Azeroth Stats addon is turned off. Turn it on in Addons to keep recording your runs.
-= Addon-ul Azeroth Stats este dezactivat. Activează-l în Addon-uri ca să continui să-ți înregistrezi rundele.
-No runs recorded yet. Finish a run with the Azeroth Stats addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
-= Nicio rundă înregistrată încă. Termină o rundă cu addon-ul Azeroth Stats activat. Jocul salvează datele addon-urilor când ieși, așa că statisticile apar aici după ce închizi jocul.
+The AS Time Tracker addon is turned off. Turn it on in Addons to keep recording your runs.
+= Addon-ul AS Time Tracker este dezactivat. Activează-l în Addon-uri ca să continui să-ți înregistrezi rundele.
+No runs recorded yet. Finish a run with the AS Time Tracker addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
+= Nicio rundă înregistrată încă. Termină o rundă cu addon-ul AS Time Tracker activat. Jocul salvează datele addon-urilor când ieși, așa că statisticile apar aici după ce închizi jocul.
 Runs
 = Runde
 Victories
@@ -941,9 +941,9 @@ In game, type /azstats to see your stats.
 = În joc, scrie /azstats ca să-ți vezi statisticile.
 Saved by the game {0}.
 = Salvat de joc: {0}.
-Azeroth Stats updated.
-= Azeroth Stats actualizat.
-Azeroth Stats installed. It records your runs from now on.
-= Azeroth Stats instalat. De acum îți înregistrează rundele.
-Could not install Azeroth Stats:\n\n{0}
-= Azeroth Stats nu a putut fi instalat:\n\n{0}
+AS Time Tracker updated.
+= AS Time Tracker actualizat.
+AS Time Tracker installed. It records your runs from now on.
+= AS Time Tracker instalat. De acum îți înregistrează rundele.
+Could not install AS Time Tracker:\n\n{0}
+= AS Time Tracker nu a putut fi instalat:\n\n{0}
