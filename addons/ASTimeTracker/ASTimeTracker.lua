@@ -1,17 +1,17 @@
--- Azeroth Stats: keeps a record of every Azeroth Survivors run.
+-- AS Time Tracker: keeps a record of every Azeroth Survivors run.
 --
 -- When a run ends (the hero fell, won or left), the game sends the run's results as the AZSEND addon
 -- message (the same table AZS_GetRunSummary() returns). This addon adds each run to its totals, personal
--- bests, per class / race / zone records and a history of the last runs, all kept in AzerothStatsDB
+-- bests, per class / race / zone records and a history of the last runs, all kept in ASTimeTrackerDB
 -- (saved with your addon settings in benilla-config\saved). The launcher's STATS page reads that file.
 --
--- In game: /azstats shows your totals, /azstats last your last run, /azstats best your records,
+-- In game: /azstats (or /astime) shows your totals, /azstats last your last run, /azstats best your records,
 -- /azstats quiet turns the end-of-run chat line off or on, /azstats reset yes clears everything.
 --
 -- Lua 5.0 (as the 1.12 client): no _G, no # operator, table.getn, event handlers read event / arg1 / arg2.
 
-AZEROTHSTATS_VERSION = 1;
-AZEROTHSTATS_HISTORY = 100;                -- runs kept in the history (the totals keep everything)
+ASTIMETRACKER_VERSION = 1;
+ASTIMETRACKER_HISTORY = 100;                -- runs kept in the history (the totals keep everything)
 
 local SUM_FIELDS = { "time", "kills", "elites", "guardians", "bosses", "dmg", "taken", "gold", "chests", "magnets", "levels" };
 -- personal bests: the record's name and the run field it comes from
@@ -20,7 +20,7 @@ local BEST_FIELDS = { { "time", "t" }, { "lvl", "lvl" }, { "kills", "kills" }, {
 
 local function Print(msg)
 	if ( DEFAULT_CHAT_FRAME ) then
-		DEFAULT_CHAT_FRAME:AddMessage("|cffffd100Azeroth Stats:|r " .. msg);
+		DEFAULT_CHAT_FRAME:AddMessage("|cffffd100AS Time Tracker:|r " .. msg);
 	end
 end
 
@@ -86,7 +86,7 @@ local function Kind(result)
 end
 
 local function Fresh()
-	local db = { version = AZEROTHSTATS_VERSION, quiet = false, lastSig = "", first = "", last = "",
+	local db = { version = ASTIMETRACKER_VERSION, quiet = false, lastSig = "", first = "", last = "",
 	             totals = { runs = 0, victory = 0, defeat = 0, left = 0, other = 0 },
 	             best = {}, classes = {}, races = {}, zones = {}, results = {}, history = {} };
 	for i = 1, table.getn(SUM_FIELDS) do
@@ -95,24 +95,24 @@ local function Fresh()
 	return db;
 end
 
--- fills in anything an older or damaged AzerothStatsDB is missing
+-- fills in anything an older or damaged ASTimeTrackerDB is missing
 local function Check()
-	if ( type(AzerothStatsDB) ~= "table" ) then
-		AzerothStatsDB = Fresh();
+	if ( type(ASTimeTrackerDB) ~= "table" ) then
+		ASTimeTrackerDB = Fresh();
 		return;
 	end
 	local fresh = Fresh();
 	for k, v in pairs(fresh) do
-		if ( type(AzerothStatsDB[k]) ~= type(v) ) then
-			AzerothStatsDB[k] = v;
+		if ( type(ASTimeTrackerDB[k]) ~= type(v) ) then
+			ASTimeTrackerDB[k] = v;
 		end
 	end
 	for k, v in pairs(fresh.totals) do
-		if ( type(AzerothStatsDB.totals[k]) ~= "number" ) then
-			AzerothStatsDB.totals[k] = v;
+		if ( type(ASTimeTrackerDB.totals[k]) ~= "number" ) then
+			ASTimeTrackerDB.totals[k] = v;
 		end
 	end
-	AzerothStatsDB.version = AZEROTHSTATS_VERSION;
+	ASTimeTrackerDB.version = ASTIMETRACKER_VERSION;
 end
 
 -- "result=defeat;t=754;lvl=23;..." -> table (numbers as numbers)
@@ -153,12 +153,12 @@ local function Group(list, key, name)
 	return g;
 end
 
-function AzerothStats_Record(s)
+function ASTimeTracker_Record(s)
 	if ( type(s) ~= "table" or not s.result ) then
 		return;
 	end
 	Check();
-	local db = AzerothStatsDB;
+	local db = ASTimeTrackerDB;
 	local sig = Signature(s);
 	if ( sig == db.lastSig ) then
 		return;
@@ -233,7 +233,7 @@ function AzerothStats_Record(s)
 
 	-- history, the newest last
 	table.insert(db.history, run);
-	while ( table.getn(db.history) > AZEROTHSTATS_HISTORY ) do
+	while ( table.getn(db.history) > ASTIMETRACKER_HISTORY ) do
 		table.remove(db.history, 1);
 	end
 
@@ -249,7 +249,7 @@ end
 
 local function ShowTotals()
 	Check();
-	local t = AzerothStatsDB.totals;
+	local t = ASTimeTrackerDB.totals;
 	if ( t.runs == 0 ) then
 		Print("no runs recorded yet. Finish a run and it shows up here and on the launcher's STATS page.");
 		return;
@@ -262,7 +262,7 @@ end
 
 local function ShowBest()
 	Check();
-	local b = AzerothStatsDB.best;
+	local b = ASTimeTrackerDB.best;
 	local names = { { "time", "Longest run", true }, { "lvl", "Highest level" }, { "kills", "Most kills" },
 	                { "dmg", "Most damage" }, { "gold", "Most gold" }, { "bosses", "Most bosses" }, { "fastestWin", "Fastest win", true } };
 	local any = false;
@@ -282,7 +282,7 @@ end
 
 local function ShowLast()
 	Check();
-	local h = AzerothStatsDB.history;
+	local h = ASTimeTrackerDB.history;
 	local r = h[table.getn(h)];
 	if ( not r ) then
 		Print("no runs recorded yet.");
@@ -292,9 +292,9 @@ local function ShowLast()
 	      ", level " .. r.lvl .. ", " .. Big(r.kills) .. " kills, " .. Big(r.dmg) .. " damage, " .. Big(r.gold) .. " gold.");
 end
 
-SLASH_AZEROTHSTATS1 = "/azstats";
-SLASH_AZEROTHSTATS2 = "/azerothstats";
-SlashCmdList["AZEROTHSTATS"] = function(msg)
+SLASH_ASTIMETRACKER1 = "/azstats";
+SLASH_ASTIMETRACKER2 = "/astime";
+SlashCmdList["ASTIMETRACKER"] = function(msg)
 	local cmd = string.lower(Str(msg));
 	cmd = string.gsub(cmd, "^%s+", "");
 	cmd = string.gsub(cmd, "%s+$", "");
@@ -306,19 +306,19 @@ SlashCmdList["AZEROTHSTATS"] = function(msg)
 		ShowBest();
 	elseif ( cmd == "quiet" ) then
 		Check();
-		AzerothStatsDB.quiet = not AzerothStatsDB.quiet;
-		if ( AzerothStatsDB.quiet ) then
+		ASTimeTrackerDB.quiet = not ASTimeTrackerDB.quiet;
+		if ( ASTimeTrackerDB.quiet ) then
 			Print("the end-of-run line is off.");
 		else
 			Print("the end-of-run line is on.");
 		end
 	elseif ( cmd == "reset yes" ) then
 		local last = "";
-		if ( type(AzerothStatsDB) == "table" ) then
-			last = Str(AzerothStatsDB.lastSig);
+		if ( type(ASTimeTrackerDB) == "table" ) then
+			last = Str(ASTimeTrackerDB.lastSig);
 		end
-		AzerothStatsDB = Fresh();
-		AzerothStatsDB.lastSig = last;             -- the run on the end screen is not counted again
+		ASTimeTrackerDB = Fresh();
+		ASTimeTrackerDB.lastSig = last;             -- the run on the end screen is not counted again
 		Print("all stats cleared.");
 	elseif ( cmd == "reset" ) then
 		Print("type /azstats reset yes to clear every stat (this cannot be undone).");
@@ -329,7 +329,7 @@ end
 
 -- the run's end arrives as an addon message; AZS_GetRunSummary() is checked too, now and then, in case
 -- the message came before this addon was listening (each run is counted once either way)
-local frame = CreateFrame("Frame", "AzerothStatsFrame");
+local frame = CreateFrame("Frame", "ASTimeTrackerFrame");
 local waited = 0;
 frame:RegisterEvent("VARIABLES_LOADED");
 frame:RegisterEvent("CHAT_MSG_ADDON");
@@ -337,7 +337,7 @@ frame:SetScript("OnEvent", function()
 	if ( event == "VARIABLES_LOADED" ) then
 		Check();
 	elseif ( event == "CHAT_MSG_ADDON" and arg1 == "AZSEND" and arg2 ) then
-		AzerothStats_Record(Parse(arg2));
+		ASTimeTracker_Record(Parse(arg2));
 	end
 end);
 frame:SetScript("OnUpdate", function()
@@ -346,10 +346,10 @@ frame:SetScript("OnUpdate", function()
 		return;
 	end
 	waited = 0;
-	if ( AZS_GetRunSummary and AzerothStatsDB ) then
+	if ( AZS_GetRunSummary and ASTimeTrackerDB ) then
 		local s = AZS_GetRunSummary();
 		if ( s ) then
-			AzerothStats_Record(s);
+			ASTimeTracker_Record(s);
 		end
 	end
 end);

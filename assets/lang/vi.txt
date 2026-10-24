@@ -863,14 +863,14 @@ Track every run
 = Ghi lại mọi lượt chơi
 The stats file could not be read ({0}).
 = Không thể đọc tệp thống kê ({0}).
-The Azeroth Stats addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
-= Addon Azeroth Stats ghi lại mọi lượt chơi của bạn: chiến thắng, số hạ gục, sát thương, vàng và các kỷ lục cá nhân. Hãy cài nó, chơi xong một lượt, và thống kê sẽ hiện ở đây.
+The AS Time Tracker addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
+= Addon AS Time Tracker ghi lại mọi lượt chơi của bạn: chiến thắng, số hạ gục, sát thương, vàng và các kỷ lục cá nhân. Hãy cài nó, chơi xong một lượt, và thống kê sẽ hiện ở đây.
 It is optional: without it, this page only shows your play time.
 = Addon này không bắt buộc: không có nó, trang này chỉ hiện thời gian chơi của bạn.
-The Azeroth Stats addon is turned off. Turn it on in Addons to keep recording your runs.
-= Addon Azeroth Stats đang tắt. Hãy bật nó trong Addon để tiếp tục ghi lại các lượt chơi.
-No runs recorded yet. Finish a run with the Azeroth Stats addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
-= Chưa có lượt chơi nào được ghi lại. Hãy chơi xong một lượt khi bật Azeroth Stats. Trò chơi lưu dữ liệu addon khi bạn thoát, nên thống kê sẽ hiện ở đây sau khi bạn đóng trò chơi.
+The AS Time Tracker addon is turned off. Turn it on in Addons to keep recording your runs.
+= Addon AS Time Tracker đang tắt. Hãy bật nó trong Addon để tiếp tục ghi lại các lượt chơi.
+No runs recorded yet. Finish a run with the AS Time Tracker addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
+= Chưa có lượt chơi nào được ghi lại. Hãy chơi xong một lượt khi bật AS Time Tracker. Trò chơi lưu dữ liệu addon khi bạn thoát, nên thống kê sẽ hiện ở đây sau khi bạn đóng trò chơi.
 Runs
 = Lượt chơi
 Victories
@@ -941,9 +941,9 @@ In game, type /azstats to see your stats.
 = Trong game, gõ /azstats để xem thống kê.
 Saved by the game {0}.
 = Được trò chơi lưu lúc: {0}.
-Azeroth Stats updated.
-= Đã cập nhật Azeroth Stats.
-Azeroth Stats installed. It records your runs from now on.
-= Đã cài Azeroth Stats. Từ giờ nó sẽ ghi lại các lượt chơi của bạn.
-Could not install Azeroth Stats:\n\n{0}
-= Không thể cài Azeroth Stats:\n\n{0}
+AS Time Tracker updated.
+= Đã cập nhật AS Time Tracker.
+AS Time Tracker installed. It records your runs from now on.
+= Đã cài AS Time Tracker. Từ giờ nó sẽ ghi lại các lượt chơi của bạn.
+Could not install AS Time Tracker:\n\n{0}
+= Không thể cài AS Time Tracker:\n\n{0}

@@ -863,14 +863,14 @@ Track every run
 = บันทึกทุกรอบที่เล่น
 The stats file could not be read ({0}).
 = อ่านไฟล์สถิติไม่ได้ ({0})
-The Azeroth Stats addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
-= แอดออน Azeroth Stats จะบันทึกทุกรอบที่คุณเล่น ทั้งชัยชนะ การสังหาร ดาเมจ ทอง และสถิติสูงสุดส่วนตัว ติดตั้งแล้วเล่นให้จบหนึ่งรอบ สถิติของคุณจะปรากฏที่นี่
+The AS Time Tracker addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
+= แอดออน AS Time Tracker จะบันทึกทุกรอบที่คุณเล่น ทั้งชัยชนะ การสังหาร ดาเมจ ทอง และสถิติสูงสุดส่วนตัว ติดตั้งแล้วเล่นให้จบหนึ่งรอบ สถิติของคุณจะปรากฏที่นี่
 It is optional: without it, this page only shows your play time.
 = ไม่บังคับ: หากไม่มีแอดออนนี้ หน้านี้จะแสดงเฉพาะเวลาเล่นของคุณ
-The Azeroth Stats addon is turned off. Turn it on in Addons to keep recording your runs.
-= แอดออน Azeroth Stats ปิดอยู่ เปิดได้ในแอดออนเพื่อบันทึกรอบที่เล่นต่อไป
-No runs recorded yet. Finish a run with the Azeroth Stats addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
-= ยังไม่มีรอบที่บันทึกไว้ เล่นให้จบหนึ่งรอบโดยเปิด Azeroth Stats ไว้ เกมจะบันทึกข้อมูลแอดออนเมื่อคุณออกจากเกม สถิติจึงจะปรากฏที่นี่หลังจากปิดเกม
+The AS Time Tracker addon is turned off. Turn it on in Addons to keep recording your runs.
+= แอดออน AS Time Tracker ปิดอยู่ เปิดได้ในแอดออนเพื่อบันทึกรอบที่เล่นต่อไป
+No runs recorded yet. Finish a run with the AS Time Tracker addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
+= ยังไม่มีรอบที่บันทึกไว้ เล่นให้จบหนึ่งรอบโดยเปิด AS Time Tracker ไว้ เกมจะบันทึกข้อมูลแอดออนเมื่อคุณออกจากเกม สถิติจึงจะปรากฏที่นี่หลังจากปิดเกม
 Runs
 = รอบ
 Victories
@@ -941,9 +941,9 @@ In game, type /azstats to see your stats.
 = ในเกม พิมพ์ /azstats เพื่อดูสถิติของคุณ
 Saved by the game {0}.
 = เกมบันทึกเมื่อ: {0}
-Azeroth Stats updated.
-= อัปเดต Azeroth Stats แล้ว
-Azeroth Stats installed. It records your runs from now on.
-= ติดตั้ง Azeroth Stats แล้ว จากนี้ไปจะบันทึกรอบที่คุณเล่น
-Could not install Azeroth Stats:\n\n{0}
-= ติดตั้ง Azeroth Stats ไม่ได้:\n\n{0}
+AS Time Tracker updated.
+= อัปเดต AS Time Tracker แล้ว
+AS Time Tracker installed. It records your runs from now on.
+= ติดตั้ง AS Time Tracker แล้ว จากนี้ไปจะบันทึกรอบที่คุณเล่น
+Could not install AS Time Tracker:\n\n{0}
+= ติดตั้ง AS Time Tracker ไม่ได้:\n\n{0}

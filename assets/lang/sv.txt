@@ -862,14 +862,14 @@ Track every run
 = Håll koll på varje runda
 The stats file could not be read ({0}).
 = Statistikfilen kunde inte läsas ({0}).
-The Azeroth Stats addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
-= Tillägget Azeroth Stats sparar varje runda du spelar: segrar, dödade fiender, skada, guld och dina personliga rekord. Installera det, slutför en runda så visas din statistik här.
+The AS Time Tracker addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
+= Tillägget AS Time Tracker sparar varje runda du spelar: segrar, dödade fiender, skada, guld och dina personliga rekord. Installera det, slutför en runda så visas din statistik här.
 It is optional: without it, this page only shows your play time.
 = Det är valfritt: utan det visar sidan bara din speltid.
-The Azeroth Stats addon is turned off. Turn it on in Addons to keep recording your runs.
-= Tillägget Azeroth Stats är avstängt. Slå på det under Tillägg för att fortsätta spara dina rundor.
-No runs recorded yet. Finish a run with the Azeroth Stats addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
-= Inga rundor sparade än. Slutför en runda med Azeroth Stats påslaget. Spelet sparar tilläggsdata när du lämnar det, så din statistik visas här när du har stängt spelet.
+The AS Time Tracker addon is turned off. Turn it on in Addons to keep recording your runs.
+= Tillägget AS Time Tracker är avstängt. Slå på det under Tillägg för att fortsätta spara dina rundor.
+No runs recorded yet. Finish a run with the AS Time Tracker addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
+= Inga rundor sparade än. Slutför en runda med AS Time Tracker påslaget. Spelet sparar tilläggsdata när du lämnar det, så din statistik visas här när du har stängt spelet.
 Runs
 = Rundor
 Victories
@@ -940,9 +940,9 @@ In game, type /azstats to see your stats.
 = Skriv /azstats i spelet för att se din statistik.
 Saved by the game {0}.
 = Sparat av spelet: {0}.
-Azeroth Stats updated.
-= Azeroth Stats uppdaterat.
-Azeroth Stats installed. It records your runs from now on.
-= Azeroth Stats installerat. Det sparar dina rundor från och med nu.
-Could not install Azeroth Stats:\n\n{0}
-= Azeroth Stats kunde inte installeras:\n\n{0}
+AS Time Tracker updated.
+= AS Time Tracker uppdaterat.
+AS Time Tracker installed. It records your runs from now on.
+= AS Time Tracker installerat. Det sparar dina rundor från och med nu.
+Could not install AS Time Tracker:\n\n{0}
+= AS Time Tracker kunde inte installeras:\n\n{0}

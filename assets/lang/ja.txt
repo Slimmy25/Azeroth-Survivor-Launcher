@@ -863,14 +863,14 @@ Track every run
 = すべてのランを記録
 The stats file could not be read ({0}).
 = 統計ファイルを読み込めませんでした（{0}）。
-The Azeroth Stats addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
-= アドオン Azeroth Stats は、プレイしたすべてのランを記録します：勝利、撃破数、ダメージ、ゴールド、自己ベスト。インストールしてランを1回終えると、ここに統計が表示されます。
+The AS Time Tracker addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
+= アドオン AS Time Tracker は、プレイしたすべてのランを記録します：勝利、撃破数、ダメージ、ゴールド、自己ベスト。インストールしてランを1回終えると、ここに統計が表示されます。
 It is optional: without it, this page only shows your play time.
 = 任意です：なくても、このページにはプレイ時間が表示されます。
-The Azeroth Stats addon is turned off. Turn it on in Addons to keep recording your runs.
-= アドオン Azeroth Stats がオフになっています。ランの記録を続けるには「アドオン」でオンにしてください。
-No runs recorded yet. Finish a run with the Azeroth Stats addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
-= まだ記録されたランはありません。Azeroth Stats をオンにしてランを1回終えてください。ゲームは終了時にアドオンのデータを保存するため、ゲームを閉じた後に統計がここに表示されます。
+The AS Time Tracker addon is turned off. Turn it on in Addons to keep recording your runs.
+= アドオン AS Time Tracker がオフになっています。ランの記録を続けるには「アドオン」でオンにしてください。
+No runs recorded yet. Finish a run with the AS Time Tracker addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
+= まだ記録されたランはありません。AS Time Tracker をオンにしてランを1回終えてください。ゲームは終了時にアドオンのデータを保存するため、ゲームを閉じた後に統計がここに表示されます。
 Runs
 = ラン
 Victories
@@ -941,9 +941,9 @@ In game, type /azstats to see your stats.
 = ゲーム内で /azstats と入力すると統計を確認できます。
 Saved by the game {0}.
 = ゲームによる保存: {0}。
-Azeroth Stats updated.
-= Azeroth Stats をアップデートしました。
-Azeroth Stats installed. It records your runs from now on.
-= Azeroth Stats をインストールしました。これからランを記録します。
-Could not install Azeroth Stats:\n\n{0}
-= Azeroth Stats をインストールできませんでした：\n\n{0}
+AS Time Tracker updated.
+= AS Time Tracker をアップデートしました。
+AS Time Tracker installed. It records your runs from now on.
+= AS Time Tracker をインストールしました。これからランを記録します。
+Could not install AS Time Tracker:\n\n{0}
+= AS Time Tracker をインストールできませんでした：\n\n{0}

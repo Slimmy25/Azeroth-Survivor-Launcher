@@ -134,7 +134,7 @@ namespace AzerothLauncher
         Dictionary<string, CheckBox> addonRows;
         Label addonCount;
 
-        static readonly string[] SectionNames = { "Cloud Save", "Addons", "Options", "Changelog", "Guide", "Stats", "About Launcher" };
+        static readonly string[] SectionNames = { "Guide", "Cloud Save", "Addons", "Changelog", "Stats", "Options", "About Launcher" };
         int gTopic = -1, gPage = -1;                         // the guide: -1 = the topic list / the topic itself
 
         int PW { get { return panel.ClientSize.Width; } }
@@ -194,7 +194,7 @@ namespace AzerothLauncher
             body.Controls.Add(strip);
             homeBtn = new IconButton(Icons.Home, ShowWindowFront);    // bring the launcher back
             strip.Controls.Add(homeBtn);
-            var icons = new Action<Graphics, float, float, Color>[] { Icons.Cloud, Icons.AddonsIcon, Icons.Gear, Icons.Scroll, Icons.Book, Icons.Trophy, Icons.Info };
+            var icons = new Action<Graphics, float, float, Color>[] { Icons.Book, Icons.Cloud, Icons.AddonsIcon, Icons.Scroll, Icons.Trophy, Icons.Gear, Icons.Info };
             for (int i = 0; i < SectionNames.Length; i++)
             {
                 string n = SectionNames[i];

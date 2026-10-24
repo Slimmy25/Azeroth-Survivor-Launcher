@@ -863,14 +863,14 @@ Track every run
 = हर रन का रिकॉर्ड रखें
 The stats file could not be read ({0}).
 = आँकड़ों की फ़ाइल पढ़ी नहीं जा सकी ({0})।
-The Azeroth Stats addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
-= Azeroth Stats ऐडऑन आपके हर रन का रिकॉर्ड रखता है: जीत, किल, डैमेज, सोना और आपके निजी रिकॉर्ड। इसे इंस्टॉल करें, एक रन पूरा करें, और आपके आँकड़े यहाँ दिखेंगे।
+The AS Time Tracker addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
+= AS Time Tracker ऐडऑन आपके हर रन का रिकॉर्ड रखता है: जीत, किल, डैमेज, सोना और आपके निजी रिकॉर्ड। इसे इंस्टॉल करें, एक रन पूरा करें, और आपके आँकड़े यहाँ दिखेंगे।
 It is optional: without it, this page only shows your play time.
 = यह वैकल्पिक है: इसके बिना यह पेज केवल आपका खेलने का समय दिखाता है।
-The Azeroth Stats addon is turned off. Turn it on in Addons to keep recording your runs.
-= Azeroth Stats ऐडऑन बंद है। अपने रन रिकॉर्ड करते रहने के लिए इसे ऐडऑन में चालू करें।
-No runs recorded yet. Finish a run with the Azeroth Stats addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
-= अभी तक कोई रन रिकॉर्ड नहीं हुआ। Azeroth Stats चालू रखकर एक रन पूरा करें। गेम बंद करते समय ऐडऑन का डेटा सेव करता है, इसलिए गेम बंद करने के बाद आपके आँकड़े यहाँ दिखेंगे।
+The AS Time Tracker addon is turned off. Turn it on in Addons to keep recording your runs.
+= AS Time Tracker ऐडऑन बंद है। अपने रन रिकॉर्ड करते रहने के लिए इसे ऐडऑन में चालू करें।
+No runs recorded yet. Finish a run with the AS Time Tracker addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
+= अभी तक कोई रन रिकॉर्ड नहीं हुआ। AS Time Tracker चालू रखकर एक रन पूरा करें। गेम बंद करते समय ऐडऑन का डेटा सेव करता है, इसलिए गेम बंद करने के बाद आपके आँकड़े यहाँ दिखेंगे।
 Runs
 = रन
 Victories
@@ -941,9 +941,9 @@ In game, type /azstats to see your stats.
 = गेम में अपने आँकड़े देखने के लिए /azstats लिखें।
 Saved by the game {0}.
 = गेम द्वारा सेव किया गया: {0}।
-Azeroth Stats updated.
-= Azeroth Stats अपडेट हुआ।
-Azeroth Stats installed. It records your runs from now on.
-= Azeroth Stats इंस्टॉल हुआ। अब से यह आपके रन रिकॉर्ड करेगा।
-Could not install Azeroth Stats:\n\n{0}
-= Azeroth Stats इंस्टॉल नहीं हो सका:\n\n{0}
+AS Time Tracker updated.
+= AS Time Tracker अपडेट हुआ।
+AS Time Tracker installed. It records your runs from now on.
+= AS Time Tracker इंस्टॉल हुआ। अब से यह आपके रन रिकॉर्ड करेगा।
+Could not install AS Time Tracker:\n\n{0}
+= AS Time Tracker इंस्टॉल नहीं हो सका:\n\n{0}

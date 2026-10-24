@@ -863,14 +863,14 @@ Track every run
 = Her oyunu kaydet
 The stats file could not be read ({0}).
 = İstatistik dosyası okunamadı ({0}).
-The Azeroth Stats addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
-= Azeroth Stats eklentisi oynadığın her oyunu kaydeder: zaferler, öldürmeler, hasar, altın ve kişisel rekorların. Yükle, bir oyunu bitir; istatistiklerin burada görünsün.
+The AS Time Tracker addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
+= AS Time Tracker eklentisi oynadığın her oyunu kaydeder: zaferler, öldürmeler, hasar, altın ve kişisel rekorların. Yükle, bir oyunu bitir; istatistiklerin burada görünsün.
 It is optional: without it, this page only shows your play time.
 = İsteğe bağlıdır: o olmadan bu sayfa yalnızca oynama süreni gösterir.
-The Azeroth Stats addon is turned off. Turn it on in Addons to keep recording your runs.
-= Azeroth Stats eklentisi kapalı. Oyunlarını kaydetmeye devam etmek için Eklentiler'den aç.
-No runs recorded yet. Finish a run with the Azeroth Stats addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
-= Henüz kayıtlı oyun yok. Azeroth Stats açıkken bir oyunu bitir. Oyun, eklenti verilerini çıkarken kaydeder; bu yüzden istatistiklerin oyunu kapattıktan sonra burada görünür.
+The AS Time Tracker addon is turned off. Turn it on in Addons to keep recording your runs.
+= AS Time Tracker eklentisi kapalı. Oyunlarını kaydetmeye devam etmek için Eklentiler'den aç.
+No runs recorded yet. Finish a run with the AS Time Tracker addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
+= Henüz kayıtlı oyun yok. AS Time Tracker açıkken bir oyunu bitir. Oyun, eklenti verilerini çıkarken kaydeder; bu yüzden istatistiklerin oyunu kapattıktan sonra burada görünür.
 Runs
 = Oyunlar
 Victories
@@ -941,9 +941,9 @@ In game, type /azstats to see your stats.
 = Oyunda istatistiklerini görmek için /azstats yaz.
 Saved by the game {0}.
 = Oyun tarafından kaydedildi: {0}.
-Azeroth Stats updated.
-= Azeroth Stats güncellendi.
-Azeroth Stats installed. It records your runs from now on.
-= Azeroth Stats yüklendi. Artık oyunlarını kaydediyor.
-Could not install Azeroth Stats:\n\n{0}
-= Azeroth Stats yüklenemedi:\n\n{0}
+AS Time Tracker updated.
+= AS Time Tracker güncellendi.
+AS Time Tracker installed. It records your runs from now on.
+= AS Time Tracker yüklendi. Artık oyunlarını kaydediyor.
+Could not install AS Time Tracker:\n\n{0}
+= AS Time Tracker yüklenemedi:\n\n{0}

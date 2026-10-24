@@ -862,14 +862,14 @@ Track every run
 = Garde une trace de chaque partie
 The stats file could not be read ({0}).
 = Le fichier de statistiques n'a pas pu être lu ({0}).
-The Azeroth Stats addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
-= L'addon Azeroth Stats garde une trace de chaque partie : victoires, ennemis tués, dégâts, or et tes records personnels. Installe-le, termine une partie, et tes statistiques s'affichent ici.
+The AS Time Tracker addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
+= L'addon AS Time Tracker garde une trace de chaque partie : victoires, ennemis tués, dégâts, or et tes records personnels. Installe-le, termine une partie, et tes statistiques s'affichent ici.
 It is optional: without it, this page only shows your play time.
 = Il est facultatif : sans lui, cette page n'affiche que ton temps de jeu.
-The Azeroth Stats addon is turned off. Turn it on in Addons to keep recording your runs.
-= L'addon Azeroth Stats est désactivé. Active-le dans Addons pour continuer à enregistrer tes parties.
-No runs recorded yet. Finish a run with the Azeroth Stats addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
-= Aucune partie enregistrée pour l'instant. Termine une partie avec l'addon Azeroth Stats activé. Le jeu sauvegarde les données des addons quand tu le quittes : tes statistiques apparaissent donc ici après avoir fermé le jeu.
+The AS Time Tracker addon is turned off. Turn it on in Addons to keep recording your runs.
+= L'addon AS Time Tracker est désactivé. Active-le dans Addons pour continuer à enregistrer tes parties.
+No runs recorded yet. Finish a run with the AS Time Tracker addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
+= Aucune partie enregistrée pour l'instant. Termine une partie avec l'addon AS Time Tracker activé. Le jeu sauvegarde les données des addons quand tu le quittes : tes statistiques apparaissent donc ici après avoir fermé le jeu.
 Runs
 = Parties
 Victories
@@ -940,9 +940,9 @@ In game, type /azstats to see your stats.
 = En jeu, tape /azstats pour voir tes statistiques.
 Saved by the game {0}.
 = Sauvegardé par le jeu : {0}.
-Azeroth Stats updated.
-= Azeroth Stats mis à jour.
-Azeroth Stats installed. It records your runs from now on.
-= Azeroth Stats installé. Il enregistre désormais tes parties.
-Could not install Azeroth Stats:\n\n{0}
-= Impossible d'installer Azeroth Stats :\n\n{0}
+AS Time Tracker updated.
+= AS Time Tracker mis à jour.
+AS Time Tracker installed. It records your runs from now on.
+= AS Time Tracker installé. Il enregistre désormais tes parties.
+Could not install AS Time Tracker:\n\n{0}
+= Impossible d'installer AS Time Tracker :\n\n{0}

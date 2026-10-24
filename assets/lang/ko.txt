@@ -863,14 +863,14 @@ Track every run
 = 모든 런 기록하기
 The stats file could not be read ({0}).
 = 통계 파일을 읽을 수 없습니다 ({0}).
-The Azeroth Stats addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
-= Azeroth Stats 애드온은 플레이한 모든 런을 기록합니다: 승리, 처치, 피해, 골드, 개인 최고 기록. 설치하고 런을 한 번 끝내면 여기에 통계가 표시됩니다.
+The AS Time Tracker addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
+= AS Time Tracker 애드온은 플레이한 모든 런을 기록합니다: 승리, 처치, 피해, 골드, 개인 최고 기록. 설치하고 런을 한 번 끝내면 여기에 통계가 표시됩니다.
 It is optional: without it, this page only shows your play time.
 = 선택 사항입니다: 없으면 이 페이지에는 플레이 시간만 표시됩니다.
-The Azeroth Stats addon is turned off. Turn it on in Addons to keep recording your runs.
-= Azeroth Stats 애드온이 꺼져 있습니다. 런을 계속 기록하려면 애드온에서 켜세요.
-No runs recorded yet. Finish a run with the Azeroth Stats addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
-= 아직 기록된 런이 없습니다. Azeroth Stats를 켠 상태로 런을 한 번 끝내세요. 게임은 종료할 때 애드온 데이터를 저장하므로, 게임을 닫은 후에 통계가 여기에 표시됩니다.
+The AS Time Tracker addon is turned off. Turn it on in Addons to keep recording your runs.
+= AS Time Tracker 애드온이 꺼져 있습니다. 런을 계속 기록하려면 애드온에서 켜세요.
+No runs recorded yet. Finish a run with the AS Time Tracker addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
+= 아직 기록된 런이 없습니다. AS Time Tracker를 켠 상태로 런을 한 번 끝내세요. 게임은 종료할 때 애드온 데이터를 저장하므로, 게임을 닫은 후에 통계가 여기에 표시됩니다.
 Runs
 = 런
 Victories
@@ -941,9 +941,9 @@ In game, type /azstats to see your stats.
 = 게임에서 /azstats 를 입력하면 통계를 볼 수 있습니다.
 Saved by the game {0}.
 = 게임이 저장한 시각: {0}.
-Azeroth Stats updated.
-= Azeroth Stats를 업데이트했습니다.
-Azeroth Stats installed. It records your runs from now on.
-= Azeroth Stats를 설치했습니다. 이제부터 런을 기록합니다.
-Could not install Azeroth Stats:\n\n{0}
-= Azeroth Stats를 설치할 수 없습니다:\n\n{0}
+AS Time Tracker updated.
+= AS Time Tracker를 업데이트했습니다.
+AS Time Tracker installed. It records your runs from now on.
+= AS Time Tracker를 설치했습니다. 이제부터 런을 기록합니다.
+Could not install AS Time Tracker:\n\n{0}
+= AS Time Tracker를 설치할 수 없습니다:\n\n{0}

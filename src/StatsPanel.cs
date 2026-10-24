@@ -1,5 +1,5 @@
 // The STATS section: celebrates the player's long-term numbers. The launcher's own play time is always there;
-// the run records come from the optional Azeroth Stats addon (see Stats.cs). Turned off in Options, the section
+// the run records come from the optional AS Time Tracker addon (see Stats.cs). Turned off in Options, the section
 // and its buttons disappear.
 using System;
 using System.Collections.Generic;
@@ -253,17 +253,17 @@ namespace AzerothLauncher
                 if (err != null) info.Text("The stats file could not be read (" + err + ").", 10, FontStyle.Regular, Theme.Bad, 6);
                 else if (!have)
                 {
-                    info.Text("The Azeroth Stats addon keeps a record of every run you play: victories, kills, damage, gold " +
+                    info.Text("The AS Time Tracker addon keeps a record of every run you play: victories, kills, damage, gold " +
                               "and your personal bests. Install it, finish a run, and your stats appear here.",
                               10, FontStyle.Regular, Theme.Text, 6);
                     info.Text("It is optional: without it, this page only shows your play time.", 9, FontStyle.Italic, Theme.GoldDim, 6);
                     info.Button(new WowButton("INSTALL STATS ADDON", InstallStatsAddon, 230, 32, 10));
                 }
                 else if (off)
-                    info.Text("The Azeroth Stats addon is turned off. Turn it on in Addons to keep recording your runs.",
+                    info.Text("The AS Time Tracker addon is turned off. Turn it on in Addons to keep recording your runs.",
                               10, FontStyle.Regular, Theme.Text, 6);
                 else
-                    info.Text("No runs recorded yet. Finish a run with the Azeroth Stats addon turned on. The game saves " +
+                    info.Text("No runs recorded yet. Finish a run with the AS Time Tracker addon turned on. The game saves " +
                               "addon data when you leave it, so your stats show up here after you close the game.",
                               10, FontStyle.Regular, Theme.Text, 6);
                 y = info.Finish(sp, 4, y);
@@ -274,7 +274,7 @@ namespace AzerothLauncher
             if (off)
             {
                 var note = new StatCard(w, null);
-                note.Text("The Azeroth Stats addon is turned off. Turn it on in Addons to keep recording your runs.",
+                note.Text("The AS Time Tracker addon is turned off. Turn it on in Addons to keep recording your runs.",
                           10, FontStyle.Italic, Theme.Bad, 0);
                 y = note.Finish(sp, 4, y);
             }
@@ -397,12 +397,12 @@ namespace AzerothLauncher
             bool had = Stats.AddonInstalled(dir);
             try
             {
-                Stats.InstallAddon(dir);
-                SetStatus(had ? "Azeroth Stats updated." : "Azeroth Stats installed. It records your runs from now on.");
+                Stats.InstallAddon(dir, SyncSettings().SavedDir);
+                SetStatus(had ? "AS Time Tracker updated." : "AS Time Tracker installed. It records your runs from now on.");
             }
             catch (Exception e)
             {
-                Msg.Show(side.Visible ? (IWin32Window)side : this, "Could not install Azeroth Stats:\n\n" + e.Message, "Stats",
+                Msg.Show(side.Visible ? (IWin32Window)side : this, "Could not install AS Time Tracker:\n\n" + e.Message, "Stats",
                          MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             if (current == "Stats") BuildPanel("Stats");

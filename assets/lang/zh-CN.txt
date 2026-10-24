@@ -863,14 +863,14 @@ Track every run
 = 记录每一局
 The stats file could not be read ({0}).
 = 无法读取统计文件（{0}）。
-The Azeroth Stats addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
-= Azeroth Stats 插件会记录你玩的每一局：胜利、击杀、伤害、金币和个人最佳成绩。安装后完成一局，你的统计就会显示在这里。
+The AS Time Tracker addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
+= AS Time Tracker 插件会记录你玩的每一局：胜利、击杀、伤害、金币和个人最佳成绩。安装后完成一局，你的统计就会显示在这里。
 It is optional: without it, this page only shows your play time.
 = 它是可选的：没有它，此页面只显示你的游戏时长。
-The Azeroth Stats addon is turned off. Turn it on in Addons to keep recording your runs.
-= Azeroth Stats 插件已关闭。请在插件中开启，以继续记录你的对局。
-No runs recorded yet. Finish a run with the Azeroth Stats addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
-= 还没有记录任何对局。请在开启 Azeroth Stats 的情况下完成一局。游戏会在退出时保存插件数据，所以关闭游戏后统计才会显示在这里。
+The AS Time Tracker addon is turned off. Turn it on in Addons to keep recording your runs.
+= AS Time Tracker 插件已关闭。请在插件中开启，以继续记录你的对局。
+No runs recorded yet. Finish a run with the AS Time Tracker addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
+= 还没有记录任何对局。请在开启 AS Time Tracker 的情况下完成一局。游戏会在退出时保存插件数据，所以关闭游戏后统计才会显示在这里。
 Runs
 = 对局
 Victories
@@ -941,9 +941,9 @@ In game, type /azstats to see your stats.
 = 在游戏中输入 /azstats 查看你的统计。
 Saved by the game {0}.
 = 游戏保存于：{0}。
-Azeroth Stats updated.
-= Azeroth Stats 已更新。
-Azeroth Stats installed. It records your runs from now on.
-= Azeroth Stats 已安装。从现在起它会记录你的对局。
-Could not install Azeroth Stats:\n\n{0}
-= 无法安装 Azeroth Stats：\n\n{0}
+AS Time Tracker updated.
+= AS Time Tracker 已更新。
+AS Time Tracker installed. It records your runs from now on.
+= AS Time Tracker 已安装。从现在起它会记录你的对局。
+Could not install AS Time Tracker:\n\n{0}
+= 无法安装 AS Time Tracker：\n\n{0}

@@ -863,14 +863,14 @@ Track every run
 = Rögzíts minden menetet
 The stats file could not be read ({0}).
 = A statisztikafájl nem olvasható ({0}).
-The Azeroth Stats addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
-= Az Azeroth Stats kiegészítő minden meneted rögzíti: győzelmek, ölések, sebzés, arany és a személyes rekordjaid. Telepítsd, fejezz be egy menetet, és a statisztikád itt jelenik meg.
+The AS Time Tracker addon keeps a record of every run you play: victories, kills, damage, gold and your personal bests. Install it, finish a run, and your stats appear here.
+= Az AS Time Tracker kiegészítő minden meneted rögzíti: győzelmek, ölések, sebzés, arany és a személyes rekordjaid. Telepítsd, fejezz be egy menetet, és a statisztikád itt jelenik meg.
 It is optional: without it, this page only shows your play time.
 = Nem kötelező: nélküle ez az oldal csak a játékidődet mutatja.
-The Azeroth Stats addon is turned off. Turn it on in Addons to keep recording your runs.
-= Az Azeroth Stats kiegészítő ki van kapcsolva. Kapcsold be a Kiegészítők között, hogy továbbra is rögzítse a meneteidet.
-No runs recorded yet. Finish a run with the Azeroth Stats addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
-= Még nincs rögzített menet. Fejezz be egy menetet bekapcsolt Azeroth Stats kiegészítővel. A játék kilépéskor menti a kiegészítők adatait, így a statisztikád a játék bezárása után jelenik meg itt.
+The AS Time Tracker addon is turned off. Turn it on in Addons to keep recording your runs.
+= Az AS Time Tracker kiegészítő ki van kapcsolva. Kapcsold be a Kiegészítők között, hogy továbbra is rögzítse a meneteidet.
+No runs recorded yet. Finish a run with the AS Time Tracker addon turned on. The game saves addon data when you leave it, so your stats show up here after you close the game.
+= Még nincs rögzített menet. Fejezz be egy menetet bekapcsolt AS Time Tracker kiegészítővel. A játék kilépéskor menti a kiegészítők adatait, így a statisztikád a játék bezárása után jelenik meg itt.
 Runs
 = Menetek
 Victories
@@ -941,9 +941,9 @@ In game, type /azstats to see your stats.
 = A játékban írd be: /azstats, hogy lásd a statisztikádat.
 Saved by the game {0}.
 = A játék mentette: {0}.
-Azeroth Stats updated.
-= Azeroth Stats frissítve.
-Azeroth Stats installed. It records your runs from now on.
-= Azeroth Stats telepítve. Mostantól rögzíti a meneteidet.
-Could not install Azeroth Stats:\n\n{0}
-= Az Azeroth Stats nem telepíthető:\n\n{0}
+AS Time Tracker updated.
+= AS Time Tracker frissítve.
+AS Time Tracker installed. It records your runs from now on.
+= AS Time Tracker telepítve. Mostantól rögzíti a meneteidet.
+Could not install AS Time Tracker:\n\n{0}
+= Az AS Time Tracker nem telepíthető:\n\n{0}
