@@ -629,7 +629,7 @@ namespace AzerothLauncher
         static RowsBlock History(List<StatRun> runs)
         {
             var rows = new RowsBlock();
-            rows.Title = Lang.T("Recent runs");
+            rows.Title = Lang.T("Recent runs") + "  ·  " + Lang.T("click a run to share it");
             rows.Empty = Lang.T("No runs recorded yet.");
             for (int i = 0; i < Math.Min(20, runs.Count); i++)
             {
@@ -653,6 +653,8 @@ namespace AzerothLauncher
                 row.ValueColor = rc;
                 row.ValueSub = Lang.T("Level " + Big(r.Level)) + " · " + Lang.T(Big(r.Kills) + " kills") +
                                (r.Dps > 0 ? " · " + Big(r.Dps) + " DPS" : "");
+                StatRun shared = r;
+                row.Click = delegate { App.ShareRun(shared); };     // a picture of the run, for Discord
                 rows.Rows.Add(row);
             }
             return rows;

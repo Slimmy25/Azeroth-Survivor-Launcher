@@ -694,8 +694,77 @@ namespace AzerothLauncher
             return Addons.FoldersOf(AddonsDir(), name, RecordedFolders(name));
         }
 
+        // ---- addon updates: when each Download More addon was installed (UTC), against when its copy on GitHub
+        // was last uploaded (the release's asset dates, asked once a session). Newer on GitHub: UPDATE.
+        Dictionary<string, object> AddonInstalledAt() { return Cfg.Section("addon_installed_at"); }
+        static Dictionary<string, DateTime> mirrorDates;     // zip file name -> uploaded (UTC); null: not asked yet
+        static bool mirrorAsking;
+
+        void AskMirrorDates()
+        {
+            if (mirrorDates != null || mirrorAsking || PreviewMode) return;
+            mirrorAsking = true;
+            Bg(delegate
+            {
+                var dates = new Dictionary<string, DateTime>(StringComparer.OrdinalIgnoreCase);
+                try
+                {
+                    string text;
+                    using (var resp = Net.Open("https://api.github.com/repos/Slimmy25/Azeroth-Survivor-Launcher-Releases/releases/tags/addons",
+                                               15000, true, "GitHub", "application/vnd.github+json"))
+                    using (var rd = new StreamReader(resp.GetResponseStream(), System.Text.Encoding.UTF8))
+                        text = rd.ReadToEnd();
+                    foreach (object a in Json.AsList(Json.Get(Json.AsDict(Json.Parse(text)), "assets")) ?? new List<object>())
+                    {
+                        var d = Json.AsDict(a);
+                        DateTime t;
+                        if (DateTime.TryParse(Json.Str(d, "updated_at"), System.Globalization.CultureInfo.InvariantCulture,
+                                              System.Globalization.DateTimeStyles.AdjustToUniversal | System.Globalization.DateTimeStyles.AssumeUniversal, out t))
+                            dates[Json.Str(d, "name")] = t;
+                    }
+                }
+                catch (Exception) { }
+                Ui(delegate
+                {
+                    mirrorDates = dates;
+                    mirrorAsking = false;
+                    if (current == "Addons" && addonMode == "download") BuildPanel("Addons");
+                });
+            });
+        }
+
+        // true when the copy on GitHub is newer than the one installed
+        bool AddonHasUpdate(AddonEntry it)
+        {
+            if (mirrorDates == null || it.Category == Data.MyAddonsCategory || !Net.IsWebAddress(it.Url)) return false;
+            string file = Uri.UnescapeDataString(it.Url.Substring(it.Url.LastIndexOf('/') + 1));
+            DateTime up;
+            if (!mirrorDates.TryGetValue(file, out up)) return false;
+            DateTime installed = DateTime.MinValue;
+            string rec = Json.Str(AddonInstalledAt(), it.Name);
+            if (!DateTime.TryParse(rec, System.Globalization.CultureInfo.InvariantCulture,
+                                   System.Globalization.DateTimeStyles.AdjustToUniversal | System.Globalization.DateTimeStyles.AssumeUniversal, out installed))
+            {
+                // installed before the launcher kept the date: the newest file in its folders says when
+                foreach (string f in AddonFoldersOf(it.Name))
+                    try
+                    {
+                        string dir = Path.Combine(AddonsDir(), f);
+                        foreach (string file2 in Directory.GetFiles(dir, "*", SearchOption.AllDirectories))
+                        {
+                            DateTime w = File.GetLastWriteTimeUtc(file2);
+                            if (w > installed) installed = w;
+                        }
+                    }
+                    catch (Exception) { }
+                if (installed == DateTime.MinValue) return false;
+            }
+            return up > installed.AddMinutes(1);
+        }
+
         void AddonsDownloadView(int top)
         {
+            AskMirrorDates();                                // which addons have a newer copy on GitHub
             Color listbg = Theme.Ink;
             var sp = MakeScroll(panel, new Rectangle(20, top, PW - 40, PH - 12 - top), listbg, Theme.Bronze);
             int cat = Math.Min(Math.Max(addonCategory, 0), Data.AddonCategories.Length - 1);
@@ -738,9 +807,12 @@ namespace AzerothLauncher
                 inner.Dock = DockStyle.Fill;
                 row.Controls.Add(inner);
                 bool haveIt = AddonFoldersOf(it.Name).Count > 0;
+                bool update = haveIt && AddonHasUpdate(it);
                 // the button keeps its room; the text wraps to what is left, so nothing runs past the window
-                var btn = haveIt ? new WowButton("UNINSTALL", delegate { UninstallAddon(it.Name); }, 120, 30, 10)
+                var btn = update ? new WowButton("UPDATE", delegate { DownloadAddon(it.Name, it.Url); }, 120, 30, 10)
+                        : haveIt ? new WowButton("UNINSTALL", delegate { UninstallAddon(it.Name); }, 120, 30, 10)
                                  : new WowButton("INSTALL", delegate { DownloadAddon(it.Name, it.Url); }, 120, 30, 10);
+                if (update) btn.Selected = true;            // gold frame: a newer version is waiting
                 int textW = w - 2 - 10 - 120 - 10 - 10;
                 int ty = 6;
                 var labels = new List<Label>();
@@ -798,6 +870,7 @@ namespace AzerothLauncher
                         var rec = new List<object>();
                         foreach (string n in names) rec.Add(n);
                         AddonInstalls()[name] = rec;
+                        AddonInstalledAt()[name] = DateTime.UtcNow.ToString("o", System.Globalization.CultureInfo.InvariantCulture);
                         Cfg.Save();
                         if (after != null) try { after(); } catch (Exception) { }
                         if (current == "Addons" || current == "Stats") BuildPanel(current);
@@ -829,6 +902,7 @@ namespace AzerothLauncher
                 return;
             }
             AddonInstalls().Remove(name);
+            AddonInstalledAt().Remove(name);
             Cfg.Save();
             SetStatus(removed.Count > 0 ? name + " uninstalled." : name + " was not installed.");
             if (current == "Addons") BuildPanel("Addons");
