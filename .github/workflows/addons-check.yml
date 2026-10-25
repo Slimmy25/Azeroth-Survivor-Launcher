@@ -1,0 +1,23 @@
+# Every AZS addon's Lua must at least compile (luac -p). Lua 5.1 is the nearest the runner has to the game's 5.0;
+# the "#" length operator, which 5.0 does not have, is looked for separately.
+name: Addons check
+
+on:
+  push:
+    paths: [ "addons/**" ]
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get install -y -qq lua5.1 >/dev/null
+      - name: Compile every addon file
+        run: |
+          fail=0
+          for f in addons/*/*.lua; do
+            luac5.1 -p "$f" || { echo "::error file=$f::does not compile"; fail=1; }
+            if grep -nE '(^|[^-"])#[A-Za-z_(]' "$f" | grep -v -- '--' ; then echo "::error file=$f::uses the # operator (not in Lua 5.0)"; fail=1; fi
+          done
+          exit $fail
