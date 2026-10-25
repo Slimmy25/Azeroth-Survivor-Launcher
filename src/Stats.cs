@@ -380,7 +380,7 @@ namespace AzerothLauncher
         public const string AddonFolder = "AZSStats", DbName = "AZSStatsDB";
         public const string FileName = AddonFolder + ".lua";
         public const string FacesFile = AddonFolder + "Faces.lua";
-        static readonly string[] AddonFiles = { AddonFolder + ".toc", AddonFolder + ".lua", AddonFolder + "Icons.lua", AddonFolder + "UI.lua" };
+        static readonly string[] AddonFiles = { AddonFolder + ".toc", AddonFolder + ".lua", AddonFolder + "Live.lua", AddonFolder + "Icons.lua", AddonFolder + "UI.lua" };
         // its earlier names ("AS Time Tracker", "Azeroth Stats"): replaced, and their records carried over, when
         // AZS Stats is installed; until then their files are read
         static readonly string[][] OldNames = { new[] { "ASTimeTracker", "ASTimeTrackerDB" }, new[] { "AzerothStats", "AzerothStatsDB" } };

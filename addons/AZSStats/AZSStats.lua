@@ -573,6 +573,12 @@ function AZSStats_Record(s)
 	local class = Group(db.classes, run.class, run.cname);
 	Accumulate(class, run);
 	local classRecords = Bests(class.best, run);
+	-- the run's highlights (highest crit, heal, kills in a second ...) and, for a new class DPS record, its pace
+	if ( AZSStats_LiveRunEnded ) then
+		local newDps = false;
+		for i = 1, table.getn(classRecords) do if ( classRecords[i] == "dps" ) then newDps = true; end end
+		pcall(AZSStats_LiveRunEnded, db, run, class, newDps);
+	end
 	AddBuild(db, run, records, classRecords);
 	AddAbilities(class.abilities, run);
 	Accumulate(Group(db.races, run.race, run.rname), run);

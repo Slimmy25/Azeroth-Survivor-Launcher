@@ -12,8 +12,9 @@ Format:
                                           e.g.  @video Your first run | https://www.youtube.com/watch?v=XXXXXXXXXXX
   @video Title | address | Uploader | uploader's address
                                           the same, with credit to the person who made the video
-Build Guides: one @page per video, newest first. The first video is also shown on the launcher's home page
-("Build collection"); a YouTube video opens in your web browser when clicked, it never starts by itself.
+Build Guides: one @page per video, newest first. Every video there is in the home page's "Build collection"
+rotation (a random one each start, ‹ › to step through them); a YouTube video opens in your web browser when
+clicked, it never starts by itself.
 Everything above the first @topic line is ignored. Gathered from the game itself (version 0.114.2); numbers can change with game updates.
 
 @topic Getting Started | What Azeroth Survivors is and how a run works
@@ -32,6 +33,11 @@ Even a lost run counts. Talent experience, boss gear, achievements and newly ope
 
 @topic Build Guides | Videos of players showing their builds
 Players' videos of builds that work. Click a video to watch it on YouTube in your web browser.
+
+@page Sub Rogue Guide | Rogue · Naxxramas · video by Des
+# Azeroth Survivors - Sub rogue guide (Naxxramas run)
+Video by Des (youtube.com/@Dessiq). All credit for the build and the video goes to the uploader.
+@video Azeroth Survivors - Sub rogue guide (Naxxramas run) | https://www.youtube.com/watch?v=Jjc9aB62xIs | Des | https://www.youtube.com/@Dessiq
 
 @page 10.000 HP Ice Barrier | Arcane Mage · Naxxramas · video by Duke
 # [Azeroth Survivors] 10.000 HP Ice Barrier - Arcane Mage - Naxxramas

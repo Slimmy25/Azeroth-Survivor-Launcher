@@ -1,4 +1,5 @@
-// The home page's "Build collection": the newest video of the guide's Build Guides topic (assets/guide.txt), as a
+// The home page's "Build collection": the videos of the guide's Build Guides topic (assets/guide.txt) in rotation
+// (a random one each time the launcher starts; ‹ › step through them), as a
 // card in the empty space under the logo: its picture with a play button, the video's title as the header, and the
 // uploader's name as credit. Nothing plays by itself; a click opens the video in the web browser (YouTube does not
 // play inside the launcher's web view). "More build guides" opens the topic in the GUIDE section.
@@ -16,22 +17,44 @@ namespace AzerothLauncher
         RectangleF buildPic, buildTitle, buildAuthor, buildMore;
         string buildHover;                                   // "video", "author", "more" or null
 
-        // the Build Guides topic's index and its newest video (the first one), or null
-        static GuideVideo FeaturedBuild(out int topicIndex)
+        static int buildShown = -1;                         // which video of the rotation is on the card
+        RectangleF buildPrev, buildNext;
+
+        // every video of the Build Guides topic, newest first, and the topic's index
+        static List<GuideVideo> BuildVideos(out int topicIndex)
         {
             topicIndex = -1;
+            var list = new List<GuideVideo>();
             List<GuideTopic> topics;
             try { topics = Data.Guide; }
-            catch (Exception) { return null; }
+            catch (Exception) { return list; }
             for (int i = 0; i < topics.Count; i++)
             {
                 if (!string.Equals(topics[i].Title, "Build Guides", StringComparison.OrdinalIgnoreCase)) continue;
                 topicIndex = i;
-                if (topics[i].Videos.Count > 0) return topics[i].Videos[0];
-                foreach (var p in topics[i].Pages) if (p.Videos.Count > 0) return p.Videos[0];
-                return null;
+                list.AddRange(topics[i].Videos);
+                foreach (var p in topics[i].Pages) list.AddRange(p.Videos);
+                break;
             }
-            return null;
+            return list;
+        }
+
+        // the video on the card now (a random one the first time), or null
+        static GuideVideo FeaturedBuild(out int topicIndex)
+        {
+            var list = BuildVideos(out topicIndex);
+            if (list.Count == 0) return null;
+            if (buildShown < 0 || buildShown >= list.Count) buildShown = new Random().Next(list.Count);
+            return list[buildShown];
+        }
+
+        void StepBuild(int by)
+        {
+            int ti;
+            var list = BuildVideos(out ti);
+            if (list.Count < 2) return;
+            buildShown = ((buildShown < 0 ? 0 : buildShown) + by + list.Count) % list.Count;
+            Invalidate(Rectangle.Ceiling(BuildBox));
         }
 
         void BuildCollection(Graphics g)
@@ -50,6 +73,20 @@ namespace AzerothLauncher
             Font head = Theme.F(11, FontStyle.Bold), link = Theme.F(9, FontStyle.Italic);
             using (var gold = new SolidBrush(Retro.Gold))
                 g.DrawString(Lang.T("Build collection"), head, gold, box.X + 14, box.Y + 8);
+            var all = BuildVideos(out ti);
+            buildPrev = buildNext = RectangleF.Empty;
+            if (all.Count > 1)                               // ‹ 1 / 2 ›: step through the rotation
+            {
+                float hx = box.X + 14 + g.MeasureString(Lang.T("Build collection"), head).Width + 10;
+                Font af = Theme.F(11, FontStyle.Bold);
+                string count = (buildShown + 1) + " / " + all.Count;
+                SizeF cs = g.MeasureString(count, link);
+                buildPrev = new RectangleF(hx, box.Y + 7, 20, 22);
+                buildNext = new RectangleF(hx + 22 + cs.Width + 4, box.Y + 7, 20, 22);
+                using (var b = new SolidBrush(buildHover == "prev" ? Theme.Hex("#fff2b0") : Theme.Gold)) g.DrawString("‹", af, b, buildPrev.X + 4, buildPrev.Y);
+                using (var b = new SolidBrush(Theme.GoldDim)) g.DrawString(count, link, b, hx + 22, box.Y + 11);
+                using (var b = new SolidBrush(buildHover == "next" ? Theme.Hex("#fff2b0") : Theme.Gold)) g.DrawString("›", af, b, buildNext.X + 4, buildNext.Y);
+            }
             string more = Lang.T("More build guides ›");
             SizeF ms = g.MeasureString(more, link);
             buildMore = new RectangleF(box.Right - 14 - ms.Width, box.Y + 11, ms.Width, ms.Height);
@@ -124,6 +161,8 @@ namespace AzerothLauncher
         {
             if (side != null && side.Visible) return null;
             if (buildMore.Contains(p)) return "more";
+            if (buildPrev.Contains(p)) return "prev";
+            if (buildNext.Contains(p)) return "next";
             if (buildAuthor.Contains(p)) return "author";
             if (buildPic.Contains(p) || buildTitle.Contains(p)) return "video";
             return null;
@@ -148,6 +187,8 @@ namespace AzerothLauncher
             int ti;
             GuideVideo v = FeaturedBuild(out ti);
             if (v == null) return false;
+            if (h == "prev") { StepBuild(-1); return true; }
+            if (h == "next") { StepBuild(1); return true; }
             if (h == "video") { Util.OpenInShell(v.Url); SetStatus("The video opened in your web browser."); }
             else if (h == "author") { if (v.AuthorUrl.Length > 0) Util.OpenInShell(v.AuthorUrl); }
             else if (h == "more" && ti >= 0)

@@ -4,6 +4,7 @@
 ## Author: Slimjim
 ## SavedVariables: AZSStatsDB
 AZSStats.lua
+AZSStatsLive.lua
 AZSStatsIcons.lua
 AZSStatsFaces.lua
 AZSStatsUI.lua

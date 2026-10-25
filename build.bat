@@ -52,7 +52,7 @@ echo Building %OUT% ...
   /resource:assets\logo.png,AS.logo.png /resource:assets\portrait.png,AS.portrait.png ^
   /resource:assets\AzerothSurvivors.ico,AS.app.ico /resource:assets\changelog.txt,AS.changelog.txt ^
   /resource:assets\addons.txt,AS.addons.txt /resource:assets\launcher-about.txt,AS.launcher-about.txt /resource:assets\launcher-changelog.txt,AS.launcher-changelog.txt /resource:assets\guide.txt,AS.guide.txt /resource:assets\spell-icons.txt,AS.spell-icons.txt /resource:assets\npc-models.txt,AS.npc-models.txt !LANGRES! ^
-  /resource:addons\AZSStats\AZSStats.toc,AS.addon.AZSStats.toc /resource:addons\AZSStats\AZSStats.lua,AS.addon.AZSStats.lua /resource:addons\AZSStats\AZSStatsIcons.lua,AS.addon.AZSStatsIcons.lua /resource:addons\AZSStats\AZSStatsUI.lua,AS.addon.AZSStatsUI.lua /resource:addons\AZSStats\AZSStatsFaces.lua,AS.addon.AZSStatsFaces.lua ^
+  /resource:addons\AZSStats\AZSStats.toc,AS.addon.AZSStats.toc /resource:addons\AZSStats\AZSStats.lua,AS.addon.AZSStats.lua /resource:addons\AZSStats\AZSStatsLive.lua,AS.addon.AZSStatsLive.lua /resource:addons\AZSStats\AZSStatsIcons.lua,AS.addon.AZSStatsIcons.lua /resource:addons\AZSStats\AZSStatsUI.lua,AS.addon.AZSStatsUI.lua /resource:addons\AZSStats\AZSStatsFaces.lua,AS.addon.AZSStatsFaces.lua ^
   src\*.cs
 if errorlevel 1 goto fail
 
