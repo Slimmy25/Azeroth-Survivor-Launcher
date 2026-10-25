@@ -158,11 +158,12 @@ namespace AzerothLauncher
                 app.BuildPanel("Stats");
             }
             // every other section, to check they all use the launcher's colors
-            foreach (string sec in new[] { "Cloud Save", "Addons", "Changelog", "Options", "About Launcher" })
+            foreach (string sec in new[] { "Cloud Save", "Addons", "Changelog", "Options", "About Launcher", "Guide" })
             {
                 app.Show();                                  // the preview starts as if in the tray
                 app.ShowSide();
                 app.current = sec;
+                if (sec == "Guide") { app.gTopic = -1; app.gPage = -1; app.guideQuery = "frost"; }   // the search, with a word typed
                 try { app.BuildPanel(sec); }
                 catch (Exception ex)
                 {
