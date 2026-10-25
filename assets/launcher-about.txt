@@ -28,7 +28,7 @@ A community launcher for Azeroth Survivors, the game made by Aethus. It installs
 
 # New Player Guide
 - Build Guides: players' videos of their builds, credited to their uploaders
-- Every spell, talent, class, race and zone named in the guide is a link to its page, and pointing at it shows what the game says it does
+- Every spell, talent, class, race and zone named in the guide is a link to its page, and pointing at it shows what it does
 - Topics and class pages on controls, zones, bosses, level-ups, gear, talents and tips
 - Videos that play inside the launcher (streamed, never saved on your PC), and a search over every page
 
