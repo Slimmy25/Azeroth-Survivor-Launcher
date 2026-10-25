@@ -1072,3 +1072,37 @@ Counted in game by AZS Stats. Turn on cloud saving to take it to your other PCs.
 = Contado no jogo pelo AZS Stats. Ative o salvamento na nuvem para levar para seus outros PCs.
 Show play time on the home screen
 = Mostrar o tempo de jogo na tela inicial
+
+# New Player Guide
+New Player Guide
+= Guia do novo jogador
+{#0} of {#1} topics read
+= {#0} de {#1} tópicos lidos
+START HERE
+= COMECE AQUI
+CONTINUE
+= CONTINUAR
+OPEN
+= ABRIR
+READ
+= LIDO
+1 VIDEO
+= 1 VÍDEO
+{#0} VIDEOS
+= {#0} VÍDEOS
+{#0}/{#1} PAGES
+= {#0}/{#1} PÁGINAS
+VIDEO
+= VÍDEO
+TIP
+= DICA
+Watch the video
+= Assistir ao vídeo
+Watch on YouTube ›
+= Assistir no YouTube ›
+Open in your browser ›
+= Abrir no navegador ›
+Play on this PC ›
+= Reproduzir neste PC ›
+Video file not found - click to open its folder
+= Arquivo de vídeo não encontrado - clique para abrir a pasta

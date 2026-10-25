@@ -1072,3 +1072,37 @@ Counted in game by AZS Stats. Turn on cloud saving to take it to your other PCs.
 = Laskettu pelissä AZS Statsilla. Ota pilvitallennus käyttöön viedäksesi sen muille koneillesi.
 Show play time on the home screen
 = Näytä peliaika aloitusnäytössä
+
+# New Player Guide
+New Player Guide
+= Uuden pelaajan opas
+{#0} of {#1} topics read
+= {#0}/{#1} aihetta luettu
+START HERE
+= ALOITA TÄSTÄ
+CONTINUE
+= JATKA
+OPEN
+= AVAA
+READ
+= LUETTU
+1 VIDEO
+= 1 VIDEO
+{#0} VIDEOS
+= {#0} VIDEOTA
+{#0}/{#1} PAGES
+= {#0}/{#1} SIVUA
+VIDEO
+= VIDEO
+TIP
+= VINKKI
+Watch the video
+= Katso video
+Watch on YouTube ›
+= Katso YouTubessa ›
+Open in your browser ›
+= Avaa selaimessa ›
+Play on this PC ›
+= Toista tällä koneella ›
+Video file not found - click to open its folder
+= Videotiedostoa ei löytynyt - avaa kansio napsauttamalla

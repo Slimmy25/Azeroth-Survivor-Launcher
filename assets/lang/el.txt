@@ -1073,3 +1073,37 @@ Counted in game by AZS Stats. Turn on cloud saving to take it to your other PCs.
 = Μετριέται στο παιχνίδι από το AZS Stats. Ενεργοποίησε την αποθήκευση cloud για να τον μεταφέρεις στους άλλους υπολογιστές σου.
 Show play time on the home screen
 = Εμφάνιση χρόνου παιχνιδιού στην αρχική οθόνη
+
+# New Player Guide
+New Player Guide
+= Οδηγός νέων παικτών
+{#0} of {#1} topics read
+= {#0} από {#1} θέματα διαβάστηκαν
+START HERE
+= ΞΕΚΙΝΑ ΕΔΩ
+CONTINUE
+= ΣΥΝΕΧΕΙΑ
+OPEN
+= ΑΝΟΙΓΜΑ
+READ
+= ΔΙΑΒΑΣΤΗΚΕ
+1 VIDEO
+= 1 ΒΙΝΤΕΟ
+{#0} VIDEOS
+= {#0} ΒΙΝΤΕΟ
+{#0}/{#1} PAGES
+= {#0}/{#1} ΣΕΛΙΔΕΣ
+VIDEO
+= ΒΙΝΤΕΟ
+TIP
+= ΣΥΜΒΟΥΛΗ
+Watch the video
+= Δες το βίντεο
+Watch on YouTube ›
+= Δες το στο YouTube ›
+Open in your browser ›
+= Άνοιγμα στον browser ›
+Play on this PC ›
+= Αναπαραγωγή σε αυτό τον υπολογιστή ›
+Video file not found - click to open its folder
+= Το αρχείο βίντεο δεν βρέθηκε - κάνε κλικ για να ανοίξεις τον φάκελο

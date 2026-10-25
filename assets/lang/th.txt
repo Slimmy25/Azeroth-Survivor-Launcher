@@ -1073,3 +1073,37 @@ Counted in game by AZS Stats. Turn on cloud saving to take it to your other PCs.
 = นับในเกมโดย AZS Stats เปิดเซฟบนคลาวด์เพื่อพาไปยังพีซีเครื่องอื่นของคุณ
 Show play time on the home screen
 = แสดงเวลาเล่นบนหน้าจอหลัก
+
+# New Player Guide
+New Player Guide
+= คู่มือผู้เล่นใหม่
+{#0} of {#1} topics read
+= อ่านแล้ว {#0} จาก {#1} หัวข้อ
+START HERE
+= เริ่มที่นี่
+CONTINUE
+= อ่านต่อ
+OPEN
+= เปิด
+READ
+= อ่านแล้ว
+1 VIDEO
+= 1 วิดีโอ
+{#0} VIDEOS
+= {#0} วิดีโอ
+{#0}/{#1} PAGES
+= {#0}/{#1} หน้า
+VIDEO
+= วิดีโอ
+TIP
+= เคล็ดลับ
+Watch the video
+= ดูวิดีโอ
+Watch on YouTube ›
+= ดูบน YouTube ›
+Open in your browser ›
+= เปิดในเบราว์เซอร์ ›
+Play on this PC ›
+= เล่นบนพีซีนี้ ›
+Video file not found - click to open its folder
+= ไม่พบไฟล์วิดีโอ - คลิกเพื่อเปิดโฟลเดอร์

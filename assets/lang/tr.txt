@@ -1073,3 +1073,37 @@ Counted in game by AZS Stats. Turn on cloud saving to take it to your other PCs.
 = Oyunda AZS Stats tarafından sayılır. Diğer bilgisayarlarına taşımak için bulut kaydını aç.
 Show play time on the home screen
 = Oyun süresini ana ekranda göster
+
+# New Player Guide
+New Player Guide
+= Yeni Oyuncu Rehberi
+{#0} of {#1} topics read
+= {#1} konudan {#0} tanesi okundu
+START HERE
+= BURADAN BAŞLA
+CONTINUE
+= DEVAM ET
+OPEN
+= AÇ
+READ
+= OKUNDU
+1 VIDEO
+= 1 VİDEO
+{#0} VIDEOS
+= {#0} VİDEO
+{#0}/{#1} PAGES
+= {#0}/{#1} SAYFA
+VIDEO
+= VİDEO
+TIP
+= İPUCU
+Watch the video
+= Videoyu izle
+Watch on YouTube ›
+= YouTube'da izle ›
+Open in your browser ›
+= Tarayıcıda aç ›
+Play on this PC ›
+= Bu bilgisayarda oynat ›
+Video file not found - click to open its folder
+= Video dosyası bulunamadı - klasörünü açmak için tıkla

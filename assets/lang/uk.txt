@@ -1073,3 +1073,37 @@ Counted in game by AZS Stats. Turn on cloud saving to take it to your other PCs.
 = Рахується в грі аддоном AZS Stats. Увімкніть хмарне збереження, щоб перенести його на інші ПК.
 Show play time on the home screen
 = Показувати час у грі на головному екрані
+
+# New Player Guide
+New Player Guide
+= Посібник новачка
+{#0} of {#1} topics read
+= Прочитано {#0} з {#1} тем
+START HERE
+= ПОЧНИ ТУТ
+CONTINUE
+= ПРОДОВЖИТИ
+OPEN
+= ВІДКРИТИ
+READ
+= ПРОЧИТАНО
+1 VIDEO
+= 1 ВІДЕО
+{#0} VIDEOS
+= ВІДЕО: {#0}
+{#0}/{#1} PAGES
+= {#0}/{#1} СТОР.
+VIDEO
+= ВІДЕО
+TIP
+= ПОРАДА
+Watch the video
+= Дивитися відео
+Watch on YouTube ›
+= Дивитися на YouTube ›
+Open in your browser ›
+= Відкрити в браузері ›
+Play on this PC ›
+= Відтворити на цьому ПК ›
+Video file not found - click to open its folder
+= Відеофайл не знайдено - натисніть, щоб відкрити теку

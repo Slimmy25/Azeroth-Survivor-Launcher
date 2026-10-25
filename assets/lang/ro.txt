@@ -1073,3 +1073,37 @@ Counted in game by AZS Stats. Turn on cloud saving to take it to your other PCs.
 = Numărat în joc de AZS Stats. Activează salvarea în cloud ca să-l duci pe celelalte PC-uri.
 Show play time on the home screen
 = Arată timpul de joc pe ecranul principal
+
+# New Player Guide
+New Player Guide
+= Ghid pentru jucători noi
+{#0} of {#1} topics read
+= {#0} din {#1} subiecte citite
+START HERE
+= ÎNCEPE AICI
+CONTINUE
+= CONTINUĂ
+OPEN
+= DESCHIDE
+READ
+= CITIT
+1 VIDEO
+= 1 VIDEO
+{#0} VIDEOS
+= {#0} VIDEOCLIPURI
+{#0}/{#1} PAGES
+= {#0}/{#1} PAGINI
+VIDEO
+= VIDEO
+TIP
+= SFAT
+Watch the video
+= Vezi videoclipul
+Watch on YouTube ›
+= Vezi pe YouTube ›
+Open in your browser ›
+= Deschide în browser ›
+Play on this PC ›
+= Redă pe acest PC ›
+Video file not found - click to open its folder
+= Fișierul video nu a fost găsit - clic pentru a deschide dosarul

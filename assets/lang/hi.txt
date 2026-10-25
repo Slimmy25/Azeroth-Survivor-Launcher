@@ -1073,3 +1073,37 @@ Counted in game by AZS Stats. Turn on cloud saving to take it to your other PCs.
 = गेम में AZS Stats ने गिना। इसे दूसरे पीसी पर ले जाने के लिए क्लाउड सेव चालू करें।
 Show play time on the home screen
 = होम स्क्रीन पर खेलने का समय दिखाएँ
+
+# New Player Guide
+New Player Guide
+= नए खिलाड़ी गाइड
+{#0} of {#1} topics read
+= {#1} में से {#0} विषय पढ़े
+START HERE
+= यहाँ से शुरू करें
+CONTINUE
+= जारी रखें
+OPEN
+= खोलें
+READ
+= पढ़ा गया
+1 VIDEO
+= 1 वीडियो
+{#0} VIDEOS
+= {#0} वीडियो
+{#0}/{#1} PAGES
+= {#0}/{#1} पेज
+VIDEO
+= वीडियो
+TIP
+= सुझाव
+Watch the video
+= वीडियो देखें
+Watch on YouTube ›
+= YouTube पर देखें ›
+Open in your browser ›
+= ब्राउज़र में खोलें ›
+Play on this PC ›
+= इस पीसी पर चलाएँ ›
+Video file not found - click to open its folder
+= वीडियो फ़ाइल नहीं मिली - फ़ोल्डर खोलने के लिए क्लिक करें

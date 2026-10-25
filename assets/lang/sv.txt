@@ -1072,3 +1072,37 @@ Counted in game by AZS Stats. Turn on cloud saving to take it to your other PCs.
 = Räknad i spelet av AZS Stats. Slå på molnsparning för att ta den till dina andra datorer.
 Show play time on the home screen
 = Visa speltid på startskärmen
+
+# New Player Guide
+New Player Guide
+= Guide för nya spelare
+{#0} of {#1} topics read
+= {#0} av {#1} ämnen lästa
+START HERE
+= BÖRJA HÄR
+CONTINUE
+= FORTSÄTT
+OPEN
+= ÖPPNA
+READ
+= LÄST
+1 VIDEO
+= 1 VIDEO
+{#0} VIDEOS
+= {#0} VIDEOR
+{#0}/{#1} PAGES
+= {#0}/{#1} SIDOR
+VIDEO
+= VIDEO
+TIP
+= TIPS
+Watch the video
+= Se videon
+Watch on YouTube ›
+= Se på YouTube ›
+Open in your browser ›
+= Öppna i webbläsaren ›
+Play on this PC ›
+= Spela upp på den här datorn ›
+Video file not found - click to open its folder
+= Videofilen hittades inte - klicka för att öppna mappen

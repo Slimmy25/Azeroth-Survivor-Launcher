@@ -1072,3 +1072,37 @@ Counted in game by AZS Stats. Turn on cloud saving to take it to your other PCs.
 = In het spel geteld door AZS Stats. Zet cloudopslag aan om hem mee te nemen naar je andere pc's.
 Show play time on the home screen
 = Speeltijd tonen op het startscherm
+
+# New Player Guide
+New Player Guide
+= Gids voor nieuwe spelers
+{#0} of {#1} topics read
+= {#0} van {#1} onderwerpen gelezen
+START HERE
+= BEGIN HIER
+CONTINUE
+= VERDER
+OPEN
+= OPENEN
+READ
+= GELEZEN
+1 VIDEO
+= 1 VIDEO
+{#0} VIDEOS
+= {#0} VIDEO'S
+{#0}/{#1} PAGES
+= {#0}/{#1} PAGINA'S
+VIDEO
+= VIDEO
+TIP
+= TIP
+Watch the video
+= Bekijk de video
+Watch on YouTube ›
+= Bekijk op YouTube ›
+Open in your browser ›
+= Openen in je browser ›
+Play on this PC ›
+= Afspelen op deze pc ›
+Video file not found - click to open its folder
+= Videobestand niet gevonden - klik om de map te openen

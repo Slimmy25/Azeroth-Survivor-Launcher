@@ -1073,3 +1073,37 @@ Counted in game by AZS Stats. Turn on cloud saving to take it to your other PCs.
 = A játékban az AZS Stats számolja. Kapcsold be a felhőmentést, hogy a többi gépedre is átkerüljön.
 Show play time on the home screen
 = Játékidő mutatása a kezdőképernyőn
+
+# New Player Guide
+New Player Guide
+= Útmutató új játékosoknak
+{#0} of {#1} topics read
+= {#1} témából {#0} elolvasva
+START HERE
+= KEZDD ITT
+CONTINUE
+= FOLYTATÁS
+OPEN
+= MEGNYITÁS
+READ
+= ELOLVASVA
+1 VIDEO
+= 1 VIDEÓ
+{#0} VIDEOS
+= {#0} VIDEÓ
+{#0}/{#1} PAGES
+= {#0}/{#1} OLDAL
+VIDEO
+= VIDEÓ
+TIP
+= TIPP
+Watch the video
+= Videó megnézése
+Watch on YouTube ›
+= Megnézés a YouTube-on ›
+Open in your browser ›
+= Megnyitás böngészőben ›
+Play on this PC ›
+= Lejátszás ezen a gépen ›
+Video file not found - click to open its folder
+= A videófájl nem található - kattints a mappa megnyitásához
