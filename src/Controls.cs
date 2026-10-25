@@ -13,8 +13,8 @@ namespace AzerothLauncher
     {
         public static readonly Color BgTop = Hex("#16151d"), BgBottom = Hex("#07070b"), Gold = Hex("#f2c14e"),    // night stone and gold, like the launcher art
             GoldDim = Hex("#9a8350"), Bronze = Hex("#34323f"), Text = Hex("#d7cea4"), Panel = Hex("#0e0d14"),
-            LinkBlue = Hex("#6aa9ff"), Ink = Hex("#0b0704"), Good = Hex("#8bc34a"), Bad = Hex("#ff6b5a"),
-            Credit = Hex("#b39a5c");
+            LinkBlue = Hex("#e6cf8c"), Ink = Hex("#15121c"),   // LinkBlue: folder paths and links, pale gold; Ink: card backgrounds Good = Hex("#8bc34a"), Bad = Hex("#ff6b5a"),
+            Credit = Hex("#b39a5c"), Card = Hex("#1b1724"), CardEdge = Hex("#3d3647");
 
         public static string FontName = "Times New Roman";
         static readonly Dictionary<string, Font> fonts = new Dictionary<string, Font>();
@@ -217,7 +217,7 @@ namespace AzerothLauncher
         {
             int w = Width, h = Height;
             if (Skin != null) { PaintSkin(g, w, h); return; }
-            if (!selected && Retro.Get("btn") != null)        // every other button: the launcher's blue stone too
+            if (Retro.Get("btn") != null)                     // every other button: the launcher's blue stone too
             {
                 Skin = w > 120 ? Retro.Long : Retro.Button;
                 PaintSkin(g, w, h);
@@ -282,6 +282,175 @@ namespace AzerothLauncher
             float fs = size;
             while (fs > 6 && g.MeasureString(label, Theme.F(fs, FontStyle.Bold)).Width > tw - 10) fs -= 0.5f;
             Theme.CenterText(g, label, Theme.F(fs, FontStyle.Bold), fg, new RectangleF(tx, down ? 1 : 0, tw, h), Color.Black);
+            if (selected && !grayed)                           // the current choice: a gold frame around the stone
+            {
+                using (var p = new Pen(Color.FromArgb(90, Theme.Gold), 4)) g.DrawRectangle(p, 2, 2, w - 5, h - 5);
+                using (var p = new Pen(Theme.Gold, 1.6f)) g.DrawRectangle(p, 1, 1, w - 3, h - 3);
+            }
+        }
+    }
+
+    // a check box in the launcher's colors: a night-stone box with a gold tick
+    public class NightCheck : CheckBox
+    {
+        bool hover;
+
+        public NightCheck()
+        {
+            SetStyle(ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer, true);
+        }
+
+        protected override void OnMouseEnter(EventArgs e) { hover = true; Invalidate(); base.OnMouseEnter(e); }
+        protected override void OnMouseLeave(EventArgs e) { hover = false; Invalidate(); base.OnMouseLeave(e); }
+
+        public override Size GetPreferredSize(Size proposed)
+        {
+            int box = Font.Height;
+            Size t = TextRenderer.MeasureText(Text, Font);
+            return new Size(box + 8 + t.Width, Math.Max(box + 2, t.Height));
+        }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            Graphics g = e.Graphics;
+            g.Clear(BackColor);
+            Theme.Smooth(g);
+            int box = Math.Min(Font.Height - 2, Height - 2);
+            int top = Math.Max(1, Math.Min((Height - box) / 2, (Font.Height - box) / 2 + 2));
+            var r = new RectangleF(1, top, box, box);
+            using (var path = new GraphicsPath())
+            {
+                float d = 6;
+                path.AddArc(r.X, r.Y, d, d, 180, 90); path.AddArc(r.Right - d, r.Y, d, d, 270, 90);
+                path.AddArc(r.Right - d, r.Bottom - d, d, d, 0, 90); path.AddArc(r.X, r.Bottom - d, d, d, 90, 90);
+                path.CloseFigure();
+                using (var b = new SolidBrush(Checked ? Theme.Hex("#2a2236") : Theme.Card)) g.FillPath(b, path);
+                using (var p = new Pen(hover || Checked ? Theme.Gold : Theme.GoldDim, 1.3f)) g.DrawPath(p, path);
+            }
+            if (Checked)
+                using (var p = new Pen(Theme.Gold, 2f))
+                {
+                    p.StartCap = p.EndCap = LineCap.Round;
+                    g.DrawLines(p, new[] { new PointF(r.X + box * 0.22f, r.Y + box * 0.52f), new PointF(r.X + box * 0.42f, r.Y + box * 0.72f),
+                                           new PointF(r.X + box * 0.78f, r.Y + box * 0.28f) });
+                }
+            var tr = new Rectangle(box + 8, 0, Width - box - 8, Height);
+            TextRenderer.DrawText(g, Text, Font, tr, hover ? Theme.Hex("#fff2b0") : ForeColor,
+                                  TextFormatFlags.Left | TextFormatFlags.WordBreak | TextFormatFlags.NoPrefix);
+        }
+    }
+
+    // the slim gold scroll bar for a read-only text box (UI.Log), in place of Windows' own wide white one
+    public class LogBar : Control
+    {
+        [System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Sequential)]
+        struct POINT { public int X, Y; }
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        static extern IntPtr SendMessage(IntPtr h, int msg, IntPtr w, ref POINT p);
+        const int EM_GETSCROLLPOS = 0x04DD, EM_SETSCROLLPOS = 0x04DE, Wide = 8;
+
+        readonly RichTextBox box;
+        bool hover, dragging;
+        int dragOffset;
+
+        public static void Attach(RichTextBox r)
+        {
+            var bar = new LogBar(r);
+            r.ParentChanged += delegate
+            {
+                if (r.Parent == null) return;
+                if (r.Dock == DockStyle.Fill)
+                {   // the box fills its parent: keep a gutter on the right for the bar
+                    r.Parent.Padding = new Padding(r.Parent.Padding.Left, r.Parent.Padding.Top, Wide + 2, r.Parent.Padding.Bottom);
+                }
+                else if (!bar.shrunk) { bar.shrunk = true; r.Width -= Wide + 2; }
+                r.Parent.Controls.Add(bar);
+                bar.BackColor = r.BackColor;
+                bar.Place();
+                bar.BringToFront();
+            };
+            r.Resize += delegate { bar.Place(); bar.Invalidate(); };
+            r.LocationChanged += delegate { bar.Place(); };
+            r.VScroll += delegate { bar.Invalidate(); };
+            r.TextChanged += delegate { bar.Invalidate(); };
+            r.MouseWheel += delegate { bar.Invalidate(); };
+            r.VisibleChanged += delegate { bar.Visible = r.Visible; };
+        }
+
+        bool shrunk;
+
+        LogBar(RichTextBox r)
+        {
+            SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer |
+                     ControlStyles.ResizeRedraw, true);
+            SetStyle(ControlStyles.Selectable, false);
+            box = r;
+            Width = Wide;
+        }
+
+        void Place()
+        {
+            if (Parent == null) return;
+            if (box.Dock == DockStyle.Fill) Bounds = new Rectangle(Parent.ClientSize.Width - Wide - 1, 2, Wide, Parent.ClientSize.Height - 4);
+            else Bounds = new Rectangle(box.Right + 2, box.Top + 2, Wide, Math.Max(10, box.Height - 4));
+            Anchor = box.Dock == DockStyle.Fill ? AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right : box.Anchor;
+        }
+
+        int Pos { get { var p = new POINT(); try { SendMessage(box.Handle, EM_GETSCROLLPOS, IntPtr.Zero, ref p); } catch (Exception) { } return p.Y; } }
+        int Content
+        {
+            get
+            {
+                if (box.TextLength == 0) return 1;
+                try { return Math.Max(1, box.GetPositionFromCharIndex(box.TextLength - 1).Y + Pos + box.Font.Height + 6); }
+                catch (Exception) { return 1; }
+            }
+        }
+
+        Rectangle Thumb()
+        {
+            int content = Content, view = Math.Max(1, box.ClientSize.Height);
+            if (content <= view) return Rectangle.Empty;
+            int h = Math.Max(26, Height * view / content);
+            int y = (int)((long)(Height - h) * Math.Min(Pos, content - view) / Math.Max(1, content - view));
+            return new Rectangle(1, y, Width - 2, h);
+        }
+
+        void ScrollTo(int thumbTop)
+        {
+            Rectangle t = Thumb();
+            if (t.IsEmpty) return;
+            int content = Content, view = box.ClientSize.Height;
+            var p = new POINT();
+            p.Y = (int)((long)Math.Max(0, Math.Min(Height - t.Height, thumbTop)) * (content - view) / Math.Max(1, Height - t.Height));
+            try { SendMessage(box.Handle, EM_SETSCROLLPOS, IntPtr.Zero, ref p); } catch (Exception) { }
+            Invalidate();
+        }
+
+        protected override void OnMouseEnter(EventArgs e) { hover = true; Invalidate(); base.OnMouseEnter(e); }
+        protected override void OnMouseLeave(EventArgs e) { hover = false; Invalidate(); base.OnMouseLeave(e); }
+        protected override void OnMouseDown(MouseEventArgs e)
+        {
+            Rectangle t = Thumb();
+            if (t.IsEmpty) return;
+            dragging = true;
+            dragOffset = t.Contains(e.Location) ? e.Y - t.Y : t.Height / 2;
+            ScrollTo(e.Y - dragOffset);
+            base.OnMouseDown(e);
+        }
+        protected override void OnMouseMove(MouseEventArgs e) { if (dragging) ScrollTo(e.Y - dragOffset); base.OnMouseMove(e); }
+        protected override void OnMouseUp(MouseEventArgs e) { dragging = false; Invalidate(); base.OnMouseUp(e); }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            Graphics g = e.Graphics;
+            g.Clear(BackColor);
+            Theme.Smooth(g);
+            Rectangle t = Thumb();
+            if (t.IsEmpty) return;
+            using (var b = new SolidBrush(Theme.Mix(BackColor, Theme.CardEdge, 0.6))) g.FillRectangle(b, 2, 0, Width - 4, Height);
+            using (var b = new SolidBrush(hover || dragging ? Theme.Gold : Theme.GoldDim))
+                g.FillRectangle(b, t.X, t.Y, t.Width, t.Height);
         }
     }
 
@@ -498,7 +667,7 @@ namespace AzerothLauncher
 
         public static CheckBox Check(string text, bool value, Color fg, Color bg, float size, bool translate = true)
         {
-            var c = new CheckBox();
+            var c = new NightCheck();
             c.Text = translate ? Lang.T(text) : text;
             c.Checked = value;
             c.ForeColor = fg;
@@ -524,8 +693,9 @@ namespace AzerothLauncher
             r.ForeColor = Theme.Text;
             r.Font = Theme.F(size);
             r.DetectUrls = false;
-            r.ScrollBars = RichTextBoxScrollBars.Vertical;
+            r.ScrollBars = RichTextBoxScrollBars.None;       // the slim gold bar instead (LogBar), added with the box
             r.WordWrap = true;
+            LogBar.Attach(r);
             return r;
         }
 
