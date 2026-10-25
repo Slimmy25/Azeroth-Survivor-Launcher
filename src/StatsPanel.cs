@@ -25,13 +25,13 @@ namespace AzerothLauncher
             if (current == "Options" && side.Visible) BuildPanel("Options");
         }
 
-        static string Big(double n)
+        public static string Big(double n)
         {
             return Math.Floor(Math.Max(0, n)).ToString("#,0", CultureInfo.InvariantCulture);
         }
 
         // 754 -> "12:34", 4000 -> "1:06:40"
-        static string Clock(double seconds)
+        public static string Clock(double seconds)
         {
             long s = (long)Math.Max(0, Math.Floor(seconds));
             long h = s / 3600, m = s % 3600 / 60, sec = s % 60;
@@ -193,6 +193,9 @@ namespace AzerothLauncher
             if (statsTab == 0)                               // Overview
             {
                 y = Place(sp, Totals(b), w, y);
+                var chart = new DpsChartBlock(runs, 40);       // DPS per run: are you getting better?
+                chart.Title = Lang.T("DPS over time") + (cls != null ? " · " + cls.Name : "");
+                y = Place(sp, chart, w, y);
                 if (cls == null)
                 {
                     y = Place(sp, Milestones(st, ps), w, y);
@@ -258,7 +261,12 @@ namespace AzerothLauncher
                 y = Place(sp, list, w, y);
             }
             else if (statsTab == 3)                          // Records
+            {
                 y = Place(sp, Records(b.Best), w, y);
+                var builds = new BuildsBlock(BestBuilds(st, cls == null ? null : cls.Key, 6));
+                builds.Title = Lang.T("Best builds");
+                y = Place(sp, builds, w, y);
+            }
             else if (statsTab == 4)                          // Nemesis
                 y = NemesisTab(sp, w, y, st, cls);
             else if (statsTab == 5)                          // Co-op
@@ -302,7 +310,10 @@ namespace AzerothLauncher
                 row.IconColor = Theme.Hex("#c41f3b");
                 row.Name = k.Name;
                 row.NameColor = Theme.Hex("#ff5a4a");
-                row.Sub = Lang.T("Killed you " + Big(k.Kills) + " times (" + Pct(k.Kills, total) + "%)");
+                double beat;
+                st.BossKills.TryGetValue(k.Name, out beat);
+                row.Sub = Lang.T("Killed you " + Big(k.Kills) + " times (" + Pct(k.Kills, total) + "%)") +
+                          (beat > 0 ? " · " + Lang.T("You beat it " + Big(beat) + " times") : "");
                 row.Value = Big(k.Kills);
                 row.ValueSub = k.Last;
                 row.Bar = total > 0 ? k.Kills / total : 0;
@@ -310,6 +321,34 @@ namespace AzerothLauncher
                 if (rows.Rows.Count >= 15) break;
             }
             y = Place(sp, rows, w, y);
+            // revenge: the bosses you beat most, against how often they got you
+            if (st.BossKills.Count > 0)
+            {
+                var rev = new RowsBlock();
+                rev.Title = Lang.T("Revenge: bosses you beat");
+                var order = new List<KeyValuePair<string, double>>(st.BossKills);
+                order.Sort(delegate(KeyValuePair<string, double> a, KeyValuePair<string, double> b) { return b.Value.CompareTo(a.Value); });
+                double most = order.Count > 0 ? order[0].Value : 1;
+                foreach (var kv in order)
+                {
+                    double got = 0;
+                    foreach (var k in killers) if (string.Equals(k.Name, kv.Key, StringComparison.OrdinalIgnoreCase)) got = k.Kills;
+                    var row = new ArmoryRow();
+                    row.Icon = Armory.Initials(kv.Key);
+                    row.Npc = kv.Key;
+                    row.IconColor = Armory.Green;
+                    row.Name = kv.Key;
+                    row.NameColor = Armory.Bright;
+                    row.Sub = Lang.T("You beat it " + Big(kv.Value) + " times") + (got > 0 ? " · " + Lang.T("It killed you " + Big(got) + " times") : "");
+                    row.Value = Big(kv.Value) + " : " + Big(got);
+                    row.ValueSub = Lang.T(kv.Value >= got ? "you lead" : "it leads");
+                    row.ValueColor = kv.Value >= got ? Armory.Green : Theme.Bad;
+                    row.Bar = most > 0 ? kv.Value / most : 0;
+                    rev.Rows.Add(row);
+                    if (rev.Rows.Count >= 15) break;
+                }
+                y = Place(sp, rev, w, y);
+            }
             var log = new RowsBlock();
             log.Title = Lang.T("Death log");
             log.Empty = Lang.T("No deaths recorded yet.");
@@ -515,6 +554,25 @@ namespace AzerothLauncher
                 rows.Rows.Add(row);
             }
             return rows;
+        }
+
+        // the builds behind the best runs: the addon's saved ones and the runs in the history, highest DPS first
+        // (one of each run), victories included even when their DPS was lower
+        static List<StatRun> BestBuilds(RunStats st, string classKey, int max)
+        {
+            var all = new List<StatRun>();
+            var seen = new HashSet<string>();
+            foreach (var list in new[] { st.Builds, st.History })
+                foreach (var r in list)
+                {
+                    if (r.Abilities.Count == 0 || (classKey != null && r.ClassKey != classKey)) continue;
+                    if (seen.Add(r.Date + "|" + r.ClassKey + "|" + r.Time)) all.Add(r);
+                }
+            all.Sort(delegate(StatRun a, StatRun b) { return b.Dps.CompareTo(a.Dps); });
+            var top = all.GetRange(0, Math.Min(max, all.Count));
+            foreach (var r in all)                           // the best victory too, if it is not there yet
+                if (r.Kind == "victory" && !top.Contains(r)) { if (top.Count >= max && top.Count > 0) top.RemoveAt(top.Count - 1); top.Add(r); break; }
+            return top;
         }
 
         static RowsBlock Records(Dictionary<string, StatRecord> best)

@@ -695,3 +695,136 @@ namespace AzerothLauncher
         }
     }
 }
+
+namespace AzerothLauncher
+{
+    // DPS over time: one dot per run (oldest left, newest right) in its class's color, a line through them, the best
+    // as a dashed line, and a trend line that shows whether you are getting better
+    public class DpsChartBlock : ArmoryBlock
+    {
+        readonly List<StatRun> runs;                         // the oldest first
+        const int ChartH = 150, AxisW = 52;
+
+        public DpsChartBlock(List<StatRun> newestFirst, int max)
+        {
+            runs = new List<StatRun>();
+            foreach (var r in newestFirst) if (r.Dps > 0) runs.Add(r);
+            if (runs.Count > max) runs = runs.GetRange(0, max);
+            runs.Reverse();
+        }
+
+        protected override int ContentHeight(int w) { return runs.Count < 2 ? 24 : ChartH + 22; }
+
+        protected override void PaintContent(Graphics g, Rectangle r)
+        {
+            if (runs.Count < 2)
+            {
+                Armory.Text(g, Lang.T("Play a few runs with the newest AZS Stats to see your DPS over time."), Theme.F(10, FontStyle.Italic),
+                            Armory.Dim, r, TextFormatFlags.Left | TextFormatFlags.WordBreak);
+                return;
+            }
+            double max = 0, best = 0;
+            foreach (var x in runs) { max = Math.Max(max, x.Dps); best = Math.Max(best, x.Dps); }
+            max = Math.Ceiling(max * 1.1 / 100) * 100;
+            var plot = new Rectangle(r.X + AxisW, r.Y + 6, r.Width - AxisW - 6, ChartH - 12);
+            Font f = Theme.F(8.5f);
+            // grid: four steps
+            for (int i = 0; i <= 4; i++)
+            {
+                float y = plot.Bottom - plot.Height * i / 4f;
+                using (var p = new Pen(i == 0 ? Armory.SlotEdge : Armory.Slot, 1)) g.DrawLine(p, plot.X, y, plot.Right, y);
+                Armory.Text(g, LauncherApp.Big(max * i / 4), f, Armory.Dim, new Rectangle(r.X, (int)y - 9, AxisW - 6, 18),
+                            TextFormatFlags.Right | TextFormatFlags.SingleLine);
+            }
+            Func<int, PointF> at = delegate(int i)
+            {
+                return new PointF(plot.X + plot.Width * i / (float)(runs.Count - 1),
+                                  plot.Bottom - (float)(plot.Height * runs[i].Dps / Math.Max(1, max)));
+            };
+            // best so far
+            float by = plot.Bottom - (float)(plot.Height * best / Math.Max(1, max));
+            using (var p = new Pen(Armory.Legendary, 1)) { p.DashStyle = DashStyle.Dash; g.DrawLine(p, plot.X, by, plot.Right, by); }
+            Armory.Text(g, Lang.T("Best") + " " + LauncherApp.Big(best), f, Armory.Legendary, new Rectangle(plot.Right - 140, (int)by - 18, 140, 16),
+                        TextFormatFlags.Right | TextFormatFlags.SingleLine);
+            // the runs
+            var pts = new PointF[runs.Count];
+            for (int i = 0; i < runs.Count; i++) pts[i] = at(i);
+            using (var p = new Pen(Color.FromArgb(150, Theme.GoldDim), 1.5f)) g.DrawLines(p, pts);
+            // trend: least squares
+            double n = runs.Count, sx = 0, sy = 0, sxy = 0, sxx = 0;
+            for (int i = 0; i < runs.Count; i++) { sx += i; sy += runs[i].Dps; sxy += i * runs[i].Dps; sxx += i * i; }
+            double slope = (n * sxy - sx * sy) / Math.Max(1e-9, n * sxx - sx * sx), icpt = (sy - slope * sx) / n;
+            Func<double, float> ty = delegate(double v) { return plot.Bottom - (float)(plot.Height * Math.Max(0, v) / Math.Max(1, max)); };
+            Color trend = slope >= 0 ? Armory.Green : Theme.Bad;
+            using (var p = new Pen(Color.FromArgb(200, trend), 2)) g.DrawLine(p, plot.X, ty(icpt), plot.Right, ty(icpt + slope * (n - 1)));
+            for (int i = 0; i < runs.Count; i++)
+            {
+                Color c = StatsColors.Class(runs[i].ClassKey);
+                using (var b = new SolidBrush(c)) g.FillEllipse(b, pts[i].X - 3.5f, pts[i].Y - 3.5f, 7, 7);
+                if (runs[i].Kind == "victory") using (var p = new Pen(Armory.Bright, 1)) g.DrawEllipse(p, pts[i].X - 4.5f, pts[i].Y - 4.5f, 9, 9);
+            }
+            double first = icpt, last = icpt + slope * (n - 1);
+            string word = Lang.T(slope >= 0 ? "Getting better" : "Dropping off") + ": " + (first > 0 ? (last >= first ? "+" : "") +
+                          Math.Round((last - first) / first * 100) + "%" : "") + "  ·  " + Lang.T(runs.Count + " runs, oldest left") +
+                          "  ·  " + Lang.T("ringed: victories");
+            Armory.Text(g, word, f, trend, new Rectangle(plot.X, r.Y + ChartH + 2, plot.Width, 18), TextFormatFlags.Left | TextFormatFlags.SingleLine);
+        }
+    }
+
+    // the builds behind your best runs: the class, how it went, the DPS, and every spell taken (icon and rank)
+    public class BuildsBlock : ArmoryBlock
+    {
+        readonly List<StatRun> builds;
+        const int RowH = 78, Icon = 30;
+
+        public BuildsBlock(List<StatRun> builds) { this.builds = builds; }
+
+        protected override int ContentHeight(int w) { return builds.Count == 0 ? 24 : builds.Count * (RowH + 8) - 8; }
+
+        protected override void PaintContent(Graphics g, Rectangle r)
+        {
+            if (builds.Count == 0)
+            {
+                Armory.Text(g, Lang.T("Your best builds show up here after a DPS high or a victory."), Theme.F(10, FontStyle.Italic),
+                            Armory.Dim, r, TextFormatFlags.Left | TextFormatFlags.WordBreak);
+                return;
+            }
+            for (int i = 0; i < builds.Count; i++)
+            {
+                StatRun b = builds[i];
+                var s = new Rectangle(r.X, r.Y + i * (RowH + 8), r.Width, RowH);
+                if (!g.VisibleClipBounds.IntersectsWith(s)) continue;
+                Armory.Box(g, s, 6, Armory.Slot, Armory.SlotEdge);
+                Color cc = StatsColors.Class(b.ClassKey);
+                var ci = new Rectangle(s.X + 8, s.Y + 8, 26, 26);
+                Image cp = SpellIcons.Class(b.ClassKey, this);
+                if (cp != null) Armory.Picture(g, ci, cp, false, true, cc); else Armory.Icon(g, ci, cc, Armory.Initials(b.Class), true);
+                string head = b.Class + " · " + Lang.T(b.Kind == "victory" ? "Victory" : b.Result) + (b.Zone.Length > 0 ? " · " + b.Zone : "");
+                Armory.Text(g, head, Theme.F(10.5f, FontStyle.Bold), cc, new Rectangle(ci.Right + 8, s.Y + 8, s.Width - 200, 18),
+                            TextFormatFlags.Left | TextFormatFlags.SingleLine | TextFormatFlags.EndEllipsis);
+                Armory.Text(g, (b.Date.Length >= 10 ? b.Date.Substring(0, 10) + " · " : "") + LauncherApp.Clock(b.Time) + " · " + Lang.T("Level " + LauncherApp.Big(b.Level)),
+                            Theme.F(8.5f), Armory.Dim, new Rectangle(ci.Right + 8, s.Y + 24, s.Width - 200, 16), TextFormatFlags.Left | TextFormatFlags.SingleLine);
+                Armory.Text(g, LauncherApp.Big(b.Dps) + " DPS", Theme.F(12, FontStyle.Bold), Armory.Legendary, new Rectangle(s.Right - 160, s.Y + 8, 150, 20),
+                            TextFormatFlags.Right | TextFormatFlags.SingleLine);
+                int x = s.X + 10, y = s.Y + 42;
+                foreach (var a in b.Abilities)
+                {
+                    if (x + Icon > s.Right - 8) break;
+                    var ir = new Rectangle(x, y, Icon, Icon);
+                    Image pic = SpellIcons.Spell(a.Name, this);
+                    if (pic != null) Armory.Picture(g, ir, pic, false, false, Armory.SlotEdge);
+                    else Armory.Icon(g, ir, Theme.GoldDim, Armory.Initials(a.Name), false);
+                    if (a.Picks > 0)
+                        Armory.Text(g, LauncherApp.Big(a.Picks), Theme.F(8, FontStyle.Bold), Armory.Bright, new Rectangle(ir.Right - 14, ir.Bottom - 13, 14, 13),
+                                    TextFormatFlags.Right | TextFormatFlags.SingleLine);
+                    x += Icon + 5;
+                }
+            }
+        }
+    }
+
+    public static class StatsColors
+    {
+        public static Color Class(string key) { return LauncherApp.ClassColorOf(key); }
+    }
+}

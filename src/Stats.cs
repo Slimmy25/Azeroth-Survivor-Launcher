@@ -365,6 +365,8 @@ namespace AzerothLauncher
         public readonly List<DeathStat> Deaths = new List<DeathStat>();          // the newest first
         public readonly List<NemesisStat> Nemesis = new List<NemesisStat>();
         public CoopStat Coop = new CoopStat();
+        public readonly List<StatRun> Builds = new List<StatRun>();               // best builds kept by the addon
+        public readonly Dictionary<string, double> BossKills = new Dictionary<string, double>(StringComparer.OrdinalIgnoreCase);   // bosses you beat
 
         public StatBlock Class(string key)
         {
@@ -460,40 +462,7 @@ namespace AzerothLauncher
                 }
             st.Months.Sort(delegate(MonthStat a, MonthStat b) { return string.CompareOrdinal(a.Month, b.Month); });
             var hist = LuaReader.List(LuaReader.Tab(db, "history"));
-            for (int i = hist.Count - 1; i >= 0; i--)
-            {
-                var h = hist[i];
-                var run = new StatRun();
-                run.Result = LuaReader.Text(h, "result");
-                run.Kind = LuaReader.Text(h, "kind");
-                run.Date = LuaReader.Text(h, "date");
-                run.Hero = LuaReader.Text(h, "hero");
-                run.ClassKey = LuaReader.Text(h, "class");
-                run.Class = LuaReader.Text(h, "cname");
-                run.Race = LuaReader.Text(h, "rname");
-                run.Zone = LuaReader.Text(h, "zname");
-                run.Time = LuaReader.Num(h, "t");
-                run.Level = LuaReader.Num(h, "lvl");
-                run.Kills = LuaReader.Num(h, "kills");
-                run.Damage = LuaReader.Num(h, "dmg");
-                run.Dps = LuaReader.Num(h, "dps");
-                if (run.Dps <= 0 && run.Time > 0) run.Dps = Math.Round(run.Damage / run.Time);   // runs from before AZS Stats kept DPS
-                run.Gold = LuaReader.Num(h, "gold");
-                run.Bosses = LuaReader.Num(h, "bosses");
-                run.Party = LuaReader.Text(h, "party");
-                run.Killer = LuaReader.Text(h, "killer");
-                foreach (var a in LuaReader.List(LuaReader.Tab(h, "abilities")))
-                {
-                    var ab = new AbilityStat();
-                    ab.Key = LuaReader.Text(a, "key");
-                    ab.Name = LuaReader.Text(a, "name");
-                    if (ab.Name.Length == 0) ab.Name = Pretty(ab.Key);
-                    ab.Picks = LuaReader.Num(a, "rank");
-                    ab.Damage = LuaReader.Num(a, "dmg");
-                    run.Abilities.Add(ab);
-                }
-                st.History.Add(run);
-            }
+            for (int i = hist.Count - 1; i >= 0; i--) st.History.Add(ReadRun(hist[i]));
 
             // play time (counted by the addon while the game runs)
             var play = LuaReader.Tab(db, "play");
@@ -524,6 +493,11 @@ namespace AzerothLauncher
                 st.Deaths.Add(ds);
             }
             Nemeses(LuaReader.Tab(db, "nemesis"), st.Nemesis);
+
+            // best builds (the addon keeps them for DPS highs and victories) and the bosses you beat
+            foreach (var h in LuaReader.List(LuaReader.Tab(db, "builds"))) st.Builds.Add(ReadRun(h));
+            var bk = LuaReader.Tab(db, "bossKills");
+            if (bk != null) foreach (var kv in bk) st.BossKills[kv.Key] = LuaReader.Num(bk, kv.Key);
 
             // co-op
             var co = LuaReader.Tab(db, "coop");
@@ -672,6 +646,42 @@ namespace AzerothLauncher
                 int c = b.Runs.CompareTo(a.Runs);
                 return c != 0 ? c : string.Compare(a.Name, b.Name, StringComparison.CurrentCultureIgnoreCase);
             });
+        }
+
+        // one run as the addon writes it (history and best builds)
+        static StatRun ReadRun(Dictionary<string, object> h)
+        {
+            var run = new StatRun();
+
+            run.Result = LuaReader.Text(h, "result");
+            run.Kind = LuaReader.Text(h, "kind");
+            run.Date = LuaReader.Text(h, "date");
+            run.Hero = LuaReader.Text(h, "hero");
+            run.ClassKey = LuaReader.Text(h, "class");
+            run.Class = LuaReader.Text(h, "cname");
+            run.Race = LuaReader.Text(h, "rname");
+            run.Zone = LuaReader.Text(h, "zname");
+            run.Time = LuaReader.Num(h, "t");
+            run.Level = LuaReader.Num(h, "lvl");
+            run.Kills = LuaReader.Num(h, "kills");
+            run.Damage = LuaReader.Num(h, "dmg");
+            run.Dps = LuaReader.Num(h, "dps");
+            if (run.Dps <= 0 && run.Time > 0) run.Dps = Math.Round(run.Damage / run.Time);   // runs from before AZS Stats kept DPS
+            run.Gold = LuaReader.Num(h, "gold");
+            run.Bosses = LuaReader.Num(h, "bosses");
+            run.Party = LuaReader.Text(h, "party");
+            run.Killer = LuaReader.Text(h, "killer");
+            foreach (var a in LuaReader.List(LuaReader.Tab(h, "abilities")))
+            {
+                var ab = new AbilityStat();
+                ab.Key = LuaReader.Text(a, "key");
+                ab.Name = LuaReader.Text(a, "name");
+                if (ab.Name.Length == 0) ab.Name = Pretty(ab.Key);
+                ab.Picks = LuaReader.Num(a, "rank");
+                ab.Damage = LuaReader.Num(a, "dmg");
+                run.Abilities.Add(ab);
+            }
+            return run;
         }
 
         // "death_knight" -> "Death Knight"
