@@ -156,11 +156,11 @@ namespace AzerothLauncher
                     }
                 }
             }
-            app.current = "Stats";
-            app.BuildPanel("Stats");
-            // the main window with a section open, then with none
-            foreach (string shot in new[] { "home-section", "home" })
+            // the main window with Community (the home screen), with a section open, then with none
+            foreach (string shot in new[] { "home-community", "home-section", "home" })
             {
+                if (shot == "home-community") { app.current = "Community"; app.ShowSide(); app.BuildPanel("Community"); }
+                if (shot == "home-section") { app.current = "Stats"; app.BuildPanel("Stats"); }
                 if (shot == "home") app.side.Hide();
                 app.Show();                                  // the preview starts as if in the tray
                 Application.DoEvents();
