@@ -1112,3 +1112,7 @@ OPEN IN BROWSER ›
 = APRI NEL BROWSER ›
 This video can't play here. Use OPEN IN BROWSER.
 = Questo video non può essere riprodotto qui. Usa APRI NEL BROWSER.
+Fullscreen
+= Schermo intero
+Exit fullscreen
+= Esci da schermo intero

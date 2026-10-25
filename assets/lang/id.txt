@@ -1112,3 +1112,7 @@ OPEN IN BROWSER ›
 = BUKA DI BROWSER ›
 This video can't play here. Use OPEN IN BROWSER.
 = Video ini tidak bisa diputar di sini. Gunakan BUKA DI BROWSER.
+Fullscreen
+= Layar penuh
+Exit fullscreen
+= Keluar layar penuh

@@ -1113,3 +1113,7 @@ OPEN IN BROWSER ›
 = OTWÓRZ W PRZEGLĄDARCE ›
 This video can't play here. Use OPEN IN BROWSER.
 = Tego filmu nie można tu odtworzyć. Użyj OTWÓRZ W PRZEGLĄDARCE.
+Fullscreen
+= Pełny ekran
+Exit fullscreen
+= Zamknij pełny ekran

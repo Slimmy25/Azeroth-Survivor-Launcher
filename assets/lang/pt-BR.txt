@@ -1112,3 +1112,7 @@ OPEN IN BROWSER ›
 = ABRIR NO NAVEGADOR ›
 This video can't play here. Use OPEN IN BROWSER.
 = Este vídeo não pode ser reproduzido aqui. Use ABRIR NO NAVEGADOR.
+Fullscreen
+= Tela cheia
+Exit fullscreen
+= Sair da tela cheia

@@ -1113,3 +1113,7 @@ OPEN IN BROWSER ›
 = DESCHIDE ÎN BROWSER ›
 This video can't play here. Use OPEN IN BROWSER.
 = Acest videoclip nu poate fi redat aici. Folosește DESCHIDE ÎN BROWSER.
+Fullscreen
+= Ecran complet
+Exit fullscreen
+= Ieși din ecran complet

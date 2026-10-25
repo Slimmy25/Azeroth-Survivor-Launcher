@@ -1113,3 +1113,7 @@ OPEN IN BROWSER ›
 = OTEVŘÍT V PROHLÍŽEČI ›
 This video can't play here. Use OPEN IN BROWSER.
 = Toto video zde nelze přehrát. Použij OTEVŘÍT V PROHLÍŽEČI.
+Fullscreen
+= Celá obrazovka
+Exit fullscreen
+= Ukončit celou obrazovku

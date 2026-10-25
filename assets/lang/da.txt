@@ -1112,3 +1112,7 @@ OPEN IN BROWSER ›
 = ÅBN I BROWSER ›
 This video can't play here. Use OPEN IN BROWSER.
 = Videoen kan ikke afspilles her. Brug ÅBN I BROWSER.
+Fullscreen
+= Fuld skærm
+Exit fullscreen
+= Afslut fuld skærm

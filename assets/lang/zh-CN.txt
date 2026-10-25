@@ -1113,3 +1113,7 @@ OPEN IN BROWSER ›
 = 在浏览器中打开 ›
 This video can't play here. Use OPEN IN BROWSER.
 = 此视频无法在这里播放。请使用“在浏览器中打开”。
+Fullscreen
+= 全屏
+Exit fullscreen
+= 退出全屏

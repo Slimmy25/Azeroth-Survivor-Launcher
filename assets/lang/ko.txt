@@ -1113,3 +1113,7 @@ OPEN IN BROWSER ›
 = 브라우저에서 열기 ›
 This video can't play here. Use OPEN IN BROWSER.
 = 이 영상은 여기서 재생할 수 없습니다. 브라우저에서 열기를 사용하세요.
+Fullscreen
+= 전체 화면
+Exit fullscreen
+= 전체 화면 종료

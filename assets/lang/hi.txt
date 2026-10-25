@@ -1113,3 +1113,7 @@ OPEN IN BROWSER ›
 = ब्राउज़र में खोलें ›
 This video can't play here. Use OPEN IN BROWSER.
 = यह वीडियो यहाँ नहीं चल सकता। ब्राउज़र में खोलें दबाएँ।
+Fullscreen
+= फ़ुलस्क्रीन
+Exit fullscreen
+= फ़ुलस्क्रीन से बाहर

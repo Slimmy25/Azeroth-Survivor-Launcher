@@ -1112,3 +1112,7 @@ OPEN IN BROWSER ›
 = ÖPPNA I WEBBLÄSARE ›
 This video can't play here. Use OPEN IN BROWSER.
 = Videon kan inte spelas upp här. Använd ÖPPNA I WEBBLÄSARE.
+Fullscreen
+= Helskärm
+Exit fullscreen
+= Avsluta helskärm
