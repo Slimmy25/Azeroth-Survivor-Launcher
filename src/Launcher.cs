@@ -49,7 +49,7 @@ namespace AzerothLauncher
         NotifyIcon tray;
         ToolStripMenuItem trayShow, trayPlay, trayUpload, trayCloseToTray, trayQuit;
 
-        void TrayTexts()
+        internal void TrayTexts()
         {
             trayShow.Text = Lang.T("Show Launcher");
             trayPlay.Text = Lang.T("Play");
