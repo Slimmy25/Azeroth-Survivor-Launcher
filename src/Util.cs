@@ -650,11 +650,12 @@ namespace AzerothLauncher
         public List<GuideVideo> Videos = new List<GuideVideo>();   // in the Body as a line "@video <number>"
     }
 
-    // "@video Title | address": a YouTube link, another web address, or a video file (a name alone is looked for
-    // in the "Guide Videos" folder next to the launcher's data)
+    // "@video Title | address [| uploader [| uploader's address]]": a YouTube link, another web address, or a video
+    // file (a name alone is looked for in the "Guide Videos" folder next to the launcher's data); the uploader is
+    // credited on the card
     public class GuideVideo
     {
-        public string Title = "", Url = "";
+        public string Title = "", Url = "", Author = "", AuthorUrl = "";
     }
 
     public class GuideTopic : GuidePage
@@ -664,7 +665,8 @@ namespace AzerothLauncher
 
     public static class Data
     {
-        public static readonly string[] AddonCategories = { "AS ADDONS", "WOW 1.12 ADDONS", "MY ADDONS" };
+        // two categories: the addons made for Azeroth Survivors (once called "AS ADDONS") and classic WoW 1.12 addons
+        public static readonly string[] AddonCategories = { "AZS ADDONS", "WOW 1.12 ADDONS" };
         public const string MyAddonsCategory = "MY ADDONS";
 
         // MY ADDONS: your own addon .zip files, kept on this PC only (never uploaded anywhere) in
@@ -690,7 +692,6 @@ namespace AzerothLauncher
             catch (Exception) { }
             return list;
         }
-        public static readonly string[] AddonFilters = { "UI OVERHAUL", "GAMEPLAY", "COSMETIC" };
         public const int ClRows = 8;                 // buttons per column in All Patch Notes (two columns per page)
 
         static List<string> changelog;
@@ -736,11 +737,12 @@ namespace AzerothLauncher
                     }
                     if (target != null && line.StartsWith("@video ", StringComparison.Ordinal))
                     {
-                        string rest = line.Substring(7);
-                        int bar = rest.IndexOf('|');
+                        string[] f = line.Substring(7).Split('|');
                         var v = new GuideVideo();
-                        v.Title = bar >= 0 ? rest.Substring(0, bar).Trim() : "";
-                        v.Url = (bar >= 0 ? rest.Substring(bar + 1) : rest).Trim();
+                        v.Title = f.Length > 1 ? f[0].Trim() : "";
+                        v.Url = (f.Length > 1 ? f[1] : f[0]).Trim();
+                        if (f.Length > 2) v.Author = f[2].Trim();
+                        if (f.Length > 3) v.AuthorUrl = f[3].Trim();
                         if (v.Url.Length == 0) continue;
                         target.Body += "@video " + target.Videos.Count + "\n";   // shown where it stands in the text
                         target.Videos.Add(v);
@@ -819,6 +821,7 @@ namespace AzerothLauncher
                     if (f.Length < 3) continue;
                     var e = new AddonEntry();
                     e.Category = f[0].Trim().ToUpperInvariant();
+                    if (e.Category == "AS ADDONS") e.Category = "AZS ADDONS";   // its old name
                     e.Name = f[1].Trim();
                     e.Url = f[2].Trim();
                     // "local:<file>.zip": a zip kept on this PC, next to the launcher (or in its own folder). Such an

@@ -714,9 +714,40 @@ namespace AzerothLauncher
             if (thumbKey != null) LoadThumb();
         }
 
+        // a YouTube video's picture for others (the home page's Build collection): null until it has loaded, then
+        // loaded() is called on a worker thread
+        public static string YouTubeIdOf(string url)
+        {
+            Match m = YouTubeId.Match(url ?? "");
+            return m.Success && (url ?? "").IndexOf("youtu", StringComparison.OrdinalIgnoreCase) >= 0 ? m.Groups[1].Value : null;
+        }
+
+        public static Image YouTubeThumb(string id, Action loaded)
+        {
+            lock (thumbs)
+            {
+                Image img;
+                if (thumbs.TryGetValue(id, out img)) return img;
+            }
+            Fetch(id, "https://img.youtube.com/vi/" + id + "/hqdefault.jpg", loaded);
+            return null;
+        }
+
         void LoadThumb()
         {
             lock (thumbs) if (thumbs.ContainsKey(thumbKey)) return;
+            Fetch(thumbKey, thumbUrl, delegate
+            {
+                try { if (IsHandleCreated) BeginInvoke(new Action(Invalidate)); }
+                catch (Exception) { }
+            });
+        }
+
+        static readonly HashSet<string> fetching = new HashSet<string>();
+
+        static void Fetch(string thumbKey, string thumbUrl, Action loaded)
+        {
+            lock (thumbs) { if (fetching.Contains(thumbKey)) return; fetching.Add(thumbKey); }
             string id = thumbKey, url = thumbUrl;
             ThreadPool.QueueUserWorkItem(delegate
             {
@@ -739,8 +770,8 @@ namespace AzerothLauncher
                         using (var tmp = Image.FromFile(path)) img = new Bitmap(tmp);
                 }
                 catch (Exception) { }
-                lock (thumbs) thumbs[id] = img;
-                try { if (IsHandleCreated) BeginInvoke(new Action(Invalidate)); }
+                lock (thumbs) { thumbs[id] = img; fetching.Remove(id); }
+                try { loaded(); }
                 catch (Exception) { }
             });
         }
@@ -819,7 +850,13 @@ namespace AzerothLauncher
                 SizeF ts = g.MeasureString(title, tf, (int)w);
                 float h = Math.Min(ts.Height, tf.Height * 2.2f);
                 g.DrawString(title, tf, b, new RectangleF(x, y, w, h), sf);
-                y += h + 6;
+                y += h + 4;
+            }
+            if (video.Author.Length > 0)                     // credit to the uploader
+            {
+                Font af = Theme.F(9.5f);
+                using (var b = new SolidBrush(Theme.Text)) g.DrawString(Lang.T("by") + " " + video.Author, af, b, x, y);
+                y += af.Height + 4;
             }
             string where = file == null ? (ytId != null ? "Watch on YouTube ›" : "Play here ›")
                          : File.Exists(file) ? "Play on this PC ›" : "Video file not found - click to open its folder";

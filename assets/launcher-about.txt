@@ -14,6 +14,7 @@ A community launcher for Azeroth Survivors, the game made by Aethus. It installs
 
 # Home and news
 - The News panel shows the newest patch notes; the Changelog has every patch note, newest first, with PREVIOUS and NEXT to step through them
+- The Build collection card shows the newest build video from the Guide, with its title and credit to the uploader; click it to watch it in your web browser (it never starts by itself)
 - The "This week" card sums up your recent runs, and your play time can be shown on the home screen
 
 # Cloud Save
@@ -23,9 +24,10 @@ A community launcher for Azeroth Survivors, the game made by Aethus. It installs
 
 # Addons
 - Switch addons on and off, or all at once, and keep two addon profiles
-- Download More installs addons with one click and offers an UPDATE when a newer copy is out
+- Download More installs addons with one click, in two categories (AZS ADDONS and WOW 1.12 ADDONS), and offers an UPDATE when a newer copy is out
 
 # New Player Guide
+- Build Guides: players' videos of their builds, credited to their uploaders
 - Topics and class pages on controls, zones, bosses, level-ups, gear, talents and tips
 - Videos that play inside the launcher (streamed, never saved on your PC), and a search over every page
 
