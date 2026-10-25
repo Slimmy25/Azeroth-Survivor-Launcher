@@ -13,8 +13,8 @@ namespace AzerothLauncher
     {
         public static readonly Color BgTop = Hex("#16151d"), BgBottom = Hex("#07070b"), Gold = Hex("#f2c14e"),    // night stone and gold, like the launcher art
             GoldDim = Hex("#9a8350"), Bronze = Hex("#34323f"), Text = Hex("#d7cea4"), Panel = Hex("#0e0d14"),
-            LinkBlue = Hex("#e6cf8c"), Ink = Hex("#15121c"),   // LinkBlue: folder paths and links, pale gold; Ink: card backgrounds Good = Hex("#8bc34a"), Bad = Hex("#ff6b5a"),
-            Credit = Hex("#b39a5c"), Card = Hex("#1b1724"), CardEdge = Hex("#3d3647");
+            LinkBlue = Hex("#e6cf8c"), Ink = Hex("#15121c"), Good = Hex("#8bc34a"), Bad = Hex("#ff6b5a"),
+            Credit = Hex("#b39a5c"), Card = Hex("#1b1724"), CardEdge = Hex("#3d3647");   // LinkBlue: paths and links (pale gold); Ink: card backgrounds
 
         public static string FontName = "Times New Roman";
         static readonly Dictionary<string, Font> fonts = new Dictionary<string, Font>();
