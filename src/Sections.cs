@@ -295,6 +295,7 @@ namespace AzerothLauncher
         void BuildPanel(string name)
         {
             panel.SuspendLayout();
+            Theme.Zoom = Theme.SectionZoom;                  // everything in a section is a little smaller
             try
             {
                 if (name == "Cloud Save") PanelCloud();
@@ -305,7 +306,7 @@ namespace AzerothLauncher
                 else if (name == "Stats") PanelStats();
                 else if (name == "About Launcher") PanelAbout();
             }
-            finally { panel.ResumeLayout(); }
+            finally { Theme.Zoom = 1f; panel.ResumeLayout(); }
         }
 
         public void RebuildCurrent()

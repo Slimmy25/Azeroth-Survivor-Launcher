@@ -51,8 +51,13 @@ namespace AzerothLauncher
 
         public static Font F(float size) { return F(size, FontStyle.Regular); }
 
+        // the sections are drawn a little smaller than the launcher itself: fonts made while Zoom < 1 shrink with it
+        public static float Zoom = 1f;
+        public const float SectionZoom = 0.85f;
+
         public static Font F(float size, FontStyle style)
         {
+            size = (float)Math.Round(size * Zoom * 4) / 4f;
             string key = size + "|" + (int)style;
             Font f;
             if (!fonts.TryGetValue(key, out f))
@@ -125,7 +130,8 @@ namespace AzerothLauncher
         float size;
         bool hover, down, active, selected, grayed;
         public IconPainter Icon;
-        public Image[] Skin;                                  // launcher art {normal, hover, down, grayed}
+        public Image[] Skin;
+        readonly float zoom;                                  // launcher art {normal, hover, down, grayed}
         public event Action Pressed;
         public string GrayedTip;                              // shown on hover, only while the button is grayed out
 
@@ -136,7 +142,8 @@ namespace AzerothLauncher
             SetStyle(ControlStyles.Selectable, false);
             this.text = text;
             this.size = size;
-            Size = new Size(width, height);
+            zoom = Theme.Zoom;                                 // made inside a section: smaller
+            Size = new Size((int)(width * zoom), (int)(height * zoom));
             Cursor = Cursors.Hand;
             if (command != null) Pressed += command;
         }
@@ -200,7 +207,14 @@ namespace AzerothLauncher
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            Graphics g = e.Graphics;
+            float old = Theme.Zoom;
+            Theme.Zoom = zoom;
+            try { PaintButton(e.Graphics); }
+            finally { Theme.Zoom = old; }
+        }
+
+        void PaintButton(Graphics g)
+        {
             int w = Width, h = Height;
             if (Skin != null) { PaintSkin(g, w, h); return; }
             if (!selected && Retro.Get("btn") != null)        // every other button: the launcher's blue stone too

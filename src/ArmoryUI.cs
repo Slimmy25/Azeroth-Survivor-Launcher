@@ -50,8 +50,18 @@ namespace AzerothLauncher
             }
         }
 
+        public static float Z = 1f;                          // the block being painted is drawn at this scale
+
         public static void Text(Graphics g, string text, Font f, Color c, Rectangle r, TextFormatFlags flags)
         {
+            if (Z != 1f)                                     // TextRenderer ignores the scale transform: scale font and box here
+            {
+                float old = Theme.Zoom;
+                Theme.Zoom = 1f;
+                f = Theme.F(f.SizeInPoints * Z, f.Style);
+                Theme.Zoom = old;
+                r = new Rectangle((int)(r.X * Z), (int)(r.Y * Z), (int)Math.Ceiling(r.Width * Z) + 1, (int)Math.Ceiling(r.Height * Z) + 1);
+            }
             TextRenderer.DrawText(g, text ?? "", f, r, c, flags | TextFormatFlags.NoPrefix);
         }
 
@@ -141,6 +151,11 @@ namespace AzerothLauncher
         protected const int Pad = 14, TitleH = 36;
         public bool Framed = true;
 
+        protected readonly float Zm = Theme.Zoom;            // made inside a section: everything drawn smaller
+        protected new int Width { get { return (int)(base.Width / Zm); } }
+        protected new int Height { get { return (int)(base.Height / Zm); } }
+        protected Point P(Point p) { return new Point((int)(p.X / Zm), (int)(p.Y / Zm)); }
+
         protected ArmoryBlock()
         {
             SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer |
@@ -152,9 +167,15 @@ namespace AzerothLauncher
 
         public void Fit(int width)
         {
-            Width = width;
-            Height = Top0 + ContentHeight(width - 2 * Pad) + Pad;
-            Layout2();
+            float old = Theme.Zoom;
+            Theme.Zoom = 1f;                                 // laid out at full size, painted scaled
+            try
+            {
+                base.Width = width;
+                base.Height = (int)Math.Ceiling((Top0 + ContentHeight(Width - 2 * Pad) + Pad) * Zm);
+                Layout2();
+            }
+            finally { Theme.Zoom = old; }
         }
 
         protected virtual void Layout2() { }
@@ -166,6 +187,16 @@ namespace AzerothLauncher
             Graphics g = e.Graphics;
             g.Clear(BackColor);
             Theme.Smooth(g);
+            g.ScaleTransform(Zm, Zm);
+            Armory.Z = Zm;
+            float oldZoom = Theme.Zoom;
+            Theme.Zoom = 1f;
+            try { PaintAll(g); }
+            finally { Armory.Z = 1f; Theme.Zoom = oldZoom; }
+        }
+
+        void PaintAll(Graphics g)
+        {
             if (Framed) Armory.Box(g, new RectangleF(0.5f, 0.5f, Width - 1.5f, Height - 1.5f), 8, Armory.Card, Armory.CardEdge);
             if (Title != null)
             {
@@ -294,7 +325,7 @@ namespace AzerothLauncher
 
         protected override void OnMouseMove(MouseEventArgs e)
         {
-            int h = At(e.Location);
+            int h = At(P(e.Location));
             if (h != hover) { hover = h; Invalidate(); }
             base.OnMouseMove(e);
         }
@@ -308,7 +339,7 @@ namespace AzerothLauncher
 
         protected override void OnMouseClick(MouseEventArgs e)
         {
-            int i = At(e.Location);
+            int i = At(P(e.Location));
             if (i >= 0 && i != Active && Picked != null) Picked(i);
             base.OnMouseClick(e);
         }
@@ -426,7 +457,7 @@ namespace AzerothLauncher
 
         protected override void OnMouseMove(MouseEventArgs e)
         {
-            int h = At(e.Location);
+            int h = At(P(e.Location));
             Cursor = h >= 0 && Rows[h].Click != null ? Cursors.Hand : Cursors.Default;
             if (h != hover) { hover = h; Invalidate(); }
             base.OnMouseMove(e);
@@ -441,7 +472,7 @@ namespace AzerothLauncher
 
         protected override void OnMouseClick(MouseEventArgs e)
         {
-            int i = At(e.Location);
+            int i = At(P(e.Location));
             if (i >= 0 && Rows[i].Click != null) Rows[i].Click();
             base.OnMouseClick(e);
         }
