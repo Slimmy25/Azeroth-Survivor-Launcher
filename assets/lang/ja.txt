@@ -1113,3 +1113,7 @@ OPEN IN BROWSER ›
 = ブラウザで開く ›
 This video can't play here. Use OPEN IN BROWSER.
 = この動画はここでは再生できません。「ブラウザで開く」を使ってください。
+Fullscreen
+= 全画面
+Exit fullscreen
+= 全画面を終了

@@ -1113,3 +1113,7 @@ OPEN IN BROWSER ›
 = MEGNYITÁS BÖNGÉSZŐBEN ›
 This video can't play here. Use OPEN IN BROWSER.
 = Ez a videó itt nem játszható le. Használd a MEGNYITÁS BÖNGÉSZŐBEN gombot.
+Fullscreen
+= Teljes képernyő
+Exit fullscreen
+= Kilépés a teljes képernyőből

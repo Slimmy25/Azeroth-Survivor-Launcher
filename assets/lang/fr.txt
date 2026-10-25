@@ -1112,3 +1112,7 @@ OPEN IN BROWSER ›
 = OUVRIR DANS LE NAVIGATEUR ›
 This video can't play here. Use OPEN IN BROWSER.
 = Cette vidéo ne peut pas être lue ici. Utilisez OUVRIR DANS LE NAVIGATEUR.
+Fullscreen
+= Plein écran
+Exit fullscreen
+= Quitter le plein écran

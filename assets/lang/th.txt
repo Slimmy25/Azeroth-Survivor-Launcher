@@ -1113,3 +1113,7 @@ OPEN IN BROWSER ›
 = เปิดในเบราว์เซอร์ ›
 This video can't play here. Use OPEN IN BROWSER.
 = เล่นวิดีโอนี้ที่นี่ไม่ได้ ใช้ เปิดในเบราว์เซอร์
+Fullscreen
+= เต็มจอ
+Exit fullscreen
+= ออกจากเต็มจอ

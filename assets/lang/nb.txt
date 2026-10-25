@@ -1112,3 +1112,7 @@ OPEN IN BROWSER ›
 = ÅPNE I NETTLESER ›
 This video can't play here. Use OPEN IN BROWSER.
 = Videoen kan ikke spilles av her. Bruk ÅPNE I NETTLESER.
+Fullscreen
+= Fullskjerm
+Exit fullscreen
+= Avslutt fullskjerm

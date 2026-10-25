@@ -1113,3 +1113,7 @@ OPEN IN BROWSER ›
 = TARAYICIDA AÇ ›
 This video can't play here. Use OPEN IN BROWSER.
 = Bu video burada oynatılamıyor. TARAYICIDA AÇ'ı kullan.
+Fullscreen
+= Tam ekran
+Exit fullscreen
+= Tam ekrandan çık

@@ -422,7 +422,86 @@ namespace AzerothLauncher
             return System.Net.WebUtility.HtmlEncode(s ?? "");
         }
 
+        // what the page tells the launcher (window.external): go fullscreen, or come back, at this point in the video
+        [System.Runtime.InteropServices.ComVisible(true)]
+        public class Bridge
+        {
+            public Action<double, double> OnToggle;          // time, volume
+            public void Toggle(object time, object volume)
+            {
+                double t = 0, vol = 0.15;
+                try { t = Convert.ToDouble(time, System.Globalization.CultureInfo.InvariantCulture); } catch (Exception) { }
+                try { vol = Convert.ToDouble(volume, System.Globalization.CultureInfo.InvariantCulture); } catch (Exception) { }
+                if (OnToggle != null) WowButton.Fire(delegate { OnToggle(t, vol); });
+            }
+        }
+
+        // the guide's player; fullscreen opens the same video in a window over the whole screen, at the same point
         public static WebBrowser Make(GuideVideo v)
+        {
+            WebBrowser web = null;
+            var bridge = new Bridge();
+            bridge.OnToggle = delegate(double t, double vol)
+            {
+                Pause(web);
+                var full = new Form();
+                full.FormBorderStyle = FormBorderStyle.None;
+                full.StartPosition = FormStartPosition.Manual;
+                full.Bounds = Screen.FromControl(web).Bounds;
+                full.BackColor = Color.Black;
+                full.TopMost = true;
+                full.ShowInTaskbar = false;
+                full.KeyPreview = true;
+                full.Icon = Theme.AppIcon;
+                double backAt = t, backVol = vol;
+                var fb = new Bridge();
+                fb.OnToggle = delegate(double t2, double v2) { backAt = t2; backVol = v2; full.Close(); };
+                var fweb = Build(v, t, vol, true, fb);
+                fweb.Dock = DockStyle.Fill;
+                full.Controls.Add(fweb);
+                fweb.PreviewKeyDown += delegate(object s, PreviewKeyDownEventArgs e)
+                {
+                    if (e.KeyCode == Keys.Escape) { try { Read(fweb, ref backAt, ref backVol); } catch (Exception) { } full.Close(); }
+                };
+                full.FormClosed += delegate
+                {
+                    fweb.Dispose();
+                    Resume(web, backAt, backVol);
+                };
+                full.Show();
+                full.Activate();
+            };
+            web = Build(v, 0, 0.15, false, bridge);
+            return web;
+        }
+
+        static void Pause(WebBrowser w)
+        {
+            try { if (w != null && w.Document != null) w.Document.InvokeScript("eval", new object[] { "document.getElementById('v').pause()" }); }
+            catch (Exception) { }
+        }
+
+        static void Read(WebBrowser w, ref double t, ref double vol)
+        {
+            object r = w.Document.InvokeScript("eval", new object[] { "(function(){var v=document.getElementById('v');return v.currentTime+'|'+v.volume;})()" });
+            string[] p = Convert.ToString(r).Split('|');
+            t = double.Parse(p[0], System.Globalization.CultureInfo.InvariantCulture);
+            vol = double.Parse(p[1], System.Globalization.CultureInfo.InvariantCulture);
+        }
+
+        static void Resume(WebBrowser w, double t, double vol)
+        {
+            try
+            {
+                if (w == null || w.IsDisposed || w.Document == null) return;
+                string js = string.Format(System.Globalization.CultureInfo.InvariantCulture,
+                    "(function(){{var v=document.getElementById('v');v.volume={1};v.currentTime={0};v.play();}})()", t, vol);
+                w.Document.InvokeScript("eval", new object[] { js });
+            }
+            catch (Exception) { }
+        }
+
+        static WebBrowser Build(GuideVideo v, double start, double volume, bool fullscreen, Bridge bridge)
         {
             UseModernMode();
             var web = new WebBrowser();
@@ -430,24 +509,36 @@ namespace AzerothLauncher
             web.IsWebBrowserContextMenuEnabled = false;
             web.WebBrowserShortcutsEnabled = false;
             web.AllowWebBrowserDrop = false;
+            web.ObjectForScripting = bridge;
             string poster = v.Url.EndsWith(".mp4", StringComparison.OrdinalIgnoreCase) ? v.Url.Substring(0, v.Url.Length - 4) + ".jpg" : "";
+            string label = fullscreen ? Lang.T("Exit fullscreen") : Lang.T("Fullscreen");
             string page =
                 "<!DOCTYPE html>\r\n<!-- saved from url=(0014)about:internet -->\r\n<html><head><meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"><meta charset=\"utf-8\">" +
-                "<style>html,body{margin:0;height:100%;background:#0e0d14;overflow:hidden;font-family:Georgia,serif;color:#d7cea4}" +
+                "<style>html,body{margin:0;height:100%;background:" + (fullscreen ? "#000" : "#0e0d14") + ";overflow:hidden;font-family:Georgia,serif;color:#d7cea4}" +
                 "video{width:100%;height:100%;background:#000;display:block}" +
+                "#fs{position:absolute;top:10px;right:10px;padding:5px 12px;background:rgba(14,13,20,.75);color:#f2c14e;border:1px solid #b39b62;" +
+                "font:bold 13px Georgia,serif;cursor:pointer;opacity:.35}#fs:hover{opacity:1}" +
                 "#err{display:none;position:absolute;left:0;right:0;top:40%;text-align:center;font-size:15px}</style></head><body>" +
-                "<video id=\"v\" controls autoplay preload=\"auto\"" + (poster.Length > 0 ? " poster=\"" + Html(poster) + "\"" : "") +
+                "<video id=\"v\" controls autoplay preload=\"auto\"" + (poster.Length > 0 && start <= 0 ? " poster=\"" + Html(poster) + "\"" : "") +
                 " src=\"" + Html(v.Url) + "\"></video>" +
+                "<div id=\"fs\" title=\"" + Html(label) + "\">" + (fullscreen ? "&#x2715; " : "&#x26F6; ") + Html(label) + "</div>" +
                 "<div id=\"err\">" + Html(Lang.T("This video can't play here. Use OPEN IN BROWSER.")) + "</div>" +
                 "<script>var v=document.getElementById('v');" +
-                "v.onerror=function(){v.style.display='none';document.getElementById('err').style.display='block';};" +
+                "v.volume=" + volume.ToString("0.###", System.Globalization.CultureInfo.InvariantCulture) + ";" +       // 15% to start
+                "var at=" + start.ToString("0.###", System.Globalization.CultureInfo.InvariantCulture) + ";" +
+                "v.addEventListener('loadedmetadata',function(){v.volume=" + volume.ToString("0.###", System.Globalization.CultureInfo.InvariantCulture) + ";if(at>0){try{v.currentTime=at;}catch(e){}}});" +
+                "function toggle(){try{window.external.Toggle(v.currentTime,v.volume);}catch(e){}}" +
+                "document.getElementById('fs').onclick=toggle;" +
+                "v.ondblclick=function(e){toggle();if(e&&e.preventDefault)e.preventDefault();return false;};" +
+                "document.onkeydown=function(e){e=e||window.event;if((e.keyCode==27&&" + (fullscreen ? "true" : "false") + ")||e.keyCode==70){toggle();return false;}};" +
+                "v.onerror=function(){v.style.display='none';document.getElementById('fs').style.display='none';document.getElementById('err').style.display='block';};" +
                 "</script></body></html>";
             // the page (not the video) goes in a small temp file marked as web content, so the web view treats it like a
             // web page and lets it stream from the internet; DocumentText pages count as about:blank and get blocked
             try
             {
                 Directory.CreateDirectory(Util.TempDir);
-                string path = Path.Combine(Util.TempDir, "guide-video.html");
+                string path = Path.Combine(Util.TempDir, fullscreen ? "guide-video-full.html" : "guide-video.html");
                 File.WriteAllText(path, page, new System.Text.UTF8Encoding(false));
                 web.Navigate(new Uri(path));
             }

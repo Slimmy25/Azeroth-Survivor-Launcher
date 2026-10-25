@@ -1113,3 +1113,7 @@ OPEN IN BROWSER ›
 = MỞ TRONG TRÌNH DUYỆT ›
 This video can't play here. Use OPEN IN BROWSER.
 = Không thể phát video này tại đây. Hãy dùng MỞ TRONG TRÌNH DUYỆT.
+Fullscreen
+= Toàn màn hình
+Exit fullscreen
+= Thoát toàn màn hình

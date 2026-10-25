@@ -1113,3 +1113,7 @@ OPEN IN BROWSER ›
 = ΑΝΟΙΓΜΑ ΣΤΟΝ BROWSER ›
 This video can't play here. Use OPEN IN BROWSER.
 = Το βίντεο δεν παίζει εδώ. Πάτησε ΑΝΟΙΓΜΑ ΣΤΟΝ BROWSER.
+Fullscreen
+= Πλήρης οθόνη
+Exit fullscreen
+= Έξοδος από πλήρη οθόνη

@@ -1112,3 +1112,7 @@ OPEN IN BROWSER ›
 = AVAA SELAIMESSA ›
 This video can't play here. Use OPEN IN BROWSER.
 = Videota ei voi toistaa tässä. Käytä AVAA SELAIMESSA.
+Fullscreen
+= Koko näyttö
+Exit fullscreen
+= Poistu koko näytöstä

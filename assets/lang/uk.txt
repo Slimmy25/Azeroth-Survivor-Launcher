@@ -1113,3 +1113,7 @@ OPEN IN BROWSER ›
 = ВІДКРИТИ В БРАУЗЕРІ ›
 This video can't play here. Use OPEN IN BROWSER.
 = Це відео не можна відтворити тут. Натисніть ВІДКРИТИ В БРАУЗЕРІ.
+Fullscreen
+= На весь екран
+Exit fullscreen
+= Вийти з повноекранного режиму
