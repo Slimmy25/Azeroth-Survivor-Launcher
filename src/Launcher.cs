@@ -24,6 +24,9 @@ namespace AzerothLauncher
         // in the open). The launcher downloads it itself (InstallDialog), into a "temp" folder beside the launcher.
         public const string ClientUrl = "https://budapestmix.hu:5000/download";
         public const string ClientUser = "AzerothSurvivors_uSZfhjS", ClientPassword = "AzerothSurvivors_uSZfhjS";
+        // The developers' backup host: a page with a link to the newest archive and its SHA-256 (no login). Each
+        // install picks one of the two hosts at random (50/50); if that one fails, the other one is tried.
+        public const string ClientMirrorUrl = "https://azerothsurvivors-mirror.sandervspl.dev/";
         public const string DiscordUrl = "https://discord.com/invite/UzxaZuSAk";
 
         const int W = 1100, H = 690;                         // retro launcher window: sections open on the left, News on the right
@@ -1150,7 +1153,10 @@ namespace AzerothLauncher
                             if (total > 0) SetStatus("Downloading the game client... " + (int)(done * 100 / total) + "%");
                         });
                     };
-                    DownloadClient(file, progress, cancel);
+                    DownloadClient(file, progress, cancel, delegate(string text)
+                    {
+                        Ui(delegate { dlg.SetPhase("download", text); });
+                    });
                     Ui(delegate { dlg.SetPhase("install", "Unpacking the game..."); SetStatus("Unpacking the game client..."); });
                     if (Archive.Kind(file) == null)
                         throw new UserError("The download server sent something that is not the game archive. Please try again later.");
@@ -1188,8 +1194,38 @@ namespace AzerothLauncher
             return true;
         }
 
-        // The login is sent the plain HTTP way (Basic); a server that wants it in the address instead gets that next.
-        static void DownloadClient(string file, Action<long, long> progress, ManualResetEvent cancel)
+        static readonly Random hostDice = new Random();
+
+        // One of the two hosts at random; when it fails (not when you cancel), the other one.
+        static void DownloadClient(string file, Action<long, long> progress, ManualResetEvent cancel, Action<string> say)
+        {
+            bool mirrorFirst;
+            lock (hostDice) mirrorFirst = hostDice.Next(2) == 0;
+            UserError first = null;
+            for (int i = 0; i < 2; i++)
+            {
+                bool mirror = (i == 0) == mirrorFirst;
+                say(i == 0 ? (mirror ? "Downloading from the backup host..." : "Downloading from the main host...")
+                           : (mirror ? "The main host did not work. Trying the backup host..." : "The backup host did not work. Trying the main host..."));
+                try
+                {
+                    if (mirror) DownloadFromMirror(file, progress, cancel);
+                    else DownloadFromMain(file, progress, cancel);
+                    return;
+                }
+                catch (CancelledError) { throw; }
+                catch (UserError e)
+                {
+                    if (first == null) { first = e; continue; }
+                    throw new UserError("Neither download host worked.\n\n" + (mirrorFirst ? "Backup host: " : "Main host: ") + first.Message +
+                                        "\n\n" + (mirrorFirst ? "Main host: " : "Backup host: ") + e.Message);
+                }
+            }
+        }
+
+        // the main host, with the download login: sent the plain HTTP way (Basic); a server that wants it in the
+        // address instead gets that next
+        static void DownloadFromMain(string file, Action<long, long> progress, ManualResetEvent cancel)
         {
             string basic = Convert.ToBase64String(Encoding.UTF8.GetBytes(ClientUser + ":" + ClientPassword));
             Action<HttpWebRequest> login = delegate(HttpWebRequest r) { r.Headers["Authorization"] = "Basic " + basic; };
@@ -1211,8 +1247,30 @@ namespace AzerothLauncher
                     if (!e.Message.Contains("error 401") && !e.Message.Contains("error 403")) throw;   // only a refused login tries the next way
                 }
             }
-            throw new UserError("The download server did not accept the launcher's login. Please tell Slimjim or Aethus.\n\n" +
-                                (lastError != null ? lastError.Message : ""));
+            throw new UserError("The download server did not accept the launcher's login." +
+                                (lastError != null ? " (" + lastError.Message + ")" : ""));
+        }
+
+        // the backup host: its page names the newest archive (the link changes with every upload) and its SHA-256,
+        // which the download is checked against
+        static void DownloadFromMirror(string file, Action<long, long> progress, ManualResetEvent cancel)
+        {
+            string html;
+            using (HttpWebResponse resp = Net.Open(ClientMirrorUrl, 30000, true, "backup download", "text/html"))
+            using (var rd = new StreamReader(resp.GetResponseStream(), Encoding.UTF8))
+                html = rd.ReadToEnd();
+            var link = System.Text.RegularExpressions.Regex.Match(html,
+                "href\\s*=\\s*[\"']([^\"']*/downloads/[^\"']+\\.(?:rar|zip|7z))[\"']", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+            if (!link.Success) throw new UserError("The backup host's page has no download link right now.");
+            string url = new Uri(new Uri(ClientMirrorUrl), System.Net.WebUtility.HtmlDecode(link.Groups[1].Value)).AbsoluteUri;
+            var sum = System.Text.RegularExpressions.Regex.Match(html, "SHA-?256.{0,300}?\\b([0-9a-fA-F]{64})\\b",
+                System.Text.RegularExpressions.RegexOptions.IgnoreCase | System.Text.RegularExpressions.RegexOptions.Singleline);
+            string sha = Net.Download(url, file, true, "backup download", progress, cancel, 0);
+            if (sum.Success && !string.Equals(sum.Groups[1].Value, sha, StringComparison.OrdinalIgnoreCase))
+            {
+                try { File.Delete(file); } catch (Exception) { }
+                throw new UserError("The download from the backup host is damaged (its checksum does not match). Please try again.");
+            }
         }
 
         bool setupAfterFileInstall;
