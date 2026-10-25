@@ -48,7 +48,7 @@ namespace AzerothLauncher
             }
             if (Theme.Portrait != null) g.DrawImage(Theme.Portrait, 28 - 24, 25 - 24, 48, 48);
             Rectangle x = CloseBox;
-            using (var b = new SolidBrush(Theme.Hex("#4a2a12"))) g.FillRectangle(b, x);
+            using (var b = new SolidBrush(Theme.Hex("#2a1c1c"))) g.FillRectangle(b, x);
             using (var p = new Pen(Theme.Hex("#d6a640"), 2)) g.DrawRectangle(p, x);
             using (var p = new Pen(Theme.Hex("#e53a22"), 3))
             {
