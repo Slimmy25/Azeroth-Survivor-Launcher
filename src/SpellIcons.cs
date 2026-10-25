@@ -233,7 +233,7 @@ namespace AzerothLauncher
                     if (body(x, y)) { sum += x; n++; }
             int cx = n > 0 ? (int)(sum / n) : (minX + maxX) / 2;
             int left = Math.Max(0, Math.Min(w - side, cx - side / 2));
-            int top = Math.Max(0, Math.Min(h - side, minY + side / 8));   // a little below the very top: hair and crests
+            int top = Math.Max(0, Math.Min(h - side, minY + side / 24));   // a little below the very top: hair and crests
             var crop = new Bitmap(side, side);
             using (var g = Graphics.FromImage(crop))
                 g.DrawImage(src, new Rectangle(0, 0, side, side), new Rectangle(left, top, side, side), GraphicsUnit.Pixel);
