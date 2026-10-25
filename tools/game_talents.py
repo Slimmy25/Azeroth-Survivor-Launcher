@@ -131,7 +131,8 @@ def main():
              ("Warlock", "Affliction"), ("Warlock", "Demonology"), ("Warlock", "Destruction"), ("Druid", "Balance"),
              ("Druid", "Feral Combat"), ("Druid", "Restoration")]
     if len(trees) != len(order):
-        sys.exit("found %d trees, expected %d" % (len(trees), len(order)))
+        print("::error::found %d trees (%s), expected %d" % (len(trees), [len(t) for t in trees], len(order)))
+        sys.exit(1)
 
     names = {}
     for m in re.finditer(r'"ability\.([a-z0-9_]+)\.name":\s*"((?:[^"\\]|\\.)*)"', text):
@@ -154,4 +155,10 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except SystemExit:
+        raise
+    except Exception as e:                                   # shown on the Actions run's page
+        print("::error::%s: %s" % (type(e).__name__, e))
+        raise
