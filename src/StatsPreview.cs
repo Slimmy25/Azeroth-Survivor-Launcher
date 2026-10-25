@@ -34,6 +34,12 @@ namespace AzerothLauncher
                     app.statsTab = tab;
                     app.BuildPanel("Stats");
                     Application.DoEvents();
+                    for (int k = 0; k < 3; k++)                  // spell icons arrive from Wowhead while the page is shown
+                    {
+                        SpellIcons.WaitForAll(15000);
+                        app.panel.Refresh();
+                        Application.DoEvents();
+                    }
                     string name = (cls ?? "all") + "-" + tab + "-" + StatTabs[tab].ToLowerInvariant();
                     using (var win = new Bitmap(app.side.Width, app.side.Height))
                     {

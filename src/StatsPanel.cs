@@ -486,6 +486,7 @@ namespace AzerothLauncher
                 double share = runs > 0 ? a.Picks / runs : 0;
                 var row = new ArmoryRow();
                 row.Icon = Armory.Initials(a.Name);
+                row.Spell = a.Name;                          // its icon, shown from Wowhead when there is one
                 row.IconColor = Armory.Quality(share);
                 row.Name = a.Name;
                 row.NameColor = Armory.Quality(share);
