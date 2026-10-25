@@ -53,12 +53,12 @@ namespace AzerothLauncher
                 if (zone != null)
                 {
                     var za = new ColorMatrix();
-                    za.Matrix33 = 0.28f;
+                    za.Matrix33 = 0.35f;
                     using (var ia = new ImageAttributes())
                     {
                         ia.SetColorMatrix(za);
                         g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                        g.DrawImage(zone, new Rectangle(W - 230, 10, 220, 220), 0, 0, zone.Width, zone.Height, GraphicsUnit.Pixel, ia);
+                        g.DrawImage(zone, new Rectangle(W - 150, 18, 128, 128), 0, 0, zone.Width, zone.Height, GraphicsUnit.Pixel, ia);
                     }
                 }
                 using (var p = new Pen(Theme.Gold, 2)) g.DrawRectangle(p, 1, 1, W - 3, H - 3);
