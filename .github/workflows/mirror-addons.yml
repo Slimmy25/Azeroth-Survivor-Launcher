@@ -59,5 +59,9 @@ jobs:
             unzip -l "mirror/$file" | tail -1
           done < list.txt
           gh release upload addons mirror/*.zip --clobber
+          # DoomWithin was taken off the list (October 2026): its old copy goes too
+          if gh release view addons --json assets --jq '.assets[].name' | grep -qx "DoomWithin-by-tna0y-vladvis.zip"; then
+            gh release delete-asset addons "DoomWithin-by-tna0y-vladvis.zip" -y
+          fi
           echo "Done:"
           gh release view addons --json assets --jq '.assets[] | .name + "  " + (.size|tostring)'
