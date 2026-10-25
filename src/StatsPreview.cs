@@ -121,6 +121,18 @@ namespace AzerothLauncher
                         app.side.DrawToBitmap(win, new Rectangle(0, 0, win.Width, win.Height));
                         win.Save(Path.Combine(outDir, "guide-talents.png"), ImageFormat.Png);
                     }
+                    ScrollPanel tsp = FindScroll(app.panel);
+                    if (tsp != null)
+                    {
+                        int h = 10;
+                        foreach (Control c in tsp.Controls) h = Math.Max(h, c.Bottom + 10);
+                        using (var page = new Bitmap(tsp.ClientSize.Width, h))
+                        {
+                            using (var g = Graphics.FromImage(page)) g.Clear(tsp.BackColor);
+                            foreach (Control c in tsp.Controls) DrawDeep(c, page, c.Left, c.Top);
+                            page.Save(Path.Combine(outDir, "guide-talents-page.png"), ImageFormat.Png);
+                        }
+                    }
                     app.gTalents = null;
                 }
                 app.current = "Stats";
