@@ -1,4 +1,6 @@
 # Next update (after v0.3)
+- Before the game is installed, only Cloud Save and Addons are grayed out (both say why); the Changelog, Guide, Stats, Options and About work as usual
+- While the game downloads, its window steps aside and the download bar shows in the status line above INSTALLING, so the Guide and everything else can be used; INSTALLING brings the window back (CANCEL)
 - The game download uses the main host or the new backup host at random (50/50); if one fails, the other is tried
 - INSTALL now downloads the game inside the launcher with a percentage bar (into a temp folder next to the launcher, deleted afterwards), then installs it
 - First-time setup and RUN SETUP AGAIN start by downloading and installing the game; installing again keeps your addons, addon settings and options

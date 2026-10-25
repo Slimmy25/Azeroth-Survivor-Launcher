@@ -270,10 +270,10 @@ namespace AzerothLauncher
 
         public void ShowSection(string name)
         {
-            // Options, About, the Guide and Stats work without the game; the other sections need it
-            if (name != "Home" && name != "Options" && name != "About Launcher" && name != "Guide" && name != "Stats" && !GateOpen())
+            // everything works without the game except Cloud Save and Addons, which are grayed out until it is installed
+            if ((name == "Cloud Save" || name == "Addons") && !GateOpen())
             {
-                SetStatus("Press INSTALL to download the game first.");
+                SetStatus(name == "Addons" ? AddonsNeedGame : CloudNeedsGame);
                 ShowWindowFront();
                 return;
             }
