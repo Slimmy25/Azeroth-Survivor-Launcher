@@ -1261,3 +1261,17 @@ Downloads and installs the game again, then asks about your folders and cloud sa
 = Downloadt en installeert het spel opnieuw en vraagt dan naar je mappen en cloudopslag.
 Installs the game from a file you downloaded yourself.
 = Installeert het spel vanaf een bestand dat je zelf hebt gedownload.
+Ranks
+= Rangen
+rank
+= rang
+needs
+= vereist
+points
+= punten
+Changes
+= Verandert
+X grows with every rank.
+= X groeit met elke rang.
+Talents that change it:
+= Talenten die het veranderen:

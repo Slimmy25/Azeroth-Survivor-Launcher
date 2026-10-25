@@ -1262,3 +1262,17 @@ Downloads and installs the game again, then asks about your folders and cloud sa
 = Újra letölti és telepíti a játékot, majd rákérdez a mappáidra és a felhőmentésre.
 Installs the game from a file you downloaded yourself.
 = Telepíti a játékot egy általad letöltött fájlból.
+Ranks
+= Szintek
+rank
+= szint
+needs
+= kell
+points
+= pont
+Changes
+= Módosítja
+X grows with every rank.
+= X minden szinttel nő.
+Talents that change it:
+= Az ezt módosító tehetségek:

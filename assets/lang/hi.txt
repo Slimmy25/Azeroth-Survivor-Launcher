@@ -1262,3 +1262,17 @@ Downloads and installs the game again, then asks about your folders and cloud sa
 = गेम को फिर से डाउनलोड और इंस्टॉल करता है, फिर आपके फ़ोल्डर और क्लाउड सेव के बारे में पूछता है।
 Installs the game from a file you downloaded yourself.
 = आपकी खुद डाउनलोड की गई फ़ाइल से गेम इंस्टॉल करता है।
+Ranks
+= रैंक
+rank
+= रैंक
+needs
+= चाहिए
+points
+= पॉइंट
+Changes
+= बदलता है
+X grows with every rank.
+= X हर रैंक के साथ बढ़ता है।
+Talents that change it:
+= इसे बदलने वाले टैलेंट:

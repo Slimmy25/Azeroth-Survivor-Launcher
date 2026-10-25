@@ -1262,3 +1262,17 @@ Downloads and installs the game again, then asks about your folders and cloud sa
 = ゲームをもう一度ダウンロードしてインストールし、フォルダーとクラウドセーブについて確認します。
 Installs the game from a file you downloaded yourself.
 = 自分でダウンロードしたファイルからゲームをインストールします。
+Ranks
+= ランク
+rank
+= ランク
+needs
+= 必要
+points
+= ポイント
+Changes
+= 変化
+X grows with every rank.
+= X はランクごとに増えます。
+Talents that change it:
+= これを変えるタレント:

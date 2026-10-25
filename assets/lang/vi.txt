@@ -1262,3 +1262,17 @@ Downloads and installs the game again, then asks about your folders and cloud sa
 = Tải và cài lại game, rồi hỏi về thư mục và lưu trên mây.
 Installs the game from a file you downloaded yourself.
 = Cài game từ một tệp bạn tự tải về.
+Ranks
+= Bậc
+rank
+= bậc
+needs
+= cần
+points
+= điểm
+Changes
+= Thay đổi
+X grows with every rank.
+= X tăng theo mỗi bậc.
+Talents that change it:
+= Thiên phú thay đổi nó:

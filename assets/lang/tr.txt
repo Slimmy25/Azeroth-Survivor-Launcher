@@ -1262,3 +1262,17 @@ Downloads and installs the game again, then asks about your folders and cloud sa
 = Oyunu yeniden indirip kurar, ardından klasörlerini ve bulut kaydını sorar.
 Installs the game from a file you downloaded yourself.
 = Oyunu kendi indirdiğin bir dosyadan kurar.
+Ranks
+= Dereceler
+rank
+= derece
+needs
+= gerekir
+points
+= puan
+Changes
+= Değiştirir
+X grows with every rank.
+= X her derecede artar.
+Talents that change it:
+= Onu değiştiren yetenekler:

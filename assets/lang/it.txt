@@ -1261,3 +1261,17 @@ Downloads and installs the game again, then asks about your folders and cloud sa
 = Scarica e installa di nuovo il gioco, poi chiede delle tue cartelle e del salvataggio cloud.
 Installs the game from a file you downloaded yourself.
 = Installa il gioco da un file che hai scaricato tu.
+Ranks
+= Gradi
+rank
+= grado
+needs
+= richiede
+points
+= punti
+Changes
+= Modifica
+X grows with every rank.
+= X cresce a ogni grado.
+Talents that change it:
+= Talenti che lo modificano:

@@ -1262,3 +1262,17 @@ Downloads and installs the game again, then asks about your folders and cloud sa
 = 게임을 다시 다운로드해 설치한 뒤 폴더와 클라우드 저장에 대해 묻습니다.
 Installs the game from a file you downloaded yourself.
 = 직접 다운로드한 파일로 게임을 설치합니다.
+Ranks
+= 등급
+rank
+= 등급
+needs
+= 필요
+points
+= 포인트
+Changes
+= 변경
+X grows with every rank.
+= X는 등급마다 커집니다.
+Talents that change it:
+= 이 주문을 바꾸는 특성:

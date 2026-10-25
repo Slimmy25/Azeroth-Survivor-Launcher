@@ -1261,3 +1261,17 @@ Downloads and installs the game again, then asks about your folders and cloud sa
 = Henter og installerer spillet igen og spørger derefter om dine mapper og skygemning.
 Installs the game from a file you downloaded yourself.
 = Installerer spillet fra en fil, du selv har hentet.
+Ranks
+= Rang
+rank
+= rang
+needs
+= kræver
+points
+= point
+Changes
+= Ændrer
+X grows with every rank.
+= X vokser for hver rang.
+Talents that change it:
+= Talenter, der ændrer den:

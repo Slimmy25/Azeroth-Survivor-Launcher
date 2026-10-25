@@ -1262,3 +1262,17 @@ Downloads and installs the game again, then asks about your folders and cloud sa
 = Znovu stáhne a nainstaluje hru, pak se zeptá na složky a ukládání do cloudu.
 Installs the game from a file you downloaded yourself.
 = Nainstaluje hru ze souboru, který sis stáhl sám.
+Ranks
+= Úrovně
+rank
+= úroveň
+needs
+= vyžaduje
+points
+= bodů
+Changes
+= Mění
+X grows with every rank.
+= X roste s každou úrovní.
+Talents that change it:
+= Talenty, které ho mění:
