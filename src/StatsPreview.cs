@@ -73,7 +73,15 @@ namespace AzerothLauncher
                     app.current = "Guide";
                     app.gTopic = view[0];
                     app.gPage = view[1];
-                    app.BuildPanel("Guide");
+                    try { app.BuildPanel("Guide"); }
+                    catch (Exception ex)
+                    {
+                        using (var eb = new Bitmap(900, 500))
+                        {
+                            using (var g = Graphics.FromImage(eb)) { g.Clear(Color.White); g.DrawString(ex.ToString(), new Font("Arial", 9), Brushes.Black, new RectangleF(4, 4, 892, 492)); }
+                            eb.Save(Path.Combine(outDir, "guide-error.png"), ImageFormat.Png);
+                        }
+                    }
                     Application.DoEvents();
                     using (var win = new Bitmap(app.side.Width, app.side.Height))
                     {
