@@ -1119,3 +1119,129 @@ Exit fullscreen
 = Kilépés a teljes képernyőből
 Highest DPS
 = Legmagasabb DPS
+
+# added 2026-10-25: install in the status line, Community, This week, stats pages, download hosts
+Play a few runs with the newest AZS Stats to see your DPS over time.
+= Játssz néhány menetet a legújabb AZS Statsszal, hogy lásd a DPS-ed alakulását.
+Best of these
+= A legjobb ezek közül
+ringed: victories
+= karikával: győzelmek
+Your best builds show up here after a DPS high or a victory.
+= A legjobb buildjeid egy DPS-rekord vagy győzelem után jelennek meg itt.
+A build video made by a player. All credit goes to the people who made it.
+= Egy játékos által készített build-videó. Minden elismerés az alkotóké.
+No community videos yet.
+= Még nincsenek közösségi videók.
+MORE BUILD GUIDES ›
+= TOVÁBBI BUILD-ÚTMUTATÓK ›
+Loading the video...
+= Videó betöltése...
+Nothing in the guide matches
+= Semmi sem egyezik az útmutatóban ezzel:
+Search the guide: a spell, a boss, a key...
+= Keresés az útmutatóban: varázslat, főellenség, billentyű...
+Patch
+= Javítás
+News
+= Hírek
+Game version
+= Játékverzió
+No runs yet this week.
+= Ezen a héten még nem volt menet.
+This week
+= Ez a hét
+Addons need the game. Press INSTALL to download it first.
+= A kiegészítőkhöz kell a játék. Előbb nyomd meg a TELEPÍTÉS gombot a letöltéshez.
+Game client not found. Press INSTALL to download it first.
+= A játékkliens nem található. Előbb nyomd meg a TELEPÍTÉS gombot a letöltéshez.
+Please wait until the game update or install has finished.
+= Várj, amíg a játék frissítése vagy telepítése befejeződik.
+Downloading the game client...
+= A játékkliens letöltése...
+The download server sent something that is not the game archive. Please try again later.
+= A letöltőszerver nem a játék archívumát küldte. Próbáld újra később.
+Download cancelled.
+= Letöltés megszakítva.
+The download server did not accept the launcher's login.
+= A letöltőszerver nem fogadta el az indító bejelentkezését.
+The backup host's page has no download link right now.
+= A tartalékszerver oldalán most nincs letöltési link.
+The download from the backup host is damaged (its checksum does not match). Please try again.
+= A tartalékszerverről letöltött fájl sérült (az ellenőrzőösszeg nem egyezik). Próbáld újra.
+The launcher is already running.\n\nLook for its icon in the system tray (near the clock).
+= Az indító már fut.\n\nKeresd az ikonját a tálca értesítési területén (az óra mellett).
+INSTALL FROM A FILE
+= TELEPÍTÉS FÁJLBÓL
+Making the run's picture...
+= A menet képének elkészítése...
+The run's picture is copied: paste it into Discord. Also saved in Pictures.
+= A menet képe a vágólapon: illeszd be a Discordba. A Képek mappába is mentve.
+Could not make the run's picture: {0}
+= Nem sikerült elkészíteni a menet képét: {0}
+The AddOns folder is not set. Set the game config folder in Options.
+= Az AddOns mappa nincs beállítva. Állítsd be a játék konfigurációs mappáját a Beállításokban.
+DPS over time
+= DPS az idő során
+Best builds
+= Legjobb buildek
+Revenge: bosses you beat
+= Bosszú: legyőzött főellenségek
+Your top partner
+= A leggyakoribb társad
+Runs together
+= Közös menetek
+Win rate together
+= Közös győzelmi arány
+Your party
+= A csapatod
+last played
+= utoljára játszott
+today
+= ma
+yesterday
+= tegnap
+click a run to share it
+= kattints egy menetre a megosztáshoz
+by
+= készítette:
+Community
+= Közösség
+Stop downloading the game?
+= Leállítod a játék letöltését?
+Close the game first, then install it again.
+= Előbb zárd be a játékot, aztán telepítsd újra.
+Close the game first, then run setup again.
+= Előbb zárd be a játékot, aztán futtasd újra a beállítást.
+No save game folder set.
+= Nincs beállítva a játékmentések mappája.
+No game config folder set.
+= Nincs beállítva a játék konfigurációs mappája.
+Downloading the game: {#0}%  ({1} of {2})
+= A játék letöltése: {#0}%  ({1} / {2})
+Downloading the game: {0}
+= A játék letöltése: {0}
+{#0} days ago
+= {#0} napja
+{#0} weeks ago
+= {#0} hete
+Your last run was {0}.
+= Utolsó meneted: {0}.
+{#0} runs, {#1} won
+= {#0} menet, {#1} győzelem
+new {0} DPS high: {1}
+= új {0} DPS-rekord: {1}
+best DPS {0} ({1})
+= legjobb DPS {0} ({1})
+most played with {0}
+= legtöbbet vele: {0}
+You beat it {0} times
+= {0}-szor győzted le
+It killed you {0} times
+= {0}-szor ölt meg
+Best together: {0}, level {1}
+= Legjobb közösen: {0}, {1}. szint
+fastest win {0}
+= leggyorsabb győzelem {0}
+{#0} runs, oldest left
+= {#0} menet, a legrégebbiek balra

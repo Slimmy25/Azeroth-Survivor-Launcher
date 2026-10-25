@@ -1119,3 +1119,129 @@ Exit fullscreen
 = Вийти з повноекранного режиму
 Highest DPS
 = Найвищий DPS
+
+# added 2026-10-25: install in the status line, Community, This week, stats pages, download hosts
+Play a few runs with the newest AZS Stats to see your DPS over time.
+= Зіграйте кілька забігів із найновішим AZS Stats, щоб побачити свій DPS у часі.
+Best of these
+= Найкращий із них
+ringed: victories
+= у кільці: перемоги
+Your best builds show up here after a DPS high or a victory.
+= Ваші найкращі білди з'являться тут після рекорду DPS або перемоги.
+A build video made by a player. All credit goes to the people who made it.
+= Відео з білдом від гравця. Уся заслуга належить його авторам.
+No community videos yet.
+= Відео спільноти поки немає.
+MORE BUILD GUIDES ›
+= БІЛЬШЕ ГАЙДІВ З БІЛДІВ ›
+Loading the video...
+= Завантаження відео...
+Nothing in the guide matches
+= У посібнику нічого не знайдено за запитом
+Search the guide: a spell, a boss, a key...
+= Пошук у посібнику: заклинання, бос, клавіша...
+Patch
+= Патч
+News
+= Новини
+Game version
+= Версія гри
+No runs yet this week.
+= Цього тижня забігів немає.
+This week
+= Цей тиждень
+Addons need the game. Press INSTALL to download it first.
+= Аддонам потрібна гра. Спершу натисніть ВСТАНОВИТИ, щоб завантажити її.
+Game client not found. Press INSTALL to download it first.
+= Клієнт гри не знайдено. Спершу натисніть ВСТАНОВИТИ, щоб завантажити його.
+Please wait until the game update or install has finished.
+= Зачекайте, доки завершиться оновлення або встановлення гри.
+Downloading the game client...
+= Завантаження клієнта гри...
+The download server sent something that is not the game archive. Please try again later.
+= Сервер завантаження надіслав не архів гри. Спробуйте пізніше.
+Download cancelled.
+= Завантаження скасовано.
+The download server did not accept the launcher's login.
+= Сервер завантаження не прийняв логін лаунчера.
+The backup host's page has no download link right now.
+= На сторінці резервного сервера зараз немає посилання для завантаження.
+The download from the backup host is damaged (its checksum does not match). Please try again.
+= Файл із резервного сервера пошкоджено (контрольна сума не збігається). Спробуйте ще раз.
+The launcher is already running.\n\nLook for its icon in the system tray (near the clock).
+= Лаунчер уже запущено.\n\nЗнайдіть його значок в області сповіщень (біля годинника).
+INSTALL FROM A FILE
+= ВСТАНОВИТИ З ФАЙЛУ
+Making the run's picture...
+= Створення зображення забігу...
+The run's picture is copied: paste it into Discord. Also saved in Pictures.
+= Зображення забігу скопійовано: вставте його в Discord. Також збережено в «Зображеннях».
+Could not make the run's picture: {0}
+= Не вдалося створити зображення забігу: {0}
+The AddOns folder is not set. Set the game config folder in Options.
+= Папку AddOns не задано. Вкажіть папку конфігурації гри в налаштуваннях.
+DPS over time
+= DPS у часі
+Best builds
+= Найкращі білди
+Revenge: bosses you beat
+= Помста: переможені боси
+Your top partner
+= Ваш головний напарник
+Runs together
+= Забігів разом
+Win rate together
+= Частка перемог разом
+Your party
+= Ваша група
+last played
+= остання гра
+today
+= сьогодні
+yesterday
+= учора
+click a run to share it
+= натисніть на забіг, щоб поділитися ним
+by
+= автор:
+Community
+= Спільнота
+Stop downloading the game?
+= Зупинити завантаження гри?
+Close the game first, then install it again.
+= Спершу закрийте гру, потім встановіть її знову.
+Close the game first, then run setup again.
+= Спершу закрийте гру, потім знову запустіть налаштування.
+No save game folder set.
+= Папку збережень гри не задано.
+No game config folder set.
+= Папку конфігурації гри не задано.
+Downloading the game: {#0}%  ({1} of {2})
+= Завантаження гри: {#0}%  ({1} з {2})
+Downloading the game: {0}
+= Завантаження гри: {0}
+{#0} days ago
+= {#0} дн. тому
+{#0} weeks ago
+= {#0} тиж. тому
+Your last run was {0}.
+= Ваш останній забіг: {0}.
+{#0} runs, {#1} won
+= Забігів: {#0}, перемог: {#1}
+new {0} DPS high: {1}
+= новий рекорд DPS ({0}): {1}
+best DPS {0} ({1})
+= найкращий DPS {0} ({1})
+most played with {0}
+= найчастіше з {0}
+You beat it {0} times
+= Ви перемогли його {0} разів
+It killed you {0} times
+= Він убив вас {0} разів
+Best together: {0}, level {1}
+= Найкраще разом: {0}, рівень {1}
+fastest win {0}
+= найшвидша перемога {0}
+{#0} runs, oldest left
+= Забігів: {#0}, старі ліворуч

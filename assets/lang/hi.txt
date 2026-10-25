@@ -1119,3 +1119,129 @@ Exit fullscreen
 = फ़ुलस्क्रीन से बाहर
 Highest DPS
 = सबसे ज़्यादा DPS
+
+# added 2026-10-25: install in the status line, Community, This week, stats pages, download hosts
+Play a few runs with the newest AZS Stats to see your DPS over time.
+= समय के साथ अपना DPS देखने के लिए नए AZS Stats के साथ कुछ रन खेलें।
+Best of these
+= इनमें सबसे अच्छा
+ringed: victories
+= घेरे वाले: जीत
+Your best builds show up here after a DPS high or a victory.
+= DPS रिकॉर्ड या जीत के बाद आपके सबसे अच्छे बिल्ड यहाँ दिखते हैं।
+A build video made by a player. All credit goes to the people who made it.
+= एक खिलाड़ी का बनाया बिल्ड वीडियो। सारा श्रेय बनाने वालों को जाता है।
+No community videos yet.
+= अभी तक कोई समुदाय वीडियो नहीं।
+MORE BUILD GUIDES ›
+= और बिल्ड गाइड ›
+Loading the video...
+= वीडियो लोड हो रहा है...
+Nothing in the guide matches
+= गाइड में इससे कुछ मेल नहीं खाता:
+Search the guide: a spell, a boss, a key...
+= गाइड में खोजें: कोई स्पेल, कोई बॉस, कोई कुंजी...
+Patch
+= पैच
+News
+= समाचार
+Game version
+= गेम संस्करण
+No runs yet this week.
+= इस सप्ताह अभी तक कोई रन नहीं।
+This week
+= इस सप्ताह
+Addons need the game. Press INSTALL to download it first.
+= ऐडऑन के लिए गेम चाहिए। पहले डाउनलोड करने के लिए इंस्टॉल करें दबाएँ।
+Game client not found. Press INSTALL to download it first.
+= गेम क्लाइंट नहीं मिला। पहले डाउनलोड करने के लिए इंस्टॉल करें दबाएँ।
+Please wait until the game update or install has finished.
+= गेम अपडेट या इंस्टॉल पूरा होने तक प्रतीक्षा करें।
+Downloading the game client...
+= गेम क्लाइंट डाउनलोड हो रहा है...
+The download server sent something that is not the game archive. Please try again later.
+= डाउनलोड सर्वर ने गेम आर्काइव नहीं भेजा। बाद में फिर कोशिश करें।
+Download cancelled.
+= डाउनलोड रद्द किया गया।
+The download server did not accept the launcher's login.
+= डाउनलोड सर्वर ने लॉन्चर का लॉगिन स्वीकार नहीं किया।
+The backup host's page has no download link right now.
+= बैकअप सर्वर के पेज पर अभी कोई डाउनलोड लिंक नहीं है।
+The download from the backup host is damaged (its checksum does not match). Please try again.
+= बैकअप सर्वर से डाउनलोड खराब है (चेकसम मेल नहीं खाता)। फिर कोशिश करें।
+The launcher is already running.\n\nLook for its icon in the system tray (near the clock).
+= लॉन्चर पहले से चल रहा है।\n\nइसका आइकन सिस्टम ट्रे (घड़ी के पास) में देखें।
+INSTALL FROM A FILE
+= फ़ाइल से इंस्टॉल करें
+Making the run's picture...
+= रन की तस्वीर बन रही है...
+The run's picture is copied: paste it into Discord. Also saved in Pictures.
+= रन की तस्वीर कॉपी हो गई: इसे Discord में पेस्ट करें। Pictures में भी सहेजी गई।
+Could not make the run's picture: {0}
+= रन की तस्वीर नहीं बन सकी: {0}
+The AddOns folder is not set. Set the game config folder in Options.
+= AddOns फ़ोल्डर सेट नहीं है। विकल्प में गेम कॉन्फ़िग फ़ोल्डर सेट करें।
+DPS over time
+= समय के साथ DPS
+Best builds
+= सबसे अच्छे बिल्ड
+Revenge: bosses you beat
+= बदला: हराए गए बॉस
+Your top partner
+= आपका मुख्य साथी
+Runs together
+= साथ में रन
+Win rate together
+= साथ में जीत दर
+Your party
+= आपकी पार्टी
+last played
+= आखिरी बार खेला
+today
+= आज
+yesterday
+= कल
+click a run to share it
+= साझा करने के लिए किसी रन पर क्लिक करें
+by
+= द्वारा
+Community
+= समुदाय
+Stop downloading the game?
+= गेम का डाउनलोड रोकें?
+Close the game first, then install it again.
+= पहले गेम बंद करें, फिर उसे दोबारा इंस्टॉल करें।
+Close the game first, then run setup again.
+= पहले गेम बंद करें, फिर सेटअप दोबारा चलाएँ।
+No save game folder set.
+= कोई गेम सेव फ़ोल्डर सेट नहीं है।
+No game config folder set.
+= कोई गेम कॉन्फ़िग फ़ोल्डर सेट नहीं है।
+Downloading the game: {#0}%  ({1} of {2})
+= गेम डाउनलोड हो रहा है: {#0}%  ({2} में से {1})
+Downloading the game: {0}
+= गेम डाउनलोड हो रहा है: {0}
+{#0} days ago
+= {#0} दिन पहले
+{#0} weeks ago
+= {#0} सप्ताह पहले
+Your last run was {0}.
+= आपका आखिरी रन: {0}।
+{#0} runs, {#1} won
+= {#0} रन, {#1} जीते
+new {0} DPS high: {1}
+= नया {0} DPS रिकॉर्ड: {1}
+best DPS {0} ({1})
+= सबसे अच्छा DPS {0} ({1})
+most played with {0}
+= सबसे ज़्यादा {0} के साथ
+You beat it {0} times
+= आपने इसे {0} बार हराया
+It killed you {0} times
+= इसने आपको {0} बार मारा
+Best together: {0}, level {1}
+= साथ में सबसे अच्छा: {0}, लेवल {1}
+fastest win {0}
+= सबसे तेज़ जीत {0}
+{#0} runs, oldest left
+= {#0} रन, सबसे पुराने बाईं ओर

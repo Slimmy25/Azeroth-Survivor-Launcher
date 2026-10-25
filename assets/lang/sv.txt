@@ -1118,3 +1118,129 @@ Exit fullscreen
 = Avsluta helskärm
 Highest DPS
 = Högsta DPS
+
+# added 2026-10-25: install in the status line, Community, This week, stats pages, download hosts
+Play a few runs with the newest AZS Stats to see your DPS over time.
+= Spela några runs med senaste AZS Stats för att se din DPS över tid.
+Best of these
+= Bäst av dessa
+ringed: victories
+= ringade: segrar
+Your best builds show up here after a DPS high or a victory.
+= Dina bästa builds visas här efter ett DPS-rekord eller en seger.
+A build video made by a player. All credit goes to the people who made it.
+= En buildvideo gjord av en spelare. All ära till dem som gjorde den.
+No community videos yet.
+= Inga communityvideor än.
+MORE BUILD GUIDES ›
+= FLER BUILDGUIDER ›
+Loading the video...
+= Läser in videon...
+Nothing in the guide matches
+= Inget i guiden matchar
+Search the guide: a spell, a boss, a key...
+= Sök i guiden: en besvärjelse, en boss, en tangent...
+Patch
+= Patch
+News
+= Nyheter
+Game version
+= Spelversion
+No runs yet this week.
+= Inga runs den här veckan.
+This week
+= Den här veckan
+Addons need the game. Press INSTALL to download it first.
+= Tillägg behöver spelet. Tryck på INSTALLERA för att ladda ner det först.
+Game client not found. Press INSTALL to download it first.
+= Spelklienten hittades inte. Tryck på INSTALLERA för att ladda ner den först.
+Please wait until the game update or install has finished.
+= Vänta tills speluppdateringen eller installationen är klar.
+Downloading the game client...
+= Laddar ner spelklienten...
+The download server sent something that is not the game archive. Please try again later.
+= Nedladdningsservern skickade inte spelarkivet. Försök igen senare.
+Download cancelled.
+= Nedladdningen avbröts.
+The download server did not accept the launcher's login.
+= Nedladdningsservern godkände inte launcherns inloggning.
+The backup host's page has no download link right now.
+= Reservserverns sida har ingen nedladdningslänk just nu.
+The download from the backup host is damaged (its checksum does not match). Please try again.
+= Nedladdningen från reservservern är skadad (kontrollsumman stämmer inte). Försök igen.
+The launcher is already running.\n\nLook for its icon in the system tray (near the clock).
+= Launchern körs redan.\n\nLeta efter dess ikon i meddelandefältet (vid klockan).
+INSTALL FROM A FILE
+= INSTALLERA FRÅN EN FIL
+Making the run's picture...
+= Skapar bilden av runnet...
+The run's picture is copied: paste it into Discord. Also saved in Pictures.
+= Bilden av runnet är kopierad: klistra in den i Discord. Den sparades även i Bilder.
+Could not make the run's picture: {0}
+= Kunde inte skapa bilden av runnet: {0}
+The AddOns folder is not set. Set the game config folder in Options.
+= Mappen AddOns är inte vald. Välj spelets konfigurationsmapp i Alternativ.
+DPS over time
+= DPS över tid
+Best builds
+= Bästa builds
+Revenge: bosses you beat
+= Hämnd: bossar du besegrat
+Your top partner
+= Din främsta partner
+Runs together
+= Runs tillsammans
+Win rate together
+= Vinstandel tillsammans
+Your party
+= Din grupp
+last played
+= senast spelad
+today
+= i dag
+yesterday
+= i går
+click a run to share it
+= klicka på ett run för att dela det
+by
+= av
+Community
+= Community
+Stop downloading the game?
+= Avbryta nedladdningen av spelet?
+Close the game first, then install it again.
+= Stäng spelet först och installera det sedan igen.
+Close the game first, then run setup again.
+= Stäng spelet först och kör sedan installationen igen.
+No save game folder set.
+= Ingen mapp för sparade spel vald.
+No game config folder set.
+= Ingen mapp för spelkonfiguration vald.
+Downloading the game: {#0}%  ({1} of {2})
+= Laddar ner spelet: {#0} %  ({1} av {2})
+Downloading the game: {0}
+= Laddar ner spelet: {0}
+{#0} days ago
+= för {#0} dagar sedan
+{#0} weeks ago
+= för {#0} veckor sedan
+Your last run was {0}.
+= Ditt senaste run: {0}.
+{#0} runs, {#1} won
+= {#0} runs, {#1} vunna
+new {0} DPS high: {1}
+= nytt {0}-DPS-rekord: {1}
+best DPS {0} ({1})
+= bästa DPS {0} ({1})
+most played with {0}
+= mest spelat med {0}
+You beat it {0} times
+= Du har besegrat den {0} gånger
+It killed you {0} times
+= Den har dödat dig {0} gånger
+Best together: {0}, level {1}
+= Bäst tillsammans: {0}, nivå {1}
+fastest win {0}
+= snabbaste seger {0}
+{#0} runs, oldest left
+= {#0} runs, äldsta till vänster

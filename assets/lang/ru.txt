@@ -1119,3 +1119,129 @@ Exit fullscreen
 = Выйти из полноэкранного режима
 Highest DPS
 = Наивысший DPS
+
+# added 2026-10-25: install in the status line, Community, This week, stats pages, download hosts
+Play a few runs with the newest AZS Stats to see your DPS over time.
+= Сыграйте несколько забегов с новейшим AZS Stats, чтобы увидеть свой DPS со временем.
+Best of these
+= Лучший из них
+ringed: victories
+= в кольце: победы
+Your best builds show up here after a DPS high or a victory.
+= Ваши лучшие билды появятся здесь после рекорда DPS или победы.
+A build video made by a player. All credit goes to the people who made it.
+= Видео с билдом от игрока. Вся заслуга принадлежит его авторам.
+No community videos yet.
+= Видео сообщества пока нет.
+MORE BUILD GUIDES ›
+= ЕЩЁ ГАЙДЫ ПО БИЛДАМ ›
+Loading the video...
+= Загрузка видео...
+Nothing in the guide matches
+= В руководстве ничего не найдено по запросу
+Search the guide: a spell, a boss, a key...
+= Поиск по руководству: заклинание, босс, клавиша...
+Patch
+= Патч
+News
+= Новости
+Game version
+= Версия игры
+No runs yet this week.
+= На этой неделе забегов нет.
+This week
+= Эта неделя
+Addons need the game. Press INSTALL to download it first.
+= Аддонам нужна игра. Сначала нажмите УСТАНОВИТЬ, чтобы скачать её.
+Game client not found. Press INSTALL to download it first.
+= Клиент игры не найден. Сначала нажмите УСТАНОВИТЬ, чтобы скачать его.
+Please wait until the game update or install has finished.
+= Подождите, пока завершится обновление или установка игры.
+Downloading the game client...
+= Загрузка клиента игры...
+The download server sent something that is not the game archive. Please try again later.
+= Сервер загрузки прислал не архив игры. Попробуйте позже.
+Download cancelled.
+= Загрузка отменена.
+The download server did not accept the launcher's login.
+= Сервер загрузки не принял логин лаунчера.
+The backup host's page has no download link right now.
+= На странице резервного сервера сейчас нет ссылки на загрузку.
+The download from the backup host is damaged (its checksum does not match). Please try again.
+= Файл с резервного сервера повреждён (контрольная сумма не совпадает). Попробуйте ещё раз.
+The launcher is already running.\n\nLook for its icon in the system tray (near the clock).
+= Лаунчер уже запущен.\n\nНайдите его значок в области уведомлений (рядом с часами).
+INSTALL FROM A FILE
+= УСТАНОВИТЬ ИЗ ФАЙЛА
+Making the run's picture...
+= Создание изображения забега...
+The run's picture is copied: paste it into Discord. Also saved in Pictures.
+= Изображение забега скопировано: вставьте его в Discord. Оно также сохранено в «Изображениях».
+Could not make the run's picture: {0}
+= Не удалось создать изображение забега: {0}
+The AddOns folder is not set. Set the game config folder in Options.
+= Папка AddOns не задана. Укажите папку конфигурации игры в настройках.
+DPS over time
+= DPS со временем
+Best builds
+= Лучшие билды
+Revenge: bosses you beat
+= Месть: побеждённые боссы
+Your top partner
+= Ваш главный напарник
+Runs together
+= Забегов вместе
+Win rate together
+= Доля побед вместе
+Your party
+= Ваша группа
+last played
+= последняя игра
+today
+= сегодня
+yesterday
+= вчера
+click a run to share it
+= нажмите на забег, чтобы поделиться им
+by
+= автор:
+Community
+= Сообщество
+Stop downloading the game?
+= Остановить загрузку игры?
+Close the game first, then install it again.
+= Сначала закройте игру, затем установите её снова.
+Close the game first, then run setup again.
+= Сначала закройте игру, затем снова запустите настройку.
+No save game folder set.
+= Папка сохранений игры не задана.
+No game config folder set.
+= Папка конфигурации игры не задана.
+Downloading the game: {#0}%  ({1} of {2})
+= Загрузка игры: {#0}%  ({1} из {2})
+Downloading the game: {0}
+= Загрузка игры: {0}
+{#0} days ago
+= {#0} дн. назад
+{#0} weeks ago
+= {#0} нед. назад
+Your last run was {0}.
+= Ваш последний забег: {0}.
+{#0} runs, {#1} won
+= Забегов: {#0}, побед: {#1}
+new {0} DPS high: {1}
+= новый рекорд DPS ({0}): {1}
+best DPS {0} ({1})
+= лучший DPS {0} ({1})
+most played with {0}
+= чаще всего с {0}
+You beat it {0} times
+= Вы победили его {0} раз
+It killed you {0} times
+= Он убил вас {0} раз
+Best together: {0}, level {1}
+= Лучшее вместе: {0}, уровень {1}
+fastest win {0}
+= самая быстрая победа {0}
+{#0} runs, oldest left
+= Забегов: {#0}, старые слева

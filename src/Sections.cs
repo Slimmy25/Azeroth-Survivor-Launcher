@@ -16,6 +16,8 @@ namespace AzerothLauncher
         string title = "Addons";
         public Action CloseClicked;
         public Form Owner2;
+        bool closable = true;
+        public bool Closable { get { return closable; } set { closable = value; Invalidate(); } }   // no X on Community
         public Action<Point> Moved;
         Point? dragOffset;
 
@@ -29,7 +31,7 @@ namespace AzerothLauncher
 
         public string Title { get { return title; } set { title = value; Invalidate(); } }
 
-        Rectangle CloseBox { get { return new Rectangle(Width - 27, 9, 18, 18); } }
+        Rectangle CloseBox { get { return closable ? new Rectangle(Width - 27, 9, 18, 18) : Rectangle.Empty; } }
 
         protected override void OnPaint(PaintEventArgs e)
         {
@@ -48,6 +50,7 @@ namespace AzerothLauncher
             }
             if (Theme.Portrait != null) g.DrawImage(Theme.Portrait, 2, 1, 36, 36);
             Rectangle x = CloseBox;
+            if (x.IsEmpty) return;
             using (var b = new SolidBrush(Theme.Hex("#2a1c1c"))) g.FillRectangle(b, x);
             using (var p = new Pen(Theme.Hex("#d6a640"), 2)) g.DrawRectangle(p, x);
             using (var p = new Pen(Theme.Hex("#e53a22"), 3))
@@ -189,7 +192,7 @@ namespace AzerothLauncher
             strip.Width = 32;
             strip.BackColor = dark;
             body.Controls.Add(strip);
-            homeBtn = new IconButton(Icons.Home, delegate { communityDismissed = false; current = null; ShowSection("Community"); });   // home: Community
+            homeBtn = new IconButton(Icons.Home, delegate { current = null; ShowSection("Community"); });   // home: Community
             strip.Controls.Add(homeBtn);
             var icons = new Action<Graphics, float, float, Color>[] { Icons.Book, Icons.Cloud, Icons.AddonsIcon, Icons.Scroll, Icons.Trophy, Icons.Gear, Icons.Info };
             for (int i = 0; i < SectionNames.Length; i++)
@@ -236,6 +239,7 @@ namespace AzerothLauncher
 
         void SetSideTitle(string text)
         {
+            sideHead.Closable = current != "Community";
             sideHead.Title = text;
             side.Text = Lang.T(Array.IndexOf(SectionNames, current) >= 0 ? current : text);    // the taskbar and Alt+Tab name
         }
@@ -243,9 +247,12 @@ namespace AzerothLauncher
         // the open section fills the left side of the launcher window
         void PlaceSide()
         {
-            side.Bounds = new Rectangle(8, 200, 670, 378);          // top level with "News", under the title
+            side.Bounds = SideRect;                          // as tall as the News column: from "News" to the last Launcher button
             side.BringToFront();
         }
+
+        // the section area: its top level with the top of the word "News", its bottom level with the Launcher buttons
+        static readonly Rectangle SideRect = new Rectangle(8, 207, 670, 541 - 207);
 
         void ShowSide()
         {
@@ -261,16 +268,14 @@ namespace AzerothLauncher
             if (side.Visible) side.Hide();
         }
 
-        // closing a section goes back to the home screen, which shows Community; closing Community itself leaves the
-        // plain home screen (the house button brings Community back)
+        // closing a section goes back to the home screen, which shows Community; Community itself cannot be closed
         void CloseSide()
         {
-            bool wasCommunity = current == "Community";
+            if (current == "Community") return;              // the home screen's Community can only be replaced, never closed
             current = "Home";
             foreach (var b in nav.Values) b.Active = false;
             RefreshStrip();
-            if (wasCommunity) { communityDismissed = true; HideSide(); }
-            else ShowHomeCommunity();
+            ShowHomeCommunity();
         }
 
         public void ShowSection(string name)
@@ -291,8 +296,8 @@ namespace AzerothLauncher
             if (name == "About Launcher") aboutLog = false;
             if (name == "Home")
             {
-                if (communityDismissed) HideSide();
-                else { current = null; ShowSection("Community"); }
+                current = null;
+                ShowSection("Community");
                 return;
             }
             ShowSide();
@@ -340,7 +345,7 @@ namespace AzerothLauncher
                 c.Dispose();
             }
             SetSideTitle(title);
-            Put(UI.BackArrow(GoBack), 20, 12);
+            if (current != "Community" || communityPlaying != null) Put(UI.BackArrow(GoBack), 20, 12);
         }
 
         // the back arrow: one step back inside the section, or out of the section when at its first page

@@ -1119,3 +1119,129 @@ Exit fullscreen
 = Έξοδος από πλήρη οθόνη
 Highest DPS
 = Υψηλότερο DPS
+
+# added 2026-10-25: install in the status line, Community, This week, stats pages, download hosts
+Play a few runs with the newest AZS Stats to see your DPS over time.
+= Παίξε μερικά runs με το νεότερο AZS Stats για να δεις το DPS σου στον χρόνο.
+Best of these
+= Το καλύτερο από αυτά
+ringed: victories
+= με κύκλο: νίκες
+Your best builds show up here after a DPS high or a victory.
+= Τα καλύτερα builds σου εμφανίζονται εδώ μετά από ρεκόρ DPS ή νίκη.
+A build video made by a player. All credit goes to the people who made it.
+= Ένα βίντεο build από έναν παίκτη. Όλη η αναγνώριση ανήκει στους δημιουργούς του.
+No community videos yet.
+= Δεν υπάρχουν ακόμη βίντεο της κοινότητας.
+MORE BUILD GUIDES ›
+= ΠΕΡΙΣΣΟΤΕΡΟΙ ΟΔΗΓΟΙ BUILD ›
+Loading the video...
+= Φόρτωση του βίντεο...
+Nothing in the guide matches
+= Τίποτα στον οδηγό δεν ταιριάζει με
+Search the guide: a spell, a boss, a key...
+= Αναζήτηση στον οδηγό: ένα ξόρκι, ένα boss, ένα πλήκτρο...
+Patch
+= Ενημέρωση
+News
+= Νέα
+Game version
+= Έκδοση παιχνιδιού
+No runs yet this week.
+= Κανένα run αυτή την εβδομάδα.
+This week
+= Αυτή την εβδομάδα
+Addons need the game. Press INSTALL to download it first.
+= Τα πρόσθετα χρειάζονται το παιχνίδι. Πάτησε πρώτα ΕΓΚΑΤΑΣΤΑΣΗ για να το κατεβάσεις.
+Game client not found. Press INSTALL to download it first.
+= Ο πελάτης του παιχνιδιού δεν βρέθηκε. Πάτησε πρώτα ΕΓΚΑΤΑΣΤΑΣΗ για να τον κατεβάσεις.
+Please wait until the game update or install has finished.
+= Περίμενε να ολοκληρωθεί η ενημέρωση ή η εγκατάσταση του παιχνιδιού.
+Downloading the game client...
+= Λήψη του πελάτη του παιχνιδιού...
+The download server sent something that is not the game archive. Please try again later.
+= Ο διακομιστής λήψης δεν έστειλε το αρχείο του παιχνιδιού. Δοκίμασε ξανά αργότερα.
+Download cancelled.
+= Η λήψη ακυρώθηκε.
+The download server did not accept the launcher's login.
+= Ο διακομιστής λήψης δεν δέχτηκε τη σύνδεση του launcher.
+The backup host's page has no download link right now.
+= Η σελίδα του εφεδρικού διακομιστή δεν έχει σύνδεσμο λήψης αυτή τη στιγμή.
+The download from the backup host is damaged (its checksum does not match). Please try again.
+= Η λήψη από τον εφεδρικό διακομιστή είναι κατεστραμμένη (το άθροισμα ελέγχου δεν ταιριάζει). Δοκίμασε ξανά.
+The launcher is already running.\n\nLook for its icon in the system tray (near the clock).
+= Ο launcher τρέχει ήδη.\n\nΨάξε το εικονίδιό του στην περιοχή ειδοποιήσεων (δίπλα στο ρολόι).
+INSTALL FROM A FILE
+= ΕΓΚΑΤΑΣΤΑΣΗ ΑΠΟ ΑΡΧΕΙΟ
+Making the run's picture...
+= Δημιουργία εικόνας του run...
+The run's picture is copied: paste it into Discord. Also saved in Pictures.
+= Η εικόνα του run αντιγράφηκε: επικόλλησέ την στο Discord. Αποθηκεύτηκε και στις Εικόνες.
+Could not make the run's picture: {0}
+= Δεν ήταν δυνατή η δημιουργία της εικόνας του run: {0}
+The AddOns folder is not set. Set the game config folder in Options.
+= Ο φάκελος AddOns δεν έχει οριστεί. Όρισε τον φάκελο ρυθμίσεων του παιχνιδιού στις Επιλογές.
+DPS over time
+= DPS στον χρόνο
+Best builds
+= Καλύτερα builds
+Revenge: bosses you beat
+= Εκδίκηση: bosses που νίκησες
+Your top partner
+= Ο κύριος συμπαίκτης σου
+Runs together
+= Runs μαζί
+Win rate together
+= Ποσοστό νικών μαζί
+Your party
+= Η ομάδα σου
+last played
+= τελευταίο παιχνίδι
+today
+= σήμερα
+yesterday
+= χθες
+click a run to share it
+= κάνε κλικ σε ένα run για να το μοιραστείς
+by
+= από
+Community
+= Κοινότητα
+Stop downloading the game?
+= Διακοπή της λήψης του παιχνιδιού;
+Close the game first, then install it again.
+= Κλείσε πρώτα το παιχνίδι και μετά εγκατάστησέ το ξανά.
+Close the game first, then run setup again.
+= Κλείσε πρώτα το παιχνίδι και μετά τρέξε ξανά τη ρύθμιση.
+No save game folder set.
+= Δεν έχει οριστεί φάκελος αποθηκεύσεων.
+No game config folder set.
+= Δεν έχει οριστεί φάκελος ρυθμίσεων του παιχνιδιού.
+Downloading the game: {#0}%  ({1} of {2})
+= Λήψη παιχνιδιού: {#0}%  ({1} από {2})
+Downloading the game: {0}
+= Λήψη παιχνιδιού: {0}
+{#0} days ago
+= πριν από {#0} ημέρες
+{#0} weeks ago
+= πριν από {#0} εβδομάδες
+Your last run was {0}.
+= Το τελευταίο σου run: {0}.
+{#0} runs, {#1} won
+= {#0} runs, {#1} νίκες
+new {0} DPS high: {1}
+= νέο ρεκόρ DPS {0}: {1}
+best DPS {0} ({1})
+= καλύτερο DPS {0} ({1})
+most played with {0}
+= περισσότερο με {0}
+You beat it {0} times
+= Το νίκησες {0} φορές
+It killed you {0} times
+= Σε σκότωσε {0} φορές
+Best together: {0}, level {1}
+= Καλύτερο μαζί: {0}, επίπεδο {1}
+fastest win {0}
+= ταχύτερη νίκη {0}
+{#0} runs, oldest left
+= {#0} runs, τα παλαιότερα αριστερά

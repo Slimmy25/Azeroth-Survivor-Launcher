@@ -1118,3 +1118,129 @@ Exit fullscreen
 = Poistu koko näytöstä
 Highest DPS
 = Korkein DPS
+
+# added 2026-10-25: install in the status line, Community, This week, stats pages, download hosts
+Play a few runs with the newest AZS Stats to see your DPS over time.
+= Pelaa muutama runi uusimmalla AZS Statsilla nähdäksesi DPS:si ajan mittaan.
+Best of these
+= Paras näistä
+ringed: victories
+= renkaalla: voitot
+Your best builds show up here after a DPS high or a victory.
+= Parhaat buildisi näkyvät tässä DPS-ennätyksen tai voiton jälkeen.
+A build video made by a player. All credit goes to the people who made it.
+= Pelaajan tekemä build-video. Kaikki kunnia sen tekijöille.
+No community videos yet.
+= Ei vielä yhteisön videoita.
+MORE BUILD GUIDES ›
+= LISÄÄ BUILD-OPPAITA ›
+Loading the video...
+= Ladataan videota...
+Nothing in the guide matches
+= Mikään oppaassa ei vastaa hakua
+Search the guide: a spell, a boss, a key...
+= Hae oppaasta: loitsu, pomo, näppäin...
+Patch
+= Päivitys
+News
+= Uutiset
+Game version
+= Pelin versio
+No runs yet this week.
+= Ei runeja tällä viikolla.
+This week
+= Tämä viikko
+Addons need the game. Press INSTALL to download it first.
+= Lisäosat tarvitsevat pelin. Paina ensin ASENNA ladataksesi sen.
+Game client not found. Press INSTALL to download it first.
+= Peliasiakasta ei löytynyt. Paina ensin ASENNA ladataksesi sen.
+Please wait until the game update or install has finished.
+= Odota, kunnes pelin päivitys tai asennus on valmis.
+Downloading the game client...
+= Ladataan peliasiakasta...
+The download server sent something that is not the game archive. Please try again later.
+= Latauspalvelin ei lähettänyt pelin arkistoa. Yritä myöhemmin uudelleen.
+Download cancelled.
+= Lataus peruttiin.
+The download server did not accept the launcher's login.
+= Latauspalvelin ei hyväksynyt käynnistimen kirjautumista.
+The backup host's page has no download link right now.
+= Varapalvelimen sivulla ei ole juuri nyt latauslinkkiä.
+The download from the backup host is damaged (its checksum does not match). Please try again.
+= Varapalvelimelta ladattu tiedosto on vioittunut (tarkistussumma ei täsmää). Yritä uudelleen.
+The launcher is already running.\n\nLook for its icon in the system tray (near the clock).
+= Käynnistin on jo käynnissä.\n\nEtsi sen kuvake ilmaisinalueelta (kellon vierestä).
+INSTALL FROM A FILE
+= ASENNA TIEDOSTOSTA
+Making the run's picture...
+= Luodaan kuvaa runista...
+The run's picture is copied: paste it into Discord. Also saved in Pictures.
+= Kuva runista on kopioitu: liitä se Discordiin. Se on tallennettu myös Kuviin.
+Could not make the run's picture: {0}
+= Kuvaa runista ei voitu luoda: {0}
+The AddOns folder is not set. Set the game config folder in Options.
+= AddOns-kansiota ei ole asetettu. Aseta pelin asetuskansio Asetuksissa.
+DPS over time
+= DPS ajan mittaan
+Best builds
+= Parhaat buildit
+Revenge: bosses you beat
+= Kosto: voittamasi pomot
+Your top partner
+= Tärkein pelikaverisi
+Runs together
+= Runit yhdessä
+Win rate together
+= Voittoprosentti yhdessä
+Your party
+= Ryhmäsi
+last played
+= viimeksi pelattu
+today
+= tänään
+yesterday
+= eilen
+click a run to share it
+= napsauta runia jakaaksesi sen
+by
+= tekijä:
+Community
+= Yhteisö
+Stop downloading the game?
+= Lopetetaanko pelin lataus?
+Close the game first, then install it again.
+= Sulje ensin peli ja asenna se sitten uudelleen.
+Close the game first, then run setup again.
+= Sulje ensin peli ja suorita sitten asennus uudelleen.
+No save game folder set.
+= Pelin tallennuskansiota ei ole asetettu.
+No game config folder set.
+= Pelin asetuskansiota ei ole asetettu.
+Downloading the game: {#0}%  ({1} of {2})
+= Ladataan peliä: {#0} %  ({1} / {2})
+Downloading the game: {0}
+= Ladataan peliä: {0}
+{#0} days ago
+= {#0} päivää sitten
+{#0} weeks ago
+= {#0} viikkoa sitten
+Your last run was {0}.
+= Viimeisin runisi: {0}.
+{#0} runs, {#1} won
+= {#0} runia, {#1} voitettu
+new {0} DPS high: {1}
+= uusi {0}-DPS-ennätys: {1}
+best DPS {0} ({1})
+= paras DPS {0} ({1})
+most played with {0}
+= eniten pelattu: {0}
+You beat it {0} times
+= Voitit sen {0} kertaa
+It killed you {0} times
+= Se tappoi sinut {0} kertaa
+Best together: {0}, level {1}
+= Paras yhdessä: {0}, taso {1}
+fastest win {0}
+= nopein voitto {0}
+{#0} runs, oldest left
+= {#0} runia, vanhimmat vasemmalla

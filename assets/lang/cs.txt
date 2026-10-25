@@ -1119,3 +1119,129 @@ Exit fullscreen
 = Ukončit celou obrazovku
 Highest DPS
 = Nejvyšší DPS
+
+# added 2026-10-25: install in the status line, Community, This week, stats pages, download hosts
+Play a few runs with the newest AZS Stats to see your DPS over time.
+= Odehraj pár runů s nejnovějším AZS Stats a uvidíš svůj DPS v čase.
+Best of these
+= Nejlepší z nich
+ringed: victories
+= v kroužku: vítězství
+Your best builds show up here after a DPS high or a victory.
+= Tvoje nejlepší buildy se tu objeví po rekordu DPS nebo vítězství.
+A build video made by a player. All credit goes to the people who made it.
+= Video s buildem od hráče. Veškeré uznání patří jeho autorům.
+No community videos yet.
+= Zatím žádná videa komunity.
+MORE BUILD GUIDES ›
+= DALŠÍ NÁVODY NA BUILDY ›
+Loading the video...
+= Načítání videa...
+Nothing in the guide matches
+= V průvodci nic neodpovídá
+Search the guide: a spell, a boss, a key...
+= Hledat v průvodci: kouzlo, boss, klávesa...
+Patch
+= Patch
+News
+= Novinky
+Game version
+= Verze hry
+No runs yet this week.
+= Tento týden zatím žádné runy.
+This week
+= Tento týden
+Addons need the game. Press INSTALL to download it first.
+= Doplňky potřebují hru. Nejdřív stiskni NAINSTALOVAT a stáhni ji.
+Game client not found. Press INSTALL to download it first.
+= Klient hry nebyl nalezen. Nejdřív stiskni NAINSTALOVAT a stáhni ho.
+Please wait until the game update or install has finished.
+= Počkej, až skončí aktualizace nebo instalace hry.
+Downloading the game client...
+= Stahování klienta hry...
+The download server sent something that is not the game archive. Please try again later.
+= Server pro stahování neposlal archiv hry. Zkus to později.
+Download cancelled.
+= Stahování zrušeno.
+The download server did not accept the launcher's login.
+= Server pro stahování nepřijal přihlášení launcheru.
+The backup host's page has no download link right now.
+= Stránka záložního serveru teď nemá odkaz ke stažení.
+The download from the backup host is damaged (its checksum does not match). Please try again.
+= Soubor ze záložního serveru je poškozený (kontrolní součet nesouhlasí). Zkus to znovu.
+The launcher is already running.\n\nLook for its icon in the system tray (near the clock).
+= Launcher už běží.\n\nHledej jeho ikonu v oznamovací oblasti (u hodin).
+INSTALL FROM A FILE
+= NAINSTALOVAT ZE SOUBORU
+Making the run's picture...
+= Vytváření obrázku runu...
+The run's picture is copied: paste it into Discord. Also saved in Pictures.
+= Obrázek runu je zkopírovaný: vlož ho do Discordu. Je uložený i v Obrázcích.
+Could not make the run's picture: {0}
+= Obrázek runu se nepodařilo vytvořit: {0}
+The AddOns folder is not set. Set the game config folder in Options.
+= Složka AddOns není nastavená. Nastav složku konfigurace hry v Možnostech.
+DPS over time
+= DPS v čase
+Best builds
+= Nejlepší buildy
+Revenge: bosses you beat
+= Pomsta: poražení bossové
+Your top partner
+= Tvůj hlavní parťák
+Runs together
+= Runy spolu
+Win rate together
+= Úspěšnost spolu
+Your party
+= Tvoje skupina
+last played
+= naposledy hráno
+today
+= dnes
+yesterday
+= včera
+click a run to share it
+= klikni na run a sdílej ho
+by
+= autor:
+Community
+= Komunita
+Stop downloading the game?
+= Zastavit stahování hry?
+Close the game first, then install it again.
+= Nejdřív zavři hru, pak ji nainstaluj znovu.
+Close the game first, then run setup again.
+= Nejdřív zavři hru, pak znovu spusť nastavení.
+No save game folder set.
+= Není nastavena složka uložených her.
+No game config folder set.
+= Není nastavena složka konfigurace hry.
+Downloading the game: {#0}%  ({1} of {2})
+= Stahování hry: {#0} %  ({1} z {2})
+Downloading the game: {0}
+= Stahování hry: {0}
+{#0} days ago
+= před {#0} dny
+{#0} weeks ago
+= před {#0} týdny
+Your last run was {0}.
+= Tvůj poslední run: {0}.
+{#0} runs, {#1} won
+= Runy: {#0}, výhry: {#1}
+new {0} DPS high: {1}
+= nový rekord DPS ({0}): {1}
+best DPS {0} ({1})
+= nejlepší DPS {0} ({1})
+most played with {0}
+= nejčastěji s {0}
+You beat it {0} times
+= Porazil jsi ho {0}×
+It killed you {0} times
+= Zabil tě {0}×
+Best together: {0}, level {1}
+= Nejlépe spolu: {0}, úroveň {1}
+fastest win {0}
+= nejrychlejší vítězství {0}
+{#0} runs, oldest left
+= Runy: {#0}, nejstarší vlevo

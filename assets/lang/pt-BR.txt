@@ -1118,3 +1118,129 @@ Exit fullscreen
 = Sair da tela cheia
 Highest DPS
 = Maior DPS
+
+# added 2026-10-25: install in the status line, Community, This week, stats pages, download hosts
+Play a few runs with the newest AZS Stats to see your DPS over time.
+= Jogue algumas partidas com o AZS Stats mais recente para ver seu DPS ao longo do tempo.
+Best of these
+= Melhor destas
+ringed: victories
+= com anel: vitórias
+Your best builds show up here after a DPS high or a victory.
+= Suas melhores builds aparecem aqui após um recorde de DPS ou uma vitória.
+A build video made by a player. All credit goes to the people who made it.
+= Um vídeo de build feito por um jogador. Todo o crédito é de quem o fez.
+No community videos yet.
+= Ainda não há vídeos da comunidade.
+MORE BUILD GUIDES ›
+= MAIS GUIAS DE BUILD ›
+Loading the video...
+= Carregando o vídeo...
+Nothing in the guide matches
+= Nada no guia corresponde a
+Search the guide: a spell, a boss, a key...
+= Buscar no guia: um feitiço, um chefe, uma tecla...
+Patch
+= Patch
+News
+= Novidades
+Game version
+= Versão do jogo
+No runs yet this week.
+= Nenhuma partida nesta semana.
+This week
+= Esta semana
+Addons need the game. Press INSTALL to download it first.
+= Os addons precisam do jogo. Pressione INSTALAR para baixá-lo primeiro.
+Game client not found. Press INSTALL to download it first.
+= Cliente do jogo não encontrado. Pressione INSTALAR para baixá-lo primeiro.
+Please wait until the game update or install has finished.
+= Aguarde o fim da atualização ou da instalação do jogo.
+Downloading the game client...
+= Baixando o cliente do jogo...
+The download server sent something that is not the game archive. Please try again later.
+= O servidor de download não enviou o arquivo do jogo. Tente novamente mais tarde.
+Download cancelled.
+= Download cancelado.
+The download server did not accept the launcher's login.
+= O servidor de download não aceitou o login do launcher.
+The backup host's page has no download link right now.
+= A página do servidor reserva não tem link de download no momento.
+The download from the backup host is damaged (its checksum does not match). Please try again.
+= O download do servidor reserva está corrompido (a soma de verificação não confere). Tente novamente.
+The launcher is already running.\n\nLook for its icon in the system tray (near the clock).
+= O launcher já está aberto.\n\nProcure o ícone dele na bandeja do sistema (perto do relógio).
+INSTALL FROM A FILE
+= INSTALAR DE UM ARQUIVO
+Making the run's picture...
+= Criando a imagem da partida...
+The run's picture is copied: paste it into Discord. Also saved in Pictures.
+= A imagem da partida foi copiada: cole-a no Discord. Também foi salva em Imagens.
+Could not make the run's picture: {0}
+= Não foi possível criar a imagem da partida: {0}
+The AddOns folder is not set. Set the game config folder in Options.
+= A pasta AddOns não está definida. Defina a pasta de configuração do jogo em Opções.
+DPS over time
+= DPS ao longo do tempo
+Best builds
+= Melhores builds
+Revenge: bosses you beat
+= Vingança: chefes que você venceu
+Your top partner
+= Seu parceiro principal
+Runs together
+= Partidas juntos
+Win rate together
+= Taxa de vitória juntos
+Your party
+= Seu grupo
+last played
+= última partida
+today
+= hoje
+yesterday
+= ontem
+click a run to share it
+= clique em uma partida para compartilhá-la
+by
+= por
+Community
+= Comunidade
+Stop downloading the game?
+= Parar o download do jogo?
+Close the game first, then install it again.
+= Feche o jogo primeiro e depois instale-o de novo.
+Close the game first, then run setup again.
+= Feche o jogo primeiro e depois execute a configuração de novo.
+No save game folder set.
+= Nenhuma pasta de jogos salvos definida.
+No game config folder set.
+= Nenhuma pasta de configuração do jogo definida.
+Downloading the game: {#0}%  ({1} of {2})
+= Baixando o jogo: {#0}%  ({1} de {2})
+Downloading the game: {0}
+= Baixando o jogo: {0}
+{#0} days ago
+= há {#0} dias
+{#0} weeks ago
+= há {#0} semanas
+Your last run was {0}.
+= Sua última partida: {0}.
+{#0} runs, {#1} won
+= {#0} partidas, {#1} vencidas
+new {0} DPS high: {1}
+= novo recorde de DPS de {0}: {1}
+best DPS {0} ({1})
+= melhor DPS {0} ({1})
+most played with {0}
+= mais jogado com {0}
+You beat it {0} times
+= Você o venceu {0} vezes
+It killed you {0} times
+= Ele te matou {0} vezes
+Best together: {0}, level {1}
+= Melhor juntos: {0}, nível {1}
+fastest win {0}
+= vitória mais rápida {0}
+{#0} runs, oldest left
+= {#0} partidas, as mais antigas à esquerda
