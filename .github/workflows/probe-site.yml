@@ -1,5 +1,5 @@
-# Developer tool: downloads the game's website (wow.aethus.pl) and its scripts onto the private "site-probe" branch,
-# to look up things like spell icon addresses. Run by hand: Actions > Probe site > Run workflow.
+# Developer tool: fetches a few web addresses from a GitHub machine and keeps the answers on the private "site-probe"
+# branch (this session's own network cannot reach them). Run by hand: Actions > Probe site > Run workflow.
 name: Probe site
 
 on:
@@ -12,22 +12,14 @@ jobs:
   probe:
     runs-on: ubuntu-latest
     steps:
-      - name: Download the site
+      - name: Fetch
         run: |
-          set -x
           mkdir -p /tmp/site && cd /tmp/site
-          curl -sSL -A "Mozilla/5.0" https://wow.aethus.pl/ -o index.html || true
-          # every script and stylesheet the page loads, and what those load
-          for round in 1 2; do
-            grep -ohE '(src|href)="[^"]+\.(js|css|json)[^"]*"|"/[^" ]+\.(js|json)"|/assets/[A-Za-z0-9._/-]+\.(js|json|css)' *.html assets/*.js 2>/dev/null \
-              | sed -E 's/^(src|href)=//; s/"//g' | sort -u > list.txt || true
-            while read -r u; do
-              case "$u" in http*) url="$u";; /*) url="https://wow.aethus.pl$u";; *) url="https://wow.aethus.pl/$u";; esac
-              out="assets/$(basename "${u%%\?*}")"; mkdir -p assets
-              [ -f "$out" ] || curl -sSL -A "Mozilla/5.0" "$url" -o "$out" || true
-            done < list.txt
-          done
-          ls -la . assets | head -100
+          curl -sS -m 30 -A "Mozilla/5.0" -o wowhead.txt -w '%{http_code}\n' "https://www.wowhead.com/classic/search/suggestions-template?q=Frostbolt" > codes.txt 2>&1 || true
+          curl -sS -m 30 -A "Mozilla/5.0" -o nether.txt -w '%{http_code}\n' "https://nether.wowhead.com/classic/tooltip/spell/116" >> codes.txt 2>&1 || true
+          curl -sS -m 60 -A "Mozilla/5.0" -o spellname.csv -w '%{http_code}\n' "https://wago.tools/db2/SpellName/csv?product=wow_classic_era" >> codes.txt 2>&1 || true
+          curl -sS -m 60 -A "Mozilla/5.0" -o spellmisc.csv -w '%{http_code}\n' "https://wago.tools/db2/SpellMisc/csv?product=wow_classic_era" >> codes.txt 2>&1 || true
+          ls -la; head -c 600 wowhead.txt; echo; head -c 600 nether.txt; echo; head -3 spellname.csv; head -3 spellmisc.csv
       - name: Keep it on the site-probe branch
         run: |
           cd /tmp/site
