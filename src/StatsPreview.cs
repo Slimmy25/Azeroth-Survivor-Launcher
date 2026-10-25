@@ -31,14 +31,6 @@ namespace AzerothLauncher
                 foreach (var c in st.Classes) SpellIcons.Class(c.Key, null);
                 foreach (var n in st.Nemesis) SpellIcons.Npc(n.Name, null);
                 SpellIcons.WaitForAll(30000);
-                foreach (var n in st.Nemesis) SpellIcons.Npc(n.Name, null);   // looked up: now the pictures
-                if (st.Nemesis.Count > 0)
-                    using (var eb = new Bitmap(1200, 80))
-                    {
-                        using (var g = Graphics.FromImage(eb)) { g.Clear(Color.White); g.DrawString(SpellIcons.Explain(st.Nemesis[0].Name), new Font("Arial", 8), Brushes.Black, new RectangleF(2, 2, 1196, 76)); }
-                        eb.Save(Path.Combine(outDir, "npc-lookup-check.png"), ImageFormat.Png);
-                    }
-                SpellIcons.WaitForAll(30000);
             }
             foreach (string cls in new[] { null, topClass })
             {

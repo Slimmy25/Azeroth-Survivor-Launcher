@@ -4,7 +4,8 @@
 //   * spells: assets\spell-icons.txt names each spell's icon; a spell missing from it is looked up on Wowhead
 //     (Classic first, then the current game) the first time it is shown, and the answer is remembered
 //   * classes: Wowhead's class icons (classicon_mage ...)
-//   * NPCs (Nemesis): the creature is looked up on Wowhead, and its model picture is shown
+//   * creatures (Nemesis): assets\npc-models.txt (from the CMaNGOS Classic database) gives the creature's model,
+//     and Wowhead's picture of that model is shown
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -89,17 +90,31 @@ namespace AzerothLauncher
             return Picture("icon_" + icon, IconHost + icon + ".jpg", repaint);
         }
 
-        // the model picture of a creature (Nemesis)
+        // the model picture of a creature (Nemesis): assets\npc-models.txt gives its model, Wowhead has the picture
+        static Dictionary<string, int> npcModels;
+
         public static Image Npc(string name, Control repaint)
         {
-            Load();
             name = (name ?? "").Trim();
             if (name.Length == 0) return null;
-            return Lookup("npc:" + name, repaint, delegate { return FindNpcDisplay(name); }, delegate(string d)
+            if (npcModels == null)
             {
-                int id = int.Parse(d);
-                return "https://wow.zamimg.com/modelviewer/classic/webthumbs/npc/" + (id & 255) + "/" + id + ".jpg";
-            });
+                npcModels = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+                try
+                {
+                    foreach (string raw in Util.ReadResource("AS.npc-models.txt").Replace("\r\n", "\n").Split('\n'))
+                    {
+                        int bar = raw.LastIndexOf('|'), id;
+                        if (raw.StartsWith("#") || bar <= 0 || !int.TryParse(raw.Substring(bar + 1), out id) || id <= 0) continue;
+                        string n = raw.Substring(0, bar);
+                        if (!npcModels.ContainsKey(n)) npcModels[n] = id;
+                    }
+                }
+                catch (Exception) { }
+            }
+            int model;
+            if (!npcModels.TryGetValue(name, out model)) return null;
+            return Picture("npc_" + model, "https://wow.zamimg.com/modelviewer/classic/webthumbs/npc/" + (model & 255) + "/" + model + ".jpg", repaint);
         }
 
         // ---- a name that has to be looked up first; the answer (or "none") is remembered on disk
@@ -258,67 +273,6 @@ namespace AzerothLauncher
                 }
             }
             return "";                                       // asked, and Wowhead has no such spell
-        }
-
-        // the screenshot tool: what the creature lookup sees
-        public static string Explain(string name)
-        {
-            var sb = new StringBuilder();
-            try
-            {
-                string json = Search("/classic", name);
-                sb.Append("search " + json.Length + " chars; ");
-                foreach (var d in Results(json))
-                {
-                    string t, n, id; d.TryGetValue("typeName", out t); d.TryGetValue("name", out n); d.TryGetValue("id", out id);
-                    sb.Append("[" + t + " " + n + " " + id + "] ");
-                }
-                sb.Append(" => " + FindNpcDisplay(name));
-                try
-                {
-                    string page = GetText("https://www.wowhead.com/classic/npc=448/hogger");
-                    sb.Append(" | hogger page " + page.Length + " chars, display-id " + page.Contains("data-mv-display-id") + ": " +
-                              Regex.Replace(page.Length > 160 ? page.Substring(0, 160) : page, @"\s+", " "));
-                }
-                catch (WebException wex)
-                {
-                    var r = wex.Response as HttpWebResponse;
-                    sb.Append(" | hogger page error " + (r != null ? ((int)r.StatusCode).ToString() : "") + " " + wex.Message);
-                }
-            }
-            catch (Exception ex) { sb.Append("error " + ex.Message); }
-            return sb.ToString();
-        }
-
-        // "Scarlet Crusader" -> "scarlet-crusader", as in Wowhead's addresses
-        static string Slug(string name)
-        {
-            return Regex.Replace(Regex.Replace(name.ToLowerInvariant(), "['’]", ""), "[^a-z0-9]+", "-").Trim('-');
-        }
-
-        static string FindNpcDisplay(string name)
-        {
-            // the same creature can have several entries (later copies of it): the original, lowest id first
-            var ids = new List<int>();
-            foreach (var d in Results(Search("/classic", name)))
-            {
-                string t, n, id;
-                int v;
-                if (d.TryGetValue("typeName", out t) && t == "NPC" && d.TryGetValue("name", out n) &&
-                    string.Equals(n, name, StringComparison.OrdinalIgnoreCase) && d.TryGetValue("id", out id) &&
-                    int.TryParse(id, out v) && !ids.Contains(v))
-                    ids.Add(v);
-            }
-            ids.Sort();
-            for (int i = 0; i < ids.Count && i < 3; i++)
-            {
-                string page = GetText("https://www.wowhead.com/classic/npc=" + ids[i] + "/" + Slug(name));
-                Match m = Regex.Match(page, @"data-mv-display-id=""(\d+)""");
-                if (!m.Success) m = Regex.Match(page, @"displayId&quot;:(\d+)");
-                if (!m.Success) m = Regex.Match(page, @"dataset\.displayId = (\d+)");
-                if (m.Success && m.Groups[1].Value != "0") return m.Groups[1].Value;
-            }
-            return "";
         }
     }
 }
