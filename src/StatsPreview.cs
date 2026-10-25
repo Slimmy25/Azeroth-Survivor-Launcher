@@ -112,9 +112,14 @@ namespace AzerothLauncher
                 app.panel.Refresh();
                 }
                 string nm = "section-" + sec.Replace(" ", "-").ToLowerInvariant();
-                using (var win = new Bitmap(app.side.Width, app.side.Height))
-                {
-                    app.side.DrawToBitmap(win, new Rectangle(0, 0, win.Width, win.Height));
+                using (var win = new Bitmap(app.panel.Width, app.panel.Height))
+                {   // control by control, back to front (DrawToBitmap of the whole window skips some of them)
+                    using (var g = Graphics.FromImage(win)) g.Clear(app.panel.BackColor);
+                    for (int i = app.panel.Controls.Count - 1; i >= 0; i--)
+                    {
+                        Control c = app.panel.Controls[i];
+                        if (c.Visible && c.Width > 0 && c.Height > 0) c.DrawToBitmap(win, c.Bounds);
+                    }
                     win.Save(Path.Combine(outDir, nm + ".png"), ImageFormat.Png);
                 }
                 ScrollPanel ssp = FindScroll(app.panel);
