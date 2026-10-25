@@ -123,7 +123,6 @@ namespace AzerothLauncher
         string current;
         string addonMode = "installed";
         int addonCategory;
-        string addonFilter;
         int clView = ClNewest, clPage;
         bool clToEnd;
         DateTime clLastStep = DateTime.MinValue;
@@ -633,18 +632,7 @@ namespace AzerothLauncher
                     b.Selected = i == addonCategory;          // the open category: filled gold
                     Put(b, x0 + i * cw + (cw - bw) / 2, 12);
                 }
-                // second row: filter by kind of addon (click the open one again to show everything)
-                var labels = new List<string> { "ALL" };
-                labels.AddRange(Data.AddonFilters);
-                int fw = (PW - 40) / labels.Count;
-                for (int i = 0; i < labels.Count; i++)
-                {
-                    string label = labels[i];
-                    var b = new WowButton(label, delegate { SetAddonFilter(label); }, 130, 30, 9);
-                    b.Selected = (label == "ALL" && addonFilter == null) || label == addonFilter;
-                    Put(b, 20 + i * fw + (fw - 130) / 2, 53);
-                }
-                AddonsDownloadView(94);
+                AddonsDownloadView(53);
             }
             else
             {
@@ -656,12 +644,6 @@ namespace AzerothLauncher
         void SetAddonMode(string mode)
         {
             addonMode = mode;
-            BuildPanel("Addons");
-        }
-
-        void SetAddonFilter(string label)
-        {
-            addonFilter = label == "ALL" || label == addonFilter ? null : label;
             BuildPanel("Addons");
         }
 
@@ -757,10 +739,8 @@ namespace AzerothLauncher
             int cat = Math.Min(Math.Max(addonCategory, 0), Data.AddonCategories.Length - 1);
             var items = new List<AddonEntry>();
             var all = new List<AddonEntry>(Data.Addons);
-            all.AddRange(Data.MyAddons());
             foreach (var a in all)
-                if (a.Category == Data.AddonCategories[cat] && (addonFilter == null || a.Tags.Contains(addonFilter) ||
-                                                                 a.Category == Data.MyAddonsCategory)) items.Add(a);
+                if (a.Category == Data.AddonCategories[cat]) items.Add(a);
             items.Sort(delegate(AddonEntry a, AddonEntry b) { return string.Compare(a.Name, b.Name, StringComparison.OrdinalIgnoreCase); });   // A to Z
             int y0 = 4;
             if (Data.AddonCategories[cat] == Data.MyAddonsCategory)
@@ -777,7 +757,7 @@ namespace AzerothLauncher
             }
             if (items.Count == 0)
             {
-                var l = UI.Text(addonFilter != null ? "No addons in this filter yet." : "No downloadable addons listed yet.",
+                var l = UI.Text("No downloadable addons listed yet.",
                                 11, FontStyle.Italic, Theme.GoldDim, listbg, 0);
                 l.Location = new Point(10, y0 + 4);
                 sp.Controls.Add(l);

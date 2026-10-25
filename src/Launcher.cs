@@ -321,6 +321,7 @@ namespace AzerothLauncher
                 g.DrawString(Lang.T("Launcher"), hf, shadow, 698, 447);
                 g.DrawString(Lang.T("Launcher"), hf, gold, 697, 446);
             }
+            BuildCollection(g);
             WeeklyRecap(g);
             // bottom bar, left: only the cloud note (the status above PLAY says the rest)
             using (var gb = new SolidBrush(Retro.Gold))
@@ -509,13 +510,21 @@ namespace AzerothLauncher
                 Cursor = over ? Cursors.Hand : Cursors.Default;
                 Invalidate(new Rectangle(NewsBar.X - 2, NewsBar.Y, NewsBar.Width + 4, NewsBar.Height));
             }
+            if (!over && !newsDrag) BuildMouseMove(e.Location);
             base.OnMouseMove(e);
         }
 
         protected override void OnMouseUp(MouseEventArgs e)
         {
             if (newsDrag) { newsDrag = false; Invalidate(new Rectangle(NewsBar.X - 2, NewsBar.Y, NewsBar.Width + 4, NewsBar.Height)); }
+            else if (e.Button == MouseButtons.Left) BuildClick(e.Location);
             base.OnMouseUp(e);
+        }
+
+        protected override void OnMouseLeave(EventArgs e)
+        {
+            if (buildHover != null) { buildHover = null; Cursor = Cursors.Default; Invalidate(Rectangle.Ceiling(BuildBox)); }
+            base.OnMouseLeave(e);
         }
 
         public void SetStatus(string msg)

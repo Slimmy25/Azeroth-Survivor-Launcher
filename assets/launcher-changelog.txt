@@ -1,4 +1,7 @@
 # Next update (after v0.3)
+- New Build Guides in the GUIDE: players' videos of their builds, each with its title and credit to the uploader; YouTube videos open in your web browser
+- The home page has a Build collection card with the newest build video; nothing plays until you click it
+- Download More has two categories: AZS ADDONS (formerly AS ADDONS) and WOW 1.12 ADDONS; the UI / gameplay / cosmetic filters and the My Addons tab are gone
 - Before the game is installed, only Cloud Save and Addons are grayed out (both say why); the Changelog, Guide, Stats, Options and About work as usual
 - While the game downloads, its window steps aside and the download bar shows in the status line above INSTALLING, so the Guide and everything else can be used; INSTALLING brings the window back (CANCEL)
 - The game download uses the main host or the new backup host at random (50/50); if one fails, the other is tried
