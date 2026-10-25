@@ -15,11 +15,22 @@ jobs:
       - name: Fetch
         run: |
           mkdir -p /tmp/site && cd /tmp/site
-          curl -sS -m 30 -A "Mozilla/5.0" -o wowhead.txt -w '%{http_code}\n' "https://www.wowhead.com/classic/search/suggestions-template?q=Frostbolt" > codes.txt 2>&1 || true
-          curl -sS -m 30 -A "Mozilla/5.0" -o nether.txt -w '%{http_code}\n' "https://nether.wowhead.com/classic/tooltip/spell/116" >> codes.txt 2>&1 || true
-          curl -sS -m 60 -A "Mozilla/5.0" -o spellname.csv -w '%{http_code}\n' "https://wago.tools/db2/SpellName/csv?product=wow_classic_era" >> codes.txt 2>&1 || true
-          curl -sS -m 60 -A "Mozilla/5.0" -o spellmisc.csv -w '%{http_code}\n' "https://wago.tools/db2/SpellMisc/csv?product=wow_classic_era" >> codes.txt 2>&1 || true
-          ls -la; head -c 600 wowhead.txt; echo; head -c 600 nether.txt; echo; head -3 spellname.csv; head -3 spellmisc.csv
+          UA="Mozilla/5.0"
+          get() { curl -sS -m 30 -A "$UA" -o "$1" -w "%{http_code} %{content_type} $2\n" "$2" >> codes.txt 2>&1 || echo "fail $2" >> codes.txt; }
+          get npc-hogger.json "https://www.wowhead.com/classic/search/suggestions-template?q=Hogger"
+          get npc-crusader.json "https://www.wowhead.com/classic/search/suggestions-template?q=Scarlet%20Crusader"
+          get npc-tooltip.json "https://nether.wowhead.com/classic/tooltip/npc/448"
+          for c in warrior paladin hunter rogue priest shaman mage warlock druid; do
+            curl -s -o /dev/null -w "%{http_code} classicon_$c\n" "https://wow.zamimg.com/images/wow/icons/large/classicon_$c.jpg" >> codes.txt
+          done
+          for n in Butcher "Legion Gate" Titan "Titan's Grip" "Explosive Ammunition" "Explosive Shot" Radiance "Power Word: Radiance"; do
+            f=$(echo "$n" | tr ' :' '__')
+            curl -sS -m 30 -G -A "$UA" --data-urlencode "q=$n" -o "spell-retail-$f.json" "https://www.wowhead.com/search/suggestions-template" || true
+            curl -sS -m 30 -G -A "$UA" --data-urlencode "q=$n" -o "spell-wotlk-$f.json" "https://www.wowhead.com/wotlk/search/suggestions-template" || true
+          done
+          get turtle-search.html "https://database.turtle-wow.org/?search=Butcher"
+          get npc-page.html "https://www.wowhead.com/classic/npc=448/hogger"
+          ls -la
       - name: Keep it on the site-probe branch
         run: |
           cd /tmp/site
