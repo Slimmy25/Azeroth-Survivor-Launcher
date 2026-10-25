@@ -112,57 +112,6 @@ namespace AzerothLauncher
                 app.current = "Stats";
                 app.BuildPanel("Stats");
             }
-            // the guide's video player: does the first video stream inside the launcher?
-            {
-                GuideVideo vid = null;
-                foreach (var t in Data.Guide) { if (t.Videos.Count > 0) { vid = t.Videos[0]; break; } foreach (var pg in t.Pages) if (vid == null && pg.Videos.Count > 0) vid = pg.Videos[0]; if (vid != null) break; }
-                var tests = new System.Collections.Generic.List<GuideVideo>();
-                if (vid != null) tests.Add(vid);
-                string localMp4 = Path.GetFullPath(Path.Combine("guide-videos", "races", "can-i-change-my-race.mp4"));
-                if (File.Exists(localMp4)) { var lv = new GuideVideo(); lv.Title = "local"; lv.Url = new Uri(localMp4).AbsoluteUri; tests.Add(lv); }
-                var report = new System.Text.StringBuilder();
-                foreach (GuideVideo tv in tests)
-                {
-                    vid = tv;
-                    app.Show();
-                    app.ShowSide();
-                    app.current = "Guide";
-                    app.gVideo = vid;
-                    app.BuildPanel("Guide");
-                    string state = "no web view";
-                    WebBrowser web = FindWeb(app.panel);
-                    var until = DateTime.Now.AddSeconds(25);
-                    bool probed = false;
-                    while (web != null && DateTime.Now < until)
-                    {
-                        Application.DoEvents();
-                        System.Threading.Thread.Sleep(100);
-                        try
-                        {
-                            if (web.Document == null) continue;
-                            if (!probed && web.ReadyState == WebBrowserReadyState.Complete)
-                            {   // can the page reach the address at all?
-                                probed = true;
-                                web.Document.InvokeScript("eval", new object[] { "window.__x='?';try{var x=new XMLHttpRequest();x.open('GET','" + vid.Url + "',true);x.setRequestHeader('Range','bytes=0-99');x.onreadystatechange=function(){if(x.readyState==4)window.__x=x.status+' '+x.getResponseHeader('Content-Type');};x.send();}catch(e){window.__x='err '+e.message;}" });
-                            }
-                            object r = web.Document.InvokeScript("eval", new object[] {
-                                "(function(){var v=document.getElementById('v');return 'mode='+document.documentMode+' ready='+(v?v.readyState:-1)+' duration='+(v?v.duration:-1)+' time='+(v?v.currentTime:-1)+' error='+(v&&v.error?v.error.code:0)+' h264='+(v?v.canPlayType('video/mp4'):'')+' xhr='+window.__x;})()" });
-                            state = Convert.ToString(r);
-                            if (state.Contains("ready=4") && !state.Contains("time=0 ")) break;
-                        }
-                        catch (Exception ex) { state = "script: " + ex.Message; }
-                    }
-                    report.Append(vid.Url + "\n" + state + "\n\n");
-                }
-                using (var eb = new Bitmap(900, 140))
-                {
-                    using (var g = Graphics.FromImage(eb)) { g.Clear(Color.White); g.DrawString(report.ToString(), new Font("Arial", 9), Brushes.Black, 4, 4); }
-                    eb.Save(Path.Combine(outDir, "video-player-check.png"), ImageFormat.Png);
-                }
-                app.gVideo = null;
-                app.current = "Stats";
-                app.BuildPanel("Stats");
-            }
             // every other section, to check they all use the launcher's colors
             foreach (string sec in new[] { "Cloud Save", "Addons", "Changelog", "Options", "About Launcher", "Guide" })
             {
@@ -229,18 +178,6 @@ namespace AzerothLauncher
                 }
             }
             app.tray.Visible = false;
-        }
-
-        static WebBrowser FindWeb(Control c)
-        {
-            foreach (Control k in c.Controls)
-            {
-                var w = k as WebBrowser;
-                if (w != null) return w;
-                w = FindWeb(k);
-                if (w != null) return w;
-            }
-            return null;
         }
 
         static ScrollPanel FindScroll(Control c)

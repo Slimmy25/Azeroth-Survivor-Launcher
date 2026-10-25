@@ -395,19 +395,6 @@ namespace AzerothLauncher
             return MakeThinScroll(parent, r, bg, Theme.CardEdge, Theme.GoldDim, Theme.Gold);
         }
 
-        ScrollPanel MakeWideScroll(Control parent, Rectangle r, Color bg, Color border)
-        {
-            var frame = new Bordered(border, 1);
-            frame.Bounds = r;
-            parent.Controls.Add(frame);
-            frame.BringToFront();
-            var sp = new ScrollPanel();
-            sp.Dock = DockStyle.Fill;
-            sp.BackColor = bg;
-            frame.Controls.Add(sp);
-            return sp;
-        }
-
         static int BottomOf(Control c) { return c.Top + c.Height; }
 
         // ------------------------------------------------------------------ Changelog

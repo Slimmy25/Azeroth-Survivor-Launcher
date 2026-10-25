@@ -305,8 +305,7 @@ namespace AzerothLauncher
     public class GuideCard : Control
     {
         public string Title, Desc, Label;
-        public int Number, Videos, Pages, PagesRead;
-        public bool Read, Hero;
+        public int Number, Videos, Pages;
         public event Action Pressed;
         bool hover;
         readonly float zoom;
@@ -365,12 +364,12 @@ namespace AzerothLauncher
             g.Clear(Parent != null ? Parent.BackColor : Theme.Panel);
             Theme.Smooth(g);
             var r = new RectangleF(0.5f, 0.5f, Width - 2, Height - 2);
-            Color top = Hero ? Theme.Hex("#3a2a12") : Theme.Hex("#1b1724"), bot = Hero ? Theme.Hex("#160f07") : Theme.Hex("#110e17");
+            Color top = Theme.Hex("#1b1724"), bot = Theme.Hex("#110e17");
             if (hover) { top = Theme.Mix(top, Theme.Gold, 0.10); bot = Theme.Mix(bot, Theme.Gold, 0.05); }
             using (var path = Round(r, 7))
             {
                 using (var lg = new LinearGradientBrush(r, top, bot, LinearGradientMode.Vertical)) g.FillPath(lg, path);
-                using (var pen = new Pen(hover || Hero ? Theme.Gold : Theme.Hex("#3d3647"), hover ? 1.5f : 1f)) g.DrawPath(pen, path);
+                using (var pen = new Pen(hover ? Theme.Gold : Theme.Hex("#3d3647"), hover ? 1.5f : 1f)) g.DrawPath(pen, path);
             }
             float x = 14;
             Font small = Theme.F(7.5f, FontStyle.Bold);
@@ -378,10 +377,9 @@ namespace AzerothLauncher
             {
                 float d = 30 * zoom + 4, cy = 14;
                 var c = new RectangleF(x, cy, d, d);
-                using (var b = new SolidBrush(Read ? Theme.Hex("#2f4a1c") : Theme.Hex("#2a2016"))) g.FillEllipse(b, c);
-                using (var pen = new Pen(Read ? Theme.Good : Theme.GoldDim, 1.5f)) g.DrawEllipse(pen, c);
-                Theme.CenterText(g, Read ? "✓" : Number.ToString(), Theme.F(Read ? 12 : 11, FontStyle.Bold),
-                                 Read ? Theme.Good : Theme.Gold, c, null);
+                using (var b = new SolidBrush(Theme.Hex("#2a2016"))) g.FillEllipse(b, c);
+                using (var pen = new Pen(Theme.GoldDim, 1.5f)) g.DrawEllipse(pen, c);
+                Theme.CenterText(g, Number.ToString(), Theme.F(11, FontStyle.Bold), Theme.Gold, c, null);
                 x += d + 12;
             }
             float y = 12, tw = Width - x - 14;
@@ -390,7 +388,7 @@ namespace AzerothLauncher
                 Pill(g, Lang.T(Label), x, y, GuideTheme.Red, Color.White, small);
                 y += small.Height + 6;
             }
-            Font tf = Theme.F(Hero ? 14 : 11.5f, FontStyle.Bold);
+            Font tf = Theme.F(11.5f, FontStyle.Bold);
             using (var b = new SolidBrush(Theme.Gold)) g.DrawString(Title, tf, b, new RectangleF(x, y, tw, tf.Height + 2));
             y += tf.Height + 1;
             Font df = Theme.F(9);
@@ -400,21 +398,18 @@ namespace AzerothLauncher
             {
                 sf.Trimming = StringTrimming.EllipsisWord;
                 sf.FormatFlags = StringFormatFlags.LineLimit;   // only whole lines, the last one ending in "..."
-                float dh = Hero ? Height - y - 8 : badgesY - y - 3;
+                float dh = badgesY - y - 3;
                 if (dh > df.Height * 0.8f) g.DrawString(Desc ?? "", df, b, new RectangleF(x, y, tw, dh), sf);
             }
-            // badges along the bottom (the big card has them at its right)
-            float bx = Hero ? Width - 14 : x, by = Hero ? (Height - small.Height) / 2f : badgesY;
+            // badges along the bottom
+            float bx = x, by = badgesY;
             var badges = new List<KeyValuePair<string, Color>>();
             if (Videos > 0) badges.Add(new KeyValuePair<string, Color>("▶ " + Lang.T(Videos == 1 ? "1 VIDEO" : Videos + " VIDEOS"), GuideTheme.Red));
             if (Pages > 0) badges.Add(new KeyValuePair<string, Color>(Lang.T(Pages + " PAGES"), Theme.Hex("#3d3647")));
-            if (Read && !Hero) badges.Add(new KeyValuePair<string, Color>(Lang.T("READ"), Theme.Hex("#2f4a1c")));
-            if (Hero) badges.Add(new KeyValuePair<string, Color>(Lang.T("OPEN") + " ›", Theme.Hex("#5a4318")));
             foreach (var kv in badges)
             {
-                if (Hero) bx -= g.MeasureString(kv.Key, small).Width + 8;
                 float bw = Pill(g, kv.Key, bx, by, kv.Value, Theme.Hex("#fff2d8"), small);
-                if (Hero) bx -= 6; else bx += bw + 6;
+                bx += bw + 6;
             }
         }
     }
