@@ -1117,3 +1117,5 @@ Fullscreen
 = Во весь экран
 Exit fullscreen
 = Выйти из полноэкранного режима
+Highest DPS
+= Наивысший DPS

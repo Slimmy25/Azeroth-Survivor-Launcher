@@ -1117,3 +1117,5 @@ Fullscreen
 = Toàn màn hình
 Exit fullscreen
 = Thoát toàn màn hình
+Highest DPS
+= DPS cao nhất

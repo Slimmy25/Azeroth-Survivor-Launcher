@@ -1,15 +1,48 @@
--- AZS Stats in game: /azs opens a window with the same stats as the launcher's STATS page, in tabs:
--- Overview, Classes, Abilities, Records, Nemesis, Co-op and History. CLASS picks every class or one class on its
--- own (Overview, Abilities, Records, Nemesis and History follow it). Long lists turn pages with < and >.
+-- AZS Stats in game: /azs, or the button on the minimap, opens a window with the same stats as the launcher's STATS
+-- page, in tabs along its bottom like the character sheet's: Overview, Classes, Abilities, Records, Nemesis, Co-op and
+-- History. CLASS picks every class or one class on its own (Overview, Abilities, Records, Nemesis and History follow
+-- it). Long lists turn pages with the arrows or the mouse wheel. The window is made of the game's own interface art:
+-- the dialog frame and header, your portrait, the character sheet's tabs, the spellbook's page arrows, spell and
+-- class icons. The minimap button can be dragged around the minimap; /azstats minimap hides or shows it.
 -- Lua 5.0 / 1.12 interface: scripts read `this`, `arg1`; no # operator.
 
-local W, H, ROWS = 560, 470, 20
+local W, H, ROWS = 600, 486, 20
 local TABS = { "Overview", "Classes", "Abilities", "Records", "Nemesis", "Co-op", "History" };
 local CLASS_COLORS = { warrior = "c79c6e", paladin = "f58cba", hunter = "abd473", rogue = "fff569", priest = "ffffff",
                        shaman = "2f8fff", mage = "69ccf0", warlock = "9482c9", druid = "ff7d0a", death_knight = "c41f3b" };
 
 local tab, page, classKey = 1, 1, nil;
-local frame, lines, tabButtons, classButton, pageText, prevButton, nextButton;
+local frame, lines, tabButtons, classButton, classIcon, pageText, prevButton, nextButton;
+
+-- icons: { texture, left, right, top, bottom } (the coordinates cut one class out of the class sheet)
+local CLASS_SHEET = "Interface\\Glues\\CharacterCreate\\UI-CharacterCreate-Classes";
+local CLASS_COORDS = { warrior = { 0, 0.25, 0, 0.25 }, mage = { 0.25, 0.49609375, 0, 0.25 }, rogue = { 0.49609375, 0.7421875, 0, 0.25 },
+                       druid = { 0.7421875, 0.98828125, 0, 0.25 }, hunter = { 0, 0.25, 0.25, 0.5 }, shaman = { 0.25, 0.49609375, 0.25, 0.5 },
+                       priest = { 0.49609375, 0.7421875, 0.25, 0.5 }, warlock = { 0.7421875, 0.98828125, 0.25, 0.5 },
+                       paladin = { 0, 0.25, 0.5, 0.75 } };
+local QUESTION = "Interface\\Icons\\INV_Misc_QuestionMark";
+
+local function ClassIcon(key)
+	key = string.lower(tostring(key or ""));
+	for k, c in pairs(CLASS_COORDS) do
+		if ( string.find(key, k, 1, true) ) then return { CLASS_SHEET, c[1], c[2], c[3], c[4] }; end
+	end
+	return nil;
+end
+
+local function SpellIcon(name)
+	local icon = AZSSTATS_SPELL_ICONS and AZSSTATS_SPELL_ICONS[string.lower(tostring(name or ""))];
+	if ( icon ) then return { "Interface\\Icons\\" .. icon }; end
+	return { QUESTION };
+end
+
+-- puts an icon on a texture (a spell without a known icon gets the question mark)
+local function SetIcon(tex, icon)
+	if ( not icon ) then tex:Hide(); return; end
+	tex:SetTexture(icon[1]);
+	if ( icon[2] ) then tex:SetTexCoord(icon[2], icon[3], icon[4], icon[5]); else tex:SetTexCoord(0.07, 0.93, 0.07, 0.93); end
+	tex:Show();
+end
 
 local function S() return AZSStats; end
 local function DB() S().Check(); return AZSStatsDB; end
@@ -60,7 +93,7 @@ end
 
 -- ---------------------------------------------------------------- what each tab shows: { left, right } lines
 local function Head(out, text) table.insert(out, { C("ffd100", text), "" }); end
-local function Line(out, l, r) table.insert(out, { l, r or "" }); end
+local function Line(out, l, r, icon) table.insert(out, { l, r or "", icon }); end
 local function Gap(out) table.insert(out, { " ", "" }); end
 
 local function Overview()
@@ -78,6 +111,15 @@ local function Overview()
 	Line(out, "Elites / guardians", Big(b.elites) .. " / " .. Big(b.guardians));
 	Line(out, "Bosses", C("ff8000", Big(b.bosses)));
 	Line(out, "Damage dealt", Big(b.dmg));
+	local bd = (classKey and b.best or db.best).dps;
+	Line(out, "Highest DPS", C("ff8000", type(bd) == "table" and Big(bd.v) or "-"));
+	local h = db.history;
+	for i = table.getn(h), 1, -1 do
+		if ( not classKey or h[i].class == classKey ) then
+			if ( Num(h[i].dps) > 0 ) then Line(out, "Last run's DPS", Big(h[i].dps)); end
+			break;
+		end
+	end
 	Line(out, "Damage taken", Big(b.taken));
 	Line(out, "Gold collected", C("ffd100", Big(b.gold)));
 	Line(out, "Caches opened", Big(b.chests));
@@ -103,7 +145,7 @@ local function Classes()
 	for i = 1, table.getn(list) do
 		local g = list[i].v;
 		Line(out, C(ClassHex(list[i].key), g.name ~= "" and g.name or S().Pretty(list[i].key)),
-		     Pct(g.runs, db.totals.runs) .. " of runs  ·  won " .. Pct(g.wins, g.runs));
+		     Pct(g.runs, db.totals.runs) .. " of runs  ·  won " .. Pct(g.wins, g.runs), ClassIcon(list[i].key));
 		Line(out, "    " .. C("9d9d9d", Big(g.runs) .. " runs, " .. Big(g.kills) .. " kills, best level " .. Big(g.bestLvl) ..
 		     ", longest " .. Clock(g.bestTime)), "");
 	end
@@ -140,10 +182,9 @@ local function Abilities()
 	Head(out, "Abilities  -  " .. name);
 	for i = 1, table.getn(list) do
 		local a = list[i].v;
-		local share = Num(a.picks) / math.max(1, Num(b.runs));
-		local hex = share >= 0.5 and "ff8000" or share >= 0.3 and "a335ee" or share >= 0.15 and "0070dd" or share >= 0.05 and "1eff00" or "ffffff";
-		Line(out, C(hex, a.name or S().Pretty(list[i].key)) .. (Num(a.bestRank) > 0 and C("9d9d9d", "  rank " .. a.bestRank) or ""),
-		     "picked " .. Pct(a.picks, b.runs) .. "  ·  won " .. Pct(a.wins, a.picks) .. "  ·  " .. Big(a.dmg) .. " dmg");
+		local nm = a.name or S().Pretty(list[i].key);
+		Line(out, C("ffffff", nm) .. (Num(a.bestRank) > 0 and C("9d9d9d", "  rank " .. a.bestRank) or ""),
+		     "picked " .. Pct(a.picks, b.runs) .. "  ·  won " .. Pct(a.wins, a.picks) .. "  ·  " .. Big(a.dmg) .. " dmg", SpellIcon(nm));
 	end
 	if ( table.getn(list) == 0 ) then Line(out, "No abilities recorded yet.", ""); end
 	return out;
@@ -155,6 +196,7 @@ local function Records()
 	local best = classKey and b.best or DB().best;
 	Head(out, "Personal bests  -  " .. name);
 	local order = { { "time", "Longest run", true }, { "fastestWin", "Fastest victory", true }, { "lvl", "Highest level" },
+	                 { "dps", "Highest DPS" },
 	                 { "kills", "Most kills in a run" }, { "dmg", "Most damage in a run" }, { "gold", "Most gold in a run" },
 	                 { "bosses", "Most bosses in a run" }, { "elites", "Most elites in a run" }, { "guardians", "Most guardians in a run" } };
 	for i = 1, table.getn(order) do
@@ -222,7 +264,7 @@ local function Coop()
 	for i = 1, table.getn(list) do
 		local e = list[i].v;
 		Line(out, C(ClassHex(e.class), list[i].key) .. ((e.cname or "") ~= "" and C("9d9d9d", "  " .. e.cname) or ""),
-		     Big(e.runs) .. " runs  ·  " .. Big(e.wins) .. " won");
+		     Big(e.runs) .. " runs  ·  " .. Big(e.wins) .. " won", ClassIcon(e.class));
 		local acc = "first " .. (e.first or "?");
 		if ( (e.firstWin or "") ~= "" ) then acc = acc .. "  ·  first win " .. e.firstWin; end
 		if ( Num(e.fastestWin) > 0 ) then acc = acc .. "  ·  fastest win " .. Clock(e.fastestWin); end
@@ -244,7 +286,8 @@ local function History()
 		if ( not classKey or r.class == classKey ) then
 			local hex = r.kind == "victory" and "1eff00" or r.kind == "defeat" and "ff4040" or "9d9d9d";
 			Line(out, C(hex, r.result) .. "  " .. C(ClassHex(r.class), r.cname) .. "  " .. (r.zname or ""),
-			     Clock(r.t) .. "  ·  lvl " .. Big(r.lvl) .. "  ·  " .. Big(r.kills) .. " kills");
+			     Clock(r.t) .. "  ·  lvl " .. Big(r.lvl) .. "  ·  " .. Big(r.kills) .. " kills" ..
+			     (Num(r.dps) > 0 and ("  ·  " .. C("ff8000", Big(r.dps) .. " DPS")) or ""), ClassIcon(r.class));
 			local extra = r.date or "";
 			if ( r.party ) then extra = extra .. "  with " .. r.party; end
 			if ( r.killer ) then extra = extra .. "  slain by " .. r.killer; end
@@ -260,12 +303,17 @@ local BUILD = { Overview, Classes, Abilities, Records, Nemesis, Coop, History };
 -- ---------------------------------------------------------------- the window
 local function Refresh()
 	if ( not frame or not frame:IsShown() ) then return; end
-	for i = 1, table.getn(tabButtons) do
-		if ( i == tab ) then tabButtons[i]:LockHighlight(); else tabButtons[i]:UnlockHighlight(); end
+	if ( frame.numTabs and PanelTemplates_SetTab ) then
+		PanelTemplates_SetTab(frame, tab);
+	else
+		for i = 1, table.getn(tabButtons) do
+			if ( i == tab ) then tabButtons[i]:LockHighlight(); else tabButtons[i]:UnlockHighlight(); end
+		end
 	end
 	local _, name = Block();
 	classButton:SetText(classKey and name or "All classes");
-	if ( tab == 2 or tab == 6 ) then classButton:Hide(); else classButton:Show(); end
+	SetIcon(classIcon, classKey and ClassIcon(classKey) or { "Interface\\Icons\\INV_Misc_Book_09" });
+	if ( tab == 2 or tab == 6 ) then classButton:Hide(); classIcon:Hide(); else classButton:Show(); end
 	local all = BUILD[tab]();
 	local pages = math.max(1, math.ceil(table.getn(all) / ROWS));
 	if ( page > pages ) then page = pages; end
@@ -274,6 +322,8 @@ local function Refresh()
 		local e = all[(page - 1) * ROWS + i];
 		lines[i].l:SetText(e and e[1] or "");
 		lines[i].r:SetText(e and e[2] or "");
+		SetIcon(lines[i].icon, e and e[3] or nil);
+		lines[i].l:SetPoint("TOPLEFT", frame, "TOPLEFT", (e and e[3]) and 44 or 26, lines[i].y);
 	end
 	pageText:SetText(page .. " / " .. pages);
 	if ( page > 1 ) then prevButton:Enable(); else prevButton:Disable(); end
@@ -302,70 +352,147 @@ local function Button(parent, text, width, onClick)
 	return b;
 end
 
+-- a frame from one of the game's templates, or a plain one if the game does not have that template
+local function Templated(kind, name, parent, template)
+	local ok, f = pcall(CreateFrame, kind, name, parent, template);
+	if ( ok and f ) then return f, true; end
+	return CreateFrame(kind, name, parent), false;
+end
+
+local function Sound(name) if ( PlaySound ) then pcall(PlaySound, name); end end
+
+-- the spellbook's page arrows
+local function Arrow(parent, dir, onClick)
+	local b = CreateFrame("Button", nil, parent);
+	b:SetWidth(28);
+	b:SetHeight(28);
+	b:SetNormalTexture("Interface\\Buttons\\UI-SpellbookIcon-" .. dir .. "Page-Up");
+	b:SetPushedTexture("Interface\\Buttons\\UI-SpellbookIcon-" .. dir .. "Page-Down");
+	b:SetDisabledTexture("Interface\\Buttons\\UI-SpellbookIcon-" .. dir .. "Page-Disabled");
+	b:SetHighlightTexture("Interface\\Buttons\\UI-Common-MouseHilight", "ADD");
+	b:SetScript("OnClick", function() Sound("igAbiliityPageTurn"); onClick(); end);
+	return b;
+end
+
 local function Build()
 	frame = CreateFrame("Frame", "AZSStatsFrame", UIParent);
 	frame:SetWidth(W);
 	frame:SetHeight(H);
-	frame:SetPoint("CENTER", UIParent, "CENTER", 0, 0);
+	frame:SetPoint("CENTER", UIParent, "CENTER", 0, 20);
 	frame:SetFrameStrata("DIALOG");
+	frame:SetToplevel(true);
 	frame:SetBackdrop({ bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",
 	                    edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
 	                    tile = true, tileSize = 32, edgeSize = 32, insets = { left = 11, right = 12, top = 12, bottom = 11 } });
 	frame:EnableMouse(true);
+	frame:EnableMouseWheel(true);
 	frame:SetMovable(true);
+	frame:SetClampedToScreen(true);
 	frame:RegisterForDrag("LeftButton");
 	frame:SetScript("OnDragStart", function() this:StartMoving(); end);
 	frame:SetScript("OnDragStop", function() this:StopMovingOrSizing(); end);
-	frame:SetScript("OnShow", function() Refresh(); end);
+	frame:SetScript("OnMouseWheel", function() page = page - arg1; Refresh(); end);   -- the wheel turns the pages
+	frame:SetScript("OnShow", function() Sound("igCharacterInfoOpen"); Refresh(); end);
+	frame:SetScript("OnHide", function() Sound("igCharacterInfoClose"); end);
 	frame:Hide();
 	table.insert(UISpecialFrames, "AZSStatsFrame");      -- Escape closes it
 
-	local title = frame:CreateFontString(nil, "OVERLAY", "GameFontNormalLarge");
-	title:SetPoint("TOP", frame, "TOP", 0, -18);
+	-- the dialog header with the title, and your portrait in a gold ring at the top left
+	local header = frame:CreateTexture(nil, "ARTWORK");
+	header:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Header");
+	header:SetWidth(300);
+	header:SetHeight(64);
+	header:SetPoint("TOP", frame, "TOP", 0, 12);
+	local title = frame:CreateFontString(nil, "OVERLAY", "GameFontNormal");
+	title:SetPoint("TOP", header, "TOP", 0, -14);
 	title:SetText("AZS Stats");
+	local portrait = frame:CreateTexture(nil, "ARTWORK");
+	portrait:SetWidth(46);
+	portrait:SetHeight(46);
+	portrait:SetPoint("TOPLEFT", frame, "TOPLEFT", 18, -16);
+	if ( SetPortraitTexture ) then SetPortraitTexture(portrait, "player"); end
+	local ring = frame:CreateTexture(nil, "OVERLAY");
+	ring:SetTexture("Interface\\Minimap\\MiniMap-TrackingBorder");
+	ring:SetWidth(84);
+	ring:SetHeight(84);
+	ring:SetPoint("TOPLEFT", portrait, "TOPLEFT", -6, 5);
+	frame:RegisterEvent("UNIT_PORTRAIT_UPDATE");
+	frame:SetScript("OnEvent", function() if ( arg1 == "player" and SetPortraitTexture ) then SetPortraitTexture(portrait, "player"); end end);
 	local close = CreateFrame("Button", nil, frame, "UIPanelCloseButton");
 	close:SetPoint("TOPRIGHT", frame, "TOPRIGHT", -6, -6);
 
-	tabButtons = {};
-	local x = 18;
-	for i = 1, table.getn(TABS) do
-		local index = i;
-		local b = Button(frame, TABS[i], 74, function() tab = index; page = 1; Refresh(); end);
-		b:SetPoint("TOPLEFT", frame, "TOPLEFT", x, -46);
-		x = x + 75;
-		tabButtons[i] = b;
-	end
-	classButton = Button(frame, "All classes", 140, NextClass);
-	classButton:SetPoint("TOPLEFT", frame, "TOPLEFT", 18, -72);
+	-- CLASS: all classes or one, with its icon
+	classIcon = frame:CreateTexture(nil, "ARTWORK");
+	classIcon:SetWidth(22);
+	classIcon:SetHeight(22);
+	classIcon:SetPoint("TOPLEFT", frame, "TOPLEFT", 74, -38);
+	classButton = Button(frame, "All classes", 150, function() Sound("igMainMenuOptionCheckBoxOn"); NextClass(); end);
+	classButton:SetPoint("LEFT", classIcon, "RIGHT", 6, 0);
 	local hint = frame:CreateFontString(nil, "OVERLAY", "GameFontDisableSmall");
 	hint:SetPoint("LEFT", classButton, "RIGHT", 8, 0);
 	hint:SetText("click to switch class");
 
+	-- the lines, each with room for an icon
+	local rule = frame:CreateTexture(nil, "ARTWORK");
+	rule:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Divider");
+	rule:SetWidth(W - 40);
+	rule:SetHeight(16);
+	rule:SetPoint("TOPLEFT", frame, "TOPLEFT", 20, -70);
 	lines = {};
 	for i = 1, ROWS do
-		local y = -102 - (i - 1) * 16;
+		local y = -86 - (i - 1) * 17;
+		local icon = frame:CreateTexture(nil, "ARTWORK");
+		icon:SetWidth(15);
+		icon:SetHeight(15);
+		icon:SetPoint("TOPLEFT", frame, "TOPLEFT", 24, y);
 		local l = frame:CreateFontString(nil, "OVERLAY", "GameFontHighlightSmall");
-		l:SetPoint("TOPLEFT", frame, "TOPLEFT", 22, y);
-		l:SetWidth(310);
+		l:SetPoint("TOPLEFT", frame, "TOPLEFT", 26, y);
+		l:SetWidth(320);
 		l:SetHeight(16);
 		l:SetJustifyH("LEFT");
 		local r = frame:CreateFontString(nil, "OVERLAY", "GameFontHighlightSmall");
-		r:SetPoint("TOPRIGHT", frame, "TOPRIGHT", -22, y);
-		r:SetWidth(W - 44 - 150);
+		r:SetPoint("TOPRIGHT", frame, "TOPRIGHT", -24, y);
+		r:SetWidth(W - 48 - 150);
 		r:SetHeight(16);
 		r:SetJustifyH("RIGHT");
-		lines[i] = { l = l, r = r };
+		lines[i] = { l = l, r = r, icon = icon, y = y };
 	end
 
-	prevButton = Button(frame, "<", 32, function() page = page - 1; Refresh(); end);
-	prevButton:SetPoint("BOTTOMLEFT", frame, "BOTTOMLEFT", 18, 16);
-	nextButton = Button(frame, ">", 32, function() page = page + 1; Refresh(); end);
-	nextButton:SetPoint("LEFT", prevButton, "RIGHT", 4, 0);
+	-- the spellbook's arrows and the page
+	prevButton = Arrow(frame, "Prev", function() page = page - 1; Refresh(); end);
+	prevButton:SetPoint("BOTTOMLEFT", frame, "BOTTOMLEFT", 22, 18);
+	nextButton = Arrow(frame, "Next", function() page = page + 1; Refresh(); end);
+	nextButton:SetPoint("LEFT", prevButton, "RIGHT", 2, 0);
 	pageText = frame:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall");
-	pageText:SetPoint("LEFT", nextButton, "RIGHT", 8, 0);
+	pageText:SetPoint("LEFT", nextButton, "RIGHT", 6, 0);
 	local foot = frame:CreateFontString(nil, "OVERLAY", "GameFontDisableSmall");
-	foot:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -22, 22);
+	foot:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -22, 26);
 	foot:SetText("Also on the launcher's STATS page");
+
+	-- the character sheet's tabs, along the bottom edge
+	tabButtons = {};
+	local templated = true;
+	for i = 1, table.getn(TABS) do
+		local index = i;
+		local b, ok = Templated("Button", "AZSStatsFrameTab" .. i, frame, "CharacterFrameTabButtonTemplate");
+		templated = templated and ok;
+		if ( not ok ) then
+			b:Hide();
+			b = Button(frame, TABS[i], 78, nil);
+		end
+		b:SetID(i);
+		b:SetText(TABS[i]);
+		b:SetScript("OnClick", function() Sound("igCharacterInfoTab"); tab = index; page = 1; Refresh(); end);
+		if ( i == 1 ) then b:SetPoint("TOPLEFT", frame, "BOTTOMLEFT", 12, ok and 8 or -2);
+		else b:SetPoint("LEFT", tabButtons[i - 1], "RIGHT", ok and -14 or 2, 0); end
+		if ( ok and PanelTemplates_TabResize ) then pcall(PanelTemplates_TabResize, 0, b); end
+		tabButtons[i] = b;
+	end
+	if ( templated and PanelTemplates_SetNumTabs ) then
+		PanelTemplates_SetNumTabs(frame, table.getn(TABS));
+		frame.selectedTab = 1;
+		PanelTemplates_UpdateTabs(frame);
+	end
 end
 
 function AZSStats_Toggle()
@@ -375,3 +502,86 @@ end
 
 SLASH_AZSSTATSUI1 = "/azs";
 SlashCmdList["AZSSTATSUI"] = function() AZSStats_Toggle(); end
+
+-- ---------------------------------------------------------------- the minimap button
+-- The tracking-button look: a round icon in the minimap's gold ring. Click: the window. Drag: move it around the
+-- minimap (the angle is saved). Its tooltip shows your runs and best results at a glance.
+local mini;
+
+local function MiniPlace()
+	local a = math.rad(Num(DB().minimap.angle));
+	local r = 80;
+	mini:ClearAllPoints();
+	mini:SetPoint("CENTER", Minimap, "CENTER", r * math.cos(a), r * math.sin(a));
+end
+
+local function MiniTooltip()
+	GameTooltip:SetOwner(this, "ANCHOR_LEFT");
+	GameTooltip:AddLine("AZS Stats");
+	local db = DB();
+	local t = db.totals;
+	GameTooltip:AddDoubleLine("Runs", Big(t.runs) .. "  (" .. Pct(t.wins, t.runs) .. " won)", 1, 1, 1, 1, 1, 1);
+	local b = db.best;
+	if ( type(b.dps) == "table" ) then GameTooltip:AddDoubleLine("Highest DPS", Big(b.dps.v), 1, 1, 1, 1, 0.5, 0); end
+	if ( type(b.time) == "table" ) then GameTooltip:AddDoubleLine("Longest run", Clock(b.time.v), 1, 1, 1, 1, 1, 1); end
+	if ( type(b.lvl) == "table" ) then GameTooltip:AddDoubleLine("Highest level", Big(b.lvl.v), 1, 1, 1, 1, 1, 1); end
+	GameTooltip:AddDoubleLine("Time played", Hours(db.play.seconds), 1, 1, 1, 1, 1, 1);
+	GameTooltip:AddLine(" ");
+	GameTooltip:AddLine("Click to open your stats. Drag to move this button.", 0.6, 0.6, 0.6);
+	GameTooltip:Show();
+end
+
+local function MiniBuild()
+	if ( mini or not Minimap ) then return; end
+	local db = DB();
+	if ( type(db.minimap) ~= "table" ) then db.minimap = { angle = 200, hide = false }; end
+	mini = CreateFrame("Button", "AZSStatsMinimapButton", Minimap);
+	mini:SetWidth(31);
+	mini:SetHeight(31);
+	mini:SetFrameStrata("MEDIUM");
+	mini:SetFrameLevel(8);
+	mini:SetToplevel(true);
+	local icon = mini:CreateTexture(nil, "BACKGROUND");
+	icon:SetTexture("Interface\\Icons\\INV_Misc_Book_09");
+	icon:SetTexCoord(0.07, 0.93, 0.07, 0.93);
+	icon:SetWidth(20);
+	icon:SetHeight(20);
+	icon:SetPoint("TOPLEFT", mini, "TOPLEFT", 6, -5);
+	local border = mini:CreateTexture(nil, "OVERLAY");
+	border:SetTexture("Interface\\Minimap\\MiniMap-TrackingBorder");
+	border:SetWidth(53);
+	border:SetHeight(53);
+	border:SetPoint("TOPLEFT", mini, "TOPLEFT", 0, 0);
+	mini:SetHighlightTexture("Interface\\Minimap\\UI-Minimap-ZoomButton-Highlight");
+	mini:RegisterForClicks("LeftButtonUp", "RightButtonUp");
+	mini:RegisterForDrag("LeftButton");
+	mini:SetScript("OnClick", function() AZSStats_Toggle(); end);
+	mini:SetScript("OnEnter", MiniTooltip);
+	mini:SetScript("OnLeave", function() GameTooltip:Hide(); end);
+	mini:SetScript("OnDragStart", function()
+		this:SetScript("OnUpdate", function()
+			local x, y = GetCursorPosition();
+			local s = Minimap:GetEffectiveScale();
+			local cx, cy = Minimap:GetCenter();
+			DB().minimap.angle = math.deg(math.atan2(y / s - cy, x / s - cx));
+			MiniPlace();
+		end);
+	end);
+	mini:SetScript("OnDragStop", function() this:SetScript("OnUpdate", nil); end);
+	MiniPlace();
+	if ( db.minimap.hide ) then mini:Hide(); end
+end
+
+function AZSStats_ToggleMinimapButton()
+	MiniBuild();
+	if ( not mini ) then return; end
+	local m = DB().minimap;
+	m.hide = not m.hide;
+	if ( m.hide ) then mini:Hide(); S().Print("the minimap button is hidden. /azstats minimap brings it back.");
+	else mini:Show(); S().Print("the minimap button is back."); end
+end
+
+local loader = CreateFrame("Frame");
+loader:RegisterEvent("VARIABLES_LOADED");
+loader:RegisterEvent("PLAYER_ENTERING_WORLD");
+loader:SetScript("OnEvent", function() MiniBuild(); end);

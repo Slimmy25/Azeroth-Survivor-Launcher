@@ -1117,3 +1117,5 @@ Fullscreen
 = Tam ekran
 Exit fullscreen
 = Tam ekrandan çık
+Highest DPS
+= En yüksek DPS

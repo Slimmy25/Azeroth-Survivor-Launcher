@@ -1117,3 +1117,5 @@ Fullscreen
 = เต็มจอ
 Exit fullscreen
 = ออกจากเต็มจอ
+Highest DPS
+= DPS สูงสุด
