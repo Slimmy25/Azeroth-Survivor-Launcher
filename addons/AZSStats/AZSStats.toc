@@ -5,4 +5,5 @@
 ## SavedVariables: AZSStatsDB
 AZSStats.lua
 AZSStatsIcons.lua
+AZSStatsFaces.lua
 AZSStatsUI.lua

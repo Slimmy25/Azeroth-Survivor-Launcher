@@ -138,8 +138,46 @@ namespace AzerothLauncher
 
         public static Image Npc(string name, Control repaint)
         {
+            int model = NpcModel(name);
+            if (model <= 0) return null;
+            return Picture("npc_" + model, NpcUrl(model), repaint, true);
+        }
+
+        static string NpcUrl(int model)
+        {
+            return "https://wow.zamimg.com/modelviewer/classic/webthumbs/npc/" + (model & 255) + "/" + model + ".jpg";
+        }
+
+        // NpcFaces: the creature's face, cut and ready (downloaded now if it is not in the cache yet), or null
+        internal static Bitmap NpcFace(string name)
+        {
+            int model = NpcModel(name);
+            if (model <= 0) return null;
+            Directory.CreateDirectory(CacheDir);
+            string path = Path.Combine(CacheDir, "npc_" + model + ".jpg");
+            if (!File.Exists(path))
+            {
+                byte[] data = Get(NpcUrl(model));
+                if (data == null || data.Length == 0) return null;
+                File.WriteAllBytes(path + ".part", data);
+                if (File.Exists(path)) File.Delete(path);
+                File.Move(path + ".part", path);
+            }
+            Bitmap src;
+            using (var tmp = Image.FromFile(path)) src = new Bitmap(tmp);
+            Bitmap f = Face(src);
+            if (f != src) src.Dispose();
+            return f;
+        }
+
+        static readonly object npcLock = new object();
+
+        static int NpcModel(string name)
+        {
             name = (name ?? "").Trim();
-            if (name.Length == 0) return null;
+            if (name.Length == 0) return 0;
+            lock (npcLock)
+            {
             if (npcModels == null)
             {
                 npcModels = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
@@ -156,8 +194,8 @@ namespace AzerothLauncher
                 catch (Exception) { }
             }
             int model;
-            if (!npcModels.TryGetValue(name, out model)) return null;
-            return Picture("npc_" + model, "https://wow.zamimg.com/modelviewer/classic/webthumbs/npc/" + (model & 255) + "/" + model + ".jpg", repaint, true);
+            return npcModels.TryGetValue(name, out model) ? model : 0;
+            }
         }
 
         // ---- a name that has to be looked up first; the answer (or "none") is remembered on disk
@@ -359,6 +397,120 @@ namespace AzerothLauncher
                 }
             }
             return "";                                       // asked, and Wowhead has no such spell
+        }
+    }
+
+    // The creature faces for the AZS Stats addon's own Nemesis tab and death log, the same pictures the STATS page
+    // shows. The game cannot fetch anything itself, so the launcher writes them into the installed addon on this PC:
+    // AZSStats\Faces\<name>.tga (64 x 64, round), and AZSStatsFaces.lua lists them. Nothing of this is uploaded
+    // anywhere; the addon's public zip ships only the empty list. The game reads new faces at the next /reload.
+    public static class NpcFaces
+    {
+        static readonly object gate = new object();
+        static bool running;
+
+        // the file name the addon looks for: lower case letters and digits only (as AZSStatsUI.lua's NpcKey)
+        public static string Key(string name)
+        {
+            return Regex.Replace((name ?? "").Trim().ToLowerInvariant(), "[^a-z0-9]", "");
+        }
+
+        public static void Sync(string addonDir, IEnumerable<string> names)
+        {
+            if (string.IsNullOrEmpty(addonDir) || !Directory.Exists(addonDir) || names == null) return;
+            var todo = new Dictionary<string, string>();
+            foreach (string n in names)
+            {
+                string k = Key(n);
+                if (k.Length > 0 && k.Length <= 60 && !todo.ContainsKey(k)) todo[k] = n.Trim();
+            }
+            lock (gate) { if (running) return; running = true; }
+            ThreadPool.QueueUserWorkItem(delegate
+            {
+                try { Work(addonDir, todo); }
+                catch (Exception) { }
+                finally { lock (gate) running = false; }
+            });
+        }
+
+        static void Work(string addonDir, Dictionary<string, string> todo)
+        {
+            string dir = Path.Combine(addonDir, "Faces");
+            Directory.CreateDirectory(dir);
+            foreach (var kv in todo)
+            {
+                string tga = Path.Combine(dir, kv.Key + ".tga");
+                if (File.Exists(tga)) continue;
+                try
+                {
+                    using (Bitmap face = SpellIcons.NpcFace(kv.Value))
+                        if (face != null) WriteTga(Round(face, 64), tga);
+                }
+                catch (Exception) { }
+            }
+            // the list the addon reads: every face that is there
+            var sb = new StringBuilder();
+            sb.Append("-- Written by the Azeroth Survivors Launcher: the creature faces in the Faces folder.\r\n");
+            sb.Append("AZSSTATS_FACES = {\r\n");
+            var keys = new List<string>();
+            foreach (string f in Directory.GetFiles(dir, "*.tga"))
+            {
+                string k = Path.GetFileNameWithoutExtension(f);
+                if (Regex.IsMatch(k, "^[a-z0-9]+$")) keys.Add(k);
+            }
+            keys.Sort(StringComparer.Ordinal);
+            foreach (string k in keys) sb.Append("\t[\"").Append(k).Append("\"] = 1,\r\n");
+            sb.Append("};\r\n");
+            string list = Path.Combine(addonDir, Stats.FacesFile), text = sb.ToString();
+            string old = File.Exists(list) ? File.ReadAllText(list, Encoding.UTF8) : null;
+            if (old != text) File.WriteAllText(list, text, new UTF8Encoding(false));
+        }
+
+        // the face scaled to size x size, inside a circle with a soft edge (outside it is see-through)
+        static Bitmap Round(Bitmap src, int size)
+        {
+            var b = new Bitmap(size, size, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+            using (var g = Graphics.FromImage(b))
+            {
+                g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                g.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
+                g.DrawImage(src, new Rectangle(0, 0, size, size));
+            }
+            double r = size / 2.0, edge = 1.5;
+            for (int y = 0; y < size; y++)
+                for (int x = 0; x < size; x++)
+                {
+                    double dx = x + 0.5 - r, dy = y + 0.5 - r, d = Math.Sqrt(dx * dx + dy * dy);
+                    double a = d <= r - edge ? 1 : d >= r ? 0 : (r - d) / edge;
+                    Color c = b.GetPixel(x, y);
+                    b.SetPixel(x, y, Color.FromArgb((int)(255 * a), c.R, c.G, c.B));
+                }
+            return b;
+        }
+
+        // an uncompressed 32-bit TGA, as the game reads (rows from the bottom up)
+        static void WriteTga(Bitmap b, string path)
+        {
+            using (b)
+            {
+                int w = b.Width, h = b.Height;
+                var data = new byte[18 + w * h * 4];
+                data[2] = 2;                                     // true colour, not compressed
+                data[12] = (byte)(w & 255); data[13] = (byte)(w >> 8);
+                data[14] = (byte)(h & 255); data[15] = (byte)(h >> 8);
+                data[16] = 32;
+                data[17] = 8;                                    // 8 alpha bits, origin bottom left
+                int i = 18;
+                for (int y = h - 1; y >= 0; y--)
+                    for (int x = 0; x < w; x++)
+                    {
+                        Color c = b.GetPixel(x, y);
+                        data[i++] = c.B; data[i++] = c.G; data[i++] = c.R; data[i++] = c.A;
+                    }
+                File.WriteAllBytes(path + ".part", data);
+                if (File.Exists(path)) File.Delete(path);
+                File.Move(path + ".part", path);
+            }
         }
     }
 }

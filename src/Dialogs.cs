@@ -156,29 +156,143 @@ namespace AzerothLauncher
         }
     }
 
-    // Two steps: (1) open the download in the web browser, (2) tell the launcher it is in Downloads.
-    // Not modal and not always-on-top, so the browser can be used in between.
+    // Installs the game from inside the launcher: it downloads the client (with the download server's login) into a
+    // "temp" folder beside the launcher, with a percentage bar, unpacks it next to the launcher and deletes the temp
+    // folder. Not modal, so the launcher stays usable; the back arrow cancels a download.
     public class InstallDialog : WowDialog
     {
-        public InstallDialog(LauncherApp app) : base("Install the game")
+        const int BarW = 380;
+        readonly LauncherApp app;
+        public string Phase = "offer";                       // offer / download / install / done
+        public ManualResetEvent CancelEvent;
+        public bool ForSetup;                                // part of first-time setup: setup carries on afterwards
+        Label statusLbl, detail;
+        ProgressBarGold bar;
+        WowButton cancelBtn;
+
+        public InstallDialog(LauncherApp app, bool forSetup) : base("Install the game")
         {
-            Begin();
-            Body.Add(UI.Text("Install Azeroth Survivors", 18, FontStyle.Bold, Theme.Gold, Theme.Panel, 0), Align.Center, 30, 4, 30, 4);
-            Body.Add(UI.Line(Theme.GoldDim, 10, 2), Align.Fill, 30, 0, 30, 10);
-            Para("Step 1", 12, FontStyle.Bold, Theme.Gold, 30, 0, 0, 0);
-            Para("Download the game in your web browser.", 11, FontStyle.Regular, Theme.Text, 30, 0, 0, 0);
-            Body.Add(B("OPEN DOWNLOAD", delegate
+            this.app = app;
+            ForSetup = forSetup;
+            BackAction = Back;
+            FormClosing += delegate(object s, FormClosingEventArgs e)
             {
-                Util.OpenInShell(LauncherApp.ClientUrl);
-                app.SetStatus("Download opened in your browser.");
-            }, 260, 40, 12), Align.Center, 30, 6, 30, 14);
-            Para("Step 2", 12, FontStyle.Bold, Theme.Gold, 30, 0, 0, 0);
-            Para("When the download has finished, come back here.", 11, FontStyle.Regular, Theme.Text, 30, 0, 0, 300);
-            Body.Add(B("IT'S IN MY DOWNLOADS", delegate { Close(); app.InstallFromDownloads(); }, 260, 40, 12), Align.Center, 30, 6, 30, 6);
-            Para("The launcher finds the file (in its own folder or Downloads), unpacks the game here and deletes the download.",
-                 9, FontStyle.Italic, Theme.GoldDim, 30, 0, 0, 300);
-            Body.Add(B("CANCEL", Close, 120, 30, 10), Align.Center, 30, 10, 30, 16);
+                if (e.CloseReason == CloseReason.UserClosing && (Phase == "install" || Phase == "download"))
+                {
+                    e.Cancel = true;
+                    Back();
+                }
+            };
+            ShowOffer();
+        }
+
+        void Reset(string title)
+        {
+            if (bar != null) bar.Stop();
+            Begin();
+            Body.Add(UI.Text(title, 18, FontStyle.Bold, Theme.Gold, Theme.Panel, 0), Align.Center, 30, 4, 30, 4);
+            Body.Add(UI.Line(Theme.GoldDim, BarW, 2), Align.Fill, 30, 0, 30, 10);
+        }
+
+        Label Line(string text, Color fg, float size, bool italic, int top, int bottom)
+        {
+            return Body.Add(UI.Text(text, size, italic ? FontStyle.Italic : FontStyle.Regular, fg, Theme.Panel, BarW),
+                            Align.Left, 30, top, 30, bottom);
+        }
+
+        public void ShowOffer()
+        {
+            Phase = "offer";
+            Reset(ForSetup ? "Welcome, Adventurer" : "Install Azeroth Survivors");
+            if (ForSetup) Line("First, the game itself.", Theme.Gold, 12, false, 0, 6);
+            Line("The launcher downloads Azeroth Survivors and installs it here, next to the launcher:", Theme.Text, 11, false, 0, 2);
+            Line(Util.LauncherDir, Theme.LinkBlue, 9, false, 0, 8);
+            Line("The download goes into a folder named temp beside the launcher and is deleted when the game is installed. " +
+                 "Your addons, addon settings and saves are kept.", Theme.GoldDim, 9, true, 0, 0);
+            Body.Add(new HRow(12, B("DOWNLOAD AND INSTALL", Start, 250, 40, 12), B(ForSetup ? "LATER" : "CANCEL", Close, 120, 40, 11)),
+                     Align.Center, 30, 14, 30, 6);
+            Body.Add(B("I ALREADY DOWNLOADED IT", delegate { bool setup = ForSetup; Close(); app.InstallFromDownloads(setup); }, 230, 26, 9),
+                     Align.Center, 30, 0, 30, 14);
             Finish();
+        }
+
+        void Start()
+        {
+            CancelEvent = new ManualResetEvent(false);
+            ShowProgress("download", "Connecting to the download server...");
+            if (!app.BeginClientDownload(this)) ShowOffer();
+        }
+
+        void Back()
+        {
+            if (Phase == "install")
+                Msg.Show(this, "The game is being installed. Please wait until it has finished.", "Installing");
+            else if (Phase == "download") Cancel();
+            else Close();
+        }
+
+        void Cancel()
+        {
+            if (CancelEvent != null) CancelEvent.Set();
+            if (cancelBtn != null) cancelBtn.Label = "CANCELLING...";
+        }
+
+        public void ShowProgress(string phase, string text)
+        {
+            Phase = phase;
+            Reset(phase == "download" ? "Downloading the game" : "Installing the game");
+            statusLbl = Line(text, Theme.Text, 11, false, 0, 8);
+            bar = Body.Add(new ProgressBarGold(BarW, 18), Align.Left, 30, 0, 30, 0);
+            detail = Line(" ", Theme.GoldDim, 10, false, 6, 0);
+            cancelBtn = null;
+            if (phase == "download")
+                cancelBtn = Body.Add(B("CANCEL", Cancel, 130, 34, 11), Align.Center, 30, 12, 30, 16);
+            else
+            {
+                Line("Please keep the launcher open until this has finished.", Theme.GoldDim, 9, true, 2, 16);
+                bar.Pulse();
+            }
+            Finish();
+        }
+
+        public void SetPhase(string phase, string text)
+        {
+            if (Phase == "done" || Phase == "offer") return;
+            if (phase != Phase) ShowProgress(phase, text);
+            else if (statusLbl != null) statusLbl.Text = Lang.T(text);
+        }
+
+        // the bar and "1.2 GB of 3.4 GB  (35%)"
+        public void SetProgress(long done, long total)
+        {
+            if (Phase != "download" || bar == null) return;
+            if (total > 0)
+            {
+                double frac = Math.Min(1.0, (double)done / total);
+                bar.Set(frac);
+                detail.Text = Lang.T(Util.FmtSize(done) + " of " + Util.FmtSize(total) + "  (" + (int)(frac * 100) + "%)");
+            }
+            else
+            {
+                detail.Text = Lang.T(Util.FmtSize(done) + " downloaded");
+                bar.Pulse();
+            }
+        }
+
+        public void ShowResult(bool ok, string text)
+        {
+            Phase = "done";
+            Reset(ok ? "Game installed" : "Install failed");
+            Line(text, ok ? Theme.Good : Theme.Bad, 11, false, 0, 6);
+            if (ok) Body.Add(B(ForSetup ? "CONTINUE" : "CLOSE", Close, 150, 40, 12), Align.Center, 30, 10, 30, 16);
+            else Body.Add(new HRow(12, B("TRY AGAIN", ShowOffer, 150, 40, 12), B("CLOSE", Close, 130, 40, 12)), Align.Center, 30, 10, 30, 16);
+            Finish();
+        }
+
+        protected override void OnFormClosed(FormClosedEventArgs e)
+        {
+            if (bar != null) bar.Stop();
+            base.OnFormClosed(e);
         }
     }
 

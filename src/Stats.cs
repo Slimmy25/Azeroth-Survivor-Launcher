@@ -379,6 +379,7 @@ namespace AzerothLauncher
     {
         public const string AddonFolder = "AZSStats", DbName = "AZSStatsDB";
         public const string FileName = AddonFolder + ".lua";
+        public const string FacesFile = AddonFolder + "Faces.lua";
         static readonly string[] AddonFiles = { AddonFolder + ".toc", AddonFolder + ".lua", AddonFolder + "Icons.lua", AddonFolder + "UI.lua" };
         // its earlier names ("AS Time Tracker", "Azeroth Stats"): replaced, and their records carried over, when
         // AZS Stats is installed; until then their files are read
@@ -498,6 +499,17 @@ namespace AzerothLauncher
             foreach (var h in LuaReader.List(LuaReader.Tab(db, "builds"))) st.Builds.Add(ReadRun(h));
             var bk = LuaReader.Tab(db, "bossKills");
             if (bk != null) foreach (var kv in bk) st.BossKills[kv.Key] = LuaReader.Num(bk, kv.Key);
+
+            // the same creature faces for the addon's own Nemesis tab (in the background)
+            try
+            {
+                var who = new List<string>();
+                foreach (var n in st.Nemesis) who.Add(n.Name);
+                foreach (var d in st.Deaths) who.Add(d.Killer);
+                foreach (var kv in st.BossKills) who.Add(kv.Key);
+                NpcFaces.Sync(AddonDirNear(savedDir), who);
+            }
+            catch (Exception) { }
 
             // co-op
             var co = LuaReader.Tab(db, "coop");
@@ -715,6 +727,27 @@ namespace AzerothLauncher
 
         public static bool AddonInstalled(string addonsDir) { return AddonPath(addonsDir) != null; }
 
+        // the installed addon's folder, found from the saved-variables folder: an AddOns (or Interface\AddOns) folder
+        // beside it or a few folders up (benilla-config\saved -> benilla-config\AddOns; WTF\Account\... -> Interface\AddOns)
+        static string AddonDirNear(string savedDir)
+        {
+            try
+            {
+                string d = savedDir;
+                for (int up = 0; up < 5 && !string.IsNullOrEmpty(d); up++)
+                {
+                    foreach (string a in new[] { Path.Combine(d, "AddOns"), Path.Combine(d, "Interface", "AddOns") })
+                    {
+                        string f = Directory.Exists(a) ? Folder(a, AddonFolder) : null;
+                        if (f != null) return f;
+                    }
+                    d = Path.GetDirectoryName(d);
+                }
+            }
+            catch (Exception) { }
+            return null;
+        }
+
         // installed, but not the version built into this launcher (or still the old "Azeroth Stats")
         public static bool AddonOutdated(string addonsDir)
         {
@@ -758,6 +791,10 @@ namespace AzerothLauncher
                 if (text.Length == 0) throw new UserError("This launcher was built without the AZS Stats addon.");
                 File.WriteAllText(Path.Combine(dir, f), text.Replace("\r\n", "\n").Replace("\n", "\r\n"), new UTF8Encoding(false));
             }
+            // the faces list is the launcher's own (NpcFaces writes it); the empty one only where there is none yet
+            string faces = Path.Combine(dir, FacesFile);
+            if (!File.Exists(faces))
+                File.WriteAllText(faces, Embedded(FacesFile).Replace("\r\n", "\n").Replace("\n", "\r\n"), new UTF8Encoding(false));
             MoveOldRecords(savedDir);
             foreach (string o in olds) Util.DeleteTreeQuiet(o);
         }

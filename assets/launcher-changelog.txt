@@ -1,4 +1,9 @@
 # Next update (after v0.3)
+- INSTALL now downloads the game inside the launcher with a percentage bar (into a temp folder next to the launcher, deleted afterwards), then installs it
+- First-time setup and RUN SETUP AGAIN start by downloading and installing the game; installing again keeps your addons, addon settings and options
+- The "Cloud sync successfully downloaded / uploaded" line is gone; only problems are shown there now
+- AZS Stats in game: the faces of your Nemesis and of the enemies in your death log, a centred portrait ring, and the minimap button moved to the bottom of the minimap
+- About Launcher describes everything the launcher does
 - New look: a wide window in the style of the classic WoW launchers, with original art. News shows the newest patch; the sections open inside the launcher on the left instead of in a second window
 - UPDATE LAUNCHER and ABOUT LAUNCHER sit at the top right; GUIDE and ADDONS in the bottom bar; DISCORD with the section buttons
 - Launcher updates now close the launcher completely (tray icon too) and then reopen it with its window open

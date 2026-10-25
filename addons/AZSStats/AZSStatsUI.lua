@@ -50,6 +50,19 @@ local function SpellIcon(name)
 	return { QUESTION };
 end
 
+-- a creature's face (Nemesis, the death log): the launcher puts the same pictures its STATS page shows into this
+-- addon's Faces folder (AZSStatsFaces.lua lists them); until it has, a creature icon stands in
+local function NpcKey(name) return string.gsub(string.lower(tostring(name or "")), "[^%a%d]", ""); end
+
+local function NpcIcon(name, fallback)
+	local k = NpcKey(name);
+	if ( k ~= "" and AZSSTATS_FACES and AZSSTATS_FACES[k] ) then
+		return { "Interface\\AddOns\\AZSStats\\Faces\\" .. k, 0, 1, 0, 1 };
+	end
+	if ( fallback == false ) then return nil; end
+	return I(fallback or "Ability_Creature_Cursed_02");
+end
+
 local function SetIcon(tex, icon)
 	if ( not icon ) then tex:Hide(); return; end
 	tex:SetTexture(icon[1]);
@@ -266,7 +279,7 @@ local function Nemesis()
 	for i = 1, math.min(15, table.getn(killers)) do
 		local k = killers[i];
 		local won = Num(beaten[k.key]);
-		Row(out, { icon = I("Ability_Creature_Cursed_02"), name = k.key, hex = "ff5a4a",
+		Row(out, { icon = NpcIcon(k.key), name = k.key, hex = "ff5a4a",
 		           sub = "Killed you " .. Big(k.v.kills) .. " times (" .. Pct(k.v.kills, deaths) .. ")" .. (won > 0 and (" · You beat it " .. Big(won) .. " times") or ""),
 		           value = Big(k.v.kills), vsub = k.v.last or "", bar = Num(k.v.kills) / math.max(1, deaths), bhex = "c41f3b" });
 	end
@@ -280,7 +293,7 @@ local function Nemesis()
 		for i = 1, math.min(15, table.getn(list)) do
 			local k = db.nemesis[list[i].key];
 			local got = type(k) == "table" and Num(k.kills) or 0;
-			Row(out, { icon = I("Ability_Warrior_Revenge"), name = list[i].key, hex = "f5e9c8",
+			Row(out, { icon = NpcIcon(list[i].key, "Ability_Warrior_Revenge"), name = list[i].key, hex = "f5e9c8",
 			           sub = "You beat it " .. Big(list[i].n) .. " times" .. (got > 0 and (" · It killed you " .. Big(got) .. " times") or ""),
 			           value = Big(list[i].n) .. " : " .. Big(got), vhex = list[i].n >= got and "5fd35f" or "ff4040",
 			           vsub = list[i].n >= got and "you lead" or "it leads", bar = list[i].n / math.max(1, list[1].n), bhex = "5fd35f" });
@@ -296,7 +309,7 @@ local function Nemesis()
 			local how = "";
 			if ( (e.spell or "") ~= "" ) then how = " · " .. e.spell; end
 			if ( Num(e.amt) > 0 ) then how = how .. " " .. Big(e.amt); end
-			Row(out, { icon = ClassIcon(e.class), name = "Slain by " .. (e.killer or "?") .. how, hex = "ff5a4a",
+			Row(out, { icon = NpcIcon(e.killer, false) or ClassIcon(e.class), name = "Slain by " .. (e.killer or "?") .. how, hex = "ff5a4a",
 			           sub = (e.cname or "") .. " · " .. (e.zname or "") .. " · Survived " .. Clock(e.t) .. " · Level " .. Big(e.lvl),
 			           sub2 = (e.last or "") ~= "" and ("Last hits: " .. e.last) or nil, value = Clock(e.t), vsub = e.date or "" });
 		end
@@ -677,16 +690,23 @@ local function Build()
 	hero:SetPoint("TOPLEFT", frame, "TOPLEFT", 20, -30);
 	Card(hero, 0.6, 0.5, 0.3);
 	hero.portrait = hero:CreateTexture(nil, "ARTWORK");
-	hero.portrait:SetWidth(52);
-	hero.portrait:SetHeight(52);
-	hero.portrait:SetPoint("TOPLEFT", hero, "TOPLEFT", 12, -10);
+	-- the gold ring is the minimap tracking button's border. In its texture the ring is not in the middle: measured in
+	-- the game, its centre sits 29% across and 22% down, it is 47% of the texture wide and its hole 31%. So only the
+	-- ring is cut out of the texture (a square around that centre), which puts the hole in the middle, and the round
+	-- portrait goes under it, a little larger than the hole so the gold covers its edge.
+	local RS, PS = 62, 42;                               -- the ring's size, the portrait's size (the hole is about 41)
+	local pcx, pcy = 42, -34;                            -- their centre in the card
+	hero.portrait:SetWidth(PS);
+	hero.portrait:SetHeight(PS);
+	hero.portrait:SetPoint("CENTER", hero, "TOPLEFT", pcx, pcy);
 	local ring = hero:CreateTexture(nil, "OVERLAY");
 	ring:SetTexture("Interface\\Minimap\\MiniMap-TrackingBorder");
-	ring:SetWidth(92);
-	ring:SetHeight(92);
-	ring:SetPoint("TOPLEFT", hero.portrait, "TOPLEFT", -7, 6);
+	ring:SetTexCoord(0.05, 0.53, 0, 0.47);
+	ring:SetWidth(RS);
+	ring:SetHeight(RS);
+	ring:SetPoint("CENTER", hero.portrait, "CENTER", 0, 0);
 	hero.heading = hero:CreateFontString(nil, "OVERLAY", "GameFontNormalLarge");
-	hero.heading:SetPoint("TOPLEFT", hero, "TOPLEFT", 78, -12);
+	hero.heading:SetPoint("TOPLEFT", hero, "TOPLEFT", 82, -12);
 	hero.line = hero:CreateFontString(nil, "OVERLAY", "GameFontHighlightSmall");
 	hero.line:SetPoint("TOPLEFT", hero.heading, "BOTTOMLEFT", 0, -4);
 	classButton = Button(hero, "All classes", 130, function() Sound("igMainMenuOptionCheckBoxOn"); NextClass(); end);
@@ -775,6 +795,7 @@ SlashCmdList["AZSSTATSUI"] = function() AZSStats_Toggle(); end
 -- click registration, no drag registration), placed again once the saved variables are in.
 local mini;
 local RING = 78;
+local MINI_ANGLE = 265;                                  -- the bottom of the minimap: no game or Peggle button there
 
 local function MiniPlace()
 	if ( not mini ) then return; end
@@ -838,8 +859,8 @@ local function MiniMake()
 	mini = CreateFrame("Frame", "AZSStatsMinimapButton", Minimap or UIParent);
 	mini:SetWidth(33);
 	mini:SetHeight(33);
-	mini:SetFrameStrata("LOW");
-	mini:SetFrameLevel(8);
+	mini:SetFrameStrata("MEDIUM");                       -- above other addons' minimap buttons, so it can always be grabbed
+	mini:SetFrameLevel(20);
 	mini:EnableMouse(true);
 	if ( mini.SetClampedToScreen ) then mini:SetClampedToScreen(true); end
 	mini.icon = mini:CreateTexture(nil, "BACKGROUND");
@@ -879,7 +900,7 @@ local function MiniMake()
 	end);
 	mini:SetScript("OnEnter", function() mini.glow:Show(); MiniTooltip(); end);
 	mini:SetScript("OnLeave", function() mini.glow:Hide(); GameTooltip:Hide(); end);
-	mini:SetPoint("CENTER", Minimap or UIParent, "CENTER", RING * math.cos(math.rad(200)), RING * math.sin(math.rad(200)));
+	mini:SetPoint("CENTER", Minimap or UIParent, "CENTER", RING * math.cos(math.rad(MINI_ANGLE)), RING * math.sin(math.rad(MINI_ANGLE)));
 	mini:Show();
 end
 
@@ -898,7 +919,11 @@ end
 local function MiniSettle()
 	if ( not mini ) then MiniMake(); end
 	local db = DB();
-	if ( type(db.minimap) ~= "table" ) then db.minimap = { angle = 200, hide = false }; end
+	if ( type(db.minimap) ~= "table" ) then db.minimap = { angle = MINI_ANGLE, hide = false }; end
+	if ( not db.minimap.spot2 ) then                     -- the old spot (left side) was under another addon's button
+		db.minimap.spot2 = true;
+		db.minimap.angle, db.minimap.detached = MINI_ANGLE, nil;
+	end
 	MiniPlace();
 	if ( db.minimap.hide ) then mini:Hide(); else mini:Show(); end
 end
