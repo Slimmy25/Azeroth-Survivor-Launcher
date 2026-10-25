@@ -356,13 +356,14 @@ namespace AzerothLauncher
             int s = Width;
             bool lit = !grayed && (active || hover);
             g.Clear(Theme.Hex("#0e0d14"));
-            Image stone = Retro.Get(lit ? "btn_hover" : "btn");    // the launcher's blue stone
-            if (stone != null && !grayed) g.DrawImage(stone, new Rectangle(1, 1, s - 2, s - 2));
-            else using (var b = new SolidBrush(Theme.Hex("#1c1a20"))) g.FillRectangle(b, 1, 1, s - 3, s - 3);
-            using (var p = new Pen(lit ? Theme.Gold : grayed ? Theme.Hex("#4a443a") : Theme.Hex("#8a7040"), 2)) g.DrawRectangle(p, 1, 1, s - 3, s - 3);
-            using (var p = new Pen(Theme.Bronze, 1)) g.DrawRectangle(p, 4, 4, s - 9, s - 9);
             Theme.Smooth(g);
-            icon(g, s / 2f, s / 2f, lit ? Theme.Gold : grayed ? Theme.Hex("#6e675b") : Theme.Hex("#c9a24a"));
+            // modern: a soft rounded tile, a gold bar on the left for the open section, a gentle lift on hover
+            var tile = new RectangleF(2, 2, s - 4, s - 4);
+            Color fill = grayed ? Theme.Hex("#121118") : active ? Theme.Hex("#2a2636") : hover ? Theme.Hex("#221f2c") : Theme.Hex("#17161f");
+            Armory.Box(g, tile, 7, fill, active ? Theme.Hex("#6b5a32") : hover ? Theme.Hex("#3d3a4a") : Theme.Hex("#26242f"));
+            if (active)
+                using (var b = new SolidBrush(Theme.Gold)) g.FillRectangle(b, 0, 9, 3, s - 18);
+            icon(g, s / 2f, s / 2f, active ? Theme.Gold : hover ? Theme.Hex("#f5e9c8") : grayed ? Theme.Hex("#55524c") : Theme.Hex("#a99c80"));
         }
     }
 
