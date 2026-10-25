@@ -795,7 +795,7 @@ SlashCmdList["AZSSTATSUI"] = function() AZSStats_Toggle(); end
 -- click registration, no drag registration), placed again once the saved variables are in.
 local mini;
 local RING = 78;
-local MINI_ANGLE = 265;                                  -- the bottom of the minimap: no game or Peggle button there
+local MINI_ANGLE = 268;                                  -- the bottom of the minimap, between the crossed swords and the - button
 
 local function MiniPlace()
 	if ( not mini ) then return; end
@@ -881,22 +881,24 @@ local function MiniMake()
 	mini.glow:SetTexture("Interface\\Minimap\\UI-Minimap-ZoomButton-Highlight");
 	mini.glow:SetBlendMode("ADD");
 	mini.glow:Hide();
+	-- as Peggle's button does it: OnUpdate is set once and only acts while a button is held down
 	mini:SetScript("OnMouseDown", function()
 		mini.icon:ClearAllPoints();
 		mini.icon:SetPoint("CENTER", mini, "CENTER", 0, 0);      -- the pressed look
 		local x, y = GetCursorPosition();
 		local s = UIParent:GetEffectiveScale();
-		mini.downX, mini.downY, mini.dragging = x / s, y / s, false;
-		mini:SetScript("OnUpdate", MiniDrag);
+		mini.downX, mini.downY, mini.dragging, mini.down = x / s, y / s, false, true;
 	end);
 	mini:SetScript("OnMouseUp", function()
 		local button, dragged = arg1, mini.dragging;
-		mini:SetScript("OnUpdate", nil);
-		mini.dragging = false;
+		mini.down, mini.dragging = false, false;
 		mini.icon:ClearAllPoints();
 		mini.icon:SetPoint("CENTER", mini, "CENTER", -1, 1);
 		if ( dragged ) then return; end
 		if ( button == "RightButton" ) then AZSStats_ToggleTracker(); else AZSStats_Toggle(); end
+	end);
+	mini:SetScript("OnUpdate", function()
+		if ( mini.down ) then MiniDrag(); end
 	end);
 	mini:SetScript("OnEnter", function() mini.glow:Show(); MiniTooltip(); end);
 	mini:SetScript("OnLeave", function() mini.glow:Hide(); GameTooltip:Hide(); end);
@@ -920,8 +922,8 @@ local function MiniSettle()
 	if ( not mini ) then MiniMake(); end
 	local db = DB();
 	if ( type(db.minimap) ~= "table" ) then db.minimap = { angle = MINI_ANGLE, hide = false }; end
-	if ( not db.minimap.spot2 ) then                     -- the old spot (left side) was under another addon's button
-		db.minimap.spot2 = true;
+	if ( not db.minimap.spot3 ) then                     -- the old spot (left side) was under the crossed swords button
+		db.minimap.spot3 = true;
 		db.minimap.angle, db.minimap.detached = MINI_ANGLE, nil;
 	end
 	MiniPlace();
@@ -944,10 +946,13 @@ loader:RegisterEvent("VARIABLES_LOADED");
 loader:SetScript("OnEvent", function() MiniSafe(MiniSettle); end);
 
 -- ---------------------------------------------------------------- the live DPS tracker
--- A small frame during a run: your DPS on the game's damage meter, against your best for this class ("82% of your
--- record"), with a bar. Passing the record plays the level-up chime and says so in chat (once a run, and only after
--- the first minute, when the meter has settled). Drag it anywhere; /azstats tracker (or right-click the minimap
--- button) turns it off and on.
+-- A small frame during a run:
+--   * your DPS on the game's damage meter against your best for this class ("82% of your record"), with a bar
+--   * PACE: your damage so far against your record run at the same moment of the run (AZSStatsLive.lua), ahead or
+--     behind and by how much, and the last full minute against the record run's same minute
+--   * this run's highlights: highest crit, highest normal hit, highest heal, most kills in 1 second
+-- Passing the record plays the level-up chime and says so in chat (once a run, after the first minute). Drag it
+-- anywhere; /azstats tracker (or right-click the minimap button) turns it off and on.
 local tracker, trackerElapsed, trackerPassed, trackerLastTime = nil, 0, false, 0;
 
 local function PlayerClassKey()
@@ -966,6 +971,11 @@ local function ClassRecord(key)
 	return 0, nil;
 end
 
+local function Signed(p)
+	local n = math.floor(math.abs(p) * 100 + 0.5);
+	return (p >= 0 and "+" or "-") .. n .. "%";
+end
+
 local function TrackerUpdate()
 	if ( not AZS_GetRunTime or not AZSStats_CurrentDPS ) then tracker:Hide(); return; end
 	local t = Num(AZS_GetRunTime());
@@ -977,6 +987,7 @@ local function TrackerUpdate()
 	local rec, cname = ClassRecord(key);
 	tracker.box:Show();
 	tracker.dps:SetText(Big(math.floor(dps + 0.5)) .. " DPS");
+	tracker.clock:SetText(Clock(t));
 	if ( rec > 0 ) then
 		local pct = dps / rec;
 		tracker.rec:SetText(math.floor(pct * 100 + 0.5) .. "% of your " .. (cname or "class") .. " record (" .. Big(rec) .. ")");
@@ -991,13 +1002,42 @@ local function TrackerUpdate()
 		tracker.rec:SetText("No " .. ((cname or "class") ~= "class" and cname or "DPS") .. " record yet: finish a run to set one");
 		tracker.bar:SetValue(0);
 	end
+	-- pace
+	local p = AZSStats_LivePace and AZSStats_LivePace(rec) or nil;
+	if ( p ) then
+		local ahead = p.diff >= 0;
+		tracker.pace:SetText((ahead and "|cff40ff40" or "|cffff5040") .. "PACE " .. Signed(p.diff) .. (ahead and " ahead" or " behind") ..
+		                     "|r  " .. Big(p.mine) .. " vs " .. Big(p.want) .. " dmg (" .. p.from .. ")");
+		if ( p.split ) then
+			local d = p.split.theirs > 0 and (p.split.mine - p.split.theirs) / p.split.theirs or 0;
+			tracker.split:SetText("Minute " .. p.split.minute .. ": " .. Big(p.split.mine) .. " vs " .. Big(p.split.theirs) ..
+			                      "  " .. (d >= 0 and "|cff40ff40" or "|cffff5040") .. Signed(d) .. "|r");
+		else
+			tracker.split:SetText(p.from == "record DPS" and "|cff999999Beat your record to set a minute-by-minute pace|r" or " ");
+		end
+	else
+		tracker.pace:SetText("|cff999999PACE: from 0:20|r");
+		tracker.split:SetText(" ");
+	end
+	-- highlights
+	local h = AZSStats_LiveHighs and AZSStats_LiveHighs() or nil;
+	if ( h ) then
+		local function One(k, label)
+			local e = h[k];
+			if ( not e or e.v <= 0 ) then return label .. " -"; end
+			local c = (e.best > 0 and e.v > e.best) and "|cffff8000" or "|cffffffff";
+			return label .. " " .. c .. Big(e.v) .. "|r";
+		end
+		tracker.highs:SetText(One("crit", "Crit") .. "   " .. One("hit", "Hit") .. "   " .. One("heal", "Heal") .. "   " ..
+		                      One("burst1", "Kills/1s"));
+	end
 end
 
 local function TrackerBuild()
 	if ( tracker ) then return; end
 	tracker = CreateFrame("Frame", "AZSStatsTracker", UIParent);
-	tracker:SetWidth(210);
-	tracker:SetHeight(52);
+	tracker:SetWidth(270);
+	tracker:SetHeight(98);
 	local db = DB();
 	if ( type(db.tracker) ~= "table" ) then db.tracker = { show = true, x = 0, y = -150 }; end
 	tracker:SetPoint("CENTER", UIParent, "CENTER", Num(db.tracker.x), Num(db.tracker.y));
@@ -1021,18 +1061,36 @@ local function TrackerBuild()
 	local dps = box:CreateFontString(nil, "OVERLAY", "GameFontNormal");
 	dps:SetPoint("TOPLEFT", box, "TOPLEFT", 10, -8);
 	tracker.dps = dps;
+	local clock = box:CreateFontString(nil, "OVERLAY", "GameFontHighlightSmall");
+	clock:SetPoint("TOPRIGHT", box, "TOPRIGHT", -10, -9);
+	tracker.clock = clock;
 	local rec = box:CreateFontString(nil, "OVERLAY", "GameFontHighlightSmall");
 	rec:SetPoint("TOPLEFT", dps, "BOTTOMLEFT", 0, -2);
-	rec:SetWidth(192);
+	rec:SetWidth(250);
 	rec:SetJustifyH("LEFT");
 	tracker.rec = rec;
 	local bar = CreateFrame("StatusBar", nil, box);
 	bar:SetStatusBarTexture("Interface\\TargetingFrame\\UI-StatusBar");
 	bar:SetMinMaxValues(0, 1);
-	bar:SetWidth(190);
+	bar:SetWidth(250);
 	bar:SetHeight(5);
-	bar:SetPoint("BOTTOMLEFT", box, "BOTTOMLEFT", 10, 7);
+	bar:SetPoint("TOPLEFT", rec, "BOTTOMLEFT", 0, -3);
 	tracker.bar = bar;
+	local pace = box:CreateFontString(nil, "OVERLAY", "GameFontHighlightSmall");
+	pace:SetPoint("TOPLEFT", bar, "BOTTOMLEFT", 0, -4);
+	pace:SetWidth(250);
+	pace:SetJustifyH("LEFT");
+	tracker.pace = pace;
+	local split = box:CreateFontString(nil, "OVERLAY", "GameFontHighlightSmall");
+	split:SetPoint("TOPLEFT", pace, "BOTTOMLEFT", 0, -2);
+	split:SetWidth(250);
+	split:SetJustifyH("LEFT");
+	tracker.split = split;
+	local highs = box:CreateFontString(nil, "OVERLAY", "GameFontDisableSmall");
+	highs:SetPoint("TOPLEFT", split, "BOTTOMLEFT", 0, -3);
+	highs:SetWidth(250);
+	highs:SetJustifyH("LEFT");
+	tracker.highs = highs;
 	tracker:SetScript("OnUpdate", function()
 		trackerElapsed = trackerElapsed + (arg1 or 0);
 		if ( trackerElapsed < 0.5 ) then return; end

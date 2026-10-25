@@ -1,4 +1,8 @@
 # Next update (after v0.3)
+- AZS Stats live tracker: PACE shows whether you are ahead of or behind your record run, second by second and minute by minute (a new class DPS record becomes the pace to beat)
+- AZS Stats highlights: highest crit, highest normal hit, highest heal and most kills in 1 and 5 seconds, per run, per class and overall; beating your best says so in chat
+- AZS Stats minimap button: at the bottom of the minimap (it was under the crossed swords button), above other buttons, click to open the window, drag to move it
+- The home page's Build collection rotates through every build video (‹ › to step through them); new: a Sub Rogue guide by Des
 - New Build Guides in the GUIDE: players' videos of their builds, each with its title and credit to the uploader; YouTube videos open in your web browser
 - The home page has a Build collection card with the newest build video; nothing plays until you click it
 - Download More has two categories: AZS ADDONS (formerly AS ADDONS) and WOW 1.12 ADDONS; the UI / gameplay / cosmetic filters and the My Addons tab are gone

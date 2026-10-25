@@ -979,6 +979,24 @@ namespace AzerothLauncher
             Bg(delegate { Session(exe, eng, cloudOnButNoFolder, minimize); });
         }
 
+        // A copy of your AZS Stats records before every game start, the last 10 kept, in the launcher's
+        // backups\AZS Stats folder: if the game ever loses the file, an older copy is there to put back.
+        static void BackupStats(string savedDir)
+        {
+            try
+            {
+                string src = Path.Combine(savedDir ?? "", Stats.FileName);
+                if (!File.Exists(src) || new FileInfo(src).Length < 200) return;
+                string dir = Path.Combine(Util.DataDir, "backups", "AZS Stats");
+                Directory.CreateDirectory(dir);
+                File.Copy(src, Path.Combine(dir, "AZSStats " + DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss") + ".lua"), true);
+                var files = new List<string>(Directory.GetFiles(dir, "AZSStats *.lua"));
+                files.Sort(StringComparer.Ordinal);
+                for (int i = 0; i < files.Count - 10; i++) { try { File.Delete(files[i]); } catch (Exception) { } }
+            }
+            catch (Exception) { }
+        }
+
         void Session(string exe, SyncEngine eng, bool cloudOnButNoFolder, bool minimize)
         {
             var problems = new List<string>();
@@ -1012,6 +1030,19 @@ namespace AzerothLauncher
                     Ui(delegate { SetCloudNote(""); });
                 }
                 else if (cloudOnButNoFolder) problems.Add("No sync folder set - launched without cloud sync.");
+                // the AZS Stats addon this launcher carries goes in right before the game starts: after the cloud
+                // download, which could otherwise bring back an older copy from another PC
+                try
+                {
+                    SyncSettings ss = SyncSettings();
+                    BackupStats(ss.SavedDir);
+                    if (Stats.AddonInstalled(ss.AddonsDir) && Stats.AddonOutdated(ss.AddonsDir))
+                    {
+                        Stats.InstallAddon(ss.AddonsDir, ss.SavedDir);
+                        SyncLog("AZS Stats addon updated to the launcher's version.", Level.Info);
+                    }
+                }
+                catch (Exception e) { SyncLog("  AZS Stats addon not updated: " + e.Message, Level.Warn); }
                 SyncLog("Starting Azeroth Survivors ...", Level.Info);
                 Ui(delegate
                 {
