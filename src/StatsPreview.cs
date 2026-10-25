@@ -74,28 +74,25 @@ namespace AzerothLauncher
                     app.ShowSide();
                     app.gTopic = view[0];
                     app.gPage = view[1];
-                    try { app.BuildPanel("Guide"); }
-                    catch (Exception ex)
-                    {
-                        using (var eb = new Bitmap(900, 500))
-                        {
-                            using (var g = Graphics.FromImage(eb)) { g.Clear(Color.White); g.DrawString(ex.ToString(), new Font("Arial", 9), Brushes.Black, new RectangleF(4, 4, 892, 492)); }
-                            eb.Save(Path.Combine(outDir, "guide-error.png"), ImageFormat.Png);
-                        }
-                    }
+                    app.BuildPanel("Guide");
                     Application.DoEvents();
-                    var errs = new System.Text.StringBuilder();
-                    errs.Append("panel " + app.panel.Controls.Count + " vis " + app.panel.Visible + " size " + app.panel.Size + "\n");
-                    PaintCheck(app.panel, errs, 0);
-                    using (var eb = new Bitmap(1000, 700))
-                    {
-                        using (var g = Graphics.FromImage(eb)) { g.Clear(Color.White); g.DrawString(errs.ToString(), new Font("Arial", 8), Brushes.Black, new RectangleF(4, 4, 992, 692)); }
-                        eb.Save(Path.Combine(outDir, "guide-check-" + view[0] + "-" + view[1] + ".png"), ImageFormat.Png);
-                    }
                     using (var win = new Bitmap(app.side.Width, app.side.Height))
                     {
                         app.side.DrawToBitmap(win, new Rectangle(0, 0, win.Width, win.Height));
                         win.Save(Path.Combine(outDir, "guide-" + view[0] + "-" + view[1] + ".png"), ImageFormat.Png);
+                    }
+                    ScrollPanel gsp = FindScroll(app.panel);
+                    if (gsp != null)
+                    {
+                        int h = 10;
+                        foreach (Control c in gsp.Controls) h = Math.Max(h, c.Bottom + 10);
+                        using (var page = new Bitmap(gsp.ClientSize.Width, h))
+                        {
+                            using (var g = Graphics.FromImage(page)) g.Clear(gsp.BackColor);
+                            foreach (Control c in gsp.Controls)
+                                if (c.Width > 0 && c.Height > 0) c.DrawToBitmap(page, new Rectangle(c.Left, c.Top, c.Width, c.Height));
+                            page.Save(Path.Combine(outDir, "guide-" + view[0] + "-" + view[1] + "-page.png"), ImageFormat.Png);
+                        }
                     }
                 }
                 app.current = "Stats";
@@ -121,21 +118,6 @@ namespace AzerothLauncher
                 }
             }
             app.tray.Visible = false;
-        }
-
-        static void PaintCheck(Control c, System.Text.StringBuilder sb, int depth)
-        {
-            foreach (Control k in c.Controls)
-            {
-                if (depth < 2) sb.Append(new string(' ', depth * 2) + k.GetType().Name + " " + k.Bounds + " vis=" + k.Visible + "\n");
-                try
-                {
-                    if (k.Width > 0 && k.Height > 0)
-                        using (var b = new Bitmap(k.Width, k.Height)) k.DrawToBitmap(b, new Rectangle(0, 0, k.Width, k.Height));
-                }
-                catch (Exception ex) { sb.Append("PAINT ERROR " + k.GetType().Name + ": " + ex.GetType().Name + " " + ex.Message + "\n"); }
-                PaintCheck(k, sb, depth + 1);
-            }
         }
 
         static ScrollPanel FindScroll(Control c)

@@ -152,7 +152,7 @@ namespace AzerothLauncher
         void GuideGrid(ScrollPanel sp, int y, int w, int count, Action<int, GuideCard> fill)
         {
             const int gap = 10;
-            int cw = (w - gap) / 2, ch = (int)(96 * Theme.Zoom);
+            int cw = (w - gap) / 2, ch = (int)(108 * Theme.Zoom);
             for (int i = 0; i < count; i++)
             {
                 var c = new GuideCard("", "", "", i + 1, cw, ch);
@@ -358,6 +358,7 @@ namespace AzerothLauncher
             using (var b = new SolidBrush(Theme.Text))
             {
                 sf.Trimming = StringTrimming.EllipsisWord;
+                sf.FormatFlags = StringFormatFlags.LineLimit;   // only whole lines, the last one ending in "..."
                 float dh = Hero ? Height - y - 8 : badgesY - y - 3;
                 if (dh > df.Height * 0.8f) g.DrawString(Desc ?? "", df, b, new RectangleF(x, y, tw, dh), sf);
             }
