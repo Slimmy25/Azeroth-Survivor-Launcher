@@ -1276,3 +1276,19 @@ X grows with every rank.
 = X растёт с каждым рангом.
 Talents that change it:
 = Таланты, которые его меняют:
+Rank
+= Ранг
+Click to add a point.
+= Щёлкните, чтобы добавить очко.
+All 51 points are spent.
+= Все 51 очко потрачены.
+Right-click to take one back.
+= Правый щелчок забирает одно.
+Points left
+= Осталось очков
+TALENT TREES ›
+= ДЕРЕВЬЯ ТАЛАНТОВ ›
+RESET
+= СБРОС
+Click a talent to add a point, right-click to take one back. A talent takes no more points than its ranks, and a build no more than 51; the purple ones are the milestones at 10, 20 and 30 points.
+= Щёлкните талант, чтобы добавить очко, правый щелчок забирает одно. Талант не берёт больше очков, чем у него рангов, а билд — больше 51; фиолетовые — это вехи на 10, 20 и 30 очках.

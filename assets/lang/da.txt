@@ -1275,3 +1275,19 @@ X grows with every rank.
 = X vokser for hver rang.
 Talents that change it:
 = Talenter, der ændrer den:
+Rank
+= Rang
+Click to add a point.
+= Klik for at tilføje et point.
+All 51 points are spent.
+= Alle 51 point er brugt.
+Right-click to take one back.
+= Højreklik for at tage et tilbage.
+Points left
+= Point tilbage
+TALENT TREES ›
+= TALENTTRÆER ›
+RESET
+= NULSTIL
+Click a talent to add a point, right-click to take one back. A talent takes no more points than its ranks, and a build no more than 51; the purple ones are the milestones at 10, 20 and 30 points.
+= Klik på et talent for at tilføje et point, højreklik for at tage et tilbage. Et talent tager ikke flere point end sine rang, og en build ikke flere end 51; de lilla er milepælene ved 10, 20 og 30 point.

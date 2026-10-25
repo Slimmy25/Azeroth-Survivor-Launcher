@@ -1275,3 +1275,19 @@ X grows with every rank.
 = X bertambah setiap peringkat.
 Talents that change it:
 = Talenta yang mengubahnya:
+Rank
+= Peringkat
+Click to add a point.
+= Klik untuk menambah poin.
+All 51 points are spent.
+= Semua 51 poin sudah dipakai.
+Right-click to take one back.
+= Klik kanan untuk mengambil satu kembali.
+Points left
+= Sisa poin
+TALENT TREES ›
+= POHON TALENTA ›
+RESET
+= ATUR ULANG
+Click a talent to add a point, right-click to take one back. A talent takes no more points than its ranks, and a build no more than 51; the purple ones are the milestones at 10, 20 and 30 points.
+= Klik talenta untuk menambah poin, klik kanan untuk mengambil satu kembali. Talenta tidak menerima poin melebihi peringkatnya, dan build tidak lebih dari 51; yang ungu adalah tonggak di 10, 20, dan 30 poin.

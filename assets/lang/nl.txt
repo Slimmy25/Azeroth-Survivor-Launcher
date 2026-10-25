@@ -1275,3 +1275,19 @@ X grows with every rank.
 = X groeit met elke rang.
 Talents that change it:
 = Talenten die het veranderen:
+Rank
+= Rang
+Click to add a point.
+= Klik om een punt toe te voegen.
+All 51 points are spent.
+= Alle 51 punten zijn besteed.
+Right-click to take one back.
+= Rechtsklik om er een terug te nemen.
+Points left
+= Punten over
+TALENT TREES ›
+= TALENTBOMEN ›
+RESET
+= RESET
+Click a talent to add a point, right-click to take one back. A talent takes no more points than its ranks, and a build no more than 51; the purple ones are the milestones at 10, 20 and 30 points.
+= Klik op een talent om een punt toe te voegen, rechtsklik om er een terug te nemen. Een talent neemt niet meer punten dan zijn rangen, en een build niet meer dan 51; de paarse zijn de mijlpalen bij 10, 20 en 30 punten.

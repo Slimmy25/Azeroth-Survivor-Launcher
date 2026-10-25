@@ -134,6 +134,7 @@ namespace AzerothLauncher
 
         static readonly string[] SectionNames = { "Guide", "Cloud Save", "Addons", "Changelog", "Stats", "Options", "About Launcher" };
         int gTopic = -1, gPage = -1;
+        string gTalents;                                     // the Guide shows this class's talent trees (a test build)
         GuideVideo gVideo;                                   // the guide: a video playing inside the section (Guide.cs)                         // the guide: -1 = the topic list / the topic itself
 
         int PW { get { return panel.ClientSize.Width; } }

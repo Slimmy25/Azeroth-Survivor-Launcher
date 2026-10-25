@@ -1275,3 +1275,19 @@ X grows with every rank.
 = X kasvaa joka tasolla.
 Talents that change it:
 = Sitä muuttavat kyvyt:
+Rank
+= Taso
+Click to add a point.
+= Napsauta lisätäksesi pisteen.
+All 51 points are spent.
+= Kaikki 51 pistettä on käytetty.
+Right-click to take one back.
+= Oikea napsautus ottaa yhden takaisin.
+Points left
+= Pisteitä jäljellä
+TALENT TREES ›
+= KYKYPUUT ›
+RESET
+= NOLLAA
+Click a talent to add a point, right-click to take one back. A talent takes no more points than its ranks, and a build no more than 51; the purple ones are the milestones at 10, 20 and 30 points.
+= Napsauta kykyä lisätäksesi pisteen, oikea napsautus ottaa yhden takaisin. Kyky ei ota enempää pisteitä kuin sillä on tasoja, eikä build yli 51; violetit ovat virstanpylväät 10, 20 ja 30 pisteessä.

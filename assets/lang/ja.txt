@@ -1276,3 +1276,19 @@ X grows with every rank.
 = X はランクごとに増えます。
 Talents that change it:
 = これを変えるタレント:
+Rank
+= ランク
+Click to add a point.
+= クリックでポイントを追加。
+All 51 points are spent.
+= 51ポイントすべて使用済み。
+Right-click to take one back.
+= 右クリックで1つ戻す。
+Points left
+= 残りポイント
+TALENT TREES ›
+= タレントツリー ›
+RESET
+= リセット
+Click a talent to add a point, right-click to take one back. A talent takes no more points than its ranks, and a build no more than 51; the purple ones are the milestones at 10, 20 and 30 points.
+= タレントをクリックでポイント追加、右クリックで1つ戻します。タレントはランク数まで、ビルドは51ポイントまで。紫は10・20・30ポイントのマイルストーンです。
