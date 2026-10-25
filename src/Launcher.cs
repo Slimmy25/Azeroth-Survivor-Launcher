@@ -390,7 +390,7 @@ namespace AzerothLauncher
             if (ps.Sessions > 0 && StatsEnabled() && Cfg.Bool("home_playtime", true))
                 lines.Add(new[] { Lang.T("Time played"), Duration(ps.Seconds) + "  ·  " + Lang.T("Last session") + " " + Duration(ps.LastSeconds) });
             if (lines.Count == 0) return;
-            var box = new RectangleF(694, 548, 394, 28);
+            var box = new RectangleF(694, 546, 394, 30);
             using (var path = Armory.Round(box, 5))
             {
                 using (var b = new SolidBrush(Color.FromArgb(190, 14, 13, 20))) g.FillPath(b, path);
@@ -762,7 +762,7 @@ namespace AzerothLauncher
         // ------------------------------------------------------------------ first-time setup
         void MaybeFirstRun()
         {
-            if (setupAsked || setupOpen || Cfg.Bool("setup_done", false)) return;
+            if (setupAsked || setupOpen || Cfg.Bool("setup_done", false) || PreviewMode) return;
             if (!Visible) return;                            // started hidden: asked when the window is first opened
             if (startupLauncherCheck || Updating)           // a launcher update may restart us first
             {
