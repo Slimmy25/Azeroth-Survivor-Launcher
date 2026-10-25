@@ -20,6 +20,7 @@ jobs:
           set -u
           out=/tmp/spell-icons.txt; miss=/tmp/missing.txt; : > "$out"; : > "$miss"
           while IFS= read -r name; do
+            name="${name%$'\r'}"                # the file may have Windows line ends
             [ -z "$name" ] && continue
             icon=""
             for base in https://www.wowhead.com/classic https://www.wowhead.com; do
