@@ -1291,3 +1291,5 @@ RESET
 = NOLLAA
 Click a talent to add a point, right-click to take one back. A talent takes no more points than its ranks, and a build no more than 51; the purple ones are the milestones at 10, 20 and 30 points.
 = Napsauta kykyä lisätäksesi pisteen, oikea napsautus ottaa yhden takaisin. Kyky ei ota enempää pisteitä kuin sillä on tasoja, eikä build yli 51; violetit ovat virstanpylväät 10, 20 ja 30 pisteessä.
+Installed
+= Asennettu

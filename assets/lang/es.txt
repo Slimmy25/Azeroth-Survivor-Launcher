@@ -1291,3 +1291,5 @@ RESET
 = REINICIAR
 Click a talent to add a point, right-click to take one back. A talent takes no more points than its ranks, and a build no more than 51; the purple ones are the milestones at 10, 20 and 30 points.
 = Haz clic en un talento para añadir un punto y clic derecho para quitar uno. Un talento no admite más puntos que sus rangos, y una build no más de 51; los morados son los hitos de 10, 20 y 30 puntos.
+Installed
+= Instalado

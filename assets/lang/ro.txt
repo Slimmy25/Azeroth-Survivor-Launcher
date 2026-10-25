@@ -1292,3 +1292,5 @@ RESET
 = RESETEAZĂ
 Click a talent to add a point, right-click to take one back. A talent takes no more points than its ranks, and a build no more than 51; the purple ones are the milestones at 10, 20 and 30 points.
 = Clic pe un talent pentru a adăuga un punct, clic dreapta pentru a lua unul înapoi. Un talent nu primește mai multe puncte decât rangurile sale, iar un build nu mai mult de 51; cele mov sunt pragurile de la 10, 20 și 30 de puncte.
+Installed
+= Instalat

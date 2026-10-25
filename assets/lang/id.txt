@@ -1291,3 +1291,5 @@ RESET
 = ATUR ULANG
 Click a talent to add a point, right-click to take one back. A talent takes no more points than its ranks, and a build no more than 51; the purple ones are the milestones at 10, 20 and 30 points.
 = Klik talenta untuk menambah poin, klik kanan untuk mengambil satu kembali. Talenta tidak menerima poin melebihi peringkatnya, dan build tidak lebih dari 51; yang ungu adalah tonggak di 10, 20, dan 30 poin.
+Installed
+= Terpasang

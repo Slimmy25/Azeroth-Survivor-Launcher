@@ -1292,3 +1292,5 @@ RESET
 = रीसेट
 Click a talent to add a point, right-click to take one back. A talent takes no more points than its ranks, and a build no more than 51; the purple ones are the milestones at 10, 20 and 30 points.
 = पॉइंट जोड़ने के लिए टैलेंट पर क्लिक करें, वापस लेने के लिए राइट-क्लिक करें। कोई टैलेंट अपनी रैंक से ज़्यादा पॉइंट नहीं लेता, और बिल्ड 51 से ज़्यादा नहीं; बैंगनी वाले 10, 20 और 30 पॉइंट के माइलस्टोन हैं।
+Installed
+= इंस्टॉल है

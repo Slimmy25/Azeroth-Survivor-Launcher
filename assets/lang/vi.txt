@@ -1292,3 +1292,5 @@ RESET
 = ĐẶT LẠI
 Click a talent to add a point, right-click to take one back. A talent takes no more points than its ranks, and a build no more than 51; the purple ones are the milestones at 10, 20 and 30 points.
 = Nhấp vào thiên phú để thêm một điểm, nhấp phải để lấy lại một điểm. Thiên phú không nhận quá số bậc của nó, và build không quá 51 điểm; ô tím là các cột mốc ở 10, 20 và 30 điểm.
+Installed
+= Đã cài

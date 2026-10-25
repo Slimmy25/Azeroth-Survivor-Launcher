@@ -1292,3 +1292,5 @@ RESET
 = 초기화
 Click a talent to add a point, right-click to take one back. A talent takes no more points than its ranks, and a build no more than 51; the purple ones are the milestones at 10, 20 and 30 points.
 = 특성을 클릭하면 포인트를 추가하고, 오른쪽 클릭하면 하나 되돌립니다. 특성은 등급 수까지, 빌드는 51포인트까지만 받습니다. 보라색은 10, 20, 30포인트의 이정표입니다.
+Installed
+= 설치됨

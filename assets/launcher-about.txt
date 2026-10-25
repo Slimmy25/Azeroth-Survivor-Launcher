@@ -1,49 +1,27 @@
 # The Azeroth Survivors Launcher
-A community launcher for Azeroth Survivors, the game made by Aethus. It installs the game, keeps it up to date, carries your progress between your PCs, manages your addons, teaches new players and keeps every stat of every run. Made by Slimjim.
+A community launcher for Azeroth Survivors, the game made by Aethus. Made by Slimjim. It does four things for you:
 
-# Install and play
-- INSTALL downloads the game right in the launcher's status line, from the main host or the developers' backup host (picked at random; if one fails, the other is tried, and the backup download is checked against its checksum), with a bar that shows how far it has come, and installs it next to the launcher. The download goes into a temp folder that is deleted once the game is in place
-- Already downloaded the game? The launcher can install it from the file in its own folder or in Downloads
-- Installing again over an existing game keeps your addons, addon settings and options
-- PLAY starts the game; the launcher can step aside to the tray while you play and comes back when the game closes
-- Game updates are offered when a new version is out: the launcher downloads, checks and installs them, and puts the old files back if anything goes wrong
+# Downloading the game
+- One click downloads and installs the whole game, right in the launcher, with a progress bar
+- The game comes from one of several hosts, picked at random; if one fails, the next is tried
+- Every download is checked against the game's known checksums, so a damaged or wrong file is never installed
+- Game updates are downloaded, checked and installed for you, and reinstalling keeps your addons and settings
 
-# First-time setup
-- The first start walks you through setup: it downloads and installs the game, then asks about cloud saving and where your AddOns, addon settings and game saves are
-- Options > RUN SETUP AGAIN starts it over from the beginning, game download included
+# Installing addons automatically
+- Download More installs addons with one click and offers an update when a newer copy is out
+- The AZS addons (AZS Stats, AZS Handbook, AZS Minor Mods, AZS Transparency) are built into the launcher and brought up to date by themselves before the game starts
+- Switch addons on and off, keep two addon profiles, and uninstall any addon from your AddOns folder
 
-# Home and news
-- The News panel shows the newest patch notes; the Changelog has every patch note, newest first, with PREVIOUS and NEXT to step through them
-- Community opens on the home screen whenever no other section is open: one of the players' build videos, with its title and credit to the person who made it, a different one every 10 minutes. Click it to watch it right there; nothing starts by itself
-- "This week", at the bottom of the window, sums up your recent runs, and your play time can be shown on the home screen
+# Helping cloud save on Windows PCs and Linux
+- Keeps your save game, AddOns and addon settings in your own cloud folder (Google Drive, OneDrive, Dropbox or any synced folder) and carries them between your machines
+- Downloads your progress before the game starts and uploads it when the game closes, even after a crash
+- Asks which progress to keep when two machines changed it, and keeps backups before anything is replaced
 
-# Cloud Save
-- Keeps your save game, AddOns and addon settings in your own Google Drive, OneDrive or Dropbox folder and shares them between your PCs
-- Downloads your progress before the game starts and uploads it after the game closes, even after a crash
-- When both PCs changed, it asks which progress to keep; backups are made before anything is replaced, and the last 5 cloud downloads can be restored
-
-# Addons
-- Switch addons on and off, or all at once, and keep two addon profiles
-- Download More installs addons with one click, in two categories (AZS ADDONS and WOW 1.12 ADDONS), and offers an UPDATE when a newer copy is out
-
-# New Player Guide
-- Build Guides: players' videos of their builds, credited to their uploaders
-- Every spell, talent, class, race and zone named in the guide is a link to its page, and pointing at it shows what it does
-- Each class page: the spells with their icons and the talents that change them, and the three full talent trees, taken from the game
-- Topics and class pages on controls, zones, bosses, level-ups, gear, talents and tips
-- Videos that play inside the launcher (streamed, never saved on your PC), and a search over every page
-
-# Stats and the AZS Stats addon
-- The built-in AZS Stats addon records every run: result, time, level, damage and DPS
-- STATS shows DPS over time, your best builds, records per class, race and zone, ability pick and win rates, a death log with your Nemesis and the bosses you beat, and co-op stats with your friends
-- Click a run to copy a picture of it for Discord
-- In game: /azs or the minimap button opens the same stats in the game's own art, with the faces of the enemies that beat you, and a small live tracker shows your DPS against your record
-- The STATS page can be hidden in Options
-
-# The launcher itself
-- Options > LAUNCHER: UPDATE LAUNCHER installs a newer launcher (its checksum is checked), then restarts; the launcher also does this by itself when it starts
-- Runs in the system tray, only one copy at a time, in 26 languages
-- Everything it writes for itself stays in an "Azeroth Survivor Launcher" folder next to it
+# New Player Guide, in the launcher and in the game
+- Every topic a new player needs: classes, races, zones, bosses, level-ups, gear, talents, controls and tips, with players' build videos
+- Each class: its spells with their icons, the talents that change them, and the full talent trees, where you can try a build
+- The same guide is inside the game with the AZS Handbook addon (/handbook), always matching the launcher's
+- Your stats from every run, in the launcher and in game (AZS Stats)
 
 # Look
 The launcher layout is inspired by the WoW Retro Launcher by Parquelle (https://github.com/Parquelle/WoWRetroLauncher). All of its artwork is original, drawn for this launcher.

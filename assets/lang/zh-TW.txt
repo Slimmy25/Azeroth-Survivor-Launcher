@@ -1292,3 +1292,5 @@ RESET
 = 重設
 Click a talent to add a point, right-click to take one back. A talent takes no more points than its ranks, and a build no more than 51; the purple ones are the milestones at 10, 20 and 30 points.
 = 點擊天賦加入一點，右鍵收回一點。天賦點數不超過其等級，整套不超過 51 點；紫色的是 10、20、30 點的里程碑。
+Installed
+= 已安裝

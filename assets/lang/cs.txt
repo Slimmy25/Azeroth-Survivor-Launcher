@@ -1292,3 +1292,5 @@ RESET
 = RESET
 Click a talent to add a point, right-click to take one back. A talent takes no more points than its ranks, and a build no more than 51; the purple ones are the milestones at 10, 20 and 30 points.
 = Kliknutím na talent přidáš bod, pravým kliknutím ho vrátíš. Talent nepřijme víc bodů, než má úrovní, a build víc než 51; fialové jsou milníky na 10, 20 a 30 bodech.
+Installed
+= Nainstalováno
