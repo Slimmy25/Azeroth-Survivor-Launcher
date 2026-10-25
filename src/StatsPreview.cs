@@ -110,7 +110,6 @@ namespace AzerothLauncher
                 }
                 Application.DoEvents();
                 app.panel.Refresh();
-                }
                 string nm = "section-" + sec.Replace(" ", "-").ToLowerInvariant();
                 using (var win = new Bitmap(app.panel.Width, app.panel.Height))
                 {   // control by control, back to front (DrawToBitmap of the whole window skips some of them)
