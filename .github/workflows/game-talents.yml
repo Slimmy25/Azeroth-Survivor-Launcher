@@ -1,0 +1,23 @@
+# Developer tool: reads the talent trees out of the game at wow.aethus.pl (tools/game_talents.py) and puts
+# assets/talents.txt on the "game-talents" branch, to be copied into main. Run by hand: Actions > Game talents.
+name: Game talents
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  read:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Read the talents from the game
+        run: python3 tools/game_talents.py
+      - name: Keep the result on the game-talents branch
+        run: |
+          mkdir /tmp/pub && cp assets/talents.txt /tmp/pub/ && cd /tmp/pub
+          git init -q -b game-talents && git config user.name bot && git config user.email bot@users.noreply.github.com
+          git add -A && git commit -qm "talents from the game"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" HEAD:game-talents
