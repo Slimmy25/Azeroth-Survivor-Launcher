@@ -28,10 +28,14 @@ def rows(sql):
             i = j + 1
 
 sql = sys.stdin.read()
+# the columns, in order, from the dump's CREATE TABLE (its INSERTs list values only)
+table = re.search(r"CREATE TABLE `creature_template` \((.*?)\n\)", sql, re.S)
+declared = [m.group(1) for m in re.finditer(r"^\s*`(\w+)`", table.group(1), re.M)] if table else None
 best = {}
 for cols, v in rows(sql):
+    cols = cols or declared
     if cols is None:
-        sys.exit("creature_template INSERTs without a column list: cannot tell the columns apart")
+        sys.exit("creature_template: no column list")
     d = dict(zip(cols, v))
     entry = int(d.get("Entry") or d.get("entry") or 0)
     name = (d.get("Name") or d.get("name") or "").strip()
