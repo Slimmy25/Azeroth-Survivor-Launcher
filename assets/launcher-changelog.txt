@@ -1,4 +1,5 @@
 # Next update (after v0.3)
+- Every class page in the Guide shows its spells with their icons, the talents that change each spell (point at one to read it), and the class's three full talent trees as the game draws them: every talent with its icon and ranks, the 10, 20 and 30 point milestones marked, read from the game itself
 - Options has tabs: FOLDERS, GENERAL, LANGUAGE and LAUNCHER. UPDATE LAUNCHER and ABOUT LAUNCHER moved into Options > LAUNCHER
 - The Discord button is now Discord's own symbol, on the News line at the right edge
 - The guide also finds spells written differently ("Shadowbolt", "Shadow Bolts"), and when AZS Stats has seen a spell's tooltip in game, pointing at the spell in the guide shows the game's own text
