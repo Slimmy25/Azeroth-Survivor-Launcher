@@ -1107,3 +1107,9 @@ Play on this PC ›
 = Lejátszás ezen a gépen ›
 Video file not found - click to open its folder
 = A videófájl nem található - kattints a mappa megnyitásához
+Play here ›
+= Lejátszás itt ›
+OPEN IN BROWSER ›
+= MEGNYITÁS BÖNGÉSZŐBEN ›
+This video can't play here. Use OPEN IN BROWSER.
+= Ez a videó itt nem játszható le. Használd a MEGNYITÁS BÖNGÉSZŐBEN gombot.

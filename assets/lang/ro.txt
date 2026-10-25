@@ -1107,3 +1107,9 @@ Play on this PC ›
 = Redă pe acest PC ›
 Video file not found - click to open its folder
 = Fișierul video nu a fost găsit - clic pentru a deschide dosarul
+Play here ›
+= Redă aici ›
+OPEN IN BROWSER ›
+= DESCHIDE ÎN BROWSER ›
+This video can't play here. Use OPEN IN BROWSER.
+= Acest videoclip nu poate fi redat aici. Folosește DESCHIDE ÎN BROWSER.

@@ -1106,3 +1106,9 @@ Play on this PC ›
 = Lire sur ce PC ›
 Video file not found - click to open its folder
 = Fichier vidéo introuvable - cliquez pour ouvrir son dossier
+Play here ›
+= Lire ici ›
+OPEN IN BROWSER ›
+= OUVRIR DANS LE NAVIGATEUR ›
+This video can't play here. Use OPEN IN BROWSER.
+= Cette vidéo ne peut pas être lue ici. Utilisez OUVRIR DANS LE NAVIGATEUR.

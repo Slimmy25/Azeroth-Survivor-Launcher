@@ -1107,3 +1107,9 @@ Play on this PC ›
 = इस पीसी पर चलाएँ ›
 Video file not found - click to open its folder
 = वीडियो फ़ाइल नहीं मिली - फ़ोल्डर खोलने के लिए क्लिक करें
+Play here ›
+= यहीं चलाएँ ›
+OPEN IN BROWSER ›
+= ब्राउज़र में खोलें ›
+This video can't play here. Use OPEN IN BROWSER.
+= यह वीडियो यहाँ नहीं चल सकता। ब्राउज़र में खोलें दबाएँ।

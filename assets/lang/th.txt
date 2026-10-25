@@ -1107,3 +1107,9 @@ Play on this PC ›
 = เล่นบนพีซีนี้ ›
 Video file not found - click to open its folder
 = ไม่พบไฟล์วิดีโอ - คลิกเพื่อเปิดโฟลเดอร์
+Play here ›
+= เล่นที่นี่ ›
+OPEN IN BROWSER ›
+= เปิดในเบราว์เซอร์ ›
+This video can't play here. Use OPEN IN BROWSER.
+= เล่นวิดีโอนี้ที่นี่ไม่ได้ ใช้ เปิดในเบราว์เซอร์

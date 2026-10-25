@@ -1107,3 +1107,9 @@ Play on this PC ›
 = この PC で再生 ›
 Video file not found - click to open its folder
 = 動画ファイルが見つかりません - クリックでフォルダを開く
+Play here ›
+= ここで再生 ›
+OPEN IN BROWSER ›
+= ブラウザで開く ›
+This video can't play here. Use OPEN IN BROWSER.
+= この動画はここでは再生できません。「ブラウザで開く」を使ってください。

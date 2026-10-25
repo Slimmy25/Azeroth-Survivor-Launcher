@@ -1106,3 +1106,9 @@ Play on this PC ›
 = Spill av på denne PC-en ›
 Video file not found - click to open its folder
 = Fant ikke videofilen - klikk for å åpne mappen
+Play here ›
+= Spill av her ›
+OPEN IN BROWSER ›
+= ÅPNE I NETTLESER ›
+This video can't play here. Use OPEN IN BROWSER.
+= Videoen kan ikke spilles av her. Bruk ÅPNE I NETTLESER.

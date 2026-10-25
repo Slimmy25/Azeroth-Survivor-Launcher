@@ -24,6 +24,7 @@ namespace AzerothLauncher
 
         void SetGuideView(int topic, int page)
         {
+            gVideo = null;
             gTopic = topic;
             gPage = page;
             if (current == "Guide") BuildPanel("Guide");
@@ -65,6 +66,8 @@ namespace AzerothLauncher
 
         void PanelGuide()
         {
+            if (VideoCard.Embed == null) VideoCard.Embed = delegate(GuideVideo v) { gVideo = v; BuildPanel("Guide"); return true; };
+            if (gVideo != null) { GuideVideoPlayer(gVideo); return; }
             var topics = Data.Guide;
             if (gTopic >= topics.Count) { gTopic = -1; gPage = -1; }
             var read = GuideRead();
@@ -73,6 +76,21 @@ namespace AzerothLauncher
             if (gPage >= topic.Pages.Count) gPage = -1;
             if (gPage < 0 && topic.Pages.Count > 0) { GuideTopicPages(topic, read); return; }
             GuideArticle(topics, topic);
+        }
+
+        // ---- a video streamed inside the section (the same address as the card: nothing is saved on the PC)
+        void GuideVideoPlayer(GuideVideo v)
+        {
+            ClearPanel(v.Title.Length > 0 ? v.Title : "Video");
+            int bw = (int)(190 * Theme.Zoom);
+            string url = v.Url;
+            Put(new WowButton("OPEN IN BROWSER ›", delegate { Util.OpenInShell(url); }, 190, 32, 9), PW - 20 - bw, 12);
+            var frame = new Bordered(Theme.CardEdge, 1);
+            frame.Bounds = new Rectangle(20, 52, PW - 40, PH - 12 - 52);
+            Put(frame, 20, 52);
+            var web = VideoView.Make(v);
+            web.Dock = DockStyle.Fill;
+            frame.Controls.Add(web);
         }
 
         // ---- first page: progress, "continue" banner and the topic cards
@@ -378,6 +396,56 @@ namespace AzerothLauncher
         }
     }
 
+    // The video player: Windows' own web view (no extra files) showing a page with a <video> that streams the address.
+    // The web view runs in Internet Explorer 7 mode unless told otherwise, and that cannot play video: the launcher
+    // asks for the modern (IE 11) mode for itself in the current user's registry (FEATURE_BROWSER_EMULATION).
+    public static class VideoView
+    {
+        static bool modeSet;
+
+        static void UseModernMode()
+        {
+            if (modeSet) return;
+            modeSet = true;
+            try
+            {
+                string exe = Path.GetFileName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
+                using (var k = Microsoft.Win32.Registry.CurrentUser.CreateSubKey(
+                    @"Software\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION"))
+                    if (k != null) k.SetValue(exe, 11001, Microsoft.Win32.RegistryValueKind.DWord);
+            }
+            catch (Exception) { }
+        }
+
+        static string Html(string s)
+        {
+            return System.Net.WebUtility.HtmlEncode(s ?? "");
+        }
+
+        public static WebBrowser Make(GuideVideo v)
+        {
+            UseModernMode();
+            var web = new WebBrowser();
+            web.ScriptErrorsSuppressed = true;
+            web.IsWebBrowserContextMenuEnabled = false;
+            web.WebBrowserShortcutsEnabled = false;
+            web.AllowWebBrowserDrop = false;
+            string poster = v.Url.EndsWith(".mp4", StringComparison.OrdinalIgnoreCase) ? v.Url.Substring(0, v.Url.Length - 4) + ".jpg" : "";
+            web.DocumentText =
+                "<!DOCTYPE html><html><head><meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"><meta charset=\"utf-8\">" +
+                "<style>html,body{margin:0;height:100%;background:#0e0d14;overflow:hidden;font-family:Georgia,serif;color:#d7cea4}" +
+                "video{width:100%;height:100%;background:#000;display:block}" +
+                "#err{display:none;position:absolute;left:0;right:0;top:40%;text-align:center;font-size:15px}</style></head><body>" +
+                "<video id=\"v\" controls autoplay preload=\"auto\"" + (poster.Length > 0 ? " poster=\"" + Html(poster) + "\"" : "") +
+                " src=\"" + Html(v.Url) + "\"></video>" +
+                "<div id=\"err\">" + Html(Lang.T("This video can't play here. Use OPEN IN BROWSER.")) + "</div>" +
+                "<script>var v=document.getElementById('v');" +
+                "v.onerror=function(){v.style.display='none';document.getElementById('err').style.display='block';};" +
+                "</script></body></html>";
+            return web;
+        }
+    }
+
     static class GuideTheme
     {
         public static readonly Color Red = Theme.Hex("#c8442f");
@@ -521,6 +589,8 @@ namespace AzerothLauncher
         readonly float zoom;
         bool hover;
 
+        public static Func<GuideVideo, bool> Embed;          // set by the launcher: plays a web video inside the section
+
         public static string VideoFolder { get { return Path.Combine(Util.DataDir, "Guide Videos"); } }
 
         public VideoCard(GuideVideo v, int w)
@@ -583,6 +653,7 @@ namespace AzerothLauncher
         {
             base.OnMouseUp(e);
             if (e.Button != MouseButtons.Left || !ClientRectangle.Contains(e.Location)) return;
+            if (file == null && ytId == null && Embed != null && Embed(video)) return;   // streamed inside the launcher
             if (file == null) { Util.OpenInShell(video.Url); return; }
             if (File.Exists(file)) { Util.OpenInShell(file); return; }
             try { Directory.CreateDirectory(VideoFolder); } catch (Exception) { }
@@ -651,7 +722,7 @@ namespace AzerothLauncher
                 g.DrawString(title, tf, b, new RectangleF(x, y, w, h), sf);
                 y += h + 6;
             }
-            string where = file == null ? (ytId != null ? "Watch on YouTube ›" : thumbUrl != null ? "Stream in your browser ›" : "Open in your browser ›")
+            string where = file == null ? (ytId != null ? "Watch on YouTube ›" : "Play here ›")
                          : File.Exists(file) ? "Play on this PC ›" : "Video file not found - click to open its folder";
             using (var b = new SolidBrush(hover ? Theme.Hex("#fff2b0") : Theme.GoldDim))
                 g.DrawString(Lang.T(where), Theme.F(9, FontStyle.Italic), b, new RectangleF(x, y, w, Height - y - 6));

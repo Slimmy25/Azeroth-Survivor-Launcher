@@ -1106,3 +1106,9 @@ Play on this PC ›
 = Putar di PC ini ›
 Video file not found - click to open its folder
 = File video tidak ditemukan - klik untuk membuka foldernya
+Play here ›
+= Putar di sini ›
+OPEN IN BROWSER ›
+= BUKA DI BROWSER ›
+This video can't play here. Use OPEN IN BROWSER.
+= Video ini tidak bisa diputar di sini. Gunakan BUKA DI BROWSER.

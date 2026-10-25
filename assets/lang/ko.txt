@@ -1107,3 +1107,9 @@ Play on this PC ›
 = 이 PC에서 재생 ›
 Video file not found - click to open its folder
 = 영상 파일을 찾을 수 없음 - 클릭하면 폴더가 열립니다
+Play here ›
+= 여기서 재생 ›
+OPEN IN BROWSER ›
+= 브라우저에서 열기 ›
+This video can't play here. Use OPEN IN BROWSER.
+= 이 영상은 여기서 재생할 수 없습니다. 브라우저에서 열기를 사용하세요.

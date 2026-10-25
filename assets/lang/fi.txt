@@ -1106,3 +1106,9 @@ Play on this PC ›
 = Toista tällä koneella ›
 Video file not found - click to open its folder
 = Videotiedostoa ei löytynyt - avaa kansio napsauttamalla
+Play here ›
+= Toista tässä ›
+OPEN IN BROWSER ›
+= AVAA SELAIMESSA ›
+This video can't play here. Use OPEN IN BROWSER.
+= Videota ei voi toistaa tässä. Käytä AVAA SELAIMESSA.

@@ -1107,3 +1107,9 @@ Play on this PC ›
 = 在本機播放 ›
 Video file not found - click to open its folder
 = 找不到影片檔案 - 點擊開啟其資料夾
+Play here ›
+= 在此播放 ›
+OPEN IN BROWSER ›
+= 在瀏覽器中開啟 ›
+This video can't play here. Use OPEN IN BROWSER.
+= 此影片無法在這裡播放。請使用「在瀏覽器中開啟」。

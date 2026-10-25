@@ -1106,3 +1106,9 @@ Play on this PC ›
 = Riproduci su questo PC ›
 Video file not found - click to open its folder
 = File video non trovato - clicca per aprire la cartella
+Play here ›
+= Riproduci qui ›
+OPEN IN BROWSER ›
+= APRI NEL BROWSER ›
+This video can't play here. Use OPEN IN BROWSER.
+= Questo video non può essere riprodotto qui. Usa APRI NEL BROWSER.

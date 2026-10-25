@@ -1107,3 +1107,9 @@ Play on this PC ›
 = Bu bilgisayarda oynat ›
 Video file not found - click to open its folder
 = Video dosyası bulunamadı - klasörünü açmak için tıkla
+Play here ›
+= Burada oynat ›
+OPEN IN BROWSER ›
+= TARAYICIDA AÇ ›
+This video can't play here. Use OPEN IN BROWSER.
+= Bu video burada oynatılamıyor. TARAYICIDA AÇ'ı kullan.

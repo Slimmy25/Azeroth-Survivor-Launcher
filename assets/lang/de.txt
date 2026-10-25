@@ -1106,3 +1106,9 @@ Play on this PC ›
 = Auf diesem PC abspielen ›
 Video file not found - click to open its folder
 = Videodatei nicht gefunden - klicken, um den Ordner zu öffnen
+Play here ›
+= Hier abspielen ›
+OPEN IN BROWSER ›
+= IM BROWSER ÖFFNEN ›
+This video can't play here. Use OPEN IN BROWSER.
+= Dieses Video kann hier nicht abgespielt werden. Nutze IM BROWSER ÖFFNEN.
