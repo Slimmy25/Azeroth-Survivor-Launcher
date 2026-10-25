@@ -339,9 +339,30 @@ namespace AzerothLauncher
                                                   : "Game client not found. Press INSTALL, or set the game folder in Options.")
                         : status);
                     Font stf = Theme.F(9, FontStyle.Italic);
-                    float sw = g.MeasureString(st, stf).Width, cxp = playBtn.Left + playBtn.Width / 2f;
-                    float sx = Math.Min(cxp - sw / 2, W - 10 - sw);
-                    g.DrawString(st, stf, sb, sx, playBtn.Top - 26);
+                    float cxp = playBtn.Left + playBtn.Width / 2f;
+                    if (dlActive)                            // the game download: its bar takes the status line's place
+                    {
+                        int pct = dlTotal > 0 ? (int)Math.Min(100, dlDone * 100 / dlTotal) : -1;
+                        st = Lang.T(pct >= 0 ? "Downloading the game: " + pct + "%  (" + Util.FmtSize(dlDone) + " of " + Util.FmtSize(dlTotal) + ")"
+                                             : "Downloading the game: " + Util.FmtSize(dlDone));
+                        Font df = Theme.F(8, FontStyle.Italic);
+                        float dw = g.MeasureString(st, df).Width;
+                        const int bw = 250, bh = 8;
+                        float bx = Math.Min(cxp - bw / 2f, W - 10 - bw);
+                        float by = playBtn.Top - 12;
+                        g.DrawString(st, df, sb, Math.Min(cxp - dw / 2, W - 10 - dw), by - 15);
+                        using (var back = new SolidBrush(Theme.Hex("#1a1410"))) g.FillRectangle(back, bx, by, bw, bh);
+                        if (pct > 0)
+                            using (var fill = new LinearGradientBrush(new RectangleF(bx, by, bw, bh), Theme.Hex("#f4d27a"), Theme.Hex("#a8761e"), 90f))
+                                g.FillRectangle(fill, bx, by, bw * pct / 100f, bh);
+                        using (var edge = new Pen(Theme.Hex("#c49a48"))) g.DrawRectangle(edge, bx, by, bw, bh);
+                    }
+                    else
+                    {
+                        float sw = g.MeasureString(st, stf).Width;
+                        float sx = Math.Min(cxp - sw / 2, W - 10 - sw);
+                        g.DrawString(st, stf, sb, sx, playBtn.Top - 26);
+                    }
                 }
                 PlayStats ps = ShownPlayStats();
                 if (ps.Sessions > 0 && StatsEnabled() && Cfg.Bool("home_playtime", true))
@@ -542,23 +563,29 @@ namespace AzerothLauncher
             RefreshGates();
         }
 
-        // Cloud Save is grayed out (and says why on hover) until the game is installed
+        // Cloud Save and Addons are grayed out (and say why on hover) until the game is installed; every other button
+        // (Guide, Changelog, Stats, Options, About, Discord, Update) works the same with or without the game
         const string CloudNeedsGame = "Cloud Save needs the game. Press INSTALL to download it first.";
+        const string AddonsNeedGame = "Addons need the game. Press INSTALL to download it first.";
 
         void RefreshGates()
         {
             bool off = !GateOpen();
-            WowButton b;
-            if (nav.TryGetValue("Cloud Save", out b))
+            foreach (string name in new[] { "Cloud Save", "Addons" })
             {
-                b.GrayedTip = CloudNeedsGame;
-                b.Grayed = off;
-            }
-            IconButton s;
-            if (stripBtns != null && stripBtns.TryGetValue("Cloud Save", out s))
-            {
-                s.GrayedTip = CloudNeedsGame;
-                s.Grayed = off;
+                string tip = name == "Addons" ? AddonsNeedGame : CloudNeedsGame;
+                WowButton b;
+                if (nav.TryGetValue(name, out b))
+                {
+                    b.GrayedTip = tip;
+                    b.Grayed = off;
+                }
+                IconButton s;
+                if (stripBtns != null && stripBtns.TryGetValue(name, out s))
+                {
+                    s.GrayedTip = tip;
+                    s.Grayed = off;
+                }
             }
         }
 
@@ -918,7 +945,12 @@ namespace AzerothLauncher
         // ------------------------------------------------------------------ play: download newest -> run game -> upload
         void Play()
         {
-            if (GameRunningFlag || Installing) return;
+            if (GameRunningFlag) return;
+            if (Installing)
+            {
+                if (installDlg != null && !installDlg.IsDisposed) InstallClient();   // the download's window, with CANCEL
+                return;
+            }
             if (Updating)
             {
                 SetStatus("The game is being updated. Please wait until that has finished.");
@@ -1080,6 +1112,16 @@ namespace AzerothLauncher
         void InstallClient() { InstallClient(false); }
 
         bool setupAfterInstall;
+        bool dlActive;                                       // the game download is running: the status line shows its bar
+        long dlDone, dlTotal;
+
+        void SetDownloadBar(bool on, long done, long total)
+        {
+            dlActive = on;
+            dlDone = done;
+            dlTotal = total;
+            Invalidate(new Rectangle(0, 578, W, H - 578));
+        }
 
         void InstallClient(bool forSetup)
         {
@@ -1127,6 +1169,7 @@ namespace AzerothLauncher
             Installing = true;
             RefreshPlayLabel();
             SetStatus("Downloading the game client...");
+            SetDownloadBar(true, 0, 0);
             string temp = Path.Combine(Util.LauncherDir, "temp");
             string dest = Util.LauncherDir;
             ManualResetEvent cancel = dlg.CancelEvent;
@@ -1150,14 +1193,14 @@ namespace AzerothLauncher
                         Ui(delegate
                         {
                             dlg.SetProgress(done, total);
-                            if (total > 0) SetStatus("Downloading the game client... " + (int)(done * 100 / total) + "%");
+                            SetDownloadBar(true, done, total);
                         });
                     };
                     DownloadClient(file, progress, cancel, delegate(string text)
                     {
                         Ui(delegate { dlg.SetPhase("download", text); });
                     });
-                    Ui(delegate { dlg.SetPhase("install", "Unpacking the game..."); SetStatus("Unpacking the game client..."); });
+                    Ui(delegate { SetDownloadBar(false, 0, 0); dlg.SetPhase("install", "Unpacking the game..."); SetStatus("Unpacking the game client..."); });
                     if (Archive.Kind(file) == null)
                         throw new UserError("The download server sent something that is not the game archive. Please try again later.");
                     Archive.InstallGame(file, dest);
@@ -1167,6 +1210,13 @@ namespace AzerothLauncher
                 finally { Util.DeleteTreeQuiet(temp); }        // the download is never kept
                 Ui(delegate
                 {
+                    SetDownloadBar(false, 0, 0);
+                    if (!dlg.IsDisposed && !dlg.Visible)      // it was tucked away while the game downloaded: back with the result
+                    {
+                        dlg.PlaceOver(this);
+                        dlg.Show();
+                        dlg.Activate();
+                    }
                     if (cancelled)
                     {
                         Installing = false;

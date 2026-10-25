@@ -220,7 +220,10 @@ namespace AzerothLauncher
         {
             CancelEvent = new ManualResetEvent(false);
             ShowProgress("download", "Connecting to the download server...");
-            if (!app.BeginClientDownload(this)) ShowOffer();
+            if (!app.BeginClientDownload(this)) { ShowOffer(); return; }
+            // out of the way while the game downloads: the launcher's status line shows the bar, and the Guide, the
+            // Changelog, Options and the rest can be used meanwhile. INSTALLING brings this window back (CANCEL).
+            LauncherApp.After(1500, delegate { if (!IsDisposed && Phase == "download") Hide(); });
         }
 
         void Back()
@@ -246,7 +249,12 @@ namespace AzerothLauncher
             detail = Line(" ", Theme.GoldDim, 10, false, 6, 0);
             cancelBtn = null;
             if (phase == "download")
-                cancelBtn = Body.Add(B("CANCEL", Cancel, 130, 34, 11), Align.Center, 30, 12, 30, 16);
+            {
+                Line("You can keep using the launcher (the Guide, the Changelog, Options ...) while the game downloads: " +
+                     "the bar is shown in the launcher's status line. Press INSTALLING to come back here.", Theme.GoldDim, 9, true, 6, 0);
+                cancelBtn = B("CANCEL", Cancel, 130, 34, 11);
+                Body.Add(new HRow(12, cancelBtn, B("HIDE", Hide, 110, 34, 11)), Align.Center, 30, 12, 30, 16);
+            }
             else
             {
                 Line("Please keep the launcher open until this has finished.", Theme.GoldDim, 9, true, 2, 16);
