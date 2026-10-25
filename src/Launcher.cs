@@ -333,10 +333,8 @@ namespace AzerothLauncher
                                  Theme.F(8, FontStyle.Italic), gb, new RectangleF(400, 658, W - 10 - 400, 14), sf);
                 }
                 string version = Data.GameVersion;
-                sf.Alignment = StringAlignment.Far;
-                using (var vb = new SolidBrush(Theme.Hex("#b8a27a")))
-                    g.DrawString(Lang.T("Game version") + (version.Length > 0 ? ": " + version : ""), Theme.F(8), vb,
-                                 new RectangleF(rc.X, 673, rc.Width - 2, 14), sf);
+                using (var vb = new SolidBrush(Theme.Hex("#b8a27a")))            // bottom-left corner
+                    g.DrawString(Lang.T("Game version") + (version.Length > 0 ? ": " + version : ""), Theme.F(8), vb, 12, 672);
             }
         }
 
