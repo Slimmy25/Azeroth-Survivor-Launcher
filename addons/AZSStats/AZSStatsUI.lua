@@ -219,6 +219,29 @@ local function Records()
 		end
 	end
 	if ( table.getn(out) == 1 ) then Line(out, "No records yet.", ""); end
+	-- the builds behind your best runs: highest DPS first
+	local builds = {};
+	for i = 1, table.getn(DB().builds or {}) do
+		local bd = DB().builds[i];
+		if ( not classKey or bd.class == classKey ) then table.insert(builds, bd); end
+	end
+	table.sort(builds, function(a, b) return Num(a.dps) > Num(b.dps); end);
+	if ( table.getn(builds) > 0 ) then
+		Gap(out);
+		Head(out, "Best builds");
+		for i = 1, math.min(8, table.getn(builds)) do
+			local bd = builds[i];
+			local hex = bd.kind == "victory" and "1eff00" or "ffffff";
+			Line(out, C(ClassHex(bd.class), bd.cname or "") .. "  " .. C(hex, bd.result or "") .. "  " .. C("9d9d9d", bd.zname or ""),
+			     C("ff8000", Big(bd.dps) .. " DPS") .. "  ·  " .. Clock(bd.t), ClassIcon(bd.class));
+			local parts = {};
+			for j = 1, table.getn(bd.abilities or {}) do
+				local a = bd.abilities[j];
+				table.insert(parts, (a.name or "?") .. (Num(a.rank) > 0 and (" " .. a.rank) or ""));
+			end
+			Line(out, "    " .. C("9d9d9d", table.concat(parts, ", ")), "");
+		end
+	end
 	return out;
 end
 
@@ -235,8 +258,24 @@ local function Nemesis()
 	end
 	local deaths = 0;
 	for i = 1, table.getn(killers) do deaths = deaths + Num(killers[i].v.kills); end
+	local beaten = db.bossKills or {};
 	for i = 2, math.min(8, table.getn(killers)) do
-		Line(out, "    " .. killers[i].key, Big(killers[i].v.kills) .. " kills  (" .. Pct(killers[i].v.kills, deaths) .. ")");
+		local won = Num(beaten[killers[i].key]);
+		Line(out, "    " .. killers[i].key, Big(killers[i].v.kills) .. " kills  (" .. Pct(killers[i].v.kills, deaths) .. ")" ..
+		     (won > 0 and ("  ·  " .. C("1eff00", "you beat it " .. Big(won))) or ""));
+	end
+	-- revenge: the bosses you have beaten most
+	local list = Sorted({}, function() return 0; end);
+	for name, n in pairs(beaten) do table.insert(list, { key = name, n = Num(n) }); end
+	table.sort(list, function(a, b) return a.n > b.n; end);
+	if ( table.getn(list) > 0 ) then
+		Gap(out);
+		Head(out, "Revenge: bosses you beat");
+		for i = 1, math.min(8, table.getn(list)) do
+			local k = db.nemesis[list[i].key];
+			Line(out, "    " .. list[i].key, C("1eff00", "beaten " .. Big(list[i].n)) ..
+			     (type(k) == "table" and ("  ·  " .. C("ff4040", "killed you " .. Big(k.kills))) or ""));
+		end
 	end
 	Gap(out);
 	Head(out, "Death log");
@@ -539,7 +578,8 @@ local function MiniTooltip()
 	if ( type(b.lvl) == "table" ) then GameTooltip:AddDoubleLine("Highest level", Big(b.lvl.v), 1, 1, 1, 1, 1, 1); end
 	GameTooltip:AddDoubleLine("Time played", Hours(db.play.seconds), 1, 1, 1, 1, 1, 1);
 	GameTooltip:AddLine(" ");
-	GameTooltip:AddLine("Click to open your stats. Drag to move this button.", 0.6, 0.6, 0.6);
+	GameTooltip:AddLine("Click: your stats. Right-click: the live DPS tracker.", 0.6, 0.6, 0.6);
+	GameTooltip:AddLine("Drag to move this button.", 0.6, 0.6, 0.6);
 	GameTooltip:Show();
 end
 
@@ -567,7 +607,9 @@ local function MiniBuild()
 	mini:SetHighlightTexture("Interface\\Minimap\\UI-Minimap-ZoomButton-Highlight");
 	mini:RegisterForClicks("LeftButtonUp", "RightButtonUp");
 	mini:RegisterForDrag("LeftButton");
-	mini:SetScript("OnClick", function() AZSStats_Toggle(); end);
+	mini:SetScript("OnClick", function()
+		if ( arg1 == "RightButton" ) then AZSStats_ToggleTracker(); else AZSStats_Toggle(); end
+	end);
 	mini:SetScript("OnEnter", MiniTooltip);
 	mini:SetScript("OnLeave", function() GameTooltip:Hide(); end);
 	mini:SetScript("OnDragStart", function()
@@ -597,3 +639,114 @@ local loader = CreateFrame("Frame");
 loader:RegisterEvent("VARIABLES_LOADED");
 loader:RegisterEvent("PLAYER_ENTERING_WORLD");
 loader:SetScript("OnEvent", function() MiniBuild(); end);
+
+-- ---------------------------------------------------------------- the live DPS tracker
+-- A small frame during a run: your DPS on the game's damage meter, against your best for this class ("82% of your
+-- record"), with a bar. Passing the record plays the level-up chime and says so in chat (once a run, and only after
+-- the first minute, when the meter has settled). Drag it anywhere; /azstats tracker (or right-click the minimap
+-- button) turns it off and on.
+local tracker, trackerElapsed, trackerPassed, trackerLastTime = nil, 0, false, 0;
+
+local function PlayerClassKey()
+	if ( not UnitClass ) then return nil; end
+	local _, token = UnitClass("player");
+	if ( not token ) then return nil; end
+	return string.lower(token);
+end
+
+local function ClassRecord(key)
+	local db = DB();
+	if ( key and type(db.classes[key]) == "table" and type(db.classes[key].best) == "table" ) then
+		local b = db.classes[key].best.dps;
+		if ( type(b) == "table" ) then return Num(b.v), db.classes[key].name; end
+	end
+	return 0, nil;
+end
+
+local function TrackerUpdate()
+	if ( not AZS_GetRunTime or not AZSStats_CurrentDPS ) then tracker:Hide(); return; end
+	local t = Num(AZS_GetRunTime());
+	if ( t <= 0 ) then tracker.box:Hide(); return; end
+	if ( t + 5 < trackerLastTime ) then trackerPassed = false; end      -- a new run
+	trackerLastTime = t;
+	local dps = AZSStats_CurrentDPS();
+	local key = PlayerClassKey();
+	local rec, cname = ClassRecord(key);
+	tracker.box:Show();
+	tracker.dps:SetText(Big(math.floor(dps + 0.5)) .. " DPS");
+	if ( rec > 0 ) then
+		local pct = dps / rec;
+		tracker.rec:SetText(math.floor(pct * 100 + 0.5) .. "% of your " .. (cname or "class") .. " record (" .. Big(rec) .. ")");
+		tracker.bar:SetValue(math.min(1, pct));
+		if ( pct >= 1 ) then tracker.bar:SetStatusBarColor(1, 0.5, 0); else tracker.bar:SetStatusBarColor(0.95, 0.76, 0.3); end
+		if ( pct > 1 and t >= 60 and not trackerPassed ) then
+			trackerPassed = true;
+			if ( PlaySound ) then if ( not pcall(PlaySound, "LEVELUPSOUND") ) then pcall(PlaySound, "QUESTCOMPLETED"); end end
+			S().Print("|cffff8000You just passed your " .. (cname or "class") .. " DPS record of " .. Big(rec) .. "!|r");
+		end
+	else
+		tracker.rec:SetText("No " .. ((cname or "class") ~= "class" and cname or "DPS") .. " record yet: finish a run to set one");
+		tracker.bar:SetValue(0);
+	end
+end
+
+local function TrackerBuild()
+	if ( tracker ) then return; end
+	tracker = CreateFrame("Frame", "AZSStatsTracker", UIParent);
+	tracker:SetWidth(210);
+	tracker:SetHeight(52);
+	local db = DB();
+	if ( type(db.tracker) ~= "table" ) then db.tracker = { show = true, x = 0, y = -150 }; end
+	tracker:SetPoint("CENTER", UIParent, "CENTER", Num(db.tracker.x), Num(db.tracker.y));
+	tracker:SetMovable(true);
+	tracker:EnableMouse(true);
+	tracker:RegisterForDrag("LeftButton");
+	tracker:SetScript("OnDragStart", function() this:StartMoving(); end);
+	tracker:SetScript("OnDragStop", function()
+		this:StopMovingOrSizing();
+		local cx, cy = this:GetCenter();
+		local ux, uy = UIParent:GetCenter();
+		DB().tracker.x, DB().tracker.y = cx - ux, cy - uy;
+	end);
+	local box = CreateFrame("Frame", nil, tracker);
+	box:SetAllPoints(tracker);
+	box:SetBackdrop({ bgFile = "Interface\\Tooltips\\UI-Tooltip-Background", edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border",
+	                  tile = true, tileSize = 16, edgeSize = 14, insets = { left = 4, right = 4, top = 4, bottom = 4 } });
+	box:SetBackdropColor(0.05, 0.05, 0.08, 0.85);
+	box:SetBackdropBorderColor(0.8, 0.65, 0.3);
+	tracker.box = box;
+	local dps = box:CreateFontString(nil, "OVERLAY", "GameFontNormal");
+	dps:SetPoint("TOPLEFT", box, "TOPLEFT", 10, -8);
+	tracker.dps = dps;
+	local rec = box:CreateFontString(nil, "OVERLAY", "GameFontHighlightSmall");
+	rec:SetPoint("TOPLEFT", dps, "BOTTOMLEFT", 0, -2);
+	rec:SetWidth(192);
+	rec:SetJustifyH("LEFT");
+	tracker.rec = rec;
+	local bar = CreateFrame("StatusBar", nil, box);
+	bar:SetStatusBarTexture("Interface\\TargetingFrame\\UI-StatusBar");
+	bar:SetMinMaxValues(0, 1);
+	bar:SetWidth(190);
+	bar:SetHeight(5);
+	bar:SetPoint("BOTTOMLEFT", box, "BOTTOMLEFT", 10, 7);
+	tracker.bar = bar;
+	tracker:SetScript("OnUpdate", function()
+		trackerElapsed = trackerElapsed + (arg1 or 0);
+		if ( trackerElapsed < 0.5 ) then return; end
+		trackerElapsed = 0;
+		TrackerUpdate();
+	end);
+	box:Hide();
+	if ( not db.tracker.show ) then tracker:Hide(); end
+end
+
+function AZSStats_ToggleTracker()
+	TrackerBuild();
+	local t = DB().tracker;
+	t.show = not t.show;
+	if ( t.show ) then tracker:Show(); S().Print("the live DPS tracker is on."); else tracker:Hide(); S().Print("the live DPS tracker is off. /azstats tracker turns it back on."); end
+end
+
+local trackerLoader = CreateFrame("Frame");
+trackerLoader:RegisterEvent("VARIABLES_LOADED");
+trackerLoader:SetScript("OnEvent", function() TrackerBuild(); end);

@@ -125,7 +125,7 @@ end
 local function Fresh()
 	return { version = AZSSTATS_VERSION, quiet = false, lastSig = "", first = "", last = "",
 	         totals = FillBlock({}), best = {}, classes = {}, races = {}, zones = {}, abilities = {}, months = {},
-	         results = {}, history = {}, deaths = {}, nemesis = {},
+	         results = {}, history = {}, deaths = {}, nemesis = {}, builds = {}, bossKills = {},
 	         play = { seconds = 0, sessions = 0, longest = 0, last = 0, lastDate = "", seen = 0 },
 	         coop = { runs = 0, wins = 0, time = 0, kills = 0, bosses = 0, solo = 0, soloWins = 0, best = {}, friends = {} } };
 end
@@ -459,6 +459,72 @@ local function PartyOf(run)
 	return out;
 end
 
+-- ---------------------------------------------------------------- best builds
+-- The spells (and ranks) of a run worth remembering: a new DPS high (overall or for its class) or a victory. Each
+-- class keeps its 5 highest-DPS builds and its 5 newest victories, so the "Best builds" list never runs out.
+AZSSTATS_BUILDS_PER_CLASS = 5;
+
+local function AddBuild(db, run, records, classRecords)
+	local function Has(list, name)
+		for i = 1, table.getn(list) do if ( list[i] == name ) then return true; end end
+		return false;
+	end
+	local why = nil;
+	if ( Has(records, "dps") or Has(classRecords, "dps") ) then why = "dps"; end
+	if ( run.kind == "victory" ) then why = why or "victory"; end
+	if ( not why or type(run.abilities) ~= "table" or table.getn(run.abilities) == 0 ) then return; end
+	if ( type(db.builds) ~= "table" ) then db.builds = {}; end
+	table.insert(db.builds, { class = run.class, cname = run.cname, rname = run.rname, zname = run.zname, date = run.date,
+	                          result = run.result, kind = run.kind, why = why, dps = run.dps, t = run.t, lvl = run.lvl,
+	                          kills = run.kills, abilities = run.abilities });
+	-- keep, for each class, the best by DPS and the newest victories
+	local byClass = {};
+	for i = 1, table.getn(db.builds) do
+		local b = db.builds[i];
+		byClass[b.class] = byClass[b.class] or {};
+		table.insert(byClass[b.class], i);
+	end
+	local keep = {};
+	for c, list in pairs(byClass) do
+		table.sort(list, function(a, b) return Num(db.builds[a].dps) > Num(db.builds[b].dps); end);
+		for i = 1, math.min(AZSSTATS_BUILDS_PER_CLASS, table.getn(list)) do keep[list[i]] = true; end
+		local wins = 0;
+		for i = table.getn(db.builds), 1, -1 do
+			local b = db.builds[i];
+			if ( b.class == c and b.kind == "victory" and wins < AZSSTATS_BUILDS_PER_CLASS ) then keep[i] = true; wins = wins + 1; end
+		end
+	end
+	local kept = {};
+	for i = 1, table.getn(db.builds) do if ( keep[i] ) then table.insert(kept, db.builds[i]); end end
+	db.builds = kept;
+end
+
+-- ---------------------------------------------------------------- bosses you beat (Nemesis "revenge")
+-- The bosses alive are read from the game (AZS_GetBosses) every couple of seconds; when one of them dies (the
+-- combat log's "X dies." or "You have slain X!"), it counts as beaten in AZSStatsDB.bossKills.
+local bossesSeen = {};
+
+local function SeeBosses()
+	if ( not AZS_GetBosses ) then return; end
+	local ok, list = pcall(AZS_GetBosses);
+	if ( not ok or type(list) ~= "table" ) then return; end
+	for k, v in pairs(list) do
+		local name = nil;
+		if ( type(v) == "table" ) then name = v.name or v.Name or v[1]; elseif ( type(k) == "string" ) then name = k; end
+		if ( type(name) == "string" and name ~= "" ) then bossesSeen[name] = true; end
+	end
+end
+
+local function OnDeath(msg)
+	if ( type(msg) ~= "string" ) then return; end
+	local _, _, name = string.find(msg, "^(.+) dies%.$");
+	if ( not name ) then _, _, name = string.find(msg, "^You have slain (.+)!$"); end
+	if ( not name or not bossesSeen[name] ) then return; end
+	bossesSeen[name] = nil;
+	Check();
+	AZSStatsDB.bossKills[name] = Num(AZSStatsDB.bossKills[name]) + 1;
+end
+
 -- ---------------------------------------------------------------- recording a run
 function AZSStats_Record(s)
 	if ( type(s) ~= "table" or not s.result ) then
@@ -507,6 +573,7 @@ function AZSStats_Record(s)
 	local class = Group(db.classes, run.class, run.cname);
 	Accumulate(class, run);
 	local classRecords = Bests(class.best, run);
+	AddBuild(db, run, records, classRecords);
 	AddAbilities(class.abilities, run);
 	Accumulate(Group(db.races, run.race, run.rname), run);
 	Accumulate(Group(db.zones, run.zone, run.zname), run);
@@ -813,10 +880,12 @@ SlashCmdList["AZSSTATS"] = function(msg)
 		Print("all stats cleared.");
 	elseif ( cmd == "reset" ) then
 		Print("type /azstats reset yes to clear every stat (this cannot be undone).");
+	elseif ( cmd == "tracker" ) then
+		if ( AZSStats_ToggleTracker ) then AZSStats_ToggleTracker(); end
 	elseif ( cmd == "minimap" ) then
 		if ( AZSStats_ToggleMinimapButton ) then AZSStats_ToggleMinimapButton(); end
 	else
-		Print("/azstats, /azstats last, /azstats best, /azstats classes, /azstats deaths, /azstats nemesis, /azstats coop, /azstats quiet, /azstats minimap; /azs or the minimap button opens the window, /azstats reset");
+		Print("/azstats, /azstats last, /azstats best, /azstats classes, /azstats deaths, /azstats nemesis, /azstats coop, /azstats quiet, /azstats minimap, /azstats tracker; /azs or the minimap button opens the window, /azstats reset");
 	end
 end
 
@@ -904,6 +973,7 @@ frame:RegisterEvent("CHAT_MSG_SPELL_CREATURE_VS_SELF_DAMAGE");
 frame:RegisterEvent("CHAT_MSG_SPELL_PERIODIC_SELF_DAMAGE");
 frame:RegisterEvent("CHAT_MSG_COMBAT_HOSTILEPLAYER_HITS");
 frame:RegisterEvent("CHAT_MSG_SPELL_HOSTILEPLAYER_DAMAGE");
+frame:RegisterEvent("CHAT_MSG_COMBAT_HOSTILE_DEATH");
 -- play time: the time the game runs, added every frame. A session starts when the interface loads, unless the
 -- game was seen less than two minutes ago (a /reload, not a new start).
 local session, playing = 0, false;
@@ -939,6 +1009,8 @@ frame:SetScript("OnEvent", function()
 		if ( arg1 == "AZSEND" and arg2 ) then Offer(Parse(arg2)); end
 	elseif ( event == "PLAYER_LOGOUT" ) then
 		AZSStats_Finalize();
+	elseif ( event == "CHAT_MSG_COMBAT_HOSTILE_DEATH" ) then
+		OnDeath(arg1);
 	else
 		OnHit(arg1);
 	end
@@ -965,6 +1037,7 @@ frame:SetScript("OnUpdate", function()
 	-- the last summary stays readable after its run (until the next one ends), so the build is copied every
 	-- time; recording an already counted summary again does nothing
 	Snapshot();
+	SeeBosses();
 	if ( AZS_GetRunSummary ) then
 		local s = AZS_GetRunSummary();
 		if ( s ) then
@@ -976,3 +1049,19 @@ end);
 
 -- for the window (AZSStatsUI.lua)
 AZSStats = { Check = Check, Big = Big, Clock = Clock, Pretty = Pretty, Kind = Kind, Print = Print };
+
+-- the current run's DPS on the game's damage meter (the live tracker in AZSStatsUI.lua reads it)
+function AZSStats_CurrentDPS()
+	if ( type(AZS_METER) ~= "table" ) then return 0; end
+	local dps = 0;
+	for i = 1, table.getn(AZS_METER) do
+		local e = AZS_METER[i];
+		if ( type(e) == "table" ) then dps = dps + Num(e.dps); end
+	end
+	if ( dps <= 0 and AZS_GetRunTime ) then           -- no DPS on the lines: the damage over the run's time
+		local t, dmg = Num(AZS_GetRunTime()), 0;
+		for i = 1, table.getn(AZS_METER) do if ( type(AZS_METER[i]) == "table" ) then dmg = dmg + Num(AZS_METER[i].dmg); end end
+		if ( t > 0 ) then dps = dmg / t; end
+	end
+	return dps;
+end
