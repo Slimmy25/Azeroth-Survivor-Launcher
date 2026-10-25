@@ -256,8 +256,8 @@ namespace AzerothLauncher
                         TextFormatFlags.Left | TextFormatFlags.SingleLine | TextFormatFlags.EndEllipsis);
             if (Note.Length > 0)
             {
-                int nw = Math.Min(Armory.TextWidth(Note, Theme.F(8.5f, FontStyle.Italic)) + 24, (r.Right - x) * 2 / 3);
-                Armory.Text(g, Note, Theme.F(8.5f, FontStyle.Italic), Armory.Dim, new Rectangle(r.Right - nw, r.Y + 2, nw, 16),
+                int nw = r.Right - x;                    // right-aligned: the whole width is free above the heading
+                Armory.Text(g, Note, Theme.F(8.5f, FontStyle.Italic), Armory.Dim, new Rectangle(r.Right - nw, r.Y + 2, nw, 18),
                             TextFormatFlags.Right | TextFormatFlags.SingleLine | TextFormatFlags.EndEllipsis);
             }
             var rects = ChipRects(r.X, r.Y + Pic + 12, r.Right);
