@@ -124,6 +124,13 @@ namespace AzerothLauncher
                     }
                 }
             }
+            // every talent of every class: its text from the game's tree; a click opens its class's page
+            int classesTopic = topics.FindIndex(delegate(GuideTopic g) { return g.Title == "Classes"; });
+            foreach (var tal in Talents.All())
+            {
+                int cp = classesTopic < 0 ? -1 : topics[classesTopic].Pages.FindIndex(delegate(GuidePage g) { return g.Title == tal.Class; });
+                if (!links.ContainsKey(tal.Name)) Add(tal.Name, classesTopic, cp, Talents.HoverText(tal));
+            }
             // races, racials and zones: the game's own words; a click opens their topic
             foreach (var kv in text)
             {
@@ -176,6 +183,14 @@ namespace AzerothLauncher
             if (byKey.TryGetValue(k, out l)) return l;
             if (k.EndsWith("s") && byKey.TryGetValue(k.Substring(0, k.Length - 1), out l)) return l;
             return null;
+        }
+
+        // what the game (or, until AZS Stats has seen it in game, the guide) says a name does; null if nothing
+        public static string GameTip(string name)
+        {
+            if (links == null) Build();
+            GuideLink l = Find(name ?? "");
+            return l != null && l.Tip.Length > 0 ? l.Tip : null;
         }
 
         static string Capital(string s) { return s.Length == 0 ? s : char.ToUpperInvariant(s[0]) + s.Substring(1); }
@@ -319,6 +334,7 @@ namespace AzerothLauncher
     {
         static GuideHover box;
         string title = "", body = "";
+        Image icon;                                           // the spell's or talent's icon, beside its name
         const int W = 300;
 
         GuideHover()
@@ -343,13 +359,17 @@ namespace AzerothLauncher
             }
         }
 
-        public static void Show(Control owner, string title, string body)
+        public static void Show(Control owner, string title, string body) { Show(owner, title, body, null); }
+
+        public static void Show(Control owner, string title, string body, Image icon)
         {
             if (box == null || box.IsDisposed) box = new GuideHover();
+            box.icon = icon;
             box.title = title;
             box.body = body;
             Font tf = Theme.F(10.5f, FontStyle.Bold), bf = Theme.F(9.5f);
-            int th = TextRenderer.MeasureText(title, tf, new Size(W - 20, 0), TextFormatFlags.WordBreak).Height;
+            int th = TextRenderer.MeasureText(title, tf, new Size(W - 20 - (icon != null ? 40 : 0), 0), TextFormatFlags.WordBreak).Height;
+            if (icon != null) th = Math.Max(th, 36);
             int bh = TextRenderer.MeasureText(body, bf, new Size(W - 20, 0), TextFormatFlags.WordBreak).Height;
             Point p = Cursor.Position;
             var size = new Size(W, th + bh + 22);
@@ -372,8 +392,16 @@ namespace AzerothLauncher
             g.Clear(BackColor);
             using (var p = new Pen(Theme.Hex("#c49a48"), 1)) g.DrawRectangle(p, 0, 0, Width - 1, Height - 1);
             Font tf = Theme.F(10.5f, FontStyle.Bold), bf = Theme.F(9.5f);
-            int th = TextRenderer.MeasureText(title, tf, new Size(W - 20, 0), TextFormatFlags.WordBreak).Height;
-            TextRenderer.DrawText(g, title, tf, new Rectangle(10, 8, W - 20, th), Theme.Gold, BackColor, TextFormatFlags.WordBreak);
+            int ix = icon != null ? 40 : 0;
+            int th = TextRenderer.MeasureText(title, tf, new Size(W - 20 - ix, 0), TextFormatFlags.WordBreak).Height;
+            if (icon != null)
+            {
+                th = Math.Max(th, 36);
+                g.DrawImage(icon, new Rectangle(10, 8, 32, 32));
+                using (var p = new Pen(Theme.Hex("#8a7040"), 1)) g.DrawRectangle(p, 10, 8, 32, 32);
+            }
+            TextRenderer.DrawText(g, title, tf, new Rectangle(10 + ix, icon != null ? 14 : 8, W - 20 - ix, th), Theme.Gold, BackColor,
+                                  TextFormatFlags.WordBreak);
             TextRenderer.DrawText(g, body, bf, new Rectangle(10, 10 + th, W - 20, Height - th - 14), Theme.Text, BackColor,
                                   TextFormatFlags.WordBreak);
         }

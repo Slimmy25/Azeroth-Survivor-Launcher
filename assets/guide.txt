@@ -415,7 +415,7 @@ Every run pays talent experience to the class you played: for time survived, kil
 - At 10, 20 and 30 points in a tree you reach its milestones, which change how your spells play.
 - You can have three specs (saved setups) per class, and respecs are free.
 
-The Classes topic lists every tree with its three milestones.
+Every class page in the Classes topic shows its three full trees, and which talents change each of its spells.
 
 @topic Achievements & Rewards | Account-wide goals and what they unlock
 # Achievements

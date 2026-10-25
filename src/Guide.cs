@@ -256,11 +256,54 @@ namespace AzerothLauncher
                 add(new GuideText(string.Join(" ", para.ToArray()), 10, Theme.Text, bg, tw, gTopic, gPage), x, 8);
                 para.Clear();
             };
+            // a class's page: its spells with their icons and the talents that change them, and its three talent
+            // trees drawn like the game's (in place of the guide's short list of milestones)
+            string className = null;
+            try
+            {
+                var tops = Data.Guide;
+                if (gTopic >= 0 && gTopic < tops.Count && tops[gTopic].Title == "Classes" && Talents.Of(page.Title).Count > 0)
+                    className = page.Title;
+            }
+            catch (Exception) { }
+            string section = "";
             foreach (string raw in page.Body.Split('\n'))
             {
                 string line = raw.Trim();
                 int vi;
                 if (line.Length == 0) { flush(); continue; }
+                if (className != null && line.StartsWith("# ")) section = line.Substring(2).Trim();
+                if (className != null && section.StartsWith("Talent"))
+                {
+                    if (!line.StartsWith("# ")) continue;
+                    flush();
+                    add(UI.Text(line.Substring(2).Trim(), 12.5f, FontStyle.Bold, Theme.Gold, bg, tw, false), x, 16);
+                    add(new GuideRule(Math.Min(60, tw), Theme.Gold), x, 3);
+                    add(new GuideText("Point at a talent to read it. Every 5 points in a tree open its next row; the purple ones " +
+                                      "are its milestones at 10, 20 and 30 points.", 9.5f, Theme.GoldDim, bg, tw, gTopic, gPage), x, 8);
+                    var trees = Talents.Of(className);
+                    int gap = 8, tw3 = (tw - gap * (trees.Count - 1)) / Math.Max(1, trees.Count), ty = y + 10, th = 0;
+                    for (int i = 0; i < trees.Count; i++)
+                    {
+                        var tv = new TalentTreeView(trees[i], tw3);
+                        tv.Location = new Point(x + i * (tw3 + gap), ty);
+                        sp.Controls.Add(tv);
+                        th = Math.Max(th, tv.Height);
+                    }
+                    y = ty + th;
+                    continue;
+                }
+                if (className != null && section.StartsWith("Spell pool") && line.StartsWith("- "))
+                {
+                    flush();
+                    Match m = Regex.Match(line.Substring(2).Trim(), @"^(.+?(?: \([^)]*\))?): (?=[a-z0-9])(.+)$");
+                    if (m.Success)
+                    {
+                        string body = m.Groups[2].Value;
+                        add(new SpellRow(m.Groups[1].Value, char.ToUpperInvariant(body[0]) + body.Substring(1), className, tw, gTopic, gPage), x, 6);
+                        continue;
+                    }
+                }
                 if (line.StartsWith("@video ") && int.TryParse(line.Substring(7), out vi) && vi < page.Videos.Count)
                 {
                     flush();
