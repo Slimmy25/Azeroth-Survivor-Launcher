@@ -1073,3 +1073,37 @@ Counted in game by AZS Stats. Turn on cloud saving to take it to your other PCs.
 = ゲーム内で AZS Stats が計測。他の PC に引き継ぐにはクラウドセーブをオンにしてください。
 Show play time on the home screen
 = ホーム画面にプレイ時間を表示
+
+# New Player Guide
+New Player Guide
+= 初心者ガイド
+{#0} of {#1} topics read
+= {#1} 件中 {#0} 件を読了
+START HERE
+= ここから始めよう
+CONTINUE
+= 続きから
+OPEN
+= 開く
+READ
+= 読了
+1 VIDEO
+= 動画 1 本
+{#0} VIDEOS
+= 動画 {#0} 本
+{#0}/{#1} PAGES
+= {#0}/{#1} ページ
+VIDEO
+= 動画
+TIP
+= ヒント
+Watch the video
+= 動画を見る
+Watch on YouTube ›
+= YouTube で見る ›
+Open in your browser ›
+= ブラウザで開く ›
+Play on this PC ›
+= この PC で再生 ›
+Video file not found - click to open its folder
+= 動画ファイルが見つかりません - クリックでフォルダを開く

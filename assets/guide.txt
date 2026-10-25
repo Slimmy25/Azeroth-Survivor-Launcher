@@ -5,6 +5,11 @@ Format:
   # Heading                               a heading inside a page
   - text                                  a bullet point
   any other line                          a paragraph (an empty line starts a new one)
+  "a line in quotes"                      a tip box
+  @video Title | address                 a video card at that spot: a YouTube link (shows its picture),
+                                          any web address, or a video file (a name alone is looked for in the
+                                          "Guide Videos" folder next to the launcher's data)
+                                          e.g.  @video Your first run | https://www.youtube.com/watch?v=XXXXXXXXXXX
 Everything above the first @topic line is ignored. Gathered from the game itself (version 0.114.2); numbers can change with game updates.
 
 @topic Getting Started | What Azeroth Survivors is and how a run works

@@ -1072,3 +1072,37 @@ Counted in game by AZS Stats. Turn on cloud saving to take it to your other PCs.
 = Talt i spillet af AZS Stats. Slå skygemning til for at tage den med til dine andre pc'er.
 Show play time on the home screen
 = Vis spilletid på startskærmen
+
+# New Player Guide
+New Player Guide
+= Guide til nye spillere
+{#0} of {#1} topics read
+= {#0} af {#1} emner læst
+START HERE
+= START HER
+CONTINUE
+= FORTSÆT
+OPEN
+= ÅBN
+READ
+= LÆST
+1 VIDEO
+= 1 VIDEO
+{#0} VIDEOS
+= {#0} VIDEOER
+{#0}/{#1} PAGES
+= {#0}/{#1} SIDER
+VIDEO
+= VIDEO
+TIP
+= TIP
+Watch the video
+= Se videoen
+Watch on YouTube ›
+= Se på YouTube ›
+Open in your browser ›
+= Åbn i din browser ›
+Play on this PC ›
+= Afspil på denne pc ›
+Video file not found - click to open its folder
+= Videofilen blev ikke fundet - klik for at åbne mappen

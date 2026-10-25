@@ -1073,3 +1073,37 @@ Counted in game by AZS Stats. Turn on cloud saving to take it to your other PCs.
 = Počítáno ve hře doplňkem AZS Stats. Zapni ukládání do cloudu, abys ho měl i na dalších počítačích.
 Show play time on the home screen
 = Zobrazit herní čas na úvodní obrazovce
+
+# New Player Guide
+New Player Guide
+= Průvodce pro nováčky
+{#0} of {#1} topics read
+= Přečteno {#0} z {#1} témat
+START HERE
+= ZAČNI ZDE
+CONTINUE
+= POKRAČOVAT
+OPEN
+= OTEVŘÍT
+READ
+= PŘEČTENO
+1 VIDEO
+= 1 VIDEO
+{#0} VIDEOS
+= VIDEA: {#0}
+{#0}/{#1} PAGES
+= {#0}/{#1} STRAN
+VIDEO
+= VIDEO
+TIP
+= TIP
+Watch the video
+= Přehrát video
+Watch on YouTube ›
+= Sledovat na YouTube ›
+Open in your browser ›
+= Otevřít v prohlížeči ›
+Play on this PC ›
+= Přehrát v tomto PC ›
+Video file not found - click to open its folder
+= Videosoubor nenalezen - klikni pro otevření složky

@@ -1072,3 +1072,37 @@ Counted in game by AZS Stats. Turn on cloud saving to take it to your other PCs.
 = Dihitung di dalam game oleh AZS Stats. Nyalakan simpan cloud untuk membawanya ke PC-mu yang lain.
 Show play time on the home screen
 = Tampilkan waktu bermain di layar utama
+
+# New Player Guide
+New Player Guide
+= Panduan Pemain Baru
+{#0} of {#1} topics read
+= {#0} dari {#1} topik dibaca
+START HERE
+= MULAI DI SINI
+CONTINUE
+= LANJUTKAN
+OPEN
+= BUKA
+READ
+= DIBACA
+1 VIDEO
+= 1 VIDEO
+{#0} VIDEOS
+= {#0} VIDEO
+{#0}/{#1} PAGES
+= {#0}/{#1} HALAMAN
+VIDEO
+= VIDEO
+TIP
+= TIPS
+Watch the video
+= Tonton videonya
+Watch on YouTube ›
+= Tonton di YouTube ›
+Open in your browser ›
+= Buka di browser ›
+Play on this PC ›
+= Putar di PC ini ›
+Video file not found - click to open its folder
+= File video tidak ditemukan - klik untuk membuka foldernya

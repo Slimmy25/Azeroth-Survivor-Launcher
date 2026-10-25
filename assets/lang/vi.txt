@@ -1073,3 +1073,37 @@ Counted in game by AZS Stats. Turn on cloud saving to take it to your other PCs.
 = Được AZS Stats đếm trong trò chơi. Bật lưu trên mây để mang nó sang các máy khác của bạn.
 Show play time on the home screen
 = Hiện thời gian chơi trên màn hình chính
+
+# New Player Guide
+New Player Guide
+= Hướng dẫn người mới
+{#0} of {#1} topics read
+= Đã đọc {#0}/{#1} chủ đề
+START HERE
+= BẮT ĐẦU TẠI ĐÂY
+CONTINUE
+= TIẾP TỤC
+OPEN
+= MỞ
+READ
+= ĐÃ ĐỌC
+1 VIDEO
+= 1 VIDEO
+{#0} VIDEOS
+= {#0} VIDEO
+{#0}/{#1} PAGES
+= {#0}/{#1} TRANG
+VIDEO
+= VIDEO
+TIP
+= MẸO
+Watch the video
+= Xem video
+Watch on YouTube ›
+= Xem trên YouTube ›
+Open in your browser ›
+= Mở trong trình duyệt ›
+Play on this PC ›
+= Phát trên máy này ›
+Video file not found - click to open its folder
+= Không tìm thấy tệp video - bấm để mở thư mục

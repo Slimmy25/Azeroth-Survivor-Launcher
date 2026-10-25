@@ -1073,3 +1073,37 @@ Counted in game by AZS Stats. Turn on cloud saving to take it to your other PCs.
 = 由游戏内的 AZS Stats 统计。开启云存档即可带到你的其他电脑。
 Show play time on the home screen
 = 在主界面显示游戏时长
+
+# New Player Guide
+New Player Guide
+= 新手指南
+{#0} of {#1} topics read
+= 已读 {#0}/{#1} 个主题
+START HERE
+= 从这里开始
+CONTINUE
+= 继续阅读
+OPEN
+= 打开
+READ
+= 已读
+1 VIDEO
+= 1 个视频
+{#0} VIDEOS
+= {#0} 个视频
+{#0}/{#1} PAGES
+= {#0}/{#1} 页
+VIDEO
+= 视频
+TIP
+= 提示
+Watch the video
+= 观看视频
+Watch on YouTube ›
+= 在 YouTube 上观看 ›
+Open in your browser ›
+= 在浏览器中打开 ›
+Play on this PC ›
+= 在本机播放 ›
+Video file not found - click to open its folder
+= 找不到视频文件 - 点击打开其文件夹

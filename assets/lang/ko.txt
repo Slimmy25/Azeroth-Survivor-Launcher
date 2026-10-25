@@ -1073,3 +1073,37 @@ Counted in game by AZS Stats. Turn on cloud saving to take it to your other PCs.
 = 게임 내 AZS Stats가 집계. 다른 PC로 옮기려면 클라우드 저장을 켜세요.
 Show play time on the home screen
 = 홈 화면에 플레이 시간 표시
+
+# New Player Guide
+New Player Guide
+= 신규 플레이어 가이드
+{#0} of {#1} topics read
+= {#1}개 중 {#0}개 주제 읽음
+START HERE
+= 여기서 시작
+CONTINUE
+= 계속하기
+OPEN
+= 열기
+READ
+= 읽음
+1 VIDEO
+= 영상 1개
+{#0} VIDEOS
+= 영상 {#0}개
+{#0}/{#1} PAGES
+= {#0}/{#1} 페이지
+VIDEO
+= 영상
+TIP
+= 팁
+Watch the video
+= 영상 보기
+Watch on YouTube ›
+= YouTube에서 보기 ›
+Open in your browser ›
+= 브라우저에서 열기 ›
+Play on this PC ›
+= 이 PC에서 재생 ›
+Video file not found - click to open its folder
+= 영상 파일을 찾을 수 없음 - 클릭하면 폴더가 열립니다
