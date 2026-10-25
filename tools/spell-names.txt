@@ -204,3 +204,5 @@ Will of the Forsaken
 Windfury
 Wrath
 Wyvern Sting
+Fan of Knives
+Heroic Strike

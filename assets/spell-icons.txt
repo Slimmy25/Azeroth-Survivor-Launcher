@@ -201,3 +201,5 @@ Corruption|spell_shadow_abominationexplosion
 Treasure Finding|racial_dwarf_findtreasure
 Totemic Wrath|spell_fire_totemofwrath
 Lightning Overload|spell_nature_lightningoverload
+Heroic Strike|ability_rogue_ambush
+Fan of Knives|ability_rogue_fanofknives
