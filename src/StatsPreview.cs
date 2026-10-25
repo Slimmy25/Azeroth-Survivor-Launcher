@@ -81,7 +81,7 @@ namespace AzerothLauncher
             {
                 var topics = Data.Guide;
                 int classes = 0;
-                for (int i = 0; i < topics.Count; i++) if (topics[i].Pages.Count > 0) { classes = i; break; }
+                for (int i = 0; i < topics.Count; i++) if (topics[i].Title == "Classes") { classes = i; break; }
                 foreach (int[] view in new[] { new[] { -1, -1 }, new[] { classes, -1 }, new[] { 0, -1 }, new[] { 1, -1 }, new[] { classes, 0 }, new[] { classes + 1, -1 } })
                 {
                     app.current = "Guide";
