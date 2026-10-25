@@ -12,9 +12,9 @@ Format:
                                           e.g.  @video Your first run | https://www.youtube.com/watch?v=XXXXXXXXXXX
   @video Title | address | Uploader | uploader's address
                                           the same, with credit to the person who made the video
-Build Guides: one @page per video, newest first. Every video there is in the home page's "Build collection"
-rotation (a random one each start, ‹ › to step through them); a YouTube video opens in your web browser when
-clicked, it never starts by itself.
+Build Guides: one @page per video, newest first. Every video there is also listed in the launcher's Community
+section (shown on the home screen); a YouTube video plays in its own window over the section when clicked (or in
+the web browser without Edge), it never starts by itself.
 Everything above the first @topic line is ignored. Gathered from the game itself (version 0.114.2); numbers can change with game updates.
 
 @topic Getting Started | What Azeroth Survivors is and how a run works

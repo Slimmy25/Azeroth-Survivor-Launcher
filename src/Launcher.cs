@@ -126,6 +126,7 @@ namespace AzerothLauncher
                 if (startInTray) Hide();
                 if (!PreviewMode) After(300, StartupUpdateCheck);   // a newer launcher on GitHub is installed right away
                 After(500, MaybeFirstRun);
+                After(700, delegate { if ((current == null || current == "Home") && !setupOpen) ShowHomeCommunity(); });   // home: Community
                 After(900, TellUpdateRecovery);
             };
             VisibleChanged += delegate
@@ -321,7 +322,6 @@ namespace AzerothLauncher
                 g.DrawString(Lang.T("Launcher"), hf, shadow, 698, 447);
                 g.DrawString(Lang.T("Launcher"), hf, gold, 697, 446);
             }
-            BuildCollection(g);
             WeeklyRecap(g);
             // bottom bar, left: only the cloud note (the status above PLAY says the rest)
             using (var gb = new SolidBrush(Retro.Gold))
@@ -432,17 +432,26 @@ namespace AzerothLauncher
                 foreach (var kv in partners) if (kv.Value > most) { most = kv.Value; top = kv.Key; }
                 if (top != null) parts.Add(Lang.T("most played with " + top));
             }
-            var box = new RectangleF(30, 500, 628, 60);
-            using (var path = Armory.Round(box, 8))
+            // one line in the bottom bar, centred, snug against the window's bottom edge
+            string head = Lang.T("This week") + ":  ", body = string.Join(" · ", parts.ToArray());
+            Font hf = Theme.F(9, FontStyle.Bold), bf = Theme.F(9);
+            float hw = g.MeasureString(head, hf).Width, bw = g.MeasureString(body, bf).Width;
+            float maxW = 440;                                // between the game version (left) and the play time (right)
+            if (hw + bw > maxW) bw = maxW - hw;
+            float x = W / 2f - (hw + bw) / 2f, y = H - 4 - hf.Height;
+            var box = new RectangleF(x - 10, y - 3, hw + bw + 20, hf.Height + 5);
+            using (var path = Armory.Round(box, 6))
             {
-                using (var b = new SolidBrush(Color.FromArgb(200, 14, 13, 20))) g.FillPath(b, path);
-                using (var p = new Pen(Color.FromArgb(160, Theme.GoldDim), 1)) g.DrawPath(p, path);
+                using (var b = new SolidBrush(Color.FromArgb(190, 14, 13, 20))) g.FillPath(b, path);
+                using (var p = new Pen(Color.FromArgb(150, Theme.GoldDim), 1)) g.DrawPath(p, path);
             }
             using (var gold = new SolidBrush(Retro.Gold))
             using (var text = new SolidBrush(Theme.Text))
+            using (var sf = new StringFormat(StringFormatFlags.NoWrap))
             {
-                g.DrawString(Lang.T("This week"), Theme.F(11, FontStyle.Bold), gold, box.X + 14, box.Y + 8);
-                g.DrawString(string.Join(" · ", parts.ToArray()), Theme.F(9.5f), text, new RectangleF(box.X + 14, box.Y + 32, box.Width - 28, box.Height - 36));
+                sf.Trimming = StringTrimming.EllipsisCharacter;
+                g.DrawString(head, hf, gold, x, y);
+                g.DrawString(body, bf, text, new RectangleF(x + hw, y + 0.5f, bw + 2, hf.Height + 2), sf);
             }
         }
 
@@ -510,21 +519,13 @@ namespace AzerothLauncher
                 Cursor = over ? Cursors.Hand : Cursors.Default;
                 Invalidate(new Rectangle(NewsBar.X - 2, NewsBar.Y, NewsBar.Width + 4, NewsBar.Height));
             }
-            if (!over && !newsDrag) BuildMouseMove(e.Location);
             base.OnMouseMove(e);
         }
 
         protected override void OnMouseUp(MouseEventArgs e)
         {
             if (newsDrag) { newsDrag = false; Invalidate(new Rectangle(NewsBar.X - 2, NewsBar.Y, NewsBar.Width + 4, NewsBar.Height)); }
-            else if (e.Button == MouseButtons.Left) BuildClick(e.Location);
             base.OnMouseUp(e);
-        }
-
-        protected override void OnMouseLeave(EventArgs e)
-        {
-            if (buildHover != null) { buildHover = null; Cursor = Cursors.Default; Invalidate(Rectangle.Ceiling(BuildBox)); }
-            base.OnMouseLeave(e);
         }
 
         public void SetStatus(string msg)

@@ -14,8 +14,8 @@ A community launcher for Azeroth Survivors, the game made by Aethus. It installs
 
 # Home and news
 - The News panel shows the newest patch notes; the Changelog has every patch note, newest first, with PREVIOUS and NEXT to step through them
-- The Build collection card shows the newest build video from the Guide, with its title and credit to the uploader; click it to watch it in your web browser (it never starts by itself)
-- The "This week" card sums up your recent runs, and your play time can be shown on the home screen
+- Community opens on the home screen whenever no other section is open: players' build videos with their titles and credit to the people who made them. Click one to watch it in a window over the section; nothing starts by itself
+- "This week", at the bottom of the window, sums up your recent runs, and your play time can be shown on the home screen
 
 # Cloud Save
 - Keeps your save game, AddOns and addon settings in your own Google Drive, OneDrive or Dropbox folder and shares them between your PCs

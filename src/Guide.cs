@@ -689,6 +689,7 @@ namespace AzerothLauncher
         bool hover;
 
         public static Func<GuideVideo, bool> Embed;          // set by the launcher: plays a web video inside the section
+        public static Func<GuideVideo, bool> YouTube;        // set by the launcher: plays a YouTube video (Community.cs)
 
         public static string VideoFolder { get { return Path.Combine(Util.DataDir, "Guide Videos"); } }
 
@@ -784,6 +785,7 @@ namespace AzerothLauncher
             base.OnMouseUp(e);
             if (e.Button != MouseButtons.Left || !ClientRectangle.Contains(e.Location)) return;
             if (file == null && ytId == null && Embed != null && Embed(video)) return;   // streamed inside the launcher
+            if (ytId != null && YouTube != null && YouTube(video)) return;              // its own window over the section
             if (file == null) { Util.OpenInShell(video.Url); return; }
             if (File.Exists(file)) { Util.OpenInShell(file); return; }
             try { Directory.CreateDirectory(VideoFolder); } catch (Exception) { }
@@ -858,7 +860,7 @@ namespace AzerothLauncher
                 using (var b = new SolidBrush(Theme.Text)) g.DrawString(Lang.T("by") + " " + video.Author, af, b, x, y);
                 y += af.Height + 4;
             }
-            string where = file == null ? (ytId != null ? "Watch on YouTube ›" : "Play here ›")
+            string where = file == null ? (ytId != null ? "Click to watch ›" : "Play here ›")
                          : File.Exists(file) ? "Play on this PC ›" : "Video file not found - click to open its folder";
             using (var b = new SolidBrush(hover ? Theme.Hex("#fff2b0") : Theme.GoldDim))
                 g.DrawString(Lang.T(where), Theme.F(9, FontStyle.Italic), b, new RectangleF(x, y, w, Height - y - 6));

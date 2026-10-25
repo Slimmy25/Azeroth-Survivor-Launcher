@@ -4,7 +4,7 @@ A community launcher for **Azeroth Survivors**, the game made by Aethus, in a re
 (night stone and gold, original art drawn by `tools/make_launcher_art.py`).
 
 - **PLAY / INSTALL**: downloads the game client inside the launcher (with a percentage bar, into a `temp` folder that is
-  deleted afterwards), installs it next to the launcher, then starts it; first-time setup begins with this; the News panel shows the newest patch notes, a Build collection card shows the newest build video,
+  deleted afterwards), installs it next to the launcher, then starts it; first-time setup begins with this; the News panel shows the newest patch notes, the **Community** section (open whenever no other section is) has players' build videos,
   and a "This week" card sums up your recent runs
 - **Cloud Save**: keeps your save game, AddOns and addon settings in Google Drive, OneDrive or Dropbox and
   shares them between your PCs (downloaded before the game starts, uploaded after it closes, even after a crash)
