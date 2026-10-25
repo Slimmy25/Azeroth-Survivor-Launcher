@@ -259,6 +259,25 @@ namespace AzerothLauncher
             return "";                                       // asked, and Wowhead has no such spell
         }
 
+        // the screenshot tool: what the creature lookup sees
+        public static string Explain(string name)
+        {
+            var sb = new StringBuilder();
+            try
+            {
+                string json = Search("/classic", name);
+                sb.Append("search " + json.Length + " chars; ");
+                foreach (var d in Results(json))
+                {
+                    string t, n, id; d.TryGetValue("typeName", out t); d.TryGetValue("name", out n); d.TryGetValue("id", out id);
+                    sb.Append("[" + t + " " + n + " " + id + "] ");
+                }
+                sb.Append(" => " + FindNpcDisplay(name));
+            }
+            catch (Exception ex) { sb.Append("error " + ex.Message); }
+            return sb.ToString();
+        }
+
         static string FindNpcDisplay(string name)
         {
             foreach (var d in Results(Search("/classic", name)))
