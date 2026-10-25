@@ -114,13 +114,17 @@ namespace AzerothLauncher
         }
 
         // Streams a web file to dest (via dest.part). progress(done, total). Returns the SHA-256 (lower-case hex).
+        [ThreadStatic] public static string LastMd5;          // the MD5 of the last file Download fetched on this thread
+
         public static string Download(string url, string dest, bool httpsOnly, string what, Action<long, long> progress,
                                       ManualResetEvent cancel, long expectedSize, Action<HttpWebRequest> prepare = null)
         {
             string tmp = dest + ".part";
             try
             {
+                LastMd5 = null;
                 using (var sha = System.Security.Cryptography.SHA256.Create())
+                using (var md5 = System.Security.Cryptography.MD5.Create())
                 using (HttpWebResponse resp = Open(url, 30000, httpsOnly, what, null, prepare))
                 {
                     if ((resp.ContentType ?? "").ToLowerInvariant().Contains("text/html"))
@@ -142,6 +146,7 @@ namespace AzerothLauncher
                             if (n <= 0) break;
                             output.Write(buf, 0, n);
                             sha.TransformBlock(buf, 0, n, null, 0);
+                            md5.TransformBlock(buf, 0, n, null, 0);
                             done += n;
                             if (progress != null) progress(done, total);
                         }
@@ -149,6 +154,8 @@ namespace AzerothLauncher
                     if (clen > 0 && done != clen)
                         throw new UserError("The download was cut off before it finished. Please try again.");
                     sha.TransformFinalBlock(new byte[0], 0, 0);
+                    md5.TransformFinalBlock(new byte[0], 0, 0);
+                    LastMd5 = Hex(md5.Hash);
                     Util.Replace(tmp, dest);
                     return Hex(sha.Hash);
                 }
