@@ -2,7 +2,7 @@
 A community launcher for Azeroth Survivors, the game made by Aethus. It installs the game, keeps it up to date, carries your progress between your PCs, manages your addons, teaches new players and keeps every stat of every run. Made by Slimjim.
 
 # Install and play
-- INSTALL downloads the game inside the launcher, from the main host or the developers' backup host (picked at random; if one fails, the other is tried, and the backup download is checked against its checksum), with a bar that shows how far it has come, and installs it next to the launcher. The download goes into a temp folder that is deleted once the game is in place
+- INSTALL downloads the game right in the launcher's status line, from the main host or the developers' backup host (picked at random; if one fails, the other is tried, and the backup download is checked against its checksum), with a bar that shows how far it has come, and installs it next to the launcher. The download goes into a temp folder that is deleted once the game is in place
 - Already downloaded the game? The launcher can install it from the file in its own folder or in Downloads
 - Installing again over an existing game keeps your addons, addon settings and options
 - PLAY starts the game; the launcher can step aside to the tray while you play and comes back when the game closes
@@ -28,6 +28,7 @@ A community launcher for Azeroth Survivors, the game made by Aethus. It installs
 
 # New Player Guide
 - Build Guides: players' videos of their builds, credited to their uploaders
+- Every spell, talent, class, race and zone named in the guide is a link to its page, and pointing at it shows what the game says it does
 - Topics and class pages on controls, zones, bosses, level-ups, gear, talents and tips
 - Videos that play inside the launcher (streamed, never saved on your PC), and a search over every page
 

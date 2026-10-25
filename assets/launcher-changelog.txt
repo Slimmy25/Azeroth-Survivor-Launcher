@@ -1,4 +1,9 @@
 # Next update (after v0.3)
+- INSTALL no longer opens a window: the download and install run in the launcher's status line, with the percentage bar; press INSTALLING to stop the download. Options has INSTALL FROM A FILE for a game you downloaded yourself
+- The New Player Guide links its pages together: click a spell, talent, class, race or zone in the text to go to it, and point at it to read what it does, in the game's own words
+- The section area is exactly as tall as the News column; "This week" and your play time sit together under the Launcher buttons
+- Community can no longer be closed; opening another section replaces it
+- Options is one scrolling page, and every new text is translated into all 26 languages; long button labels now fit in every language
 - DISCORD opens the new invite, discord.gg/azerothsurvivors
 - New Community section: it opens on the home screen whenever no other section is open and features one of the players' build videos (credited to its maker), a different one every 10 minutes. A click plays it right inside the section's borders, and so do the Guide's YouTube videos; nothing starts by itself
 - "This week" now sits centred at the bottom of the window
