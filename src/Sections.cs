@@ -367,10 +367,12 @@ namespace AzerothLauncher
             CloseSide();
         }
 
+        Control putInto;                                     // where Put / PutText add (the section, or a scrolling page in it)
+
         T Put<T>(T c, int x, int y) where T : Control
         {
             c.Location = new Point(x, y);
-            panel.Controls.Add(c);
+            (putInto ?? panel).Controls.Add(c);
             c.BringToFront();
             return c;
         }
@@ -1155,13 +1157,24 @@ namespace AzerothLauncher
         void PanelOptions()
         {
             ClearPanel("Options");
+            // everything on one scrolling page under the back arrow, so it fits any language and the section's height
+            int top0 = (int)(12 + 32 * Theme.Zoom) + 8;
+            var sp = MakeScroll(panel, new Rectangle(8, top0, PW - 16, PH - 8 - top0), Theme.Panel, Theme.Panel);
+            int pageW = sp.ClientSize.Width + 16;             // the page's width, in the same terms as the section's
+            putInto = sp;
+            try { OptionsPage(pageW); }
+            finally { putInto = null; }
+        }
+
+        void OptionsPage(int PW)
+        {
             SyncSettings ss = SyncSettings();
             var rows = new List<object[]>();
             rows.Add(new object[] { "Game folder", GameDir(), new Action(ChooseGameFolder) });
             rows.Add(new object[] { "Save game folder", ss.SaveDir, new Action(ChooseSaveDir) });
             rows.Add(new object[] { "Game config folder (AddOns, addon settings)", ss.ConfigDir, new Action(ChooseConfigDir) });
             if (CloudEnabled()) rows.Add(new object[] { "Sync folder (inside your cloud drive)", Cfg.Str("cloud_dir"), new Action(ChooseCloudDir) });
-            int y = 52;
+            int y = 6;
             foreach (var r in rows)
             {
                 var lab = PutText((string)r[0], 11, FontStyle.Bold, Theme.Gold, 20, y, 0);
@@ -1243,8 +1256,16 @@ namespace AzerothLauncher
             };
             homeCb.Size = VStack.Measure(homeCb);
             Put(homeCb, 18, BottomOf(statsLabel) + 4);
-            Put(new WowButton("RUN SETUP AGAIN", delegate { RunSetup(); }, 190, 30, 9), PW - 20 - 190, PH - 10 - 30);
-            Put(new WowButton("INSTALL FROM A FILE", delegate { InstallFromDownloads(); }, 190, 30, 9), PW - 20 - 190 - 8 - 190, PH - 10 - 30);
+            // setup and installing from a file: at the end of the page
+            y = BottomOf(homeCb) + 12;
+            Put(UI.Line(Theme.Bronze, PW - 40, 1), 20, y);
+            y += 10;
+            var again = Put(new WowButton("RUN SETUP AGAIN", delegate { RunSetup(); }, 190, 30, 9), 20, y);
+            Put(new WowButton("INSTALL FROM A FILE", delegate { InstallFromDownloads(); }, 190, 30, 9), again.Right + 10, y);
+            var pad = new Panel();
+            pad.BackColor = Theme.Panel;
+            pad.Bounds = new Rectangle(0, BottomOf(again), 1, 12);
+            putInto.Controls.Add(pad);
         }
 
         void ChooseGameFolder()

@@ -88,9 +88,9 @@ namespace AzerothLauncher
             ClearPanel("Community");
             int ti;
             GuideVideo v = Featured(BuildVideos(out ti));
-            PutText("A build video made by a player. All credit goes to the people who made it.",
-                    9.5f, FontStyle.Italic, Theme.GoldDim, 24, 18, PW - 260);
-            int top = (int)(12 + 32 * Theme.Zoom) + 12;
+            var intro = PutText("A build video made by a player. All credit goes to the people who made it.",
+                                9.5f, FontStyle.Italic, Theme.GoldDim, 24, 18, PW - 24 - (int)(200 * Theme.Zoom) - 34);
+            int top = Math.Max((int)(12 + 32 * Theme.Zoom) + 12, BottomOf(intro) + 6);
             if (v == null)
             {
                 PutText("No community videos yet.", 11, FontStyle.Italic, Theme.GoldDim, 24, top + 8, 0);
