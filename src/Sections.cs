@@ -423,18 +423,13 @@ namespace AzerothLauncher
             else if (clView == ClList) { title = "All Patch Notes"; btn = "‹ LATEST"; back = ClNewest; }
             else { title = Data.PostTitle(entries[clView]); btn = "‹ ALL PATCH NOTES"; back = ClList; }
             ClearPanel(title);
-            Put(new WowButton(btn, delegate { SetChangelogView(back); }, 190, 32, 10), PW - 20 - 190, 12);
-            int top = 52, bottom = PH;
-            if (clView >= 0)                                 // PREVIOUS (older) / NEXT (newer) under the post
+            Put(new WowButton(btn, delegate { SetChangelogView(back); }, 190, 32, 10), PW - 20 - (int)(190 * Theme.Zoom), 12);
+            int top = (int)(12 + 32 * Theme.Zoom) + 10, bottom = PH;
+            if (clView >= 0 || clView == ClNewest)           // PREVIOUS (older) / NEXT (newer), always at the bottom
             {
-                int v = clView, by = PH - 12 - 34;
-                if (v + 1 < entries.Count) Put(new WowButton("‹ PREVIOUS", delegate { SetChangelogView(v + 1); }, 150, 34, 10), 20, by);
-                if (v > 0) Put(new WowButton("NEXT ›", delegate { SetChangelogView(v - 1); }, 150, 34, 10), PW - 20 - 150, by);
-                var lbl = UI.Text((entries.Count - v) + " of " + entries.Count, 10, FontStyle.Italic, Theme.GoldDim, Theme.Panel, 0);
-                Size ls = VStack.Measure(lbl);
-                lbl.Size = ls;
-                Put(lbl, (PW - ls.Width) / 2, by + (34 - ls.Height) / 2);
-                bottom = by;
+                int v = clView == ClNewest ? 0 : clView;
+                bottom = NavRow(entries.Count - v, entries.Count, v + 1 < entries.Count ? (Action)delegate { SetChangelogView(v + 1); } : null,
+                                v > 0 ? (Action)delegate { SetChangelogView(v - 1); } : null);
             }
             if (clView == ClList)
             {
@@ -495,35 +490,32 @@ namespace AzerothLauncher
             sp.Controls.Add(pad);
         }
 
+        // ‹ PREVIOUS · "3 of 40" · NEXT › pinned to the bottom of the section, whatever its size; returns its top
+        int NavRow(int at, int count, Action previous, Action next)
+        {
+            int bh = (int)(34 * Theme.Zoom), by = PH - 10 - bh, bw = (int)(150 * Theme.Zoom);
+            if (previous != null) Put(new WowButton("‹ PREVIOUS", previous, 150, 34, 10), 20, by);
+            if (next != null) Put(new WowButton("NEXT ›", next, 150, 34, 10), PW - 20 - bw, by);
+            var lbl = UI.Text(at + " of " + count, 10, FontStyle.Italic, Theme.GoldDim, Theme.Panel, 0);
+            Size ls = VStack.Measure(lbl);
+            lbl.Size = ls;
+            Put(lbl, (PW - ls.Width) / 2, by + (bh - ls.Height) / 2);
+            return by;
+        }
+
+        int clRows = Data.ClRows;                            // buttons per column that fit the section (set by the list)
+
         void PatchNotesList(List<string> entries, int top)
         {
-            int per = Data.ClRows * 2;
+            int rowH = (int)(48 * Theme.Zoom), bh = (int)(34 * Theme.Zoom);
+            int areaBottom = PH - 10 - bh - 10;               // above the PREVIOUS / NEXT row
+            clRows = Math.Max(1, (areaBottom - top - 4) / rowH);
+            int per = clRows * 2;
             int pages = Math.Max(1, (entries.Count + per - 1) / per);
             int page = Math.Min(Math.Max(clPage, 0), pages - 1);
             clPage = page;
-            int areaBottom = PH - 14;
-            if (pages > 1)                                   // numbered page buttons at the bottom
-            {
-                int perRow = pages <= 8 ? pages : (pages + 1) / 2;     // many pages: a second row right below
-                int rows = (pages + perRow - 1) / perRow;
-                int y = PH - 12 - rows * 32 + 2;
-                areaBottom = y - 14;
-                for (int r = 0; r < pages; r += perRow)
-                {
-                    var items = new List<Control>();
-                    if (r == 0) items.Add(UI.Text("PAGE", 10, FontStyle.Italic, Theme.GoldDim, Theme.Panel, 0));
-                    for (int pg = r; pg < Math.Min(pages, r + perRow); pg++)
-                    {
-                        int n = pg;
-                        var pb = new WowButton((pg + 1).ToString(), delegate { SetClPage(n); }, 44, 30, pg != page ? 11 : 13);
-                        pb.Selected = pg == page;            // you are here: filled gold
-                        items.Add(pb);
-                    }
-                    var row = new HRow(6, items.ToArray());
-                    Put(row, (PW - row.Width) / 2, y);
-                    y += 32;
-                }
-            }
+            NavRow(page + 1, pages, page > 0 ? (Action)delegate { SetClPage(page - 1); } : null,
+                   page + 1 < pages ? (Action)delegate { SetClPage(page + 1); } : null);
             var area = new WheelPanel();
             area.BackColor = Theme.Panel;
             area.Bounds = new Rectangle(20, top, PW - 40, areaBottom - top);
@@ -539,11 +531,11 @@ namespace AzerothLauncher
             int colW = area.Width / 2;
             for (int k = 0, i = page * per; i < Math.Min(entries.Count, (page + 1) * per); k++, i++)
             {
-                int col = k / Data.ClRows, rowN = k % Data.ClRows;   // fill the left column first, then the right
+                int col = k / clRows, rowN = k % clRows;     // fill the left column first, then the right
                 int n = i;
                 string version = Data.PostTitle(entries[i]) + (i == 0 ? " (current)" : "");
                 var b = new WowButton(version, delegate { SetChangelogView(n); }, 230, 40, 14);
-                b.Location = new Point(col * colW + 4, rowN * 48 + 4);
+                b.Location = new Point(col * colW + 4, rowN * rowH + 4);
                 area.Controls.Add(b);
             }
         }
@@ -564,7 +556,7 @@ namespace AzerothLauncher
         void SetChangelogView(int view)
         {
             clView = view;
-            if (view >= 0) clPage = view / (Data.ClRows * 2);         // coming back to the list shows this post's page
+            if (view >= 0) clPage = view / (clRows * 2);         // coming back to the list shows this post's page
             BuildPanel("Changelog");
         }
 

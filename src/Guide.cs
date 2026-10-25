@@ -1,4 +1,4 @@
-// The New Player Guide (assets\guide.txt): topic cards with a "read" progress bar, topics made of pages, and
+// The New Player Guide (assets\guide.txt): topic cards (every topic open at any time, nothing tracked), topics made of pages, and
 // article pages with headings, bullets, tip boxes and video cards.
 //
 // Videos: put a line "@video Title | address" anywhere in a topic or page of guide.txt; the video card shows up
@@ -22,39 +22,14 @@ namespace AzerothLauncher
     {
         static readonly Color GuideCardBg = Theme.Hex("#15121c"), GuideRed = Theme.Hex("#c8442f");
 
+        int GuideTop { get { return (int)(12 + 32 * Theme.Zoom) + 10; } }   // under the back arrow row
+
         void SetGuideView(int topic, int page)
         {
             gVideo = null;
             gTopic = topic;
             gPage = page;
             if (current == "Guide") BuildPanel("Guide");
-        }
-
-        // ---- what has been read (kept in the config: "guide_read", a list of topic and topic/page titles)
-        HashSet<string> GuideRead()
-        {
-            var set = new HashSet<string>(StringComparer.Ordinal);
-            List<object> l = Json.AsList(Json.Get(Cfg.Data, "guide_read"));
-            if (l != null) foreach (object o in l) if (o is string) set.Add((string)o);
-            return set;
-        }
-
-        void MarkGuideRead(string key)
-        {
-            var set = GuideRead();
-            if (set.Contains(key)) return;
-            set.Add(key);
-            var l = new List<object>();
-            foreach (string k in set) l.Add(k);
-            Cfg.Set("guide_read", l);
-            if (!PreviewMode) Cfg.Save();
-        }
-
-        bool TopicRead(GuideTopic t, HashSet<string> read)
-        {
-            if (t.Pages.Count == 0) return read.Contains(t.Title);
-            foreach (var p in t.Pages) if (!read.Contains(t.Title + "/" + p.Title)) return false;
-            return true;
         }
 
         static int CountVideos(GuideTopic t)
@@ -67,14 +42,14 @@ namespace AzerothLauncher
         void PanelGuide()
         {
             if (VideoCard.Embed == null) VideoCard.Embed = delegate(GuideVideo v) { gVideo = v; BuildPanel("Guide"); return true; };
+            if (Cfg.Data.ContainsKey("guide_read")) { Cfg.Remove("guide_read"); if (!PreviewMode) Cfg.Save(); }   // no longer tracked
             if (gVideo != null) { GuideVideoPlayer(gVideo); return; }
             var topics = Data.Guide;
             if (gTopic >= topics.Count) { gTopic = -1; gPage = -1; }
-            var read = GuideRead();
-            if (gTopic < 0) { GuideHome(topics, read); return; }
+            if (gTopic < 0) { GuideHome(topics); return; }
             GuideTopic topic = topics[gTopic];
             if (gPage >= topic.Pages.Count) gPage = -1;
-            if (gPage < 0 && topic.Pages.Count > 0) { GuideTopicPages(topic, read); return; }
+            if (gPage < 0 && topic.Pages.Count > 0) { GuideTopicPages(topic); return; }
             GuideArticle(topics, topic);
         }
 
@@ -86,65 +61,36 @@ namespace AzerothLauncher
             string url = v.Url;
             Put(new WowButton("OPEN IN BROWSER ›", delegate { Util.OpenInShell(url); }, 190, 32, 9), PW - 20 - bw, 12);
             var frame = new Bordered(Theme.CardEdge, 1);
-            frame.Bounds = new Rectangle(20, 52, PW - 40, PH - 12 - 52);
+            frame.Bounds = new Rectangle(20, GuideTop, PW - 40, PH - 12 - GuideTop);
             Put(frame, 20, 52);
             var web = VideoView.Make(v);
             web.Dock = DockStyle.Fill;
             frame.Controls.Add(web);
         }
 
-        // ---- first page: progress, "continue" banner and the topic cards
-        void GuideHome(List<GuideTopic> topics, HashSet<string> read)
+        // ---- first page: a card for every topic, all open at any time
+        void GuideHome(List<GuideTopic> topics)
         {
             ClearPanel("New Player Guide");
-            int done = 0, next = -1;
-            for (int i = 0; i < topics.Count; i++)
-            {
-                if (TopicRead(topics[i], read)) done++;
-                else if (next < 0) next = i;
-            }
-            int barW = Math.Min(260, PW / 3);
-            var prog = new GuideProgress(Lang.T(done + " of " + topics.Count + " topics read"), done, topics.Count, barW, 30);
-            Put(prog, PW - 20 - barW, 12);
-
-            var sp = MakeThinScroll(panel, new Rectangle(20, 52, PW - 40, PH - 12 - 52), Theme.Panel, Theme.Bronze,
+            var sp = MakeThinScroll(panel, new Rectangle(20, GuideTop, PW - 40, PH - 12 - GuideTop), Theme.Panel, Theme.Bronze,
                                     Theme.GoldDim, Theme.Gold);
             int w = sp.ClientSize.Width - 8, y = 4;
-            if (next >= 0)
-            {
-                int ni = next;
-                var hero = new GuideCard(next == 0 && done == 0 ? "START HERE" : "CONTINUE", topics[next].Title,
-                                         topics[next].Desc, 0, w, 74);
-                hero.Hero = true;
-                hero.Videos = CountVideos(topics[next]);
-                hero.Pressed += delegate { SetGuideView(ni, -1); };
-                hero.Location = new Point(4, y);
-                sp.Controls.Add(hero);
-                y += hero.Height + 12;
-            }
             GuideGrid(sp, y, w, topics.Count, delegate(int i, GuideCard c)
             {
                 c.Title = topics[i].Title;
                 c.Desc = topics[i].Desc;
                 c.Videos = CountVideos(topics[i]);
-                c.Read = TopicRead(topics[i], read);
-                if (topics[i].Pages.Count > 0)
-                {
-                    int r = 0;
-                    foreach (var p in topics[i].Pages) if (read.Contains(topics[i].Title + "/" + p.Title)) r++;
-                    c.Pages = topics[i].Pages.Count;
-                    c.PagesRead = r;
-                }
+                c.Pages = topics[i].Pages.Count;
                 c.Pressed += delegate { SetGuideView(i, -1); };
             });
         }
 
         // ---- a topic made of pages (Classes): a card for each page
-        void GuideTopicPages(GuideTopic topic, HashSet<string> read)
+        void GuideTopicPages(GuideTopic topic)
         {
             ClearPanel(topic.Title);
             Put(new WowButton("‹ ALL TOPICS", delegate { SetGuideView(-1, -1); }, 170, 32, 10), PW - 20 - (int)(170 * Theme.Zoom), 12);
-            var sp = MakeThinScroll(panel, new Rectangle(20, 52, PW - 40, PH - 12 - 52), Theme.Panel, Theme.Bronze,
+            var sp = MakeThinScroll(panel, new Rectangle(20, GuideTop, PW - 40, PH - 12 - GuideTop), Theme.Panel, Theme.Bronze,
                                     Theme.GoldDim, Theme.Gold);
             int w = sp.ClientSize.Width - 8, y = 4;
             if (topic.Desc.Length > 0)
@@ -161,7 +107,6 @@ namespace AzerothLauncher
                 c.Title = topic.Pages[i].Title;
                 c.Desc = topic.Pages[i].Desc;
                 c.Videos = topic.Pages[i].Videos.Count;
-                c.Read = read.Contains(topic.Title + "/" + topic.Pages[i].Title);
                 c.Pressed += delegate { SetGuideView(ti, i); };
             });
         }
@@ -189,7 +134,6 @@ namespace AzerothLauncher
         {
             bool inPage = gPage >= 0;
             GuidePage shown = inPage ? topic.Pages[gPage] : topic;
-            MarkGuideRead(inPage ? topic.Title + "/" + shown.Title : topic.Title);
             ClearPanel(shown.Title);
             int bw = (int)(170 * Theme.Zoom);
             if (inPage) Put(new WowButton("‹ " + topic.Title.ToUpperInvariant(), delegate { SetGuideView(gTopic, -1); }, 170, 32, 9), PW - 20 - bw, 12);
@@ -204,7 +148,7 @@ namespace AzerothLauncher
             var dots = new GuideDots(count, at, PW / 3, bh);
             Put(dots, (PW - dots.Width) / 2, by);
 
-            var sp = MakeThinScroll(panel, new Rectangle(20, 52, PW - 40, by - 10 - 52), GuideCardBg, Theme.Bronze,
+            var sp = MakeThinScroll(panel, new Rectangle(20, GuideTop, PW - 40, by - 10 - GuideTop), GuideCardBg, Theme.Bronze,
                                     Theme.GoldDim, Theme.Gold);
             GuideBody(sp, inPage ? topic.Title : "Guide", shown);
         }
@@ -384,7 +328,7 @@ namespace AzerothLauncher
             float bx = Hero ? Width - 14 : x, by = Hero ? (Height - small.Height) / 2f : badgesY;
             var badges = new List<KeyValuePair<string, Color>>();
             if (Videos > 0) badges.Add(new KeyValuePair<string, Color>("▶ " + Lang.T(Videos == 1 ? "1 VIDEO" : Videos + " VIDEOS"), GuideTheme.Red));
-            if (Pages > 0) badges.Add(new KeyValuePair<string, Color>(Lang.T(PagesRead + "/" + Pages + " PAGES"), Theme.Hex("#3d3647")));
+            if (Pages > 0) badges.Add(new KeyValuePair<string, Color>(Lang.T(Pages + " PAGES"), Theme.Hex("#3d3647")));
             if (Read && !Hero) badges.Add(new KeyValuePair<string, Color>(Lang.T("READ"), Theme.Hex("#2f4a1c")));
             if (Hero) badges.Add(new KeyValuePair<string, Color>(Lang.T("OPEN") + " ›", Theme.Hex("#5a4318")));
             foreach (var kv in badges)
@@ -550,52 +494,6 @@ namespace AzerothLauncher
     static class GuideTheme
     {
         public static readonly Color Red = Theme.Hex("#c8442f");
-    }
-
-    // "3 of 13 topics read" over a thin gold bar
-    public class GuideProgress : Control
-    {
-        readonly string text;
-        readonly int done, total;
-        readonly float zoom;
-
-        public GuideProgress(string text, int done, int total, int w, int h)
-        {
-            SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer, true);
-            this.text = text; this.done = done; this.total = total;
-            zoom = Theme.Zoom;
-            Size = new Size(w, h);
-        }
-
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            float old = Theme.Zoom;
-            Theme.Zoom = zoom;
-            try
-            {
-                Graphics g = e.Graphics;
-                g.Clear(Parent != null ? Parent.BackColor : Theme.Panel);
-                Theme.Smooth(g);
-                Font f = Theme.F(9, FontStyle.Italic);
-                using (var sf = new StringFormat())
-                using (var b = new SolidBrush(Theme.GoldDim))
-                {
-                    sf.Alignment = StringAlignment.Far;
-                    g.DrawString(text, f, b, new RectangleF(0, 0, Width, f.Height + 2), sf);
-                }
-                var r = new RectangleF(1, Height - 8, Width - 2, 6);
-                using (var p = GuideCard.Round(r, 3))
-                using (var b = new SolidBrush(Theme.Hex("#2a2533"))) g.FillPath(b, p);
-                if (total > 0 && done > 0)
-                {
-                    var fr = new RectangleF(r.X, r.Y, Math.Max(6, r.Width * done / total), r.Height);
-                    using (var p = GuideCard.Round(fr, 3))
-                    using (var b = new LinearGradientBrush(fr, Theme.Hex("#c9821a"), Theme.Gold, LinearGradientMode.Horizontal))
-                        g.FillPath(b, p);
-                }
-            }
-            finally { Theme.Zoom = old; }
-        }
     }
 
     // page dots between PREVIOUS and NEXT

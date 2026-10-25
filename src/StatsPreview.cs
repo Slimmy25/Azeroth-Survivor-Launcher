@@ -27,7 +27,11 @@ namespace AzerothLauncher
             string topClass = st != null && st.Classes.Count > 0 ? st.Classes[0].Key : null;
             if (st != null)                                  // ask for every spell icon now, so the pictures show them
             {
-                foreach (var ab in st.Abilities) SpellIcons.Get(ab.Name, null);
+                foreach (var ab in st.Abilities) SpellIcons.Spell(ab.Name, null);
+                foreach (var c in st.Classes) SpellIcons.Class(c.Key, null);
+                foreach (var n in st.Nemesis) SpellIcons.Npc(n.Name, null);
+                SpellIcons.WaitForAll(30000);
+                foreach (var n in st.Nemesis) SpellIcons.Npc(n.Name, null);   // looked up: now the pictures
                 SpellIcons.WaitForAll(30000);
             }
             foreach (string cls in new[] { null, topClass })
@@ -70,7 +74,6 @@ namespace AzerothLauncher
             // the New Player Guide: topic cards, a topic made of pages, and pages with video cards
             {
                 var topics = Data.Guide;
-                app.Cfg.Set("guide_read", new System.Collections.Generic.List<object> { "Controls", "Classes/Warrior" });
                 int classes = 0;
                 for (int i = 0; i < topics.Count; i++) if (topics[i].Pages.Count > 0) { classes = i; break; }
                 foreach (int[] view in new[] { new[] { -1, -1 }, new[] { classes, -1 }, new[] { 0, -1 }, new[] { 1, -1 }, new[] { classes, 0 }, new[] { classes + 1, -1 } })

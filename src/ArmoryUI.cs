@@ -89,6 +89,28 @@ namespace AzerothLauncher
             return Z == 1f ? h : (int)Math.Ceiling(h / Z);
         }
 
+        // a picture in an icon's place, clipped to its rounded (or round) frame; a creature's model picture is cut to
+        // its upper middle (the head and shoulders)
+        public static void Picture(Graphics g, Rectangle r, Image pic, bool portrait, bool round, Color frame)
+        {
+            using (var path = round ? Ellipse(r) : Round(r, 5))
+            {
+                var clip = g.Clip;
+                g.SetClip(path, CombineMode.Intersect);
+                g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                using (var bg = new SolidBrush(Theme.Hex("#0b0a10"))) g.FillRectangle(bg, r);
+                if (portrait)
+                {
+                    int s = (int)(Math.Min(pic.Width, pic.Height) * 0.62);
+                    var src = new Rectangle((pic.Width - s) / 2, (int)(pic.Height * 0.04), s, s);
+                    g.DrawImage(pic, r, src, GraphicsUnit.Pixel);
+                }
+                else g.DrawImage(pic, r);
+                g.Clip = clip;
+                using (var p = new Pen(frame, 1.5f)) g.DrawPath(p, path);
+            }
+        }
+
         // the stand-in for an item icon: a framed square (or round) badge with a gradient and the initials
         public static void Icon(Graphics g, Rectangle r, Color color, string letters, bool round)
         {
@@ -230,6 +252,7 @@ namespace AzerothLauncher
         public string Heading = "", Line = "", Note = "";
         public Color Accent = Theme.Gold;
         public string Letters;                               // shown in the frame instead of the emblem
+        public string ClassPic;                              // or the class's icon (from Wowhead), when it has arrived
         public readonly List<string[]> Chips = new List<string[]>();     // { glyph, value, label }
         int chipRows = 1;
         const int Pic = 76;
@@ -260,7 +283,9 @@ namespace AzerothLauncher
         {
             var frame = new Rectangle(r.X, r.Y, Pic, Pic);
             Armory.Box(g, frame, 6, Theme.Hex("#0b0704"), Color.Empty);
-            if (Letters != null) Armory.Icon(g, Rectangle.Inflate(frame, -6, -6), Accent, Letters, true);
+            Image cp = ClassPic != null ? SpellIcons.Class(ClassPic, this) : null;
+            if (cp != null) Armory.Picture(g, Rectangle.Inflate(frame, -5, -5), cp, false, false, Accent);
+            else if (Letters != null) Armory.Icon(g, Rectangle.Inflate(frame, -6, -6), Accent, Letters, true);
             else if (Theme.Portrait != null) g.DrawImage(Theme.Portrait, Rectangle.Inflate(frame, -4, -4));
             using (var p = new Pen(Accent, 2)) using (var path = Armory.Round(frame, 6)) g.DrawPath(p, path);
             int x = r.X + Pic + 16;
@@ -394,7 +419,7 @@ namespace AzerothLauncher
         public string Icon = "?", Name = "", Sub = "", Sub2 = "", Value = "", ValueSub = "";     // Sub2: a dim third line
         public Color IconColor = Theme.Gold, NameColor = Armory.Bright, SubColor = Armory.Green, ValueColor = Armory.Bright;
         public bool RoundIcon;
-        public string Spell;                                 // a spell: its icon picture (SpellIcons) instead of the badge
+        public string Spell, ClassPic, Npc;                  // a picture from Wowhead instead of the badge (SpellIcons)
         public double Bar = -1;                              // 0..1 draws a thin bar under the line
         public Action Click;
     }
@@ -439,19 +464,11 @@ namespace AzerothLauncher
                 Armory.Box(g, s, 6, i == hover && row.Click != null ? Armory.SlotHover : Armory.Slot, Armory.SlotEdge);
                 var icon = new Rectangle(s.X + 7, s.Y + 7, 40, 40);
                 // only a row that is on screen asks for its icon: scrolling down fetches the rest as they come into view
-                Image pic = row.Spell != null && g.VisibleClipBounds.IntersectsWith(icon) ? SpellIcons.Get(row.Spell, this) : null;
-                if (pic != null)
-                {
-                    using (var path = Armory.Round(icon, 5))
-                    {
-                        var clip = g.Clip;
-                        g.SetClip(path, System.Drawing.Drawing2D.CombineMode.Intersect);
-                        g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
-                        g.DrawImage(pic, icon);
-                        g.Clip = clip;
-                        using (var p = new Pen(row.IconColor, 1.5f)) g.DrawPath(p, path);   // the quality color as its frame
-                    }
-                }
+                Image pic = null;
+                if (g.VisibleClipBounds.IntersectsWith(icon))
+                    pic = row.Spell != null ? SpellIcons.Spell(row.Spell, this) : row.ClassPic != null ? SpellIcons.Class(row.ClassPic, this)
+                        : row.Npc != null ? SpellIcons.Npc(row.Npc, this) : null;
+                if (pic != null) Armory.Picture(g, icon, pic, row.Npc != null, row.RoundIcon, row.IconColor);
                 else Armory.Icon(g, icon, row.IconColor, row.Icon, row.RoundIcon);
                 Font fv = Theme.F(11, FontStyle.Bold), fvs = Theme.F(8.5f);
                 int vw = Math.Max(Armory.TextWidth(row.Value, fv), Armory.TextWidth(row.ValueSub, fvs));
