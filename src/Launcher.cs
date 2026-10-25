@@ -24,9 +24,15 @@ namespace AzerothLauncher
         // in the open). The launcher downloads it itself (BeginClientDownload), into a "temp" folder beside the launcher.
         public const string ClientUrl = "https://budapestmix.hu:5000/download";
         public const string ClientUser = "AzerothSurvivors_uSZfhjS", ClientPassword = "AzerothSurvivors_uSZfhjS";
-        // The developers' backup host: a page with a link to the newest archive and its SHA-256 (no login). Each
-        // install picks one of the two hosts at random (50/50); if that one fails, the other one is tried.
+        // The developers' backup host: a page with a link to the newest archive and its SHA-256 (no login).
         public const string ClientMirrorUrl = "https://azerothsurvivors-mirror.sandervspl.dev/";
+        // A third host, on Google Drive (the same game in its own archive, so its own MD5).
+        public const string ClientDriveId = "12EHYJrgdANtgZvND49L_cxQwoObTbkWq";
+        // Each install picks one of the hosts at random; if that one fails, the others are tried in turn. Every download
+        // is checked against the game's known checksums below (update them with a new game version).
+        public const string ClientSha256 = "971db7968dc37ec50b18d64a1de7f693e137f6793a7368e4d5c27bd9522eccd8";   // AzerothSurvivorsWindowsNew.rar
+        public const string ClientMd5 = "7748bfdffaccd2f46d868cf69ad3e72c";                                       //   (760497456 bytes)
+        public const string ClientDriveMd5 = "81887cd5d56dcca3b7dd086b0b498cf6";                                  // the Google Drive archive
         public const string DiscordUrl = "https://discord.gg/azerothsurvivors";
 
         const int W = 1100, H = 690;                         // retro launcher window: sections open on the left, News on the right
@@ -1287,31 +1293,42 @@ namespace AzerothLauncher
 
         static readonly Random hostDice = new Random();
 
-        // One of the two hosts at random; when it fails (not when you cancel), the other one.
+        // One of the hosts at random; when it fails (not when you cancel), the next one.
         static void DownloadClient(string file, Action<long, long> progress, ManualResetEvent cancel, Action<string> say)
         {
-            bool mirrorFirst;
-            lock (hostDice) mirrorFirst = hostDice.Next(2) == 0;
-            UserError first = null;
-            for (int i = 0; i < 2; i++)
+            var hosts = new List<int> { 0, 1, 2 };            // 0 main, 1 backup, 2 Google Drive
+            lock (hostDice)
+                for (int i = hosts.Count - 1; i > 0; i--) { int j = hostDice.Next(i + 1); int t = hosts[i]; hosts[i] = hosts[j]; hosts[j] = t; }
+            string[] names = { "main host", "backup host", "Google Drive host" };
+            var errors = new List<string>();
+            for (int i = 0; i < hosts.Count; i++)
             {
-                bool mirror = (i == 0) == mirrorFirst;
-                say(i == 0 ? (mirror ? "Downloading from the backup host..." : "Downloading from the main host...")
-                           : (mirror ? "The main host did not work. Trying the backup host..." : "The backup host did not work. Trying the main host..."));
+                int h = hosts[i];
+                say(i == 0 ? "Downloading from the " + names[h] + "..."
+                           : "The " + names[hosts[i - 1]] + " did not work. Trying the " + names[h] + "...");
                 try
                 {
-                    if (mirror) DownloadFromMirror(file, progress, cancel);
-                    else DownloadFromMain(file, progress, cancel);
+                    if (h == 0) DownloadFromMain(file, progress, cancel);
+                    else if (h == 1) DownloadFromMirror(file, progress, cancel);
+                    else DownloadFromDrive(file, progress, cancel);
                     return;
                 }
                 catch (CancelledError) { throw; }
-                catch (UserError e)
-                {
-                    if (first == null) { first = e; continue; }
-                    throw new UserError("Neither download host worked.\n\n" + (mirrorFirst ? "Backup host: " : "Main host: ") + first.Message +
-                                        "\n\n" + (mirrorFirst ? "Main host: " : "Backup host: ") + e.Message);
-                }
+                catch (UserError e) { errors.Add(char.ToUpperInvariant(names[h][0]) + names[h].Substring(1) + ": " + e.Message); }
             }
+            throw new UserError("No download host worked.\n\n" + string.Join("\n\n", errors.ToArray()));
+        }
+
+        // the downloaded game against its known checksums: a damaged or different file is deleted, never installed
+        static void CheckClient(string file, string sha, string md5, bool drive, string where)
+        {
+            bool ok = drive ? string.Equals(md5, ClientDriveMd5, StringComparison.OrdinalIgnoreCase)
+                              || string.Equals(sha, ClientSha256, StringComparison.OrdinalIgnoreCase)
+                            : string.Equals(sha, ClientSha256, StringComparison.OrdinalIgnoreCase)
+                              && (md5 == null || string.Equals(md5, ClientMd5, StringComparison.OrdinalIgnoreCase));
+            if (ok) return;
+            try { File.Delete(file); } catch (Exception) { }
+            throw new UserError("The download from the " + where + " is damaged or not the right file (its checksum does not match). Please try again.");
         }
 
         // the main host, with the download login: sent the plain HTTP way (Basic); a server that wants it in the
@@ -1328,7 +1345,8 @@ namespace AzerothLauncher
             {
                 try
                 {
-                    Net.Download(url, file, true, "download", progress, cancel, 0, login);
+                    string sha = Net.Download(url, file, true, "download", progress, cancel, 0, login);
+                    CheckClient(file, sha, Net.LastMd5, false, "main host");
                     return;
                 }
                 catch (CancelledError) { throw; }
@@ -1342,8 +1360,8 @@ namespace AzerothLauncher
                                 (lastError != null ? " (" + lastError.Message + ")" : ""));
         }
 
-        // the backup host: its page names the newest archive (the link changes with every upload) and its SHA-256,
-        // which the download is checked against
+        // the backup host: its page names the newest archive (the link changes with every upload) and its SHA-256;
+        // the download must match the game's known checksums (and the page's, when it shows one)
         static void DownloadFromMirror(string file, Action<long, long> progress, ManualResetEvent cancel)
         {
             string html;
@@ -1362,6 +1380,36 @@ namespace AzerothLauncher
                 try { File.Delete(file); } catch (Exception) { }
                 throw new UserError("The download from the backup host is damaged (its checksum does not match). Please try again.");
             }
+            CheckClient(file, sha, Net.LastMd5, false, "backup host");
+        }
+
+        // Google Drive: a large file first gives a "can't scan this file for viruses" page whose form holds the real
+        // download address; that form is followed, then the file is checked against its MD5
+        static void DownloadFromDrive(string file, Action<long, long> progress, ManualResetEvent cancel)
+        {
+            string url = "https://drive.usercontent.google.com/download?id=" + ClientDriveId + "&export=download&confirm=t";
+            // only the first byte is asked for: the file itself is then fetched by the download below
+            using (HttpWebResponse resp = Net.Open(url, 30000, true, "Google Drive download", null,
+                                                   delegate(HttpWebRequest r) { r.AddRange(0L, 0L); }))
+            {
+                if ((resp.ContentType ?? "").ToLowerInvariant().Contains("text/html"))
+                {
+                    string html;
+                    using (var rd = new StreamReader(resp.GetResponseStream(), Encoding.UTF8)) html = rd.ReadToEnd();
+                    var form = System.Text.RegularExpressions.Regex.Match(html, "<form[^>]*action=\"([^\"]+)\"[^>]*>(.*?)</form>",
+                        System.Text.RegularExpressions.RegexOptions.IgnoreCase | System.Text.RegularExpressions.RegexOptions.Singleline);
+                    if (!form.Success) throw new UserError("Google Drive did not offer the file right now (it may have hit its download limit).");
+                    var q = new List<string>();
+                    foreach (System.Text.RegularExpressions.Match m in System.Text.RegularExpressions.Regex.Matches(form.Groups[2].Value,
+                        "<input[^>]*name=\"([^\"]+)\"[^>]*value=\"([^\"]*)\"", System.Text.RegularExpressions.RegexOptions.IgnoreCase))
+                        q.Add(Uri.EscapeDataString(System.Net.WebUtility.HtmlDecode(m.Groups[1].Value)) + "=" +
+                              Uri.EscapeDataString(System.Net.WebUtility.HtmlDecode(m.Groups[2].Value)));
+                    url = new Uri(new Uri(url), System.Net.WebUtility.HtmlDecode(form.Groups[1].Value)).AbsoluteUri;
+                    url += (url.Contains("?") ? "&" : "?") + string.Join("&", q.ToArray());
+                }
+            }
+            string sha = Net.Download(url, file, true, "Google Drive download", progress, cancel, 0);
+            CheckClient(file, sha, Net.LastMd5, true, "Google Drive host");
         }
 
         bool setupAfterFileInstall;
