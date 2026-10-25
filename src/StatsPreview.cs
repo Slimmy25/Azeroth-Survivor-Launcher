@@ -92,6 +92,35 @@ namespace AzerothLauncher
                 app.current = "Stats";
                 app.BuildPanel("Stats");
             }
+            // every other section, to check they all use the launcher's colors
+            foreach (string sec in new[] { "Cloud Save", "Addons", "Changelog", "Options", "About Launcher" })
+            {
+                app.ShowSide();
+                app.current = sec;
+                try { app.BuildPanel(sec); } catch (Exception) { continue; }
+                Application.DoEvents();
+                string nm = "section-" + sec.Replace(" ", "-").ToLowerInvariant();
+                using (var win = new Bitmap(app.side.Width, app.side.Height))
+                {
+                    app.side.DrawToBitmap(win, new Rectangle(0, 0, win.Width, win.Height));
+                    win.Save(Path.Combine(outDir, nm + ".png"), ImageFormat.Png);
+                }
+                ScrollPanel ssp = FindScroll(app.panel);
+                if (ssp != null)
+                {
+                    int h = 10;
+                    foreach (Control c in ssp.Controls) h = Math.Max(h, c.Bottom + 10);
+                    using (var page = new Bitmap(ssp.ClientSize.Width, Math.Min(h, 3000)))
+                    {
+                        using (var g = Graphics.FromImage(page)) g.Clear(ssp.BackColor);
+                        foreach (Control c in ssp.Controls)
+                            if (c.Width > 0 && c.Height > 0) c.DrawToBitmap(page, new Rectangle(c.Left, c.Top, c.Width, c.Height));
+                        page.Save(Path.Combine(outDir, nm + "-page.png"), ImageFormat.Png);
+                    }
+                }
+            }
+            app.current = "Stats";
+            app.BuildPanel("Stats");
             // the main window with a section open, then with none
             foreach (string shot in new[] { "home-section", "home" })
             {
