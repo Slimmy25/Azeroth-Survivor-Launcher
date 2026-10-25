@@ -100,11 +100,12 @@ namespace AzerothLauncher
 
         // the sections are drawn a little smaller than the launcher itself: fonts made while Zoom < 1 shrink with it
         public static float Zoom = 1f;
-        public const float SectionZoom = 0.85f;
+        public const float SectionZoom = 0.72f;
 
         public static Font F(float size, FontStyle style)
         {
-            size = Math.Max(8.75f, (float)Math.Round(size * Zoom * 4) / 4f);   // never smaller than this: readable everywhere
+            // never smaller than this: readable everywhere (the compact sections allow a little less)
+            size = Math.Max(Zoom < 1f ? 8.25f : 8.75f, (float)Math.Round(size * Zoom * 4) / 4f);
             string key = size + "|" + (int)style;
             Font f;
             if (!fonts.TryGetValue(key, out f))
@@ -540,7 +541,7 @@ namespace AzerothLauncher
             SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer, true);
             SetStyle(ControlStyles.Selectable, false);
             this.icon = icon;
-            Size = new Size(34, 34);
+            Size = new Size(26, 26);                         // the slim strip beside the sections
             Cursor = Cursors.Hand;
             if (command != null) Pressed += command;
         }

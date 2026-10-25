@@ -13,7 +13,7 @@ using System.Windows.Forms;
 
 namespace AzerothLauncher
 {
-    public partial class LauncherApp : Form
+    public partial class LauncherApp : Form, IWheel
     {
         // TEMPORARY: while true, nothing but INSTALL works until the game has been downloaded by this launcher
         // (the flag is stored in the config when a download finishes). Set to false to switch it off.
@@ -271,8 +271,11 @@ namespace AzerothLauncher
                 using (var body = new SolidBrush(Theme.Hex("#e8dcc0")))
                 using (var shadow = new SolidBrush(Color.Black))
                 {
-                    float y = 236;
                     Font tf = Theme.F(11, FontStyle.Bold), bf = Theme.F(9);
+                    // the whole post, scrolled by newsScroll inside NewsArea (mouse wheel, or drag the slim bar)
+                    Region oldClip = g.Clip;
+                    g.SetClip(NewsArea);
+                    float y = NewsArea.Y - newsScroll;
                     g.DrawString(Lang.T("Patch ") + lines[0].Trim(), tf, shadow, 698, y + 1);
                     g.DrawString(Lang.T("Patch ") + lines[0].Trim(), tf, title, 697, y);
                     y += 22;
@@ -281,12 +284,22 @@ namespace AzerothLauncher
                         string l = lines[i].Trim();
                         if (l.Length == 0 || l.Trim('-', '=', '_', '\u2014', '\u2013').Length == 0) continue;   // blank or a rule
                         if (l.StartsWith("- ") || l.StartsWith("* ")) l = "\u2022 " + l.Substring(2);
-                        var box = new RectangleF(700, y, 385, 442 - y);
-                        SizeF sz = g.MeasureString(l, bf, 385);
-                        if (y + sz.Height > 442) break;                   // only whole entries above "Launcher"
-                        g.DrawString(l, bf, shadow, new RectangleF(box.X + 1, box.Y + 1, box.Width, box.Height));
-                        g.DrawString(l, bf, body, box);
+                        SizeF sz = g.MeasureString(l, bf, NewsTextW);
+                        if (y + sz.Height > NewsArea.Y && y < NewsArea.Bottom)
+                        {
+                            var box = new RectangleF(700, y, NewsTextW, sz.Height + 2);
+                            g.DrawString(l, bf, shadow, new RectangleF(box.X + 1, box.Y + 1, box.Width, box.Height));
+                            g.DrawString(l, bf, body, box);
+                        }
                         y += sz.Height + 1;
+                    }
+                    newsHeight = (int)(y + newsScroll - NewsArea.Y) + 4;
+                    g.Clip = oldClip;
+                    Rectangle thumb = NewsThumb();
+                    if (!thumb.IsEmpty)
+                    {
+                        using (var tb = new SolidBrush(Color.FromArgb(120, Theme.CardEdge))) g.FillRectangle(tb, NewsBar.X + 2, NewsBar.Y, 2, NewsBar.Height);
+                        using (var tb = new SolidBrush(newsDrag || newsBarHover ? Theme.Gold : Theme.GoldDim)) g.FillRectangle(tb, thumb);
                     }
                 }
             }
@@ -340,6 +353,79 @@ namespace AzerothLauncher
                 using (var vb = new SolidBrush(Theme.Hex("#b8a27a")))            // bottom-left corner
                     g.DrawString(Lang.T("Game version") + (version.Length > 0 ? ": " + version : ""), Theme.F(9.5f), vb, 12, 670);   // a little bigger
             }
+        }
+
+        // ---- the News panel scrolls when the patch note is longer than its space
+        static readonly Rectangle NewsArea = new Rectangle(694, 236, 386, 442 - 236);
+        static readonly Rectangle NewsBar = new Rectangle(1080, 238, 6, 442 - 240);
+        const int NewsTextW = 372;
+        int newsScroll, newsHeight;
+        bool newsDrag, newsBarHover;
+        int newsDragOffset;
+
+        Rectangle NewsThumb()
+        {
+            if (newsHeight <= NewsArea.Height) return Rectangle.Empty;
+            int h = Math.Max(24, NewsBar.Height * NewsArea.Height / newsHeight);
+            int y = NewsBar.Y + (NewsBar.Height - h) * newsScroll / Math.Max(1, newsHeight - NewsArea.Height);
+            return new Rectangle(NewsBar.X, y, NewsBar.Width, h);
+        }
+
+        void ScrollNews(int to)
+        {
+            int max = Math.Max(0, newsHeight - NewsArea.Height);
+            to = Math.Max(0, Math.Min(max, to));
+            if (to == newsScroll) return;
+            newsScroll = to;
+            Invalidate(new Rectangle(NewsArea.X - 4, NewsArea.Y - 2, NewsBar.Right - NewsArea.X + 8, NewsArea.Height + 4));
+        }
+
+        public void Wheel(int delta)
+        {
+            Point p = PointToClient(Cursor.Position);
+            Rectangle hot = Rectangle.Union(NewsArea, NewsBar);
+            if (hot.Contains(p)) ScrollNews(newsScroll - delta / 120 * 40);
+        }
+
+        protected override void OnMouseDown(MouseEventArgs e)
+        {
+            Rectangle t = NewsThumb();
+            Rectangle bar = new Rectangle(NewsBar.X - 4, NewsBar.Y, NewsBar.Width + 8, NewsBar.Height);
+            if (e.Button == MouseButtons.Left && !t.IsEmpty && bar.Contains(e.Location))
+            {
+                newsDrag = true;
+                newsDragOffset = t.Contains(e.Location) ? e.Y - t.Y : t.Height / 2;
+                DragNews(e.Y);
+            }
+            base.OnMouseDown(e);
+        }
+
+        void DragNews(int mouseY)
+        {
+            Rectangle t = NewsThumb();
+            if (t.IsEmpty) return;
+            int range = NewsBar.Height - t.Height;
+            int top = Math.Max(0, Math.Min(range, mouseY - newsDragOffset - NewsBar.Y));
+            ScrollNews(range <= 0 ? 0 : top * (newsHeight - NewsArea.Height) / range);
+        }
+
+        protected override void OnMouseMove(MouseEventArgs e)
+        {
+            if (newsDrag) DragNews(e.Y);
+            bool over = new Rectangle(NewsBar.X - 4, NewsBar.Y, NewsBar.Width + 8, NewsBar.Height).Contains(e.Location) && !NewsThumb().IsEmpty;
+            if (over != newsBarHover)
+            {
+                newsBarHover = over;
+                Cursor = over ? Cursors.Hand : Cursors.Default;
+                Invalidate(new Rectangle(NewsBar.X - 2, NewsBar.Y, NewsBar.Width + 4, NewsBar.Height));
+            }
+            base.OnMouseMove(e);
+        }
+
+        protected override void OnMouseUp(MouseEventArgs e)
+        {
+            if (newsDrag) { newsDrag = false; Invalidate(new Rectangle(NewsBar.X - 2, NewsBar.Y, NewsBar.Width + 4, NewsBar.Height)); }
+            base.OnMouseUp(e);
         }
 
         public void SetStatus(string msg)
