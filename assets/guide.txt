@@ -43,6 +43,11 @@ Even a lost run counts. Talent experience, boss gear, achievements and newly ope
 - Enter starts the run in the selected zone.
 - Every key can be changed in Options > Key Bindings.
 
+# Camera distance
+You can set how far the camera sits from your hero, both from the main menu and in the middle of a run.
+@video How do I change my camera distance from the main menu? | https://cdn.jsdelivr.net/gh/Slimmy25/Azeroth-Survivor-Launcher-Releases@guide-videos/controls/how-do-i-change-my-camera-distance-from-the-main-menu.mp4
+@video How do I change my camera distance in game? | https://cdn.jsdelivr.net/gh/Slimmy25/Azeroth-Survivor-Launcher-Releases@guide-videos/controls/how-do-i-change-my-camera-distance-in-game.mp4
+
 # Gamepad
 Gamepads are supported. On menus, the D-pad or left stick moves between buttons, A presses and B goes back. Y opens stored level-ups.
 
@@ -50,6 +55,7 @@ Gamepads are supported. On menus, the D-pad or left stick moves between buttons,
 - Controls > Store Level-Ups: level-ups no longer pause the fight. They are saved for later and a Level Up! button shows how many are waiting.
 - Controls > Open Caches by Clicking: walking over a cache no longer buys it; right-click it instead.
 - Interface: turn parts of the run's screen on or off (run clock, boss bars, kills and gold, damage meter and more).
+@video How do I open the DPS meter? | https://cdn.jsdelivr.net/gh/Slimmy25/Azeroth-Survivor-Launcher-Releases@guide-videos/controls/how-do-i-open-the-dps-meter.mp4
 
 @topic Your First Run | A step-by-step start for new heroes
 # Before you start
@@ -291,6 +297,7 @@ Gamepads are supported. On menus, the D-pad or left stick moves between buttons,
 
 @topic Races | The eight races and their racial abilities
 Choose your race, gender and looks in Armory > Character. Each race has a racial ability that casts on its own, plus passive bonuses. Not every race is open to every class: hover a race portrait to see.
+@video Can I change my race? | https://cdn.jsdelivr.net/gh/Slimmy25/Azeroth-Survivor-Launcher-Releases@guide-videos/races/can-i-change-my-race.mp4
 
 # Alliance
 - Human: Perception (every 30 sec, more damage for a short time), The Human Spirit (+10% experience), Diplomacy (+20% gold).
@@ -339,6 +346,10 @@ Each level-up deals you three cards. Pick one with the mouse or with 1, 2 or 3. 
 
 # Stored level-ups
 With Options > Controls > Store Level-Ups switched on, a level-up no longer pauses the fight. Your levels wait until you open them with the Level Up! button above your action bar, or with Y.
+
+# Luck
+Luck gives you better odds of rarer upgrades when you level up. You can see your luck in the Run Stats next to the character window during a run.
+@video What does luck do? | https://cdn.jsdelivr.net/gh/Slimmy25/Azeroth-Survivor-Launcher-Releases@guide-videos/level-ups-and-cards/what-does-luck-do.mp4
 
 # A moment of safety
 After you pick a card or an item you are immune to damage for one second.
