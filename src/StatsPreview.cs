@@ -105,6 +105,21 @@ namespace AzerothLauncher
                     app.side.DrawToBitmap(win, new Rectangle(0, 0, win.Width, win.Height));
                     win.Save(Path.Combine(outDir, nm + ".png"), ImageFormat.Png);
                 }
+                try
+                {   // also straight off the screen, in case a control does not draw itself into a picture
+                    app.side.Location = new Point(0, 0);
+                    app.side.TopMost = true;
+                    app.side.Refresh();
+                    Application.DoEvents();
+                    System.Threading.Thread.Sleep(300);
+                    Application.DoEvents();
+                    using (var scr = new Bitmap(app.side.Width, app.side.Height))
+                    {
+                        using (var g = Graphics.FromImage(scr)) g.CopyFromScreen(app.side.Location, Point.Empty, scr.Size);
+                        scr.Save(Path.Combine(outDir, nm + "-screen.png"), ImageFormat.Png);
+                    }
+                }
+                catch (Exception) { }
                 ScrollPanel ssp = FindScroll(app.panel);
                 if (ssp != null)
                 {
