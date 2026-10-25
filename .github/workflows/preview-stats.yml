@@ -27,6 +27,14 @@ jobs:
             exit $code
           }
 
+      - name: Video playback on the build machine (Windows Server has none by default)
+        shell: pwsh
+        continue-on-error: true
+        run: |
+          $r = Install-WindowsFeature Server-Media-Foundation
+          $r | Format-List | Out-String | Write-Output
+          if ($r.RestartNeeded -eq 'Yes') { Write-Output "::warning::Media Foundation needs a restart; the video check may fail" }
+
       - name: Render the STATS page
         shell: pwsh
         run: |
