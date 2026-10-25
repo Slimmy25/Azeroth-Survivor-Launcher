@@ -1072,6 +1072,14 @@ namespace AzerothLauncher
                     }
                 }
                 catch (Exception e) { SyncLog("  AZS Stats addon not updated: " + e.Message, Level.Warn); }
+                // the other AZS addons the launcher carries (AZS Handbook, AZS Minor Mods, AZS Transparency): the
+                // installed ones brought up to the launcher's version too
+                try
+                {
+                    foreach (string f in BuiltinAddons.UpdateInstalled(SyncSettings().AddonsDir))
+                        SyncLog(f + " addon updated to the launcher's version.", Level.Info);
+                }
+                catch (Exception e) { SyncLog("  AZS addons not updated: " + e.Message, Level.Warn); }
                 SyncLog("Starting Azeroth Survivors ...", Level.Info);
                 Ui(delegate
                 {

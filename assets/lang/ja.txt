@@ -1292,3 +1292,5 @@ RESET
 = リセット
 Click a talent to add a point, right-click to take one back. A talent takes no more points than its ranks, and a build no more than 51; the purple ones are the milestones at 10, 20 and 30 points.
 = タレントをクリックでポイント追加、右クリックで1つ戻します。タレントはランク数まで、ビルドは51ポイントまで。紫は10・20・30ポイントのマイルストーンです。
+Installed
+= インストール済み

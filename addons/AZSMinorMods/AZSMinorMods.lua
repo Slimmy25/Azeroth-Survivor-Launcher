@@ -9,9 +9,21 @@
 local K = AZSKIT;
 local NAME = "AZS Minor Mods";
 
--- the words that make a chat line a level-up line (matched without case)
-local LEVEL_WORDS = { "level up", "leveled up", "levelled up", "reached level", "gained a level", "you are now level",
-                      "congratulations, you have reached", "level-up", "ding!" };
+-- the words that make a chat line a level-up line (matched without case): the game's own two level-up lines,
+-- "Congratulations, you have reached level 12!" (its LEVEL_UP text) and "You have gained 3% damage, 12 maximum health
+-- and 0.5 health per second.", and the usual ways of saying it
+local LEVEL_WORDS = { "you have reached level", "you have gained", "level up", "leveled up", "levelled up", "reached level",
+                      "gained a level", "you are now level", "level-up", "ding!" };
+
+-- the game's LEVEL_UP text in the game's language: the part before the number
+local function LevelText()
+	if ( type(LEVEL_UP) ~= "string" ) then return nil; end
+	local s = string.find(LEVEL_UP, "%", 1, true);
+	local head = s and string.sub(LEVEL_UP, 1, s - 1) or LEVEL_UP;
+	head = string.lower(string.gsub(head, "^%s+", ""));
+	if ( string.len(head) < 6 ) then return nil; end
+	return head;
+end
 
 local function DB()
 	if ( type(AZSMinorModsDB) ~= "table" ) then AZSMinorModsDB = {}; end
@@ -28,6 +40,8 @@ local function Hidden(msg)
 	local d = DB();
 	local low = string.lower(string.gsub(msg, "|c%x%x%x%x%x%x%x%x", ""));
 	if ( d.hideLevel ) then
+		local own = LevelText();
+		if ( own and string.find(low, own, 1, true) ) then return true; end
 		for i = 1, table.getn(LEVEL_WORDS) do
 			if ( string.find(low, LEVEL_WORDS[i], 1, true) ) then return true; end
 		end

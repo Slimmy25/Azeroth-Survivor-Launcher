@@ -1,6 +1,8 @@
 # Addons offered in Addons > DOWNLOAD MORE. One addon per line:
 #   CATEGORY | Name shown | https://direct-link-to/addon.zip | (unused) | description
 # CATEGORY is AZS ADDONS (the addons made for Azeroth Survivors) or WOW 1.12 ADDONS. A link "local:<name>.zip" is a zip kept next to the launcher (listed only where it exists).
+# A link "builtin:<folder>" is an AZS addon the launcher carries inside itself (BuiltinAddons.cs): installed from the
+# launcher, kept up to date by it.
 # The fourth field is no longer used (it was a filter) and is left empty. The description is optional. Lines starting with # are ignored.
 
 AZS ADDONS | DBM by Gabriellus | https://github.com/Slimmy25/Azeroth-Survivor-Launcher-Releases/releases/download/addons/DBM-by-Gabriellus.zip | 
@@ -10,3 +12,6 @@ AZS ADDONS | Chest GPS By Fotze | https://github.com/Slimmy25/Azeroth-Survivor-L
 AZS ADDONS | SurvivorsDragonU By Mxgwyn | https://github.com/Slimmy25/Azeroth-Survivor-Launcher-Releases/releases/download/addons/SurvivorsDragonUi-by-Mxgwyn.zip | 
 AZS ADDONS | Keijin UI By Keijin | https://github.com/Slimmy25/Azeroth-Survivor-Launcher-Releases/releases/download/addons/Keijin-UI-by-Keijin.zip | 
 AZS ADDONS | AZS Stats By Slimjim | https://github.com/Slimmy25/Azeroth-Survivor-Launcher-Releases/releases/download/addons/AZS-Stats-by-Slimjim.zip | | All your stats in game (/azs) and on the STATS page: runs, records, abilities, classes, play time, your Nemesis and co-op with friends.
+AZS ADDONS | AZS Handbook By Slimjim | builtin:AZSHandbook | | The launcher's whole New Player Guide inside the game (/handbook): every topic and page, each class's spells with their icons and the talents that change them, and all the talent trees.
+AZS ADDONS | AZS Minor Mods By Slimjim | builtin:AZSMinorMods | | Small chat changes (/azsmods): the level-up text out of the chat, and a Say & Party box above the chat so you can read them while you play.
+AZS ADDONS | AZS Transparency By Slimjim | builtin:AZSTransparency | | A test (/transparency): which of your spells each item upgrade makes stronger, from rings, trinkets, amulets and boss gear.

@@ -1292,3 +1292,5 @@ RESET
 = SIFIRLA
 Click a talent to add a point, right-click to take one back. A talent takes no more points than its ranks, and a build no more than 51; the purple ones are the milestones at 10, 20 and 30 points.
 = Puan eklemek için bir yeteneğe tıkla, birini geri almak için sağ tıkla. Bir yetenek derecesinden fazla puan almaz, bir build de 51'den fazla; mor olanlar 10, 20 ve 30 puandaki kilometre taşlarıdır.
+Installed
+= Yüklü

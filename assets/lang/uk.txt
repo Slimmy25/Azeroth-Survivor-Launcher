@@ -1292,3 +1292,5 @@ RESET
 = СКИНУТИ
 Click a talent to add a point, right-click to take one back. A talent takes no more points than its ranks, and a build no more than 51; the purple ones are the milestones at 10, 20 and 30 points.
 = Клацніть талант, щоб додати очко, правий клік забирає одне. Талант не бере більше очок, ніж має рангів, а білд — більше 51; фіолетові — це віхи на 10, 20 і 30 очках.
+Installed
+= Встановлено

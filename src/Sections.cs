@@ -681,6 +681,12 @@ namespace AzerothLauncher
 
         List<string> AddonFoldersOf(string name)
         {
+            foreach (var e in Data.Addons)
+                if (e.Name == name && BuiltinAddons.Find(e.Url) != null)
+                {
+                    string at = BuiltinAddons.PathOf(AddonsDir(), BuiltinAddons.Find(e.Url));
+                    return at == null ? new List<string>() : new List<string> { Path.GetFileName(at) };
+                }
             return Addons.FoldersOf(AddonsDir(), name, RecordedFolders(name));
         }
 
@@ -786,6 +792,11 @@ namespace AzerothLauncher
             }
             int w = sp.ClientSize.Width - 4 - 8;
             int y = y0;
+            if (Data.AddonCategories[cat] == "AZS ADDONS")
+            {
+                AddonCards(sp, items, w, y, listbg);
+                return;
+            }
             foreach (var item in items)
             {
                 var it = item;
@@ -822,6 +833,75 @@ namespace AzerothLauncher
             }
         }
 
+        // AZS ADDONS: a block for each addon, two to a row: its name, what it does, and its button at the bottom
+        void AddonCards(ScrollPanel sp, List<AddonEntry> items, int w, int y, Color listbg)
+        {
+            const int gap = 8;
+            int cw = (w - gap) / 2, textW = cw - 2 - 20;
+            // a row of two is as tall as the taller of them
+            var heights = new List<int>();
+            var built = new List<Control>();
+            foreach (var item in items)
+            {
+                var it = item;
+                var card = new Bordered(Theme.GoldDim, 1);
+                var inner = new Panel();
+                inner.BackColor = listbg;
+                inner.Dock = DockStyle.Fill;
+                card.Controls.Add(inner);
+                bool haveIt = AddonFoldersOf(it.Name).Count > 0;
+                bool update = haveIt && AddonHasUpdate(it);
+                var btn = update ? new WowButton("UPDATE", delegate { DownloadAddon(it.Name, it.Url); }, 120, 30, 10)
+                        : haveIt ? new WowButton("UNINSTALL", delegate { UninstallAddon(it.Name); }, 120, 30, 10)
+                                 : new WowButton("INSTALL", delegate { DownloadAddon(it.Name, it.Url); }, 120, 30, 10);
+                if (update) btn.Selected = true;
+                int ty = 8;
+                var name = UI.Text(it.Name, 12, FontStyle.Bold, Theme.Gold, listbg, textW, false);
+                name.Size = VStack.Measure(name);
+                name.Location = new Point(10, ty);
+                inner.Controls.Add(name);
+                ty += name.Height + 2;
+                if (it.Description.Length > 0)
+                {
+                    var d = UI.Text(it.Description, 9, FontStyle.Regular, Theme.Text, listbg, textW, false);
+                    d.Size = VStack.Measure(d);
+                    d.Location = new Point(10, ty);
+                    inner.Controls.Add(d);
+                    ty += d.Height;
+                }
+                if (haveIt)
+                {
+                    var on = UI.Text("Installed", 9, FontStyle.Italic, Theme.GoldDim, listbg, 0);
+                    on.Size = VStack.Measure(on);
+                    inner.Controls.Add(on);
+                    on.Tag = "installed";
+                }
+                inner.Controls.Add(btn);
+                btn.Tag = "button";
+                heights.Add(ty + 8 + btn.Height + 10);
+                built.Add(card);
+            }
+            for (int i = 0; i < built.Count; i++)
+            {
+                int row = i / 2, h = Math.Max(heights[i], i % 2 == 0 && i + 1 < built.Count ? heights[i + 1] : i % 2 == 1 ? heights[i - 1] : 0);
+                h = Math.Max(h, 120);
+                var card = built[i];
+                card.Bounds = new Rectangle(4 + (i % 2) * (cw + gap), y, cw, h);
+                var inner = card.Controls[0];
+                foreach (Control c in inner.Controls)
+                {
+                    if ((c.Tag as string) == "button") c.Location = new Point(cw - 2 - 10 - c.Width, h - 2 - 10 - c.Height);
+                    if ((c.Tag as string) == "installed") c.Location = new Point(10, h - 2 - 10 - (30 + c.Height) / 2 - 2);
+                }
+                sp.Controls.Add(card);
+                if (i % 2 == 1 || i + 1 == built.Count) y += h + gap;
+            }
+            var pad = new Panel();
+            pad.BackColor = listbg;
+            pad.Bounds = new Rectangle(4, y, 1, 4);
+            sp.Controls.Add(pad);
+        }
+
         bool AddonsLocked()
         {
             if (GameRunningFlag || SyncBusy)
@@ -847,7 +927,12 @@ namespace AzerothLauncher
             {
                 List<string> names = null;
                 string err = null;
-                try { names = Archive.InstallAddonZip(url, dir); }
+                BuiltinAddon builtin = BuiltinAddons.Find(url);
+                try
+                {
+                    if (builtin != null) { BuiltinAddons.Install(dir, builtin); names = new List<string> { builtin.Folder }; }
+                    else names = Archive.InstallAddonZip(url, dir);
+                }
                 catch (Exception e) { err = e.Message.Length > 0 ? e.Message : e.GetType().Name; }
                 Ui(delegate
                 {
@@ -894,6 +979,29 @@ namespace AzerothLauncher
             Cfg.Save();
             SetStatus(removed.Count > 0 ? name + " uninstalled." : name + " was not installed.");
             if (current == "Addons") BuildPanel("Addons");
+        }
+
+        // one folder of the AddOns folder deleted (the installed list's X), with the settings it saved
+        void UninstallFolder(string folder)
+        {
+            if (AddonsLocked()) return;
+            if (Msg.Show(side, "Uninstall " + folder + "?\n\nIts folder is deleted from your AddOns folder, with the settings it saved.",
+                         "Uninstall", MessageBoxButtons.YesNo) != DialogResult.Yes) return;
+            try { Addons.Uninstall(AddonsDir(), new List<string> { folder }, SyncSettings().SavedDir); }
+            catch (Exception e)
+            {
+                Msg.Show(side, "Could not uninstall " + folder + ":\n\n" + e.Message, "Addons", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            // a Download More addon made of this folder is no longer installed
+            foreach (var kv in new List<KeyValuePair<string, object>>(AddonInstalls()))
+            {
+                var l = Json.AsList(kv.Value);
+                if (l != null && l.Contains(folder)) { AddonInstalls().Remove(kv.Key); AddonInstalledAt().Remove(kv.Key); }
+            }
+            Cfg.Save();
+            SetStatus(folder + " uninstalled.");
+            BuildPanel("Addons");
         }
 
         void AddonsInstalledView(int top)
@@ -962,9 +1070,13 @@ namespace AzerothLauncher
                 var cb = UI.Check(name, a.Value, a.Value ? Theme.Text : Theme.GoldDim, listbg, 11, false);
                 cb.AutoSize = false;
                 Size need = TextRenderer.MeasureText(name, cb.Font, new Size(w - 24, 0), TextFormatFlags.WordBreak);
-                cb.Bounds = new Rectangle(6, y, w, Math.Max(22, need.Height + 4));     // long names wrap
+                cb.Bounds = new Rectangle(6, y, w - 34, Math.Max(22, need.Height + 4));     // long names wrap
                 cb.CheckedChanged += delegate { OnAddonToggle(name); };
                 sp.Controls.Add(cb);
+                // its folder out of the AddOns folder (with the settings it saved)
+                var del = new WowButton("X", delegate { UninstallFolder(name); }, 26, 22, 9);
+                del.Location = new Point(6 + w - 30, y + (cb.Height - del.Height) / 2);
+                sp.Controls.Add(del);
                 addonRows[name] = cb;
                 y += cb.Height + 1;
             }

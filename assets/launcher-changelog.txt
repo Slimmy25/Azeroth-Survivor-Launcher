@@ -1,4 +1,8 @@
 # Next update (after v0.3)
+- New AZS addons, built into the launcher (Addons > Download More > AZS ADDONS) and kept up to date by it before the game starts: AZS Handbook (the whole New Player Guide inside the game, /handbook), AZS Minor Mods (the level-up text out of the chat and a Say & Party box above it, /azsmods) and AZS Transparency (a test: which of your spells each item upgrade makes stronger, /transparency). All AZS addons share AZS Stats' look, and each has its own spot by the minimap
+- AZS ADDONS in Download More are shown as blocks, two to a row
+- The installed addons list has an X beside each addon to uninstall it from the AddOns folder
+- About Launcher describes what the launcher does: downloading the game, installing addons, cloud save and the New Player Guide
 - Each class page in the Guide has a TALENT TREES button: the class's three trees, where you can try out a build of up to 51 points (click to add a point, right-click to take one back; no talent takes more than its ranks). Your test build is kept for each class
 - Every class page in the Guide shows its spells with their icons, the talents that change each spell (point at one to read it), and the class's three full talent trees as the game draws them: every talent with its icon and ranks, the 10, 20 and 30 point milestones marked, read from the game itself
 - Options has tabs: FOLDERS, GENERAL, LANGUAGE and LAUNCHER. UPDATE LAUNCHER and ABOUT LAUNCHER moved into Options > LAUNCHER

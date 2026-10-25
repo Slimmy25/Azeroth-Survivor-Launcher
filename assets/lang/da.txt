@@ -1291,3 +1291,5 @@ RESET
 = NULSTIL
 Click a talent to add a point, right-click to take one back. A talent takes no more points than its ranks, and a build no more than 51; the purple ones are the milestones at 10, 20 and 30 points.
 = Klik på et talent for at tilføje et point, højreklik for at tage et tilbage. Et talent tager ikke flere point end sine rang, og en build ikke flere end 51; de lilla er milepælene ved 10, 20 og 30 point.
+Installed
+= Installeret
