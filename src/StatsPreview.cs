@@ -96,8 +96,14 @@ namespace AzerothLauncher
             {
                 GuideVideo vid = null;
                 foreach (var t in Data.Guide) { if (t.Videos.Count > 0) { vid = t.Videos[0]; break; } foreach (var pg in t.Pages) if (vid == null && pg.Videos.Count > 0) vid = pg.Videos[0]; if (vid != null) break; }
-                if (vid != null)
+                var tests = new System.Collections.Generic.List<GuideVideo>();
+                if (vid != null) tests.Add(vid);
+                string localMp4 = Path.GetFullPath(Path.Combine("guide-videos", "races", "can-i-change-my-race.mp4"));
+                if (File.Exists(localMp4)) { var lv = new GuideVideo(); lv.Title = "local"; lv.Url = new Uri(localMp4).AbsoluteUri; tests.Add(lv); }
+                var report = new System.Text.StringBuilder();
+                foreach (GuideVideo tv in tests)
                 {
+                    vid = tv;
                     app.Show();
                     app.ShowSide();
                     app.current = "Guide";
@@ -126,15 +132,16 @@ namespace AzerothLauncher
                         }
                         catch (Exception ex) { state = "script: " + ex.Message; }
                     }
-                    using (var eb = new Bitmap(700, 60))
-                    {
-                        using (var g = Graphics.FromImage(eb)) { g.Clear(Color.White); g.DrawString(vid.Url + "\n" + state, new Font("Arial", 9), Brushes.Black, 4, 4); }
-                        eb.Save(Path.Combine(outDir, "video-player-check.png"), ImageFormat.Png);
-                    }
-                    app.gVideo = null;
-                    app.current = "Stats";
-                    app.BuildPanel("Stats");
+                    report.Append(vid.Url + "\n" + state + "\n\n");
                 }
+                using (var eb = new Bitmap(900, 140))
+                {
+                    using (var g = Graphics.FromImage(eb)) { g.Clear(Color.White); g.DrawString(report.ToString(), new Font("Arial", 9), Brushes.Black, 4, 4); }
+                    eb.Save(Path.Combine(outDir, "video-player-check.png"), ImageFormat.Png);
+                }
+                app.gVideo = null;
+                app.current = "Stats";
+                app.BuildPanel("Stats");
             }
             // every other section, to check they all use the launcher's colors
             foreach (string sec in new[] { "Cloud Save", "Addons", "Changelog", "Options", "About Launcher" })
