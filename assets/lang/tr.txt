@@ -1276,3 +1276,19 @@ X grows with every rank.
 = X her derecede artar.
 Talents that change it:
 = Onu değiştiren yetenekler:
+Rank
+= Derece
+Click to add a point.
+= Puan eklemek için tıkla.
+All 51 points are spent.
+= 51 puanın tamamı harcandı.
+Right-click to take one back.
+= Birini geri almak için sağ tıkla.
+Points left
+= Kalan puan
+TALENT TREES ›
+= YETENEK AĞAÇLARI ›
+RESET
+= SIFIRLA
+Click a talent to add a point, right-click to take one back. A talent takes no more points than its ranks, and a build no more than 51; the purple ones are the milestones at 10, 20 and 30 points.
+= Puan eklemek için bir yeteneğe tıkla, birini geri almak için sağ tıkla. Bir yetenek derecesinden fazla puan almaz, bir build de 51'den fazla; mor olanlar 10, 20 ve 30 puandaki kilometre taşlarıdır.

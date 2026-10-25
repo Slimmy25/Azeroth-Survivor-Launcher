@@ -1276,3 +1276,19 @@ X grows with every rank.
 = X minden szinttel nő.
 Talents that change it:
 = Az ezt módosító tehetségek:
+Rank
+= Szint
+Click to add a point.
+= Kattints egy pont hozzáadásához.
+All 51 points are spent.
+= Mind az 51 pont elköltve.
+Right-click to take one back.
+= Jobb kattintással visszaveszel egyet.
+Points left
+= Maradék pont
+TALENT TREES ›
+= TEHETSÉGFÁK ›
+RESET
+= ALAPHELYZET
+Click a talent to add a point, right-click to take one back. A talent takes no more points than its ranks, and a build no more than 51; the purple ones are the milestones at 10, 20 and 30 points.
+= Kattints egy tehetségre egy pont hozzáadásához, jobb kattintással visszaveszel egyet. Egy tehetség nem kap több pontot, mint ahány szintje van, egy build pedig legfeljebb 51-et; a lilák a 10, 20 és 30 pontos mérföldkövek.

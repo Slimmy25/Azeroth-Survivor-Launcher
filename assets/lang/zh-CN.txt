@@ -1276,3 +1276,19 @@ X grows with every rank.
 = X 随每级提升。
 Talents that change it:
 = 改变此法术的天赋：
+Rank
+= 等级
+Click to add a point.
+= 点击添加一点。
+All 51 points are spent.
+= 51 点已全部分配。
+Right-click to take one back.
+= 右键收回一点。
+Points left
+= 剩余点数
+TALENT TREES ›
+= 天赋树 ›
+RESET
+= 重置
+Click a talent to add a point, right-click to take one back. A talent takes no more points than its ranks, and a build no more than 51; the purple ones are the milestones at 10, 20 and 30 points.
+= 点击天赋添加一点，右键收回一点。天赋点数不超过其等级，整套不超过 51 点；紫色的是 10、20、30 点的里程碑。

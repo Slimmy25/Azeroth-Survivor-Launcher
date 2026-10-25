@@ -22,6 +22,7 @@ namespace AzerothLauncher
         // the text as the game shows it, with the number that grows with each rank as "X"
         public string Shown { get { return Text.Replace("{v}%", "X%").Replace("{v2}%", "Y%").Replace("{v}", "X").Replace("{v2}", "Y"); } }
         public int Points { get { return Row * 5; } }          // points in the tree it needs (the milestones: 10, 20, 30)
+        public string Id { get { return Spec + "/" + Key; } }  // unique within its class
         public bool Milestone { get { return Text.StartsWith("Milestone") || Text.StartsWith("Capstone"); } }
     }
 
@@ -124,6 +125,65 @@ namespace AzerothLauncher
         }
     }
 
+    // a test build in the Guide's talent trees: the points put in each talent of one class. Up to 51 points, and no
+    // more than a talent's ranks; the game's other rules (a row opens after 5 points in its tree) are not enforced,
+    // so any build can be tried out
+    public class TalentBuild
+    {
+        public const int MaxPoints = 51;
+        readonly Dictionary<string, int> points = new Dictionary<string, int>(StringComparer.Ordinal);
+        public Action Changed;
+
+        public int Get(Talent t) { int n; return points.TryGetValue(t.Id, out n) ? n : 0; }
+
+        public int Spent { get { int s = 0; foreach (int v in points.Values) s += v; return s; } }
+
+        public int SpentIn(TalentTree tree) { int s = 0; foreach (var t in tree.Talents) s += Get(t); return s; }
+
+        public bool Add(Talent t)
+        {
+            if (Get(t) >= t.Ranks || Spent >= MaxPoints) return false;
+            points[t.Id] = Get(t) + 1;
+            if (Changed != null) Changed();
+            return true;
+        }
+
+        public bool Remove(Talent t)
+        {
+            int n = Get(t);
+            if (n <= 0) return false;
+            if (n == 1) points.Remove(t.Id); else points[t.Id] = n - 1;
+            if (Changed != null) Changed();
+            return true;
+        }
+
+        public void Reset() { points.Clear(); if (Changed != null) Changed(); }
+
+        // "Arms/deep_wounds=1;Fury/cruelty=5": kept in the launcher's settings, one build per class
+        public string Save()
+        {
+            var parts = new List<string>();
+            foreach (var kv in points) parts.Add(kv.Key + "=" + kv.Value);
+            return string.Join(";", parts.ToArray());
+        }
+
+        public static TalentBuild Parse(string text, string className)
+        {
+            var b = new TalentBuild();
+            var byId = new Dictionary<string, Talent>(StringComparer.Ordinal);
+            foreach (var tr in Talents.Of(className)) foreach (var t in tr.Talents) byId[t.Id] = t;
+            foreach (string part in (text ?? "").Split(';'))
+            {
+                int eq = part.LastIndexOf('='), n;
+                Talent t;
+                if (eq <= 0 || !int.TryParse(part.Substring(eq + 1), out n) || !byId.TryGetValue(part.Substring(0, eq), out t)) continue;
+                n = Math.Min(n, Math.Min(t.Ranks, MaxPoints - b.Spent));
+                if (n > 0) b.points[t.Id] = n;
+            }
+            return b;
+        }
+    }
+
     // one spec's tree, like the game's talent window: the spec's name over a grid of the talents' icons
     public class TalentTreeView : Control
     {
@@ -131,6 +191,7 @@ namespace AzerothLauncher
         readonly List<KeyValuePair<Rectangle, Talent>> cells = new List<KeyValuePair<Rectangle, Talent>>();
         Talent over;
         const int Cols = 4, Rows = 7;
+        public TalentBuild Build;                            // set: a test build, click to add a point, right-click to take one back
 
         public TalentTreeView(TalentTree tree, int width)
         {
@@ -156,6 +217,14 @@ namespace AzerothLauncher
             }
             using (var b = new SolidBrush(Theme.Gold))
                 g.DrawString(tree.Spec, Theme.F(11, FontStyle.Bold), b, 10, 6);
+            if (Build != null)
+            {
+                string pts = Build.SpentIn(tree).ToString();
+                Font pf = Theme.F(11, FontStyle.Bold);
+                SizeF ps = g.MeasureString(pts, pf);
+                using (var b = new SolidBrush(Build.SpentIn(tree) > 0 ? Theme.Hex("#7ee05a") : Theme.GoldDim))
+                    g.DrawString(pts, pf, b, Width - 10 - ps.Width, 6);
+            }
             int cell = Cell, ic = Math.Min(36, cell - 10), x0 = 8 + (Width - 16 - cell * Cols) / 2, y0 = 30;
             cells.Clear();
             // the line that joins the milestones, as in the game's window
@@ -173,14 +242,18 @@ namespace AzerothLauncher
                 Image img = SpellIcons.Icon(t.Icon, this);
                 if (img != null) g.DrawImage(img, r);
                 else using (var b = new SolidBrush(Theme.Hex("#2a2218"))) g.FillRectangle(b, r);
+                int have = Build != null ? Build.Get(t) : 0;
+                if (Build != null && have == 0)                // not taken: dimmed, as in the game
+                    using (var b = new SolidBrush(Color.FromArgb(150, 8, 6, 10))) g.FillRectangle(b, r);
                 bool milestone = t.Milestone;
                 using (var p = new Pen(t == over ? Theme.Hex("#fff2b0") : milestone ? Theme.Hex("#b27cff") : Theme.Hex("#8a7040"), t == over ? 2 : 1.5f))
                     g.DrawRectangle(p, r);
-                string rk = "0/" + t.Ranks;
+                string rk = have + "/" + t.Ranks;
                 SizeF rs = g.MeasureString(rk, rf);
                 var rb = new RectangleF(r.Right - rs.Width + 4, r.Bottom - rs.Height + 4, rs.Width, rs.Height - 1);
                 using (var b = new SolidBrush(Color.FromArgb(220, 10, 8, 6))) g.FillRectangle(b, rb);
-                using (var b = new SolidBrush(Theme.Text)) g.DrawString(rk, rf, b, rb.X, rb.Y - 1);
+                Color rc = have >= t.Ranks ? Theme.Hex("#ffd100") : have > 0 ? Theme.Hex("#7ee05a") : Theme.Text;
+                using (var b = new SolidBrush(rc)) g.DrawString(rk, rf, b, rb.X, rb.Y - 1);
             }
         }
 
@@ -195,9 +268,30 @@ namespace AzerothLauncher
             base.OnMouseMove(e);
             Talent t = At(e.Location);
             if (t != over) { over = t; Invalidate(); }
-            Cursor = t != null ? Cursors.Help : Cursors.Default;
-            if (t != null) GuideHover.Show(this, t.Name, Talents.HoverText(t), SpellIcons.Icon(t.Icon, null));
+            Cursor = t != null ? (Build != null ? Cursors.Hand : Cursors.Help) : Cursors.Default;
+            if (t != null) ShowTip(t);
             else GuideHover.Hide();
+        }
+
+        void ShowTip(Talent t)
+        {
+            string body = Talents.HoverText(t);
+            if (Build != null)
+                body = Lang.T("Rank") + " " + Build.Get(t) + "/" + t.Ranks + "\n" + body + "\n\n" +
+                       (Build.Get(t) < t.Ranks ? (Build.Spent < TalentBuild.MaxPoints ? Lang.T("Click to add a point.") : Lang.T("All 51 points are spent.")) + " " : "") +
+                       (Build.Get(t) > 0 ? Lang.T("Right-click to take one back.") : "");
+            GuideHover.Show(this, t.Name, body.TrimEnd(), SpellIcons.Icon(t.Icon, null));
+        }
+
+        protected override void OnMouseUp(MouseEventArgs e)
+        {
+            base.OnMouseUp(e);
+            if (Build == null) return;
+            Talent t = At(e.Location);
+            if (t == null) return;
+            if (e.Button == MouseButtons.Left) Build.Add(t);
+            else if (e.Button == MouseButtons.Right) Build.Remove(t);
+            ShowTip(t);
         }
 
         protected override void OnMouseLeave(EventArgs e)

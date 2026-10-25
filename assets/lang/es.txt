@@ -1275,3 +1275,19 @@ X grows with every rank.
 = X crece con cada rango.
 Talents that change it:
 = Talentos que lo cambian:
+Rank
+= Rango
+Click to add a point.
+= Haz clic para añadir un punto.
+All 51 points are spent.
+= Los 51 puntos están gastados.
+Right-click to take one back.
+= Clic derecho para quitar uno.
+Points left
+= Puntos restantes
+TALENT TREES ›
+= ÁRBOLES DE TALENTOS ›
+RESET
+= REINICIAR
+Click a talent to add a point, right-click to take one back. A talent takes no more points than its ranks, and a build no more than 51; the purple ones are the milestones at 10, 20 and 30 points.
+= Haz clic en un talento para añadir un punto y clic derecho para quitar uno. Un talento no admite más puntos que sus rangos, y una build no más de 51; los morados son los hitos de 10, 20 y 30 puntos.

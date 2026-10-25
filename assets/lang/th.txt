@@ -1276,3 +1276,19 @@ X grows with every rank.
 = X เพิ่มขึ้นทุกระดับ
 Talents that change it:
 = ทาเลนต์ที่เปลี่ยนสกิลนี้:
+Rank
+= ระดับ
+Click to add a point.
+= คลิกเพื่อเพิ่มแต้ม
+All 51 points are spent.
+= ใช้ครบทั้ง 51 แต้มแล้ว
+Right-click to take one back.
+= คลิกขวาเพื่อคืนหนึ่งแต้ม
+Points left
+= แต้มที่เหลือ
+TALENT TREES ›
+= ต้นทาเลนต์ ›
+RESET
+= รีเซ็ต
+Click a talent to add a point, right-click to take one back. A talent takes no more points than its ranks, and a build no more than 51; the purple ones are the milestones at 10, 20 and 30 points.
+= คลิกทาเลนต์เพื่อเพิ่มแต้ม คลิกขวาเพื่อคืนหนึ่งแต้ม ทาเลนต์รับแต้มได้ไม่เกินจำนวนระดับ และบิลด์ไม่เกิน 51 แต้ม อันสีม่วงคือหมุดหมายที่ 10, 20 และ 30 แต้ม

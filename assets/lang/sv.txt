@@ -1275,3 +1275,19 @@ X grows with every rank.
 = X växer för varje rang.
 Talents that change it:
 = Talanger som ändrar den:
+Rank
+= Rang
+Click to add a point.
+= Klicka för att lägga till en poäng.
+All 51 points are spent.
+= Alla 51 poäng är använda.
+Right-click to take one back.
+= Högerklicka för att ta tillbaka en.
+Points left
+= Poäng kvar
+TALENT TREES ›
+= TALANGTRÄD ›
+RESET
+= ÅTERSTÄLL
+Click a talent to add a point, right-click to take one back. A talent takes no more points than its ranks, and a build no more than 51; the purple ones are the milestones at 10, 20 and 30 points.
+= Klicka på en talang för att lägga till en poäng, högerklicka för att ta tillbaka en. En talang tar inte fler poäng än sina rang, och en build inte fler än 51; de lila är milstolparna vid 10, 20 och 30 poäng.

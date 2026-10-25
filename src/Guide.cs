@@ -27,6 +27,7 @@ namespace AzerothLauncher
         void SetGuideView(int topic, int page)
         {
             gVideo = null;
+            gTalents = null;
             gTopic = topic;
             gPage = page;
             if (current == "Guide") BuildPanel("Guide");
@@ -44,6 +45,7 @@ namespace AzerothLauncher
             if (VideoCard.Embed == null) VideoCard.Embed = delegate(GuideVideo v) { gVideo = v; BuildPanel("Guide"); return true; };
             if (Cfg.Data.ContainsKey("guide_read")) { Cfg.Remove("guide_read"); if (!PreviewMode) Cfg.Save(); }   // no longer tracked
             if (gVideo != null) { GuideVideoPlayer(gVideo); return; }
+            if (gTalents != null && Talents.Of(gTalents).Count > 0) { GuideTalents(gTalents); return; }
             GuideLinks.Reset();                              // the game's tooltips AZS Stats has seen since the last time
             var topics = Data.Guide;
             if (gTopic >= topics.Count) { gTopic = -1; gPage = -1; }
@@ -67,6 +69,64 @@ namespace AzerothLauncher
             var web = VideoView.Make(v);
             web.Dock = DockStyle.Fill;
             frame.Controls.Add(web);
+        }
+
+        // ---- a class's three talent trees, as in the game, with a test build of up to 51 points (kept per class)
+        void GuideTalents(string cls)
+        {
+            ClearPanel(cls + " Talents");
+            int bw = (int)(170 * Theme.Zoom);
+            Put(new WowButton("‹ " + cls.ToUpperInvariant(), delegate { gTalents = null; BuildPanel("Guide"); }, 170, 32, 9), PW - 20 - bw, 12);
+            var build = TalentBuild.Parse(Cfg.Str("talent_build_" + cls), cls);
+            var sp = MakeThinScroll(panel, new Rectangle(20, GuideTop, PW - 40, PH - 12 - GuideTop), GuideCardBg, Theme.Bronze,
+                                    Theme.GoldDim, Theme.Gold);
+            Color bg = sp.BackColor;
+            int w = sp.ClientSize.Width - 8, x = 4, y = 4;
+            var left = UI.Text("", 11, FontStyle.Bold, Theme.Gold, bg, w - 140, false);
+            left.Bounds = new Rectangle(x, y + 6, w - 150, Theme.F(11, FontStyle.Bold).Height + 4);
+            sp.Controls.Add(left);
+            var reset = new WowButton("RESET", delegate { build.Reset(); }, 120, 30, 9);
+            reset.Location = new Point(x + w - reset.Width, y);
+            sp.Controls.Add(reset);
+            y += Math.Max(reset.Height, left.Height) + 6;
+            var hint = UI.Text("Click a talent to add a point, right-click to take one back. A talent takes no more points than its " +
+                               "ranks, and a build no more than 51; the purple ones are the milestones at 10, 20 and 30 points.",
+                               9.5f, FontStyle.Regular, Theme.GoldDim, bg, w, true);
+            hint.Size = VStack.Measure(hint);
+            hint.Location = new Point(x, y);
+            sp.Controls.Add(hint);
+            y += hint.Height + 10;
+            var trees = Talents.Of(cls);
+            var views = new List<TalentTreeView>();
+            int gap = 8, tw3 = (w - gap * (trees.Count - 1)) / Math.Max(1, trees.Count), th = 0;
+            for (int i = 0; i < trees.Count; i++)
+            {
+                var tv = new TalentTreeView(trees[i], tw3);
+                tv.Build = build;
+                tv.Location = new Point(x + i * (tw3 + gap), y);
+                sp.Controls.Add(tv);
+                views.Add(tv);
+                th = Math.Max(th, tv.Height);
+            }
+            var pad = new Panel();
+            pad.BackColor = bg;
+            pad.Bounds = new Rectangle(x, y + th, 1, 12);
+            sp.Controls.Add(pad);
+            Action show = delegate
+            {
+                var spent = new List<string>();
+                foreach (var tr in trees) spent.Add(build.SpentIn(tr).ToString());
+                left.Text = Lang.T("Points left") + ": " + (TalentBuild.MaxPoints - build.Spent) + " / " + TalentBuild.MaxPoints +
+                            "     (" + string.Join(" / ", spent.ToArray()) + ")";
+            };
+            build.Changed = delegate
+            {
+                show();
+                foreach (var v in views) v.Invalidate();
+                Cfg.Set("talent_build_" + cls, build.Save());
+                if (!PreviewMode) Cfg.Save();
+            };
+            show();
         }
 
         // ---- first page: a card for every topic, all open at any time
@@ -279,18 +339,13 @@ namespace AzerothLauncher
                     flush();
                     add(UI.Text(line.Substring(2).Trim(), 12.5f, FontStyle.Bold, Theme.Gold, bg, tw, false), x, 16);
                     add(new GuideRule(Math.Min(60, tw), Theme.Gold), x, 3);
-                    add(new GuideText("Point at a talent to read it. Every 5 points in a tree open its next row; the purple ones " +
-                                      "are its milestones at 10, 20 and 30 points.", 9.5f, Theme.GoldDim, bg, tw, gTopic, gPage), x, 8);
-                    var trees = Talents.Of(className);
-                    int gap = 8, tw3 = (tw - gap * (trees.Count - 1)) / Math.Max(1, trees.Count), ty = y + 10, th = 0;
-                    for (int i = 0; i < trees.Count; i++)
-                    {
-                        var tv = new TalentTreeView(trees[i], tw3);
-                        tv.Location = new Point(x + i * (tw3 + gap), ty);
-                        sp.Controls.Add(tv);
-                        th = Math.Max(th, tv.Height);
-                    }
-                    y = ty + th;
+                    var specs = new List<string>();
+                    foreach (var tr in Talents.Of(className)) specs.Add(tr.Spec);
+                    add(new GuideText("The " + className + "'s three talent trees: " + string.Join(", ", specs.ToArray()) +
+                                      ". Open them to read every talent, see its milestones at 10, 20 and 30 points, and try out a build " +
+                                      "of up to 51 points.", 10, Theme.Text, bg, tw, gTopic, gPage), x, 8);
+                    string cls = className;
+                    add(new WowButton("TALENT TREES ›", delegate { gTalents = cls; BuildPanel("Guide"); }, 220, 36, 10), x, 10);
                     continue;
                 }
                 if (className != null && section.StartsWith("Spell pool") && line.StartsWith("- "))

@@ -1,4 +1,5 @@
 # Next update (after v0.3)
+- Each class page in the Guide has a TALENT TREES button: the class's three trees, where you can try out a build of up to 51 points (click to add a point, right-click to take one back; no talent takes more than its ranks). Your test build is kept for each class
 - Every class page in the Guide shows its spells with their icons, the talents that change each spell (point at one to read it), and the class's three full talent trees as the game draws them: every talent with its icon and ranks, the 10, 20 and 30 point milestones marked, read from the game itself
 - Options has tabs: FOLDERS, GENERAL, LANGUAGE and LAUNCHER. UPDATE LAUNCHER and ABOUT LAUNCHER moved into Options > LAUNCHER
 - The Discord button is now Discord's own symbol, on the News line at the right edge

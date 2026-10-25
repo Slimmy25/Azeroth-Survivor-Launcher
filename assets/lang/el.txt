@@ -1276,3 +1276,19 @@ X grows with every rank.
 = Το X αυξάνεται με κάθε βαθμίδα.
 Talents that change it:
 = Ταλέντα που το αλλάζουν:
+Rank
+= Βαθμίδα
+Click to add a point.
+= Κάνε κλικ για να προσθέσεις πόντο.
+All 51 points are spent.
+= Και οι 51 πόντοι έχουν μοιραστεί.
+Right-click to take one back.
+= Δεξί κλικ για να πάρεις έναν πίσω.
+Points left
+= Πόντοι που μένουν
+TALENT TREES ›
+= ΔΕΝΤΡΑ ΤΑΛΕΝΤΩΝ ›
+RESET
+= ΕΠΑΝΑΦΟΡΑ
+Click a talent to add a point, right-click to take one back. A talent takes no more points than its ranks, and a build no more than 51; the purple ones are the milestones at 10, 20 and 30 points.
+= Κάνε κλικ σε ένα ταλέντο για να προσθέσεις πόντο, δεξί κλικ για να πάρεις έναν πίσω. Ένα ταλέντο δεν παίρνει περισσότερους πόντους από τις βαθμίδες του, και ένα build όχι πάνω από 51· τα μωβ είναι τα ορόσημα στους 10, 20 και 30 πόντους.

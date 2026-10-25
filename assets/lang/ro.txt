@@ -1276,3 +1276,19 @@ X grows with every rank.
 = X crește cu fiecare rang.
 Talents that change it:
 = Talente care îl modifică:
+Rank
+= Rang
+Click to add a point.
+= Clic pentru a adăuga un punct.
+All 51 points are spent.
+= Toate cele 51 de puncte sunt folosite.
+Right-click to take one back.
+= Clic dreapta pentru a lua unul înapoi.
+Points left
+= Puncte rămase
+TALENT TREES ›
+= ARBORI DE TALENTE ›
+RESET
+= RESETEAZĂ
+Click a talent to add a point, right-click to take one back. A talent takes no more points than its ranks, and a build no more than 51; the purple ones are the milestones at 10, 20 and 30 points.
+= Clic pe un talent pentru a adăuga un punct, clic dreapta pentru a lua unul înapoi. Un talent nu primește mai multe puncte decât rangurile sale, iar un build nu mai mult de 51; cele mov sunt pragurile de la 10, 20 și 30 de puncte.

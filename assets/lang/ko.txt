@@ -1276,3 +1276,19 @@ X grows with every rank.
 = X는 등급마다 커집니다.
 Talents that change it:
 = 이 주문을 바꾸는 특성:
+Rank
+= 등급
+Click to add a point.
+= 클릭하면 포인트를 추가합니다.
+All 51 points are spent.
+= 51포인트를 모두 사용했습니다.
+Right-click to take one back.
+= 오른쪽 클릭으로 하나 되돌립니다.
+Points left
+= 남은 포인트
+TALENT TREES ›
+= 특성 트리 ›
+RESET
+= 초기화
+Click a talent to add a point, right-click to take one back. A talent takes no more points than its ranks, and a build no more than 51; the purple ones are the milestones at 10, 20 and 30 points.
+= 특성을 클릭하면 포인트를 추가하고, 오른쪽 클릭하면 하나 되돌립니다. 특성은 등급 수까지, 빌드는 51포인트까지만 받습니다. 보라색은 10, 20, 30포인트의 이정표입니다.
