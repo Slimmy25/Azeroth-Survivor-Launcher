@@ -161,7 +161,6 @@ namespace AzerothLauncher
         readonly Font font, linkFont;
         readonly int wrap;
         GuideLink over;
-        static readonly TextFormatFlags Flags = TextFormatFlags.NoPadding | TextFormatFlags.NoPrefix | TextFormatFlags.SingleLine;
 
         public GuideText(string text, float size, Color fg, Color bg, int wrapWidth, int topic, int page)
         {
@@ -180,34 +179,48 @@ namespace AzerothLauncher
 
         bool Clickable(GuideLink l) { return l != null && l.Topic >= 0 && !(l.Topic == here && l.Page == herePage); }
 
-        // lays the words out (and draws them when g is given); returns the height
-        int Flow(Graphics g)
+        static readonly Bitmap measureBmp = new Bitmap(1, 1);
+
+        // lays the words out (and draws them when g is given); returns the height. Measured and drawn the same way
+        // (GDI+, typographic), so the spaces and the links sit exactly where the text says
+        int Flow(Graphics draw)
         {
             hot.Clear();
-            float x = 0, y = 0;
-            int lineH = font.Height;
-            int spaceW = TextRenderer.MeasureText("a a", font, Size.Empty, Flags).Width - TextRenderer.MeasureText("aa", font, Size.Empty, Flags).Width;
-            foreach (var run in runs)
+            Graphics g = draw ?? Graphics.FromImage(measureBmp);
+            try
             {
-                GuideLink link = run.Value;
-                Font f = link != null ? linkFont : font;
-                Color c = link == null ? ForeColor : (link == over ? Theme.Hex("#fff2b0") : Theme.Hex("#e8b84a"));
-                // a link stays in one piece when it fits on a line; plain text wraps word by word
-                string[] words = link != null ? new[] { run.Key } : Regex.Split(run.Key, "( )");
-                foreach (string word in words)
+                Theme.Smooth(g);
+                using (var sf = (StringFormat)StringFormat.GenericTypographic.Clone())
                 {
-                    if (word.Length == 0) continue;
-                    if (word == " ") { x += spaceW; continue; }
-                    int w = TextRenderer.MeasureText(word, f, Size.Empty, Flags).Width;
-                    if (x > 0 && x + w > wrap) { x = 0; y += lineH; }
-                    if (g != null) TextRenderer.DrawText(g, word, f, new Point((int)x, (int)y), c, BackColor, Flags);
-                    if (link != null) hot.Add(new KeyValuePair<RectangleF, GuideLink>(new RectangleF(x, y, w, lineH), link));
-                    x += w;
+                    sf.FormatFlags |= StringFormatFlags.MeasureTrailingSpaces | StringFormatFlags.NoWrap;
+                    float x = 0, y = 0;
+                    int lineH = font.Height + 1;
+                    float spaceW = g.MeasureString(" ", font, PointF.Empty, sf).Width;
+                    foreach (var run in runs)
+                    {
+                        GuideLink link = run.Value;
+                        Font f = link != null ? linkFont : font;
+                        Color c = link == null ? ForeColor : (link == over ? Theme.Hex("#fff2b0") : Theme.Hex("#e8b84a"));
+                        // a link stays in one piece when it fits on a line; plain text wraps word by word
+                        string[] words = link != null ? new[] { run.Key } : Regex.Split(run.Key, "( )");
+                        foreach (string word in words)
+                        {
+                            if (word.Length == 0) continue;
+                            if (word == " ") { if (x > 0) x += spaceW; continue; }
+                            float w = g.MeasureString(word, f, PointF.Empty, sf).Width;
+                            if (x > 0 && x + w > wrap) { x = 0; y += lineH; }
+                            if (draw != null)
+                                using (var b = new SolidBrush(c)) draw.DrawString(word, f, b, x, y, sf);
+                            if (link != null) hot.Add(new KeyValuePair<RectangleF, GuideLink>(new RectangleF(x, y, w, lineH), link));
+                            x += w;
+                        }
+                    }
+                    int h = (int)Math.Ceiling(y) + lineH;
+                    if (draw == null) Size = new Size(wrap, h);
+                    return h;
                 }
             }
-            int h = (int)y + lineH;
-            if (g == null) Size = new Size(wrap, h);
-            return h;
+            finally { if (draw == null) g.Dispose(); }
         }
 
         protected override void OnPaint(PaintEventArgs e)
