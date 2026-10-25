@@ -156,23 +156,12 @@ namespace AzerothLauncher
             foreach (var l in links.Values) if (!byKey.ContainsKey(Norm(l.Term))) byKey[Norm(l.Term)] = l;
             var terms = new List<string>(links.Keys);
             terms.Sort(delegate(string a, string b) { return b.Length.CompareTo(a.Length); });   // longest first
-            // a name of several words is also found in any case, run together and in the plural ("shadowbolt",
-            // "Shadow Bolts"); a name of one word only as written, capitalised, so "fear" or "execute" in a sentence
-            // stays plain text (its plural and possessive still count: "Executes", "Ignite's")
+            // a name is found only as written (its possessive too: "Ignite's"), so "fear" or "execute" in a sentence
+            // stays plain text
             var parts = new List<string>();
-            foreach (string term in terms)
-            {
-                string[] words = term.Split(' ');
-                if (words.Length > 1)
-                {
-                    var w = new List<string>();
-                    foreach (string x in words) w.Add(Regex.Escape(x));
-                    parts.Add("(?i:" + string.Join(@"\s?", w.ToArray()) + ")");
-                }
-                else parts.Add(Regex.Escape(term));
-            }
+            foreach (string term in terms) parts.Add(Regex.Escape(term));
             finder = parts.Count == 0 ? null
-                : new Regex(@"(?<![A-Za-z'])(" + string.Join("|", parts.ToArray()) + @")(?:'?s)?(?![A-Za-z])");
+                : new Regex(@"(?<![A-Za-z'])(" + string.Join("|", parts.ToArray()) + @")(?:'s)?(?![A-Za-z])");
         }
 
         static GuideLink Find(string matched)
@@ -181,7 +170,6 @@ namespace AzerothLauncher
             if (links.TryGetValue(matched, out l)) return l;
             string k = Norm(matched);
             if (byKey.TryGetValue(k, out l)) return l;
-            if (k.EndsWith("s") && byKey.TryGetValue(k.Substring(0, k.Length - 1), out l)) return l;
             return null;
         }
 
@@ -204,7 +192,7 @@ namespace AzerothLauncher
             if (finder != null)
                 foreach (Match m in finder.Matches(text))
                 {
-                    GuideLink l = Find(m.Value);
+                    GuideLink l = Find(m.Groups[1].Value);
                     if (l == null) continue;
                     if (m.Index > at) outList.Add(new KeyValuePair<string, GuideLink>(text.Substring(at, m.Index - at), null));
                     outList.Add(new KeyValuePair<string, GuideLink>(m.Value, l));
@@ -334,6 +322,48 @@ namespace AzerothLauncher
     {
         static GuideHover box;
         string title = "", body = "";
+        static readonly Bitmap measure = new Bitmap(1, 1);
+        string splitFor;                                      // the body (and title) the runs below were cut from
+        List<KeyValuePair<string, GuideLink>> runs;
+
+        // the body, word by word: the other spells, talents and names the guide knows are drawn in gold (not
+        // clickable: the box goes away when the mouse moves to it); returns the height
+        int Flow(Graphics g, Font f, bool draw)
+        {
+            if (splitFor != title + "\u0001" + body)
+            {
+                splitFor = title + "\u0001" + body;
+                runs = new List<KeyValuePair<string, GuideLink>>();
+                foreach (var r in GuideLinks.Split(body))
+                    runs.Add(r.Value != null && string.Equals(r.Value.Term, title, StringComparison.OrdinalIgnoreCase)
+                             ? new KeyValuePair<string, GuideLink>(r.Key, null) : r);
+            }
+            g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
+            int wrap = W - 20, lineH = f.Height + 1;
+            float x = 0, y = 0;
+            using (var sf = (StringFormat)StringFormat.GenericTypographic.Clone())
+            using (var plain = new SolidBrush(Theme.Text))
+            using (var gold = new SolidBrush(Theme.Hex("#e8b84a")))
+            {
+                sf.FormatFlags |= StringFormatFlags.MeasureTrailingSpaces | StringFormatFlags.NoWrap;
+                float spaceW = g.MeasureString(" ", f, PointF.Empty, sf).Width * 1.15f;
+                foreach (var run in runs)
+                {
+                    bool hl = run.Value != null;
+                    foreach (string word in hl ? new[] { run.Key } : Regex.Split(run.Key, "( |\n)"))
+                    {
+                        if (word.Length == 0) continue;
+                        if (word == "\n") { x = 0; y += lineH; continue; }
+                        if (word == " ") { if (x > 0) x += spaceW; continue; }
+                        float w = g.MeasureString(word, f, PointF.Empty, sf).Width;
+                        if (x > 0 && x + w > wrap) { x = 0; y += lineH; }
+                        if (draw) g.DrawString(word, f, hl ? gold : plain, x, y, sf);
+                        x += w;
+                    }
+                }
+            }
+            return (int)Math.Ceiling(y) + lineH;
+        }
         Image icon;                                           // the spell's or talent's icon, beside its name
         const int W = 300;
 
@@ -370,7 +400,8 @@ namespace AzerothLauncher
             Font tf = Theme.F(10.5f, FontStyle.Bold), bf = Theme.F(9.5f);
             int th = TextRenderer.MeasureText(title, tf, new Size(W - 20 - (icon != null ? 40 : 0), 0), TextFormatFlags.WordBreak).Height;
             if (icon != null) th = Math.Max(th, 36);
-            int bh = TextRenderer.MeasureText(body, bf, new Size(W - 20, 0), TextFormatFlags.WordBreak).Height;
+            int bh;
+            using (var mg = Graphics.FromImage(measure)) bh = box.Flow(mg, bf, false);
             Point p = Cursor.Position;
             var size = new Size(W, th + bh + 22);
             Rectangle screen = Screen.FromPoint(p).WorkingArea;
@@ -402,8 +433,10 @@ namespace AzerothLauncher
             }
             TextRenderer.DrawText(g, title, tf, new Rectangle(10 + ix, icon != null ? 14 : 8, W - 20 - ix, th), Theme.Gold, BackColor,
                                   TextFormatFlags.WordBreak);
-            TextRenderer.DrawText(g, body, bf, new Rectangle(10, 10 + th, W - 20, Height - th - 14), Theme.Text, BackColor,
-                                  TextFormatFlags.WordBreak);
+            var st = g.Save();
+            g.TranslateTransform(10, 10 + th);
+            Flow(g, bf, true);
+            g.Restore(st);
         }
     }
 }
