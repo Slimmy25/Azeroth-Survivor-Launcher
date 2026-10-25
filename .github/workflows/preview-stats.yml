@@ -37,6 +37,12 @@ jobs:
                          'HKLM:\SOFTWARE\Microsoft\Active Setup\Installed Components\{A509B1A8-37EF-4b3f-8CFC-4F3A74704073}') {
             if (Test-Path $k) { Set-ItemProperty -Path $k -Name IsInstalled -Value 0 }
           }
+          try {
+            $x = New-Object -ComObject Msxml2.XMLHTTP
+            $x.open('GET', 'https://cdn.jsdelivr.net/gh/Slimmy25/Azeroth-Survivor-Launcher-Releases@guide-videos/races/can-i-change-my-race.jpg', $false)
+            $x.send()
+            Write-Output "::notice::WinINet test: $($x.status) $($x.getResponseHeader('Content-Type'))"
+          } catch { Write-Output "::notice::WinINet test failed: $($_.Exception.Message)" }
           Write-Output "::notice::Media Foundation: success=$($r.Success) restart=$($r.RestartNeeded) exit=$($r.ExitCode)"
           if ($r.RestartNeeded -eq 'Yes') { Write-Output "::warning::Media Foundation needs a restart; the video check may fail" }
 
