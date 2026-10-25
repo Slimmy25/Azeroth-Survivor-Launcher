@@ -389,6 +389,11 @@ namespace AzerothLauncher
 
         // a scrollable area with a 1 px border; returns the scrolling panel
         ScrollPanel MakeScroll(Control parent, Rectangle r, Color bg, Color border)
+        {   // every list and page uses the slim gold scroll bar, like the Guide and Stats
+            return MakeThinScroll(parent, r, bg, Theme.CardEdge, Theme.GoldDim, Theme.Gold);
+        }
+
+        ScrollPanel MakeWideScroll(Control parent, Rectangle r, Color bg, Color border)
         {
             var frame = new Bordered(border, 1);
             frame.Bounds = r;
@@ -448,8 +453,8 @@ namespace AzerothLauncher
         {
             Color boxbg = Theme.Ink;
             string[] lines = text.Trim('\n').Split('\n');
-            int w = sp.ClientSize.Width - SystemInformation.VerticalScrollBarWidth - 8;
-            var box = new Bordered(Theme.GoldDim, 2);
+            int w = sp.ClientSize.Width - 8;
+            var box = new Bordered(Theme.CardEdge, 1);
             var inner = new Panel();
             inner.BackColor = boxbg;
             inner.Dock = DockStyle.Fill;
@@ -716,7 +721,7 @@ namespace AzerothLauncher
                 hint.Location = new Point(10, 8);
                 sp.Controls.Add(hint);
                 var open = new WowButton("OPEN FOLDER", delegate { Directory.CreateDirectory(Data.MyAddonsDir); Util.OpenInShell(Data.MyAddonsDir); }, 130, 28, 9);
-                open.Location = new Point(sp.ClientSize.Width - SystemInformation.VerticalScrollBarWidth - 140, 6);
+                open.Location = new Point(sp.ClientSize.Width - 4 - 140, 6);
                 sp.Controls.Add(open);
                 y0 = Math.Max(hint.Bottom, open.Bottom) + 8;
             }
@@ -728,7 +733,7 @@ namespace AzerothLauncher
                 sp.Controls.Add(l);
                 return;
             }
-            int w = sp.ClientSize.Width - SystemInformation.VerticalScrollBarWidth - 8;
+            int w = sp.ClientSize.Width - 4 - 8;
             int y = y0;
             foreach (var item in items)
             {
@@ -893,7 +898,7 @@ namespace AzerothLauncher
                 l.Location = new Point(10, 8);
                 sp.Controls.Add(l);
             }
-            int w = sp.ClientSize.Width - SystemInformation.VerticalScrollBarWidth - 12;
+            int w = sp.ClientSize.Width - 4 - 12;
             int y = 2;
             foreach (var a in addons)
             {

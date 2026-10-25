@@ -310,9 +310,9 @@ namespace AzerothLauncher
             for (int i = 0; i < Tabs.Count && i < rects.Count; i++)
             {
                 Rectangle t = rects[i];
-                if (i == Active) Armory.Box(g, t, 6, Theme.Gold, Color.Empty);
+                if (i == Active) Armory.Box(g, t, 6, Theme.Hex("#2a2236"), Theme.Gold);   // the open tab: gold frame, like the buttons
                 else if (i == hover) Armory.Box(g, t, 6, Armory.SlotHover, Color.Empty);
-                Armory.Text(g, Tabs[i], f, i == Active ? Theme.Hex("#1a1006") : Armory.Bright, t,
+                Armory.Text(g, Tabs[i], f, i == Active ? Theme.Gold : Armory.Bright, t,
                             TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter | TextFormatFlags.SingleLine | TextFormatFlags.EndEllipsis);
             }
         }
