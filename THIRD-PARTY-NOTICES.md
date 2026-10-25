@@ -39,3 +39,10 @@ downloaded from their own links. They are not part of this repository.
 The launcher's text font, Source Serif 4 SmText (`assets/fonts`, built into the exe unchanged), is by Adobe and is
 licensed under the SIL Open Font License 1.1. The full license is in `assets/fonts/SourceSerif4-OFL.txt`.
 Original project: https://github.com/adobe-fonts/source-serif
+
+## Game data and pictures shown on the STATS page
+
+- Creature models (`assets/npc-models.txt`, names and model numbers only) come from the CMaNGOS Classic world
+  database: https://github.com/cmangos/classic-db
+- Spell, class and creature pictures are not part of the launcher: they are shown from Wowhead's image host
+  (https://wow.zamimg.com) when a player opens the page, like any web page would. They belong to their owners.
