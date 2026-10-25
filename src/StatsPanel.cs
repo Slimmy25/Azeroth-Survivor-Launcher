@@ -526,7 +526,7 @@ namespace AzerothLauncher
             var order = new[] {
                 new[] { "time", "Longest run", "clock", "#a335ee" }, new[] { "fastestWin", "Fastest victory", "clock", "#ff8000" },
                 new[] { "lvl", "Highest level", "", "#3b8ff0" }, new[] { "kills", "Most kills in a run", "", "#c41f3b" },
-                new[] { "dmg", "Most damage in a run", "", "#ff8000" }, new[] { "gold", "Most gold in a run", "", "#ffd100" },
+                new[] { "dps", "Highest DPS", "", "#ff8000" }, new[] { "dmg", "Most damage in a run", "", "#ff8000" }, new[] { "gold", "Most gold in a run", "", "#ffd100" },
                 new[] { "bosses", "Most bosses in a run", "", "#a335ee" }, new[] { "elites", "Elites", "", "#1eff00" },
                 new[] { "guardians", "Guardians", "", "#69ccf0" } };
             foreach (var o in order)
@@ -586,7 +586,8 @@ namespace AzerothLauncher
                                                     " · Gold " + Big(r.Gold)));
                 row.Value = Clock(r.Time);
                 row.ValueColor = rc;
-                row.ValueSub = Lang.T("Level " + Big(r.Level)) + " · " + Lang.T(Big(r.Kills) + " kills");
+                row.ValueSub = Lang.T("Level " + Big(r.Level)) + " · " + Lang.T(Big(r.Kills) + " kills") +
+                               (r.Dps > 0 ? " · " + Big(r.Dps) + " DPS" : "");
                 rows.Rows.Add(row);
             }
             return rows;

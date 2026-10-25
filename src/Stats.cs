@@ -346,7 +346,7 @@ namespace AzerothLauncher
     public class StatRun
     {
         public string Result = "", Kind = "", Date = "", Hero = "", ClassKey = "", Class = "", Race = "", Zone = "", Party = "", Killer = "";
-        public double Time, Level, Kills, Damage, Gold, Bosses;
+        public double Time, Level, Kills, Damage, Gold, Bosses, Dps;          // Dps: from the game's damage meter
         public readonly List<AbilityStat> Abilities = new List<AbilityStat>();     // Picks = its rank here
     }
 
@@ -377,7 +377,7 @@ namespace AzerothLauncher
     {
         public const string AddonFolder = "AZSStats", DbName = "AZSStatsDB";
         public const string FileName = AddonFolder + ".lua";
-        static readonly string[] AddonFiles = { AddonFolder + ".toc", AddonFolder + ".lua", AddonFolder + "UI.lua" };
+        static readonly string[] AddonFiles = { AddonFolder + ".toc", AddonFolder + ".lua", AddonFolder + "Icons.lua", AddonFolder + "UI.lua" };
         // its earlier names ("AS Time Tracker", "Azeroth Stats"): replaced, and their records carried over, when
         // AZS Stats is installed; until then their files are read
         static readonly string[][] OldNames = { new[] { "ASTimeTracker", "ASTimeTrackerDB" }, new[] { "AzerothStats", "AzerothStatsDB" } };
@@ -476,6 +476,8 @@ namespace AzerothLauncher
                 run.Level = LuaReader.Num(h, "lvl");
                 run.Kills = LuaReader.Num(h, "kills");
                 run.Damage = LuaReader.Num(h, "dmg");
+                run.Dps = LuaReader.Num(h, "dps");
+                if (run.Dps <= 0 && run.Time > 0) run.Dps = Math.Round(run.Damage / run.Time);   // runs from before AZS Stats kept DPS
                 run.Gold = LuaReader.Num(h, "gold");
                 run.Bosses = LuaReader.Num(h, "bosses");
                 run.Party = LuaReader.Text(h, "party");

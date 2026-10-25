@@ -15,7 +15,9 @@
 -- stats in a window (AZSStatsUI.lua).
 --
 -- Chat commands: /azstats (or /astime) your totals, /azstats last, best, classes, deaths, nemesis, coop,
--- /azstats quiet turns the end-of-run chat lines off or on, /azstats reset yes clears everything.
+-- /azstats quiet turns the end-of-run chat lines off or on, /azstats minimap hides or shows the minimap button,
+-- /azstats reset yes clears everything. Every run also keeps its DPS (from the game's damage meter); a new highest
+-- DPS is announced in chat.
 --
 -- Lua 5.0 (as the 1.12 client): no _G, no # operator, table.getn, event handlers read event / arg1 / arg2.
 
@@ -29,7 +31,11 @@ local SUM_FIELDS = { "time", "kills", "elites", "guardians", "bosses", "dmg", "t
 local COUNT_FIELDS = { "runs", "victory", "defeat", "left", "other", "wins", "bestTime", "bestLvl" };
 -- personal bests: the record's name and the run field it comes from
 local BEST_FIELDS = { { "time", "t" }, { "lvl", "lvl" }, { "kills", "kills" }, { "dmg", "dmg" }, { "gold", "gold" },
-                      { "bosses", "bosses" }, { "elites", "elites" }, { "guardians", "guardians" }, { "endl", "endl" } };
+                      { "bosses", "bosses" }, { "elites", "elites" }, { "guardians", "guardians" }, { "endl", "endl" },
+                      { "dps", "dps" } };
+-- how a record is named in chat
+local RECORD_NAMES = { time = "longest run", lvl = "level", kills = "kills", dmg = "damage", gold = "gold", bosses = "bosses",
+                       elites = "elites", guardians = "guardians", endl = "endless", dps = "DPS" };
 
 local function Print(msg)
 	if ( DEFAULT_CHAT_FRAME ) then
@@ -387,7 +393,7 @@ local function Snapshot()
 	if ( pt ) then lastParty = pt; end
 	local s = CopyList(AZS_SPELLS, { "key", "spell", "rank" });
 	if ( s ) then lastSpells = s; end
-	local m = CopyList(AZS_METER, { "name", "dmg" });
+	local m = CopyList(AZS_METER, { "name", "dmg", "dps" });   -- the game's own damage meter
 	if ( m ) then lastMeter = m; end
 end
 
@@ -476,6 +482,14 @@ function AZSStats_Record(s)
 	if ( run.rname == "" ) then run.rname = Pretty(run.race); end
 	if ( run.zname == "" ) then run.zname = Pretty(run.zone); end
 	run.abilities = Abilities();
+	-- damage per second, as the game's damage meter shows it: the sum of its lines' DPS (the meter's damage over
+	-- the run's time when the meter gives no DPS)
+	local dps = 0;
+	if ( type(lastMeter) == "table" ) then
+		for i = 1, table.getn(lastMeter) do dps = dps + Num(lastMeter[i].dps); end
+	end
+	if ( dps <= 0 and run.t > 0 ) then dps = run.dmg / run.t; end
+	run.dps = math.floor(dps + 0.5);
 
 	-- everything together
 	Accumulate(db.totals, run);
@@ -609,13 +623,31 @@ function AZSStats_Record(s)
 
 	if ( not db.quiet ) then
 		local line = "run " .. Big(db.totals.runs) .. " recorded: " .. run.result .. " after " .. Clock(run.t) .. ", level " ..
-		             run.lvl .. ", " .. Big(run.kills) .. " kills.";
-		if ( table.getn(records) > 0 ) then
-			line = line .. " |cff40ff40New record: " .. table.concat(records, ", ") .. "!|r";
-		elseif ( table.getn(classRecords) > 0 ) then
-			line = line .. " |cff40ff40New " .. run.cname .. " record: " .. table.concat(classRecords, ", ") .. "!|r";
+		             run.lvl .. ", " .. Big(run.kills) .. " kills, " .. Big(run.dps) .. " DPS.";
+		local function Names(list)
+			local out = {};
+			for i = 1, table.getn(list) do
+				if ( list[i] ~= "dps" ) then table.insert(out, RECORD_NAMES[list[i]] or list[i]); end
+			end
+			return out;
+		end
+		local function Has(list, name)
+			for i = 1, table.getn(list) do if ( list[i] == name ) then return true; end end
+			return false;
+		end
+		local rn, cn = Names(records), Names(classRecords);
+		if ( table.getn(rn) > 0 ) then
+			line = line .. " |cff40ff40New record: " .. table.concat(rn, ", ") .. "!|r";
+		elseif ( table.getn(cn) > 0 ) then
+			line = line .. " |cff40ff40New " .. run.cname .. " record: " .. table.concat(cn, ", ") .. "!|r";
 		end
 		Print(line);
+		-- a new highest DPS gets a line of its own
+		if ( Has(records, "dps") ) then
+			Print("|cffff8000New DPS high: " .. Big(run.dps) .. " DPS!|r Your best ever, as " .. run.cname .. ".");
+		elseif ( Has(classRecords, "dps") ) then
+			Print("|cffff8000New " .. run.cname .. " DPS high: " .. Big(run.dps) .. " DPS!|r");
+		end
 		for i = 1, table.getn(coopNews) do Print("|cff40c0ff" .. coopNews[i] .. "|r"); end
 		if ( run.killer ) then
 			local n = db.nemesis[run.killer];
@@ -645,7 +677,7 @@ end
 local function ShowBest()
 	Check();
 	local b = AZSStatsDB.best;
-	local names = { { "time", "Longest run", true }, { "lvl", "Highest level" }, { "kills", "Most kills" },
+	local names = { { "time", "Longest run", true }, { "lvl", "Highest level" }, { "dps", "Highest DPS" }, { "kills", "Most kills" },
 	                { "dmg", "Most damage" }, { "gold", "Most gold" }, { "bosses", "Most bosses" }, { "fastestWin", "Fastest win", true } };
 	local any = false;
 	for i = 1, table.getn(names) do
@@ -781,8 +813,10 @@ SlashCmdList["AZSSTATS"] = function(msg)
 		Print("all stats cleared.");
 	elseif ( cmd == "reset" ) then
 		Print("type /azstats reset yes to clear every stat (this cannot be undone).");
+	elseif ( cmd == "minimap" ) then
+		if ( AZSStats_ToggleMinimapButton ) then AZSStats_ToggleMinimapButton(); end
 	else
-		Print("/azstats, /azstats last, /azstats best, /azstats classes, /azstats deaths, /azstats nemesis, /azstats coop, /azstats quiet; /azs opens the window, /azstats reset");
+		Print("/azstats, /azstats last, /azstats best, /azstats classes, /azstats deaths, /azstats nemesis, /azstats coop, /azstats quiet, /azstats minimap; /azs or the minimap button opens the window, /azstats reset");
 	end
 end
 

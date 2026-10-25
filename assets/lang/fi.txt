@@ -1116,3 +1116,5 @@ Fullscreen
 = Koko näyttö
 Exit fullscreen
 = Poistu koko näytöstä
+Highest DPS
+= Korkein DPS

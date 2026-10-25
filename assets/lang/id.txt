@@ -1116,3 +1116,5 @@ Fullscreen
 = Layar penuh
 Exit fullscreen
 = Keluar layar penuh
+Highest DPS
+= DPS tertinggi

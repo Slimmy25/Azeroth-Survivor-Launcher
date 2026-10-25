@@ -1117,3 +1117,5 @@ Fullscreen
 = 전체 화면
 Exit fullscreen
 = 전체 화면 종료
+Highest DPS
+= 최고 DPS

@@ -1117,3 +1117,5 @@ Fullscreen
 = 全画面
 Exit fullscreen
 = 全画面を終了
+Highest DPS
+= 最高DPS

@@ -1116,3 +1116,5 @@ Fullscreen
 = Plein écran
 Exit fullscreen
 = Quitter le plein écran
+Highest DPS
+= DPS le plus élevé

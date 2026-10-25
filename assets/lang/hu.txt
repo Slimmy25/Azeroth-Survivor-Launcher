@@ -1117,3 +1117,5 @@ Fullscreen
 = Teljes képernyő
 Exit fullscreen
 = Kilépés a teljes képernyőből
+Highest DPS
+= Legmagasabb DPS

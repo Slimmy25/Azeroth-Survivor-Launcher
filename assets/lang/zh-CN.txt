@@ -1117,3 +1117,5 @@ Fullscreen
 = 全屏
 Exit fullscreen
 = 退出全屏
+Highest DPS
+= 最高DPS

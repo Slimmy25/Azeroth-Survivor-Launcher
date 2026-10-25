@@ -1116,3 +1116,5 @@ Fullscreen
 = Helskärm
 Exit fullscreen
 = Avsluta helskärm
+Highest DPS
+= Högsta DPS

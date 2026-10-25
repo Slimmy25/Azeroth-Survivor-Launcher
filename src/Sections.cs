@@ -277,7 +277,7 @@ namespace AzerothLauncher
                 ShowWindowFront();
                 return;
             }
-            if (name == current && name != "Home") name = "Home";     // clicking the active button again closes it
+            if (name == current && name != "Home" && side.Visible) return;   // already open: clicking its button again does nothing
             current = name;
             foreach (var kv in nav) kv.Value.Active = kv.Key == name;
             RefreshStrip();
