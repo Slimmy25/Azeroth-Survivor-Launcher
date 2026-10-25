@@ -48,7 +48,7 @@ echo Building %OUT% ...
 "%CSC%" /nologo /target:winexe /platform:anycpu /optimize+ /langversion:5 /warn:3 /nowarn:162,429 ^
   /out:"%OUT%" /win32icon:assets\AzerothSurvivors.ico /win32manifest:app.manifest ^
   /r:System.dll /r:System.Core.dll /r:System.Drawing.dll /r:System.Windows.Forms.dll ^
-  /r:System.IO.Compression.dll /r:System.IO.Compression.FileSystem.dll ^
+  /r:System.Management.dll /r:System.IO.Compression.dll /r:System.IO.Compression.FileSystem.dll ^
   /resource:assets\logo.png,AS.logo.png /resource:assets\discord\symbol-blurple.png,AS.discord-blurple.png /resource:assets\discord\symbol-white.png,AS.discord-white.png /resource:assets\portrait.png,AS.portrait.png ^
   /resource:assets\AzerothSurvivors.ico,AS.app.ico /resource:assets\changelog.txt,AS.changelog.txt ^
   /resource:assets\addons.txt,AS.addons.txt /resource:assets\launcher-about.txt,AS.launcher-about.txt /resource:assets\launcher-changelog.txt,AS.launcher-changelog.txt /resource:assets\guide.txt,AS.guide.txt /resource:assets\game-text.txt,AS.game-text.txt /resource:assets\talents.txt,AS.talents.txt /resource:assets\spell-icons.txt,AS.spell-icons.txt /resource:assets\npc-models.txt,AS.npc-models.txt !LANGRES! ^

@@ -14,6 +14,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -124,30 +125,28 @@ namespace AzerothLauncher
             }
         }
 
-        // the video playing inside the section's borders
+        // the video playing, filling the whole section box, with an X over its corner to close it
         void CommunityPlayer(GuideVideo v)
         {
             ClearPanel(v.Title.Length > 0 ? v.Title : "Video");
-            var frame = new Bordered(Theme.CardEdge, 1);
-            int top = (int)(12 + 32 * Theme.Zoom) + 10;
-            frame.Bounds = new Rectangle(20, top, PW - 40, PH - 12 - top);
-            Put(frame, 20, top);
             edgeHost = new Panel();
-            edgeHost.Dock = DockStyle.Fill;
             edgeHost.BackColor = Color.Black;
-            frame.Controls.Add(edgeHost);
+            edgeHost.Bounds = new Rectangle(0, 0, PW, PH);
+            Put(edgeHost, 0, 0);
+            edgeHost.Size = new Size(PW, PH);
             var wait = new Label();
             wait.Text = Lang.T("Loading the video...");
             wait.ForeColor = Theme.GoldDim;
             wait.BackColor = Color.Black;
             wait.Font = Theme.F(10, FontStyle.Italic);
             wait.AutoSize = true;
-            wait.Location = new Point(12, 10);
+            wait.Location = new Point(16, 14);
             edgeHost.Controls.Add(wait);
-            edgeHost.Resize += delegate { FitEdge(); };
-            if (v.Author.Length > 0)
-                PutText(Lang.T("by") + " " + v.Author, 9.5f, FontStyle.Italic, Theme.GoldDim, 84, 16, PW - 104, false);
+            edgeHost.Resize += delegate { FitEdge(); PlaceVideoClose(); };
+            edgeHost.VisibleChanged += delegate { PlaceVideoClose(); };
+            edgeHost.Disposed += delegate { if (videoClose != null && !videoClose.IsDisposed) videoClose.Hide(); };
             StartEdge(v);
+            ShowVideoClose();
         }
 
         // ---- playing: Edge's window as a child of the section
@@ -157,10 +156,52 @@ namespace AzerothLauncher
         [DllImport("user32.dll")] static extern bool MoveWindow(IntPtr hWnd, int x, int y, int w, int h, bool repaint);
         [DllImport("user32.dll")] static extern bool ShowWindow(IntPtr hWnd, int cmd);
         [DllImport("user32.dll")] static extern bool IsWindow(IntPtr hWnd);
+        [DllImport("user32.dll")] static extern bool IsWindowVisible(IntPtr hWnd);
+        [DllImport("user32.dll")] static extern uint GetWindowThreadProcessId(IntPtr hWnd, out uint pid);
+        [DllImport("user32.dll", CharSet = CharSet.Unicode)] static extern int GetClassName(IntPtr hWnd, StringBuilder s, int max);
+        [DllImport("user32.dll", CharSet = CharSet.Unicode)] static extern int GetWindowTextLength(IntPtr hWnd);
+        delegate bool EnumProc(IntPtr hWnd, IntPtr lp);
+        [DllImport("user32.dll")] static extern bool EnumWindows(EnumProc cb, IntPtr lp);
         const int GWL_STYLE = -16, GWL_EXSTYLE = -20;
-        const int WS_CHILD = 0x40000000, WS_VISIBLE = 0x10000000, WS_POPUP = unchecked((int)0x80000000);
+        const int WS_CHILD = 0x40000000, WS_VISIBLE = 0x10000000, WS_POPUP = unchecked((int)0x80000000), WS_CLIPSIBLINGS = 0x04000000;
         const int WS_CAPTION = 0x00C00000, WS_THICKFRAME = 0x00040000, WS_SYSMENU = 0x00080000;
         const int WS_MINIMIZEBOX = 0x00020000, WS_MAXIMIZEBOX = 0x00010000, WS_EX_APPWINDOW = 0x00040000;
+
+        // the Edge browser window of a process: visible, Chrome's window class, with a title (the page's)
+        static IntPtr EdgeWindowOf(int pid)
+        {
+            IntPtr found = IntPtr.Zero;
+            EnumWindows(delegate(IntPtr h, IntPtr lp)
+            {
+                uint wp;
+                GetWindowThreadProcessId(h, out wp);
+                if (wp != (uint)pid || !IsWindowVisible(h) || GetWindowTextLength(h) == 0) return true;
+                var cls = new StringBuilder(64);
+                GetClassName(h, cls, 64);
+                if (cls.ToString() != "Chrome_WidgetWin_1") return true;
+                found = h;
+                return false;
+            }, IntPtr.Zero);
+            return found;
+        }
+
+        // an Edge left over from an earlier launcher (it crashed) still holds the video player's profile: a new one
+        // would hand the video to it and quit, so it is closed first
+        static void KillOldPlayers(string profile)
+        {
+            try
+            {
+                using (var q = new System.Management.ManagementObjectSearcher(
+                    "SELECT ProcessId, CommandLine FROM Win32_Process WHERE Name = 'msedge.exe'"))
+                    foreach (System.Management.ManagementObject o in q.Get())
+                    {
+                        string cmd = Convert.ToString(o["CommandLine"]) ?? "";
+                        if (cmd.IndexOf(profile, StringComparison.OrdinalIgnoreCase) < 0) continue;
+                        try { Process.GetProcessById(Convert.ToInt32(o["ProcessId"])).Kill(); } catch (Exception) { }
+                    }
+            }
+            catch (Exception) { }
+        }
 
         static string EdgePath()
         {
@@ -197,12 +238,14 @@ namespace AzerothLauncher
             if (edge == null) return;
             string profile = Path.Combine(Util.DataDir, "video-player");
             Process p;
+            KillOldPlayers(profile);
             try
             {
                 Directory.CreateDirectory(profile);
                 var psi = new ProcessStartInfo(edge,
                     "--user-data-dir=\"" + profile + "\" --no-first-run --no-default-browser-check --disable-features=msEdgeSidebarV2" +
-                    " --window-position=-32000,-32000 --window-size=640,360 --app=\"" + WatchUrl(v) + "\"");
+                    " --disable-features=CalculateNativeWinOcclusion --disable-backgrounding-occluded-windows" +
+                    " --window-position=0,0 --window-size=640,360 --app=\"" + WatchUrl(v) + "\"");
                 psi.UseShellExecute = false;
                 p = Process.Start(psi);
             }
@@ -212,10 +255,10 @@ namespace AzerothLauncher
             ThreadPool.QueueUserWorkItem(delegate
             {
                 IntPtr hwnd = IntPtr.Zero;
-                for (int i = 0; i < 100 && hwnd == IntPtr.Zero; i++)
+                for (int i = 0; i < 400 && hwnd == IntPtr.Zero; i++)
                 {
-                    Thread.Sleep(150);
-                    try { if (p.HasExited) return; p.Refresh(); hwnd = p.MainWindowHandle; }
+                    Thread.Sleep(40);
+                    try { if (p.HasExited) return; hwnd = EdgeWindowOf(p.Id); }
                     catch (Exception) { return; }
                 }
                 if (hwnd == IntPtr.Zero) return;
@@ -228,7 +271,7 @@ namespace AzerothLauncher
             if (p != edgeVideo || edgeHost == null || edgeHost.IsDisposed) { try { if (!p.HasExited) p.Kill(); } catch (Exception) { } return; }
             int style = GetWindowLong(hwnd, GWL_STYLE);
             style &= ~(WS_POPUP | WS_CAPTION | WS_THICKFRAME | WS_SYSMENU | WS_MINIMIZEBOX | WS_MAXIMIZEBOX);
-            style |= WS_CHILD | WS_VISIBLE;
+            style |= WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS;
             SetWindowLong(hwnd, GWL_STYLE, style);
             SetWindowLong(hwnd, GWL_EXSTYLE, GetWindowLong(hwnd, GWL_EXSTYLE) & ~WS_EX_APPWINDOW);   // no taskbar button
             SetParent(hwnd, edgeHost.Handle);
@@ -236,6 +279,7 @@ namespace AzerothLauncher
             foreach (Control c in edgeHost.Controls) c.Visible = false;
             FitEdge();
             ShowWindow(hwnd, 5);
+            ShowVideoClose();
         }
 
         void FitEdge()
@@ -247,12 +291,51 @@ namespace AzerothLauncher
         // closes the playing video's Edge (leaving the video, another section, the launcher closing)
         void StopEdge()
         {
+            if (videoClose != null && !videoClose.IsDisposed) videoClose.Hide();
             Process p = edgeVideo;
             edgeVideo = null;
             edgeWnd = IntPtr.Zero;
             if (p == null) return;
             try { if (!p.HasExited) p.Kill(); } catch (Exception) { }
             try { p.Dispose(); } catch (Exception) { }
+        }
+
+        // the X over the video's top right corner: a small window of its own, so it stays above Edge's
+        VideoClose videoClose;
+
+        void ShowVideoClose()
+        {
+            if (edgeHost == null || edgeHost.IsDisposed) return;
+            Form owner = edgeHost.TopLevelControl as Form;
+            if (owner == null) return;
+            if (videoClose == null || videoClose.IsDisposed)
+            {
+                videoClose = new VideoClose();
+                videoClose.Pressed += delegate { LeaveCommunityVideo(); };
+            }
+            if (!placeHooked)
+            {
+                placeHooked = true;
+                EventHandler again = delegate { PlaceVideoClose(); };
+                owner.LocationChanged += again;
+                owner.SizeChanged += again;
+                owner.VisibleChanged += again;
+                LocationChanged += again;
+            }
+            PlaceVideoClose();
+        }
+
+        bool placeHooked;
+
+        void PlaceVideoClose()
+        {
+            if (videoClose == null || videoClose.IsDisposed) return;
+            Form top = edgeHost != null && !edgeHost.IsDisposed ? edgeHost.TopLevelControl as Form : null;
+            bool on = top != null && edgeVideo != null && edgeHost.Visible && top.Visible && top.WindowState != FormWindowState.Minimized;
+            if (!on) { videoClose.Hide(); return; }
+            Point p = edgeHost.PointToScreen(new Point(edgeHost.ClientSize.Width - videoClose.Width - 10, 10));
+            videoClose.Location = p;
+            if (!videoClose.Visible) videoClose.Show(top);
         }
 
         // the back arrow while a video plays: back to the featured video's page
@@ -263,6 +346,61 @@ namespace AzerothLauncher
             StopEdge();
             BuildPanel("Community");
             return true;
+        }
+    }
+
+    // the round X that closes a playing video
+    public class VideoClose : Form
+    {
+        public event Action Pressed;
+        bool hover;
+
+        public VideoClose()
+        {
+            FormBorderStyle = FormBorderStyle.None;
+            ShowInTaskbar = false;
+            StartPosition = FormStartPosition.Manual;
+            Size = new Size(34, 34);
+            BackColor = Color.Black;
+            TransparencyKey = Color.Magenta;
+            Cursor = Cursors.Hand;
+            SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer, true);
+        }
+
+        protected override bool ShowWithoutActivation { get { return true; } }
+
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x08000000 | 0x00000080;       // no activation, no Alt+Tab entry
+                return cp;
+            }
+        }
+
+        protected override void OnMouseEnter(EventArgs e) { hover = true; Invalidate(); base.OnMouseEnter(e); }
+        protected override void OnMouseLeave(EventArgs e) { hover = false; Invalidate(); base.OnMouseLeave(e); }
+        protected override void OnMouseUp(MouseEventArgs e)
+        {
+            base.OnMouseUp(e);
+            if (e.Button == MouseButtons.Left && ClientRectangle.Contains(e.Location)) WowButton.Fire(Pressed);
+        }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            Graphics g = e.Graphics;
+            g.Clear(Color.Magenta);
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;   // no pink fringe on the see-through corners
+            var r = new Rectangle(1, 1, Width - 3, Height - 3);
+            using (var b = new SolidBrush(hover ? Theme.Hex("#c8442f") : Color.FromArgb(30, 22, 18))) g.FillEllipse(b, r);
+            using (var p = new Pen(Theme.Gold, 2f)) g.DrawEllipse(p, r);
+            int c = Width / 2, d = 6;
+            using (var p = new Pen(Color.White, 2.5f))
+            {
+                g.DrawLine(p, c - d, c - d, c + d, c + d);
+                g.DrawLine(p, c - d, c + d, c + d, c - d);
+            }
         }
     }
 
