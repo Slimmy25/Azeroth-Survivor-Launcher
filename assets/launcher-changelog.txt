@@ -1,6 +1,6 @@
 # Next update (after v0.3)
 - DISCORD opens the new invite, discord.gg/azerothsurvivors
-- New Community section: it opens on the home screen whenever no other section is open, with the players' build videos (credited to their makers). A click plays the video in its own window right over the section (no video starts by itself)
+- New Community section: it opens on the home screen whenever no other section is open and features one of the players' build videos (credited to its maker), a different one every 10 minutes. A click plays it right inside the section's borders, and so do the Guide's YouTube videos; nothing starts by itself
 - "This week" now sits centred at the bottom of the window
 - AZS Stats live tracker: PACE shows whether you are ahead of or behind your record run, second by second and minute by minute (a new class DPS record becomes the pace to beat)
 - AZS Stats highlights: highest crit, highest normal hit, highest heal and most kills in 1 and 5 seconds, per run, per class and overall; beating your best says so in chat

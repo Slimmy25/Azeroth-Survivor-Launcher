@@ -120,6 +120,8 @@ namespace AzerothLauncher
             RefreshPlayLabel();
 
             FormClosing += OnClosingWindow;
+            FormClosed += delegate { StopEdge(); };              // a Community video never outlives the launcher
+            VideoCard.YouTube = PlayYouTube;                     // YouTube videos play inside Community (Community.cs)
             Resize += delegate { if (WindowState == FormWindowState.Minimized) After(1, HideToTray); };
             Shown += delegate
             {
@@ -705,6 +707,7 @@ namespace AzerothLauncher
 
         public void QuitApp()
         {
+            StopEdge();
             if (SyncBusy)
             {
                 ShowWindowFront();

@@ -256,6 +256,8 @@ namespace AzerothLauncher
 
         void HideSide()
         {
+            StopEdge();
+            communityPlaying = null;
             if (side.Visible) side.Hide();
         }
 
@@ -299,6 +301,7 @@ namespace AzerothLauncher
 
         void BuildPanel(string name)
         {
+            if (name != "Community") communityPlaying = null;   // another section: the Community video is left
             panel.SuspendLayout();
             Theme.Zoom = Theme.SectionZoom;                  // everything in a section is a little smaller
             try
@@ -326,6 +329,8 @@ namespace AzerothLauncher
         // Empties the section area; the title goes in the title bar. Every section gets the same back arrow.
         void ClearPanel(string title)
         {
+            StopEdge();                                      // a video playing in Community (Community.cs) stops
+            edgeHost = null;
             logBox = null;
             while (panel.Controls.Count > 0)
             {
@@ -340,6 +345,7 @@ namespace AzerothLauncher
         // the back arrow: one step back inside the section, or out of the section when at its first page
         void GoBack()
         {
+            if (LeaveCommunityVideo()) return;
             if (current == "Addons" && addonMode == "download") { SetAddonMode("installed"); return; }
             if (current == "Changelog")
             {
