@@ -88,7 +88,7 @@ namespace AzerothLauncher
             StartPosition = FormStartPosition.CenterScreen;
 
             // layout: PLAY in the box at the bottom right, the sections under the news, the rest in the bottom bar
-            playBtn = Place(new WowButton("PLAY", Play, 104, 58, 14), 969, 598);         // smaller: status above, time played below
+            playBtn = Place(new WowButton("PLAY", Play, 88, 49, 12), 977, 604);         // smaller: status above, time played below
             playBtn.Skin = Retro.Play;
             foreach (string name in navNames)
             {
@@ -317,11 +317,21 @@ namespace AzerothLauncher
                 sf.Alignment = StringAlignment.Center;
                 var rc = new RectangleF(800, 0, 292, 16);
                 using (var sb = new SolidBrush(Theme.Hex("#fff2b0")))
-                    g.DrawString(Lang.T(status), Theme.F(9, FontStyle.Italic), sb, new RectangleF(rc.X, 580, rc.Width, 16), sf);
+                {
+                    // centred over PLAY; a long status that would run off the window ends at the right edge instead
+                    string st = Lang.T(status);
+                    Font stf = Theme.F(9, FontStyle.Italic);
+                    float sw = g.MeasureString(st, stf).Width, cxp = playBtn.Left + playBtn.Width / 2f;
+                    float sx = Math.Min(cxp - sw / 2, W - 10 - sw);
+                    g.DrawString(st, stf, sb, sx, 582);
+                }
                 PlayStats ps = ShownPlayStats();
                 if (ps.Sessions > 0 && StatsEnabled() && Cfg.Bool("home_playtime", true))
+                {
+                    sf.Alignment = StringAlignment.Far;          // from the right edge, growing left
                     g.DrawString(Lang.T("Time played: " + Duration(ps.Seconds) + "   |   Last session: " + Duration(ps.LastSeconds)),
-                                 Theme.F(8, FontStyle.Italic), gb, new RectangleF(rc.X, 658, rc.Width, 14), sf);
+                                 Theme.F(8, FontStyle.Italic), gb, new RectangleF(400, 658, W - 10 - 400, 14), sf);
+                }
                 string version = Data.GameVersion;
                 sf.Alignment = StringAlignment.Far;
                 using (var vb = new SolidBrush(Theme.Hex("#b8a27a")))

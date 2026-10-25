@@ -155,8 +155,8 @@ def background(emblem):
             d.ellipse((sx - 5, sy - 5, sx + 5, sy + 5), fill=(160, 150, 130), outline=(40, 34, 26))
             d.ellipse((sx - 3, sy - 4, sx + 1, sy), fill=(225, 215, 190))
     # PLAY box: dark recess with a gold trim
-    d.rectangle((963, 594, 1079, 660), fill=(8, 7, 6), outline=(176, 140, 64), width=2)
-    d.rectangle((966, 597, 1076, 657), outline=(70, 55, 28), width=1)
+    d.rectangle((972, 599, 1070, 658), fill=(8, 7, 6), outline=(176, 140, 64), width=2)
+    d.rectangle((975, 602, 1067, 655), outline=(70, 55, 28), width=1)
     # the game's emblem (Azeroth Survivors / Aethus) at the top
     # (the emblem is drawn by the launcher, next to the title)
     return im
