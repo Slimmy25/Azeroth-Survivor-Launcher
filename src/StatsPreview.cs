@@ -164,6 +164,16 @@ namespace AzerothLauncher
                 if (shot == "home") app.side.Hide();
                 PreviewShot(app, Path.Combine(outDir, shot + ".png"));
             }
+            // every tab of Options
+            for (int t = 0; t < OptionTabs.Length; t++)
+            {
+                app.optionsTab = t;
+                app.current = "Options";
+                app.ShowSide();
+                app.BuildPanel("Options");
+                PreviewShot(app, Path.Combine(outDir, "options-" + t + ".png"));
+            }
+            app.optionsTab = 0;
             // every language: the home screen and Options, to see that nothing runs out of its space
             string langDir = Path.Combine(outDir, "lang");
             Directory.CreateDirectory(langDir);

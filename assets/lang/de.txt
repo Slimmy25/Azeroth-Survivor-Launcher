@@ -1244,3 +1244,20 @@ fastest win {0}
 = schnellster Sieg {0}
 {#0} runs, oldest left
 = {#0} Runs, älteste links
+# Options tabs
+FOLDERS
+= ORDNER
+GENERAL
+= ALLGEMEIN
+LANGUAGE
+= SPRACHE
+LAUNCHER
+= LAUNCHER
+Checks for a newer launcher and installs it (the launcher also does this by itself when it starts).
+= Sucht nach einem neueren Launcher und installiert ihn (das macht der Launcher auch selbst beim Start).
+What the launcher does, and its own changelog.
+= Was der Launcher kann, und sein eigenes Änderungsprotokoll.
+Downloads and installs the game again, then asks about your folders and cloud saving.
+= Lädt das Spiel erneut herunter, installiert es und fragt dann nach deinen Ordnern und dem Cloud-Speicher.
+Installs the game from a file you downloaded yourself.
+= Installiert das Spiel aus einer Datei, die du selbst heruntergeladen hast.

@@ -44,6 +44,7 @@ namespace AzerothLauncher
             if (VideoCard.Embed == null) VideoCard.Embed = delegate(GuideVideo v) { gVideo = v; BuildPanel("Guide"); return true; };
             if (Cfg.Data.ContainsKey("guide_read")) { Cfg.Remove("guide_read"); if (!PreviewMode) Cfg.Save(); }   // no longer tracked
             if (gVideo != null) { GuideVideoPlayer(gVideo); return; }
+            GuideLinks.Reset();                              // the game's tooltips AZS Stats has seen since the last time
             var topics = Data.Guide;
             if (gTopic >= topics.Count) { gTopic = -1; gPage = -1; }
             if (gTopic < 0) { GuideHome(topics); return; }

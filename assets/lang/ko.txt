@@ -1245,3 +1245,20 @@ fastest win {0}
 = 최단 승리 {0}
 {#0} runs, oldest left
 = {#0}판, 오래된 순으로 왼쪽부터
+# Options tabs
+FOLDERS
+= 폴더
+GENERAL
+= 일반
+LANGUAGE
+= 언어
+LAUNCHER
+= 런처
+Checks for a newer launcher and installs it (the launcher also does this by itself when it starts).
+= 새 런처를 찾아 설치합니다(런처가 시작할 때 스스로도 합니다).
+What the launcher does, and its own changelog.
+= 런처가 하는 일과 런처 자체의 변경 내역.
+Downloads and installs the game again, then asks about your folders and cloud saving.
+= 게임을 다시 다운로드해 설치한 뒤 폴더와 클라우드 저장에 대해 묻습니다.
+Installs the game from a file you downloaded yourself.
+= 직접 다운로드한 파일로 게임을 설치합니다.

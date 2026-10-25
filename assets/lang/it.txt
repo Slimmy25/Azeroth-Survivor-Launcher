@@ -1244,3 +1244,20 @@ fastest win {0}
 = vittoria più rapida {0}
 {#0} runs, oldest left
 = {#0} partite, le più vecchie a sinistra
+# Options tabs
+FOLDERS
+= CARTELLE
+GENERAL
+= GENERALE
+LANGUAGE
+= LINGUA
+LAUNCHER
+= LAUNCHER
+Checks for a newer launcher and installs it (the launcher also does this by itself when it starts).
+= Cerca un launcher più recente e lo installa (il launcher lo fa anche da solo all'avvio).
+What the launcher does, and its own changelog.
+= Cosa fa il launcher e il suo registro delle modifiche.
+Downloads and installs the game again, then asks about your folders and cloud saving.
+= Scarica e installa di nuovo il gioco, poi chiede delle tue cartelle e del salvataggio cloud.
+Installs the game from a file you downloaded yourself.
+= Installa il gioco da un file che hai scaricato tu.

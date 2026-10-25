@@ -10,6 +10,10 @@
 -- died within 1 second and within 5 seconds. Each run keeps its own (run.hi in the history); your best ever, and per
 -- class, are kept in AZSStatsDB.highs and AZSStatsDB.classes[class].highs. Beating one says so in chat at once.
 --
+-- Tooltips: whenever the game shows the tooltip of one of your abilities (hover a spell on the action bar, a level-up
+-- card or anywhere else), its text is written down in AZSStatsDB.tooltips under the spell's name, so the launcher's
+-- New Player Guide can show what the game itself says the spell does.
+--
 -- Lua 5.0 / 1.12: event handlers read event and arg1; no # operator.
 
 local function Num(v) v = tonumber(v); return v or 0; end
@@ -236,3 +240,49 @@ function AZSStats_LiveRunEnded(db, run, classBlock, newClassDps)
 	end
 	if ( r == cur ) then cur.hi = {}; cur.announced = {}; end
 end
+
+-- ---- the game's own tooltips of your abilities
+local function TipKey(name)
+	local k = string.lower(tostring(name or ""));
+	k = string.gsub(k, "%s*%(.-%)%s*$", "");
+	k = string.gsub(k, "%s+%d+$", "");
+	k = string.gsub(k, "[^%a%d]", "");
+	return k;
+end
+
+local lastTip = "";
+local function CaptureTooltip()
+	if ( not GameTooltip or not GameTooltip:IsVisible() or type(AZSStatsDB) ~= "table" ) then return; end
+	local first = getglobal("GameTooltipTextLeft1");
+	local name = first and first:GetText();
+	if ( not name or name == "" ) then return; end
+	local k = TipKey(name);
+	if ( not AZSSTATS_SPELL_ICONS or not AZSSTATS_SPELL_ICONS[k] ) then return; end      -- only abilities
+	local lines = {};
+	local n = GameTooltip.NumLines and GameTooltip:NumLines() or 12;
+	for i = 2, math.min(n, 20) do
+		local l, r = getglobal("GameTooltipTextLeft" .. i), getglobal("GameTooltipTextRight" .. i);
+		local lt = l and l:IsVisible() and l:GetText() or nil;
+		local rt = r and r:IsVisible() and r:GetText() or nil;
+		if ( lt and lt ~= "" ) then
+			if ( rt and rt ~= "" ) then lt = lt .. "   " .. rt; end
+			table.insert(lines, lt);
+		end
+	end
+	if ( table.getn(lines) == 0 ) then return; end
+	local text = table.concat(lines, "\n");
+	if ( name .. text == lastTip ) then return; end
+	lastTip = name .. text;
+	if ( type(AZSStatsDB.tooltips) ~= "table" ) then AZSStatsDB.tooltips = {}; end
+	local clean = string.gsub(name, "%s*%(.-%)%s*$", "");
+	AZSStatsDB.tooltips[clean] = { text = text, title = name, date = date and date("%Y-%m-%d") or "" };
+end
+
+local tipFrame = CreateFrame("Frame");
+local tipAcc = 0;
+tipFrame:SetScript("OnUpdate", function()
+	tipAcc = tipAcc + (arg1 or 0);
+	if ( tipAcc < 0.25 ) then return; end
+	tipAcc = 0;
+	pcall(CaptureTooltip);
+end);

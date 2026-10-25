@@ -1166,4 +1166,38 @@ namespace AzerothLauncher
             Location = new Point(Math.Max(area.Left, x), Math.Max(area.Top, y));
         }
     }
+
+    // A brand's own symbol as a link (Discord): drawn as it is, never recoloured or reshaped; the hover shows the
+    // white version of the same symbol (the brand's own white), and a tooltip names it.
+    public class BrandIcon : Control
+    {
+        readonly Image normal, hot;
+        bool hover;
+
+        public BrandIcon(Image normal, Image hot, string tip)
+        {
+            SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer |
+                     ControlStyles.SupportsTransparentBackColor, true);
+            BackColor = Color.Transparent;
+            this.normal = normal;
+            this.hot = hot ?? normal;
+            Cursor = Cursors.Hand;
+            WowButton.Tips.SetToolTip(this, tip);
+        }
+
+        protected override void OnMouseEnter(EventArgs e) { hover = true; Invalidate(); base.OnMouseEnter(e); }
+        protected override void OnMouseLeave(EventArgs e) { hover = false; Invalidate(); base.OnMouseLeave(e); }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            Image img = hover ? hot : normal;
+            if (img == null) return;
+            e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+            e.Graphics.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
+            // the symbol keeps its own proportions (65 x 48), centred
+            float s = Math.Min((float)Width / img.Width, (float)Height / img.Height);
+            float w = img.Width * s, h = img.Height * s;
+            e.Graphics.DrawImage(img, (Width - w) / 2, (Height - h) / 2, w, h);
+        }
+    }
 }

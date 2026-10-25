@@ -40,7 +40,7 @@ A community launcher for Azeroth Survivors, the game made by Aethus. It installs
 - The STATS page can be hidden in Options
 
 # The launcher itself
-- UPDATE LAUNCHER installs a newer launcher by itself (its checksum is checked), then restarts
+- Options > LAUNCHER: UPDATE LAUNCHER installs a newer launcher (its checksum is checked), then restarts; the launcher also does this by itself when it starts
 - Runs in the system tray, only one copy at a time, in 26 languages
 - Everything it writes for itself stays in an "Azeroth Survivor Launcher" folder next to it
 

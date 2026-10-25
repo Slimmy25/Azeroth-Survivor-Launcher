@@ -1154,19 +1154,51 @@ namespace AzerothLauncher
         }
 
         // ------------------------------------------------------------------ Options
+        // Options: a bar of tabs across the top (beside the back arrow) and one short page per tab
+        static readonly string[] OptionTabs = { "FOLDERS", "GENERAL", "LANGUAGE", "LAUNCHER" };
+        int optionsTab;
+
         void PanelOptions()
         {
             ClearPanel("Options");
-            // everything on one scrolling page under the back arrow, so it fits any language and the section's height
-            int top0 = (int)(12 + 32 * Theme.Zoom) + 8;
+            int x0 = 20 + (int)(52 * Theme.Zoom) + 10, wAll = PW - 20 - x0, cw = wAll / OptionTabs.Length;
+            for (int i = 0; i < OptionTabs.Length; i++)
+            {
+                int n = i;
+                var b = new WowButton(OptionTabs[i], delegate { optionsTab = n; BuildPanel("Options"); }, (int)((cw - 6) / Theme.Zoom), 32, 10);
+                b.Selected = i == optionsTab;
+                Put(b, x0 + i * cw, 12);
+            }
+            int top0 = (int)(12 + 32 * Theme.Zoom) + 10;
             var sp = MakeScroll(panel, new Rectangle(8, top0, PW - 16, PH - 8 - top0), Theme.Panel, Theme.Panel);
             int pageW = sp.ClientSize.Width + 16;             // the page's width, in the same terms as the section's
             putInto = sp;
-            try { OptionsPage(pageW); }
+            try
+            {
+                int end;
+                if (optionsTab == 0) end = OptionsFolders(pageW);
+                else if (optionsTab == 1) end = OptionsGeneral(pageW);
+                else if (optionsTab == 2) end = OptionsLanguage(pageW);
+                else end = OptionsLauncher(pageW);
+                var pad = new Panel();
+                pad.BackColor = Theme.Panel;
+                pad.Bounds = new Rectangle(0, end, 1, 12);
+                sp.Controls.Add(pad);
+            }
             finally { putInto = null; }
         }
 
-        void OptionsPage(int PW)
+        int OptionCheck(string text, bool value, int y, Action<bool> changed)
+        {
+            var cb = UI.Check(text, value, Theme.Text, Theme.Panel, 11);
+            cb.CheckedChanged += delegate { bool on = cb.Checked; BeginInvoke(new Action(delegate { changed(on); })); };
+            cb.Size = VStack.Measure(cb);
+            Put(cb, 18, y);
+            return y + cb.Height + 4;
+        }
+
+        // FOLDERS: where the game, its saves, its config and the cloud copy are, and cloud saving on or off
+        int OptionsFolders(int PW)
         {
             SyncSettings ss = SyncSettings();
             var rows = new List<object[]>();
@@ -1177,67 +1209,32 @@ namespace AzerothLauncher
             int y = 6;
             foreach (var r in rows)
             {
-                var lab = PutText((string)r[0], 11, FontStyle.Bold, Theme.Gold, 20, y, 0);
+                var lab = PutText((string)r[0], 11, FontStyle.Bold, Theme.Gold, 20, y, PW - 160);
                 string v = (string)r[1];
-                var val = PutText(string.IsNullOrEmpty(v) ? Lang.T("(not set)") : v, 9, FontStyle.Regular, Theme.LinkBlue, 20, BottomOf(lab), 400, false);
+                var val = PutText(string.IsNullOrEmpty(v) ? Lang.T("(not set)") : v, 9, FontStyle.Regular, Theme.LinkBlue, 20, BottomOf(lab), PW - 160, false);
                 int h = BottomOf(val) - y;
-                Put(new WowButton("CHANGE", (Action)r[2], 100, 28, 9), PW - 20 - 100, y + Math.Max(0, (h - 28) / 2));
+                Put(new WowButton("CHANGE", (Action)r[2], 100, 28, 9), PW - 20 - (int)(100 * Theme.Zoom), y + Math.Max(0, (h - 28) / 2));
                 y = Math.Max(BottomOf(val), y + 30) + 5;
             }
             Put(UI.Line(Theme.Bronze, PW - 40, 1), 20, y + 4);
-            y += 15;
-            var checks = new[] {
-                new object[] { "cloud_enabled", CloudEnabled(), "Cloud saving" },
-                new object[] { "close_to_tray", Cfg.Bool("close_to_tray", true), "Close button hides the launcher to the tray" },
-                new object[] { "minimize_on_play", Cfg.Bool("minimize_on_play", true), "Minimize the launcher when the game starts" },
-                new object[] { "stats_enabled", StatsEnabled(), "Show the Stats section (your play time and run records)" } };
-            foreach (var c in checks)
-            {
-                string key = (string)c[0];
-                var cb = UI.Check((string)c[2], (bool)c[1], Theme.Text, Theme.Panel, 11);
-                cb.CheckedChanged += delegate
-                {
-                    if (key == "cloud_enabled")
-                    {
-                        bool on = cb.Checked;
-                        BeginInvoke(new Action(delegate { SetCloudEnabled(on); }));
-                        return;
-                    }
-                    if (key == "stats_enabled")
-                    {
-                        bool on = cb.Checked;
-                        BeginInvoke(new Action(delegate { SetStatsEnabled(on); }));
-                        return;
-                    }
-                    Cfg.Set(key, cb.Checked);
-                    Cfg.Save();
-                };
-                cb.Size = VStack.Measure(cb);
-                Put(cb, 18, y);
-                y += cb.Height + 4;
-            }
-            // language: every language built into the launcher, in its own name
-            var langs = Lang.Available();
-            string langName = "English";
-            foreach (var kv in langs) if (kv.Key == Lang.Code) langName = kv.Value;
-            var langLab = PutText("Language", 11, FontStyle.Bold, Theme.Gold, 20, y + 9, 0);
-            WowButton langBtn = null;
-            langBtn = Put(new WowButton(langName, delegate
-            {
-                var menu = new ContextMenuStrip();
-                foreach (var kv in langs)
-                {
-                    string code = kv.Key;
-                    var item = new ToolStripMenuItem(kv.Value, null, delegate { SetLanguage(code); });
-                    item.Checked = code == Lang.Code;
-                    menu.Items.Add(item);
-                }
-                menu.Show(langBtn, new Point(0, langBtn.Height));
-            }, 220, 30, 10), 20 + langLab.Width + 14, y + 4);
-            y += 40;
-            // play time
+            y += 14;
+            return OptionCheck("Cloud saving", CloudEnabled(), y, delegate(bool on) { SetCloudEnabled(on); });
+        }
+
+        // GENERAL: how the launcher behaves, the Stats page, and the play time AZS Stats counts
+        int OptionsGeneral(int PW)
+        {
+            int y = 6;
+            y = OptionCheck("Close button hides the launcher to the tray", Cfg.Bool("close_to_tray", true), y,
+                            delegate(bool on) { Cfg.Set("close_to_tray", on); Cfg.Save(); });
+            y = OptionCheck("Minimize the launcher when the game starts", Cfg.Bool("minimize_on_play", true), y,
+                            delegate(bool on) { Cfg.Set("minimize_on_play", on); Cfg.Save(); });
+            y = OptionCheck("Show the Stats section (your play time and run records)", StatsEnabled(), y,
+                            delegate(bool on) { SetStatsEnabled(on); });
+            y = OptionCheck("Show play time on the home screen", Cfg.Bool("home_playtime", true), y,
+                            delegate(bool on) { Cfg.Set("home_playtime", on); Cfg.Save(); Invalidate(); });
             Put(UI.Line(Theme.Bronze, PW - 40, 1), 20, y + 4);
-            y += 15;
+            y += 14;
             var head = PutText("Play time", 11, FontStyle.Bold, Theme.Gold, 20, y, 0);
             PlayStats ps = ShownPlayStats();
             long sessions = ps.Sessions;
@@ -1247,25 +1244,42 @@ namespace AzerothLauncher
                 : "Total: " + Duration(ps.Seconds) + " over " + Util.Plural((int)sessions, "session") + "\n" +
                   "Counted in game by AZS Stats; cloud saving carries it to your other PCs.";
             var statsLabel = PutText(stats, 10, FontStyle.Regular, Theme.Text, 20, BottomOf(head) + 2, PW - 40);
-            var homeCb = UI.Check("Show play time on the home screen", Cfg.Bool("home_playtime", true), Theme.Text, Theme.Panel, 11);
-            homeCb.CheckedChanged += delegate
+            return BottomOf(statsLabel);
+        }
+
+        // LANGUAGE: every language built into the launcher, in its own name
+        int OptionsLanguage(int PW)
+        {
+            var langs = Lang.Available();
+            int y = 6, x = 20, col = 0, bw = 190, cols = Math.Max(1, (PW - 40) / (int)((bw + 10) * Theme.Zoom));
+            foreach (var kv in langs)
             {
-                Cfg.Set("home_playtime", homeCb.Checked);
-                Cfg.Save();
-                Invalidate();
+                string code = kv.Key;
+                var b = new WowButton(kv.Value, delegate { SetLanguage(code); }, bw, 28, 9);
+                b.Selected = code == Lang.Code;
+                Put(b, x + col * (int)((bw + 10) * Theme.Zoom), y);
+                if (++col >= cols) { col = 0; y += (int)(28 * Theme.Zoom) + 6; }
+            }
+            if (col > 0) y += (int)(28 * Theme.Zoom) + 6;
+            return y;
+        }
+
+        // LAUNCHER: updating the launcher, About, setup again and installing the game from a file
+        int OptionsLauncher(int PW)
+        {
+            int y = 6, bw = 200;
+            Action<string, Action, string> row = delegate(string label, Action act, string note)
+            {
+                var b = Put(new WowButton(label, act, bw, 30, 9), 20, y);
+                var t = PutText(note, 9.5f, FontStyle.Italic, Theme.GoldDim, 20 + b.Width + 12, y + 2, PW - 40 - b.Width - 12);
+                y = Math.Max(BottomOf(b), BottomOf(t)) + 8;
             };
-            homeCb.Size = VStack.Measure(homeCb);
-            Put(homeCb, 18, BottomOf(statsLabel) + 4);
-            // setup and installing from a file: at the end of the page
-            y = BottomOf(homeCb) + 12;
-            Put(UI.Line(Theme.Bronze, PW - 40, 1), 20, y);
-            y += 10;
-            var again = Put(new WowButton("RUN SETUP AGAIN", delegate { RunSetup(); }, 190, 30, 9), 20, y);
-            Put(new WowButton("INSTALL FROM A FILE", delegate { InstallFromDownloads(); }, 190, 30, 9), again.Right + 10, y);
-            var pad = new Panel();
-            pad.BackColor = Theme.Panel;
-            pad.Bounds = new Rectangle(0, BottomOf(again), 1, 12);
-            putInto.Controls.Add(pad);
+            row(updateBtn.Label, delegate { CheckLauncherUpdate(true); BuildPanel("Options"); },
+                "Checks for a newer launcher and installs it (the launcher also does this by itself when it starts).");
+            row("ABOUT LAUNCHER", delegate { ShowSection("About Launcher"); }, "What the launcher does, and its own changelog.");
+            row("RUN SETUP AGAIN", delegate { RunSetup(); }, "Downloads and installs the game again, then asks about your folders and cloud saving.");
+            row("INSTALL FROM A FILE", delegate { InstallFromDownloads(); }, "Installs the game from a file you downloaded yourself.");
+            return y;
         }
 
         void ChooseGameFolder()

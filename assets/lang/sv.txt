@@ -1244,3 +1244,20 @@ fastest win {0}
 = snabbaste seger {0}
 {#0} runs, oldest left
 = {#0} runs, äldsta till vänster
+# Options tabs
+FOLDERS
+= MAPPAR
+GENERAL
+= ALLMÄNT
+LANGUAGE
+= SPRÅK
+LAUNCHER
+= LAUNCHER
+Checks for a newer launcher and installs it (the launcher also does this by itself when it starts).
+= Letar efter en nyare launcher och installerar den (launchern gör det också själv när den startar).
+What the launcher does, and its own changelog.
+= Vad launchern gör, och dess egen ändringslogg.
+Downloads and installs the game again, then asks about your folders and cloud saving.
+= Laddar ner och installerar spelet igen och frågar sedan om dina mappar och molnsparning.
+Installs the game from a file you downloaded yourself.
+= Installerar spelet från en fil som du själv har laddat ner.

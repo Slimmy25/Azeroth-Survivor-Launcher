@@ -1245,3 +1245,20 @@ fastest win {0}
 = cea mai rapidă victorie {0}
 {#0} runs, oldest left
 = {#0} runde, cele mai vechi în stânga
+# Options tabs
+FOLDERS
+= FOLDERE
+GENERAL
+= GENERAL
+LANGUAGE
+= LIMBĂ
+LAUNCHER
+= LAUNCHER
+Checks for a newer launcher and installs it (the launcher also does this by itself when it starts).
+= Caută un launcher mai nou și îl instalează (launcherul face asta și singur la pornire).
+What the launcher does, and its own changelog.
+= Ce face launcherul și propriul său jurnal de modificări.
+Downloads and installs the game again, then asks about your folders and cloud saving.
+= Descarcă și instalează din nou jocul, apoi te întreabă despre foldere și salvarea în cloud.
+Installs the game from a file you downloaded yourself.
+= Instalează jocul dintr-un fișier descărcat de tine.

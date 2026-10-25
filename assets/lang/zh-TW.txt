@@ -1245,3 +1245,20 @@ fastest win {0}
 = 最快勝利 {0}
 {#0} runs, oldest left
 = {#0} 局，最早的在左邊
+# Options tabs
+FOLDERS
+= 資料夾
+GENERAL
+= 一般
+LANGUAGE
+= 語言
+LAUNCHER
+= 啟動器
+Checks for a newer launcher and installs it (the launcher also does this by itself when it starts).
+= 檢查並安裝較新版本的啟動器（啟動器啟動時也會自動執行）。
+What the launcher does, and its own changelog.
+= 啟動器的功能，以及它自己的更新記錄。
+Downloads and installs the game again, then asks about your folders and cloud saving.
+= 重新下載並安裝遊戲，然後詢問你的資料夾和雲端存檔設定。
+Installs the game from a file you downloaded yourself.
+= 從你自己下載的檔案安裝遊戲。

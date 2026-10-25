@@ -1245,3 +1245,20 @@ fastest win {0}
 = chiến thắng nhanh nhất {0}
 {#0} runs, oldest left
 = {#0} lượt, cũ nhất ở bên trái
+# Options tabs
+FOLDERS
+= THƯ MỤC
+GENERAL
+= CHUNG
+LANGUAGE
+= NGÔN NGỮ
+LAUNCHER
+= LAUNCHER
+Checks for a newer launcher and installs it (the launcher also does this by itself when it starts).
+= Tìm launcher mới hơn và cài đặt (launcher cũng tự làm việc này khi khởi động).
+What the launcher does, and its own changelog.
+= Launcher làm được gì, và nhật ký thay đổi của nó.
+Downloads and installs the game again, then asks about your folders and cloud saving.
+= Tải và cài lại game, rồi hỏi về thư mục và lưu trên mây.
+Installs the game from a file you downloaded yourself.
+= Cài game từ một tệp bạn tự tải về.

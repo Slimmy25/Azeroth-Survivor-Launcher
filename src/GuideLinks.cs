@@ -24,6 +24,17 @@ namespace AzerothLauncher
         static Dictionary<string, GuideLink> links;
         static Regex finder;
         public static Action<int, int> Navigate;             // set by the launcher: open the Guide at that topic / page
+        public static Func<Dictionary<string, string>> CapturedTips;   // set by the launcher: the game's tooltips AZS Stats saw
+        static Dictionary<string, GuideLink> byKey;           // the same links by Norm(name): "shadowbolt" -> Shadow Bolt
+
+        public static void Reset() { links = null; }        // read again (new tooltips from the game)
+
+        // a name without case, spaces, apostrophes or a plural s: "Shadow Bolts" and "shadowbolt" are both "shadowbolt"
+        static string Norm(string s)
+        {
+            string k = Regex.Replace((s ?? "").ToLowerInvariant(), "[^a-z0-9]", "");
+            return k;
+        }
 
         static Dictionary<string, string> GameText()
         {
@@ -124,11 +135,47 @@ namespace AzerothLauncher
                 Add(kv.Key, zone ? zonesTopic : racesTopic, -1, kv.Value);
             }
             foreach (string w in TreeWords) links.Remove(w);
+            // the game's own words win: a tooltip AZS Stats saw in game replaces the guide's line about that spell
+            Dictionary<string, string> seen = null;
+            try { if (CapturedTips != null) seen = CapturedTips(); } catch (Exception) { }
+            if (seen != null)
+                foreach (var kv in seen)
+                {
+                    GuideLink l;
+                    if (links.TryGetValue(kv.Key, out l)) l.Tip = kv.Value;
+                    else Add(kv.Key, -1, -1, kv.Value);
+                }
+            byKey = new Dictionary<string, GuideLink>(StringComparer.Ordinal);
+            foreach (var l in links.Values) if (!byKey.ContainsKey(Norm(l.Term))) byKey[Norm(l.Term)] = l;
             var terms = new List<string>(links.Keys);
             terms.Sort(delegate(string a, string b) { return b.Length.CompareTo(a.Length); });   // longest first
+            // a name of several words is also found in any case, run together and in the plural ("shadowbolt",
+            // "Shadow Bolts"); a name of one word only as written, capitalised, so "fear" or "execute" in a sentence
+            // stays plain text (its plural and possessive still count: "Executes", "Ignite's")
             var parts = new List<string>();
-            foreach (string term in terms) parts.Add(Regex.Escape(term));
-            finder = parts.Count == 0 ? null : new Regex(@"(?<![A-Za-z'])(" + string.Join("|", parts.ToArray()) + @")(?![A-Za-z])");
+            foreach (string term in terms)
+            {
+                string[] words = term.Split(' ');
+                if (words.Length > 1)
+                {
+                    var w = new List<string>();
+                    foreach (string x in words) w.Add(Regex.Escape(x));
+                    parts.Add("(?i:" + string.Join(@"\s?", w.ToArray()) + ")");
+                }
+                else parts.Add(Regex.Escape(term));
+            }
+            finder = parts.Count == 0 ? null
+                : new Regex(@"(?<![A-Za-z'])(" + string.Join("|", parts.ToArray()) + @")(?:'?s)?(?![A-Za-z])");
+        }
+
+        static GuideLink Find(string matched)
+        {
+            GuideLink l;
+            if (links.TryGetValue(matched, out l)) return l;
+            string k = Norm(matched);
+            if (byKey.TryGetValue(k, out l)) return l;
+            if (k.EndsWith("s") && byKey.TryGetValue(k.Substring(0, k.Length - 1), out l)) return l;
+            return null;
         }
 
         static string Capital(string s) { return s.Length == 0 ? s : char.ToUpperInvariant(s[0]) + s.Substring(1); }
@@ -142,8 +189,10 @@ namespace AzerothLauncher
             if (finder != null)
                 foreach (Match m in finder.Matches(text))
                 {
+                    GuideLink l = Find(m.Value);
+                    if (l == null) continue;
                     if (m.Index > at) outList.Add(new KeyValuePair<string, GuideLink>(text.Substring(at, m.Index - at), null));
-                    outList.Add(new KeyValuePair<string, GuideLink>(m.Value, links[m.Value]));
+                    outList.Add(new KeyValuePair<string, GuideLink>(m.Value, l));
                     at = m.Index + m.Length;
                 }
             if (at < text.Length) outList.Add(new KeyValuePair<string, GuideLink>(text.Substring(at), null));

@@ -1245,3 +1245,20 @@ fastest win {0}
 = 最速勝利 {0}
 {#0} runs, oldest left
 = {#0} ラン、古い順に左から
+# Options tabs
+FOLDERS
+= フォルダー
+GENERAL
+= 一般
+LANGUAGE
+= 言語
+LAUNCHER
+= ランチャー
+Checks for a newer launcher and installs it (the launcher also does this by itself when it starts).
+= 新しいランチャーを探してインストールします（起動時にも自動で行います）。
+What the launcher does, and its own changelog.
+= ランチャーの機能と、ランチャー自身の変更履歴。
+Downloads and installs the game again, then asks about your folders and cloud saving.
+= ゲームをもう一度ダウンロードしてインストールし、フォルダーとクラウドセーブについて確認します。
+Installs the game from a file you downloaded yourself.
+= 自分でダウンロードしたファイルからゲームをインストールします。
