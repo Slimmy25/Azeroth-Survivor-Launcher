@@ -1,18 +1,19 @@
--- AZS Stats in game: /azs, or the button on the minimap, opens a window with the same stats as the launcher's STATS
--- page, in tabs along its bottom like the character sheet's: Overview, Classes, Abilities, Records, Nemesis, Co-op and
--- History. CLASS picks every class or one class on its own (Overview, Abilities, Records, Nemesis and History follow
--- it). Long lists turn pages with the arrows or the mouse wheel. The window is made of the game's own interface art:
--- the dialog frame and header, your portrait, the character sheet's tabs, the spellbook's page arrows, spell and
--- class icons. The minimap button can be dragged around the minimap; /azstats minimap hides or shows it.
--- Lua 5.0 / 1.12 interface: scripts read `this`, `arg1`; no # operator.
+-- AZS Stats in game: /azs, or the AZS Stats button by the minimap, opens the same STATS page as the launcher's, built
+-- the same way: a header card (your portrait or the class's icon, a heading, a line and stat chips), then tiles and
+-- rows in a scrolling list (an icon, a coloured name, a green detail line, the value on the right and a thin bar), and
+-- the character sheet's tabs along the bottom: Overview, Classes, Abilities, Records, Nemesis, Co-op and History.
+-- CLASS picks every class or one class on its own. Inside the game it uses the game's own art: the dialog frame and
+-- header, the tooltip borders, the scroll bar, the tabs, your portrait, class and spell icons and item icons.
+-- Lua 5.0 / 1.12 interface: scripts read `this`, `arg1`; no # operator; only the 1.12 API.
 
-local W, H, ROWS = 600, 486, 20
+local W, H = 640, 540
+local CW = W - 64                                       -- the list's width (inside the frame, beside the scroll bar)
 local TABS = { "Overview", "Classes", "Abilities", "Records", "Nemesis", "Co-op", "History" };
 local CLASS_COLORS = { warrior = "c79c6e", paladin = "f58cba", hunter = "abd473", rogue = "fff569", priest = "ffffff",
                        shaman = "2f8fff", mage = "69ccf0", warlock = "9482c9", druid = "ff7d0a", death_knight = "c41f3b" };
 
-local tab, page, classKey = 1, 1, nil;
-local frame, lines, tabButtons, classButton, classIcon, pageText, prevButton, nextButton;
+local tab, classKey = 1, nil;
+local frame, tabButtons, classButton, scroll, child, hero;
 
 -- icons: { texture, left, right, top, bottom } (the coordinates cut one class out of the class sheet)
 local CLASS_SHEET = "Interface\\Glues\\CharacterCreate\\UI-CharacterCreate-Classes";
@@ -21,6 +22,7 @@ local CLASS_COORDS = { warrior = { 0, 0.25, 0, 0.25 }, mage = { 0.25, 0.49609375
                        priest = { 0.49609375, 0.7421875, 0.25, 0.5 }, warlock = { 0.7421875, 0.98828125, 0.25, 0.5 },
                        paladin = { 0, 0.25, 0.5, 0.75 } };
 local QUESTION = "Interface\\Icons\\INV_Misc_QuestionMark";
+local function I(name) return { "Interface\\Icons\\" .. name }; end
 
 local function ClassIcon(key)
 	key = string.lower(tostring(key or ""));
@@ -44,11 +46,10 @@ end
 
 local function SpellIcon(name)
 	local icon = AZSSTATS_SPELL_ICONS and AZSSTATS_SPELL_ICONS[SpellKey(name)];
-	if ( icon ) then return { "Interface\\Icons\\" .. icon }; end
+	if ( icon ) then return I(icon); end
 	return { QUESTION };
 end
 
--- puts an icon on a texture (a spell without a known icon gets the question mark)
 local function SetIcon(tex, icon)
 	if ( not icon ) then tex:Hide(); return; end
 	tex:SetTexture(icon[1]);
@@ -85,6 +86,12 @@ local function ClassHex(key)
 	return "ffd100";
 end
 
+-- "a1b2c3" -> r, g, b (0..1)
+local function RGB(hex)
+	local function h(i) return (tonumber(string.sub(hex, i, i + 1), 16) or 255) / 255; end
+	return h(1), h(3), h(5);
+end
+
 -- the block shown: every run, or one class's
 local function Block()
 	local db = DB();
@@ -93,7 +100,7 @@ local function Block()
 	return db.totals, "All classes";
 end
 
--- sorted list of { key, value } from a table, by f(value), largest first
+-- sorted list of { key, v } from a table, by f(value), largest first
 local function Sorted(t, f)
 	local out = {};
 	for k, v in pairs(t or {}) do
@@ -103,48 +110,49 @@ local function Sorted(t, f)
 	return out;
 end
 
--- ---------------------------------------------------------------- what each tab shows: { left, right } lines
-local function Head(out, text) table.insert(out, { C("ffd100", text), "" }); end
-local function Line(out, l, r, icon) table.insert(out, { l, r or "", icon }); end
-local function Gap(out) table.insert(out, { " ", "" }); end
+-- ---------------------------------------------------------------- what each tab shows
+-- A tab is a list of items, the same blocks as the launcher's STATS page:
+--   { kind = "head", text }                                   a section title
+--   { kind = "tiles", items = { { value, label }, ... } }     tiles, four to a row
+--   { kind = "row", icon, name, hex, sub, sub2, value, vsub, vhex, bar, bhex }   a row card
+--   { kind = "note", text }                                   a dim line
+local function Head(out, text) table.insert(out, { kind = "head", text = text }); end
+local function Tiles(out, items) table.insert(out, { kind = "tiles", items = items }); end
+local function Note(out, text) table.insert(out, { kind = "note", text = text }); end
+local function Row(out, r) r.kind = "row"; table.insert(out, r); end
+
+local RECORD_ICONS = { time = "INV_Misc_PocketWatch_01", fastestWin = "Spell_Nature_Swiftness", lvl = "Spell_Holy_SealOfWisdom",
+                       dps = "Ability_Warrior_BattleShout", kills = "Ability_DualWield", dmg = "Spell_Fire_Fireball02",
+                       gold = "INV_Misc_Coin_01", bosses = "INV_Misc_Head_Dragon_01", elites = "Ability_Warrior_Challange",
+                       guardians = "INV_Shield_06" };
 
 local function Overview()
 	local out = {};
 	local db = DB();
 	local b, name = Block();
-	Head(out, name);
-	Line(out, "Runs", Big(b.runs));
-	Line(out, "Victories", C("1eff00", Big(b.wins)) .. "  (" .. Pct(b.wins, b.runs) .. ")");
-	Line(out, "Defeats / left", Big(b.defeat) .. " / " .. Big(b.left));
-	Line(out, "Time in runs", Hours(b.time));
-	Line(out, "Highest level", Big(b.bestLvl));
-	Line(out, "Longest run", Clock(b.bestTime));
-	Line(out, "Enemies slain", Big(b.kills));
-	Line(out, "Elites / guardians", Big(b.elites) .. " / " .. Big(b.guardians));
-	Line(out, "Bosses", C("ff8000", Big(b.bosses)));
-	Line(out, "Damage dealt", Big(b.dmg));
-	local bd = (classKey and b.best or db.best).dps;
-	Line(out, "Highest DPS", C("ff8000", type(bd) == "table" and Big(bd.v) or "-"));
+	local best = classKey and b.best or db.best;
+	Head(out, classKey and (name .. ": your runs") or "Your runs");
+	Tiles(out, { { Big(b.runs), "Runs" }, { Big(b.wins), "Victories" }, { Pct(b.wins, b.runs), "Win rate" }, { Hours(b.time), "Time in runs" },
+	             { Big(b.kills), "Enemies slain" }, { Big(b.elites), "Elites" }, { Big(b.guardians), "Guardians" }, { Big(b.bosses), "Bosses" },
+	             { Big(b.dmg), "Damage dealt" }, { Big(b.taken), "Damage taken" }, { Big(b.gold), "Gold collected" }, { Big(b.chests), "Caches opened" } });
+	Head(out, "Highlights");
+	local bd = best.dps;
+	Row(out, { icon = I(RECORD_ICONS.dps), name = "Highest DPS", hex = "ff8000", sub = type(bd) == "table" and ((bd.cname or "") .. " · " .. (bd.zname or "")) or "Finish a run to set one",
+	           value = type(bd) == "table" and Big(bd.v) or "-", vhex = "ff8000", vsub = type(bd) == "table" and (bd.date or "") or "" });
 	local h = db.history;
 	for i = table.getn(h), 1, -1 do
-		if ( not classKey or h[i].class == classKey ) then
-			if ( Num(h[i].dps) > 0 ) then Line(out, "Last run's DPS", Big(h[i].dps)); end
+		local r = h[i];
+		if ( not classKey or r.class == classKey ) then
+			Row(out, { icon = ClassIcon(r.class), name = "Last run: " .. (r.result or ""), hex = r.kind == "victory" and "1eff00" or r.kind == "defeat" and "ff4040" or "9d9d9d",
+			           sub = (r.cname or "") .. " · " .. (r.zname or "") .. " · " .. Clock(r.t) .. ", level " .. Big(r.lvl),
+			           value = Num(r.dps) > 0 and (Big(r.dps) .. " DPS") or "", vhex = "ff8000", vsub = r.date or "" });
 			break;
 		end
 	end
-	Line(out, "Damage taken", Big(b.taken));
-	Line(out, "Gold collected", C("ffd100", Big(b.gold)));
-	Line(out, "Caches opened", Big(b.chests));
 	if ( not classKey ) then
 		local p = db.play;
-		Gap(out);
 		Head(out, "Play time");
-		Line(out, "Time played", Hours(p.seconds));
-		Line(out, "Sessions", Big(p.sessions));
-		Line(out, "This session", Hours(p.last));
-		Line(out, "Longest session", Hours(p.longest));
-	else
-		Line(out, "Pick rate", Pct(b.runs, db.totals.runs));
+		Tiles(out, { { Hours(p.seconds), "Time played" }, { Big(p.sessions), "Sessions" }, { Hours(p.last), "This session" }, { Hours(p.longest), "Longest session" } });
 	end
 	return out;
 end
@@ -156,32 +164,28 @@ local function Classes()
 	local list = Sorted(db.classes, function(v) return Num(v.runs); end);
 	for i = 1, table.getn(list) do
 		local g = list[i].v;
-		Line(out, C(ClassHex(list[i].key), g.name ~= "" and g.name or S().Pretty(list[i].key)),
-		     Pct(g.runs, db.totals.runs) .. " of runs  ·  won " .. Pct(g.wins, g.runs), ClassIcon(list[i].key));
-		Line(out, "    " .. C("9d9d9d", Big(g.runs) .. " runs, " .. Big(g.kills) .. " kills, best level " .. Big(g.bestLvl) ..
-		     ", longest " .. Clock(g.bestTime)), "");
+		Row(out, { icon = ClassIcon(list[i].key), name = g.name ~= "" and g.name or S().Pretty(list[i].key), hex = ClassHex(list[i].key),
+		           sub = "Runs: " .. Big(g.runs) .. " · Won: " .. Big(g.wins) .. " · Longest: " .. Clock(g.bestTime) .. " · Best level: " .. Big(g.bestLvl),
+		           value = Pct(g.runs, db.totals.runs), vsub = "Win rate " .. Pct(g.wins, g.runs),
+		           bar = Num(g.runs) / math.max(1, Num(db.totals.runs)), bhex = ClassHex(list[i].key) });
 	end
-	if ( table.getn(list) == 0 ) then Line(out, "No runs recorded yet.", ""); end
-	local months = {};
-	for m, e in pairs(db.months) do
-		if ( type(e) == "table" ) then table.insert(months, m); end
+	if ( table.getn(list) == 0 ) then Note(out, "No runs recorded yet."); end
+	local races = Sorted(db.races, function(v) return Num(v.runs); end);
+	if ( table.getn(races) > 0 ) then
+		Head(out, "Races");
+		for i = 1, table.getn(races) do
+			local g = races[i].v;
+			Row(out, { icon = I("INV_Misc_Head_Human_01"), name = g.name ~= "" and g.name or S().Pretty(races[i].key), hex = "ffd100",
+			           sub = "Runs: " .. Big(g.runs) .. " · Won: " .. Big(g.wins), value = Clock(g.bestTime), vsub = "Level " .. Big(g.bestLvl) });
+		end
 	end
-	table.sort(months);
-	if ( table.getn(months) > 0 ) then
-		Gap(out);
-		Head(out, "Picks per month");
-		for i = table.getn(months), math.max(1, table.getn(months) - 11), -1 do
-			local e = db.months[months[i]];
-			local parts = {};
-			local cl = {};
-			for k, n in pairs(e.classes or {}) do table.insert(cl, { k = k, n = Num(n) }); end
-			table.sort(cl, function(a, b) return a.n > b.n; end);
-			for j = 1, math.min(3, table.getn(cl)) do
-				local g = db.classes[cl[j].k];
-				local nm = (type(g) == "table" and g.name ~= "") and g.name or S().Pretty(cl[j].k);
-				table.insert(parts, C(ClassHex(cl[j].k), nm) .. " " .. Pct(cl[j].n, e.runs));
-			end
-			Line(out, months[i], table.concat(parts, "  "));
+	local zones = Sorted(db.zones, function(v) return Num(v.runs); end);
+	if ( table.getn(zones) > 0 ) then
+		Head(out, "Zones");
+		for i = 1, table.getn(zones) do
+			local g = zones[i].v;
+			Row(out, { icon = I("INV_Misc_Map_01"), name = g.name ~= "" and g.name or S().Pretty(zones[i].key), hex = "69ccf0",
+			           sub = "Runs: " .. Big(g.runs) .. " · Won: " .. Big(g.wins), value = Clock(g.bestTime), vsub = "Level " .. Big(g.bestLvl) });
 		end
 	end
 	return out;
@@ -195,10 +199,12 @@ local function Abilities()
 	for i = 1, table.getn(list) do
 		local a = list[i].v;
 		local nm = a.name or S().Pretty(list[i].key);
-		Line(out, C("ffffff", nm) .. (Num(a.bestRank) > 0 and C("9d9d9d", "  rank " .. a.bestRank) or ""),
-		     "picked " .. Pct(a.picks, b.runs) .. "  ·  won " .. Pct(a.wins, a.picks) .. "  ·  " .. Big(a.dmg) .. " dmg", SpellIcon(nm));
+		Row(out, { icon = SpellIcon(nm), name = nm, hex = "f5e9c8",
+		           sub = "Picked in " .. Big(a.picks) .. " runs (" .. Pct(a.picks, b.runs) .. ") · Win rate " .. Pct(a.wins, a.picks),
+		           value = Big(a.dmg) .. " damage", vsub = Num(a.bestRank) > 0 and ("Best rank " .. a.bestRank) or "",
+		           bar = Num(a.picks) / math.max(1, Num(b.runs)), bhex = "b39b62" });
 	end
-	if ( table.getn(list) == 0 ) then Line(out, "No abilities recorded yet.", ""); end
+	if ( table.getn(list) == 0 ) then Note(out, "No abilities recorded yet."); end
 	return out;
 end
 
@@ -208,40 +214,38 @@ local function Records()
 	local best = classKey and b.best or DB().best;
 	Head(out, "Personal bests  -  " .. name);
 	local order = { { "time", "Longest run", true }, { "fastestWin", "Fastest victory", true }, { "lvl", "Highest level" },
-	                 { "dps", "Highest DPS" },
-	                 { "kills", "Most kills in a run" }, { "dmg", "Most damage in a run" }, { "gold", "Most gold in a run" },
+	                 { "dps", "Highest DPS" }, { "kills", "Most kills in a run" }, { "dmg", "Most damage in a run" }, { "gold", "Most gold in a run" },
 	                 { "bosses", "Most bosses in a run" }, { "elites", "Most elites in a run" }, { "guardians", "Most guardians in a run" } };
+	local any = false;
 	for i = 1, table.getn(order) do
 		local r = best[order[i][1]];
 		if ( type(r) == "table" ) then
-			Line(out, C("ff8000", order[i][2]), order[i][3] and Clock(r.v) or Big(r.v));
-			Line(out, "    " .. C("9d9d9d", (r.cname or "") .. " · " .. (r.zname or "") .. " · " .. (r.date or "")), "");
+			any = true;
+			Row(out, { icon = I(RECORD_ICONS[order[i][1]] or "INV_Misc_QuestionMark"), name = order[i][2], hex = "ff8000",
+			           sub = (r.cname or "") .. " · " .. (r.zname or ""), value = order[i][3] and Clock(r.v) or Big(r.v), vsub = r.date or "" });
 		end
 	end
-	if ( table.getn(out) == 1 ) then Line(out, "No records yet.", ""); end
+	if ( not any ) then Note(out, "No records yet."); end
 	-- the builds behind your best runs: highest DPS first
 	local builds = {};
 	for i = 1, table.getn(DB().builds or {}) do
 		local bd = DB().builds[i];
 		if ( not classKey or bd.class == classKey ) then table.insert(builds, bd); end
 	end
-	table.sort(builds, function(a, b) return Num(a.dps) > Num(b.dps); end);
-	if ( table.getn(builds) > 0 ) then
-		Gap(out);
-		Head(out, "Best builds");
-		for i = 1, math.min(8, table.getn(builds)) do
-			local bd = builds[i];
-			local hex = bd.kind == "victory" and "1eff00" or "ffffff";
-			Line(out, C(ClassHex(bd.class), bd.cname or "") .. "  " .. C(hex, bd.result or "") .. "  " .. C("9d9d9d", bd.zname or ""),
-			     C("ff8000", Big(bd.dps) .. " DPS") .. "  ·  " .. Clock(bd.t), ClassIcon(bd.class));
-			local parts = {};
-			for j = 1, table.getn(bd.abilities or {}) do
-				local a = bd.abilities[j];
-				table.insert(parts, (a.name or "?") .. (Num(a.rank) > 0 and (" " .. a.rank) or ""));
-			end
-			Line(out, "    " .. C("9d9d9d", table.concat(parts, ", ")), "");
+	table.sort(builds, function(a, c) return Num(a.dps) > Num(c.dps); end);
+	Head(out, "Best builds");
+	for i = 1, math.min(8, table.getn(builds)) do
+		local bd = builds[i];
+		local parts = {};
+		for j = 1, table.getn(bd.abilities or {}) do
+			local a = bd.abilities[j];
+			table.insert(parts, (a.name or "?") .. (Num(a.rank) > 0 and (" " .. a.rank) or ""));
 		end
+		Row(out, { icon = ClassIcon(bd.class), name = (bd.cname or "") .. " · " .. (bd.kind == "victory" and "Victory" or (bd.result or "")) .. " · " .. (bd.zname or ""),
+		           hex = ClassHex(bd.class), sub = table.concat(parts, ", "), value = Big(bd.dps) .. " DPS", vhex = "ff8000",
+		           vsub = (bd.date or "") .. " · " .. Clock(bd.t), spells = bd.abilities });
 	end
+	if ( table.getn(builds) == 0 ) then Note(out, "Your best builds show up here after a DPS high or a victory."); end
 	return out;
 end
 
@@ -250,50 +254,54 @@ local function Nemesis()
 	local db = DB();
 	local b, name = Block();
 	local killers = Sorted(classKey and b.nemesis or db.nemesis, function(v) return Num(v.kills); end);
-	Head(out, "Nemesis  -  " .. name);
-	if ( killers[1] ) then
-		Line(out, "Your nemesis: " .. C("ff4040", killers[1].key), Big(killers[1].v.kills) .. " kills");
-	else
-		Line(out, "No one has killed you yet.", "");
-	end
 	local deaths = 0;
 	for i = 1, table.getn(killers) do deaths = deaths + Num(killers[i].v.kills); end
 	local beaten = db.bossKills or {};
-	for i = 2, math.min(8, table.getn(killers)) do
-		local won = Num(beaten[killers[i].key]);
-		Line(out, "    " .. killers[i].key, Big(killers[i].v.kills) .. " kills  (" .. Pct(killers[i].v.kills, deaths) .. ")" ..
-		     (won > 0 and ("  ·  " .. C("1eff00", "you beat it " .. Big(won))) or ""));
+	if ( killers[1] ) then
+		Head(out, "Your nemesis: " .. killers[1].key);
+		Tiles(out, { { Big(killers[1].v.kills), "Times it killed you" }, { Pct(killers[1].v.kills, deaths), "Of your deaths" },
+		             { Big(deaths), "Deaths" }, { Big(Num(beaten[killers[1].key])), "Times you beat it" } });
 	end
+	Head(out, "Who kills you");
+	for i = 1, math.min(15, table.getn(killers)) do
+		local k = killers[i];
+		local won = Num(beaten[k.key]);
+		Row(out, { icon = I("Ability_Creature_Cursed_02"), name = k.key, hex = "ff5a4a",
+		           sub = "Killed you " .. Big(k.v.kills) .. " times (" .. Pct(k.v.kills, deaths) .. ")" .. (won > 0 and (" · You beat it " .. Big(won) .. " times") or ""),
+		           value = Big(k.v.kills), vsub = k.v.last or "", bar = Num(k.v.kills) / math.max(1, deaths), bhex = "c41f3b" });
+	end
+	if ( table.getn(killers) == 0 ) then Note(out, "No one has killed you yet."); end
 	-- revenge: the bosses you have beaten most
 	local list = {};
-	for name, n in pairs(beaten) do table.insert(list, { key = name, n = Num(n) }); end
-	table.sort(list, function(a, b) return a.n > b.n; end);
+	for nm, n in pairs(beaten) do table.insert(list, { key = nm, n = Num(n) }); end
+	table.sort(list, function(a, c) return a.n > c.n; end);
 	if ( table.getn(list) > 0 ) then
-		Gap(out);
 		Head(out, "Revenge: bosses you beat");
-		for i = 1, math.min(8, table.getn(list)) do
+		for i = 1, math.min(15, table.getn(list)) do
 			local k = db.nemesis[list[i].key];
-			Line(out, "    " .. list[i].key, C("1eff00", "beaten " .. Big(list[i].n)) ..
-			     (type(k) == "table" and ("  ·  " .. C("ff4040", "killed you " .. Big(k.kills))) or ""));
+			local got = type(k) == "table" and Num(k.kills) or 0;
+			Row(out, { icon = I("Ability_Warrior_Revenge"), name = list[i].key, hex = "f5e9c8",
+			           sub = "You beat it " .. Big(list[i].n) .. " times" .. (got > 0 and (" · It killed you " .. Big(got) .. " times") or ""),
+			           value = Big(list[i].n) .. " : " .. Big(got), vhex = list[i].n >= got and "5fd35f" or "ff4040",
+			           vsub = list[i].n >= got and "you lead" or "it leads", bar = list[i].n / math.max(1, list[1].n), bhex = "5fd35f" });
 		end
 	end
-	Gap(out);
 	Head(out, "Death log");
 	local d = db.deaths;
 	local shown = 0;
 	for i = table.getn(d), 1, -1 do
 		local e = d[i];
-		if ( not classKey or e.class == classKey ) then
+		if ( (not classKey or e.class == classKey) and shown < 30 ) then
 			shown = shown + 1;
 			local how = "";
-			if ( (e.spell or "") ~= "" ) then how = " - " .. e.spell; end
+			if ( (e.spell or "") ~= "" ) then how = " · " .. e.spell; end
 			if ( Num(e.amt) > 0 ) then how = how .. " " .. Big(e.amt); end
-			Line(out, C("ff4040", e.killer) .. how, C(ClassHex(e.class), e.cname) .. " " .. Big(e.lvl) .. "  ·  " .. Clock(e.t));
-			Line(out, "    " .. C("9d9d9d", (e.date or "") .. "  " .. (e.zname or "")), "");
-			if ( (e.last or "") ~= "" ) then Line(out, "    " .. C("9d9d9d", "last hits: " .. e.last), ""); end
+			Row(out, { icon = ClassIcon(e.class), name = "Slain by " .. (e.killer or "?") .. how, hex = "ff5a4a",
+			           sub = (e.cname or "") .. " · " .. (e.zname or "") .. " · Survived " .. Clock(e.t) .. " · Level " .. Big(e.lvl),
+			           sub2 = (e.last or "") ~= "" and ("Last hits: " .. e.last) or nil, value = Clock(e.t), vsub = e.date or "" });
 		end
 	end
-	if ( shown == 0 ) then Line(out, "No deaths recorded yet.", ""); end
+	if ( shown == 0 ) then Note(out, "No deaths recorded yet."); end
 	return out;
 end
 
@@ -301,29 +309,29 @@ local function Coop()
 	local out = {};
 	local co = DB().coop;
 	Head(out, "Co-op");
-	Line(out, "Runs with friends", Big(co.runs) .. "  (won " .. Pct(co.wins, co.runs) .. ")");
-	Line(out, "Solo runs", Big(co.solo) .. "  (won " .. Pct(co.soloWins, co.solo) .. ")");
-	Line(out, "Time together", Hours(co.time));
-	Line(out, "Kills / bosses together", Big(co.kills) .. " / " .. Big(co.bosses));
-	local bt = co.best and co.best.time;
-	if ( type(bt) == "table" ) then Line(out, "Longest run together", Clock(bt.v) .. "  " .. C("9d9d9d", bt.with or "")); end
-	local fw = co.best and co.best.fastestWin;
-	if ( type(fw) == "table" ) then Line(out, "Fastest win together", Clock(fw.v) .. "  " .. C("9d9d9d", fw.with or "")); end
-	Gap(out);
-	Head(out, "Who you play with");
+	Tiles(out, { { Big(co.runs), "Runs with friends" }, { Pct(co.wins, co.runs), "Co-op win rate" }, { Pct(co.soloWins, co.solo), "Solo win rate" },
+	             { Hours(co.time), "Time together" } });
 	local list = Sorted(co.friends, function(v) return Num(v.runs); end);
+	if ( list[1] ) then
+		local t = list[1].v;
+		Head(out, "Your top partner: " .. list[1].key .. ((t.cname or "") ~= "" and (" (" .. t.cname .. ")") or ""));
+		Tiles(out, { { Big(t.runs), "Runs together" }, { Big(t.wins), "Victories together" }, { Pct(t.wins, t.runs), "Win rate together" },
+		             { Hours(t.time), "Time together" } });
+	end
+	Head(out, "Your party");
+	local most = list[1] and Num(list[1].v.runs) or 1;
 	for i = 1, table.getn(list) do
 		local e = list[i].v;
-		Line(out, C(ClassHex(e.class), list[i].key) .. ((e.cname or "") ~= "" and C("9d9d9d", "  " .. e.cname) or ""),
-		     Big(e.runs) .. " runs  ·  " .. Big(e.wins) .. " won", ClassIcon(e.class));
-		local acc = "first " .. (e.first or "?");
-		if ( (e.firstWin or "") ~= "" ) then acc = acc .. "  ·  first win " .. e.firstWin; end
-		if ( Num(e.fastestWin) > 0 ) then acc = acc .. "  ·  fastest win " .. Clock(e.fastestWin); end
-		Line(out, "    " .. C("9d9d9d", acc), "");
-		Line(out, "    " .. C("9d9d9d", "longest " .. Clock(e.bestTime) .. "  ·  most bosses " .. Big(e.mostBosses) ..
-		     "  ·  their damage " .. Big(e.dmg) .. "  ·  last " .. (e.last or "")), "");
+		local more = {};
+		if ( Num(e.bestTime) > 0 ) then table.insert(more, "Best together: " .. Clock(e.bestTime) .. ", level " .. Big(e.bestLvl)); end
+		if ( Num(e.fastestWin) > 0 ) then table.insert(more, "fastest win " .. Clock(e.fastestWin)); end
+		if ( (e.first or "") ~= "" ) then table.insert(more, "since " .. string.sub(e.first, 1, 10)); end
+		Row(out, { icon = ClassIcon(e.class) or I("INV_Misc_GroupNeedMore"), name = list[i].key .. ((e.cname or "") ~= "" and (" · " .. e.cname) or ""),
+		           hex = ClassHex(e.class), sub = Big(e.runs) .. " runs together · " .. Big(e.wins) .. " won (" .. Pct(e.wins, e.runs) .. ")",
+		           sub2 = table.concat(more, " · "), value = string.sub(e.last or "", 1, 10), vsub = "last played",
+		           bar = Num(e.runs) / math.max(1, most), bhex = ClassHex(e.class) });
 	end
-	if ( table.getn(list) == 0 ) then Line(out, "No co-op runs recorded yet.", ""); end
+	if ( table.getn(list) == 0 ) then Note(out, "No co-op runs recorded yet. Play a run with friends and they show up here."); end
 	return out;
 end
 
@@ -332,24 +340,238 @@ local function History()
 	local h = DB().history;
 	local b, name = Block();
 	Head(out, "Recent runs  -  " .. name);
+	local shown = 0;
 	for i = table.getn(h), 1, -1 do
 		local r = h[i];
-		if ( not classKey or r.class == classKey ) then
+		if ( (not classKey or r.class == classKey) and shown < 40 ) then
+			shown = shown + 1;
 			local hex = r.kind == "victory" and "1eff00" or r.kind == "defeat" and "ff4040" or "9d9d9d";
-			Line(out, C(hex, r.result) .. "  " .. C(ClassHex(r.class), r.cname) .. "  " .. (r.zname or ""),
-			     Clock(r.t) .. "  ·  lvl " .. Big(r.lvl) .. "  ·  " .. Big(r.kills) .. " kills" ..
-			     (Num(r.dps) > 0 and ("  ·  " .. C("ff8000", Big(r.dps) .. " DPS")) or ""), ClassIcon(r.class));
-			local extra = r.date or "";
-			if ( r.party ) then extra = extra .. "  with " .. r.party; end
-			if ( r.killer ) then extra = extra .. "  slain by " .. r.killer; end
-			Line(out, "    " .. C("9d9d9d", extra), "");
+			local parts = {};
+			for j = 1, table.getn(r.abilities or {}) do table.insert(parts, r.abilities[j].name or "?"); end
+			Row(out, { icon = ClassIcon(r.class), name = (r.result or "") .. " · " .. (r.cname or "") .. " · " .. (r.zname or ""), hex = hex,
+			           sub = (r.date or "") .. (r.party and ("  with " .. r.party) or "") .. (r.killer and ("  slain by " .. r.killer) or ""),
+			           sub2 = table.concat(parts, ", "), value = Clock(r.t), vhex = hex,
+			           vsub = "Level " .. Big(r.lvl) .. " · " .. Big(r.kills) .. " kills" .. (Num(r.dps) > 0 and (" · " .. Big(r.dps) .. " DPS") or "") });
 		end
 	end
-	if ( table.getn(out) == 1 ) then Line(out, "No runs recorded yet.", ""); end
+	if ( shown == 0 ) then Note(out, "No runs recorded yet."); end
 	return out;
 end
 
 local BUILD = { Overview, Classes, Abilities, Records, Nemesis, Coop, History };
+
+-- ---------------------------------------------------------------- drawing the blocks (frames are reused)
+local pools = { row = {}, tile = {}, head = {}, note = {} };
+local used = { row = 0, tile = 0, head = 0, note = 0 };
+
+-- a card in the tooltip style: dark inside, a thin border
+local function Card(f, r, g, b)
+	f:SetBackdrop({ bgFile = "Interface\\Tooltips\\UI-Tooltip-Background", edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border",
+	                tile = true, tileSize = 16, edgeSize = 12, insets = { left = 3, right = 3, top = 3, bottom = 3 } });
+	f:SetBackdropColor(0.08, 0.07, 0.11, 0.92);
+	f:SetBackdropBorderColor(r or 0.35, g or 0.33, b or 0.4);
+end
+
+local function GetRow()
+	used.row = used.row + 1;
+	local f = pools.row[used.row];
+	if ( f ) then return f; end
+	f = CreateFrame("Frame", nil, child);
+	Card(f);
+	f.icon = f:CreateTexture(nil, "ARTWORK");
+	f.icon:SetWidth(30);
+	f.icon:SetHeight(30);
+	f.icon:SetPoint("TOPLEFT", f, "TOPLEFT", 7, -6);
+	f.name = f:CreateFontString(nil, "OVERLAY", "GameFontNormal");
+	f.name:SetPoint("TOPLEFT", f, "TOPLEFT", 44, -6);
+	f.name:SetJustifyH("LEFT");
+	f.sub = f:CreateFontString(nil, "OVERLAY", "GameFontHighlightSmall");
+	f.sub:SetPoint("TOPLEFT", f.name, "BOTTOMLEFT", 0, -2);
+	f.sub:SetJustifyH("LEFT");
+	f.sub:SetTextColor(0.37, 0.83, 0.37);
+	f.sub2 = f:CreateFontString(nil, "OVERLAY", "GameFontDisableSmall");
+	f.sub2:SetPoint("TOPLEFT", f.sub, "BOTTOMLEFT", 0, -2);
+	f.sub2:SetJustifyH("LEFT");
+	f.value = f:CreateFontString(nil, "OVERLAY", "GameFontHighlight");
+	f.value:SetPoint("TOPRIGHT", f, "TOPRIGHT", -9, -7);
+	f.value:SetJustifyH("RIGHT");
+	f.vsub = f:CreateFontString(nil, "OVERLAY", "GameFontDisableSmall");
+	f.vsub:SetPoint("TOPRIGHT", f.value, "BOTTOMRIGHT", 0, -3);
+	f.vsub:SetJustifyH("RIGHT");
+	f.bar = CreateFrame("StatusBar", nil, f);
+	f.bar:SetStatusBarTexture("Interface\\TargetingFrame\\UI-StatusBar");
+	f.bar:SetMinMaxValues(0, 1);
+	f.bar:SetHeight(3);
+	f.bar:SetPoint("BOTTOMLEFT", f, "BOTTOMLEFT", 44, 5);
+	f.bar:SetPoint("BOTTOMRIGHT", f, "BOTTOMRIGHT", -9, 5);
+	f.spells = {};
+	pools.row[used.row] = f;
+	return f;
+end
+
+local function GetTile()
+	used.tile = used.tile + 1;
+	local f = pools.tile[used.tile];
+	if ( f ) then return f; end
+	f = CreateFrame("Frame", nil, child);
+	Card(f);
+	f.top = f:CreateTexture(nil, "ARTWORK");
+	f.top:SetTexture(0.95, 0.76, 0.3);                     -- the launcher's gold line along the top
+	f.top:SetHeight(2);
+	f.top:SetPoint("TOPLEFT", f, "TOPLEFT", 6, -4);
+	f.top:SetPoint("TOPRIGHT", f, "TOPRIGHT", -6, -4);
+	f.value = f:CreateFontString(nil, "OVERLAY", "GameFontHighlightLarge");
+	f.value:SetPoint("TOP", f, "TOP", 0, -9);
+	f.label = f:CreateFontString(nil, "OVERLAY", "GameFontDisableSmall");
+	f.label:SetPoint("TOP", f.value, "BOTTOM", 0, -2);
+	pools.tile[used.tile] = f;
+	return f;
+end
+
+local function GetHead()
+	used.head = used.head + 1;
+	local f = pools.head[used.head];
+	if ( f ) then return f; end
+	f = CreateFrame("Frame", nil, child);
+	f.text = f:CreateFontString(nil, "OVERLAY", "GameFontNormal");
+	f.text:SetPoint("TOPLEFT", f, "TOPLEFT", 2, -6);
+	f.line = f:CreateTexture(nil, "ARTWORK");
+	f.line:SetTexture(0.7, 0.6, 0.38, 0.6);
+	f.line:SetHeight(1);
+	f.line:SetPoint("BOTTOMLEFT", f, "BOTTOMLEFT", 0, 2);
+	f.line:SetPoint("BOTTOMRIGHT", f, "BOTTOMRIGHT", 0, 2);
+	pools.head[used.head] = f;
+	return f;
+end
+
+local function GetNote()
+	used.note = used.note + 1;
+	local f = pools.note[used.note];
+	if ( f ) then return f; end
+	f = CreateFrame("Frame", nil, child);
+	f.text = f:CreateFontString(nil, "OVERLAY", "GameFontDisable");
+	f.text:SetPoint("TOPLEFT", f, "TOPLEFT", 6, -4);
+	f.text:SetJustifyH("LEFT");
+	pools.note[used.note] = f;
+	return f;
+end
+
+-- a build's spells as small icons under its row
+local function Spells(f, list, y)
+	for i = 1, table.getn(f.spells) do f.spells[i]:Hide(); end
+	if ( type(list) ~= "table" ) then return; end
+	for i = 1, math.min(12, table.getn(list)) do
+		local t = f.spells[i];
+		if ( not t ) then
+			t = f:CreateTexture(nil, "ARTWORK");
+			t:SetWidth(22);
+			t:SetHeight(22);
+			f.spells[i] = t;
+		end
+		t:ClearAllPoints();
+		t:SetPoint("TOPLEFT", f, "TOPLEFT", 44 + (i - 1) * 25, y);
+		SetIcon(t, SpellIcon(list[i].name));
+	end
+end
+
+local function Lay(items)
+	for k, _ in pairs(used) do
+		used[k] = 0;
+		for i = 1, table.getn(pools[k]) do pools[k][i]:Hide(); end
+	end
+	local y = 0;
+	for _, it in ipairs(items) do
+		if ( it.kind == "head" ) then
+			local f = GetHead();
+			f:SetWidth(CW);
+			f:SetHeight(24);
+			f:SetPoint("TOPLEFT", child, "TOPLEFT", 0, -y);
+			f.text:SetText(it.text);
+			f:Show();
+			y = y + 28;
+		elseif ( it.kind == "note" ) then
+			local f = GetNote();
+			f:SetWidth(CW);
+			f:SetHeight(20);
+			f:SetPoint("TOPLEFT", child, "TOPLEFT", 0, -y);
+			f.text:SetText(it.text);
+			f:Show();
+			y = y + 22;
+		elseif ( it.kind == "tiles" ) then
+			local tw = math.floor((CW - 3 * 6) / 4);
+			for i = 1, table.getn(it.items) do
+				local f = GetTile();
+				f:SetWidth(tw);
+				f:SetHeight(42);
+				f:ClearAllPoints();
+				f:SetPoint("TOPLEFT", child, "TOPLEFT", math.mod(i - 1, 4) * (tw + 6), -(y + math.floor((i - 1) / 4) * 48));
+				f.value:SetText(it.items[i][1]);
+				f.label:SetText(it.items[i][2]);
+				f:Show();
+			end
+			y = y + math.ceil(table.getn(it.items) / 4) * 48 + 4;
+		else
+			local f = GetRow();
+			local h = 44;
+			if ( it.sub2 and it.sub2 ~= "" ) then h = h + 12; end
+			if ( it.spells ) then h = h + 26; end
+			f:SetWidth(CW);
+			f:SetHeight(h);
+			f:ClearAllPoints();
+			f:SetPoint("TOPLEFT", child, "TOPLEFT", 0, -y);
+			SetIcon(f.icon, it.icon);
+			f.name:SetText(it.name or "");
+			f.name:SetTextColor(RGB(it.hex or "ffd100"));
+			f.sub:SetText(it.sub or "");
+			f.sub2:SetText(it.sub2 or "");
+			f.value:SetText(it.value or "");
+			f.value:SetTextColor(RGB(it.vhex or "f5e9c8"));
+			f.vsub:SetText(it.vsub or "");
+			local vw = math.max(f.value:GetStringWidth(), f.vsub:GetStringWidth());
+			f.name:SetWidth(CW - 44 - vw - 24);
+			f.sub:SetWidth(CW - 44 - vw - 24);
+			f.sub2:SetWidth(CW - 44 - 16);
+			if ( it.bar ) then
+				f.bar:SetValue(math.min(1, math.max(0, it.bar)));
+				f.bar:SetStatusBarColor(RGB(it.bhex or "b39b62"));
+				f.bar:Show();
+			else
+				f.bar:Hide();
+			end
+			Spells(f, it.spells, -(h - 32));
+			f:Show();
+			y = y + h + 5;
+		end
+	end
+	child:SetHeight(math.max(1, y));
+	return y;
+end
+
+-- ---------------------------------------------------------------- the header card
+local CHIPS = { { "kills", "Ability_DualWield", "Enemies slain" }, { "bosses", "INV_Misc_Head_Dragon_01", "Bosses" },
+                { "gold", "INV_Misc_Coin_01", "Gold" }, { "winrate", "Spell_Holy_SealOfWisdom", "Win rate" },
+                { "dps", "Ability_Warrior_BattleShout", "Highest DPS" }, { "time", "INV_Misc_PocketWatch_01", "Time played" } };
+
+local function Hero()
+	local db = DB();
+	local b, name = Block();
+	if ( classKey ) then
+		SetIcon(hero.portrait, ClassIcon(classKey));
+		hero.heading:SetText(C(ClassHex(classKey), name));
+		hero.line:SetText("Runs " .. Big(b.runs) .. " · Victories " .. Big(b.wins) .. " · Best level " .. Big(b.bestLvl) ..
+		                  "   ·   picked in " .. Pct(b.runs, db.totals.runs) .. " of your runs");
+	else
+		if ( SetPortraitTexture ) then SetPortraitTexture(hero.portrait, "player"); hero.portrait:SetTexCoord(0, 1, 0, 1); hero.portrait:Show(); end
+		hero.heading:SetText(UnitName and UnitName("player") or "Your Survivor");
+		hero.line:SetText("Runs " .. Big(b.runs) .. " · Victories " .. Big(b.wins) .. " · Best level " .. Big(b.bestLvl));
+	end
+	local best = classKey and b.best or db.best;
+	local vals = { kills = Big(b.kills), bosses = Big(b.bosses), gold = Big(b.gold), winrate = Pct(b.wins, b.runs),
+	               dps = type(best.dps) == "table" and Big(best.dps.v) or "-", time = classKey and Hours(b.time) or Hours(db.play.seconds) };
+	for i = 1, table.getn(CHIPS) do
+		hero.chips[i].value:SetText(vals[CHIPS[i][1]]);
+	end
+end
 
 -- ---------------------------------------------------------------- the window
 local function Refresh()
@@ -363,22 +585,12 @@ local function Refresh()
 	end
 	local _, name = Block();
 	classButton:SetText(classKey and name or "All classes");
-	SetIcon(classIcon, classKey and ClassIcon(classKey) or { "Interface\\Icons\\INV_Misc_Book_09" });
-	if ( tab == 2 or tab == 6 ) then classButton:Hide(); classIcon:Hide(); else classButton:Show(); end
-	local all = BUILD[tab]();
-	local pages = math.max(1, math.ceil(table.getn(all) / ROWS));
-	if ( page > pages ) then page = pages; end
-	if ( page < 1 ) then page = 1; end
-	for i = 1, ROWS do
-		local e = all[(page - 1) * ROWS + i];
-		lines[i].l:SetText(e and e[1] or "");
-		lines[i].r:SetText(e and e[2] or "");
-		SetIcon(lines[i].icon, e and e[3] or nil);
-		lines[i].l:SetPoint("TOPLEFT", frame, "TOPLEFT", (e and e[3]) and 44 or 26, lines[i].y);
-	end
-	pageText:SetText(page .. " / " .. pages);
-	if ( page > 1 ) then prevButton:Enable(); else prevButton:Disable(); end
-	if ( page < pages ) then nextButton:Enable(); else nextButton:Disable(); end
+	if ( tab == 2 or tab == 6 ) then classButton:Hide(); else classButton:Show(); end
+	Hero();
+	Lay(BUILD[tab]());
+	if ( scroll.UpdateScrollChildRect ) then scroll:UpdateScrollChildRect(); end
+	scroll:SetVerticalScroll(0);
+	if ( AZSStatsScrollScrollBar ) then AZSStatsScrollScrollBar:SetValue(0); end
 end
 
 -- CLASS: every class, then each class you played (most played first)
@@ -390,7 +602,6 @@ local function NextClass()
 	end
 	idx = idx + 1;
 	if ( idx > table.getn(list) ) then classKey = nil; else classKey = list[idx].key; end
-	page = 1;
 	Refresh();
 end
 
@@ -399,7 +610,7 @@ local function Button(parent, text, width, onClick)
 	b:SetWidth(width);
 	b:SetHeight(22);
 	b:SetText(text);
-	b:SetScript("OnClick", onClick);
+	if ( onClick ) then b:SetScript("OnClick", onClick); end
 	return b;
 end
 
@@ -412,19 +623,6 @@ end
 
 local function Sound(name) if ( PlaySound ) then pcall(PlaySound, name); end end
 
--- the spellbook's page arrows
-local function Arrow(parent, dir, onClick)
-	local b = CreateFrame("Button", nil, parent);
-	b:SetWidth(28);
-	b:SetHeight(28);
-	b:SetNormalTexture("Interface\\Buttons\\UI-SpellbookIcon-" .. dir .. "Page-Up");
-	b:SetPushedTexture("Interface\\Buttons\\UI-SpellbookIcon-" .. dir .. "Page-Down");
-	b:SetDisabledTexture("Interface\\Buttons\\UI-SpellbookIcon-" .. dir .. "Page-Disabled");
-	b:SetHighlightTexture("Interface\\Buttons\\UI-Common-MouseHilight", "ADD");
-	b:SetScript("OnClick", function() Sound("igAbiliityPageTurn"); onClick(); end);
-	return b;
-end
-
 local function Build()
 	frame = CreateFrame("Frame", "AZSStatsFrame", UIParent);
 	frame:SetWidth(W);
@@ -435,19 +633,17 @@ local function Build()
 	                    edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
 	                    tile = true, tileSize = 32, edgeSize = 32, insets = { left = 11, right = 12, top = 12, bottom = 11 } });
 	frame:EnableMouse(true);
-	if ( frame.EnableMouseWheel ) then frame:EnableMouseWheel(true); end
 	frame:SetMovable(true);
 	if ( frame.SetClampedToScreen ) then frame:SetClampedToScreen(true); end   -- not in every client
 	frame:RegisterForDrag("LeftButton");
 	frame:SetScript("OnDragStart", function() this:StartMoving(); end);
 	frame:SetScript("OnDragStop", function() this:StopMovingOrSizing(); end);
-	frame:SetScript("OnMouseWheel", function() page = page - arg1; Refresh(); end);   -- the wheel turns the pages
 	frame:SetScript("OnShow", function() Sound("igCharacterInfoOpen"); Refresh(); end);
 	frame:SetScript("OnHide", function() Sound("igCharacterInfoClose"); end);
 	frame:Hide();
 	table.insert(UISpecialFrames, "AZSStatsFrame");      -- Escape closes it
 
-	-- the dialog header with the title, and your portrait in a gold ring at the top left
+	-- the dialog header with the title
 	local header = frame:CreateTexture(nil, "ARTWORK");
 	header:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Header");
 	header:SetWidth(300);
@@ -456,86 +652,85 @@ local function Build()
 	local title = frame:CreateFontString(nil, "OVERLAY", "GameFontNormal");
 	title:SetPoint("TOP", header, "TOP", 0, -14);
 	title:SetText("AZS Stats");
-	local portrait = frame:CreateTexture(nil, "ARTWORK");
-	portrait:SetWidth(46);
-	portrait:SetHeight(46);
-	portrait:SetPoint("TOPLEFT", frame, "TOPLEFT", 18, -16);
-	if ( SetPortraitTexture ) then SetPortraitTexture(portrait, "player"); end
-	local ring = frame:CreateTexture(nil, "OVERLAY");
-	ring:SetTexture("Interface\\Minimap\\MiniMap-TrackingBorder");
-	ring:SetWidth(84);
-	ring:SetHeight(84);
-	ring:SetPoint("TOPLEFT", portrait, "TOPLEFT", -6, 5);
-	frame:RegisterEvent("UNIT_PORTRAIT_UPDATE");
-	frame:SetScript("OnEvent", function() if ( arg1 == "player" and SetPortraitTexture ) then SetPortraitTexture(portrait, "player"); end end);
 	local close = CreateFrame("Button", nil, frame, "UIPanelCloseButton");
 	close:SetPoint("TOPRIGHT", frame, "TOPRIGHT", -6, -6);
 
-	-- CLASS: all classes or one, with its icon
-	classIcon = frame:CreateTexture(nil, "ARTWORK");
-	classIcon:SetWidth(22);
-	classIcon:SetHeight(22);
-	classIcon:SetPoint("TOPLEFT", frame, "TOPLEFT", 74, -38);
-	classButton = Button(frame, "All classes", 150, function() Sound("igMainMenuOptionCheckBoxOn"); NextClass(); end);
-	classButton:SetPoint("LEFT", classIcon, "RIGHT", 6, 0);
-	local hint = frame:CreateFontString(nil, "OVERLAY", "GameFontDisableSmall");
-	hint:SetPoint("LEFT", classButton, "RIGHT", 8, 0);
-	hint:SetText("click to switch class");
-
-	-- the lines, each with room for an icon
-	local rule = frame:CreateTexture(nil, "ARTWORK");
-	rule:SetTexture("Interface\\DialogFrame\\UI-DialogBox-Divider");
-	rule:SetWidth(W - 40);
-	rule:SetHeight(16);
-	rule:SetPoint("TOPLEFT", frame, "TOPLEFT", 20, -70);
-	lines = {};
-	for i = 1, ROWS do
-		local y = -86 - (i - 1) * 17;
-		local icon = frame:CreateTexture(nil, "ARTWORK");
-		icon:SetWidth(15);
-		icon:SetHeight(15);
-		icon:SetPoint("TOPLEFT", frame, "TOPLEFT", 24, y);
-		local l = frame:CreateFontString(nil, "OVERLAY", "GameFontHighlightSmall");
-		l:SetPoint("TOPLEFT", frame, "TOPLEFT", 26, y);
-		l:SetWidth(320);
-		l:SetHeight(16);
-		l:SetJustifyH("LEFT");
-		local r = frame:CreateFontString(nil, "OVERLAY", "GameFontHighlightSmall");
-		r:SetPoint("TOPRIGHT", frame, "TOPRIGHT", -24, y);
-		r:SetWidth(W - 48 - 150);
-		r:SetHeight(16);
-		r:SetJustifyH("RIGHT");
-		lines[i] = { l = l, r = r, icon = icon, y = y };
+	-- the header card: portrait in a gold ring, heading, line, and six chips with item icons
+	hero = CreateFrame("Frame", nil, frame);
+	hero:SetWidth(W - 40);
+	hero:SetHeight(104);
+	hero:SetPoint("TOPLEFT", frame, "TOPLEFT", 20, -30);
+	Card(hero, 0.6, 0.5, 0.3);
+	hero.portrait = hero:CreateTexture(nil, "ARTWORK");
+	hero.portrait:SetWidth(52);
+	hero.portrait:SetHeight(52);
+	hero.portrait:SetPoint("TOPLEFT", hero, "TOPLEFT", 12, -10);
+	local ring = hero:CreateTexture(nil, "OVERLAY");
+	ring:SetTexture("Interface\\Minimap\\MiniMap-TrackingBorder");
+	ring:SetWidth(92);
+	ring:SetHeight(92);
+	ring:SetPoint("TOPLEFT", hero.portrait, "TOPLEFT", -7, 6);
+	hero.heading = hero:CreateFontString(nil, "OVERLAY", "GameFontNormalLarge");
+	hero.heading:SetPoint("TOPLEFT", hero, "TOPLEFT", 78, -12);
+	hero.line = hero:CreateFontString(nil, "OVERLAY", "GameFontHighlightSmall");
+	hero.line:SetPoint("TOPLEFT", hero.heading, "BOTTOMLEFT", 0, -4);
+	classButton = Button(hero, "All classes", 130, function() Sound("igMainMenuOptionCheckBoxOn"); NextClass(); end);
+	classButton:SetPoint("TOPRIGHT", hero, "TOPRIGHT", -10, -10);
+	hero.chips = {};
+	local cw = math.floor((W - 40 - 24 - 5 * 4) / 6);
+	for i = 1, table.getn(CHIPS) do
+		local c = CreateFrame("Frame", nil, hero);
+		c:SetWidth(cw);
+		c:SetHeight(32);
+		c:SetPoint("BOTTOMLEFT", hero, "BOTTOMLEFT", 12 + (i - 1) * (cw + 4), 8);
+		Card(c);
+		c.icon = c:CreateTexture(nil, "ARTWORK");
+		c.icon:SetWidth(20);
+		c.icon:SetHeight(20);
+		c.icon:SetPoint("LEFT", c, "LEFT", 6, 0);
+		SetIcon(c.icon, I(CHIPS[i][2]));
+		c.value = c:CreateFontString(nil, "OVERLAY", "GameFontHighlightSmall");
+		c.value:SetPoint("TOPLEFT", c.icon, "TOPRIGHT", 4, 1);
+		c.label = c:CreateFontString(nil, "OVERLAY", "GameFontDisableSmall");
+		c.label:SetPoint("BOTTOMLEFT", c.icon, "BOTTOMRIGHT", 4, -1);
+		c.label:SetText(CHIPS[i][3]);
+		hero.chips[i] = c;
 	end
 
-	-- the spellbook's arrows and the page
-	prevButton = Arrow(frame, "Prev", function() page = page - 1; Refresh(); end);
-	prevButton:SetPoint("BOTTOMLEFT", frame, "BOTTOMLEFT", 22, 18);
-	nextButton = Arrow(frame, "Next", function() page = page + 1; Refresh(); end);
-	nextButton:SetPoint("LEFT", prevButton, "RIGHT", 2, 0);
-	pageText = frame:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall");
-	pageText:SetPoint("LEFT", nextButton, "RIGHT", 6, 0);
-	local foot = frame:CreateFontString(nil, "OVERLAY", "GameFontDisableSmall");
-	foot:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -22, 26);
-	foot:SetText("Also on the launcher's STATS page");
+	-- the list: the game's scroll frame and scroll bar
+	local ok;
+	scroll, ok = Templated("ScrollFrame", "AZSStatsScroll", frame, "UIPanelScrollFrameTemplate");
+	scroll:SetPoint("TOPLEFT", hero, "BOTTOMLEFT", 2, -8);
+	scroll:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -40, 24);
+	child = CreateFrame("Frame", nil, scroll);
+	child:SetWidth(CW);
+	child:SetHeight(10);
+	scroll:SetScrollChild(child);
+	if ( not ok ) then                                  -- no template: the mouse wheel still scrolls
+		scroll:EnableMouseWheel(true);
+		scroll:SetScript("OnMouseWheel", function()
+			local max = math.max(0, child:GetHeight() - this:GetHeight());
+			this:SetVerticalScroll(math.max(0, math.min(max, this:GetVerticalScroll() - arg1 * 40)));
+		end);
+	end
 
 	-- the character sheet's tabs, along the bottom edge
 	tabButtons = {};
 	local templated = true;
 	for i = 1, table.getn(TABS) do
 		local index = i;
-		local b, ok = Templated("Button", "AZSStatsFrameTab" .. i, frame, "CharacterFrameTabButtonTemplate");
-		templated = templated and ok;
-		if ( not ok ) then
+		local b, tok = Templated("Button", "AZSStatsFrameTab" .. i, frame, "CharacterFrameTabButtonTemplate");
+		templated = templated and tok;
+		if ( not tok ) then
 			b:Hide();
 			b = Button(frame, TABS[i], 78, nil);
 		end
 		b:SetID(i);
 		b:SetText(TABS[i]);
-		b:SetScript("OnClick", function() Sound("igCharacterInfoTab"); tab = index; page = 1; Refresh(); end);
-		if ( i == 1 ) then b:SetPoint("TOPLEFT", frame, "BOTTOMLEFT", 12, ok and 8 or -2);
-		else b:SetPoint("LEFT", tabButtons[i - 1], "RIGHT", ok and -14 or 2, 0); end
-		if ( ok and PanelTemplates_TabResize ) then pcall(PanelTemplates_TabResize, 0, b); end
+		b:SetScript("OnClick", function() Sound("igCharacterInfoTab"); tab = index; Refresh(); end);
+		if ( i == 1 ) then b:SetPoint("TOPLEFT", frame, "BOTTOMLEFT", 12, tok and 8 or -2);
+		else b:SetPoint("LEFT", tabButtons[i - 1], "RIGHT", tok and -14 or 2, 0); end
+		if ( tok and PanelTemplates_TabResize ) then pcall(PanelTemplates_TabResize, 0, b); end
 		tabButtons[i] = b;
 	end
 	if ( templated and PanelTemplates_SetNumTabs ) then
@@ -546,7 +741,10 @@ local function Build()
 end
 
 function AZSStats_Toggle()
-	if ( not frame ) then Build(); end
+	if ( not frame ) then
+		local ok, err = pcall(Build);
+		if ( not ok ) then S().Print("|cffff4040the stats window could not be made:|r " .. tostring(err)); frame = nil; return; end
+	end
 	if ( frame:IsShown() ) then frame:Hide(); else frame:Show(); end
 end
 
