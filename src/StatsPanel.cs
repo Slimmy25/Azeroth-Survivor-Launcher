@@ -307,6 +307,9 @@ namespace AzerothLauncher
                 var row = new ArmoryRow();
                 row.Icon = Armory.Initials(k.Name);
                 row.Npc = k.Name;                            // the creature's picture, from Wowhead
+                string boss = k.Name;
+                row.Help = true;                             // ?: the guide where it is (Zones & Bosses for a boss)
+                row.Click = delegate { OpenGuideFor(boss); };
                 row.IconColor = Theme.Hex("#c41f3b");
                 row.Name = k.Name;
                 row.NameColor = Theme.Hex("#ff5a4a");
@@ -544,6 +547,9 @@ namespace AzerothLauncher
                 var row = new ArmoryRow();
                 row.Icon = Armory.Initials(a.Name);
                 row.Spell = a.Name;                          // its icon, shown from Wowhead when there is one
+                string spell = a.Name;
+                row.Help = true;                             // ?: the class's guide page with this spell
+                row.Click = delegate { App.OpenGuideFor(spell); };
                 row.IconColor = Theme.GoldDim;               // one color for every ability
                 row.Name = a.Name;
                 row.NameColor = Armory.Bright;

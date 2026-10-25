@@ -282,7 +282,7 @@ namespace AzerothLauncher
             foreach (var kv in nav) kv.Value.Active = kv.Key == name;
             RefreshStrip();
             if (name == "Changelog") clView = ClNewest;
-            if (name == "Guide") { gTopic = -1; gPage = -1; }      // the guide always opens on its topic list
+            if (name == "Guide") { gTopic = -1; gPage = -1; guideQuery = ""; }      // the guide always opens on its topic list
             if (name == "About Launcher") aboutLog = false;
             if (name == "Home")
             {

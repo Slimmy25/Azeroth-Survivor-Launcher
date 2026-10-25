@@ -420,6 +420,7 @@ namespace AzerothLauncher
         public Color IconColor = Theme.Gold, NameColor = Armory.Bright, SubColor = Armory.Green, ValueColor = Armory.Bright;
         public bool RoundIcon;
         public string Spell, ClassPic, Npc, RacePic, ZonePic;   // a picture from Wowhead instead of the badge (SpellIcons)
+        public bool Help;                                    // Click opens the guide about it: a small "?" on the icon
         public double Bar = -1;                              // 0..1 draws a thin bar under the line
         public Action Click;
     }
@@ -471,6 +472,14 @@ namespace AzerothLauncher
                         : row.ZonePic != null ? SpellIcons.Zone(row.ZonePic, this) : null;
                 if (pic != null) Armory.Picture(g, icon, pic, false, row.RoundIcon, row.IconColor);   // creatures come cut to the face
                 else Armory.Icon(g, icon, row.IconColor, row.Icon, row.RoundIcon);
+                if (row.Help && row.Click != null)
+                {
+                    var q = new Rectangle(icon.Right - 13, icon.Y - 3, 16, 16);
+                    using (var b = new SolidBrush(i == hover ? Theme.Gold : Theme.Hex("#2a2236"))) g.FillEllipse(b, q);
+                    using (var p = new Pen(Theme.Gold, 1)) g.DrawEllipse(p, q);
+                    Armory.Text(g, "?", Theme.F(8, FontStyle.Bold), i == hover ? Theme.Hex("#1a1006") : Theme.Gold, q,
+                                TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter | TextFormatFlags.SingleLine);
+                }
                 Font fv = Theme.F(11, FontStyle.Bold), fvs = Theme.F(8.5f);
                 int vw = Math.Max(Armory.TextWidth(row.Value, fv), Armory.TextWidth(row.ValueSub, fvs));
                 vw = Math.Min(vw + 4, s.Width / 3);
