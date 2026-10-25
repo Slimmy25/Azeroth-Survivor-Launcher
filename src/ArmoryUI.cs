@@ -65,15 +65,28 @@ namespace AzerothLauncher
             TextRenderer.DrawText(g, text ?? "", f, r, c, flags | TextFormatFlags.NoPrefix);
         }
 
+        // measured as Text() will draw it (the scaled font has a minimum size, so it is not simply size * Z),
+        // given back in the block's own, unscaled units
+        static Font Drawn(Font f)
+        {
+            if (Z == 1f) return f;
+            float old = Theme.Zoom;
+            Theme.Zoom = 1f;
+            try { return Theme.F(f.SizeInPoints * Z, f.Style); }
+            finally { Theme.Zoom = old; }
+        }
+
         public static int TextWidth(string text, Font f)
         {
-            return TextRenderer.MeasureText(text ?? "", f, new Size(int.MaxValue, int.MaxValue), TextFormatFlags.NoPrefix | TextFormatFlags.NoPadding).Width;
+            int w = TextRenderer.MeasureText(text ?? "", Drawn(f), new Size(int.MaxValue, int.MaxValue), TextFormatFlags.NoPrefix | TextFormatFlags.NoPadding).Width;
+            return Z == 1f ? w : (int)Math.Ceiling(w / Z);
         }
 
         public static int TextHeight(string text, Font f, int width)
         {
-            return TextRenderer.MeasureText(text ?? "", f, new Size(Math.Max(10, width), int.MaxValue),
-                                            TextFormatFlags.NoPrefix | TextFormatFlags.WordBreak).Height;
+            int h = TextRenderer.MeasureText(text ?? "", Drawn(f), new Size(Math.Max(10, (int)(width * Z)), int.MaxValue),
+                                             TextFormatFlags.NoPrefix | TextFormatFlags.WordBreak).Height;
+            return Z == 1f ? h : (int)Math.Ceiling(h / Z);
         }
 
         // the stand-in for an item icon: a framed square (or round) badge with a gradient and the initials
@@ -169,13 +182,14 @@ namespace AzerothLauncher
         {
             float old = Theme.Zoom;
             Theme.Zoom = 1f;                                 // laid out at full size, painted scaled
+            Armory.Z = Zm;                                   // measured as painted
             try
             {
                 base.Width = width;
                 base.Height = (int)Math.Ceiling((Top0 + ContentHeight(Width - 2 * Pad) + Pad) * Zm);
                 Layout2();
             }
-            finally { Theme.Zoom = old; }
+            finally { Theme.Zoom = old; Armory.Z = 1f; }
         }
 
         protected virtual void Layout2() { }
