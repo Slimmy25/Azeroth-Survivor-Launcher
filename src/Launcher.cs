@@ -228,13 +228,12 @@ namespace AzerothLauncher
             if (bg != null) g.DrawImage(bg, 0, 0, W, H);
             else g.Clear(Theme.BgBottom);
             Theme.Smooth(g);
-            g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
+            g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
             // title: "Azeroth Survivors" in big gold letters over the section area, the emblem to its right
             using (var path = new GraphicsPath())
             using (var sf = new StringFormat())
             {
-                var font = Theme.F(46, FontStyle.Bold);
-                path.AddString("Azeroth Survivors", font.FontFamily, (int)FontStyle.Bold, 58f, new PointF(0, 0), sf);
+                path.AddString("Azeroth Survivors", Theme.TitleFamily(), (int)FontStyle.Bold, 58f, new PointF(0, 0), sf);   // the decorative title font
                 RectangleF b = path.GetBounds();
                 Image em = Theme.Logo;
                 int emW = em != null ? 128 : 0, emH = em != null ? em.Height * 128 / em.Width : 0;

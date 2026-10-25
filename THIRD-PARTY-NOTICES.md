@@ -33,3 +33,9 @@ SOFTWARE.
 
 The addons offered in **Download More** are made by their own authors (named in the list) and are
 downloaded from their own links. They are not part of this repository.
+
+## Source Serif 4 (Adobe)
+
+The launcher's text font, Source Serif 4 SmText (`assets/fonts`, built into the exe unchanged), is by Adobe and is
+licensed under the SIL Open Font License 1.1. The full license is in `assets/fonts/SourceSerif4-OFL.txt`.
+Original project: https://github.com/adobe-fonts/source-serif
