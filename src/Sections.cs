@@ -1155,7 +1155,7 @@ namespace AzerothLauncher
 
         // ------------------------------------------------------------------ Options
         // Options: a bar of tabs across the top (beside the back arrow) and one short page per tab
-        static readonly string[] OptionTabs = { "FOLDERS", "GENERAL", "LANGUAGE", "LAUNCHER" };
+        static readonly string[] OptionTabs = { "FOLDERS", "GAME", "GENERAL", "LANGUAGE", "LAUNCHER" };
         int optionsTab;
 
         void PanelOptions()
@@ -1177,8 +1177,9 @@ namespace AzerothLauncher
             {
                 int end;
                 if (optionsTab == 0) end = OptionsFolders(pageW);
-                else if (optionsTab == 1) end = OptionsGeneral(pageW);
-                else if (optionsTab == 2) end = OptionsLanguage(pageW);
+                else if (optionsTab == 1) end = OptionsGame(pageW);
+                else if (optionsTab == 2) end = OptionsGeneral(pageW);
+                else if (optionsTab == 3) end = OptionsLanguage(pageW);
                 else end = OptionsLauncher(pageW);
                 var pad = new Panel();
                 pad.BackColor = Theme.Panel;
@@ -1219,6 +1220,82 @@ namespace AzerothLauncher
             Put(UI.Line(Theme.Bronze, PW - 40, 1), 20, y + 4);
             y += 14;
             return OptionCheck("Cloud saving", CloudEnabled(), y, delegate(bool on) { SetCloudEnabled(on); });
+        }
+
+        // GAME: the game's own settings (display mode, window size, graphics, sound), written into its config.toml;
+        // the game reads them when it starts
+        int OptionsGame(int PW)
+        {
+            string file = GameSettings.FileIn(SyncSettings().ConfigDir);
+            var now = GameSettings.Read(file);
+            bool running = GameRunningFlag || Util.GameRunning();
+            int y = 6;
+            var intro = PutText(running ? "The game is running: close it first, it saves its own settings when it closes."
+                                        : "The game's own settings. They take effect the next time the game starts.",
+                                9.5f, FontStyle.Italic, running ? Theme.Hex("#e07050") : Theme.GoldDim, 20, y, PW - 40);
+            y = BottomOf(intro) + 8;
+            if (file == null)
+            {
+                var none = PutText("The game config folder is not set. Set it in Options > FOLDERS.", 10, FontStyle.Regular, Theme.Text, 20, y, PW - 40);
+                return BottomOf(none);
+            }
+            Action<GameSetting, string> set = delegate(GameSetting gs, string v)
+            {
+                if (GameRunningFlag || Util.GameRunning()) { SetStatus("Close the game first: it saves its own settings when it closes."); return; }
+                try
+                {
+                    GameSettings.Set(file, gs.Cvar, v);
+                    SetStatus(Lang.T("Game setting saved:") + " " + Lang.T(gs.Label));
+                }
+                catch (UserError e) { SetStatus(e.Message); }
+                catch (Exception e) { SetStatus(Lang.T("Could not save the game setting:") + " " + e.Message); }
+                BuildPanel("Options");
+            };
+            foreach (GameSetting gs in GameSettings.All)
+            {
+                string cur = GameSettings.Value(now, gs);
+                GameSetting g = gs;
+                if (gs.Check)
+                {
+                    y = OptionCheck(gs.Label, cur == "1", y, delegate(bool on) { set(g, on ? "1" : "0"); });
+                    continue;
+                }
+                var lab = PutText(gs.Label, 11, FontStyle.Bold, Theme.Gold, 20, y, PW - 40);
+                y = BottomOf(lab) + 2;
+                if (gs.Note != null)
+                {
+                    var note = PutText(gs.Note, 9, FontStyle.Italic, Theme.GoldDim, 20, y, PW - 40);
+                    y = BottomOf(note) + 3;
+                }
+                var values = new List<string>(gs.Values);
+                var names = new List<string>(gs.Names);
+                int at = values.FindIndex(delegate(string v) { return SameSetting(v, cur); });
+                if (at < 0 && !string.IsNullOrEmpty(cur)) { values.Add(cur); names.Add(cur.Replace("x", "×")); at = values.Count - 1; }
+                int n = values.Count, gap = 6;
+                int bw = Math.Min(170, (int)(((PW - 40) - gap * (n - 1)) / (float)n / Theme.Zoom));
+                int x = 20;
+                for (int i = 0; i < n; i++)
+                {
+                    string v = values[i];
+                    var b = new WowButton(names[i], delegate { set(g, v); }, bw, 28, 8.5f);
+                    b.Selected = i == at;
+                    Put(b, x, y);
+                    x += b.Width + gap;
+                }
+                y += (int)(28 * Theme.Zoom) + 12;
+            }
+            var where = PutText(Lang.T("Saved in") + " " + file, 8.5f, FontStyle.Regular, Theme.LinkBlue, 20, y, PW - 40, false);
+            return BottomOf(where);
+        }
+
+        static bool SameSetting(string a, string b)
+        {
+            if (a == null || b == null) return false;
+            double x, y;
+            if (double.TryParse(a, System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out x) &&
+                double.TryParse(b, System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out y))
+                return Math.Abs(x - y) < 0.001;
+            return string.Equals(a.Trim(), b.Trim(), StringComparison.OrdinalIgnoreCase);
         }
 
         // GENERAL: how the launcher behaves, the Stats page, and the play time AZS Stats counts
