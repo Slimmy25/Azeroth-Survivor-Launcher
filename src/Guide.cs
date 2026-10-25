@@ -137,8 +137,7 @@ namespace AzerothLauncher
                 var h = hits[i];
                 GuideTopic topic = topics[h.Key];
                 c.Title = h.Value < 0 ? topic.Title : topic.Pages[h.Value].Title;
-                c.Label = h.Value < 0 ? null : topic.Title.ToUpperInvariant();
-                c.Desc = lines[i];
+                c.Desc = (h.Value < 0 ? "" : topic.Title + " · ") + lines[i];   // where it is, and the line it was found in
                 c.Pressed += delegate { SetGuideView(h.Key, h.Value); };
             });
         }
