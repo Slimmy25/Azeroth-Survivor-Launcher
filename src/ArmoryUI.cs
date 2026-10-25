@@ -394,6 +394,7 @@ namespace AzerothLauncher
         public string Icon = "?", Name = "", Sub = "", Sub2 = "", Value = "", ValueSub = "";     // Sub2: a dim third line
         public Color IconColor = Theme.Gold, NameColor = Armory.Bright, SubColor = Armory.Green, ValueColor = Armory.Bright;
         public bool RoundIcon;
+        public string Spell;                                 // a spell: its icon picture (SpellIcons) instead of the badge
         public double Bar = -1;                              // 0..1 draws a thin bar under the line
         public Action Click;
     }
@@ -437,7 +438,20 @@ namespace AzerothLauncher
                 Rectangle s = rects[i];
                 Armory.Box(g, s, 6, i == hover && row.Click != null ? Armory.SlotHover : Armory.Slot, Armory.SlotEdge);
                 var icon = new Rectangle(s.X + 7, s.Y + 7, 40, 40);
-                Armory.Icon(g, icon, row.IconColor, row.Icon, row.RoundIcon);
+                Image pic = row.Spell != null ? SpellIcons.Get(row.Spell, this) : null;
+                if (pic != null)
+                {
+                    using (var path = Armory.Round(icon, 5))
+                    {
+                        var clip = g.Clip;
+                        g.SetClip(path, System.Drawing.Drawing2D.CombineMode.Intersect);
+                        g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                        g.DrawImage(pic, icon);
+                        g.Clip = clip;
+                        using (var p = new Pen(row.IconColor, 1.5f)) g.DrawPath(p, path);   // the quality color as its frame
+                    }
+                }
+                else Armory.Icon(g, icon, row.IconColor, row.Icon, row.RoundIcon);
                 Font fv = Theme.F(11, FontStyle.Bold), fvs = Theme.F(8.5f);
                 int vw = Math.Max(Armory.TextWidth(row.Value, fv), Armory.TextWidth(row.ValueSub, fvs));
                 vw = Math.Min(vw + 4, s.Width / 3);
