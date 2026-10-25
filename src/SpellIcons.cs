@@ -273,6 +273,17 @@ namespace AzerothLauncher
                     sb.Append("[" + t + " " + n + " " + id + "] ");
                 }
                 sb.Append(" => " + FindNpcDisplay(name));
+                try
+                {
+                    string page = GetText("https://www.wowhead.com/classic/npc=448");
+                    sb.Append(" | hogger page " + page.Length + " chars, display-id " + page.Contains("data-mv-display-id") + ": " +
+                              Regex.Replace(page.Length > 160 ? page.Substring(0, 160) : page, @"\s+", " "));
+                }
+                catch (WebException wex)
+                {
+                    var r = wex.Response as HttpWebResponse;
+                    sb.Append(" | hogger page error " + (r != null ? ((int)r.StatusCode).ToString() : "") + " " + wex.Message);
+                }
             }
             catch (Exception ex) { sb.Append("error " + ex.Message); }
             return sb.ToString();
