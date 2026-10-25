@@ -27,6 +27,8 @@ CHANGELOG
 = YAMA NOTLARI
 ABOUT LAUNCHER
 = BAŞLATICI HAKKINDA
+UPDATE LAUNCHER
+= LAUNCHER'I GÜNCELLE
 A game made by Aethus
 = Aethus tarafından yapılan bir oyun
 Version {0}

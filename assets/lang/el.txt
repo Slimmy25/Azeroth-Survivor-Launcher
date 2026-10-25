@@ -27,6 +27,8 @@ CHANGELOG
 = ΣΗΜΕΙΩΣΕΙΣ ΕΚΔΟΣΗΣ
 ABOUT LAUNCHER
 = ΣΧΕΤΙΚΑ ΜΕ ΤΟΝ LAUNCHER
+UPDATE LAUNCHER
+= ΕΝΗΜΕΡΩΣΗ LAUNCHER
 A game made by Aethus
 = Ένα παιχνίδι του Aethus
 Version {0}

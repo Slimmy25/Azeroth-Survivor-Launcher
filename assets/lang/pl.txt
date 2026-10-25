@@ -27,6 +27,8 @@ CHANGELOG
 = LISTA ZMIAN
 ABOUT LAUNCHER
 = O LAUNCHERZE
+UPDATE LAUNCHER
+= AKTUALIZUJ LAUNCHER
 A game made by Aethus
 = Gra stworzona przez Aethusa
 Version {0}

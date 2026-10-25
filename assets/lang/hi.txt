@@ -27,6 +27,8 @@ CHANGELOG
 = पैच नोट्स
 ABOUT LAUNCHER
 = लॉन्चर के बारे में
+UPDATE LAUNCHER
+= लॉन्चर अपडेट करें
 A game made by Aethus
 = Aethus का बनाया गेम
 Version {0}

@@ -27,6 +27,8 @@ CHANGELOG
 = VÁLTOZÁSNAPLÓ
 ABOUT LAUNCHER
 = A LAUNCHERRŐL
+UPDATE LAUNCHER
+= LAUNCHER FRISSÍTÉSE
 A game made by Aethus
 = Aethus játéka
 Version {0}

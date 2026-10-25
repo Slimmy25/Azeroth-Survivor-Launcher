@@ -27,6 +27,8 @@ CHANGELOG
 = 更新履歴
 ABOUT LAUNCHER
 = ランチャーについて
+UPDATE LAUNCHER
+= ランチャーを更新
 A game made by Aethus
 = Aethus が制作したゲーム
 Version {0}

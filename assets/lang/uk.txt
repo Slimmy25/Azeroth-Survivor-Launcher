@@ -27,6 +27,8 @@ CHANGELOG
 = СПИСОК ЗМІН
 ABOUT LAUNCHER
 = ПРО ЛАУНЧЕР
+UPDATE LAUNCHER
+= ОНОВИТИ ЛАУНЧЕР
 A game made by Aethus
 = Гра від Aethus
 Version {0}

@@ -26,6 +26,8 @@ CHANGELOG
 = PATCHNOTITIES
 ABOUT LAUNCHER
 = OVER DE LAUNCHER
+UPDATE LAUNCHER
+= LAUNCHER BIJWERKEN
 A game made by Aethus
 = Een spel gemaakt door Aethus
 Version {0}

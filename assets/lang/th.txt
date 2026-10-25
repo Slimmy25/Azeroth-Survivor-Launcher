@@ -27,6 +27,8 @@ CHANGELOG
 = บันทึกแพตช์
 ABOUT LAUNCHER
 = เกี่ยวกับลันเชอร์
+UPDATE LAUNCHER
+= อัปเดตลันเชอร์
 A game made by Aethus
 = เกมโดย Aethus
 Version {0}

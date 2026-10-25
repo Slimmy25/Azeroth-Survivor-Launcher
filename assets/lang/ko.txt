@@ -27,6 +27,8 @@ CHANGELOG
 = 패치 노트
 ABOUT LAUNCHER
 = 런처 정보
+UPDATE LAUNCHER
+= 런처 업데이트
 A game made by Aethus
 = Aethus가 만든 게임
 Version {0}

@@ -27,6 +27,8 @@ CHANGELOG
 = NHẬT KÝ CẬP NHẬT
 ABOUT LAUNCHER
 = GIỚI THIỆU LAUNCHER
+UPDATE LAUNCHER
+= CẬP NHẬT LAUNCHER
 A game made by Aethus
 = Một trò chơi của Aethus
 Version {0}
