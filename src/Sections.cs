@@ -131,7 +131,8 @@ namespace AzerothLauncher
         Label addonCount;
 
         static readonly string[] SectionNames = { "Guide", "Cloud Save", "Addons", "Changelog", "Stats", "Options", "About Launcher" };
-        int gTopic = -1, gPage = -1;                         // the guide: -1 = the topic list / the topic itself
+        int gTopic = -1, gPage = -1;
+        GuideVideo gVideo;                                   // the guide: a video playing inside the section (Guide.cs)                         // the guide: -1 = the topic list / the topic itself
 
         int PW { get { return panel.ClientSize.Width; } }
         int PH { get { return panel.ClientSize.Height; } }
@@ -342,6 +343,7 @@ namespace AzerothLauncher
             }
             if (current == "Guide")
             {
+                if (gVideo != null) { gVideo = null; BuildPanel("Guide"); return; }
                 if (gPage >= 0) { SetGuideView(gTopic, -1); return; }
                 if (gTopic >= 0) { SetGuideView(-1, -1); return; }
             }

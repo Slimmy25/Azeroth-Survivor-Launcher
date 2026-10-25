@@ -1107,3 +1107,9 @@ Play on this PC ›
 = Αναπαραγωγή σε αυτό τον υπολογιστή ›
 Video file not found - click to open its folder
 = Το αρχείο βίντεο δεν βρέθηκε - κάνε κλικ για να ανοίξεις τον φάκελο
+Play here ›
+= Αναπαραγωγή εδώ ›
+OPEN IN BROWSER ›
+= ΑΝΟΙΓΜΑ ΣΤΟΝ BROWSER ›
+This video can't play here. Use OPEN IN BROWSER.
+= Το βίντεο δεν παίζει εδώ. Πάτησε ΑΝΟΙΓΜΑ ΣΤΟΝ BROWSER.

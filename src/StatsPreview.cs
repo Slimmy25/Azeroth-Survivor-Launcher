@@ -92,6 +92,44 @@ namespace AzerothLauncher
                 app.current = "Stats";
                 app.BuildPanel("Stats");
             }
+            // the guide's video player: does the first video stream inside the launcher?
+            {
+                GuideVideo vid = null;
+                foreach (var t in Data.Guide) { if (t.Videos.Count > 0) { vid = t.Videos[0]; break; } foreach (var pg in t.Pages) if (vid == null && pg.Videos.Count > 0) vid = pg.Videos[0]; if (vid != null) break; }
+                if (vid != null)
+                {
+                    app.Show();
+                    app.ShowSide();
+                    app.current = "Guide";
+                    app.gVideo = vid;
+                    app.BuildPanel("Guide");
+                    string state = "no web view";
+                    WebBrowser web = FindWeb(app.panel);
+                    var until = DateTime.Now.AddSeconds(25);
+                    while (web != null && DateTime.Now < until)
+                    {
+                        Application.DoEvents();
+                        System.Threading.Thread.Sleep(100);
+                        try
+                        {
+                            if (web.Document == null) continue;
+                            object r = web.Document.InvokeScript("eval", new object[] {
+                                "(function(){var v=document.getElementById('v');return 'mode='+document.documentMode+' ready='+(v?v.readyState:-1)+' duration='+(v?v.duration:-1)+' time='+(v?v.currentTime:-1)+' error='+(v&&v.error?v.error.code:0);})()" });
+                            state = Convert.ToString(r);
+                            if (state.Contains("ready=4") && !state.Contains("time=0 ")) break;
+                        }
+                        catch (Exception ex) { state = "script: " + ex.Message; }
+                    }
+                    using (var eb = new Bitmap(700, 60))
+                    {
+                        using (var g = Graphics.FromImage(eb)) { g.Clear(Color.White); g.DrawString(vid.Url + "\n" + state, new Font("Arial", 9), Brushes.Black, 4, 4); }
+                        eb.Save(Path.Combine(outDir, "video-player-check.png"), ImageFormat.Png);
+                    }
+                    app.gVideo = null;
+                    app.current = "Stats";
+                    app.BuildPanel("Stats");
+                }
+            }
             // every other section, to check they all use the launcher's colors
             foreach (string sec in new[] { "Cloud Save", "Addons", "Changelog", "Options", "About Launcher" })
             {
@@ -157,6 +195,18 @@ namespace AzerothLauncher
                 }
             }
             app.tray.Visible = false;
+        }
+
+        static WebBrowser FindWeb(Control c)
+        {
+            foreach (Control k in c.Controls)
+            {
+                var w = k as WebBrowser;
+                if (w != null) return w;
+                w = FindWeb(k);
+                if (w != null) return w;
+            }
+            return null;
         }
 
         static ScrollPanel FindScroll(Control c)

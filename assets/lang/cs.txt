@@ -1107,3 +1107,9 @@ Play on this PC ›
 = Přehrát v tomto PC ›
 Video file not found - click to open its folder
 = Videosoubor nenalezen - klikni pro otevření složky
+Play here ›
+= Přehrát zde ›
+OPEN IN BROWSER ›
+= OTEVŘÍT V PROHLÍŽEČI ›
+This video can't play here. Use OPEN IN BROWSER.
+= Toto video zde nelze přehrát. Použij OTEVŘÍT V PROHLÍŽEČI.

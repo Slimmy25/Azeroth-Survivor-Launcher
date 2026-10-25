@@ -1106,3 +1106,9 @@ Play on this PC ›
 = Afspelen op deze pc ›
 Video file not found - click to open its folder
 = Videobestand niet gevonden - klik om de map te openen
+Play here ›
+= Hier afspelen ›
+OPEN IN BROWSER ›
+= OPENEN IN BROWSER ›
+This video can't play here. Use OPEN IN BROWSER.
+= Deze video kan hier niet worden afgespeeld. Gebruik OPENEN IN BROWSER.
