@@ -27,7 +27,7 @@ namespace AzerothLauncher
         // The developers' backup host: a page with a link to the newest archive and its SHA-256 (no login). Each
         // install picks one of the two hosts at random (50/50); if that one fails, the other one is tried.
         public const string ClientMirrorUrl = "https://azerothsurvivors-mirror.sandervspl.dev/";
-        public const string DiscordUrl = "https://discord.com/invite/UzxaZuSAk";
+        public const string DiscordUrl = "https://discord.gg/azerothsurvivors";
 
         const int W = 1100, H = 690;                         // retro launcher window: sections open on the left, News on the right
 

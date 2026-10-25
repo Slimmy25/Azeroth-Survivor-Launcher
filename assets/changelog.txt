@@ -2,6 +2,15 @@ Patch notes shown in the launcher's Changelog. The launcher sorts them by versio
 Every post starts with its title on the first line. Posts are separated by a line with only === on it.
 Everything above the first === line is ignored.
 ===
+0.116.0
+-------
+Engine update: the game client the run plays in is brought up to date. In co-op, buffs from your friends now show this game's numbers.
+
+* Under-the-hood engine improvements from the client the game is built on.
+* In co-op, buffs from your friends show Azeroth Survivors' numbers instead of the original game's: a warrior's Battle Shout, a druid's Rejuvenation or Dire Bear Form, and the rest, on you and on the party frames.
+* Boss attack markers on the ground now always show on top of spell effects: a Frost Trap, a Consecration, a Hurricane no longer hides where the next attack lands.
+* The Discord button and the site's Discord link now open our new invite, discord.gg/azerothsurvivors.
+===
 0.115.0
 -------
 Co-op fixes and friendlier parties: players who drop out leave the party cleanly, Horde and Alliance fight side by side, and everyone reads the game in their own language. Raid markers work for everyone, and the first three zones are gentler for parties.
