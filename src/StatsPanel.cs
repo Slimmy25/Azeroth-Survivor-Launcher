@@ -566,6 +566,7 @@ namespace AzerothLauncher
                 foreach (var r in list)
                 {
                     if (r.Abilities.Count == 0 || (classKey != null && r.ClassKey != classKey)) continue;
+                    if (r.Time < 300 && r.Kind != "victory") continue;     // a run left early has no real build yet
                     if (seen.Add(r.Date + "|" + r.ClassKey + "|" + r.Time)) all.Add(r);
                 }
             all.Sort(delegate(StatRun a, StatRun b) { return b.Dps.CompareTo(a.Dps); });

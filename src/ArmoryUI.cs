@@ -744,7 +744,7 @@ namespace AzerothLauncher
             // best so far
             float by = plot.Bottom - (float)(plot.Height * best / Math.Max(1, max));
             using (var p = new Pen(Armory.Legendary, 1)) { p.DashStyle = DashStyle.Dash; g.DrawLine(p, plot.X, by, plot.Right, by); }
-            Armory.Text(g, Lang.T("Best") + " " + LauncherApp.Big(best), f, Armory.Legendary, new Rectangle(plot.Right - 140, (int)by - 18, 140, 16),
+            Armory.Text(g, Lang.T("Best of these") + " " + LauncherApp.Big(best), f, Armory.Legendary, new Rectangle(plot.Right - 140, (int)by - 18, 140, 16),
                         TextFormatFlags.Right | TextFormatFlags.SingleLine);
             // the runs
             var pts = new PointF[runs.Count];
