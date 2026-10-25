@@ -1,0 +1,206 @@
+Adrenaline Rush
+Aimed Shot
+Arcane Concentration
+Arcane Explosion
+Arcane Missiles
+Arcane Power
+Arcane Shot
+Ardent Defender
+Auto Shot
+Backstab
+Battle Shout
+Berserking
+Bestial Wrath
+Blade Flurry
+Bladestorm
+Blast Wave
+Blizzard
+Blood Frenzy
+Blood Fury
+Bloodrage
+Bloodthirst
+Butcher
+Call of Flame
+Call of the Elements
+Cannibalize
+Cat Form
+Chain Lightning
+Chastise
+Cheat Death
+Cleave
+Concussive Shot
+Cone of Cold
+Conflagrate
+Consecration
+Contagion
+Corruption
+Curse of Agony
+Daybreak
+Deadly Poison
+Death Coil
+Deep Wounds
+Demonic Empowerment
+Demoralizing Shout
+Devouring Plague
+Diplomacy
+Dire Bear Form
+Divine Aegis
+Divine Favor
+Divine Shield
+Divine Storm
+Drain Life
+Earth Shock
+Elemental Fury
+Elemental Mastery
+Endurance
+Engineering Specialization
+Entangling Roots
+Entrapment
+Escape Artist
+Eviscerate
+Execute
+Exorcism
+Expansive Mind
+Explosive Ammunition
+Explosive Trap
+Faerie Fire
+Fear
+Feral Spirit
+Fire Blast
+Fire Nova
+Fireball
+Flame Shock
+Flamestrike
+Force of Nature
+Fortified
+Frenzy
+Frost Nova
+Frost Shock
+Frost Trap
+Frostbite
+Frostbolt
+Fury
+Ghostly Strike
+Gouge
+Gun Specialization
+Hallowed Ground
+Hammer of Justice
+Hammer of Wrath
+Hammer of the Righteous
+Hardiness
+Healing Wave
+Hellfire
+Holy Fire
+Holy Light
+Holy Nova
+Holy Shield
+Holy Shock
+Holy Wrath
+Hot Streak
+Hunter's Mark
+Hurricane
+Ice Barrier
+Ignite
+Immolate
+Immolation Trap
+Insect Swarm
+Judgement
+Kidney Shot
+Kill Shot
+Killing Spree
+Legion Gate
+Light's Grace
+Lightning Bolt
+Lightning Overload
+Lightning Shield
+Lightwell
+Maelstrom Weapon
+Magma Totem
+Mind Blast
+Mind Flay
+Moonfire
+Mortal Strike
+Mortal Wounds
+Multi-Shot
+Mutilate
+Nature Resistance
+Nightfall
+Omen of Clarity
+Pact of the Annihilan
+Penance
+Perception
+Piercing Shots
+Power Word: Shield
+Preparation
+Presence of Mind
+Psychic Scream
+Purifying Flame
+Pyroblast
+Pyroclasm
+Quickness
+Radiance
+Rain of Chaos
+Rain of Fire
+Rake
+Rampage
+Rapid Fire
+Rapture
+Redemption
+Regeneration
+Regrowth
+Reincarnation
+Rejuvenation
+Rend
+Renew
+Rupture
+Seal Fate
+Seal of Command
+Searing Pain
+Searing Totem
+Seed of Corruption
+Serpent Sting
+Shadow Bolt
+Shadow Cleave
+Shadow Dance
+Shadow Resistance
+Shadow Weaving
+Shadow Word: Pain
+Shadowform
+Shadowmeld
+Shadowy Apparitions
+Shield Slam
+Shockwave
+Shred
+Sinister Strike
+Slice and Dice
+Smite
+Soul Devourer
+Soul Link
+Soulfire
+Splitting Ice
+Starfall
+Starfire
+Stoneform
+Summon Water Elemental
+Sweeping Strikes
+Swiftmend
+Swipe
+Tame Beast
+The Art of War
+The Human Spirit
+Thorns
+Throwing Specialization
+Thunder Clap
+Titan
+Totemic Wrath
+Toxic Bloom
+Tranquility
+Treasure Finding
+Tree of Life
+Volley
+War Stomp
+Whirlwind
+Will of the Forsaken
+Windfury
+Wrath
+Wyvern Sting
