@@ -33,7 +33,7 @@ Even a lost run counts. Talent experience, boss gear, achievements and newly ope
 @topic Build Guides | Videos of players showing their builds
 Players' videos of builds that work. Click a video to watch it on YouTube in your web browser.
 
-@page [Azeroth Survivors] 10.000 HP Ice Barrier - Arcane Mage - Naxxramas | Arcane Mage in Naxxramas, by Duke
+@page 10.000 HP Ice Barrier | Arcane Mage · Naxxramas · video by Duke
 # [Azeroth Survivors] 10.000 HP Ice Barrier - Arcane Mage - Naxxramas
 Video by Duke (youtube.com/@duke-yt). All credit for the build and the video goes to the uploader.
 @video [Azeroth Survivors] 10.000 HP Ice Barrier - Arcane Mage - Naxxramas | https://youtu.be/Yy38LhuL5OU | Duke | https://www.youtube.com/@duke-yt
