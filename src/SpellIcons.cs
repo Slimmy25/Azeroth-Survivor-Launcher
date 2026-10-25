@@ -43,7 +43,7 @@ namespace AzerothLauncher
                     int bar = line.LastIndexOf('|');
                     if (bar <= 0) continue;
                     string icon = line.Substring(bar + 1).Trim().ToLowerInvariant();
-                    if (Regex.IsMatch(icon, "^[a-z0-9_-]+$")) names[line.Substring(0, bar).Trim()] = icon;
+                    if (Regex.IsMatch(icon, "^[a-z0-9_-]+$")) names[Key(line.Substring(0, bar))] = icon;
                 }
             }
             catch (Exception) { }
@@ -66,6 +66,19 @@ namespace AzerothLauncher
             return Regex.Replace(s, @"\s+\d+$", "").Trim();
         }
 
+        // how names are matched: case, spaces, colons, dashes and apostrophes (straight or curly) do not count, so
+        // "Shadow Word: Pain", "Shadow Word Pain" and "shadow_word_pain" are one spell; short forms count as the spell
+        static readonly Dictionary<string, string> Short = new Dictionary<string, string> {
+            { "swpain", "shadowwordpain" }, { "swp", "shadowwordpain" }, { "pwshield", "powerwordshield" }, { "pws", "powerwordshield" },
+            { "swdeath", "shadowworddeath" }, { "pwfortitude", "powerwordfortitude" }, { "mark", "huntersmark" } };
+
+        static string Key(string name)
+        {
+            string k = Regex.Replace(Clean(name).ToLowerInvariant(), "[^a-z0-9]", "");
+            string full;
+            return Short.TryGetValue(k, out full) ? full : k;
+        }
+
         // ---- what the rows ask for: the picture, or null for now (`repaint` is redrawn when it arrives)
         public static Image Spell(string spell, Control repaint)
         {
@@ -73,7 +86,7 @@ namespace AzerothLauncher
             string name = Clean(spell);
             if (name.Length == 0) return null;
             string icon;
-            if (names.TryGetValue(name, out icon)) return Icon(icon, repaint);
+            if (names.TryGetValue(Key(name), out icon)) return Icon(icon, repaint);
             return Lookup("spell:" + name, repaint, delegate { return FindSpellIcon(name); }, delegate(string ans) { return IconHost + ans + ".jpg"; });
         }
 
@@ -267,7 +280,7 @@ namespace AzerothLauncher
                 {
                     string t, n, icon;
                     if (d.TryGetValue("typeName", out t) && t == "Spell" && d.TryGetValue("name", out n) &&
-                        string.Equals(n, name, StringComparison.OrdinalIgnoreCase) && d.TryGetValue("icon", out icon) &&
+                        Key(n) == Key(name) && d.TryGetValue("icon", out icon) &&
                         Regex.IsMatch(icon, "^[a-z0-9_-]+$"))
                         return icon;
                 }

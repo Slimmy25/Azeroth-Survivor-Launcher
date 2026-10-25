@@ -12,10 +12,10 @@ for line in open(src, encoding="utf-8-sig"):
     if re.fullmatch(r"[a-z0-9_-]+", icon.strip()): pairs.append((name.strip(), icon.strip()))
 out = ["-- AZS Stats: the icon of each spell (made by tools/make_addon_icons.py from the launcher's assets/spell-icons.txt).",
        "-- The in-game window shows Interface\\Icons\\<icon>; a spell missing here, or an icon the game does not have,",
-       "-- gets the question mark icon.",
+       "-- gets the question mark icon. Names are matched without case, spaces or punctuation (AZSStatsUI.lua, SpellKey).",
        "AZSSTATS_SPELL_ICONS = {"]
 for name, icon in sorted(pairs, key=lambda p: p[0].lower()):
-    out.append('\t["%s"] = "%s",' % (name.lower().replace("\\", "\\\\").replace('"', '\\"'), icon))
+    out.append('\t["%s"] = "%s",' % (re.sub(r"[^a-z0-9]", "", name.lower()), icon))
 out.append("};")
 open(dst, "w", encoding="utf-8", newline="\r\n").write("\n".join(out) + "\n")
 print(len(pairs), "spells")

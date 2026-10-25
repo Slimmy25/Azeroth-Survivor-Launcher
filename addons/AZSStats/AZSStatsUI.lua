@@ -30,8 +30,20 @@ local function ClassIcon(key)
 	return nil;
 end
 
+-- a spell's name as the icon table knows it: no case, spaces or punctuation ("Shadow Word: Pain" = "shadowwordpain"),
+-- and the usual short forms
+local SHORT = { swpain = "shadowwordpain", swp = "shadowwordpain", pwshield = "powerwordshield", pws = "powerwordshield",
+                swdeath = "shadowworddeath", pwfortitude = "powerwordfortitude", mark = "huntersmark" };
+local function SpellKey(name)
+	local k = string.lower(tostring(name or ""));
+	k = string.gsub(k, "%s*%(.-%)%s*$", "");            -- "(Rank 4)"
+	k = string.gsub(k, "%s+%d+$", "");                    -- "Frostbolt 4"
+	k = string.gsub(k, "[^%a%d]", "");
+	return SHORT[k] or k;
+end
+
 local function SpellIcon(name)
-	local icon = AZSSTATS_SPELL_ICONS and AZSSTATS_SPELL_ICONS[string.lower(tostring(name or ""))];
+	local icon = AZSSTATS_SPELL_ICONS and AZSSTATS_SPELL_ICONS[SpellKey(name)];
 	if ( icon ) then return { "Interface\\Icons\\" .. icon }; end
 	return { QUESTION };
 end
