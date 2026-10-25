@@ -280,15 +280,25 @@ namespace AzerothLauncher
 
         static string FindNpcDisplay(string name)
         {
+            // the same creature can have several entries (later copies of it): the original, lowest id first
+            var ids = new List<int>();
             foreach (var d in Results(Search("/classic", name)))
             {
                 string t, n, id;
-                if (!d.TryGetValue("typeName", out t) || t != "NPC" || !d.TryGetValue("name", out n) ||
-                    !string.Equals(n, name, StringComparison.OrdinalIgnoreCase) || !d.TryGetValue("id", out id)) continue;
-                string page = GetText("https://www.wowhead.com/classic/npc=" + id);
+                int v;
+                if (d.TryGetValue("typeName", out t) && t == "NPC" && d.TryGetValue("name", out n) &&
+                    string.Equals(n, name, StringComparison.OrdinalIgnoreCase) && d.TryGetValue("id", out id) &&
+                    int.TryParse(id, out v) && !ids.Contains(v))
+                    ids.Add(v);
+            }
+            ids.Sort();
+            for (int i = 0; i < ids.Count && i < 3; i++)
+            {
+                string page = GetText("https://www.wowhead.com/classic/npc=" + ids[i]);
                 Match m = Regex.Match(page, @"data-mv-display-id=""(\d+)""");
                 if (!m.Success) m = Regex.Match(page, @"displayId&quot;:(\d+)");
-                if (m.Success) return m.Groups[1].Value;
+                if (!m.Success) m = Regex.Match(page, @"dataset\.displayId = (\d+)");
+                if (m.Success && m.Groups[1].Value != "0") return m.Groups[1].Value;
             }
             return "";
         }
