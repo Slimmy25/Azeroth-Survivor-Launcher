@@ -404,7 +404,7 @@ namespace AzerothLauncher
                 foreach (var kv in partners) if (kv.Value > most) { most = kv.Value; top = kv.Key; }
                 if (top != null) parts.Add(Lang.T("most played with " + top));
             }
-            var box = new RectangleF(30, 486, 628, 74);
+            var box = new RectangleF(30, 500, 628, 60);
             using (var path = Armory.Round(box, 8))
             {
                 using (var b = new SolidBrush(Color.FromArgb(200, 14, 13, 20))) g.FillPath(b, path);
