@@ -1262,3 +1262,17 @@ Downloads and installs the game again, then asks about your folders and cloud sa
 = ดาวน์โหลดและติดตั้งเกมใหม่ แล้วถามเรื่องโฟลเดอร์และเซฟบนคลาวด์
 Installs the game from a file you downloaded yourself.
 = ติดตั้งเกมจากไฟล์ที่คุณดาวน์โหลดเอง
+Ranks
+= ระดับ
+rank
+= ระดับ
+needs
+= ต้องใช้
+points
+= แต้ม
+Changes
+= เปลี่ยน
+X grows with every rank.
+= X เพิ่มขึ้นทุกระดับ
+Talents that change it:
+= ทาเลนต์ที่เปลี่ยนสกิลนี้:

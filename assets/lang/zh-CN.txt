@@ -1262,3 +1262,17 @@ Downloads and installs the game again, then asks about your folders and cloud sa
 = 重新下载并安装游戏，然后询问你的文件夹和云存档设置。
 Installs the game from a file you downloaded yourself.
 = 从你自己下载的文件安装游戏。
+Ranks
+= 等级
+rank
+= 级
+needs
+= 需要
+points
+= 点
+Changes
+= 改变
+X grows with every rank.
+= X 随每级提升。
+Talents that change it:
+= 改变此法术的天赋：

@@ -1262,3 +1262,17 @@ Downloads and installs the game again, then asks about your folders and cloud sa
 = Pobiera i instaluje grę ponownie, a potem pyta o foldery i zapis w chmurze.
 Installs the game from a file you downloaded yourself.
 = Instaluje grę z pliku, który pobrałeś samodzielnie.
+Ranks
+= Rangi
+rank
+= ranga
+needs
+= wymaga
+points
+= pkt
+Changes
+= Zmienia
+X grows with every rank.
+= X rośnie z każdą rangą.
+Talents that change it:
+= Talenty, które go zmieniają:

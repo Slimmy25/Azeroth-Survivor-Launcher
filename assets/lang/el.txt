@@ -1262,3 +1262,17 @@ Downloads and installs the game again, then asks about your folders and cloud sa
 = Κατεβάζει και εγκαθιστά ξανά το παιχνίδι και μετά ρωτά για τους φακέλους σου και την αποθήκευση cloud.
 Installs the game from a file you downloaded yourself.
 = Εγκαθιστά το παιχνίδι από αρχείο που κατέβασες μόνος σου.
+Ranks
+= Βαθμίδες
+rank
+= βαθμίδα
+needs
+= απαιτεί
+points
+= πόντους
+Changes
+= Αλλάζει
+X grows with every rank.
+= Το X αυξάνεται με κάθε βαθμίδα.
+Talents that change it:
+= Ταλέντα που το αλλάζουν:

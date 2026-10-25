@@ -1261,3 +1261,17 @@ Downloads and installs the game again, then asks about your folders and cloud sa
 = Lataa ja asentaa pelin uudelleen ja kysyy sitten kansioista ja pilvitallennuksesta.
 Installs the game from a file you downloaded yourself.
 = Asentaa pelin tiedostosta, jonka latasit itse.
+Ranks
+= Tasot
+rank
+= taso
+needs
+= vaatii
+points
+= pistettä
+Changes
+= Muuttaa
+X grows with every rank.
+= X kasvaa joka tasolla.
+Talents that change it:
+= Sitä muuttavat kyvyt:

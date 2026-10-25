@@ -1261,3 +1261,17 @@ Downloads and installs the game again, then asks about your folders and cloud sa
 = Laddar ner och installerar spelet igen och frågar sedan om dina mappar och molnsparning.
 Installs the game from a file you downloaded yourself.
 = Installerar spelet från en fil som du själv har laddat ner.
+Ranks
+= Rang
+rank
+= rang
+needs
+= kräver
+points
+= poäng
+Changes
+= Ändrar
+X grows with every rank.
+= X växer för varje rang.
+Talents that change it:
+= Talanger som ändrar den:

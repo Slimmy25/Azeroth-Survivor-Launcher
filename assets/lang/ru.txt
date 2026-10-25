@@ -1262,3 +1262,17 @@ Downloads and installs the game again, then asks about your folders and cloud sa
 = Заново скачивает и устанавливает игру, затем спрашивает о папках и облачном сохранении.
 Installs the game from a file you downloaded yourself.
 = Устанавливает игру из файла, который вы скачали сами.
+Ranks
+= Ранги
+rank
+= ранг
+needs
+= нужно
+points
+= очков
+Changes
+= Изменяет
+X grows with every rank.
+= X растёт с каждым рангом.
+Talents that change it:
+= Таланты, которые его меняют:

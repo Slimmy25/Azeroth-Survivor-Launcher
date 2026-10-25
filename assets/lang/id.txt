@@ -1261,3 +1261,17 @@ Downloads and installs the game again, then asks about your folders and cloud sa
 = Mengunduh dan memasang game lagi, lalu menanyakan folder dan Simpan Cloud.
 Installs the game from a file you downloaded yourself.
 = Memasang game dari file yang kamu unduh sendiri.
+Ranks
+= Peringkat
+rank
+= peringkat
+needs
+= butuh
+points
+= poin
+Changes
+= Mengubah
+X grows with every rank.
+= X bertambah setiap peringkat.
+Talents that change it:
+= Talenta yang mengubahnya:

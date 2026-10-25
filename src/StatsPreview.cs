@@ -70,7 +70,7 @@ namespace AzerothLauncher
                         {
                             using (var g = Graphics.FromImage(page)) g.Clear(sp.BackColor);
                             foreach (Control c in sp.Controls)
-                                if (c.Width > 0 && c.Height > 0) c.DrawToBitmap(page, new Rectangle(c.Left, c.Top, c.Width, c.Height));
+                                if (c.Width > 0 && c.Height > 0) DrawDeep(c, page, c.Left, c.Top);
                             page.Save(Path.Combine(outDir, name + "-page.png"), ImageFormat.Png);
                         }
                     }
@@ -82,7 +82,7 @@ namespace AzerothLauncher
                 var topics = Data.Guide;
                 int classes = 0;
                 for (int i = 0; i < topics.Count; i++) if (topics[i].Title == "Classes") { classes = i; break; }
-                foreach (int[] view in new[] { new[] { -1, -1 }, new[] { classes, -1 }, new[] { 0, -1 }, new[] { 1, -1 }, new[] { classes, 0 }, new[] { classes + 1, -1 } })
+                foreach (int[] view in new[] { new[] { -1, -1 }, new[] { classes, -1 }, new[] { 0, -1 }, new[] { 1, -1 }, new[] { classes, 0 }, new[] { classes, 4 }, new[] { classes, 6 }, new[] { classes + 1, -1 } })
                 {
                     app.current = "Guide";
                     app.ShowSide();
@@ -104,7 +104,7 @@ namespace AzerothLauncher
                         {
                             using (var g = Graphics.FromImage(page)) g.Clear(gsp.BackColor);
                             foreach (Control c in gsp.Controls)
-                                if (c.Width > 0 && c.Height > 0) c.DrawToBitmap(page, new Rectangle(c.Left, c.Top, c.Width, c.Height));
+                                if (c.Width > 0 && c.Height > 0) DrawDeep(c, page, c.Left, c.Top);
                             page.Save(Path.Combine(outDir, "guide-" + view[0] + "-" + view[1] + "-page.png"), ImageFormat.Png);
                         }
                     }
@@ -151,7 +151,7 @@ namespace AzerothLauncher
                     {
                         using (var g = Graphics.FromImage(page)) g.Clear(ssp.BackColor);
                         foreach (Control c in ssp.Controls)
-                            if (c.Width > 0 && c.Height > 0) c.DrawToBitmap(page, new Rectangle(c.Left, c.Top, c.Width, c.Height));
+                            if (c.Width > 0 && c.Height > 0) DrawDeep(c, page, c.Left, c.Top);
                         page.Save(Path.Combine(outDir, nm + "-page.png"), ImageFormat.Png);
                     }
                 }
@@ -224,6 +224,18 @@ namespace AzerothLauncher
                 if (s != null) return s;
             }
             return null;
+        }
+
+        // a control and everything in it (DrawToBitmap alone leaves out what sits inside some painted controls)
+        static void DrawDeep(Control c, Bitmap page, int x, int y)
+        {
+            if (!c.Visible || c.Width <= 0 || c.Height <= 0) return;
+            c.DrawToBitmap(page, new Rectangle(x, y, c.Width, c.Height));
+            for (int i = c.Controls.Count - 1; i >= 0; i--)
+            {
+                Control k = c.Controls[i];
+                DrawDeep(k, page, x + k.Left, y + k.Top);
+            }
         }
     }
 }

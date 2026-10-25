@@ -1262,3 +1262,17 @@ Downloads and installs the game again, then asks about your folders and cloud sa
 = Descarcă și instalează din nou jocul, apoi te întreabă despre foldere și salvarea în cloud.
 Installs the game from a file you downloaded yourself.
 = Instalează jocul dintr-un fișier descărcat de tine.
+Ranks
+= Ranguri
+rank
+= rang
+needs
+= necesită
+points
+= puncte
+Changes
+= Modifică
+X grows with every rank.
+= X crește cu fiecare rang.
+Talents that change it:
+= Talente care îl modifică:
