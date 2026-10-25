@@ -606,7 +606,18 @@ local function NextClass()
 end
 
 local function Button(parent, text, width, onClick)
-	local b = CreateFrame("Button", nil, parent, "UIPanelButtonTemplate");
+	local ok, b = pcall(CreateFrame, "Button", nil, parent, "UIPanelButtonTemplate");
+	if ( not ok or not b ) then b = CreateFrame("Button", nil, parent); end
+	if ( not b:GetFontString() ) then                   -- the template did not take: the same art by hand
+		local fs = b:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall");
+		fs:SetPoint("CENTER", b, "CENTER", 0, 1);
+		b:SetFontString(fs);
+		b:SetNormalTexture("Interface\\Buttons\\UI-Panel-Button-Up");
+		b:SetPushedTexture("Interface\\Buttons\\UI-Panel-Button-Down");
+		b:SetHighlightTexture("Interface\\Buttons\\UI-Panel-Button-Highlight");
+		local t = { b:GetNormalTexture(), b:GetPushedTexture(), b:GetHighlightTexture() };
+		for i = 1, 3 do if ( t[i] ) then t[i]:SetTexCoord(0, 0.625, 0, 0.6875); end end
+	end
 	b:SetWidth(width);
 	b:SetHeight(22);
 	b:SetText(text);
@@ -615,9 +626,13 @@ local function Button(parent, text, width, onClick)
 end
 
 -- a frame from one of the game's templates, or a plain one if the game does not have that template
-local function Templated(kind, name, parent, template)
+-- (a client without the template may still hand back a plain frame, so a part the template makes is checked too)
+local function Templated(kind, name, parent, template, part)
 	local ok, f = pcall(CreateFrame, kind, name, parent, template);
-	if ( ok and f ) then return f, true; end
+	if ( ok and f ) then
+		if ( not part or getglobal(name .. part) ) then return f, true; end
+		return f, false;
+	end
 	return CreateFrame(kind, name, parent), false;
 end
 
@@ -699,7 +714,7 @@ local function Build()
 
 	-- the list: the game's scroll frame and scroll bar
 	local ok;
-	scroll, ok = Templated("ScrollFrame", "AZSStatsScroll", frame, "UIPanelScrollFrameTemplate");
+	scroll, ok = Templated("ScrollFrame", "AZSStatsScroll", frame, "UIPanelScrollFrameTemplate", "ScrollBar");
 	scroll:SetPoint("TOPLEFT", hero, "BOTTOMLEFT", 2, -8);
 	scroll:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -40, 24);
 	child = CreateFrame("Frame", nil, scroll);
@@ -719,7 +734,7 @@ local function Build()
 	local templated = true;
 	for i = 1, table.getn(TABS) do
 		local index = i;
-		local b, tok = Templated("Button", "AZSStatsFrameTab" .. i, frame, "CharacterFrameTabButtonTemplate");
+		local b, tok = Templated("Button", "AZSStatsFrameTab" .. i, frame, "CharacterFrameTabButtonTemplate", "Left");
 		templated = templated and tok;
 		if ( not tok ) then
 			b:Hide();
@@ -752,28 +767,31 @@ SLASH_AZSSTATSUI1 = "/azs";
 SlashCmdList["AZSSTATSUI"] = function() AZSStats_Toggle(); end
 
 -- ---------------------------------------------------------------- the minimap button
--- The tracking-button look: a round icon in the minimap's gold ring. Click: the window. Drag: move it around the
--- minimap (the angle is saved). Its tooltip shows your runs and best results at a glance.
+-- The tracking-button look: a round icon in the minimap's gold ring. Click: the window. Right-click: the live DPS
+-- tracker. Drag: move it around the minimap (the angle is saved); drag it well away from the minimap and it stays
+-- where you drop it. Its tooltip shows your runs and best results at a glance.
+-- Built the way the Peggle port does it on this client, which is known to show: a plain Frame made when the file
+-- loads, parented to the Minimap, mouse enabled, clicks read from OnMouseDown / OnMouseUp (no Button widget, no
+-- click registration, no drag registration), placed again once the saved variables are in.
 local mini;
-
--- around the minimap when the game shows one; otherwise (or before it is laid out) a free spot, top right
-local function OnMinimap()
-	return Minimap and Minimap.IsVisible and Minimap:IsVisible() and Minimap:GetCenter() ~= nil;
-end
+local RING = 78;
 
 local function MiniPlace()
+	if ( not mini ) then return; end
 	local m = DB().minimap;
 	mini:ClearAllPoints();
-	if ( OnMinimap() ) then
+	if ( m.detached and m.x and m.y ) then
+		mini:SetPoint("CENTER", UIParent, "BOTTOMLEFT", Num(m.x), Num(m.y));
+	elseif ( Minimap ) then
 		local a = math.rad(Num(m.angle));
-		mini:SetPoint("CENTER", Minimap, "CENTER", 80 * math.cos(a), 80 * math.sin(a));
+		mini:SetPoint("CENTER", Minimap, "CENTER", RING * math.cos(a), RING * math.sin(a));
 	else
-		mini:SetPoint("CENTER", UIParent, "TOPRIGHT", m.x ~= nil and Num(m.x) or -60, m.y ~= nil and Num(m.y) or -60);
+		mini:SetPoint("CENTER", UIParent, "TOPRIGHT", -60, -60);
 	end
 end
 
 local function MiniTooltip()
-	GameTooltip:SetOwner(this, "ANCHOR_LEFT");
+	GameTooltip:SetOwner(mini, "ANCHOR_LEFT");
 	GameTooltip:AddLine("AZS Stats");
 	local db = DB();
 	local t = db.totals;
@@ -789,73 +807,106 @@ local function MiniTooltip()
 	GameTooltip:Show();
 end
 
--- only what a 1.12 client has: a plain Button on UIParent (so it shows even when the minimap is hidden)
-local function MiniBuild()
-	if ( mini ) then MiniPlace(); return; end
+-- while a mouse button is held: once the cursor has moved a few pixels it is a drag, not a click
+local function MiniDrag()
+	local x, y = GetCursorPosition();
+	local s = UIParent:GetEffectiveScale();
+	x, y = x / s, y / s;
+	if ( not mini.dragging ) then
+		if ( math.abs(x - mini.downX) + math.abs(y - mini.downY) < 6 ) then return; end
+		mini.dragging = true;
+		GameTooltip:Hide();
+	end
+	local m = DB().minimap;
+	local cx, cy;
+	if ( Minimap ) then cx, cy = Minimap:GetCenter(); end
+	if ( cx and cy ) then
+		local ms = Minimap:GetEffectiveScale() / s;           -- the minimap's centre in UIParent's units
+		cx, cy = cx * ms, cy * ms;
+	end
+	if ( cx and cy and (x - cx) * (x - cx) + (y - cy) * (y - cy) < 140 * 140 ) then
+		m.detached = nil;
+		m.angle = math.deg(math.atan2(y - cy, x - cx));
+	else
+		m.detached = true;
+		m.x, m.y = x, y;
+	end
+	MiniPlace();
+end
+
+local function MiniMake()
+	mini = CreateFrame("Frame", "AZSStatsMinimapButton", Minimap or UIParent);
+	mini:SetWidth(33);
+	mini:SetHeight(33);
+	mini:SetFrameStrata("LOW");
+	mini:SetFrameLevel(8);
+	mini:EnableMouse(true);
+	if ( mini.SetClampedToScreen ) then mini:SetClampedToScreen(true); end
+	mini.icon = mini:CreateTexture(nil, "BACKGROUND");
+	mini.icon:SetWidth(21);
+	mini.icon:SetHeight(21);
+	mini.icon:SetPoint("CENTER", mini, "CENTER", -1, 1);
+	mini.icon:SetTexture("Interface\\Icons\\INV_Misc_Book_09");
+	mini.icon:SetTexCoord(0.07, 0.93, 0.07, 0.93);
+	mini.border = mini:CreateTexture(nil, "ARTWORK");
+	mini.border:SetWidth(52);
+	mini.border:SetHeight(52);
+	mini.border:SetPoint("TOPLEFT", mini, "TOPLEFT", 0, 0);
+	mini.border:SetTexture("Interface\\Minimap\\MiniMap-TrackingBorder");
+	mini.glow = mini:CreateTexture(nil, "OVERLAY");
+	mini.glow:SetWidth(32);
+	mini.glow:SetHeight(32);
+	mini.glow:SetPoint("CENTER", mini, "CENTER", 0, 0);
+	mini.glow:SetTexture("Interface\\Minimap\\UI-Minimap-ZoomButton-Highlight");
+	mini.glow:SetBlendMode("ADD");
+	mini.glow:Hide();
+	mini:SetScript("OnMouseDown", function()
+		mini.icon:ClearAllPoints();
+		mini.icon:SetPoint("CENTER", mini, "CENTER", 0, 0);      -- the pressed look
+		local x, y = GetCursorPosition();
+		local s = UIParent:GetEffectiveScale();
+		mini.downX, mini.downY, mini.dragging = x / s, y / s, false;
+		mini:SetScript("OnUpdate", MiniDrag);
+	end);
+	mini:SetScript("OnMouseUp", function()
+		local button, dragged = arg1, mini.dragging;
+		mini:SetScript("OnUpdate", nil);
+		mini.dragging = false;
+		mini.icon:ClearAllPoints();
+		mini.icon:SetPoint("CENTER", mini, "CENTER", -1, 1);
+		if ( dragged ) then return; end
+		if ( button == "RightButton" ) then AZSStats_ToggleTracker(); else AZSStats_Toggle(); end
+	end);
+	mini:SetScript("OnEnter", function() mini.glow:Show(); MiniTooltip(); end);
+	mini:SetScript("OnLeave", function() mini.glow:Hide(); GameTooltip:Hide(); end);
+	mini:SetPoint("CENTER", Minimap or UIParent, "CENTER", RING * math.cos(math.rad(200)), RING * math.sin(math.rad(200)));
+	mini:Show();
+end
+
+local miniError = false;
+local function MiniSafe(fn)
+	local ok, err = pcall(fn);
+	if ( not ok and not miniError ) then
+		miniError = true;
+		if ( DEFAULT_CHAT_FRAME ) then
+			DEFAULT_CHAT_FRAME:AddMessage("|cffffd100AZS Stats|r |cffff4040the minimap button could not be made:|r " .. tostring(err));
+		end
+	end
+end
+
+-- once the saved variables are in: the saved spot, or hidden if you hid it
+local function MiniSettle()
+	if ( not mini ) then MiniMake(); end
 	local db = DB();
 	if ( type(db.minimap) ~= "table" ) then db.minimap = { angle = 200, hide = false }; end
-	mini = CreateFrame("Button", "AZSStatsMinimapButton", UIParent);
-	mini:SetWidth(31);
-	mini:SetHeight(31);
-	mini:SetFrameStrata("MEDIUM");
-	mini:SetFrameLevel(8);
-	mini:SetMovable(true);
-	local icon = mini:CreateTexture(nil, "BACKGROUND");
-	icon:SetTexture("Interface\\Icons\\INV_Misc_Book_09");
-	icon:SetTexCoord(0.07, 0.93, 0.07, 0.93);
-	icon:SetWidth(20);
-	icon:SetHeight(20);
-	icon:SetPoint("TOPLEFT", mini, "TOPLEFT", 6, -5);
-	local border = mini:CreateTexture(nil, "OVERLAY");
-	border:SetTexture("Interface\\Minimap\\MiniMap-TrackingBorder");
-	border:SetWidth(53);
-	border:SetHeight(53);
-	border:SetPoint("TOPLEFT", mini, "TOPLEFT", 0, 0);
-	mini:SetHighlightTexture("Interface\\Minimap\\UI-Minimap-ZoomButton-Highlight");
-	mini:RegisterForClicks("LeftButtonUp", "RightButtonUp");
-	mini:RegisterForDrag("LeftButton");
-	mini:SetScript("OnClick", function()
-		if ( arg1 == "RightButton" ) then AZSStats_ToggleTracker(); else AZSStats_Toggle(); end
-	end);
-	mini:SetScript("OnEnter", MiniTooltip);
-	mini:SetScript("OnLeave", function() GameTooltip:Hide(); end);
-	mini:SetScript("OnDragStart", function()
-		if ( OnMinimap() ) then
-			this:SetScript("OnUpdate", function()
-				local x, y = GetCursorPosition();
-				local s = Minimap:GetEffectiveScale();
-				local cx, cy = Minimap:GetCenter();
-				DB().minimap.angle = math.deg(math.atan2(y / s - cy, x / s - cx));
-				MiniPlace();
-			end);
-		else
-			this:StartMoving();
-		end
-	end);
-	mini:SetScript("OnDragStop", function()
-		this:SetScript("OnUpdate", nil);
-		this:StopMovingOrSizing();
-		if ( not OnMinimap() ) then              -- remember the free spot (from the top right corner)
-			local x, y = this:GetCenter();
-			DB().minimap.x, DB().minimap.y = x - UIParent:GetRight(), y - UIParent:GetTop();
-			MiniPlace();
-		end
-	end);
 	MiniPlace();
 	if ( db.minimap.hide ) then mini:Hide(); else mini:Show(); end
 end
 
-local miniError = false;
-local function MiniSafe()
-	local ok, err = pcall(MiniBuild);
-	if ( not ok and not miniError ) then
-		miniError = true;
-		S().Print("|cffff4040the minimap button could not be made:|r " .. tostring(err));
-	end
-end
+MiniSafe(MiniMake);                                               -- made right away, as the file loads
 
 function AZSStats_ToggleMinimapButton()
-	MiniSafe();
+	MiniSafe(MiniSettle);
 	if ( not mini ) then return; end
 	local m = DB().minimap;
 	m.hide = not m.hide;
@@ -865,8 +916,7 @@ end
 
 local loader = CreateFrame("Frame");
 loader:RegisterEvent("VARIABLES_LOADED");
-loader:RegisterEvent("PLAYER_ENTERING_WORLD");
-loader:SetScript("OnEvent", function() MiniSafe(); end);   -- again when entering the world: the minimap may show by then
+loader:SetScript("OnEvent", function() MiniSafe(MiniSettle); end);
 
 -- ---------------------------------------------------------------- the live DPS tracker
 -- A small frame during a run: your DPS on the game's damage meter, against your best for this class ("82% of your
