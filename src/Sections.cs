@@ -189,7 +189,7 @@ namespace AzerothLauncher
             strip.Width = 32;
             strip.BackColor = dark;
             body.Controls.Add(strip);
-            homeBtn = new IconButton(Icons.Home, CloseSide);          // back to the plain launcher
+            homeBtn = new IconButton(Icons.Home, delegate { communityDismissed = false; current = null; ShowSection("Community"); });   // home: Community
             strip.Controls.Add(homeBtn);
             var icons = new Action<Graphics, float, float, Color>[] { Icons.Book, Icons.Cloud, Icons.AddonsIcon, Icons.Scroll, Icons.Trophy, Icons.Gear, Icons.Info };
             for (int i = 0; i < SectionNames.Length; i++)
@@ -259,12 +259,16 @@ namespace AzerothLauncher
             if (side.Visible) side.Hide();
         }
 
+        // closing a section goes back to the home screen, which shows Community; closing Community itself leaves the
+        // plain home screen (the house button brings Community back)
         void CloseSide()
         {
+            bool wasCommunity = current == "Community";
             current = "Home";
             foreach (var b in nav.Values) b.Active = false;
             RefreshStrip();
-            HideSide();
+            if (wasCommunity) { communityDismissed = true; HideSide(); }
+            else ShowHomeCommunity();
         }
 
         public void ShowSection(string name)
@@ -285,7 +289,8 @@ namespace AzerothLauncher
             if (name == "About Launcher") aboutLog = false;
             if (name == "Home")
             {
-                HideSide();
+                if (communityDismissed) HideSide();
+                else { current = null; ShowSection("Community"); }
                 return;
             }
             ShowSide();
@@ -305,6 +310,7 @@ namespace AzerothLauncher
                 else if (name == "Guide") PanelGuide();
                 else if (name == "Stats") PanelStats();
                 else if (name == "About Launcher") PanelAbout();
+                else if (name == "Community") PanelCommunity();
             }
             finally { Theme.Zoom = 1f; panel.ResumeLayout(); }
         }
