@@ -12,7 +12,7 @@ namespace AzerothLauncher
     public static class Theme
     {
         public static readonly Color BgTop = Hex("#16151d"), BgBottom = Hex("#07070b"), Gold = Hex("#f2c14e"),    // night stone and gold, like the launcher art
-            GoldDim = Hex("#9a8350"), Bronze = Hex("#34323f"), Text = Hex("#d7cea4"), Panel = Hex("#0e0d14"),
+            GoldDim = Hex("#b39b62"), Bronze = Hex("#34323f"), Text = Hex("#d7cea4"), Panel = Hex("#0e0d14"),
             LinkBlue = Hex("#e6cf8c"), Ink = Hex("#15121c"), Good = Hex("#8bc34a"), Bad = Hex("#ff6b5a"),
             Credit = Hex("#b39a5c"), Card = Hex("#1b1724"), CardEdge = Hex("#3d3647");   // LinkBlue: paths and links (pale gold); Ink: card backgrounds
 
@@ -32,21 +32,68 @@ namespace AzerothLauncher
             return Color.FromArgb((int)(a.R + (b.R - a.R) * t), (int)(a.G + (b.G - a.G) * t), (int)(a.B + (b.B - a.B) * t));
         }
 
-        // Nearest to the "Azeroth Survivors" logo lettering: the game's own Morpheus if installed, then Cinzel,
-        // then Papyrus (ships with Office), then the earlier choices.
+        // The launcher's text font: Source Serif 4 SmText (Adobe, SIL Open Font License), built into the exe and made
+        // for reading small text on screens. It has Latin (with Vietnamese), Greek and Cyrillic; Japanese, Korean,
+        // Chinese, Thai and Hindi use the Windows font their language file names (@font).
+        // Only the big "Azeroth Survivors" title keeps a decorative font (TitleFontName).
+        public static string TitleFontName = "Georgia";
+        static FontFamily bundled;
+        static PrivateFontCollection privateFonts;
+        static readonly List<IntPtr> fontMemory = new List<IntPtr>();   // must stay alive while the fonts are used
+
+        [System.Runtime.InteropServices.DllImport("gdi32.dll")]
+        static extern IntPtr AddFontMemResourceEx(IntPtr pbFont, uint cbFont, IntPtr pdv, ref uint pcFonts);
+
+        static void LoadBundledFonts()
+        {
+            if (privateFonts != null) return;
+            privateFonts = new PrivateFontCollection();
+            try
+            {
+                var asm = System.Reflection.Assembly.GetExecutingAssembly();
+                foreach (string res in asm.GetManifestResourceNames())
+                {
+                    if (!res.StartsWith("AS.font.", StringComparison.Ordinal)) continue;
+                    byte[] data;
+                    using (Stream s = asm.GetManifestResourceStream(res))
+                    using (var ms = new MemoryStream()) { s.CopyTo(ms); data = ms.ToArray(); }
+                    IntPtr mem = System.Runtime.InteropServices.Marshal.AllocCoTaskMem(data.Length);
+                    System.Runtime.InteropServices.Marshal.Copy(data, 0, mem, data.Length);
+                    fontMemory.Add(mem);
+                    privateFonts.AddMemoryFont(mem, data.Length);        // for text drawn by the launcher (GDI+)
+                    uint n = 0;
+                    AddFontMemResourceEx(mem, (uint)data.Length, IntPtr.Zero, ref n);   // and for labels and boxes (GDI)
+                }
+                if (privateFonts.Families.Length > 0) bundled = privateFonts.Families[0];
+            }
+            catch (Exception) { bundled = null; }
+        }
+
         public static void PickFont()
         {
+            LoadBundledFonts();
             var have = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
             using (var fc = new InstalledFontCollection())
                 foreach (FontFamily f in fc.Families) have.Add(f.Name);
-            FontName = "Times New Roman";
             fonts.Clear();
-            // a language whose letters the decorative fonts do not have (Cyrillic, Greek, Chinese ...) names its own fonts
-            foreach (string f in Lang.FontOverride.Split(','))
-                if (f.Trim().Length > 0 && have.Contains(f.Trim())) { FontName = f.Trim(); return; }
-            foreach (string f in new[] { "Morpheus", "Cinzel", "Papyrus", "Friz Quadrata TT", "Friz Quadrata Std",
-                                         "Palatino Linotype", "Book Antiqua", "Georgia" })
-                if (have.Contains(f)) { FontName = f; return; }
+            TitleFontName = "Georgia";
+            foreach (string f in new[] { "Morpheus", "Cinzel", "Friz Quadrata TT", "Friz Quadrata Std", "Palatino Linotype", "Georgia" })
+                if (have.Contains(f)) { TitleFontName = f; break; }
+            // scripts the bundled font does not have: the language's own Windows font
+            string c = Lang.Code ?? "en";
+            bool ownScript = c == "ja" || c == "ko" || c.StartsWith("zh") || c == "th" || c == "hi";
+            if (ownScript)
+                foreach (string f in Lang.FontOverride.Split(','))
+                    if (f.Trim().Length > 0 && have.Contains(f.Trim())) { FontName = f.Trim(); return; }
+            if (bundled != null) { FontName = bundled.Name; return; }
+            FontName = have.Contains("Georgia") ? "Georgia" : "Times New Roman";
+        }
+
+        // the title's decorative font, big sizes only
+        public static FontFamily TitleFamily()
+        {
+            try { return new FontFamily(TitleFontName); }
+            catch (Exception) { return FontFamily.GenericSerif; }
         }
 
         public static Font F(float size) { return F(size, FontStyle.Regular); }
@@ -57,12 +104,22 @@ namespace AzerothLauncher
 
         public static Font F(float size, FontStyle style)
         {
-            size = (float)Math.Round(size * Zoom * 4) / 4f;
+            size = Math.Max(8.75f, (float)Math.Round(size * Zoom * 4) / 4f);   // never smaller than this: readable everywhere
             string key = size + "|" + (int)style;
             Font f;
             if (!fonts.TryGetValue(key, out f))
             {
-                try { f = new Font(FontName, size, style, GraphicsUnit.Point); }
+                try
+                {
+                    if (bundled != null && FontName == bundled.Name)
+                    {
+                        FontStyle st = style;
+                        if (!bundled.IsStyleAvailable(st)) st = style & (FontStyle.Bold | FontStyle.Italic);
+                        if (!bundled.IsStyleAvailable(st)) st = FontStyle.Regular;
+                        f = new Font(bundled, size, st | (style & (FontStyle.Underline | FontStyle.Strikeout)), GraphicsUnit.Point);
+                    }
+                    else f = new Font(FontName, size, style, GraphicsUnit.Point);
+                }
                 catch (Exception) { f = new Font(FontFamily.GenericSerif, size, style, GraphicsUnit.Point); }
                 fonts[key] = f;
             }
@@ -102,7 +159,7 @@ namespace AzerothLauncher
         public static void Smooth(Graphics g)
         {
             g.SmoothingMode = SmoothingMode.AntiAlias;
-            g.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+            g.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;   // the sharpest text Windows can draw
             g.InterpolationMode = InterpolationMode.HighQualityBicubic;
         }
 
