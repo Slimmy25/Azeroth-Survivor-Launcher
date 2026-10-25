@@ -210,6 +210,7 @@ namespace AzerothLauncher
             req.Timeout = 15000;
             req.ReadWriteTimeout = 15000;
             req.AllowAutoRedirect = true;
+            req.Accept = "text/html,application/json,image/*,*/*";
             req.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
             using (var resp = (HttpWebResponse)req.GetResponse())
             using (Stream s = resp.GetResponseStream())
@@ -275,7 +276,7 @@ namespace AzerothLauncher
                 sb.Append(" => " + FindNpcDisplay(name));
                 try
                 {
-                    string page = GetText("https://www.wowhead.com/classic/npc=448");
+                    string page = GetText("https://www.wowhead.com/classic/npc=448/hogger");
                     sb.Append(" | hogger page " + page.Length + " chars, display-id " + page.Contains("data-mv-display-id") + ": " +
                               Regex.Replace(page.Length > 160 ? page.Substring(0, 160) : page, @"\s+", " "));
                 }
@@ -287,6 +288,12 @@ namespace AzerothLauncher
             }
             catch (Exception ex) { sb.Append("error " + ex.Message); }
             return sb.ToString();
+        }
+
+        // "Scarlet Crusader" -> "scarlet-crusader", as in Wowhead's addresses
+        static string Slug(string name)
+        {
+            return Regex.Replace(Regex.Replace(name.ToLowerInvariant(), "['’]", ""), "[^a-z0-9]+", "-").Trim('-');
         }
 
         static string FindNpcDisplay(string name)
@@ -305,7 +312,7 @@ namespace AzerothLauncher
             ids.Sort();
             for (int i = 0; i < ids.Count && i < 3; i++)
             {
-                string page = GetText("https://www.wowhead.com/classic/npc=" + ids[i]);
+                string page = GetText("https://www.wowhead.com/classic/npc=" + ids[i] + "/" + Slug(name));
                 Match m = Regex.Match(page, @"data-mv-display-id=""(\d+)""");
                 if (!m.Success) m = Regex.Match(page, @"displayId&quot;:(\d+)");
                 if (!m.Success) m = Regex.Match(page, @"dataset\.displayId = (\d+)");
