@@ -27,6 +27,8 @@ CHANGELOG
 = 更新日志
 ABOUT LAUNCHER
 = 关于启动器
+UPDATE LAUNCHER
+= 更新启动器
 A game made by Aethus
 = Aethus 出品的游戏
 Version {0}

@@ -334,7 +334,7 @@ namespace AzerothLauncher
                 }
                 string version = Data.GameVersion;
                 using (var vb = new SolidBrush(Theme.Hex("#b8a27a")))            // bottom-left corner
-                    g.DrawString(Lang.T("Game version") + (version.Length > 0 ? ": " + version : ""), Theme.F(8), vb, 12, 672);
+                    g.DrawString(Lang.T("Game version") + (version.Length > 0 ? ": " + version : ""), Theme.F(9.5f), vb, 12, 670);   // a little bigger
             }
         }
 

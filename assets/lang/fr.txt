@@ -26,6 +26,8 @@ CHANGELOG
 = NOTES DE VERSION
 ABOUT LAUNCHER
 = À PROPOS DU LAUNCHER
+UPDATE LAUNCHER
+= METTRE À JOUR
 A game made by Aethus
 = Un jeu créé par Aethus
 Version {0}

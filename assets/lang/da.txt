@@ -26,6 +26,8 @@ CHANGELOG
 = PATCHNOTER
 ABOUT LAUNCHER
 = OM LAUNCHEREN
+UPDATE LAUNCHER
+= OPDATER LAUNCHER
 A game made by Aethus
 = Et spil lavet af Aethus
 Version {0}

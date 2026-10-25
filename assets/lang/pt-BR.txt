@@ -26,6 +26,8 @@ CHANGELOG
 = NOTAS DE ATUALIZAÇÃO
 ABOUT LAUNCHER
 = SOBRE O LAUNCHER
+UPDATE LAUNCHER
+= ATUALIZAR LAUNCHER
 A game made by Aethus
 = Um jogo feito por Aethus
 Version {0}

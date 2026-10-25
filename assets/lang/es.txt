@@ -26,6 +26,8 @@ CHANGELOG
 = NOTAS DE PARCHE
 ABOUT LAUNCHER
 = ACERCA DEL LAUNCHER
+UPDATE LAUNCHER
+= ACTUALIZAR LAUNCHER
 A game made by Aethus
 = Un juego creado por Aethus
 Version {0}
