@@ -1,0 +1,33 @@
+# Developer tool: builds assets/npc-models.txt ("Creature name|model id") from the CMaNGOS Classic world database
+# (https://github.com/cmangos/classic-db), so the STATS page's Nemesis can show each creature's model picture from
+# Wowhead's image host. Puts the file on the private "npc-models" branch. Run by hand: Actions > NPC models.
+name: NPC models
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Read the creatures
+        run: |
+          set -e
+          git clone -q --depth 1 https://github.com/cmangos/classic-db.git /tmp/db
+          ls /tmp/db /tmp/db/Full_DB || true
+          f=$(ls /tmp/db/Full_DB/*.sql.gz 2>/dev/null | head -1)
+          if [ -n "$f" ]; then zcat "$f" > /tmp/world.sql; else f=$(ls /tmp/db/Full_DB/*.sql | head -1); cp "$f" /tmp/world.sql; fi
+          ls -la /tmp/world.sql
+          python3 tools/npc_models.py < /tmp/world.sql > /tmp/npc-models.txt
+          wc -l /tmp/npc-models.txt; grep -E "^(Hogger|Scarlet Crusader|Patchwerk|Ragnaros|Gnoll Brute)\|" /tmp/npc-models.txt || true
+          echo "::notice::creatures: $(wc -l < /tmp/npc-models.txt)"
+      - name: Keep it on the npc-models branch
+        run: |
+          mkdir /tmp/pub && cp /tmp/npc-models.txt /tmp/pub/ && cd /tmp/pub
+          git init -q -b npc-models && git config user.name bot && git config user.email bot@users.noreply.github.com
+          git add -A && git commit -qm "npc models"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" HEAD:npc-models
