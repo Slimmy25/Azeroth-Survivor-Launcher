@@ -1294,3 +1294,41 @@ Click a talent to add a point, right-click to take one back. A talent takes no m
 = タレントをクリックでポイント追加、右クリックで1つ戻します。タレントはランク数まで、ビルドは51ポイントまで。紫は10・20・30ポイントのマイルストーンです。
 Installed
 = インストール済み
+Moving over from the website?
+= Webサイトから移行しますか？
+Played Azeroth Survivors in your browser? Bring your progress with you: your heroes, the zones you opened, your gear, talents and codex.
+= ブラウザで Azeroth Survivors を遊びましたか？ 進行状況を持ってきましょう：ヒーロー、開いたゾーン、装備、タレント、コデックス。
+On the website, open Options > Saves and press Export Save. Then choose that .sav file here. The game opens with your progress, ready to play.
+= Webサイトで オプション > セーブ を開き、セーブをエクスポート を押します。次にその .sav ファイルをここで選んでください。ゲームはあなたの進行状況で開き、すぐに遊べます。
+IMPORT MY SAVE
+= セーブをインポート
+I'M NEW HERE
+= はじめてです
+NEXT
+= 次へ
+IMPORT ANOTHER
+= 別のものをインポート
+Step 1 of 3
+= ステップ 1/3
+Step 2 of 3
+= ステップ 2/3
+Step 3 of 3
+= ステップ 3/3
+IMPORT A SAVE
+= セーブをインポート
+Puts in a save exported from the game (on the website: Options > Saves > Export Save), so the game opens with it.
+= ゲームからエクスポートしたセーブを入れます（Webサイト：オプション > セーブ > エクスポート）。ゲームはそれで開きます。
+Close the game first, then import the save.
+= 先にゲームを閉じてから、セーブをインポートしてください。
+Checking for a launcher update...
+= ランチャーの更新を確認中...
+Featured video. All credit goes to the people who made it.
+= おすすめ動画。すべての功績は制作者のものです。
+The video could not be shown here. Press the back arrow and try again.
+= ここで動画を表示できませんでした。戻る矢印を押して、もう一度お試しください。
+Choose the save you exported from the website (.sav)
+= Webサイトからエクスポートしたセーブを選択（.sav）
+Azeroth Survivors save (*.sav)|*.sav|All files (*.*)|*.*
+= Azeroth Survivors セーブ (*.sav)|*.sav|すべてのファイル (*.*)|*.*
+Save imported.
+= セーブをインポートしました。

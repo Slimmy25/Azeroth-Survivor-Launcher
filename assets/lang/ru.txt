@@ -1294,3 +1294,41 @@ Click a talent to add a point, right-click to take one back. A talent takes no m
 = Щёлкните талант, чтобы добавить очко, правый щелчок забирает одно. Талант не берёт больше очков, чем у него рангов, а билд — больше 51; фиолетовые — это вехи на 10, 20 и 30 очках.
 Installed
 = Установлен
+Moving over from the website?
+= Переходите с сайта?
+Played Azeroth Survivors in your browser? Bring your progress with you: your heroes, the zones you opened, your gear, talents and codex.
+= Играли в Azeroth Survivors в браузере? Перенесите прогресс: героев, открытые зоны, снаряжение, таланты и кодекс.
+On the website, open Options > Saves and press Export Save. Then choose that .sav file here. The game opens with your progress, ready to play.
+= На сайте откройте Настройки > Сохранения и нажмите «Экспорт сохранения». Затем выберите здесь этот файл .sav. Игра откроется с вашим прогрессом, можно играть.
+IMPORT MY SAVE
+= ИМПОРТИРОВАТЬ МОЁ СОХРАНЕНИЕ
+I'M NEW HERE
+= Я НОВИЧОК
+NEXT
+= ДАЛЕЕ
+IMPORT ANOTHER
+= ИМПОРТИРОВАТЬ ДРУГОЕ
+Step 1 of 3
+= Шаг 1 из 3
+Step 2 of 3
+= Шаг 2 из 3
+Step 3 of 3
+= Шаг 3 из 3
+IMPORT A SAVE
+= ИМПОРТ СОХРАНЕНИЯ
+Puts in a save exported from the game (on the website: Options > Saves > Export Save), so the game opens with it.
+= Подставляет сохранение, экспортированное из игры (на сайте: Настройки > Сохранения > Экспорт сохранения), чтобы игра открылась с ним.
+Close the game first, then import the save.
+= Сначала закройте игру, затем импортируйте сохранение.
+Checking for a launcher update...
+= Проверка обновления лаунчера...
+Featured video. All credit goes to the people who made it.
+= Избранное видео. Вся заслуга — его авторам.
+The video could not be shown here. Press the back arrow and try again.
+= Видео не удалось показать здесь. Нажмите стрелку назад и попробуйте снова.
+Choose the save you exported from the website (.sav)
+= Выберите сохранение, экспортированное с сайта (.sav)
+Azeroth Survivors save (*.sav)|*.sav|All files (*.*)|*.*
+= Сохранение Azeroth Survivors (*.sav)|*.sav|Все файлы (*.*)|*.*
+Save imported.
+= Сохранение импортировано.

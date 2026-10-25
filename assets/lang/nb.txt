@@ -1293,3 +1293,41 @@ Click a talent to add a point, right-click to take one back. A talent takes no m
 = Klikk på et talent for å legge til et poeng, høyreklikk for å ta ett tilbake. Et talent tar ikke flere poeng enn rangene sine, og en build ikke flere enn 51; de lilla er milepælene ved 10, 20 og 30 poeng.
 Installed
 = Installert
+Moving over from the website?
+= Flytter du fra nettsiden?
+Played Azeroth Survivors in your browser? Bring your progress with you: your heroes, the zones you opened, your gear, talents and codex.
+= Har du spilt Azeroth Survivors i nettleseren? Ta med fremgangen: heltene, de åpnede sonene, utstyret, talentene og kodeksen.
+On the website, open Options > Saves and press Export Save. Then choose that .sav file here. The game opens with your progress, ready to play.
+= Åpne Innstillinger > Lagringer på nettsiden og trykk Eksporter lagring. Velg så den .sav-filen her. Spillet åpner med fremgangen din, klart til å spille.
+IMPORT MY SAVE
+= IMPORTER LAGRINGEN MIN
+I'M NEW HERE
+= JEG ER NY
+NEXT
+= NESTE
+IMPORT ANOTHER
+= IMPORTER EN ANNEN
+Step 1 of 3
+= Trinn 1 av 3
+Step 2 of 3
+= Trinn 2 av 3
+Step 3 of 3
+= Trinn 3 av 3
+IMPORT A SAVE
+= IMPORTER EN LAGRING
+Puts in a save exported from the game (on the website: Options > Saves > Export Save), so the game opens with it.
+= Legger inn en lagring eksportert fra spillet (på nettsiden: Innstillinger > Lagringer > Eksporter), så spillet åpner med den.
+Close the game first, then import the save.
+= Lukk spillet først, og importer så lagringen.
+Checking for a launcher update...
+= Ser etter en launcher-oppdatering...
+Featured video. All credit goes to the people who made it.
+= Utvalgt video. All ære går til dem som laget den.
+The video could not be shown here. Press the back arrow and try again.
+= Videoen kunne ikke vises her. Trykk på tilbake-pilen og prøv igjen.
+Choose the save you exported from the website (.sav)
+= Velg lagringen du eksporterte fra nettsiden (.sav)
+Azeroth Survivors save (*.sav)|*.sav|All files (*.*)|*.*
+= Azeroth Survivors-lagring (*.sav)|*.sav|Alle filer (*.*)|*.*
+Save imported.
+= Lagring importert.

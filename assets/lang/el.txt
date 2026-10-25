@@ -1294,3 +1294,41 @@ Click a talent to add a point, right-click to take one back. A talent takes no m
 = Κάνε κλικ σε ένα ταλέντο για να προσθέσεις πόντο, δεξί κλικ για να πάρεις έναν πίσω. Ένα ταλέντο δεν παίρνει περισσότερους πόντους από τις βαθμίδες του, και ένα build όχι πάνω από 51· τα μωβ είναι τα ορόσημα στους 10, 20 και 30 πόντους.
 Installed
 = Εγκατεστημένο
+Moving over from the website?
+= Έρχεσαι από τον ιστότοπο;
+Played Azeroth Survivors in your browser? Bring your progress with you: your heroes, the zones you opened, your gear, talents and codex.
+= Έπαιξες Azeroth Survivors στον browser; Φέρε την πρόοδό σου: ήρωες, ζώνες που άνοιξες, εξοπλισμό, ταλέντα και κώδικα.
+On the website, open Options > Saves and press Export Save. Then choose that .sav file here. The game opens with your progress, ready to play.
+= Στον ιστότοπο άνοιξε Επιλογές > Αποθηκεύσεις και πάτα Εξαγωγή αποθήκευσης. Μετά διάλεξε εδώ αυτό το αρχείο .sav. Το παιχνίδι ανοίγει με την πρόοδό σου, έτοιμο για παιχνίδι.
+IMPORT MY SAVE
+= ΕΙΣΑΓΩΓΗ ΤΗΣ ΑΠΟΘΗΚΕΥΣΗΣ ΜΟΥ
+I'M NEW HERE
+= ΕΙΜΑΙ ΚΑΙΝΟΥΡΓΙΟΣ
+NEXT
+= ΕΠΟΜΕΝΟ
+IMPORT ANOTHER
+= ΕΙΣΑΓΩΓΗ ΑΛΛΗΣ
+Step 1 of 3
+= Βήμα 1 από 3
+Step 2 of 3
+= Βήμα 2 από 3
+Step 3 of 3
+= Βήμα 3 από 3
+IMPORT A SAVE
+= ΕΙΣΑΓΩΓΗ ΑΠΟΘΗΚΕΥΣΗΣ
+Puts in a save exported from the game (on the website: Options > Saves > Export Save), so the game opens with it.
+= Βάζει μια αποθήκευση που εξήχθη από το παιχνίδι (στον ιστότοπο: Επιλογές > Αποθηκεύσεις > Εξαγωγή), ώστε το παιχνίδι να ανοίγει με αυτή.
+Close the game first, then import the save.
+= Κλείσε πρώτα το παιχνίδι και μετά κάνε εισαγωγή.
+Checking for a launcher update...
+= Έλεγχος για ενημέρωση του launcher...
+Featured video. All credit goes to the people who made it.
+= Προτεινόμενο βίντεο. Όλα τα εύσημα σε όσους το έφτιαξαν.
+The video could not be shown here. Press the back arrow and try again.
+= Το βίντεο δεν μπόρεσε να εμφανιστεί εδώ. Πάτα το βέλος επιστροφής και δοκίμασε ξανά.
+Choose the save you exported from the website (.sav)
+= Διάλεξε την αποθήκευση που εξήγαγες από τον ιστότοπο (.sav)
+Azeroth Survivors save (*.sav)|*.sav|All files (*.*)|*.*
+= Αποθήκευση Azeroth Survivors (*.sav)|*.sav|Όλα τα αρχεία (*.*)|*.*
+Save imported.
+= Η αποθήκευση εισήχθη.

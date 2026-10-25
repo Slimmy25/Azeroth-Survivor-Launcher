@@ -1294,3 +1294,41 @@ Click a talent to add a point, right-click to take one back. A talent takes no m
 = Puan eklemek için bir yeteneğe tıkla, birini geri almak için sağ tıkla. Bir yetenek derecesinden fazla puan almaz, bir build de 51'den fazla; mor olanlar 10, 20 ve 30 puandaki kilometre taşlarıdır.
 Installed
 = Yüklü
+Moving over from the website?
+= Web sitesinden mi geçiyorsun?
+Played Azeroth Survivors in your browser? Bring your progress with you: your heroes, the zones you opened, your gear, talents and codex.
+= Azeroth Survivors'ı tarayıcıda mı oynadın? İlerlemeni getir: kahramanların, açtığın bölgeler, ekipmanın, yeteneklerin ve kodeks.
+On the website, open Options > Saves and press Export Save. Then choose that .sav file here. The game opens with your progress, ready to play.
+= Web sitesinde Seçenekler > Kayıtlar'ı aç ve Kaydı Dışa Aktar'a bas. Sonra o .sav dosyasını burada seç. Oyun ilerlemenle, oynamaya hazır açılır.
+IMPORT MY SAVE
+= KAYDIMI İÇE AKTAR
+I'M NEW HERE
+= BURADA YENİYİM
+NEXT
+= İLERİ
+IMPORT ANOTHER
+= BAŞKA BİR TANE AKTAR
+Step 1 of 3
+= Adım 1 / 3
+Step 2 of 3
+= Adım 2 / 3
+Step 3 of 3
+= Adım 3 / 3
+IMPORT A SAVE
+= KAYIT İÇE AKTAR
+Puts in a save exported from the game (on the website: Options > Saves > Export Save), so the game opens with it.
+= Oyundan dışa aktarılmış bir kaydı yerleştirir (web sitesinde: Seçenekler > Kayıtlar > Dışa Aktar), böylece oyun onunla açılır.
+Close the game first, then import the save.
+= Önce oyunu kapat, sonra kaydı içe aktar.
+Checking for a launcher update...
+= Başlatıcı güncellemesi aranıyor...
+Featured video. All credit goes to the people who made it.
+= Öne çıkan video. Tüm emek onu yapanlara aittir.
+The video could not be shown here. Press the back arrow and try again.
+= Video burada gösterilemedi. Geri okuna basıp tekrar dene.
+Choose the save you exported from the website (.sav)
+= Web sitesinden dışa aktardığın kaydı seç (.sav)
+Azeroth Survivors save (*.sav)|*.sav|All files (*.*)|*.*
+= Azeroth Survivors kaydı (*.sav)|*.sav|Tüm dosyalar (*.*)|*.*
+Save imported.
+= Kayıt içe aktarıldı.

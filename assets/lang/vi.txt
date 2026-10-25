@@ -1294,3 +1294,41 @@ Click a talent to add a point, right-click to take one back. A talent takes no m
 = Nhấp vào thiên phú để thêm một điểm, nhấp phải để lấy lại một điểm. Thiên phú không nhận quá số bậc của nó, và build không quá 51 điểm; ô tím là các cột mốc ở 10, 20 và 30 điểm.
 Installed
 = Đã cài
+Moving over from the website?
+= Chuyển sang từ trang web?
+Played Azeroth Survivors in your browser? Bring your progress with you: your heroes, the zones you opened, your gear, talents and codex.
+= Đã chơi Azeroth Survivors trên trình duyệt? Mang theo tiến trình: anh hùng, khu vực đã mở, trang bị, thiên phú và sách ghi chép.
+On the website, open Options > Saves and press Export Save. Then choose that .sav file here. The game opens with your progress, ready to play.
+= Trên trang web, mở Tùy chọn > Bản lưu và nhấn Xuất bản lưu. Rồi chọn tệp .sav đó ở đây. Trò chơi mở với tiến trình của bạn, sẵn sàng để chơi.
+IMPORT MY SAVE
+= NHẬP BẢN LƯU CỦA TÔI
+I'M NEW HERE
+= TÔI MỚI CHƠI
+NEXT
+= TIẾP
+IMPORT ANOTHER
+= NHẬP BẢN KHÁC
+Step 1 of 3
+= Bước 1/3
+Step 2 of 3
+= Bước 2/3
+Step 3 of 3
+= Bước 3/3
+IMPORT A SAVE
+= NHẬP BẢN LƯU
+Puts in a save exported from the game (on the website: Options > Saves > Export Save), so the game opens with it.
+= Đặt bản lưu xuất từ trò chơi (trên trang web: Tùy chọn > Bản lưu > Xuất), để trò chơi mở với nó.
+Close the game first, then import the save.
+= Hãy đóng trò chơi trước, rồi nhập bản lưu.
+Checking for a launcher update...
+= Đang kiểm tra bản cập nhật trình khởi chạy...
+Featured video. All credit goes to the people who made it.
+= Video nổi bật. Mọi công lao thuộc về người làm ra nó.
+The video could not be shown here. Press the back arrow and try again.
+= Không thể hiển thị video tại đây. Nhấn mũi tên quay lại và thử lại.
+Choose the save you exported from the website (.sav)
+= Chọn bản lưu bạn đã xuất từ trang web (.sav)
+Azeroth Survivors save (*.sav)|*.sav|All files (*.*)|*.*
+= Bản lưu Azeroth Survivors (*.sav)|*.sav|Mọi tệp (*.*)|*.*
+Save imported.
+= Đã nhập bản lưu.

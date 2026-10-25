@@ -1293,3 +1293,41 @@ Click a talent to add a point, right-click to take one back. A talent takes no m
 = Clicca un talento per aggiungere un punto, clic destro per toglierne uno. Un talento non prende più punti dei suoi gradi, e una build non più di 51; quelli viola sono le tappe a 10, 20 e 30 punti.
 Installed
 = Installato
+Moving over from the website?
+= Arrivi dal sito web?
+Played Azeroth Survivors in your browser? Bring your progress with you: your heroes, the zones you opened, your gear, talents and codex.
+= Hai giocato ad Azeroth Survivors nel browser? Porta con te i tuoi progressi: eroi, zone aperte, equipaggiamento, talenti e codice.
+On the website, open Options > Saves and press Export Save. Then choose that .sav file here. The game opens with your progress, ready to play.
+= Sul sito apri Opzioni > Salvataggi e premi Esporta salvataggio. Poi scegli qui quel file .sav. Il gioco si apre con i tuoi progressi, pronto per giocare.
+IMPORT MY SAVE
+= IMPORTA IL MIO SALVATAGGIO
+I'M NEW HERE
+= SONO NUOVO
+NEXT
+= AVANTI
+IMPORT ANOTHER
+= IMPORTANE UN ALTRO
+Step 1 of 3
+= Passo 1 di 3
+Step 2 of 3
+= Passo 2 di 3
+Step 3 of 3
+= Passo 3 di 3
+IMPORT A SAVE
+= IMPORTA UN SALVATAGGIO
+Puts in a save exported from the game (on the website: Options > Saves > Export Save), so the game opens with it.
+= Inserisce un salvataggio esportato dal gioco (sul sito: Opzioni > Salvataggi > Esporta salvataggio), così il gioco si apre con esso.
+Close the game first, then import the save.
+= Chiudi prima il gioco, poi importa il salvataggio.
+Checking for a launcher update...
+= Ricerca di un aggiornamento del launcher...
+Featured video. All credit goes to the people who made it.
+= Video in evidenza. Tutto il merito va a chi l'ha realizzato.
+The video could not be shown here. Press the back arrow and try again.
+= Il video non è stato mostrato qui. Premi la freccia indietro e riprova.
+Choose the save you exported from the website (.sav)
+= Scegli il salvataggio esportato dal sito (.sav)
+Azeroth Survivors save (*.sav)|*.sav|All files (*.*)|*.*
+= Salvataggio di Azeroth Survivors (*.sav)|*.sav|Tutti i file (*.*)|*.*
+Save imported.
+= Salvataggio importato.

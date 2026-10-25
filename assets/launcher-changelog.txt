@@ -1,4 +1,11 @@
 # Next update (after v0.3)
+- First-time setup starts by asking whether you are moving over from the website: choose the .sav you exported there (Options > Saves > Export Save) and the game opens with your progress. Options > LAUNCHER has IMPORT A SAVE too
+- PLAY first makes sure you have the newest launcher (and installs it if not); the UPDATE LAUNCHER button is gone
+- AZS Minor Mods sets the camera as far out as it goes (50 yards) when the game starts; it can be turned off in /azsmods
+- Changing a setting in Options keeps the page where you scrolled it
+- The News line: the Discord symbol left of "News", CHANGELOG at the end of the line
+- YouTube videos play inside the launcher: the player's own window is found even when Edge hands it to another of its processes, so it no longer opens on its own at the top left of the screen
+- Community headlines Asmongold's video for two weeks; 12 new build guide videos by Holdherhand and Des
 - New AZS addons, built into the launcher (Addons > Download More > AZS ADDONS) and kept up to date by it before the game starts: AZS Handbook (the whole New Player Guide inside the game, /handbook), AZS Minor Mods (the level-up text out of the chat and a Say & Party box above it, /azsmods) and AZS Transparency (a test: which of your spells each item upgrade makes stronger, /transparency). All AZS addons share AZS Stats' look, and each has its own spot by the minimap
 - AZS ADDONS in Download More are shown as blocks, two to a row
 - The installed addons list has an X beside each addon to uninstall it from the AddOns folder

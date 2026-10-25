@@ -50,9 +50,24 @@ namespace AzerothLauncher
             return list;
         }
 
-        // the featured video: a random one, a different one every 10 minutes (while nothing is playing)
+        // A headline video: shown first in Community, in place of the rotating build videos, until its date (local).
+        // Set it to null when there is none.
+        static readonly GuideVideo Headline = new GuideVideo
+        {
+            Title = "There's a whole new way to play WoW..",
+            Url = "https://www.youtube.com/watch?v=Suq82njFIuI",
+            Author = "Asmongold TV",
+            AuthorUrl = "https://www.youtube.com/@AsmonTV",
+        };
+        static readonly DateTime HeadlineUntil = new DateTime(2026, 11, 8, 23, 59, 59);   // two weeks from Oct 25, 2026
+
+        static bool HeadlineOn { get { return Headline != null && DateTime.Now <= HeadlineUntil; } }
+
+        // the featured video: the headline while it runs, otherwise a random build video, a different one every 10
+        // minutes (while nothing is playing)
         static GuideVideo Featured(List<GuideVideo> list)
         {
+            if (HeadlineOn) return Headline;
             if (list.Count == 0) return null;
             if (communityPick < 0 || communityPick >= list.Count || (DateTime.Now - communityPicked).TotalMinutes >= RotateMinutes)
             {
@@ -89,7 +104,8 @@ namespace AzerothLauncher
             ClearPanel("Community");
             int ti;
             GuideVideo v = Featured(BuildVideos(out ti));
-            var intro = PutText("A build video made by a player. All credit goes to the people who made it.",
+            var intro = PutText(HeadlineOn ? "Featured video. All credit goes to the people who made it."
+                                           : "A build video made by a player. All credit goes to the people who made it.",
                                 9.5f, FontStyle.Italic, Theme.GoldDim, 24, 18, PW - 24 - (int)(200 * Theme.Zoom) - 34);
             int top = Math.Max((int)(12 + 32 * Theme.Zoom) + 12, BottomOf(intro) + 6);
             if (v == null)
@@ -167,22 +183,59 @@ namespace AzerothLauncher
         const int WS_CAPTION = 0x00C00000, WS_THICKFRAME = 0x00040000, WS_SYSMENU = 0x00080000;
         const int WS_MINIMIZEBOX = 0x00020000, WS_MAXIMIZEBOX = 0x00010000, WS_EX_APPWINDOW = 0x00040000;
 
-        // the Edge browser window of a process: visible, Chrome's window class, with a title (the page's)
-        static IntPtr EdgeWindowOf(int pid)
+        // the video player's Edge window: a visible Edge window (Chrome's window class, with a title) of an msedge.exe
+        // started with the player's own profile. Edge often hands its first process over to another one, so the
+        // window is looked for by the profile, not by the process the launcher started.
+        static IntPtr PlayerWindow(string profile, HashSet<IntPtr> before)
         {
+            var pids = new HashSet<uint>();
+            foreach (int id in PlayerProcesses(profile)) pids.Add((uint)id);
             IntPtr found = IntPtr.Zero;
             EnumWindows(delegate(IntPtr h, IntPtr lp)
             {
-                uint wp;
-                GetWindowThreadProcessId(h, out wp);
-                if (wp != (uint)pid || !IsWindowVisible(h) || GetWindowTextLength(h) == 0) return true;
+                if (!IsWindowVisible(h) || GetWindowTextLength(h) == 0 || before.Contains(h)) return true;
                 var cls = new StringBuilder(64);
                 GetClassName(h, cls, 64);
                 if (cls.ToString() != "Chrome_WidgetWin_1") return true;
+                uint wp;
+                GetWindowThreadProcessId(h, out wp);
+                if (!pids.Contains(wp)) return true;
                 found = h;
                 return false;
             }, IntPtr.Zero);
             return found;
+        }
+
+        // every Edge window there is now (so one that was already open is never taken)
+        static HashSet<IntPtr> EdgeWindowsNow()
+        {
+            var set = new HashSet<IntPtr>();
+            EnumWindows(delegate(IntPtr h, IntPtr lp)
+            {
+                var cls = new StringBuilder(64);
+                GetClassName(h, cls, 64);
+                if (cls.ToString() == "Chrome_WidgetWin_1") set.Add(h);
+                return true;
+            }, IntPtr.Zero);
+            return set;
+        }
+
+        // the msedge.exe processes running with the player's profile
+        static List<int> PlayerProcesses(string profile)
+        {
+            var list = new List<int>();
+            try
+            {
+                using (var q = new System.Management.ManagementObjectSearcher(
+                    "SELECT ProcessId, CommandLine FROM Win32_Process WHERE Name = 'msedge.exe'"))
+                    foreach (System.Management.ManagementObject o in q.Get())
+                    {
+                        string cmd = Convert.ToString(o["CommandLine"]) ?? "";
+                        if (cmd.IndexOf(profile, StringComparison.OrdinalIgnoreCase) >= 0) list.Add(Convert.ToInt32(o["ProcessId"]));
+                    }
+            }
+            catch (Exception) { }
+            return list;
         }
 
         // an Edge left over from an earlier launcher (it crashed) still holds the video player's profile: a new one
@@ -239,36 +292,54 @@ namespace AzerothLauncher
             string profile = Path.Combine(Util.DataDir, "video-player");
             Process p;
             KillOldPlayers(profile);
+            var before = EdgeWindowsNow();
             try
             {
                 Directory.CreateDirectory(profile);
                 var psi = new ProcessStartInfo(edge,
                     "--user-data-dir=\"" + profile + "\" --no-first-run --no-default-browser-check --disable-features=msEdgeSidebarV2" +
                     " --disable-features=CalculateNativeWinOcclusion --disable-backgrounding-occluded-windows" +
-                    " --window-position=0,0 --window-size=640,360 --app=\"" + WatchUrl(v) + "\"");
+                    " --window-position=-20000,-20000 --window-size=640,360 --app=\"" + WatchUrl(v) + "\"");
                 psi.UseShellExecute = false;
                 p = Process.Start(psi);
             }
             catch (Exception) { Util.OpenInShell(WatchUrl(v)); communityPlaying = null; return; }
             edgeVideo = p;
-            // its window appears after a moment: then it is moved into the section
+            edgeProfile = profile;
+            // its window appears after a moment (often from another Edge process than the one started): then it is
+            // moved into the section
             ThreadPool.QueueUserWorkItem(delegate
             {
                 IntPtr hwnd = IntPtr.Zero;
-                for (int i = 0; i < 400 && hwnd == IntPtr.Zero; i++)
+                for (int i = 0; i < 150 && hwnd == IntPtr.Zero; i++)
                 {
-                    Thread.Sleep(40);
-                    try { if (p.HasExited) return; hwnd = EdgeWindowOf(p.Id); }
-                    catch (Exception) { return; }
+                    Thread.Sleep(i < 50 ? 60 : 150);
+                    if (p != edgeVideo) return;               // stopped meanwhile
+                    try { hwnd = PlayerWindow(profile, before); }
+                    catch (Exception) { }
                 }
-                if (hwnd == IntPtr.Zero) return;
+                if (hwnd == IntPtr.Zero)
+                {
+                    // never seen: no stray window is left behind, and the section says so
+                    if (p != edgeVideo) return;
+                    KillOldPlayers(profile);
+                    Ui(delegate
+                    {
+                        if (edgeHost == null || edgeHost.IsDisposed) return;
+                        foreach (Control c in edgeHost.Controls)
+                            if (c is Label) c.Text = Lang.T("The video could not be shown here. Press the back arrow and try again.");
+                    });
+                    return;
+                }
                 Ui(delegate { Adopt(p, hwnd); });
             });
         }
 
+        string edgeProfile;                                   // the player's Edge profile (its processes are found by it)
+
         void Adopt(Process p, IntPtr hwnd)
         {
-            if (p != edgeVideo || edgeHost == null || edgeHost.IsDisposed) { try { if (!p.HasExited) p.Kill(); } catch (Exception) { } return; }
+            if (p != edgeVideo || edgeHost == null || edgeHost.IsDisposed) { KillOldPlayers(edgeProfile ?? ""); return; }
             int style = GetWindowLong(hwnd, GWL_STYLE);
             style &= ~(WS_POPUP | WS_CAPTION | WS_THICKFRAME | WS_SYSMENU | WS_MINIMIZEBOX | WS_MAXIMIZEBOX);
             style |= WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS;
@@ -298,6 +369,9 @@ namespace AzerothLauncher
             if (p == null) return;
             try { if (!p.HasExited) p.Kill(); } catch (Exception) { }
             try { p.Dispose(); } catch (Exception) { }
+            // the Edge that took the video over, and its helpers
+            string prof = edgeProfile;
+            if (!string.IsNullOrEmpty(prof)) ThreadPool.QueueUserWorkItem(delegate { KillOldPlayers(prof); });
         }
 
         // the X over the video's top right corner: a small window of its own, so it stays above Edge's

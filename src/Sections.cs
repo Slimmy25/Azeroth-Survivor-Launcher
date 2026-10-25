@@ -634,6 +634,39 @@ namespace AzerothLauncher
             box.ScrollToCaret();
         }
 
+        // ------------------------------------------------------------------ importing a save (setup and Options)
+        // asks for a .sav file and puts it in as the game's progress; returns its name, or null when nothing was done
+        public string ImportSave(IWin32Window owner, string saveDir)
+        {
+            if (GameRunningFlag || Util.GameRunning()) { Msg.Show(owner, "Close the game first, then import the save.", "Import save"); return null; }
+            string file;
+            using (var d = new OpenFileDialog())
+            {
+                d.Title = Lang.T("Choose the save you exported from the website (.sav)");
+                d.Filter = Lang.T("Azeroth Survivors save (*.sav)|*.sav|All files (*.*)|*.*");
+                string dl = Path.Combine(Util.Home, "Downloads");
+                if (Directory.Exists(dl)) d.InitialDirectory = dl;
+                if (d.ShowDialog(owner) != DialogResult.OK) return null;
+                file = d.FileName;
+            }
+            if (string.IsNullOrEmpty(saveDir)) saveDir = Util.DefaultSaveDir;
+            try { SaveImport.Read(file); }
+            catch (Exception e) { Msg.Show(owner, e.Message, "Import save", MessageBoxButtons.OK, MessageBoxIcon.Error); return null; }
+            if (File.Exists(Path.Combine(saveDir, SaveImport.SaveFile)) &&
+                Msg.Show(owner, "This PC already has progress in the game.\n\nReplace it with " + Path.GetFileName(file) +
+                                "?\nWhat is there now is kept as a backup in the game's Saves folder.", "Import save",
+                         MessageBoxButtons.YesNo) != DialogResult.Yes) return null;
+            try { SaveImport.Import(file, saveDir); }
+            catch (Exception e)
+            {
+                Msg.Show(owner, "The save could not be imported:\n\n" + e.Message, "Import save", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
+            Cfg.Set("save_imported", DateTime.UtcNow.ToString("o", System.Globalization.CultureInfo.InvariantCulture));
+            Cfg.Save();
+            return Path.GetFileName(file);
+        }
+
         // ------------------------------------------------------------------ Addons
         string AddonsDir() { return SyncSettings().AddonsDir; }
 
@@ -1271,8 +1304,13 @@ namespace AzerothLauncher
         static readonly string[] OptionTabs = { "FOLDERS", "GAME", "GENERAL", "LANGUAGE", "LAUNCHER" };
         int optionsTab;
 
+        ScrollPanel optionsPage;                             // the page shown, so a rebuild of the same tab keeps its place
+        int optionsPageTab = -1;
+
         void PanelOptions()
         {
+            // a setting changed on this tab rebuilds it: it stays where it was scrolled to
+            int keep = optionsPage != null && !optionsPage.IsDisposed && optionsPageTab == optionsTab ? -optionsPage.AutoScrollPosition.Y : 0;
             ClearPanel("Options");
             int x0 = 20 + (int)(52 * Theme.Zoom) + 10, wAll = PW - 20 - x0, cw = wAll / OptionTabs.Length;
             for (int i = 0; i < OptionTabs.Length; i++)
@@ -1300,6 +1338,9 @@ namespace AzerothLauncher
                 sp.Controls.Add(pad);
             }
             finally { putInto = null; }
+            optionsPage = sp;
+            optionsPageTab = optionsTab;
+            if (keep > 0) sp.AutoScrollPosition = new Point(0, keep);
         }
 
         int OptionCheck(string text, bool value, int y, Action<bool> changed)
@@ -1464,11 +1505,11 @@ namespace AzerothLauncher
                 var t = PutText(note, 9.5f, FontStyle.Italic, Theme.GoldDim, 20 + b.Width + 12, y + 2, PW - 40 - b.Width - 12);
                 y = Math.Max(BottomOf(b), BottomOf(t)) + 8;
             };
-            row(updateBtn.Label, delegate { CheckLauncherUpdate(true); BuildPanel("Options"); },
-                "Checks for a newer launcher and installs it (the launcher also does this by itself when it starts).");
             row("ABOUT LAUNCHER", delegate { ShowSection("About Launcher"); }, "What the launcher does, and its own changelog.");
             row("RUN SETUP AGAIN", delegate { RunSetup(); }, "Downloads and installs the game again, then asks about your folders and cloud saving.");
             row("INSTALL FROM A FILE", delegate { InstallFromDownloads(); }, "Installs the game from a file you downloaded yourself.");
+            row("IMPORT A SAVE", delegate { if (ImportSave(side, SyncSettings().SaveDir) != null) SetStatus("Save imported."); },
+                "Puts in a save exported from the game (on the website: Options > Saves > Export Save), so the game opens with it.");
             return y;
         }
 

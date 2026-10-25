@@ -8,8 +8,9 @@ using System.Windows.Forms;
 
 namespace AzerothLauncher
 {
-    // First-time setup: (A) cloud saving yes/no, (B) where AddOns, game saves and addon settings are.
-    // Page 2 asks whether to go to the Addons section. Result = settings to store, or null when closed early.
+    // First-time setup: page 1 asks whether you are moving over from the website and imports your save (so the game opens
+    // with your progress), page 2 is (A) cloud saving yes/no, (B) where AddOns, game saves and addon settings are, and
+    // page 3 asks whether to go to the Addons section. Result = settings to store, or null when closed early.
     public class SetupDialog : WowDialog
     {
         readonly LauncherApp app;
@@ -32,14 +33,47 @@ namespace AzerothLauncher
             defaults["addons_dir"] = Path.Combine(ss.ConfigDir, "AddOns");
             defaults["saved_dir"] = Path.Combine(ss.ConfigDir, "saved");
             defaults["save_dir"] = Util.DefaultSaveDir;
-            Page1();
+            Page0();
+        }
+
+        string imported;                                     // the save imported on page 1 (its file name), or null
+
+        // page 1: moving over from the website? Import the save first, before anything else
+        void Page0()
+        {
+            BackAction = Close;                              // page 1: the back arrow leaves setup (same as LATER)
+            Begin();
+            Heading("Welcome, Adventurer", "Step 1 of 3", 26);
+            Para("Moving over from the website?", 13, FontStyle.Bold, Theme.Gold, 26, 0, 0, 0);
+            Para("Played Azeroth Survivors in your browser? Bring your progress with you: your heroes, the zones you opened, " +
+                 "your gear, talents and codex.\n\nOn the website, open Options > Saves and press Export Save. Then choose " +
+                 "that .sav file here. The game opens with your progress, ready to play.", 11, FontStyle.Regular, Theme.Text, 26, 4, 10, 0);
+            if (imported != null)
+            {
+                Para("✓ Imported: " + imported, 11, FontStyle.Bold, Theme.Good, 26, 4, 4, 0);
+                Body.Add(new HRow(12, B("NEXT", Page1, 170, 38, 12), B("IMPORT ANOTHER", ImportSave, 190, 38, 10)),
+                         Align.Center, 26, 14, 26, 16);
+            }
+            else
+                Body.Add(new HRow(12, B("IMPORT MY SAVE", ImportSave, 220, 42, 12), B("I'M NEW HERE", Page1, 190, 42, 11)),
+                         Align.Center, 26, 14, 26, 16);
+            Finish();
+        }
+
+        void ImportSave()
+        {
+            string saveDir = vals.ContainsKey("save_dir") && (vals["save_dir"] ?? "").Length > 0 ? vals["save_dir"] : Util.DefaultSaveDir;
+            string name = app.ImportSave(this, saveDir);
+            if (name == null) return;
+            imported = name;
+            Page0();
         }
 
         void Page1()
         {
-            BackAction = Close;                              // page 1: the back arrow leaves setup (same as LATER)
+            BackAction = Page0;                              // page 2: back to the import page
             Begin();
-            Heading("Welcome, Adventurer", "Step 1 of 2", 26);
+            Heading("Welcome, Adventurer", "Step 2 of 3", 26);
             Para("A.  Cloud saving", 13, FontStyle.Bold, Theme.Gold, 26, 0, 0, 0);
             var cb = UI.Check("Keep my progress in the cloud (Google Drive, OneDrive, Dropbox ...)\nand share it between my PCs",
                               cloudOn, Theme.Text, Theme.Panel, 11);
@@ -139,7 +173,7 @@ namespace AzerothLauncher
         {
             BackAction = Page1;                               // page 2: back to the folders page
             Begin();
-            Heading("Addons", "Step 2 of 2", 26);
+            Heading("Addons", "Step 3 of 3", 26);
             Para("Your settings are saved.\n\nWould you like to go to the Addons section now\n" +
                  "to download some addons, or to enable or disable the ones you have?", 12, FontStyle.Regular, Theme.Text, 26, 0, 14, 0);
             Body.Add(B("DOWNLOAD ADDONS", delegate { Leave("download"); }, 320, 42, 12), Align.Center, 26, 4, 26, 4);

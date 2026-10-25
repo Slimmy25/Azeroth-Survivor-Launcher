@@ -1294,3 +1294,41 @@ Click a talent to add a point, right-click to take one back. A talent takes no m
 = पॉइंट जोड़ने के लिए टैलेंट पर क्लिक करें, वापस लेने के लिए राइट-क्लिक करें। कोई टैलेंट अपनी रैंक से ज़्यादा पॉइंट नहीं लेता, और बिल्ड 51 से ज़्यादा नहीं; बैंगनी वाले 10, 20 और 30 पॉइंट के माइलस्टोन हैं।
 Installed
 = इंस्टॉल है
+Moving over from the website?
+= वेबसाइट से आ रहे हैं?
+Played Azeroth Survivors in your browser? Bring your progress with you: your heroes, the zones you opened, your gear, talents and codex.
+= ब्राउज़र में Azeroth Survivors खेला है? अपनी प्रगति साथ लाएँ: आपके हीरो, खोले गए ज़ोन, गियर, टैलेंट और कोडेक्स।
+On the website, open Options > Saves and press Export Save. Then choose that .sav file here. The game opens with your progress, ready to play.
+= वेबसाइट पर Options > Saves खोलें और Export Save दबाएँ। फिर वह .sav फ़ाइल यहाँ चुनें। गेम आपकी प्रगति के साथ खुलेगा, खेलने के लिए तैयार।
+IMPORT MY SAVE
+= मेरा सेव इम्पोर्ट करें
+I'M NEW HERE
+= मैं नया हूँ
+NEXT
+= आगे
+IMPORT ANOTHER
+= दूसरा इम्पोर्ट करें
+Step 1 of 3
+= चरण 1 / 3
+Step 2 of 3
+= चरण 2 / 3
+Step 3 of 3
+= चरण 3 / 3
+IMPORT A SAVE
+= सेव इम्पोर्ट करें
+Puts in a save exported from the game (on the website: Options > Saves > Export Save), so the game opens with it.
+= गेम से एक्सपोर्ट किया सेव लगाता है (वेबसाइट पर: Options > Saves > Export Save), ताकि गेम उसी के साथ खुले।
+Close the game first, then import the save.
+= पहले गेम बंद करें, फिर सेव इम्पोर्ट करें।
+Checking for a launcher update...
+= लॉन्चर अपडेट की जाँच हो रही है...
+Featured video. All credit goes to the people who made it.
+= चुना हुआ वीडियो। सारा श्रेय इसे बनाने वालों का है।
+The video could not be shown here. Press the back arrow and try again.
+= वीडियो यहाँ नहीं दिखाया जा सका। पीछे वाला तीर दबाएँ और फिर कोशिश करें।
+Choose the save you exported from the website (.sav)
+= वेबसाइट से एक्सपोर्ट किया सेव चुनें (.sav)
+Azeroth Survivors save (*.sav)|*.sav|All files (*.*)|*.*
+= Azeroth Survivors सेव (*.sav)|*.sav|सभी फ़ाइलें (*.*)|*.*
+Save imported.
+= सेव इम्पोर्ट हो गया।

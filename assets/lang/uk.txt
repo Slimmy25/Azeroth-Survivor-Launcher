@@ -1294,3 +1294,41 @@ Click a talent to add a point, right-click to take one back. A talent takes no m
 = Клацніть талант, щоб додати очко, правий клік забирає одне. Талант не бере більше очок, ніж має рангів, а білд — більше 51; фіолетові — це віхи на 10, 20 і 30 очках.
 Installed
 = Встановлено
+Moving over from the website?
+= Переходите з сайту?
+Played Azeroth Survivors in your browser? Bring your progress with you: your heroes, the zones you opened, your gear, talents and codex.
+= Грали в Azeroth Survivors у браузері? Перенесіть прогрес: героїв, відкриті зони, спорядження, таланти й кодекс.
+On the website, open Options > Saves and press Export Save. Then choose that .sav file here. The game opens with your progress, ready to play.
+= На сайті відкрийте Налаштування > Збереження і натисніть «Експорт збереження». Потім виберіть тут цей файл .sav. Гра відкриється з вашим прогресом, можна грати.
+IMPORT MY SAVE
+= ІМПОРТУВАТИ МОЄ ЗБЕРЕЖЕННЯ
+I'M NEW HERE
+= Я НОВАЧОК
+NEXT
+= ДАЛІ
+IMPORT ANOTHER
+= ІМПОРТУВАТИ ІНШЕ
+Step 1 of 3
+= Крок 1 з 3
+Step 2 of 3
+= Крок 2 з 3
+Step 3 of 3
+= Крок 3 з 3
+IMPORT A SAVE
+= ІМПОРТ ЗБЕРЕЖЕННЯ
+Puts in a save exported from the game (on the website: Options > Saves > Export Save), so the game opens with it.
+= Підставляє збереження, експортоване з гри (на сайті: Налаштування > Збереження > Експорт збереження), щоб гра відкрилася з ним.
+Close the game first, then import the save.
+= Спершу закрийте гру, потім імпортуйте збереження.
+Checking for a launcher update...
+= Перевірка оновлення лаунчера...
+Featured video. All credit goes to the people who made it.
+= Обране відео. Уся заслуга — його авторам.
+The video could not be shown here. Press the back arrow and try again.
+= Відео не вдалося показати тут. Натисніть стрілку назад і спробуйте ще раз.
+Choose the save you exported from the website (.sav)
+= Виберіть збереження, експортоване з сайту (.sav)
+Azeroth Survivors save (*.sav)|*.sav|All files (*.*)|*.*
+= Збереження Azeroth Survivors (*.sav)|*.sav|Усі файли (*.*)|*.*
+Save imported.
+= Збереження імпортовано.
