@@ -323,7 +323,7 @@ namespace AzerothLauncher
                     Font stf = Theme.F(9, FontStyle.Italic);
                     float sw = g.MeasureString(st, stf).Width, cxp = playBtn.Left + playBtn.Width / 2f;
                     float sx = Math.Min(cxp - sw / 2, W - 10 - sw);
-                    g.DrawString(st, stf, sb, sx, playBtn.Top - 20);
+                    g.DrawString(st, stf, sb, sx, playBtn.Top - 26);
                 }
                 PlayStats ps = ShownPlayStats();
                 if (ps.Sessions > 0 && StatsEnabled() && Cfg.Bool("home_playtime", true))
