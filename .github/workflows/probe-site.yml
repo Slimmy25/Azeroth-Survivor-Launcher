@@ -15,21 +15,17 @@ jobs:
       - name: Fetch
         run: |
           mkdir -p /tmp/site && cd /tmp/site
-          UA="Mozilla/5.0"
-          get() { curl -sS -m 30 -A "$UA" -o "$1" -w "%{http_code} %{content_type} $2\n" "$2" >> codes.txt 2>&1 || echo "fail $2" >> codes.txt; }
-          get npc-hogger.json "https://www.wowhead.com/classic/search/suggestions-template?q=Hogger"
-          get npc-crusader.json "https://www.wowhead.com/classic/search/suggestions-template?q=Scarlet%20Crusader"
-          get npc-tooltip.json "https://nether.wowhead.com/classic/tooltip/npc/448"
-          for c in warrior paladin hunter rogue priest shaman mage warlock druid; do
-            curl -s -o /dev/null -w "%{http_code} classicon_$c\n" "https://wow.zamimg.com/images/wow/icons/large/classicon_$c.jpg" >> codes.txt
+          for u in \
+            https://wow.zamimg.com/modelviewer/classic/webthumbs/npc/128/384.webp \
+            https://wow.zamimg.com/modelviewer/classic/webthumbs/npc/128/384.png \
+            https://wow.zamimg.com/modelviewer/classic/webthumbs/npc/128/384.jpg \
+            https://wow.zamimg.com/modelviewer/live/webthumbs/npc/128/384.webp \
+            https://wow.zamimg.com/modelviewer/live/webthumbs/npc/128/384.png \
+            https://wow.zamimg.com/modelviewer/wrath/webthumbs/npc/128/384.png \
+            https://wow.zamimg.com/modelviewer/classic/webthumbs/npc/0/384.png ; do
+            curl -s -o "$(echo $u | tr '/:' '__')" -w "%{http_code} %{content_type} %{size_download} $u\n" "$u" >> codes.txt
           done
-          for n in Butcher "Legion Gate" Titan "Titan's Grip" "Explosive Ammunition" "Explosive Shot" Radiance "Power Word: Radiance"; do
-            f=$(echo "$n" | tr ' :' '__')
-            curl -sS -m 30 -G -A "$UA" --data-urlencode "q=$n" -o "spell-retail-$f.json" "https://www.wowhead.com/search/suggestions-template" || true
-            curl -sS -m 30 -G -A "$UA" --data-urlencode "q=$n" -o "spell-wotlk-$f.json" "https://www.wowhead.com/wotlk/search/suggestions-template" || true
-          done
-          get turtle-search.html "https://database.turtle-wow.org/?search=Butcher"
-          get npc-page.html "https://www.wowhead.com/classic/npc=448/hogger"
+          curl -sS -A "Mozilla/5.0" -o npc-crusader-page.html "https://www.wowhead.com/classic/npc=1660" -w "%{http_code} crusader page\n" >> codes.txt
           ls -la
       - name: Keep it on the site-probe branch
         run: |
