@@ -69,27 +69,107 @@ namespace AzerothLauncher
         }
 
         // ---- first page: a card for every topic, all open at any time
+        string guideQuery = "";
+
         void GuideHome(List<GuideTopic> topics)
         {
             ClearPanel("New Player Guide");
+            // the search box, beside the back arrow: every topic and page, titles and text
+            int sx = 20 + (int)(52 * Theme.Zoom) + 12, sh = (int)(32 * Theme.Zoom);
+            var search = new GuideSearchBox(PW - 20 - sx, sh);
+            search.Text = guideQuery;
+            Put(search, sx, 12);
             var sp = MakeThinScroll(panel, new Rectangle(20, GuideTop, PW - 40, PH - 12 - GuideTop), Theme.Panel, Theme.Bronze,
                                     Theme.GoldDim, Theme.Gold);
-            int w = sp.ClientSize.Width - 8, y = 4;
-            GuideGrid(sp, y, w, topics.Count, delegate(int i, GuideCard c)
+            Action fill = delegate
             {
-                c.Title = topics[i].Title;
-                c.Desc = topics[i].Desc;
-                c.Videos = CountVideos(topics[i]);
-                c.Pages = topics[i].Pages.Count;
-                c.Pressed += delegate { SetGuideView(i, -1); };
+                sp.SuspendLayout();
+                while (sp.Controls.Count > 0) { Control c = sp.Controls[0]; sp.Controls.RemoveAt(0); c.Dispose(); }
+                int w = sp.ClientSize.Width - 8, y = 4;
+                if (guideQuery.Trim().Length == 0)
+                    GuideGrid(sp, y, w, topics.Count, delegate(int i, GuideCard c)
+                    {
+                        c.Title = topics[i].Title;
+                        c.Desc = topics[i].Desc;
+                        c.Videos = CountVideos(topics[i]);
+                        c.Pages = topics[i].Pages.Count;
+                        c.Pressed += delegate { SetGuideView(i, -1); };
+                    });
+                else GuideResults(sp, w, topics, guideQuery.Trim());
+                sp.ResumeLayout();
+            };
+            search.TextChanged += delegate { guideQuery = search.Text; fill(); };
+            fill();
+            if (guideQuery.Length > 0) { search.Focus(); search.SelectionStart = search.TextLength; }
+        }
+
+        // every topic and page whose title or text has all the words searched for; the line it was found in is shown
+        void GuideResults(ScrollPanel sp, int w, List<GuideTopic> topics, string q)
+        {
+            string[] words = q.ToLowerInvariant().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            var hits = new List<KeyValuePair<int, int>>();   // topic, page (-1: the topic itself)
+            var lines = new List<string>();
+            for (int t = 0; t < topics.Count; t++)
+                for (int p = -1; p < topics[t].Pages.Count; p++)
+                {
+                    GuidePage pg = p < 0 ? (GuidePage)topics[t] : topics[t].Pages[p];
+                    string all = (pg.Title + " " + pg.Desc + " " + pg.Body).ToLowerInvariant();
+                    bool ok = true;
+                    foreach (string wd in words) if (all.IndexOf(wd, StringComparison.Ordinal) < 0) { ok = false; break; }
+                    if (!ok) continue;
+                    string line = pg.Desc;
+                    foreach (string raw in pg.Body.Split('\n'))
+                        if (!raw.StartsWith("@") && raw.ToLowerInvariant().IndexOf(words[0], StringComparison.Ordinal) >= 0)
+                        { line = raw.TrimStart('-', '#', ' ', '"').Trim(); break; }
+                    hits.Add(new KeyValuePair<int, int>(t, p));
+                    lines.Add(line);
+                }
+            if (hits.Count == 0)
+            {
+                var none = UI.Text(Lang.T("Nothing in the guide matches") + " \"" + q + "\".", 11, FontStyle.Italic, Theme.GoldDim, sp.BackColor, w - 8, false);
+                none.Size = VStack.Measure(none);
+                none.Location = new Point(6, 8);
+                sp.Controls.Add(none);
+                return;
+            }
+            GuideGrid(sp, 4, w, hits.Count, delegate(int i, GuideCard c)
+            {
+                var h = hits[i];
+                GuideTopic topic = topics[h.Key];
+                c.Title = h.Value < 0 ? topic.Title : topic.Pages[h.Value].Title;
+                c.Label = h.Value < 0 ? null : topic.Title.ToUpperInvariant();
+                c.Desc = lines[i];
+                c.Pressed += delegate { SetGuideView(h.Key, h.Value); };
             });
+        }
+
+        // from elsewhere in the launcher (a "?" on Stats): the guide page about a spell, or the topic naming a boss
+        public void OpenGuideFor(string text)
+        {
+            var topics = Data.Guide;
+            if (string.IsNullOrEmpty(text)) return;
+            string low = text.ToLowerInvariant();
+            for (int t = 0; t < topics.Count; t++)
+                for (int p = 0; p < topics[t].Pages.Count; p++)
+                    if (topics[t].Pages[p].Body.ToLowerInvariant().Contains(low)) { OpenGuideAt(t, p); return; }
+            for (int t = 0; t < topics.Count; t++)
+                if ((topics[t].Title + " " + topics[t].Body).ToLowerInvariant().Contains(low)) { OpenGuideAt(t, -1); return; }
+            if (current != "Guide") ShowSection("Guide");   // nothing names it: search for it
+            guideQuery = text;
+            SetGuideView(-1, -1);
+        }
+
+        void OpenGuideAt(int topic, int page)
+        {
+            if (current != "Guide") ShowSection("Guide");
+            SetGuideView(topic, page);
         }
 
         // ---- a topic made of pages (Classes): a card for each page
         void GuideTopicPages(GuideTopic topic)
         {
             ClearPanel(topic.Title);
-            Put(new WowButton("‹ ALL TOPICS", delegate { SetGuideView(-1, -1); }, 170, 32, 10), PW - 20 - (int)(170 * Theme.Zoom), 12);
+            Put(new WowButton("‹ ALL TOPICS", delegate { guideQuery = ""; SetGuideView(-1, -1); }, 170, 32, 10), PW - 20 - (int)(170 * Theme.Zoom), 12);
             var sp = MakeThinScroll(panel, new Rectangle(20, GuideTop, PW - 40, PH - 12 - GuideTop), Theme.Panel, Theme.Bronze,
                                     Theme.GoldDim, Theme.Gold);
             int w = sp.ClientSize.Width - 8, y = 4;
@@ -488,6 +568,32 @@ namespace AzerothLauncher
             }
             catch (Exception) { web.DocumentText = page; }
             return web;
+        }
+    }
+
+    // the guide's search box: a night-stone field with a gold edge and a hint while it is empty
+    public class GuideSearchBox : TextBox
+    {
+        const int WM_PAINT = 0x000F;
+
+        public GuideSearchBox(int w, int h)
+        {
+            BorderStyle = BorderStyle.FixedSingle;
+            BackColor = Theme.Card;
+            ForeColor = Theme.Text;
+            Font = Theme.F(10.5f);
+            Width = w;
+            Height = Math.Max(h, Font.Height + 8);
+        }
+
+        protected override void WndProc(ref Message m)
+        {
+            base.WndProc(ref m);
+            if (m.Msg == WM_PAINT && TextLength == 0)        // the hint while nothing is typed
+                using (var g = CreateGraphics())
+                    TextRenderer.DrawText(g, "\u2315  " + Lang.T("Search the guide: a spell, a boss, a key..."), Font,
+                                          new Rectangle(2, 1, Width - 4, Height - 2), Theme.GoldDim,
+                                          TextFormatFlags.Left | TextFormatFlags.VerticalCenter | TextFormatFlags.NoPrefix);
         }
     }
 

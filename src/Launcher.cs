@@ -70,8 +70,11 @@ namespace AzerothLauncher
 
         public static bool PreviewMode;                     // rendering preview pictures: no update checks, no restarts
 
+        public static LauncherApp App;                       // the running launcher (for the Stats page's static builders)
+
         public LauncherApp(bool startInTray)
         {
+            App = this;
             this.startInTray = startInTray;
             Theme.PickFont();
             Cfg = Config.Load();
@@ -312,6 +315,7 @@ namespace AzerothLauncher
                 g.DrawString(Lang.T("Launcher"), hf, shadow, 698, 447);
                 g.DrawString(Lang.T("Launcher"), hf, gold, 697, 446);
             }
+            WeeklyRecap(g);
             // bottom bar, left: only the cloud note (the status above PLAY says the rest)
             using (var gb = new SolidBrush(Retro.Gold))
             using (var sf = new StringFormat())
@@ -343,6 +347,74 @@ namespace AzerothLauncher
                 string version = Data.GameVersion;
                 using (var vb = new SolidBrush(Theme.Hex("#b8a27a")))            // bottom-left corner
                     g.DrawString(Lang.T("Game version") + (version.Length > 0 ? ": " + version : ""), Theme.F(9.5f), vb, 12, 670);   // a little bigger
+            }
+        }
+
+        // ---- "This week": a card in the empty lower left of the home screen (AZS Stats' runs of the last 7 days)
+        void WeeklyRecap(Graphics g)
+        {
+            RunStats st = null;
+            try { st = StatsEnabled() ? AddonStats() : null; } catch (Exception) { }
+            if (st == null || st.History.Count == 0) return;
+            DateTime since = DateTime.Now.AddDays(-7);
+            int runs = 0, wins = 0;
+            double bestDps = 0;
+            StatRun bestRun = null;
+            var partners = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+            foreach (var r in st.History)
+            {
+                DateTime d;
+                if (!DateTime.TryParse(r.Date, System.Globalization.CultureInfo.InvariantCulture,
+                                       System.Globalization.DateTimeStyles.None, out d) || d < since) continue;
+                runs++;
+                if (r.Kind == "victory") wins++;
+                if (r.Dps > bestDps) { bestDps = r.Dps; bestRun = r; }
+                foreach (string p in r.Party.Split(','))
+                {
+                    string n = p.Trim();
+                    if (n.Length == 0) continue;
+                    int c;
+                    partners.TryGetValue(n, out c);
+                    partners[n] = c + 1;
+                }
+            }
+            var parts = new List<string>();
+            if (runs == 0)
+            {
+                DateTime last;
+                string ago = DateTime.TryParse(st.History[0].Date, System.Globalization.CultureInfo.InvariantCulture,
+                                               System.Globalization.DateTimeStyles.None, out last)
+                             ? Lang.T(((int)(DateTime.Now - last).TotalDays) + " days ago") : "";
+                parts.Add(Lang.T("No runs yet this week.") + (ago.Length > 0 ? " " + Lang.T("Your last run was " + ago + ".") : ""));
+            }
+            else
+            {
+                parts.Add(Lang.T(runs + " runs, " + wins + " won"));
+                if (bestRun != null)
+                {
+                    // a DPS high set this week (for its class)?
+                    StatBlock cb = st.Class(bestRun.ClassKey);
+                    StatRecord rec;
+                    bool high = cb != null && cb.Best.TryGetValue("dps", out rec) && rec.Value <= bestRun.Dps + 0.5;
+                    parts.Add(high ? Lang.T("new " + bestRun.Class + " DPS high: " + Big(bestRun.Dps))
+                                   : Lang.T("best DPS " + Big(bestRun.Dps) + " (" + bestRun.Class + ")"));
+                }
+                string top = null;
+                int most = 0;
+                foreach (var kv in partners) if (kv.Value > most) { most = kv.Value; top = kv.Key; }
+                if (top != null) parts.Add(Lang.T("most played with " + top));
+            }
+            var box = new RectangleF(30, 486, 628, 74);
+            using (var path = Armory.Round(box, 8))
+            {
+                using (var b = new SolidBrush(Color.FromArgb(200, 14, 13, 20))) g.FillPath(b, path);
+                using (var p = new Pen(Color.FromArgb(160, Theme.GoldDim), 1)) g.DrawPath(p, path);
+            }
+            using (var gold = new SolidBrush(Retro.Gold))
+            using (var text = new SolidBrush(Theme.Text))
+            {
+                g.DrawString(Lang.T("This week"), Theme.F(11, FontStyle.Bold), gold, box.X + 14, box.Y + 8);
+                g.DrawString(string.Join(" · ", parts.ToArray()), Theme.F(9.5f), text, new RectangleF(box.X + 14, box.Y + 32, box.Width - 28, box.Height - 36));
             }
         }
 
