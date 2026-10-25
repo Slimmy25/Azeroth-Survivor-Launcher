@@ -1294,3 +1294,41 @@ Click a talent to add a point, right-click to take one back. A talent takes no m
 = Kliknij talent, aby dodać punkt, prawy klik zabiera jeden. Talent nie przyjmie więcej punktów niż ma rang, a build więcej niż 51; fioletowe to kamienie milowe przy 10, 20 i 30 punktach.
 Installed
 = Zainstalowany
+Moving over from the website?
+= Przechodzisz ze strony internetowej?
+Played Azeroth Survivors in your browser? Bring your progress with you: your heroes, the zones you opened, your gear, talents and codex.
+= Grałeś w Azeroth Survivors w przeglądarce? Zabierz swój postęp: bohaterów, otwarte strefy, ekwipunek, talenty i kodeks.
+On the website, open Options > Saves and press Export Save. Then choose that .sav file here. The game opens with your progress, ready to play.
+= Na stronie otwórz Opcje > Zapisy i naciśnij Eksportuj zapis. Potem wybierz tutaj ten plik .sav. Gra uruchomi się z twoim postępem, gotowa do gry.
+IMPORT MY SAVE
+= IMPORTUJ MÓJ ZAPIS
+I'M NEW HERE
+= JESTEM NOWY
+NEXT
+= DALEJ
+IMPORT ANOTHER
+= IMPORTUJ INNY
+Step 1 of 3
+= Krok 1 z 3
+Step 2 of 3
+= Krok 2 z 3
+Step 3 of 3
+= Krok 3 z 3
+IMPORT A SAVE
+= IMPORTUJ ZAPIS
+Puts in a save exported from the game (on the website: Options > Saves > Export Save), so the game opens with it.
+= Wstawia zapis wyeksportowany z gry (na stronie: Opcje > Zapisy > Eksportuj zapis), aby gra uruchomiła się z nim.
+Close the game first, then import the save.
+= Najpierw zamknij grę, potem zaimportuj zapis.
+Checking for a launcher update...
+= Sprawdzanie aktualizacji launchera...
+Featured video. All credit goes to the people who made it.
+= Polecany film. Całe uznanie dla jego twórców.
+The video could not be shown here. Press the back arrow and try again.
+= Nie udało się pokazać filmu tutaj. Naciśnij strzałkę wstecz i spróbuj ponownie.
+Choose the save you exported from the website (.sav)
+= Wybierz zapis wyeksportowany ze strony (.sav)
+Azeroth Survivors save (*.sav)|*.sav|All files (*.*)|*.*
+= Zapis Azeroth Survivors (*.sav)|*.sav|Wszystkie pliki (*.*)|*.*
+Save imported.
+= Zapis zaimportowany.

@@ -1294,3 +1294,41 @@ Click a talent to add a point, right-click to take one back. A talent takes no m
 = Clic pe un talent pentru a adăuga un punct, clic dreapta pentru a lua unul înapoi. Un talent nu primește mai multe puncte decât rangurile sale, iar un build nu mai mult de 51; cele mov sunt pragurile de la 10, 20 și 30 de puncte.
 Installed
 = Instalat
+Moving over from the website?
+= Vii de pe site?
+Played Azeroth Survivors in your browser? Bring your progress with you: your heroes, the zones you opened, your gear, talents and codex.
+= Ai jucat Azeroth Survivors în browser? Adu-ți progresul: eroii, zonele deschise, echipamentul, talentele și codexul.
+On the website, open Options > Saves and press Export Save. Then choose that .sav file here. The game opens with your progress, ready to play.
+= Pe site, deschide Opțiuni > Salvări și apasă Exportă salvarea. Apoi alege aici acel fișier .sav. Jocul se deschide cu progresul tău, gata de joc.
+IMPORT MY SAVE
+= IMPORTĂ SALVAREA MEA
+I'M NEW HERE
+= SUNT NOU
+NEXT
+= ÎNAINTE
+IMPORT ANOTHER
+= IMPORTĂ ALTA
+Step 1 of 3
+= Pasul 1 din 3
+Step 2 of 3
+= Pasul 2 din 3
+Step 3 of 3
+= Pasul 3 din 3
+IMPORT A SAVE
+= IMPORTĂ O SALVARE
+Puts in a save exported from the game (on the website: Options > Saves > Export Save), so the game opens with it.
+= Pune o salvare exportată din joc (pe site: Opțiuni > Salvări > Exportă), ca jocul să se deschidă cu ea.
+Close the game first, then import the save.
+= Închide mai întâi jocul, apoi importă salvarea.
+Checking for a launcher update...
+= Se caută o actualizare a lansatorului...
+Featured video. All credit goes to the people who made it.
+= Videoclip recomandat. Tot meritul aparține celor care l-au făcut.
+The video could not be shown here. Press the back arrow and try again.
+= Videoclipul nu a putut fi afișat aici. Apasă săgeata înapoi și încearcă din nou.
+Choose the save you exported from the website (.sav)
+= Alege salvarea exportată de pe site (.sav)
+Azeroth Survivors save (*.sav)|*.sav|All files (*.*)|*.*
+= Salvare Azeroth Survivors (*.sav)|*.sav|Toate fișierele (*.*)|*.*
+Save imported.
+= Salvare importată.

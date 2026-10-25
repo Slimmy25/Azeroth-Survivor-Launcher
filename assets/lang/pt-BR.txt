@@ -1293,3 +1293,41 @@ Click a talent to add a point, right-click to take one back. A talent takes no m
 = Clique num talento para adicionar um ponto e com o botão direito para tirar um. Um talento não aceita mais pontos que seus graus, e uma build não mais que 51; os roxos são os marcos de 10, 20 e 30 pontos.
 Installed
 = Instalado
+Moving over from the website?
+= Vindo do site?
+Played Azeroth Survivors in your browser? Bring your progress with you: your heroes, the zones you opened, your gear, talents and codex.
+= Jogou Azeroth Survivors no navegador? Traga seu progresso: seus heróis, as zonas abertas, seu equipamento, talentos e o códice.
+On the website, open Options > Saves and press Export Save. Then choose that .sav file here. The game opens with your progress, ready to play.
+= No site, abra Opções > Saves e clique em Exportar Save. Depois escolha aqui esse arquivo .sav. O jogo abre com seu progresso, pronto para jogar.
+IMPORT MY SAVE
+= IMPORTAR MEU SAVE
+I'M NEW HERE
+= SOU NOVO AQUI
+NEXT
+= PRÓXIMO
+IMPORT ANOTHER
+= IMPORTAR OUTRO
+Step 1 of 3
+= Passo 1 de 3
+Step 2 of 3
+= Passo 2 de 3
+Step 3 of 3
+= Passo 3 de 3
+IMPORT A SAVE
+= IMPORTAR UM SAVE
+Puts in a save exported from the game (on the website: Options > Saves > Export Save), so the game opens with it.
+= Coloca um save exportado do jogo (no site: Opções > Saves > Exportar Save), para o jogo abrir com ele.
+Close the game first, then import the save.
+= Feche o jogo primeiro e depois importe o save.
+Checking for a launcher update...
+= Procurando atualização do launcher...
+Featured video. All credit goes to the people who made it.
+= Vídeo em destaque. Todo o crédito é de quem o fez.
+The video could not be shown here. Press the back arrow and try again.
+= O vídeo não pôde ser exibido aqui. Clique na seta de voltar e tente de novo.
+Choose the save you exported from the website (.sav)
+= Escolha o save que você exportou do site (.sav)
+Azeroth Survivors save (*.sav)|*.sav|All files (*.*)|*.*
+= Save do Azeroth Survivors (*.sav)|*.sav|Todos os arquivos (*.*)|*.*
+Save imported.
+= Save importado.

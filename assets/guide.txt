@@ -32,7 +32,7 @@ Azeroth Survivors is a survivors-style game set in classic World of Warcraft, ma
 Even a lost run counts. Talent experience, boss gear, achievements and newly opened zones stay with you. Gear and looks are kept per class, and achievements and rewards count for your whole account.
 
 @topic Build Guides | Videos of players showing their builds
-Players' videos of builds that work. Click a video to watch it on YouTube in your web browser.
+Players' videos of builds that work. Click a video to watch it right here in the launcher.
 
 @page Sub Rogue Guide | Rogue · Naxxramas · video by Des
 # Azeroth Survivors - Sub rogue guide (Naxxramas run)
@@ -43,6 +43,66 @@ Video by Des (youtube.com/@Dessiq). All credit for the build and the video goes 
 # [Azeroth Survivors] 10.000 HP Ice Barrier - Arcane Mage - Naxxramas
 Video by Duke (youtube.com/@duke-yt). All credit for the build and the video goes to the uploader.
 @video [Azeroth Survivors] 10.000 HP Ice Barrier - Arcane Mage - Naxxramas | https://youtu.be/Yy38LhuL5OU | Duke | https://www.youtube.com/@duke-yt
+
+@page Marksmanship Hunter Guide | Hunter · Naxxramas · video by Holdherhand
+# Azeroth Survivors: Marksmanship Hunter Naxxramas Guide (AIMED SHOT CRIT BUILD)
+Video by Holdherhand (youtube.com/@Holdherhand). All credit for the build and the video goes to the uploader.
+@video Azeroth Survivors: Marksmanship Hunter Naxxramas Guide (AIMED SHOT CRIT BUILD) | https://www.youtube.com/watch?v=X6VPK8cYiaY | Holdherhand | https://www.youtube.com/@Holdherhand
+
+@page Frost Mage Guide | Mage · Naxxramas · video by Holdherhand
+# Azeroth Survivors: Frost Mage Naxxramas Guide (Blizzard Spam)
+Video by Holdherhand (youtube.com/@Holdherhand). All credit for the build and the video goes to the uploader.
+@video Azeroth Survivors: Frost Mage Naxxramas Guide (Blizzard Spam) | https://www.youtube.com/watch?v=Cxpg1-fF2mY | Holdherhand | https://www.youtube.com/@Holdherhand
+
+@page Protection Paladin Guide | Paladin · Naxxramas · video by Holdherhand
+# Azeroth Survivors: Protection Paladin Naxxramas Guide (Consecration Tank)
+Video by Holdherhand (youtube.com/@Holdherhand). All credit for the build and the video goes to the uploader.
+@video Azeroth Survivors: Protection Paladin Naxxramas Guide (Consecration Tank) | https://www.youtube.com/watch?v=6Erree9VFww | Holdherhand | https://www.youtube.com/@Holdherhand
+
+@page Shadow Priest Guide | Priest · Naxxramas · video by Holdherhand
+# Azeroth Survivors: Shadow Priest Naxxramas Guide (Mind Blast)
+Video by Holdherhand (youtube.com/@Holdherhand). All credit for the build and the video goes to the uploader.
+@video Azeroth Survivors: Shadow Priest Naxxramas Guide (Mind Blast) | https://www.youtube.com/watch?v=dBEwDAuUEuk | Holdherhand | https://www.youtube.com/@Holdherhand
+
+@page Demonology Warlock Guide | Warlock · Naxxramas · video by Holdherhand
+# Azeroth Survivors: Demonology Warlock Guide (Naxxramas full clear)
+Video by Holdherhand (youtube.com/@Holdherhand). All credit for the build and the video goes to the uploader.
+@video Azeroth Survivors: Demonology Warlock Guide (Naxxramas full clear) | https://www.youtube.com/watch?v=hbd1qEXzUhc | Holdherhand | https://www.youtube.com/@Holdherhand
+
+@page Demo Warlock: Pit Lord Carry | Warlock · Naxxramas · video by Holdherhand
+# Azeroth Survivors: Demo Warlock Naxxramas Guide (PITLORD CARRY)
+Video by Holdherhand (youtube.com/@Holdherhand). All credit for the build and the video goes to the uploader.
+@video Azeroth Survivors: Demo Warlock Naxxramas Guide (PITLORD CARRY) | https://www.youtube.com/watch?v=KGVegSpSLt8 | Holdherhand | https://www.youtube.com/@Holdherhand
+
+@page Deep Fury / Arms Warrior | Warrior · Naxxramas · video by Holdherhand
+# Azeroth Survivors: Warrior Naxxramas Deep Fury / arms full run with Guide!
+Video by Holdherhand (youtube.com/@Holdherhand). All credit for the build and the video goes to the uploader.
+@video Azeroth Survivors: Warrior Naxxramas Deep Fury / arms full run with Guide! | https://www.youtube.com/watch?v=n0d6oP0BRos | Holdherhand | https://www.youtube.com/@Holdherhand
+
+@page Holy Priest Guide | Priest · Naxxramas · video by Holdherhand
+# Azeroth Survivors: Holy Priest Naxxramas Guide (SMITE IS UNETHICAL)
+Video by Holdherhand (youtube.com/@Holdherhand). All credit for the build and the video goes to the uploader.
+@video Azeroth Survivors: Holy Priest Naxxramas Guide (SMITE IS UNETHICAL) | https://www.youtube.com/watch?v=68XuYPKZBm0 | Holdherhand | https://www.youtube.com/@Holdherhand
+
+@page Fire Mage Guide | Mage · Naxxramas · video by Holdherhand
+# Azeroth Survivors: Fire Mage Naxxramas Guide (PYRO ONLY)
+Video by Holdherhand (youtube.com/@Holdherhand). All credit for the build and the video goes to the uploader.
+@video Azeroth Survivors: Fire Mage Naxxramas Guide (PYRO ONLY) | https://www.youtube.com/watch?v=3sWN8aCfAaA | Holdherhand | https://www.youtube.com/@Holdherhand
+
+@page Rogue Build Showcase | Rogue · Naxxramas · video by Holdherhand
+# Azeroth Survivors: Rogue Naxxramas (strongest rogue build showcase)
+Video by Holdherhand (youtube.com/@Holdherhand). All credit for the build and the video goes to the uploader.
+@video Azeroth Survivors: Rogue Naxxramas (strongest rogue build showcase) | https://www.youtube.com/watch?v=Sy3YV3MOWgc | Holdherhand | https://www.youtube.com/@Holdherhand
+
+@page Arcane Mage Guide | Mage · Naxxramas · video by Holdherhand
+# Azeroth Survivors: Arcane Mage Naxxramas Guide (the most fun mage build)
+Video by Holdherhand (youtube.com/@Holdherhand). All credit for the build and the video goes to the uploader.
+@video Azeroth Survivors: Arcane Mage Naxxramas Guide (the most fun mage build) | https://www.youtube.com/watch?v=iX4wBxCaiBk | Holdherhand | https://www.youtube.com/@Holdherhand
+
+@page Whirlwind Warrior Guide | Warrior · gameplay · video by Des
+# Azeroth Survivors - Warrior gameplay ( Guide whirlwind build)
+Video by Des (youtube.com/@Dessiq). All credit for the build and the video goes to the uploader.
+@video Azeroth Survivors - Warrior gameplay ( Guide whirlwind build) | https://www.youtube.com/watch?v=WkRmRzD3Y9g | Des | https://www.youtube.com/@Dessiq
 
 @topic Controls | Keys, mouse and gamepad
 # Moving

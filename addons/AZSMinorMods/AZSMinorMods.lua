@@ -1,6 +1,8 @@
 -- AZS Minor Mods: small changes to the game's chat, in AZS Stats' look (AZSKit.lua).
 --   * The level-up text is taken out of the chat ("Level up!", "You have reached level 12", ...). Lines are matched
 --     without case; /azsmods hide <words> hides lines with those words too, /azsmods unhide <words> stops that.
+--   * The camera goes as far out as the game allows, 50 yards (the Max Camera Distance setting at its top), and starts there. Turn it off in
+--     /azsmods to keep the game's own setting.
 --   * A second chat box above the game's own one collects what is said ("Say") and your party's messages, so you
 --     can read them while you play. Drag its title to move it; the mouse wheel scrolls it.
 -- /azsmods opens the settings window.
@@ -30,6 +32,7 @@ local function DB()
 	local d = AZSMinorModsDB;
 	if ( d.hideLevel == nil ) then d.hideLevel = true; end
 	if ( d.box == nil ) then d.box = true; end
+	if ( d.camera == nil ) then d.camera = true; end
 	if ( type(d.words) ~= "table" ) then d.words = {}; end
 	return d;
 end
@@ -75,6 +78,23 @@ local function HookChat()
 			return orig(ev);
 		end;
 	end
+end
+
+-- ---------------------------------------------------------------- the camera at its farthest: 50
+-- The game's Max Camera Distance slider is cameraDistanceMaxFactor, a factor of cameraDistanceMax (15 yards): its
+-- top, 3.33, is 50 yards. Minor Mods sets it to 50 yards when the game starts (and zooms out to it once); turned off
+-- in /azsmods, the game's own setting stays.
+local MAX_CAMERA = 50;
+
+local function Camera(zoomOut)
+	if ( not DB().camera or not SetCVar ) then return; end
+	local base = 15;
+	if ( GetCVar ) then
+		local ok, v = pcall(GetCVar, "cameraDistanceMax");
+		if ( ok and tonumber(v) and tonumber(v) > 0 ) then base = tonumber(v); end
+	end
+	pcall(SetCVar, "cameraDistanceMaxFactor", string.format("%.4f", MAX_CAMERA / base));
+	if ( zoomOut and CameraZoomOut ) then pcall(CameraZoomOut, MAX_CAMERA); end
 end
 
 -- ---------------------------------------------------------------- the Say & Party box
@@ -177,7 +197,7 @@ local function Check(parent, label, y, get, set)
 end
 
 local function WinBuild()
-	win = K.Window("AZSMinorModsFrame", NAME, 380, 250);
+	win = K.Window("AZSMinorModsFrame", NAME, 380, 280);
 	local hero = K.Hero(win, 340);
 	hero:SetPoint("TOPLEFT", win, "TOPLEFT", 20, -30);
 	K.Icon(hero.icon, "INV_Misc_Gear_02");
@@ -188,6 +208,8 @@ local function WinBuild()
 	Check(win, "Say & Party box above the chat", -132, function() return DB().box; end,
 	      function(v) DB().box = v; BoxBuild(); BoxPlace(); end);
 	Check(win, "Lock the box where it is", -160, function() return DB().lock; end, function(v) DB().lock = v; end);
+	Check(win, "Camera as far out as it goes (50)", -188, function() return DB().camera; end,
+	      function(v) DB().camera = v; Camera(v); end);
 	local clear = K.Button(win, "Clear the box", 120, function() BoxBuild(); box.msg:Clear(); end);
 	clear:SetPoint("BOTTOMLEFT", win, "BOTTOMLEFT", 24, 20);
 	local reset = K.Button(win, "Box back above the chat", 170, function()
@@ -236,6 +258,7 @@ loader:RegisterEvent("PLAYER_ENTERING_WORLD");
 loader:SetScript("OnEvent", function()
 	local ok, err = pcall(HookChat);
 	if ( not ok ) then K.Print(NAME, "|cffff4040the chat could not be changed:|r " .. tostring(err)); end
+	pcall(Camera, event == "PLAYER_ENTERING_WORLD");
 	if ( event == "VARIABLES_LOADED" ) then
 		ok, err = pcall(BoxBuild);
 		if ( not ok ) then K.Print(NAME, "|cffff4040the Say & Party box could not be made:|r " .. tostring(err)); end

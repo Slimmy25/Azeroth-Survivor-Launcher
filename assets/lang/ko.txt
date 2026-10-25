@@ -1294,3 +1294,41 @@ Click a talent to add a point, right-click to take one back. A talent takes no m
 = 특성을 클릭하면 포인트를 추가하고, 오른쪽 클릭하면 하나 되돌립니다. 특성은 등급 수까지, 빌드는 51포인트까지만 받습니다. 보라색은 10, 20, 30포인트의 이정표입니다.
 Installed
 = 설치됨
+Moving over from the website?
+= 웹사이트에서 넘어오셨나요?
+Played Azeroth Survivors in your browser? Bring your progress with you: your heroes, the zones you opened, your gear, talents and codex.
+= 브라우저에서 Azeroth Survivors를 플레이했나요? 진행 상황을 가져오세요: 영웅, 연 지역, 장비, 특성, 도감.
+On the website, open Options > Saves and press Export Save. Then choose that .sav file here. The game opens with your progress, ready to play.
+= 웹사이트에서 설정 > 저장을 열고 저장 내보내기를 누르세요. 그런 다음 여기에서 그 .sav 파일을 고르세요. 게임이 진행 상황 그대로 열려 바로 플레이할 수 있습니다.
+IMPORT MY SAVE
+= 내 저장 가져오기
+I'M NEW HERE
+= 처음이에요
+NEXT
+= 다음
+IMPORT ANOTHER
+= 다른 것 가져오기
+Step 1 of 3
+= 1/3단계
+Step 2 of 3
+= 2/3단계
+Step 3 of 3
+= 3/3단계
+IMPORT A SAVE
+= 저장 가져오기
+Puts in a save exported from the game (on the website: Options > Saves > Export Save), so the game opens with it.
+= 게임에서 내보낸 저장을 넣습니다(웹사이트: 설정 > 저장 > 내보내기). 게임이 그것으로 열립니다.
+Close the game first, then import the save.
+= 먼저 게임을 닫은 다음 저장을 가져오세요.
+Checking for a launcher update...
+= 런처 업데이트 확인 중...
+Featured video. All credit goes to the people who made it.
+= 추천 영상. 모든 공은 만든 사람에게 있습니다.
+The video could not be shown here. Press the back arrow and try again.
+= 여기에서 영상을 보여 줄 수 없습니다. 뒤로 화살표를 누르고 다시 시도하세요.
+Choose the save you exported from the website (.sav)
+= 웹사이트에서 내보낸 저장을 고르세요(.sav)
+Azeroth Survivors save (*.sav)|*.sav|All files (*.*)|*.*
+= Azeroth Survivors 저장 (*.sav)|*.sav|모든 파일 (*.*)|*.*
+Save imported.
+= 저장을 가져왔습니다.

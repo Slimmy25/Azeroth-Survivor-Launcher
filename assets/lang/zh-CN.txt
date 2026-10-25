@@ -1294,3 +1294,41 @@ Click a talent to add a point, right-click to take one back. A talent takes no m
 = 点击天赋添加一点，右键收回一点。天赋点数不超过其等级，整套不超过 51 点；紫色的是 10、20、30 点的里程碑。
 Installed
 = 已安装
+Moving over from the website?
+= 从网站版迁移过来？
+Played Azeroth Survivors in your browser? Bring your progress with you: your heroes, the zones you opened, your gear, talents and codex.
+= 在浏览器里玩过 Azeroth Survivors？把进度带过来：你的英雄、开启的区域、装备、天赋和图鉴。
+On the website, open Options > Saves and press Export Save. Then choose that .sav file here. The game opens with your progress, ready to play.
+= 在网站上打开 选项 > 存档，点击 导出存档。然后在这里选择那个 .sav 文件。游戏会带着你的进度打开，直接就能玩。
+IMPORT MY SAVE
+= 导入我的存档
+I'M NEW HERE
+= 我是新玩家
+NEXT
+= 下一步
+IMPORT ANOTHER
+= 导入另一个
+Step 1 of 3
+= 第 1 步，共 3 步
+Step 2 of 3
+= 第 2 步，共 3 步
+Step 3 of 3
+= 第 3 步，共 3 步
+IMPORT A SAVE
+= 导入存档
+Puts in a save exported from the game (on the website: Options > Saves > Export Save), so the game opens with it.
+= 放入从游戏导出的存档（网站上：选项 > 存档 > 导出存档），让游戏用它打开。
+Close the game first, then import the save.
+= 请先关闭游戏，再导入存档。
+Checking for a launcher update...
+= 正在检查启动器更新...
+Featured video. All credit goes to the people who made it.
+= 精选视频。所有功劳归于制作者。
+The video could not be shown here. Press the back arrow and try again.
+= 无法在此处显示视频。请点返回箭头后重试。
+Choose the save you exported from the website (.sav)
+= 选择你从网站导出的存档（.sav）
+Azeroth Survivors save (*.sav)|*.sav|All files (*.*)|*.*
+= Azeroth Survivors 存档 (*.sav)|*.sav|所有文件 (*.*)|*.*
+Save imported.
+= 存档已导入。

@@ -1293,3 +1293,41 @@ Click a talent to add a point, right-click to take one back. A talent takes no m
 = Klik på et talent for at tilføje et point, højreklik for at tage et tilbage. Et talent tager ikke flere point end sine rang, og en build ikke flere end 51; de lilla er milepælene ved 10, 20 og 30 point.
 Installed
 = Installeret
+Moving over from the website?
+= Flytter du fra hjemmesiden?
+Played Azeroth Survivors in your browser? Bring your progress with you: your heroes, the zones you opened, your gear, talents and codex.
+= Har du spillet Azeroth Survivors i din browser? Tag dine fremskridt med: dine helte, de åbnede zoner, dit udstyr, talenter og kodeks.
+On the website, open Options > Saves and press Export Save. Then choose that .sav file here. The game opens with your progress, ready to play.
+= Åbn Indstillinger > Gemte spil på hjemmesiden og tryk Eksportér gemt spil. Vælg så den .sav-fil her. Spillet åbner med dine fremskridt, klar til at spille.
+IMPORT MY SAVE
+= IMPORTÉR MIT GEMTE SPIL
+I'M NEW HERE
+= JEG ER NY
+NEXT
+= NÆSTE
+IMPORT ANOTHER
+= IMPORTÉR ET ANDET
+Step 1 of 3
+= Trin 1 af 3
+Step 2 of 3
+= Trin 2 af 3
+Step 3 of 3
+= Trin 3 af 3
+IMPORT A SAVE
+= IMPORTÉR ET GEMT SPIL
+Puts in a save exported from the game (on the website: Options > Saves > Export Save), so the game opens with it.
+= Lægger et gemt spil eksporteret fra spillet ind (på hjemmesiden: Indstillinger > Gemte spil > Eksportér), så spillet åbner med det.
+Close the game first, then import the save.
+= Luk spillet først, og importér så det gemte spil.
+Checking for a launcher update...
+= Søger efter en launcher-opdatering...
+Featured video. All credit goes to the people who made it.
+= Udvalgt video. Al ære går til dem, der lavede den.
+The video could not be shown here. Press the back arrow and try again.
+= Videoen kunne ikke vises her. Tryk på tilbage-pilen og prøv igen.
+Choose the save you exported from the website (.sav)
+= Vælg det gemte spil, du eksporterede fra hjemmesiden (.sav)
+Azeroth Survivors save (*.sav)|*.sav|All files (*.*)|*.*
+= Azeroth Survivors-gemt spil (*.sav)|*.sav|Alle filer (*.*)|*.*
+Save imported.
+= Gemt spil importeret.

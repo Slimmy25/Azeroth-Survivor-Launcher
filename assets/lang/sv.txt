@@ -1293,3 +1293,41 @@ Click a talent to add a point, right-click to take one back. A talent takes no m
 = Klicka på en talang för att lägga till en poäng, högerklicka för att ta tillbaka en. En talang tar inte fler poäng än sina rang, och en build inte fler än 51; de lila är milstolparna vid 10, 20 och 30 poäng.
 Installed
 = Installerad
+Moving over from the website?
+= Flyttar du från webbplatsen?
+Played Azeroth Survivors in your browser? Bring your progress with you: your heroes, the zones you opened, your gear, talents and codex.
+= Har du spelat Azeroth Survivors i webbläsaren? Ta med dina framsteg: dina hjältar, öppnade zoner, utrustning, talanger och kodex.
+On the website, open Options > Saves and press Export Save. Then choose that .sav file here. The game opens with your progress, ready to play.
+= Öppna Alternativ > Sparfiler på webbplatsen och tryck Exportera sparfil. Välj sedan den .sav-filen här. Spelet öppnas med dina framsteg, redo att spela.
+IMPORT MY SAVE
+= IMPORTERA MIN SPARFIL
+I'M NEW HERE
+= JAG ÄR NY
+NEXT
+= NÄSTA
+IMPORT ANOTHER
+= IMPORTERA EN TILL
+Step 1 of 3
+= Steg 1 av 3
+Step 2 of 3
+= Steg 2 av 3
+Step 3 of 3
+= Steg 3 av 3
+IMPORT A SAVE
+= IMPORTERA EN SPARFIL
+Puts in a save exported from the game (on the website: Options > Saves > Export Save), so the game opens with it.
+= Lägger in en sparfil exporterad från spelet (på webbplatsen: Alternativ > Sparfiler > Exportera), så att spelet öppnas med den.
+Close the game first, then import the save.
+= Stäng spelet först och importera sedan sparfilen.
+Checking for a launcher update...
+= Söker efter en launcher-uppdatering...
+Featured video. All credit goes to the people who made it.
+= Utvald video. All ära till dem som gjorde den.
+The video could not be shown here. Press the back arrow and try again.
+= Videon kunde inte visas här. Tryck på bakåtpilen och försök igen.
+Choose the save you exported from the website (.sav)
+= Välj sparfilen du exporterade från webbplatsen (.sav)
+Azeroth Survivors save (*.sav)|*.sav|All files (*.*)|*.*
+= Azeroth Survivors-sparfil (*.sav)|*.sav|Alla filer (*.*)|*.*
+Save imported.
+= Sparfil importerad.

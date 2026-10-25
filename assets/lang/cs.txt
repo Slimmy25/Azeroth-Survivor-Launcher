@@ -1294,3 +1294,41 @@ Click a talent to add a point, right-click to take one back. A talent takes no m
 = Kliknutím na talent přidáš bod, pravým kliknutím ho vrátíš. Talent nepřijme víc bodů, než má úrovní, a build víc než 51; fialové jsou milníky na 10, 20 a 30 bodech.
 Installed
 = Nainstalováno
+Moving over from the website?
+= Přecházíš z webu?
+Played Azeroth Survivors in your browser? Bring your progress with you: your heroes, the zones you opened, your gear, talents and codex.
+= Hrál jsi Azeroth Survivors v prohlížeči? Vezmi si svůj postup: hrdiny, otevřené zóny, vybavení, talenty a kodex.
+On the website, open Options > Saves and press Export Save. Then choose that .sav file here. The game opens with your progress, ready to play.
+= Na webu otevři Možnosti > Uložené hry a stiskni Exportovat uloženou hru. Pak tu vyber ten soubor .sav. Hra se otevře s tvým postupem, připravená ke hraní.
+IMPORT MY SAVE
+= IMPORTOVAT MOU HRU
+I'M NEW HERE
+= JSEM TU NOVÝ
+NEXT
+= DALŠÍ
+IMPORT ANOTHER
+= IMPORTOVAT DALŠÍ
+Step 1 of 3
+= Krok 1 ze 3
+Step 2 of 3
+= Krok 2 ze 3
+Step 3 of 3
+= Krok 3 ze 3
+IMPORT A SAVE
+= IMPORTOVAT ULOŽENOU HRU
+Puts in a save exported from the game (on the website: Options > Saves > Export Save), so the game opens with it.
+= Vloží uloženou hru exportovanou ze hry (na webu: Možnosti > Uložené hry > Exportovat), aby se s ní hra otevřela.
+Close the game first, then import the save.
+= Nejdřív zavři hru, pak importuj uloženou hru.
+Checking for a launcher update...
+= Hledám aktualizaci launcheru...
+Featured video. All credit goes to the people who made it.
+= Doporučené video. Veškeré zásluhy patří jeho tvůrcům.
+The video could not be shown here. Press the back arrow and try again.
+= Video se tu nepodařilo zobrazit. Stiskni šipku zpět a zkus to znovu.
+Choose the save you exported from the website (.sav)
+= Vyber uloženou hru exportovanou z webu (.sav)
+Azeroth Survivors save (*.sav)|*.sav|All files (*.*)|*.*
+= Uložená hra Azeroth Survivors (*.sav)|*.sav|Všechny soubory (*.*)|*.*
+Save imported.
+= Uložená hra importována.

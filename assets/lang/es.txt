@@ -1293,3 +1293,41 @@ Click a talent to add a point, right-click to take one back. A talent takes no m
 = Haz clic en un talento para añadir un punto y clic derecho para quitar uno. Un talento no admite más puntos que sus rangos, y una build no más de 51; los morados son los hitos de 10, 20 y 30 puntos.
 Installed
 = Instalado
+Moving over from the website?
+= ¿Vienes desde la web?
+Played Azeroth Survivors in your browser? Bring your progress with you: your heroes, the zones you opened, your gear, talents and codex.
+= ¿Jugaste a Azeroth Survivors en tu navegador? Trae tu progreso: tus héroes, las zonas que abriste, tu equipo, talentos y el códice.
+On the website, open Options > Saves and press Export Save. Then choose that .sav file here. The game opens with your progress, ready to play.
+= En la web, abre Opciones > Partidas y pulsa Exportar partida. Luego elige aquí ese archivo .sav. El juego se abre con tu progreso, listo para jugar.
+IMPORT MY SAVE
+= IMPORTAR MI PARTIDA
+I'M NEW HERE
+= SOY NUEVO
+NEXT
+= SIGUIENTE
+IMPORT ANOTHER
+= IMPORTAR OTRA
+Step 1 of 3
+= Paso 1 de 3
+Step 2 of 3
+= Paso 2 de 3
+Step 3 of 3
+= Paso 3 de 3
+IMPORT A SAVE
+= IMPORTAR UNA PARTIDA
+Puts in a save exported from the game (on the website: Options > Saves > Export Save), so the game opens with it.
+= Coloca una partida exportada del juego (en la web: Opciones > Partidas > Exportar partida), para que el juego se abra con ella.
+Close the game first, then import the save.
+= Cierra primero el juego y luego importa la partida.
+Checking for a launcher update...
+= Buscando una actualización del lanzador...
+Featured video. All credit goes to the people who made it.
+= Video destacado. Todo el mérito es de quienes lo hicieron.
+The video could not be shown here. Press the back arrow and try again.
+= No se pudo mostrar el video aquí. Pulsa la flecha atrás e inténtalo de nuevo.
+Choose the save you exported from the website (.sav)
+= Elige la partida que exportaste de la web (.sav)
+Azeroth Survivors save (*.sav)|*.sav|All files (*.*)|*.*
+= Partida de Azeroth Survivors (*.sav)|*.sav|Todos los archivos (*.*)|*.*
+Save imported.
+= Partida importada.

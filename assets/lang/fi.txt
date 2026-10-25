@@ -1293,3 +1293,41 @@ Click a talent to add a point, right-click to take one back. A talent takes no m
 = Napsauta kykyä lisätäksesi pisteen, oikea napsautus ottaa yhden takaisin. Kyky ei ota enempää pisteitä kuin sillä on tasoja, eikä build yli 51; violetit ovat virstanpylväät 10, 20 ja 30 pisteessä.
 Installed
 = Asennettu
+Moving over from the website?
+= Siirrytkö verkkosivulta?
+Played Azeroth Survivors in your browser? Bring your progress with you: your heroes, the zones you opened, your gear, talents and codex.
+= Pelasitko Azeroth Survivorsia selaimessa? Tuo edistymisesi: sankarisi, avatut alueet, varusteet, kyvyt ja koodeksi.
+On the website, open Options > Saves and press Export Save. Then choose that .sav file here. The game opens with your progress, ready to play.
+= Avaa verkkosivulla Asetukset > Tallennukset ja paina Vie tallennus. Valitse sitten tuo .sav-tiedosto tästä. Peli avautuu edistymiselläsi, valmiina pelattavaksi.
+IMPORT MY SAVE
+= TUO TALLENNUKSENI
+I'M NEW HERE
+= OLEN UUSI
+NEXT
+= SEURAAVA
+IMPORT ANOTHER
+= TUO TOINEN
+Step 1 of 3
+= Vaihe 1/3
+Step 2 of 3
+= Vaihe 2/3
+Step 3 of 3
+= Vaihe 3/3
+IMPORT A SAVE
+= TUO TALLENNUS
+Puts in a save exported from the game (on the website: Options > Saves > Export Save), so the game opens with it.
+= Asettaa pelistä viedyn tallennuksen (verkkosivulla: Asetukset > Tallennukset > Vie), jotta peli avautuu sen kanssa.
+Close the game first, then import the save.
+= Sulje peli ensin ja tuo sitten tallennus.
+Checking for a launcher update...
+= Etsitään käynnistimen päivitystä...
+Featured video. All credit goes to the people who made it.
+= Esittelyvideo. Kaikki kunnia sen tekijöille.
+The video could not be shown here. Press the back arrow and try again.
+= Videota ei voitu näyttää tässä. Paina takaisin-nuolta ja yritä uudelleen.
+Choose the save you exported from the website (.sav)
+= Valitse verkkosivulta viemäsi tallennus (.sav)
+Azeroth Survivors save (*.sav)|*.sav|All files (*.*)|*.*
+= Azeroth Survivors -tallennus (*.sav)|*.sav|Kaikki tiedostot (*.*)|*.*
+Save imported.
+= Tallennus tuotu.

@@ -52,7 +52,7 @@ namespace AzerothLauncher
         readonly WowButton playBtn, updateBtn, aboutBtn;
         readonly BrandIcon discordIcon;
         readonly Dictionary<string, WowButton> nav = new Dictionary<string, WowButton>();
-        readonly string[] navNames = { "Guide", "Addons", "Cloud Save", "Changelog", "Stats", "Options" };   // order under "Launcher" (Discord before Options)
+        readonly string[] navNames = { "Guide", "Addons", "Cloud Save", "Changelog", "Stats", "Options" };   // Changelog: on the News line   // order under "Launcher" (Discord before Options)
         NotifyIcon tray;
         ToolStripMenuItem trayShow, trayPlay, trayUpload, trayCloseToTray, trayQuit;
 
@@ -108,6 +108,7 @@ namespace AzerothLauncher
             foreach (string name in navNames)
             {
                 string n = name;
+                if (n == "Changelog") continue;              // on the News line (below)
                 nav[n] = Place(new WowButton(n == "Guide" ? "NEW PLAYER GUIDE" : n.ToUpperInvariant(), delegate { ShowSection(n); }, 128, 27, 8.5f), 693, 480);
                 nav[n].Skin = Retro.Button;
             }
@@ -117,9 +118,12 @@ namespace AzerothLauncher
             nav["About Launcher"] = aboutBtn;
             updateBtn = Place(new WowButton("UPDATE LAUNCHER", delegate { CheckLauncherUpdate(true); }, 159, 27, 8), W - 8 - 159 - 6, 64);
             updateBtn.Visible = false;
-            // Discord: its own symbol (Blurple, from discord.com/branding, unaltered), on the "News" line at the right edge
+            // the News line: Discord's own symbol (Blurple, from discord.com/branding, unaltered) left of "News", and
+            // CHANGELOG at the very end of the line
             discordIcon = new BrandIcon(Theme.LoadImage("AS.discord-blurple.png"), Theme.LoadImage("AS.discord-white.png"), "Discord");
-            discordIcon.Bounds = new Rectangle(1085 - 26, 203, 26, 20);
+            discordIcon.Bounds = new Rectangle(697, 203, 26, 20);
+            nav["Changelog"] = Place(new WowButton("CHANGELOG", delegate { ShowSection("Changelog"); }, 110, 22, 8), 1085 - 110, 201);
+            nav["Changelog"].Skin = Retro.Button;
             discordIcon.Click += delegate { Util.OpenInShell(DiscordUrl); };
             Controls.Add(discordIcon);
             LayoutNav();
@@ -338,8 +342,8 @@ namespace AzerothLauncher
             using (var shadow = new SolidBrush(Color.Black))
             {
                 Font hf = Theme.F(11);
-                g.DrawString(Lang.T("News"), hf, shadow, 698, 205);
-                g.DrawString(Lang.T("News"), hf, gold, 697, 204);
+                g.DrawString(Lang.T("News"), hf, shadow, 729, 205);    // after the Discord symbol
+                g.DrawString(Lang.T("News"), hf, gold, 728, 204);
                 g.DrawString(Lang.T("Launcher"), hf, shadow, 698, 447);
                 g.DrawString(Lang.T("Launcher"), hf, gold, 697, 446);
             }
@@ -582,6 +586,7 @@ namespace AzerothLauncher
             int k = 0;                                       // three per row under "Launcher"
             foreach (string name in navNames)
             {
+                if (name == "Changelog") continue;           // its place is on the News line
                 if (!NavShown(name)) { nav[name].Visible = false; continue; }
                 nav[name].Visible = true;
                 nav[name].Location = new Point(693 + (k % 3) * 134, 480 + (k / 3) * 34);
@@ -999,6 +1004,43 @@ namespace AzerothLauncher
                 InstallClient();
                 return;
             }
+            // PLAY first makes sure this is the newest launcher: a newer one is installed (and the launcher restarts)
+            // instead of starting the game; when GitHub can't be reached, the game starts as it is
+            if (!playChecking && !StartedAfterUpdate && !PreviewMode)
+            {
+                playChecking = true;
+                SetStatus("Checking for a launcher update...");
+                Bg(delegate
+                {
+                    LauncherRelease rel = null;
+                    bool differs = false;
+                    try { rel = SelfUpdate.FetchLatest(); differs = SelfUpdate.Differs(rel); }
+                    catch (Exception) { }
+                    Ui(delegate
+                    {
+                        playChecking = false;
+                        if (differs && rel != null && !Updating)
+                        {
+                            launcherRelease = rel;
+                            RefreshUpdateBtn();
+                            SetStatus("A new launcher (" + rel.Name + ") is installed first; press PLAY again after it restarts.");
+                            ForceLauncherUpdate();
+                            return;
+                        }
+                        StartGame();
+                    });
+                });
+                return;
+            }
+            if (playChecking) return;
+            StartGame();
+        }
+
+        bool playChecking;                                   // PLAY is checking for a launcher update
+
+        void StartGame()
+        {
+            if (GameRunningFlag || Installing || Updating || !ClientPresent()) return;
             string exe = Path.Combine(GameDir(), Util.GameExe);
             GameRunningFlag = true;
             RefreshPlayLabel();

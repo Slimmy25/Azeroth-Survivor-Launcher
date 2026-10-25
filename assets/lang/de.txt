@@ -1293,3 +1293,41 @@ Click a talent to add a point, right-click to take one back. A talent takes no m
 = Klicke auf ein Talent, um einen Punkt zu vergeben, Rechtsklick nimmt einen zurück. Ein Talent nimmt nicht mehr Punkte als seine Ränge, ein Build nicht mehr als 51; die lilafarbenen sind die Meilensteine bei 10, 20 und 30 Punkten.
 Installed
 = Installiert
+Moving over from the website?
+= Wechselst du von der Website?
+Played Azeroth Survivors in your browser? Bring your progress with you: your heroes, the zones you opened, your gear, talents and codex.
+= Azeroth Survivors im Browser gespielt? Nimm deinen Fortschritt mit: deine Helden, die geöffneten Zonen, deine Ausrüstung, Talente und den Kodex.
+On the website, open Options > Saves and press Export Save. Then choose that .sav file here. The game opens with your progress, ready to play.
+= Öffne auf der Website Optionen > Spielstände und drücke Spielstand exportieren. Wähle dann hier diese .sav-Datei. Das Spiel startet mit deinem Fortschritt, bereit zum Spielen.
+IMPORT MY SAVE
+= MEINEN SPIELSTAND IMPORTIEREN
+I'M NEW HERE
+= ICH BIN NEU HIER
+NEXT
+= WEITER
+IMPORT ANOTHER
+= WEITEREN IMPORTIEREN
+Step 1 of 3
+= Schritt 1 von 3
+Step 2 of 3
+= Schritt 2 von 3
+Step 3 of 3
+= Schritt 3 von 3
+IMPORT A SAVE
+= SPIELSTAND IMPORTIEREN
+Puts in a save exported from the game (on the website: Options > Saves > Export Save), so the game opens with it.
+= Übernimmt einen aus dem Spiel exportierten Spielstand (auf der Website: Optionen > Spielstände > Spielstand exportieren), damit das Spiel mit ihm startet.
+Close the game first, then import the save.
+= Schließe zuerst das Spiel, dann importiere den Spielstand.
+Checking for a launcher update...
+= Suche nach einem Launcher-Update...
+Featured video. All credit goes to the people who made it.
+= Empfohlenes Video. Alle Anerkennung gebührt den Menschen, die es gemacht haben.
+The video could not be shown here. Press the back arrow and try again.
+= Das Video konnte hier nicht gezeigt werden. Drücke den Zurück-Pfeil und versuche es erneut.
+Choose the save you exported from the website (.sav)
+= Wähle den Spielstand, den du von der Website exportiert hast (.sav)
+Azeroth Survivors save (*.sav)|*.sav|All files (*.*)|*.*
+= Azeroth-Survivors-Spielstand (*.sav)|*.sav|Alle Dateien (*.*)|*.*
+Save imported.
+= Spielstand importiert.

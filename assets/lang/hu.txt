@@ -1294,3 +1294,41 @@ Click a talent to add a point, right-click to take one back. A talent takes no m
 = Kattints egy tehetségre egy pont hozzáadásához, jobb kattintással visszaveszel egyet. Egy tehetség nem kap több pontot, mint ahány szintje van, egy build pedig legfeljebb 51-et; a lilák a 10, 20 és 30 pontos mérföldkövek.
 Installed
 = Telepítve
+Moving over from the website?
+= A weboldalról jössz át?
+Played Azeroth Survivors in your browser? Bring your progress with you: your heroes, the zones you opened, your gear, talents and codex.
+= Böngészőben játszottál az Azeroth Survivors-szel? Hozd magaddal a haladásod: hőseid, megnyitott zónáid, felszerelésed, tehetségeid és a kódexet.
+On the website, open Options > Saves and press Export Save. Then choose that .sav file here. The game opens with your progress, ready to play.
+= A weboldalon nyisd meg a Beállítások > Mentések menüt, és nyomd meg a Mentés exportálása gombot. Aztán itt válaszd ki azt a .sav fájlt. A játék a haladásoddal nyílik meg, játékra készen.
+IMPORT MY SAVE
+= MENTÉSEM IMPORTÁLÁSA
+I'M NEW HERE
+= ÚJ VAGYOK
+NEXT
+= TOVÁBB
+IMPORT ANOTHER
+= MÁSIK IMPORTÁLÁSA
+Step 1 of 3
+= 1. lépés / 3
+Step 2 of 3
+= 2. lépés / 3
+Step 3 of 3
+= 3. lépés / 3
+IMPORT A SAVE
+= MENTÉS IMPORTÁLÁSA
+Puts in a save exported from the game (on the website: Options > Saves > Export Save), so the game opens with it.
+= Betölti a játékból exportált mentést (a weboldalon: Beállítások > Mentések > Exportálás), hogy a játék azzal nyíljon meg.
+Close the game first, then import the save.
+= Előbb zárd be a játékot, aztán importáld a mentést.
+Checking for a launcher update...
+= Indító-frissítés keresése...
+Featured video. All credit goes to the people who made it.
+= Kiemelt videó. Minden elismerés a készítőit illeti.
+The video could not be shown here. Press the back arrow and try again.
+= A videót nem sikerült itt megjeleníteni. Nyomd meg a vissza nyilat, és próbáld újra.
+Choose the save you exported from the website (.sav)
+= Válaszd ki a weboldalról exportált mentést (.sav)
+Azeroth Survivors save (*.sav)|*.sav|All files (*.*)|*.*
+= Azeroth Survivors mentés (*.sav)|*.sav|Minden fájl (*.*)|*.*
+Save imported.
+= Mentés importálva.
