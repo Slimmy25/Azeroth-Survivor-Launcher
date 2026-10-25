@@ -88,7 +88,7 @@ namespace AzerothLauncher
             StartPosition = FormStartPosition.CenterScreen;
 
             // layout: PLAY in the box at the bottom right, the sections under the news, the rest in the bottom bar
-            playBtn = Place(new WowButton("PLAY", Play, 88, 49, 12), 977, 604);         // smaller: status above, time played below
+            playBtn = Place(new WowButton("PLAY", Play, 88, 49, 12), 977, 578 + (112 - 49) / 2);   // centred in the bottom bar         // smaller: status above, time played below
             playBtn.Skin = Retro.Play;
             foreach (string name in navNames)
             {
@@ -323,14 +323,14 @@ namespace AzerothLauncher
                     Font stf = Theme.F(9, FontStyle.Italic);
                     float sw = g.MeasureString(st, stf).Width, cxp = playBtn.Left + playBtn.Width / 2f;
                     float sx = Math.Min(cxp - sw / 2, W - 10 - sw);
-                    g.DrawString(st, stf, sb, sx, 582);
+                    g.DrawString(st, stf, sb, sx, playBtn.Top - 20);
                 }
                 PlayStats ps = ShownPlayStats();
                 if (ps.Sessions > 0 && StatsEnabled() && Cfg.Bool("home_playtime", true))
                 {
                     sf.Alignment = StringAlignment.Far;          // from the right edge, growing left
                     g.DrawString(Lang.T("Time played: " + Duration(ps.Seconds) + "   |   Last session: " + Duration(ps.LastSeconds)),
-                                 Theme.F(8, FontStyle.Italic), gb, new RectangleF(400, 658, W - 10 - 400, 14), sf);
+                                 Theme.F(8, FontStyle.Italic), gb, new RectangleF(400, H - 17, W - 10 - 400, 14), sf);   // the very bottom
                 }
                 string version = Data.GameVersion;
                 using (var vb = new SolidBrush(Theme.Hex("#b8a27a")))            // bottom-left corner
