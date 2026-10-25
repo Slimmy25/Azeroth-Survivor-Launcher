@@ -1,0 +1,48 @@
+# Developer tool: looks up the icon name of every spell in tools/spell-names.txt on Wowhead (Classic first, then the
+# current game for spells from later expansions) and writes tools/spell-icons.txt ("Spell name|icon name") onto the
+# private "spell-icons" branch. The launcher shows the pictures from Wowhead's image host at runtime; no image is
+# stored in the repository or the exe. Run by hand: Actions > Spell icons > Run workflow.
+name: Spell icons
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  lookup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Look up every spell
+        run: |
+          set -u
+          out=/tmp/spell-icons.txt; miss=/tmp/missing.txt; : > "$out"; : > "$miss"
+          while IFS= read -r name; do
+            [ -z "$name" ] && continue
+            icon=""
+            for base in https://www.wowhead.com/classic https://www.wowhead.com; do
+              json=$(curl -sS -m 20 -G -A "Mozilla/5.0" --data-urlencode "q=$name" "$base/search/suggestions-template" || true)
+              icon=$(printf '%s' "$json" | jq -r --arg n "$name" '
+                [.results[]? | select(.typeName=="Spell" and .icon != null)] as $s
+                | (([$s[] | select((.name|ascii_downcase)==($n|ascii_downcase))][0]) // empty) | .icon' 2>/dev/null || true)
+              [ -n "$icon" ] && [ "$icon" != "null" ] && break
+              icon=""
+            done
+            if [ -n "$icon" ]; then
+              code=$(curl -s -o /dev/null -w '%{http_code}' "https://wow.zamimg.com/images/wow/icons/large/$icon.jpg")
+              if [ "$code" = "200" ]; then echo "$name|$icon" >> "$out"; else echo "$name (icon $icon: $code)" >> "$miss"; fi
+            else
+              echo "$name" >> "$miss"
+            fi
+            sleep 0.3
+          done < tools/spell-names.txt
+          echo "found $(wc -l < "$out"), missing $(wc -l < "$miss")"
+          echo "::notice::spell icons found $(wc -l < "$out"), missing $(wc -l < "$miss")"
+      - name: Keep the result on the spell-icons branch
+        run: |
+          mkdir /tmp/pub && cp /tmp/spell-icons.txt /tmp/missing.txt /tmp/pub/ && cd /tmp/pub
+          git init -q -b spell-icons && git config user.name bot && git config user.email bot@users.noreply.github.com
+          git add -A && git commit -qm "spell icons"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" HEAD:spell-icons
