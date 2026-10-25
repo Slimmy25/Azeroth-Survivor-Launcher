@@ -312,16 +312,7 @@ namespace AzerothLauncher
                 g.DrawString(Lang.T("Launcher"), hf, shadow, 698, 447);
                 g.DrawString(Lang.T("Launcher"), hf, gold, 697, 446);
             }
-            // bottom bar, left: the welcome line and the cloud note
-            string bodyText = ClientPresent() ? "Press PLAY to enter Azeroth." : "";   // no client: said in the status instead
-            if (CloudEnabled()) bodyText += (bodyText.Length > 0 ? " " : "") + "Your cloud save syncs automatically.";
-            using (var b = new SolidBrush(Theme.Hex("#d7cea4")))
-            using (var sh = new SolidBrush(Color.Black))
-            {
-                var box = new RectangleF(32, 594, 395, 50);
-                g.DrawString(Lang.T(bodyText), Theme.F(9), sh, new RectangleF(box.X + 1, box.Y + 1, box.Width, box.Height));
-                g.DrawString(Lang.T(bodyText), Theme.F(9), b, box);
-            }
+            // bottom bar, left: only the cloud note (the status above PLAY says the rest)
             using (var gb = new SolidBrush(Retro.Gold))
             using (var sf = new StringFormat())
             {
