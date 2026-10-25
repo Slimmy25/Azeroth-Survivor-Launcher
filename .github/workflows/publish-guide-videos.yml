@@ -49,3 +49,22 @@ jobs:
             curl -fsS -o /dev/null "https://purge.jsdelivr.net/gh/${PUBLIC_REPO}@guide-videos/$f" || true
           done
           git ls-files
+
+      - name: Check that every video streams from jsDelivr
+        env:
+          PUBLIC_REPO: Slimmy25/Azeroth-Survivor-Launcher-Releases
+        run: |
+          set -uo pipefail
+          sleep 20
+          bad=0
+          for f in $(cd guide-videos && find . -name '*.mp4' -o -name '*.jpg' | sed 's|^\./||' | sort); do
+            url="https://cdn.jsdelivr.net/gh/${PUBLIC_REPO}@guide-videos/$f"
+            # a streaming player asks for a part of the file: expect "206 video/mp4" (or "image/jpeg" for pictures)
+            got=$(curl -s -o /dev/null -r 0-1023 -w '%{http_code} %{content_type}' "$url")
+            echo "$got  $f"
+            case "$f:$got" in
+              *.mp4:"206 video/mp4"*|*.jpg:"206 image/jpeg"*|*.jpg:"200 image/jpeg"*) ;;
+              *) bad=1 ;;
+            esac
+          done
+          [ $bad -eq 0 ] || { echo "::error::Some files do not stream from jsDelivr yet"; exit 1; }
