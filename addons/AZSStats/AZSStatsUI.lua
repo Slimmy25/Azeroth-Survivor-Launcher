@@ -431,14 +431,13 @@ local function Build()
 	frame:SetHeight(H);
 	frame:SetPoint("CENTER", UIParent, "CENTER", 0, 20);
 	frame:SetFrameStrata("DIALOG");
-	frame:SetToplevel(true);
 	frame:SetBackdrop({ bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",
 	                    edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
 	                    tile = true, tileSize = 32, edgeSize = 32, insets = { left = 11, right = 12, top = 12, bottom = 11 } });
 	frame:EnableMouse(true);
-	frame:EnableMouseWheel(true);
+	if ( frame.EnableMouseWheel ) then frame:EnableMouseWheel(true); end
 	frame:SetMovable(true);
-	frame:SetClampedToScreen(true);
+	if ( frame.SetClampedToScreen ) then frame:SetClampedToScreen(true); end   -- not in every client
 	frame:RegisterForDrag("LeftButton");
 	frame:SetScript("OnDragStart", function() this:StartMoving(); end);
 	frame:SetScript("OnDragStop", function() this:StopMovingOrSizing(); end);
@@ -559,11 +558,20 @@ SlashCmdList["AZSSTATSUI"] = function() AZSStats_Toggle(); end
 -- minimap (the angle is saved). Its tooltip shows your runs and best results at a glance.
 local mini;
 
+-- around the minimap when the game shows one; otherwise (or before it is laid out) a free spot, top right
+local function OnMinimap()
+	return Minimap and Minimap.IsVisible and Minimap:IsVisible() and Minimap:GetCenter() ~= nil;
+end
+
 local function MiniPlace()
-	local a = math.rad(Num(DB().minimap.angle));
-	local r = 80;
+	local m = DB().minimap;
 	mini:ClearAllPoints();
-	mini:SetPoint("CENTER", Minimap, "CENTER", r * math.cos(a), r * math.sin(a));
+	if ( OnMinimap() ) then
+		local a = math.rad(Num(m.angle));
+		mini:SetPoint("CENTER", Minimap, "CENTER", 80 * math.cos(a), 80 * math.sin(a));
+	else
+		mini:SetPoint("CENTER", UIParent, "TOPRIGHT", m.x ~= nil and Num(m.x) or -60, m.y ~= nil and Num(m.y) or -60);
+	end
 end
 
 local function MiniTooltip()
@@ -583,16 +591,17 @@ local function MiniTooltip()
 	GameTooltip:Show();
 end
 
+-- only what a 1.12 client has: a plain Button on UIParent (so it shows even when the minimap is hidden)
 local function MiniBuild()
-	if ( mini or not Minimap ) then return; end
+	if ( mini ) then MiniPlace(); return; end
 	local db = DB();
 	if ( type(db.minimap) ~= "table" ) then db.minimap = { angle = 200, hide = false }; end
-	mini = CreateFrame("Button", "AZSStatsMinimapButton", Minimap);
+	mini = CreateFrame("Button", "AZSStatsMinimapButton", UIParent);
 	mini:SetWidth(31);
 	mini:SetHeight(31);
 	mini:SetFrameStrata("MEDIUM");
 	mini:SetFrameLevel(8);
-	mini:SetToplevel(true);
+	mini:SetMovable(true);
 	local icon = mini:CreateTexture(nil, "BACKGROUND");
 	icon:SetTexture("Interface\\Icons\\INV_Misc_Book_09");
 	icon:SetTexCoord(0.07, 0.93, 0.07, 0.93);
@@ -613,21 +622,42 @@ local function MiniBuild()
 	mini:SetScript("OnEnter", MiniTooltip);
 	mini:SetScript("OnLeave", function() GameTooltip:Hide(); end);
 	mini:SetScript("OnDragStart", function()
-		this:SetScript("OnUpdate", function()
-			local x, y = GetCursorPosition();
-			local s = Minimap:GetEffectiveScale();
-			local cx, cy = Minimap:GetCenter();
-			DB().minimap.angle = math.deg(math.atan2(y / s - cy, x / s - cx));
-			MiniPlace();
-		end);
+		if ( OnMinimap() ) then
+			this:SetScript("OnUpdate", function()
+				local x, y = GetCursorPosition();
+				local s = Minimap:GetEffectiveScale();
+				local cx, cy = Minimap:GetCenter();
+				DB().minimap.angle = math.deg(math.atan2(y / s - cy, x / s - cx));
+				MiniPlace();
+			end);
+		else
+			this:StartMoving();
+		end
 	end);
-	mini:SetScript("OnDragStop", function() this:SetScript("OnUpdate", nil); end);
+	mini:SetScript("OnDragStop", function()
+		this:SetScript("OnUpdate", nil);
+		this:StopMovingOrSizing();
+		if ( not OnMinimap() ) then              -- remember the free spot (from the top right corner)
+			local x, y = this:GetCenter();
+			DB().minimap.x, DB().minimap.y = x - UIParent:GetRight(), y - UIParent:GetTop();
+			MiniPlace();
+		end
+	end);
 	MiniPlace();
-	if ( db.minimap.hide ) then mini:Hide(); end
+	if ( db.minimap.hide ) then mini:Hide(); else mini:Show(); end
+end
+
+local miniError = false;
+local function MiniSafe()
+	local ok, err = pcall(MiniBuild);
+	if ( not ok and not miniError ) then
+		miniError = true;
+		S().Print("|cffff4040the minimap button could not be made:|r " .. tostring(err));
+	end
 end
 
 function AZSStats_ToggleMinimapButton()
-	MiniBuild();
+	MiniSafe();
 	if ( not mini ) then return; end
 	local m = DB().minimap;
 	m.hide = not m.hide;
@@ -638,7 +668,7 @@ end
 local loader = CreateFrame("Frame");
 loader:RegisterEvent("VARIABLES_LOADED");
 loader:RegisterEvent("PLAYER_ENTERING_WORLD");
-loader:SetScript("OnEvent", function() MiniBuild(); end);
+loader:SetScript("OnEvent", function() MiniSafe(); end);   -- again when entering the world: the minimap may show by then
 
 -- ---------------------------------------------------------------- the live DPS tracker
 -- A small frame during a run: your DPS on the game's damage meter, against your best for this class ("82% of your
@@ -749,4 +779,7 @@ end
 
 local trackerLoader = CreateFrame("Frame");
 trackerLoader:RegisterEvent("VARIABLES_LOADED");
-trackerLoader:SetScript("OnEvent", function() TrackerBuild(); end);
+trackerLoader:SetScript("OnEvent", function()
+	local ok, err = pcall(TrackerBuild);
+	if ( not ok ) then S().Print("|cffff4040the live DPS tracker could not be made:|r " .. tostring(err)); end
+end);
