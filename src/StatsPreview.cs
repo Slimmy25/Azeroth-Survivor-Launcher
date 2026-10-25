@@ -83,6 +83,14 @@ namespace AzerothLauncher
                         }
                     }
                     Application.DoEvents();
+                    var errs = new System.Text.StringBuilder();
+                    errs.Append("panel " + app.panel.Controls.Count + " vis " + app.panel.Visible + " size " + app.panel.Size + "\n");
+                    PaintCheck(app.panel, errs, 0);
+                    using (var eb = new Bitmap(1000, 700))
+                    {
+                        using (var g = Graphics.FromImage(eb)) { g.Clear(Color.White); g.DrawString(errs.ToString(), new Font("Arial", 8), Brushes.Black, new RectangleF(4, 4, 992, 692)); }
+                        eb.Save(Path.Combine(outDir, "guide-check-" + view[0] + "-" + view[1] + ".png"), ImageFormat.Png);
+                    }
                     using (var win = new Bitmap(app.side.Width, app.side.Height))
                     {
                         app.side.DrawToBitmap(win, new Rectangle(0, 0, win.Width, win.Height));
@@ -112,6 +120,21 @@ namespace AzerothLauncher
                 }
             }
             app.tray.Visible = false;
+        }
+
+        static void PaintCheck(Control c, System.Text.StringBuilder sb, int depth)
+        {
+            foreach (Control k in c.Controls)
+            {
+                if (depth < 2) sb.Append(new string(' ', depth * 2) + k.GetType().Name + " " + k.Bounds + " vis=" + k.Visible + "\n");
+                try
+                {
+                    if (k.Width > 0 && k.Height > 0)
+                        using (var b = new Bitmap(k.Width, k.Height)) k.DrawToBitmap(b, new Rectangle(0, 0, k.Width, k.Height));
+                }
+                catch (Exception ex) { sb.Append("PAINT ERROR " + k.GetType().Name + ": " + ex.GetType().Name + " " + ex.Message + "\n"); }
+                PaintCheck(k, sb, depth + 1);
+            }
         }
 
         static ScrollPanel FindScroll(Control c)
