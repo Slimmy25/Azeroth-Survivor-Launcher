@@ -42,7 +42,8 @@ temporary undo folder of a game update, which is kept inside the game folder.
 
 ## What it reaches on the internet
 
-- The game's download server (`ClientUrl` in `src/Launcher.cs`, with the shared download login): the game client
+- The game's download hosts (`ClientUrl`, with the shared download login, and the backup `ClientMirrorUrl` in
+  `src/Launcher.cs`, one picked at random): the game client
 - GitHub: launcher updates, game updates, the addons offered in Download More, and their upload dates
 - jsDelivr (a CDN for GitHub files): the guide's videos, streamed while they play
 - Wowhead's image host (wow.zamimg.com): spell, class, race, zone and creature pictures on the STATS page, shown only

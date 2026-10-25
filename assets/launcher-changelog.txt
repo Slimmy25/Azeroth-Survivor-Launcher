@@ -1,4 +1,5 @@
 # Next update (after v0.3)
+- The game download uses the main host or the new backup host at random (50/50); if one fails, the other is tried
 - INSTALL now downloads the game inside the launcher with a percentage bar (into a temp folder next to the launcher, deleted afterwards), then installs it
 - First-time setup and RUN SETUP AGAIN start by downloading and installing the game; installing again keeps your addons, addon settings and options
 - The "Cloud sync successfully downloaded / uploaded" line is gone; only problems are shown there now
