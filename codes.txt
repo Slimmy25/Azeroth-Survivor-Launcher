@@ -1,0 +1,43 @@
+Elwynn Forest|achievement_zone_elwynnforest|200
+Duskwood|achievement_zone_duskwood|200
+Warsong Gulch|achievement_bg_captureflag_wsg|200
+Warsong Gulch|achievement_bg_winwsg|200
+Warsong Gulch|inv_misc_rune_07|200
+Un'Goro Crater|achievement_zone_ungorocrater_01|200
+Un'Goro Crater|achievement_zone_ungorocrater|404
+Arathi Basin|achievement_bg_winab|200
+Arathi Basin|achievement_bg_ab_kill_in_mine|200
+Feralas|achievement_zone_feralas|200
+Gurubashi Arena|achievement_arena_2v2_7|200
+Gurubashi Arena|achievement_zone_stranglethorn_01|200
+Gurubashi Arena|achievement_boss_hakkar|200
+Scarlet Monastery|achievement_dungeon_scarletmonastery|404
+Scarlet Monastery|inv_helmet_52|200
+Scarlet Monastery|spell_holy_righteousfury|200
+Alterac Valley|achievement_bg_winav|200
+Alterac Valley|achievement_zone_alteracmountains_01|200
+Blackrock Mountain|achievement_zone_blackrock_01|200
+Blackrock Mountain|achievement_boss_nefarion|200
+Gates of Ahn'Qiraj|achievement_zone_silithus_01|200
+Gates of Ahn'Qiraj|achievement_boss_cthun|200
+Gates of Ahn'Qiraj|inv_misc_ahnqirajtrinket_01|200
+Naxxramas|achievement_dungeon_naxxramas_10man|200
+Naxxramas|achievement_dungeon_naxxramas|200
+Naxxramas|achievement_boss_kelthuzad_01|200
+Stranglethorn Vale|achievement_zone_stranglethorn_01|200
+Human|race_human_male|200
+Human|achievement_character_human_male|200
+Dwarf|race_dwarf_male|200
+Dwarf|achievement_character_dwarf_male|200
+Night Elf|race_nightelf_male|200
+Night Elf|achievement_character_nightelf_male|200
+Gnome|race_gnome_male|200
+Gnome|achievement_character_gnome_male|200
+Orc|race_orc_male|200
+Orc|achievement_character_orc_male|200
+Undead|race_scourge_male|200
+Undead|achievement_character_undead_male|200
+Tauren|race_tauren_male|200
+Tauren|achievement_character_tauren_male|200
+Troll|race_troll_male|200
+Troll|achievement_character_troll_male|200
