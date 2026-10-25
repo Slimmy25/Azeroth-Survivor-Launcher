@@ -23,13 +23,13 @@ namespace AzerothLauncher
         {
             SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer |
                      ControlStyles.ResizeRedraw, true);
-            Height = 50;
+            Height = 38;                                     // compact: the sections have little room
             BackColor = Theme.Hex("#0e0d14");
         }
 
         public string Title { get { return title; } set { title = value; Invalidate(); } }
 
-        Rectangle CloseBox { get { return new Rectangle(Width - 34, 13, 22, 22); } }
+        Rectangle CloseBox { get { return new Rectangle(Width - 27, 9, 18, 18); } }
 
         protected override void OnPaint(PaintEventArgs e)
         {
@@ -37,23 +37,23 @@ namespace AzerothLauncher
             g.Clear(BackColor);
             int w = Math.Max(Width, 200);
             Image bar = Retro.Get("long");                  // the launcher's blue stone, framed in gold
-            if (bar != null) g.DrawImage(bar, new Rectangle(30, 11, w - 34, 28));
-            using (var p = new Pen(Theme.Hex("#c49a48"), 2)) g.DrawRectangle(p, 30, 11, w - 34, 27);
+            if (bar != null) g.DrawImage(bar, new Rectangle(22, 7, w - 26, 22));
+            using (var p = new Pen(Theme.Hex("#c49a48"), 2)) g.DrawRectangle(p, 22, 7, w - 26, 21);
             Theme.Smooth(g);
             using (var sf = new StringFormat())
             using (var b = new SolidBrush(Theme.Hex("#fff0b0")))
             {
                 sf.LineAlignment = StringAlignment.Center;
-                g.DrawString(Lang.T(title), Theme.F(13, FontStyle.Bold), b, new RectangleF(66, 11, w - 110, 28), sf);
+                g.DrawString(Lang.T(title), Theme.F(11, FontStyle.Bold), b, new RectangleF(50, 7, w - 86, 22), sf);
             }
-            if (Theme.Portrait != null) g.DrawImage(Theme.Portrait, 28 - 24, 25 - 24, 48, 48);
+            if (Theme.Portrait != null) g.DrawImage(Theme.Portrait, 2, 1, 36, 36);
             Rectangle x = CloseBox;
             using (var b = new SolidBrush(Theme.Hex("#2a1c1c"))) g.FillRectangle(b, x);
             using (var p = new Pen(Theme.Hex("#d6a640"), 2)) g.DrawRectangle(p, x);
             using (var p = new Pen(Theme.Hex("#e53a22"), 3))
             {
-                g.DrawLine(p, x.X + 6, x.Y + 6, x.X + 16, x.Y + 16);
-                g.DrawLine(p, x.X + 16, x.Y + 6, x.X + 6, x.Y + 16);
+                g.DrawLine(p, x.X + 5, x.Y + 5, x.X + 13, x.Y + 13);
+                g.DrawLine(p, x.X + 13, x.Y + 5, x.X + 5, x.Y + 13);
             }
         }
 
@@ -187,7 +187,7 @@ namespace AzerothLauncher
             // right: strip of small icon buttons (jump to another section)
             strip = new Panel();
             strip.Dock = DockStyle.Right;
-            strip.Width = 42;
+            strip.Width = 32;
             strip.BackColor = dark;
             body.Controls.Add(strip);
             homeBtn = new IconButton(Icons.Home, CloseSide);          // back to the plain launcher
@@ -217,16 +217,16 @@ namespace AzerothLauncher
 
         void LayoutStrip()
         {
-            homeBtn.Location = new Point(8, 0);
-            int y = 34 + 14;
+            homeBtn.Location = new Point(6, 0);
+            int y = 26 + 10;
             foreach (string n in SectionNames)
             {
                 var b = stripBtns[n];
                 bool show = NavShown(n);
                 b.Visible = show;
                 if (!show) continue;
-                b.Location = new Point(8, y);
-                y += 34 + 6;
+                b.Location = new Point(6, y);
+                y += 26 + 5;
             }
         }
 
