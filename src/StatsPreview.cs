@@ -56,6 +56,34 @@ namespace AzerothLauncher
                 }
                 if (topClass == null) break;
             }
+            // the New Player Guide: topic cards, a topic made of pages, and a page with a (sample) video card
+            {
+                var topics = Data.Guide;
+                var v = new GuideVideo();
+                v.Title = "Your first run in Elwynn Forest";
+                v.Url = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+                topics[0].Videos.Add(v);
+                int at = topics[0].Body.IndexOf("# How a run works");
+                if (at >= 0) topics[0].Body = topics[0].Body.Insert(at, "@video 0\n");
+                app.Cfg.Set("guide_read", new System.Collections.Generic.List<object> { "Controls", "Classes/Warrior" });
+                int classes = 0;
+                for (int i = 0; i < topics.Count; i++) if (topics[i].Pages.Count > 0) { classes = i; break; }
+                foreach (int[] view in new[] { new[] { -1, -1 }, new[] { classes, -1 }, new[] { 0, -1 }, new[] { 1, -1 }, new[] { classes, 0 } })
+                {
+                    app.current = "Guide";
+                    app.gTopic = view[0];
+                    app.gPage = view[1];
+                    app.BuildPanel("Guide");
+                    Application.DoEvents();
+                    using (var win = new Bitmap(app.side.Width, app.side.Height))
+                    {
+                        app.side.DrawToBitmap(win, new Rectangle(0, 0, win.Width, win.Height));
+                        win.Save(Path.Combine(outDir, "guide-" + view[0] + "-" + view[1] + ".png"), ImageFormat.Png);
+                    }
+                }
+                app.current = "Stats";
+                app.BuildPanel("Stats");
+            }
             // the main window with a section open, then with none
             foreach (string shot in new[] { "home-section", "home" })
             {

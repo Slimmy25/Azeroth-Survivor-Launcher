@@ -647,6 +647,14 @@ namespace AzerothLauncher
     public class GuidePage
     {
         public string Title = "", Desc = "", Body = "";
+        public List<GuideVideo> Videos = new List<GuideVideo>();   // in the Body as a line "@video <number>"
+    }
+
+    // "@video Title | address": a YouTube link, another web address, or a video file (a name alone is looked for
+    // in the "Guide Videos" folder next to the launcher's data)
+    public class GuideVideo
+    {
+        public string Title = "", Url = "";
     }
 
     public class GuideTopic : GuidePage
@@ -724,6 +732,18 @@ namespace AzerothLauncher
                             topic.Pages.Add(p);
                             target = p;
                         }
+                        continue;
+                    }
+                    if (target != null && line.StartsWith("@video ", StringComparison.Ordinal))
+                    {
+                        string rest = line.Substring(7);
+                        int bar = rest.IndexOf('|');
+                        var v = new GuideVideo();
+                        v.Title = bar >= 0 ? rest.Substring(0, bar).Trim() : "";
+                        v.Url = (bar >= 0 ? rest.Substring(bar + 1) : rest).Trim();
+                        if (v.Url.Length == 0) continue;
+                        target.Body += "@video " + target.Videos.Count + "\n";   // shown where it stands in the text
+                        target.Videos.Add(v);
                         continue;
                     }
                     if (target != null) target.Body += line + "\n";
