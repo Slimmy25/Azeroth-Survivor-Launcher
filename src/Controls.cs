@@ -11,8 +11,8 @@ namespace AzerothLauncher
 {
     public static class Theme
     {
-        public static readonly Color BgTop = Hex("#1c1209"), BgBottom = Hex("#050302"), Gold = Hex("#ffb90f"),
-            GoldDim = Hex("#8a6a1c"), Bronze = Hex("#4a3414"), Text = Hex("#d8c28a"), Panel = Hex("#120c06"),
+        public static readonly Color BgTop = Hex("#16151d"), BgBottom = Hex("#07070b"), Gold = Hex("#f2c14e"),    // night stone and gold, like the launcher art
+            GoldDim = Hex("#9a8350"), Bronze = Hex("#34323f"), Text = Hex("#d7cea4"), Panel = Hex("#0e0d14"),
             LinkBlue = Hex("#6aa9ff"), Ink = Hex("#0b0704"), Good = Hex("#8bc34a"), Bad = Hex("#ff6b5a"),
             Credit = Hex("#b39a5c");
 
@@ -203,6 +203,13 @@ namespace AzerothLauncher
             Graphics g = e.Graphics;
             int w = Width, h = Height;
             if (Skin != null) { PaintSkin(g, w, h); return; }
+            if (!selected && Retro.Get("btn") != null)        // every other button: the launcher's blue stone too
+            {
+                Skin = w > 120 ? Retro.Long : Retro.Button;
+                PaintSkin(g, w, h);
+                Skin = null;
+                return;
+            }
             string state = grayed ? "grayed" : down ? "down" : hover ? "hover" : active ? "active" : "normal";
             Color top, bot, border, fg, shadow = Color.Black;
             if (state == "grayed") { top = Theme.Hex("#2a2620"); bot = Theme.Hex("#12100d"); border = Theme.Hex("#5a5246"); fg = Theme.Hex("#7d7466"); }
@@ -338,8 +345,8 @@ namespace AzerothLauncher
             Image stone = Retro.Get(lit ? "btn_hover" : "btn");    // the launcher's blue stone
             if (stone != null && !grayed) g.DrawImage(stone, new Rectangle(1, 1, s - 2, s - 2));
             else using (var b = new SolidBrush(Theme.Hex("#1c1a20"))) g.FillRectangle(b, 1, 1, s - 3, s - 3);
-            using (var p = new Pen(lit ? Theme.Gold : grayed ? Theme.Hex("#4a443a") : Theme.Hex("#7a5a22"), 2)) g.DrawRectangle(p, 1, 1, s - 3, s - 3);
-            using (var p = new Pen(Theme.Hex("#3a2a12"), 1)) g.DrawRectangle(p, 4, 4, s - 9, s - 9);
+            using (var p = new Pen(lit ? Theme.Gold : grayed ? Theme.Hex("#4a443a") : Theme.Hex("#8a7040"), 2)) g.DrawRectangle(p, 1, 1, s - 3, s - 3);
+            using (var p = new Pen(Theme.Bronze, 1)) g.DrawRectangle(p, 4, 4, s - 9, s - 9);
             Theme.Smooth(g);
             icon(g, s / 2f, s / 2f, lit ? Theme.Gold : grayed ? Theme.Hex("#6e675b") : Theme.Hex("#c9a24a"));
         }

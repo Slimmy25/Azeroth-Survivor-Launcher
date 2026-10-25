@@ -1,4 +1,4 @@
-// The look of the STATS section, after the WoW armory sites: a character header with a framed portrait and stat
+﻿// The look of the STATS section, after the WoW armory sites: a character header with a framed portrait and stat
 // chips, a tab bar, and rounded cards holding tiles, item-style rows (a framed "icon", a name in its quality color,
 // a green line under it, the value on the right), progress bars and the monthly class chart.
 // Every block paints itself and works out its own height for a given width (Fit).
@@ -12,8 +12,8 @@ namespace AzerothLauncher
 {
     public static class Armory
     {
-        public static readonly Color Page = Theme.Hex("#100b06"), Card = Theme.Hex("#1b140d"), CardEdge = Theme.Hex("#3d2c15"),
-            Slot = Theme.Hex("#241a10"), SlotHover = Theme.Hex("#2f2215"), SlotEdge = Theme.Hex("#4a3517"),
+        public static readonly Color Page = Theme.Hex("#0e0d14"), Card = Theme.Hex("#16151e"), CardEdge = Theme.Hex("#34323f"),
+            Slot = Theme.Hex("#1b1a24"), SlotHover = Theme.Hex("#252331"), SlotEdge = Theme.Hex("#45414f"),
             Dim = Theme.Hex("#9c8a64"), Bright = Theme.Hex("#f5e9c8"), Green = Theme.Hex("#5fd35f"),
             Poor = Theme.Hex("#9d9d9d"), Common = Theme.Hex("#ffffff"), Uncommon = Theme.Hex("#1eff00"),
             Rare = Theme.Hex("#3b8ff0"), Epic = Theme.Hex("#b35cf5"), Legendary = Theme.Hex("#ff8000");
