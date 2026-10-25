@@ -189,13 +189,13 @@ namespace AzerothLauncher
             Graphics g = draw ?? Graphics.FromImage(measureBmp);
             try
             {
-                Theme.Smooth(g);
+                g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;   // as the guide's other text
                 using (var sf = (StringFormat)StringFormat.GenericTypographic.Clone())
                 {
                     sf.FormatFlags |= StringFormatFlags.MeasureTrailingSpaces | StringFormatFlags.NoWrap;
                     float x = 0, y = 0;
                     int lineH = font.Height + 1;
-                    float spaceW = g.MeasureString(" ", font, PointF.Empty, sf).Width;
+                    float spaceW = g.MeasureString(" ", font, PointF.Empty, sf).Width * 1.15f;
                     foreach (var run in runs)
                     {
                         GuideLink link = run.Value;
