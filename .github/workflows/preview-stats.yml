@@ -39,12 +39,12 @@ jobs:
         shell: bash
         run: |
           set -e
-          mkdir -p /tmp/pv && cp preview-out/*.png /tmp/pv/
+          mkdir -p /tmp/pv/lang && cp preview-out/*.png /tmp/pv/ && cp preview-out/lang/*.png /tmp/pv/lang/ 2>/dev/null || true
           git config user.name "preview-bot"
           git config user.email "preview-bot@users.noreply.github.com"
           git checkout --orphan previews-tmp
           git rm -rfq . || true
-          mkdir -p stats && cp /tmp/pv/*.png stats/
+          mkdir -p stats/lang && cp /tmp/pv/*.png stats/ && cp /tmp/pv/lang/*.png stats/lang/ 2>/dev/null || true
           git add stats
           git commit -qm "STATS preview of ${GITHUB_SHA::7}"
           git push -f origin HEAD:previews

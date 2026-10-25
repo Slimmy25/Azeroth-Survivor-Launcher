@@ -162,22 +162,46 @@ namespace AzerothLauncher
                 if (shot == "home-community") { app.current = "Community"; app.ShowSide(); app.BuildPanel("Community"); }
                 if (shot == "home-section") { app.current = "Stats"; app.BuildPanel("Stats"); }
                 if (shot == "home") app.side.Hide();
-                app.Show();                                  // the preview starts as if in the tray
-                Application.DoEvents();
-                // painted by hand: the build machine's screen is smaller than the window, so it would be cut off
-                using (var home = new Bitmap(W, H))
+                PreviewShot(app, Path.Combine(outDir, shot + ".png"));
+            }
+            // every language: the home screen and Options, to see that nothing runs out of its space
+            string langDir = Path.Combine(outDir, "lang");
+            Directory.CreateDirectory(langDir);
+            foreach (var kv in Lang.Available())
+            {
+                Lang.Load(kv.Key);
+                Theme.PickFont();
+                app.TrayTexts();
+                foreach (string sec in new[] { "Community", "Options", "Guide" })
                 {
-                    using (var g = Graphics.FromImage(home))
-                        app.OnPaint(new PaintEventArgs(g, new Rectangle(0, 0, W, H)));
-                    for (int i = app.Controls.Count - 1; i >= 0; i--)
-                    {
-                        Control c = app.Controls[i];
-                        if (c.Visible && c.Width > 0 && c.Height > 0) c.DrawToBitmap(home, c.Bounds);
-                    }
-                    home.Save(Path.Combine(outDir, shot + ".png"), ImageFormat.Png);
+                    app.current = sec;
+                    app.ShowSide();
+                    app.BuildPanel(sec);
+                    PreviewShot(app, Path.Combine(langDir, kv.Key + "-" + sec.ToLowerInvariant() + ".png"));
                 }
             }
+            Lang.Load("en");
+            Theme.PickFont();
             app.tray.Visible = false;
+        }
+
+        // the whole window as a picture, painted by hand: the build machine's screen is smaller than the window
+        static void PreviewShot(LauncherApp app, string file)
+        {
+            app.Show();                                      // the preview starts as if in the tray
+            app.Invalidate(true);
+            Application.DoEvents();
+            using (var home = new Bitmap(W, H))
+            {
+                using (var g = Graphics.FromImage(home))
+                    app.OnPaint(new PaintEventArgs(g, new Rectangle(0, 0, W, H)));
+                for (int i = app.Controls.Count - 1; i >= 0; i--)
+                {
+                    Control c = app.Controls[i];
+                    if (c.Visible && c.Width > 0 && c.Height > 0) c.DrawToBitmap(home, c.Bounds);
+                }
+                home.Save(file, ImageFormat.Png);
+            }
         }
 
         static ScrollPanel FindScroll(Control c)
