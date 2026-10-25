@@ -95,6 +95,7 @@ namespace AzerothLauncher
             // every other section, to check they all use the launcher's colors
             foreach (string sec in new[] { "Cloud Save", "Addons", "Changelog", "Options", "About Launcher" })
             {
+                app.Show();                                  // the preview starts as if in the tray
                 app.ShowSide();
                 app.current = sec;
                 try { app.BuildPanel(sec); }
@@ -109,20 +110,6 @@ namespace AzerothLauncher
                 }
                 Application.DoEvents();
                 app.panel.Refresh();
-                {
-                    var tree = new System.Text.StringBuilder();
-                    Action<Control, int> dump = null;
-                    dump = delegate(Control c, int d)
-                    {
-                        tree.Append(new string(' ', d * 2) + c.GetType().Name + " " + c.Bounds + " vis=" + c.Visible + " txt=" + (c.Text.Length > 20 ? c.Text.Substring(0, 20) : c.Text) + "\n");
-                        if (d < 3) foreach (Control k in c.Controls) dump(k, d + 1);
-                    };
-                    dump(app.side, 0);
-                    using (var eb = new Bitmap(1000, 900))
-                    {
-                        using (var g = Graphics.FromImage(eb)) { g.Clear(Color.White); g.DrawString(tree.ToString(), new Font("Arial", 7), Brushes.Black, new RectangleF(4, 4, 992, 892)); }
-                        eb.Save(Path.Combine(outDir, "tree-" + sec.Replace(" ", "-") + ".png"), ImageFormat.Png);
-                    }
                 }
                 string nm = "section-" + sec.Replace(" ", "-").ToLowerInvariant();
                 using (var win = new Bitmap(app.side.Width, app.side.Height))
