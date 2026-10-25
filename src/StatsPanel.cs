@@ -139,6 +139,7 @@ namespace AzerothLauncher
                 hero.Heading = cls.Name;
                 hero.Accent = ClassColor(cls.Key);
                 hero.Letters = Armory.Initials(cls.Name);
+                hero.ClassPic = cls.Key;
                 hero.Line = Lang.T("Runs " + Big(cls.Runs) + " · Victories " + Big(cls.Victories) + " · Best level " + Big(cls.BestLevel)) +
                             "   " + Lang.T("Picked in " + Pct(cls.Runs, st.Total.Runs) + "% of your runs");
                 AddChips(hero, cls, null);
@@ -215,6 +216,7 @@ namespace AzerothLauncher
                         string key = c.Key;
                         var row = new ArmoryRow();
                         row.Icon = Armory.Initials(c.Name);
+                        row.ClassPic = key;
                         row.RoundIcon = true;
                         row.IconColor = ClassColor(key);
                         row.Name = c.Name;
@@ -296,6 +298,7 @@ namespace AzerothLauncher
             {
                 var row = new ArmoryRow();
                 row.Icon = Armory.Initials(k.Name);
+                row.Npc = k.Name;                            // the creature's picture, from Wowhead
                 row.IconColor = Theme.Hex("#c41f3b");
                 row.Name = k.Name;
                 row.NameColor = Theme.Hex("#ff5a4a");
@@ -314,6 +317,7 @@ namespace AzerothLauncher
             {
                 var row = new ArmoryRow();
                 row.Icon = "X";
+                row.Npc = d.Killer;
                 row.IconColor = ClassColor(d.ClassKey);
                 row.RoundIcon = true;
                 row.Name = Lang.T("Slain by " + d.Killer) + (d.Spell.Length > 0 ? " · " + d.Spell : "") +
@@ -347,28 +351,42 @@ namespace AzerothLauncher
             tiles.Items.Add(new[] { Big(co.Bosses), Lang.T("Bosses together") });
             y = Place(sp, tiles, w, y);
 
+            // the friend you play with most, at a glance
+            if (co.Friends.Count > 0)
+            {
+                FriendStat top = co.Friends[0];
+                var best = new TilesBlock();
+                best.Title = Lang.T("Your top partner") + ": " + top.Name + (top.Class.Length > 0 ? " (" + top.Class + ")" : "");
+                best.Items.Add(new[] { Big(top.Runs), Lang.T("Runs together") });
+                best.Items.Add(new[] { Big(top.Wins), Lang.T("Victories together") });
+                best.Items.Add(new[] { Pct(top.Wins, top.Runs) + "%", Lang.T("Win rate together") });
+                best.Items.Add(new[] { Duration((long)top.Time), Lang.T("Time together") });
+                y = Place(sp, best, w, y);
+            }
+
+            // everyone, most runs together first: who, how it went, and when you last played
             var friends = new RowsBlock();
-            friends.Title = Lang.T("Who you play with");
+            friends.Title = Lang.T("Your party");
             friends.Empty = Lang.T("No co-op runs recorded yet. Play a run with friends and they show up here.");
             double most = co.Friends.Count > 0 ? co.Friends[0].Runs : 1;
             foreach (var f in co.Friends)
             {
                 var row = new ArmoryRow();
                 row.Icon = Armory.Initials(f.Name);
+                row.ClassPic = f.ClassKey.Length > 0 ? f.ClassKey : null;     // their class's icon
                 row.RoundIcon = true;
                 row.IconColor = f.ClassKey.Length > 0 ? ClassColor(f.ClassKey) : Theme.Hex("#5fb0d3");
-                row.Name = f.Name + (f.Class.Length > 0 ? "  (" + f.Class + ")" : "");
+                row.Name = f.Name + (f.Class.Length > 0 ? " · " + f.Class : "");
                 row.NameColor = row.IconColor;
-                row.Sub = Lang.T("Runs: " + Big(f.Runs) + " · Won: " + Big(f.Wins) + " · Longest: " + Clock(f.BestTime) +
-                                 " · Best level: " + Big(f.BestLevel));
-                var acc = new List<string>();
-                if (f.FirstWin.Length > 0) acc.Add(Lang.T("First win together " + f.FirstWin));
-                if (f.FastestWin > 0) acc.Add(Lang.T("Fastest win " + Clock(f.FastestWin)));
-                if (f.MostBosses > 0) acc.Add(Lang.T("Most bosses " + Big(f.MostBosses)));
-                acc.Add(Lang.T("Played since " + f.First));
-                row.Sub2 = string.Join(" · ", acc.ToArray());
-                row.Value = Big(f.Runs);
-                row.ValueSub = f.Last;
+                row.Sub = Lang.T(Big(f.Runs) + " runs together · " + Big(f.Wins) + " won (" + Pct(f.Wins, f.Runs) + "%)");
+                row.SubColor = Armory.Bright;
+                var more = new List<string>();
+                if (f.BestTime > 0) more.Add(Lang.T("Best together: " + Clock(f.BestTime) + ", level " + Big(f.BestLevel)));
+                if (f.FastestWin > 0) more.Add(Lang.T("fastest win " + Clock(f.FastestWin)));
+                if (f.First.Length >= 10) more.Add(Lang.T("since " + f.First.Substring(0, 10)));
+                row.Sub2 = string.Join(" · ", more.ToArray());
+                row.Value = Ago(f.Last);
+                row.ValueSub = Lang.T("last played");
                 row.Bar = most > 0 ? f.Runs / most : 0;
                 friends.Rows.Add(row);
                 if (friends.Rows.Count >= 30) break;
@@ -487,9 +505,9 @@ namespace AzerothLauncher
                 var row = new ArmoryRow();
                 row.Icon = Armory.Initials(a.Name);
                 row.Spell = a.Name;                          // its icon, shown from Wowhead when there is one
-                row.IconColor = Armory.Quality(share);
+                row.IconColor = Theme.GoldDim;               // one color for every ability
                 row.Name = a.Name;
-                row.NameColor = Armory.Quality(share);
+                row.NameColor = Armory.Bright;
                 row.Sub = Lang.T("Picked in " + Big(a.Picks) + " runs (" + Pct(a.Picks, runs) + "%) · Win rate " + Pct(a.Wins, a.Picks) + "%");
                 row.Value = Lang.T(Big(a.Damage) + " damage");
                 if (a.BestRank > 0) row.ValueSub = Lang.T("Best rank " + Big(a.BestRank));
@@ -528,6 +546,21 @@ namespace AzerothLauncher
             return rows;
         }
 
+        // "today", "yesterday", "3 days ago", "5 weeks ago" ... from a "yyyy-MM-dd HH:mm" date
+        static string Ago(string when)
+        {
+            DateTime d;
+            if (string.IsNullOrEmpty(when) || !DateTime.TryParse(when.Length >= 10 ? when.Substring(0, 10) : when,
+                    System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out d)) return when ?? "";
+            int days = (int)(DateTime.Today - d.Date).TotalDays;
+            if (days <= 0) return Lang.T("today");
+            if (days == 1) return Lang.T("yesterday");
+            if (days < 14) return Lang.T(days + " days ago");
+            if (days < 60) return Lang.T((days / 7) + " weeks ago");
+            if (days < 730) return Lang.T((days / 30) + " months ago");
+            return Lang.T((days / 365) + " years ago");
+        }
+
         static RowsBlock History(List<StatRun> runs)
         {
             var rows = new RowsBlock();
@@ -539,6 +572,7 @@ namespace AzerothLauncher
                 var row = new ArmoryRow();
                 Color rc = r.Kind == "victory" ? Armory.Green : r.Kind == "defeat" ? Theme.Bad : Armory.Dim;
                 row.Icon = Armory.Initials(r.Class);
+                row.ClassPic = r.ClassKey.Length > 0 ? r.ClassKey : r.Class;
                 row.RoundIcon = true;
                 row.IconColor = ClassColor(r.ClassKey.Length > 0 ? r.ClassKey : r.Class);
                 row.Name = Lang.T(ResultName(r.Kind, r.Result)) + " · " + Pair(r.Class, r.Race.Length > 0 ? "(" + r.Race + ")" : "") +
