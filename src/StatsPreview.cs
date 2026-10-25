@@ -44,21 +44,7 @@ namespace AzerothLauncher
             {
                 for (int tab = 0; tab < StatTabs.Length; tab++)
                 {
-                    {   // the Warrior's talent trees with a test build
-                    app.current = "Guide";
-                    app.ShowSide();
-                    app.gTopic = classes; app.gPage = 0; app.gTalents = "Warrior";
-                    app.Cfg.Set("talent_build_Warrior", "Arms/imp_heroic=5;Arms/deflection=3;Arms/deep_wounds=1;Fury/cruelty=5");
-                    app.BuildPanel("Guide");
-                    Application.DoEvents();
-                    using (var win = new Bitmap(app.side.Width, app.side.Height))
-                    {
-                        app.side.DrawToBitmap(win, new Rectangle(0, 0, win.Width, win.Height));
-                        win.Save(Path.Combine(outDir, "guide-talents.png"), ImageFormat.Png);
-                    }
-                    app.gTalents = null;
-                }
-                app.current = "Stats";
+                    app.current = "Stats";
                     app.statsClass = cls;
                     app.statsTab = tab;
                     app.BuildPanel("Stats");
@@ -122,6 +108,20 @@ namespace AzerothLauncher
                             page.Save(Path.Combine(outDir, "guide-" + view[0] + "-" + view[1] + "-page.png"), ImageFormat.Png);
                         }
                     }
+                }
+                {   // the Warrior's talent trees with a test build
+                    app.current = "Guide";
+                    app.ShowSide();
+                    app.gTopic = classes; app.gPage = 0; app.gTalents = "Warrior";
+                    app.Cfg.Set("talent_build_Warrior", "Arms/imp_heroic=5;Arms/deflection=3;Arms/deep_wounds=1;Fury/cruelty=5");
+                    app.BuildPanel("Guide");
+                    Application.DoEvents();
+                    using (var win = new Bitmap(app.side.Width, app.side.Height))
+                    {
+                        app.side.DrawToBitmap(win, new Rectangle(0, 0, win.Width, win.Height));
+                        win.Save(Path.Combine(outDir, "guide-talents.png"), ImageFormat.Png);
+                    }
+                    app.gTalents = null;
                 }
                 app.current = "Stats";
                 app.BuildPanel("Stats");
