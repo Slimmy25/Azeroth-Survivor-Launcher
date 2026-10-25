@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Globalization;
 using System.IO;
+using System.Net;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
@@ -19,8 +20,10 @@ namespace AzerothLauncher
         // (the flag is stored in the config when a download finishes). Set to false to switch it off.
         public const bool RequireLauncherInstall = true;
 
-        // Where the game is downloaded from: the launcher opens this in the default web browser.
+        // Where the game is downloaded from, and the download server's login (shared with every player, so it is fine
+        // in the open). The launcher downloads it itself (InstallDialog), into a "temp" folder beside the launcher.
         public const string ClientUrl = "https://budapestmix.hu:5000/download";
+        public const string ClientUser = "AzerothSurvivors_uSZfhjS", ClientPassword = "AzerothSurvivors_uSZfhjS";
         public const string DiscordUrl = "https://discord.com/invite/UzxaZuSAk";
 
         const int W = 1100, H = 690;                         // retro launcher window: sections open on the left, News on the right
@@ -705,7 +708,7 @@ namespace AzerothLauncher
         // ------------------------------------------------------------------ first-time setup
         void MaybeFirstRun()
         {
-            if (setupAsked || setupOpen || Cfg.Bool("setup_done", false) || !GateOpen()) return;
+            if (setupAsked || setupOpen || Cfg.Bool("setup_done", false)) return;
             if (!Visible) return;                            // started hidden: asked when the window is first opened
             if (startupLauncherCheck || Updating)           // a launcher update may restart us first
             {
@@ -716,7 +719,20 @@ namespace AzerothLauncher
             RunSetup();
         }
 
+        // First-time setup, and RUN SETUP AGAIN: both assume the game is not here yet, so they start by downloading and
+        // installing it; the folders and cloud page comes once it is installed.
         public void RunSetup()
+        {
+            if (GameRunningFlag) { Info("Setup", "Close the game first, then run setup again."); return; }
+            if (Updating || Installing) { SetStatus("Please wait until the game update or install has finished."); return; }
+            current = "Home";
+            foreach (var b in nav.Values) b.Active = false;
+            RefreshStrip();
+            HideSide();
+            InstallClient(true);
+        }
+
+        void ShowSetupDialog()
         {
             // close the section window so only the setup dialog is in focus
             current = "Home";
@@ -949,7 +965,7 @@ namespace AzerothLauncher
                         Ui(delegate { SetCloudNote("Cloud sync failed - game not launched"); SetStatus("Ready."); });
                         return;
                     }
-                    Ui(delegate { SetCloudNote("Cloud sync successfully downloaded"); });
+                    Ui(delegate { SetCloudNote(""); });
                 }
                 else if (cloudOnButNoFolder) problems.Add("No sync folder set - launched without cloud sync.");
                 SyncLog("Starting Azeroth Survivors ...", Level.Info);
@@ -988,7 +1004,7 @@ namespace AzerothLauncher
                     try
                     {
                         if (eng.Push(false))
-                            Ui(delegate { SetStatus("Ready."); SetCloudNote("Cloud sync successfully uploaded"); });
+                            Ui(delegate { SetStatus("Ready."); SetCloudNote(""); });
                         else
                         {
                             problems.Add("Some of your progress was NOT uploaded. See the log in Cloud Save.");
@@ -1058,7 +1074,11 @@ namespace AzerothLauncher
         }
 
         // ------------------------------------------------------------------ installing the game client
-        void InstallClient()
+        void InstallClient() { InstallClient(false); }
+
+        bool setupAfterInstall;
+
+        void InstallClient(bool forSetup)
         {
             if (Updating)
             {
@@ -1067,19 +1087,142 @@ namespace AzerothLauncher
             }
             if (installDlg != null && !installDlg.IsDisposed)
             {
+                if (forSetup) installDlg.ForSetup = true;
                 installDlg.Show();
                 installDlg.WindowState = FormWindowState.Normal;
                 installDlg.Activate();
                 return;
             }
-            installDlg = new InstallDialog(this);
+            installDlg = new InstallDialog(this, forSetup);
+            installDlg.FormClosed += delegate
+            {
+                installDlg = null;
+                if (setupAfterInstall)                       // installed as part of setup: on to the folders page
+                {
+                    setupAfterInstall = false;
+                    After(300, ShowSetupDialog);
+                }
+            };
             installDlg.PlaceOver(this);
             installDlg.Show();
         }
 
-        public void InstallFromDownloads()
+        // The game download, done by the launcher: into <launcher folder>\temp, with the download server's login,
+        // then unpacked next to the launcher; the temp folder is deleted afterwards, whatever happened.
+        public bool BeginClientDownload(InstallDialog dlg)
+        {
+            if (Updating || Installing)
+            {
+                SetStatus("Please wait until the game update or install has finished.");
+                return false;
+            }
+            if (GameRunningFlag)
+            {
+                Msg.Show(dlg, "Close the game first, then install it again.", "Install");
+                return false;
+            }
+            Installing = true;
+            RefreshPlayLabel();
+            SetStatus("Downloading the game client...");
+            string temp = Path.Combine(Util.LauncherDir, "temp");
+            string dest = Util.LauncherDir;
+            ManualResetEvent cancel = dlg.CancelEvent;
+            Bg(delegate
+            {
+                string error = null;
+                bool cancelled = false;
+                try
+                {
+                    Util.DeleteTreeQuiet(temp);
+                    Directory.CreateDirectory(temp);
+                    string file = Path.Combine(temp, "AzerothSurvivors-client.download");
+                    long last = -1;
+                    int lastTick = 0;
+                    Action<long, long> progress = delegate(long done, long total)
+                    {
+                        int pct = total > 0 ? (int)(done * 1000 / total) : (int)(done >> 20);
+                        if (pct == last && Environment.TickCount - lastTick < 1000) return;
+                        last = pct;
+                        lastTick = Environment.TickCount;
+                        Ui(delegate
+                        {
+                            dlg.SetProgress(done, total);
+                            if (total > 0) SetStatus("Downloading the game client... " + (int)(done * 100 / total) + "%");
+                        });
+                    };
+                    DownloadClient(file, progress, cancel);
+                    Ui(delegate { dlg.SetPhase("install", "Unpacking the game..."); SetStatus("Unpacking the game client..."); });
+                    if (Archive.Kind(file) == null)
+                        throw new UserError("The download server sent something that is not the game archive. Please try again later.");
+                    Archive.InstallGame(file, dest);
+                }
+                catch (CancelledError) { cancelled = true; }
+                catch (Exception e) { error = e.Message; }
+                finally { Util.DeleteTreeQuiet(temp); }        // the download is never kept
+                Ui(delegate
+                {
+                    if (cancelled)
+                    {
+                        Installing = false;
+                        RefreshPlayLabel();
+                        SetStatus("Download cancelled.");
+                        if (!dlg.IsDisposed) dlg.ShowOffer();
+                        return;
+                    }
+                    if (error == null) InstallDone(null, dest);
+                    else
+                    {
+                        Installing = false;
+                        RefreshPlayLabel();
+                        SetStatus("Install failed.");
+                        if (dlg.IsDisposed) Error("Install", error);
+                    }
+                    if (!dlg.IsDisposed)
+                    {
+                        if (error == null && dlg.ForSetup) setupAfterInstall = true;
+                        dlg.ShowResult(error == null, error == null ? "Azeroth Survivors is installed." +
+                            (dlg.ForSetup ? " Next: where your files are, and cloud saving." : " Press PLAY to enter Azeroth.") : error);
+                    }
+                });
+            });
+            return true;
+        }
+
+        // The login is sent the plain HTTP way (Basic); a server that wants it in the address instead gets that next.
+        static void DownloadClient(string file, Action<long, long> progress, ManualResetEvent cancel)
+        {
+            string basic = Convert.ToBase64String(Encoding.UTF8.GetBytes(ClientUser + ":" + ClientPassword));
+            Action<HttpWebRequest> login = delegate(HttpWebRequest r) { r.Headers["Authorization"] = "Basic " + basic; };
+            string q = ClientUrl.Contains("?") ? "&" : "?";
+            string u = Uri.EscapeDataString(ClientUser), pw = Uri.EscapeDataString(ClientPassword);
+            string[] urls = { ClientUrl, ClientUrl + q + "username=" + u + "&password=" + pw, ClientUrl + q + "user=" + u + "&pass=" + pw };
+            UserError lastError = null;
+            foreach (string url in urls)
+            {
+                try
+                {
+                    Net.Download(url, file, true, "download", progress, cancel, 0, login);
+                    return;
+                }
+                catch (CancelledError) { throw; }
+                catch (UserError e)
+                {
+                    lastError = e;
+                    if (!e.Message.Contains("error 401") && !e.Message.Contains("error 403")) throw;   // only a refused login tries the next way
+                }
+            }
+            throw new UserError("The download server did not accept the launcher's login. Please tell Slimjim or Aethus.\n\n" +
+                                (lastError != null ? lastError.Message : ""));
+        }
+
+        bool setupAfterFileInstall;
+
+        public void InstallFromDownloads() { InstallFromDownloads(false); }
+
+        public void InstallFromDownloads(bool forSetup)
         {
             if (Updating || Installing) return;
+            setupAfterFileInstall = forSetup;
             string archive = Archive.FindDownloaded();
             if (archive != null)
             {
@@ -1140,7 +1283,9 @@ namespace AzerothLauncher
             {
                 SetStatus("Install complete - press PLAY.");
                 Notify("Install complete. Press PLAY to enter Azeroth.");
-                After(300, MaybeFirstRun);                   // first-time setup comes after the install
+                if (installDlg == null && (setupAfterFileInstall || !Cfg.Bool("setup_done", false)))
+                    After(300, ShowSetupDialog);             // installed from a file during setup: on to the folders page
+                setupAfterFileInstall = false;
                 if (Updater.Enabled) After(800, delegate { CheckForUpdate(false, true); });   // is it already the newest?
             }
         }

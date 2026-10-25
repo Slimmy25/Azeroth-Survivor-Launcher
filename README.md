@@ -3,7 +3,8 @@
 A community launcher for **Azeroth Survivors**, the game made by Aethus, in a retro classic-launcher look
 (night stone and gold, original art drawn by `tools/make_launcher_art.py`).
 
-- **PLAY / INSTALL**: installs the game client, then starts it; the News panel shows the newest patch notes,
+- **PLAY / INSTALL**: downloads the game client inside the launcher (with a percentage bar, into a `temp` folder that is
+  deleted afterwards), installs it next to the launcher, then starts it; first-time setup begins with this; the News panel shows the newest patch notes,
   and a "This week" card sums up your recent runs
 - **Cloud Save**: keeps your save game, AddOns and addon settings in Google Drive, OneDrive or Dropbox and
   shares them between your PCs (downloaded before the game starts, uploaded after it closes, even after a crash)
@@ -41,6 +42,7 @@ temporary undo folder of a game update, which is kept inside the game folder.
 
 ## What it reaches on the internet
 
+- The game's download server (`ClientUrl` in `src/Launcher.cs`, with the shared download login): the game client
 - GitHub: launcher updates, game updates, the addons offered in Download More, and their upload dates
 - jsDelivr (a CDN for GitHub files): the guide's videos, streamed while they play
 - Wowhead's image host (wow.zamimg.com): spell, class, race, zone and creature pictures on the STATS page, shown only

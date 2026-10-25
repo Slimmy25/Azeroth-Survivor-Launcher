@@ -58,8 +58,10 @@ namespace AzerothLauncher
 
         // Opens a web address and follows redirects itself (GitHub and most file hosts use them).
         // httpsOnly: every step must be https (the game updates).
-        public static HttpWebResponse Open(string url, int timeoutMs, bool httpsOnly, string what, string accept = null)
+        public static HttpWebResponse Open(string url, int timeoutMs, bool httpsOnly, string what, string accept = null,
+                                           Action<HttpWebRequest> prepare = null)
         {
+            string firstHost = null;
             for (int hop = 0; hop < 10; hop++)
             {
                 if (httpsOnly ? !IsHttps(url) : !IsWebAddress(url))
@@ -73,6 +75,9 @@ namespace AzerothLauncher
                 req.Headers["Cache-Control"] = "no-cache";
                 req.AutomaticDecompression = DecompressionMethods.None;
                 if (accept != null) req.Accept = accept;
+                if (firstHost == null) firstHost = req.RequestUri.Host;
+                // extra headers (a login) go only to the server first asked, never to one it redirects to
+                if (prepare != null && string.Equals(req.RequestUri.Host, firstHost, StringComparison.OrdinalIgnoreCase)) prepare(req);
                 HttpWebResponse resp;
                 try
                 {
@@ -110,13 +115,13 @@ namespace AzerothLauncher
 
         // Streams a web file to dest (via dest.part). progress(done, total). Returns the SHA-256 (lower-case hex).
         public static string Download(string url, string dest, bool httpsOnly, string what, Action<long, long> progress,
-                                      ManualResetEvent cancel, long expectedSize)
+                                      ManualResetEvent cancel, long expectedSize, Action<HttpWebRequest> prepare = null)
         {
             string tmp = dest + ".part";
             try
             {
                 using (var sha = System.Security.Cryptography.SHA256.Create())
-                using (HttpWebResponse resp = Open(url, 30000, httpsOnly, what))
+                using (HttpWebResponse resp = Open(url, 30000, httpsOnly, what, null, prepare))
                 {
                     if ((resp.ContentType ?? "").ToLowerInvariant().Contains("text/html"))
                         throw new UserError("The download link gave a web page instead of the file. It must be a direct download link.");
@@ -359,7 +364,10 @@ namespace AzerothLauncher
         }
 
         // Moves src (file or folder) to dst, merging folders and replacing files. The launcher itself is never overwritten.
-        static void MergeInto(string src, string dst)
+        // keep: a file that is already there stays as it is (the player's own settings, addons and saves)
+        static void MergeInto(string src, string dst) { MergeInto(src, dst, false); }
+
+        static void MergeInto(string src, string dst, bool keep)
         {
             if (string.Equals(Path.GetFullPath(dst), Path.GetFullPath(Application_ExePath()), StringComparison.OrdinalIgnoreCase))
                 return;
@@ -367,10 +375,11 @@ namespace AzerothLauncher
             {
                 Directory.CreateDirectory(dst);
                 foreach (string child in Directory.GetFileSystemEntries(src))
-                    MergeInto(child, Path.Combine(dst, Path.GetFileName(child)));
+                    MergeInto(child, Path.Combine(dst, Path.GetFileName(child)), keep);
             }
             else
             {
+                if (keep && File.Exists(dst)) return;
                 Directory.CreateDirectory(Path.GetDirectoryName(dst));
                 if (File.Exists(dst)) File.SetAttributes(dst, FileAttributes.Normal);
                 Util.Replace(src, dst);
@@ -399,8 +408,11 @@ namespace AzerothLauncher
                 string exe = FindGameExe(stage);
                 if (exe == null) throw new UserError("The archive was unpacked, but " + Util.GameExe + " was not inside it.");
                 string root = Path.GetDirectoryName(exe);
+                // installing again over a game that is already here: the game files are replaced, but nothing the
+                // player already has in benilla-config (addons, addon settings, options, key bindings) is overwritten
                 foreach (string item in Directory.GetFileSystemEntries(root))
-                    MergeInto(item, Path.Combine(destDir, Path.GetFileName(item)));
+                    MergeInto(item, Path.Combine(destDir, Path.GetFileName(item)),
+                              string.Equals(Path.GetFileName(item), "benilla-config", StringComparison.OrdinalIgnoreCase));
             }
             finally
             {

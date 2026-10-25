@@ -1,14 +1,45 @@
 # The Azeroth Survivors Launcher
-A community launcher for Azeroth Survivors, the game made by Aethus.
+A community launcher for Azeroth Survivors, the game made by Aethus. It installs the game, keeps it up to date, carries your progress between your PCs, manages your addons, teaches new players and keeps every stat of every run. Made by Slimjim.
 
-It installs and updates the game, keeps your save in your own cloud drive, manages your addons and keeps track of your play time.
+# Install and play
+- INSTALL downloads the game inside the launcher, with a bar that shows how far it has come, and installs it next to the launcher. The download goes into a temp folder that is deleted once the game is in place
+- Already downloaded the game? The launcher can install it from the file in its own folder or in Downloads
+- Installing again over an existing game keeps your addons, addon settings and options
+- PLAY starts the game; the launcher can step aside to the tray while you play and comes back when the game closes
+- Game updates are offered when a new version is out: the launcher downloads, checks and installs them, and puts the old files back if anything goes wrong
 
-# Write your own text here
-This page is a placeholder. Replace this text with your description of the launcher in assets/launcher-about.txt.
+# First-time setup
+- The first start walks you through setup: it downloads and installs the game, then asks about cloud saving and where your AddOns, addon settings and game saves are
+- Options > RUN SETUP AGAIN starts it over from the beginning, game download included
 
-- A line starting with # is a heading
-- A line starting with - is a bullet point
-- Any other line is a paragraph
+# Home and news
+- The News panel shows the newest patch notes; the Changelog has every patch note, newest first, with PREVIOUS and NEXT to step through them
+- The "This week" card sums up your recent runs, and your play time can be shown on the home screen
+
+# Cloud Save
+- Keeps your save game, AddOns and addon settings in your own Google Drive, OneDrive or Dropbox folder and shares them between your PCs
+- Downloads your progress before the game starts and uploads it after the game closes, even after a crash
+- When both PCs changed, it asks which progress to keep; backups are made before anything is replaced, and the last 5 cloud downloads can be restored
+
+# Addons
+- Switch addons on and off, or all at once, and keep two addon profiles
+- Download More installs addons with one click and offers an UPDATE when a newer copy is out
+
+# New Player Guide
+- Topics and class pages on controls, zones, bosses, level-ups, gear, talents and tips
+- Videos that play inside the launcher (streamed, never saved on your PC), and a search over every page
+
+# Stats and the AZS Stats addon
+- The built-in AZS Stats addon records every run: result, time, level, damage and DPS
+- STATS shows DPS over time, your best builds, records per class, race and zone, ability pick and win rates, a death log with your Nemesis and the bosses you beat, and co-op stats with your friends
+- Click a run to copy a picture of it for Discord
+- In game: /azs or the minimap button opens the same stats in the game's own art, with the faces of the enemies that beat you, and a small live tracker shows your DPS against your record
+- The STATS page can be hidden in Options
+
+# The launcher itself
+- UPDATE LAUNCHER installs a newer launcher by itself (its checksum is checked), then restarts
+- Runs in the system tray, only one copy at a time, in 26 languages
+- Everything it writes for itself stays in an "Azeroth Survivor Launcher" folder next to it
 
 # Look
 The launcher layout is inspired by the WoW Retro Launcher by Parquelle (https://github.com/Parquelle/WoWRetroLauncher). All of its artwork is original, drawn for this launcher.
