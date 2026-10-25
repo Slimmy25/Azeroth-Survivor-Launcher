@@ -1244,3 +1244,20 @@ fastest win {0}
 = nopein voitto {0}
 {#0} runs, oldest left
 = {#0} runia, vanhimmat vasemmalla
+# Options tabs
+FOLDERS
+= KANSIOT
+GENERAL
+= YLEISET
+LANGUAGE
+= KIELI
+LAUNCHER
+= KÄYNNISTIN
+Checks for a newer launcher and installs it (the launcher also does this by itself when it starts).
+= Etsii uudemman käynnistimen ja asentaa sen (käynnistin tekee tämän myös itse käynnistyessään).
+What the launcher does, and its own changelog.
+= Mitä käynnistin tekee, ja sen oma muutosloki.
+Downloads and installs the game again, then asks about your folders and cloud saving.
+= Lataa ja asentaa pelin uudelleen ja kysyy sitten kansioista ja pilvitallennuksesta.
+Installs the game from a file you downloaded yourself.
+= Asentaa pelin tiedostosta, jonka latasit itse.

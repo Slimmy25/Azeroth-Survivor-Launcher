@@ -1244,3 +1244,20 @@ fastest win {0}
 = snelste overwinning {0}
 {#0} runs, oldest left
 = {#0} runs, oudste links
+# Options tabs
+FOLDERS
+= MAPPEN
+GENERAL
+= ALGEMEEN
+LANGUAGE
+= TAAL
+LAUNCHER
+= LAUNCHER
+Checks for a newer launcher and installs it (the launcher also does this by itself when it starts).
+= Zoekt een nieuwere launcher en installeert die (de launcher doet dit ook zelf bij het opstarten).
+What the launcher does, and its own changelog.
+= Wat de launcher doet, en zijn eigen wijzigingslog.
+Downloads and installs the game again, then asks about your folders and cloud saving.
+= Downloadt en installeert het spel opnieuw en vraagt dan naar je mappen en cloudopslag.
+Installs the game from a file you downloaded yourself.
+= Installeert het spel vanaf een bestand dat je zelf hebt gedownload.

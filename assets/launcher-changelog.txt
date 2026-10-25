@@ -1,4 +1,7 @@
 # Next update (after v0.3)
+- Options has tabs: FOLDERS, GENERAL, LANGUAGE and LAUNCHER. UPDATE LAUNCHER and ABOUT LAUNCHER moved into Options > LAUNCHER
+- The Discord button is now Discord's own symbol, on the News line at the right edge
+- The guide also finds spells written differently ("Shadowbolt", "Shadow Bolts"), and when AZS Stats has seen a spell's tooltip in game, pointing at the spell in the guide shows the game's own text
 - INSTALL no longer opens a window: the download and install run in the launcher's status line, with the percentage bar; press INSTALLING to stop the download. Options has INSTALL FROM A FILE for a game you downloaded yourself
 - The New Player Guide links its pages together: click a spell, talent, class, race or zone in the text to go to it, and point at it to read what it does (talents, classes, races and zones in the game's own words)
 - The section area is exactly as tall as the News column; "This week" and your play time sit together under the Launcher buttons

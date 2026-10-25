@@ -1244,3 +1244,20 @@ fastest win {0}
 = hurtigste sejr {0}
 {#0} runs, oldest left
 = {#0} runs, ældste til venstre
+# Options tabs
+FOLDERS
+= MAPPER
+GENERAL
+= GENERELT
+LANGUAGE
+= SPROG
+LAUNCHER
+= LAUNCHER
+Checks for a newer launcher and installs it (the launcher also does this by itself when it starts).
+= Søger efter en nyere launcher og installerer den (launcheren gør det også selv, når den starter).
+What the launcher does, and its own changelog.
+= Hvad launcheren kan, og dens egen ændringslog.
+Downloads and installs the game again, then asks about your folders and cloud saving.
+= Henter og installerer spillet igen og spørger derefter om dine mapper og skygemning.
+Installs the game from a file you downloaded yourself.
+= Installerer spillet fra en fil, du selv har hentet.

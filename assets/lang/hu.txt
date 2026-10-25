@@ -1245,3 +1245,20 @@ fastest win {0}
 = leggyorsabb győzelem {0}
 {#0} runs, oldest left
 = {#0} menet, a legrégebbiek balra
+# Options tabs
+FOLDERS
+= MAPPÁK
+GENERAL
+= ÁLTALÁNOS
+LANGUAGE
+= NYELV
+LAUNCHER
+= INDÍTÓ
+Checks for a newer launcher and installs it (the launcher also does this by itself when it starts).
+= Újabb indítót keres és telepíti (az indító ezt indításkor magától is megteszi).
+What the launcher does, and its own changelog.
+= Mit tud az indító, és a saját változásnaplója.
+Downloads and installs the game again, then asks about your folders and cloud saving.
+= Újra letölti és telepíti a játékot, majd rákérdez a mappáidra és a felhőmentésre.
+Installs the game from a file you downloaded yourself.
+= Telepíti a játékot egy általad letöltött fájlból.

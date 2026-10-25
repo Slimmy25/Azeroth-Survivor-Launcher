@@ -367,6 +367,8 @@ namespace AzerothLauncher
         public CoopStat Coop = new CoopStat();
         public readonly List<StatRun> Builds = new List<StatRun>();               // best builds kept by the addon
         public readonly Dictionary<string, double> BossKills = new Dictionary<string, double>(StringComparer.OrdinalIgnoreCase);   // bosses you beat
+        // the game's own tooltips of abilities, as AZS Stats saw them in game: spell name -> its text
+        public readonly Dictionary<string, string> Tooltips = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 
         public StatBlock Class(string key)
         {
@@ -499,6 +501,13 @@ namespace AzerothLauncher
             foreach (var h in LuaReader.List(LuaReader.Tab(db, "builds"))) st.Builds.Add(ReadRun(h));
             var bk = LuaReader.Tab(db, "bossKills");
             if (bk != null) foreach (var kv in bk) st.BossKills[kv.Key] = LuaReader.Num(bk, kv.Key);
+            var tips = LuaReader.Tab(db, "tooltips");
+            if (tips != null)
+                foreach (var kv in tips)
+                {
+                    string text = LuaReader.Text(kv.Value as Dictionary<string, object>, "text");
+                    if (text.Length > 0) st.Tooltips[kv.Key] = text;
+                }
 
             // the same creature faces for the addon's own Nemesis tab (in the background)
             try

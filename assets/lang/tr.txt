@@ -1245,3 +1245,20 @@ fastest win {0}
 = en hızlı zafer {0}
 {#0} runs, oldest left
 = {#0} tur, en eskiler solda
+# Options tabs
+FOLDERS
+= KLASÖRLER
+GENERAL
+= GENEL
+LANGUAGE
+= DİL
+LAUNCHER
+= BAŞLATICI
+Checks for a newer launcher and installs it (the launcher also does this by itself when it starts).
+= Daha yeni bir başlatıcı arar ve kurar (başlatıcı bunu açılırken kendisi de yapar).
+What the launcher does, and its own changelog.
+= Başlatıcının neler yaptığı ve kendi değişiklik günlüğü.
+Downloads and installs the game again, then asks about your folders and cloud saving.
+= Oyunu yeniden indirip kurar, ardından klasörlerini ve bulut kaydını sorar.
+Installs the game from a file you downloaded yourself.
+= Oyunu kendi indirdiğin bir dosyadan kurar.

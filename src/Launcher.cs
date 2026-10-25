@@ -43,7 +43,8 @@ namespace AzerothLauncher
         string status = "Ready.", cloudNote = "";
         bool addonDlBusy;
 
-        readonly WowButton playBtn, updateBtn, aboutBtn, discordBtn;
+        readonly WowButton playBtn, updateBtn, aboutBtn;
+        readonly BrandIcon discordIcon;
         readonly Dictionary<string, WowButton> nav = new Dictionary<string, WowButton>();
         readonly string[] navNames = { "Guide", "Addons", "Cloud Save", "Changelog", "Stats", "Options" };   // order under "Launcher" (Discord before Options)
         NotifyIcon tray;
@@ -104,14 +105,17 @@ namespace AzerothLauncher
                 nav[n] = Place(new WowButton(n == "Guide" ? "NEW PLAYER GUIDE" : n.ToUpperInvariant(), delegate { ShowSection(n); }, 128, 27, 8.5f), 693, 480);
                 nav[n].Skin = Retro.Button;
             }
-            aboutBtn = Place(new WowButton("ABOUT LAUNCHER", delegate { ShowSection("About Launcher"); }, 159, 27, 8), W - 8 - 159 - 6, 98);         // under UPDATE LAUNCHER
-            aboutBtn.Skin = Retro.Long;
+            // UPDATE LAUNCHER and ABOUT LAUNCHER live in Options > Launcher now; these two stay hidden and carry their state
+            aboutBtn = Place(new WowButton("ABOUT LAUNCHER", delegate { ShowSection("About Launcher"); }, 159, 27, 8), W - 8 - 159 - 6, 98);
+            aboutBtn.Visible = false;
             nav["About Launcher"] = aboutBtn;
-            discordBtn = Place(new WowButton("DISCORD", delegate { Util.OpenInShell(DiscordUrl); }, 128, 27, 8.5f), 693, 480);
-            discordBtn.Skin = Retro.Button;
-            discordBtn.Icon = Icons.Chat;
             updateBtn = Place(new WowButton("UPDATE LAUNCHER", delegate { CheckLauncherUpdate(true); }, 159, 27, 8), W - 8 - 159 - 6, 64);
-            updateBtn.Skin = Retro.Long;
+            updateBtn.Visible = false;
+            // Discord: its own symbol (Blurple, from discord.com/branding, unaltered), on the "News" line at the right edge
+            discordIcon = new BrandIcon(Theme.LoadImage("AS.discord-blurple.png"), Theme.LoadImage("AS.discord-white.png"), "Discord");
+            discordIcon.Bounds = new Rectangle(1085 - 26, 203, 26, 20);
+            discordIcon.Click += delegate { Util.OpenInShell(DiscordUrl); };
+            Controls.Add(discordIcon);
             LayoutNav();
 
             BuildSide();
@@ -121,6 +125,11 @@ namespace AzerothLauncher
             FormClosing += OnClosingWindow;
             FormClosed += delegate { StopEdge(); };              // a Community video never outlives the launcher
             VideoCard.YouTube = PlayYouTube;                     // YouTube videos play inside Community (Community.cs)
+            GuideLinks.CapturedTips = delegate                  // the abilities' tooltips AZS Stats wrote down in game
+            {
+                RunStats st = AddonStats();
+                return st != null ? st.Tooltips : null;
+            };
             GuideLinks.Navigate = delegate(int t, int pg)      // a link in the Guide's text (GuideLinks.cs)
             {
                 if (current != "Guide" || !side.Visible) ShowSection("Guide");
@@ -564,10 +573,9 @@ namespace AzerothLauncher
         // stack the section buttons
         void LayoutNav()
         {
-            int k = 0;                                       // three per row under "Launcher", Discord just before Options
+            int k = 0;                                       // three per row under "Launcher"
             foreach (string name in navNames)
             {
-                if (name == "Options") { discordBtn.Location = new Point(693 + (k % 3) * 134, 480 + (k / 3) * 34); k++; }
                 if (!NavShown(name)) { nav[name].Visible = false; continue; }
                 nav[name].Visible = true;
                 nav[name].Location = new Point(693 + (k % 3) * 134, 480 + (k / 3) * 34);

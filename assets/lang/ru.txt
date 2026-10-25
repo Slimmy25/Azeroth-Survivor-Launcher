@@ -1245,3 +1245,20 @@ fastest win {0}
 = самая быстрая победа {0}
 {#0} runs, oldest left
 = Забегов: {#0}, старые слева
+# Options tabs
+FOLDERS
+= ПАПКИ
+GENERAL
+= ОБЩИЕ
+LANGUAGE
+= ЯЗЫК
+LAUNCHER
+= ЛАУНЧЕР
+Checks for a newer launcher and installs it (the launcher also does this by itself when it starts).
+= Ищет более новый лаунчер и устанавливает его (лаунчер делает это и сам при запуске).
+What the launcher does, and its own changelog.
+= Что умеет лаунчер, и его собственный список изменений.
+Downloads and installs the game again, then asks about your folders and cloud saving.
+= Заново скачивает и устанавливает игру, затем спрашивает о папках и облачном сохранении.
+Installs the game from a file you downloaded yourself.
+= Устанавливает игру из файла, который вы скачали сами.

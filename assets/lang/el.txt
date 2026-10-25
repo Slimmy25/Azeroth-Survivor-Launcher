@@ -1245,3 +1245,20 @@ fastest win {0}
 = ταχύτερη νίκη {0}
 {#0} runs, oldest left
 = {#0} runs, τα παλαιότερα αριστερά
+# Options tabs
+FOLDERS
+= ΦΑΚΕΛΟΙ
+GENERAL
+= ΓΕΝΙΚΑ
+LANGUAGE
+= ΓΛΩΣΣΑ
+LAUNCHER
+= LAUNCHER
+Checks for a newer launcher and installs it (the launcher also does this by itself when it starts).
+= Ψάχνει νεότερο launcher και το εγκαθιστά (το launcher το κάνει και μόνο του όταν ξεκινά).
+What the launcher does, and its own changelog.
+= Τι κάνει το launcher και το δικό του αρχείο αλλαγών.
+Downloads and installs the game again, then asks about your folders and cloud saving.
+= Κατεβάζει και εγκαθιστά ξανά το παιχνίδι και μετά ρωτά για τους φακέλους σου και την αποθήκευση cloud.
+Installs the game from a file you downloaded yourself.
+= Εγκαθιστά το παιχνίδι από αρχείο που κατέβασες μόνος σου.

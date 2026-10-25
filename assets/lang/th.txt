@@ -1245,3 +1245,20 @@ fastest win {0}
 = ชนะเร็วที่สุด {0}
 {#0} runs, oldest left
 = {#0} รอบ เก่าที่สุดอยู่ซ้าย
+# Options tabs
+FOLDERS
+= โฟลเดอร์
+GENERAL
+= ทั่วไป
+LANGUAGE
+= ภาษา
+LAUNCHER
+= ลันเชอร์
+Checks for a newer launcher and installs it (the launcher also does this by itself when it starts).
+= ค้นหาลันเชอร์เวอร์ชันใหม่และติดตั้ง (ลันเชอร์ทำเองเมื่อเปิดด้วย)
+What the launcher does, and its own changelog.
+= ลันเชอร์ทำอะไรได้บ้าง และบันทึกการเปลี่ยนแปลงของมัน
+Downloads and installs the game again, then asks about your folders and cloud saving.
+= ดาวน์โหลดและติดตั้งเกมใหม่ แล้วถามเรื่องโฟลเดอร์และเซฟบนคลาวด์
+Installs the game from a file you downloaded yourself.
+= ติดตั้งเกมจากไฟล์ที่คุณดาวน์โหลดเอง

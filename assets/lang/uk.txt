@@ -1245,3 +1245,20 @@ fastest win {0}
 = найшвидша перемога {0}
 {#0} runs, oldest left
 = Забігів: {#0}, старі ліворуч
+# Options tabs
+FOLDERS
+= ТЕКИ
+GENERAL
+= ЗАГАЛЬНЕ
+LANGUAGE
+= МОВА
+LAUNCHER
+= ЛАУНЧЕР
+Checks for a newer launcher and installs it (the launcher also does this by itself when it starts).
+= Шукає новіший лаунчер і встановлює його (лаунчер робить це й сам під час запуску).
+What the launcher does, and its own changelog.
+= Що вміє лаунчер, і його власний список змін.
+Downloads and installs the game again, then asks about your folders and cloud saving.
+= Знову завантажує й встановлює гру, потім питає про теки та хмарне збереження.
+Installs the game from a file you downloaded yourself.
+= Встановлює гру з файлу, який ви завантажили самі.

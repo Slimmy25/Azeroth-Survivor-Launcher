@@ -1244,3 +1244,20 @@ fastest win {0}
 = kemenangan tercepat {0}
 {#0} runs, oldest left
 = {#0} run, yang terlama di kiri
+# Options tabs
+FOLDERS
+= FOLDER
+GENERAL
+= UMUM
+LANGUAGE
+= BAHASA
+LAUNCHER
+= LAUNCHER
+Checks for a newer launcher and installs it (the launcher also does this by itself when it starts).
+= Mencari launcher yang lebih baru dan memasangnya (launcher juga melakukannya sendiri saat dibuka).
+What the launcher does, and its own changelog.
+= Apa yang dilakukan launcher, dan catatan perubahannya sendiri.
+Downloads and installs the game again, then asks about your folders and cloud saving.
+= Mengunduh dan memasang game lagi, lalu menanyakan folder dan Simpan Cloud.
+Installs the game from a file you downloaded yourself.
+= Memasang game dari file yang kamu unduh sendiri.

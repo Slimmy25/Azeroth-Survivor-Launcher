@@ -1245,3 +1245,20 @@ fastest win {0}
 = nejrychlejší vítězství {0}
 {#0} runs, oldest left
 = Runy: {#0}, nejstarší vlevo
+# Options tabs
+FOLDERS
+= SLOŽKY
+GENERAL
+= OBECNÉ
+LANGUAGE
+= JAZYK
+LAUNCHER
+= LAUNCHER
+Checks for a newer launcher and installs it (the launcher also does this by itself when it starts).
+= Vyhledá novější launcher a nainstaluje ho (launcher to dělá i sám při spuštění).
+What the launcher does, and its own changelog.
+= Co launcher umí a jeho vlastní seznam změn.
+Downloads and installs the game again, then asks about your folders and cloud saving.
+= Znovu stáhne a nainstaluje hru, pak se zeptá na složky a ukládání do cloudu.
+Installs the game from a file you downloaded yourself.
+= Nainstaluje hru ze souboru, který sis stáhl sám.
