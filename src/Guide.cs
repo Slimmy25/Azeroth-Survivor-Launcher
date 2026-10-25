@@ -431,8 +431,8 @@ namespace AzerothLauncher
             web.WebBrowserShortcutsEnabled = false;
             web.AllowWebBrowserDrop = false;
             string poster = v.Url.EndsWith(".mp4", StringComparison.OrdinalIgnoreCase) ? v.Url.Substring(0, v.Url.Length - 4) + ".jpg" : "";
-            web.DocumentText =
-                "<!DOCTYPE html><html><head><meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"><meta charset=\"utf-8\">" +
+            string page =
+                "<!DOCTYPE html>\r\n<!-- saved from url=(0014)about:internet -->\r\n<html><head><meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"><meta charset=\"utf-8\">" +
                 "<style>html,body{margin:0;height:100%;background:#0e0d14;overflow:hidden;font-family:Georgia,serif;color:#d7cea4}" +
                 "video{width:100%;height:100%;background:#000;display:block}" +
                 "#err{display:none;position:absolute;left:0;right:0;top:40%;text-align:center;font-size:15px}</style></head><body>" +
@@ -442,6 +442,16 @@ namespace AzerothLauncher
                 "<script>var v=document.getElementById('v');" +
                 "v.onerror=function(){v.style.display='none';document.getElementById('err').style.display='block';};" +
                 "</script></body></html>";
+            // the page (not the video) goes in a small temp file marked as web content, so the web view treats it like a
+            // web page and lets it stream from the internet; DocumentText pages count as about:blank and get blocked
+            try
+            {
+                Directory.CreateDirectory(Util.TempDir);
+                string path = Path.Combine(Util.TempDir, "guide-video.html");
+                File.WriteAllText(path, page, new System.Text.UTF8Encoding(false));
+                web.Navigate(new Uri(path));
+            }
+            catch (Exception) { web.DocumentText = page; }
             return web;
         }
     }
