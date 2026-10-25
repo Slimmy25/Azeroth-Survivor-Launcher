@@ -252,7 +252,7 @@ namespace AzerothLauncher
             Action flush = delegate
             {
                 if (para.Count == 0) return;
-                add(UI.Text(string.Join(" ", para.ToArray()), 10, FontStyle.Regular, Theme.Text, bg, tw, false), x, 8);
+                add(new GuideText(string.Join(" ", para.ToArray()), 10, Theme.Text, bg, tw, gTopic, gPage), x, 8);
                 para.Clear();
             };
             foreach (string raw in page.Body.Split('\n'))
@@ -278,8 +278,7 @@ namespace AzerothLauncher
                     var dot = new GuideRule(6, Theme.Gold);
                     dot.Diamond = true;
                     dot.Height = 6;
-                    var l = UI.Text(line.Substring(2).Trim(), 10, FontStyle.Regular, Theme.Text, bg, tw - 20, false);
-                    l.Size = VStack.Measure(l);
+                    var l = new GuideText(line.Substring(2).Trim(), 10, Theme.Text, bg, tw - 20, gTopic, gPage);
                     int lineH = Theme.F(10).Height;
                     dot.Location = new Point(x + 3, y + 6 + (lineH - 6) / 2);
                     sp.Controls.Add(dot);

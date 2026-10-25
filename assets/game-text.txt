@@ -1,0 +1,141 @@
+Hover texts for the New Player Guide: what the game itself says about a talent, a race, a racial, a class or a zone.
+Taken from the game at https://wow.aethus.pl/ (version 0.116.0), and from nowhere else.
+One entry per line:   Name | text
+"X" stands for a number that grows with each talent rank. Lines starting with # and everything above the first
+=== line are ignored.
+===
+# classes
+Warrior | Unstoppable in the thick of it. Huge health, cleaving swings, and every kill feeds the fury.
+Paladin | Holy ground and righteous hammers. Heals himself, shrugs off death once in a while.
+Hunter | Death from range. Arrows, traps and volleys, as long as you keep your distance.
+Rogue | Fast, fragile and lethal. The quickest hero, with crits that delete elites.
+Priest | Light and Shadow. Shields and heals keep you alive while pain spreads through the horde.
+Shaman | Storms that jump from foe to foe, and totems that fight beside you.
+Mage | The glass cannon. The biggest area damage in Azeroth, and nothing to hide behind.
+Warlock | Curses and fire. Damage over time stacks up on everything that chases you.
+Druid | Moon, storm and growth. Roots, hurricanes and the steadiest self-healing.
+
+# races
+Human | Perception: every 30 sec, +15% damage for 10 sec. The Human Spirit: +10% experience. Diplomacy: +20% gold.
+Orc | Blood Fury: every 40 sec, +35% damage for 12 sec. Hardiness: +10% max health.
+Dwarf | Stoneform: every 45 sec, a shield absorbing 30% of max health. Gun Specialization: +6% damage. Treasure Finding: +30% pickup range.
+Night Elf | Shadowmeld: near death, 3 sec of immunity (75 sec cooldown). Quickness: +8% movement speed. Nature Resistance: +5% damage reduction.
+Undead | Will of the Forsaken: near death, 4 sec of immunity (60 sec cooldown). Cannibalize: every kill heals 1 health. Shadow Resistance: +4% damage reduction.
+Tauren | War Stomp: every 15 sec, stuns nearby enemies for 2 sec. Endurance: +15% max health.
+Gnome | Escape Artist: every 20 sec, roots nearby enemies for 2 sec. Expansive Mind: -8% cooldowns. Engineering Specialization: +20% luck.
+Troll | Berserking: every 35 sec, cooldowns recover 30% faster for 10 sec. Regeneration: +1.5 health per second. Throwing Specialization: +3% critical strike.
+
+# racials
+Perception | Every 30 sec, +15% damage for 10 sec.
+The Human Spirit | +10% experience.
+Diplomacy | +20% gold.
+Blood Fury | Every 40 sec, +35% damage for 12 sec.
+Hardiness | +10% max health.
+Stoneform | Every 45 sec, a shield absorbing 30% of max health.
+Gun Specialization | +6% damage.
+Treasure Finding | +30% pickup range.
+Shadowmeld | Near death, 3 sec of immunity (75 sec cooldown).
+Quickness | +8% movement speed.
+Nature Resistance | +5% damage reduction.
+Will of the Forsaken | Near death, 4 sec of immunity (60 sec cooldown).
+Cannibalize | Every kill heals 1 health.
+Shadow Resistance | +4% damage reduction.
+War Stomp | Every 15 sec, stuns nearby enemies for 2 sec.
+Endurance | +15% max health.
+Escape Artist | Every 20 sec, roots nearby enemies for 2 sec.
+Expansive Mind | -8% cooldowns.
+Engineering Specialization | +20% luck.
+Berserking | Every 35 sec, cooldowns recover 30% faster for 10 sec.
+Regeneration | +1.5 health per second.
+Throwing Specialization | +3% critical strike.
+
+# zones
+Elwynn Forest | The Defias Uprising. Kobolds pour out of Jasperlode Mine, gnolls cross the river and the Defias Brotherhood marches on the farms. Their leader waits for you at the end.
+Duskwood | Night of the Nightbane. The graves of Raven Hill stand open. Worgen hunt between the trees, and Morbent Fel calls the dead of Duskwood to war.
+Warsong Gulch | The Burning Legion. A demon gate tears open over the gulch. Imps, felhounds and satyrs pour through, and Lord Kazzak follows.
+Arathi Basin | The Highlands Rise. With the Basin's banners down, the Highlands come for it: Boulderfist ogres and Witherbark trolls out of the hills, and the Syndicate behind them, sent by the last lord of Alterac to take it for his own.
+Feralas | The Gates of Dire Maul. The Gordunni ogres break out of Dire Maul with the Woodpaw gnolls and the wild things of Feralas behind them. King Gordok himself comes to claim the forest.
+Gurubashi Arena | The Blood God Wakes. The Hakkari turn the Arena into an altar. Trolls, raptors and the Blood God's serpents fill the ring, and Hakkar the Soulflayer walks the world again.
+Alterac Valley | The Frozen Wilds. The valley wakes. Troggs swarm from the mines, the wolves are starving, and the Ice Lord stirs beneath the snow.
+Blackrock Mountain | The Lord of Blackrock. The Dark Iron and the Blackrock clan march out of the mountain together, fire elementals and dragonkin at their side. Above them circles the Lord of Blackrock.
+Gates of Ahn'Qiraj | The Old God Stirs. The Scarab Wall has fallen. The silithid swarm and the Qiraji legions spill across the sands, and behind them C'Thun opens its eye.
+Un'Goro Crater | The Primal Hunt. The crater's jungle wakes hungry. Ravasaur packs run the ferns, the pterrordax circle overhead, and King Mosh shakes the ground on his way to the kill.
+Scarlet Monastery | The Crusade's Last Stand. The Scarlet Crusade bars the cathedral against the world. Monks and zealots fill the garden and the nave, and at the altar High Inquisitor Whitemane waits to raise the fallen.
+Naxxramas | The Scourge Invasion. Naxxramas hangs over the Plaguelands, and its master waits in his frozen chamber. His lieutenants step out of the alcoves where the abominations stand, and when they fall, Kel'Thuzad rises from his throne.
+
+# talents (milestones and capstones)
+Adrenaline Rush | Milestone. Every Xth kill floods you with adrenaline: a free Adrenaline Rush, your cooldowns 60% faster for 11 sec.
+Arcane Concentration | Milestone. Clearcasting: every spell you cast has a X% chance to set off a free Arcane Explosion.
+Arcane Power | Capstone. You start every run with Arcane Missiles instead of Fireball, and your spells strike twice X% more often. Your echoes cascade: a spell that strikes twice by chance rolls again to strike once more, up to 3 more times in a row.
+Ardent Defender | Milestone. You start every run with Hammer of Justice. Every Consecration raises a shield of X% of your maximum health, stacking up to 30% (39% with Blessed Life), and while a shield holds, you deal 20% more damage.
+Bestial Wrath | Capstone. A raptor joins your wolf, and your pets' bites tear through 2 more enemies nearby for X% of the bite.
+Bladestorm | Capstone. You start every run with Whirlwind, and you never stop spinning: a free Whirlwind every 3 sec.
+Blood Frenzy | Milestone. Your critical strikes rip the target open: it bleeds for X% of the hit over 6 sec.
+Call of the Elements | Milestone. You start every run with Searing Totem, and every totem you set down sets a second one beside it.
+Chastise | Capstone. Smite strikes 1 more enemy, and every Smite cast that critically strikes sets off a free Holy Nova.
+Cheat Death | Milestone. A blow that would kill you leaves you at 25% health instead, and you fade into the shadows: nothing can touch you for 3 sec. Once every 2.5 min.
+Contagion | Milestone. When an enemy dies with Corruption or Curse of Agony on it, each jumps to the enemy nearest it.
+Daybreak | Milestone. Holy Shock's critical strikes call down a free Holy Wrath around you, at most once every 3 sec.
+Deadly Poison | Milestone. Your strikes poison: every swing and every strike adds Deadly Poison, X% of the hit over 6 sec.
+Deep Wounds | Milestone. Your critical strikes make the target bleed for X% of the hit over 6 sec.
+Divine Aegis | Milestone. You start every run with Power Word: Shield, and a shield on you that breaks bursts in holy light: X% of what it absorbed strikes every enemy within 10 yd.
+Divine Favor | Milestone. You start every run with Holy Shock, and each of its bolts leaps to 2 more enemies for X% of it.
+Divine Storm | Capstone. You start every run with Exorcism, and every Exorcism bursts on its target, striking every enemy within 5 yd for X% of it.
+Elemental Fury | Milestone. Chain Lightning jumps to 3 more enemies and loses nothing with each jump.
+Elemental Mastery | Capstone. You start every run with Chain Lightning, and a second Chain Lightning casts itself every 3 sec.
+Entrapment | Milestone. Your traps hold what they hit: every hit of a trap has a X% chance to root the enemy for 2 sec.
+Explosive Ammunition | Milestone. Enemies killed by your Auto Shot or Multi-Shot explode for X% of their maximum health on everything within 6 yd.
+Feral Spirit | Capstone. Two spirit wolves fight beside you, and their bites carry Windfury: a X% chance to strike twice more at once.
+Force of Nature | Capstone. Two treants fight at your side, and you start every run with Moonfire.
+Fortified | Milestone. Every Shield Slam raises a shield of X% of your maximum health, stacking up to 30% (42% with Shield Mastery), and while a shield holds, you deal 20% more damage.
+Frostbite | Milestone. Your Frost spells have a X% chance to freeze what they hit in place for 1.5 sec.
+Hallowed Ground | Milestone. Every Hammer of Justice that lands hallows the ground beneath you: a free Consecration, at most once every 4 sec.
+Hammer of the Righteous | Capstone. Your maximum health is 15% higher, every spell you cast deals an extra 1% of your maximum health, Hammer of Justice also strikes for 1.5% of its target's maximum health, and a shield that breaks bursts in holy light: half of what it absorbed, up to half the most it held, strikes every enemy within 10 yd.
+Hot Streak | Milestone. Every fourth Fire critical strike casts a free Pyroblast, at most twice a second.
+Ignite | Milestone. Your Fire critical strikes ignite the target for X% of the hit over 4 sec.
+Kill Shot | Capstone. You start every run with Aimed Shot; its cooldown is X% shorter and a killing blow readies it again, at most every 2 sec.
+Killing Spree | Capstone. Sinister Strike strikes X more enemy, and you strike on your own: a free Sinister Strike every 3 sec.
+Legion Gate | Milestone. Every 4 sec, summon 3 random lesser demons for 12–16 sec (max 12).
+Light's Grace | Capstone. A Holy Wrath bursts from you on its own every 14 sec.
+Lightning Overload | Milestone. Lightning Bolt and Chain Lightning have a X% chance to strike again for free.
+Maelstrom Weapon | Milestone. Every Xth spell you cast is followed by a free Chain Lightning.
+Mortal Wounds | Capstone. You start every run with Mortal Strike; a killing blow by Mortal Strike or Execute readies it again at once, at most once a second.
+Mutilate | Milestone. Sinister Strike and Backstab strike with both blades: everything they hit is struck again at once for 50% of the blow.
+Nightfall | Milestone. Your Shadow Bolts carry the night: each one that lands corrupts its target for X% of the bolt over 12 sec, and every tick of Corruption has a 2% chance to fire a free Shadow Bolt, at most twice a second.
+Omen of Clarity | Milestone. Every spell you cast has a X% chance to call down a free Starfire.
+Pact of the Annihilan | Capstone. Summons a Pit Lord for X sec every 30 sec, reduced by CDR (min 13 sec). Up to 2 active.
+Butcher | Capstone. Summons a Felguard for X sec every 30 sec, reduced by CDR (min 13 sec). Up to 2 active.
+Penance | Capstone. You strike out on your own: a free Penance about every 3 sec, three bolts of holy light at the nearest enemies.
+Piercing Shots | Milestone. Auto Shot pierces: every arrow also strikes 1 enemy beyond its target for X% of it.
+Preparation | Milestone. A free Gouge stuns the enemies around you every 6 sec.
+Presence of Mind | Milestone. Arcane Missiles fires X more missiles, and each missile leaps on to another enemy for its full damage.
+Purifying Flame | Milestone. Smite and Holy Fire critical strikes set their target alight for X% of the hit over 6 sec.
+Pyroclasm | Capstone. You start every run with Pyroblast, and enemies killed by your Fire spells explode for X% of their maximum health on everything within 6 yd, at most 3 a second.
+Radiance | Milestone. A Holy Nova bursts from you on its own every 24 sec.
+Rain of Chaos | Capstone. A second Rain of Fire falls on its own every 13 sec, and its burning ground slows what it touches.
+Rake | Milestone. Your hide thickens: 20% more maximum health and 8% less damage taken. You start every run with Swipe and Shred, and everything they hit bleeds for X% of the blow over 6 sec.
+Rampage | Milestone. Every Xth kill unleashes a free Whirlwind.
+Rapid Fire | Milestone. Every Xth shot you fire is followed by a free Aimed Shot.
+Rapture | Milestone. A broken Power Word: Shield is raised again at once, at most once every 15 sec.
+Reincarnation | Milestone. A blow that would kill you leaves you at 50% health instead, once every 2 min.
+Seal of Command | Milestone. You start every run with Judgement, and every Judgement also strikes 2 more enemies near its target for X% of it.
+Seed of Corruption | Capstone. You start every run with Corruption, and enemies that die afflicted by your damage-over-time effects burst for X% of their maximum health on everything within 6 yd.
+Shadow Dance | Capstone. You start every run with Backstab instead of Sinister Strike, and Backstab and Eviscerate splash X% of their damage onto every enemy within 5 yd of their target.
+Shadow Weaving | Milestone. Your Shadow spells also strike what they hit for X% of its maximum health.
+Shadowform | Capstone. You take on Shadowform for the whole run, and when an enemy dies with Shadow Word: Pain on it, it bursts for X% of its maximum health on everything within 6 yd and the pain jumps to the enemy nearest it.
+Shadowy Apparitions | Milestone. You start every run with Shadow Word: Pain instead of Smite, and its ticks have a X% chance to loose a shadowy apparition: a free Mind Blast, at most twice a second.
+Shockwave | Milestone. Each Shield Slam sends a shockwave from its first target: every enemy within 8 yd of it is struck for X% of the blow and stunned.
+Soul Devourer | Milestone. Permanently summons a Felhunter. Its bites hit 2 enemies, prioritizing bosses and elites, and deal X% more damage per 1% missing enemy health.
+Splitting Ice | Milestone. Frostbolt splinters on impact: X% of its damage to every enemy within 5 yd of its target.
+Starfall | Milestone. Stars fall around you: a free Starfire every 4 sec.
+Summon Water Elemental | Capstone. You start every run with Frostbolt instead of Fireball. A Water Elemental fights at your side, hurling Frostbolts, and a free Frost Nova bursts from you every 8 sec.
+Sweeping Strikes | Milestone. Cleave, Mortal Strike and Execute sweep on: each hit also strikes 2 more enemies near its target for X% of it.
+Swiftmend | Milestone. Falling below 40% health makes a free Regrowth bloom on you, once every 8 sec.
+Tame Beast | Milestone. A wolf fights at your side, biting what you shoot.
+The Art of War | Milestone. Your critical strikes have a X% chance to hurl a free Exorcism, at most once a second.
+Titan | Capstone. You start every run with Shield Slam, your damage reduction can reach 70% instead of 60%, and every spell you cast deals an extra 1.5% of your maximum health, and Shield Slam also strikes for 2% of its target's maximum health.
+Totemic Wrath | Capstone. You start every run with Magma Totem, and a second Searing Totem drops on its own every 14 sec.
+Toxic Bloom | Capstone. Enemies that die poisoned or bleeding burst in a toxic cloud for X% of their maximum health on everything within 7 yd.
+Tree of Life | Capstone. Healing beyond your maximum health becomes a shield, up to 20% of it, and a free Rejuvenation blooms on you every 6 sec.
+Windfury | Milestone. Your Lightning Bolts, Earth Shocks and Frost Shocks have a X% chance to strike twice more at once.
+Wyvern Sting | Capstone. You start every run with Frost Trap, and an Explosive Trap sets itself at your feet every 5 sec.
