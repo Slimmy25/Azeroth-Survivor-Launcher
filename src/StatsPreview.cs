@@ -56,19 +56,13 @@ namespace AzerothLauncher
                 }
                 if (topClass == null) break;
             }
-            // the New Player Guide: topic cards, a topic made of pages, and a page with a (sample) video card
+            // the New Player Guide: topic cards, a topic made of pages, and pages with video cards
             {
                 var topics = Data.Guide;
-                var v = new GuideVideo();
-                v.Title = "Your first run in Elwynn Forest";
-                v.Url = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
-                topics[0].Videos.Add(v);
-                int at = topics[0].Body.IndexOf("# How a run works");
-                if (at >= 0) topics[0].Body = topics[0].Body.Insert(at, "@video 0\n");
                 app.Cfg.Set("guide_read", new System.Collections.Generic.List<object> { "Controls", "Classes/Warrior" });
                 int classes = 0;
                 for (int i = 0; i < topics.Count; i++) if (topics[i].Pages.Count > 0) { classes = i; break; }
-                foreach (int[] view in new[] { new[] { -1, -1 }, new[] { classes, -1 }, new[] { 0, -1 }, new[] { 1, -1 }, new[] { classes, 0 } })
+                foreach (int[] view in new[] { new[] { -1, -1 }, new[] { classes, -1 }, new[] { 0, -1 }, new[] { 1, -1 }, new[] { classes, 0 }, new[] { classes + 1, -1 } })
                 {
                     app.current = "Guide";
                     app.ShowSide();

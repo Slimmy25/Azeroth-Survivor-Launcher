@@ -517,7 +517,7 @@ namespace AzerothLauncher
         static readonly Regex YouTubeId = new Regex(@"(?:youtu\.be/|[?&]v=|/embed/|/shorts/|/live/)([A-Za-z0-9_-]{11})");
 
         readonly GuideVideo video;
-        readonly string ytId, file;
+        readonly string ytId, file, thumbKey, thumbUrl;
         readonly float zoom;
         bool hover;
 
@@ -533,16 +533,22 @@ namespace AzerothLauncher
             ytId = m.Success && v.Url.IndexOf("youtu", StringComparison.OrdinalIgnoreCase) >= 0 ? m.Groups[1].Value : null;
             if (!Net.IsWebAddress(v.Url))
                 file = Path.IsPathRooted(v.Url) ? v.Url : Path.Combine(VideoFolder, v.Url);
+            if (ytId != null) { thumbKey = ytId; thumbUrl = "https://img.youtube.com/vi/" + ytId + "/hqdefault.jpg"; }
+            else if (file == null && v.Url.EndsWith(".mp4", StringComparison.OrdinalIgnoreCase))
+            {   // a streamed video: its picture is a .jpg of the same name next to it
+                thumbUrl = v.Url.Substring(0, v.Url.Length - 4) + ".jpg";
+                thumbKey = Regex.Replace(thumbUrl.Substring(thumbUrl.IndexOf("//") + 2), "[^A-Za-z0-9.-]", "_");
+            }
             int th = Math.Min(150, (int)(w * 0.36 * 9 / 16));
             Size = new Size(w, th + 16);
             Cursor = Cursors.Hand;
-            if (ytId != null) LoadThumb();
+            if (thumbKey != null) LoadThumb();
         }
 
         void LoadThumb()
         {
-            lock (thumbs) if (thumbs.ContainsKey(ytId)) return;
-            string id = ytId;
+            lock (thumbs) if (thumbs.ContainsKey(thumbKey)) return;
+            string id = thumbKey, url = thumbUrl;
             ThreadPool.QueueUserWorkItem(delegate
             {
                 Image img = null;
@@ -552,7 +558,7 @@ namespace AzerothLauncher
                     Directory.CreateDirectory(cache);
                     string path = Path.Combine(cache, id + ".jpg");
                     if (!File.Exists(path) && !LauncherApp.PreviewMode)
-                        using (var resp = Net.Open("https://img.youtube.com/vi/" + id + "/hqdefault.jpg", 10000, true, "video picture"))
+                        using (var resp = Net.Open(url, 10000, true, "video picture"))
                         using (Stream s = resp.GetResponseStream())
                         using (var fs = File.Create(path + ".part"))
                         {
@@ -605,14 +611,14 @@ namespace AzerothLauncher
             int th = Height - 16, tw = th * 16 / 9;
             var pic = new Rectangle(8, 8, tw, th);
             Image img = null;
-            if (ytId != null) lock (thumbs) thumbs.TryGetValue(ytId, out img);
+            if (thumbKey != null) lock (thumbs) thumbs.TryGetValue(thumbKey, out img);
             using (var clip = GuideCard.Round(pic, 5))
             {
                 g.SetClip(clip);
                 if (img != null)
                 {
                     // YouTube's picture has black bars above and below: fill the box with its middle
-                    float s = Math.Max((float)tw / img.Width, (float)th / (img.Height * 0.75f));
+                    float s = Math.Max((float)tw / img.Width, (float)th / (img.Height * (ytId != null ? 0.75f : 1f)));
                     float iw = img.Width * s, ih = img.Height * s;
                     g.DrawImage(img, pic.X + (tw - iw) / 2, pic.Y + (th - ih) / 2, iw, ih);
                     if (!hover) using (var dim = new SolidBrush(Color.FromArgb(50, 0, 0, 0))) g.FillRectangle(dim, pic);
@@ -645,7 +651,7 @@ namespace AzerothLauncher
                 g.DrawString(title, tf, b, new RectangleF(x, y, w, h), sf);
                 y += h + 6;
             }
-            string where = file == null ? (ytId != null ? "Watch on YouTube ›" : "Open in your browser ›")
+            string where = file == null ? (ytId != null ? "Watch on YouTube ›" : thumbUrl != null ? "Stream in your browser ›" : "Open in your browser ›")
                          : File.Exists(file) ? "Play on this PC ›" : "Video file not found - click to open its folder";
             using (var b = new SolidBrush(hover ? Theme.Hex("#fff2b0") : Theme.GoldDim))
                 g.DrawString(Lang.T(where), Theme.F(9, FontStyle.Italic), b, new RectangleF(x, y, w, Height - y - 6));
