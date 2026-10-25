@@ -120,7 +120,7 @@ namespace AzerothLauncher
                                 web.Document.InvokeScript("eval", new object[] { "window.__x='?';try{var x=new XMLHttpRequest();x.open('GET','" + vid.Url + "',true);x.setRequestHeader('Range','bytes=0-99');x.onreadystatechange=function(){if(x.readyState==4)window.__x=x.status+' '+x.getResponseHeader('Content-Type');};x.send();}catch(e){window.__x='err '+e.message;}" });
                             }
                             object r = web.Document.InvokeScript("eval", new object[] {
-                                "(function(){var v=document.getElementById('v');return 'mode='+document.documentMode+' ready='+(v?v.readyState:-1)+' duration='+(v?v.duration:-1)+' time='+(v?v.currentTime:-1)+' error='+(v&&v.error?v.error.code:0)+' h264='+(v?v.canPlayType('video/mp4; codecs=\\"avc1.42E01E, mp4a.40.2\\"'):'')+' xhr='+window.__x;})()" });
+                                "(function(){var v=document.getElementById('v');return 'mode='+document.documentMode+' ready='+(v?v.readyState:-1)+' duration='+(v?v.duration:-1)+' time='+(v?v.currentTime:-1)+' error='+(v&&v.error?v.error.code:0)+' h264='+(v?v.canPlayType('video/mp4'):'')+' xhr='+window.__x;})()" });
                             state = Convert.ToString(r);
                             if (state.Contains("ready=4") && !state.Contains("time=0 ")) break;
                         }
