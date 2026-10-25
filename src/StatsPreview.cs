@@ -71,6 +71,7 @@ namespace AzerothLauncher
                 foreach (int[] view in new[] { new[] { -1, -1 }, new[] { classes, -1 }, new[] { 0, -1 }, new[] { 1, -1 }, new[] { classes, 0 } })
                 {
                     app.current = "Guide";
+                    app.ShowSide();
                     app.gTopic = view[0];
                     app.gPage = view[1];
                     try { app.BuildPanel("Guide"); }
