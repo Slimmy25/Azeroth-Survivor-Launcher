@@ -97,29 +97,24 @@ namespace AzerothLauncher
             {
                 app.ShowSide();
                 app.current = sec;
-                try { app.BuildPanel(sec); } catch (Exception) { continue; }
+                try { app.BuildPanel(sec); }
+                catch (Exception ex)
+                {
+                    using (var eb = new Bitmap(900, 300))
+                    {
+                        using (var g = Graphics.FromImage(eb)) { g.Clear(Color.White); g.DrawString(ex.ToString(), new Font("Arial", 8), Brushes.Black, new RectangleF(4, 4, 892, 292)); }
+                        eb.Save(Path.Combine(outDir, "section-error-" + sec.Replace(" ", "-") + ".png"), ImageFormat.Png);
+                    }
+                    continue;
+                }
                 Application.DoEvents();
+                app.panel.Refresh();
                 string nm = "section-" + sec.Replace(" ", "-").ToLowerInvariant();
                 using (var win = new Bitmap(app.side.Width, app.side.Height))
                 {
                     app.side.DrawToBitmap(win, new Rectangle(0, 0, win.Width, win.Height));
                     win.Save(Path.Combine(outDir, nm + ".png"), ImageFormat.Png);
                 }
-                try
-                {   // also straight off the screen, in case a control does not draw itself into a picture
-                    app.side.Location = new Point(0, 0);
-                    app.side.TopMost = true;
-                    app.side.Refresh();
-                    Application.DoEvents();
-                    System.Threading.Thread.Sleep(300);
-                    Application.DoEvents();
-                    using (var scr = new Bitmap(app.side.Width, app.side.Height))
-                    {
-                        using (var g = Graphics.FromImage(scr)) g.CopyFromScreen(app.side.Location, Point.Empty, scr.Size);
-                        scr.Save(Path.Combine(outDir, nm + "-screen.png"), ImageFormat.Png);
-                    }
-                }
-                catch (Exception) { }
                 ScrollPanel ssp = FindScroll(app.panel);
                 if (ssp != null)
                 {
