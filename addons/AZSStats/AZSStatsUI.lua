@@ -265,7 +265,7 @@ local function Nemesis()
 		     (won > 0 and ("  ·  " .. C("1eff00", "you beat it " .. Big(won))) or ""));
 	end
 	-- revenge: the bosses you have beaten most
-	local list = Sorted({}, function() return 0; end);
+	local list = {};
 	for name, n in pairs(beaten) do table.insert(list, { key = name, n = Num(n) }); end
 	table.sort(list, function(a, b) return a.n > b.n; end);
 	if ( table.getn(list) > 0 ) then
