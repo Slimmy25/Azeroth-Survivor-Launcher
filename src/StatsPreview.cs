@@ -30,6 +30,8 @@ namespace AzerothLauncher
                 foreach (var ab in st.Abilities) SpellIcons.Spell(ab.Name, null);
                 foreach (var c in st.Classes) SpellIcons.Class(c.Key, null);
                 foreach (var n in st.Nemesis) SpellIcons.Npc(n.Name, null);
+                foreach (var g in st.Races) SpellIcons.Race(g.Key + "|" + g.Name, null);
+                foreach (var g in st.Zones) SpellIcons.Zone(g.Key + "|" + g.Name, null);
                 SpellIcons.WaitForAll(30000);
             }
             foreach (string cls in new[] { null, topClass })

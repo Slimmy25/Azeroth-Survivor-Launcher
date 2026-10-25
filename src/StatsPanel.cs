@@ -240,8 +240,8 @@ namespace AzerothLauncher
                         months.Title = Lang.T("Pick rate over time");
                         y = Place(sp, months, w, y);
                     }
-                    if (st.Races.Count > 0) y = Place(sp, GroupRows("Races", st.Races, Theme.Gold), w, y);
-                    if (st.Zones.Count > 0) y = Place(sp, GroupRows("Zones", st.Zones, Theme.Hex("#5fb0d3")), w, y);
+                    if (st.Races.Count > 0) y = Place(sp, GroupRows("Races", st.Races, Theme.Gold, true), w, y);
+                    if (st.Zones.Count > 0) y = Place(sp, GroupRows("Zones", st.Zones, Theme.Hex("#5fb0d3"), false), w, y);
                 }
                 else if (st.Months.Count > 0)
                 {
@@ -593,7 +593,7 @@ namespace AzerothLauncher
             return rows;
         }
 
-        static RowsBlock GroupRows(string title, List<StatBlock> list, Color color)
+        static RowsBlock GroupRows(string title, List<StatBlock> list, Color color, bool races)
         {
             var rows = new RowsBlock();
             rows.Title = Lang.T(title);
@@ -602,6 +602,8 @@ namespace AzerothLauncher
             {
                 var row = new ArmoryRow();
                 row.Icon = Armory.Initials(g.Name);
+                if (races) row.RacePic = g.Key + "|" + g.Name;       // the race's portrait
+                else row.ZonePic = g.Key + "|" + g.Name;             // the zone's art
                 row.IconColor = color;
                 row.Name = g.Name;
                 row.Sub = Lang.T("Runs: " + Big(g.Runs) + " · Won: " + Big(g.Victories));

@@ -419,7 +419,7 @@ namespace AzerothLauncher
         public string Icon = "?", Name = "", Sub = "", Sub2 = "", Value = "", ValueSub = "";     // Sub2: a dim third line
         public Color IconColor = Theme.Gold, NameColor = Armory.Bright, SubColor = Armory.Green, ValueColor = Armory.Bright;
         public bool RoundIcon;
-        public string Spell, ClassPic, Npc;                  // a picture from Wowhead instead of the badge (SpellIcons)
+        public string Spell, ClassPic, Npc, RacePic, ZonePic;   // a picture from Wowhead instead of the badge (SpellIcons)
         public double Bar = -1;                              // 0..1 draws a thin bar under the line
         public Action Click;
     }
@@ -467,8 +467,9 @@ namespace AzerothLauncher
                 Image pic = null;
                 if (g.VisibleClipBounds.IntersectsWith(icon))
                     pic = row.Spell != null ? SpellIcons.Spell(row.Spell, this) : row.ClassPic != null ? SpellIcons.Class(row.ClassPic, this)
-                        : row.Npc != null ? SpellIcons.Npc(row.Npc, this) : null;
-                if (pic != null) Armory.Picture(g, icon, pic, row.Npc != null, row.RoundIcon, row.IconColor);
+                        : row.Npc != null ? SpellIcons.Npc(row.Npc, this) : row.RacePic != null ? SpellIcons.Race(row.RacePic, this)
+                        : row.ZonePic != null ? SpellIcons.Zone(row.ZonePic, this) : null;
+                if (pic != null) Armory.Picture(g, icon, pic, false, row.RoundIcon, row.IconColor);   // creatures come cut to the face
                 else Armory.Icon(g, icon, row.IconColor, row.Icon, row.RoundIcon);
                 Font fv = Theme.F(11, FontStyle.Bold), fvs = Theme.F(8.5f);
                 int vw = Math.Max(Armory.TextWidth(row.Value, fv), Armory.TextWidth(row.ValueSub, fvs));

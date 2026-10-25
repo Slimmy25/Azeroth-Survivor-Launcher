@@ -97,6 +97,36 @@ namespace AzerothLauncher
             return k.Length == 0 ? null : Icon("classicon_" + k, repaint);
         }
 
+        // races and zones (Classes page): Classic's race portraits, and each zone's own art from the achievements
+        static readonly Dictionary<string, string> RaceIcons = new Dictionary<string, string> {
+            { "human", "race_human_male" }, { "dwarf", "race_dwarf_male" }, { "nightelf", "race_nightelf_male" },
+            { "gnome", "race_gnome_male" }, { "orc", "race_orc_male" }, { "undead", "race_scourge_male" },
+            { "scourge", "race_scourge_male" }, { "tauren", "race_tauren_male" }, { "troll", "race_troll_male" } };
+        static readonly Dictionary<string, string> ZoneIcons = new Dictionary<string, string> {
+            { "elwynnforest", "achievement_zone_elwynnforest" }, { "duskwood", "achievement_zone_duskwood" },
+            { "warsonggulch", "achievement_bg_captureflag_wsg" }, { "ungorocrater", "achievement_zone_ungorocrater_01" },
+            { "arathibasin", "achievement_bg_winab" }, { "feralas", "achievement_zone_feralas" },
+            { "gurubashiarena", "achievement_zone_stranglethorn_01" }, { "stranglethornvale", "achievement_zone_stranglethorn_01" },
+            { "scarletmonastery", "spell_holy_righteousfury" }, { "alteracvalley", "achievement_bg_winav" },
+            { "blackrockmountain", "achievement_zone_blackrock_01" }, { "gatesofahnqiraj", "achievement_zone_silithus_01" },
+            { "ahnqiraj", "achievement_zone_silithus_01" }, { "naxxramas", "achievement_dungeon_naxxramas" } };
+
+        public static Image Race(string race, Control repaint)
+        {
+            string icon;
+            foreach (string part in (race ?? "").Split('|'))       // "key|Name": either one
+                if (RaceIcons.TryGetValue(Key(part), out icon)) return Icon(icon, repaint);
+            return null;
+        }
+
+        public static Image Zone(string zone, Control repaint)
+        {
+            string icon;
+            foreach (string part in (zone ?? "").Split('|'))       // "key|Name": either one
+                if (ZoneIcons.TryGetValue(Key(part), out icon)) return Icon(icon, repaint);
+            return null;
+        }
+
         public static Image Icon(string icon, Control repaint)
         {
             if (string.IsNullOrEmpty(icon) || !Regex.IsMatch(icon, "^[a-z0-9_-]+$")) return null;
@@ -127,7 +157,7 @@ namespace AzerothLauncher
             }
             int model;
             if (!npcModels.TryGetValue(name, out model)) return null;
-            return Picture("npc_" + model, "https://wow.zamimg.com/modelviewer/classic/webthumbs/npc/" + (model & 255) + "/" + model + ".jpg", repaint);
+            return Picture("npc_" + model, "https://wow.zamimg.com/modelviewer/classic/webthumbs/npc/" + (model & 255) + "/" + model + ".jpg", repaint, true);
         }
 
         // ---- a name that has to be looked up first; the answer (or "none") is remembered on disk
@@ -161,7 +191,9 @@ namespace AzerothLauncher
             return null;
         }
 
-        static Image Picture(string key, string url, Control repaint)
+        static Image Picture(string key, string url, Control repaint) { return Picture(key, url, repaint, false); }
+
+        static Image Picture(string key, string url, Control repaint, bool face)
         {
             lock (images)
             {
@@ -170,11 +202,47 @@ namespace AzerothLauncher
                 if (repaint != null && !waiting.Contains(repaint)) waiting.Add(repaint);
                 if (!loading.Add(key)) return null;
             }
-            ThreadPool.QueueUserWorkItem(delegate { Fetch(key, url); });
+            ThreadPool.QueueUserWorkItem(delegate { Fetch(key, url, face); });
             return null;
         }
 
-        static void Fetch(string key, string url)
+        // a creature's picture cut to its face: find the creature (what differs from the plain background), then a
+        // square at the top of it, around the head (a tall figure's head is small; a beast's fills more of it)
+        static Bitmap Face(Bitmap src)
+        {
+            int w = src.Width, h = src.Height;
+            Color bg = src.GetPixel(2, 2);
+            int minX = w, maxX = -1, minY = h, maxY = -1;
+            Func<int, int, bool> body = delegate(int x, int y)
+            {
+                Color c = src.GetPixel(x, y);
+                return Math.Abs(c.R - bg.R) + Math.Abs(c.G - bg.G) + Math.Abs(c.B - bg.B) > 48;
+            };
+            for (int y = 0; y < h; y += 2)
+                for (int x = 0; x < w; x += 2)
+                    if (body(x, y)) { if (x < minX) minX = x; if (x > maxX) maxX = x; if (y < minY) minY = y; if (y > maxY) maxY = y; }
+            if (maxX < 0) return src;
+            int bw = maxX - minX + 1, bh = maxY - minY + 1;
+            int side = bh > bw * 1.15 ? (int)(bh * 0.40) : (int)(Math.Min(bw, bh) * 0.62);
+            side = Math.Max(24, Math.Min(side, Math.Min(w, h)));
+            // the head's middle: the middle of the creature in its top rows
+            long sum = 0, n = 0;
+            int band = Math.Max(4, side / 2);
+            for (int y = minY; y < Math.Min(h, minY + band); y += 2)
+                for (int x = minX; x <= maxX; x += 2)
+                    if (body(x, y)) { sum += x; n++; }
+            int cx = n > 0 ? (int)(sum / n) : (minX + maxX) / 2;
+            int left = Math.Max(0, Math.Min(w - side, cx - side / 2));
+            int top = Math.Max(0, Math.Min(h - side, minY - side / 12));
+            var crop = new Bitmap(side, side);
+            using (var g = Graphics.FromImage(crop))
+                g.DrawImage(src, new Rectangle(0, 0, side, side), new Rectangle(left, top, side, side), GraphicsUnit.Pixel);
+            return crop;
+        }
+
+        static void Fetch(string key, string url) { Fetch(key, url, false); }
+
+        static void Fetch(string key, string url, bool face)
         {
             Image img = null;
             try
@@ -193,6 +261,11 @@ namespace AzerothLauncher
                 }
                 if (File.Exists(path))
                     using (var tmp = Image.FromFile(path)) img = new Bitmap(tmp);
+                if (face && img != null)
+                {
+                    Bitmap f = Face((Bitmap)img);
+                    if (f != img) { img.Dispose(); img = f; }
+                }
             }
             catch (Exception) { }
             Done(key, img, true);
