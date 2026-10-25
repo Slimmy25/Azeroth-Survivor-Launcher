@@ -371,7 +371,9 @@ local function Snapshot()
 	if ( AZS_GetRunTime ) then
 		now = Num(AZS_GetRunTime());
 	end
-	if ( now + 1 < lastRunTime ) then           -- a new run started: the last one is over
+	-- a new run started: the clock is back near zero. (Not every small step back: in co-op the clock follows
+	-- the party leader's and can jump back a second or two, which is not a new run.)
+	if ( now < 15 and lastRunTime - now > 10 ) then
 		lastRunTime = now;
 		if ( pending and AZSStats_Finalize ) then AZSStats_Finalize(); end
 		lastSpells, lastMeter, lastTaken, lastParty = nil, nil, nil, nil;
@@ -785,6 +787,23 @@ SlashCmdList["AZSSTATS"] = function(msg)
 end
 
 -- ---------------------------------------------------------------- one record per run
+-- A run is known by its hero, class, zone and when it started (the client's clock minus the run's time), so the
+-- same run is never recorded twice, however often its summary changes (in co-op it changes every few seconds
+-- while you are down) and whatever the run's clock does.
+local function RunStart(s)
+	return math.floor(GetTime() - Num(s.t));
+end
+
+local function SameRun(s, k)
+	if ( type(k) ~= "table" ) then return false; end
+	return Str(s.hero) == Str(k.hero) and Str(s.class) == Str(k.class) and Str(s.zone) == Str(k.zone)
+	       and math.abs(RunStart(s) - Num(k.start)) <= 90;
+end
+
+local function InParty()
+	return type(lastParty) == "table" and table.getn(lastParty) > 0;
+end
+
 -- In co-op a downed hero is not out: the game already shows the run's summary while friends can still revive
 -- you, and it changes every few seconds. So a summary is only recorded once the run is really over:
 --   * a victory, or leaving the run: at once
@@ -796,6 +815,7 @@ function AZSStats_Finalize()
 	local s = pending;
 	pending = nil;
 	recordedRun = true;
+	AZSStatsDB.lastRun = { hero = Str(s.hero), class = Str(s.class), zone = Str(s.zone), start = RunStart(s) };
 	finalizing = true;
 	AZSStats_Record(s);
 	finalizing = false;
@@ -806,6 +826,7 @@ local function Offer(s)
 	if ( type(s) ~= "table" or not s.result ) then return; end
 	if ( recordedRun ) then return; end           -- this run is already counted
 	Check();
+	if ( SameRun(s, AZSStatsDB.lastRun) ) then recordedRun = true; return; end   -- counted already (also after a /reload)
 	local sig = Signature(s);
 	if ( sig == AZSStatsDB.lastSig ) then return; end
 	local fresh = not pending or Signature(pending) ~= sig;
@@ -832,7 +853,9 @@ local function CheckPending()
 	if ( AZS_GetRunTime ) then now = Num(AZS_GetRunTime()); end
 	if ( now == clockSeen ) then stillFor = stillFor + 2; else stillFor = 0; end
 	clockSeen = now;
-	if ( stillFor >= 4 ) then AZSStats_Finalize(); end
+	-- alone, a defeat is final once the clock has stopped; in a party, friends can still revive you, so the
+	-- party's clock must have stood still for longer (the whole party is down, or the run ended)
+	if ( stillFor >= (InParty() and 12 or 4) ) then AZSStats_Finalize(); end
 end
 
 -- the run's end arrives as an addon message; AZS_GetRunSummary() is checked too, now and then, in case
