@@ -1,0 +1,36 @@
+# Developer tool: downloads the game's website (wow.aethus.pl) and its scripts onto the private "site-probe" branch,
+# to look up things like spell icon addresses. Run by hand: Actions > Probe site > Run workflow.
+name: Probe site
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download the site
+        run: |
+          set -x
+          mkdir -p /tmp/site && cd /tmp/site
+          curl -sSL -A "Mozilla/5.0" https://wow.aethus.pl/ -o index.html || true
+          # every script and stylesheet the page loads, and what those load
+          for round in 1 2; do
+            grep -ohE '(src|href)="[^"]+\.(js|css|json)[^"]*"|"/[^" ]+\.(js|json)"|/assets/[A-Za-z0-9._/-]+\.(js|json|css)' *.html assets/*.js 2>/dev/null \
+              | sed -E 's/^(src|href)=//; s/"//g' | sort -u > list.txt || true
+            while read -r u; do
+              case "$u" in http*) url="$u";; /*) url="https://wow.aethus.pl$u";; *) url="https://wow.aethus.pl/$u";; esac
+              out="assets/$(basename "${u%%\?*}")"; mkdir -p assets
+              [ -f "$out" ] || curl -sSL -A "Mozilla/5.0" "$url" -o "$out" || true
+            done < list.txt
+          done
+          ls -la . assets | head -100
+      - name: Keep it on the site-probe branch
+        run: |
+          cd /tmp/site
+          git init -q -b site-probe && git config user.name probe && git config user.email probe@users.noreply.github.com
+          git add -A && git commit -qm "site probe"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" HEAD:site-probe
