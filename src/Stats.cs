@@ -505,8 +505,8 @@ namespace AzerothLauncher
             if (tips != null)
                 foreach (var kv in tips)
                 {
-                    string text = LuaReader.Text(kv.Value as Dictionary<string, object>, "text");
-                    if (text.Length > 0) st.Tooltips[kv.Key] = text;
+                    string tipText = LuaReader.Text(kv.Value as Dictionary<string, object>, "text");
+                    if (tipText.Length > 0) st.Tooltips[kv.Key] = tipText;
                 }
 
             // the same creature faces for the addon's own Nemesis tab (in the background)
