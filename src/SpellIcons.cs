@@ -223,7 +223,7 @@ namespace AzerothLauncher
                     if (body(x, y)) { if (x < minX) minX = x; if (x > maxX) maxX = x; if (y < minY) minY = y; if (y > maxY) maxY = y; }
             if (maxX < 0) return src;
             int bw = maxX - minX + 1, bh = maxY - minY + 1;
-            int side = bh > bw * 1.15 ? (int)(bh * 0.40) : (int)(Math.Min(bw, bh) * 0.62);
+            int side = bh > bw * 1.15 ? (int)(bh * 0.30) : (int)(Math.Min(bw, bh) * 0.52);
             side = Math.Max(24, Math.Min(side, Math.Min(w, h)));
             // the head's middle: the middle of the creature in its top rows
             long sum = 0, n = 0;
