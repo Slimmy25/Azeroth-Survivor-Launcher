@@ -256,7 +256,7 @@ namespace AzerothLauncher
                         TextFormatFlags.Left | TextFormatFlags.SingleLine | TextFormatFlags.EndEllipsis);
             if (Note.Length > 0)
             {
-                int nw = Math.Min(Armory.TextWidth(Note, Theme.F(8.5f, FontStyle.Italic)) + 4, (r.Right - x) / 2);
+                int nw = Math.Min(Armory.TextWidth(Note, Theme.F(8.5f, FontStyle.Italic)) + 4, (r.Right - x) * 2 / 3);
                 Armory.Text(g, Note, Theme.F(8.5f, FontStyle.Italic), Armory.Dim, new Rectangle(r.Right - nw, r.Y + 2, nw, 16),
                             TextFormatFlags.Right | TextFormatFlags.SingleLine | TextFormatFlags.EndEllipsis);
             }
