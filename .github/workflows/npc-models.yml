@@ -19,7 +19,7 @@ jobs:
           git clone -q --depth 1 https://github.com/cmangos/classic-db.git /tmp/db || echo "::error::clone failed"
           echo "::notice::top: $(ls /tmp/db | tr '\n' ' ')"
           echo "::notice::sql files: $(find /tmp/db -iname '*.sql*' -size +1M | head -5 | tr '\n' ' ')"
-          f=$(find /tmp/db -iname '*.sql*' -size +1M | head -1)
+          f=$(ls /tmp/db/Full_DB/*.sql* | head -1)
           case "$f" in
             *.gz) zcat "$f" > /tmp/world.sql ;;
             *.zip) unzip -p "$f" > /tmp/world.sql ;;
