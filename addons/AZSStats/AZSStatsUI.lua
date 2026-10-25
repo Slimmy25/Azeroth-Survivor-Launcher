@@ -694,7 +694,7 @@ local function Build()
 	-- the game, its centre sits 29% across and 22% down, it is 47% of the texture wide and its hole 31%. So only the
 	-- ring is cut out of the texture (a square around that centre), which puts the hole in the middle, and the round
 	-- portrait goes under it, a little larger than the hole so the gold covers its edge.
-	local RS, PS = 62, 42;                               -- the ring's size, the portrait's size (the hole is about 41)
+	local RS, PS = 62, 50;                               -- the ring's size, the portrait's size (the hole is about 41)
 	local pcx, pcy = 42, -34;                            -- their centre in the card
 	hero.portrait:SetWidth(PS);
 	hero.portrait:SetHeight(PS);
