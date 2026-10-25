@@ -263,6 +263,24 @@ namespace AzerothLauncher
             else a();
         }
 
+        // the biggest font size (from size down) at which the label fits the button: on one line, or on two when a
+        // translation is long, but never cut off and never with a word broken in the middle
+        public static float FitLabel(Graphics g, string label, float size, float width, float height)
+        {
+            float fs = size;
+            for (; fs > 5.5f; fs -= 0.5f)
+            {
+                Font f = Theme.F(fs, FontStyle.Bold);
+                if (g.MeasureString(label, f).Width <= width) return fs;            // one line
+                if (fs > size * 0.8f) continue;                                    // try smaller on one line first
+                bool wordFits = true;
+                foreach (string word in label.Split(' '))
+                    if (g.MeasureString(word, f).Width > width) { wordFits = false; break; }
+                if (wordFits && g.MeasureString(label, f, (int)width).Height <= height) return fs;   // two lines
+            }
+            return fs;
+        }
+
         protected override void OnPaint(PaintEventArgs e)
         {
             float old = Theme.Zoom;
@@ -314,7 +332,7 @@ namespace AzerothLauncher
             }
             string label = Lang.T(text);
             float fs = size;                                  // a longer translation gets a smaller font so it fits
-            while (fs > 6 && g.MeasureString(label, Theme.F(fs, FontStyle.Bold)).Width > tw - 10) fs -= 0.5f;
+            fs = FitLabel(g, label, fs, tw - 10, h - 4);
             Theme.CenterText(g, label, Theme.F(fs, FontStyle.Bold), fg, new RectangleF(tx, 0, tw, h), shadow);
         }
 
@@ -338,7 +356,7 @@ namespace AzerothLauncher
             }
             string label = Lang.T(text);
             float fs = size;
-            while (fs > 6 && g.MeasureString(label, Theme.F(fs, FontStyle.Bold)).Width > tw - 10) fs -= 0.5f;
+            fs = FitLabel(g, label, fs, tw - 10, h - 4);
             Theme.CenterText(g, label, Theme.F(fs, FontStyle.Bold), fg, new RectangleF(tx, down ? 1 : 0, tw, h), Color.Black);
             if (selected && !grayed)                           // the current choice: a gold frame around the stone
             {
