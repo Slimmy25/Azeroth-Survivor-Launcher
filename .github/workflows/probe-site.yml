@@ -15,18 +15,12 @@ jobs:
       - name: Fetch
         run: |
           mkdir -p /tmp/site && cd /tmp/site
-          for u in \
-            https://wow.zamimg.com/modelviewer/classic/webthumbs/npc/128/384.webp \
-            https://wow.zamimg.com/modelviewer/classic/webthumbs/npc/128/384.png \
-            https://wow.zamimg.com/modelviewer/classic/webthumbs/npc/128/384.jpg \
-            https://wow.zamimg.com/modelviewer/live/webthumbs/npc/128/384.webp \
-            https://wow.zamimg.com/modelviewer/live/webthumbs/npc/128/384.png \
-            https://wow.zamimg.com/modelviewer/wrath/webthumbs/npc/128/384.png \
-            https://wow.zamimg.com/modelviewer/classic/webthumbs/npc/0/384.png ; do
-            curl -s -o "$(echo $u | tr '/:' '__')" -w "%{http_code} %{content_type} %{size_download} $u\n" "$u" >> codes.txt
+          for t in Creature CreatureDisplayInfo; do
+            curl -sS -m 120 -A "Mozilla/5.0" -o full-$t.csv -w "%{http_code} %{size_download} $t\n" "https://wago.tools/db2/$t/csv?product=wow_classic_era" >> codes.txt || true
+            head -3 full-$t.csv > head-$t.csv; wc -l full-$t.csv >> codes.txt
+            grep -i "hogger\|Scarlet Crusader" full-$t.csv | head -5 >> codes.txt || true
+            rm -f full-$t.csv
           done
-          curl -sS -A "Mozilla/5.0" -o npc-crusader-page.html "https://www.wowhead.com/classic/npc=1660" -w "%{http_code} crusader page\n" >> codes.txt
-          ls -la
       - name: Keep it on the site-probe branch
         run: |
           cd /tmp/site
