@@ -28,6 +28,10 @@ ABOUT LAUNCHER
 = OVER DE LAUNCHER
 UPDATE LAUNCHER
 = LAUNCHER BIJWERKEN
+NEW PLAYER GUIDE
+= GIDS VOOR NIEUWE SPELERS
+A Game Made By Aethus
+= Een game gemaakt door Aethus
 A game made by Aethus
 = Een spel gemaakt door Aethus
 Version {0}

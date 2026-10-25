@@ -28,6 +28,10 @@ ABOUT LAUNCHER
 = TIETOJA LAUNCHERISTA
 UPDATE LAUNCHER
 = PÄIVITÄ LAUNCHER
+NEW PLAYER GUIDE
+= UUDEN PELAAJAN OPAS
+A Game Made By Aethus
+= Aethuksen tekemä peli
 A game made by Aethus
 = Pelin on tehnyt Aethus
 Version {0}

@@ -29,6 +29,10 @@ ABOUT LAUNCHER
 = ПРО ЛАУНЧЕР
 UPDATE LAUNCHER
 = ОНОВИТИ ЛАУНЧЕР
+NEW PLAYER GUIDE
+= ПОСІБНИК НОВАЧКА
+A Game Made By Aethus
+= Гра від Aethus
 A game made by Aethus
 = Гра від Aethus
 Version {0}

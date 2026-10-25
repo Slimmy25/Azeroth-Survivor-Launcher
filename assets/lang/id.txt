@@ -28,6 +28,10 @@ ABOUT LAUNCHER
 = TENTANG LAUNCHER
 UPDATE LAUNCHER
 = PERBARUI LAUNCHER
+NEW PLAYER GUIDE
+= PANDUAN PEMAIN BARU
+A Game Made By Aethus
+= Sebuah game buatan Aethus
 A game made by Aethus
 = Game buatan Aethus
 Version {0}

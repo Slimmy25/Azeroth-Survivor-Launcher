@@ -29,6 +29,10 @@ ABOUT LAUNCHER
 = ランチャーについて
 UPDATE LAUNCHER
 = ランチャーを更新
+NEW PLAYER GUIDE
+= 初心者ガイド
+A Game Made By Aethus
+= Aethus 制作のゲーム
 A game made by Aethus
 = Aethus が制作したゲーム
 Version {0}

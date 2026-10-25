@@ -28,6 +28,10 @@ ABOUT LAUNCHER
 = OM LAUNCHEREN
 UPDATE LAUNCHER
 = OPDATER LAUNCHER
+NEW PLAYER GUIDE
+= GUIDE TIL NYE SPILLERE
+A Game Made By Aethus
+= Et spil lavet af Aethus
 A game made by Aethus
 = Et spil lavet af Aethus
 Version {0}

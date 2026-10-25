@@ -29,6 +29,10 @@ ABOUT LAUNCHER
 = เกี่ยวกับลันเชอร์
 UPDATE LAUNCHER
 = อัปเดตลันเชอร์
+NEW PLAYER GUIDE
+= คู่มือผู้เล่นใหม่
+A Game Made By Aethus
+= เกมที่สร้างโดย Aethus
 A game made by Aethus
 = เกมโดย Aethus
 Version {0}

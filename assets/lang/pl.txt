@@ -29,6 +29,10 @@ ABOUT LAUNCHER
 = O LAUNCHERZE
 UPDATE LAUNCHER
 = AKTUALIZUJ LAUNCHER
+NEW PLAYER GUIDE
+= PORADNIK DLA NOWYCH
+A Game Made By Aethus
+= Gra stworzona przez Aethusa
 A game made by Aethus
 = Gra stworzona przez Aethusa
 Version {0}
