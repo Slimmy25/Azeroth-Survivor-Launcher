@@ -1119,3 +1119,129 @@ Exit fullscreen
 = 全画面を終了
 Highest DPS
 = 最高DPS
+
+# added 2026-10-25: install in the status line, Community, This week, stats pages, download hosts
+Play a few runs with the newest AZS Stats to see your DPS over time.
+= 最新の AZS Stats で何回かランをプレイすると、DPS の推移が表示されます。
+Best of these
+= この中のベスト
+ringed: victories
+= リング付き：勝利
+Your best builds show up here after a DPS high or a victory.
+= DPS 記録の更新や勝利のあと、ベストビルドがここに表示されます。
+A build video made by a player. All credit goes to the people who made it.
+= プレイヤーが作ったビルド動画です。すべての功績は制作者のものです。
+No community videos yet.
+= コミュニティ動画はまだありません。
+MORE BUILD GUIDES ›
+= ビルドガイドをもっと見る ›
+Loading the video...
+= 動画を読み込んでいます...
+Nothing in the guide matches
+= ガイド内に一致するものがありません：
+Search the guide: a spell, a boss, a key...
+= ガイドを検索：呪文、ボス、キー...
+Patch
+= パッチ
+News
+= ニュース
+Game version
+= ゲームバージョン
+No runs yet this week.
+= 今週はまだランがありません。
+This week
+= 今週
+Addons need the game. Press INSTALL to download it first.
+= アドオンにはゲームが必要です。先に「インストール」を押してダウンロードしてください。
+Game client not found. Press INSTALL to download it first.
+= ゲームクライアントが見つかりません。先に「インストール」を押してダウンロードしてください。
+Please wait until the game update or install has finished.
+= ゲームの更新またはインストールが終わるまでお待ちください。
+Downloading the game client...
+= ゲームクライアントをダウンロード中...
+The download server sent something that is not the game archive. Please try again later.
+= ダウンロードサーバーからゲームのアーカイブが届きませんでした。後でもう一度お試しください。
+Download cancelled.
+= ダウンロードを中止しました。
+The download server did not accept the launcher's login.
+= ダウンロードサーバーがランチャーのログインを受け付けませんでした。
+The backup host's page has no download link right now.
+= 予備サーバーのページに今はダウンロードリンクがありません。
+The download from the backup host is damaged (its checksum does not match). Please try again.
+= 予備サーバーからのダウンロードが壊れています（チェックサムが一致しません）。もう一度お試しください。
+The launcher is already running.\n\nLook for its icon in the system tray (near the clock).
+= ランチャーはすでに起動しています。\n\nシステムトレイ（時計の近く）のアイコンを探してください。
+INSTALL FROM A FILE
+= ファイルからインストール
+Making the run's picture...
+= ランの画像を作成中...
+The run's picture is copied: paste it into Discord. Also saved in Pictures.
+= ランの画像をコピーしました：Discord に貼り付けてください。ピクチャにも保存しました。
+Could not make the run's picture: {0}
+= ランの画像を作成できませんでした：{0}
+The AddOns folder is not set. Set the game config folder in Options.
+= AddOns フォルダーが設定されていません。オプションでゲームの設定フォルダーを指定してください。
+DPS over time
+= DPS の推移
+Best builds
+= ベストビルド
+Revenge: bosses you beat
+= リベンジ：倒したボス
+Your top partner
+= いちばんの相棒
+Runs together
+= 一緒のラン
+Win rate together
+= 一緒の勝率
+Your party
+= あなたのパーティー
+last played
+= 最後のプレイ
+today
+= 今日
+yesterday
+= 昨日
+click a run to share it
+= ランをクリックして共有
+by
+= 作成：
+Community
+= コミュニティ
+Stop downloading the game?
+= ゲームのダウンロードを中止しますか？
+Close the game first, then install it again.
+= 先にゲームを閉じてから、もう一度インストールしてください。
+Close the game first, then run setup again.
+= 先にゲームを閉じてから、もう一度セットアップを実行してください。
+No save game folder set.
+= ゲームのセーブフォルダーが設定されていません。
+No game config folder set.
+= ゲームの設定フォルダーが設定されていません。
+Downloading the game: {#0}%  ({1} of {2})
+= ゲームをダウンロード中：{#0}%（{1} / {2}）
+Downloading the game: {0}
+= ゲームをダウンロード中：{0}
+{#0} days ago
+= {#0} 日前
+{#0} weeks ago
+= {#0} 週間前
+Your last run was {0}.
+= 最後のラン：{0}。
+{#0} runs, {#1} won
+= {#0} ラン、{#1} 勝
+new {0} DPS high: {1}
+= {0} の DPS 新記録：{1}
+best DPS {0} ({1})
+= ベスト DPS {0}（{1}）
+most played with {0}
+= いちばん一緒に遊んだ相手：{0}
+You beat it {0} times
+= {0} 回倒した
+It killed you {0} times
+= {0} 回倒された
+Best together: {0}, level {1}
+= 一緒のベスト：{0}、レベル {1}
+fastest win {0}
+= 最速勝利 {0}
+{#0} runs, oldest left
+= {#0} ラン、古い順に左から

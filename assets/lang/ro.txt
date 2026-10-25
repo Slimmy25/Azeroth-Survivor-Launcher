@@ -1119,3 +1119,129 @@ Exit fullscreen
 = Ieși din ecran complet
 Highest DPS
 = Cel mai mare DPS
+
+# added 2026-10-25: install in the status line, Community, This week, stats pages, download hosts
+Play a few runs with the newest AZS Stats to see your DPS over time.
+= Joacă câteva runde cu cel mai nou AZS Stats ca să vezi DPS-ul tău în timp.
+Best of these
+= Cel mai bun dintre acestea
+ringed: victories
+= încercuite: victorii
+Your best builds show up here after a DPS high or a victory.
+= Cele mai bune build-uri ale tale apar aici după un record de DPS sau o victorie.
+A build video made by a player. All credit goes to the people who made it.
+= Un videoclip cu un build făcut de un jucător. Tot meritul este al autorilor.
+No community videos yet.
+= Încă nu există videoclipuri ale comunității.
+MORE BUILD GUIDES ›
+= MAI MULTE GHIDURI DE BUILD ›
+Loading the video...
+= Se încarcă videoclipul...
+Nothing in the guide matches
+= Nimic din ghid nu se potrivește cu
+Search the guide: a spell, a boss, a key...
+= Caută în ghid: o vrajă, un boss, o tastă...
+Patch
+= Patch
+News
+= Noutăți
+Game version
+= Versiunea jocului
+No runs yet this week.
+= Nicio rundă săptămâna aceasta.
+This week
+= Săptămâna aceasta
+Addons need the game. Press INSTALL to download it first.
+= Addon-urile au nevoie de joc. Apasă întâi INSTALEAZĂ ca să-l descarci.
+Game client not found. Press INSTALL to download it first.
+= Clientul jocului nu a fost găsit. Apasă întâi INSTALEAZĂ ca să-l descarci.
+Please wait until the game update or install has finished.
+= Așteaptă să se termine actualizarea sau instalarea jocului.
+Downloading the game client...
+= Se descarcă clientul jocului...
+The download server sent something that is not the game archive. Please try again later.
+= Serverul de descărcare nu a trimis arhiva jocului. Încearcă mai târziu.
+Download cancelled.
+= Descărcare anulată.
+The download server did not accept the launcher's login.
+= Serverul de descărcare nu a acceptat autentificarea launcherului.
+The backup host's page has no download link right now.
+= Pagina serverului de rezervă nu are acum un link de descărcare.
+The download from the backup host is damaged (its checksum does not match). Please try again.
+= Fișierul de pe serverul de rezervă este deteriorat (suma de control nu se potrivește). Încearcă din nou.
+The launcher is already running.\n\nLook for its icon in the system tray (near the clock).
+= Launcherul rulează deja.\n\nCaută pictograma lui în zona de notificare (lângă ceas).
+INSTALL FROM A FILE
+= INSTALEAZĂ DIN FIȘIER
+Making the run's picture...
+= Se creează imaginea rundei...
+The run's picture is copied: paste it into Discord. Also saved in Pictures.
+= Imaginea rundei a fost copiată: lipește-o în Discord. A fost salvată și în Imagini.
+Could not make the run's picture: {0}
+= Nu s-a putut crea imaginea rundei: {0}
+The AddOns folder is not set. Set the game config folder in Options.
+= Folderul AddOns nu este setat. Setează folderul de configurare al jocului în Opțiuni.
+DPS over time
+= DPS în timp
+Best builds
+= Cele mai bune build-uri
+Revenge: bosses you beat
+= Răzbunare: boși învinși
+Your top partner
+= Partenerul tău principal
+Runs together
+= Runde împreună
+Win rate together
+= Rata de victorii împreună
+Your party
+= Grupul tău
+last played
+= jucat ultima dată
+today
+= azi
+yesterday
+= ieri
+click a run to share it
+= dă clic pe o rundă ca s-o distribui
+by
+= de
+Community
+= Comunitate
+Stop downloading the game?
+= Oprești descărcarea jocului?
+Close the game first, then install it again.
+= Închide întâi jocul, apoi instalează-l din nou.
+Close the game first, then run setup again.
+= Închide întâi jocul, apoi rulează din nou configurarea.
+No save game folder set.
+= Niciun folder pentru salvările jocului.
+No game config folder set.
+= Niciun folder de configurare a jocului.
+Downloading the game: {#0}%  ({1} of {2})
+= Se descarcă jocul: {#0}%  ({1} din {2})
+Downloading the game: {0}
+= Se descarcă jocul: {0}
+{#0} days ago
+= acum {#0} zile
+{#0} weeks ago
+= acum {#0} săptămâni
+Your last run was {0}.
+= Ultima ta rundă: {0}.
+{#0} runs, {#1} won
+= {#0} runde, {#1} câștigate
+new {0} DPS high: {1}
+= nou record DPS {0}: {1}
+best DPS {0} ({1})
+= cel mai bun DPS {0} ({1})
+most played with {0}
+= jucat cel mai mult cu {0}
+You beat it {0} times
+= L-ai învins de {0} ori
+It killed you {0} times
+= Te-a ucis de {0} ori
+Best together: {0}, level {1}
+= Cel mai bine împreună: {0}, nivelul {1}
+fastest win {0}
+= cea mai rapidă victorie {0}
+{#0} runs, oldest left
+= {#0} runde, cele mai vechi în stânga

@@ -1118,3 +1118,129 @@ Exit fullscreen
 = Keluar layar penuh
 Highest DPS
 = DPS tertinggi
+
+# added 2026-10-25: install in the status line, Community, This week, stats pages, download hosts
+Play a few runs with the newest AZS Stats to see your DPS over time.
+= Mainkan beberapa run dengan AZS Stats terbaru untuk melihat DPS-mu dari waktu ke waktu.
+Best of these
+= Terbaik dari ini
+ringed: victories
+= berlingkar: kemenangan
+Your best builds show up here after a DPS high or a victory.
+= Build terbaikmu muncul di sini setelah rekor DPS atau kemenangan.
+A build video made by a player. All credit goes to the people who made it.
+= Video build buatan seorang pemain. Semua penghargaan untuk pembuatnya.
+No community videos yet.
+= Belum ada video komunitas.
+MORE BUILD GUIDES ›
+= PANDUAN BUILD LAINNYA ›
+Loading the video...
+= Memuat video...
+Nothing in the guide matches
+= Tidak ada yang cocok di panduan untuk
+Search the guide: a spell, a boss, a key...
+= Cari di panduan: mantra, bos, tombol...
+Patch
+= Patch
+News
+= Berita
+Game version
+= Versi game
+No runs yet this week.
+= Belum ada run minggu ini.
+This week
+= Minggu ini
+Addons need the game. Press INSTALL to download it first.
+= Addon membutuhkan game. Tekan INSTAL dulu untuk mengunduhnya.
+Game client not found. Press INSTALL to download it first.
+= Klien game tidak ditemukan. Tekan INSTAL dulu untuk mengunduhnya.
+Please wait until the game update or install has finished.
+= Tunggu hingga pembaruan atau instalasi game selesai.
+Downloading the game client...
+= Mengunduh klien game...
+The download server sent something that is not the game archive. Please try again later.
+= Server unduhan tidak mengirim arsip game. Coba lagi nanti.
+Download cancelled.
+= Unduhan dibatalkan.
+The download server did not accept the launcher's login.
+= Server unduhan tidak menerima login launcher.
+The backup host's page has no download link right now.
+= Halaman server cadangan sedang tidak punya tautan unduhan.
+The download from the backup host is damaged (its checksum does not match). Please try again.
+= Unduhan dari server cadangan rusak (checksum tidak cocok). Coba lagi.
+The launcher is already running.\n\nLook for its icon in the system tray (near the clock).
+= Launcher sudah berjalan.\n\nCari ikonnya di area notifikasi (dekat jam).
+INSTALL FROM A FILE
+= INSTAL DARI FILE
+Making the run's picture...
+= Membuat gambar run...
+The run's picture is copied: paste it into Discord. Also saved in Pictures.
+= Gambar run disalin: tempelkan ke Discord. Juga disimpan di Gambar.
+Could not make the run's picture: {0}
+= Tidak dapat membuat gambar run: {0}
+The AddOns folder is not set. Set the game config folder in Options.
+= Folder AddOns belum diatur. Atur folder konfigurasi game di Opsi.
+DPS over time
+= DPS dari waktu ke waktu
+Best builds
+= Build terbaik
+Revenge: bosses you beat
+= Balas dendam: bos yang kamu kalahkan
+Your top partner
+= Rekan utamamu
+Runs together
+= Run bersama
+Win rate together
+= Tingkat menang bersama
+Your party
+= Grupmu
+last played
+= terakhir dimainkan
+today
+= hari ini
+yesterday
+= kemarin
+click a run to share it
+= klik run untuk membagikannya
+by
+= oleh
+Community
+= Komunitas
+Stop downloading the game?
+= Hentikan unduhan game?
+Close the game first, then install it again.
+= Tutup game dulu, lalu instal ulang.
+Close the game first, then run setup again.
+= Tutup game dulu, lalu jalankan penyiapan lagi.
+No save game folder set.
+= Folder simpanan game belum diatur.
+No game config folder set.
+= Folder konfigurasi game belum diatur.
+Downloading the game: {#0}%  ({1} of {2})
+= Mengunduh game: {#0}%  ({1} dari {2})
+Downloading the game: {0}
+= Mengunduh game: {0}
+{#0} days ago
+= {#0} hari lalu
+{#0} weeks ago
+= {#0} minggu lalu
+Your last run was {0}.
+= Run terakhirmu: {0}.
+{#0} runs, {#1} won
+= {#0} run, {#1} menang
+new {0} DPS high: {1}
+= rekor DPS {0} baru: {1}
+best DPS {0} ({1})
+= DPS terbaik {0} ({1})
+most played with {0}
+= paling sering dengan {0}
+You beat it {0} times
+= Kamu mengalahkannya {0} kali
+It killed you {0} times
+= Ia membunuhmu {0} kali
+Best together: {0}, level {1}
+= Terbaik bersama: {0}, level {1}
+fastest win {0}
+= kemenangan tercepat {0}
+{#0} runs, oldest left
+= {#0} run, yang terlama di kiri

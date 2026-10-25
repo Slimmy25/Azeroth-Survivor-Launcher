@@ -1119,3 +1119,129 @@ Exit fullscreen
 = 離開全螢幕
 Highest DPS
 = 最高DPS
+
+# added 2026-10-25: install in the status line, Community, This week, stats pages, download hosts
+Play a few runs with the newest AZS Stats to see your DPS over time.
+= 用最新版 AZS Stats 玩幾局，就能看到你的 DPS 變化。
+Best of these
+= 其中最佳
+ringed: victories
+= 有環：勝利
+Your best builds show up here after a DPS high or a victory.
+= 創下 DPS 紀錄或獲勝後，你的最佳配置會顯示在這裡。
+A build video made by a player. All credit goes to the people who made it.
+= 由玩家製作的配置影片。所有功勞歸於製作者。
+No community videos yet.
+= 還沒有社群影片。
+MORE BUILD GUIDES ›
+= 更多配置指南 ›
+Loading the video...
+= 正在載入影片...
+Nothing in the guide matches
+= 指南中沒有符合的內容：
+Search the guide: a spell, a boss, a key...
+= 搜尋指南：法術、首領、按鍵...
+Patch
+= 修正檔
+News
+= 新聞
+Game version
+= 遊戲版本
+No runs yet this week.
+= 本週還沒有對局。
+This week
+= 本週
+Addons need the game. Press INSTALL to download it first.
+= 插件需要遊戲。請先按「安裝」下載遊戲。
+Game client not found. Press INSTALL to download it first.
+= 找不到遊戲用戶端。請先按「安裝」下載。
+Please wait until the game update or install has finished.
+= 請等待遊戲更新或安裝完成。
+Downloading the game client...
+= 正在下載遊戲用戶端...
+The download server sent something that is not the game archive. Please try again later.
+= 下載伺服器傳來的不是遊戲壓縮檔。請稍後再試。
+Download cancelled.
+= 下載已取消。
+The download server did not accept the launcher's login.
+= 下載伺服器不接受啟動器的登入。
+The backup host's page has no download link right now.
+= 備用伺服器頁面目前沒有下載連結。
+The download from the backup host is damaged (its checksum does not match). Please try again.
+= 從備用伺服器下載的檔案已損毀（檢查碼不符）。請再試一次。
+The launcher is already running.\n\nLook for its icon in the system tray (near the clock).
+= 啟動器已在執行。\n\n請在系統匣（時鐘旁）找到它的圖示。
+INSTALL FROM A FILE
+= 從檔案安裝
+Making the run's picture...
+= 正在產生對局圖片...
+The run's picture is copied: paste it into Discord. Also saved in Pictures.
+= 對局圖片已複製：貼到 Discord 即可。也已儲存到「圖片」資料夾。
+Could not make the run's picture: {0}
+= 無法產生對局圖片：{0}
+The AddOns folder is not set. Set the game config folder in Options.
+= 尚未設定 AddOns 資料夾。請在「選項」中設定遊戲設定資料夾。
+DPS over time
+= DPS 變化
+Best builds
+= 最佳配置
+Revenge: bosses you beat
+= 復仇：你擊敗的首領
+Your top partner
+= 最常合作的隊友
+Runs together
+= 共同對局
+Win rate together
+= 共同勝率
+Your party
+= 你的隊伍
+last played
+= 上次遊玩
+today
+= 今天
+yesterday
+= 昨天
+click a run to share it
+= 點擊對局即可分享
+by
+= 作者：
+Community
+= 社群
+Stop downloading the game?
+= 要停止下載遊戲嗎？
+Close the game first, then install it again.
+= 請先關閉遊戲，然後重新安裝。
+Close the game first, then run setup again.
+= 請先關閉遊戲，然後重新執行設定。
+No save game folder set.
+= 尚未設定遊戲存檔資料夾。
+No game config folder set.
+= 尚未設定遊戲設定資料夾。
+Downloading the game: {#0}%  ({1} of {2})
+= 正在下載遊戲：{#0}%（{1} / {2}）
+Downloading the game: {0}
+= 正在下載遊戲：{0}
+{#0} days ago
+= {#0} 天前
+{#0} weeks ago
+= {#0} 週前
+Your last run was {0}.
+= 你的上一局：{0}。
+{#0} runs, {#1} won
+= {#0} 局，勝 {#1} 局
+new {0} DPS high: {1}
+= 新的{0} DPS 紀錄：{1}
+best DPS {0} ({1})
+= 最佳 DPS {0}（{1}）
+most played with {0}
+= 最常一起玩的：{0}
+You beat it {0} times
+= 你擊敗了它 {0} 次
+It killed you {0} times
+= 它擊殺了你 {0} 次
+Best together: {0}, level {1}
+= 共同最佳：{0}，等級 {1}
+fastest win {0}
+= 最快勝利 {0}
+{#0} runs, oldest left
+= {#0} 局，最早的在左邊

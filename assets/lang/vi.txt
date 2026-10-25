@@ -1119,3 +1119,129 @@ Exit fullscreen
 = Thoát toàn màn hình
 Highest DPS
 = DPS cao nhất
+
+# added 2026-10-25: install in the status line, Community, This week, stats pages, download hosts
+Play a few runs with the newest AZS Stats to see your DPS over time.
+= Chơi vài lượt với AZS Stats mới nhất để xem DPS của bạn theo thời gian.
+Best of these
+= Tốt nhất trong số này
+ringed: victories
+= có vòng: chiến thắng
+Your best builds show up here after a DPS high or a victory.
+= Các build tốt nhất của bạn sẽ hiện ở đây sau một kỷ lục DPS hoặc chiến thắng.
+A build video made by a player. All credit goes to the people who made it.
+= Video build do một người chơi làm. Toàn bộ công lao thuộc về người làm.
+No community videos yet.
+= Chưa có video cộng đồng.
+MORE BUILD GUIDES ›
+= THÊM HƯỚNG DẪN BUILD ›
+Loading the video...
+= Đang tải video...
+Nothing in the guide matches
+= Không có gì trong hướng dẫn khớp với
+Search the guide: a spell, a boss, a key...
+= Tìm trong hướng dẫn: một phép, một boss, một phím...
+Patch
+= Bản vá
+News
+= Tin tức
+Game version
+= Phiên bản game
+No runs yet this week.
+= Tuần này chưa có lượt nào.
+This week
+= Tuần này
+Addons need the game. Press INSTALL to download it first.
+= Addon cần có game. Hãy nhấn CÀI ĐẶT trước để tải về.
+Game client not found. Press INSTALL to download it first.
+= Không tìm thấy client game. Hãy nhấn CÀI ĐẶT trước để tải về.
+Please wait until the game update or install has finished.
+= Hãy đợi cập nhật hoặc cài đặt game hoàn tất.
+Downloading the game client...
+= Đang tải client game...
+The download server sent something that is not the game archive. Please try again later.
+= Máy chủ tải xuống không gửi gói game. Hãy thử lại sau.
+Download cancelled.
+= Đã hủy tải xuống.
+The download server did not accept the launcher's login.
+= Máy chủ tải xuống không chấp nhận đăng nhập của launcher.
+The backup host's page has no download link right now.
+= Trang máy chủ dự phòng hiện không có liên kết tải.
+The download from the backup host is damaged (its checksum does not match). Please try again.
+= Tệp từ máy chủ dự phòng bị hỏng (checksum không khớp). Hãy thử lại.
+The launcher is already running.\n\nLook for its icon in the system tray (near the clock).
+= Launcher đã đang chạy.\n\nHãy tìm biểu tượng của nó ở khay hệ thống (gần đồng hồ).
+INSTALL FROM A FILE
+= CÀI ĐẶT TỪ TỆP
+Making the run's picture...
+= Đang tạo ảnh của lượt chơi...
+The run's picture is copied: paste it into Discord. Also saved in Pictures.
+= Ảnh lượt chơi đã được sao chép: hãy dán vào Discord. Cũng đã lưu trong Pictures.
+Could not make the run's picture: {0}
+= Không thể tạo ảnh lượt chơi: {0}
+The AddOns folder is not set. Set the game config folder in Options.
+= Chưa đặt thư mục AddOns. Hãy đặt thư mục cấu hình game trong Tùy chọn.
+DPS over time
+= DPS theo thời gian
+Best builds
+= Build tốt nhất
+Revenge: bosses you beat
+= Báo thù: boss bạn đã hạ
+Your top partner
+= Đồng đội chính của bạn
+Runs together
+= Lượt chơi cùng nhau
+Win rate together
+= Tỉ lệ thắng cùng nhau
+Your party
+= Nhóm của bạn
+last played
+= chơi lần cuối
+today
+= hôm nay
+yesterday
+= hôm qua
+click a run to share it
+= nhấn vào một lượt để chia sẻ
+by
+= của
+Community
+= Cộng đồng
+Stop downloading the game?
+= Dừng tải game?
+Close the game first, then install it again.
+= Hãy đóng game trước, rồi cài lại.
+Close the game first, then run setup again.
+= Hãy đóng game trước, rồi chạy lại thiết lập.
+No save game folder set.
+= Chưa đặt thư mục lưu game.
+No game config folder set.
+= Chưa đặt thư mục cấu hình game.
+Downloading the game: {#0}%  ({1} of {2})
+= Đang tải game: {#0}%  ({1} / {2})
+Downloading the game: {0}
+= Đang tải game: {0}
+{#0} days ago
+= {#0} ngày trước
+{#0} weeks ago
+= {#0} tuần trước
+Your last run was {0}.
+= Lượt gần nhất của bạn: {0}.
+{#0} runs, {#1} won
+= {#0} lượt, thắng {#1}
+new {0} DPS high: {1}
+= kỷ lục DPS {0} mới: {1}
+best DPS {0} ({1})
+= DPS tốt nhất {0} ({1})
+most played with {0}
+= chơi nhiều nhất với {0}
+You beat it {0} times
+= Bạn đã hạ nó {0} lần
+It killed you {0} times
+= Nó đã giết bạn {0} lần
+Best together: {0}, level {1}
+= Tốt nhất cùng nhau: {0}, cấp {1}
+fastest win {0}
+= chiến thắng nhanh nhất {0}
+{#0} runs, oldest left
+= {#0} lượt, cũ nhất ở bên trái

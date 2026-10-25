@@ -1118,3 +1118,129 @@ Exit fullscreen
 = Volledig scherm sluiten
 Highest DPS
 = Hoogste DPS
+
+# added 2026-10-25: install in the status line, Community, This week, stats pages, download hosts
+Play a few runs with the newest AZS Stats to see your DPS over time.
+= Speel een paar runs met de nieuwste AZS Stats om je DPS door de tijd te zien.
+Best of these
+= Beste hiervan
+ringed: victories
+= omcirkeld: overwinningen
+Your best builds show up here after a DPS high or a victory.
+= Je beste builds verschijnen hier na een DPS-record of een overwinning.
+A build video made by a player. All credit goes to the people who made it.
+= Een buildvideo gemaakt door een speler. Alle eer gaat naar de makers.
+No community videos yet.
+= Nog geen communityvideo's.
+MORE BUILD GUIDES ›
+= MEER BUILDGIDSEN ›
+Loading the video...
+= Video wordt geladen...
+Nothing in the guide matches
+= Niets in de gids komt overeen met
+Search the guide: a spell, a boss, a key...
+= Doorzoek de gids: een spreuk, een baas, een toets...
+Patch
+= Patch
+News
+= Nieuws
+Game version
+= Spelversie
+No runs yet this week.
+= Deze week nog geen runs.
+This week
+= Deze week
+Addons need the game. Press INSTALL to download it first.
+= Addons hebben het spel nodig. Druk eerst op INSTALLEREN om het te downloaden.
+Game client not found. Press INSTALL to download it first.
+= Spelclient niet gevonden. Druk eerst op INSTALLEREN om hem te downloaden.
+Please wait until the game update or install has finished.
+= Wacht tot de spelupdate of installatie klaar is.
+Downloading the game client...
+= Spelclient wordt gedownload...
+The download server sent something that is not the game archive. Please try again later.
+= De downloadserver stuurde niet het spelarchief. Probeer het later opnieuw.
+Download cancelled.
+= Download geannuleerd.
+The download server did not accept the launcher's login.
+= De downloadserver accepteerde de login van de launcher niet.
+The backup host's page has no download link right now.
+= De pagina van de reserveserver heeft nu geen downloadlink.
+The download from the backup host is damaged (its checksum does not match). Please try again.
+= De download van de reserveserver is beschadigd (de controlesom klopt niet). Probeer het opnieuw.
+The launcher is already running.\n\nLook for its icon in the system tray (near the clock).
+= De launcher draait al.\n\nZoek het pictogram in het systeemvak (bij de klok).
+INSTALL FROM A FILE
+= INSTALLEREN VANAF BESTAND
+Making the run's picture...
+= Afbeelding van de run wordt gemaakt...
+The run's picture is copied: paste it into Discord. Also saved in Pictures.
+= De afbeelding van de run is gekopieerd: plak hem in Discord. Ook opgeslagen in Afbeeldingen.
+Could not make the run's picture: {0}
+= Kon de afbeelding van de run niet maken: {0}
+The AddOns folder is not set. Set the game config folder in Options.
+= De AddOns-map is niet ingesteld. Stel de map met spelconfiguratie in bij Opties.
+DPS over time
+= DPS door de tijd
+Best builds
+= Beste builds
+Revenge: bosses you beat
+= Wraak: verslagen bazen
+Your top partner
+= Je vaste partner
+Runs together
+= Runs samen
+Win rate together
+= Winstpercentage samen
+Your party
+= Je groep
+last played
+= laatst gespeeld
+today
+= vandaag
+yesterday
+= gisteren
+click a run to share it
+= klik op een run om hem te delen
+by
+= door
+Community
+= Community
+Stop downloading the game?
+= Het downloaden van het spel stoppen?
+Close the game first, then install it again.
+= Sluit eerst het spel en installeer het dan opnieuw.
+Close the game first, then run setup again.
+= Sluit eerst het spel en voer dan de installatiewizard opnieuw uit.
+No save game folder set.
+= Geen map voor spelopslag ingesteld.
+No game config folder set.
+= Geen map voor spelconfiguratie ingesteld.
+Downloading the game: {#0}%  ({1} of {2})
+= Spel wordt gedownload: {#0}%  ({1} van {2})
+Downloading the game: {0}
+= Spel wordt gedownload: {0}
+{#0} days ago
+= {#0} dagen geleden
+{#0} weeks ago
+= {#0} weken geleden
+Your last run was {0}.
+= Je laatste run: {0}.
+{#0} runs, {#1} won
+= {#0} runs, {#1} gewonnen
+new {0} DPS high: {1}
+= nieuw {0}-DPS-record: {1}
+best DPS {0} ({1})
+= beste DPS {0} ({1})
+most played with {0}
+= het meest gespeeld met {0}
+You beat it {0} times
+= Je versloeg hem {0} keer
+It killed you {0} times
+= Hij doodde je {0} keer
+Best together: {0}, level {1}
+= Beste samen: {0}, level {1}
+fastest win {0}
+= snelste overwinning {0}
+{#0} runs, oldest left
+= {#0} runs, oudste links

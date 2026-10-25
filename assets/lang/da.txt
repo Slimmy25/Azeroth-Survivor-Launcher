@@ -1118,3 +1118,129 @@ Exit fullscreen
 = Afslut fuld skærm
 Highest DPS
 = Højeste DPS
+
+# added 2026-10-25: install in the status line, Community, This week, stats pages, download hosts
+Play a few runs with the newest AZS Stats to see your DPS over time.
+= Spil et par runs med den nyeste AZS Stats for at se din DPS over tid.
+Best of these
+= Bedste af disse
+ringed: victories
+= med ring: sejre
+Your best builds show up here after a DPS high or a victory.
+= Dine bedste builds vises her efter en DPS-rekord eller en sejr.
+A build video made by a player. All credit goes to the people who made it.
+= En build-video lavet af en spiller. Al ære går til dem, der lavede den.
+No community videos yet.
+= Ingen community-videoer endnu.
+MORE BUILD GUIDES ›
+= FLERE BUILD-GUIDES ›
+Loading the video...
+= Indlæser videoen...
+Nothing in the guide matches
+= Intet i guiden matcher
+Search the guide: a spell, a boss, a key...
+= Søg i guiden: en besværgelse, en boss, en tast...
+Patch
+= Patch
+News
+= Nyheder
+Game version
+= Spilversion
+No runs yet this week.
+= Ingen runs i denne uge.
+This week
+= Denne uge
+Addons need the game. Press INSTALL to download it first.
+= Addons kræver spillet. Tryk på INSTALLÉR for at hente det først.
+Game client not found. Press INSTALL to download it first.
+= Spilklienten blev ikke fundet. Tryk på INSTALLÉR for at hente den først.
+Please wait until the game update or install has finished.
+= Vent, til spilopdateringen eller installationen er færdig.
+Downloading the game client...
+= Henter spilklienten...
+The download server sent something that is not the game archive. Please try again later.
+= Downloadserveren sendte ikke spillets arkiv. Prøv igen senere.
+Download cancelled.
+= Download annulleret.
+The download server did not accept the launcher's login.
+= Downloadserveren godtog ikke launcherens login.
+The backup host's page has no download link right now.
+= Reserveserverens side har ikke noget downloadlink lige nu.
+The download from the backup host is damaged (its checksum does not match). Please try again.
+= Downloadet fra reserveserveren er beskadiget (kontrolsummen passer ikke). Prøv igen.
+The launcher is already running.\n\nLook for its icon in the system tray (near the clock).
+= Launcheren kører allerede.\n\nFind dens ikon i meddelelsesområdet (ved uret).
+INSTALL FROM A FILE
+= INSTALLÉR FRA EN FIL
+Making the run's picture...
+= Laver billedet af runnet...
+The run's picture is copied: paste it into Discord. Also saved in Pictures.
+= Billedet af runnet er kopieret: indsæt det i Discord. Det er også gemt i Billeder.
+Could not make the run's picture: {0}
+= Kunne ikke lave billedet af runnet: {0}
+The AddOns folder is not set. Set the game config folder in Options.
+= AddOns-mappen er ikke valgt. Vælg spillets konfigurationsmappe i Indstillinger.
+DPS over time
+= DPS over tid
+Best builds
+= Bedste builds
+Revenge: bosses you beat
+= Hævn: bosser du har slået
+Your top partner
+= Din faste makker
+Runs together
+= Runs sammen
+Win rate together
+= Sejrsrate sammen
+Your party
+= Din gruppe
+last played
+= sidst spillet
+today
+= i dag
+yesterday
+= i går
+click a run to share it
+= klik på et run for at dele det
+by
+= af
+Community
+= Fællesskab
+Stop downloading the game?
+= Stop download af spillet?
+Close the game first, then install it again.
+= Luk spillet først, og installér det så igen.
+Close the game first, then run setup again.
+= Luk spillet først, og kør så opsætningen igen.
+No save game folder set.
+= Ingen mappe til spilgemninger valgt.
+No game config folder set.
+= Ingen mappe til spilkonfiguration valgt.
+Downloading the game: {#0}%  ({1} of {2})
+= Henter spillet: {#0} %  ({1} af {2})
+Downloading the game: {0}
+= Henter spillet: {0}
+{#0} days ago
+= for {#0} dage siden
+{#0} weeks ago
+= for {#0} uger siden
+Your last run was {0}.
+= Dit seneste run: {0}.
+{#0} runs, {#1} won
+= {#0} runs, {#1} vundet
+new {0} DPS high: {1}
+= ny {0}-DPS-rekord: {1}
+best DPS {0} ({1})
+= bedste DPS {0} ({1})
+most played with {0}
+= mest spillet med {0}
+You beat it {0} times
+= Du har slået den {0} gange
+It killed you {0} times
+= Den har dræbt dig {0} gange
+Best together: {0}, level {1}
+= Bedst sammen: {0}, level {1}
+fastest win {0}
+= hurtigste sejr {0}
+{#0} runs, oldest left
+= {#0} runs, ældste til venstre

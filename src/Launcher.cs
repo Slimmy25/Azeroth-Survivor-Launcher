@@ -292,8 +292,8 @@ namespace AzerothLauncher
                     Region oldClip = g.Clip;
                     g.SetClip(NewsArea);
                     float y = NewsArea.Y - newsScroll;
-                    g.DrawString(Lang.T("Patch ") + lines[0].Trim(), tf, shadow, 698, y + 1);
-                    g.DrawString(Lang.T("Patch ") + lines[0].Trim(), tf, title, 697, y);
+                    g.DrawString(Lang.T("Patch") + " " + lines[0].Trim(), tf, shadow, 698, y + 1);
+                    g.DrawString(Lang.T("Patch") + " " + lines[0].Trim(), tf, title, 697, y);
                     y += 22;
                     for (int i = 1; i < lines.Length; i++)
                     {
@@ -371,13 +371,6 @@ namespace AzerothLauncher
                         g.DrawString(st, stf, sb, sx, playBtn.Top - 26);
                     }
                 }
-                PlayStats ps = ShownPlayStats();
-                if (ps.Sessions > 0 && StatsEnabled() && Cfg.Bool("home_playtime", true))
-                {
-                    sf.Alignment = StringAlignment.Far;          // from the right edge, growing left
-                    g.DrawString(Lang.T("Time played: " + Duration(ps.Seconds) + "   |   Last session: " + Duration(ps.LastSeconds)),
-                                 Theme.F(8, FontStyle.Italic), gb, new RectangleF(400, H - 17, W - 10 - 400, 14), sf);   // the very bottom
-                }
                 string version = Data.GameVersion;
                 using (var vb = new SolidBrush(Theme.Hex("#b8a27a")))            // bottom-left corner
                     g.DrawString(Lang.T("Game version") + (version.Length > 0 ? ": " + version : ""), Theme.F(9.5f), vb, 12, 670);   // a little bigger
@@ -387,9 +380,44 @@ namespace AzerothLauncher
         // ---- "This week": a card in the empty lower left of the home screen (AZS Stats' runs of the last 7 days)
         void WeeklyRecap(Graphics g)
         {
+            // under the Launcher buttons: "This week" (AZS Stats' runs of the last 7 days) and the play time AZS Stats
+            // counts in game, together in one small card
+            var lines = new List<string[]>();                // { heading, text }
             RunStats st = null;
             try { st = StatsEnabled() ? AddonStats() : null; } catch (Exception) { }
-            if (st == null || st.History.Count == 0) return;
+            if (st != null && st.History.Count > 0) lines.Add(new[] { Lang.T("This week"), WeekText(st) });
+            PlayStats ps = st != null ? st.Play : new PlayStats();
+            if (ps.Sessions > 0 && StatsEnabled() && Cfg.Bool("home_playtime", true))
+                lines.Add(new[] { Lang.T("Time played"), Duration(ps.Seconds) + "  ·  " + Lang.T("Last session") + " " + Duration(ps.LastSeconds) });
+            if (lines.Count == 0) return;
+            var box = new RectangleF(694, 548, 394, 28);
+            using (var path = Armory.Round(box, 5))
+            {
+                using (var b = new SolidBrush(Color.FromArgb(190, 14, 13, 20))) g.FillPath(b, path);
+                using (var p = new Pen(Color.FromArgb(150, Theme.GoldDim), 1)) g.DrawPath(p, path);
+            }
+            Font hf = Theme.F(8, FontStyle.Bold), bf = Theme.F(8);
+            float lh = lines.Count == 1 ? box.Height : box.Height / 2;
+            using (var gold = new SolidBrush(Retro.Gold))
+            using (var text = new SolidBrush(Theme.Text))
+            using (var sf = new StringFormat(StringFormatFlags.NoWrap))
+            {
+                sf.Trimming = StringTrimming.EllipsisCharacter;
+                sf.LineAlignment = StringAlignment.Center;
+                for (int i = 0; i < lines.Count; i++)
+                {
+                    float y = box.Y + i * lh + (lines.Count == 1 ? 0 : (i == 0 ? 1 : -1));
+                    string head = lines[i][0] + ":";
+                    float hw = g.MeasureString(head, hf).Width;
+                    g.DrawString(head, hf, gold, new RectangleF(box.X + 8, y, hw + 2, lh), sf);
+                    g.DrawString(lines[i][1], bf, text, new RectangleF(box.X + 8 + hw + 2, y, box.Width - 16 - hw - 2, lh), sf);
+                }
+            }
+        }
+
+        // "3 runs, 1 won · best DPS 205 (Mage) · most played with Brisa", or when the week was quiet, when you last played
+        string WeekText(RunStats st)
+        {
             DateTime since = DateTime.Now.AddDays(-7);
             int runs = 0, wins = 0;
             double bestDps = 0;
@@ -426,7 +454,6 @@ namespace AzerothLauncher
                 parts.Add(Lang.T(runs + " runs, " + wins + " won"));
                 if (bestRun != null)
                 {
-                    // a DPS high set this week (for its class)?
                     StatBlock cb = st.Class(bestRun.ClassKey);
                     StatRecord rec;
                     bool high = cb != null && cb.Best.TryGetValue("dps", out rec) && rec.Value <= bestRun.Dps + 0.5;
@@ -438,27 +465,7 @@ namespace AzerothLauncher
                 foreach (var kv in partners) if (kv.Value > most) { most = kv.Value; top = kv.Key; }
                 if (top != null) parts.Add(Lang.T("most played with " + top));
             }
-            // one line in the bottom bar, centred, snug against the window's bottom edge
-            string head = Lang.T("This week") + ":  ", body = string.Join(" · ", parts.ToArray());
-            Font hf = Theme.F(9, FontStyle.Bold), bf = Theme.F(9);
-            float hw = g.MeasureString(head, hf).Width, bw = g.MeasureString(body, bf).Width;
-            float maxW = 440;                                // between the game version (left) and the play time (right)
-            if (hw + bw > maxW) bw = maxW - hw;
-            float x = W / 2f - (hw + bw) / 2f, y = H - 4 - hf.Height;
-            var box = new RectangleF(x - 10, y - 3, hw + bw + 20, hf.Height + 5);
-            using (var path = Armory.Round(box, 6))
-            {
-                using (var b = new SolidBrush(Color.FromArgb(190, 14, 13, 20))) g.FillPath(b, path);
-                using (var p = new Pen(Color.FromArgb(150, Theme.GoldDim), 1)) g.DrawPath(p, path);
-            }
-            using (var gold = new SolidBrush(Retro.Gold))
-            using (var text = new SolidBrush(Theme.Text))
-            using (var sf = new StringFormat(StringFormatFlags.NoWrap))
-            {
-                sf.Trimming = StringTrimming.EllipsisCharacter;
-                g.DrawString(head, hf, gold, x, y);
-                g.DrawString(body, bf, text, new RectangleF(x + hw, y + 0.5f, bw + 2, hf.Height + 2), sf);
-            }
+            return string.Join(" · ", parts.ToArray());
         }
 
         // ---- the News panel scrolls when the patch note is longer than its space

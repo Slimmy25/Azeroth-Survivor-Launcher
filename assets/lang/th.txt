@@ -1119,3 +1119,129 @@ Exit fullscreen
 = ออกจากเต็มจอ
 Highest DPS
 = DPS สูงสุด
+
+# added 2026-10-25: install in the status line, Community, This week, stats pages, download hosts
+Play a few runs with the newest AZS Stats to see your DPS over time.
+= เล่นสักสองสามรอบด้วย AZS Stats เวอร์ชันล่าสุดเพื่อดู DPS ของคุณตามเวลา
+Best of these
+= ดีที่สุดในกลุ่มนี้
+ringed: victories
+= มีวง: ชนะ
+Your best builds show up here after a DPS high or a victory.
+= บิลด์ที่ดีที่สุดของคุณจะแสดงที่นี่หลังทำสถิติ DPS หรือชนะ
+A build video made by a player. All credit goes to the people who made it.
+= วิดีโอบิลด์ที่ผู้เล่นทำ เครดิตทั้งหมดเป็นของผู้สร้าง
+No community videos yet.
+= ยังไม่มีวิดีโอของชุมชน
+MORE BUILD GUIDES ›
+= คู่มือบิลด์เพิ่มเติม ›
+Loading the video...
+= กำลังโหลดวิดีโอ...
+Nothing in the guide matches
+= ไม่มีอะไรในคู่มือที่ตรงกับ
+Search the guide: a spell, a boss, a key...
+= ค้นหาในคู่มือ: เวท บอส ปุ่ม...
+Patch
+= แพตช์
+News
+= ข่าวสาร
+Game version
+= เวอร์ชันเกม
+No runs yet this week.
+= สัปดาห์นี้ยังไม่มีรอบ
+This week
+= สัปดาห์นี้
+Addons need the game. Press INSTALL to download it first.
+= แอดออนต้องใช้เกม กด ติดตั้ง ก่อนเพื่อดาวน์โหลด
+Game client not found. Press INSTALL to download it first.
+= ไม่พบไคลเอนต์เกม กด ติดตั้ง ก่อนเพื่อดาวน์โหลด
+Please wait until the game update or install has finished.
+= โปรดรอจนกว่าการอัปเดตหรือการติดตั้งเกมจะเสร็จ
+Downloading the game client...
+= กำลังดาวน์โหลดไคลเอนต์เกม...
+The download server sent something that is not the game archive. Please try again later.
+= เซิร์ฟเวอร์ดาวน์โหลดไม่ได้ส่งไฟล์เกมมา โปรดลองอีกครั้งภายหลัง
+Download cancelled.
+= ยกเลิกการดาวน์โหลดแล้ว
+The download server did not accept the launcher's login.
+= เซิร์ฟเวอร์ดาวน์โหลดไม่ยอมรับการเข้าสู่ระบบของลันเชอร์
+The backup host's page has no download link right now.
+= หน้าเซิร์ฟเวอร์สำรองยังไม่มีลิงก์ดาวน์โหลดในตอนนี้
+The download from the backup host is damaged (its checksum does not match). Please try again.
+= ไฟล์จากเซิร์ฟเวอร์สำรองเสียหาย (checksum ไม่ตรง) โปรดลองอีกครั้ง
+The launcher is already running.\n\nLook for its icon in the system tray (near the clock).
+= ลันเชอร์กำลังทำงานอยู่แล้ว\n\nมองหาไอคอนในถาดระบบ (ใกล้นาฬิกา)
+INSTALL FROM A FILE
+= ติดตั้งจากไฟล์
+Making the run's picture...
+= กำลังสร้างภาพของรอบนี้...
+The run's picture is copied: paste it into Discord. Also saved in Pictures.
+= คัดลอกภาพของรอบแล้ว: วางลงใน Discord ได้เลย และบันทึกไว้ใน Pictures ด้วย
+Could not make the run's picture: {0}
+= สร้างภาพของรอบไม่ได้: {0}
+The AddOns folder is not set. Set the game config folder in Options.
+= ยังไม่ได้ตั้งโฟลเดอร์ AddOns ตั้งโฟลเดอร์การตั้งค่าเกมในตัวเลือก
+DPS over time
+= DPS ตามเวลา
+Best builds
+= บิลด์ที่ดีที่สุด
+Revenge: bosses you beat
+= แก้แค้น: บอสที่คุณชนะ
+Your top partner
+= คู่หูหลักของคุณ
+Runs together
+= รอบที่เล่นด้วยกัน
+Win rate together
+= อัตราชนะด้วยกัน
+Your party
+= ปาร์ตี้ของคุณ
+last played
+= เล่นล่าสุด
+today
+= วันนี้
+yesterday
+= เมื่อวาน
+click a run to share it
+= คลิกรอบเพื่อแชร์
+by
+= โดย
+Community
+= ชุมชน
+Stop downloading the game?
+= หยุดดาวน์โหลดเกมไหม?
+Close the game first, then install it again.
+= ปิดเกมก่อน แล้วค่อยติดตั้งใหม่
+Close the game first, then run setup again.
+= ปิดเกมก่อน แล้วค่อยเรียกใช้การตั้งค่าอีกครั้ง
+No save game folder set.
+= ยังไม่ได้ตั้งโฟลเดอร์เซฟเกม
+No game config folder set.
+= ยังไม่ได้ตั้งโฟลเดอร์การตั้งค่าเกม
+Downloading the game: {#0}%  ({1} of {2})
+= กำลังดาวน์โหลดเกม: {#0}%  ({1} จาก {2})
+Downloading the game: {0}
+= กำลังดาวน์โหลดเกม: {0}
+{#0} days ago
+= {#0} วันที่แล้ว
+{#0} weeks ago
+= {#0} สัปดาห์ที่แล้ว
+Your last run was {0}.
+= รอบล่าสุดของคุณ: {0}
+{#0} runs, {#1} won
+= {#0} รอบ ชนะ {#1}
+new {0} DPS high: {1}
+= สถิติ DPS {0} ใหม่: {1}
+best DPS {0} ({1})
+= DPS ดีที่สุด {0} ({1})
+most played with {0}
+= เล่นด้วยบ่อยที่สุด: {0}
+You beat it {0} times
+= คุณชนะมัน {0} ครั้ง
+It killed you {0} times
+= มันฆ่าคุณ {0} ครั้ง
+Best together: {0}, level {1}
+= ดีที่สุดด้วยกัน: {0} เลเวล {1}
+fastest win {0}
+= ชนะเร็วที่สุด {0}
+{#0} runs, oldest left
+= {#0} รอบ เก่าที่สุดอยู่ซ้าย

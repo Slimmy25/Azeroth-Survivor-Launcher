@@ -1119,3 +1119,129 @@ Exit fullscreen
 = Tam ekrandan çık
 Highest DPS
 = En yüksek DPS
+
+# added 2026-10-25: install in the status line, Community, This week, stats pages, download hosts
+Play a few runs with the newest AZS Stats to see your DPS over time.
+= DPS'inin zaman içindeki değişimini görmek için en yeni AZS Stats ile birkaç tur oyna.
+Best of these
+= Bunların en iyisi
+ringed: victories
+= halkalı: zaferler
+Your best builds show up here after a DPS high or a victory.
+= En iyi build'lerin bir DPS rekoru veya zaferden sonra burada görünür.
+A build video made by a player. All credit goes to the people who made it.
+= Bir oyuncunun hazırladığı build videosu. Tüm emek onu yapanlara ait.
+No community videos yet.
+= Henüz topluluk videosu yok.
+MORE BUILD GUIDES ›
+= DAHA FAZLA BUILD REHBERİ ›
+Loading the video...
+= Video yükleniyor...
+Nothing in the guide matches
+= Rehberde eşleşen bir şey yok:
+Search the guide: a spell, a boss, a key...
+= Rehberde ara: bir büyü, bir boss, bir tuş...
+Patch
+= Yama
+News
+= Haberler
+Game version
+= Oyun sürümü
+No runs yet this week.
+= Bu hafta henüz tur yok.
+This week
+= Bu hafta
+Addons need the game. Press INSTALL to download it first.
+= Eklentiler için oyun gerekli. Önce indirmek için YÜKLE'ye bas.
+Game client not found. Press INSTALL to download it first.
+= Oyun istemcisi bulunamadı. Önce indirmek için YÜKLE'ye bas.
+Please wait until the game update or install has finished.
+= Oyun güncellemesi veya kurulumu bitene kadar bekle.
+Downloading the game client...
+= Oyun istemcisi indiriliyor...
+The download server sent something that is not the game archive. Please try again later.
+= İndirme sunucusu oyun arşivini göndermedi. Daha sonra tekrar dene.
+Download cancelled.
+= İndirme iptal edildi.
+The download server did not accept the launcher's login.
+= İndirme sunucusu başlatıcının girişini kabul etmedi.
+The backup host's page has no download link right now.
+= Yedek sunucunun sayfasında şu an indirme bağlantısı yok.
+The download from the backup host is damaged (its checksum does not match). Please try again.
+= Yedek sunucudan inen dosya bozuk (sağlama toplamı uyuşmuyor). Tekrar dene.
+The launcher is already running.\n\nLook for its icon in the system tray (near the clock).
+= Başlatıcı zaten çalışıyor.\n\nSimgesini bildirim alanında (saatin yanında) ara.
+INSTALL FROM A FILE
+= DOSYADAN YÜKLE
+Making the run's picture...
+= Turun resmi hazırlanıyor...
+The run's picture is copied: paste it into Discord. Also saved in Pictures.
+= Turun resmi kopyalandı: Discord'a yapıştır. Resimler klasörüne de kaydedildi.
+Could not make the run's picture: {0}
+= Turun resmi oluşturulamadı: {0}
+The AddOns folder is not set. Set the game config folder in Options.
+= AddOns klasörü ayarlanmamış. Seçenekler'de oyunun yapılandırma klasörünü ayarla.
+DPS over time
+= Zaman içinde DPS
+Best builds
+= En iyi build'ler
+Revenge: bosses you beat
+= İntikam: yendiğin boss'lar
+Your top partner
+= En sık oynadığın ortak
+Runs together
+= Birlikte turlar
+Win rate together
+= Birlikte kazanma oranı
+Your party
+= Grubun
+last played
+= son oynanan
+today
+= bugün
+yesterday
+= dün
+click a run to share it
+= paylaşmak için bir tura tıkla
+by
+= yapan:
+Community
+= Topluluk
+Stop downloading the game?
+= Oyunun indirilmesi durdurulsun mu?
+Close the game first, then install it again.
+= Önce oyunu kapat, sonra yeniden yükle.
+Close the game first, then run setup again.
+= Önce oyunu kapat, sonra kurulumu yeniden çalıştır.
+No save game folder set.
+= Kayıtlı oyun klasörü ayarlanmamış.
+No game config folder set.
+= Oyun yapılandırma klasörü ayarlanmamış.
+Downloading the game: {#0}%  ({1} of {2})
+= Oyun indiriliyor: %{#0}  ({1} / {2})
+Downloading the game: {0}
+= Oyun indiriliyor: {0}
+{#0} days ago
+= {#0} gün önce
+{#0} weeks ago
+= {#0} hafta önce
+Your last run was {0}.
+= Son turun: {0}.
+{#0} runs, {#1} won
+= {#0} tur, {#1} galibiyet
+new {0} DPS high: {1}
+= yeni {0} DPS rekoru: {1}
+best DPS {0} ({1})
+= en iyi DPS {0} ({1})
+most played with {0}
+= en çok birlikte oynanan: {0}
+You beat it {0} times
+= Onu {0} kez yendin
+It killed you {0} times
+= Seni {0} kez öldürdü
+Best together: {0}, level {1}
+= Birlikte en iyi: {0}, seviye {1}
+fastest win {0}
+= en hızlı zafer {0}
+{#0} runs, oldest left
+= {#0} tur, en eskiler solda

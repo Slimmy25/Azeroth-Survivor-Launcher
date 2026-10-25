@@ -21,7 +21,6 @@ namespace AzerothLauncher
 {
     public partial class LauncherApp
     {
-        bool communityDismissed;                             // its X was pressed: the home screen stays plain until next time
         static int communityPick = -1;                       // the featured video (index in BuildVideos)
         static DateTime communityPicked = DateTime.MinValue;
         GuideVideo communityPlaying;                         // the video playing in the section, or null
@@ -68,7 +67,7 @@ namespace AzerothLauncher
         // the home screen: Community, unless its X was pressed
         void ShowHomeCommunity()
         {
-            if (communityDismissed || side == null) { HideSide(); return; }
+            if (side == null) return;
             ShowSection("Community");
         }
 
@@ -90,7 +89,7 @@ namespace AzerothLauncher
             int ti;
             GuideVideo v = Featured(BuildVideos(out ti));
             PutText("A build video made by a player. All credit goes to the people who made it.",
-                    9.5f, FontStyle.Italic, Theme.GoldDim, 84, 16, PW - 104);
+                    9.5f, FontStyle.Italic, Theme.GoldDim, 24, 18, PW - 260);
             int top = (int)(12 + 32 * Theme.Zoom) + 12;
             if (v == null)
             {
@@ -186,7 +185,6 @@ namespace AzerothLauncher
         {
             if (EdgePath() == null) { Util.OpenInShell(WatchUrl(v)); return true; }
             communityPlaying = v;
-            communityDismissed = false;
             if (current == "Community" && side.Visible) BuildPanel("Community");
             else { current = null; ShowSection("Community"); }
             return true;

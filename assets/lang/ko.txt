@@ -1119,3 +1119,129 @@ Exit fullscreen
 = 전체 화면 종료
 Highest DPS
 = 최고 DPS
+
+# added 2026-10-25: install in the status line, Community, This week, stats pages, download hosts
+Play a few runs with the newest AZS Stats to see your DPS over time.
+= 최신 AZS Stats로 몇 판 플레이하면 시간에 따른 DPS를 볼 수 있습니다.
+Best of these
+= 이 중 최고
+ringed: victories
+= 고리 표시: 승리
+Your best builds show up here after a DPS high or a victory.
+= DPS 기록을 세우거나 승리하면 최고의 빌드가 여기에 표시됩니다.
+A build video made by a player. All credit goes to the people who made it.
+= 플레이어가 만든 빌드 영상입니다. 모든 공은 제작자에게 있습니다.
+No community videos yet.
+= 아직 커뮤니티 영상이 없습니다.
+MORE BUILD GUIDES ›
+= 빌드 가이드 더 보기 ›
+Loading the video...
+= 영상을 불러오는 중...
+Nothing in the guide matches
+= 가이드에서 일치하는 항목이 없습니다:
+Search the guide: a spell, a boss, a key...
+= 가이드 검색: 주문, 보스, 키...
+Patch
+= 패치
+News
+= 소식
+Game version
+= 게임 버전
+No runs yet this week.
+= 이번 주에는 아직 판이 없습니다.
+This week
+= 이번 주
+Addons need the game. Press INSTALL to download it first.
+= 애드온에는 게임이 필요합니다. 먼저 설치를 눌러 다운로드하세요.
+Game client not found. Press INSTALL to download it first.
+= 게임 클라이언트를 찾을 수 없습니다. 먼저 설치를 눌러 다운로드하세요.
+Please wait until the game update or install has finished.
+= 게임 업데이트나 설치가 끝날 때까지 기다려 주세요.
+Downloading the game client...
+= 게임 클라이언트를 다운로드하는 중...
+The download server sent something that is not the game archive. Please try again later.
+= 다운로드 서버가 게임 압축 파일을 보내지 않았습니다. 나중에 다시 시도하세요.
+Download cancelled.
+= 다운로드를 취소했습니다.
+The download server did not accept the launcher's login.
+= 다운로드 서버가 런처의 로그인을 받아들이지 않았습니다.
+The backup host's page has no download link right now.
+= 예비 서버 페이지에 지금은 다운로드 링크가 없습니다.
+The download from the backup host is damaged (its checksum does not match). Please try again.
+= 예비 서버에서 받은 파일이 손상되었습니다(체크섬 불일치). 다시 시도하세요.
+The launcher is already running.\n\nLook for its icon in the system tray (near the clock).
+= 런처가 이미 실행 중입니다.\n\n시스템 트레이(시계 근처)에서 아이콘을 찾아보세요.
+INSTALL FROM A FILE
+= 파일에서 설치
+Making the run's picture...
+= 판 이미지를 만드는 중...
+The run's picture is copied: paste it into Discord. Also saved in Pictures.
+= 판 이미지를 복사했습니다: Discord에 붙여 넣으세요. 사진 폴더에도 저장했습니다.
+Could not make the run's picture: {0}
+= 판 이미지를 만들 수 없습니다: {0}
+The AddOns folder is not set. Set the game config folder in Options.
+= AddOns 폴더가 설정되지 않았습니다. 옵션에서 게임 설정 폴더를 지정하세요.
+DPS over time
+= 시간에 따른 DPS
+Best builds
+= 최고의 빌드
+Revenge: bosses you beat
+= 복수: 쓰러뜨린 보스
+Your top partner
+= 가장 자주 함께한 동료
+Runs together
+= 함께한 판
+Win rate together
+= 함께한 승률
+Your party
+= 내 파티
+last played
+= 마지막 플레이
+today
+= 오늘
+yesterday
+= 어제
+click a run to share it
+= 판을 클릭해 공유하세요
+by
+= 제작:
+Community
+= 커뮤니티
+Stop downloading the game?
+= 게임 다운로드를 중지할까요?
+Close the game first, then install it again.
+= 먼저 게임을 닫은 다음 다시 설치하세요.
+Close the game first, then run setup again.
+= 먼저 게임을 닫은 다음 설정을 다시 실행하세요.
+No save game folder set.
+= 게임 저장 폴더가 설정되지 않았습니다.
+No game config folder set.
+= 게임 설정 폴더가 설정되지 않았습니다.
+Downloading the game: {#0}%  ({1} of {2})
+= 게임 다운로드 중: {#0}%  ({1} / {2})
+Downloading the game: {0}
+= 게임 다운로드 중: {0}
+{#0} days ago
+= {#0}일 전
+{#0} weeks ago
+= {#0}주 전
+Your last run was {0}.
+= 마지막 판: {0}.
+{#0} runs, {#1} won
+= {#0}판, {#1}승
+new {0} DPS high: {1}
+= {0} DPS 신기록: {1}
+best DPS {0} ({1})
+= 최고 DPS {0} ({1})
+most played with {0}
+= 가장 많이 함께한 상대: {0}
+You beat it {0} times
+= {0}번 쓰러뜨림
+It killed you {0} times
+= {0}번 당함
+Best together: {0}, level {1}
+= 함께한 최고 기록: {0}, 레벨 {1}
+fastest win {0}
+= 최단 승리 {0}
+{#0} runs, oldest left
+= {#0}판, 오래된 순으로 왼쪽부터
