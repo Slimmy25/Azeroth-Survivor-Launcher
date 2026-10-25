@@ -32,7 +32,7 @@ jobs:
         continue-on-error: true
         run: |
           $r = Install-WindowsFeature Server-Media-Foundation
-          $r | Format-List | Out-String | Write-Output
+          Write-Output "::notice::Media Foundation: success=$($r.Success) restart=$($r.RestartNeeded) exit=$($r.ExitCode)"
           if ($r.RestartNeeded -eq 'Yes') { Write-Output "::warning::Media Foundation needs a restart; the video check may fail" }
 
       - name: Render the STATS page
