@@ -229,7 +229,7 @@ namespace AzerothLauncher
         // a control and everything in it (DrawToBitmap alone leaves out what sits inside some painted controls)
         static void DrawDeep(Control c, Bitmap page, int x, int y)
         {
-            if (!c.Visible || c.Width <= 0 || c.Height <= 0) return;
+            if (c.Width <= 0 || c.Height <= 0) return;
             c.DrawToBitmap(page, new Rectangle(x, y, c.Width, c.Height));
             for (int i = c.Controls.Count - 1; i >= 0; i--)
             {
