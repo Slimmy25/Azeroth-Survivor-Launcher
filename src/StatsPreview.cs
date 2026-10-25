@@ -25,6 +25,11 @@ namespace AzerothLauncher
             app.ShowSide();
             RunStats st = Stats.Load(app.SyncSettings().SavedDir);
             string topClass = st != null && st.Classes.Count > 0 ? st.Classes[0].Key : null;
+            if (st != null)                                  // ask for every spell icon now, so the pictures show them
+            {
+                foreach (var ab in st.Abilities) SpellIcons.Get(ab.Name, null);
+                SpellIcons.WaitForAll(30000);
+            }
             foreach (string cls in new[] { null, topClass })
             {
                 for (int tab = 0; tab < StatTabs.Length; tab++)
