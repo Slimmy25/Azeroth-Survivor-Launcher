@@ -329,6 +329,7 @@ namespace AzerothLauncher
         // Empties the section area; the title goes in the title bar. Every section gets the same back arrow.
         void ClearPanel(string title)
         {
+            GuideHover.Hide();
             StopEdge();                                      // a video playing in Community (Community.cs) stops
             edgeHost = null;
             logBox = null;
@@ -1238,6 +1239,7 @@ namespace AzerothLauncher
             homeCb.Size = VStack.Measure(homeCb);
             Put(homeCb, 18, BottomOf(statsLabel) + 4);
             Put(new WowButton("RUN SETUP AGAIN", delegate { RunSetup(); }, 190, 30, 9), PW - 20 - 190, PH - 10 - 30);
+            Put(new WowButton("INSTALL FROM A FILE", delegate { InstallFromDownloads(); }, 190, 30, 9), PW - 20 - 190 - 8 - 190, PH - 10 - 30);
         }
 
         void ChooseGameFolder()

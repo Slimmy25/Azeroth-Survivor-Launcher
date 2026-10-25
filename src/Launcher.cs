@@ -21,7 +21,7 @@ namespace AzerothLauncher
         public const bool RequireLauncherInstall = true;
 
         // Where the game is downloaded from, and the download server's login (shared with every player, so it is fine
-        // in the open). The launcher downloads it itself (InstallDialog), into a "temp" folder beside the launcher.
+        // in the open). The launcher downloads it itself (BeginClientDownload), into a "temp" folder beside the launcher.
         public const string ClientUrl = "https://budapestmix.hu:5000/download";
         public const string ClientUser = "AzerothSurvivors_uSZfhjS", ClientPassword = "AzerothSurvivors_uSZfhjS";
         // The developers' backup host: a page with a link to the newest archive and its SHA-256 (no login). Each
@@ -35,7 +35,6 @@ namespace AzerothLauncher
         public bool GameRunningFlag, Installing, SyncBusy, Updating, UpdateChecking, UpdateAvailable;
         UpdateInfo updateInfo;
         UpdateDialog updateDlg;
-        InstallDialog installDlg;
         bool updateOfferPending, setupOpen, setupAsked, trayNotified, quitting;
         string updateRecovery;
         readonly bool startInTray;
@@ -122,6 +121,11 @@ namespace AzerothLauncher
             FormClosing += OnClosingWindow;
             FormClosed += delegate { StopEdge(); };              // a Community video never outlives the launcher
             VideoCard.YouTube = PlayYouTube;                     // YouTube videos play inside Community (Community.cs)
+            GuideLinks.Navigate = delegate(int t, int pg)      // a link in the Guide's text (GuideLinks.cs)
+            {
+                if (current != "Guide" || !side.Visible) ShowSection("Guide");
+                SetGuideView(t, pg);
+            };
             Resize += delegate { if (WindowState == FormWindowState.Minimized) After(1, HideToTray); };
             Shown += delegate
             {
@@ -961,7 +965,7 @@ namespace AzerothLauncher
             if (GameRunningFlag) return;
             if (Installing)
             {
-                if (installDlg != null && !installDlg.IsDisposed) InstallClient();   // the download's window, with CANCEL
+                InstallClient();                             // asks whether to stop the download
                 return;
             }
             if (Updating)
@@ -1167,6 +1171,11 @@ namespace AzerothLauncher
             Invalidate(new Rectangle(0, 578, W, H - 578));
         }
 
+        ManualResetEvent installCancel;
+        bool downloadInstall;
+
+        // INSTALL: no window of its own. The download and the install run in the launcher's status line (a bar with the
+        // percentage above INSTALLING); pressing INSTALLING asks whether to stop the download.
         void InstallClient(bool forSetup)
         {
             if (Updating)
@@ -1174,49 +1183,33 @@ namespace AzerothLauncher
                 SetStatus("The game is being updated. Please wait until that has finished.");
                 return;
             }
-            if (installDlg != null && !installDlg.IsDisposed)
+            if (Installing)
             {
-                if (forSetup) installDlg.ForSetup = true;
-                installDlg.Show();
-                installDlg.WindowState = FormWindowState.Normal;
-                installDlg.Activate();
+                if (installCancel != null && dlActive && Ask("Install", "Stop downloading the game?"))
+                    installCancel.Set();
                 return;
             }
-            installDlg = new InstallDialog(this, forSetup);
-            installDlg.FormClosed += delegate
+            if (GameRunningFlag)
             {
-                installDlg = null;
-                if (setupAfterInstall)                       // installed as part of setup: on to the folders page
-                {
-                    setupAfterInstall = false;
-                    After(300, ShowSetupDialog);
-                }
-            };
-            installDlg.PlaceOver(this);
-            installDlg.Show();
+                Info("Install", "Close the game first, then install it again.");
+                return;
+            }
+            setupAfterInstall = forSetup;
+            BeginClientDownload();
         }
 
         // The game download, done by the launcher: into <launcher folder>\temp, with the download server's login,
         // then unpacked next to the launcher; the temp folder is deleted afterwards, whatever happened.
-        public bool BeginClientDownload(InstallDialog dlg)
+        void BeginClientDownload()
         {
-            if (Updating || Installing)
-            {
-                SetStatus("Please wait until the game update or install has finished.");
-                return false;
-            }
-            if (GameRunningFlag)
-            {
-                Msg.Show(dlg, "Close the game first, then install it again.", "Install");
-                return false;
-            }
             Installing = true;
             RefreshPlayLabel();
             SetStatus("Downloading the game client...");
             SetDownloadBar(true, 0, 0);
             string temp = Path.Combine(Util.LauncherDir, "temp");
             string dest = Util.LauncherDir;
-            ManualResetEvent cancel = dlg.CancelEvent;
+            installCancel = new ManualResetEvent(false);
+            ManualResetEvent cancel = installCancel;
             Bg(delegate
             {
                 string error = null;
@@ -1234,17 +1227,10 @@ namespace AzerothLauncher
                         if (pct == last && Environment.TickCount - lastTick < 1000) return;
                         last = pct;
                         lastTick = Environment.TickCount;
-                        Ui(delegate
-                        {
-                            dlg.SetProgress(done, total);
-                            SetDownloadBar(true, done, total);
-                        });
+                        Ui(delegate { SetDownloadBar(true, done, total); });
                     };
-                    DownloadClient(file, progress, cancel, delegate(string text)
-                    {
-                        Ui(delegate { dlg.SetPhase("download", text); });
-                    });
-                    Ui(delegate { SetDownloadBar(false, 0, 0); dlg.SetPhase("install", "Unpacking the game..."); SetStatus("Unpacking the game client..."); });
+                    DownloadClient(file, progress, cancel, delegate(string text) { });
+                    Ui(delegate { SetDownloadBar(false, 0, 0); SetStatus("Unpacking the game client..."); });
                     if (Archive.Kind(file) == null)
                         throw new UserError("The download server sent something that is not the game archive. Please try again later.");
                     Archive.InstallGame(file, dest);
@@ -1255,37 +1241,33 @@ namespace AzerothLauncher
                 Ui(delegate
                 {
                     SetDownloadBar(false, 0, 0);
-                    if (!dlg.IsDisposed && !dlg.Visible)      // it was tucked away while the game downloaded: back with the result
-                    {
-                        dlg.PlaceOver(this);
-                        dlg.Show();
-                        dlg.Activate();
-                    }
+                    installCancel = null;
                     if (cancelled)
                     {
                         Installing = false;
+                        setupAfterInstall = false;
                         RefreshPlayLabel();
                         SetStatus("Download cancelled.");
-                        if (!dlg.IsDisposed) dlg.ShowOffer();
                         return;
                     }
-                    if (error == null) InstallDone(null, dest);
-                    else
+                    if (error != null)
                     {
                         Installing = false;
+                        setupAfterInstall = false;
                         RefreshPlayLabel();
                         SetStatus("Install failed.");
-                        if (dlg.IsDisposed) Error("Install", error);
+                        ShowWindowFront();
+                        Error("Install", error);
+                        return;
                     }
-                    if (!dlg.IsDisposed)
-                    {
-                        if (error == null && dlg.ForSetup) setupAfterInstall = true;
-                        dlg.ShowResult(error == null, error == null ? "Azeroth Survivors is installed." +
-                            (dlg.ForSetup ? " Next: where your files are, and cloud saving." : " Press PLAY to enter Azeroth.") : error);
-                    }
+                    bool setup = setupAfterInstall || !Cfg.Bool("setup_done", false);
+                    setupAfterInstall = false;
+                    downloadInstall = true;
+                    try { InstallDone(null, dest); }
+                    finally { downloadInstall = false; }
+                    if (setup) After(300, ShowSetupDialog);  // first-time setup / RUN SETUP AGAIN: on to the folders page
                 });
             });
-            return true;
         }
 
         static readonly Random hostDice = new Random();
@@ -1435,7 +1417,7 @@ namespace AzerothLauncher
             {
                 SetStatus("Install complete - press PLAY.");
                 Notify("Install complete. Press PLAY to enter Azeroth.");
-                if (installDlg == null && (setupAfterFileInstall || !Cfg.Bool("setup_done", false)))
+                if (!downloadInstall && (setupAfterFileInstall || !Cfg.Bool("setup_done", false)))
                     After(300, ShowSetupDialog);             // installed from a file during setup: on to the folders page
                 setupAfterFileInstall = false;
                 if (Updater.Enabled) After(800, delegate { CheckForUpdate(false, true); });   // is it already the newest?
