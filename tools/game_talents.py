@@ -20,14 +20,9 @@ def get(url):
 
 
 def wasm_url():
+    # the page loads everything with the same version stamp (rogue.css?v=..., wenilla_bg.wasm?v=...)
     html = get(SITE).decode("utf-8", "replace")
-    m = re.search(r'wenilla_bg\.wasm\?v=([0-9a-f]+)', html)
-    if not m:
-        for js in re.findall(r'src="([^"]+\.js[^"]*)"', html):
-            t = get(SITE + js.lstrip("/")).decode("utf-8", "replace")
-            m = re.search(r'wenilla_bg\.wasm\?v=([0-9a-f]+)', t)
-            if m:
-                break
+    m = re.search(r'\?v=([0-9a-f]{6,})', html)
     return SITE + "wenilla_bg.wasm" + ("?v=" + m.group(1) if m else "")
 
 
@@ -82,6 +77,8 @@ def memory(b):
 def main():
     root = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
     data = open(sys.argv[1], "rb").read() if len(sys.argv) > 1 else get(wasm_url())
+    if data[:4] != b"\0asm":
+        sys.exit("::error::the download is not the game's WebAssembly file")
     mem = memory(data)
     text = data.decode("latin1")
     u = lambda i: struct.unpack_from("<I", mem, i)[0]
