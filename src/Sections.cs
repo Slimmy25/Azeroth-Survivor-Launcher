@@ -864,8 +864,8 @@ namespace AzerothLauncher
             var toggle = Put(new WowButton("TOGGLE ALL", ToggleAllAddons, 190, 34, 11), cx, top + 28 + 6);
             addonCount = UI.Text("", 10, FontStyle.Italic, Theme.GoldDim, Theme.Panel, 0);
             addonCount.AutoSize = false;
-            addonCount.TextAlign = ContentAlignment.TopRight;
-            addonCount.Bounds = new Rectangle(cx, BottomOf(toggle) + 2, 190, 20);
+            addonCount.TextAlign = ContentAlignment.TopCenter;   // centred under TOGGLE ALL
+            addonCount.Bounds = new Rectangle(cx, BottomOf(toggle) + 2, toggle.Width, 20);
             Put(addonCount, cx, BottomOf(toggle) + 2);
             var profiles = Cfg.Section("addon_profiles");
             int py = bottom;
