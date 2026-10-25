@@ -438,7 +438,8 @@ namespace AzerothLauncher
                 Rectangle s = rects[i];
                 Armory.Box(g, s, 6, i == hover && row.Click != null ? Armory.SlotHover : Armory.Slot, Armory.SlotEdge);
                 var icon = new Rectangle(s.X + 7, s.Y + 7, 40, 40);
-                Image pic = row.Spell != null ? SpellIcons.Get(row.Spell, this) : null;
+                // only a row that is on screen asks for its icon: scrolling down fetches the rest as they come into view
+                Image pic = row.Spell != null && g.VisibleClipBounds.IntersectsWith(icon) ? SpellIcons.Get(row.Spell, this) : null;
                 if (pic != null)
                 {
                     using (var path = Armory.Round(icon, 5))
