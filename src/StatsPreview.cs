@@ -139,13 +139,25 @@ namespace AzerothLauncher
                 app.BuildPanel("Stats");
             }
             // every other section, to check they all use the launcher's colors
-            foreach (string sec in new[] { "Cloud Save", "Addons", "Changelog", "Options", "About Launcher", "Guide" })
+            // the AZS addons the launcher carries, installed into the preview's AddOns folder (their files, the data
+            // written from the guide among them, are kept with the pictures to be checked)
+            try
+            {
+                string addonsDir = Path.Combine(Path.GetFullPath(outDir), "AddOns");
+                Directory.CreateDirectory(addonsDir);
+                foreach (var a in BuiltinAddons.All) BuiltinAddons.Install(addonsDir, a);
+            }
+            catch (Exception) { }
+            foreach (string sec in new[] { "Cloud Save", "Addons", "Addons Download", "Changelog", "Options", "About Launcher", "Guide" })
             {
                 app.Show();                                  // the preview starts as if in the tray
                 app.ShowSide();
-                app.current = sec;
+                string build = sec;
+                if (sec == "Addons Download") { build = "Addons"; app.addonMode = "download"; app.addonCategory = 0; }
+                else if (sec == "Addons") app.addonMode = "installed";
+                app.current = build;
                 if (sec == "Guide") { app.gTopic = -1; app.gPage = -1; app.guideQuery = "frost"; }   // the search, with a word typed
-                try { app.BuildPanel(sec); }
+                try { app.BuildPanel(build); }
                 catch (Exception ex)
                 {
                     using (var eb = new Bitmap(900, 300))
