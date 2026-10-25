@@ -29,6 +29,10 @@ ABOUT LAUNCHER
 = 關於啟動器
 UPDATE LAUNCHER
 = 更新啟動器
+NEW PLAYER GUIDE
+= 新手指南
+A Game Made By Aethus
+= 由 Aethus 製作的遊戲
 A game made by Aethus
 = Aethus 出品的遊戲
 Version {0}

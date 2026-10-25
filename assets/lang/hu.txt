@@ -29,6 +29,10 @@ ABOUT LAUNCHER
 = A LAUNCHERRŐL
 UPDATE LAUNCHER
 = LAUNCHER FRISSÍTÉSE
+NEW PLAYER GUIDE
+= ÚTMUTATÓ ÚJ JÁTÉKOSOKNAK
+A Game Made By Aethus
+= Aethus játéka
 A game made by Aethus
 = Aethus játéka
 Version {0}

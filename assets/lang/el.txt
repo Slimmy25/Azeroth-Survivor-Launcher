@@ -29,6 +29,10 @@ ABOUT LAUNCHER
 = ΣΧΕΤΙΚΑ ΜΕ ΤΟΝ LAUNCHER
 UPDATE LAUNCHER
 = ΕΝΗΜΕΡΩΣΗ LAUNCHER
+NEW PLAYER GUIDE
+= ΟΔΗΓΟΣ ΝΕΩΝ ΠΑΙΚΤΩΝ
+A Game Made By Aethus
+= Ένα παιχνίδι του Aethus
 A game made by Aethus
 = Ένα παιχνίδι του Aethus
 Version {0}

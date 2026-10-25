@@ -29,6 +29,10 @@ ABOUT LAUNCHER
 = GIỚI THIỆU LAUNCHER
 UPDATE LAUNCHER
 = CẬP NHẬT LAUNCHER
+NEW PLAYER GUIDE
+= HƯỚNG DẪN NGƯỜI MỚI
+A Game Made By Aethus
+= Một trò chơi của Aethus
 A game made by Aethus
 = Một trò chơi của Aethus
 Version {0}

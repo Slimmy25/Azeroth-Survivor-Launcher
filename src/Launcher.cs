@@ -40,7 +40,7 @@ namespace AzerothLauncher
 
         readonly WowButton playBtn, updateBtn, aboutBtn, discordBtn;
         readonly Dictionary<string, WowButton> nav = new Dictionary<string, WowButton>();
-        readonly string[] navNames = { "Guide", "Cloud Save", "Addons", "Changelog", "Stats", "Options" };   // top to bottom
+        readonly string[] navNames = { "Guide", "Addons", "Cloud Save", "Changelog", "Stats", "Options" };   // order under "Launcher" (Discord before Options)
         NotifyIcon tray;
         ToolStripMenuItem trayShow, trayPlay, trayUpload, trayCloseToTray, trayQuit;
 
@@ -93,10 +93,8 @@ namespace AzerothLauncher
             foreach (string name in navNames)
             {
                 string n = name;
-                bool low = n == "Guide" || n == "Addons";       // these two sit in the bottom bar
-                nav[n] = Place(new WowButton(n.ToUpperInvariant(), delegate { ShowSection(n); }, low ? 159 : 128, 27, 8.5f),
-                               low ? (n == "Guide" ? 445 : 612) : 693, low ? H - 8 - 27 : 480);   // Guide and Addons: along the very bottom
-                nav[n].Skin = low ? Retro.Long : Retro.Button;
+                nav[n] = Place(new WowButton(n == "Guide" ? "NEW PLAYER GUIDE" : n.ToUpperInvariant(), delegate { ShowSection(n); }, 128, 27, 8.5f), 693, 480);
+                nav[n].Skin = Retro.Button;
             }
             aboutBtn = Place(new WowButton("ABOUT LAUNCHER", delegate { ShowSection("About Launcher"); }, 159, 27, 8), W - 8 - 159 - 6, 98);         // under UPDATE LAUNCHER
             aboutBtn.Skin = Retro.Long;
@@ -258,6 +256,12 @@ namespace AzerothLauncher
                     g.FillPath(lg, path);
                 using (var pen = new Pen(Theme.Hex("#4a2a08"), 2f)) g.DrawPath(pen, path);
                 if (em != null) g.DrawImage(em, pb.Right + 16, 70 + (120 - emH) / 2, emW, emH);
+                // under the title: who made the game
+                string by = Lang.T("A Game Made By Aethus");
+                Font byf = Theme.F(13, FontStyle.Italic);
+                float bw = g.MeasureString(by, byf).Width, bx = pb.Left + (pb.Width - bw) / 2, byy = pb.Bottom + 12;
+                using (var bsh = new SolidBrush(Color.Black)) g.DrawString(by, byf, bsh, bx + 1, byy + 1);
+                using (var bb = new SolidBrush(Theme.Hex("#e8d9a8"))) g.DrawString(by, byf, bb, bx, byy);
             }
             // News: the newest patch note
             var posts = Data.Changelog;
@@ -297,10 +301,8 @@ namespace AzerothLauncher
                 g.DrawString(Lang.T("Launcher"), hf, gold, 697, 446);
             }
             // bottom bar, left: the welcome line and the cloud note
-            string bodyText = ClientPresent() ? "Press PLAY to enter Azeroth." :
-                (RequireLauncherInstall ? "Game client not found. Press INSTALL to download it first."
-                                        : "Game client not found. Press INSTALL, or set the game folder in Options.");
-            if (CloudEnabled()) bodyText += " Your cloud save syncs automatically.";
+            string bodyText = ClientPresent() ? "Press PLAY to enter Azeroth." : "";   // no client: said in the status instead
+            if (CloudEnabled()) bodyText += (bodyText.Length > 0 ? " " : "") + "Your cloud save syncs automatically.";
             using (var b = new SolidBrush(Theme.Hex("#d7cea4")))
             using (var sh = new SolidBrush(Color.Black))
             {
@@ -319,7 +321,10 @@ namespace AzerothLauncher
                 using (var sb = new SolidBrush(Theme.Hex("#fff2b0")))
                 {
                     // centred over PLAY; a long status that would run off the window ends at the right edge instead
-                    string st = Lang.T(status);
+                    string st = Lang.T(status == "Ready." && !ClientPresent()
+                        ? (RequireLauncherInstall ? "Game client not found. Press INSTALL to download it first."
+                                                  : "Game client not found. Press INSTALL, or set the game folder in Options.")
+                        : status);
                     Font stf = Theme.F(9, FontStyle.Italic);
                     float sw = g.MeasureString(st, stf).Width, cxp = playBtn.Left + playBtn.Width / 2f;
                     float sx = Math.Min(cxp - sw / 2, W - 10 - sw);
@@ -361,16 +366,15 @@ namespace AzerothLauncher
         // stack the section buttons
         void LayoutNav()
         {
-            int k = 0;                                       // three per row under "Launcher"; Guide and Addons are in the bottom bar
+            int k = 0;                                       // three per row under "Launcher", Discord just before Options
             foreach (string name in navNames)
             {
+                if (name == "Options") { discordBtn.Location = new Point(693 + (k % 3) * 134, 480 + (k / 3) * 34); k++; }
                 if (!NavShown(name)) { nav[name].Visible = false; continue; }
                 nav[name].Visible = true;
-                if (name == "Guide" || name == "Addons") continue;
                 nav[name].Location = new Point(693 + (k % 3) * 134, 480 + (k / 3) * 34);
                 k++;
             }
-            discordBtn.Location = new Point(693 + (k % 3) * 134, 480 + (k / 3) * 34);
             if (strip != null) LayoutStrip();
         }
 

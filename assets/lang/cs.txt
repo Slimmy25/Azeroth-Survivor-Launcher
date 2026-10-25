@@ -29,6 +29,10 @@ ABOUT LAUNCHER
 = O LAUNCHERU
 UPDATE LAUNCHER
 = AKTUALIZOVAT LAUNCHER
+NEW PLAYER GUIDE
+= PRŮVODCE PRO NOVÁČKY
+A Game Made By Aethus
+= Hra od Aethuse
 A game made by Aethus
 = Hra od tvůrce Aethus
 Version {0}

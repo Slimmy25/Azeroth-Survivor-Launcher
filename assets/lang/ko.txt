@@ -29,6 +29,10 @@ ABOUT LAUNCHER
 = 런처 정보
 UPDATE LAUNCHER
 = 런처 업데이트
+NEW PLAYER GUIDE
+= 신규 플레이어 가이드
+A Game Made By Aethus
+= Aethus가 만든 게임
 A game made by Aethus
 = Aethus가 만든 게임
 Version {0}

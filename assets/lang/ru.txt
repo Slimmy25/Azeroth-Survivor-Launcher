@@ -29,6 +29,10 @@ ABOUT LAUNCHER
 = О ЛАУНЧЕРЕ
 UPDATE LAUNCHER
 = ОБНОВИТЬ ЛАУНЧЕР
+NEW PLAYER GUIDE
+= РУКОВОДСТВО НОВИЧКА
+A Game Made By Aethus
+= Игра от Aethus
 A game made by Aethus
 = Игра от Aethus
 Version {0}
