@@ -1593,3 +1593,5 @@ Converted for Azeroth Survivors. Catches every Lua error (with !BugGrabber) and 
 = Omgebouwd voor Azeroth Survivors. Vangt elke Lua-fout op (met !BugGrabber) en toont ze in één venster: /bugsack of de minimapknop.
 GAME
 = SPEL
+OTHER ADDONS
+= ANDERE ADDONS

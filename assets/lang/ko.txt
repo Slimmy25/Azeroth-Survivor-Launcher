@@ -1594,3 +1594,5 @@ Converted for Azeroth Survivors. Catches every Lua error (with !BugGrabber) and 
 = Azeroth Survivors용으로 변환. 모든 Lua 오류를 (!BugGrabber와 함께) 잡아 하나의 창에 보여줍니다: /bugsack 또는 미니맵 버튼.
 GAME
 = 게임
+OTHER ADDONS
+= 기타 애드온

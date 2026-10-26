@@ -627,7 +627,7 @@ SlashCmdList["AZSHANDBOOK"] = function(msg)
 	AZSHandbook_Toggle();
 end
 
--- the minimap button: a book, at the top left of the minimap (AZS Stats' is at the bottom, AZS Transparency's at the right)
+-- the minimap button: a book, at the top left of the minimap (AZS Stats' is at the bottom)
 local ok, err = pcall(function()
 	AZSHandbook_Mini = K.Minimap({ name = "AZSHandbookMinimapButton", icon = "INV_Misc_Book_11", angle = 110, db = DB,
 		click = function() AZSHandbook_Toggle(); end,

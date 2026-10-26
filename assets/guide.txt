@@ -132,7 +132,10 @@ Gamepads are supported. On menus, the D-pad or left stick moves between buttons,
 # Useful options
 - Controls > Store Level-Ups: level-ups no longer pause the fight. They are saved for later and a Level Up! button shows how many are waiting.
 - Controls > Open Caches by Clicking: walking over a cache no longer buys it; right-click it instead.
-- Interface: turn parts of the run's screen on or off (run clock, boss bars, kills and gold, damage meter and more).
+- Interface: turn parts of the run's screen on or off: the run clock and next-boss line, the boss and guardian bars, the kills and gold box, your spells and jewelry, the banners in the middle of the screen, the boss loot notice and the damage meter.
+
+# The damage meter
+The meter window has three views: Damage Done (every spell, pet, talent and item, with its share of the run), Healing Done (the health each source gave you, overhealing left out) and Boss Damage (the last boss fight only). Lines in blue are a talent's or amulet's own damage. Its Reset button only clears the window: the run's numbers are kept.
 @video How do I open the DPS meter? | https://cdn.jsdelivr.net/gh/Slimmy25/Azeroth-Survivor-Launcher-Releases@guide-videos/controls/how-do-i-open-the-dps-meter.mp4
 
 @topic Your First Run | A step-by-step start for new heroes
@@ -412,6 +415,8 @@ Every zone ends with a final boss. Beat it to open the next zone, for that class
 
 # Boss fights
 Every boss has its own moves: charges, blinks behind you, eggs that hatch, totems and more. Before a big attack the ground is marked. Step out of the marker: getting caught hurts twice as much. The horde also grows tougher as the minutes pass, so the last bosses are the real test.
+- Several bosses can be up at once if you have not finished the last one when the next arrives.
+- Below 30% health a boss enrages and uses its abilities more often: save your cooldowns and your distance for that part.
 
 @topic Level-Ups & Cards | How your hero grows during a run
 # Picking cards
@@ -423,7 +428,10 @@ Each level-up deals you three cards. Pick one with the mouse or with 1, 2 or 3. 
 - Perks from the Rewards tab add more free rerolls, let you banish a card for the rest of the run, or skip a hand for gold.
 
 # Stored level-ups
-With Options > Controls > Store Level-Ups switched on, a level-up no longer pauses the fight. Your levels wait until you open them with the Level Up! button above your action bar, or with Y.
+With Options > Controls > Store Level-Ups switched on, a level-up no longer pauses the fight. Your levels wait until you open them with the Level Up! button above your action bar, or with Y. They are offered one after another until none are left. Switching the setting off offers every stored level at once.
+
+# The clock
+The run's clock stops while the cards are on screen and while the game is paused, so taking your time over a pick costs you nothing.
 
 # Luck
 Luck gives you better odds of rarer upgrades when you level up. You can see your luck in the Run Stats next to the character window during a run.
@@ -443,7 +451,9 @@ A floating blue rune in a pillar of blue light. Walk over it and every coin and 
 Caches are chests on the field that cost gold to open, and the price rises as you buy more (the run's screen shows the next price). A cache offers jewelry cards: rings, trinkets and amulets. Elites and guardians offer jewelry too. Each class also has legendary amulets of its own, one for every spell. The Codex in the Armory shows every piece the game has offered you so far. In co-op, every hero buys their own caches.
 
 # Guardians
-Guardians are big monsters that wait in their lairs. A red flag on the minimap points to the nearest lair. Slay a guardian for a reward pick. Each one you slay makes the later ones tougher, and an empty lair fills again after a few minutes. They also have their own moves, so treat them like small bosses.
+Guardians are big monsters that wait in their lairs. A red flag on the minimap points to the nearest lair (or, when every lair is empty, the one that fills soonest). Slay a guardian for a reward pick. Each one you slay makes the later ones tougher, and an empty lair fills again after a few minutes. They also have their own moves, so treat them like small bosses.
+- A lair is asleep (its guardian waits), awake (its guardian is fighting) or empty.
+- A guardian wakes when you come near. It fights where it stands, but walks back home if you lead it too far from its lair.
 
 # Elites, runes and soulstones
 - Elites are stronger enemies in the horde, worth a jewelry pick. Many spells aim at bosses and elites first.
@@ -511,6 +521,21 @@ You play the hero on your own picker. The host chooses the zone, and you can onl
 - Your heals, Battle Shout and Power Word: Shield also help friends within 30 yards.
 - Every hero rolls on a slain boss's gear for their own class, and a guardian slain by anyone rewards everyone.
 - Everything you win goes to your own save.
+
+@topic Addons | Add-ons for the game's interface, and where they go
+Azeroth Survivors runs on the World of Warcraft 1.12 client, so it uses 1.12 addons. They can change the interface, add windows and read the run as it goes: the clock, the bosses, your spells, the damage meter and more.
+
+# Installing
+- With the launcher: open Addons, then Download More. INSTALL puts an addon in its place, and the list keeps it up to date. Every addon is optional and starts off.
+- By hand (Windows): put the addon's folder in benilla-config\AddOns, next to the game.
+- In the browser version: Options > AddOns, then install a .zip of the addon's folder.
+- An addon loads the next time you enter the world.
+
+# Old addons
+An addon made for a different game version only loads with "Load out of date AddOns" switched on. Addons built for this game have the launcher's AZS ADDONS label; the WOW 1.12 ADDONS are classic addons converted to work here.
+
+# Replacing the game's HUD
+An addon can hide a part of the game's own screen (the clock, the boss bars, the damage meter and so on) to draw its own. Those are the same "Show ..." settings as Options > Interface, so you can always switch them back there.
 
 @topic Tips for New Players | Small things that make a big difference
 - Never stop moving. Walk in wide circles so the horde follows you in a line instead of surrounding you.

@@ -123,10 +123,12 @@ local function InMenu()
 			if ( string.find(string.lower(tex), "divineintervention", 1, true) ) then return true; end   -- Divine Shield's icon
 		end
 	end
+	-- AZS_BUFFS holds spell ids ({ spell, left }): Divine Shield is 642 (rank 1) or 1020 (rank 2)
 	if ( type(AZS_BUFFS) == "table" ) then
 		for i = 1, table.getn(AZS_BUFFS) do
 			local b = AZS_BUFFS[i];
-			if ( type(b) == "table" and string.find(string.lower(tostring(b.spell or "")), "divine shield", 1, true) ) then return true; end
+			local id = type(b) == "table" and tonumber(b.spell) or nil;
+			if ( id == 642 or id == 1020 ) then return true; end
 		end
 	end
 	return false;
@@ -175,10 +177,12 @@ end
 -- ---- level-up saves: your lowest health in the last moment before a level-up
 local lowHp, lowAt, lastLevel = 1, 0, nil;
 local function WatchHealth()
-	if ( not UnitHealth or not UnitHealthMax ) then return; end
-	local m = UnitHealthMax("player");
+	-- the run's own health (AZS_RUN.hp / hpm), else the unit's
+	local h, m;
+	if ( type(AZS_RUN) == "table" and Num(AZS_RUN.hpm) > 0 ) then h, m = Num(AZS_RUN.hp), Num(AZS_RUN.hpm);
+	elseif ( UnitHealth and UnitHealthMax ) then h, m = UnitHealth("player"), UnitHealthMax("player"); end
 	if ( not m or m <= 0 ) then return; end
-	local r = UnitHealth("player") / m;
+	local r = h / m;
 	local now = GetTime();
 	if ( r < lowHp or now - lowAt > 1.5 ) then lowHp, lowAt = r, now; end
 end
@@ -256,7 +260,7 @@ ev:SetScript("OnUpdate", function()
 		fast = 0;
 		pcall(WatchHealth);
 		-- a level-up the event did not tell about: the level went up
-		local lv = UnitLevel and UnitLevel("player") or nil;
+		local lv = (type(AZS_RUN) == "table" and Num(AZS_RUN.lvl) > 0) and Num(AZS_RUN.lvl) or (UnitLevel and UnitLevel("player") or nil);
 		if ( lv and lastLevel and lv > lastLevel ) then pcall(LevelUp); end
 		lastLevel = lv;
 		if ( InMenu() ) then menuUntil = GetTime() + 1; end

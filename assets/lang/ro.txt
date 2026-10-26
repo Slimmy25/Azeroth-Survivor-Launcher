@@ -1594,3 +1594,5 @@ Converted for Azeroth Survivors. Catches every Lua error (with !BugGrabber) and 
 = Adaptat pentru Azeroth Survivors. Prinde fiecare eroare Lua (cu !BugGrabber) și le arată într-o fereastră: /bugsack sau butonul lui de minihartă.
 GAME
 = JOC
+OTHER ADDONS
+= ALTE ADDONURI
