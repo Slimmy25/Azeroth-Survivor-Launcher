@@ -2,3 +2,7 @@
      than the last release), its text goes to the top of assets/launcher-changelog.txt, and a new next.md starts. -->
 
 ## What's new
+
+### News and Changelog
+- Patch notes for the game's 0.119.1, 0.120.0 and 0.120.1 updates: fewer co-op disconnects, any race with any class
+  (Rewards > Races), and boss kills counting for the whole party's achievements.
