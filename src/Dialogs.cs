@@ -169,18 +169,35 @@ namespace AzerothLauncher
             Page2();
         }
 
+        // page 3: addons. All of them are optional; if the player wants addons, AZS Stats is asked about first (before
+        // the list), and is only turned on when they want their stats tracked in and out of the game.
+        public bool? TrackStats;                              // the answer about AZS Stats (null: not asked)
+
         void Page2()
         {
-            BackAction = Page1;                               // page 2: back to the folders page
+            BackAction = Page1;                               // back to the folders page
             Begin();
             Heading("Addons", "Step 3 of 3", 26);
-            Para("Your settings are saved.\n\nWould you like to go to the Addons section now\n" +
-                 "to download some addons, or to enable or disable the ones you have?", 12, FontStyle.Regular, Theme.Text, 26, 0, 14, 0);
-            Body.Add(B("DOWNLOAD ADDONS", delegate { Leave("download"); }, 320, 42, 12), Align.Center, 26, 4, 26, 4);
-            Body.Add(B("ENABLE / DISABLE ADDONS", delegate { Leave("installed"); }, 320, 42, 12), Align.Center, 26, 4, 26, 4);
-            Body.Add(B("NO THANKS", delegate { Leave(null); }, 200, 34, 10), Align.Center, 26, 10, 26, 18);
+            Para("Your settings are saved.\n\nWould you like to download addons? They are all optional: " +
+                 "you choose each one you want.", 12, FontStyle.Regular, Theme.Text, 26, 0, 14, 560);
+            Body.Add(new HRow(12, B("YES, ADDONS", PageStats, 200, 42, 12), B("NO THANKS", delegate { Leave(null); }, 170, 42, 11)),
+                     Align.Center, 26, 4, 26, 4);
+            Body.Add(B("ENABLE / DISABLE MY ADDONS", delegate { Leave("installed"); }, 300, 34, 10), Align.Center, 26, 10, 26, 18);
             Finish();
-            BackAction = Page1;
+        }
+
+        void PageStats()
+        {
+            BackAction = Page2;
+            Begin();
+            Heading("AZS Stats", "Step 3 of 3", 26);
+            Para("Do you want to track your stats in and out of the game?", 13, FontStyle.Bold, Theme.Gold, 26, 0, 4, 560);
+            Para("AZS Stats records your runs while you play (/azs in game) and fills the launcher's STATS page: records, " +
+                 "abilities, classes, play time, your Nemesis and co-op with friends.", 11, FontStyle.Regular, Theme.Text, 26, 2, 12, 560);
+            Body.Add(new HRow(12, B("YES, TRACK MY STATS", delegate { TrackStats = true; Leave("download"); }, 250, 42, 12),
+                                  B("NO", delegate { TrackStats = false; Leave("download"); }, 140, 42, 12)),
+                     Align.Center, 26, 4, 26, 18);
+            Finish();
         }
 
         void Leave(string go)

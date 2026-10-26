@@ -1369,7 +1369,7 @@ namespace AzerothLauncher
         {
             SyncSettings ss = SyncSettings();
             var rows = new List<object[]>();
-            rows.Add(new object[] { "Game folder", GameDir(), new Action(ChooseGameFolder) });
+            rows.Add(new object[] { "Game folder", GameDir(), new Action(ChooseGameFolderButton) });
             rows.Add(new object[] { "Save game folder", ss.SaveDir, new Action(ChooseSaveDir) });
             rows.Add(new object[] { "Game config folder (AddOns, addon settings)", ss.ConfigDir, new Action(ChooseConfigDir) });
             if (CloudEnabled()) rows.Add(new object[] { "Sync folder (inside your cloud drive)", Cfg.Str("cloud_dir"), new Action(ChooseCloudDir) });
@@ -1383,6 +1383,14 @@ namespace AzerothLauncher
                 Put(new WowButton("CHANGE", (Action)r[2], 100, 28, 9), PW - 20 - (int)(100 * Theme.Zoom), y + Math.Max(0, (h - 28) / 2));
                 y = Math.Max(BottomOf(val), y + 30) + 5;
             }
+            // a save from the website: the game opens with it
+            var il = PutText("Import a save", 11, FontStyle.Bold, Theme.Gold, 20, y, PW - 160);
+            var inote = PutText("Puts in a save exported from the game (on the website: Options > Saves > Export Save), so the game opens with it.",
+                                9, FontStyle.Italic, Theme.GoldDim, 20, BottomOf(il), PW - 160);
+            int ih = BottomOf(inote) - y;
+            Put(new WowButton("IMPORT", delegate { if (ImportSave(side, SyncSettings().SaveDir) != null) SetStatus("Save imported."); }, 100, 28, 9),
+                PW - 20 - (int)(100 * Theme.Zoom), y + Math.Max(0, (ih - 28) / 2));
+            y = Math.Max(BottomOf(inote), y + 30) + 5;
             Put(UI.Line(Theme.Bronze, PW - 40, 1), 20, y + 4);
             y += 14;
             return OptionCheck("Cloud saving", CloudEnabled(), y, delegate(bool on) { SetCloudEnabled(on); });
@@ -1518,23 +1526,31 @@ namespace AzerothLauncher
                 y = Math.Max(BottomOf(b), BottomOf(t)) + 8;
             };
             row("ABOUT LAUNCHER", delegate { ShowSection("About Launcher"); }, "What the launcher does.");
-            row("RUN SETUP AGAIN", delegate { RunSetup(); }, "Downloads and installs the game again, then asks about your folders and cloud saving.");
-            row("INSTALL FROM A FILE", delegate { InstallFromDownloads(); }, "Installs the game from a file you downloaded yourself.");
-            row("IMPORT A SAVE", delegate { if (ImportSave(side, SyncSettings().SaveDir) != null) SetStatus("Save imported."); },
-                "Puts in a save exported from the game (on the website: Options > Saves > Export Save), so the game opens with it.");
+            row("RUN SETUP AGAIN", delegate { RunSetup(); }, "Asks again about your save, folders, cloud saving and addons. Nothing is downloaded.");
             return y;
         }
 
-        void ChooseGameFolder()
+        // the game folder: one that holds the game is the same as installing it (there is no "install from a file")
+        void ChooseGameFolderButton() { ChooseGameFolder(); }
+
+        bool ChooseGameFolder()
         {
-            string d = AskFolder(side, "Select your Azeroth Survivors game folder", GameDir());
-            if (d == null) return;
+            string d = AskFolder(this, "Select your Azeroth Survivors game folder (the one with " + Util.GameExe + ")", GameDir());
+            if (d == null) return false;
+            if (!File.Exists(Path.Combine(d, Util.GameExe)))
+            {
+                Warn("Game folder", Lang.T("That folder does not have the game in it") + " (" + Util.GameExe + ").");
+                return false;
+            }
             Cfg.Set("game_dir", d);
+            Cfg.Set("installed_by_launcher", true);           // the player's own copy counts as installed
             Cfg.Save();
             SetStatus("Game folder set: " + d);
             RefreshPlayLabel();                              // PLAY/INSTALL and the Cloud Save button follow the new folder
             Invalidate();
             RebuildCurrent();
+            if (Updater.Enabled) After(800, delegate { CheckForUpdate(false, true); });   // is it the newest version?
+            return true;
         }
 
         void ChooseSaveDir()

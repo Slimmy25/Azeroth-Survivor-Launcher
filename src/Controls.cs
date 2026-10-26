@@ -1147,6 +1147,83 @@ namespace AzerothLauncher
             return new WowButton(text, a, w, h, size);
         }
 
+        // ---- shown inside the launcher: over a darkened picture of it, and nothing behind it can be clicked until it
+        // is answered. No window of its own (when the launcher is hidden or minimized, it opens as a window instead).
+        public static Form Host;                              // the launcher, set when it starts
+        Panel shade;
+        bool closedInside;
+
+        static bool HostUsable()
+        {
+            Form h = Host;
+            return h != null && !h.IsDisposed && h.Visible && h.WindowState != FormWindowState.Minimized && !h.InvokeRequired;
+        }
+
+        public bool PutInLauncher()
+        {
+            if (!HostUsable()) return false;
+            Form h = Host;
+            var bmp = new Bitmap(Math.Max(1, h.ClientSize.Width), Math.Max(1, h.ClientSize.Height));
+            try { h.DrawToBitmap(bmp, new Rectangle(Point.Empty, bmp.Size)); } catch (Exception) { }
+            using (var g = Graphics.FromImage(bmp))
+            using (var dim = new SolidBrush(Color.FromArgb(175, 0, 0, 0))) g.FillRectangle(dim, 0, 0, bmp.Width, bmp.Height);
+            shade = new Panel();
+            shade.BackgroundImage = bmp;
+            shade.Bounds = new Rectangle(Point.Empty, h.ClientSize);
+            TopMost = false;
+            ShowInTaskbar = false;
+            TopLevel = false;
+            FormBorderStyle = FormBorderStyle.None;
+            shade.Controls.Add(this);
+            h.Controls.Add(shade);
+            shade.BringToFront();
+            SizeChanged += delegate { CenterInShade(); };
+            FormClosed += delegate { closedInside = true; RemoveShade(); };
+            CenterInShade();
+            Show();
+            BringToFront();
+            Select();
+            return true;
+        }
+
+        void CenterInShade()
+        {
+            if (shade == null) return;
+            Location = new Point(Math.Max(0, (shade.Width - Width) / 2), Math.Max(0, (shade.Height - Height) / 2));
+        }
+
+        void RemoveShade()
+        {
+            Panel s = shade;
+            shade = null;
+            if (s == null) return;
+            if (s.Controls.Contains(this)) s.Controls.Remove(this);
+            if (s.Parent != null) s.Parent.Controls.Remove(s);
+            Image img = s.BackgroundImage;
+            s.BackgroundImage = null;
+            s.Dispose();
+            if (img != null) img.Dispose();
+        }
+
+        // like ShowDialog, but inside the launcher: returns when it is closed
+        public DialogResult ShowModal(IWin32Window owner)
+        {
+            if (!PutInLauncher()) return ShowDialog(owner);
+            while (!closedInside && !IsDisposed && Host != null && !Host.IsDisposed)
+            {
+                Application.DoEvents();
+                if (!closedInside) System.Threading.Thread.Sleep(10);
+            }
+            RemoveShade();
+            return DialogResult;
+        }
+
+        // like Show (it stays open while the launcher goes on), but inside the launcher
+        public void ShowInside()
+        {
+            if (!PutInLauncher()) Show();
+        }
+
         // centred over the launcher when that is on screen, otherwise centred on the screen
         public void PlaceOver(Form parent)
         {
@@ -1164,6 +1241,41 @@ namespace AzerothLauncher
                 y = area.Top + (area.Height - Height) / 3;
             }
             Location = new Point(Math.Max(area.Left, x), Math.Max(area.Top, y));
+        }
+    }
+
+    // A question or a message, inside the launcher (Msg.Show uses it): the text and its buttons
+    public class MsgDialog : WowDialog
+    {
+        public MsgDialog(string text, string caption, MessageBoxButtons buttons) : base(caption)
+        {
+            DialogResult no = buttons == MessageBoxButtons.OK ? DialogResult.OK
+                            : buttons == MessageBoxButtons.YesNo ? DialogResult.No : DialogResult.Cancel;
+            BackAction = delegate { Done(no); };
+            Begin();
+            Heading(caption, null, 26);
+            Para(text, 11, FontStyle.Regular, Theme.Text, 26, 0, 6, 520);
+            var bs = new List<Control>();
+            if (buttons == MessageBoxButtons.OK) bs.Add(B("OK", delegate { Done(DialogResult.OK); }, 140, 36, 11));
+            else if (buttons == MessageBoxButtons.OKCancel)
+            {
+                bs.Add(B("OK", delegate { Done(DialogResult.OK); }, 140, 36, 11));
+                bs.Add(B("CANCEL", delegate { Done(DialogResult.Cancel); }, 140, 36, 11));
+            }
+            else
+            {
+                bs.Add(B("YES", delegate { Done(DialogResult.Yes); }, 140, 36, 11));
+                bs.Add(B("NO", delegate { Done(DialogResult.No); }, 140, 36, 11));
+                if (buttons == MessageBoxButtons.YesNoCancel) bs.Add(B("CANCEL", delegate { Done(DialogResult.Cancel); }, 140, 36, 11));
+            }
+            Body.Add(new HRow(12, bs.ToArray()), Align.Center, 26, 14, 26, 16);
+            Finish();
+        }
+
+        void Done(DialogResult r)
+        {
+            DialogResult = r;
+            Close();
         }
     }
 

@@ -12,7 +12,8 @@ namespace AzerothLauncher
 {
     public partial class LauncherApp
     {
-        public bool StatsEnabled() { return Cfg.Bool("stats_enabled", true); }
+        // off for a new player until setup asks (players who finished setup before keep it on)
+        public bool StatsEnabled() { return Cfg.Bool("stats_enabled", Cfg.Bool("setup_done", false)); }
 
         // Options > "Show the Stats section"
         void SetStatsEnabled(bool on)
