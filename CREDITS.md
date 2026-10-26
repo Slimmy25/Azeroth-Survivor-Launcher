@@ -13,9 +13,8 @@ Windows client, `AzerothSurvivors.exe`. The game, its code, its data, its patch 
   the game's own download hosts (`src/Launcher.cs`): the game's download server, the community mirror at
   `azerothsurvivors-mirror.sandervspl.dev` (by sandervspl), a Google Drive copy, and, as a last resort, the game's own
   download page, <https://wow.aethus.pl/download>. Each download is checked against the game's published checksums.
-- **Game data** the launcher shows was read from the game itself, at <https://wow.aethus.pl/>: the talent trees
-  (`assets/talents.txt`, by `tools/game_talents.py`), and spell and talent descriptions (`assets/game-text.txt`). The
-  Guide (`assets/guide.txt`) was written for the launcher from what the game shows and says.
+- **Game data** the launcher shows (talent trees, spell and talent descriptions, names) is the game's own, by Aethus.
+  The Guide was written for the launcher from what the game shows and says.
 - **Patch notes** in News and Changelog (`assets/changelog.txt`) are the game's own, by Aethus.
 - **The game's addon API** used by the AZS addons is documented by the game.
 - **The launcher's emblem** (`assets/logo.png`, the shield with its two heroes) is Azeroth Survivors' own art, and
