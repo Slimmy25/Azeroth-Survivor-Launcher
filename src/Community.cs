@@ -112,7 +112,7 @@ namespace AzerothLauncher
                         if (t.Length > 0) v.Title = t;
                         if (v.Author.Length == 0) v.Author = a;
                         if (v.AuthorUrl.Length == 0) v.AuthorUrl = au;
-                        if (current == "Community" && side.Visible && communityPlaying == null) BuildPanel("Community");
+                        if (current == "Community" && side.Visible && communityPlaying == null) BuildPanel("Community");   // also MORE VIDEOS
                     });
                 }
                 catch (Exception) { }
@@ -155,7 +155,7 @@ namespace AzerothLauncher
                 return;
             }
             // the video's title as the heading, the credit under it, then its picture with a play button
-            var title = PutText(v.Title.Length > 0 ? v.Title : "Build video", 13, FontStyle.Bold, Theme.Gold, 24, top, PW - 48, false);
+            var title = PutText(v.Title.Length > 0 ? v.Title : "Video", 13, FontStyle.Bold, Theme.Gold, 24, top, PW - 48, false);
             int y = BottomOf(title) + 2;
             if (v.Author.Length > 0)
             {
@@ -174,19 +174,29 @@ namespace AzerothLauncher
             pic.Click += delegate { PlayYouTube(v); };
             panel.Controls.Add(pic);
             pic.BringToFront();
-            if (BuildVideos(out ti).Count > 0)
+            if (MoreVideos().Count > 1)
                 Put(new WowButton("MORE VIDEOS ›", delegate { communityMore = true; BuildPanel("Community"); }, 200, 30, 9),
                     PW - 20 - (int)(200 * Theme.Zoom), 12);
         }
 
-        // MORE VIDEOS: every video that plays after the headline videos, as a grid of pictures; a click plays it here
+        // MORE VIDEOS: the videos of the front page's rotation (the headline videos while they run), then the videos
+        // that play once they are over, as a grid of pictures; a click plays it here
         bool communityMore;
+
+        static List<GuideVideo> MoreVideos()
+        {
+            var list = new List<GuideVideo>();
+            if (HeadlineOn) list.AddRange(Headlines);
+            int ti;
+            foreach (var v in BuildVideos(out ti)) if (!list.Contains(v)) list.Add(v);
+            return list;
+        }
 
         void CommunityMoreVideos()
         {
             ClearPanel("More Videos");
-            int ti;
-            var list = BuildVideos(out ti);
+            var list = MoreVideos();
+            foreach (var mv in list) FetchTitle(mv);
             int top = (int)(12 + 32 * Theme.Zoom) + 10;
             var sp = MakeScroll(panel, new Rectangle(20, top, PW - 40, PH - 12 - top), Theme.Panel, Theme.Bronze);
             const int cols = 3, gap = 12;
@@ -202,7 +212,7 @@ namespace AzerothLauncher
                 pic.Location = new Point(x, y);
                 pic.Click += delegate { PlayYouTube(v); };
                 sp.Controls.Add(pic);
-                var t = UI.Text(v.Title.Length > 0 ? v.Title : "Build video", 9.5f, FontStyle.Bold, Theme.Gold, sp.BackColor, cw, false);
+                var t = UI.Text(v.Title.Length > 0 ? v.Title : "Video", 9.5f, FontStyle.Bold, Theme.Gold, sp.BackColor, cw, false);
                 t.Size = VStack.Measure(t);
                 t.Location = new Point(x, y + ph + 4);
                 t.Cursor = Cursors.Hand;
