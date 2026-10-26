@@ -269,6 +269,7 @@ namespace AzerothLauncher
                 y = Place(sp, Records(b.Best), w, y);
                 var more = new TilesBlock();                 // legendaries collected and level-ups that saved you
                 more.Title = Lang.T("Collected");
+                more.Cols = 2;                               // two wide tiles, so their labels fit
                 more.Items.Add(new[] { Big(b.Legendary), Lang.T("Legendaries collected") });
                 more.Items.Add(new[] { Big(b.Saves), Lang.T("Level-up saves (at 15% health or less)") });
                 y = Place(sp, more, w, y);
