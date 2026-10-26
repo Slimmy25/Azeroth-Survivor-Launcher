@@ -1612,3 +1612,5 @@ Talents further down need this point.
 = Lejjebb lévő tehetségeknek kell ez a pont.
 Click a talent to add a point, right-click to take one back. As in the game, each row opens once its own tree has 5 points for every row above it; a build takes no more than 51 points. The purple ones are the milestones at 10, 20 and 30 points.
 = Kattints egy tehetségre egy pontért, jobb kattintással visszaveszed. Mint a játékban, minden sor akkor nyílik meg, ha a saját fájában minden fölötte lévő sorra 5 pont jut; egy build legfeljebb 51 pontot vesz fel. A lilák a 10, 20 és 30 pontos mérföldkövek.
+Watched!
+= Megnézve!

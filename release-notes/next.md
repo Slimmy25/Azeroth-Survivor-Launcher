@@ -7,6 +7,13 @@
 - Patch notes for the game's 0.119.1, 0.120.0 and 0.120.1 updates: fewer co-op disconnects, any race with any class
   (Rewards > Races), and boss kills counting for the whole party's achievements.
 
+### Community
+- MORE VIDEOS: a video you have watched for more than 45 seconds now has a "Watched!" tag over its picture (only the
+  time the video really plays counts, not loading or pausing). The tag is remembered between launches.
+- MORE VIDEOS: the featured videos stay at the top in their own order; every other video is shuffled into a new random
+  order each time you open the page.
+- New featured video in the front page's rotation and at the top of MORE VIDEOS: https://www.youtube.com/watch?v=AxcvhgPfYHU
+
 ### The Guide
 - Races: how to open any race to any class on the Rewards tab (new in the game's 0.120.0).
 - Achievements & Rewards: the Races reward, and co-op achievements counting for the whole party.

@@ -1612,3 +1612,5 @@ Talents further down need this point.
 = 下方的天賦需要這一點。
 Click a talent to add a point, right-click to take one back. As in the game, each row opens once its own tree has 5 points for every row above it; a build takes no more than 51 points. The purple ones are the milestones at 10, 20 and 30 points.
 = 點擊天賦加一點，按右鍵收回。與遊戲中一樣，每一列要在本系天賦樹中為上方每一列投入 5 點後才會開啟；配置最多 51 點。紫色的是 10、20 和 30 點的里程碑。
+Watched!
+= 已看過！

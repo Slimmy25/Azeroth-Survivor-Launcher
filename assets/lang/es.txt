@@ -1611,3 +1611,5 @@ Talents further down need this point.
 = Talentos más abajo necesitan este punto.
 Click a talent to add a point, right-click to take one back. As in the game, each row opens once its own tree has 5 points for every row above it; a build takes no more than 51 points. The purple ones are the milestones at 10, 20 and 30 points.
 = Haz clic en un talento para añadir un punto y clic derecho para quitarlo. Como en el juego, cada fila se abre cuando su propio árbol tiene 5 puntos por cada fila de arriba; una build lleva como mucho 51 puntos. Los morados son los hitos de 10, 20 y 30 puntos.
+Watched!
+= ¡Visto!

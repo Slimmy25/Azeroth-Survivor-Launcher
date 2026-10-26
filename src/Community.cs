@@ -59,6 +59,7 @@ namespace AzerothLauncher
                              Author = "Asmongold TV", AuthorUrl = "https://www.youtube.com/@AsmonTV" },
             new GuideVideo { Url = "https://www.youtube.com/watch?v=BKrbMA02fbQ" },
             new GuideVideo { Url = "https://www.youtube.com/watch?v=ryyXRezVAsc" },
+            new GuideVideo { Url = "https://www.youtube.com/watch?v=AxcvhgPfYHU" },
         };
         static readonly DateTime HeadlineUntil = new DateTime(2026, 11, 9, 23, 59, 59);   // two weeks from Oct 26, 2026
 
@@ -175,27 +176,63 @@ namespace AzerothLauncher
             panel.Controls.Add(pic);
             pic.BringToFront();
             if (MoreVideos().Count > 1)
-                Put(new WowButton("MORE VIDEOS ›", delegate { communityMore = true; BuildPanel("Community"); }, 200, 30, 9),
+                Put(new WowButton("MORE VIDEOS ›", delegate { communityMore = true; moreOrder = null; BuildPanel("Community"); }, 200, 30, 9),
                     PW - 20 - (int)(200 * Theme.Zoom), 12);
         }
 
-        // MORE VIDEOS: the videos of the front page's rotation (the headline videos while they run), then the videos
-        // that play once they are over, as a grid of pictures; a click plays it here
+        // MORE VIDEOS: the headline videos first, always at the top in their own order (while they run), then all the
+        // other videos in a random order, shuffled again each time MORE VIDEOS is opened; a click plays it here
         bool communityMore;
+        List<GuideVideo> moreOrder;                          // the order shown, kept while the page is open
 
         static List<GuideVideo> MoreVideos()
         {
             var list = new List<GuideVideo>();
             if (HeadlineOn) list.AddRange(Headlines);
             int ti;
-            foreach (var v in BuildVideos(out ti)) if (!list.Contains(v)) list.Add(v);
+            var rest = new List<GuideVideo>();
+            foreach (var v in BuildVideos(out ti)) if (!list.Contains(v) && !rest.Contains(v)) rest.Add(v);
+            var rnd = new Random();
+            for (int i = rest.Count - 1; i > 0; i--)
+            {
+                int j = rnd.Next(i + 1);
+                var t = rest[i]; rest[i] = rest[j]; rest[j] = t;
+            }
+            list.AddRange(rest);
             return list;
+        }
+
+        // the videos watched for more than 45 seconds (their YouTube ids, kept in the settings): MORE VIDEOS marks
+        // them "Watched!"
+        const double WatchedSeconds = 45;
+        HashSet<string> watched;
+
+        bool IsWatched(GuideVideo v)
+        {
+            if (watched == null)
+            {
+                watched = new HashSet<string>(StringComparer.Ordinal);
+                foreach (string id in (Cfg.Str("videos_watched") ?? "").Split(','))
+                    if (id.Trim().Length > 0) watched.Add(id.Trim());
+            }
+            string vid = VideoCard.YouTubeIdOf(v.Url);
+            return vid != null && watched.Contains(vid);
+        }
+
+        void MarkWatched(GuideVideo v)
+        {
+            string vid = VideoCard.YouTubeIdOf(v.Url);
+            if (vid == null || IsWatched(v)) return;
+            watched.Add(vid);
+            Cfg.Set("videos_watched", string.Join(",", new List<string>(watched).ToArray()));
+            if (!PreviewMode) Cfg.Save();
         }
 
         void CommunityMoreVideos()
         {
             ClearPanel("More Videos");
-            var list = MoreVideos();
+            if (moreOrder == null) moreOrder = MoreVideos();
+            var list = moreOrder;
             foreach (var mv in list) FetchTitle(mv);
             int top = (int)(12 + 32 * Theme.Zoom) + 10;
             var sp = MakeScroll(panel, new Rectangle(20, top, PW - 40, PH - 12 - top), Theme.Panel, Theme.Bronze);
@@ -209,6 +246,7 @@ namespace AzerothLauncher
                 if (col == 0 && i > 0) { y += rowH + gap; rowH = 0; }
                 int x = 4 + col * (cw + gap);
                 var pic = new VideoPoster(v, new Size(cw, ph));
+                pic.Watched = IsWatched(v);
                 pic.Location = new Point(x, y);
                 pic.Click += delegate { PlayYouTube(v); };
                 sp.Controls.Add(pic);
@@ -432,7 +470,7 @@ namespace AzerothLauncher
                     return;
                 }
                 Ui(delegate { Adopt(p, hwnd); });
-                WatchPage(p, port);
+                WatchPage(p, port, v);
             });
         }
 
@@ -450,7 +488,12 @@ namespace AzerothLauncher
             "if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',add);else add();" +
             "var n=0,t=setInterval(function(){add();window.dispatchEvent(new Event('resize'));if(++n>20)clearInterval(t);},500);})();";
 
-        void WatchPage(Process p, int port)
+        // the page's state, as a number: 1 while fullscreen, plus 2 while its video is playing
+        const string PageState =
+            "(function(){var v=document.querySelector('video');" +
+            "return (document.fullscreenElement?1:0)+((v&&!v.paused&&!v.ended&&v.readyState>2)?2:0);})()";
+
+        void WatchPage(Process p, int port, GuideVideo v)
         {
             var dt = new EdgeDevTools();
             try
@@ -460,16 +503,31 @@ namespace AzerothLauncher
                     if (p != edgeVideo) return;
                     if (!dt.Connect(port)) Thread.Sleep(250);
                 }
-                if (!dt.Open) return;
+                if (!dt.Open)
+                {
+                    // no DevTools: the time the player stays open counts as watching
+                    var opened = DateTime.Now;
+                    while (p == edgeVideo && (DateTime.Now - opened).TotalSeconds < WatchedSeconds) Thread.Sleep(500);
+                    if (p == edgeVideo) Ui(delegate { MarkWatched(v); });
+                    return;
+                }
                 dt.OnEveryPage(PlayerOnly);
                 dt.Eval(PlayerOnly);
-                bool full = false;
+                bool full = false, marked = false;
+                double played = 0;
                 while (p == edgeVideo && dt.Open)
                 {
                     Thread.Sleep(300);
-                    string r = dt.Eval("!!document.fullscreenElement");
+                    string r = dt.Eval(PageState);
                     if (r == null) continue;
-                    bool now = r.IndexOf("\"value\":true", StringComparison.Ordinal) >= 0;
+                    var m = System.Text.RegularExpressions.Regex.Match(r, "\"value\":(\\d)");
+                    int state = m.Success ? m.Groups[1].Value[0] - '0' : 0;
+                    if ((state & 2) != 0 && !marked)
+                    {
+                        played += 0.3;                        // only the time the video really plays
+                        if (played > WatchedSeconds) { marked = true; Ui(delegate { MarkWatched(v); }); }
+                    }
+                    bool now = (state & 1) != 0;
                     if (now == full) continue;
                     full = now;
                     bool f = now;
@@ -668,6 +726,7 @@ namespace AzerothLauncher
         readonly GuideVideo video;
         readonly string id;
         bool hover;
+        public bool Watched;                                 // a "Watched!" tag over its top-left corner
 
         public VideoPoster(GuideVideo v, Size size)
         {
@@ -715,6 +774,22 @@ namespace AzerothLauncher
             float t = pd * 0.32f;
             using (var b = new SolidBrush(Color.White))
                 g.FillPolygon(b, new[] { new PointF(cx - t * 0.7f, cy - t), new PointF(cx - t * 0.7f, cy + t), new PointF(cx + t, cy) });
+            if (Watched)
+            {
+                string tag = Lang.T("Watched!");
+                Font f = Theme.F(9, FontStyle.Bold);                 // a cached font: not disposed here
+                {
+                    SizeF ts = g.MeasureString(tag, f);
+                    var tr = new Rectangle(8, 8, (int)ts.Width + 14, (int)ts.Height + 6);
+                    using (var path = Armory.Round(tr, 6))
+                    {
+                        using (var b = new SolidBrush(Color.FromArgb(225, 24, 70, 30))) g.FillPath(b, path);
+                        using (var pen = new Pen(Theme.Gold, 1f)) g.DrawPath(pen, path);
+                    }
+                    using (var b = new SolidBrush(Color.White))
+                        g.DrawString(tag, f, b, tr.X + (tr.Width - ts.Width) / 2f, tr.Y + (tr.Height - ts.Height) / 2f);
+                }
+            }
         }
     }
 }

@@ -1612,3 +1612,5 @@ Talents further down need this point.
 = ทาเลนต์แถวล่างต้องใช้แต้มนี้
 Click a talent to add a point, right-click to take one back. As in the game, each row opens once its own tree has 5 points for every row above it; a build takes no more than 51 points. The purple ones are the milestones at 10, 20 and 30 points.
 = คลิกทาเลนต์เพื่อเพิ่มแต้ม คลิกขวาเพื่อนำออก เหมือนในเกม แต่ละแถวจะเปิดเมื่อต้นของมันมี 5 แต้มต่อทุกแถวที่อยู่ด้านบน บิลด์ใช้ได้สูงสุด 51 แต้ม สีม่วงคือหลักไมล์ที่ 10, 20 และ 30 แต้ม
+Watched!
+= ดูแล้ว!

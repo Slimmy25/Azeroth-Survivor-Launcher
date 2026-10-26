@@ -1612,3 +1612,5 @@ Talents further down need this point.
 = Talentele mai de jos au nevoie de acest punct.
 Click a talent to add a point, right-click to take one back. As in the game, each row opens once its own tree has 5 points for every row above it; a build takes no more than 51 points. The purple ones are the milestones at 10, 20 and 30 points.
 = Clic pe un talent adaugă un punct, clic dreapta îl ia înapoi. Ca în joc, fiecare rând se deschide când arborele lui are 5 puncte pentru fiecare rând de deasupra; un build ia cel mult 51 de puncte. Cele mov sunt pragurile de la 10, 20 și 30 de puncte.
+Watched!
+= Vizionat!
