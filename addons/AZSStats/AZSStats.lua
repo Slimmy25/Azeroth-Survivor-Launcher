@@ -518,14 +518,30 @@ local function SeeBosses()
 	end
 end
 
-local function OnDeath(msg)
-	if ( type(msg) ~= "string" ) then return; end
-	local _, _, name = string.find(msg, "^(.+) dies%.$");
-	if ( not name ) then _, _, name = string.find(msg, "^You have slain (.+)!$"); end
+local function BossDown(name)
 	if ( not name or not bossesSeen[name] ) then return; end
 	bossesSeen[name] = nil;
 	Check();
 	AZSStatsDB.bossKills[name] = Num(AZSStatsDB.bossKills[name]) + 1;
+end
+
+-- the combat log's "X dies." (a fallback), and the game's own "bossdown" banner (AZS_RegisterBannerHandler); a boss
+-- is counted once whichever comes first
+local function OnDeath(msg)
+	if ( type(msg) ~= "string" ) then return; end
+	local _, _, name = string.find(msg, "^(.+) dies%.$");
+	if ( not name ) then _, _, name = string.find(msg, "^You have slain (.+)!$"); end
+	BossDown(name);
+end
+
+if ( type(AZS_RegisterBannerHandler) == "function" ) then
+	pcall(AZS_RegisterBannerHandler, function(b)
+		if ( type(b) == "table" and b.kind == "bossdown" and Str(b.name) ~= "" ) then
+			SeeBosses();                                  -- in case it fell between two looks
+			bossesSeen[b.name] = true;
+			BossDown(b.name);
+		end
+	end);
 end
 
 -- ---------------------------------------------------------------- recording a run
@@ -940,7 +956,9 @@ local function SameRun(s, k)
 end
 
 local function InParty()
-	return type(lastParty) == "table" and table.getn(lastParty) > 0;
+	if ( type(lastParty) == "table" and table.getn(lastParty) > 0 ) then return true; end
+	if ( GetNumPartyMembers ) then local ok, n = pcall(GetNumPartyMembers); return ok and Num(n) > 0; end
+	return false;
 end
 
 -- In co-op a downed hero is not out: the game already shows the run's summary while friends can still revive
@@ -1006,6 +1024,7 @@ local function CoopDown()
 	local down = false;
 	if ( InParty() ) then
 		if ( type(AZS_REVIVE) == "table" and Num(AZS_REVIVE.down) == 1 ) then down = true; end
+		if ( type(AZS_GetPhase) == "function" and AZS_GetPhase() == "dead" ) then down = true; end
 		if ( UnitIsDeadOrGhost and UnitIsDeadOrGhost("player") ) then down = true; end
 	end
 	if ( down and not wasDown ) then
@@ -1141,6 +1160,11 @@ function AZSStats_CurrentDPS()
 end
 
 function AZSStats_GameDPS()
+	-- the game's addon API gives the run's DPS straight: AZS_GetMeter() -> lines, total, dps
+	if ( type(AZS_GetMeter) == "function" ) then
+		local ok, _, _, d = pcall(AZS_GetMeter);
+		if ( ok and tonumber(d) ) then return Num(d); end
+	end
 	if ( type(AZS_METER) ~= "table" ) then return 0; end
 	local dps = 0;
 	for i = 1, table.getn(AZS_METER) do

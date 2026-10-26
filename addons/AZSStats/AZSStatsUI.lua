@@ -986,6 +986,10 @@ loader:SetScript("OnEvent", function() MiniSafe(MiniSettle); end);
 local tracker, trackerElapsed, trackerPassed, trackerLastTime = nil, 0, false, 0;
 
 local function PlayerClassKey()
+	-- the run's class key (AZS_ZONE.class), the same key the records are kept under
+	if ( type(AZS_ZONE) == "table" and type(AZS_ZONE.class) == "string" and AZS_ZONE.class ~= "" ) then
+		return string.lower(AZS_ZONE.class);
+	end
 	if ( not UnitClass ) then return nil; end
 	local _, token = UnitClass("player");
 	if ( not token ) then return nil; end
@@ -1008,6 +1012,11 @@ end
 
 local function TrackerUpdate()
 	if ( not AZS_GetRunTime or not AZSStats_CurrentDPS ) then tracker:Hide(); return; end
+	-- only during a run (out of one, the clock can still hold the last run's time)
+	if ( type(AZS_GetPhase) == "function" ) then
+		local ph = AZS_GetPhase();
+		if ( ph == nil or ph == "ready" or ph == "victory" ) then tracker.box:Hide(); return; end
+	end
 	local t = Num(AZS_GetRunTime());
 	if ( t <= 0 ) then tracker.box:Hide(); return; end
 	if ( t + 5 < trackerLastTime ) then trackerPassed = false; end      -- a new run
