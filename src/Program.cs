@@ -1,4 +1,4 @@
-﻿// Azeroth Survivors Launcher (2006-style look), C# version.
+// Azeroth Survivors Launcher (2006-style look), C# version.
 // Built by build.bat with the C# compiler that is part of Windows (.NET Framework 4.8), so the exe is a small,
 // plain .NET program: no packer, no self-extracting runtime, nothing unpacked to a temp folder at start.
 using System;
@@ -13,9 +13,9 @@ using System.Windows.Forms;
 [assembly: AssemblyCompany("Azeroth Survivors")]
 [assembly: AssemblyProduct("Azeroth Survivors Launcher")]
 [assembly: AssemblyCopyright("Copyright (c) 2026 Azeroth Survivors")]
-[assembly: AssemblyVersion("2.0.0.0")]
-[assembly: AssemblyFileVersion("2.0.0.0")]
-[assembly: AssemblyInformationalVersion("2.0.0")]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyInformationalVersion("1.0")]
 [assembly: ComVisible(false)]
 [assembly: System.Runtime.Versioning.TargetFramework(".NETFramework,Version=v4.8", FrameworkDisplayName = ".NET Framework 4.8")]
 

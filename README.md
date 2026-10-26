@@ -116,7 +116,7 @@ be installed. The exe appears in `dist`. Every push is also built on GitHub (**A
 | The Guide | `assets/guide.txt` (format at the top); its groups: `GuideGroups` in `src/Guide.cs` |
 | Guide videos | `guide-videos/<topic>/` (published by Actions > Publish guide videos) |
 | Community videos | `Headlines` in `src/Community.cs`, then the Build Guides videos |
-| Talent trees | `assets/talents.txt` (from the game: Actions > Game talents) |
+| Talent trees | `assets/talents.txt` |
 | Translations | `assets/lang/<code>.txt` (see `assets/lang/README.md`) |
 | The AZS addons | `addons/AZSStats`, `addons/AZSHandbook`, `addons/AZSMinorMods`, shared look `addons/AZSKit` |
 | Where launcher updates come from | `Repos` in `src/SelfUpdate.cs` |
