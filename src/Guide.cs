@@ -22,7 +22,49 @@ namespace AzerothLauncher
     {
         static readonly Color GuideCardBg = Theme.Hex("#15121c"), GuideRed = Theme.Hex("#c8442f");
 
-        int GuideTop { get { return (int)(12 + 32 * Theme.Zoom) + 10; } }   // under the back arrow row
+        // under the back arrow row, or under the topic tabs when they are shown
+        int guideTabsBottom;
+        int GuideTop { get { return guideTabsBottom > 0 ? guideTabsBottom : (int)(12 + 32 * Theme.Zoom) + 10; } }
+        int guideLastTopic;                                  // the tab to go back to when the search is emptied
+        bool guideFocusSearch;
+
+        // The guide's header, like Options: the search box beside the back arrow, then a tab for every topic across
+        // the section (wrapping onto more rows). The selected topic is the one shown under it.
+        void GuideHeader(string title, List<GuideTopic> topics)
+        {
+            ClearPanel(title);
+            int sx = 20 + (int)(52 * Theme.Zoom) + 12, sh = (int)(32 * Theme.Zoom);
+            var search = new GuideSearchBox(PW - 20 - sx, sh);
+            search.Text = guideQuery;
+            Put(search, sx, 12);
+            if (guideQuery.Length == 0)
+                search.TextChanged += delegate
+                {
+                    guideQuery = search.Text;
+                    if (guideQuery.Length == 0) return;
+                    guideFocusSearch = true;
+                    SetGuideView(-1, -1);                     // the results take the topic's place
+                };
+            if (guideFocusSearch) { guideFocusSearch = false; search.Focus(); search.SelectionStart = search.TextLength; }
+            guideSearch = search;
+            // the topic tabs: their own widths, as many to a row as fit
+            int y = 12 + sh + 8, x = 20, rowH = (int)(26 * Theme.Zoom), gap = 4, right = PW - 20;
+            using (var g = CreateGraphics())
+                for (int i = 0; i < topics.Count; i++)
+                {
+                    int n = i;
+                    string label = topics[i].Title.ToUpperInvariant();
+                    int tw = (int)(g.MeasureString(Lang.T(label), Theme.F(8)).Width / Theme.Zoom) + 22;
+                    var b = new WowButton(label, delegate { guideQuery = ""; SetGuideView(n, -1); }, tw, 26, 8);
+                    b.Selected = i == gTopic && guideQuery.Length == 0;
+                    if (x + b.Width > right && x > 20) { x = 20; y += rowH + gap; }
+                    Put(b, x, y);
+                    x += b.Width + gap;
+                }
+            guideTabsBottom = y + rowH + 10;
+        }
+
+        GuideSearchBox guideSearch;
 
         void SetGuideView(int topic, int page)
         {
@@ -48,8 +90,11 @@ namespace AzerothLauncher
             if (gTalents != null && Talents.Of(gTalents).Count > 0) { GuideTalents(gTalents); return; }
             GuideLinks.Reset();                              // the game's tooltips AZS Stats has seen since the last time
             var topics = Data.Guide;
+            guideTabsBottom = 0;
             if (gTopic >= topics.Count) { gTopic = -1; gPage = -1; }
+            if (gTopic < 0 && guideQuery.Trim().Length == 0 && topics.Count > 0) gTopic = Math.Min(guideLastTopic, topics.Count - 1);
             if (gTopic < 0) { GuideHome(topics); return; }
+            guideLastTopic = gTopic;
             GuideTopic topic = topics[gTopic];
             if (gPage >= topic.Pages.Count) gPage = -1;
             if (gPage < 0 && topic.Pages.Count > 0) { GuideTopicPages(topic); return; }
@@ -134,12 +179,9 @@ namespace AzerothLauncher
 
         void GuideHome(List<GuideTopic> topics)
         {
-            ClearPanel("New Player Guide");
-            // the search box, beside the back arrow: every topic and page, titles and text
-            int sx = 20 + (int)(52 * Theme.Zoom) + 12, sh = (int)(32 * Theme.Zoom);
-            var search = new GuideSearchBox(PW - 20 - sx, sh);
-            search.Text = guideQuery;
-            Put(search, sx, 12);
+            // the search results, under the tabs (none selected); emptying the search goes back to the last topic
+            GuideHeader("New Player Guide", topics);
+            var search = guideSearch;
             var sp = MakeThinScroll(panel, new Rectangle(20, GuideTop, PW - 40, PH - 12 - GuideTop), Theme.Panel, Theme.Bronze,
                                     Theme.GoldDim, Theme.Gold);
             Action fill = delegate
@@ -159,7 +201,12 @@ namespace AzerothLauncher
                 else GuideResults(sp, w, topics, guideQuery.Trim());
                 sp.ResumeLayout();
             };
-            search.TextChanged += delegate { guideQuery = search.Text; fill(); };
+            search.TextChanged += delegate
+            {
+                guideQuery = search.Text;
+                if (guideQuery.Trim().Length == 0) { guideQuery = ""; guideFocusSearch = true; SetGuideView(guideLastTopic, -1); return; }
+                fill();
+            };
             fill();
             if (guideQuery.Length > 0) { search.Focus(); search.SelectionStart = search.TextLength; }
         }
@@ -228,8 +275,7 @@ namespace AzerothLauncher
         // ---- a topic made of pages (Classes): a card for each page
         void GuideTopicPages(GuideTopic topic)
         {
-            ClearPanel(topic.Title);
-            Put(new WowButton("‹ ALL TOPICS", delegate { guideQuery = ""; SetGuideView(-1, -1); }, 170, 32, 10), PW - 20 - (int)(170 * Theme.Zoom), 12);
+            GuideHeader(topic.Title, Data.Guide);
             var sp = MakeThinScroll(panel, new Rectangle(20, GuideTop, PW - 40, PH - 12 - GuideTop), Theme.Panel, Theme.Bronze,
                                     Theme.GoldDim, Theme.Gold);
             int w = sp.ClientSize.Width - 8, y = 4;
@@ -274,10 +320,7 @@ namespace AzerothLauncher
         {
             bool inPage = gPage >= 0;
             GuidePage shown = inPage ? topic.Pages[gPage] : topic;
-            ClearPanel(shown.Title);
-            int bw = (int)(170 * Theme.Zoom);
-            if (inPage) Put(new WowButton("‹ " + topic.Title.ToUpperInvariant(), delegate { SetGuideView(gTopic, -1); }, 170, 32, 9), PW - 20 - bw, 12);
-            else Put(new WowButton("‹ ALL TOPICS", delegate { SetGuideView(-1, -1); }, 170, 32, 10), PW - 20 - bw, 12);
+            GuideHeader(shown.Title, topics);
 
             int count = inPage ? topic.Pages.Count : topics.Count, at = inPage ? gPage : gTopic;
             int bh = (int)(34 * Theme.Zoom), by = PH - 12 - bh, tIndex = gTopic;

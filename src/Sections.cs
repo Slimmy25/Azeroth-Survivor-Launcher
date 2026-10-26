@@ -293,7 +293,7 @@ namespace AzerothLauncher
             foreach (var kv in nav) kv.Value.Active = kv.Key == name;
             RefreshStrip();
             if (name == "Changelog") clView = Data.Changelog.Count > 1 ? 1 : ClNewest;   // News already shows the newest
-            if (name == "Guide") { gTopic = -1; gPage = -1; guideQuery = ""; }      // the guide always opens on its topic list
+            if (name == "Guide") { gTopic = -1; gPage = -1; guideQuery = ""; guideLastTopic = 0; }   // the guide opens on its first topic
             if (name == "About Launcher") aboutLog = false;
             if (name == "Home")
             {
@@ -364,7 +364,7 @@ namespace AzerothLauncher
             {
                 if (gVideo != null) { gVideo = null; BuildPanel("Guide"); return; }
                 if (gPage >= 0) { SetGuideView(gTopic, -1); return; }
-                if (gTopic >= 0) { SetGuideView(-1, -1); return; }
+                if (guideQuery.Length > 0) { guideQuery = ""; SetGuideView(guideLastTopic, -1); return; }
             }
             CloseSide();
         }
@@ -1425,21 +1425,35 @@ namespace AzerothLauncher
                 catch (Exception e) { SetStatus(Lang.T("Could not save the game setting:") + " " + e.Message); }
                 BuildPanel("Options");
             };
+            string group = null;
             foreach (GameSetting gs in GameSettings.All)
             {
                 string cur = GameSettings.Value(now, gs);
                 GameSetting g = gs;
+                if (gs.Group != group)                       // a heading for each group: DISPLAY, GRAPHICS, SOUND, GAMEPLAY
+                {
+                    group = gs.Group;
+                    y += 6;
+                    var gh = PutText(group, 13, FontStyle.Bold, Theme.Gold, 20, y, 0);
+                    Put(UI.Line(Theme.Bronze, PW - 40, 2), 20, BottomOf(gh) + 2);
+                    y = BottomOf(gh) + 10;
+                }
                 if (gs.Check)
                 {
                     y = OptionCheck(gs.Label, cur == "1", y, delegate(bool on) { set(g, on ? "1" : "0"); });
+                    if (gs.Note != null)
+                    {
+                        var cn = PutText(gs.Note, 9.5f, FontStyle.Regular, Theme.Text, 44, y - 4, PW - 64);
+                        y = BottomOf(cn) + 6;
+                    }
                     continue;
                 }
-                var lab = PutText(gs.Label, 11, FontStyle.Bold, Theme.Gold, 20, y, PW - 40);
-                y = BottomOf(lab) + 2;
+                var lab = PutText(gs.Label, 11.5f, FontStyle.Bold, Theme.Hex("#fff2b0"), 20, y, PW - 40);
+                y = BottomOf(lab) + 1;
                 if (gs.Note != null)
                 {
-                    var note = PutText(gs.Note, 9, FontStyle.Italic, Theme.GoldDim, 20, y, PW - 40);
-                    y = BottomOf(note) + 3;
+                    var note = PutText(gs.Note, 9.5f, FontStyle.Regular, Theme.Text, 20, y, PW - 40);
+                    y = BottomOf(note) + 4;
                 }
                 var values = new List<string>(gs.Values);
                 var names = new List<string>(gs.Names);
@@ -1451,12 +1465,12 @@ namespace AzerothLauncher
                 for (int i = 0; i < n; i++)
                 {
                     string v = values[i];
-                    var b = new WowButton(names[i], delegate { set(g, v); }, bw, 28, 8.5f);
+                    var b = new WowButton(names[i], delegate { set(g, v); }, bw, 30, 9);
                     b.Selected = i == at;
                     Put(b, x, y);
                     x += b.Width + gap;
                 }
-                y += (int)(28 * Theme.Zoom) + 12;
+                y += (int)(30 * Theme.Zoom) + 14;
             }
             var where = PutText(Lang.T("Saved in") + " " + file, 8.5f, FontStyle.Regular, Theme.LinkBlue, 20, y, PW - 40, false);
             return BottomOf(where);
