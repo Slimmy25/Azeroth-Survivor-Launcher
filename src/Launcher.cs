@@ -125,7 +125,7 @@ namespace AzerothLauncher
             updateBtn.Visible = false;
             // the News line: Discord's own symbol (Blurple, from discord.com/branding, unaltered) left of "News", and
             // CHANGELOG at the very end of the line
-            discordIcon = new BrandIcon(Theme.LoadImage("AS.discord-blurple.png"), Theme.LoadImage("AS.discord-white.png"), "Discord");
+            discordIcon = new BrandIcon(Theme.LoadImage("AS.discord-blurple.png"), Theme.LoadImage("AS.discord-white.png"), DiscordUrl);   // the hover shows where it goes
             discordIcon.Bounds = new Rectangle(697, 203, 26, 20);
             nav["Changelog"] = Place(new WowButton("CHANGELOG", delegate { ShowSection("Changelog"); }, 110, 22, 8), 1085 - 110, 201);
             nav["Changelog"].Skin = Retro.Button;

@@ -1280,7 +1280,7 @@ namespace AzerothLauncher
     }
 
     // A brand's own symbol as a link (Discord): drawn as it is, never recoloured or reshaped; the hover shows the
-    // white version of the same symbol (the brand's own white), and a tooltip names it.
+    // white version of the same symbol (the brand's own white), and a tooltip shows its link.
     public class BrandIcon : Control
     {
         readonly Image normal, hot;

@@ -8,6 +8,7 @@
   (Rewards > Races), and boss kills counting for the whole party's achievements.
 
 ### Community
+- Hovering the Discord symbol on the News line now shows where it goes: https://discord.gg/azerothsurvivors
 - MORE VIDEOS: a video you have watched for more than 45 seconds now has a "Watched!" tag over its picture (only the
   time the video really plays counts, not loading or pausing). The tag is remembered between launches.
 - MORE VIDEOS: the featured videos stay at the top in their own order; every other video is shuffled into a new random
