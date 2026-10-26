@@ -91,6 +91,7 @@ namespace AzerothLauncher
         public LauncherApp(bool startInTray)
         {
             App = this;
+            WowDialog.Host = this;                           // questions and messages open inside the launcher
             this.startInTray = startInTray;
             Theme.PickFont();
             Cfg = Config.Load();
@@ -795,17 +796,29 @@ namespace AzerothLauncher
             RunSetup();
         }
 
-        // First-time setup, and RUN SETUP AGAIN: both assume the game is not here yet, so they start by downloading and
-        // installing it; the folders and cloud page comes once it is installed.
+        // First-time setup, and RUN SETUP AGAIN: the save, folders, cloud saving and addons questions. Nothing is
+        // downloaded here: the game is only downloaded when the player presses INSTALL (and says they don't have it).
         public void RunSetup()
         {
             if (GameRunningFlag) { Info("Setup", "Close the game first, then run setup again."); return; }
             if (Updating || Installing) { SetStatus("Please wait until the game update or install has finished."); return; }
-            current = "Home";
-            foreach (var b in nav.Values) b.Active = false;
-            RefreshStrip();
-            HideSide();
-            InstallClient(true);
+            ShowSetupDialog();
+        }
+
+        // INSTALL (no game yet): first asks whether the game is already on this PC. Yes: its folder is chosen and the
+        // setup goes on as usual; no: the launcher downloads it.
+        void AskHaveGame()
+        {
+            DialogResult r = Msg.Show(this, "Do you already have Azeroth Survivors downloaded on this PC?\n\n" +
+                                            "YES: choose the folder it is in (the one with AzerothSurvivors.exe).\n" +
+                                            "NO: the launcher downloads and installs it for you.",
+                                      "Install", MessageBoxButtons.YesNoCancel);
+            if (r == DialogResult.Yes)
+            {
+                if (!ChooseGameFolder()) return;
+                if (!Cfg.Bool("setup_done", false)) After(200, ShowSetupDialog);
+            }
+            else if (r == DialogResult.No) InstallClient(!Cfg.Bool("setup_done", false));
         }
 
         void ShowSetupDialog()
@@ -818,7 +831,7 @@ namespace AzerothLauncher
             var dlg = new SetupDialog(this);
             dlg.PlaceOver(this);
             setupOpen = true;
-            try { dlg.ShowDialog(Visible ? this : null); }
+            try { dlg.ShowModal(Visible ? this : null); }
             finally { setupOpen = false; }
             if (dlg.Result != null)
             {
@@ -829,6 +842,12 @@ namespace AzerothLauncher
                 Cfg.Save();
                 SetStatus("Setup saved.");
                 ApplyCloudVisibility();
+                if (dlg.TrackStats.HasValue)                 // AZS Stats only when the player wants their stats tracked
+                {
+                    SetStatsEnabled(dlg.TrackStats.Value);
+                    if (dlg.TrackStats.Value && ClientPresent()) InstallStatsAddon();
+                    else if (dlg.TrackStats.Value) { Cfg.Set("stats_pending", true); Cfg.Save(); }   // once the game is installed
+                }
                 if (dlg.Goto != null)                        // page 2: straight to the Addons section
                 {
                     addonMode = dlg.Goto;
@@ -889,7 +908,7 @@ namespace AzerothLauncher
                     using (var dlg = new ConflictDialog(sets, downloading))
                     {
                         dlg.PlaceOver(this);
-                        dlg.ShowDialog(this);
+                        dlg.ShowModal(this);
                         return dlg.Result;
                     }
                 });
@@ -1004,7 +1023,7 @@ namespace AzerothLauncher
             }
             if (!ClientPresent())
             {
-                InstallClient();
+                AskHaveGame();
                 return;
             }
             // PLAY first makes sure this is the newest launcher: a newer one is installed (and the launcher restarts)
@@ -1546,6 +1565,12 @@ namespace AzerothLauncher
             else
             {
                 SetStatus("Install complete - press PLAY.");
+                if (Cfg.Bool("stats_pending", false))        // setup said yes to AZS Stats before the game was here
+                {
+                    Cfg.Remove("stats_pending");
+                    Cfg.Save();
+                    InstallStatsAddon();
+                }
                 Notify("Install complete. Press PLAY to enter Azeroth.");
                 if (!downloadInstall && (setupAfterFileInstall || !Cfg.Bool("setup_done", false)))
                     After(300, ShowSetupDialog);             // installed from a file during setup: on to the folders page
@@ -1863,7 +1888,7 @@ namespace AzerothLauncher
             }
             updateDlg = new UpdateDialog(this, updateInfo);
             updateDlg.PlaceOver(this);
-            updateDlg.Show();
+            updateDlg.ShowInside();
         }
 
         UpdateDialog OpenUpdateDialog()

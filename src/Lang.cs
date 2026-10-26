@@ -207,22 +207,37 @@ namespace AzerothLauncher
         }
     }
 
-    // MessageBox with translated text and title
+    // Messages and questions with translated text and title: inside the launcher (MsgDialog) when it is on screen,
+    // otherwise a plain message box
     public static class Msg
     {
+        static System.Windows.Forms.DialogResult Inside(string text, string caption, System.Windows.Forms.MessageBoxButtons buttons)
+        {
+            using (var d = new MsgDialog(text, caption, buttons)) return d.ShowModal(WowDialog.Host);
+        }
+
+        static bool CanInside()
+        {
+            var h = WowDialog.Host;
+            return h != null && !h.IsDisposed && h.Visible && h.WindowState != System.Windows.Forms.FormWindowState.Minimized && !h.InvokeRequired;
+        }
+
         public static System.Windows.Forms.DialogResult Show(string text, string caption)
         {
+            if (CanInside()) return Inside(text, caption, System.Windows.Forms.MessageBoxButtons.OK);
             return System.Windows.Forms.MessageBox.Show(Lang.T(text), Lang.T(caption));
         }
 
         public static System.Windows.Forms.DialogResult Show(System.Windows.Forms.IWin32Window owner, string text, string caption)
         {
+            if (CanInside()) return Inside(text, caption, System.Windows.Forms.MessageBoxButtons.OK);
             return System.Windows.Forms.MessageBox.Show(owner, Lang.T(text), Lang.T(caption));
         }
 
         public static System.Windows.Forms.DialogResult Show(System.Windows.Forms.IWin32Window owner, string text, string caption,
                                                              System.Windows.Forms.MessageBoxButtons buttons)
         {
+            if (CanInside()) return Inside(text, caption, buttons);
             return System.Windows.Forms.MessageBox.Show(owner, Lang.T(text), Lang.T(caption), buttons);
         }
 
@@ -230,6 +245,7 @@ namespace AzerothLauncher
                                                              System.Windows.Forms.MessageBoxButtons buttons,
                                                              System.Windows.Forms.MessageBoxIcon icon)
         {
+            if (CanInside()) return Inside(text, caption, buttons);
             return System.Windows.Forms.MessageBox.Show(owner, Lang.T(text), Lang.T(caption), buttons, icon);
         }
     }
