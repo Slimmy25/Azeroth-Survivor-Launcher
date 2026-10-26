@@ -293,7 +293,7 @@ namespace AzerothLauncher
             foreach (var kv in nav) kv.Value.Active = kv.Key == name;
             RefreshStrip();
             if (name == "Changelog") clView = Data.Changelog.Count > 1 ? 1 : ClNewest;   // News already shows the newest
-            if (name == "Guide") { gTopic = -1; gPage = -1; guideQuery = ""; guideLastTopic = 0; }   // the guide opens on its first topic
+            if (name == "Guide") { gTopic = -1; gPage = -1; guideQuery = ""; guideLastTopic = 0; gBuilder = false; gTalents = null; guideGroup = 0; }   // the guide opens on its first topic
             if (name == "About Launcher") aboutLog = false;
             if (name == "Home")
             {
@@ -363,6 +363,7 @@ namespace AzerothLauncher
             if (current == "Guide")
             {
                 if (gVideo != null) { gVideo = null; BuildPanel("Guide"); return; }
+                if (gTalents != null && gBuilder) { gTalents = null; BuildPanel("Guide"); return; }   // back to the builder's classes
                 if (gPage >= 0) { SetGuideView(gTopic, -1); return; }
                 if (guideQuery.Length > 0) { guideQuery = ""; SetGuideView(guideLastTopic, -1); return; }
             }

@@ -1596,3 +1596,13 @@ GAME
 = HRA
 OTHER ADDONS
 = OSTATNÍ DOPLŇKY
+NEW PLAYER
+= NOVÝ HRÁČ
+THEORYCRAFTING
+= TEORIE
+TALENT TREE BUILDER
+= TVŮRCE STROMŮ TALENTŮ
+Talent Tree Builder
+= Tvůrce stromů talentů
+Pick a class to open its three talent trees. Click a talent to add a point, right-click to take one back: a build of up to 51 points, kept for each class.
+= Vyber povolání a otevři jeho tři stromy talentů. Kliknutím na talent přidáš bod, pravým kliknutím ho vrátíš: build až do 51 bodů, uložený pro každé povolání.

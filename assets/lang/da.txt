@@ -1595,3 +1595,13 @@ GAME
 = SPIL
 OTHER ADDONS
 = ANDRE TILFØJELSER
+NEW PLAYER
+= NY SPILLER
+THEORYCRAFTING
+= TEORI
+TALENT TREE BUILDER
+= TALENTTRÆ-BYGGER
+Talent Tree Builder
+= Talenttræ-bygger
+Pick a class to open its three talent trees. Click a talent to add a point, right-click to take one back: a build of up to 51 points, kept for each class.
+= Vælg en klasse for at åbne dens tre talenttræer. Klik på et talent for at give et point, højreklik for at tage det tilbage: et build på højst 51 point, gemt for hver klasse.

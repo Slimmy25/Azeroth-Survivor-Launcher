@@ -1595,3 +1595,13 @@ GAME
 = PELI
 OTHER ADDONS
 = MUUT LISÄOSAT
+NEW PLAYER
+= UUSI PELAAJA
+THEORYCRAFTING
+= TEORIA
+TALENT TREE BUILDER
+= KYKYPUURAKENNIN
+Talent Tree Builder
+= Kykypuurakennin
+Pick a class to open its three talent trees. Click a talent to add a point, right-click to take one back: a build of up to 51 points, kept for each class.
+= Valitse luokka avataksesi sen kolme kykypuuta. Klikkaa kykyä lisätäksesi pisteen, oikea klikkaus ottaa sen pois: enintään 51 pisteen build, tallessa jokaiselle luokalle.

@@ -1596,3 +1596,13 @@ GAME
 = 게임
 OTHER ADDONS
 = 기타 애드온
+NEW PLAYER
+= 신규 플레이어
+THEORYCRAFTING
+= 이론 연구
+TALENT TREE BUILDER
+= 특성 트리 빌더
+Talent Tree Builder
+= 특성 트리 빌더
+Pick a class to open its three talent trees. Click a talent to add a point, right-click to take one back: a build of up to 51 points, kept for each class.
+= 직업을 고르면 세 가지 특성 트리가 열립니다. 특성을 클릭하면 점수를 더하고, 오른쪽 클릭하면 되돌립니다: 최대 51점까지의 빌드가 직업별로 저장됩니다.

@@ -1596,3 +1596,13 @@ GAME
 = OYUN
 OTHER ADDONS
 = DİĞER EKLENTİLER
+NEW PLAYER
+= YENİ OYUNCU
+THEORYCRAFTING
+= TEORİ
+TALENT TREE BUILDER
+= YETENEK AĞACI PLANLAYICI
+Talent Tree Builder
+= Yetenek ağacı planlayıcı
+Pick a class to open its three talent trees. Click a talent to add a point, right-click to take one back: a build of up to 51 points, kept for each class.
+= Üç yetenek ağacını açmak için bir sınıf seç. Bir yeteneğe tıklayınca puan eklenir, sağ tıklayınca geri alınır: en fazla 51 puanlık bir build, her sınıf için saklanır.

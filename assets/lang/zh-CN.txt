@@ -1596,3 +1596,13 @@ GAME
 = 游戏
 OTHER ADDONS
 = 其他插件
+NEW PLAYER
+= 新手入门
+THEORYCRAFTING
+= 理论研究
+TALENT TREE BUILDER
+= 天赋树模拟器
+Talent Tree Builder
+= 天赋树模拟器
+Pick a class to open its three talent trees. Click a talent to add a point, right-click to take one back: a build of up to 51 points, kept for each class.
+= 选择一个职业，打开它的三棵天赋树。点击天赋加一点，右键收回：最多 51 点的配置，每个职业各自保存。

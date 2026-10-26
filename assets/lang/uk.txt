@@ -1596,3 +1596,13 @@ GAME
 = ГРА
 OTHER ADDONS
 = ІНШІ АДДОНИ
+NEW PLAYER
+= НОВАЧКАМ
+THEORYCRAFTING
+= ТЕОРІЯ
+TALENT TREE BUILDER
+= КОНСТРУКТОР ТАЛАНТІВ
+Talent Tree Builder
+= Конструктор талантів
+Pick a class to open its three talent trees. Click a talent to add a point, right-click to take one back: a build of up to 51 points, kept for each class.
+= Виберіть клас, щоб відкрити три його дерева талантів. Клацання по таланту додає очко, праве клацання прибирає: білд до 51 очка, зберігається для кожного класу.

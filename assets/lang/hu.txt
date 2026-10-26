@@ -1596,3 +1596,13 @@ GAME
 = JÁTÉK
 OTHER ADDONS
 = EGYÉB KIEGÉSZÍTŐK
+NEW PLAYER
+= ÚJ JÁTÉKOS
+THEORYCRAFTING
+= ELMÉLET
+TALENT TREE BUILDER
+= TEHETSÉGFA-TERVEZŐ
+Talent Tree Builder
+= Tehetségfa-tervező
+Pick a class to open its three talent trees. Click a talent to add a point, right-click to take one back: a build of up to 51 points, kept for each class.
+= Válassz kasztot a három tehetségfája megnyitásához. Kattints egy tehetségre egy pontért, jobb kattintással visszaveszed: legfeljebb 51 pontos build, kasztonként megőrizve.

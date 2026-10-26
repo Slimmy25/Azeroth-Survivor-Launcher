@@ -109,6 +109,15 @@ namespace AzerothLauncher
                         }
                     }
                 }
+                {   // the Talent Tree Builder's class picker
+                    app.current = "Guide";
+                    app.ShowSide();
+                    app.gTopic = -1; app.gPage = -1; app.gTalents = null; app.gBuilder = true;
+                    app.BuildPanel("Guide");
+                    Application.DoEvents();
+                    PreviewShot(app, Path.Combine(outDir, "guide-builder.png"));
+                    app.gBuilder = false;
+                }
                 {   // the Warrior's talent trees with a test build
                     app.current = "Guide";
                     app.ShowSide();
