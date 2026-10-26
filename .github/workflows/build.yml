@@ -47,8 +47,14 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           TAG: ${{ inputs.release || github.event.release.tag_name || github.ref_name }}
         run: |
-          gh release view "$TAG" >/dev/null 2>&1 || \
-            gh release create "$TAG" --title "Launcher $TAG" --notes "Azeroth Survivors Launcher $TAG"
+          # each version is its own release, with its notes from release-notes/<tag>.md when there is one
+          notes="release-notes/$TAG.md"
+          [ -f "$notes" ] || { echo "Azeroth Survivors Launcher $TAG" > /tmp/notes.md; notes=/tmp/notes.md; }
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release edit "$TAG" --title "Azeroth Survivors Launcher $TAG" --notes-file "$notes"
+          else
+            gh release create "$TAG" --title "Azeroth Survivors Launcher $TAG" --notes-file "$notes" --latest
+          fi
           gh release upload "$TAG" "dist/Azeroth Survivors Launcher.exe" "dist/Azeroth Survivors Launcher.sha256.txt" --clobber
 
       # Players download from a separate PUBLIC repository that holds only the exe releases, never the code.
