@@ -1,101 +1,130 @@
 # Azeroth Survivors Launcher
 
-A community launcher for **Azeroth Survivors**, the game made by Aethus, in a retro classic-launcher look
-(night stone and gold, original art drawn by `tools/make_launcher_art.py`).
+A free, community-made Windows launcher for **[Azeroth Survivors](https://wow.aethus.pl/)**, the survivors-style game made
+by **Aethus**. It gets the game onto your PC, keeps it up to date, manages your addons, teaches new players how the
+game works, gives you tools to plan builds, and brings the community's videos to your home screen.
 
-- **PLAY / INSTALL**: downloads the game client inside the launcher (with a percentage bar, into a `temp` folder that is
-  deleted afterwards), installs it next to the launcher, then starts it; first-time setup begins with this; the News panel shows the newest patch notes, the **Community** section (open whenever no other section is) has players' build videos,
-  and a "This week" card sums up your recent runs
-- **Cloud Save**: keeps your save game, AddOns and addon settings in Google Drive, OneDrive or Dropbox and
-  shares them between your PCs (downloaded before the game starts, uploaded after it closes, even after a crash)
-- **Addons**: switch addons on and off, two saveable profiles, and **Download More** to install addons with one
-  click (it offers an UPDATE when the copy on GitHub is newer than yours)
-- **New Player Guide**: Build Guides (players' build videos, credited), topics and class pages with videos that play inside the launcher (streamed, never saved),
-  and a search over every page
-- **Changelog**: every patch note, newest first
-- **Stats** (optional, can be hidden in Options): with the built-in **AZS Stats** addon (in game: `/azs` or its
-  minimap button), every run's result and DPS, DPS over time, your best builds, class, race and zone records,
-  a death log with your Nemesis and the bosses you beat, and co-op stats with your friends. Click a run to copy a
-  picture of it for Discord
-- **UPDATE LAUNCHER**: a newer launcher on this project's downloads page is installed when the launcher starts (its
-  SHA-256 is checked, then it restarts itself); game updates can be switched on too
-- Runs in the system tray; only one copy runs at a time; 26 languages
+This is a fan project. It is not made by Aethus, and it is not affiliated with or endorsed by Blizzard Entertainment.
+The launcher does not contain or host the game: it downloads it from the game's own download hosts. See
+[CREDITS.md](CREDITS.md) for where everything comes from.
 
-## Download
+**[Download the launcher](https://github.com/Slimmy25/Azeroth-Survivor-Launcher/releases/latest)**: one file,
+`Azeroth Survivors Launcher.exe`. Put it in the folder where the game is, or where you want it installed. It needs
+nothing else: it runs on the .NET Framework 4.8 that comes with Windows 10 and 11.
 
-Get `Azeroth Survivors Launcher.exe` from the [downloads page](https://github.com/Slimmy25/Azeroth-Survivor-Launcher-Releases/releases/latest) and put it in the folder where the
-game is (or should be installed). It needs nothing else: it runs on the .NET Framework 4.8 that is part of
-Windows 10 and 11.
+---
 
-## Where the launcher keeps its files
+## What it does
+
+### Gets the game for you
+- **INSTALL** first asks whether the game is already on your PC. If it is, you point the launcher at its folder. If
+  not, the launcher downloads it, with a progress bar, and installs it next to itself.
+- The download comes from one of the game's three download hosts, picked at random, and the next one is tried if a
+  host fails. The game's own download page is the last resort. Every download is checked against the game's known
+  checksums before it is installed.
+- **PLAY** checks for a newer launcher and for game updates, then starts the game.
+- Nothing is downloaded until you press INSTALL. First-time setup only asks questions, all inside the launcher:
+  importing a save from the website version, your folders, cloud saving and addons.
+- The launcher updates itself: a new version is checked (SHA-256) and installed when it starts.
+
+### Addon manager
+- **Your addons**: turn each one on or off, uninstall it (its folder and saved settings), toggle them all, and keep
+  two profiles of which ones are on. They are grouped like the store: AZS addons, WoW 1.12 addons, your own and
+  anything else.
+- **Download More**: install, update or uninstall addons with one click.
+  - **AZS addons** are made for Azeroth Survivors, by Slimjim and other players.
+  - **WoW 1.12 addons** are classic addons converted to work in this game.
+  - **My Addons** lists the addon .zip files you keep on your own PC.
+- Every addon is optional and starts off. Nothing is installed unless you choose it (AZS Stats is offered once
+  during setup).
+
+### The Guide
+Everything a player needs, in three groups:
+- **New Player**: getting started, controls, your first run, tips, run options and endless mode, achievements and
+  rewards, and how addons work.
+- **Gameplay**: all nine classes (each with its spell pool, the spells' icons and the talents that change them),
+  races, all twelve zones and their bosses, level-ups and cards, talents, pickups, caches and guardians, gear and the
+  Armory, and co-op.
+- **Theorycrafting**: the **Talent Tree Builder** and players' **Build Guides**.
+
+A search box covers every page. Hovering a spell, talent or item shows what the game itself says about it. Short
+how-to videos play inside the launcher. The same guide is in the game with the **AZS Handbook** addon (`/handbook`).
+
+### Tools to theorycraft
+- **Talent Tree Builder**: all three trees of every class, as in the game. Click to add a point and right-click to
+  take one back. Each row opens with 5 points per row above it in its own tree, up to 51 points. Each class keeps
+  its own build.
+- **Build Guides**: players' build videos, credited to them, for every class.
+- **STATS** (optional, with the AZS Stats addon): every run's result and DPS, DPS over time, your best builds with
+  their spells, records per class, race and zone (highest DPS solo and in co-op), level-up saves, legendaries, a
+  death log with your Nemesis, co-op stats with your friends, and an **Armory** of each class's hero with their gear
+  and numbers. In game, a live tracker compares your DPS with your record as you play.
+
+### Community videos
+The home screen features videos made by the community, in rotation. **MORE VIDEOS** lists them all. They play inside
+the launcher, streamed from YouTube and never saved on your PC, with the creator's name linking to their channel.
+
+### Also
+- **Cloud Save**: your save, AddOns and addon settings kept in Google Drive, OneDrive or Dropbox and shared between
+  your PCs.
+- **News and Changelog**: every patch note of the game, newest first.
+- **Options**: the game's own settings (display, graphics, sound, gameplay) with a plain explanation for each, your
+  folders, and the launcher's own settings.
+- **26 languages**, the system tray, and only one copy running at a time.
+
+### The AZS addons
+| Addon | What it does |
+| --- | --- |
+| **AZS Stats** (`/azs`) | Records every run for the launcher's STATS page and shows the same stats in game. |
+| **AZS Handbook** (`/handbook`) | The launcher's whole Guide, inside the game. |
+| **AZS Minor Mods** (`/azsmods`) | Small changes, each on or off: no level-up, stat-bonus or new-spell lines in chat, a Say & Party box, boss markers, a blinking marker on a friend who falls, move and lock the UI, hide the target frame, the camera at its farthest. |
+
+They use the game's addon API and share one look (`addons/AZSKit`).
+
+---
+
+## Where it keeps its files
 
 Everything the launcher writes for itself goes into a folder named `Azeroth Survivor Launcher` next to the exe:
 settings (`config.json`), the cloud sync memory (`state.json`), `log.txt`, backups made before a sync replaces
 anything (`backups`), the last 5 cloud downloads (`downloads`) and temporary files (`temp`).
 
 It uses `%LOCALAPPDATA%\Azeroth Survivor Launcher` instead when the exe's folder can't be written to (for example
-Program Files), or when the exe sits inside Google Drive, OneDrive, Dropbox or iCloud. The sync memory belongs to one
-PC and must not be copied to the others.
-
-Some things stay where they belong: the game itself, its save folder and AddOns, the cloud sync folder, and the
-temporary undo folder of a game update, which is kept inside the game folder.
+Program Files), or when the exe is inside Google Drive, OneDrive, Dropbox or iCloud.
 
 ## What it reaches on the internet
 
-- The game's download hosts (`ClientUrl`, with the shared download login, and the backup `ClientMirrorUrl` in
-  `src/Launcher.cs`, one picked at random): the game client
-- GitHub: launcher updates, game updates, the addons offered in Download More, and their upload dates
-- jsDelivr (a CDN for GitHub files): the guide's videos, streamed while they play
-- Wowhead's image host (wow.zamimg.com): spell, class, race, zone and creature pictures on the STATS page, shown only
-  when the page is open and cached in the launcher's `temp` folder; a spell missing from `assets/spell-icons.txt` is
-  looked up on Wowhead once
-- Your cloud drive's folder on this PC (Cloud Save), nothing else of your files
+- **The game's download hosts** (in `src/Launcher.cs`): the game client.
+- **GitHub**: launcher updates, game updates, and the addons offered in Download More.
+- **jsDelivr** (a CDN for GitHub files): the guide's how-to videos, streamed while they play.
+- **YouTube**: community and build videos, played in a Microsoft Edge window inside the launcher, and their titles.
+- **Wowhead's image host** (`wow.zamimg.com`): spell, class, race, zone and creature pictures, shown when a page
+  needs them and cached in the launcher's `temp` folder.
+- **Your cloud drive's folder on this PC** (Cloud Save), and nothing else of your files.
 
-To play videos inside the launcher it uses Windows' own web view, and asks Windows to run that view in its modern
-mode for this exe: one value under
-`HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION`.
+---
 
 ## Build it yourself
 
-Double-click `build.bat`. It uses the C# compiler that comes with Windows, so nothing has to be installed.
-The exe appears in the `dist` folder. Every upload to this repository is also built automatically on
-GitHub (see the **Actions** tab).
-
-## Editing
+Double-click `build.bat`. It uses the C# compiler that comes with Windows (C# 5, .NET Framework), so nothing has to
+be installed. The exe appears in `dist`. Every push is also built on GitHub (**Actions** tab).
 
 | What | Where |
 | --- | --- |
 | Patch notes | `assets/changelog.txt` (posts separated by a line with only `===`) |
-| Download More list | `assets/addons.txt` (format explained at the top) |
-| About Launcher: description | `assets/launcher-about.txt` |
-| About Launcher: launcher changelog | `assets/launcher-changelog.txt` (newest first) |
-| New player guide | `assets/guide.txt` (a video: `@video Title \| address`, see the top of the file) |
+| Download More list | `assets/addons.txt`, and where each copy comes from: `addons/sources.txt` |
+| The Guide | `assets/guide.txt` (format at the top); its groups: `GuideGroups` in `src/Guide.cs` |
 | Guide videos | `guide-videos/<topic>/` (published by Actions > Publish guide videos) |
-| Spell icons | `assets/spell-icons.txt` (then `tools/make_addon_icons.py` for the addon) |
-| The AZS Stats addon | `addons/AZSStats` (built into the exe; the STATS page installs it) |
-| Where launcher updates come from | `Repo` in `src/SelfUpdate.cs` (the latest non-pre-release) |
-| Game update address | `ManifestUrl` in `src/Update.cs` |
-| Install link, Discord link | `src/Launcher.cs` |
+| Community videos | `Headlines` in `src/Community.cs`, then the Build Guides videos |
+| Talent trees | `assets/talents.txt` (from the game: Actions > Game talents) |
+| Translations | `assets/lang/<code>.txt` (see `assets/lang/README.md`) |
+| The AZS addons | `addons/AZSStats`, `addons/AZSHandbook`, `addons/AZSMinorMods`, shared look `addons/AZSKit` |
+| Where launcher updates come from | `Repos` in `src/SelfUpdate.cs` |
 
-## Game updates
-
-`make_update.bat` writes `update.json` for a new game version. Attach the game archive and that `update.json`
-to a release; the launcher reads
-`https://github.com/<owner>/<repo>/releases/latest/download/update.json`.
-
-## Code signing
-
-Create a `sign_config.bat` as described at the top of `sign_build.bat` (never upload it); `build.bat` then
-signs the exe automatically.
-
-## Credits
-
-- Launcher: Slimjim
-- Cloud save engine: built on the sync framework by KeijinDE, used with his blessing (MIT, see THIRD-PARTY-NOTICES.md)
+Code signing is optional: `sign_build.bat` explains it. Never commit `sign_config.bat` or a certificate
+(`.gitignore` keeps them out).
 
 ## License
 
-The code is under the [MIT License](LICENSE). The game's name, logo and artwork are not covered by it.
-Third-party parts keep their own licenses, listed in [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md): the cloud sync
-engine (MIT), the Source Serif 4 font (SIL Open Font License), the creature list from the CMaNGOS Classic database,
-and the pictures and videos shown from Wowhead and jsDelivr, which belong to their owners.
+The launcher's code and the AZS addons are under the [MIT License](LICENSE). Everything that comes from someone else
+keeps its own license and owner: see [CREDITS.md](CREDITS.md).
