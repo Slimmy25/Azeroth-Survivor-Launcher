@@ -1332,3 +1332,263 @@ Azeroth Survivors save (*.sav)|*.sav|All files (*.*)|*.*
 = Azeroth Survivors kaydı (*.sav)|*.sav|Tüm dosyalar (*.*)|*.*
 Save imported.
 = Kayıt içe aktarıldı.
+
+# October 2026: setup inside the launcher, game options, stats, Armory, more videos, converted addons
+Video
+= Video
+MORE VIDEOS ›
+= DAHA FAZLA VİDEO ›
+More Videos
+= Daha fazla video
+OK
+= TAMAM
+YES
+= EVET
+NO
+= HAYIR
+Your settings are saved.\n\nWould you like to download addons? They are all optional: you choose each one you want.
+= Ayarların kaydedildi.\n\nEklenti indirmek ister misin? Hepsi isteğe bağlı: her birini sen seçersin.
+YES, ADDONS
+= EVET, EKLENTİLER
+ENABLE / DISABLE MY ADDONS
+= EKLENTİLERİMİ AÇ / KAPAT
+Do you want to track your stats in and out of the game?
+= İstatistiklerini oyunun içinde ve dışında takip etmek ister misin?
+AZS Stats records your runs while you play (/azs in game) and fills the launcher's STATS page: records, abilities, classes, play time, your Nemesis and co-op with friends.
+= AZS Stats oynarken koşularını kaydeder (oyunda /azs) ve başlatıcının İSTATİSTİK sayfasını doldurur: rekorlar, yetenekler, sınıflar, oynama süresi, Baş Düşmanın ve arkadaşlarla co-op.
+YES, TRACK MY STATS
+= EVET, İSTATİSTİKLERİMİ TAKİP ET
+Do you already have Azeroth Survivors downloaded on this PC?\n\nYES: choose the folder it is in (the one with AzerothSurvivors.exe).\nNO: the launcher downloads and installs it for you.
+= Azeroth Survivors bu bilgisayarda zaten indirili mi?\n\nEVET: oyunun olduğu klasörü seç (AzerothSurvivors.exe olan).\nHAYIR: başlatıcı senin için indirip kurar.
+Do you already have Azeroth Survivors downloaded on this PC?
+= Azeroth Survivors bu bilgisayarda zaten indirili mi?
+YES: choose the folder it is in (the one with AzerothSurvivors.exe).
+= EVET: oyunun olduğu klasörü seç (AzerothSurvivors.exe olan).
+NO: the launcher downloads and installs it for you.
+= HAYIR: başlatıcı senin için indirip kurar.
+Select your Azeroth Survivors game folder (the one with AzerothSurvivors.exe)
+= Azeroth Survivors oyun klasörünü seç (AzerothSurvivors.exe olan)
+That folder does not have the game in it
+= Bu klasörde oyun yok
+The other hosts did not work. Trying the game's own download page...
+= Diğer sunucular çalışmadı. Oyunun kendi indirme sayfası deneniyor...
+The game's download page did not give a game archive.
+= Oyunun indirme sayfası bir oyun arşivi vermedi.
+Import a save
+= Kayıt içe aktar
+IMPORT
+= İÇE AKTAR
+What the launcher does.
+= Başlatıcının yaptıkları.
+Asks again about your save, folders, cloud saving and addons. Nothing is downloaded.
+= Kaydını, klasörleri, bulut kaydını ve eklentileri yeniden sorar. Hiçbir şey indirilmez.
+DISPLAY
+= GÖRÜNTÜ
+GRAPHICS
+= GRAFİK
+SOUND
+= SES
+OFF
+= KAPALI
+LOW
+= DÜŞÜK
+MEDIUM
+= ORTA
+HIGH
+= YÜKSEK
+MINIMAL
+= EN AZ
+FULL
+= TAM
+Window size (Windowed)
+= Pencere boyutu (pencereli)
+The size of the game's window when it runs Windowed.
+= Oyun pencereli çalışırken penceresinin boyutu.
+Maximize the game window
+= Oyun penceresini büyüt
+Opens the window as big as the screen allows.
+= Pencereyi ekranın izin verdiği kadar büyük açar.
+Vertical sync
+= Dikey eşitleme
+Matches the frame rate to your monitor. Turn it on if you see the picture tearing.
+= Kare hızını monitörüne uydurur. Görüntü yırtılıyorsa aç.
+UI scale
+= Arayüz ölçeği
+The size of the game's interface.
+= Oyun arayüzünün boyutu.
+Brightness
+= Parlaklık
+Lightens or darkens the whole picture: nights, caves and interiors are what it is for.
+= Tüm görüntüyü aydınlatır ya da karartır: geceler, mağaralar ve iç mekanlar için.
+Anti-aliasing (multisampling)
+= Kenar yumuşatma (multisampling)
+Smooths jagged edges at some cost in frame rate. Takes effect the next time the game starts.
+= Tırtıklı kenarları kare hızı pahasına yumuşatır. Oyun bir sonraki açılışta etkili olur.
+Anisotropic filtering
+= Anizotropik filtreleme
+Keeps the ground and walls sharp when seen at a slant. Takes effect the next time the game starts.
+= Yere ve duvarlara açıyla bakınca onları net tutar. Oyun bir sonraki açılışta etkili olur.
+Trilinear filtering
+= Üç doğrusal filtreleme
+Smooths the steps between a texture's levels of detail. Takes effect the next time the game starts.
+= Bir dokunun ayrıntı seviyeleri arasındaki geçişleri yumuşatır. Oyun bir sonraki açılışta etkili olur.
+Terrain distance
+= Arazi mesafesi
+How far you can see terrain. Lower it for a faster game.
+= Araziyi ne kadar uzağa görebildiğin. Daha hızlı oyun için düşür.
+Environment detail
+= Çevre ayrıntısı
+How far you can see objects. Lower it for a faster game.
+= Nesneleri ne kadar uzağa görebildiğin. Daha hızlı oyun için düşür.
+Spell detail
+= Büyü ayrıntısı
+The detail of spell effects. Lower it for a faster game.
+= Büyü efektlerinin ayrıntısı. Daha hızlı oyun için düşür.
+Weather intensity
+= Hava yoğunluğu
+How strong rain and snow are. Lower it for a faster game.
+= Yağmur ve karın ne kadar güçlü olduğu. Daha hızlı oyun için düşür.
+No spell effects
+= Büyü efekti yok
+Draws no explosions, missiles, glows or beams. Spells still sound. For a slow computer.
+= Patlama, mermi, parıltı ya da ışın çizmez. Büyülerin sesi kalır. Yavaş bir bilgisayar için.
+Full screen glow
+= Tam ekran parıltı
+A soft glow around the bright parts of the picture. Off for a sharper picture or a slower computer.
+= Görüntünün parlak yerlerinin çevresinde yumuşak bir parıltı. Daha net bir görüntü ya da daha yavaş bir bilgisayar için kapat.
+Death effect
+= Ölüm efekti
+Turns the world grey while your hero is dead.
+= Kahramanın ölüyken dünyayı griye boyar.
+Enable all sound
+= Tüm sesleri aç
+Sound effects volume
+= Ses efektleri seviyesi
+Music volume
+= Müzik seviyesi
+Ambience volume
+= Ortam sesi seviyesi
+Loop music
+= Müziği tekrarla
+Starts the next track as soon as one ends, instead of after a stretch of silence.
+= Bir parça bitince bir sessizlik beklemeden sonrakini başlatır.
+Ambience
+= Ortam sesi
+Error speech
+= Hata sesleri
+Speech for errors, such as "Target out of range".
+= Hatalar için sesli uyarı, örneğin "Hedef menzil dışında".
+Emote sounds
+= İfade sesleri
+The voices of emotes such as /cheer and /laugh.
+= /cheer ve /laugh gibi ifadelerin sesleri.
+Sound when the game is in the background
+= Oyun arka plandayken ses
+Keeps the sound playing while you work in another window.
+= Başka bir pencerede çalışırken sesin çalmaya devam etmesini sağlar.
+Store level-ups
+= Seviye atlamalarını biriktir
+Level-ups no longer stop the fight: a Level Up! button over your action bars opens them when you are ready.
+= Seviye atlamak artık savaşı durdurmaz: eylem çubuklarının üstündeki Level Up! düğmesi hazır olduğunda onları açar.
+Open caches by clicking
+= Sandıkları tıklayarak aç
+Caches are bought only when you right-click them, not when you walk over them.
+= Sandıklar üzerinden yürüyünce değil, yalnızca sağ tıklayınca satın alınır.
+Damage meter on top
+= Hasar sayacı üstte
+Keeps the damage meter over the level-up and jewelry cards.
+= Hasar sayacını seviye ve mücevher kartlarının üstünde tutar.
+Show run clock
+= Koşu saatini göster
+The run's clock and the time to the next boss, at the top of the screen.
+= Koşunun saati ve bir sonraki boss'a kalan süre, ekranın üstünde.
+Show boss bars
+= Boss çubuklarını göster
+The health bars of the bosses and awake guardians you fight.
+= Savaştığın boss'ların ve uyanık muhafızların can çubukları.
+Show kills and gold
+= Öldürme ve altını göster
+The box with your kills and gold beside the minimap.
+= Mini haritanın yanındaki öldürmelerin ve altının kutusu.
+Show build
+= Build'i göster
+Your spells and jewelry with their cooldowns.
+= Büyülerin ve mücevherlerin, bekleme süreleriyle.
+Show banners
+= Afişleri göster
+The messages in the middle of the screen, such as a boss arriving.
+= Ekranın ortasındaki mesajlar, örneğin bir boss'un gelişi.
+Show loot notices
+= Ganimet bildirimlerini göster
+The notice of a piece of gear a boss dropped.
+= Bir boss'un düşürdüğü ekipman parçasının bildirimi.
+Show damage meter
+= Hasar sayacını göster
+The damage meter's minimap button and its window.
+= Hasar sayacının mini harita düğmesi ve penceresi.
+Armory
+= Cephanelik
+Collected
+= Toplanan
+Legendaries collected
+= Toplanan efsaneviler
+Level-up saves (at 15% health or less)
+= Seviye atlayarak kurtulma (%15 can veya altında)
+Health
+= Can
+Damage
+= Hasar
+Haste
+= Hız (saldırı)
+Crit
+= Kritik
+Crit Dmg
+= Kritik hasar
+Armor
+= Zırh
+Area
+= Alan
+Targets
+= Hedefler
+Echo
+= Yankı
+Speed
+= Hız
+Regen
+= Yenilenme
+Pickup
+= Toplama
+AZS Stats writes down each class's hero (their gear and numbers) while you play. Play a run and they show up here.
+= AZS Stats oynarken her sınıfın kahramanını (ekipmanı ve sayıları) not eder. Bir koşu oyna, burada görünürler.
+Level
+= Seviye
+Gear worn
+= Giyilen ekipman
+No gear worn.
+= Giyilen ekipman yok.
+Highest DPS by zone
+= Bölgeye göre en yüksek DPS
+Finish a run to set one.
+= Bir tane koymak için bir koşuyu bitir.
+Solo
+= Solo
+Deaths in co-op
+= Co-op ölümleri
+No co-op deaths recorded yet.
+= Henüz kayıtlı co-op ölümü yok.
+Most legendaries in a run
+= Bir koşuda en çok efsanevi
+Most level-up saves in a run
+= Bir koşuda en çok seviye kurtarışı
+All your stats in game (/azs) and on the STATS page: runs, records, abilities, classes, play time, your Nemesis and co-op with friends.
+= Tüm istatistiklerin oyunda (/azs) ve İSTATİSTİK sayfasında: koşular, rekorlar, yetenekler, sınıflar, oynama süresi, Baş Düşmanın ve arkadaşlarla co-op.
+The launcher's whole New Player Guide inside the game (/handbook): every topic and page, each class's spells with their icons and the talents that change them, and all the talent trees.
+= Başlatıcının tüm Yeni Oyuncu Rehberi oyunun içinde (/handbook): her konu ve sayfa, her sınıfın büyüleri simgeleri ve onları değiştiren yeteneklerle, ve tüm yetenek ağaçları.
+Small changes, each on or off (/azsmods or its minimap button): remove bloat from chat, a Say & Party box, boss markers (Skull, Cross, Moon), a blinking Square on a friend who falls, the level-up text out of the chat and the camera at 50.
+= Küçük değişiklikler, her biri açılıp kapanır (/azsmods ya da mini harita düğmesi): sohbetten fazlalığı at, bir Söyle ve Grup kutusu, boss işaretleri (Kafatası, Çarpı, Ay), düşen bir arkadaşın üstünde yanıp sönen bir Kare, sohbette seviye atlama metni yok ve kamera 50'de.
+A test (/transparency): which of your spells each item upgrade makes stronger, from rings, trinkets, amulets and boss gear.
+= Bir deneme (/transparency): her eşya yükseltmesinin hangi büyülerini güçlendirdiği; yüzükler, tılsımlar, muskalar ve boss ekipmanından.
+Converted for Azeroth Survivors. Puts every minimap button into one bag button: click it and they open in a bar (/mbb).
+= Azeroth Survivors için uyarlandı. Tüm mini harita düğmelerini tek bir çanta düğmesine koyar: tıkla, bir çubukta açılsınlar (/mbb).
+Converted for Azeroth Survivors. Catches every Lua error (with !BugGrabber) and shows them in one window: /bugsack or its minimap button.
+= Azeroth Survivors için uyarlandı. Her Lua hatasını yakalar (!BugGrabber ile) ve tek bir pencerede gösterir: /bugsack ya da mini harita düğmesi.

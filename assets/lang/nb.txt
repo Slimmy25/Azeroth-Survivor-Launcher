@@ -1331,3 +1331,263 @@ Azeroth Survivors save (*.sav)|*.sav|All files (*.*)|*.*
 = Azeroth Survivors-lagring (*.sav)|*.sav|Alle filer (*.*)|*.*
 Save imported.
 = Lagring importert.
+
+# October 2026: setup inside the launcher, game options, stats, Armory, more videos, converted addons
+Video
+= Video
+MORE VIDEOS ›
+= FLERE VIDEOER ›
+More Videos
+= Flere videoer
+OK
+= OK
+YES
+= JA
+NO
+= NEI
+Your settings are saved.\n\nWould you like to download addons? They are all optional: you choose each one you want.
+= Innstillingene dine er lagret.\n\nVil du laste ned tillegg? Alle er valgfrie: du velger hvert enkelt selv.
+YES, ADDONS
+= JA, TILLEGG
+ENABLE / DISABLE MY ADDONS
+= SLÅ MINE TILLEGG PÅ / AV
+Do you want to track your stats in and out of the game?
+= Vil du følge statistikken din i og utenfor spillet?
+AZS Stats records your runs while you play (/azs in game) and fills the launcher's STATS page: records, abilities, classes, play time, your Nemesis and co-op with friends.
+= AZS Stats lagrer rundene dine mens du spiller (/azs i spillet) og fyller oppstarterens STATISTIKK-side: rekorder, evner, klasser, spilletid, din Nemesis og co-op med venner.
+YES, TRACK MY STATS
+= JA, FØLG STATISTIKKEN MIN
+Do you already have Azeroth Survivors downloaded on this PC?\n\nYES: choose the folder it is in (the one with AzerothSurvivors.exe).\nNO: the launcher downloads and installs it for you.
+= Har du allerede lastet ned Azeroth Survivors på denne PC-en?\n\nJA: velg mappen det ligger i (den med AzerothSurvivors.exe).\nNEI: oppstarteren laster ned og installerer det for deg.
+Do you already have Azeroth Survivors downloaded on this PC?
+= Har du allerede lastet ned Azeroth Survivors på denne PC-en?
+YES: choose the folder it is in (the one with AzerothSurvivors.exe).
+= JA: velg mappen det ligger i (den med AzerothSurvivors.exe).
+NO: the launcher downloads and installs it for you.
+= NEI: oppstarteren laster ned og installerer det for deg.
+Select your Azeroth Survivors game folder (the one with AzerothSurvivors.exe)
+= Velg spillmappen for Azeroth Survivors (den med AzerothSurvivors.exe)
+That folder does not have the game in it
+= Den mappen inneholder ikke spillet
+The other hosts did not work. Trying the game's own download page...
+= De andre serverne virket ikke. Prøver spillets egen nedlastingsside...
+The game's download page did not give a game archive.
+= Spillets nedlastingsside ga ikke et spillarkiv.
+Import a save
+= Importer en lagring
+IMPORT
+= IMPORTER
+What the launcher does.
+= Hva oppstarteren gjør.
+Asks again about your save, folders, cloud saving and addons. Nothing is downloaded.
+= Spør igjen om lagring, mapper, skylagring og tillegg. Ingenting lastes ned.
+DISPLAY
+= SKJERM
+GRAPHICS
+= GRAFIKK
+SOUND
+= LYD
+OFF
+= AV
+LOW
+= LAV
+MEDIUM
+= MIDDELS
+HIGH
+= HØY
+MINIMAL
+= MINIMAL
+FULL
+= FULL
+Window size (Windowed)
+= Vindusstørrelse (vindu)
+The size of the game's window when it runs Windowed.
+= Størrelsen på spillvinduet når det kjører i vindu.
+Maximize the game window
+= Maksimer spillvinduet
+Opens the window as big as the screen allows.
+= Åpner vinduet så stort som skjermen tillater.
+Vertical sync
+= Vertikal synkronisering
+Matches the frame rate to your monitor. Turn it on if you see the picture tearing.
+= Tilpasser bildefrekvensen til skjermen. Slå den på hvis bildet river seg.
+UI scale
+= Skalering av grensesnitt
+The size of the game's interface.
+= Størrelsen på spillets grensesnitt.
+Brightness
+= Lysstyrke
+Lightens or darkens the whole picture: nights, caves and interiors are what it is for.
+= Gjør hele bildet lysere eller mørkere: ment for netter, huler og innendørs.
+Anti-aliasing (multisampling)
+= Kantutjevning (multisampling)
+Smooths jagged edges at some cost in frame rate. Takes effect the next time the game starts.
+= Glatter ut hakkete kanter på bekostning av bildefrekvens. Gjelder neste gang spillet starter.
+Anisotropic filtering
+= Anisotropisk filtrering
+Keeps the ground and walls sharp when seen at a slant. Takes effect the next time the game starts.
+= Holder bakken og veggene skarpe sett på skrå. Gjelder neste gang spillet starter.
+Trilinear filtering
+= Trilineær filtrering
+Smooths the steps between a texture's levels of detail. Takes effect the next time the game starts.
+= Glatter ut trinnene mellom en teksturs detaljnivåer. Gjelder neste gang spillet starter.
+Terrain distance
+= Terrengavstand
+How far you can see terrain. Lower it for a faster game.
+= Hvor langt du ser terrenget. Senk den for et raskere spill.
+Environment detail
+= Detaljer i omgivelsene
+How far you can see objects. Lower it for a faster game.
+= Hvor langt du ser gjenstander. Senk den for et raskere spill.
+Spell detail
+= Detaljer i trylleformler
+The detail of spell effects. Lower it for a faster game.
+= Detaljene i effektene til trylleformler. Senk dem for et raskere spill.
+Weather intensity
+= Værstyrke
+How strong rain and snow are. Lower it for a faster game.
+= Hvor kraftig regn og snø er. Senk den for et raskere spill.
+No spell effects
+= Ingen trylleformeleffekter
+Draws no explosions, missiles, glows or beams. Spells still sound. For a slow computer.
+= Tegner ingen eksplosjoner, prosjektiler, glød eller stråler. Trylleformlene høres fortsatt. For en treg datamaskin.
+Full screen glow
+= Fullskjermsglød
+A soft glow around the bright parts of the picture. Off for a sharper picture or a slower computer.
+= En myk glød rundt bildets lyse deler. Av for et skarpere bilde eller en tregere datamaskin.
+Death effect
+= Dødseffekt
+Turns the world grey while your hero is dead.
+= Gjør verden grå mens helten din er død.
+Enable all sound
+= Slå på all lyd
+Sound effects volume
+= Volum for lydeffekter
+Music volume
+= Musikkvolum
+Ambience volume
+= Volum for omgivelser
+Loop music
+= Gjenta musikk
+Starts the next track as soon as one ends, instead of after a stretch of silence.
+= Starter neste spor så snart ett slutter, i stedet for etter en stillhet.
+Ambience
+= Omgivelseslyder
+Error speech
+= Feilstemme
+Speech for errors, such as "Target out of range".
+= Stemme ved feil, som «Målet er utenfor rekkevidde».
+Emote sounds
+= Emote-lyder
+The voices of emotes such as /cheer and /laugh.
+= Stemmene i emotes som /cheer og /laugh.
+Sound when the game is in the background
+= Lyd når spillet er i bakgrunnen
+Keeps the sound playing while you work in another window.
+= Holder lyden i gang mens du jobber i et annet vindu.
+Store level-ups
+= Spar nivåøkninger
+Level-ups no longer stop the fight: a Level Up! button over your action bars opens them when you are ready.
+= Nivåøkninger stopper ikke lenger kampen: en Level Up!-knapp over handlingslinjene åpner dem når du er klar.
+Open caches by clicking
+= Åpne kister med klikk
+Caches are bought only when you right-click them, not when you walk over them.
+= Kister kjøpes bare når du høyreklikker på dem, ikke når du går over dem.
+Damage meter on top
+= Skademåler øverst
+Keeps the damage meter over the level-up and jewelry cards.
+= Holder skademåleren over nivå- og smykkekortene.
+Show run clock
+= Vis rundeklokke
+The run's clock and the time to the next boss, at the top of the screen.
+= Rundens klokke og tiden til neste boss, øverst på skjermen.
+Show boss bars
+= Vis bosslinjer
+The health bars of the bosses and awake guardians you fight.
+= Livslinjene til bossene og de våkne voktere du kjemper mot.
+Show kills and gold
+= Vis drap og gull
+The box with your kills and gold beside the minimap.
+= Boksen med drapene og gullet ditt ved siden av minikartet.
+Show build
+= Vis build
+Your spells and jewelry with their cooldowns.
+= Trylleformlene og smykkene dine med nedkjølingstidene.
+Show banners
+= Vis bannere
+The messages in the middle of the screen, such as a boss arriving.
+= Meldingene midt på skjermen, som når en boss kommer.
+Show loot notices
+= Vis byttevarsler
+The notice of a piece of gear a boss dropped.
+= Varselet om en utstyrsdel en boss slapp.
+Show damage meter
+= Vis skademåler
+The damage meter's minimap button and its window.
+= Skademålerens minikartknapp og vinduet.
+Armory
+= Våpenkammer
+Collected
+= Samlet
+Legendaries collected
+= Legendariske samlet
+Level-up saves (at 15% health or less)
+= Redninger med nivåøkning (ved 15 % liv eller mindre)
+Health
+= Liv
+Damage
+= Skade
+Haste
+= Hast
+Crit
+= Krit
+Crit Dmg
+= Kritskade
+Armor
+= Rustning
+Area
+= Område
+Targets
+= Mål
+Echo
+= Ekko
+Speed
+= Fart
+Regen
+= Regenerering
+Pickup
+= Oppsamling
+AZS Stats writes down each class's hero (their gear and numbers) while you play. Play a run and they show up here.
+= AZS Stats noterer hver klasses helt (utstyr og tall) mens du spiller. Spill en runde, så dukker de opp her.
+Level
+= Nivå
+Gear worn
+= Utstyr på
+No gear worn.
+= Ikke noe utstyr på.
+Highest DPS by zone
+= Høyeste DPS per sone
+Finish a run to set one.
+= Fullfør en runde for å sette en.
+Solo
+= Solo
+Deaths in co-op
+= Dødsfall i co-op
+No co-op deaths recorded yet.
+= Ingen dødsfall i co-op lagret ennå.
+Most legendaries in a run
+= Flest legendariske i én runde
+Most level-up saves in a run
+= Flest redninger med nivåøkning i én runde
+All your stats in game (/azs) and on the STATS page: runs, records, abilities, classes, play time, your Nemesis and co-op with friends.
+= All statistikken din i spillet (/azs) og på STATISTIKK-siden: runder, rekorder, evner, klasser, spilletid, din Nemesis og co-op med venner.
+The launcher's whole New Player Guide inside the game (/handbook): every topic and page, each class's spells with their icons and the talents that change them, and all the talent trees.
+= Oppstarterens hele guide for nye spillere inne i spillet (/handbook): hvert emne og hver side, hver klasses trylleformler med ikoner og talentene som endrer dem, og alle talenttrærne.
+Small changes, each on or off (/azsmods or its minimap button): remove bloat from chat, a Say & Party box, boss markers (Skull, Cross, Moon), a blinking Square on a friend who falls, the level-up text out of the chat and the camera at 50.
+= Små endringer, hver av eller på (/azsmods eller minikartknappen): rydd i chatten, en Si- og Gruppeboks, bossmarkører (Hodeskalle, Kryss, Måne), en blinkende Firkant over en venn som faller, nivåøkningsteksten ut av chatten og kameraet på 50.
+A test (/transparency): which of your spells each item upgrade makes stronger, from rings, trinkets, amulets and boss gear.
+= En test (/transparency): hvilke av trylleformlene dine hver gjenstandsoppgradering gjør sterkere, fra ringer, trinkets, amuletter og bossutstyr.
+Converted for Azeroth Survivors. Puts every minimap button into one bag button: click it and they open in a bar (/mbb).
+= Bygget om for Azeroth Survivors. Legger alle minikartknapper i én veskeknapp: klikk på den, så åpnes de i en linje (/mbb).
+Converted for Azeroth Survivors. Catches every Lua error (with !BugGrabber) and shows them in one window: /bugsack or its minimap button.
+= Bygget om for Azeroth Survivors. Fanger hver Lua-feil (med !BugGrabber) og viser dem i ett vindu: /bugsack eller minikartknappen.
