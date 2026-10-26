@@ -16,3 +16,4 @@
   minimap button the game shows by itself could make the bag think the bar was already open. The bar now stays until
   your pointer has been away from it for 3 seconds (change it in its options, right-click the bag). New: /mbb open
   and /mbb close.
+- MinimapButtonBag's bag button now sits on the right of the minimap, no longer under the game's damage meter button.
