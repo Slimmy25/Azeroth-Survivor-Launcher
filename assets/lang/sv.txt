@@ -1607,3 +1607,7 @@ Pick a class to open its three talent trees. Click a talent to add a point, righ
 = Välj en klass för att öppna dess tre talangträd. Klicka på en talang för att lägga en poäng, högerklicka för att ta tillbaka den: en build på högst 51 poäng, sparad för varje klass.
 Pick a class and try out a build of up to 51 points on its three talent trees.
 = Välj en klass och prova en build på högst 51 poäng i dess tre talangträd.
+Talents further down need this point.
+= Talanger längre ner behöver den här poängen.
+Click a talent to add a point, right-click to take one back. As in the game, each row opens once its own tree has 5 points for every row above it; a build takes no more than 51 points. The purple ones are the milestones at 10, 20 and 30 points.
+= Klicka på en talang för att lägga en poäng, högerklicka för att ta tillbaka den. Som i spelet öppnas varje rad när dess eget träd har 5 poäng för varje rad ovanför; en build tar högst 51 poäng. De lila är milstolparna vid 10, 20 och 30 poäng.

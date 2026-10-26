@@ -140,18 +140,51 @@ namespace AzerothLauncher
 
         public int SpentIn(TalentTree tree) { int s = 0; foreach (var t in tree.Talents) s += Get(t); return s; }
 
+        // As in the game: a talent in row N opens once its own tree has 5 x N points in the rows above it. Each tree
+        // counts on its own; the other two trees' points do not open it.
+        List<TalentTree> trees = new List<TalentTree>();
+
+        TalentTree TreeOf(Talent t)
+        {
+            foreach (var tr in trees) if (tr.Spec == t.Spec) return tr;
+            return null;
+        }
+
+        // the points in a talent's tree, in the rows above the given row
+        public int AboveRow(Talent t, int row)
+        {
+            var tr = TreeOf(t);
+            if (tr == null) return int.MaxValue;
+            int s = 0;
+            foreach (var u in tr.Talents) if (u.Row < row) s += Get(u);
+            return s;
+        }
+
+        public bool Open(Talent t) { return AboveRow(t, t.Row) >= t.Points; }
+
         public bool Add(Talent t)
         {
-            if (Get(t) >= t.Ranks || Spent >= MaxPoints) return false;
+            if (Get(t) >= t.Ranks || Spent >= MaxPoints || !Open(t)) return false;
             points[t.Id] = Get(t) + 1;
             if (Changed != null) Changed();
+            return true;
+        }
+
+        // a point can come back only if every talent taken further down still has its rows above it filled
+        public bool CanRemove(Talent t)
+        {
+            if (Get(t) <= 0) return false;
+            var tr = TreeOf(t);
+            if (tr == null) return true;
+            foreach (var u in tr.Talents)
+                if (u.Row > t.Row && Get(u) > 0 && AboveRow(u, u.Row) - 1 < u.Points) return false;
             return true;
         }
 
         public bool Remove(Talent t)
         {
             int n = Get(t);
-            if (n <= 0) return false;
+            if (n <= 0 || !CanRemove(t)) return false;
             if (n == 1) points.Remove(t.Id); else points[t.Id] = n - 1;
             if (Changed != null) Changed();
             return true;
@@ -170,8 +203,9 @@ namespace AzerothLauncher
         public static TalentBuild Parse(string text, string className)
         {
             var b = new TalentBuild();
+            b.trees = Talents.Of(className);
             var byId = new Dictionary<string, Talent>(StringComparer.Ordinal);
-            foreach (var tr in Talents.Of(className)) foreach (var t in tr.Talents) byId[t.Id] = t;
+            foreach (var tr in b.trees) foreach (var t in tr.Talents) byId[t.Id] = t;
             foreach (string part in (text ?? "").Split(';'))
             {
                 int eq = part.LastIndexOf('='), n;
@@ -179,6 +213,13 @@ namespace AzerothLauncher
                 if (eq <= 0 || !int.TryParse(part.Substring(eq + 1), out n) || !byId.TryGetValue(part.Substring(0, eq), out t)) continue;
                 n = Math.Min(n, Math.Min(t.Ranks, MaxPoints - b.Spent));
                 if (n > 0) b.points[t.Id] = n;
+            }
+            // a build saved before the rows were enforced: the talents whose rows above are not filled come off
+            for (bool changed = true; changed; )
+            {
+                changed = false;
+                foreach (var t in byId.Values)
+                    if (b.Get(t) > 0 && !b.Open(t)) { b.points.Remove(t.Id); changed = true; }
             }
             return b;
         }
@@ -243,8 +284,9 @@ namespace AzerothLauncher
                 if (img != null) g.DrawImage(img, r);
                 else using (var b = new SolidBrush(Theme.Hex("#2a2218"))) g.FillRectangle(b, r);
                 int have = Build != null ? Build.Get(t) : 0;
-                if (Build != null && have == 0)                // not taken: dimmed, as in the game
-                    using (var b = new SolidBrush(Color.FromArgb(150, 8, 6, 10))) g.FillRectangle(b, r);
+                bool locked = Build != null && have == 0 && !Build.Open(t);
+                if (Build != null && have == 0)                // not taken: dimmed, as in the game; not open yet: darker
+                    using (var b = new SolidBrush(Color.FromArgb(locked ? 205 : 150, 8, 6, 10))) g.FillRectangle(b, r);
                 bool milestone = t.Milestone;
                 using (var p = new Pen(t == over ? Theme.Hex("#fff2b0") : milestone ? Theme.Hex("#b27cff") : Theme.Hex("#8a7040"), t == over ? 2 : 1.5f))
                     g.DrawRectangle(p, r);
@@ -277,9 +319,20 @@ namespace AzerothLauncher
         {
             string body = Talents.HoverText(t);
             if (Build != null)
-                body = Lang.T("Rank") + " " + Build.Get(t) + "/" + t.Ranks + "\n" + body + "\n\n" +
-                       (Build.Get(t) < t.Ranks ? (Build.Spent < TalentBuild.MaxPoints ? Lang.T("Click to add a point.") : Lang.T("All 51 points are spent.")) + " " : "") +
-                       (Build.Get(t) > 0 ? Lang.T("Right-click to take one back.") : "");
+            {
+                string add = "";
+                if (Build.Get(t) < t.Ranks)
+                {
+                    if (!Build.Open(t)) add = Lang.T("needs") + " " + t.Points + " " + Lang.T("points") + " (" + tree.Spec + ": " +
+                                              Build.AboveRow(t, t.Row) + "/" + t.Points + ") ";
+                    else add = (Build.Spent < TalentBuild.MaxPoints ? Lang.T("Click to add a point.") : Lang.T("All 51 points are spent.")) + " ";
+                }
+                string back = "";
+                if (Build.Get(t) > 0)
+                    back = Build.CanRemove(t) ? Lang.T("Right-click to take one back.")
+                                              : Lang.T("Talents further down need this point.");
+                body = Lang.T("Rank") + " " + Build.Get(t) + "/" + t.Ranks + "\n" + body + "\n\n" + add + back;
+            }
             GuideHover.Show(this, t.Name, body.TrimEnd(), SpellIcons.Icon(t.Icon, null));
         }
 

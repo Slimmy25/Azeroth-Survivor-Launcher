@@ -1608,3 +1608,7 @@ Pick a class to open its three talent trees. Click a talent to add a point, righ
 = 직업을 고르면 세 가지 특성 트리가 열립니다. 특성을 클릭하면 점수를 더하고, 오른쪽 클릭하면 되돌립니다: 최대 51점까지의 빌드가 직업별로 저장됩니다.
 Pick a class and try out a build of up to 51 points on its three talent trees.
 = 직업을 고르고 세 가지 특성 트리에서 최대 51점의 빌드를 시험해 보세요.
+Talents further down need this point.
+= 아래쪽 특성에 이 점수가 필요합니다.
+Click a talent to add a point, right-click to take one back. As in the game, each row opens once its own tree has 5 points for every row above it; a build takes no more than 51 points. The purple ones are the milestones at 10, 20 and 30 points.
+= 특성을 클릭하면 점수를 더하고, 오른쪽 클릭하면 되돌립니다. 게임과 같이 각 줄은 해당 트리에 위쪽 줄마다 5점이 있어야 열립니다. 빌드는 최대 51점입니다. 보라색은 10, 20, 30점의 이정표입니다.

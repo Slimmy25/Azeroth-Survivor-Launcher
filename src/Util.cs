@@ -542,14 +542,32 @@ namespace AzerothLauncher
         public static bool Overlap(string a, string b) { return Inside(a, b) || Inside(b, a); }
 
         // removes a folder, read-only files included
+        // Deletes a folder and everything in it. Read-only flags (on files and folders) are cleared first, and each file
+        // and folder is deleted on its own with a few short retries: OneDrive, an antivirus or the search indexer often
+        // hold a file for a moment, which made a single Directory.Delete fail with "access is denied".
         public static void DeleteTree(string path)
         {
             if (!Directory.Exists(path)) return;
+            var dirs = new List<string>(Directory.GetDirectories(path, "*", SearchOption.AllDirectories));
+            dirs.Sort(delegate(string a, string b) { return b.Length.CompareTo(a.Length); });   // deepest first
+            dirs.Add(path);
+            foreach (string d in dirs)
+                try { new DirectoryInfo(d).Attributes = FileAttributes.Directory; } catch (Exception) { }
             foreach (string f in Directory.GetFiles(path, "*", SearchOption.AllDirectories))
+                Retry(delegate { File.SetAttributes(f, FileAttributes.Normal); File.Delete(f); });
+            foreach (string d in dirs)
+                Retry(delegate { if (Directory.Exists(d)) Directory.Delete(d, false); });
+        }
+
+        static void Retry(Action a)
+        {
+            for (int i = 0; ; i++)
             {
-                try { File.SetAttributes(f, FileAttributes.Normal); } catch (Exception) { }
+                try { a(); return; }
+                catch (IOException) { if (i >= 5) throw; }
+                catch (UnauthorizedAccessException) { if (i >= 5) throw; }
+                System.Threading.Thread.Sleep(120);
             }
-            Directory.Delete(path, true);
         }
 
         public static void DeleteTreeQuiet(string path)

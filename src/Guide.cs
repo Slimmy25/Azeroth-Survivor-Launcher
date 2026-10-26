@@ -36,9 +36,9 @@ namespace AzerothLauncher
         {
             new[] { "NEW PLAYER", "Getting Started", "Controls", "Your First Run", "Tips for New Players", "Run Options & Endless",
                     "Achievements & Rewards", "Addons" },
-            new[] { "GAMEPLAY", "Classes", "Races", "Zones & Bosses", "Level-Ups & Cards", "Pickups, Caches & Guardians",
+            new[] { "GAMEPLAY", "Classes", "Races", "Zones & Bosses", "Level-Ups & Cards", "Talents", "Pickups, Caches & Guardians",
                     "Gear & the Armory", "Co-op" },
-            new[] { "THEORYCRAFTING", TalentBuilder, "Talents", "Build Guides" },
+            new[] { "THEORYCRAFTING", TalentBuilder, "Build Guides" },
         };
         int guideGroup;                                       // the group whose tabs are shown
         bool guideMain = true;                                // the main page: every topic as a card, by group
@@ -244,8 +244,9 @@ namespace AzerothLauncher
             reset.Location = new Point(x + w - reset.Width, y);
             sp.Controls.Add(reset);
             y += Math.Max(reset.Height, left.Height) + 6;
-            var hint = UI.Text("Click a talent to add a point, right-click to take one back. A talent takes no more points than its " +
-                               "ranks, and a build no more than 51; the purple ones are the milestones at 10, 20 and 30 points.",
+            var hint = UI.Text("Click a talent to add a point, right-click to take one back. As in the game, each row opens once " +
+                               "its own tree has 5 points for every row above it; a build takes no more than 51 points. The purple " +
+                               "ones are the milestones at 10, 20 and 30 points.",
                                9.5f, FontStyle.Regular, Theme.GoldDim, bg, w, true);
             hint.Size = VStack.Measure(hint);
             hint.Location = new Point(x, y);

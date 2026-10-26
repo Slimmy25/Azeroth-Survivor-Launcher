@@ -1608,3 +1608,7 @@ Pick a class to open its three talent trees. Click a talent to add a point, righ
 = 選擇一個職業，開啟它的三棵天賦樹。點擊天賦加一點，按右鍵收回：最多 51 點的配置，每個職業各自保存。
 Pick a class and try out a build of up to 51 points on its three talent trees.
 = 選擇一個職業，在它的三棵天賦樹上試試最多 51 點的配置。
+Talents further down need this point.
+= 下方的天賦需要這一點。
+Click a talent to add a point, right-click to take one back. As in the game, each row opens once its own tree has 5 points for every row above it; a build takes no more than 51 points. The purple ones are the milestones at 10, 20 and 30 points.
+= 點擊天賦加一點，按右鍵收回。與遊戲中一樣，每一列要在本系天賦樹中為上方每一列投入 5 點後才會開啟；配置最多 51 點。紫色的是 10、20 和 30 點的里程碑。

@@ -1608,3 +1608,7 @@ Pick a class to open its three talent trees. Click a talent to add a point, righ
 = किसी क्लास के तीनों प्रतिभा वृक्ष खोलने के लिए उसे चुनें। प्रतिभा पर क्लिक से एक अंक जुड़ता है, राइट-क्लिक से वापस: 51 अंकों तक का बिल्ड, हर क्लास के लिए सहेजा जाता है।
 Pick a class and try out a build of up to 51 points on its three talent trees.
 = कोई क्लास चुनें और उसके तीनों प्रतिभा वृक्षों पर 51 अंकों तक का बिल्ड आज़माएँ।
+Talents further down need this point.
+= नीचे की प्रतिभाओं को इस अंक की ज़रूरत है।
+Click a talent to add a point, right-click to take one back. As in the game, each row opens once its own tree has 5 points for every row above it; a build takes no more than 51 points. The purple ones are the milestones at 10, 20 and 30 points.
+= किसी प्रतिभा पर क्लिक से एक अंक जुड़ता है, राइट-क्लिक से वापस। गेम की तरह, हर पंक्ति तब खुलती है जब उसके अपने वृक्ष में ऊपर की हर पंक्ति के लिए 5 अंक हों; बिल्ड में अधिकतम 51 अंक। बैंगनी वाले 10, 20 और 30 अंकों के पड़ाव हैं।

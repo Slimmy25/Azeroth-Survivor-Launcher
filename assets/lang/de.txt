@@ -1607,3 +1607,7 @@ Pick a class to open its three talent trees. Click a talent to add a point, righ
 = Wähle eine Klasse, um ihre drei Talentbäume zu öffnen. Klicke auf ein Talent für einen Punkt, Rechtsklick nimmt ihn zurück: ein Build mit bis zu 51 Punkten, für jede Klasse gespeichert.
 Pick a class and try out a build of up to 51 points on its three talent trees.
 = Wähle eine Klasse und probiere auf ihren drei Talentbäumen einen Build mit bis zu 51 Punkten aus.
+Talents further down need this point.
+= Talente weiter unten brauchen diesen Punkt.
+Click a talent to add a point, right-click to take one back. As in the game, each row opens once its own tree has 5 points for every row above it; a build takes no more than 51 points. The purple ones are the milestones at 10, 20 and 30 points.
+= Klicke auf ein Talent für einen Punkt, Rechtsklick nimmt ihn zurück. Wie im Spiel öffnet sich jede Reihe, sobald ihr eigener Baum 5 Punkte für jede Reihe darüber hat; ein Build nimmt höchstens 51 Punkte. Die lilafarbenen sind die Meilensteine bei 10, 20 und 30 Punkten.
