@@ -42,6 +42,13 @@ jobs:
             file="$(echo "$file" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')"
             url="$(echo "$url" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')"
             case "$url" in
+              hosted)                                    # kept on the "addons" release itself: nothing to download
+                if ! gh release view addons --json assets --jq '.assets[].name' | grep -qx "$file"; then
+                  echo "::error::$file is marked hosted but is not on the addons release"; exit 1
+                fi
+                echo "Keeping $file (hosted on the addons release)"
+                continue
+                ;;
               local:*)                                   # an addon kept in this repository: zip its folder
                 folders="${url#local:}"
                 echo "Zipping addons/$folders as $file"
@@ -67,9 +74,9 @@ jobs:
             fi
             unzip -l "mirror/$file" | tail -1
           done < list.txt
-          gh release upload addons mirror/*.zip --clobber
+          ls mirror/*.zip >/dev/null 2>&1 && gh release upload addons mirror/*.zip --clobber
           # addons taken off the list: their old copies go too (named one by one)
-          for old in DoomWithin-by-tna0y-vladvis.zip AS-Time-Tracker-by-Slimjim.zip DBM-by-Gabriellus.zip Azerloot-by-KindaGray.zip; do
+          for old in DoomWithin-by-tna0y-vladvis.zip AS-Time-Tracker-by-Slimjim.zip; do
             if [ ! -f "mirror/$old" ] && gh release view addons --json assets --jq '.assets[].name' | grep -qx "$old"; then
               echo "Removing $old"; gh release delete-asset addons "$old" -y
             fi
