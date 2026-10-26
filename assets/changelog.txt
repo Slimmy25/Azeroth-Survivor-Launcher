@@ -2,6 +2,29 @@ Patch notes shown in the launcher's Changelog. The launcher sorts them by versio
 Every post starts with its title on the first line. Posts are separated by a line with only === on it.
 Everything above the first === line is ignored.
 ===
+0.120.1
+-------
+Co-op achievements fixed: a boss's killing blow now counts for the whole party, not just the player who landed it.
+
+* Whoever lands a boss's killing blow, every player still in the run earns the achievements it gives (like no u, You're Fired or Bad Dragon!).
+* Every boss the party slays now counts toward Boss Hunter for everyone.
+===
+0.120.0
+-------
+Play any race with any class: open a race to every class for 100 achievement points on the armory's Rewards tab.
+
+* New Races section on the Rewards tab: buy a race for 100 points and every class can be that race, its racial and passives with it. A Tauren Paladin, a Gnome Druid, an Undead Shaman: it's up to you.
+* Races are bought for good: a perk reset keeps them.
+* A druid of a Horde race takes the Tauren's cat and bear forms, an Alliance one the Night Elf's.
+* Hovering a race your class can't be yet says where to open it.
+===
+0.119.1
+-------
+Fewer co-op disconnects: a party's run no longer ends when one player's connection to the co-op lobby drops for a moment.
+
+* A co-op run now keeps going as long as the party's own co-op server connection holds. Before, a short drop of the separate lobby connection (on the host's side or a guest's) ended the run for everyone, often with "the host left" or a kick back to the lobby.
+* A guest who really leaves or loses their game still drops out of the host's party as before.
+===
 0.119.0
 -------
 Druid healing: Tranquility can crit, and every druid's Rejuvenation on you in co-op heals at once.
