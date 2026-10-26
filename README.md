@@ -77,7 +77,7 @@ the launcher, streamed from YouTube and never saved on your PC, with the creator
 | --- | --- |
 | **AZS Stats** (`/azs`) | Records every run for the launcher's STATS page and shows the same stats in game. |
 | **AZS Handbook** (`/handbook`) | The launcher's whole Guide, inside the game. |
-| **AZS Minor Mods** (`/azsmods`) | Small changes, each on or off: no level-up, stat-bonus or new-spell lines in chat, a Say & Party box, boss markers, a blinking marker on a friend who falls, move and lock the UI, hide the target frame, the camera at its farthest. |
+| **AZS Minor Mods** (`/azsmods`) | Small changes, each on or off: no level-up, stat-bonus or new-spell lines in chat, boss markers, a blinking marker on a friend who falls, move and lock the UI, hide the target frame, a plain action bar of just the six spell squares (no gryphons), the camera at its farthest. |
 
 They use the game's addon API and share one look (`addons/AZSKit`).
 

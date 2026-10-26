@@ -1583,8 +1583,8 @@ All your stats in game (/azs) and on the STATS page: runs, records, abilities, c
 = Semua statistikmu di dalam game (/azs) dan di halaman STATISTIK: run, rekor, kemampuan, kelas, waktu bermain, Nemesis-mu, dan co-op bersama teman.
 The launcher's whole New Player Guide inside the game (/handbook): every topic and page, each class's spells with their icons and the talents that change them, and all the talent trees.
 = Seluruh Panduan Pemain Baru dari launcher di dalam game (/handbook): setiap topik dan halaman, mantra tiap kelas dengan ikonnya dan talenta yang mengubahnya, serta semua pohon talenta.
-Small changes, each on or off (/azsmods or its minimap button): remove bloat from chat, a Say & Party box, boss markers (Skull, Cross, Moon), a blinking Square on a friend who falls, the level-up text out of the chat and the camera at 50.
-= Perubahan kecil, masing-masing bisa nyala atau mati (/azsmods atau tombol minimap-nya): buang sampah dari chat, kotak Say & Party, penanda bos (Tengkorak, Silang, Bulan), Kotak berkedip di atas teman yang tumbang, teks naik level keluar dari chat, dan kamera di 50.
+Small changes, each on or off (/azsmods or its minimap button): no level-up, stat bonus or new spell lines in chat, boss markers (Skull, Cross, Moon), a blinking Square on a friend who falls, a plain action bar with just the six squares, move and lock the UI, hide the target frame and the camera at 50.
+= Perubahan kecil, masing-masing bisa nyala atau mati (/azsmods atau tombol minimap-nya): tanpa baris naik level, bonus stat, atau mantra baru di chat, penanda bos (Tengkorak, Silang, Bulan), Kotak berkedip di atas teman yang tumbang, bilah aksi polos dengan enam kotak saja, pindahkan dan kunci UI, sembunyikan bingkai target, dan kamera di 50.
 A test (/transparency): which of your spells each item upgrade makes stronger, from rings, trinkets, amulets and boss gear.
 = Sebuah uji coba (/transparency): mantra mana yang diperkuat setiap peningkatan item, dari cincin, trinket, jimat, dan perlengkapan bos.
 Converted for Azeroth Survivors. Puts every minimap button into one bag button: click it and they open in a bar (/mbb).
