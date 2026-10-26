@@ -1583,8 +1583,8 @@ All your stats in game (/azs) and on the STATS page: runs, records, abilities, c
 = All din statistik i spelet (/azs) och på STATISTIK-sidan: rundor, rekord, förmågor, klasser, speltid, din Nemesis och co-op med vänner.
 The launcher's whole New Player Guide inside the game (/handbook): every topic and page, each class's spells with their icons and the talents that change them, and all the talent trees.
 = Startprogrammets hela guide för nya spelare inne i spelet (/handbook): varje ämne och sida, varje klass besvärjelser med ikoner och talangerna som ändrar dem, och alla talangträd.
-Small changes, each on or off (/azsmods or its minimap button): remove bloat from chat, a Say & Party box, boss markers (Skull, Cross, Moon), a blinking Square on a friend who falls, the level-up text out of the chat and the camera at 50.
-= Små ändringar, var och en av eller på (/azsmods eller dess minikartknapp): rensa chatten, en Säg- och Gruppruta, bossmarkeringar (Dödskalle, Kryss, Måne), en blinkande Fyrkant över en vän som fallit, nivåhöjningstexten borta ur chatten och kameran på 50.
+Small changes, each on or off (/azsmods or its minimap button): no level-up, stat bonus or new spell lines in chat, boss markers (Skull, Cross, Moon), a blinking Square on a friend who falls, a plain action bar with just the six squares, move and lock the UI, hide the target frame and the camera at 50.
+= Små ändringar, var och en av eller på (/azsmods eller dess minikartknapp): inga rader om ny nivå, statbonus eller ny besvärjelse i chatten, bossmarkörer (dödskalle, kryss, måne), en blinkande fyrkant över en vän som faller, en enkel åtgärdsrad med bara de sex rutorna, flytta och lås gränssnittet, dölj målramen och kameran på 50.
 A test (/transparency): which of your spells each item upgrade makes stronger, from rings, trinkets, amulets and boss gear.
 = Ett test (/transparency): vilka av dina besvärjelser varje föremålsuppgradering gör starkare, från ringar, smycken, amuletter och bossutrustning.
 Converted for Azeroth Survivors. Puts every minimap button into one bag button: click it and they open in a bar (/mbb).

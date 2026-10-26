@@ -1584,8 +1584,8 @@ All your stats in game (/azs) and on the STATS page: runs, records, abilities, c
 = 게임 안(/azs)과 통계 페이지의 모든 통계: 런, 기록, 능력, 직업, 플레이 시간, 숙적, 친구와의 협동.
 The launcher's whole New Player Guide inside the game (/handbook): every topic and page, each class's spells with their icons and the talents that change them, and all the talent trees.
 = 런처의 신규 플레이어 가이드 전체를 게임 안에서(/handbook): 모든 주제와 페이지, 각 직업의 주문과 아이콘, 그 주문을 바꾸는 특성, 그리고 모든 특성 트리.
-Small changes, each on or off (/azsmods or its minimap button): remove bloat from chat, a Say & Party box, boss markers (Skull, Cross, Moon), a blinking Square on a friend who falls, the level-up text out of the chat and the camera at 50.
-= 각각 켜고 끌 수 있는 작은 변경(/azsmods 또는 미니맵 버튼): 채팅 군더더기 제거, 일반 대화 및 파티 창, 우두머리 표시(해골, 가위표, 달), 쓰러진 친구 위에서 깜박이는 네모, 채팅에서 레벨 업 문구 제거, 카메라 50.
+Small changes, each on or off (/azsmods or its minimap button): no level-up, stat bonus or new spell lines in chat, boss markers (Skull, Cross, Moon), a blinking Square on a friend who falls, a plain action bar with just the six squares, move and lock the UI, hide the target frame and the camera at 50.
+= 작은 변경, 각각 켜고 끄기 (/azsmods 또는 미니맵 버튼): 채팅에 레벨 업, 능력치 보너스, 새 주문 줄 없음, 우두머리 징표 (해골, 가위표, 달), 쓰러진 친구 위에서 깜박이는 네모, 여섯 칸만 있는 단순한 행동 단축바, UI 이동과 잠금, 대상 창 숨기기, 카메라 거리 50.
 A test (/transparency): which of your spells each item upgrade makes stronger, from rings, trinkets, amulets and boss gear.
 = 테스트(/transparency): 반지, 장신구, 목걸이, 우두머리 장비의 각 아이템 강화가 어떤 주문을 강하게 하는지.
 Converted for Azeroth Survivors. Puts every minimap button into one bag button: click it and they open in a bar (/mbb).

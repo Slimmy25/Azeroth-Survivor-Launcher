@@ -1584,8 +1584,8 @@ All your stats in game (/azs) and on the STATS page: runs, records, abilities, c
 = Вся ваша статистика в игре (/azs) и на странице СТАТИСТИКА: забеги, рекорды, способности, классы, время в игре, ваш Немезис и кооператив с друзьями.
 The launcher's whole New Player Guide inside the game (/handbook): every topic and page, each class's spells with their icons and the talents that change them, and all the talent trees.
 = Всё руководство новичка из лаунчера прямо в игре (/handbook): каждая тема и страница, заклинания каждого класса с иконками и талантами, которые их меняют, и все деревья талантов.
-Small changes, each on or off (/azsmods or its minimap button): remove bloat from chat, a Say & Party box, boss markers (Skull, Cross, Moon), a blinking Square on a friend who falls, the level-up text out of the chat and the camera at 50.
-= Небольшие изменения, каждое включается отдельно (/azsmods или кнопка у мини-карты): меньше мусора в чате, окно «Сказать» и «Группа», метки боссов (Череп, Крест, Луна), мигающий Квадрат над павшим другом, без текста о повышении уровня в чате и камера на 50.
+Small changes, each on or off (/azsmods or its minimap button): no level-up, stat bonus or new spell lines in chat, boss markers (Skull, Cross, Moon), a blinking Square on a friend who falls, a plain action bar with just the six squares, move and lock the UI, hide the target frame and the camera at 50.
+= Небольшие изменения, каждое вкл. или выкл. (/azsmods или его кнопка у миникарты): без строк о новом уровне, бонусе к характеристикам и новом заклинании в чате, метки боссов (череп, крест, луна), мигающий квадрат над павшим другом, простая панель действий только из шести ячеек, перемещение и закрепление интерфейса, скрытие рамки цели и камера на 50.
 A test (/transparency): which of your spells each item upgrade makes stronger, from rings, trinkets, amulets and boss gear.
 = Тест (/transparency): какие ваши заклинания усиливает каждое улучшение предмета — от колец, аксессуаров, амулетов и снаряжения боссов.
 Converted for Azeroth Survivors. Puts every minimap button into one bag button: click it and they open in a bar (/mbb).

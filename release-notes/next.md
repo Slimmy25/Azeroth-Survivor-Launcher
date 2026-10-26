@@ -17,3 +17,10 @@
   your pointer has been away from it for 3 seconds (change it in its options, right-click the bag). New: /mbb open
   and /mbb close.
 - MinimapButtonBag's bag button now sits on the right of the minimap, no longer under the game's damage meter button.
+- AZS Minor Mods, chat: one setting now, "No level-up, stat bonus or new spell lines in chat". It hides
+  "Congratulations, you have reached level 12!", "You have gained 3% damage, 12 maximum health…" and "You have
+  learned a new spell: Cleave (Level 1)", in every language the game has. "Remove bloat from chat" is folded into it.
+- AZS Minor Mods: the separate Say & Party box is gone. Say and Party chat stay in the main chat window as usual.
+- AZS Minor Mods, new setting: "Plain action bar". The gryphons and the bar's art go, leaving just the six spell
+  squares (the racial button and the character and talent buttons are hidden too). Untick it and the bar comes back
+  as it was; the character and talent panels still open with their keys (C and N).

@@ -1584,8 +1584,8 @@ All your stats in game (/azs) and on the STATS page: runs, records, abilities, c
 = Tüm istatistiklerin oyunda (/azs) ve İSTATİSTİK sayfasında: koşular, rekorlar, yetenekler, sınıflar, oynama süresi, Baş Düşmanın ve arkadaşlarla co-op.
 The launcher's whole New Player Guide inside the game (/handbook): every topic and page, each class's spells with their icons and the talents that change them, and all the talent trees.
 = Başlatıcının tüm Yeni Oyuncu Rehberi oyunun içinde (/handbook): her konu ve sayfa, her sınıfın büyüleri simgeleri ve onları değiştiren yeteneklerle, ve tüm yetenek ağaçları.
-Small changes, each on or off (/azsmods or its minimap button): remove bloat from chat, a Say & Party box, boss markers (Skull, Cross, Moon), a blinking Square on a friend who falls, the level-up text out of the chat and the camera at 50.
-= Küçük değişiklikler, her biri açılıp kapanır (/azsmods ya da mini harita düğmesi): sohbetten fazlalığı at, bir Söyle ve Grup kutusu, boss işaretleri (Kafatası, Çarpı, Ay), düşen bir arkadaşın üstünde yanıp sönen bir Kare, sohbette seviye atlama metni yok ve kamera 50'de.
+Small changes, each on or off (/azsmods or its minimap button): no level-up, stat bonus or new spell lines in chat, boss markers (Skull, Cross, Moon), a blinking Square on a friend who falls, a plain action bar with just the six squares, move and lock the UI, hide the target frame and the camera at 50.
+= Küçük değişiklikler, her biri açık ya da kapalı (/azsmods ya da mini harita düğmesi): sohbette seviye atlama, stat bonusu ya da yeni büyü satırı yok, boss işaretleri (Kafatası, Çarpı, Ay), düşen bir dostun üstünde yanıp sönen Kare, yalnızca altı kareli sade bir aksiyon çubuğu, arayüzü taşıma ve kilitleme, hedef çerçevesini gizleme ve 50'de kamera.
 A test (/transparency): which of your spells each item upgrade makes stronger, from rings, trinkets, amulets and boss gear.
 = Bir deneme (/transparency): her eşya yükseltmesinin hangi büyülerini güçlendirdiği; yüzükler, tılsımlar, muskalar ve boss ekipmanından.
 Converted for Azeroth Survivors. Puts every minimap button into one bag button: click it and they open in a bar (/mbb).

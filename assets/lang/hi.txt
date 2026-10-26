@@ -1584,8 +1584,8 @@ All your stats in game (/azs) and on the STATS page: runs, records, abilities, c
 = गेम में (/azs) और आँकड़े पेज पर आपके सारे आँकड़े: रन, रिकॉर्ड, क्षमताएँ, क्लास, खेलने का समय, आपका नेमेसिस और दोस्तों के साथ को-ऑप।
 The launcher's whole New Player Guide inside the game (/handbook): every topic and page, each class's spells with their icons and the talents that change them, and all the talent trees.
 = लॉन्चर की पूरी नए खिलाड़ी गाइड गेम के अंदर (/handbook): हर विषय और पेज, हर क्लास के मंत्र उनके आइकन और उन्हें बदलने वाली प्रतिभाओं के साथ, और सभी प्रतिभा वृक्ष।
-Small changes, each on or off (/azsmods or its minimap button): remove bloat from chat, a Say & Party box, boss markers (Skull, Cross, Moon), a blinking Square on a friend who falls, the level-up text out of the chat and the camera at 50.
-= छोटे बदलाव, हर एक अलग से चालू या बंद (/azsmods या उसका मिनीमैप बटन): चैट से फ़ालतू हटाएँ, Say & Party बॉक्स, बॉस निशान (खोपड़ी, क्रॉस, चाँद), गिरे हुए दोस्त के ऊपर टिमटिमाता चौकोर, चैट से लेवल-अप का टेक्स्ट हटाएँ और कैमरा 50 पर।
+Small changes, each on or off (/azsmods or its minimap button): no level-up, stat bonus or new spell lines in chat, boss markers (Skull, Cross, Moon), a blinking Square on a friend who falls, a plain action bar with just the six squares, move and lock the UI, hide the target frame and the camera at 50.
+= छोटे बदलाव, हर एक अलग से चालू या बंद (/azsmods या उसका मिनीमैप बटन): चैट में लेवल-अप, स्टैट बोनस या नए मंत्र की पंक्तियाँ नहीं, बॉस निशान (खोपड़ी, क्रॉस, चाँद), गिरे हुए दोस्त के ऊपर टिमटिमाता चौकोर, सिर्फ़ छह खानों वाला सादा ऐक्शन बार, UI को हिलाना और लॉक करना, टारगेट फ़्रेम छिपाना और कैमरा 50 पर।
 A test (/transparency): which of your spells each item upgrade makes stronger, from rings, trinkets, amulets and boss gear.
 = एक परीक्षण (/transparency): अंगूठी, ट्रिंकेट, ताबीज़ और बॉस उपकरण का हर आइटम अपग्रेड आपके कौन से मंत्र मज़बूत करता है।
 Converted for Azeroth Survivors. Puts every minimap button into one bag button: click it and they open in a bar (/mbb).

@@ -1584,8 +1584,8 @@ All your stats in game (/azs) and on the STATS page: runs, records, abilities, c
 = Všechny tvoje statistiky ve hře (/azs) i na stránce STATISTIKY: běhy, rekordy, schopnosti, povolání, herní čas, tvůj Nemesis a co-op s přáteli.
 The launcher's whole New Player Guide inside the game (/handbook): every topic and page, each class's spells with their icons and the talents that change them, and all the talent trees.
 = Celý průvodce pro nové hráče z launcheru přímo ve hře (/handbook): každé téma a stránka, kouzla každého povolání s ikonami a talenty, které je mění, a všechny stromy talentů.
-Small changes, each on or off (/azsmods or its minimap button): remove bloat from chat, a Say & Party box, boss markers (Skull, Cross, Moon), a blinking Square on a friend who falls, the level-up text out of the chat and the camera at 50.
-= Drobné změny, každou zapneš zvlášť (/azsmods nebo jeho tlačítko na minimapě): méně balastu v chatu, okno Říct a Družina, značky bossů (Lebka, Kříž, Měsíc), blikající Čtverec nad padlým přítelem, text o úrovni pryč z chatu a kamera na 50.
+Small changes, each on or off (/azsmods or its minimap button): no level-up, stat bonus or new spell lines in chat, boss markers (Skull, Cross, Moon), a blinking Square on a friend who falls, a plain action bar with just the six squares, move and lock the UI, hide the target frame and the camera at 50.
+= Drobné změny, každá zvlášť zapnout nebo vypnout (/azsmods nebo jeho tlačítko u minimapy): žádné řádky o nové úrovni, bonusu ke statům ani novém kouzlu v chatu, značky bossů (lebka, kříž, měsíc), blikající čtverec nad padlým přítelem, prostá akční lišta jen se šesti čtverci, přesun a zamčení rozhraní, skrytí rámečku cíle a kamera na 50.
 A test (/transparency): which of your spells each item upgrade makes stronger, from rings, trinkets, amulets and boss gear.
 = Test (/transparency): která tvoje kouzla posílí každé vylepšení předmětu, z prstenů, cetek, amuletů a výbavy bossů.
 Converted for Azeroth Survivors. Puts every minimap button into one bag button: click it and they open in a bar (/mbb).

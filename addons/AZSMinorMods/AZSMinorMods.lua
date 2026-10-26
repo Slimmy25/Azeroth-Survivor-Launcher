@@ -5,15 +5,12 @@
 --     with those words too, /azsmods unhide <words> stops that. What players say is never hidden.
 --   * The camera goes as far out as the game allows, 50 yards (the Max Camera Distance setting at its top), and starts there. Turn it off in
 --     /azsmods to keep the game's own setting.
---   * A second chat box above the game's own one collects what is said ("Say") and your party's messages, so you
---     can read them while you play. Drag its title to move it; the mouse wheel scrolls it.
---   * Remove bloat from chat: the "you have learned a new spell" lines are hidden, and Say and Party chat go only
---     to the Say & Party box, not the main chat.
 --   * Boss markers: every boss alive gets a raid marker, the first a Skull, the second a Cross, the third a Moon.
 --   * In co-op, a friend who falls gets the Square over their head, blinking 5 times.
 --   * Move the UI: unlock it, drag the player, target and party frames, the minimap, buffs, cast bar, action bars and
---     the Say & Party box where you want them, then lock it again. The places are kept (Reset puts them back).
+--     where you want them, then lock it again. The places are kept (Reset puts them back).
 --   * Hide the target frame: this game picks its own targets, so the frame can go.
+--   * Plain action bar: the gryphons and the bar's art go, and only the six spell squares are left.
 -- /azsmods (or the gear by the minimap) opens the settings window: every one of these on or off.
 -- Lua 5.0 / 1.12 interface: scripts read `this`, `event`, `arg1`, `arg2`; no # operator; only the 1.12 API.
 
@@ -51,9 +48,9 @@ local function DB()
 	if ( type(AZSMinorModsDB) ~= "table" ) then AZSMinorModsDB = {}; end
 	local d = AZSMinorModsDB;
 	if ( d.hideLevel == nil ) then d.hideLevel = true; end
-	if ( d.box == nil ) then d.box = true; end
 	if ( d.camera == nil ) then d.camera = true; end
-	if ( d.bloat == nil ) then d.bloat = false; end
+	if ( d.plainBar == nil ) then d.plainBar = false; end
+	d.box, d.bloat, d.x, d.y = nil, nil, nil, nil;          -- the retired Say & Party box and "Remove bloat"
 	if ( d.bossMarks == nil ) then d.bossMarks = true; end
 	if ( d.deathMarks == nil ) then d.deathMarks = true; end
 	if ( d.hideTarget == nil ) then d.hideTarget = false; end
@@ -62,7 +59,7 @@ local function DB()
 	return d;
 end
 
--- the "you have learned a new spell" lines (Remove bloat from chat): the game's own texts in its language, the part
+-- the "you have learned a new spell" lines: the game's own texts in its language, the part
 -- before the spell's name, and the English ways of saying it
 local LEARN_WORDS = { "you have learned a new spell", "you have learned a new ability", "you have learned", "you learned",
                       "you learn " };
@@ -100,7 +97,7 @@ local function Hidden(msg)
 	if ( string.find(msg, "|Hplayer:", 1, true) ) then return false; end   -- a player's own words
 	local d = DB();
 	local low = string.lower(string.gsub(msg, "|c%x%x%x%x%x%x%x%x", ""));
-	if ( d.hideLevel or d.bloat ) then
+	if ( d.hideLevel ) then
 		-- the level-up, its stat bonus and the new spell it taught
 		local own = LevelText();
 		if ( own and string.find(low, own, 1, true) ) then return true; end
@@ -133,8 +130,6 @@ local function HookChat()
 		local orig = ChatFrame_OnEvent;
 		ChatFrame_OnEvent = function(ev)
 			local e = ev or event;
-			-- Remove bloat from chat: Say and Party only in the Say & Party box
-			if ( DB().bloat and DB().box and (e == "CHAT_MSG_SAY" or e == "CHAT_MSG_PARTY" or e == "CHAT_MSG_PARTY_LEADER") ) then return; end
 			-- what players say, yell, whisper or write in a channel is theirs: only the game's own lines are hidden
 			local players = e == "CHAT_MSG_SAY" or e == "CHAT_MSG_YELL" or e == "CHAT_MSG_WHISPER" or e == "CHAT_MSG_PARTY" or
 			                e == "CHAT_MSG_PARTY_LEADER" or e == "CHAT_MSG_RAID" or e == "CHAT_MSG_GUILD" or e == "CHAT_MSG_CHANNEL" or
@@ -160,79 +155,6 @@ local function Camera(zoomOut)
 	end
 	pcall(SetCVar, "cameraDistanceMaxFactor", string.format("%.4f", MAX_CAMERA / base));
 	if ( zoomOut and CameraZoomOut ) then pcall(CameraZoomOut, MAX_CAMERA); end
-end
-
--- ---------------------------------------------------------------- the Say & Party box
-local box;
-
-local function BoxPlace()
-	local d = DB();
-	box:ClearAllPoints();
-	if ( d.x and d.y ) then
-		box:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", K.Num(d.x), K.Num(d.y));
-	elseif ( ChatFrame1 ) then
-		box:SetPoint("BOTTOMLEFT", ChatFrame1, "TOPLEFT", -4, 34);     -- above the chat and its tabs
-	else
-		box:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 32, 300);
-	end
-	if ( d.box ) then box:Show(); else box:Hide(); end
-end
-
-local function Color(kind)
-	local t = ChatTypeInfo and ChatTypeInfo[kind];
-	if ( t ) then return t.r or 1, t.g or 1, t.b or 1; end
-	if ( kind == "PARTY" ) then return 0.67, 0.67, 1; end
-	return 1, 1, 1;
-end
-
-local function BoxAdd()
-	local kind = (event == "CHAT_MSG_SAY") and "SAY" or "PARTY";
-	local who = arg2 or "";
-	local text;
-	if ( kind == "SAY" ) then text = "[" .. who .. "] says: " .. tostring(arg1 or "");
-	else text = "[Party] [" .. who .. "]: " .. tostring(arg1 or ""); end
-	local r, g, b = Color(kind);
-	box.msg:AddMessage(text, r, g, b);
-end
-
-local function BoxBuild()
-	if ( box ) then return; end
-	local width = ChatFrame1 and ChatFrame1:GetWidth() or 430;
-	if ( not width or width < 200 ) then width = 430; end
-	box = CreateFrame("Frame", "AZSMinorModsChat", UIParent);
-	box:SetWidth(width + 8);
-	box:SetHeight(112);
-	K.Card(box, 0.6, 0.5, 0.3);
-	box:SetBackdropColor(0.04, 0.04, 0.06, 0.55);
-	box:SetMovable(true);
-	box:EnableMouse(true);
-	if ( box.SetClampedToScreen ) then box:SetClampedToScreen(true); end
-	box:RegisterForDrag("LeftButton");
-	box:SetScript("OnDragStart", function() if ( DB().unlocked ) then this:StartMoving(); end end);
-	box:SetScript("OnDragStop", function()
-		this:StopMovingOrSizing();
-		local d = DB();
-		d.x, d.y = this:GetLeft(), this:GetBottom();
-	end);
-	box.title = box:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall");
-	box.title:SetPoint("TOPLEFT", box, "TOPLEFT", 8, -5);
-	box.title:SetText("Say & Party");
-	box.msg = CreateFrame("ScrollingMessageFrame", "AZSMinorModsChatMessages", box);
-	box.msg:SetPoint("TOPLEFT", box, "TOPLEFT", 8, -18);
-	box.msg:SetPoint("BOTTOMRIGHT", box, "BOTTOMRIGHT", -8, 6);
-	box.msg:SetFontObject(ChatFontNormal or GameFontHighlightSmall);
-	box.msg:SetJustifyH("LEFT");
-	box.msg:SetMaxLines(200);
-	box.msg:SetFading(false);
-	box.msg:EnableMouseWheel(true);
-	box.msg:SetScript("OnMouseWheel", function()
-		if ( arg1 > 0 ) then this:ScrollUp(); else this:ScrollDown(); end
-	end);
-	box:SetScript("OnEvent", function() pcall(BoxAdd); end);
-	box:RegisterEvent("CHAT_MSG_SAY");
-	box:RegisterEvent("CHAT_MSG_PARTY");
-	pcall(box.RegisterEvent, box, "CHAT_MSG_PARTY_LEADER");   -- not in every client
-	BoxPlace();
 end
 
 -- ---------------------------------------------------------------- raid markers on bosses, and on friends who fall
@@ -339,8 +261,7 @@ end);
 -- follows. Locked, the handles go and the frames stay where they were put; the places are put back at every login.
 local MOVABLE = { { "PlayerFrame", "Player" }, { "TargetFrame", "Target" }, { "PartyMemberFrame1", "Party" },
                   { "MinimapCluster", "Minimap" }, { "BuffFrame", "Buffs" }, { "CastingBarFrame", "Cast bar" },
-                  { "MainMenuBar", "Action bars" }, { "MultiBarBottomLeft", "Bar 2" }, { "MultiBarRight", "Right bar" },
-                  { "AZSMinorModsChat", "Say & Party" } };
+                  { "MainMenuBar", "Action bars" }, { "MultiBarBottomLeft", "Bar 2" }, { "MultiBarRight", "Right bar" } };
 local handles = {};
 
 local function Place(name)
@@ -349,7 +270,6 @@ local function Place(name)
 	if ( not f or type(p) ~= "table" or not p.x or not p.y ) then return; end
 	f:ClearAllPoints();
 	f:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", K.Num(p.x), K.Num(p.y));
-	if ( name == "AZSMinorModsChat" ) then local d = DB(); d.x, d.y = p.x, p.y; end
 end
 
 local function PlaceAll()
@@ -419,8 +339,6 @@ end
 
 function AZSMinorMods_ResetPlaces()
 	DB().places = {};
-	local d = DB();
-	d.x, d.y = nil, nil;
 	K.Print(NAME, "the frames go back to their own places after a /reload.");
 	if ( ReloadUI ) then ReloadUI(); end
 end
@@ -436,6 +354,47 @@ local function TargetFrameHidden(on)
 	else
 		TargetFrame.Show = targetShow;
 		if ( UnitExists("target") ) then TargetFrame:Show(); end
+	end
+end
+
+-- the plain action bar: the gryphons at its ends and all of the bar's art (the game's slices, its own extra ones and
+-- the racial's rim) made see-through, and the racial button and the character and talent buttons hidden, so only
+-- the six spell squares (ActionButton1-6) are left. Untick and everything comes back as it was.
+local PLAIN_HIDE = { "ActionButton12", "CharacterMicroButton", "TalentMicroButton" };
+local plainShow = {};
+local function BarArt(alpha)
+	local names = { "MainMenuBarLeftEndCap", "MainMenuBarRightEndCap", "AZS_RacialRim" };
+	for i = 0, 3 do table.insert(names, "MainMenuBarTexture" .. i); end
+	for i = 4, 12 do table.insert(names, "AZS_MainMenuBarTexture" .. i); end
+	for i = 1, table.getn(names) do
+		local t = getglobal(names[i]);
+		if ( t and t.SetAlpha ) then t:SetAlpha(alpha); end
+	end
+	-- and every other texture straight on the bar's art frame (the end caps and slices sit there too)
+	if ( MainMenuBarArtFrame and MainMenuBarArtFrame.GetRegions ) then
+		local regions = { MainMenuBarArtFrame:GetRegions() };
+		for i = 1, table.getn(regions) do
+			local r = regions[i];
+			if ( r and r.GetObjectType and r:GetObjectType() == "Texture" ) then r:SetAlpha(alpha); end
+		end
+	end
+end
+
+local function PlainBar(on)
+	if ( not MainMenuBar ) then return; end
+	BarArt(on and 0 or 1);
+	for i = 1, table.getn(PLAIN_HIDE) do
+		local f = getglobal(PLAIN_HIDE[i]);
+		if ( f ) then
+			if ( not plainShow[f] ) then plainShow[f] = f.Show; end
+			if ( on ) then
+				f.Show = function() end;
+				f:Hide();
+			elseif ( f.Show ~= plainShow[f] ) then
+				f.Show = plainShow[f];
+				f:Show();
+			end
+		end
 	end
 end
 
@@ -478,17 +437,12 @@ local function WinBuild()
 		y = y - 28;
 	end
 	Row("No level-up, stat bonus or new spell lines in chat", function() return DB().hideLevel; end, function(v) DB().hideLevel = v; end);
-	Row("Remove bloat from chat", function() return DB().bloat; end, function(v)
-		DB().bloat = v;
-		if ( v and not DB().box ) then DB().box = true; BoxBuild(); BoxPlace(); end   -- Say & Party go to the box
-	end);
-	Row("Say & Party box above the chat", function() return DB().box; end,
-	    function(v) DB().box = v; BoxBuild(); BoxPlace(); end);
 	Row("Camera as far out as it goes (50)", function() return DB().camera; end,
 	    function(v) DB().camera = v; Camera(v); end);
 	Row("Mark bosses: Skull, Cross, Moon", function() return DB().bossMarks; end, function(v) DB().bossMarks = v; end);
 	Row("Blink a Square over a friend who falls", function() return DB().deathMarks; end, function(v) DB().deathMarks = v; end);
 	Row("Hide the target frame", function() return DB().hideTarget; end, function(v) DB().hideTarget = v; TargetFrameHidden(v); end);
+	Row("Plain action bar: no gryphons, just the 6 squares", function() return DB().plainBar; end, function(v) DB().plainBar = v; PlainBar(v); end);
 	Row("Unlock the UI to move it (untick to lock)", function() return DB().unlocked; end, function(v) AZSMinorMods_SetUnlocked(v); end);
 	Row("Minimap button", function() local m = DB().minimap; return not (m and m.hide); end,
 	    function(v) if ( AZSMinorMods_Mini ) then local m = DB().minimap; if ( (m and m.hide and true or false) == v ) then AZSMinorMods_Mini.Toggle(); end end end);
@@ -496,9 +450,7 @@ local function WinBuild()
 	note:SetPoint("TOPLEFT", win, "TOPLEFT", 30, y - 4);
 	note:SetWidth(360);
 	note:SetJustifyH("LEFT");
-	note:SetText("Remove bloat: no \"you have learned\" lines, and Say and Party only in the box. Unlocked, drag the green handles; lock it again when done.");
-	local clear = K.Button(win, "Clear the box", 120, function() BoxBuild(); box.msg:Clear(); end);
-	clear:SetPoint("BOTTOMLEFT", win, "BOTTOMLEFT", 24, 20);
+	note:SetText("Unlocked, drag the green handles; lock it again when done.");
 	local reset = K.Button(win, "Reset positions", 150, function() AZSMinorMods_ResetPlaces(); end);
 	reset:SetPoint("BOTTOMRIGHT", win, "BOTTOMRIGHT", -24, 20);
 end
@@ -532,10 +484,6 @@ SlashCmdList["AZSMINORMODS"] = function(msg)
 		AZSMinorMods_SetUnlocked(true);
 	elseif ( cmd == "lock" ) then
 		AZSMinorMods_SetUnlocked(false);
-	elseif ( cmd == "box" ) then
-		d.box = not d.box;
-		BoxBuild();
-		BoxPlace();
 	else
 		AZSMinorMods_Toggle();
 	end
@@ -549,13 +497,12 @@ loader:SetScript("OnEvent", function()
 	if ( not ok ) then K.Print(NAME, "|cffff4040the chat could not be changed:|r " .. tostring(err)); end
 	pcall(Camera, event == "PLAYER_ENTERING_WORLD");
 	if ( event == "VARIABLES_LOADED" ) then
-		ok, err = pcall(BoxBuild);
-		if ( not ok ) then K.Print(NAME, "|cffff4040the Say & Party box could not be made:|r " .. tostring(err)); end
 		DB().unlocked = false;                             -- every session starts locked
 	end
 	-- the frames back where they were put (the game places some of them again as it loads), and the target frame
 	pcall(PlaceAll);
 	pcall(TargetFrameHidden, DB().hideTarget);
+	if ( DB().plainBar ) then pcall(PlainBar, true); end
 end);
 pcall(HookChat);                                          -- right away too, so lines printed while loading are caught
 
