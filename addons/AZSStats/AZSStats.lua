@@ -1024,7 +1024,7 @@ local function CoopDown()
 		e.dmg = Num(e.dmg) + (k and Num(k.amt) or 0);
 		e.last = Now();
 		if ( k and Str(k.spell) ~= "" ) then e.spell = k.spell; end
-		local zname = type(AZS_ZONE) == "table" and Str(AZS_ZONE.name) or "";
+		local zname = type(AZS_ZONE) == "table" and Str(AZS_ZONE.zname) or "";
 		table.insert(co.deathLog, { date = Now(), killer = killer, spell = k and Str(k.spell) or "", amt = k and Num(k.amt) or 0,
 		                            t = AZS_GetRunTime and Num(AZS_GetRunTime()) or 0, zname = zname });
 		while ( table.getn(co.deathLog) > AZSSTATS_DEATHS ) do table.remove(co.deathLog, 1); end
