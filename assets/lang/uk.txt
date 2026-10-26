@@ -1332,3 +1332,263 @@ Azeroth Survivors save (*.sav)|*.sav|All files (*.*)|*.*
 = Збереження Azeroth Survivors (*.sav)|*.sav|Усі файли (*.*)|*.*
 Save imported.
 = Збереження імпортовано.
+
+# October 2026: setup inside the launcher, game options, stats, Armory, more videos, converted addons
+Video
+= Відео
+MORE VIDEOS ›
+= ЩЕ ВІДЕО ›
+More Videos
+= Ще відео
+OK
+= ОК
+YES
+= ТАК
+NO
+= НІ
+Your settings are saved.\n\nWould you like to download addons? They are all optional: you choose each one you want.
+= Налаштування збережено.\n\nХочете завантажити аддони? Усі вони необов'язкові: ви обираєте кожен самі.
+YES, ADDONS
+= ТАК, АДДОНИ
+ENABLE / DISABLE MY ADDONS
+= УВІМКНУТИ / ВИМКНУТИ МОЇ АДДОНИ
+Do you want to track your stats in and out of the game?
+= Хочете відстежувати свою статистику в грі та поза нею?
+AZS Stats records your runs while you play (/azs in game) and fills the launcher's STATS page: records, abilities, classes, play time, your Nemesis and co-op with friends.
+= AZS Stats записує ваші забіги під час гри (/azs у грі) і заповнює сторінку СТАТИСТИКА в лаунчері: рекорди, здібності, класи, час у грі, вашого Немезиса та кооператив із друзями.
+YES, TRACK MY STATS
+= ТАК, ВІДСТЕЖУВАТИ СТАТИСТИКУ
+Do you already have Azeroth Survivors downloaded on this PC?\n\nYES: choose the folder it is in (the one with AzerothSurvivors.exe).\nNO: the launcher downloads and installs it for you.
+= Azeroth Survivors уже завантажена на цей ПК?\n\nТАК: виберіть теку, в якій вона є (ту, де AzerothSurvivors.exe).\nНІ: лаунчер завантажить і встановить її за вас.
+Do you already have Azeroth Survivors downloaded on this PC?
+= Azeroth Survivors уже завантажена на цей ПК?
+YES: choose the folder it is in (the one with AzerothSurvivors.exe).
+= ТАК: виберіть теку, в якій вона є (ту, де AzerothSurvivors.exe).
+NO: the launcher downloads and installs it for you.
+= НІ: лаунчер завантажить і встановить її за вас.
+Select your Azeroth Survivors game folder (the one with AzerothSurvivors.exe)
+= Виберіть теку гри Azeroth Survivors (ту, де AzerothSurvivors.exe)
+That folder does not have the game in it
+= У цій теці немає гри
+The other hosts did not work. Trying the game's own download page...
+= Інші сервери не спрацювали. Пробую сторінку завантаження гри...
+The game's download page did not give a game archive.
+= Сторінка завантаження гри не дала архів гри.
+Import a save
+= Імпортувати збереження
+IMPORT
+= ІМПОРТ
+What the launcher does.
+= Що робить лаунчер.
+Asks again about your save, folders, cloud saving and addons. Nothing is downloaded.
+= Знову питає про збереження, теки, хмарне збереження та аддони. Нічого не завантажується.
+DISPLAY
+= ЕКРАН
+GRAPHICS
+= ГРАФІКА
+SOUND
+= ЗВУК
+OFF
+= ВИМК.
+LOW
+= НИЗЬКО
+MEDIUM
+= СЕРЕДНЬО
+HIGH
+= ВИСОКО
+MINIMAL
+= МІНІМУМ
+FULL
+= ПОВНІСТЮ
+Window size (Windowed)
+= Розмір вікна (у вікні)
+The size of the game's window when it runs Windowed.
+= Розмір вікна гри у віконному режимі.
+Maximize the game window
+= Розгорнути вікно гри
+Opens the window as big as the screen allows.
+= Відкриває вікно настільки великим, наскільки дозволяє екран.
+Vertical sync
+= Вертикальна синхронізація
+Matches the frame rate to your monitor. Turn it on if you see the picture tearing.
+= Підлаштовує частоту кадрів під монітор. Увімкніть, якщо зображення рветься.
+UI scale
+= Масштаб інтерфейсу
+The size of the game's interface.
+= Розмір інтерфейсу гри.
+Brightness
+= Яскравість
+Lightens or darkens the whole picture: nights, caves and interiors are what it is for.
+= Робить усе зображення світлішим або темнішим: для ночей, печер і приміщень.
+Anti-aliasing (multisampling)
+= Згладжування (мультисемплінг)
+Smooths jagged edges at some cost in frame rate. Takes effect the next time the game starts.
+= Згладжує зубчасті краї ціною частоти кадрів. Діє з наступного запуску гри.
+Anisotropic filtering
+= Анізотропна фільтрація
+Keeps the ground and walls sharp when seen at a slant. Takes effect the next time the game starts.
+= Зберігає чіткість землі й стін під кутом. Діє з наступного запуску гри.
+Trilinear filtering
+= Трилінійна фільтрація
+Smooths the steps between a texture's levels of detail. Takes effect the next time the game starts.
+= Згладжує переходи між рівнями деталізації текстури. Діє з наступного запуску гри.
+Terrain distance
+= Дальність ландшафту
+How far you can see terrain. Lower it for a faster game.
+= Як далеко видно ландшафт. Зменште для швидшої гри.
+Environment detail
+= Деталізація оточення
+How far you can see objects. Lower it for a faster game.
+= Як далеко видно об'єкти. Зменште для швидшої гри.
+Spell detail
+= Деталізація заклинань
+The detail of spell effects. Lower it for a faster game.
+= Деталізація ефектів заклинань. Зменште для швидшої гри.
+Weather intensity
+= Сила погоди
+How strong rain and snow are. Lower it for a faster game.
+= Наскільки сильні дощ і сніг. Зменште для швидшої гри.
+No spell effects
+= Без ефектів заклинань
+Draws no explosions, missiles, glows or beams. Spells still sound. For a slow computer.
+= Не малює вибухів, снарядів, сяйва чи променів. Звук заклинань лишається. Для повільного комп'ютера.
+Full screen glow
+= Сяйво на весь екран
+A soft glow around the bright parts of the picture. Off for a sharper picture or a slower computer.
+= М'яке сяйво навколо яскравих частин зображення. Вимкніть для чіткішого зображення або повільнішого комп'ютера.
+Death effect
+= Ефект смерті
+Turns the world grey while your hero is dead.
+= Робить світ сірим, поки ваш герой мертвий.
+Enable all sound
+= Увімкнути весь звук
+Sound effects volume
+= Гучність ефектів
+Music volume
+= Гучність музики
+Ambience volume
+= Гучність оточення
+Loop music
+= Повтор музики
+Starts the next track as soon as one ends, instead of after a stretch of silence.
+= Вмикає наступний трек одразу після закінчення попереднього, а не після паузи.
+Ambience
+= Звуки оточення
+Error speech
+= Озвучення помилок
+Speech for errors, such as "Target out of range".
+= Голос для помилок, наприклад «Ціль надто далеко».
+Emote sounds
+= Звуки емоцій
+The voices of emotes such as /cheer and /laugh.
+= Голоси емоцій на кшталт /cheer і /laugh.
+Sound when the game is in the background
+= Звук, коли гра у фоні
+Keeps the sound playing while you work in another window.
+= Звук грає далі, поки ви працюєте в іншому вікні.
+Store level-ups
+= Відкладати підвищення рівня
+Level-ups no longer stop the fight: a Level Up! button over your action bars opens them when you are ready.
+= Підвищення рівня більше не зупиняє бій: кнопка Level Up! над панелями дій відкриває їх, коли ви готові.
+Open caches by clicking
+= Відкривати схованки клацанням
+Caches are bought only when you right-click them, not when you walk over them.
+= Схованки купуються лише правим клацанням, а не коли ви по них проходите.
+Damage meter on top
+= Лічильник шкоди поверх
+Keeps the damage meter over the level-up and jewelry cards.
+= Тримає лічильник шкоди поверх карт рівня та прикрас.
+Show run clock
+= Показувати годинник забігу
+The run's clock and the time to the next boss, at the top of the screen.
+= Годинник забігу й час до наступного боса вгорі екрана.
+Show boss bars
+= Показувати смуги босів
+The health bars of the bosses and awake guardians you fight.
+= Смуги здоров'я босів і пробуджених вартових, з якими ви б'єтеся.
+Show kills and gold
+= Показувати вбивства й золото
+The box with your kills and gold beside the minimap.
+= Віконце з вашими вбивствами та золотом біля мінікарти.
+Show build
+= Показувати білд
+Your spells and jewelry with their cooldowns.
+= Ваші заклинання й прикраси з їхнім перезаряджанням.
+Show banners
+= Показувати банери
+The messages in the middle of the screen, such as a boss arriving.
+= Повідомлення в центрі екрана, наприклад про появу боса.
+Show loot notices
+= Показувати сповіщення про здобич
+The notice of a piece of gear a boss dropped.
+= Сповіщення про предмет спорядження, що випав із боса.
+Show damage meter
+= Показувати лічильник шкоди
+The damage meter's minimap button and its window.
+= Кнопка лічильника шкоди біля мінікарти та його вікно.
+Armory
+= Збройова
+Collected
+= Зібрано
+Legendaries collected
+= Зібрано легендарних
+Level-up saves (at 15% health or less)
+= Порятунки підвищенням рівня (за 15% здоров'я або менше)
+Health
+= Здоров'я
+Damage
+= Шкода
+Haste
+= Швидкість
+Crit
+= Крит
+Crit Dmg
+= Крит. шкода
+Armor
+= Броня
+Area
+= Область
+Targets
+= Цілі
+Echo
+= Відлуння
+Speed
+= Швидкість бігу
+Regen
+= Відновлення
+Pickup
+= Підбирання
+AZS Stats writes down each class's hero (their gear and numbers) while you play. Play a run and they show up here.
+= AZS Stats записує героя кожного класу (спорядження й показники) під час гри. Зіграйте забіг, і вони з'являться тут.
+Level
+= Рівень
+Gear worn
+= Вдягнене спорядження
+No gear worn.
+= Спорядження не вдягнене.
+Highest DPS by zone
+= Найвищий DPS за зонами
+Finish a run to set one.
+= Завершіть забіг, щоб встановити його.
+Solo
+= Соло
+Deaths in co-op
+= Смерті в кооперативі
+No co-op deaths recorded yet.
+= Смертей у кооперативі ще немає.
+Most legendaries in a run
+= Найбільше легендарних за забіг
+Most level-up saves in a run
+= Найбільше порятунків підвищенням за забіг
+All your stats in game (/azs) and on the STATS page: runs, records, abilities, classes, play time, your Nemesis and co-op with friends.
+= Уся ваша статистика в грі (/azs) і на сторінці СТАТИСТИКА: забіги, рекорди, здібності, класи, час у грі, ваш Немезис і кооператив із друзями.
+The launcher's whole New Player Guide inside the game (/handbook): every topic and page, each class's spells with their icons and the talents that change them, and all the talent trees.
+= Увесь посібник новачка з лаунчера просто в грі (/handbook): кожна тема й сторінка, заклинання кожного класу з іконками й талантами, що їх змінюють, і всі дерева талантів.
+Small changes, each on or off (/azsmods or its minimap button): remove bloat from chat, a Say & Party box, boss markers (Skull, Cross, Moon), a blinking Square on a friend who falls, the level-up text out of the chat and the camera at 50.
+= Невеликі зміни, кожна вмикається окремо (/azsmods або кнопка біля мінікарти): менше сміття в чаті, вікно «Сказати» і «Група», мітки босів (Череп, Хрест, Місяць), блимаючий Квадрат над полеглим другом, без тексту про підвищення рівня в чаті й камера на 50.
+A test (/transparency): which of your spells each item upgrade makes stronger, from rings, trinkets, amulets and boss gear.
+= Тест (/transparency): які ваші заклинання посилює кожне покращення предмета — від кілець, аксесуарів, амулетів і спорядження босів.
+Converted for Azeroth Survivors. Puts every minimap button into one bag button: click it and they open in a bar (/mbb).
+= Перероблено для Azeroth Survivors. Ховає всі кнопки мінікарти в одну кнопку-сумку: натисніть, і вони відкриються панеллю (/mbb).
+Converted for Azeroth Survivors. Catches every Lua error (with !BugGrabber) and shows them in one window: /bugsack or its minimap button.
+= Перероблено для Azeroth Survivors. Ловить кожну помилку Lua (разом із !BugGrabber) і показує їх в одному вікні: /bugsack або його кнопка біля мінікарти.
