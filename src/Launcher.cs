@@ -114,7 +114,7 @@ namespace AzerothLauncher
             {
                 string n = name;
                 if (n == "Changelog") continue;              // on the News line (below)
-                nav[n] = Place(new WowButton(n == "Guide" ? "NEW PLAYER GUIDE" : n.ToUpperInvariant(), delegate { ShowSection(n); }, 128, 27, 8.5f), 693, 480);
+                nav[n] = Place(new WowButton(n.ToUpperInvariant(), delegate { ShowSection(n); }, 128, 27, 8.5f), 693, 480);
                 nav[n].Skin = Retro.Button;
             }
             // UPDATE LAUNCHER and ABOUT LAUNCHER live in Options > Launcher now; these two stay hidden and carry their state

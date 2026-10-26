@@ -1,4 +1,4 @@
-// The New Player Guide (assets\guide.txt): topic cards (every topic open at any time, nothing tracked), topics made of pages, and
+// The Guide (assets\guide.txt), in three groups (New Player, Gameplay, Theorycrafting): topic cards (every topic open at any time, nothing tracked), topics made of pages, and
 // article pages with headings, bullets, tip boxes and video cards.
 //
 // Videos: put a line "@video Title | address" anywhere in a topic or page of guide.txt; the video card shows up
@@ -28,11 +28,63 @@ namespace AzerothLauncher
         int guideLastTopic;                                  // the tab to go back to when the search is emptied
         bool guideFocusSearch;
 
-        // The guide's header, like Options: the search box beside the back arrow, then a tab for every topic across
-        // the section (wrapping onto more rows). The selected topic is the one shown under it.
+        // The guide's groups, each a row of topic tabs (by the topics' titles, in this order). A topic not named here goes
+        // to the first group. "Talent Tree Builder" is not a topic of guide.txt: it is the class picker for the talent
+        // trees and their test builds.
+        public const string TalentBuilder = "Talent Tree Builder";
+        static readonly string[][] GuideGroups =
+        {
+            new[] { "NEW PLAYER", "Getting Started", "Controls", "Your First Run", "Tips for New Players", "Run Options & Endless",
+                    "Achievements & Rewards", "Addons" },
+            new[] { "GAMEPLAY", "Classes", "Races", "Zones & Bosses", "Level-Ups & Cards", "Pickups, Caches & Guardians",
+                    "Gear & the Armory", "Co-op" },
+            new[] { "THEORYCRAFTING", TalentBuilder, "Talents", "Build Guides" },
+        };
+        int guideGroup;                                       // the group whose tabs are shown
+        bool gBuilder;                                        // the Talent Tree Builder is open
+
+        static int GroupOf(string title)
+        {
+            for (int g = 0; g < GuideGroups.Length; g++)
+                for (int i = 1; i < GuideGroups[g].Length; i++)
+                    if (string.Equals(GuideGroups[g][i], title, StringComparison.OrdinalIgnoreCase)) return g;
+            return 0;
+        }
+
+        // the tabs of a group: the topics' indexes in Data.Guide (-2 for the Talent Tree Builder), in the group's order
+        static List<int> GroupTabs(int group, List<GuideTopic> topics)
+        {
+            var list = new List<int>();
+            for (int i = 1; i < GuideGroups[group].Length; i++)
+            {
+                if (GuideGroups[group][i] == TalentBuilder) { list.Add(-2); continue; }
+                for (int t = 0; t < topics.Count; t++)
+                    if (string.Equals(topics[t].Title, GuideGroups[group][i], StringComparison.OrdinalIgnoreCase)) { list.Add(t); break; }
+            }
+            if (group == 0)                                   // topics no group names
+                for (int t = 0; t < topics.Count; t++)
+                {
+                    bool named = false;
+                    foreach (var grp in GuideGroups)
+                        for (int i = 1; i < grp.Length; i++) if (string.Equals(grp[i], topics[t].Title, StringComparison.OrdinalIgnoreCase)) named = true;
+                    if (!named) list.Add(t);
+                }
+            return list;
+        }
+
+        void OpenGuideTab(int tab)
+        {
+            guideQuery = "";
+            if (tab == -2) { gVideo = null; gTalents = null; gBuilder = true; guideGroup = 2; if (current == "Guide") BuildPanel("Guide"); }
+            else SetGuideView(tab, -1);
+        }
+
+        // The guide's header, like Options: the search box beside the back arrow, the three groups, then the topics of the
+        // open group as smaller tabs (wrapping onto more rows when needed)
         void GuideHeader(string title, List<GuideTopic> topics)
         {
             ClearPanel(title);
+            topics = Data.Guide;
             int sx = 20 + (int)(52 * Theme.Zoom) + 12, sh = (int)(32 * Theme.Zoom);
             var search = new GuideSearchBox(PW - 20 - sx, sh);
             search.Text = guideQuery;
@@ -43,25 +95,74 @@ namespace AzerothLauncher
                     guideQuery = search.Text;
                     if (guideQuery.Length == 0) return;
                     guideFocusSearch = true;
+                    gBuilder = false;
                     SetGuideView(-1, -1);                     // the results take the topic's place
                 };
             if (guideFocusSearch) { guideFocusSearch = false; search.Focus(); search.SelectionStart = search.TextLength; }
             guideSearch = search;
-            // the topic tabs: their own widths, as many to a row as fit
-            int y = 12 + sh + 6, x = 20, rowH = (int)(22 * Theme.Zoom), gap = 3, right = PW - 20;
-            using (var g = CreateGraphics())
-                for (int i = 0; i < topics.Count; i++)
+            if (gBuilder) guideGroup = 2;
+            else if (gTopic >= 0 && gTopic < topics.Count) guideGroup = GroupOf(topics[gTopic].Title);
+            bool searching = guideQuery.Length > 0;
+            // the groups: one row, sharing the width
+            int y = 12 + sh + 6, n = GuideGroups.Length, gapG = 6;
+            int gw = (int)(((PW - 40) - gapG * (n - 1)) / (float)n / Theme.Zoom);
+            for (int g = 0; g < n; g++)
+            {
+                int grp = g;
+                var gb = new WowButton(GuideGroups[g][0], delegate
                 {
-                    int n = i;
-                    string label = topics[i].Title.ToUpperInvariant();
+                    var tabs = GroupTabs(grp, Data.Guide);
+                    guideGroup = grp;
+                    if (tabs.Count > 0) OpenGuideTab(tabs[0]);
+                }, gw, 28, 9);
+                gb.Selected = g == guideGroup && !searching;
+                Put(gb, 20 + g * (gb.Width + gapG), y);
+            }
+            y += (int)(28 * Theme.Zoom) + 6;
+            // the open group's topics
+            int x = 20, rowH = (int)(22 * Theme.Zoom), gap = 3, right = PW - 20;
+            using (var g = CreateGraphics())
+                foreach (int tab in GroupTabs(guideGroup, topics))
+                {
+                    int t = tab;
+                    string label = (tab == -2 ? TalentBuilder : topics[tab].Title).ToUpperInvariant();
                     int tw = (int)(g.MeasureString(Lang.T(label), Theme.F(7.5f)).Width / Theme.Zoom) + 12;
-                    var b = new WowButton(label, delegate { guideQuery = ""; SetGuideView(n, -1); }, tw, 22, 7.5f);
-                    b.Selected = i == gTopic && guideQuery.Length == 0;
+                    var b = new WowButton(label, delegate { OpenGuideTab(t); }, tw, 22, 7.5f);
+                    b.Selected = !searching && (tab == -2 ? gBuilder : (!gBuilder && tab == gTopic));
                     if (x + b.Width > right && x > 20) { x = 20; y += rowH + gap; }
                     Put(b, x, y);
                     x += b.Width + gap;
                 }
             guideTabsBottom = y + rowH + 8;
+        }
+
+        static readonly string[] BuilderClasses = { "Warrior", "Paladin", "Hunter", "Rogue", "Priest", "Shaman", "Mage", "Warlock", "Druid" };
+
+        // ---- the Talent Tree Builder: pick a class, then try out a build on its three trees (kept per class)
+        void GuideBuilderHome()
+        {
+            GuideHeader(TalentBuilder, Data.Guide);
+            var sp = MakeThinScroll(panel, new Rectangle(20, GuideTop, PW - 40, PH - 12 - GuideTop), Theme.Panel, Theme.Bronze,
+                                    Theme.GoldDim, Theme.Gold);
+            int w = sp.ClientSize.Width - 8, y = 4;
+            var hint = UI.Text("Pick a class to open its three talent trees. Click a talent to add a point, right-click to take one back: " +
+                               "a build of up to 51 points, kept for each class.", 10, FontStyle.Regular, Theme.Text, sp.BackColor, w, true);
+            hint.Size = VStack.Measure(hint);
+            hint.Location = new Point(4, y);
+            sp.Controls.Add(hint);
+            y += hint.Height + 10;
+            const int cols = 3, gap = 8;
+            int cw = (w - gap * (cols - 1)) / cols;
+            int i = 0;
+            foreach (string c in BuilderClasses)
+            {
+                if (Talents.Of(c).Count == 0) continue;
+                string cls = c;
+                var b = new WowButton(c.ToUpperInvariant(), delegate { gTalents = cls; BuildPanel("Guide"); }, (int)(cw / Theme.Zoom), 40, 10);
+                b.Location = new Point(4 + (i % cols) * (cw + gap), y + (i / cols) * (b.Height + gap));
+                sp.Controls.Add(b);
+                i++;
+            }
         }
 
         GuideSearchBox guideSearch;
@@ -70,6 +171,7 @@ namespace AzerothLauncher
         {
             gVideo = null;
             gTalents = null;
+            gBuilder = false;
             gTopic = topic;
             gPage = page;
             if (current == "Guide") BuildPanel("Guide");
@@ -88,6 +190,7 @@ namespace AzerothLauncher
             if (Cfg.Data.ContainsKey("guide_read")) { Cfg.Remove("guide_read"); if (!PreviewMode) Cfg.Save(); }   // no longer tracked
             if (gVideo != null) { GuideVideoPlayer(gVideo); return; }
             if (gTalents != null && Talents.Of(gTalents).Count > 0) { GuideTalents(gTalents); return; }
+            if (gBuilder) { GuideBuilderHome(); return; }
             GuideLinks.Reset();                              // the game's tooltips AZS Stats has seen since the last time
             var topics = Data.Guide;
             guideTabsBottom = 0;
@@ -119,9 +222,14 @@ namespace AzerothLauncher
         // ---- a class's three talent trees, as in the game, with a test build of up to 51 points (kept per class)
         void GuideTalents(string cls)
         {
-            ClearPanel(cls + " Talents");
-            int bw = (int)(170 * Theme.Zoom);
-            Put(new WowButton("‹ " + cls.ToUpperInvariant(), delegate { gTalents = null; BuildPanel("Guide"); }, 170, 32, 9), PW - 20 - bw, 12);
+            guideTabsBottom = 0;
+            if (gBuilder) GuideHeader(cls + " Talents", Data.Guide);   // from the Talent Tree Builder: its tabs stay
+            else
+            {
+                ClearPanel(cls + " Talents");
+                int bw = (int)(170 * Theme.Zoom);
+                Put(new WowButton("‹ " + cls.ToUpperInvariant(), delegate { gTalents = null; BuildPanel("Guide"); }, 170, 32, 9), PW - 20 - bw, 12);
+            }
             var build = TalentBuild.Parse(Cfg.Str("talent_build_" + cls), cls);
             var sp = MakeThinScroll(panel, new Rectangle(20, GuideTop, PW - 40, PH - 12 - GuideTop), GuideCardBg, Theme.Bronze,
                                     Theme.GoldDim, Theme.Gold);
@@ -180,7 +288,7 @@ namespace AzerothLauncher
         void GuideHome(List<GuideTopic> topics)
         {
             // the search results, under the tabs (none selected); emptying the search goes back to the last topic
-            GuideHeader("New Player Guide", topics);
+            GuideHeader("Guide", topics);
             var search = guideSearch;
             var sp = MakeThinScroll(panel, new Rectangle(20, GuideTop, PW - 40, PH - 12 - GuideTop), Theme.Panel, Theme.Bronze,
                                     Theme.GoldDim, Theme.Gold);

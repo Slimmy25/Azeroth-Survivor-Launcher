@@ -1596,3 +1596,13 @@ GAME
 = ΠΑΙΧΝΙΔΙ
 OTHER ADDONS
 = ΑΛΛΑ ΠΡΟΣΘΕΤΑ
+NEW PLAYER
+= ΝΕΟΣ ΠΑΙΚΤΗΣ
+THEORYCRAFTING
+= ΘΕΩΡΙΑ
+TALENT TREE BUILDER
+= ΣΧΕΔΙΑΣΤΗΣ ΔΕΝΤΡΩΝ ΤΑΛΕΝΤΩΝ
+Talent Tree Builder
+= Σχεδιαστής δέντρων ταλέντων
+Pick a class to open its three talent trees. Click a talent to add a point, right-click to take one back: a build of up to 51 points, kept for each class.
+= Διάλεξε μια κλάση για να ανοίξεις τα τρία δέντρα ταλέντων της. Κλικ σε ταλέντο προσθέτει πόντο, δεξί κλικ τον αφαιρεί: build έως 51 πόντους, αποθηκευμένο για κάθε κλάση.

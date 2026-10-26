@@ -1595,3 +1595,13 @@ GAME
 = SPEL
 OTHER ADDONS
 = ANDRA TILLÄGG
+NEW PLAYER
+= NY SPELARE
+THEORYCRAFTING
+= TEORI
+TALENT TREE BUILDER
+= TALANGTRÄDSBYGGARE
+Talent Tree Builder
+= Talangträdsbyggare
+Pick a class to open its three talent trees. Click a talent to add a point, right-click to take one back: a build of up to 51 points, kept for each class.
+= Välj en klass för att öppna dess tre talangträd. Klicka på en talang för att lägga en poäng, högerklicka för att ta tillbaka den: en build på högst 51 poäng, sparad för varje klass.

@@ -1595,3 +1595,13 @@ GAME
 = JEU
 OTHER ADDONS
 = AUTRES ADDONS
+NEW PLAYER
+= NOUVEAU JOUEUR
+THEORYCRAFTING
+= THEORYCRAFT
+TALENT TREE BUILDER
+= CRÉATEUR D'ARBRES DE TALENTS
+Talent Tree Builder
+= Créateur d'arbres de talents
+Pick a class to open its three talent trees. Click a talent to add a point, right-click to take one back: a build of up to 51 points, kept for each class.
+= Choisis une classe pour ouvrir ses trois arbres de talents. Clique sur un talent pour ajouter un point, clic droit pour le retirer : un build de 51 points au plus, gardé pour chaque classe.

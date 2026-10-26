@@ -1596,3 +1596,13 @@ GAME
 = ゲーム
 OTHER ADDONS
 = その他のアドオン
+NEW PLAYER
+= 初心者向け
+THEORYCRAFTING
+= 理論・研究
+TALENT TREE BUILDER
+= タレントツリービルダー
+Talent Tree Builder
+= タレントツリービルダー
+Pick a class to open its three talent trees. Click a talent to add a point, right-click to take one back: a build of up to 51 points, kept for each class.
+= クラスを選ぶと3つのタレントツリーが開きます。タレントをクリックでポイント追加、右クリックで戻します。最大51ポイントのビルドがクラスごとに保存されます。

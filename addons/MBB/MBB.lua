@@ -30,7 +30,7 @@ MBB_DefaultOptions = {
 };
 
 -- frames that are part of the minimap itself, or must stay where they are
-MBB_Ignore = { "MiniMapTrackingFrame", "MiniMapMeetingStoneFrame", "MiniMapMailFrame", "MiniMapBattlefieldFrame",
+MBB_Ignore = { "MBB", "MiniMapTrackingFrame", "MiniMapMeetingStoneFrame", "MiniMapMailFrame", "MiniMapBattlefieldFrame",
 	"MiniMapPing", "MinimapBackdrop", "MinimapZoomIn", "MinimapZoomOut", "BookOfTracksFrame", "GatherNote",
 	"FishingExtravaganzaMini", "MiniNotePOI", "RecipeRadarMinimapIcon", "FWGMinimapPOI", "MBB_MinimapButtonFrame",
 	"QuestieNote", "MetaMap", "LootLinkMinimapButton", "TimeManagerClockButton", "pfMiniMapPin", "MinimapCluster",
@@ -84,11 +84,13 @@ local function Script(frame, kind)
 end
 
 -- ---------------------------------------------------------------- the bag's own button (on the minimap)
-local bag = CreateFrame("Frame", "MBB_MinimapButtonFrame", Minimap or UIParent);
+-- On UIParent (placed next to the minimap), not on the Minimap itself: a frame on the minimap can end up under it or
+-- hidden with it on this client, and the bag button must always be there to bring the buttons back.
+local bag = CreateFrame("Frame", "MBB_MinimapButtonFrame", UIParent);
 bag:SetWidth(33);
 bag:SetHeight(33);
-bag:SetFrameStrata("HIGH");
-bag:SetFrameLevel(20);
+bag:SetFrameStrata("MEDIUM");
+bag:SetFrameLevel(30);
 bag:EnableMouse(true);
 bag:SetMovable(true);
 bag.icon = bag:CreateTexture("MBB_MinimapButtonFrame_Texture", "BACKGROUND");
@@ -115,11 +117,27 @@ function MBB_SetButtonPosition()
 	local s = (o.Scale or 100) / 100;
 	bag:SetScale(s);
 	bag:ClearAllPoints();
-	if ( o.AttachToMinimap == 1 and Minimap ) then
+	if ( o.AttachToMinimap == 1 and Minimap and Minimap:GetCenter() ) then
 		local a = math.rad(tonumber(o.ButtonPos[1]) or 200);
-		bag:SetPoint("CENTER", Minimap, "CENTER", RING * math.cos(a) / s, RING * math.sin(a) / s);
+		local ms = Minimap:GetEffectiveScale() / bag:GetEffectiveScale();
+		local cx, cy = Minimap:GetCenter();
+		bag:SetPoint("CENTER", UIParent, "BOTTOMLEFT", cx * ms + RING * math.cos(a) / s, cy * ms + RING * math.sin(a) / s);
+	elseif ( o.AttachToMinimap == 1 ) then
+		bag:SetPoint("CENTER", UIParent, "TOPRIGHT", -170 / s, -170 / s);
 	else
 		bag:SetPoint("CENTER", UIParent, "BOTTOMLEFT", (tonumber(o.ButtonPos[1]) or 300) / s, (tonumber(o.ButtonPos[2]) or 300) / s);
+	end
+	bag:Show();
+end
+
+-- is the bag button shown and on the screen? If not, it goes back to its place by the minimap
+local function CheckBag()
+	if ( not bag:IsShown() ) then bag:Show(); end
+	local l, b = bag:GetLeft(), bag:GetBottom();
+	local w, h = UIParent:GetWidth(), UIParent:GetHeight();
+	local s = bag:GetEffectiveScale() / UIParent:GetEffectiveScale();
+	if ( not l or not b or l * s < -20 or b * s < -20 or l * s > (w or 2000) - 10 or b * s > (h or 2000) - 10 ) then
+		MBB_ResetPosition();
 	end
 end
 
@@ -488,6 +506,9 @@ SlashCmdList["MBB"] = function(cmd)
 		MBB_ResetPosition();
 	elseif ( cmd == "options" ) then
 		MBB_ToggleOptions();
+	elseif ( cmd == "show" ) then
+		MBB_ResetPosition();
+		MBB_Print("MBB: the bag button is back by the minimap.");
 	else
 		MBB_Print("MBB v" .. MBB_Version .. ":");
 		MBB_Print(MBB_HELP1 or "Type \"/mbb <cmd>\":");
@@ -495,12 +516,13 @@ SlashCmdList["MBB"] = function(cmd)
 		MBB_Print(MBB_HELP3 or "  reset position");
 		MBB_Print(MBB_HELP4 or "  reset all");
 		MBB_Print("  |c00ffffffoptions|r: the options window");
+		MBB_Print("  |c00ffffffshow|r: the bag button back by the minimap");
 	end
 end
 
 local ev = CreateFrame("Frame", "MBBFrame");
 ev:RegisterEvent("VARIABLES_LOADED");
-local started, scanned, scannedAgain = GetTime(), false, false;
+local started, scanned, scannedAgain, checked = GetTime(), false, false, 0;
 ev:SetScript("OnEvent", function()
 	local o = Opts();
 	if ( o.Version ~= MBB_Version ) then
@@ -520,6 +542,11 @@ ev:SetScript("OnUpdate", function()
 	elseif ( not scannedAgain and now - started > 15 ) then
 		scannedAgain = true;
 		pcall(MBB_GatherIcons);
+	end
+	if ( now - checked > 3 and MBB_DragFlag ~= 1 ) then
+		checked = now;
+		pcall(MBB_SetButtonPosition);                       -- follows the minimap if another addon moved it
+		pcall(CheckBag);
 	end
 	if ( MBB_DragFlag == 1 ) then
 		if ( IsMouseButtonDown and not IsMouseButtonDown("LeftButton") ) then MBB_DragFlag = 0; else Drag(); end

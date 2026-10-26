@@ -1595,3 +1595,13 @@ GAME
 = SPEL
 OTHER ADDONS
 = ANDERE ADDONS
+NEW PLAYER
+= NIEUWE SPELER
+THEORYCRAFTING
+= THEORYCRAFTING
+TALENT TREE BUILDER
+= TALENTBOOMPLANNER
+Talent Tree Builder
+= Talentboomplanner
+Pick a class to open its three talent trees. Click a talent to add a point, right-click to take one back: a build of up to 51 points, kept for each class.
+= Kies een klasse om haar drie talentbomen te openen. Klik op een talent voor een punt, rechtsklik om het terug te nemen: een build van hoogstens 51 punten, bewaard per klasse.

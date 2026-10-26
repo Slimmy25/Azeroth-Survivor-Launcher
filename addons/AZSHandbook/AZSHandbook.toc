@@ -1,6 +1,6 @@
 ## Interface: 11200
 ## Title: AZS Handbook
-## Notes: The launcher's New Player Guide in game: every topic and page, each class's spells with their icons and the talents that change them, and all the talent trees. Type /handbook in game.
+## Notes: The launcher's Guide in game: every topic and page, each class's spells with their icons and the talents that change them, and all the talent trees. Type /handbook in game.
 ## Author: Slimjim
 ## SavedVariables: AZSHandbookDB
 AZSKit.lua

@@ -1,4 +1,4 @@
--- AZS Handbook: the launcher's New Player Guide in game. Every topic and page of the guide (AZSHandbookData.lua,
+-- AZS Handbook: the launcher's Guide in game. Every topic and page of the guide (AZSHandbookData.lua,
 -- written by the launcher from its own guide, so the two always match), with the game's own icons: each spell of a
 -- class with its icon and the talents that change it, every class's three talent trees as the game draws them,
 -- and the spells and talents named in the text in gold. /handbook (or /azsh), or the book by the minimap, opens it.
@@ -530,7 +530,7 @@ local function Where()
 	local topics = D().topics;
 	local topic = view.topic and topics[view.topic];
 	if ( view.talents ) then return view.talents .. " Talents", "The " .. view.talents .. "'s three talent trees, from the game", view.talents; end
-	if ( not topic ) then return "New Player Guide", "Everything the launcher's Guide has, inside the game. Pick a topic.", "Getting Started"; end
+	if ( not topic ) then return "Guide", "Everything the launcher's Guide has, inside the game. Pick a topic.", "Getting Started"; end
 	local page = view.page and topic.pages[view.page];
 	if ( page ) then return page.title, topic.title .. "  -  " .. page.desc, page.title; end
 	return topic.title, topic.desc, topic.title;
@@ -633,7 +633,7 @@ local ok, err = pcall(function()
 		click = function() AZSHandbook_Toggle(); end,
 		tooltip = function(tt)
 			tt:AddLine(NAME);
-			tt:AddLine("The launcher's New Player Guide in game.", 1, 1, 1);
+			tt:AddLine("The launcher's Guide in game.", 1, 1, 1);
 			tt:AddLine(" ");
 			tt:AddLine("Click: open the handbook. /handbook <class> opens a class.", 0.6, 0.6, 0.6);
 		end });
