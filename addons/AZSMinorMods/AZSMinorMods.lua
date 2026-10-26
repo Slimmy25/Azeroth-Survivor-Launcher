@@ -9,6 +9,9 @@
 --     to the Say & Party box, not the main chat.
 --   * Boss markers: every boss alive gets a raid marker, the first a Skull, the second a Cross, the third a Moon.
 --   * In co-op, a friend who falls gets the Square over their head, blinking 5 times.
+--   * Move the UI: unlock it, drag the player, target and party frames, the minimap, buffs, cast bar, action bars and
+--     the Say & Party box where you want them, then lock it again. The places are kept (Reset puts them back).
+--   * Hide the target frame: this game picks its own targets, so the frame can go.
 -- /azsmods (or the gear by the minimap) opens the settings window: every one of these on or off.
 -- Lua 5.0 / 1.12 interface: scripts read `this`, `event`, `arg1`, `arg2`; no # operator; only the 1.12 API.
 
@@ -40,6 +43,8 @@ local function DB()
 	if ( d.bloat == nil ) then d.bloat = false; end
 	if ( d.bossMarks == nil ) then d.bossMarks = true; end
 	if ( d.deathMarks == nil ) then d.deathMarks = true; end
+	if ( d.hideTarget == nil ) then d.hideTarget = false; end
+	if ( type(d.places) ~= "table" ) then d.places = {}; end
 	if ( type(d.words) ~= "table" ) then d.words = {}; end
 	return d;
 end
@@ -179,7 +184,7 @@ local function BoxBuild()
 	box:EnableMouse(true);
 	if ( box.SetClampedToScreen ) then box:SetClampedToScreen(true); end
 	box:RegisterForDrag("LeftButton");
-	box:SetScript("OnDragStart", function() if ( not DB().lock ) then this:StartMoving(); end end);
+	box:SetScript("OnDragStart", function() if ( DB().unlocked ) then this:StartMoving(); end end);
 	box:SetScript("OnDragStop", function()
 		this:StopMovingOrSizing();
 		local d = DB();
@@ -254,6 +259,8 @@ end
 
 local function BossMarks()
 	if ( not DB().bossMarks or type(AZS_GetBosses) ~= "function" ) then return; end
+	-- only while a run is being played: out of it the list can still hold the last run's bosses
+	if ( type(AZS_GetPhase) == "function" and AZS_GetPhase() ~= "playing" ) then return; end
 	local ok, bosses = pcall(AZS_GetBosses);
 	if ( not ok or type(bosses) ~= "table" ) then return; end
 	local alive = {};
@@ -302,6 +309,112 @@ markFrame:SetScript("OnUpdate", function()
 	end
 end);
 
+
+-- ---------------------------------------------------------------- moving the UI, and the target frame
+-- Unlocked, each of these frames gets a handle over it (its name on a green panel): drag the handle and the frame
+-- follows. Locked, the handles go and the frames stay where they were put; the places are put back at every login.
+local MOVABLE = { { "PlayerFrame", "Player" }, { "TargetFrame", "Target" }, { "PartyMemberFrame1", "Party" },
+                  { "MinimapCluster", "Minimap" }, { "BuffFrame", "Buffs" }, { "CastingBarFrame", "Cast bar" },
+                  { "MainMenuBar", "Action bars" }, { "MultiBarBottomLeft", "Bar 2" }, { "MultiBarRight", "Right bar" },
+                  { "AZSMinorModsChat", "Say & Party" } };
+local handles = {};
+
+local function Place(name)
+	local f = getglobal(name);
+	local p = DB().places[name];
+	if ( not f or type(p) ~= "table" or not p.x or not p.y ) then return; end
+	f:ClearAllPoints();
+	f:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", K.Num(p.x), K.Num(p.y));
+	if ( name == "AZSMinorModsChat" ) then local d = DB(); d.x, d.y = p.x, p.y; end
+end
+
+local function PlaceAll()
+	for i = 1, table.getn(MOVABLE) do pcall(Place, MOVABLE[i][1]); end
+end
+
+local function Handle(name, label)
+	local f = getglobal(name);
+	if ( not f ) then return nil; end
+	local h = handles[name];
+	if ( not h ) then
+		h = CreateFrame("Frame", nil, UIParent);
+		h:SetFrameStrata("DIALOG");
+		h:SetBackdrop({ bgFile = "Interface\\Tooltips\\UI-Tooltip-Background", edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border",
+		                tile = true, tileSize = 16, edgeSize = 12, insets = { left = 3, right = 3, top = 3, bottom = 3 } });
+		h:SetBackdropColor(0.1, 0.6, 0.1, 0.45);
+		h:SetBackdropBorderColor(0.3, 1, 0.3, 0.9);
+		h:EnableMouse(true);
+		h.text = h:CreateFontString(nil, "OVERLAY", "GameFontNormal");
+		h.text:SetPoint("CENTER", h, "CENTER", 0, 0);
+		h.text:SetText(label);
+		h:SetScript("OnMouseDown", function()
+			local t = getglobal(name);
+			if ( not t ) then return; end
+			t:SetMovable(true);
+			if ( t.SetClampedToScreen ) then t:SetClampedToScreen(true); end
+			t:StartMoving();
+			this.moving = true;
+		end);
+		h:SetScript("OnMouseUp", function()
+			local t = getglobal(name);
+			if ( not t or not this.moving ) then return; end
+			this.moving = nil;
+			t:StopMovingOrSizing();
+			DB().places[name] = { x = t:GetLeft(), y = t:GetBottom() };
+			Place(name);
+		end);
+		h:SetScript("OnUpdate", function()
+			local t = getglobal(name);
+			if ( not t ) then return; end
+			this:ClearAllPoints();
+			this:SetPoint("TOPLEFT", t, "TOPLEFT", 0, 0);
+			this:SetPoint("BOTTOMRIGHT", t, "BOTTOMRIGHT", 0, 0);
+		end);
+		handles[name] = h;
+	end
+	local w, ht = f:GetWidth(), f:GetHeight();
+	if ( not w or w < 20 ) then f:SetWidth(math.max(w or 0, 120)); end
+	if ( not ht or ht < 16 ) then f:SetHeight(math.max(ht or 0, 24)); end
+	return h;
+end
+
+-- unlocked: the handles show (the frames are shown too, so even an empty party frame can be placed)
+function AZSMinorMods_SetUnlocked(on)
+	DB().unlocked = on and true or false;
+	for i = 1, table.getn(MOVABLE) do
+		local name = MOVABLE[i][1];
+		if ( on ) then
+			local ok, h = pcall(Handle, name, MOVABLE[i][2]);
+			if ( ok and h ) then h:Show(); end
+		elseif ( handles[name] ) then
+			handles[name]:Hide();
+		end
+	end
+	K.Print(NAME, on and "the UI is unlocked: drag the green handles, then lock it in /azsmods." or "the UI is locked.");
+end
+
+function AZSMinorMods_ResetPlaces()
+	DB().places = {};
+	local d = DB();
+	d.x, d.y = nil, nil;
+	K.Print(NAME, "the frames go back to their own places after a /reload.");
+	if ( ReloadUI ) then ReloadUI(); end
+end
+
+-- the target frame: hidden for good while the setting is on (this game targets for you)
+local targetShow;
+local function TargetFrameHidden(on)
+	if ( not TargetFrame ) then return; end
+	if ( not targetShow ) then targetShow = TargetFrame.Show; end
+	if ( on ) then
+		TargetFrame.Show = function() end;
+		TargetFrame:Hide();
+	else
+		TargetFrame.Show = targetShow;
+		if ( UnitExists("target") ) then TargetFrame:Show(); end
+	end
+end
+
 -- ---------------------------------------------------------------- the settings window
 local win;
 
@@ -329,7 +442,7 @@ local function Check(parent, label, y, get, set)
 end
 
 local function WinBuild()
-	win = K.Window("AZSMinorModsFrame", NAME, 420, 448);
+	win = K.Window("AZSMinorModsFrame", NAME, 420, 500);
 	local hero = K.Hero(win, 380);
 	hero:SetPoint("TOPLEFT", win, "TOPLEFT", 20, -30);
 	K.Icon(hero.icon, "INV_Misc_Gear_02");
@@ -347,26 +460,22 @@ local function WinBuild()
 	end);
 	Row("Say & Party box above the chat", function() return DB().box; end,
 	    function(v) DB().box = v; BoxBuild(); BoxPlace(); end);
-	Row("Lock the box where it is", function() return DB().lock; end, function(v) DB().lock = v; end);
 	Row("Camera as far out as it goes (50)", function() return DB().camera; end,
 	    function(v) DB().camera = v; Camera(v); end);
 	Row("Mark bosses: Skull, Cross, Moon", function() return DB().bossMarks; end, function(v) DB().bossMarks = v; end);
 	Row("Blink a Square over a friend who falls", function() return DB().deathMarks; end, function(v) DB().deathMarks = v; end);
+	Row("Hide the target frame", function() return DB().hideTarget; end, function(v) DB().hideTarget = v; TargetFrameHidden(v); end);
+	Row("Unlock the UI to move it (untick to lock)", function() return DB().unlocked; end, function(v) AZSMinorMods_SetUnlocked(v); end);
 	Row("Minimap button", function() local m = DB().minimap; return not (m and m.hide); end,
 	    function(v) if ( AZSMinorMods_Mini ) then local m = DB().minimap; if ( (m and m.hide and true or false) == v ) then AZSMinorMods_Mini.Toggle(); end end end);
 	local note = win:CreateFontString(nil, "OVERLAY", "GameFontDisableSmall");
 	note:SetPoint("TOPLEFT", win, "TOPLEFT", 30, y - 4);
 	note:SetWidth(360);
 	note:SetJustifyH("LEFT");
-	note:SetText("Remove bloat: no \"you have learned\" lines, and Say and Party only in the box.");
+	note:SetText("Remove bloat: no \"you have learned\" lines, and Say and Party only in the box. Unlocked, drag the green handles; lock it again when done.");
 	local clear = K.Button(win, "Clear the box", 120, function() BoxBuild(); box.msg:Clear(); end);
 	clear:SetPoint("BOTTOMLEFT", win, "BOTTOMLEFT", 24, 20);
-	local reset = K.Button(win, "Box back above the chat", 170, function()
-		local d = DB();
-		d.x, d.y = nil, nil;
-		BoxBuild();
-		BoxPlace();
-	end);
+	local reset = K.Button(win, "Reset positions", 150, function() AZSMinorMods_ResetPlaces(); end);
 	reset:SetPoint("BOTTOMRIGHT", win, "BOTTOMRIGHT", -24, 20);
 end
 
@@ -395,6 +504,10 @@ SlashCmdList["AZSMINORMODS"] = function(msg)
 	elseif ( cmd == "minimap" ) then
 		local shown = AZSMinorMods_Mini and AZSMinorMods_Mini.Toggle();
 		K.Print(NAME, shown and "the minimap button is back." or "the minimap button is hidden. /azsmods minimap brings it back.");
+	elseif ( cmd == "unlock" or cmd == "move" ) then
+		AZSMinorMods_SetUnlocked(true);
+	elseif ( cmd == "lock" ) then
+		AZSMinorMods_SetUnlocked(false);
 	elseif ( cmd == "box" ) then
 		d.box = not d.box;
 		BoxBuild();
@@ -414,12 +527,16 @@ loader:SetScript("OnEvent", function()
 	if ( event == "VARIABLES_LOADED" ) then
 		ok, err = pcall(BoxBuild);
 		if ( not ok ) then K.Print(NAME, "|cffff4040the Say & Party box could not be made:|r " .. tostring(err)); end
+		DB().unlocked = false;                             -- every session starts locked
 	end
+	-- the frames back where they were put (the game places some of them again as it loads), and the target frame
+	pcall(PlaceAll);
+	pcall(TargetFrameHidden, DB().hideTarget);
 end);
 pcall(HookChat);                                          -- right away too, so lines printed while loading are caught
 
 -- the minimap button: a gear, at the left of the minimap (AZS Stats' is at the bottom, AZS Handbook's at the top
--- left, AZS Transparency's at the right)
+-- left)
 local okMini, errMini = pcall(function()
 	AZSMinorMods_Mini = K.Minimap({ name = "AZSMinorModsMinimapButton", icon = "INV_Misc_Gear_02", angle = 190, db = DB,
 		click = function() AZSMinorMods_Toggle(); end,

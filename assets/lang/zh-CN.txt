@@ -1594,3 +1594,5 @@ Converted for Azeroth Survivors. Catches every Lua error (with !BugGrabber) and 
 = 为 Azeroth Survivors 移植。捕获每个 Lua 错误（配合 !BugGrabber）并在一个窗口中显示：/bugsack 或其小地图按钮。
 GAME
 = 游戏
+OTHER ADDONS
+= 其他插件
