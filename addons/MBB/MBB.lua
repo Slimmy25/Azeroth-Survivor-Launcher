@@ -12,7 +12,7 @@
 --   /mbb buttons, /mbb reset position, /mbb reset all
 -- Lua 5.0 / 1.12 interface: no #, scripts read this / arg1.
 
-MBB_Version = "0.508-azs";
+MBB_Version = "0.508-azs2";                -- a new version starts from the defaults below
 MBB_DragFlag = 0;
 MBB_ShowTimeout = -1;
 MBB_Buttons = {};
@@ -21,7 +21,7 @@ MBB_Exclude = MBB_Exclude or {};
 MBB_DefaultOptions = {
 	ButtonPos = { 200, 0 },          -- attached: the angle around the minimap (and 0); detached: x, y on the screen
 	AttachToMinimap = 1,
-	CollapseTimeout = 1,
+	CollapseTimeout = 3,                    -- seconds after the pointer leaves the bag and its buttons
 	ExpandDirection = 1,
 	MaxButtonsPerLine = 0,
 	AltExpandDirection = 4,
@@ -252,12 +252,23 @@ function MBB_PrepareButton(name)
 	return true;
 end
 
+-- Whether the bar is open is kept here, not read from the buttons: the game shows and hides some minimap buttons
+-- itself (its HUD parts, like the damage meter's), and one of them showing made the bag think it was open, so a
+-- click closed it instead.
+local barOpen = false;
+
 function MBB_Open()
+	return barOpen;
+end
+
+function MBB_ShowButtons()
+	MBB_SetPositions();
+	barOpen = true;
 	for i = 1, table.getn(MBB_Buttons) do
 		local f = getglobal(MBB_Buttons[i]);
-		if ( f and f:IsVisible() ) then return true; end
+		if ( f and f.isvisible and f.oshow ) then f.oshow(f); end
 	end
-	return false;
+	MBB_ShowTimeout = -1;                                -- the pointer is on the bag: the collapse waits until it leaves
 end
 
 function MBB_AddButton(name)
@@ -329,6 +340,7 @@ end
 
 function MBB_HideButtons()
 	MBB_ShowTimeout = -1;
+	barOpen = false;
 	for i = 1, table.getn(MBB_Buttons) do
 		local f = getglobal(MBB_Buttons[i]);
 		if ( f and f.ohide ) then f.ohide(f); end
@@ -350,16 +362,7 @@ function MBB_OnClick(button)
 	elseif ( button == "RightButton" ) then
 		MBB_ToggleOptions();
 	else
-		if ( MBB_Open() ) then
-			MBB_HideButtons();
-		else
-			MBB_SetPositions();
-			for i = 1, table.getn(MBB_Buttons) do
-				local f = getglobal(MBB_Buttons[i]);
-				if ( f and f.isvisible ) then f.oshow(f); end
-			end
-			MBB_ShowTimeout = 0;
-		end
+		if ( MBB_Open() ) then MBB_HideButtons(); else MBB_ShowButtons(); end
 	end
 end
 
@@ -506,6 +509,11 @@ SlashCmdList["MBB"] = function(cmd)
 		MBB_ResetPosition();
 	elseif ( cmd == "options" ) then
 		MBB_ToggleOptions();
+	elseif ( cmd == "open" ) then
+		MBB_ShowButtons();
+		MBB_Print("MBB: " .. table.getn(MBB_Buttons) .. " buttons in the bar.");
+	elseif ( cmd == "close" ) then
+		MBB_HideButtons();
 	elseif ( cmd == "show" ) then
 		MBB_ResetPosition();
 		MBB_Print("MBB: the bag button is back by the minimap.");
