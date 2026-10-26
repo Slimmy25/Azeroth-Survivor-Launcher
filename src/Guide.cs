@@ -139,7 +139,7 @@ namespace AzerothLauncher
 
         static readonly string[] BuilderClasses = { "Warrior", "Paladin", "Hunter", "Rogue", "Priest", "Shaman", "Mage", "Warlock", "Druid" };
 
-        // ---- the Talent Tree Builder: pick a class, then try out a build on its three trees (kept per class)
+        // ---- the Talent Tree Builder: pick a class, then try out a build on its three trees (empty again each time it opens)
         void GuideBuilderHome()
         {
             GuideHeader(TalentBuilder, Data.Guide);
@@ -221,7 +221,7 @@ namespace AzerothLauncher
             frame.Controls.Add(web);
         }
 
-        // ---- a class's three talent trees, as in the game, with a test build of up to 51 points (kept per class)
+        // ---- a class's three talent trees, as in the game, with a test build of up to 51 points (cleared on leaving)
         void GuideTalents(string cls)
         {
             guideTabsBottom = 0;
@@ -232,7 +232,8 @@ namespace AzerothLauncher
                 int bw = (int)(170 * Theme.Zoom);
                 Put(new WowButton("‹ " + cls.ToUpperInvariant(), delegate { gTalents = null; BuildPanel("Guide"); }, 170, 32, 9), PW - 20 - bw, 12);
             }
-            var build = TalentBuild.Parse(Cfg.Str("talent_build_" + cls), cls);
+            if (liveBuild == null || liveBuildCls != cls) { liveBuild = TalentBuild.Parse("", cls); liveBuildCls = cls; }
+            var build = liveBuild;
             var sp = MakeThinScroll(panel, new Rectangle(20, GuideTop, PW - 40, PH - 12 - GuideTop), GuideCardBg, Theme.Bronze,
                                     Theme.GoldDim, Theme.Gold);
             Color bg = sp.BackColor;
@@ -279,8 +280,6 @@ namespace AzerothLauncher
             {
                 show();
                 foreach (var v in views) v.Invalidate();
-                Cfg.Set("talent_build_" + cls, build.Save());
-                if (!PreviewMode) Cfg.Save();
             };
             show();
         }

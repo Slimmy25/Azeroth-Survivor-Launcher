@@ -135,6 +135,8 @@ namespace AzerothLauncher
         static readonly string[] SectionNames = { "Guide", "Cloud Save", "Addons", "Changelog", "Stats", "Options", "About Launcher" };
         int gTopic = -1, gPage = -1;
         string gTalents;                                     // the Guide shows this class's talent trees (a test build)
+        TalentBuild liveBuild;                               // the test build on those trees: kept only while they show
+        string liveBuildCls;
         GuideVideo gVideo;                                   // the guide: a video playing inside the section (Guide.cs)                         // the guide: -1 = the topic list / the topic itself
 
         int PW { get { return panel.ClientSize.Width; } }
@@ -338,6 +340,8 @@ namespace AzerothLauncher
         void BuildPanel(string name)
         {
             if (name != "Community") communityPlaying = null;   // another section: the Community video is left
+            // the talent trees left (another page, class or section): their test build starts empty next time
+            if (name != "Guide" || gTalents == null || gTalents != liveBuildCls) { liveBuild = null; liveBuildCls = null; }
             bool freeze = !PreviewMode && name != "Community";  // Community's player window is another program's
             if (freeze) Freeze(true);
             panel.SuspendLayout();
