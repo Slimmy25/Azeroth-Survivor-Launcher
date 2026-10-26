@@ -1607,3 +1607,7 @@ Pick a class to open its three talent trees. Click a talent to add a point, righ
 = Pilih kelas untuk membuka tiga pohon talentanya. Klik talenta untuk menambah poin, klik kanan untuk mengambilnya kembali: build hingga 51 poin, disimpan untuk tiap kelas.
 Pick a class and try out a build of up to 51 points on its three talent trees.
 = Pilih kelas dan coba build hingga 51 poin di tiga pohon talentanya.
+Talents further down need this point.
+= Talenta di bawah membutuhkan poin ini.
+Click a talent to add a point, right-click to take one back. As in the game, each row opens once its own tree has 5 points for every row above it; a build takes no more than 51 points. The purple ones are the milestones at 10, 20 and 30 points.
+= Klik talenta untuk menambah poin, klik kanan untuk mengambilnya kembali. Seperti di game, tiap baris terbuka setelah pohonnya punya 5 poin untuk setiap baris di atasnya; build memakai paling banyak 51 poin. Yang ungu adalah tonggak di 10, 20, dan 30 poin.

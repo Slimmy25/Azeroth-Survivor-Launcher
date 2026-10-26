@@ -22,6 +22,7 @@ namespace AzerothLauncher
             {
                 string name = Path.GetFileName(d);
                 if (name.StartsWith("blizzard_", StringComparison.OrdinalIgnoreCase)) continue;
+                if (name.EndsWith(DeletedSuffix, StringComparison.OrdinalIgnoreCase)) { Util.DeleteTreeQuiet(d); continue; }   // left from an uninstall
                 if (name.EndsWith(DisabledSuffix, StringComparison.Ordinal))
                 {
                     string baseName = name.Substring(0, name.Length - DisabledSuffix.Length);
@@ -82,6 +83,10 @@ namespace AzerothLauncher
             return found;
         }
 
+        // a folder that could not be deleted is renamed to <name>.deleted: the game does not load it (its .toc no
+        // longer matches its folder), and the next look at the AddOns folder deletes it
+        public const string DeletedSuffix = ".deleted";
+
         static void Drop(string path)
         {
             if (Directory.Exists(path) && !Util.IsLink(path)) Util.DeleteTree(path);
@@ -111,7 +116,15 @@ namespace AzerothLauncher
                     if ((Directory.Exists(path) || File.Exists(path)) &&
                         string.Equals(Path.GetDirectoryName(Path.GetFullPath(path)), root, StringComparison.OrdinalIgnoreCase))
                     {
-                        Drop(path);
+                        try { Drop(path); }
+                        catch (Exception)
+                        {
+                            if (!Directory.Exists(path)) throw;
+                            string away = path + DeletedSuffix;
+                            if (Directory.Exists(away)) Util.DeleteTreeQuiet(away);
+                            Directory.Move(path, away);           // out of the game's reach now; deleted later
+                            Util.DeleteTreeQuiet(away);
+                        }
                         if (!removed.Contains(name)) removed.Add(name);
                     }
                 }
@@ -125,7 +138,7 @@ namespace AzerothLauncher
                         if (real.StartsWith(savedRoot + "\\", StringComparison.OrdinalIgnoreCase) &&
                             (Directory.Exists(path) || File.Exists(path)))
                         {
-                            Drop(path);
+                            try { Drop(path); } catch (Exception) { continue; }   // its saved settings: never worth failing over
                             if (!removed.Contains(name)) removed.Add(name);
                         }
                     }

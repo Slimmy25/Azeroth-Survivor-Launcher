@@ -311,9 +311,35 @@ namespace AzerothLauncher
             BuildPanel(name);
         }
 
+        // While a section is rebuilt, nothing in it is drawn: the old page stays on screen until the new one is complete,
+        // then it is drawn at once (before, each new control showed up as an empty grey box for a moment)
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        static extern IntPtr SendMessage(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam);
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        static extern bool RedrawWindow(IntPtr hWnd, IntPtr rect, IntPtr region, uint flags);
+        const int WM_SETREDRAW = 0x000B;
+        int frozen;
+
+        void Freeze(bool on)
+        {
+            if (panel == null || panel.IsDisposed || !panel.IsHandleCreated) return;
+            if (on)
+            {
+                if (frozen++ == 0) SendMessage(panel.Handle, WM_SETREDRAW, IntPtr.Zero, IntPtr.Zero);
+            }
+            else if (frozen > 0 && --frozen == 0)
+            {
+                SendMessage(panel.Handle, WM_SETREDRAW, new IntPtr(1), IntPtr.Zero);
+                // erase, invalidate, every child, now
+                RedrawWindow(panel.Handle, IntPtr.Zero, IntPtr.Zero, 0x0004 | 0x0001 | 0x0080 | 0x0100 | 0x0400);
+            }
+        }
+
         void BuildPanel(string name)
         {
             if (name != "Community") communityPlaying = null;   // another section: the Community video is left
+            bool freeze = !PreviewMode && name != "Community";  // Community's player window is another program's
+            if (freeze) Freeze(true);
             panel.SuspendLayout();
             Theme.Zoom = Theme.SectionZoom;                  // everything in a section is a little smaller
             try
@@ -327,7 +353,12 @@ namespace AzerothLauncher
                 else if (name == "About Launcher") PanelAbout();
                 else if (name == "Community") PanelCommunity();
             }
-            finally { Theme.Zoom = 1f; panel.ResumeLayout(); }
+            finally
+            {
+                Theme.Zoom = 1f;
+                panel.ResumeLayout();
+                if (freeze) Freeze(false);
+            }
         }
 
         public void RebuildCurrent()
@@ -697,15 +728,15 @@ namespace AzerothLauncher
             ClearPanel(dl ? "Download More" : "Addons");
             if (dl)
             {
-                // the back arrow returns to My Addons; the two category buttons share the rest of the row
-                int x0 = 84, wCats = PW - 104, cw = wCats / Data.AddonCategories.Length;
+                // the back arrow returns to My Addons; the categories are a row of tabs filling the rest, as in Options
+                int x0 = 20 + (int)(52 * Theme.Zoom) + 10, wAll = PW - 20 - x0, cw = wAll / Data.AddonCategories.Length;
                 for (int i = 0; i < Data.AddonCategories.Length; i++)
                 {
                     int n = i;
-                    int bw = Math.Min(190, cw - 6);
-                    var b = new WowButton(Data.AddonCategories[i], delegate { addonCategory = n; BuildPanel("Addons"); }, bw, 32, 10);
+                    var b = new WowButton(Data.AddonCategories[i], delegate { addonCategory = n; BuildPanel("Addons"); },
+                                          (int)((cw - 6) / Theme.Zoom), 32, 10);
                     b.Selected = i == addonCategory;          // the open category: filled gold
-                    Put(b, x0 + i * cw + (cw - bw) / 2, 12);
+                    Put(b, x0 + i * cw, 12);
                 }
                 AddonsDownloadView(53);
             }
@@ -857,7 +888,7 @@ namespace AzerothLauncher
         {
             const int gap = 6, cols = 4;
             int cw = (w - gap * (cols - 1)) / cols, textW = cw - 2 - 14;
-            int bw = Math.Min(96, cw - 16);
+            int bw = (int)((cw - 2 - 16) / Theme.Zoom);       // the block's button runs along its bottom
             var heights = new List<int>();
             var built = new List<Control>();
             foreach (var item in items)
@@ -870,9 +901,9 @@ namespace AzerothLauncher
                 card.Controls.Add(inner);
                 bool haveIt = AddonFoldersOf(it.Name).Count > 0;
                 bool update = haveIt && AddonHasUpdate(it);
-                var btn = update ? new WowButton("UPDATE", delegate { DownloadAddon(it.Name, it.Url); }, bw, 24, 8)
-                        : haveIt ? new WowButton("UNINSTALL", delegate { UninstallAddon(it.Name); }, bw, 24, 8)
-                                 : new WowButton("INSTALL", delegate { DownloadAddon(it.Name, it.Url); }, bw, 24, 8);
+                var btn = update ? new WowButton("UPDATE", delegate { DownloadAddon(it.Name, it.Url); }, bw, 30, 9)
+                        : haveIt ? new WowButton("UNINSTALL", delegate { UninstallAddon(it.Name); }, bw, 30, 9)
+                                 : new WowButton("INSTALL", delegate { DownloadAddon(it.Name, it.Url); }, bw, 30, 9);
                 if (update) btn.Selected = true;
                 if (btn.Width > cw - 14) btn.Width = cw - 14;  // never wider than its block
                 int ty = 6;
@@ -1125,9 +1156,13 @@ namespace AzerothLauncher
                     lastCat = cat;
                     var hd = UI.Text(cat, 9, FontStyle.Bold, Theme.Gold, listbg, 0);
                     hd.Size = VStack.Measure(hd);
-                    hd.Location = new Point(6, y + (y > 2 ? 6 : 0));
+                    hd.Location = new Point(6, y + (y > 2 ? 8 : 2));
                     sp.Controls.Add(hd);
-                    y = hd.Bottom + 2;
+                    var rule = new Panel();                  // a thin gold line under the heading
+                    rule.BackColor = Theme.GoldDim;
+                    rule.Bounds = new Rectangle(6, hd.Bottom + 1, w - 4, 1);
+                    sp.Controls.Add(rule);
+                    y = rule.Bottom + 4;
                 }
                 var cb = UI.Check(name, a.Value, a.Value ? Theme.Text : Theme.GoldDim, listbg, 11, false);
                 cb.AutoSize = false;

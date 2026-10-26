@@ -1608,3 +1608,7 @@ Pick a class to open its three talent trees. Click a talent to add a point, righ
 = Üç yetenek ağacını açmak için bir sınıf seç. Bir yeteneğe tıklayınca puan eklenir, sağ tıklayınca geri alınır: en fazla 51 puanlık bir build, her sınıf için saklanır.
 Pick a class and try out a build of up to 51 points on its three talent trees.
 = Bir sınıf seç ve üç yetenek ağacında en fazla 51 puanlık bir build dene.
+Talents further down need this point.
+= Aşağıdaki yetenekler bu puana ihtiyaç duyuyor.
+Click a talent to add a point, right-click to take one back. As in the game, each row opens once its own tree has 5 points for every row above it; a build takes no more than 51 points. The purple ones are the milestones at 10, 20 and 30 points.
+= Bir yeteneğe tıklayınca puan eklenir, sağ tıklayınca geri alınır. Oyundaki gibi her sıra, kendi ağacında üstündeki her sıra için 5 puan olunca açılır; bir build en fazla 51 puan alır. Mor olanlar 10, 20 ve 30 puandaki kilometre taşlarıdır.

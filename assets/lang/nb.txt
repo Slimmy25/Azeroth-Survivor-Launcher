@@ -1607,3 +1607,7 @@ Pick a class to open its three talent trees. Click a talent to add a point, righ
 = Velg en klasse for å åpne de tre talenttrærne. Klikk på et talent for å legge til et poeng, høyreklikk for å ta det tilbake: et build på opptil 51 poeng, lagret for hver klasse.
 Pick a class and try out a build of up to 51 points on its three talent trees.
 = Velg en klasse og prøv et build på opptil 51 poeng i de tre talenttrærne.
+Talents further down need this point.
+= Talenter lenger ned trenger dette poenget.
+Click a talent to add a point, right-click to take one back. As in the game, each row opens once its own tree has 5 points for every row above it; a build takes no more than 51 points. The purple ones are the milestones at 10, 20 and 30 points.
+= Klikk på et talent for å legge til et poeng, høyreklikk for å ta det tilbake. Som i spillet åpnes hver rad når treet har 5 poeng for hver rad over; et build tar høyst 51 poeng. De lilla er milepælene ved 10, 20 og 30 poeng.

@@ -1608,3 +1608,7 @@ Pick a class to open its three talent trees. Click a talent to add a point, righ
 = Виберіть клас, щоб відкрити три його дерева талантів. Клацання по таланту додає очко, праве клацання прибирає: білд до 51 очка, зберігається для кожного класу.
 Pick a class and try out a build of up to 51 points on its three talent trees.
 = Виберіть клас і спробуйте білд до 51 очка на трьох його деревах талантів.
+Talents further down need this point.
+= Таланти нижче потребують це очко.
+Click a talent to add a point, right-click to take one back. As in the game, each row opens once its own tree has 5 points for every row above it; a build takes no more than 51 points. The purple ones are the milestones at 10, 20 and 30 points.
+= Клацання по таланту додає очко, праве клацання прибирає. Як у грі, кожен ряд відкривається, коли в його дереві є 5 очок за кожен ряд вище; білд бере не більше 51 очка. Фіолетові — віхи на 10, 20 і 30 очках.
