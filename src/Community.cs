@@ -50,24 +50,26 @@ namespace AzerothLauncher
             return list;
         }
 
-        // A headline video: shown first in Community, in place of the rotating build videos, until its date (local).
-        // Set it to null when there is none.
-        static readonly GuideVideo Headline = new GuideVideo
+        // Headline videos: while they run they are the only ones in Community (in place of the rotating build
+        // videos), swapping every 10 minutes like the build videos do. A video with no Title gets its title and
+        // channel from YouTube (oEmbed) the first time it is shown.
+        static readonly GuideVideo[] Headlines = new GuideVideo[]
         {
-            Title = "There's a whole new way to play WoW..",
-            Url = "https://www.youtube.com/watch?v=Suq82njFIuI",
-            Author = "Asmongold TV",
-            AuthorUrl = "https://www.youtube.com/@AsmonTV",
+            new GuideVideo { Title = "There's a whole new way to play WoW..", Url = "https://www.youtube.com/watch?v=Suq82njFIuI",
+                             Author = "Asmongold TV", AuthorUrl = "https://www.youtube.com/@AsmonTV" },
+            new GuideVideo { Url = "https://www.youtube.com/watch?v=BKrbMA02fbQ" },
+            new GuideVideo { Url = "https://www.youtube.com/watch?v=ryyXRezVAsc" },
+            // TODO: the "Blizzard WISHES they made this.." video (its link is still needed)
         };
-        static readonly DateTime HeadlineUntil = new DateTime(2026, 11, 8, 23, 59, 59);   // two weeks from Oct 25, 2026
+        static readonly DateTime HeadlineUntil = new DateTime(2026, 11, 9, 23, 59, 59);   // two weeks from Oct 26, 2026
 
-        static bool HeadlineOn { get { return Headline != null && DateTime.Now <= HeadlineUntil; } }
+        static bool HeadlineOn { get { return Headlines.Length > 0 && DateTime.Now <= HeadlineUntil; } }
 
-        // the featured video: the headline while it runs, otherwise a random build video, a different one every 10
-        // minutes (while nothing is playing)
+        // the featured video: a headline video while they run, otherwise a random build video; a different one
+        // every 10 minutes (while nothing is playing)
         static GuideVideo Featured(List<GuideVideo> list)
         {
-            if (HeadlineOn) return Headline;
+            if (HeadlineOn) list = new List<GuideVideo>(Headlines);
             if (list.Count == 0) return null;
             if (communityPick < 0 || communityPick >= list.Count || (DateTime.Now - communityPicked).TotalMinutes >= RotateMinutes)
             {
@@ -78,6 +80,44 @@ namespace AzerothLauncher
                 communityPicked = DateTime.Now;
             }
             return list[communityPick];
+        }
+
+        // fills in a video's missing title and channel from YouTube's oEmbed, then redraws Community
+        static readonly HashSet<string> titleAsked = new HashSet<string>();
+
+        static string JsonField(string json, string key)
+        {
+            var m = System.Text.RegularExpressions.Regex.Match(json, "\"" + key + "\"\\s*:\\s*\"((?:[^\"\\\\]|\\\\.)*)\"");
+            if (!m.Success) return "";
+            try { return System.Text.RegularExpressions.Regex.Unescape(m.Groups[1].Value); }
+            catch (Exception) { return m.Groups[1].Value; }
+        }
+
+        void FetchTitle(GuideVideo v)
+        {
+            if (v.Title.Length > 0 || titleAsked.Contains(v.Url)) return;
+            titleAsked.Add(v.Url);
+            ThreadPool.QueueUserWorkItem(delegate
+            {
+                try
+                {
+                    var req = (System.Net.HttpWebRequest)System.Net.WebRequest.Create(
+                        "https://www.youtube.com/oembed?format=json&url=" + Uri.EscapeDataString(WatchUrl(v)));
+                    req.Timeout = 10000;
+                    string json;
+                    using (var r = req.GetResponse())
+                    using (var sr = new StreamReader(r.GetResponseStream(), Encoding.UTF8)) json = sr.ReadToEnd();
+                    string t = JsonField(json, "title"), a = JsonField(json, "author_name"), au = JsonField(json, "author_url");
+                    Ui(delegate
+                    {
+                        if (t.Length > 0) v.Title = t;
+                        if (v.Author.Length == 0) v.Author = a;
+                        if (v.AuthorUrl.Length == 0) v.AuthorUrl = au;
+                        if (current == "Community" && side.Visible && communityPlaying == null) BuildPanel("Community");
+                    });
+                }
+                catch (Exception) { }
+            });
         }
 
         // the home screen: Community, unless its X was pressed
@@ -104,6 +144,7 @@ namespace AzerothLauncher
             ClearPanel("Community");
             int ti;
             GuideVideo v = Featured(BuildVideos(out ti));
+            if (v != null) FetchTitle(v);
             var intro = PutText(HeadlineOn ? "Featured video. All credit goes to the people who made it."
                                            : "A build video made by a player. All credit goes to the people who made it.",
                                 9.5f, FontStyle.Italic, Theme.GoldDim, 24, 18, PW - 24 - (int)(200 * Theme.Zoom) - 34);
@@ -170,6 +211,7 @@ namespace AzerothLauncher
         [DllImport("user32.dll")] static extern int GetWindowLong(IntPtr hWnd, int index);
         [DllImport("user32.dll")] static extern int SetWindowLong(IntPtr hWnd, int index, int value);
         [DllImport("user32.dll")] static extern bool MoveWindow(IntPtr hWnd, int x, int y, int w, int h, bool repaint);
+        [DllImport("user32.dll")] static extern bool SetWindowPos(IntPtr hWnd, IntPtr after, int x, int y, int w, int h, uint flags);
         [DllImport("user32.dll")] static extern bool ShowWindow(IntPtr hWnd, int cmd);
         [DllImport("user32.dll")] static extern bool IsWindow(IntPtr hWnd);
         [DllImport("user32.dll")] static extern bool IsWindowVisible(IntPtr hWnd);
@@ -297,8 +339,12 @@ namespace AzerothLauncher
             {
                 Directory.CreateDirectory(profile);
                 var psi = new ProcessStartInfo(edge,
-                    "--user-data-dir=\"" + profile + "\" --no-first-run --no-default-browser-check --disable-features=msEdgeSidebarV2" +
-                    " --disable-features=CalculateNativeWinOcclusion --disable-backgrounding-occluded-windows" +
+                    "--user-data-dir=\"" + profile + "\" --no-first-run --no-default-browser-check" +
+                    // one --disable-features only (Edge keeps just the last one). A window of another program can't
+                    // show Edge's GPU (DirectComposition) output, which left the video white: Edge draws in software.
+                    " --disable-features=msEdgeSidebarV2,CalculateNativeWinOcclusion --disable-backgrounding-occluded-windows" +
+                    " --disable-renderer-backgrounding --disable-gpu --disable-gpu-compositing --disable-direct-composition" +
+                    " --autoplay-policy=no-user-gesture-required" +
                     " --window-position=-20000,-20000 --window-size=640,360 --app=\"" + WatchUrl(v) + "\"");
                 psi.UseShellExecute = false;
                 p = Process.Start(psi);
@@ -346,6 +392,7 @@ namespace AzerothLauncher
             SetWindowLong(hwnd, GWL_STYLE, style);
             SetWindowLong(hwnd, GWL_EXSTYLE, GetWindowLong(hwnd, GWL_EXSTYLE) & ~WS_EX_APPWINDOW);   // no taskbar button
             SetParent(hwnd, edgeHost.Handle);
+            SetWindowPos(hwnd, IntPtr.Zero, 0, 0, 0, 0, 0x0001 | 0x0002 | 0x0004 | 0x0010 | 0x0020);   // frame changed
             edgeWnd = hwnd;
             foreach (Control c in edgeHost.Controls) c.Visible = false;
             FitEdge();
@@ -356,7 +403,10 @@ namespace AzerothLauncher
         void FitEdge()
         {
             if (edgeWnd == IntPtr.Zero || edgeHost == null || edgeHost.IsDisposed || !IsWindow(edgeWnd)) return;
-            MoveWindow(edgeWnd, 0, 0, edgeHost.ClientSize.Width, edgeHost.ClientSize.Height, true);
+            // Edge draws its own title bar inside the window: it is pushed up out of sight
+            int bar;
+            using (var g = edgeHost.CreateGraphics()) bar = (int)Math.Round(33 * g.DpiY / 96f);
+            MoveWindow(edgeWnd, 0, -bar, edgeHost.ClientSize.Width, edgeHost.ClientSize.Height + bar, true);
         }
 
         // closes the playing video's Edge (leaving the video, another section, the launcher closing)
