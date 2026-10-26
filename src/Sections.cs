@@ -875,6 +875,8 @@ namespace AzerothLauncher
         }
 
         // AZS ADDONS: a small block for each addon, four to a row: its name, what it does, and its button at the bottom
+        readonly ToolTip addonTips = new ToolTip();
+
         void AddonCards(ScrollPanel sp, List<AddonEntry> items, int w, int y, Color listbg)
         {
             const int gap = 6, cols = 4;
@@ -904,7 +906,14 @@ namespace AzerothLauncher
                 ty += name.Height + 1;
                 if (it.Description.Length > 0)
                 {
-                    var d = UI.Text(it.Description, 7.5f, FontStyle.Regular, Theme.Text, listbg, textW, false);
+                    // a short line on the block; the whole description when the pointer rests on it
+                    string shortDesc = Lang.T(it.Description);
+                    int cut = shortDesc.IndexOfAny(new[] { ':', '.', '(' });
+                    if (cut > 12) shortDesc = shortDesc.Substring(0, cut).Trim();
+                    if (shortDesc.Length > 64) shortDesc = shortDesc.Substring(0, 62).TrimEnd() + "…";
+                    var d = UI.Text(shortDesc, 7.5f, FontStyle.Regular, Theme.Text, listbg, textW, false);
+                    addonTips.SetToolTip(d, Lang.T(it.Description));
+                    addonTips.SetToolTip(inner, Lang.T(it.Description));
                     d.Size = VStack.Measure(d);
                     d.Location = new Point(7, ty);
                     inner.Controls.Add(d);
@@ -1465,7 +1474,10 @@ namespace AzerothLauncher
                 for (int i = 0; i < n; i++)
                 {
                     string v = values[i];
-                    var b = new WowButton(names[i], delegate { set(g, v); }, bw, 30, 9);
+                    int need;                                // a long name gets the room it needs
+                    using (var mg = CreateGraphics()) need = (int)(mg.MeasureString(Lang.T(names[i]), Theme.F(9)).Width / Theme.Zoom) + 20;
+                    if (x > 20 && x + (int)(Math.Max(bw, need) * Theme.Zoom) > PW - 20) { x = 20; y += (int)(30 * Theme.Zoom) + 6; }
+                    var b = new WowButton(names[i], delegate { set(g, v); }, Math.Max(bw, need), 30, 9);
                     b.Selected = i == at;
                     Put(b, x, y);
                     x += b.Width + gap;

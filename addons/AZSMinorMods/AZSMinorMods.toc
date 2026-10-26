@@ -1,6 +1,6 @@
 ## Interface: 11200
 ## Title: AZS Minor Mods
-## Notes: Small changes: the level-up text out of the chat, a Say & Party box above the chat, and the camera as far out as it goes (50). Type /azsmods in game.
+## Notes: Small changes, each on or off: remove bloat from chat, a Say & Party box, boss markers, a Square on a friend who falls, no level-up text, camera at 50. /azsmods or the minimap button.
 ## Author: Slimjim
 ## SavedVariables: AZSMinorModsDB
 AZSKit.lua
