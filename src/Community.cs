@@ -140,6 +140,7 @@ namespace AzerothLauncher
                 communityTimer.Start();
             }
             if (communityPlaying != null) { CommunityPlayer(communityPlaying); return; }
+            if (communityMore) { CommunityMoreVideos(); return; }
             ClearPanel("Community");
             int ti;
             GuideVideo v = Featured(BuildVideos(out ti));
@@ -173,12 +174,55 @@ namespace AzerothLauncher
             pic.Click += delegate { PlayYouTube(v); };
             panel.Controls.Add(pic);
             pic.BringToFront();
-            if (ti >= 0)
-            {
-                int topic = ti;
-                Put(new WowButton("MORE BUILD GUIDES ›", delegate { ShowSection("Guide"); SetGuideView(topic, -1); }, 200, 30, 9),
+            if (BuildVideos(out ti).Count > 0)
+                Put(new WowButton("MORE VIDEOS ›", delegate { communityMore = true; BuildPanel("Community"); }, 200, 30, 9),
                     PW - 20 - (int)(200 * Theme.Zoom), 12);
+        }
+
+        // MORE VIDEOS: every video that plays after the headline videos, as a grid of pictures; a click plays it here
+        bool communityMore;
+
+        void CommunityMoreVideos()
+        {
+            ClearPanel("More Videos");
+            int ti;
+            var list = BuildVideos(out ti);
+            int top = (int)(12 + 32 * Theme.Zoom) + 10;
+            var sp = MakeScroll(panel, new Rectangle(20, top, PW - 40, PH - 12 - top), Theme.Panel, Theme.Bronze);
+            const int cols = 3, gap = 12;
+            int cw = (sp.ClientSize.Width - 20 - gap * (cols - 1)) / cols, ph = cw * 9 / 16;
+            int y = 6, rowH = 0;
+            for (int i = 0; i < list.Count; i++)
+            {
+                GuideVideo v = list[i];
+                int col = i % cols;
+                if (col == 0 && i > 0) { y += rowH + gap; rowH = 0; }
+                int x = 4 + col * (cw + gap);
+                var pic = new VideoPoster(v, new Size(cw, ph));
+                pic.Location = new Point(x, y);
+                pic.Click += delegate { PlayYouTube(v); };
+                sp.Controls.Add(pic);
+                var t = UI.Text(v.Title.Length > 0 ? v.Title : "Build video", 9.5f, FontStyle.Bold, Theme.Gold, sp.BackColor, cw, false);
+                t.Size = VStack.Measure(t);
+                t.Location = new Point(x, y + ph + 4);
+                t.Cursor = Cursors.Hand;
+                t.Click += delegate { PlayYouTube(v); };
+                sp.Controls.Add(t);
+                int hh = ph + 4 + t.Height;
+                if (v.Author.Length > 0)
+                {
+                    var by = UI.Text(Lang.T("by") + " " + v.Author, 8.5f, FontStyle.Regular, Theme.Text, sp.BackColor, cw, false);
+                    by.Size = VStack.Measure(by);
+                    by.Location = new Point(x, y + hh);
+                    sp.Controls.Add(by);
+                    hh += by.Height;
+                }
+                rowH = Math.Max(rowH, hh);
             }
+            var pad = new Panel();
+            pad.Bounds = new Rectangle(4, y + rowH, 1, 10);
+            pad.BackColor = sp.BackColor;
+            sp.Controls.Add(pad);
         }
 
         // the video playing, filling the whole section box, with an X over its corner to close it

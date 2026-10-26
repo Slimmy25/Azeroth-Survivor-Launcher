@@ -28,6 +28,10 @@ namespace AzerothLauncher
         public const string ClientMirrorUrl = "https://azerothsurvivors-mirror.sandervspl.dev/";
         // A third host, on Google Drive (the same game in its own archive, so its own MD5).
         public const string ClientDriveId = "12EHYJrgdANtgZvND49L_cxQwoObTbkWq";
+        // The last resort: the game's own download page. Never one of the three picked at random; only tried after
+        // all three have failed. Its archive may be newer than the checksums below, so it is accepted when it is a
+        // real .rar/.zip/.7z archive from the game's own site.
+        public const string ClientLastResortUrl = "https://wow.aethus.pl/download";
         // Each install picks one of the hosts at random; if that one fails, the others are tried in turn. Every download
         // is checked against the game's known checksums below (update them with a new game version).
         public const string ClientSha256 = "971db7968dc37ec50b18d64a1de7f693e137f6793a7368e4d5c27bd9522eccd8";   // AzerothSurvivorsWindowsNew.rar
@@ -348,12 +352,10 @@ namespace AzerothLauncher
                 g.DrawString(Lang.T("Launcher"), hf, gold, 697, 446);
             }
             WeeklyRecap(g);
-            // bottom bar, left: only the cloud note (the status above PLAY says the rest)
+            // bottom bar: the status above PLAY says everything
             using (var gb = new SolidBrush(Retro.Gold))
             using (var sf = new StringFormat())
             {
-                if (cloudNote.Length > 0)
-                    g.DrawString(Lang.T(cloudNote), Theme.F(8, FontStyle.Italic), gb, new RectangleF(32, 640, 395, 16));
                 // bottom bar, right: status above PLAY, time played below it, the game version in the corner
                 sf.Alignment = StringAlignment.Center;
                 var rc = new RectangleF(800, 0, 292, 16);
@@ -566,10 +568,11 @@ namespace AzerothLauncher
             Invalidate(new Rectangle(0, 578, W, H - 578));
         }
 
+        // every message goes to the one status line above PLAY (there is no note in the bottom left any more)
         public void SetCloudNote(string text)
         {
             cloudNote = text ?? "";
-            Invalidate(new Rectangle(0, 578, W, H - 578));
+            if (cloudNote.Length > 0) SetStatus(cloudNote);
         }
 
         // a section button is hidden while its feature is off: Cloud Save (cloud saving) and Stats (Options)
@@ -1366,6 +1369,10 @@ namespace AzerothLauncher
                 catch (CancelledError) { throw; }
                 catch (UserError e) { errors.Add(char.ToUpperInvariant(names[h][0]) + names[h].Substring(1) + ": " + e.Message); }
             }
+            say("The other hosts did not work. Trying the game's own download page...");
+            try { DownloadFromGameSite(file, progress, cancel); return; }
+            catch (CancelledError) { throw; }
+            catch (UserError e) { errors.Add("Game's download page: " + e.Message); }
             throw new UserError("No download host worked.\n\n" + string.Join("\n\n", errors.ToArray()));
         }
 
@@ -1408,6 +1415,16 @@ namespace AzerothLauncher
             }
             throw new UserError("The download server did not accept the launcher's login." +
                                 (lastError != null ? " (" + lastError.Message + ")" : ""));
+        }
+
+        // the last resort: the game's own download page (https://wow.aethus.pl/download)
+        static void DownloadFromGameSite(string file, Action<long, long> progress, ManualResetEvent cancel)
+        {
+            string sha = Net.Download(ClientLastResortUrl, file, true, "game's download page", progress, cancel, 0);
+            if (string.Equals(sha, ClientSha256, StringComparison.OrdinalIgnoreCase)) return;
+            if (Archive.Kind(file) != null) return;
+            try { File.Delete(file); } catch (Exception) { }
+            throw new UserError("The game's download page did not give a game archive.");
         }
 
         // the backup host: its page names the newest archive (the link changes with every upload) and its SHA-256;

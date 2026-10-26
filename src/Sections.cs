@@ -292,7 +292,7 @@ namespace AzerothLauncher
             current = name;
             foreach (var kv in nav) kv.Value.Active = kv.Key == name;
             RefreshStrip();
-            if (name == "Changelog") clView = ClNewest;
+            if (name == "Changelog") clView = Data.Changelog.Count > 1 ? 1 : ClNewest;   // News already shows the newest
             if (name == "Guide") { gTopic = -1; gPage = -1; guideQuery = ""; }      // the guide always opens on its topic list
             if (name == "About Launcher") aboutLog = false;
             if (name == "Home")
@@ -346,13 +346,14 @@ namespace AzerothLauncher
                 c.Dispose();
             }
             SetSideTitle(title);
-            if (current != "Community" || communityPlaying != null) Put(UI.BackArrow(GoBack), 20, 12);
+            if (current != "Community" || communityPlaying != null || communityMore) Put(UI.BackArrow(GoBack), 20, 12);
         }
 
         // the back arrow: one step back inside the section, or out of the section when at its first page
         void GoBack()
         {
             if (LeaveCommunityVideo()) return;
+            if (current == "Community" && communityMore) { communityMore = false; BuildPanel("Community"); return; }
             if (current == "Addons" && addonMode == "download") { SetAddonMode("installed"); return; }
             if (current == "Changelog")
             {
@@ -588,15 +589,22 @@ namespace AzerothLauncher
         // ------------------------------------------------------------------ About Launcher
         // About Launcher: ABOUT shows the description, LAUNCHER CHANGELOG the launcher's own changelog
         bool aboutLog;
+        // The launcher's own changelog is kept up to date in assets\launcher-changelog.txt but not shipped for now
+        // (build.bat leaves it out). Set to true, and put its resource back in build.bat, to show it again.
+        const bool ShowLauncherChangelog = false;
 
         void PanelAbout()
         {
             ClearPanel("About Launcher");
-            var about = Put(new WowButton("ABOUT", delegate { aboutLog = false; BuildPanel("About Launcher"); }, 130, 32, 10), 84, 12);
-            about.Selected = !aboutLog;
-            var log = Put(new WowButton("LAUNCHER CHANGELOG", delegate { aboutLog = true; BuildPanel("About Launcher"); }, 230, 32, 10),
-                          84 + 130 + 10, 12);
-            log.Selected = aboutLog;
+            if (ShowLauncherChangelog)
+            {
+                var about = Put(new WowButton("ABOUT", delegate { aboutLog = false; BuildPanel("About Launcher"); }, 130, 32, 10), 84, 12);
+                about.Selected = !aboutLog;
+                var log = Put(new WowButton("LAUNCHER CHANGELOG", delegate { aboutLog = true; BuildPanel("About Launcher"); }, 230, 32, 10),
+                              84 + 130 + 10, 12);
+                log.Selected = aboutLog;
+            }
+            else aboutLog = false;
             var credits = UI.Text("Vibe coded by Slimjim\nCloud save code established by Keijin", 13, FontStyle.Italic,
                                   Theme.Credit, Theme.Panel, 0);
             credits.TextAlign = ContentAlignment.TopRight;
@@ -866,12 +874,12 @@ namespace AzerothLauncher
             }
         }
 
-        // AZS ADDONS: a block for each addon, two to a row: its name, what it does, and its button at the bottom
+        // AZS ADDONS: a small block for each addon, four to a row: its name, what it does, and its button at the bottom
         void AddonCards(ScrollPanel sp, List<AddonEntry> items, int w, int y, Color listbg)
         {
-            const int gap = 8;
-            int cw = (w - gap) / 2, textW = cw - 2 - 20;
-            // a row of two is as tall as the taller of them
+            const int gap = 6, cols = 4;
+            int cw = (w - gap * (cols - 1)) / cols, textW = cw - 2 - 14;
+            int bw = Math.Min(96, cw - 16);
             var heights = new List<int>();
             var built = new List<Control>();
             foreach (var item in items)
@@ -884,50 +892,54 @@ namespace AzerothLauncher
                 card.Controls.Add(inner);
                 bool haveIt = AddonFoldersOf(it.Name).Count > 0;
                 bool update = haveIt && AddonHasUpdate(it);
-                var btn = update ? new WowButton("UPDATE", delegate { DownloadAddon(it.Name, it.Url); }, 120, 30, 10)
-                        : haveIt ? new WowButton("UNINSTALL", delegate { UninstallAddon(it.Name); }, 120, 30, 10)
-                                 : new WowButton("INSTALL", delegate { DownloadAddon(it.Name, it.Url); }, 120, 30, 10);
+                var btn = update ? new WowButton("UPDATE", delegate { DownloadAddon(it.Name, it.Url); }, bw, 24, 8)
+                        : haveIt ? new WowButton("UNINSTALL", delegate { UninstallAddon(it.Name); }, bw, 24, 8)
+                                 : new WowButton("INSTALL", delegate { DownloadAddon(it.Name, it.Url); }, bw, 24, 8);
                 if (update) btn.Selected = true;
-                int ty = 8;
-                var name = UI.Text(it.Name, 12, FontStyle.Bold, Theme.Gold, listbg, textW, false);
+                int ty = 6;
+                var name = UI.Text(it.Name, 9.5f, FontStyle.Bold, Theme.Gold, listbg, textW, false);
                 name.Size = VStack.Measure(name);
-                name.Location = new Point(10, ty);
+                name.Location = new Point(7, ty);
                 inner.Controls.Add(name);
-                ty += name.Height + 2;
+                ty += name.Height + 1;
                 if (it.Description.Length > 0)
                 {
-                    var d = UI.Text(it.Description, 9, FontStyle.Regular, Theme.Text, listbg, textW, false);
+                    var d = UI.Text(it.Description, 7.5f, FontStyle.Regular, Theme.Text, listbg, textW, false);
                     d.Size = VStack.Measure(d);
-                    d.Location = new Point(10, ty);
+                    d.Location = new Point(7, ty);
                     inner.Controls.Add(d);
                     ty += d.Height;
                 }
                 if (haveIt)
                 {
-                    var on = UI.Text("Installed", 9, FontStyle.Italic, Theme.GoldDim, listbg, 0);
+                    var on = UI.Text("Installed", 7.5f, FontStyle.Italic, Theme.GoldDim, listbg, 0);
                     on.Size = VStack.Measure(on);
                     inner.Controls.Add(on);
                     on.Tag = "installed";
+                    ty += on.Height + 2;
                 }
                 inner.Controls.Add(btn);
                 btn.Tag = "button";
-                heights.Add(ty + 8 + btn.Height + 10);
+                heights.Add(ty + 6 + btn.Height + 8);
                 built.Add(card);
             }
-            for (int i = 0; i < built.Count; i++)
+            for (int r = 0; r * cols < built.Count; r++)
             {
-                int row = i / 2, h = Math.Max(heights[i], i % 2 == 0 && i + 1 < built.Count ? heights[i + 1] : i % 2 == 1 ? heights[i - 1] : 0);
-                h = Math.Max(h, 120);
-                var card = built[i];
-                card.Bounds = new Rectangle(4 + (i % 2) * (cw + gap), y, cw, h);
-                var inner = card.Controls[0];
-                foreach (Control c in inner.Controls)
+                int h = 90;
+                for (int i = r * cols; i < Math.Min(built.Count, r * cols + cols); i++) h = Math.Max(h, heights[i]);
+                for (int i = r * cols; i < Math.Min(built.Count, r * cols + cols); i++)
                 {
-                    if ((c.Tag as string) == "button") c.Location = new Point(cw - 2 - 10 - c.Width, h - 2 - 10 - c.Height);
-                    if ((c.Tag as string) == "installed") c.Location = new Point(10, h - 2 - 10 - (30 + c.Height) / 2 - 2);
+                    var card = built[i];
+                    card.Bounds = new Rectangle(4 + (i % cols) * (cw + gap), y, cw, h);
+                    var inner = card.Controls[0];
+                    Control b = null;
+                    foreach (Control c in inner.Controls)
+                        if ((c.Tag as string) == "button") { c.Location = new Point((cw - 2 - c.Width) / 2, h - 2 - 8 - c.Height); b = c; }
+                    foreach (Control c in inner.Controls)
+                        if ((c.Tag as string) == "installed" && b != null) c.Location = new Point(7, b.Top - c.Height - 2);
+                    sp.Controls.Add(card);
                 }
-                sp.Controls.Add(card);
-                if (i % 2 == 1 || i + 1 == built.Count) y += h + gap;
+                y += h + gap;
             }
             var pad = new Panel();
             pad.BackColor = listbg;
@@ -1505,7 +1517,7 @@ namespace AzerothLauncher
                 var t = PutText(note, 9.5f, FontStyle.Italic, Theme.GoldDim, 20 + b.Width + 12, y + 2, PW - 40 - b.Width - 12);
                 y = Math.Max(BottomOf(b), BottomOf(t)) + 8;
             };
-            row("ABOUT LAUNCHER", delegate { ShowSection("About Launcher"); }, "What the launcher does, and its own changelog.");
+            row("ABOUT LAUNCHER", delegate { ShowSection("About Launcher"); }, "What the launcher does.");
             row("RUN SETUP AGAIN", delegate { RunSetup(); }, "Downloads and installs the game again, then asks about your folders and cloud saving.");
             row("INSTALL FROM A FILE", delegate { InstallFromDownloads(); }, "Installs the game from a file you downloaded yourself.");
             row("IMPORT A SAVE", delegate { if (ImportSave(side, SyncSettings().SaveDir) != null) SetStatus("Save imported."); },
