@@ -55,11 +55,10 @@ namespace AzerothLauncher
         // channel from YouTube (oEmbed) the first time it is shown.
         static readonly GuideVideo[] Headlines = new GuideVideo[]
         {
-            new GuideVideo { Title = "There's a whole new way to play WoW..", Url = "https://www.youtube.com/watch?v=Suq82njFIuI",
+            new GuideVideo { Title = "Blizzard WISHES they made this..", Url = "https://www.youtube.com/watch?v=Suq82njFIuI",
                              Author = "Asmongold TV", AuthorUrl = "https://www.youtube.com/@AsmonTV" },
             new GuideVideo { Url = "https://www.youtube.com/watch?v=BKrbMA02fbQ" },
             new GuideVideo { Url = "https://www.youtube.com/watch?v=ryyXRezVAsc" },
-            // TODO: the "Blizzard WISHES they made this.." video (its link is still needed)
         };
         static readonly DateTime HeadlineUntil = new DateTime(2026, 11, 9, 23, 59, 59);   // two weeks from Oct 26, 2026
 
