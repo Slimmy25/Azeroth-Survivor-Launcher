@@ -833,48 +833,11 @@ namespace AzerothLauncher
             }
             int w = sp.ClientSize.Width - 4 - 8;
             int y = y0;
-            if (Data.AddonCategories[cat] == "AZS ADDONS")
-            {
-                AddonCards(sp, items, w, y, listbg);
-                return;
-            }
-            foreach (var item in items)
-            {
-                var it = item;
-                var row = new Bordered(Theme.GoldDim, 1);
-                var inner = new Panel();
-                inner.BackColor = listbg;
-                inner.Dock = DockStyle.Fill;
-                row.Controls.Add(inner);
-                bool haveIt = AddonFoldersOf(it.Name).Count > 0;
-                bool update = haveIt && AddonHasUpdate(it);
-                // the button keeps its room; the text wraps to what is left, so nothing runs past the window
-                var btn = update ? new WowButton("UPDATE", delegate { DownloadAddon(it.Name, it.Url); }, 120, 30, 10)
-                        : haveIt ? new WowButton("UNINSTALL", delegate { UninstallAddon(it.Name); }, 120, 30, 10)
-                                 : new WowButton("INSTALL", delegate { DownloadAddon(it.Name, it.Url); }, 120, 30, 10);
-                if (update) btn.Selected = true;            // gold frame: a newer version is waiting
-                int textW = w - 2 - 10 - 120 - 10 - 10;
-                int ty = 6;
-                var labels = new List<Label>();
-                labels.Add(UI.Text(it.Name, 12, FontStyle.Bold, Theme.Gold, listbg, textW, false));
-                if (it.Description.Length > 0) labels.Add(UI.Text(it.Description, 9, FontStyle.Regular, Theme.Text, listbg, textW, false));
-                foreach (var l in labels)
-                {
-                    l.Size = VStack.Measure(l);
-                    l.Location = new Point(10, ty);
-                    inner.Controls.Add(l);
-                    ty += l.Height;
-                }
-                int h = Math.Max(ty + 6, 42) + 2;
-                btn.Location = new Point(w - 2 - 10 - 120, (h - 2 - 30) / 2);
-                inner.Controls.Add(btn);
-                row.Bounds = new Rectangle(4, y, w, h);
-                sp.Controls.Add(row);
-                y += h + 6;
-            }
+            // every list is small blocks, four to a row
+            AddonCards(sp, items, w, y, listbg);
         }
 
-        // AZS ADDONS: a small block for each addon, four to a row: its name, what it does, and its button at the bottom
+        // Download More (every category): a small block for each addon, four to a row: its name, what it does, and its button at the bottom
         readonly ToolTip addonTips = new ToolTip();
 
         void AddonCards(ScrollPanel sp, List<AddonEntry> items, int w, int y, Color listbg)

@@ -43,9 +43,10 @@ jobs:
             url="$(echo "$url" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')"
             case "$url" in
               local:*)                                   # an addon kept in this repository: zip its folder
-                folder="${url#local:}"
-                echo "Zipping addons/$folder as $file"
-                (cd addons && zip -qr "../mirror/$file" "$folder")
+                folders="${url#local:}"
+                echo "Zipping addons/$folders as $file"
+                IFS='+' read -ra parts <<< "$folders"
+                (cd addons && zip -qr "../mirror/$file" "${parts[@]}")
                 ;;
               *)
                 echo "Downloading $file from $url"

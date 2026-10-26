@@ -1,0 +1,10 @@
+## Interface: 11200
+## Title: BugSack
+## Version: 2.1.0-azs
+## Notes: Toss those bugs inna sack. Every Lua error in one window: /bugsack (or /bs) or its minimap button. (Converted for Azeroth Survivors.)
+## Author: Fritti, Rabbit (converted for Azeroth Survivors)
+## X-Credits: Rowne, Ramble, kergoth, ckknight, Gamefaq, thomasmo, damjau
+## X-License: CC-BY-NC-SA-2.5
+## SavedVariables: BugSackDB
+## RequiredDeps: !BugGrabber
+BugSack.lua

@@ -1,0 +1,9 @@
+## Interface: 11200
+## Title: BugGrabber
+## Version: 2.1.1-azs
+## Notes: Grabs bugs for the bug sack. (Converted for Azeroth Survivors.)
+## Author: Fritti, Rabbit (converted for Azeroth Survivors)
+## X-Credits: Rowne, Ramble, kergoth, ckknight
+## X-License: CC-BY-NC-SA-2.5
+## SavedVariables: BugGrabberDB
+BugGrabber.lua

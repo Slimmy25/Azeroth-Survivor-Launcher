@@ -21,7 +21,7 @@ jobs:
           fail=0
           # the addons as the launcher writes them (with their data made from the guide), from the last preview
           git fetch -q origin previews && git archive origin/previews stats/addons | tar -x -C /tmp 2>/dev/null || true
-          for f in addons/*/*.lua /tmp/stats/addons/*/*.lua; do
+          for f in addons/*/*.lua addons/*/*/*.lua /tmp/stats/addons/*/*.lua; do
             [ -f "$f" ] || continue
             luac5.1 -p "$f" || { echo "::error file=$f::does not compile"; fail=1; }
             if grep -nE '(^|[^-"])#[A-Za-z_(]' "$f" | grep -v -- '--' ; then echo "::error file=$f::uses the # operator (not in Lua 5.0)"; fail=1; fi
