@@ -19,7 +19,8 @@ MBB_Buttons = {};
 MBB_Exclude = MBB_Exclude or {};
 
 MBB_DefaultOptions = {
-	ButtonPos = { 200, 0 },          -- attached: the angle around the minimap (and 0); detached: x, y on the screen
+	ButtonPos = { 20, 0 },           -- attached: the angle around the minimap (0 = right, 90 = top); detached: x, y on the
+	                                 -- screen. 20: the right side, clear of the game's damage meter button and the AZS ones
 	AttachToMinimap = 1,
 	CollapseTimeout = 3,                    -- seconds after the pointer leaves the bag and its buttons
 	ExpandDirection = 1,
@@ -118,7 +119,7 @@ function MBB_SetButtonPosition()
 	bag:SetScale(s);
 	bag:ClearAllPoints();
 	if ( o.AttachToMinimap == 1 and Minimap and Minimap:GetCenter() ) then
-		local a = math.rad(tonumber(o.ButtonPos[1]) or 200);
+		local a = math.rad(tonumber(o.ButtonPos[1]) or 20);
 		local ms = Minimap:GetEffectiveScale() / bag:GetEffectiveScale();
 		local cx, cy = Minimap:GetCenter();
 		bag:SetPoint("CENTER", UIParent, "BOTTOMLEFT", cx * ms + RING * math.cos(a) / s, cy * ms + RING * math.sin(a) / s);
@@ -538,6 +539,9 @@ ev:SetScript("OnEvent", function()
 		MBB_Options = Copy(MBB_DefaultOptions);
 	end
 	if ( type(MBB_Exclude) ~= "table" ) then MBB_Exclude = {}; end
+	-- the first default spot (200) was under the game's damage meter button: move it, unless it was dragged there
+	local o2 = Opts();
+	if ( o2.AttachToMinimap == 1 and tonumber(o2.ButtonPos[1]) == 200 ) then o2.ButtonPos = { 20, 0 }; end
 	MBB_SetButtonPosition();
 end);
 ev:SetScript("OnUpdate", function()
