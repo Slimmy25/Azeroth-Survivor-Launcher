@@ -41,6 +41,7 @@ namespace AzerothLauncher
             new[] { "THEORYCRAFTING", TalentBuilder, "Talents", "Build Guides" },
         };
         int guideGroup;                                       // the group whose tabs are shown
+        bool guideMain = true;                                // the main page: every topic as a card, by group
         bool gBuilder;                                        // the Talent Tree Builder is open
 
         static int GroupOf(string title)
@@ -75,7 +76,7 @@ namespace AzerothLauncher
         void OpenGuideTab(int tab)
         {
             guideQuery = "";
-            if (tab == -2) { gVideo = null; gTalents = null; gBuilder = true; guideGroup = 2; if (current == "Guide") BuildPanel("Guide"); }
+            if (tab == -2) { gVideo = null; gTalents = null; gBuilder = true; guideMain = false; guideGroup = 2; if (current == "Guide") BuildPanel("Guide"); }
             else SetGuideView(tab, -1);
         }
 
@@ -102,7 +103,7 @@ namespace AzerothLauncher
             guideSearch = search;
             if (gBuilder) guideGroup = 2;
             else if (gTopic >= 0 && gTopic < topics.Count) guideGroup = GroupOf(topics[gTopic].Title);
-            bool searching = guideQuery.Length > 0;
+            bool searching = guideQuery.Length > 0 || (guideMain && !gBuilder && gTopic < 0);   // no group picked
             // the groups: one row, sharing the width
             int y = 12 + sh + 6, n = GuideGroups.Length, gapG = 6;
             int gw = (int)(((PW - 40) - gapG * (n - 1)) / (float)n / Theme.Zoom);
@@ -172,6 +173,7 @@ namespace AzerothLauncher
             gVideo = null;
             gTalents = null;
             gBuilder = false;
+            guideMain = false;
             gTopic = topic;
             gPage = page;
             if (current == "Guide") BuildPanel("Guide");
@@ -195,7 +197,7 @@ namespace AzerothLauncher
             var topics = Data.Guide;
             guideTabsBottom = 0;
             if (gTopic >= topics.Count) { gTopic = -1; gPage = -1; }
-            if (gTopic < 0 && guideQuery.Trim().Length == 0 && topics.Count > 0) gTopic = Math.Min(guideLastTopic, topics.Count - 1);
+            if (gTopic < 0 && guideQuery.Trim().Length == 0 && topics.Count > 0 && !guideMain) gTopic = Math.Min(guideLastTopic, topics.Count - 1);
             if (gTopic < 0) { GuideHome(topics); return; }
             guideLastTopic = gTopic;
             GuideTopic topic = topics[gTopic];
@@ -298,14 +300,39 @@ namespace AzerothLauncher
                 while (sp.Controls.Count > 0) { Control c = sp.Controls[0]; sp.Controls.RemoveAt(0); c.Dispose(); }
                 int w = sp.ClientSize.Width - 8, y = 4;
                 if (guideQuery.Trim().Length == 0)
-                    GuideGrid(sp, y, w, topics.Count, delegate(int i, GuideCard c)
+                {
+                    // the main page: the three groups, each with its topics as cards
+                    const int gap = 10;
+                    int ch = (int)(108 * Theme.Zoom);
+                    for (int g = 0; g < GuideGroups.Length; g++)
                     {
-                        c.Title = topics[i].Title;
-                        c.Desc = topics[i].Desc;
-                        c.Videos = CountVideos(topics[i]);
-                        c.Pages = topics[i].Pages.Count;
-                        c.Pressed += delegate { SetGuideView(i, -1); };
-                    });
+                        var tabs = GroupTabs(g, topics);
+                        if (tabs.Count == 0) continue;
+                        var head = UI.Text(GuideGroups[g][0], 11, FontStyle.Bold, Theme.Gold, sp.BackColor, 0);
+                        head.Size = VStack.Measure(head);
+                        head.Location = new Point(4, y + (y > 4 ? 6 : 0));
+                        sp.Controls.Add(head);
+                        y = head.Bottom + 4;
+                        GuideGrid(sp, y, w, tabs.Count, delegate(int i, GuideCard c)
+                        {
+                            int t = tabs[i];
+                            if (t == -2)
+                            {
+                                c.Title = TalentBuilder;
+                                c.Desc = Lang.T("Pick a class and try out a build of up to 51 points on its three talent trees.");
+                            }
+                            else
+                            {
+                                c.Title = topics[t].Title;
+                                c.Desc = topics[t].Desc;
+                                c.Videos = CountVideos(topics[t]);
+                                c.Pages = topics[t].Pages.Count;
+                            }
+                            c.Pressed += delegate { OpenGuideTab(t); };
+                        });
+                        y += ((tabs.Count + 1) / 2) * (ch + gap);
+                    }
+                }
                 else GuideResults(sp, w, topics, guideQuery.Trim());
                 sp.ResumeLayout();
             };

@@ -288,12 +288,18 @@ namespace AzerothLauncher
                 ShowWindowFront();
                 return;
             }
+            if (name == "Guide" && current == "Guide" && side.Visible)   // the Guide's button again: back to its main page
+            {
+                gTopic = -1; gPage = -1; guideQuery = ""; gBuilder = false; gTalents = null; gVideo = null; guideMain = true;
+                BuildPanel("Guide");
+                return;
+            }
             if (name == current && name != "Home" && side.Visible) return;   // already open: clicking its button again does nothing
             current = name;
             foreach (var kv in nav) kv.Value.Active = kv.Key == name;
             RefreshStrip();
             if (name == "Changelog") clView = Data.Changelog.Count > 1 ? 1 : ClNewest;   // News already shows the newest
-            if (name == "Guide") { gTopic = -1; gPage = -1; guideQuery = ""; guideLastTopic = 0; gBuilder = false; gTalents = null; guideGroup = 0; }   // the guide opens on its first topic
+            if (name == "Guide") { gTopic = -1; gPage = -1; guideQuery = ""; guideLastTopic = 0; gBuilder = false; gTalents = null; guideGroup = 0; guideMain = true; }   // the guide opens on its first topic
             if (name == "About Launcher") aboutLog = false;
             if (name == "Home")
             {
@@ -363,8 +369,14 @@ namespace AzerothLauncher
             if (current == "Guide")
             {
                 if (gVideo != null) { gVideo = null; BuildPanel("Guide"); return; }
-                if (gTalents != null && gBuilder) { gTalents = null; BuildPanel("Guide"); return; }   // back to the builder's classes
+                if (gTalents != null) { gTalents = null; BuildPanel("Guide"); return; }   // back to the builder's classes or the class page
                 if (gPage >= 0) { SetGuideView(gTopic, -1); return; }
+                if (!guideMain && guideQuery.Length == 0)          // a topic or the builder: back to the main page
+                {
+                    gTopic = -1; gTalents = null; gBuilder = false; guideMain = true;
+                    BuildPanel("Guide");
+                    return;
+                }
                 if (guideQuery.Length > 0) { guideQuery = ""; SetGuideView(guideLastTopic, -1); return; }
             }
             CloseSide();

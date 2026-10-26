@@ -1605,3 +1605,5 @@ Talent Tree Builder
 = Kykypuurakennin
 Pick a class to open its three talent trees. Click a talent to add a point, right-click to take one back: a build of up to 51 points, kept for each class.
 = Valitse luokka avataksesi sen kolme kykypuuta. Klikkaa kykyä lisätäksesi pisteen, oikea klikkaus ottaa sen pois: enintään 51 pisteen build, tallessa jokaiselle luokalle.
+Pick a class and try out a build of up to 51 points on its three talent trees.
+= Valitse luokka ja kokeile enintään 51 pisteen buildia sen kolmessa kykypuussa.

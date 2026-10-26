@@ -1605,3 +1605,5 @@ Talent Tree Builder
 = Talentbaum-Planer
 Pick a class to open its three talent trees. Click a talent to add a point, right-click to take one back: a build of up to 51 points, kept for each class.
 = Wähle eine Klasse, um ihre drei Talentbäume zu öffnen. Klicke auf ein Talent für einen Punkt, Rechtsklick nimmt ihn zurück: ein Build mit bis zu 51 Punkten, für jede Klasse gespeichert.
+Pick a class and try out a build of up to 51 points on its three talent trees.
+= Wähle eine Klasse und probiere auf ihren drei Talentbäumen einen Build mit bis zu 51 Punkten aus.

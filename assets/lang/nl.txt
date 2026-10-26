@@ -1605,3 +1605,5 @@ Talent Tree Builder
 = Talentboomplanner
 Pick a class to open its three talent trees. Click a talent to add a point, right-click to take one back: a build of up to 51 points, kept for each class.
 = Kies een klasse om haar drie talentbomen te openen. Klik op een talent voor een punt, rechtsklik om het terug te nemen: een build van hoogstens 51 punten, bewaard per klasse.
+Pick a class and try out a build of up to 51 points on its three talent trees.
+= Kies een klasse en probeer een build van hoogstens 51 punten op haar drie talentbomen.

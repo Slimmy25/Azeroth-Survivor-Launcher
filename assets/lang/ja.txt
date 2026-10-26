@@ -1606,3 +1606,5 @@ Talent Tree Builder
 = タレントツリービルダー
 Pick a class to open its three talent trees. Click a talent to add a point, right-click to take one back: a build of up to 51 points, kept for each class.
 = クラスを選ぶと3つのタレントツリーが開きます。タレントをクリックでポイント追加、右クリックで戻します。最大51ポイントのビルドがクラスごとに保存されます。
+Pick a class and try out a build of up to 51 points on its three talent trees.
+= クラスを選び、3つのタレントツリーで最大51ポイントのビルドを試せます。

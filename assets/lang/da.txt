@@ -1605,3 +1605,5 @@ Talent Tree Builder
 = Talenttræ-bygger
 Pick a class to open its three talent trees. Click a talent to add a point, right-click to take one back: a build of up to 51 points, kept for each class.
 = Vælg en klasse for at åbne dens tre talenttræer. Klik på et talent for at give et point, højreklik for at tage det tilbage: et build på højst 51 point, gemt for hver klasse.
+Pick a class and try out a build of up to 51 points on its three talent trees.
+= Vælg en klasse og prøv et build på højst 51 point i dens tre talenttræer.
