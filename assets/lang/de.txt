@@ -1591,3 +1591,5 @@ Converted for Azeroth Survivors. Puts every minimap button into one bag button: 
 = Für Azeroth Survivors umgebaut. Steckt alle Minikarten-Knöpfe in einen Taschen-Knopf: Klick darauf, und sie öffnen sich in einer Leiste (/mbb).
 Converted for Azeroth Survivors. Catches every Lua error (with !BugGrabber) and shows them in one window: /bugsack or its minimap button.
 = Für Azeroth Survivors umgebaut. Fängt jeden Lua-Fehler ab (mit !BugGrabber) und zeigt sie in einem Fenster: /bugsack oder sein Minikarten-Knopf.
+GAME
+= SPIEL

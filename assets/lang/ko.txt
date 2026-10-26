@@ -1592,3 +1592,5 @@ Converted for Azeroth Survivors. Puts every minimap button into one bag button: 
 = Azeroth Survivors용으로 변환. 미니맵 버튼을 모두 하나의 가방 버튼에 넣습니다: 클릭하면 막대 모양으로 열립니다(/mbb).
 Converted for Azeroth Survivors. Catches every Lua error (with !BugGrabber) and shows them in one window: /bugsack or its minimap button.
 = Azeroth Survivors용으로 변환. 모든 Lua 오류를 (!BugGrabber와 함께) 잡아 하나의 창에 보여줍니다: /bugsack 또는 미니맵 버튼.
+GAME
+= 게임

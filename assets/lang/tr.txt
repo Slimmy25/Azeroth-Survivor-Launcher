@@ -1592,3 +1592,5 @@ Converted for Azeroth Survivors. Puts every minimap button into one bag button: 
 = Azeroth Survivors için uyarlandı. Tüm mini harita düğmelerini tek bir çanta düğmesine koyar: tıkla, bir çubukta açılsınlar (/mbb).
 Converted for Azeroth Survivors. Catches every Lua error (with !BugGrabber) and shows them in one window: /bugsack or its minimap button.
 = Azeroth Survivors için uyarlandı. Her Lua hatasını yakalar (!BugGrabber ile) ve tek bir pencerede gösterir: /bugsack ya da mini harita düğmesi.
+GAME
+= OYUN

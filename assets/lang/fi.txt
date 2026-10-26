@@ -1591,3 +1591,5 @@ Converted for Azeroth Survivors. Puts every minimap button into one bag button: 
 = Muokattu Azeroth Survivorsille. Laittaa kaikki minikartan painikkeet yhteen laukkupainikkeeseen: klikkaa, niin ne avautuvat palkkiin (/mbb).
 Converted for Azeroth Survivors. Catches every Lua error (with !BugGrabber) and shows them in one window: /bugsack or its minimap button.
 = Muokattu Azeroth Survivorsille. Nappaa jokaisen Lua-virheen (!BugGrabberin kanssa) ja näyttää ne yhdessä ikkunassa: /bugsack tai sen minikarttapainike.
+GAME
+= PELI

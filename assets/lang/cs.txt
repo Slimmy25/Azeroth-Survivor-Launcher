@@ -1592,3 +1592,5 @@ Converted for Azeroth Survivors. Puts every minimap button into one bag button: 
 = Upraveno pro Azeroth Survivors. Schová všechna tlačítka minimapy do jednoho tlačítka brašny: klikni a otevřou se v liště (/mbb).
 Converted for Azeroth Survivors. Catches every Lua error (with !BugGrabber) and shows them in one window: /bugsack or its minimap button.
 = Upraveno pro Azeroth Survivors. Zachytí každou chybu Lua (s !BugGrabber) a ukáže je v jednom okně: /bugsack nebo jeho tlačítko na minimapě.
+GAME
+= HRA

@@ -1592,3 +1592,5 @@ Converted for Azeroth Survivors. Puts every minimap button into one bag button: 
 = Átalakítva az Azeroth Survivorshöz. Minden minitérkép-gombot egyetlen táska-gombba tesz: kattints rá, és egy sávban nyílnak meg (/mbb).
 Converted for Azeroth Survivors. Catches every Lua error (with !BugGrabber) and shows them in one window: /bugsack or its minimap button.
 = Átalakítva az Azeroth Survivorshöz. Elkap minden Lua hibát (a !BugGrabberrel) és egy ablakban mutatja őket: /bugsack vagy a minitérkép-gombja.
+GAME
+= JÁTÉK

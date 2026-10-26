@@ -1591,3 +1591,5 @@ Converted for Azeroth Survivors. Puts every minimap button into one bag button: 
 = Diubah untuk Azeroth Survivors. Menaruh semua tombol minimap dalam satu tombol tas: klik dan semuanya terbuka dalam satu bilah (/mbb).
 Converted for Azeroth Survivors. Catches every Lua error (with !BugGrabber) and shows them in one window: /bugsack or its minimap button.
 = Diubah untuk Azeroth Survivors. Menangkap setiap galat Lua (bersama !BugGrabber) dan menampilkannya dalam satu jendela: /bugsack atau tombol minimap-nya.
+GAME
+= GAME

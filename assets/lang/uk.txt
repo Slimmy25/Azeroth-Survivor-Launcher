@@ -1592,3 +1592,5 @@ Converted for Azeroth Survivors. Puts every minimap button into one bag button: 
 = Перероблено для Azeroth Survivors. Ховає всі кнопки мінікарти в одну кнопку-сумку: натисніть, і вони відкриються панеллю (/mbb).
 Converted for Azeroth Survivors. Catches every Lua error (with !BugGrabber) and shows them in one window: /bugsack or its minimap button.
 = Перероблено для Azeroth Survivors. Ловить кожну помилку Lua (разом із !BugGrabber) і показує їх в одному вікні: /bugsack або його кнопка біля мінікарти.
+GAME
+= ГРА
