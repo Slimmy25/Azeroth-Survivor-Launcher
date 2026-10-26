@@ -2,6 +2,34 @@ Patch notes shown in the launcher's Changelog. The launcher sorts them by versio
 Every post starts with its title on the first line. Posts are separated by a line with only === on it.
 Everything above the first === line is ignored.
 ===
+0.119.0
+-------
+Druid healing: Tranquility can crit, and every druid's Rejuvenation on you in co-op heals at once.
+
+* Tranquility's Nature damage can now critically strike, like your spells. It still sets off no other effects.
+* Rejuvenation stacks in co-op: every druid in the party keeps their own on you, so five druids heal you with five Rejuvenations at once, shown as one icon with its stacks. Casting your own again still renews yours.
+===
+0.118.0
+-------
+Co-op fixes: guests now get their talent experience, progress and achievements however the run ends. Co-op achievements need at least one friend in the run, and the revive bar pauses while you pick a card. Everything from the co-op update is now translated into every language.
+
+* Fixed: as a guest in a friend's co-op game, leaving before the whole party's run ended, or the host leaving or going back to the menu, counted nothing for you: no talent experience, no kills or other progress, no achievements. Your run now counts however it ends, as it always did for the host.
+* Co-op achievements that ask for a party now need at least one other player in the run with you: Better Together, Against All Odds, Things That Go Bump in the Night, For the Team, Dragonslayers, The Old Gods Have No Friends and Together, To the End. A co-op run you play alone no longer counts, and zones and bosses beaten alone add no progress. A friend who left before the boss fell or the zone was won doesn't count either. Their descriptions say so now. Achievements and progress you already have are kept.
+* Bringing a friend back pauses while you pick a level-up card or a new item: their bar holds where it is and carries on once you're back in the fight. Another friend fighting beside them keeps it going.
+* The Co-op achievements, their hats, cloaks, tabard and companions, United Front and the White Devilsaur switch are translated into Polish, Czech, German, Portuguese, Spanish, French, Romanian, Turkish, Russian, Ukrainian, Chinese, Japanese and Korean.
+===
+0.117.0
+-------
+Co-op achievements: 14 new feats for parties, earned by everyone in the party. They bring hats, cloaks, a tabard, four companions, a co-op luck perk and a White Devilsaur for hunters.
+
+* New Co-op achievements tab, 14 achievements done with friends: Better Together, Five of a Kind, Rest in Photosynthesis, Against All Odds, The Brotherhood Falls, Things That Go Bump in the Night, For the Team, Jurassic Pack, Hakkar Smoothie, Holy Frame Drops, Dragonslayers, Totem'ly Balanced, The Old Gods Have No Friends and Together, To the End. Every player in the party earns them, whoever lands the killing blow.
+* Zones beaten in co-op are remembered across runs, for the achievements that ask for several (For the Team, Dragonslayers, Together, To the End).
+* New looks from them: the Admiral's Hat, Bloodsail Admiral's Hat, Embrace of the Lycan and Whitemane's Chapeau for your head; the Cape of the Brotherhood, Cloak of the Brood Lord and Cloak of the Devoured for your back; and the Contest Winner's Tabard.
+* New companions: Ancient Protector, Mini Herod, Mini Nefarian and Mr. Bigglesworth.
+* United Front (from For the Team): +10% luck in every co-op run, for good.
+* White Devilsaur (from Jurassic Pack): a new switch at the bottom right of the hunter's Beast Mastery tree, free of points. On, one White Devilsaur fights for you in place of Tame Beast's wolf and Bestial Wrath's raptor, dealing what the two would.
+* The armory's look list scrolls when a slot has many looks, instead of running off the bottom of the pane.
+===
 0.116.0
 -------
 Engine update: the game client the run plays in is brought up to date. In co-op, buffs from your friends now show this game's numbers.
