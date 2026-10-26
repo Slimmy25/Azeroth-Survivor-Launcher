@@ -24,3 +24,7 @@
 - AZS Minor Mods, new setting: "Plain action bar". The gryphons and the bar's art go, leaving just the six spell
   squares (the racial button and the character and talent buttons are hidden too). Untick it and the bar comes back
   as it was; the character and talent panels still open with their keys (C and N).
+
+### The Guide
+- Talent Tree Builder: leaving a class's talent trees now clears the points you put in, so every visit starts from an
+  empty build (before, the last build came back).

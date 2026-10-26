@@ -122,7 +122,8 @@ namespace AzerothLauncher
                     app.current = "Guide";
                     app.ShowSide();
                     app.gTopic = classes; app.gPage = 0; app.gTalents = "Warrior";
-                    app.Cfg.Set("talent_build_Warrior", "Arms/imp_heroic=5;Arms/deflection=3;Arms/deep_wounds=1;Fury/cruelty=5");
+                    app.liveBuild = TalentBuild.Parse("Arms/imp_heroic=5;Arms/deflection=3;Arms/deep_wounds=1;Fury/cruelty=5", "Warrior");
+                    app.liveBuildCls = "Warrior";
                     app.BuildPanel("Guide");
                     Application.DoEvents();
                     using (var win = new Bitmap(app.side.Width, app.side.Height))
