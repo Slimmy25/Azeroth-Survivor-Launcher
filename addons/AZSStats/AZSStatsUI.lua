@@ -137,7 +137,7 @@ local function Row(out, r) r.kind = "row"; table.insert(out, r); end
 local RECORD_ICONS = { time = "INV_Misc_PocketWatch_01", fastestWin = "Spell_Nature_Swiftness", lvl = "Spell_Holy_SealOfWisdom",
                        dps = "Ability_Warrior_BattleShout", kills = "Ability_DualWield", dmg = "Spell_Fire_Fireball02",
                        gold = "INV_Misc_Coin_01", bosses = "INV_Misc_Head_Dragon_01", elites = "Ability_Warrior_Challange",
-                       guardians = "INV_Shield_06" };
+                       guardians = "INV_Shield_06", legendary = "INV_Jewelry_Necklace_AhnQiraj_01", saves = "Spell_Holy_SealOfSalvation" };
 
 local function Overview()
 	local out = {};
@@ -228,7 +228,8 @@ local function Records()
 	Head(out, "Personal bests  -  " .. name);
 	local order = { { "time", "Longest run", true }, { "fastestWin", "Fastest victory", true }, { "lvl", "Highest level" },
 	                 { "dps", "Highest DPS" }, { "kills", "Most kills in a run" }, { "dmg", "Most damage in a run" }, { "gold", "Most gold in a run" },
-	                 { "bosses", "Most bosses in a run" }, { "elites", "Most elites in a run" }, { "guardians", "Most guardians in a run" } };
+	                 { "bosses", "Most bosses in a run" }, { "elites", "Most elites in a run" }, { "guardians", "Most guardians in a run" },
+	                 { "legendary", "Most legendaries in a run" }, { "saves", "Most level-up saves in a run" } };
 	local any = false;
 	for i = 1, table.getn(order) do
 		local r = best[order[i][1]];
@@ -239,6 +240,25 @@ local function Records()
 		end
 	end
 	if ( not any ) then Note(out, "No records yet."); end
+	-- totals: legendaries collected and level-ups that saved you (health at 15% or less)
+	Tiles(out, { { Big(b.legendary), "Legendaries collected" }, { Big(b.saves), "Level-up saves" } });
+	-- every zone's highest DPS: overall, alone and in co-op
+	if ( not classKey ) then
+		local zones = Sorted(DB().zones or {}, function(v) return type(v.best) == "table" and type(v.best.dps) == "table" and Num(v.best.dps.v) or 0; end);
+		local shownZ = false;
+		for i = 1, table.getn(zones) do
+			local z = zones[i].v;
+			local zb = type(z.best) == "table" and z.best or {};
+			if ( type(zb.dps) == "table" ) then
+				if ( not shownZ ) then Head(out, "Highest DPS by zone"); shownZ = true; end
+				local solo = type(zb.dpsSolo) == "table" and Big(zb.dpsSolo.v) or "-";
+				local coop = type(zb.dpsCoop) == "table" and Big(zb.dpsCoop.v) or "-";
+				Row(out, { icon = I("INV_Misc_Map_01"), name = (z.name ~= "" and z.name or zones[i].key), hex = "ffd100",
+				           sub = "Solo " .. solo .. " · Co-op " .. coop, value = Big(zb.dps.v) .. " DPS", vhex = "ff8000",
+				           vsub = (zb.dps.cname or "") });
+			end
+		end
+	end
 	-- the builds behind your best runs: highest DPS first
 	local builds = {};
 	for i = 1, table.getn(DB().builds or {}) do
@@ -345,6 +365,16 @@ local function Coop()
 		           bar = Num(e.runs) / math.max(1, most), bhex = ClassHex(e.class) });
 	end
 	if ( table.getn(list) == 0 ) then Note(out, "No co-op runs recorded yet. Play a run with friends and they show up here."); end
+	-- going down in co-op: how often, and to what
+	Head(out, "Deaths in co-op: " .. Big(co.deaths));
+	local by = Sorted(co.deathsBy or {}, function(v) return Num(v.kills); end);
+	for i = 1, math.min(10, table.getn(by)) do
+		local e = by[i].v;
+		Row(out, { icon = I("Ability_Creature_Cursed_02"), name = by[i].key, hex = "ff4040",
+		           sub = ((e.spell or "") ~= "" and ("with " .. e.spell .. " · ") or "") .. "last " .. string.sub(e.last or "", 1, 10),
+		           value = Big(e.kills), vsub = "times" });
+	end
+	if ( table.getn(by) == 0 ) then Note(out, "No co-op deaths yet."); end
 	return out;
 end
 

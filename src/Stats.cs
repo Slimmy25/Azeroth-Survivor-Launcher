@@ -281,6 +281,21 @@ namespace AzerothLauncher
         public string LastDate = "";
     }
 
+    // one class's hero as AZS Stats last saw it on the character pane: the gear worn and the numbers
+    public class ArmoryChar
+    {
+        public string ClassKey = "", Class = "", Hero = "", Race = "", Date = "";
+        public double Level;
+        public readonly List<ArmoryItem> Gear = new List<ArmoryItem>();
+        public readonly Dictionary<string, double> Numbers = new Dictionary<string, double>();
+    }
+
+    public class ArmoryItem
+    {
+        public string Slot = "", Name = "", Color = "ffffff", Icon = "";
+        public double Id;
+    }
+
     // one personal best
     public class StatRecord
     {
@@ -300,7 +315,7 @@ namespace AzerothLauncher
     {
         public string Key = "", Name = "";
         public double Runs, Victories, Defeats, Left, Time, Kills, Elites, Guardians, Bosses, Damage, Taken, Gold, Chests,
-                      Magnets, Levels, BestTime, BestLevel;
+                      Magnets, Levels, BestTime, BestLevel, Legendary, Saves;   // legendaries collected, level-up saves
         public readonly Dictionary<string, StatRecord> Best = new Dictionary<string, StatRecord>();
         public readonly List<AbilityStat> Abilities = new List<AbilityStat>();     // the most picked first
         public readonly List<NemesisStat> Nemesis = new List<NemesisStat>();       // the most kills first
@@ -330,7 +345,8 @@ namespace AzerothLauncher
     // co-op runs: totals, records together and the friends (most runs first)
     public class CoopStat
     {
-        public double Runs, Wins, Time, Kills, Bosses, Solo, SoloWins;
+        public double Runs, Wins, Time, Kills, Bosses, Solo, SoloWins, Deaths;     // Deaths: times you went down
+        public readonly List<NemesisStat> DeathsBy = new List<NemesisStat>();      // what put you down, the most first
         public readonly Dictionary<string, StatRecord> Best = new Dictionary<string, StatRecord>();
         public readonly List<FriendStat> Friends = new List<FriendStat>();
     }
@@ -369,6 +385,7 @@ namespace AzerothLauncher
         public readonly Dictionary<string, double> BossKills = new Dictionary<string, double>(StringComparer.OrdinalIgnoreCase);   // bosses you beat
         // the game's own tooltips of abilities, as AZS Stats saw them in game: spell name -> its text
         public readonly Dictionary<string, string> Tooltips = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+        public readonly List<ArmoryChar> Armory = new List<ArmoryChar>();         // each class's hero, the newest first
 
         public StatBlock Class(string key)
         {
@@ -509,6 +526,38 @@ namespace AzerothLauncher
                     if (tipText.Length > 0) st.Tooltips[kv.Key] = tipText;
                 }
 
+            // the armory: each class's hero, gear and numbers
+            var arm = LuaReader.Tab(db, "armory");
+            if (arm != null)
+                foreach (var kv in arm)
+                {
+                    var a = kv.Value as Dictionary<string, object>;
+                    if (a == null) continue;
+                    var ac = new ArmoryChar();
+                    ac.ClassKey = kv.Key;
+                    ac.Class = LuaReader.Text(a, "cname");
+                    if (ac.Class.Length == 0) ac.Class = Pretty(kv.Key);
+                    ac.Hero = LuaReader.Text(a, "hero");
+                    ac.Race = LuaReader.Text(a, "race");
+                    ac.Date = LuaReader.Text(a, "date");
+                    ac.Level = LuaReader.Num(a, "level");
+                    foreach (var g in LuaReader.List(LuaReader.Tab(a, "gear")))
+                    {
+                        var it = new ArmoryItem();
+                        it.Slot = LuaReader.Text(g, "slot");
+                        it.Name = LuaReader.Text(g, "name");
+                        it.Color = LuaReader.Text(g, "color");
+                        if (it.Color.Length != 6) it.Color = "ffffff";
+                        it.Icon = LuaReader.Text(g, "icon");
+                        it.Id = LuaReader.Num(g, "id");
+                        ac.Gear.Add(it);
+                    }
+                    var nums = LuaReader.Tab(a, "stats");
+                    if (nums != null) foreach (var n in nums) ac.Numbers[n.Key] = LuaReader.Num(nums, n.Key);
+                    st.Armory.Add(ac);
+                }
+            st.Armory.Sort(delegate(ArmoryChar x, ArmoryChar y) { return string.CompareOrdinal(y.Date, x.Date); });
+
             // the same creature faces for the addon's own Nemesis tab (in the background)
             try
             {
@@ -529,6 +578,8 @@ namespace AzerothLauncher
             st.Coop.Bosses = LuaReader.Num(co, "bosses");
             st.Coop.Solo = LuaReader.Num(co, "solo");
             st.Coop.SoloWins = LuaReader.Num(co, "soloWins");
+            st.Coop.Deaths = LuaReader.Num(co, "deaths");
+            Nemeses(LuaReader.Tab(co, "deathsBy"), st.Coop.DeathsBy);
             Bests(LuaReader.Tab(co, "best"), st.Coop.Best);
             var bestTab = LuaReader.Tab(co, "best");
             if (bestTab != null)
@@ -585,6 +636,8 @@ namespace AzerothLauncher
             b.Levels = LuaReader.Num(t, "levels");
             b.BestTime = LuaReader.Num(t, "bestTime");
             b.BestLevel = LuaReader.Num(t, "bestLvl");
+            b.Legendary = LuaReader.Num(t, "legendary");
+            b.Saves = LuaReader.Num(t, "saves");
             return b;
         }
 

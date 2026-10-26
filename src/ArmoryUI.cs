@@ -420,6 +420,7 @@ namespace AzerothLauncher
         public Color IconColor = Theme.Gold, NameColor = Armory.Bright, SubColor = Armory.Green, ValueColor = Armory.Bright;
         public bool RoundIcon;
         public string Spell, ClassPic, Npc, RacePic, ZonePic;   // a picture from Wowhead instead of the badge (SpellIcons)
+        public string IconName;                              // an icon by its own name (an item's), from Wowhead
         public bool Help;                                    // Click opens the guide about it: a small "?" on the icon
         public double Bar = -1;                              // 0..1 draws a thin bar under the line
         public Action Click;
@@ -469,7 +470,8 @@ namespace AzerothLauncher
                 if (g.VisibleClipBounds.IntersectsWith(icon))
                     pic = row.Spell != null ? SpellIcons.Spell(row.Spell, this) : row.ClassPic != null ? SpellIcons.Class(row.ClassPic, this)
                         : row.Npc != null ? SpellIcons.Npc(row.Npc, this) : row.RacePic != null ? SpellIcons.Race(row.RacePic, this)
-                        : row.ZonePic != null ? SpellIcons.Zone(row.ZonePic, this) : null;
+                        : row.ZonePic != null ? SpellIcons.Zone(row.ZonePic, this)
+                        : !string.IsNullOrEmpty(row.IconName) ? SpellIcons.Icon(row.IconName, this) : null;
                 if (pic != null) Armory.Picture(g, icon, pic, false, row.RoundIcon, row.IconColor);   // creatures come cut to the face
                 else Armory.Icon(g, icon, row.IconColor, row.Icon, row.RoundIcon);
                 if (row.Help && row.Click != null)

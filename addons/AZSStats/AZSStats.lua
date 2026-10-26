@@ -27,15 +27,17 @@ AZSSTATS_HISTORY = 100;               -- runs kept in the history (the totals ke
 AZSSTATS_RUN_ABILITIES = 12;          -- abilities kept per run in the history
 
 -- the numbers added up for every run (globally and per class); "time" comes from the run's t
-local SUM_FIELDS = { "time", "kills", "elites", "guardians", "bosses", "dmg", "taken", "gold", "chests", "magnets", "levels" };
+local SUM_FIELDS = { "time", "kills", "elites", "guardians", "bosses", "dmg", "taken", "gold", "chests", "magnets", "levels",
+                     "legendary", "saves" };
 local COUNT_FIELDS = { "runs", "victory", "defeat", "left", "other", "wins", "bestTime", "bestLvl" };
 -- personal bests: the record's name and the run field it comes from
 local BEST_FIELDS = { { "time", "t" }, { "lvl", "lvl" }, { "kills", "kills" }, { "dmg", "dmg" }, { "gold", "gold" },
                       { "bosses", "bosses" }, { "elites", "elites" }, { "guardians", "guardians" }, { "endl", "endl" },
-                      { "dps", "dps" } };
+                      { "dps", "dps" }, { "legendary", "legendary" }, { "saves", "saves" } };
 -- how a record is named in chat
 local RECORD_NAMES = { time = "longest run", lvl = "level", kills = "kills", dmg = "damage", gold = "gold", bosses = "bosses",
-                       elites = "elites", guardians = "guardians", endl = "endless", dps = "DPS" };
+                       elites = "elites", guardians = "guardians", endl = "endless", dps = "DPS",
+                       legendary = "legendaries in a run", saves = "level-up saves in a run" };
 
 local function Print(msg)
 	if ( DEFAULT_CHAT_FRAME ) then
@@ -127,7 +129,8 @@ local function Fresh()
 	         totals = FillBlock({}), best = {}, classes = {}, races = {}, zones = {}, abilities = {}, months = {},
 	         results = {}, history = {}, deaths = {}, nemesis = {}, builds = {}, bossKills = {},
 	         play = { seconds = 0, sessions = 0, longest = 0, last = 0, lastDate = "", seen = 0 },
-	         coop = { runs = 0, wins = 0, time = 0, kills = 0, bosses = 0, solo = 0, soloWins = 0, best = {}, friends = {} } };
+	         coop = { runs = 0, wins = 0, time = 0, kills = 0, bosses = 0, solo = 0, soloWins = 0, best = {}, friends = {},
+	                  deaths = 0, deathsBy = {}, deathLog = {} } };
 end
 
 local function Month(when)
@@ -548,6 +551,19 @@ function AZSStats_Record(s)
 	if ( run.rname == "" ) then run.rname = Pretty(run.race); end
 	if ( run.zname == "" ) then run.zname = Pretty(run.zone); end
 	run.abilities = Abilities();
+	-- from the live side (AZSStatsLive.lua): legendaries picked up, level-ups that saved you, time spent down in co-op
+	local deadT = 0;
+	if ( AZSStats_LiveCounts ) then
+		local ok, lc = pcall(AZSStats_LiveCounts, run);
+		if ( ok and type(lc) == "table" ) then
+			run.legendary = Num(lc.legendary);
+			run.saves = Num(lc.saves);
+			deadT = Num(lc.dead);
+			if ( Num(lc.coopDeaths) > 0 ) then run.coopDeaths = Num(lc.coopDeaths); end
+		end
+	end
+	run.legendary = Num(run.legendary);
+	run.saves = Num(run.saves);
 	-- damage per second, as the game's damage meter shows it: the sum of its lines' DPS (the meter's damage over
 	-- the run's time when the meter gives no DPS)
 	local dps = 0;
@@ -555,7 +571,10 @@ function AZSStats_Record(s)
 		for i = 1, table.getn(lastMeter) do dps = dps + Num(lastMeter[i].dps); end
 	end
 	if ( dps <= 0 and run.t > 0 ) then dps = run.dmg / run.t; end
+	-- in co-op the time you spent down does not count: the damage over the time you were up
+	if ( deadT > 0 and run.dmg > 0 and run.t - deadT > 5 ) then dps = math.max(dps, run.dmg / (run.t - deadT)); end
 	run.dps = math.floor(dps + 0.5);
+	local party = PartyOf(run);
 
 	-- everything together
 	Accumulate(db.totals, run);
@@ -582,7 +601,19 @@ function AZSStats_Record(s)
 	AddBuild(db, run, records, classRecords);
 	AddAbilities(class.abilities, run);
 	Accumulate(Group(db.races, run.race, run.rname), run);
-	Accumulate(Group(db.zones, run.zone, run.zname), run);
+	-- the zone: its totals, and its highest DPS (overall, alone and in co-op)
+	local zone = Group(db.zones, run.zone, run.zname);
+	Accumulate(zone, run);
+	if ( run.dps > 0 ) then
+		local function ZoneBest(key)
+			local old = zone.best[key];
+			if ( type(old) ~= "table" or run.dps > Num(old.v) ) then
+				zone.best[key] = { v = run.dps, hero = run.hero, cname = run.cname, rname = run.rname, zname = run.zname, date = run.date };
+			end
+		end
+		ZoneBest("dps");
+		ZoneBest(table.getn(party) > 0 and "dpsCoop" or "dpsSolo");
+	end
 
 	-- a death: who did it, how, and the hits before it
 	if ( run.kind == "defeat" ) then
@@ -630,7 +661,6 @@ function AZSStats_Record(s)
 	lastTaken = nil;
 
 	-- co-op: the friends in this run
-	local party = PartyOf(run);
 	local co = db.coop;
 	local coopNews = {};
 	if ( table.getn(party) > 0 ) then
@@ -967,6 +997,42 @@ local function CheckPending()
 	if ( stillFor >= (InParty() and 12 or 4) ) then AZSStats_Finalize(); end
 end
 
+-- ---------------------------------------------------------------- deaths in co-op
+-- In co-op a hero who goes down is not out (friends can bring them back), so each time you go down counts as a
+-- co-op death, with what did it (the last hit you took): AZSStatsDB.coop.deaths, deathsBy and deathLog.
+local wasDown = false;
+
+local function CoopDown()
+	local down = false;
+	if ( InParty() ) then
+		if ( type(AZS_REVIVE) == "table" and Num(AZS_REVIVE.down) == 1 ) then down = true; end
+		if ( UnitIsDeadOrGhost and UnitIsDeadOrGhost("player") ) then down = true; end
+	end
+	if ( down and not wasDown ) then
+		Check();
+		local co = AZSStatsDB.coop;
+		local now = GetTime();
+		local k = nil;
+		for i = table.getn(hits), 1, -1 do
+			if ( now - hits[i].at < 20 ) then k = hits[i]; break; end
+		end
+		local killer = k and k.src or "Unknown";
+		co.deaths = Num(co.deaths) + 1;
+		local e = co.deathsBy[killer];
+		if ( type(e) ~= "table" ) then e = { kills = 0, dmg = 0, last = "", spell = "" }; co.deathsBy[killer] = e; end
+		e.kills = Num(e.kills) + 1;
+		e.dmg = Num(e.dmg) + (k and Num(k.amt) or 0);
+		e.last = Now();
+		if ( k and Str(k.spell) ~= "" ) then e.spell = k.spell; end
+		local zname = type(AZS_ZONE) == "table" and Str(AZS_ZONE.name) or "";
+		table.insert(co.deathLog, { date = Now(), killer = killer, spell = k and Str(k.spell) or "", amt = k and Num(k.amt) or 0,
+		                            t = AZS_GetRunTime and Num(AZS_GetRunTime()) or 0, zname = zname });
+		while ( table.getn(co.deathLog) > AZSSTATS_DEATHS ) do table.remove(co.deathLog, 1); end
+		if ( AZSStats_LiveCoopDown ) then pcall(AZSStats_LiveCoopDown); end
+	end
+	wasDown = down;
+end
+
 -- the run's end arrives as an addon message; AZS_GetRunSummary() is checked too, now and then, in case
 -- the message came before this addon was listening (each run is counted once either way)
 local frame = CreateFrame("Frame", "AZSStatsEventFrame");
@@ -1044,6 +1110,7 @@ frame:SetScript("OnUpdate", function()
 	-- time; recording an already counted summary again does nothing
 	Snapshot();
 	SeeBosses();
+	pcall(CoopDown);
 	if ( AZS_GetRunSummary ) then
 		local s = AZS_GetRunSummary();
 		if ( s ) then
@@ -1056,8 +1123,24 @@ end);
 -- for the window (AZSStatsUI.lua)
 AZSStats = { Check = Check, Big = Big, Clock = Clock, Pretty = Pretty, Kind = Kind, Print = Print };
 
--- the current run's DPS on the game's damage meter (the live tracker in AZSStatsUI.lua reads it)
+-- the current run's DPS on the game's damage meter (the live tracker in AZSStatsUI.lua reads it). In co-op the
+-- time you are down does not count: the counter stops while you are down and goes on when you are back.
+local frozenDps = 0;
 function AZSStats_CurrentDPS()
+	local dead, downNow = 0, false;
+	if ( AZSStats_LiveDead ) then dead, downNow = AZSStats_LiveDead(); end
+	if ( downNow ) then return frozenDps; end
+	local d = AZSStats_GameDPS();
+	if ( Num(dead) > 0 and AZS_GetRunTime and type(AZS_METER) == "table" ) then
+		local t, dmg = Num(AZS_GetRunTime()), 0;
+		for i = 1, table.getn(AZS_METER) do if ( type(AZS_METER[i]) == "table" ) then dmg = dmg + Num(AZS_METER[i].dmg); end end
+		if ( t - Num(dead) > 1 and dmg > 0 ) then d = dmg / (t - Num(dead)); end
+	end
+	frozenDps = d;
+	return d;
+end
+
+function AZSStats_GameDPS()
 	if ( type(AZS_METER) ~= "table" ) then return 0; end
 	local dps = 0;
 	for i = 1, table.getn(AZS_METER) do
