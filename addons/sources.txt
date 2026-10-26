@@ -4,15 +4,17 @@
 # "addons" release under that file name (replacing the old copy). It runs by itself when this file changes,
 # or by hand: Actions > Mirror addons > Run workflow (do that to pick up a new version of an addon).
 # "local:<folder>" instead of a link zips that folder of this repository (addons/<folder>) instead;
+# "hosted" means the zip lives on the "addons" release itself (uploaded there by hand: to update it, upload the new
+# zip under the same name on the release); the workflow only checks that it is there.
 # "github-latest:<owner>/<repo>" takes the .zip of that repository's newest release (its name can change).
 # "local:<folder>+<folder>" zips several folders into the one .zip (an addon that comes with a second one).
 # The launcher's Download More list (assets/addons.txt) points at:
 #   https://github.com/Slimmy25/Azeroth-Survivor-Launcher-Releases/releases/download/addons/<file name>
 
-DBM-by-Gabriellus.zip           | https://files.catbox.moe/2r4n2u.zip
-Death-Recap-by-Fotze.zip        | https://files.catbox.moe/329wa0.zip
+DBM-by-Gabriellus.zip           | hosted
+Death-Recap-by-Fotze.zip        | hosted
 Azerloot-by-KindaGray.zip       | github-latest:Kindagrey/Azerloot
-Chest-GPS-by-Fotze.zip          | https://files.catbox.moe/riqfmy.zip
+Chest-GPS-by-Fotze.zip          | hosted
 SurvivorsDragonUi-by-Mxgwyn.zip | https://github.com/migwynkriid13/SurvivorsDragonUi/releases/latest/download/SurvivorsDragonUi.zip
 Keijin-UI-by-Keijin.zip         | https://github.com/KeijinDE/KeijinUI_modern-as-ui/releases/download/v3.7.1/KeijinUI-3.7.1.zip
 AZS-Stats-by-Slimjim.zip        | local:AZSStats
