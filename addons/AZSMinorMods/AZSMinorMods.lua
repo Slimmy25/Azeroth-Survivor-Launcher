@@ -1,6 +1,8 @@
 -- AZS Minor Mods: small changes to the game's chat, in AZS Stats' look (AZSKit.lua).
---   * The level-up text is taken out of the chat ("Level up!", "You have reached level 12", ...). Lines are matched
---     without case; /azsmods hide <words> hides lines with those words too, /azsmods unhide <words> stops that.
+--   * The level-up lines are taken out of the chat: "You have reached level 12", the stat bonus that comes with it
+--     ("You have gained 3% damage, 12 maximum health ...") and the new spell ("You have learned a new spell: Cleave
+--     (Level 1)"), in every language the game has. Lines are matched without case; /azsmods hide <words> hides lines
+--     with those words too, /azsmods unhide <words> stops that. What players say is never hidden.
 --   * The camera goes as far out as the game allows, 50 yards (the Max Camera Distance setting at its top), and starts there. Turn it off in
 --     /azsmods to keep the game's own setting.
 --   * A second chat box above the game's own one collects what is said ("Say") and your party's messages, so you
@@ -23,6 +25,17 @@ local NAME = "AZS Minor Mods";
 -- and 0.5 health per second.", and the usual ways of saying it
 local LEVEL_WORDS = { "you have reached level", "you have gained", "level up", "leveled up", "levelled up", "reached level",
                       "gained a level", "you are now level", "level-up", "ding!" };
+
+-- the stat bonus a level-up gives, in each of the game's languages (a piece of the line that has no number in it), as
+-- the game itself writes "You have gained {damage}% damage, {health} maximum health and {regen} health per second."
+local STAT_WORDS = { "maximum health and", "maximale gesundheit und", "de salud máxima y", "de vida máxima e",
+                     "points de vie maximum et", "maksymalnego zdrowia i", "maximálního zdraví a", "до макс. здоров'я і",
+                     "к макс. здоровью и", "、最大体力+", "最大生命值和每秒", ", 최대 생명력 ", " azami can ve saniyede ",
+                     " viață maximă și " };
+-- the game's "New spell" in its languages
+local NEW_SPELL_WORDS = { "new spell", "neuer zauber", "hechizo nuevo", "novo feitiço", "nouveau sort", "nowe zaklęcie",
+                          "nové kouzlo", "vrajă nouă", "yeni büyü", "нове закляття", "новое заклинание", "新しい呪文",
+                          "新法术", "새 주문" };
 
 -- the game's LEVEL_UP text in the game's language: the part before the number
 local function LevelText()
@@ -75,17 +88,24 @@ local function LearnLine(low)
 end
 
 -- ---------------------------------------------------------------- the level-up text out of the chat
+local function Any(low, list)
+	for i = 1, table.getn(list) do
+		if ( string.find(low, list[i], 1, true) ) then return true; end
+	end
+	return false;
+end
+
 local function Hidden(msg)
 	if ( type(msg) ~= "string" ) then return false; end
+	if ( string.find(msg, "|Hplayer:", 1, true) ) then return false; end   -- a player's own words
 	local d = DB();
 	local low = string.lower(string.gsub(msg, "|c%x%x%x%x%x%x%x%x", ""));
-	if ( d.bloat and LearnLine(low) ) then return true; end
-	if ( d.hideLevel ) then
+	if ( d.hideLevel or d.bloat ) then
+		-- the level-up, its stat bonus and the new spell it taught
 		local own = LevelText();
 		if ( own and string.find(low, own, 1, true) ) then return true; end
-		for i = 1, table.getn(LEVEL_WORDS) do
-			if ( string.find(low, LEVEL_WORDS[i], 1, true) ) then return true; end
-		end
+		if ( Any(low, LEVEL_WORDS) or Any(low, STAT_WORDS) or Any(low, NEW_SPELL_WORDS) or LearnLine(low) ) then return true; end
+		if ( string.find(low, "%(level %d+%)") ) then return true; end
 	end
 	for i = 1, table.getn(d.words) do
 		if ( string.find(low, d.words[i], 1, true) ) then return true; end
@@ -115,7 +135,11 @@ local function HookChat()
 			local e = ev or event;
 			-- Remove bloat from chat: Say and Party only in the Say & Party box
 			if ( DB().bloat and DB().box and (e == "CHAT_MSG_SAY" or e == "CHAT_MSG_PARTY" or e == "CHAT_MSG_PARTY_LEADER") ) then return; end
-			if ( type(arg1) == "string" and e and string.find(e, "^CHAT_MSG_") and Hidden(arg1) ) then return; end
+			-- what players say, yell, whisper or write in a channel is theirs: only the game's own lines are hidden
+			local players = e == "CHAT_MSG_SAY" or e == "CHAT_MSG_YELL" or e == "CHAT_MSG_WHISPER" or e == "CHAT_MSG_PARTY" or
+			                e == "CHAT_MSG_PARTY_LEADER" or e == "CHAT_MSG_RAID" or e == "CHAT_MSG_GUILD" or e == "CHAT_MSG_CHANNEL" or
+			                e == "CHAT_MSG_EMOTE" or e == "CHAT_MSG_OFFICER" or e == "CHAT_MSG_RAID_LEADER";
+			if ( not players and type(arg1) == "string" and e and string.find(e, "^CHAT_MSG_") and Hidden(arg1) ) then return; end
 			return orig(ev);
 		end;
 	end
@@ -453,7 +477,7 @@ local function WinBuild()
 		Check(win, label, y, get, set);
 		y = y - 28;
 	end
-	Row("Take the level-up text out of the chat", function() return DB().hideLevel; end, function(v) DB().hideLevel = v; end);
+	Row("No level-up, stat bonus or new spell lines in chat", function() return DB().hideLevel; end, function(v) DB().hideLevel = v; end);
 	Row("Remove bloat from chat", function() return DB().bloat; end, function(v)
 		DB().bloat = v;
 		if ( v and not DB().box ) then DB().box = true; BoxBuild(); BoxPlace(); end   -- Say & Party go to the box
