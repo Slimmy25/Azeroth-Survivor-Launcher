@@ -48,20 +48,20 @@ namespace AzerothLauncher
             if (guideFocusSearch) { guideFocusSearch = false; search.Focus(); search.SelectionStart = search.TextLength; }
             guideSearch = search;
             // the topic tabs: their own widths, as many to a row as fit
-            int y = 12 + sh + 8, x = 20, rowH = (int)(26 * Theme.Zoom), gap = 4, right = PW - 20;
+            int y = 12 + sh + 6, x = 20, rowH = (int)(22 * Theme.Zoom), gap = 3, right = PW - 20;
             using (var g = CreateGraphics())
                 for (int i = 0; i < topics.Count; i++)
                 {
                     int n = i;
                     string label = topics[i].Title.ToUpperInvariant();
-                    int tw = (int)(g.MeasureString(Lang.T(label), Theme.F(8)).Width / Theme.Zoom) + 22;
-                    var b = new WowButton(label, delegate { guideQuery = ""; SetGuideView(n, -1); }, tw, 26, 8);
+                    int tw = (int)(g.MeasureString(Lang.T(label), Theme.F(7.5f)).Width / Theme.Zoom) + 12;
+                    var b = new WowButton(label, delegate { guideQuery = ""; SetGuideView(n, -1); }, tw, 22, 7.5f);
                     b.Selected = i == gTopic && guideQuery.Length == 0;
                     if (x + b.Width > right && x > 20) { x = 20; y += rowH + gap; }
                     Put(b, x, y);
                     x += b.Width + gap;
                 }
-            guideTabsBottom = y + rowH + 10;
+            guideTabsBottom = y + rowH + 8;
         }
 
         GuideSearchBox guideSearch;

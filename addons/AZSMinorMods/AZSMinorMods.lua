@@ -5,7 +5,11 @@
 --     /azsmods to keep the game's own setting.
 --   * A second chat box above the game's own one collects what is said ("Say") and your party's messages, so you
 --     can read them while you play. Drag its title to move it; the mouse wheel scrolls it.
--- /azsmods opens the settings window.
+--   * Remove bloat from chat: the "you have learned a new spell" lines are hidden, and Say and Party chat go only
+--     to the Say & Party box, not the main chat.
+--   * Boss markers: every boss alive gets a raid marker, the first a Skull, the second a Cross, the third a Moon.
+--   * In co-op, a friend who falls gets the Square over their head, blinking 5 times.
+-- /azsmods (or the gear by the minimap) opens the settings window: every one of these on or off.
 -- Lua 5.0 / 1.12 interface: scripts read `this`, `event`, `arg1`, `arg2`; no # operator; only the 1.12 API.
 
 local K = AZSKIT;
@@ -33,8 +37,36 @@ local function DB()
 	if ( d.hideLevel == nil ) then d.hideLevel = true; end
 	if ( d.box == nil ) then d.box = true; end
 	if ( d.camera == nil ) then d.camera = true; end
+	if ( d.bloat == nil ) then d.bloat = false; end
+	if ( d.bossMarks == nil ) then d.bossMarks = true; end
+	if ( d.deathMarks == nil ) then d.deathMarks = true; end
 	if ( type(d.words) ~= "table" ) then d.words = {}; end
 	return d;
+end
+
+-- the "you have learned a new spell" lines (Remove bloat from chat): the game's own texts in its language, the part
+-- before the spell's name, and the English ways of saying it
+local LEARN_WORDS = { "you have learned a new spell", "you have learned a new ability", "you have learned", "you learned",
+                      "you learn " };
+
+local function Prefix(text)
+	if ( type(text) ~= "string" ) then return nil; end
+	local s = string.find(text, "%", 1, true);
+	local head = s and string.sub(text, 1, s - 1) or text;
+	head = string.lower(string.gsub(head, "^%s+", ""));
+	if ( string.len(head) < 6 ) then return nil; end
+	return head;
+end
+
+local function LearnLine(low)
+	for _, g in ipairs({ "ERR_LEARN_SPELL_S", "ERR_LEARN_ABILITY_S", "ERR_LEARN_RECIPE_S" }) do
+		local own = Prefix(getglobal(g));
+		if ( own and string.find(low, own, 1, true) ) then return true; end
+	end
+	for i = 1, table.getn(LEARN_WORDS) do
+		if ( string.find(low, LEARN_WORDS[i], 1, true) ) then return true; end
+	end
+	return false;
 end
 
 -- ---------------------------------------------------------------- the level-up text out of the chat
@@ -42,6 +74,7 @@ local function Hidden(msg)
 	if ( type(msg) ~= "string" ) then return false; end
 	local d = DB();
 	local low = string.lower(string.gsub(msg, "|c%x%x%x%x%x%x%x%x", ""));
+	if ( d.bloat and LearnLine(low) ) then return true; end
 	if ( d.hideLevel ) then
 		local own = LevelText();
 		if ( own and string.find(low, own, 1, true) ) then return true; end
@@ -74,7 +107,10 @@ local function HookChat()
 		hooked.event = true;
 		local orig = ChatFrame_OnEvent;
 		ChatFrame_OnEvent = function(ev)
-			if ( type(arg1) == "string" and (ev or event) and string.find(ev or event, "^CHAT_MSG_") and Hidden(arg1) ) then return; end
+			local e = ev or event;
+			-- Remove bloat from chat: Say and Party only in the Say & Party box
+			if ( DB().bloat and DB().box and (e == "CHAT_MSG_SAY" or e == "CHAT_MSG_PARTY" or e == "CHAT_MSG_PARTY_LEADER") ) then return; end
+			if ( type(arg1) == "string" and e and string.find(e, "^CHAT_MSG_") and Hidden(arg1) ) then return; end
 			return orig(ev);
 		end;
 	end
@@ -170,6 +206,102 @@ local function BoxBuild()
 	BoxPlace();
 end
 
+-- ---------------------------------------------------------------- raid markers on bosses, and on friends who fall
+-- The game's raid markers (they work alone and in co-op): the bosses alive get a Skull, a Cross and a Moon, in the
+-- order they came (AZS_GetBosses). A marker needs the boss as a unit: the target, the mouseover, a friend's target,
+-- or, when none of those is it, a quick target-and-back by its name.
+local BOSS_ICONS = { 8, 7, 5 };                          -- Skull, Cross, Moon
+local SQUARE = 6;
+local marked = {};                                        -- boss id -> its marker
+local tries = {};                                         -- boss id -> target-and-back tries (at most 3)
+local fallen = {};                                        -- party unit -> was down at the last look
+local blinks = {};                                        -- party unit -> { left = times, at = next change, on = shown }
+
+local function Units()
+	local u = { "target", "mouseover", "targettarget" };
+	for i = 1, 4 do table.insert(u, "party" .. i .. "target"); end
+	return u;
+end
+
+local function Mark(unit, icon)
+	if ( not SetRaidTarget or not UnitExists(unit) ) then return false; end
+	if ( GetRaidTargetIndex and GetRaidTargetIndex(unit) == icon ) then return true; end
+	return pcall(SetRaidTarget, unit, icon);
+end
+
+local function MarkBoss(name, icon, id)
+	local list = Units();
+	for i = 1, table.getn(list) do
+		local u = list[i];
+		if ( UnitExists(u) and UnitName(u) == name and not UnitIsPlayer(u) and not UnitIsDead(u) ) then
+			return Mark(u, icon);
+		end
+	end
+	-- not one of them: target it by its name, mark it, and give back the target there was
+	if ( not TargetByName or (tries[id] or 0) >= 3 ) then return false; end
+	tries[id] = (tries[id] or 0) + 1;
+	local had = UnitExists("target") and UnitName("target") or nil;
+	if ( not pcall(TargetByName, name, true) ) then return false; end
+	local ok = false;
+	if ( UnitExists("target") and UnitName("target") == name ) then ok = Mark("target", icon); end
+	if ( had and had ~= name ) then
+		if ( TargetLastTarget ) then pcall(TargetLastTarget); end
+	elseif ( not had and ClearTarget ) then
+		pcall(ClearTarget);
+	end
+	return ok;
+end
+
+local function BossMarks()
+	if ( not DB().bossMarks or type(AZS_GetBosses) ~= "function" ) then return; end
+	local ok, bosses = pcall(AZS_GetBosses);
+	if ( not ok or type(bosses) ~= "table" ) then return; end
+	local alive = {};
+	for i = 1, table.getn(bosses) do
+		local b = bosses[i];
+		if ( b.id ) then alive[b.id] = true; end
+		if ( i <= table.getn(BOSS_ICONS) and b.id and b.name and marked[b.id] ~= BOSS_ICONS[i] ) then
+			if ( MarkBoss(b.name, BOSS_ICONS[i], b.id) ) then marked[b.id] = BOSS_ICONS[i]; end
+		end
+	end
+	for id in pairs(marked) do if ( not alive[id] ) then marked[id] = nil; end end
+	for id in pairs(tries) do if ( not alive[id] ) then tries[id] = nil; end end
+end
+
+-- a friend down in co-op: the Square over their head, on and off 5 times
+local function DeathMarks(now)
+	if ( not DB().deathMarks ) then return; end
+	for i = 1, 4 do
+		local u = "party" .. i;
+		local down = UnitExists(u) and (UnitIsDeadOrGhost and UnitIsDeadOrGhost(u) or UnitHealth(u) == 0) and true or false;
+		if ( down and not fallen[u] ) then blinks[u] = { left = 10, at = now, on = false }; end
+		fallen[u] = down;
+	end
+	for u, b in pairs(blinks) do
+		if ( now >= b.at ) then
+			b.on = not b.on;
+			if ( UnitExists(u) ) then pcall(SetRaidTarget, u, b.on and SQUARE or 0); end
+			b.left = b.left - 1;
+			b.at = now + 0.4;
+			if ( b.left <= 0 ) then
+				if ( UnitExists(u) ) then pcall(SetRaidTarget, u, 0); end
+				blinks[u] = nil;
+			end
+		end
+	end
+end
+
+local markFrame = CreateFrame("Frame");
+local nextBoss = 0;
+markFrame:SetScript("OnUpdate", function()
+	local now = GetTime();
+	pcall(DeathMarks, now);
+	if ( now >= nextBoss ) then
+		nextBoss = now + 0.75;
+		pcall(BossMarks);
+	end
+end);
+
 -- ---------------------------------------------------------------- the settings window
 local win;
 
@@ -197,19 +329,36 @@ local function Check(parent, label, y, get, set)
 end
 
 local function WinBuild()
-	win = K.Window("AZSMinorModsFrame", NAME, 380, 280);
-	local hero = K.Hero(win, 340);
+	win = K.Window("AZSMinorModsFrame", NAME, 420, 448);
+	local hero = K.Hero(win, 380);
 	hero:SetPoint("TOPLEFT", win, "TOPLEFT", 20, -30);
 	K.Icon(hero.icon, "INV_Misc_Gear_02");
 	hero.heading:SetText("Minor Mods");
-	hero.line:SetText("Small changes to the chat.");
-	Check(win, "Take the level-up text out of the chat", -104, function() return DB().hideLevel; end,
-	      function(v) DB().hideLevel = v; end);
-	Check(win, "Say & Party box above the chat", -132, function() return DB().box; end,
-	      function(v) DB().box = v; BoxBuild(); BoxPlace(); end);
-	Check(win, "Lock the box where it is", -160, function() return DB().lock; end, function(v) DB().lock = v; end);
-	Check(win, "Camera as far out as it goes (50)", -188, function() return DB().camera; end,
-	      function(v) DB().camera = v; Camera(v); end);
+	hero.line:SetText("Every change on its own: tick what you want.");
+	local y = -104;
+	local function Row(label, get, set)
+		Check(win, label, y, get, set);
+		y = y - 28;
+	end
+	Row("Take the level-up text out of the chat", function() return DB().hideLevel; end, function(v) DB().hideLevel = v; end);
+	Row("Remove bloat from chat", function() return DB().bloat; end, function(v)
+		DB().bloat = v;
+		if ( v and not DB().box ) then DB().box = true; BoxBuild(); BoxPlace(); end   -- Say & Party go to the box
+	end);
+	Row("Say & Party box above the chat", function() return DB().box; end,
+	    function(v) DB().box = v; BoxBuild(); BoxPlace(); end);
+	Row("Lock the box where it is", function() return DB().lock; end, function(v) DB().lock = v; end);
+	Row("Camera as far out as it goes (50)", function() return DB().camera; end,
+	    function(v) DB().camera = v; Camera(v); end);
+	Row("Mark bosses: Skull, Cross, Moon", function() return DB().bossMarks; end, function(v) DB().bossMarks = v; end);
+	Row("Blink a Square over a friend who falls", function() return DB().deathMarks; end, function(v) DB().deathMarks = v; end);
+	Row("Minimap button", function() local m = DB().minimap; return not (m and m.hide); end,
+	    function(v) if ( AZSMinorMods_Mini ) then local m = DB().minimap; if ( (m and m.hide and true or false) == v ) then AZSMinorMods_Mini.Toggle(); end end end);
+	local note = win:CreateFontString(nil, "OVERLAY", "GameFontDisableSmall");
+	note:SetPoint("TOPLEFT", win, "TOPLEFT", 30, y - 4);
+	note:SetWidth(360);
+	note:SetJustifyH("LEFT");
+	note:SetText("Remove bloat: no \"you have learned\" lines, and Say and Party only in the box.");
 	local clear = K.Button(win, "Clear the box", 120, function() BoxBuild(); box.msg:Clear(); end);
 	clear:SetPoint("BOTTOMLEFT", win, "BOTTOMLEFT", 24, 20);
 	local reset = K.Button(win, "Box back above the chat", 170, function()
@@ -243,6 +392,9 @@ SlashCmdList["AZSMINORMODS"] = function(msg)
 	elseif ( cmd == "unhide" and rest ~= "" ) then
 		for i = table.getn(d.words), 1, -1 do if ( d.words[i] == rest ) then table.remove(d.words, i); end end
 		K.Print(NAME, "chat lines with \"" .. rest .. "\" are shown again.");
+	elseif ( cmd == "minimap" ) then
+		local shown = AZSMinorMods_Mini and AZSMinorMods_Mini.Toggle();
+		K.Print(NAME, shown and "the minimap button is back." or "the minimap button is hidden. /azsmods minimap brings it back.");
 	elseif ( cmd == "box" ) then
 		d.box = not d.box;
 		BoxBuild();
@@ -265,3 +417,17 @@ loader:SetScript("OnEvent", function()
 	end
 end);
 pcall(HookChat);                                          -- right away too, so lines printed while loading are caught
+
+-- the minimap button: a gear, at the left of the minimap (AZS Stats' is at the bottom, AZS Handbook's at the top
+-- left, AZS Transparency's at the right)
+local okMini, errMini = pcall(function()
+	AZSMinorMods_Mini = K.Minimap({ name = "AZSMinorModsMinimapButton", icon = "INV_Misc_Gear_02", angle = 190, db = DB,
+		click = function() AZSMinorMods_Toggle(); end,
+		tooltip = function(tt)
+			tt:AddLine(NAME);
+			tt:AddLine("Small changes, each on or off.", 1, 1, 1);
+			tt:AddLine(" ");
+			tt:AddLine("Click: the settings. /azsmods minimap hides this button.", 0.6, 0.6, 0.6);
+		end });
+end);
+if ( not okMini ) then K.Print(NAME, "|cffff4040the minimap button could not be made:|r " .. tostring(errMini)); end
