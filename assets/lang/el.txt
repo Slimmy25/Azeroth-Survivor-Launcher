@@ -1612,3 +1612,5 @@ Talents further down need this point.
 = Ταλέντα πιο κάτω χρειάζονται αυτόν τον πόντο.
 Click a talent to add a point, right-click to take one back. As in the game, each row opens once its own tree has 5 points for every row above it; a build takes no more than 51 points. The purple ones are the milestones at 10, 20 and 30 points.
 = Κλικ σε ταλέντο προσθέτει πόντο, δεξί κλικ τον αφαιρεί. Όπως στο παιχνίδι, κάθε σειρά ανοίγει όταν το δέντρο της έχει 5 πόντους για κάθε σειρά από πάνω· ένα build παίρνει έως 51 πόντους. Τα μωβ είναι τα ορόσημα στους 10, 20 και 30 πόντους.
+Watched!
+= Το είδατε!

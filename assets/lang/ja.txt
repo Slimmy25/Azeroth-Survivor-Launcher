@@ -1612,3 +1612,5 @@ Talents further down need this point.
 = 下の段のタレントにこのポイントが必要です。
 Click a talent to add a point, right-click to take one back. As in the game, each row opens once its own tree has 5 points for every row above it; a build takes no more than 51 points. The purple ones are the milestones at 10, 20 and 30 points.
 = タレントをクリックでポイント追加、右クリックで戻します。ゲームと同じく、各段はそのツリーで上の段1つにつき5ポイント入れると開きます。ビルドは最大51ポイントです。紫は10・20・30ポイントのマイルストーンです。
+Watched!
+= 視聴済み！

@@ -1612,3 +1612,5 @@ Talents further down need this point.
 = Các thiên phú phía dưới cần điểm này.
 Click a talent to add a point, right-click to take one back. As in the game, each row opens once its own tree has 5 points for every row above it; a build takes no more than 51 points. The purple ones are the milestones at 10, 20 and 30 points.
 = Nhấp vào thiên phú để thêm điểm, nhấp chuột phải để lấy lại. Như trong game, mỗi hàng mở khi cây của nó có 5 điểm cho mỗi hàng phía trên; build dùng tối đa 51 điểm. Màu tím là các mốc 10, 20 và 30 điểm.
+Watched!
+= Đã xem!

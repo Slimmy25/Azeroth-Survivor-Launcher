@@ -1611,3 +1611,5 @@ Talents further down need this point.
 = Talenten verder omlaag hebben dit punt nodig.
 Click a talent to add a point, right-click to take one back. As in the game, each row opens once its own tree has 5 points for every row above it; a build takes no more than 51 points. The purple ones are the milestones at 10, 20 and 30 points.
 = Klik op een talent voor een punt, rechtsklik om het terug te nemen. Zoals in het spel opent elke rij zodra haar eigen boom 5 punten heeft voor elke rij erboven; een build neemt hoogstens 51 punten. De paarse zijn de mijlpalen bij 10, 20 en 30 punten.
+Watched!
+= Bekeken!

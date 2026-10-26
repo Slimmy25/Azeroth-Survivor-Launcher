@@ -1611,3 +1611,5 @@ Talents further down need this point.
 = Talenter længere nede har brug for dette point.
 Click a talent to add a point, right-click to take one back. As in the game, each row opens once its own tree has 5 points for every row above it; a build takes no more than 51 points. The purple ones are the milestones at 10, 20 and 30 points.
 = Klik på et talent for at give et point, højreklik for at tage det tilbage. Som i spillet åbner hver række, når dens eget træ har 5 point for hver række ovenover; et build tager højst 51 point. De lilla er milepælene ved 10, 20 og 30 point.
+Watched!
+= Set!
