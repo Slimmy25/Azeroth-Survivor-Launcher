@@ -14,20 +14,30 @@
 -- card or anywhere else), its text is written down in AZSStatsDB.tooltips under the spell's name, so the launcher's
 -- New Player Guide can show what the game itself says the spell does.
 --
+-- Menus: while you pick a level-up card or an item (in co-op the fight goes on around you, and the game keeps you
+-- safe with Divine Shield), kills are not counted for "most kills in 1 / 5 seconds".
+--
+-- Level-up saves: a level-up while your health was at 15% or less (it heals you) counts as a save.
+-- Legendaries: every legendary item you collect (a legendary amulet or piece of gear: its name in orange, or the
+-- word "legendary" in its notice), and the most in one run.
+-- Co-op: the time you are down is kept, so the DPS counter stops while you are down (AZSStats_CurrentDPS).
+--
 -- Lua 5.0 / 1.12: event handlers read event and arg1; no # operator.
 
 local function Num(v) v = tonumber(v); return v or 0; end
 
-local HIGHS = { "crit", "hit", "heal", "burst1", "burst5" };
+local HIGHS = { "crit", "hit", "heal", "burst1", "burst5", "legendary", "saves" };
 local HIGH_NAMES = { crit = "highest crit", hit = "highest normal hit", heal = "highest heal",
-                     burst1 = "most kills in 1 second", burst5 = "most kills in 5 seconds" };
+                     burst1 = "most kills in 1 second", burst5 = "most kills in 5 seconds",
+                     legendary = "most legendaries in a run", saves = "most level-up saves in a run" };
 
 -- the run going on
 local cur, prev;
 local lastT = 0;
 
 local function NewRun()
-	return { t = 0, dmg = 0, kills = 0, marks = { dmg = {}, kills = {} }, hi = {}, announced = {}, deaths = {} };
+	return { t = 0, dmg = 0, kills = 0, marks = { dmg = {}, kills = {} }, hi = {}, announced = {}, deaths = {},
+	         legendary = 0, legSeen = {}, saves = 0, dead = 0, coopDeaths = 0 };
 end
 cur = NewRun();
 
@@ -99,8 +109,36 @@ local function OnCombat(msg)
 	end
 end
 
+-- ---- in a menu (a level-up card or an item to pick): the phase says so, or Divine Shield is on you
+local menuUntil = 0;
+local function InMenu()
+	if ( AZS_GetPhase ) then
+		local ok, ph = pcall(AZS_GetPhase);
+		if ( ok and (ph == "choosing" or ph == "paused") ) then return true; end
+	end
+	if ( UnitBuff ) then
+		for i = 1, 32 do
+			local tex = UnitBuff("player", i);
+			if ( not tex ) then break; end
+			if ( string.find(string.lower(tex), "divineintervention", 1, true) ) then return true; end   -- Divine Shield's icon
+		end
+	end
+	if ( type(AZS_BUFFS) == "table" ) then
+		for i = 1, table.getn(AZS_BUFFS) do
+			local b = AZS_BUFFS[i];
+			if ( type(b) == "table" and string.find(string.lower(tostring(b.spell or "")), "divine shield", 1, true) ) then return true; end
+		end
+	end
+	return false;
+end
+
 local function OnDeath(msg)
 	if ( type(msg) ~= "string" or Num(lastT) <= 0 ) then return; end
+	if ( InMenu() or GetTime() < menuUntil ) then         -- picking a card: the kills around you are not yours to burst
+		menuUntil = math.max(menuUntil, GetTime() + 1);
+		cur.deaths = {};
+		return;
+	end
 	if ( not string.find(msg, " dies%.$") and not string.find(msg, "^You have slain ") ) then return; end
 	local now = GetTime();
 	cur.kills = cur.kills + 1;
@@ -110,6 +148,73 @@ local function OnDeath(msg)
 	for i = 1, table.getn(cur.deaths) do if ( now - cur.deaths[i] <= 1 ) then in1 = in1 + 1; end end
 	if ( in1 > 1 ) then Raise("burst1", in1); end
 	if ( table.getn(cur.deaths) > 1 ) then Raise("burst5", table.getn(cur.deaths)); end
+end
+
+-- ---- legendaries collected: an orange (legendary) item name, or "legendary" in the notice
+local function Legendary(text, name)
+	if ( Num(lastT) <= 0 or type(text) ~= "string" ) then return; end
+	local low = string.lower(text);
+	if ( not string.find(low, "ff8000", 1, true) and not string.find(low, "legendary", 1, true) ) then return; end
+	local key = name;
+	if ( not key or key == "" ) then
+		local _, _, n = string.find(text, "%[(.-)%]");
+		key = n or text;
+	end
+	if ( cur.legSeen[key] ) then return; end
+	cur.legSeen[key] = true;
+	cur.legendary = cur.legendary + 1;
+	Raise("legendary", cur.legendary);
+end
+
+if ( AZS_RegisterBannerHandler ) then
+	pcall(AZS_RegisterBannerHandler, function(b)
+		if ( type(b) == "table" ) then Legendary(tostring(b.text or "") .. " " .. tostring(b.name or ""), b.name); end
+	end);
+end
+
+-- ---- level-up saves: your lowest health in the last moment before a level-up
+local lowHp, lowAt, lastLevel = 1, 0, nil;
+local function WatchHealth()
+	if ( not UnitHealth or not UnitHealthMax ) then return; end
+	local m = UnitHealthMax("player");
+	if ( not m or m <= 0 ) then return; end
+	local r = UnitHealth("player") / m;
+	local now = GetTime();
+	if ( r < lowHp or now - lowAt > 1.5 ) then lowHp, lowAt = r, now; end
+end
+
+local function LevelUp()
+	if ( Num(lastT) <= 0 ) then return; end
+	if ( lowHp > 0 and lowHp <= 0.15 and GetTime() - lowAt <= 1.5 ) then
+		cur.saves = cur.saves + 1;
+		Raise("saves", cur.saves);
+		lowHp = 1;
+	end
+end
+
+-- ---- co-op: the time you are down (the DPS counter stops), and each time you go down
+local downNow, downSince = false, 0;
+local function DownNow()
+	local inParty = type(AZS_PARTY) == "table" and table.getn(AZS_PARTY) > 0;
+	if ( not inParty ) then return false; end
+	if ( type(AZS_REVIVE) == "table" and Num(AZS_REVIVE.down) == 1 ) then return true; end
+	return UnitIsDeadOrGhost and UnitIsDeadOrGhost("player") and true or false;
+end
+
+function AZSStats_LiveCoopDown()
+	cur.coopDeaths = cur.coopDeaths + 1;
+end
+
+-- what AZSStats_Record keeps of this run: legendaries, level-up saves, the time down and co-op deaths
+function AZSStats_LiveCounts(run)
+	local r = cur;
+	if ( prev and run and math.abs(Num(prev.t) - Num(run.t)) < math.abs(Num(cur.t) - Num(run.t)) ) then r = prev; end
+	return { legendary = r.legendary, saves = r.saves, dead = r.dead, coopDeaths = r.coopDeaths };
+end
+
+-- for the DPS counter: the seconds spent down in co-op this run, and whether you are down now
+function AZSStats_LiveDead()
+	return cur.dead, downNow;
 end
 
 -- ---- the minute marks, and a new run
@@ -137,11 +242,29 @@ for _, e in ipairs({ "CHAT_MSG_SPELL_SELF_DAMAGE", "CHAT_MSG_COMBAT_SELF_HITS", 
 	pcall(ev.RegisterEvent, ev, e);
 end
 ev:SetScript("OnEvent", function()
-	if ( event == "CHAT_MSG_COMBAT_HOSTILE_DEATH" ) then OnDeath(arg1); else OnCombat(arg1); end
+	if ( event == "CHAT_MSG_COMBAT_HOSTILE_DEATH" ) then OnDeath(arg1);
+	elseif ( event == "PLAYER_LEVEL_UP" ) then LevelUp();
+	elseif ( event == "CHAT_MSG_LOOT" or event == "CHAT_MSG_SYSTEM" ) then Legendary(arg1);
+	else OnCombat(arg1); end
 end);
-local acc = 0;
+for _, e in ipairs({ "PLAYER_LEVEL_UP", "CHAT_MSG_LOOT", "CHAT_MSG_SYSTEM" }) do pcall(ev.RegisterEvent, ev, e); end
+local acc, fast = 0, 0;
 ev:SetScript("OnUpdate", function()
-	acc = acc + (arg1 or 0);
+	local dt = arg1 or 0;
+	fast = fast + dt;
+	if ( fast >= 0.1 ) then
+		fast = 0;
+		pcall(WatchHealth);
+		-- a level-up the event did not tell about: the level went up
+		local lv = UnitLevel and UnitLevel("player") or nil;
+		if ( lv and lastLevel and lv > lastLevel ) then pcall(LevelUp); end
+		lastLevel = lv;
+		if ( InMenu() ) then menuUntil = GetTime() + 1; end
+	end
+	local d = DownNow();
+	if ( d and Num(lastT) > 0 ) then cur.dead = cur.dead + dt; end
+	downNow = d;
+	acc = acc + dt;
 	if ( acc < 1 ) then return; end
 	acc = 0;
 	Tick();
@@ -285,4 +408,59 @@ tipFrame:SetScript("OnUpdate", function()
 	if ( tipAcc < 0.25 ) then return; end
 	tipAcc = 0;
 	pcall(CaptureTooltip);
+end);
+
+-- ---- the armory, for the launcher's STATS > Armory: what each class's hero wears, and their numbers on the
+-- character pane (AZS_STATS), written down whenever the gear changes and every half a minute
+local ARMORY_SLOTS = { { 1, "Head" }, { 2, "Neck" }, { 3, "Shoulder" }, { 15, "Back" }, { 5, "Chest" }, { 4, "Shirt" },
+                       { 19, "Tabard" }, { 9, "Wrist" }, { 10, "Hands" }, { 6, "Waist" }, { 7, "Legs" }, { 8, "Feet" },
+                       { 11, "Finger" }, { 12, "Finger" }, { 13, "Trinket" }, { 14, "Trinket" }, { 16, "Main Hand" },
+                       { 17, "Off Hand" }, { 18, "Ranged" } };
+local ARMORY_STATS = { "hp", "dmg", "cd", "crit", "cm", "arm", "area", "cnt", "echo", "spd", "reg", "pick" };
+
+local function CaptureArmory()
+	if ( type(AZSStatsDB) ~= "table" or not GetInventoryItemLink ) then return; end
+	local key = ClassKey();
+	if ( not key ) then return; end
+	local a = { hero = UnitName and UnitName("player") or "", race = UnitRace and UnitRace("player") or "",
+	            level = UnitLevel and UnitLevel("player") or 0, cname = UnitClass and UnitClass("player") or "",
+	            date = date and date("%Y-%m-%d %H:%M") or "", gear = {}, stats = {} };
+	local any = false;
+	for i = 1, table.getn(ARMORY_SLOTS) do
+		local slot, label = ARMORY_SLOTS[i][1], ARMORY_SLOTS[i][2];
+		local link = GetInventoryItemLink("player", slot);
+		if ( link ) then
+			local _, _, color = string.find(link, "|c%x%x(%x%x%x%x%x%x)");
+			local _, _, name = string.find(link, "%[(.-)%]");
+			local _, _, id = string.find(link, "item:(%d+)");
+			local tex = GetInventoryItemTexture and GetInventoryItemTexture("player", slot) or "";
+			tex = string.gsub(tostring(tex or ""), "^.*\\", "");
+			table.insert(a.gear, { slot = label, name = name or "?", color = color or "ffffff", id = tonumber(id) or 0, icon = tex });
+			any = true;
+		end
+	end
+	if ( type(AZS_STATS) == "table" ) then
+		for i = 1, table.getn(ARMORY_STATS) do
+			local k = ARMORY_STATS[i];
+			if ( tonumber(AZS_STATS[k]) ) then a.stats[k] = tonumber(AZS_STATS[k]); any = true; end
+		end
+	end
+	if ( not any ) then return; end
+	if ( type(AZSStatsDB.armory) ~= "table" ) then AZSStatsDB.armory = {}; end
+	AZSStatsDB.armory[key] = a;
+end
+
+local armoryFrame = CreateFrame("Frame");
+armoryFrame:RegisterEvent("PLAYER_ENTERING_WORLD");
+armoryFrame:RegisterEvent("UNIT_INVENTORY_CHANGED");
+armoryFrame:SetScript("OnEvent", function()
+	if ( event == "UNIT_INVENTORY_CHANGED" and arg1 ~= "player" ) then return; end
+	pcall(CaptureArmory);
+end);
+local armoryAcc = 0;
+armoryFrame:SetScript("OnUpdate", function()
+	armoryAcc = armoryAcc + (arg1 or 0);
+	if ( armoryAcc < 30 ) then return; end
+	armoryAcc = 0;
+	pcall(CaptureArmory);
 end);

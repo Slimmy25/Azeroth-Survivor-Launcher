@@ -54,7 +54,7 @@ namespace AzerothLauncher
         static readonly double[] GoldSteps = { 100, 1000, 5000, 10000, 50000, 100000, 500000, 1000000, 5000000 };
         static readonly double[] HourSteps = { 1, 5, 10, 25, 50, 100, 250, 500, 1000, 2500 };
 
-        static readonly string[] StatTabs = { "Overview", "Classes", "Abilities", "Records", "Nemesis", "Co-op", "History" };
+        static readonly string[] StatTabs = { "Overview", "Classes", "Abilities", "Records", "Nemesis", "Co-op", "History", "Armory" };
         string statsClass;                                   // null = every class, else a class key
         int statsTab;
 
@@ -264,6 +264,12 @@ namespace AzerothLauncher
             else if (statsTab == 3)                          // Records
             {
                 y = Place(sp, Records(b.Best), w, y);
+                var more = new TilesBlock();                 // legendaries collected and level-ups that saved you
+                more.Title = Lang.T("Collected");
+                more.Items.Add(new[] { Big(b.Legendary), Lang.T("Legendaries collected") });
+                more.Items.Add(new[] { Big(b.Saves), Lang.T("Level-up saves (at 15% health or less)") });
+                y = Place(sp, more, w, y);
+                if (cls == null) y = Place(sp, ZoneDps(st), w, y);
                 var builds = new BuildsBlock(BestBuilds(st, cls == null ? null : cls.Key, 6));
                 builds.Title = Lang.T("Best builds");
                 y = Place(sp, builds, w, y);
@@ -272,6 +278,8 @@ namespace AzerothLauncher
                 y = NemesisTab(sp, w, y, st, cls);
             else if (statsTab == 5)                          // Co-op
                 y = CoopTab(sp, w, y, st);
+            else if (statsTab == 7)                          // Armory
+                y = ArmoryTab(sp, w, y, st, cls);
             else                                             // History
                 y = Place(sp, History(runs), w, y);
 
@@ -378,6 +386,100 @@ namespace AzerothLauncher
             return Place(sp, log, w, y);
         }
 
+        // ------------------------------------------------------------------ Armory: each class's hero, out of the game
+        static readonly string[][] ArmoryNumbers = {
+            new[] { "hp", "Health", "n" }, new[] { "dmg", "Damage", "pct1" }, new[] { "cd", "Haste", "haste" }, new[] { "crit", "Crit", "pct" },
+            new[] { "cm", "Crit Dmg", "pct" }, new[] { "arm", "Armor", "pct" }, new[] { "area", "Area", "pct1" }, new[] { "cnt", "Targets", "plus" },
+            new[] { "echo", "Echo", "pct" }, new[] { "spd", "Speed", "pct1" }, new[] { "reg", "Regen", "dec" }, new[] { "pick", "Pickup", "yd" } };
+
+        static string ArmoryValue(string kind, double v)
+        {
+            var ci = CultureInfo.InvariantCulture;
+            switch (kind)
+            {
+                case "pct1": return ((v - 1) * 100).ToString("+0;-0", ci) + "%";
+                case "haste": return ((1 - v) * 100).ToString("+0;-0", ci) + "%";
+                case "pct": return (v * 100).ToString("0.#", ci) + "%";
+                case "plus": return "+" + v.ToString("0", ci);
+                case "dec": return v.ToString("0.0", ci);
+                case "yd": return v.ToString("0", ci) + " yd";
+                default: return Big(v);
+            }
+        }
+
+        int ArmoryTab(ScrollPanel sp, int w, int y, RunStats st, StatBlock cls)
+        {
+            var list = cls == null ? st.Armory : st.Armory.FindAll(delegate(ArmoryChar a) { return a.ClassKey == cls.Key; });
+            if (list.Count == 0)
+            {
+                var none = Note(null, "AZS Stats writes down each class's hero (their gear and numbers) while you play. Play a run and they show up here.", Armory.Dim);
+                return Place(sp, none, w, y);
+            }
+            foreach (var a in list)
+            {
+                var tiles = new TilesBlock();
+                tiles.Title = a.Hero + " · " + Lang.T(a.Class) + (a.Race.Length > 0 ? " · " + a.Race : "") +
+                              (a.Level > 0 ? " · " + Lang.T("Level") + " " + Big(a.Level) : "");
+                foreach (var n in ArmoryNumbers)
+                {
+                    double v;
+                    if (a.Numbers.TryGetValue(n[0], out v)) tiles.Items.Add(new[] { ArmoryValue(n[2], v), Lang.T(n[1]) });
+                }
+                if (tiles.Items.Count > 0) y = Place(sp, tiles, w, y);
+                var gear = new RowsBlock();
+                gear.Title = Lang.T("Gear worn") + (a.Date.Length >= 10 ? " · " + a.Date.Substring(0, 10) : "");
+                gear.Cols = 2;
+                gear.Empty = Lang.T("No gear worn.");
+                foreach (var it in a.Gear)
+                {
+                    var row = new ArmoryRow();
+                    row.Name = it.Name;
+                    row.NameColor = Theme.Hex("#" + it.Color);
+                    row.IconColor = row.NameColor;
+                    row.Icon = Armory.Initials(it.Name);
+                    row.IconName = it.Icon.Length > 0 ? it.Icon.ToLowerInvariant() : null;
+                    row.Sub = Lang.T(it.Slot);
+                    row.SubColor = Armory.Dim;
+                    gear.Rows.Add(row);
+                }
+                y = Place(sp, gear, w, y);
+            }
+            return y;
+        }
+
+        // every zone's highest DPS: overall, alone and in co-op
+        static RowsBlock ZoneDps(RunStats st)
+        {
+            var rows = new RowsBlock();
+            rows.Title = Lang.T("Highest DPS by zone");
+            rows.Empty = Lang.T("Finish a run to set one.");
+            var zones = new List<StatBlock>(st.Zones);
+            zones.Sort(delegate(StatBlock a, StatBlock b)
+            {
+                StatRecord ra, rb;
+                double va = a.Best.TryGetValue("dps", out ra) ? ra.Value : 0, vb = b.Best.TryGetValue("dps", out rb) ? rb.Value : 0;
+                return vb.CompareTo(va);
+            });
+            foreach (var z in zones)
+            {
+                StatRecord all, solo, coop;
+                if (!z.Best.TryGetValue("dps", out all) || all.Value <= 0) continue;
+                z.Best.TryGetValue("dpsSolo", out solo);
+                z.Best.TryGetValue("dpsCoop", out coop);
+                var row = new ArmoryRow();
+                row.Name = z.Name;
+                row.ZonePic = z.Key;
+                row.Icon = Armory.Initials(z.Name);
+                row.IconColor = Theme.Hex("#ffd100");
+                row.NameColor = Theme.Hex("#ffd100");
+                row.Sub = Lang.T("Solo") + " " + (solo != null ? Big(solo.Value) : "-") + " · " + Lang.T("Co-op") + " " + (coop != null ? Big(coop.Value) : "-");
+                row.Value = Big(all.Value) + " DPS";
+                row.ValueSub = all.Class;
+                rows.Rows.Add(row);
+            }
+            return rows;
+        }
+
         // ------------------------------------------------------------------ Co-op: who you play with
         int CoopTab(ScrollPanel sp, int w, int y, RunStats st)
         {
@@ -460,6 +562,28 @@ namespace AzerothLauncher
                 }
                 y = Place(sp, best, w, y);
             }
+
+            // going down in co-op: how often, and to what
+            var downs = new RowsBlock();
+            downs.Title = Lang.T("Deaths in co-op") + ": " + Big(co.Deaths);
+            downs.Empty = Lang.T("No co-op deaths recorded yet.");
+            double worst = co.DeathsBy.Count > 0 ? co.DeathsBy[0].Kills : 1;
+            foreach (var n in co.DeathsBy)
+            {
+                var row = new ArmoryRow();
+                row.Name = n.Name;
+                row.Npc = n.Name;
+                row.Icon = Armory.Initials(n.Name);
+                row.IconColor = Theme.Hex("#ff4040");
+                row.NameColor = Theme.Hex("#ff7060");
+                row.Sub = Lang.T("Last time") + " " + Ago(n.Last);
+                row.Value = Big(n.Kills);
+                row.ValueSub = Lang.T("times");
+                row.Bar = worst > 0 ? n.Kills / worst : 0;
+                downs.Rows.Add(row);
+                if (downs.Rows.Count >= 15) break;
+            }
+            y = Place(sp, downs, w, y);
             return y;
         }
 
@@ -594,7 +718,8 @@ namespace AzerothLauncher
                 new[] { "lvl", "Highest level", "", "#3b8ff0" }, new[] { "kills", "Most kills in a run", "", "#c41f3b" },
                 new[] { "dps", "Highest DPS", "", "#ff8000" }, new[] { "dmg", "Most damage in a run", "", "#ff8000" }, new[] { "gold", "Most gold in a run", "", "#ffd100" },
                 new[] { "bosses", "Most bosses in a run", "", "#a335ee" }, new[] { "elites", "Elites", "", "#1eff00" },
-                new[] { "guardians", "Guardians", "", "#69ccf0" } };
+                new[] { "guardians", "Guardians", "", "#69ccf0" }, new[] { "legendary", "Most legendaries in a run", "", "#ff8000" },
+                new[] { "saves", "Most level-up saves in a run", "", "#1eff00" } };
             foreach (var o in order)
             {
                 StatRecord b;
