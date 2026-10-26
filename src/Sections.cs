@@ -1,4 +1,4 @@
-﻿// The section window: a WoW-whisper-style box that opens to the right of the launcher, with Cloud Save,
+// The section window: a WoW-whisper-style box that opens to the right of the launcher, with Cloud Save,
 // Addons (and Download More), Options, Changelog, Guide, Stats (StatsPanel.cs) and About Launcher.
 using System;
 using System.Collections.Generic;
@@ -861,6 +861,7 @@ namespace AzerothLauncher
                         : haveIt ? new WowButton("UNINSTALL", delegate { UninstallAddon(it.Name); }, bw, 24, 8)
                                  : new WowButton("INSTALL", delegate { DownloadAddon(it.Name, it.Url); }, bw, 24, 8);
                 if (update) btn.Selected = true;
+                if (btn.Width > cw - 14) btn.Width = cw - 14;  // never wider than its block
                 int ty = 6;
                 var name = UI.Text(it.Name, 9.5f, FontStyle.Bold, Theme.Gold, listbg, textW, false);
                 name.Size = VStack.Measure(name);
@@ -1081,9 +1082,40 @@ namespace AzerothLauncher
             }
             int w = sp.ClientSize.Width - 4 - 12;
             int y = 2;
+            // grouped like Download More: AZS addons, WoW 1.12 addons, My Addons, then any other folder
+            var cats = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            foreach (var e in Data.Addons)
+                foreach (string f in AddonFoldersOf(e.Name)) if (!cats.ContainsKey(f)) cats[f] = e.Category;
+            Func<string, string> catOf = delegate(string folder)
+            {
+                string c;
+                if (cats.TryGetValue(folder, out c)) return c;
+                if (folder.StartsWith("AZS", StringComparison.OrdinalIgnoreCase)) return Data.AddonCategories[0];
+                return "OTHER ADDONS";
+            };
+            var order = new List<string>(Data.AddonCategories);
+            order.Add(Data.MyAddonsCategory);
+            order.Add("OTHER ADDONS");
+            addons.Sort(delegate(KeyValuePair<string, bool> p1, KeyValuePair<string, bool> p2)
+            {
+                int c1 = order.IndexOf(catOf(p1.Key)), c2 = order.IndexOf(catOf(p2.Key));
+                if (c1 != c2) return c1.CompareTo(c2);
+                return string.Compare(p1.Key, p2.Key, StringComparison.OrdinalIgnoreCase);
+            });
+            string lastCat = null;
             foreach (var a in addons)
             {
                 string name = a.Key;
+                string cat = catOf(name);
+                if (cat != lastCat)
+                {
+                    lastCat = cat;
+                    var hd = UI.Text(cat, 9, FontStyle.Bold, Theme.Gold, listbg, 0);
+                    hd.Size = VStack.Measure(hd);
+                    hd.Location = new Point(6, y + (y > 2 ? 6 : 0));
+                    sp.Controls.Add(hd);
+                    y = hd.Bottom + 2;
+                }
                 var cb = UI.Check(name, a.Value, a.Value ? Theme.Text : Theme.GoldDim, listbg, 11, false);
                 cb.AutoSize = false;
                 Size need = TextRenderer.MeasureText(name, cb.Font, new Size(w - 24, 0), TextFormatFlags.WordBreak);
