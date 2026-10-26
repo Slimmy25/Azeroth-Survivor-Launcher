@@ -334,6 +334,7 @@ namespace AzerothLauncher
             Process p;
             KillOldPlayers(profile);
             var before = EdgeWindowsNow();
+            int port = EdgeDevTools.FreePort();
             try
             {
                 Directory.CreateDirectory(profile);
@@ -343,7 +344,7 @@ namespace AzerothLauncher
                     // show Edge's GPU (DirectComposition) output, which left the video white: Edge draws in software.
                     " --disable-features=msEdgeSidebarV2,CalculateNativeWinOcclusion --disable-backgrounding-occluded-windows" +
                     " --disable-renderer-backgrounding --disable-gpu --disable-gpu-compositing --disable-direct-composition" +
-                    " --autoplay-policy=no-user-gesture-required" +
+                    " --autoplay-policy=no-user-gesture-required --remote-debugging-port=" + port +
                     " --window-position=-20000,-20000 --window-size=640,360 --app=\"" + WatchUrl(v) + "\"");
                 psi.UseShellExecute = false;
                 p = Process.Start(psi);
@@ -377,7 +378,86 @@ namespace AzerothLauncher
                     return;
                 }
                 Ui(delegate { Adopt(p, hwnd); });
+                WatchPage(p, port);
             });
+        }
+
+        // The page, through Edge's DevTools: YouTube's page is styled so only the player shows, filling the window,
+        // and while the video is fullscreen, Edge's window leaves the section and covers the whole screen.
+        const string PlayerOnly =
+            "(function(){function add(){if(document.getElementById('azs-player-only'))return;" +
+            "var s=document.createElement('style');s.id='azs-player-only';s.textContent=" +
+            "'html,body{overflow:hidden!important;background:#000!important}" +
+            "#masthead-container,ytd-masthead,#secondary,#below,#comments,#related,tp-yt-app-drawer,ytd-mini-guide-renderer,ytd-popup-container{display:none!important}" +
+            "#movie_player{position:fixed!important;left:0!important;top:0!important;width:100vw!important;height:100vh!important;z-index:2147483646!important;background:#000!important}" +
+            ".html5-video-container,.html5-video-container video{width:100vw!important;height:100vh!important;left:0!important;top:0!important}" +
+            "video{object-fit:contain!important}';" +
+            "(document.head||document.documentElement).appendChild(s);}" +
+            "if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',add);else add();" +
+            "var n=0,t=setInterval(function(){add();window.dispatchEvent(new Event('resize'));if(++n>20)clearInterval(t);},500);})();";
+
+        void WatchPage(Process p, int port)
+        {
+            var dt = new EdgeDevTools();
+            try
+            {
+                for (int i = 0; i < 40 && !dt.Open; i++)
+                {
+                    if (p != edgeVideo) return;
+                    if (!dt.Connect(port)) Thread.Sleep(250);
+                }
+                if (!dt.Open) return;
+                dt.OnEveryPage(PlayerOnly);
+                dt.Eval(PlayerOnly);
+                bool full = false;
+                while (p == edgeVideo && dt.Open)
+                {
+                    Thread.Sleep(300);
+                    string r = dt.Eval("!!document.fullscreenElement");
+                    if (r == null) continue;
+                    bool now = r.IndexOf("\"value\":true", StringComparison.Ordinal) >= 0;
+                    if (now == full) continue;
+                    full = now;
+                    bool f = now;
+                    Ui(delegate { if (p == edgeVideo) VideoFullscreen(f); });
+                }
+            }
+            finally { dt.Dispose(); }
+        }
+
+        [DllImport("user32.dll")] static extern bool SetForegroundWindow(IntPtr hWnd);
+        bool videoFull;
+
+        // the video's fullscreen: Edge's window becomes a top window covering the launcher's screen; back in the
+        // section when it ends
+        void VideoFullscreen(bool on)
+        {
+            if (edgeWnd == IntPtr.Zero || !IsWindow(edgeWnd) || edgeHost == null || edgeHost.IsDisposed) return;
+            videoFull = on;
+            if (on)
+            {
+                Rectangle sc = Screen.FromControl(edgeHost).Bounds;
+                SetParent(edgeWnd, IntPtr.Zero);
+                int style = GetWindowLong(edgeWnd, GWL_STYLE);
+                style &= ~WS_CHILD;
+                style |= WS_POPUP | WS_VISIBLE;
+                SetWindowLong(edgeWnd, GWL_STYLE, style);
+                SetWindowPos(edgeWnd, new IntPtr(-1), sc.X, sc.Y, sc.Width, sc.Height, 0x0020 | 0x0040);   // topmost, frame changed, shown
+                SetForegroundWindow(edgeWnd);
+                PlaceVideoClose();
+            }
+            else
+            {
+                SetWindowPos(edgeWnd, new IntPtr(-2), 0, 0, 0, 0, 0x0001 | 0x0002);                     // not topmost
+                int style = GetWindowLong(edgeWnd, GWL_STYLE);
+                style &= ~WS_POPUP;
+                style |= WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS;
+                SetWindowLong(edgeWnd, GWL_STYLE, style);
+                SetParent(edgeWnd, edgeHost.Handle);
+                SetWindowPos(edgeWnd, IntPtr.Zero, 0, 0, 0, 0, 0x0001 | 0x0002 | 0x0004 | 0x0010 | 0x0020);
+                FitEdge();
+                PlaceVideoClose();
+            }
         }
 
         string edgeProfile;                                   // the player's Edge profile (its processes are found by it)
@@ -401,7 +481,7 @@ namespace AzerothLauncher
 
         void FitEdge()
         {
-            if (edgeWnd == IntPtr.Zero || edgeHost == null || edgeHost.IsDisposed || !IsWindow(edgeWnd)) return;
+            if (videoFull || edgeWnd == IntPtr.Zero || edgeHost == null || edgeHost.IsDisposed || !IsWindow(edgeWnd)) return;
             // Edge draws its own title bar inside the window: it is pushed up out of sight
             int bar;
             using (var g = edgeHost.CreateGraphics()) bar = (int)Math.Round(33 * g.DpiY / 96f);
@@ -415,6 +495,7 @@ namespace AzerothLauncher
             Process p = edgeVideo;
             edgeVideo = null;
             edgeWnd = IntPtr.Zero;
+            videoFull = false;
             if (p == null) return;
             try { if (!p.HasExited) p.Kill(); } catch (Exception) { }
             try { p.Dispose(); } catch (Exception) { }
@@ -454,7 +535,7 @@ namespace AzerothLauncher
         {
             if (videoClose == null || videoClose.IsDisposed) return;
             Form top = edgeHost != null && !edgeHost.IsDisposed ? edgeHost.TopLevelControl as Form : null;
-            bool on = top != null && edgeVideo != null && edgeHost.Visible && top.Visible && top.WindowState != FormWindowState.Minimized;
+            bool on = !videoFull && top != null && edgeVideo != null && edgeHost.Visible && top.Visible && top.WindowState != FormWindowState.Minimized;
             if (!on) { videoClose.Hide(); return; }
             Point p = edgeHost.PointToScreen(new Point(edgeHost.ClientSize.Width - videoClose.Width - 10, 10));
             videoClose.Location = p;
