@@ -1,5 +1,5 @@
 // Cloud sync engine of the Azeroth Survivor Launcher. Its framework comes from KeijinDE's sync engine, used with
-// his blessing (MIT License, Copyright (c) 2026 KeijinDE, see THIRD-PARTY-NOTICES.md).
+// his blessing (MIT License, Copyright (c) 2026 KeijinDE, see CREDITS.md).
 // Same sync folder layout, fingerprints and rules as that engine and the earlier Python launcher, so all of
 // them can share one folder and this launcher keeps the sync memory of the old one.
 //

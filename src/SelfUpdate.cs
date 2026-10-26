@@ -1,4 +1,4 @@
-﻿// Launcher updates: the UPDATE button (and a quiet check at start-up) compares this exe with the exe on the
+// Launcher updates: the UPDATE button (and a quiet check at start-up) compares this exe with the exe on the
 // latest release of the GitHub repository. When they differ, it offers the new one (never forced); the new exe is
 // downloaded next to this one, checked against the release's SHA-256, swapped in, and the launcher restarts.
 // Pre-releases (such as "test" and "addons") are never offered: GitHub's "latest release" skips them.
@@ -21,8 +21,13 @@ namespace AzerothLauncher
 
     public static class SelfUpdate
     {
-        // The public repository that only holds the exe releases (the source code repository is private)
-        public const string Repo = "Slimmy25/Azeroth-Survivor-Launcher-Releases";
+        // Where the launcher's releases are: the project's own repository first (once it is public, its releases are
+        // the ones to use), then the downloads-only repository every launcher used until then. A repository that can't
+        // be read (still private: GitHub answers 404) is skipped, so nothing changes until the first one is public.
+        // The Build workflow publishes every release to both.
+        public static readonly string[] Repos = { "Slimmy25/Azeroth-Survivor-Launcher", "Slimmy25/Azeroth-Survivor-Launcher-Releases" };
+        static string repo = Repos[Repos.Length - 1];       // the one that answered last
+        public static string Repo { get { return repo; } }
         public static string ReleasesPage { get { return "https://github.com/" + Repo + "/releases/latest"; } }
 
         static string ExePath { get { return Path.GetFullPath(Application.ExecutablePath); } }
@@ -38,18 +43,26 @@ namespace AzerothLauncher
         // the newest published (not pre-) release and its exe
         public static LauncherRelease FetchLatest()
         {
-            string text;
-            try
+            string text = null;
+            UserError last = null;
+            foreach (string r0 in Repos)
             {
-                using (var resp = Net.Open("https://api.github.com/repos/" + Repo + "/releases/latest", 15000, true, "GitHub",
-                                           "application/vnd.github+json"))
-                using (var r = new StreamReader(resp.GetResponseStream(), Encoding.UTF8))
-                    text = r.ReadToEnd();
+                try
+                {
+                    using (var resp = Net.Open("https://api.github.com/repos/" + r0 + "/releases/latest", 15000, true, "GitHub",
+                                               "application/vnd.github+json"))
+                    using (var r = new StreamReader(resp.GetResponseStream(), Encoding.UTF8))
+                        text = r.ReadToEnd();
+                    if (text.IndexOf(".exe", StringComparison.OrdinalIgnoreCase) < 0) { text = null; continue; }   // no launcher in it
+                    repo = r0;
+                    break;
+                }
+                catch (UserError e) { last = e; }
             }
-            catch (UserError e)
+            if (text == null)
             {
-                if (e.Message.Contains("error 404")) throw new UserError("No launcher release has been published on GitHub yet.");
-                throw;
+                if (last == null || last.Message.Contains("error 404")) throw new UserError("No launcher release has been published on GitHub yet.");
+                throw last;
             }
             var d = Json.AsDict(Json.Parse(text));
             if (d == null) throw new UserError("GitHub's answer could not be read.");
