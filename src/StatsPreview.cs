@@ -1,4 +1,4 @@
-﻿// A developer tool, not used by players: "--preview-stats <saved folder> <out folder>" renders the STATS page for
+// A developer tool, not used by players: "--preview-stats <saved folder> <out folder>" renders the STATS page for
 // the AZS Stats file in <saved folder> into PNG pictures (every tab, overall and for the most played class),
 // so the layout can be checked without the game. Settings are only changed in memory, nothing is saved.
 using System;
@@ -148,12 +148,13 @@ namespace AzerothLauncher
                 foreach (var a in BuiltinAddons.All) BuiltinAddons.Install(addonsDir, a);
             }
             catch (Exception) { }
-            foreach (string sec in new[] { "Cloud Save", "Addons", "Addons Download", "Changelog", "Options", "About Launcher", "Guide" })
+            foreach (string sec in new[] { "Cloud Save", "Addons", "Addons Download", "Addons Download 112", "Changelog", "Options", "About Launcher", "Guide" })
             {
                 app.Show();                                  // the preview starts as if in the tray
                 app.ShowSide();
                 string build = sec;
                 if (sec == "Addons Download") { build = "Addons"; app.addonMode = "download"; app.addonCategory = 0; }
+                else if (sec == "Addons Download 112") { build = "Addons"; app.addonMode = "download"; app.addonCategory = 1; }
                 else if (sec == "Addons") app.addonMode = "installed";
                 app.current = build;
                 if (sec == "Guide") { app.gTopic = -1; app.gPage = -1; app.guideQuery = "frost"; }   // the search, with a word typed
