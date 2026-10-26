@@ -377,7 +377,10 @@ The meter window has three views: Damage Done (every spell, pet, talent and item
 - Restoration: Swiftmend, Tranquility, Tree of Life
 
 @topic Races | The eight races and their racial abilities
-Choose your race, gender and looks in Armory > Character. Each race has a racial ability that casts on its own, plus passive bonuses. Not every race is open to every class: hover a race portrait to see.
+Choose your race, gender and looks in Armory > Character. Each race has a racial ability that casts on its own, plus passive bonuses. Not every race is open to every class at first: hover a race portrait to see where to open it.
+
+# Any race, any class
+On the armory's Rewards tab, the Races section opens a race to every class for 100 achievement points, with its racial ability and passives. A Tauren Paladin, a Gnome Druid, an Undead Shaman: it's up to you. A race you buy is yours for good (a perk reset keeps it). A druid of a Horde race takes the Tauren's cat and bear forms, an Alliance one the Night Elf's.
 @video Can I change my race? | https://cdn.jsdelivr.net/gh/Slimmy25/Azeroth-Survivor-Launcher-Releases@guide-videos/races/can-i-change-my-race.mp4
 
 # Alliance
@@ -496,6 +499,8 @@ Achievements give points to spend on the Rewards tab. Rewards are account-wide t
 - Perks: Second Thoughts (more free rerolls), Skip (pass on a hand and take gold instead), Veteran's Lessons (more talent experience for a class behind your best), Banish (remove a card for the rest of the run), Opening Hand (your first level-up deals four cards) and Keen Eye (bosses drop their piece more often). Each perk is unlocked by an achievement.
 - Companions: a critter that follows every hero and fetches coins and experience for you. Instincts make it prefer gold, experience or battleground runes, and you can unlock a second companion and many looks.
 - Tabards and appearances: looks only. Battleground tabards come with their zone's achievement.
+- Races: 100 points opens a race to every class, for good (see Races).
+- Co-op achievements: earned by everyone in the party. A boss's killing blow counts for every player still in the run, whoever lands it.
 You can take back points spent on perks and spend them again; the panel shows how many resets you have left.
 
 @topic Run Options & Endless | Harder runs for better rewards, and what comes after a win
