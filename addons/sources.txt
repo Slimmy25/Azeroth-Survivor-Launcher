@@ -3,7 +3,8 @@
 # The "Mirror addons" workflow downloads every link below, checks it is a real .zip and puts it on the
 # "addons" release under that file name (replacing the old copy). It runs by itself when this file changes,
 # or by hand: Actions > Mirror addons > Run workflow (do that to pick up a new version of an addon).
-# "local:<folder>" instead of a link zips that folder of this repository (addons/<folder>) instead.
+# "local:<folder>" instead of a link zips that folder of this repository (addons/<folder>) instead;
+# "local:<folder>+<folder>" zips several folders into the one .zip (an addon that comes with a second one).
 # The launcher's Download More list (assets/addons.txt) points at:
 #   https://github.com/Slimmy25/Azeroth-Survivor-Launcher-Releases/releases/download/addons/<file name>
 
@@ -14,3 +15,5 @@ Chest-GPS-by-Fotze.zip          | https://files.catbox.moe/riqfmy.zip
 SurvivorsDragonUi-by-Mxgwyn.zip | https://github.com/migwynkriid13/SurvivorsDragonUi/releases/latest/download/SurvivorsDragonUi.zip
 Keijin-UI-by-Keijin.zip         | https://github.com/KeijinDE/KeijinUI_modern-as-ui/releases/download/v3.7.1/KeijinUI-3.7.1.zip
 AZS-Stats-by-Slimjim.zip        | local:AZSStats
+MinimapButtonBag-by-Tunhadil-LaYt.zip | local:MBB
+BugSack-by-Fritti-Rabbit.zip    | local:!BugGrabber+BugSack

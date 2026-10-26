@@ -1,0 +1,10 @@
+## Interface: 11200
+## Title: MinimapButtonBag
+## Version: 0.508-azs
+## Author: Tunhadil, LaYt (converted for Azeroth Survivors)
+## Notes: Puts every minimap button into one bag button: click it and they open in a bar. Right click: options. /mbb
+## SavedVariablesPerCharacter: MBB_Exclude, MBB_Options
+localization-enGB.lua
+localization-deDE.lua
+localization-ruRU.lua
+MBB.lua
