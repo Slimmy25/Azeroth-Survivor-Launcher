@@ -1591,3 +1591,5 @@ Converted for Azeroth Survivors. Puts every minimap button into one bag button: 
 = Omgebouwd voor Azeroth Survivors. Stopt alle minimapknoppen in één tasknop: klik erop en ze openen in een balk (/mbb).
 Converted for Azeroth Survivors. Catches every Lua error (with !BugGrabber) and shows them in one window: /bugsack or its minimap button.
 = Omgebouwd voor Azeroth Survivors. Vangt elke Lua-fout op (met !BugGrabber) en toont ze in één venster: /bugsack of de minimapknop.
+GAME
+= SPEL

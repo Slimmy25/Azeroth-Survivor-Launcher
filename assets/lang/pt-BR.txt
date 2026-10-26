@@ -1591,3 +1591,5 @@ Converted for Azeroth Survivors. Puts every minimap button into one bag button: 
 = Convertido para Azeroth Survivors. Coloca todos os botões do minimapa em um só botão de bolsa: clique e eles abrem numa barra (/mbb).
 Converted for Azeroth Survivors. Catches every Lua error (with !BugGrabber) and shows them in one window: /bugsack or its minimap button.
 = Convertido para Azeroth Survivors. Pega todo erro de Lua (com !BugGrabber) e mostra em uma janela: /bugsack ou seu botão no minimapa.
+GAME
+= JOGO

@@ -1592,3 +1592,5 @@ Converted for Azeroth Survivors. Puts every minimap button into one bag button: 
 = Adaptat pentru Azeroth Survivors. Pune toate butoanele miniharții într-un singur buton-geantă: dă clic și se deschid într-o bară (/mbb).
 Converted for Azeroth Survivors. Catches every Lua error (with !BugGrabber) and shows them in one window: /bugsack or its minimap button.
 = Adaptat pentru Azeroth Survivors. Prinde fiecare eroare Lua (cu !BugGrabber) și le arată într-o fereastră: /bugsack sau butonul lui de minihartă.
+GAME
+= JOC

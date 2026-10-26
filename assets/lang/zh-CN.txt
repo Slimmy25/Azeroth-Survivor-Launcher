@@ -1592,3 +1592,5 @@ Converted for Azeroth Survivors. Puts every minimap button into one bag button: 
 = 为 Azeroth Survivors 移植。把所有小地图按钮放进一个背包按钮：点击后它们会以一排展开（/mbb）。
 Converted for Azeroth Survivors. Catches every Lua error (with !BugGrabber) and shows them in one window: /bugsack or its minimap button.
 = 为 Azeroth Survivors 移植。捕获每个 Lua 错误（配合 !BugGrabber）并在一个窗口中显示：/bugsack 或其小地图按钮。
+GAME
+= 游戏
