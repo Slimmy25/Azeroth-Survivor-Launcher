@@ -1,5 +1,5 @@
-// The AZS addons the launcher carries inside itself (besides AZS Stats, Stats.cs): AZS Handbook, AZS Minor Mods and
-// AZS Transparency. Download More lists them as "builtin:<folder>"; INSTALL writes their files from the launcher, and
+// The AZS addons the launcher carries inside itself (besides AZS Stats, Stats.cs): AZS Handbook and AZS Minor Mods.
+// (AZS Transparency was a test and is gone: Retired lists it, and its folder is taken out of AddOns.) Download More lists them as "builtin:<folder>"; INSTALL writes their files from the launcher, and
 // an installed one is brought up to the launcher's version right before the game starts (as AZS Stats is).
 // Each one gets its own copy of AZSKit.lua, the look all AZS addons share (addons\AZSKit).
 // AZS Handbook also gets AZSHandbookData.lua, made here from the launcher's own guide and talent trees, so the
@@ -27,7 +27,6 @@ namespace AzerothLauncher
         {
             new BuiltinAddon { Folder = "AZSHandbook", Files = new[] { "AZSHandbook.toc", "AZSHandbook.lua" }, Generated = "AZSHandbookData.lua" },
             new BuiltinAddon { Folder = "AZSMinorMods", Files = new[] { "AZSMinorMods.toc", "AZSMinorMods.lua" } },
-            new BuiltinAddon { Folder = "AZSTransparency", Files = new[] { "AZSTransparency.toc", "AZSTransparency.lua" }, Generated = "AZSTransparencyData.lua" },
         };
 
         public static BuiltinAddon Find(string url)
@@ -43,7 +42,7 @@ namespace AzerothLauncher
             foreach (string f in a.Files) yield return new KeyValuePair<string, string>(f, Util.ReadResource("AS.addon." + a.Folder + "." + f));
             yield return new KeyValuePair<string, string>(Kit, Util.ReadResource("AS.addon.kit." + Kit));
             if (a.Generated != null)
-                yield return new KeyValuePair<string, string>(a.Generated, a.Folder == "AZSTransparency" ? TransparencyData.Lua() : HandbookData.Lua());
+                yield return new KeyValuePair<string, string>(a.Generated, HandbookData.Lua());
         }
 
         // its folder in AddOns, turned on or off, or null
@@ -85,6 +84,19 @@ namespace AzerothLauncher
         }
 
         // the installed ones that are not the launcher's version, brought up to it (before the game starts)
+        // addons that are gone from the launcher: their folders (on or off) come out of AddOns
+        public static readonly string[] Retired = { "AZSTransparency" };
+
+        public static List<string> RemoveRetired(string addonsDir, string savedDir)
+        {
+            var gone = new List<string>();
+            if (string.IsNullOrEmpty(addonsDir) || !Directory.Exists(addonsDir)) return gone;
+            foreach (string r in Retired)
+                if (Directory.Exists(Path.Combine(addonsDir, r)) || Directory.Exists(Path.Combine(addonsDir, r + Addons.DisabledSuffix)))
+                    gone.AddRange(Addons.Uninstall(addonsDir, new List<string> { r }, savedDir));
+            return gone;
+        }
+
         public static List<string> UpdateInstalled(string addonsDir)
         {
             var done = new List<string>();
@@ -210,96 +222,6 @@ namespace AzerothLauncher
             var b = new StringBuilder();
             foreach (char c in (name ?? "").ToLowerInvariant()) if ((c >= 'a' && c <= 'z') || (c >= '0' && c <= '9')) b.Append(c);
             return b.ToString();
-        }
-    }
-
-    // AZSTransparencyData.lua: every class's spells (the guide's spell pools) with their icons and what kind of spell
-    // each is, read from the guide's own words ("hits every enemy around you" is an area spell, "the 3 nearest
-    // enemies" picks its targets, "over time" is a damage-over-time spell...). AZS Transparency matches these against
-    // the game's own rules for each item upgrade (the game's character pane: Area makes "your spells' areas"
-    // larger, Targets adds to "every spell that picks its targets", and so on).
-    public static class TransparencyData
-    {
-        static string cached;
-
-        static readonly string[][] Rules =
-        {
-            new[] { "heal",   @"\bheals? you|a big heal|heal when" },
-            new[] { "shield", @"absorbs|immune to all damage|shields you" },
-            new[] { "buff",   @"damage boost|cooldowns recover|deal much more damage for a while" },
-            new[] { "thorns", @"hit you in melee take damage" },
-            new[] { "area",   @"around you|the ground|in a cone|thickest group|everything near|every enemy (?:on|near)|in front of you|explode" },
-            new[] { "targets",@"nearest enem|up to \d|random enem|healthiest enem|jumps to|arc to|strikes \d|the \d nearest" },
-            new[] { "dot",    @"(?<!heals you )over time|bleed|poisons" },
-            new[] { "cc",     @"slows?|roots?|stuns?|flee|freezes" },
-            new[] { "pet",    @"totem|demons|lightwell" },
-        };
-
-        static List<string> Tags(string cls, string name, string text)
-        {
-            string t = (text ?? "").ToLowerInvariant();
-            var tags = new List<string>();
-            foreach (var r in Rules) if (System.Text.RegularExpressions.Regex.IsMatch(t, r[1])) tags.Add(r[0]);
-            bool support = (tags.Contains("heal") || tags.Contains("shield") || tags.Contains("buff")) &&
-                           !System.Text.RegularExpressions.Regex.IsMatch(t, @"strikes|hits|damage over time|drains|damaging|missiles");
-            if (!support) tags.Add("damage");
-            if (tags.Contains("damage") && !tags.Contains("pet") && (cls == "Warrior" || cls == "Rogue" ||
-                System.Text.RegularExpressions.Regex.IsMatch(t + " " + name.ToLowerInvariant(), @"\bshot\b|shoots|arrows|claw|swipe|shred")))
-                tags.Add("weapon");
-            return tags;
-        }
-
-        static string Q(string s)
-        {
-            return "\"" + (s ?? "").Replace("\\", "\\\\").Replace("\"", "\\\"").Replace("\r", "").Replace("\n", "\\n") + "\"";
-        }
-
-        public static string Lua()
-        {
-            if (cached != null) return cached;
-            var icons = new Dictionary<string, string>();
-            foreach (string raw in Util.ReadResource("AS.spell-icons.txt").Replace("\r\n", "\n").Split('\n'))
-            {
-                string line = raw.Trim();
-                int bar = line.IndexOf('|');
-                if (line.StartsWith("#") || bar <= 0) continue;
-                string k = HandbookData.Key(line.Substring(0, bar));
-                if (!icons.ContainsKey(k)) icons[k] = line.Substring(bar + 1).Trim();
-            }
-            var s = new StringBuilder();
-            s.Append("-- AZS Transparency: every class's spells and what kind of spell each is, written by the launcher from its guide.\n");
-            s.Append("-- Do not edit: the launcher writes it again.\nAZSTRANSPARENCY_DATA = {\n");
-            List<GuideTopic> topics;
-            try { topics = Data.Guide; } catch (Exception) { topics = new List<GuideTopic>(); }
-            var bullet = new System.Text.RegularExpressions.Regex(@"^- (.+?(?: \([^)]*\))?): (?=[a-z0-9])(.+)$");
-            foreach (var t in topics)
-            {
-                if (t.Title != "Classes") continue;
-                foreach (var p in t.Pages)
-                {
-                    s.Append("[").Append(Q(p.Title.ToUpperInvariant())).Append("] = {\n");
-                    string section = "";
-                    foreach (string raw in p.Body.Split('\n'))
-                    {
-                        string line = raw.Trim();
-                        if (line.StartsWith("# ")) { section = line.Substring(2); continue; }
-                        if (!section.StartsWith("Spell pool")) continue;
-                        var m = bullet.Match(line);
-                        if (!m.Success) continue;
-                        string name = System.Text.RegularExpressions.Regex.Replace(m.Groups[1].Value, @"\s*\(.*\)$", "");
-                        string icon;
-                        if (!icons.TryGetValue(HandbookData.Key(name), out icon)) icon = "INV_Misc_QuestionMark";
-                        s.Append("\t{ name = ").Append(Q(name)).Append(", icon = ").Append(Q(icon)).Append(", text = ")
-                         .Append(Q(m.Groups[2].Value)).Append(", tags = {");
-                        foreach (string tag in Tags(p.Title, name, m.Groups[2].Value)) s.Append(" ").Append(tag).Append(" = true,");
-                        s.Append(" } },\n");
-                    }
-                    s.Append("},\n");
-                }
-            }
-            s.Append("};\n");
-            cached = s.ToString();
-            return cached;
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿// The main launcher window: the tall narrow window with PLAY and the section buttons, the tray icon, playing
+// The main launcher window: the tall narrow window with PLAY and the section buttons, the tray icon, playing
 // (cloud download -> game -> cloud upload), installing the game, cloud sync runs and game updates.
 using System;
 using System.Collections.Generic;
@@ -1136,10 +1136,12 @@ namespace AzerothLauncher
                     }
                 }
                 catch (Exception e) { SyncLog("  AZS Stats addon not updated: " + e.Message, Level.Warn); }
-                // the other AZS addons the launcher carries (AZS Handbook, AZS Minor Mods, AZS Transparency): the
-                // installed ones brought up to the launcher's version too
+                // the other AZS addons the launcher carries (AZS Handbook, AZS Minor Mods): the installed ones brought up
+                // to the launcher's version too, and the retired ones (AZS Transparency) taken out
                 try
                 {
+                    foreach (string f in BuiltinAddons.RemoveRetired(SyncSettings().AddonsDir, SyncSettings().SavedDir))
+                        SyncLog(f + " addon removed (it is no longer part of the launcher).", Level.Info);
                     foreach (string f in BuiltinAddons.UpdateInstalled(SyncSettings().AddonsDir))
                         SyncLog(f + " addon updated to the launcher's version.", Level.Info);
                 }

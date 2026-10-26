@@ -154,7 +154,9 @@ namespace AzerothLauncher
                 AddChips(hero, data ? st.Total : null, ps);
             }
             if (st != null) hero.Note = Lang.T("Saved by the game " + st.Written.ToString("yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture) + ".");
-            y = Place(sp, hero, w, y);
+            // the header (your survivor or the class, with its numbers) is the Overview tab's own; with no runs yet it is
+            // the whole page
+            if (!data) y = Place(sp, hero, w, y);
 
             // --- no run records (yet): play time and how to get more
             if (!data)
@@ -185,6 +187,7 @@ namespace AzerothLauncher
             string clsKey = cls != null ? cls.Key : null;
             tabs.Picked = delegate(int i) { SetStatsView(clsKey, i); };
             y = Place(sp, tabs, w, y);
+            if (statsTab == 0) y = Place(sp, hero, w, y);
 
             StatBlock b = cls ?? st.Total;
             List<StatRun> runs = cls == null ? st.History : st.History.FindAll(delegate(StatRun r) { return r.ClassKey == cls.Key; });

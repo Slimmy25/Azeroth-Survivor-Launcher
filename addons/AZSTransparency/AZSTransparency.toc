@@ -1,8 +1,0 @@
-## Interface: 11200
-## Title: AZS Transparency
-## Notes: Which of your spells each item upgrade makes stronger: rings, trinkets, amulets and boss gear, matched with the game's own rules. Type /transparency in game.
-## Author: Slimjim
-## SavedVariables: AZSTransparencyDB
-AZSKit.lua
-AZSTransparencyData.lua
-AZSTransparency.lua
