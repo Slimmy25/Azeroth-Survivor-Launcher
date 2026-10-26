@@ -1605,3 +1605,5 @@ Talent Tree Builder
 = Pembuat pohon talenta
 Pick a class to open its three talent trees. Click a talent to add a point, right-click to take one back: a build of up to 51 points, kept for each class.
 = Pilih kelas untuk membuka tiga pohon talentanya. Klik talenta untuk menambah poin, klik kanan untuk mengambilnya kembali: build hingga 51 poin, disimpan untuk tiap kelas.
+Pick a class and try out a build of up to 51 points on its three talent trees.
+= Pilih kelas dan coba build hingga 51 poin di tiga pohon talentanya.

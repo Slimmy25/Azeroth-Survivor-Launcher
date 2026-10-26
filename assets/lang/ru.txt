@@ -1606,3 +1606,5 @@ Talent Tree Builder
 = Конструктор талантов
 Pick a class to open its three talent trees. Click a talent to add a point, right-click to take one back: a build of up to 51 points, kept for each class.
 = Выберите класс, чтобы открыть три его дерева талантов. Щелчок по таланту добавляет очко, правый щелчок убирает: билд до 51 очка, сохраняется для каждого класса.
+Pick a class and try out a build of up to 51 points on its three talent trees.
+= Выберите класс и опробуйте билд до 51 очка на трёх его деревьях талантов.

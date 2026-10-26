@@ -1605,3 +1605,5 @@ Talent Tree Builder
 = Criador de árvores de talentos
 Pick a class to open its three talent trees. Click a talent to add a point, right-click to take one back: a build of up to 51 points, kept for each class.
 = Escolha uma classe para abrir suas três árvores de talentos. Clique num talento para somar um ponto e clique direito para tirar: uma build de até 51 pontos, guardada para cada classe.
+Pick a class and try out a build of up to 51 points on its three talent trees.
+= Escolha uma classe e teste uma build de até 51 pontos nas suas três árvores de talentos.

@@ -1606,3 +1606,5 @@ Talent Tree Builder
 = 天賦樹模擬器
 Pick a class to open its three talent trees. Click a talent to add a point, right-click to take one back: a build of up to 51 points, kept for each class.
 = 選擇一個職業，開啟它的三棵天賦樹。點擊天賦加一點，按右鍵收回：最多 51 點的配置，每個職業各自保存。
+Pick a class and try out a build of up to 51 points on its three talent trees.
+= 選擇一個職業，在它的三棵天賦樹上試試最多 51 點的配置。

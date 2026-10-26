@@ -1606,3 +1606,5 @@ Talent Tree Builder
 = Tvůrce stromů talentů
 Pick a class to open its three talent trees. Click a talent to add a point, right-click to take one back: a build of up to 51 points, kept for each class.
 = Vyber povolání a otevři jeho tři stromy talentů. Kliknutím na talent přidáš bod, pravým kliknutím ho vrátíš: build až do 51 bodů, uložený pro každé povolání.
+Pick a class and try out a build of up to 51 points on its three talent trees.
+= Vyber povolání a vyzkoušej build až do 51 bodů na jeho třech stromech talentů.

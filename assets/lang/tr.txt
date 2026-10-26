@@ -1606,3 +1606,5 @@ Talent Tree Builder
 = Yetenek ağacı planlayıcı
 Pick a class to open its three talent trees. Click a talent to add a point, right-click to take one back: a build of up to 51 points, kept for each class.
 = Üç yetenek ağacını açmak için bir sınıf seç. Bir yeteneğe tıklayınca puan eklenir, sağ tıklayınca geri alınır: en fazla 51 puanlık bir build, her sınıf için saklanır.
+Pick a class and try out a build of up to 51 points on its three talent trees.
+= Bir sınıf seç ve üç yetenek ağacında en fazla 51 puanlık bir build dene.

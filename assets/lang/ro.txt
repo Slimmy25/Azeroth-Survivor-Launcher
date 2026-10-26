@@ -1606,3 +1606,5 @@ Talent Tree Builder
 = Constructor de arbori de talente
 Pick a class to open its three talent trees. Click a talent to add a point, right-click to take one back: a build of up to 51 points, kept for each class.
 = Alege o clasă ca să-i deschizi cei trei arbori de talente. Clic pe un talent adaugă un punct, clic dreapta îl ia înapoi: un build de până la 51 de puncte, păstrat pentru fiecare clasă.
+Pick a class and try out a build of up to 51 points on its three talent trees.
+= Alege o clasă și încearcă un build de până la 51 de puncte pe cei trei arbori de talente ai ei.

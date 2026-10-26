@@ -1606,3 +1606,5 @@ Talent Tree Builder
 = Trình tạo cây thiên phú
 Pick a class to open its three talent trees. Click a talent to add a point, right-click to take one back: a build of up to 51 points, kept for each class.
 = Chọn một lớp để mở ba cây thiên phú của nó. Nhấp vào thiên phú để thêm điểm, nhấp chuột phải để lấy lại: build tối đa 51 điểm, lưu riêng cho từng lớp.
+Pick a class and try out a build of up to 51 points on its three talent trees.
+= Chọn một lớp và thử build tối đa 51 điểm trên ba cây thiên phú của lớp đó.

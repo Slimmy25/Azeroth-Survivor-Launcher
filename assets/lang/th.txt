@@ -1606,3 +1606,5 @@ Talent Tree Builder
 = ตัวจัดต้นทาเลนต์
 Pick a class to open its three talent trees. Click a talent to add a point, right-click to take one back: a build of up to 51 points, kept for each class.
 = เลือกอาชีพเพื่อเปิดต้นทาเลนต์ทั้งสาม คลิกทาเลนต์เพื่อเพิ่มแต้ม คลิกขวาเพื่อนำออก: บิลด์ได้สูงสุด 51 แต้ม เก็บไว้แยกแต่ละอาชีพ
+Pick a class and try out a build of up to 51 points on its three talent trees.
+= เลือกอาชีพแล้วลองบิลด์สูงสุด 51 แต้มบนต้นทาเลนต์ทั้งสามของอาชีพนั้น

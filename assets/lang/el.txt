@@ -1606,3 +1606,5 @@ Talent Tree Builder
 = Σχεδιαστής δέντρων ταλέντων
 Pick a class to open its three talent trees. Click a talent to add a point, right-click to take one back: a build of up to 51 points, kept for each class.
 = Διάλεξε μια κλάση για να ανοίξεις τα τρία δέντρα ταλέντων της. Κλικ σε ταλέντο προσθέτει πόντο, δεξί κλικ τον αφαιρεί: build έως 51 πόντους, αποθηκευμένο για κάθε κλάση.
+Pick a class and try out a build of up to 51 points on its three talent trees.
+= Διάλεξε μια κλάση και δοκίμασε ένα build έως 51 πόντους στα τρία δέντρα ταλέντων της.

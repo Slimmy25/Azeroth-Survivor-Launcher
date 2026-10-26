@@ -1606,3 +1606,5 @@ Talent Tree Builder
 = प्रतिभा वृक्ष निर्माता
 Pick a class to open its three talent trees. Click a talent to add a point, right-click to take one back: a build of up to 51 points, kept for each class.
 = किसी क्लास के तीनों प्रतिभा वृक्ष खोलने के लिए उसे चुनें। प्रतिभा पर क्लिक से एक अंक जुड़ता है, राइट-क्लिक से वापस: 51 अंकों तक का बिल्ड, हर क्लास के लिए सहेजा जाता है।
+Pick a class and try out a build of up to 51 points on its three talent trees.
+= कोई क्लास चुनें और उसके तीनों प्रतिभा वृक्षों पर 51 अंकों तक का बिल्ड आज़माएँ।
