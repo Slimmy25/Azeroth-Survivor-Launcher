@@ -41,7 +41,12 @@ local function NewRun()
 end
 cur = NewRun();
 
+-- the run's damage: AZS_GetMeter()'s total (the game's addon API), else the meter's lines added up
 local function MeterDamage()
+	if ( type(AZS_GetMeter) == "function" ) then
+		local ok, _, total = pcall(AZS_GetMeter);
+		if ( ok and tonumber(total) ) then return Num(total); end
+	end
 	if ( type(AZS_METER) ~= "table" ) then return 0; end
 	local d = 0;
 	for i = 1, table.getn(AZS_METER) do
@@ -51,6 +56,9 @@ local function MeterDamage()
 end
 
 local function ClassKey()
+	if ( type(AZS_ZONE) == "table" and type(AZS_ZONE.class) == "string" and AZS_ZONE.class ~= "" ) then
+		return string.lower(AZS_ZONE.class);             -- the game's own key (warrior, mage, ...)
+	end
 	if ( not UnitClass ) then return nil; end
 	local _, token = UnitClass("player");
 	return token and string.lower(token) or nil;
@@ -168,11 +176,8 @@ local function Legendary(text, name)
 	Raise("legendary", cur.legendary);
 end
 
-if ( AZS_RegisterBannerHandler ) then
-	pcall(AZS_RegisterBannerHandler, function(b)
-		if ( type(b) == "table" ) then Legendary(tostring(b.text or "") .. " " .. tostring(b.name or ""), b.name); end
-	end);
-end
+-- (banners are not looked at: the game's banner kinds have no item drops, and an achievement named "Legendary ..."
+-- would count by mistake)
 
 -- ---- level-up saves: your lowest health in the last moment before a level-up
 local lowHp, lowAt, lastLevel = 1, 0, nil;
@@ -200,8 +205,10 @@ end
 local downNow, downSince = false, 0;
 local function DownNow()
 	local inParty = type(AZS_PARTY) == "table" and table.getn(AZS_PARTY) > 0;
+	if ( not inParty and GetNumPartyMembers ) then local ok, n = pcall(GetNumPartyMembers); inParty = ok and Num(n) > 0; end
 	if ( not inParty ) then return false; end
 	if ( type(AZS_REVIVE) == "table" and Num(AZS_REVIVE.down) == 1 ) then return true; end
+	if ( type(AZS_GetPhase) == "function" and AZS_GetPhase() == "dead" ) then return true; end
 	return UnitIsDeadOrGhost and UnitIsDeadOrGhost("player") and true or false;
 end
 
@@ -223,6 +230,11 @@ end
 
 -- ---- the minute marks, and a new run
 local function Tick()
+	-- out of a run the clock can still hold the last run's time: only a run being played counts
+	if ( type(AZS_GetPhase) == "function" ) then
+		local ph = AZS_GetPhase();
+		if ( ph == nil or ph == "ready" or ph == "victory" ) then return; end
+	end
 	local t = AZS_GetRunTime and Num(AZS_GetRunTime()) or 0;
 	if ( t < 15 and lastT - t > 10 ) then            -- the clock went back: a new run (as AZSStats.lua decides it)
 		prev = cur;
