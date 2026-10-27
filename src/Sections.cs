@@ -259,6 +259,14 @@ namespace AzerothLauncher
             m.Show(this, new Point(at.X - 6, Height - 4));
         }
 
+        // the list of a step, opened by a click: at the same place as when hovered
+        void ClickMenu(int i)
+        {
+            Rectangle at = StepRect(i);
+            if (at.IsEmpty) foreach (var a in arrows) if (a.Value == i) at = a.Key;
+            if (!at.IsEmpty) ShowMenu(i, at);
+        }
+
         protected override void OnMouseDown(MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left && !CloseBox.Contains(e.Location) && Owner2 != null)
@@ -279,20 +287,19 @@ namespace AzerothLauncher
                 if (Moved != null && Owner2 != null) Moved(Owner2.Location);
             }
             else if (e.Button == MouseButtons.Left && CloseBox.Contains(e.Location)) WowButton.Fire(CloseClicked);
-            else if (e.Button == MouseButtons.Left && ArrowAt(e.Location) >= 0)
-            {
-                int i = ArrowAt(e.Location);
-                foreach (var a in arrows) if (a.Value == i) ShowMenu(i, a.Key);
-            }
+            else if (e.Button == MouseButtons.Left && ArrowAt(e.Location) >= 0) ClickMenu(ArrowAt(e.Location));
             else if (e.Button == MouseButtons.Left)
             {
+                // a click anywhere on a step's word opens its list where the hover list opens (a step without a list
+                // goes to its page)
                 int h = HotAt(e.Location);
                 if (h == -2) WowButton.Fire(BackClicked);
+                else if (h >= 0 && menus.ContainsKey(h)) ClickMenu(h);
                 else if (h >= 0) WowButton.Fire(crumbs[h].Value);
                 else
                 {
                     int m = MenuTextAt(e.Location);
-                    if (m >= 0) foreach (var a in arrows) if (a.Value == m) ShowMenu(m, a.Key);
+                    if (m >= 0) ClickMenu(m);
                 }
             }
             base.OnMouseUp(e);
@@ -572,6 +579,7 @@ namespace AzerothLauncher
                 else if (name == "About Launcher") PanelAbout();
                 else if (name == "Community") PanelCommunity();
                 else if (name == "Setup") PanelSetup();          // first-time setup (Setup.cs)
+                RememberView(name);                              // the back arrow's way (History.cs)
             }
             finally
             {
@@ -640,6 +648,8 @@ namespace AzerothLauncher
         {
             if (current == "Setup") { SetupBack(); return; }
             if (LeaveCommunityVideo()) return;
+            if (current == "Guide" && gVideo != null) { gVideo = null; BuildPanel("Guide"); return; }   // a video: back to its page
+            if (BackInHistory()) return;                     // back along the way you came (History.cs)
             if (current == "Community" && communityMore) { communityMore = false; BuildPanel("Community"); return; }
             if (current == "Addons" && addonMode == "download") { SetAddonMode("installed"); return; }
             if (current == "Options" && optionsLang) { optionsLang = false; BuildPanel("Options"); return; }
@@ -1911,10 +1921,12 @@ namespace AzerothLauncher
             var now = GameSettings.Read(file);
             bool running = GameRunningFlag || Util.GameRunning();
             int y = 6;
-            var intro = PutText(running ? "The game is running: close it first, it saves its own settings when it closes."
-                                        : "The game's own settings. They take effect the next time the game starts.",
-                                9.5f, FontStyle.Italic, running ? Theme.Hex("#e07050") : Theme.GoldDim, 20, y, PW - 40);
-            y = BottomOf(intro) + 8;
+            if (running)                                     // only while the game runs: its settings can't be changed then
+            {
+                var intro = PutText("The game is running: close it first, it saves its own settings when it closes.",
+                                    9.5f, FontStyle.Italic, Theme.Hex("#e07050"), 20, y, PW - 40);
+                y = BottomOf(intro) + 8;
+            }
             if (file == null)
             {
                 var none = PutText("The game config folder is not set. Set it in Options > FOLDERS.", 10, FontStyle.Regular, Theme.Text, 20, y, PW - 40);
