@@ -1779,7 +1779,6 @@ namespace AzerothLauncher
                      "Your settings stay as they are."))
             {
                 SetStatus("Launcher update postponed. Press UPDATE when you want it.");
-                NextGameCheck(manual);
                 return;
             }
             DownloadLauncher(rel, false);
@@ -1843,7 +1842,6 @@ namespace AzerothLauncher
                 {
                     // no internet or GitHub down: don't lock the player out; the next start tries again
                     Error("Launcher update", err + "\n\nYou can keep using this version for now. The launcher tries again the next time it starts.");
-                    NextGameCheck(false);
                 }
                 else Error("Launcher update", err);
                 return;
