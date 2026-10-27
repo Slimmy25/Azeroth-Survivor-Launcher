@@ -70,7 +70,7 @@ The home screen features videos made by the community, in rotation. **MORE VIDEO
 the launcher, streamed from YouTube and never saved on your PC, with the creator's name linking to their channel.
 
 ### Also
-- **Cloud Save**: your save and your addons' settings kept in Google Drive, OneDrive or Dropbox and shared between
+- **Cloud Save** (Options > Cloud Save): your save and your addons' settings kept in Google Drive, OneDrive or Dropbox and shared between
   your PCs. The addons themselves aren't copied (an old copy could replace a newer one): when settings arrive for an
   addon from Download More that isn't installed, the launcher installs it.
 - **News and Changelog**: every patch note of the game, newest first.

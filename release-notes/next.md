@@ -32,3 +32,20 @@
   question now opens straight over the launcher as it is. The same goes for every question inside the launcher.
 - The README's list of download hosts names who runs each one: a Mirror By Community Member (Leo), a Mirror By
   Community Member (Meexa) and a Mirror By Discord Mod (Fotze).
+
+### Launcher buttons and Options
+- New **THEORYCRAFTING** button beside GUIDE: it opens the Guide's Theorycrafting page (Talent Tree Builder, Gear
+  Planner, Build Guides). Each group has its own page in the trail too: click "Gameplay" in Guide › Gameplay › Classes.
+- The Talent Tree Builder and the Gear Planner come up in the Guide's search, and their names are links anywhere in
+  the Guide.
+- The Stats buttons are disabled while AZS Stats is not installed and switched on; hovering says "Disabled when AZS
+  Stats is not active". The INSTALL STATS ADDON button on the Stats page is gone.
+- Cloud Save moved into Options: a new **CLOUD SAVE** tab holds cloud saving on or off, the sync folder (moved from
+  FOLDERS) and OPEN CLOUD SAVE › for syncing now, the log and earlier downloads.
+- The game's settings are now two tabs: **GRAPHICS** (display and graphics) and **GAMEPLAY** (gameplay and sound).
+- GENERAL is gone: its settings and the play time are on the **LAUNCHER** tab, and so is the language: LANGUAGE › opens
+  the list of languages (Options › Launcher › Language).
+
+### The Guide
+- At the end of a page, **NEXT** takes you to the next page of the topic, then to the next topic of the same group
+  (Getting Started, Controls, Your First Run, ...), so the New Player guide reads in order.
