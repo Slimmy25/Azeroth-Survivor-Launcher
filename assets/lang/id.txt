@@ -1751,3 +1751,7 @@ Wear armor pieces of a set to see its bonuses here. Four pieces of two sets give
 = {0}% dari peringkatmu
 waiting for clarification from dev
 = menunggu penjelasan dari pengembang
+The bonuses of everything chosen, added together, with the set bonuses reached. Click a piece to add a star (up to 5, then back to 0); right-click to take it off.
+= Bonus semua yang dipilih dijumlahkan, dengan bonus set yang tercapai. Klik sebuah bagian untuk menambah bintang (hingga 5, lalu kembali ke 0); klik kanan untuk melepasnya.
+Stars decide which set bonuses you reach. What a star adds to a piece is not disclosed by the game, so it is not counted here.
+= Bintang menentukan bonus set mana yang kamu capai. Seberapa banyak bintang menambah sebuah bagian tidak diungkap oleh game, jadi tidak dihitung di sini.

@@ -1751,3 +1751,7 @@ Wear armor pieces of a set to see its bonuses here. Four pieces of two sets give
 = {0} % tasoistasi
 waiting for clarification from dev
 = odottaa kehittäjän tarkennusta
+The bonuses of everything chosen, added together, with the set bonuses reached. Click a piece to add a star (up to 5, then back to 0); right-click to take it off.
+= Kaikkien valintojen bonukset yhteensä saavutettujen settibonusten kanssa. Napsauta osaa lisätäksesi tähden (enintään 5, sitten takaisin 0:aan); oikea napsautus riisuu sen.
+Stars decide which set bonuses you reach. What a star adds to a piece is not disclosed by the game, so it is not counted here.
+= Tähdet ratkaisevat, mitkä settibonukset saavutat. Peli ei kerro, mitä tähti lisää osaan, joten sitä ei lasketa tässä.

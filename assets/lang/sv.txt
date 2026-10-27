@@ -1751,3 +1751,7 @@ Wear armor pieces of a set to see its bonuses here. Four pieces of two sets give
 = {0} % av dina rangsteg
 waiting for clarification from dev
 = väntar på besked från utvecklaren
+The bonuses of everything chosen, added together, with the set bonuses reached. Click a piece to add a star (up to 5, then back to 0); right-click to take it off.
+= Bonusarna från allt som valts, sammanlagda, med de uppnådda setbonusarna. Klicka på en del för att lägga till en stjärna (upp till 5, sedan tillbaka till 0); högerklicka för att ta av den.
+Stars decide which set bonuses you reach. What a star adds to a piece is not disclosed by the game, so it is not counted here.
+= Stjärnor avgör vilka setbonusar du når. Vad en stjärna ger en del avslöjar inte spelet, så det räknas inte med här.

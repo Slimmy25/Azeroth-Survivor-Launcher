@@ -1,8 +1,9 @@
 // The Gear Planner (Guide > Theorycrafting): pick a class, put gear and jewelry in the slots of a character sheet laid
 // out like the game's own (C), and see what they add: the sheet's stats and the Run Stats panel beside it.
-// The numbers are the bonuses added together (Items.cs), each piece grown by its stars (0 to 5, picked above the list),
-// with the 4-piece bonus of every set worn at 4 pieces (two sets of four give both). A piece whose bonuses are not known
-// yet adds nothing.
+// The numbers are the bonuses added together (Items.cs), with the 4-piece bonus of every set worn at 4 pieces of 1+ stars
+// (two sets of four give both). A click on a piece adds a star (5 at most, then back to 0): stars decide the set bonuses
+// reached; what a star adds to a piece the game does not disclose, so it is not counted. A piece whose bonuses are not
+// known yet adds nothing.
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -39,7 +40,7 @@ namespace AzerothLauncher
         {
             if (plannerClass != cls)
                 foreach (string s in new List<string>(plannerSlots.Keys))
-                    if (plannerSlots[s] is GearPiece) plannerSlots.Remove(s);
+                    if (plannerSlots[s] is GearPiece) { plannerSlots.Remove(s); GearSheet.Stars.Remove(s); }
             plannerClass = cls;
         }
 
@@ -92,17 +93,13 @@ namespace AzerothLauncher
         string hover;
         int hoverRow = -1;
         static readonly object EmptyRow = new object();
-        // each slot's stars (kept while the launcher runs, like the slots), and the star buttons drawn above the list
+        // each slot's stars, 0 to 5 (kept while the launcher runs, like the slots): a click on the piece adds one
         public static readonly Dictionary<string, int> Stars = new Dictionary<string, int>();
-        readonly List<Rectangle> starBoxes = new List<Rectangle>();
-        // what Totals found: an estimate among the numbers, and every set worn (rarity -> pieces worn, at 1+, 3+, 5 stars)
-        bool estimated, pending;
+        // what Totals found: every set worn (rarity -> pieces worn, at 1+, 3+, 5 stars)
         readonly Dictionary<string, int[]> setsWorn = new Dictionary<string, int[]>();
         static readonly Color Active = Theme.Hex("#40d040");
 
         static int StarsOf(string slot) { int n; return Stars.TryGetValue(slot, out n) ? n : 0; }
-        static bool GearSlot(string slot) { return slot != "Neck" && !slot.StartsWith("Finger") && !slot.StartsWith("Trinket"); }
-        static bool WeaponSlot(string slot) { return slot == "Main Hand" || slot == "Off Hand" || slot == "Ranged"; }
 
         static readonly Color Page = Theme.Hex("#0e0d14"), Edge = Theme.Hex("#4a3a22"), SlotBg = Theme.Hex("#1b1a24"),
             SlotEdge = Theme.Hex("#45414f"), Gold = Theme.Hex("#f0c050"), Bright = Theme.Hex("#f5e9c8"), Dim = Theme.Hex("#9c8a64");
@@ -170,14 +167,11 @@ namespace AzerothLauncher
             var t = new Dictionary<string, double>();
             health = 0;
             unknown = 0;
-            estimated = false;
-            pending = false;
             setsWorn.Clear();
             foreach (var kv in slots)
             {
                 var p = kv.Value as GearPiece;
                 List<ItemBonus> list = null;
-                double f = 1;
                 if (p != null)
                 {
                     int st = StarsOf(kv.Key);
@@ -191,16 +185,13 @@ namespace AzerothLauncher
                         if (st >= 5) c[3]++;
                     }
                     if (!p.Known) { unknown++; continue; }
-                    f = Items.StarFactor(p, st);
-                    if (Items.StarEstimate(p, st)) estimated = true;
-                    if (Items.StarPending(p, st)) pending = true;
-                    health += (int)Math.Round(p.Health * f);
+                    health += p.Health;
                     list = p.Bonuses;
                 }
                 var j = kv.Value as Jewel;
                 if (j != null) list = j.Bonuses;
                 if (list == null) continue;
-                foreach (var b in list) Add(t, b.Stat, b.Value * f);
+                foreach (var b in list) Add(t, b.Stat, b.Value);
             }
             // the 4-piece bonus of every set with 4 armor pieces at 1+ stars: two sets of four give both
             foreach (var kv in setsWorn)
@@ -230,7 +221,7 @@ namespace AzerothLauncher
         {
             double v;
             if (!t.TryGetValue(stat, out v) || v == 0) return unit == "%" ? "+0%" : "+0";
-            return (estimated ? "~" : "") + (v > 0 ? "+" : "") + Items.Pct(v) + unit;
+            return (v > 0 ? "+" : "") + Items.Pct(v) + unit;
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -272,7 +263,7 @@ namespace AzerothLauncher
             int half = (mid.Width - 6) / 2;
             double hp;
             t.TryGetValue("health%", out hp);
-            string healthText = (estimated && health > 0 ? "~" : "") + "+" + health + (hp != 0 ? " +" + Items.Pct(hp) + "%" : "");
+            string healthText = "+" + health + (hp != 0 ? " +" + Items.Pct(hp) + "%" : "");
             StatBox(g, new Rectangle(mid.X, mid.Y, half, boxH), new[]
             {
                 new[] { "Health", healthText }, new[] { "Damage", Val(t, "damage", "%") }, new[] { "Haste", Val(t, "cooldown", "%") },
@@ -283,8 +274,8 @@ namespace AzerothLauncher
                 new[] { "Area", Val(t, "area", "%") }, new[] { "Targets", Val(t, "targets", "") }, new[] { "Echo", Val(t, "echo", "%") },
                 new[] { "Speed", Val(t, "speed", "%") }, new[] { "Regen", Val(t, "regen", "") }, new[] { "Pickup", Val(t, "pickup", "%") },
             });
-            string txt = Lang.T("The bonuses of everything chosen, added together, with each piece's stars and the set bonuses reached. A number marked ~ is an estimate.");
-            if (pending) txt += " " + Lang.T("Stars") + ": " + Lang.T(Items.StarsPending) + ".";
+            string txt = Lang.T("The bonuses of everything chosen, added together, with the set bonuses reached. Click a piece to add a star (up to 5, then back to 0); right-click to take it off.") +
+                         " " + Lang.T(Items.StarsNotCounted);
             if (unknown > 0) txt = Lang.T("Pieces with bonuses not known yet") + ": " + unknown + ". " + txt;
             Para(g, txt, fSmall, Dim, mid.X, mid.Y + boxH + 8, mid.Width, mid.Bottom);
 
@@ -393,30 +384,6 @@ namespace AzerothLauncher
             using (var b = new SolidBrush(Gold)) g.DrawString(head, fHead, b, r.X + 10, r.Y + 8);
             float y = r.Y + 12 + fHead.GetHeight(g);
             float lh = Math.Max(fText.GetHeight(g) + 6, 20);
-            // the stars of the piece in this slot: 0 to 5
-            starBoxes.Clear();
-            if (WeaponSlot(chosenSlot))
-            {
-                y += Para(g, Lang.T("Stars") + ": " + Lang.T(Items.StarsPending), fSmall, Dim, r.X + 10, y, r.Width - 20, r.Bottom) + 4;
-            }
-            else if (GearSlot(chosenSlot))
-            {
-                string lab = Lang.T("Stars") + ":";
-                SizeF ls = g.MeasureString(lab, fText);
-                using (var b = new SolidBrush(Dim)) g.DrawString(lab, fText, b, r.X + 10, y + (lh - ls.Height) / 2);
-                int bw = (int)Math.Max(16, lh - 4), x0 = r.X + 14 + (int)ls.Width, cur = StarsOf(chosenSlot);
-                for (int i = 0; i <= 5; i++)
-                {
-                    var box = new Rectangle(x0 + i * (bw + 3), (int)y + 2, bw, bw);
-                    if (box.Right > r.Right - 6) break;
-                    starBoxes.Add(box);
-                    using (var b = new SolidBrush(i == cur ? Color.FromArgb(200, 240, 192, 80) : (i <= cur && i > 0 ? Color.FromArgb(70, 240, 192, 80) : SlotBg))) g.FillRectangle(b, box);
-                    using (var p = new Pen(i == cur ? Gold : SlotEdge)) g.DrawRectangle(p, box);
-                    using (var f2 = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center })
-                    using (var b = new SolidBrush(i == cur ? Color.Black : Bright)) g.DrawString(i.ToString(), fSmall, b, box, f2);
-                }
-                y += lh + 4;
-            }
             int ic = (int)(lh - 4);                          // the picture: as tall as the line
             object worn;
             slots.TryGetValue(chosenSlot, out worn);
@@ -506,6 +473,15 @@ namespace AzerothLauncher
                     using (var b = new SolidBrush(Bright)) g.DrawString(ab, fBold, b, r.X + (r.Width - a.Width) / 2, r.Y + (r.Height - a.Height) / 2);
                 }
                 using (var p = new Pen(RarityColor(RarityOf(o)), 2f)) g.DrawRectangle(p, r);
+                int st = o is GearPiece ? StarsOf(slot) : 0;
+                if (st > 0)                                   // its stars: a small counter in the corner
+                {
+                    string n = st.ToString();
+                    SizeF ns = g.MeasureString(n, fBold);
+                    var cr = new RectangleF(r.Right - ns.Width - 3, r.Bottom - ns.Height - 1, ns.Width + 2, ns.Height);
+                    using (var b = new SolidBrush(Color.FromArgb(210, 10, 8, 14))) g.FillRectangle(b, cr);
+                    using (var b = new SolidBrush(Gold)) g.DrawString(n, fBold, b, cr.X + 1, cr.Y);
+                }
             }
             else
             {
@@ -535,8 +511,7 @@ namespace AzerothLauncher
         {
             string s = SlotAt(e.Location);
             int r = s == null ? RowAt(e.Location) : -1;
-            bool onStar = StarAt(e.Location) >= 0;
-            Cursor = s != null || r >= 0 || onStar ? Cursors.Hand : Cursors.Default;
+            Cursor = s != null || r >= 0 ? Cursors.Hand : Cursors.Default;
             if (s != hover || r != hoverRow)
             {
                 hover = s;
@@ -554,28 +529,21 @@ namespace AzerothLauncher
 
         protected override void OnMouseLeave(EventArgs e) { hover = null; hoverRow = -1; tip.SetToolTip(this, null); Invalidate(); base.OnMouseLeave(e); }
 
-        int StarAt(Point p)
-        {
-            for (int i = 0; i < starBoxes.Count; i++) if (starBoxes[i].Contains(p)) return i;
-            return -1;
-        }
-
         protected override void OnMouseUp(MouseEventArgs e)
         {
             base.OnMouseUp(e);
-            int star = StarAt(e.Location);
-            if (star >= 0 && e.Button == MouseButtons.Left)
-            {
-                Stars[chosenSlot] = star;
-                Publish();
-                Invalidate();
-                return;
-            }
             string s = SlotAt(e.Location);
             if (s != null)
             {
-                if (e.Button == MouseButtons.Right) slots.Remove(s);
-                else chosenSlot = s;                          // the selector shows what this slot can hold
+                object worn;
+                slots.TryGetValue(s, out worn);
+                if (e.Button == MouseButtons.Right) { slots.Remove(s); Stars.Remove(s); }
+                else
+                {
+                    if (worn is GearPiece) Stars[s] = (StarsOf(s) + 1) % 6;   // a click on a piece: one more star, after 5 back to 0
+                    chosenSlot = s;                           // the selector shows what this slot can hold
+                }
+                hover = null;                                 // the hover card shows the new stars at once
                 Publish();
                 Invalidate();
                 return;
@@ -585,6 +553,7 @@ namespace AzerothLauncher
             object o = rows[r].Value;
             if (o == EmptyRow) slots.Remove(chosenSlot);
             else slots[chosenSlot] = o;
+            Stars.Remove(chosenSlot);                         // a new piece starts at 0 stars
             Publish();
             Invalidate();
         }

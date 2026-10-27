@@ -1752,3 +1752,7 @@ Wear armor pieces of a set to see its bonuses here. Four pieces of two sets give
 = आपकी रैंकों का {0}%
 waiting for clarification from dev
 = डेवलपर से स्पष्टीकरण की प्रतीक्षा
+The bonuses of everything chosen, added together, with the set bonuses reached. Click a piece to add a star (up to 5, then back to 0); right-click to take it off.
+= चुनी गई हर चीज़ के बोनस एक साथ, हासिल सेट बोनस के साथ। सितारा जोड़ने के लिए किसी टुकड़े पर क्लिक करें (5 तक, फिर वापस 0); हटाने के लिए राइट-क्लिक करें।
+Stars decide which set bonuses you reach. What a star adds to a piece is not disclosed by the game, so it is not counted here.
+= सितारे तय करते हैं कि आप कौन से सेट बोनस हासिल करते हैं। एक सितारा किसी टुकड़े में क्या जोड़ता है, गेम नहीं बताता, इसलिए यहाँ इसे नहीं गिना जाता।

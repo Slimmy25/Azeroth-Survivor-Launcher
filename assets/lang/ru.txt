@@ -1752,3 +1752,7 @@ Wear armor pieces of a set to see its bonuses here. Four pieces of two sets give
 = {0}% ваших рангов
 waiting for clarification from dev
 = ожидает уточнения от разработчика
+The bonuses of everything chosen, added together, with the set bonuses reached. Click a piece to add a star (up to 5, then back to 0); right-click to take it off.
+= Бонусы всего выбранного вместе, с достигнутыми бонусами комплектов. Щёлкните по предмету, чтобы добавить звезду (до 5, затем снова 0); правый щелчок снимает его.
+Stars decide which set bonuses you reach. What a star adds to a piece is not disclosed by the game, so it is not counted here.
+= Звёзды определяют, каких бонусов комплектов вы достигаете. Что звезда добавляет предмету, игра не раскрывает, поэтому здесь это не учитывается.

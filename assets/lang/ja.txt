@@ -1752,3 +1752,7 @@ Wear armor pieces of a set to see its bonuses here. Four pieces of two sets give
 = ランク全体の{0}%
 waiting for clarification from dev
 = 開発者からの説明待ち
+The bonuses of everything chosen, added together, with the set bonuses reached. Click a piece to add a star (up to 5, then back to 0); right-click to take it off.
+= 選んだすべての装備のボーナスの合計と、達成したセットボーナス。装備をクリックすると星が1つ増えます（最大5、その次は0に戻る）。右クリックで外します。
+Stars decide which set bonuses you reach. What a star adds to a piece is not disclosed by the game, so it is not counted here.
+= 星は到達するセットボーナスを決めます。星が装備に何を加えるかはゲームで公開されていないため、ここでは計算しません。

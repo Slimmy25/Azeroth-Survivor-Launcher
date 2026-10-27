@@ -1751,3 +1751,7 @@ Wear armor pieces of a set to see its bonuses here. Four pieces of two sets give
 = {0} % av rangene dine
 waiting for clarification from dev
 = venter på avklaring fra utvikleren
+The bonuses of everything chosen, added together, with the set bonuses reached. Click a piece to add a star (up to 5, then back to 0); right-click to take it off.
+= Bonusene fra alt som er valgt, lagt sammen, med oppnådde settbonuser. Klikk på en del for å gi den en stjerne (opptil 5, så tilbake til 0); høyreklikk for å ta den av.
+Stars decide which set bonuses you reach. What a star adds to a piece is not disclosed by the game, so it is not counted here.
+= Stjerner avgjør hvilke settbonuser du når. Hva en stjerne gir en del, oppgir ikke spillet, så det telles ikke med her.

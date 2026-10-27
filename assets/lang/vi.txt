@@ -1752,3 +1752,7 @@ Wear armor pieces of a set to see its bonuses here. Four pieces of two sets give
 = {0}% số bậc của bạn
 waiting for clarification from dev
 = đang chờ nhà phát triển làm rõ
+The bonuses of everything chosen, added together, with the set bonuses reached. Click a piece to add a star (up to 5, then back to 0); right-click to take it off.
+= Tổng phần thưởng của mọi món đã chọn, kèm thưởng bộ đã đạt. Bấm vào một món để thêm sao (tối đa 5, rồi về 0); bấm chuột phải để tháo.
+Stars decide which set bonuses you reach. What a star adds to a piece is not disclosed by the game, so it is not counted here.
+= Sao quyết định bạn đạt được thưởng bộ nào. Trò chơi không tiết lộ một sao thêm gì cho món đồ, nên ở đây không tính.

@@ -1752,3 +1752,7 @@ Wear armor pieces of a set to see its bonuses here. Four pieces of two sets give
 = {0} % vašich úrovní
 waiting for clarification from dev
 = čeká se na upřesnění od vývojáře
+The bonuses of everything chosen, added together, with the set bonuses reached. Click a piece to add a star (up to 5, then back to 0); right-click to take it off.
+= Bonusy všeho vybraného dohromady, s dosaženými bonusy sad. Kliknutím na kus přidáte hvězdu (až 5, pak zpět na 0); pravým kliknutím ho sundáte.
+Stars decide which set bonuses you reach. What a star adds to a piece is not disclosed by the game, so it is not counted here.
+= Hvězdy určují, jakých bonusů sad dosáhnete. Kolik hvězda kusu přidá, hra neprozrazuje, proto se zde nepočítá.
