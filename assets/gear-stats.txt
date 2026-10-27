@@ -1,12 +1,176 @@
 Gear bonuses, entered by hand from the game's own item cards (the Armory's Collection: click a piece). The game works
 these numbers out as it runs, so they are not in its files like the rest of assets/items.txt.
 One piece per line:   class | rarity | slot | health | bonus=value, bonus=value, ...
-rarity: Common, Uncommon, Rare, Epic, PvP, Legendary.   slot: Head, Shoulder, Chest, Waist, Legs, Feet, Wrist, Hands, Main Hand
+rarity: Common, Uncommon, Rare, Epic, PvP, Legendary.   slot: Head, Shoulder, Chest, Waist, Legs, Feet, Wrist, Hands, Main Hand (a hunter's weapon: Ranged)
 bonus (as the card says it; percent bonuses as their percent):
   damage, cooldown, health% (max health), crit, critdmg, armor (damage reduction), regen (health per second),
   speed, area, pickup, xp, gold, luck, echo (chance to cast twice), lifesteal, killheal, targets, thorns, buff
 Lines starting with # and everything above the first === line are ignored.
 ===
+# Warrior, Common (Recruit's set, Worn Claymore)
+warrior | Common | Head | 8 | crit=0.7
+warrior | Common | Shoulder | 4 | area=2.8
+warrior | Common | Chest | 13 | armor=1.4
+warrior | Common | Waist | 0 | pickup=8.4, gold=4.2
+warrior | Common | Legs | 10 | regen=0.2
+warrior | Common | Feet | 0 | speed=5.3
+warrior | Common | Wrist | 0 | cooldown=1.8
+warrior | Common | Hands | 0 | crit=0.8, critdmg=4.2, pickup=42
+warrior | Common | Main Hand | 0 | damage=8.4
+# Warrior, Uncommon (Valor set, Bastard Sword of Valor)
+warrior | Uncommon | Head | 14 | crit=1.9, speed=1.4
+warrior | Uncommon | Shoulder | 7 | area=4.8, cooldown=1.4, regen=0.2
+warrior | Uncommon | Chest | 29 | armor=2.4, regen=0.3
+warrior | Uncommon | Waist | 0 | pickup=14, gold=7.1, damage=2.1, speed=1.1
+warrior | Uncommon | Legs | 17 | regen=0.4, area=2.8, crit=0.6
+warrior | Uncommon | Feet | 0 | speed=8.9, damage=2.1, crit=0.7
+warrior | Uncommon | Wrist | 7 | cooldown=3, armor=1.1
+warrior | Uncommon | Hands | 6 | crit=1.4, critdmg=7.1, pickup=71, cooldown=1.1
+warrior | Uncommon | Main Hand | 0 | damage=14, speed=1.4, crit=0.7
+# Warrior, Rare (Might set, Blackhand Doomsaw)
+warrior | Rare | Head | 21 | crit=2.9, speed=2.2
+warrior | Rare | Shoulder | 11 | area=7, cooldown=2.2, regen=0.3
+warrior | Rare | Chest | 45 | armor=3.5, regen=0.4
+warrior | Rare | Waist | 0 | pickup=21, gold=11, damage=3.4, speed=1.7
+warrior | Rare | Legs | 25 | regen=0.5, area=4.5, crit=0.9
+warrior | Rare | Feet | 0 | speed=13, damage=3.4, crit=1.1
+warrior | Rare | Wrist | 11 | cooldown=4.4, armor=1.7
+warrior | Rare | Hands | 9 | crit=2.1, critdmg=11, pickup=105, cooldown=1.7
+warrior | Rare | Main Hand | 0 | damage=21, speed=2.2, crit=1.1
+# Warrior, Epic (Wrath set, Ravager's Greatblade)
+warrior | Epic | Head | 29 | crit=4.1, speed=3.4
+warrior | Epic | Shoulder | 15 | area=9.8, cooldown=3.4, regen=0.5
+warrior | Epic | Chest | 64 | armor=4.9, regen=0.7
+warrior | Epic | Waist | 0 | pickup=29, gold=15, damage=5, speed=2.5
+warrior | Epic | Legs | 34 | regen=0.7, area=6.7, crit=1.3
+warrior | Epic | Feet | 0 | speed=18, damage=5, crit=1.7
+warrior | Epic | Wrist | 17 | cooldown=6.1, armor=2.5
+warrior | Epic | Hands | 13 | crit=2.9, critdmg=15, pickup=147, cooldown=2.5
+warrior | Epic | Main Hand | 0 | damage=29, speed=3.4, crit=1.7
+# Warrior, PvP (Field Marshal's set, Grand Marshal's Claymore)
+warrior | PvP | Head | 34 | crit=4.8, speed=4.1
+warrior | PvP | Shoulder | 17 | area=11, cooldown=4.1, regen=0.6
+warrior | PvP | Chest | 74 | armor=5.6, regen=0.8
+warrior | PvP | Waist | 0 | pickup=34, gold=17, damage=6.1, speed=3
+warrior | PvP | Legs | 39 | regen=0.8, area=8.1, crit=1.6
+warrior | PvP | Feet | 0 | speed=21, damage=6.1, crit=2
+warrior | PvP | Wrist | 20 | cooldown=7, armor=3
+warrior | PvP | Hands | 16 | crit=3.4, critdmg=17, pickup=168, cooldown=3
+warrior | PvP | Main Hand | 0 | damage=34, speed=4.1, crit=2
+# Warrior, Legendary (Dreadnaught set; the Gauntlets and Sulfuras were not in the video yet)
+warrior | Legendary | Head | 39 | crit=5.6, speed=4.8, echo=4.2
+warrior | Legendary | Shoulder | 19 | area=13, cooldown=4.8, regen=0.7, echo=4.2
+warrior | Legendary | Chest | 87 | armor=6.4, regen=1, echo=4.2
+warrior | Legendary | Waist | 0 | pickup=39, gold=19, damage=7.1, speed=3.6, echo=4.2
+warrior | Legendary | Legs | 45 | regen=1, area=9.5, crit=1.9, echo=4.2
+warrior | Legendary | Feet | 0 | speed=24, damage=7.1, crit=2.4, echo=4.2
+warrior | Legendary | Wrist | 24 | cooldown=8.1, armor=3.6, echo=4.2
+# Paladin, Common (Squire's set, Wooden Maul)
+paladin | Common | Head | 8 | crit=0.7
+paladin | Common | Shoulder | 4 | area=2.8
+paladin | Common | Chest | 13 | armor=1.4
+paladin | Common | Waist | 0 | pickup=8.4, gold=4.2
+paladin | Common | Legs | 10 | regen=0.2
+paladin | Common | Feet | 0 | speed=5.3
+paladin | Common | Wrist | 0 | cooldown=1.8
+paladin | Common | Hands | 0 | crit=0.8, critdmg=4.2, pickup=42
+paladin | Common | Main Hand | 0 | damage=8.4
+# Paladin, Uncommon (Lightforge set, Hammer of the Squire)
+paladin | Uncommon | Head | 14 | crit=1.2, damage=2.1, speed=1.1
+paladin | Uncommon | Shoulder | 7 | area=7.6, crit=0.6
+paladin | Uncommon | Chest | 21 | armor=2.4, damage=2.1, crit=0.7
+paladin | Uncommon | Waist | 7 | pickup=14, gold=7.1, armor=1.1
+paladin | Uncommon | Legs | 23 | regen=0.4, cooldown=1.1
+paladin | Uncommon | Feet | 0 | speed=10, crit=0.7
+paladin | Uncommon | Wrist | 0 | cooldown=4.4, regen=0.2
+paladin | Uncommon | Hands | 8 | crit=1.4, critdmg=7.1, pickup=71, regen=0.3
+paladin | Uncommon | Main Hand | 0 | damage=16, speed=1.1
+# Paladin, Rare (Lawbringer set, Hammer of the Lightforge)
+paladin | Rare | Head | 21 | crit=1.8, damage=3.4, speed=1.7
+paladin | Rare | Shoulder | 11 | area=11, crit=0.9
+paladin | Rare | Chest | 32 | armor=3.5, damage=3.4, crit=1.1
+paladin | Rare | Waist | 11 | pickup=21, gold=11, armor=1.7
+paladin | Rare | Legs | 34 | regen=0.5, cooldown=1.7
+paladin | Rare | Feet | 0 | speed=15, crit=1.1
+paladin | Rare | Wrist | 0 | cooldown=6.6, regen=0.3
+paladin | Rare | Hands | 13 | crit=2.1, critdmg=11, pickup=105, regen=0.4
+paladin | Rare | Main Hand | 0 | damage=24, speed=1.7
+# Paladin, Epic (Judgement set, Lightforged Hammer)
+paladin | Epic | Head | 29 | crit=2.5, damage=5, speed=2.5
+paladin | Epic | Shoulder | 15 | area=17, crit=1.3
+paladin | Epic | Chest | 44 | armor=4.9, damage=5, crit=1.7
+paladin | Epic | Waist | 17 | pickup=29, gold=15, armor=2.5
+paladin | Epic | Legs | 47 | regen=0.7, cooldown=2.5
+paladin | Epic | Feet | 0 | speed=22, crit=1.7
+paladin | Epic | Wrist | 0 | cooldown=9.5, regen=0.5
+paladin | Epic | Hands | 20 | crit=2.9, critdmg=15, pickup=147, regen=0.7
+paladin | Epic | Main Hand | 0 | damage=34, speed=2.5
+# Paladin, PvP (Field Marshal's set, Grand Marshal's Demolisher)
+paladin | PvP | Head | 34 | crit=2.8, damage=6.1, speed=3
+paladin | PvP | Shoulder | 17 | area=19, crit=1.6
+paladin | PvP | Chest | 50 | armor=5.6, damage=6.1, crit=2
+paladin | PvP | Waist | 20 | pickup=34, gold=17, armor=3
+paladin | PvP | Legs | 55 | regen=0.8, cooldown=3
+paladin | PvP | Feet | 0 | speed=25, crit=2
+paladin | PvP | Wrist | 0 | cooldown=11, regen=0.6
+paladin | PvP | Hands | 24 | crit=3.4, critdmg=17, pickup=168, regen=0.8
+paladin | PvP | Main Hand | 0 | damage=40, speed=3
+# Paladin, Legendary (Redemption set; the Sabatons, Bracers, Gauntlets and Ashbringer were not in the video yet)
+paladin | Legendary | Head | 39 | crit=3.2, damage=7.1, speed=3.6, echo=4.2
+paladin | Legendary | Shoulder | 19 | area=22, crit=1.9, echo=4.2
+paladin | Legendary | Chest | 58 | armor=6.4, damage=7.1, crit=2.4, echo=4.2
+paladin | Legendary | Waist | 24 | pickup=39, gold=19, armor=3.6, echo=4.2
+paladin | Legendary | Legs | 64 | regen=1, cooldown=3.6, echo=4.2
+# Hunter, Common (Tracker's set, Short Bow)
+hunter | Common | Head | 8 | crit=0.7
+hunter | Common | Shoulder | 4 | area=2.8
+hunter | Common | Chest | 13 | armor=1.4
+hunter | Common | Waist | 0 | pickup=8.4, gold=4.2
+hunter | Common | Legs | 10 | regen=0.2
+hunter | Common | Feet | 0 | speed=5.3
+hunter | Common | Wrist | 0 | cooldown=1.8
+hunter | Common | Hands | 0 | crit=0.8, critdmg=4.2, pickup=42
+hunter | Common | Ranged | 0 | damage=8.4
+# Hunter, Uncommon (Beaststalker's set, Hunting Bow of the Wilds)
+hunter | Uncommon | Head | 21 | crit=1.2, armor=1.1
+hunter | Uncommon | Shoulder | 13 | area=4.8, cooldown=1.1
+hunter | Uncommon | Chest | 21 | armor=2.4, speed=1.4, crit=0.7
+hunter | Uncommon | Waist | 0 | pickup=14, gold=7.1, cooldown=1.4, regen=0.2
+hunter | Uncommon | Legs | 25 | regen=0.6
+hunter | Uncommon | Feet | 0 | speed=10, damage=2.1
+hunter | Uncommon | Wrist | 0 | cooldown=3, area=2.8, crit=0.6
+hunter | Uncommon | Hands | 0 | crit=2.1, critdmg=7.1, pickup=71, damage=2.1
+hunter | Uncommon | Ranged | 7 | damage=14, armor=1.1
+# Hunter, Rare (Giantstalker's set, Bow of the Dragonflight)
+hunter | Rare | Head | 32 | crit=1.8, armor=1.7
+hunter | Rare | Shoulder | 20 | area=7, cooldown=1.7
+hunter | Rare | Chest | 32 | armor=3.5, speed=2.2, crit=1.1
+hunter | Rare | Waist | 0 | pickup=21, gold=11, cooldown=2.2, regen=0.3
+hunter | Rare | Legs | 38 | regen=1
+hunter | Rare | Feet | 0 | speed=15, damage=3.4
+hunter | Rare | Wrist | 0 | cooldown=4.4, area=4.5, crit=0.9
+hunter | Rare | Hands | 0 | crit=3.2, critdmg=11, pickup=105, damage=3.4
+hunter | Rare | Ranged | 11 | damage=21, armor=1.7
+# Hunter, Epic (Dragonstalker's set, Ahn'Qiraj Rifle)
+hunter | Epic | Head | 46 | crit=2.5, armor=2.5
+hunter | Epic | Shoulder | 28 | area=9.8, cooldown=2.5
+hunter | Epic | Chest | 44 | armor=4.9, speed=3.4, crit=1.7
+hunter | Epic | Waist | 0 | pickup=29, gold=15, cooldown=3.4, regen=0.5
+hunter | Epic | Legs | 54 | regen=1.4
+hunter | Epic | Feet | 0 | speed=21, damage=5
+hunter | Epic | Wrist | 0 | cooldown=6.1, area=6.7, crit=1.3
+hunter | Epic | Hands | 0 | crit=4.6, critdmg=15, pickup=147, damage=5
+hunter | Epic | Ranged | 17 | damage=29, armor=2.5
+# Hunter, PvP (Field Marshal's set, Grand Marshal's Bullseye; the Helm was not in the video yet)
+hunter | PvP | Shoulder | 33 | area=11, cooldown=3
+hunter | PvP | Chest | 50 | armor=5.6, speed=4.1, crit=2
+hunter | PvP | Waist | 0 | pickup=34, gold=17, cooldown=4.1, regen=0.6
+hunter | PvP | Legs | 63 | regen=1.7
+hunter | PvP | Feet | 0 | speed=24, damage=6.1
+hunter | PvP | Wrist | 0 | cooldown=7, area=8.1, crit=1.6
+hunter | PvP | Hands | 0 | crit=5.4, critdmg=17, pickup=168, damage=6.1
+hunter | PvP | Ranged | 20 | damage=34, armor=3
+# Hunter, Legendary (Cryptstalker set, Rhok'delar): not in the video yet
 # Priest, Common (Acolyte's set, Acolyte's Staff)
 priest | Common | Head | 8 | crit=0.7
 priest | Common | Shoulder | 4 | area=2.8
