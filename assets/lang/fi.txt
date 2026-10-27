@@ -1787,3 +1787,5 @@ This launcher is here to help you play and manage Azeroth Survivors: it installs
 = Tämä käynnistin auttaa sinua pelaamaan ja hallitsemaan Azeroth Survivorsia: se asentaa pelin, pitää edistymisesi turvassa pilvessä, hallitsee lisäosiasi ja näyttää tilastosi ja oppaan. Ilman käyttöönottoa sillä on vähän annettavaa.\n\nAloita käyttöönotto uudelleen, kun olet valmis.
 START SETUP AGAIN
 = ALOITA UUDELLEEN
+Search every page for "{0}"
+= Hae ”{0}” kaikilta sivuilta

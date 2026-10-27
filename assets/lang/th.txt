@@ -1788,3 +1788,5 @@ This launcher is here to help you play and manage Azeroth Survivors: it installs
 = ตัวเปิดเกมนี้ช่วยให้คุณเล่นและจัดการ Azeroth Survivors: ติดตั้งเกม เก็บความคืบหน้าบนคลาวด์อย่างปลอดภัย จัดการแอดออน และแสดงสถิติกับคู่มือ หากไม่ตั้งค่าก็มีให้ใช้ไม่มาก\n\nเริ่มตั้งค่าใหม่เมื่อคุณพร้อม
 START SETUP AGAIN
 = เริ่มตั้งค่าใหม่
+Search every page for "{0}"
+= ค้นหา "{0}" ในทุกหน้า

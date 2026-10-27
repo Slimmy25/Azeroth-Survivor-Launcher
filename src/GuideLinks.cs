@@ -25,6 +25,32 @@ namespace AzerothLauncher
         static Dictionary<string, GuideLink> links;
         static Regex finder;
         public static Action<GuideLink> Navigate;            // set by the launcher: open the Guide where the link goes
+
+        // the Guide's words (spells, talents, items, races, zones) whose name holds every word typed, the ones that start
+        // with it first: the search box's suggestions. Only those that lead somewhere.
+        public static List<GuideLink> Matching(string q, int max)
+        {
+            if (links == null) Build();
+            var list = new List<GuideLink>();
+            string[] words = (q ?? "").ToLowerInvariant().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            if (words.Length == 0) return list;
+            foreach (var l in links.Values)
+            {
+                if (l.Topic < 0 && l.Class == null) continue;
+                string n = l.Term.ToLowerInvariant();
+                bool all = true;
+                foreach (string w in words) if (!n.Contains(w)) { all = false; break; }
+                if (all) list.Add(l);
+            }
+            string first = words[0];
+            list.Sort(delegate(GuideLink a, GuideLink b)
+            {
+                int sa = a.Term.ToLowerInvariant().StartsWith(first) ? 0 : 1, sb = b.Term.ToLowerInvariant().StartsWith(first) ? 0 : 1;
+                return sa != sb ? sa.CompareTo(sb) : a.Term.Length.CompareTo(b.Term.Length);
+            });
+            if (list.Count > max) list.RemoveRange(max, list.Count - max);
+            return list;
+        }
         public static Func<Dictionary<string, string>> CapturedTips;   // set by the launcher: the game's tooltips AZS Stats saw
         static Dictionary<string, GuideLink> byKey;           // the same links by Norm(name): "shadowbolt" -> Shadow Bolt
 

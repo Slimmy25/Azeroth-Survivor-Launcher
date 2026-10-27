@@ -1788,3 +1788,5 @@ This launcher is here to help you play and manage Azeroth Survivors: it installs
 = 本啟動器幫助你遊玩和管理 Azeroth Survivors：安裝遊戲、在雲端保護進度、管理插件，並顯示統計與指南。不進行設定，它能提供的很少。\n\n準備好後隨時重新開始設定。
 START SETUP AGAIN
 = 重新開始設定
+Search every page for "{0}"
+= 在所有頁面中搜尋「{0}」

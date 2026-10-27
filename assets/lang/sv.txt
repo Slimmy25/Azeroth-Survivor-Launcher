@@ -1787,3 +1787,5 @@ This launcher is here to help you play and manage Azeroth Survivors: it installs
 = Det här startprogrammet hjälper dig att spela och hantera Azeroth Survivors: det installerar spelet, håller dina framsteg säkra i molnet, hanterar dina tillägg och visar din statistik och guiden. Utan konfiguration har det lite att erbjuda.\n\nStarta konfigurationen igen när du är redo.
 START SETUP AGAIN
 = STARTA KONFIGURATIONEN IGEN
+Search every page for "{0}"
+= Sök efter ”{0}” på alla sidor

@@ -1788,3 +1788,5 @@ This launcher is here to help you play and manage Azeroth Survivors: it installs
 = Trình khởi chạy này giúp bạn chơi và quản lý Azeroth Survivors: cài trò chơi, giữ tiến trình an toàn trên đám mây, quản lý addon và hiển thị thống kê cùng hướng dẫn. Không thiết lập thì nó chẳng có mấy thứ để dùng.\n\nHãy bắt đầu thiết lập lại khi bạn sẵn sàng.
 START SETUP AGAIN
 = BẮT ĐẦU THIẾT LẬP LẠI
+Search every page for "{0}"
+= Tìm "{0}" trên mọi trang

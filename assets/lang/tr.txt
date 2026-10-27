@@ -1788,3 +1788,5 @@ This launcher is here to help you play and manage Azeroth Survivors: it installs
 = Bu başlatıcı Azeroth Survivors'ı oynamana ve yönetmene yardım eder: oyunu kurar, ilerlemeni bulutta güvende tutar, eklentilerini yönetir, istatistiklerini ve rehberi gösterir. Kurulum olmadan sunabileceği pek bir şey yok.\n\nHazır olduğunda kurulumu yeniden başlat.
 START SETUP AGAIN
 = KURULUMU YENİDEN BAŞLAT
+Search every page for "{0}"
+= Tüm sayfalarda "{0}" ara
