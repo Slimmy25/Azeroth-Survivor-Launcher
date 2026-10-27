@@ -3,6 +3,10 @@
 
 ## What's new
 
+This is a very large, but scattered update: it touches many different parts of the launcher, from the first-time setup to
+the Guide and the Gear Planner, rather than one big feature. Taken together it is a big step up in how easy and simple
+the launcher is to use.
+
 ### Gear Planner: stars
 - Click a piece on the character sheet to add a star: each click adds one, up to 5, and the next click goes back to 0.
   A small number on the piece shows its stars. The star buttons above the list are gone. Right-click still takes the
@@ -57,3 +61,6 @@
 - No more NEXT button at the end of Guide pages: hover or click a step of the path at the top to go to any other page or
   topic. The Changelog keeps its PREVIOUS and NEXT.
 - Options > GRAPHICS no longer starts with "The game's own settings. They take effect the next time the game starts."
+- Guide search: typing no longer jumps to a page at the first letter. A list of suggestions opens under the box as you
+  type (topics, pages and the Guide's spells, items, zones and races); click one to go there, or press Enter (or pick
+  the last line) to see every page your words are found in.

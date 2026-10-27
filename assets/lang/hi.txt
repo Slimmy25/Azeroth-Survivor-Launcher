@@ -1788,3 +1788,5 @@ This launcher is here to help you play and manage Azeroth Survivors: it installs
 = यह लॉन्चर Azeroth Survivors खेलने और संभालने में आपकी मदद के लिए है: यह गेम इंस्टॉल करता है, आपकी प्रगति क्लाउड में सुरक्षित रखता है, ऐडऑन संभालता है और आपके आँकड़े व गाइड दिखाता है। सेटअप के बिना इसके पास देने को बहुत कम है।\n\nजब तैयार हों, सेटअप फिर से शुरू करें।
 START SETUP AGAIN
 = सेटअप फिर से शुरू करें
+Search every page for "{0}"
+= हर पेज में "{0}" खोजें

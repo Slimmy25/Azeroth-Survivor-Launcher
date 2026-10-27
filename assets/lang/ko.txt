@@ -1788,3 +1788,5 @@ This launcher is here to help you play and manage Azeroth Survivors: it installs
 = 이 런처는 Azeroth Survivors를 플레이하고 관리하도록 돕습니다. 게임을 설치하고, 진행 상황을 클라우드에 안전하게 보관하고, 애드온을 관리하며, 통계와 가이드를 보여 줍니다. 설정 없이는 제공할 것이 거의 없습니다.\n\n준비되면 설정을 다시 시작하세요.
 START SETUP AGAIN
 = 설정 다시 시작
+Search every page for "{0}"
+= 모든 페이지에서 "{0}" 검색

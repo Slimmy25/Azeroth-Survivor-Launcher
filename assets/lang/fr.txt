@@ -1787,3 +1787,5 @@ This launcher is here to help you play and manage Azeroth Survivors: it installs
 = Ce launcher vous aide à jouer et à gérer Azeroth Survivors : il installe le jeu, garde votre progression à l'abri dans le cloud, gère vos addons et affiche vos statistiques et le guide. Sans configuration, il n'a pas grand-chose à offrir.\n\nRelancez la configuration quand vous serez prêt.
 START SETUP AGAIN
 = RECOMMENCER LA CONFIGURATION
+Search every page for "{0}"
+= Chercher « {0} » dans toutes les pages

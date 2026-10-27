@@ -96,18 +96,100 @@ namespace AzerothLauncher
             var search = new GuideSearchBox(PW - 40, sh);
             search.Text = guideQuery;
             Put(search, 20, 8);
-            if (guideQuery.Length == 0)
-                search.TextChanged += delegate
-                {
-                    guideQuery = search.Text;
-                    if (guideQuery.Length == 0) return;
-                    guideFocusSearch = true;
-                    gBuilder = false; gPlanner = false;
-                    SetGuideView(-1, -1);                     // the results take the topic's place
-                };
+            // on the main page, typing just types: a list of suggestions opens under the box as you type (topics, pages
+            // and the Guide's words: spells, items, zones). A click on one goes there; Enter (or the last line) shows
+            // every page the words are found in.
+            if (guideQuery.Length == 0) SearchSuggestions(search, 20, 8 + sh);
             if (guideFocusSearch) { guideFocusSearch = false; search.Focus(); search.SelectionStart = search.TextLength; }
             guideSearch = search;
             guideTabsBottom = 8 + sh + 8;
+        }
+
+        // one line of the search box's suggestions
+        class GuideHint
+        {
+            public string Text;
+            public Action Go;
+            public override string ToString() { return Text; }
+        }
+
+        void SearchSuggestions(GuideSearchBox search, int x, int y)
+        {
+            var drop = new ListBox();
+            drop.BorderStyle = BorderStyle.FixedSingle;
+            drop.BackColor = Theme.Hex("#16151e");
+            drop.ForeColor = Theme.Hex("#f5e9c8");
+            drop.Font = Theme.F(10);
+            drop.IntegralHeight = false;
+            drop.Visible = false;
+            drop.Width = search.Width;
+            Put(drop, x, y);
+            drop.BringToFront();
+            Action showAll = delegate
+            {
+                guideQuery = search.Text;
+                if (guideQuery.Trim().Length == 0) return;
+                guideFocusSearch = true;
+                gBuilder = false; gPlanner = false;
+                SetGuideView(-1, -1);                         // every page the words are found in
+            };
+            Action pick = delegate
+            {
+                var h = drop.SelectedItem as GuideHint;
+                if (h != null) WowButton.Fire(h.Go);
+            };
+            drop.MouseClick += delegate { pick(); };
+            drop.KeyDown += delegate(object s, KeyEventArgs e)
+            {
+                if (e.KeyCode == Keys.Enter) { e.SuppressKeyPress = true; pick(); }
+                else if (e.KeyCode == Keys.Escape) { drop.Visible = false; search.Focus(); }
+            };
+            search.KeyDown += delegate(object s, KeyEventArgs e)
+            {
+                if (e.KeyCode == Keys.Down && drop.Visible && drop.Items.Count > 0) { e.SuppressKeyPress = true; drop.Focus(); drop.SelectedIndex = 0; }
+                else if (e.KeyCode == Keys.Enter) { e.SuppressKeyPress = true; WowButton.Fire(showAll); }
+                else if (e.KeyCode == Keys.Escape) drop.Visible = false;
+            };
+            search.TextChanged += delegate
+            {
+                string q = search.Text.Trim();
+                drop.BeginUpdate();
+                drop.Items.Clear();
+                if (q.Length > 0)
+                {
+                    var topics = Data.Guide;
+                    string[] words = q.ToLowerInvariant().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                    Func<string, bool> has = delegate(string title)
+                    {
+                        string hay = Lang.T(title).ToLowerInvariant() + " " + title.ToLowerInvariant();
+                        foreach (string w in words) if (!hay.Contains(w)) return false;
+                        return true;
+                    };
+                    for (int t = 0; t < topics.Count && drop.Items.Count < 6; t++)
+                    {
+                        int ti = t;
+                        if (has(topics[t].Title)) drop.Items.Add(new GuideHint { Text = Lang.T(topics[t].Title), Go = delegate { OpenGuideTab(ti); } });
+                        for (int p = 0; p < topics[t].Pages.Count && drop.Items.Count < 6; p++)
+                        {
+                            int pi = p;
+                            if (has(topics[t].Pages[p].Title))
+                                drop.Items.Add(new GuideHint { Text = Lang.T(topics[t].Pages[p].Title) + "   ·   " + Lang.T(topics[t].Title), Go = delegate { SetGuideView(ti, pi); } });
+                        }
+                    }
+                    foreach (var l in GuideLinks.Matching(q, 12 - drop.Items.Count))
+                    {
+                        GuideLink link = l;
+                        string where = l.Topic >= 0 && l.Topic < topics.Count ? Lang.T(topics[l.Topic].Title) : Lang.T("Talents");
+                        drop.Items.Add(new GuideHint { Text = l.Term + "   ·   " + where, Go = delegate { if (GuideLinks.Navigate != null) GuideLinks.Navigate(link); } });
+                    }
+                    drop.Items.Add(new GuideHint { Text = Lang.F("Search every page for \"{0}\"", q), Go = showAll });
+                }
+                drop.EndUpdate();
+                int rows = Math.Min(drop.Items.Count, 10);
+                drop.Height = rows * drop.ItemHeight + 4;
+                drop.Visible = rows > 0;
+                if (drop.Visible) drop.BringToFront();
+            };
         }
 
         static string GroupName(int g)

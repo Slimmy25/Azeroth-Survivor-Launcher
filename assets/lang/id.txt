@@ -1787,3 +1787,5 @@ This launcher is here to help you play and manage Azeroth Survivors: it installs
 = Launcher ini ada untuk membantumu bermain dan mengelola Azeroth Survivors: memasang game, menjaga progresmu di cloud, mengelola addon, serta menampilkan statistik dan panduan. Tanpa penyiapan, tidak banyak yang bisa ditawarkan.\n\nMulai lagi penyiapan kapan pun kamu siap.
 START SETUP AGAIN
 = MULAI PENYIAPAN LAGI
+Search every page for "{0}"
+= Cari "{0}" di semua halaman

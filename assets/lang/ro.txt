@@ -1788,3 +1788,5 @@ This launcher is here to help you play and manage Azeroth Survivors: it installs
 = Acest launcher te ajută să joci și să gestionezi Azeroth Survivors: instalează jocul, îți păstrează progresul în cloud, îți gestionează addon-urile și îți arată statisticile și ghidul. Fără configurare are puțin de oferit.\n\nPornește din nou configurarea când ești gata.
 START SETUP AGAIN
 = REPORNEȘTE CONFIGURAREA
+Search every page for "{0}"
+= Caută „{0}” în toate paginile
