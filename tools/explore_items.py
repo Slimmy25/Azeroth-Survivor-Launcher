@@ -38,8 +38,10 @@ def rows(start, end, step):
     for a in range(start, end, step):
         say("%x: %s" % (a, dump(a, step // 4)))
 
-rows(0x506740, 0x506740 + 40 * 46, 40)
-rows(0x4d7c00, 0x4d8000, 64)
+rows(0x480378, 0x480378 + 0xe8 * 3, 0xe8 // 2 if False else 116)
+rows(0x480f54, 0x480f54 + 0x5c * 4, 92)
+rows(0x47df90, 0x47df90 + 36 * 12, 36)
+rows(0x506ab0, 0x506ab0 + 40 * 30, 40)
 text = "\n".join(out)
 # annotations: chunks of about 3500 characters
 chunk, n = "", 0
