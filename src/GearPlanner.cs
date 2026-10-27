@@ -79,7 +79,9 @@ namespace AzerothLauncher
         static readonly string[] Left = { "Head", "Neck", "Shoulder", "Back", "Chest", "Shirt", "Tabard", "Wrist" };
         static readonly string[] Right = { "Hands", "Waist", "Legs", "Feet", "Finger 1", "Finger 2", "Trinket 1", "Trinket 2" };
         static readonly string[] Bottom = { "Main Hand", "Off Hand", "Ranged" };
-        static readonly HashSet<string> Unused = new HashSet<string> { "Back", "Shirt", "Tabard", "Off Hand", "Ranged" };
+        static readonly HashSet<string> UnusedSlots = new HashSet<string> { "Back", "Shirt", "Tabard", "Off Hand", "Ranged" };
+        static readonly HashSet<string> UnusedHunter = new HashSet<string> { "Back", "Shirt", "Tabard", "Off Hand", "Main Hand" };
+        HashSet<string> Unused { get { return cls == "Hunter" ? UnusedHunter : UnusedSlots; } }   // a hunter's weapon is Ranged
 
         readonly string cls;
         readonly Dictionary<string, object> slots;

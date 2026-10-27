@@ -304,7 +304,8 @@ namespace AzerothLauncher
                             p.Drops.Add(boss + " · " + z[1] + (time.Length > 0 ? " · " + time : ""));
                         }
                         GearPiece kp;
-                        if (known.TryGetValue(k + "|" + rar + "|" + slot, out kp)) { p.Health = kp.Health; p.Bonuses = kp.Bonuses; }
+                        if (slot == "Main Hand" && k == "hunter") p.Slot = "Ranged";   // a hunter's bow or gun: the Ranged slot, as in the game
+                        if (known.TryGetValue(k + "|" + rar + "|" + p.Slot, out kp)) { p.Health = kp.Health; p.Bonuses = kp.Bonuses; }
                         g.Add(p);
                     }
             }
