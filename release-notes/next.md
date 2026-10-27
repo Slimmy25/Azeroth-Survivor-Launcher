@@ -3,3 +3,6 @@
 
 ## What's new
 
+### News and Changelog
+- Patch notes for the game's 0.120.5 update: co-op works on networks that blocked the co-op server, and an unreachable
+  server is reported as such instead of "the host left".
