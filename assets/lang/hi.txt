@@ -1716,3 +1716,7 @@ Cloud saving stays off. You can turn it on later in Options > CLOUD SAVE.
 = क्लाउड सेविंग बंद रहेगी। आप इसे बाद में विकल्प > CLOUD SAVE में चालू कर सकते हैं।
 The launcher's whole Guide inside the game (/handbook): every topic and page, each class's spells with their icons and what changes them, each class's gear, the Talent Tree Builder and the Gear Planner, the same as in the launcher.
 = लॉन्चर की पूरी गाइड गेम के अंदर (/handbook): हर विषय और पेज, हर क्लास के मंत्र उनके आइकन और उन्हें बदलने वाली चीज़ों के साथ, हर क्लास का गियर, टैलेंट ट्री बिल्डर और गियर प्लानर, बिल्कुल लॉन्चर जैसा।
+Folders
+= फ़ोल्डर
+Graphics
+= ग्राफ़िक्स

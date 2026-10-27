@@ -1715,3 +1715,7 @@ Cloud saving stays off. You can turn it on later in Options > CLOUD SAVE.
 = Opslaan in de cloud blijft uit. Je kunt het later aanzetten in Opties > CLOUD SAVE.
 The launcher's whole Guide inside the game (/handbook): every topic and page, each class's spells with their icons and what changes them, each class's gear, the Talent Tree Builder and the Gear Planner, the same as in the launcher.
 = De hele gids van de launcher in het spel (/handbook): elk onderwerp en elke pagina, de spreuken van elke klasse met hun iconen en wat ze verandert, de uitrusting van elke klasse, de talentboombouwer en de uitrustingsplanner, net als in de launcher.
+Folders
+= Mappen
+Graphics
+= Graphics

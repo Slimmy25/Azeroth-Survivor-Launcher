@@ -1716,3 +1716,7 @@ Cloud saving stays off. You can turn it on later in Options > CLOUD SAVE.
 = 云存档保持关闭。之后可在“选项 > CLOUD SAVE”中开启。
 The launcher's whole Guide inside the game (/handbook): every topic and page, each class's spells with their icons and what changes them, each class's gear, the Talent Tree Builder and the Gear Planner, the same as in the launcher.
 = 游戏内的完整启动器指南（/handbook）：每个主题和页面、各职业的法术及其图标和改变它们的内容、各职业的装备、天赋树构建器和装备规划器，与启动器中完全相同。
+Folders
+= 文件夹
+Graphics
+= 图形

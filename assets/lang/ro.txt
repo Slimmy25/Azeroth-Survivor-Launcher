@@ -1716,3 +1716,7 @@ Cloud saving stays off. You can turn it on later in Options > CLOUD SAVE.
 = Salvarea în cloud rămâne oprită. O poți porni mai târziu din Opțiuni > CLOUD SAVE.
 The launcher's whole Guide inside the game (/handbook): every topic and page, each class's spells with their icons and what changes them, each class's gear, the Talent Tree Builder and the Gear Planner, the same as in the launcher.
 = Tot ghidul launcherului în joc (/handbook): fiecare subiect și pagină, vrăjile fiecărei clase cu iconițele lor și ce le schimbă, echipamentul fiecărei clase, constructorul de talente și planificatorul de echipament, la fel ca în launcher.
+Folders
+= Foldere
+Graphics
+= Grafică
