@@ -28,6 +28,8 @@
   empty build (before, the last build came back).
 
 ### Addons
+- New in Download More > AZS ADDONS: Survivor UI by morderous (with Survivor Plates). The launcher always takes the
+  addon zip from its newest release (SurvivorUI-v….zip), never the Survivor UI installer next to it.
 - MinimapButtonBag: clicking the bag now opens its bar of buttons. It closed itself a moment after opening, and a
   minimap button the game shows by itself could make the bag think the bar was already open. The bar now stays until
   your pointer has been away from it for 3 seconds (change it in its options, right-click the bag). New: /mbb open

@@ -6,7 +6,8 @@
 # "local:<folder>" instead of a link zips that folder of this repository (addons/<folder>) instead;
 # "hosted" means the zip lives on the "addons" release itself (uploaded there by hand: to update it, upload the new
 # zip under the same name on the release); the workflow only checks that it is there.
-# "github-latest:<owner>/<repo>" takes the .zip of that repository's newest release (its name can change).
+# "github-latest:<owner>/<repo>" takes the .zip of that repository's newest release (its name can change);
+# "github-latest:<owner>/<repo>:<prefix>" only a .zip whose name starts with <prefix> (a release with other zips too).
 # "local:<folder>+<folder>" zips several folders into the one .zip (an addon that comes with a second one).
 # The launcher's Download More list (assets/addons.txt) points at:
 #   https://github.com/Slimmy25/Azeroth-Survivor-Launcher-Releases/releases/download/addons/<file name>
@@ -16,6 +17,8 @@ Death-Recap-by-Fotze.zip        | hosted
 Azerloot-by-KindaGray.zip       | github-latest:Kindagrey/Azerloot
 Chest-GPS-by-Fotze.zip          | hosted
 SurvivorsDragonUi-by-Mxgwyn.zip | https://github.com/migwynkriid13/SurvivorsDragonUi/releases/latest/download/SurvivorsDragonUi.zip
+# Survivor UI: always the addon zip (SurvivorUI-v<version>.zip), never the SurvivorUI-Installer.zip next to it
+Survivor-UI-by-morderous.zip    | github-latest:morderous/survivor-ui:SurvivorUI-v
 Keijin-UI-by-Keijin.zip         | https://github.com/KeijinDE/KeijinUI_modern-as-ui/releases/download/v3.7.1/KeijinUI-3.7.1.zip
 AZS-Stats-by-Slimjim.zip        | local:AZSStats
 MinimapButtonBag-by-Tunhadil-LaYt.zip | local:MBB
