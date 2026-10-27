@@ -438,6 +438,7 @@ mage | Legendary | Legs | 45 | regen=1.7, cooldown=4.8, echo=4.2
 mage | Legendary | Feet | 29 | speed=24, regen=1, echo=4.2
 mage | Legendary | Wrist | 0 | cooldown=8.1, damage=7.1, speed=3.6, echo=4.2
 mage | Legendary | Hands | 0 | crit=5.8, critdmg=19, pickup=193, area=9.5, echo=4.2
+mage | Legendary | Main Hand | 0 | damage=46, crit=2.4, targets=1
 # Warlock, Common
 warlock | Common | Head | 8 | crit=0.7
 warlock | Common | Shoulder | 4 | area=2.8
