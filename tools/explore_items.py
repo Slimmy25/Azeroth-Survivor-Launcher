@@ -38,16 +38,22 @@ def rows(start, end, step):
     for a in range(start, end, step):
         say("%x: %s" % (a, dump(a, step // 4)))
 
-# runs of 5-6 increasing small floats (rarity tiers?) anywhere in the data
-seen = 0
-for a in range(1048576, len(mem) - 24, 4):
-    v = [f(a + 4 * k) for k in range(6)]
-    if all(0.001 <= x <= 5000 for x in v) and all(v[k] < v[k + 1] for k in range(5)) and v[5] / v[0] < 20 and v[5] / v[0] > 1.5:
-        if len(set(round(x, 4) for x in v)) == 6 and all(abs(x * 1000 - round(x * 1000)) < 1e-3 or abs(x - round(x)) < 1e-6 for x in v):
-            say("%x: %s" % (a, " ".join("%g" % x for x in v)))
-            seen += 1
-            if seen > 120: break
-rows(0x480378 + 0xe8 * 3, 0x480378 + 0xe8 * 9, 116)
+# the Priest's legendary (Faith) pieces as the game shows them: look for their numbers stored together
+import math
+def near(x, y): return abs(x - y) <= max(1e-4, abs(y) * 2e-3)
+targets = [0.042, 0.071, 0.024, 0.095, 0.051, 0.039, 1.93, 0.036, 0.081, 0.048, 0.24, 0.39, 0.19, 0.13, 0.019, 0.39]
+floats = {}
+for a in range(1048576, len(mem) - 4, 4):
+    x = f(a)
+    for t in (0.042, 1.93, 0.081, 0.095, 0.071, 0.39, 0.019):
+        if near(x, t): floats.setdefault(t, []).append(a)
+for t, l in floats.items():
+    say("f32 %g at %d places: %s" % (t, len(l), " ".join("%x" % a for a in l[:40])))
+# doubles too
+for a in range(1048576, len(mem) - 8, 8):
+    x = struct.unpack_from("<d", mem, a)[0]
+    for t in (0.042, 1.93, 0.081, 0.095, 0.071):
+        if near(x, t): say("f64 %g at %x" % (t, a))
 text = "\n".join(out)
 # annotations: chunks of about 3500 characters
 chunk, n = "", 0
