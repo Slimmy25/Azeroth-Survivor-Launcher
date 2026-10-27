@@ -6,3 +6,8 @@
 ### News and Changelog
 - Patch notes for the game's 0.120.5 update: co-op works on networks that blocked the co-op server, and an unreachable
   server is reported as such instead of "the host left".
+
+### Gear Planner and Items
+- Every Priest piece now has its bonuses: the Common (Acolyte's), Uncommon (Devout), Rare (Prophecy) and Epic
+  (Transcendence) sets and their staves join Legendary and PvP. All 54 Priest pieces count in the Gear Planner's
+  totals and in the spell and talent hover numbers; none is marked * any more.
