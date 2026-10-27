@@ -84,15 +84,21 @@ def main():
     debug.append("amulet rows: %d" % len(amulet_rows))
     for x in amulet_rows:
         debug.append("  %x %s | %s | %s | %d %d %d" % x)
-    if amulet_rows:
-        end = amulet_rows[-1][0] + 36
-        for q in range(end, end + 40 * 40, 40):
-            debug.append("after %x: %s" % (q, " ".join(
-                ("%x" % u(q + 4 * i)) + ("=%g" % f(q + 4 * i) if 0x30000000 < u(q + 4 * i) < 0x48000000 else "") for i in range(10))))
-        start = amulet_rows[0][0]
-        for q in range(start - 40 * 30, start, 40):
-            debug.append("before %x: %s" % (q, " ".join(
-                ("%x" % u(q + 4 * i)) + ("=%g" % f(q + 4 * i) if 0x30000000 < u(q + 4 * i) < 0x48000000 else "") for i in range(10))))
+    for x in amulet_rows:
+        ptr, cnt = x[4], x[5]
+        for i in range(cnt):
+            q = ptr + 40 * i
+            debug.append("  effect %s %d: %s" % (x[1], i, " ".join(
+                ("%x" % u(q + 4 * j)) + ("=%g" % f(q + 4 * j) if 0x30000000 < u(q + 4 * j) < 0x48000000 else "") for j in range(10))))
+    # the texts the amulets' lines use: a table of (pointer, length) to texts with "{p}"
+    tmpl = []
+    for r in range(1048576, len(mem) - 8, 4):
+        t = s(u(r), u(r + 4))
+        if t and "{p}" in t and len(t) < 120:
+            tmpl.append((r, t))
+    debug.append("templates: %d" % len(tmpl))
+    for r, t in tmpl[:80]:
+        debug.append("  tmpl %x %s" % (r, t))
     amulets = sorted((k[7:], v) for k, v in en.items() if k.startswith("amulet."))
 
     # ---- the class sets: five (name, length, "of" flag) entries in a row, the first the class's common set
@@ -124,7 +130,7 @@ def main():
     pvp = []
     fm = en.get("set.pvp.alliance") or "Field Marshal's"
     for r in range(1048576, len(mem) - 96, 4):
-        if s(u(r), u(r + 4)) != fm:
+        if s(u(r), u(r + 4)) not in (fm, "Warlord's"):
             continue
         horde = s(u(r + 8), u(r + 12))
         wp, wn, cid = u(r + 16), u(r + 20), u(r + 88)
@@ -135,7 +141,7 @@ def main():
             q = wp + 24 * i
             weapons.append((s(u(q + 4), u(q + 8)), s(u(q + 16), u(q + 20))))
         if all(a and h for a, h in weapons):
-            pvp.append((cid, fm, horde, weapons))
+            pvp.append((cid, s(u(r), u(r + 4)), horde, weapons))
             debug.append("pvp row %x class %d: %s / %s %s" % (r, cid, fm, horde, weapons))
 
     # ---- drop chances: a run of decreasing shares from 60% to 20%
