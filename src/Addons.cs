@@ -52,12 +52,27 @@ namespace AzerothLauncher
         {
             new Conflict { Preferred = new[] { "SurvivorUI", "SurvivorsUI" }, Other = new[] { "AZSMinorMods" },
                            Why = "both set raid marks on bosses and party members" },
-            // the interfaces (Download More > UI): pick one. Survivor UI is kept when two are found on.
+            // the interfaces (Download More > UI): pick one. When two are found on, the one kept is the first of: Survivor UI,
+            // SurvivorsDragonUi, Keijin UI, Bordo UI, BlackwellUI
             new Conflict { Preferred = new[] { "SurvivorUI", "SurvivorsUI" }, Other = new[] { "SurvivorsDragonUi" },
                            Why = "both replace the game's interface" },
             new Conflict { Preferred = new[] { "SurvivorUI", "SurvivorsUI" }, Other = new[] { "KeijinUI" },
                            Why = "both replace the game's interface" },
             new Conflict { Preferred = new[] { "SurvivorsDragonUi" }, Other = new[] { "KeijinUI" },
+                           Why = "both replace the game's interface" },
+            new Conflict { Preferred = new[] { "SurvivorUI", "SurvivorsUI" }, Other = new[] { "BordoUI" },
+                           Why = "both replace the game's interface" },
+            new Conflict { Preferred = new[] { "SurvivorUI", "SurvivorsUI" }, Other = new[] { "BlackwellUI" },
+                           Why = "both replace the game's interface" },
+            new Conflict { Preferred = new[] { "SurvivorsDragonUi" }, Other = new[] { "BordoUI" },
+                           Why = "both replace the game's interface" },
+            new Conflict { Preferred = new[] { "SurvivorsDragonUi" }, Other = new[] { "BlackwellUI" },
+                           Why = "both replace the game's interface" },
+            new Conflict { Preferred = new[] { "KeijinUI" }, Other = new[] { "BordoUI" },
+                           Why = "both replace the game's interface" },
+            new Conflict { Preferred = new[] { "KeijinUI" }, Other = new[] { "BlackwellUI" },
+                           Why = "both replace the game's interface" },
+            new Conflict { Preferred = new[] { "BordoUI" }, Other = new[] { "BlackwellUI" },
                            Why = "both replace the game's interface" },
         };
 

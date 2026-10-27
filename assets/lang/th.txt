@@ -1688,3 +1688,11 @@ Spells that affect this:
 = คาถาที่ส่งผลต่อคาถานี้:
 Found your game and its saves: first-time setup skipped. Every setting is in Options.
 = พบเกมและเซฟของคุณแล้ว: ข้ามการตั้งค่าครั้งแรก การตั้งค่าทั้งหมดอยู่ในตัวเลือก
+A complete interface: a centered combat bar with your health and buffs, an XP bar with kills and gold, boss timers with arrows, party frames, nameplates, map pins and a bigger damage font.
+= อินเทอร์เฟซครบชุด: แถบต่อสู้กลางจอพร้อมพลังชีวิตและบัฟ แถบ XP พร้อมจำนวนการสังหารและทอง ตัวจับเวลาบอสพร้อมลูกศร กรอบปาร์ตี้ ป้ายชื่อ หมุดบนแผนที่ และตัวเลขดาเมจที่ใหญ่ขึ้น
+A small panel with your chance of a Rare, Epic or Legendary card at your current luck, and the Battleground Caches and guardian lairs on your minimap (/lucky).
+= แผงเล็กๆ แสดงโอกาสได้การ์ด Rare, Epic หรือ Legendary ตามโชคปัจจุบันของคุณ พร้อม Battleground Caches และรังของผู้พิทักษ์บนมินิแมป (/lucky)
+Damage per spell with the kills of each spell, plus healing, boss damage, damage taken and your party's damage, each in its own window if you like.
+= ดาเมจของแต่ละคาถาพร้อมจำนวนการสังหารของแต่ละคาถา รวมถึงการรักษา ดาเมจใส่บอส ดาเมจที่ได้รับ และดาเมจของปาร์ตี้ แยกหน้าต่างได้ตามต้องการ
+A complete interface in a dark cyberpunk style: a new combat HUD with action bars, a cast bar, character and build panels, a damage meter, chat, minimap and nameplates.
+= อินเทอร์เฟซครบชุดสไตล์ไซเบอร์พังก์โทนมืด: HUD ต่อสู้ใหม่พร้อมแถบแอ็กชัน แถบร่ายคาถา แผงตัวละครและบิลด์ มาตรวัดดาเมจ แชท มินิแมป และป้ายชื่อ

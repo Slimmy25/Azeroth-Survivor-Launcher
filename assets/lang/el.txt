@@ -1688,3 +1688,11 @@ Spells that affect this:
 = Ξόρκια που την επηρεάζουν:
 Found your game and its saves: first-time setup skipped. Every setting is in Options.
 = Βρέθηκε το παιχνίδι σας και οι αποθηκεύσεις του: η αρχική ρύθμιση παραλείφθηκε. Όλες οι ρυθμίσεις βρίσκονται στις Επιλογές.
+A complete interface: a centered combat bar with your health and buffs, an XP bar with kills and gold, boss timers with arrows, party frames, nameplates, map pins and a bigger damage font.
+= Ένα πλήρες περιβάλλον: κεντρική μπάρα μάχης με την υγεία και τα buff σου, μπάρα εμπειρίας με σκοτωμούς και χρυσό, χρονόμετρα αφεντικών με βέλη, πλαίσια ομάδας, πινακίδες ονομάτων, σημάδια στον χάρτη και μεγαλύτερη γραμματοσειρά ζημιάς.
+A small panel with your chance of a Rare, Epic or Legendary card at your current luck, and the Battleground Caches and guardian lairs on your minimap (/lucky).
+= Ένα μικρό πάνελ με την πιθανότητά σου για κάρτα Rare, Epic ή Legendary με την τωρινή σου τύχη, και τα Battleground Caches και τις φωλιές των φυλάκων στον μικρό χάρτη (/lucky).
+Damage per spell with the kills of each spell, plus healing, boss damage, damage taken and your party's damage, each in its own window if you like.
+= Ζημιά ανά ξόρκι με τους σκοτωμούς κάθε ξορκιού, καθώς και θεραπεία, ζημιά σε αφεντικά, ζημιά που δέχτηκες και ζημιά της ομάδας σου, το καθένα σε δικό του παράθυρο αν θέλεις.
+A complete interface in a dark cyberpunk style: a new combat HUD with action bars, a cast bar, character and build panels, a damage meter, chat, minimap and nameplates.
+= Ένα πλήρες περιβάλλον σε σκοτεινό cyberpunk στυλ: νέο HUD μάχης με μπάρες ενεργειών, μπάρα εκτέλεσης, πάνελ χαρακτήρα και build, μετρητή ζημιάς, συνομιλία, μικρό χάρτη και πινακίδες ονομάτων.
