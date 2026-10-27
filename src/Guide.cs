@@ -716,6 +716,23 @@ namespace AzerothLauncher
             }
             catch (Exception) { }
             string section = "";
+            // the class's spells and what they say (the game's own text when AZS Stats saw it): for "Spells that affect this"
+            var pool = new List<KeyValuePair<string, string>>();
+            if (className != null)
+            {
+                string sec = "";
+                foreach (string raw in page.Body.Split('\n'))
+                {
+                    string line = raw.Trim();
+                    if (line.StartsWith("# ")) { sec = line.Substring(2).Trim(); continue; }
+                    if (!sec.StartsWith("Spell pool") || !line.StartsWith("- ")) continue;
+                    Match m = Regex.Match(line.Substring(2).Trim(), @"^(.+?(?: \([^)]*\))?): (?=[a-z0-9])(.+)$");
+                    if (!m.Success) continue;
+                    string nm = m.Groups[1].Value;
+                    string game = GuideLinks.GameTip(Regex.Replace(nm, @"\s*\(.*\)$", ""));
+                    pool.Add(new KeyValuePair<string, string>(nm, game ?? m.Groups[2].Value));
+                }
+            }
             foreach (string raw in page.Body.Split('\n'))
             {
                 string line = raw.Trim();
@@ -744,7 +761,7 @@ namespace AzerothLauncher
                     if (m.Success)
                     {
                         string body = m.Groups[2].Value;
-                        add(new SpellRow(m.Groups[1].Value, char.ToUpperInvariant(body[0]) + body.Substring(1), className, tw, gTopic, gPage), x, 6);
+                        add(new SpellRow(m.Groups[1].Value, char.ToUpperInvariant(body[0]) + body.Substring(1), className, tw, gTopic, gPage, pool), x, 6);
                         continue;
                     }
                 }

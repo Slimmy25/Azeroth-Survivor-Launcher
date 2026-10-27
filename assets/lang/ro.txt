@@ -1684,3 +1684,5 @@ Numbers with your Gear Planner set:
 = Cifre cu setul tău din planificator:
 Your Gear Planner set:
 = Setul tău din planificator:
+Spells that affect this:
+= Vrăji care o influențează:

@@ -1683,3 +1683,5 @@ Numbers with your Gear Planner set:
 = Zahlen mit deinem Ausrüstungsplaner-Set:
 Your Gear Planner set:
 = Dein Ausrüstungsplaner-Set:
+Spells that affect this:
+= Zauber, die ihn beeinflussen:

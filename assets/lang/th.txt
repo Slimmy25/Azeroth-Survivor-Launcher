@@ -1684,3 +1684,5 @@ Numbers with your Gear Planner set:
 = ตัวเลขเมื่อรวมชุดจากตัววางแผนอุปกรณ์:
 Your Gear Planner set:
 = ชุดจากตัววางแผนอุปกรณ์ของคุณ:
+Spells that affect this:
+= คาถาที่ส่งผลต่อคาถานี้:

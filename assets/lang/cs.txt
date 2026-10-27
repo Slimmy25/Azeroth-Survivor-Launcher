@@ -1684,3 +1684,5 @@ Numbers with your Gear Planner set:
 = Čísla s vaší sadou z plánovače:
 Your Gear Planner set:
 = Vaše sada z plánovače:
+Spells that affect this:
+= Kouzla, která ho ovlivňují:

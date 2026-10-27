@@ -1683,3 +1683,5 @@ Numbers with your Gear Planner set:
 = Valori con il tuo set del pianificatore:
 Your Gear Planner set:
 = Il tuo set del pianificatore:
+Spells that affect this:
+= Incantesimi che lo influenzano:

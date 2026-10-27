@@ -1684,3 +1684,5 @@ Numbers with your Gear Planner set:
 = आपके गियर योजनाकार सेट के साथ संख्याएँ:
 Your Gear Planner set:
 = आपका गियर योजनाकार सेट:
+Spells that affect this:
+= इसे प्रभावित करने वाले मंत्र:
