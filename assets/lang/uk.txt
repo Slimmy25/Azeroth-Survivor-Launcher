@@ -1720,3 +1720,5 @@ Folders
 = Теки
 Graphics
 = Графіка
+The bonuses of everything chosen, added together, at 0 stars: stars and set bonuses are not counted.
+= Бонуси всього вибраного разом, при 0 зірок: зірки та бонуси комплектів не враховуються.

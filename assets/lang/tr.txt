@@ -1720,3 +1720,5 @@ Folders
 = Klasörler
 Graphics
 = Grafik
+The bonuses of everything chosen, added together, at 0 stars: stars and set bonuses are not counted.
+= Seçilen her şeyin bonusları toplamı, 0 yıldızda: yıldızlar ve set bonusları sayılmaz.

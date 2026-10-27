@@ -1719,3 +1719,5 @@ Folders
 = Folder
 Graphics
 = Grafis
+The bonuses of everything chosen, added together, at 0 stars: stars and set bonuses are not counted.
+= Bonus semua yang dipilih dijumlahkan, pada 0 bintang: bintang dan bonus set tidak dihitung.

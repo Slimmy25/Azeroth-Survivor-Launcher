@@ -1720,3 +1720,5 @@ Folders
 = Foldere
 Graphics
 = Grafică
+The bonuses of everything chosen, added together, at 0 stars: stars and set bonuses are not counted.
+= Bonusurile tuturor pieselor alese, adunate, la 0 stele: stelele și bonusurile de set nu sunt socotite.

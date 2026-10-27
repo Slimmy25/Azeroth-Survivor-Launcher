@@ -1720,3 +1720,5 @@ Folders
 = 資料夾
 Graphics
 = 圖形
+The bonuses of everything chosen, added together, at 0 stars: stars and set bonuses are not counted.
+= 所選全部裝備的加成總和（0 星）：不計算星級和套裝加成。

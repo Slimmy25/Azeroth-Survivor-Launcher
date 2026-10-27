@@ -1720,3 +1720,5 @@ Folders
 = फ़ोल्डर
 Graphics
 = ग्राफ़िक्स
+The bonuses of everything chosen, added together, at 0 stars: stars and set bonuses are not counted.
+= चुनी गई हर चीज़ के बोनस एक साथ जोड़े गए, 0 सितारों पर: सितारे और सेट बोनस नहीं गिने जाते।

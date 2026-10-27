@@ -1720,3 +1720,5 @@ Folders
 = Папки
 Graphics
 = Графика
+The bonuses of everything chosen, added together, at 0 stars: stars and set bonuses are not counted.
+= Бонусы всего выбранного вместе, при 0 звёзд: звёзды и бонусы комплектов не учитываются.

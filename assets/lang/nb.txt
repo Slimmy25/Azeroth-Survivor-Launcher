@@ -1719,3 +1719,5 @@ Folders
 = Mapper
 Graphics
 = Grafikk
+The bonuses of everything chosen, added together, at 0 stars: stars and set bonuses are not counted.
+= Bonusene fra alt som er valgt, lagt sammen, ved 0 stjerner: stjerner og settbonuser telles ikke med.

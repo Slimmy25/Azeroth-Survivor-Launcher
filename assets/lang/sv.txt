@@ -1719,3 +1719,5 @@ Folders
 = Mappar
 Graphics
 = Grafik
+The bonuses of everything chosen, added together, at 0 stars: stars and set bonuses are not counted.
+= Bonusarna från allt som valts, sammanlagda, vid 0 stjärnor: stjärnor och setbonusar räknas inte.

@@ -1719,3 +1719,5 @@ Folders
 = Mappen
 Graphics
 = Graphics
+The bonuses of everything chosen, added together, at 0 stars: stars and set bonuses are not counted.
+= De bonussen van alles wat gekozen is bij elkaar opgeteld, bij 0 sterren: sterren en setbonussen tellen niet mee.

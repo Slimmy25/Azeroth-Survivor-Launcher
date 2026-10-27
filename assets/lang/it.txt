@@ -1719,3 +1719,5 @@ Folders
 = Cartelle
 Graphics
 = Grafica
+The bonuses of everything chosen, added together, at 0 stars: stars and set bonuses are not counted.
+= I bonus di tutto ciò che è scelto, sommati, a 0 stelle: stelle e bonus del set non sono contati.

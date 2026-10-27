@@ -1720,3 +1720,5 @@ Folders
 = Thư mục
 Graphics
 = Đồ họa
+The bonuses of everything chosen, added together, at 0 stars: stars and set bonuses are not counted.
+= Tổng phần thưởng của mọi món đã chọn, ở 0 sao: không tính sao và thưởng bộ.
