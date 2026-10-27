@@ -2,6 +2,15 @@ Patch notes shown in the launcher's Changelog. The launcher sorts them by versio
 Every post starts with its title on the first line. Posts are separated by a line with only === on it.
 Everything above the first === line is ignored.
 ===
+0.123.0
+-------
+Co-op holds together on a laggy connection: enemies no longer freeze and jump, the game no longer teleports you back during lag, and level-up cards no longer come back or pick the wrong card. Host and guests all need this version.
+
+* Enemies keep moving smoothly when the connection to your host hiccups. They used to stand still for a moment and then jump to where they really were; now they catch up quickly instead.
+* Other players jump much less after a lag spike. Their position is carried on to where they really are now, not where they were when the delay started.
+* Guests are no longer teleported back on their own during lag ("stuck" indoors, or snapping back after the game corrected your position), and other players no longer see you jump for it.
+* Level-up cards no longer reappear after you picked, or keep coming back over and over, on a slow connection. A pick that arrives late can no longer take a card from a newer offer you haven't seen yet.
+===
 0.122.0
 -------
 Co-op improvements, and its window shows every lobby's difficulty, with a filter for it. Heroic clears in co-op always count, updates survive a dropped connection, and Again after a run no longer leaves a ghost chest or your rune buffs behind.
