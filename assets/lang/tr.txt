@@ -1668,3 +1668,19 @@ Turn cloud saving on to keep your save and your addons' settings in Google Drive
 = Kaydını ve eklentilerinin ayarlarını Google Drive, OneDrive veya Dropbox'ta tutmak için bulut kaydını aç.
 Disabled when AZS Stats is not active
 = AZS Stats etkin değilken devre dışı
+What class do you want to build for?
+= Hangi sınıf için build yapmak istiyorsun?
+TALENTS ›
+= YETENEKLER ›
+GEAR PLANNER ›
+= EKİPMAN PLANLAYICI ›
+damage
+= hasar
+cooldowns
+= bekleme süreleri
+area
+= alan
+Numbers with your Gear Planner set:
+= Ekipman planlayıcı setinle sayılar:
+Your Gear Planner set:
+= Ekipman planlayıcı setin:

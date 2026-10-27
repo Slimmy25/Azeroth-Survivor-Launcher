@@ -1668,3 +1668,19 @@ Turn cloud saving on to keep your save and your addons' settings in Google Drive
 = Увімкніть хмарне збереження, щоб зберігати гру й налаштування аддонів у Google Drive, OneDrive або Dropbox.
 Disabled when AZS Stats is not active
 = Вимкнено, поки AZS Stats не активний
+What class do you want to build for?
+= Для якого класу ви хочете зібрати білд?
+TALENTS ›
+= ТАЛАНТИ ›
+GEAR PLANNER ›
+= ПЛАНУВАЛЬНИК СПОРЯДЖЕННЯ ›
+damage
+= шкоди
+cooldowns
+= перезарядки
+area
+= площі
+Numbers with your Gear Planner set:
+= Числа з вашим набором із планувальника:
+Your Gear Planner set:
+= Ваш набір із планувальника:

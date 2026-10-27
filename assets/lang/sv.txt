@@ -1667,3 +1667,19 @@ Turn cloud saving on to keep your save and your addons' settings in Google Drive
 = Slå på molnsparning för att ha din sparfil och dina tilläggs inställningar i Google Drive, OneDrive eller Dropbox.
 Disabled when AZS Stats is not active
 = Avstängt när AZS Stats inte är aktivt
+What class do you want to build for?
+= Vilken klass vill du bygga för?
+TALENTS ›
+= TALANGER ›
+GEAR PLANNER ›
+= UTRUSTNINGSPLANERARE ›
+damage
+= skada
+cooldowns
+= nedkylningar
+area
+= område
+Numbers with your Gear Planner set:
+= Siffror med ditt set från utrustningsplaneraren:
+Your Gear Planner set:
+= Ditt set från utrustningsplaneraren:

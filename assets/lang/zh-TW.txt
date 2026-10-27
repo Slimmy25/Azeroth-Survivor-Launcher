@@ -1668,3 +1668,19 @@ Turn cloud saving on to keep your save and your addons' settings in Google Drive
 = 開啟雲端存檔，把你的存檔和插件設定保存在 Google Drive、OneDrive 或 Dropbox 中。
 Disabled when AZS Stats is not active
 = AZS Stats 未啟用時無法使用
+What class do you want to build for?
+= 你想為哪個職業搭配？
+TALENTS ›
+= 天賦 ›
+GEAR PLANNER ›
+= 裝備規劃器 ›
+damage
+= 傷害
+cooldowns
+= 冷卻
+area
+= 範圍
+Numbers with your Gear Planner set:
+= 計入裝備規劃器套裝後的數值：
+Your Gear Planner set:
+= 你的裝備規劃器套裝：

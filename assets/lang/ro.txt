@@ -1668,3 +1668,19 @@ Turn cloud saving on to keep your save and your addons' settings in Google Drive
 = Pornește salvarea în cloud ca să-ți păstrezi salvarea și setările addonurilor în Google Drive, OneDrive sau Dropbox.
 Disabled when AZS Stats is not active
 = Dezactivat cât timp AZS Stats nu este activ
+What class do you want to build for?
+= Pentru ce clasă vrei să construiești?
+TALENTS ›
+= TALENTE ›
+GEAR PLANNER ›
+= PLANIFICATOR DE ECHIPAMENT ›
+damage
+= daune
+cooldowns
+= timpi de reîncărcare
+area
+= zonă
+Numbers with your Gear Planner set:
+= Cifre cu setul tău din planificator:
+Your Gear Planner set:
+= Setul tău din planificator:
