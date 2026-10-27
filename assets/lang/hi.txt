@@ -1658,3 +1658,13 @@ CONFLICT: PICK ONE
 = टकराव: एक चुनें
 these two can't be on together: untick the one you don't want.
 = ये दोनों एक साथ चालू नहीं हो सकते: जो नहीं चाहिए उसका निशान हटाएँ।
+LANGUAGE ›
+= भाषा ›
+OPEN CLOUD SAVE ›
+= क्लाउड सेव खोलें ›
+Sync now, the log, and earlier downloads.
+= अभी सिंक करें, लॉग और पिछले डाउनलोड।
+Turn cloud saving on to keep your save and your addons' settings in Google Drive, OneDrive or Dropbox.
+= अपना सेव और ऐडऑन की सेटिंग Google Drive, OneDrive या Dropbox में रखने के लिए क्लाउड सेव चालू करें।
+Disabled when AZS Stats is not active
+= AZS Stats सक्रिय न होने पर बंद

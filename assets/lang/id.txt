@@ -1657,3 +1657,13 @@ CONFLICT: PICK ONE
 = KONFLIK: PILIH SATU
 these two can't be on together: untick the one you don't want.
 = keduanya tidak bisa menyala bersamaan: hapus centang yang tidak kamu mau.
+LANGUAGE ›
+= BAHASA ›
+OPEN CLOUD SAVE ›
+= BUKA SIMPAN CLOUD ›
+Sync now, the log, and earlier downloads.
+= Sinkronkan sekarang, log, dan unduhan sebelumnya.
+Turn cloud saving on to keep your save and your addons' settings in Google Drive, OneDrive or Dropbox.
+= Nyalakan simpan cloud untuk menyimpan save dan pengaturan addon-mu di Google Drive, OneDrive, atau Dropbox.
+Disabled when AZS Stats is not active
+= Nonaktif selama AZS Stats tidak aktif

@@ -1657,3 +1657,13 @@ CONFLICT: PICK ONE
 = KONFLIKT: VÄLJ ETT
 these two can't be on together: untick the one you don't want.
 = de här två kan inte vara på samtidigt: bocka ur det du inte vill ha.
+LANGUAGE ›
+= SPRÅK ›
+OPEN CLOUD SAVE ›
+= ÖPPNA MOLNSPARNING ›
+Sync now, the log, and earlier downloads.
+= Synka nu, loggen och tidigare nedladdningar.
+Turn cloud saving on to keep your save and your addons' settings in Google Drive, OneDrive or Dropbox.
+= Slå på molnsparning för att ha din sparfil och dina tilläggs inställningar i Google Drive, OneDrive eller Dropbox.
+Disabled when AZS Stats is not active
+= Avstängt när AZS Stats inte är aktivt

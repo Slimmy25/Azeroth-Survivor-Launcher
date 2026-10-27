@@ -1658,3 +1658,13 @@ CONFLICT: PICK ONE
 = 競合：どちらか一つを選択
 these two can't be on together: untick the one you don't want.
 = この2つは同時にオンにできません：不要な方のチェックを外してください。
+LANGUAGE ›
+= 言語 ›
+OPEN CLOUD SAVE ›
+= クラウドセーブを開く ›
+Sync now, the log, and earlier downloads.
+= 今すぐ同期、ログ、以前のダウンロード。
+Turn cloud saving on to keep your save and your addons' settings in Google Drive, OneDrive or Dropbox.
+= クラウドセーブをオンにすると、セーブとアドオンの設定を Google Drive、OneDrive、Dropbox に保存できます。
+Disabled when AZS Stats is not active
+= AZS Stats が有効でない間は使えません

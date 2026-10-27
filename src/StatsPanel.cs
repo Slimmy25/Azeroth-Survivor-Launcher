@@ -113,13 +113,8 @@ namespace AzerothLauncher
             string addonPath = Stats.AddonPath(addonsDir);
             bool have = addonPath != null;
             bool off = have && addonPath.EndsWith(Addons.DisabledSuffix, StringComparison.OrdinalIgnoreCase);
-            // the addon is brought up to date by the launcher before every game, so only a missing addon needs a button
+            // no buttons here: the launcher keeps AZS Stats up to date, and without it the Stats buttons are disabled
             int pageTop = 8;
-            if (!have)
-            {
-                Put(new WowButton("INSTALL STATS ADDON", InstallStatsAddon, 230, 32, 10), PW - 20 - (int)(230 * Theme.Zoom), 8);
-                pageTop = 8 + (int)(32 * Theme.Zoom) + 8;
-            }
 
             RunStats st = null;
             string err = null;

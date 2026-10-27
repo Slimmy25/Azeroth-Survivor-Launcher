@@ -56,7 +56,8 @@ namespace AzerothLauncher
         readonly WowButton playBtn, updateBtn, aboutBtn;
         readonly BrandIcon discordIcon;
         readonly Dictionary<string, WowButton> nav = new Dictionary<string, WowButton>();
-        readonly string[] navNames = { "Guide", "Addons", "Cloud Save", "Changelog", "Stats", "Options" };   // Changelog: on the News line   // order under "Launcher" (Discord before Options)
+        // the buttons under "Launcher": Guide and its Theorycrafting group, Addons, Stats, Options (Cloud Save is in Options)
+        readonly string[] navNames = { "Guide", "Theorycrafting", "Addons", "Changelog", "Stats", "Options" };   // Changelog: on the News line   // order under "Launcher" (Discord before Options)
         NotifyIcon tray;
         ToolStripMenuItem trayShow, trayPlay, trayUpload, trayCloseToTray, trayQuit;
 
@@ -112,7 +113,8 @@ namespace AzerothLauncher
             {
                 string n = name;
                 if (n == "Changelog") continue;              // on the News line (below)
-                nav[n] = Place(new WowButton(n.ToUpperInvariant(), delegate { ShowSection(n); }, 128, 27, 8.5f), 693, 480);
+                Action open = n == "Theorycrafting" ? (Action)delegate { GuideGroupPage(2); } : delegate { ShowSection(n); };
+                nav[n] = Place(new WowButton(n.ToUpperInvariant(), open, 128, 27, 8.5f), 693, 480);
                 nav[n].Skin = Retro.Button;
             }
             // UPDATE LAUNCHER and ABOUT LAUNCHER live in Options > Launcher now; these two stay hidden and carry their state
@@ -571,7 +573,7 @@ namespace AzerothLauncher
         // a section button is hidden while its feature is off: Cloud Save (cloud saving) and Stats (Options)
         bool NavShown(string name)
         {
-            if (name == "Cloud Save") return CloudEnabled();
+            if (name == "Cloud Save") return false;         // opened from Options > CLOUD SAVE
             if (name == "Stats") return StatsEnabled();
             return true;
         }
@@ -606,8 +608,26 @@ namespace AzerothLauncher
         const string CloudNeedsGame = "Cloud Save needs the game. Press INSTALL to download it first.";
         const string AddonsNeedGame = "Addons need the game. Press INSTALL to download it first.";
 
+        public const string StatsNeedAddon = "Disabled when AZS Stats is not active";
+
+        // AZS Stats installed and switched on: the Stats page has something to show
+        public bool StatsAddonActive()
+        {
+            try
+            {
+                string p = Stats.AddonPath(AddonsDir());
+                return p != null && !p.EndsWith(Addons.DisabledSuffix, StringComparison.OrdinalIgnoreCase);
+            }
+            catch (Exception) { return false; }
+        }
+
         void RefreshGates()
         {
+            bool statsOff = !StatsAddonActive();
+            WowButton sb;
+            if (nav.TryGetValue("Stats", out sb)) { sb.GrayedTip = StatsNeedAddon; sb.Grayed = statsOff; }
+            IconButton si;
+            if (stripBtns != null && stripBtns.TryGetValue("Stats", out si)) { si.GrayedTip = StatsNeedAddon; si.Grayed = statsOff; }
             bool off = !GateOpen();
             foreach (string name in new[] { "Cloud Save", "Addons" })
             {
