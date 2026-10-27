@@ -136,6 +136,22 @@ namespace AzerothLauncher
                     app.BuildPanel("Guide");
                     Application.DoEvents();
                     PreviewShot(app, Path.Combine(outDir, "guide-planner.png"));
+                    var stack = new Stack<Control>();
+                    stack.Push(app.panel);
+                    while (stack.Count > 0)
+                    {
+                        Control c = stack.Pop();
+                        if (c is GearSheet)
+                        {
+                            using (var bmp = new Bitmap(c.Width, c.Height))
+                            {
+                                c.DrawToBitmap(bmp, new Rectangle(0, 0, c.Width, c.Height));
+                                bmp.Save(Path.Combine(outDir, "guide-planner-sheet.png"), ImageFormat.Png);
+                            }
+                            break;
+                        }
+                        foreach (Control k in c.Controls) stack.Push(k);
+                    }
                     app.gPlanner = false;
                     // the Items topic's Priest page
                     int items = Data.Guide.FindIndex(delegate(GuideTopic g) { return g.Title == "Items"; });
