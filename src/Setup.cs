@@ -17,19 +17,20 @@ namespace AzerothLauncher
         Dictionary<string, string> setupVals, setupDefaults;
         Dictionary<string, object> setupResult;
 
+        // RUN SETUP AGAIN and the first start ask the same, from the start, as if nothing had been set up: every folder
+        // at its usual place, cloud saving on with no folder chosen yet. What was set before stays until FINISH.
         void ShowSetupDialog()
         {
-            SyncSettings ss = SyncSettings();
-            setupCloud = Cfg.Bool("setup_done", false) ? CloudEnabled() : Cfg.Bool("cloud_enabled", true);
+            string game = GameDir();
+            string config = Path.Combine(game, "benilla-config");
+            setupCloud = true;
             setupVals = new Dictionary<string, string>();
             setupDefaults = new Dictionary<string, string>();
-            setupVals["cloud_dir"] = Cfg.Str("cloud_dir");
-            setupVals["addons_dir"] = ss.AddonsDir;
-            setupVals["save_dir"] = ss.SaveDir;
-            setupVals["saved_dir"] = ss.SavedDir;
-            setupDefaults["addons_dir"] = Path.Combine(ss.ConfigDir, "AddOns");
-            setupDefaults["saved_dir"] = Path.Combine(ss.ConfigDir, "saved");
+            setupDefaults["addons_dir"] = Path.Combine(config, "AddOns");
+            setupDefaults["saved_dir"] = Path.Combine(config, "saved");
             setupDefaults["save_dir"] = Util.DefaultSaveDir;
+            setupVals["cloud_dir"] = "";
+            foreach (var kv in setupDefaults) setupVals[kv.Key] = kv.Value;
             setupImported = null;
             setupResult = null;
             setupPage = 0;
@@ -59,20 +60,34 @@ namespace AzerothLauncher
             int step = Math.Min(setupPage, 3) + 1;
             SetCrumbs("Setup", null, SetupSteps[setupPage], null);
             int x = 24, w = PW - 48, y = 10;
-            var head = PutText("Welcome, Adventurer", 17, FontStyle.Bold, Theme.Gold, x, y, w);
-            PutText(Lang.F("Step {0} of {1}", step, 4), 10, FontStyle.Italic, Theme.GoldDim, PW - 24 - 120, y + 8, 120);
+            var head = PutText("Welcome, Adventurer", 17, FontStyle.Bold, Theme.Gold, x, y, w - 130);
+            var stepL = PutText(Lang.F("Step {0} of {1}", step, 4), 10, FontStyle.Italic, Theme.GoldDim, 0, y + 8, 0);
+            stepL.Left = PW - 24 - stepL.Width;
             y = BottomOf(head) + 4;
             Put(UI.Line(Theme.GoldDim, w, 2), x, y);
-            y += 10;
-            if (setupPage == 0) SetupLanguage(x, y, w);
-            else if (setupPage == 1) SetupSave(x, y, w);
-            else if (setupPage == 2) SetupFolders(x, y, w);
-            else if (setupPage == 3) SetupAddons(x, y, w);
-            else SetupStats(x, y, w);
+            y += 6;
+            // the page itself scrolls inside the section box: it never runs past its edges, whatever the language
+            var sp = MakeScroll(panel, new Rectangle(8, y, PW - 16, PH - 8 - y), Theme.Panel, Theme.Panel);
+            putInto = sp;
+            try
+            {
+                int px = 16, pw = sp.ClientSize.Width - 32;
+                int end;
+                if (setupPage == 0) end = SetupLanguage(px, 6, pw);
+                else if (setupPage == 1) end = SetupSave(px, 6, pw);
+                else if (setupPage == 2) end = SetupFolders(px, 6, pw);
+                else if (setupPage == 3) end = SetupAddons(px, 6, pw);
+                else end = SetupStats(px, 6, pw);
+                var pad = new Panel();
+                pad.BackColor = Theme.Panel;
+                pad.Bounds = new Rectangle(0, end, 1, 12);
+                sp.Controls.Add(pad);
+            }
+            finally { putInto = null; }
         }
 
         // page 1: the language, every one the launcher speaks; the choice is shown at once
-        void SetupLanguage(int x, int y, int w)
+        int SetupLanguage(int x, int y, int w)
         {
             var q = PutText("Which language do you want the launcher in?", 13, FontStyle.Bold, Theme.Gold, x, y, w);
             y = BottomOf(q) + 10;
@@ -86,11 +101,12 @@ namespace AzerothLauncher
                 if (++col >= cols) { col = 0; y += (int)(28 * Theme.Zoom) + 6; }
             }
             if (col > 0) y += (int)(28 * Theme.Zoom) + 6;
-            Put(new WowButton("NEXT ›", delegate { SetupGo(1); }, 170, 38, 12), PW - 24 - (int)(170 * Theme.Zoom), y + 10);
+            var nx = Put(new WowButton("NEXT ›", delegate { SetupGo(1); }, 170, 38, 12), x + w - (int)(170 * Theme.Zoom), y + 10);
+            return nx.Bottom;
         }
 
         // page 2: moving over from the website? The save is imported before anything else
-        void SetupSave(int x, int y, int w)
+        int SetupSave(int x, int y, int w)
         {
             var q = PutText("Moving over from the website?", 13, FontStyle.Bold, Theme.Gold, x, y, w);
             var p = PutText("Played Azeroth Survivors in your browser? Bring your progress with you: your heroes, the zones you opened, " +
@@ -103,12 +119,11 @@ namespace AzerothLauncher
                 y = BottomOf(ok) + 12;
                 var n = Put(new WowButton("NEXT ›", delegate { SetupGo(2); }, 170, 38, 12), x, y);
                 Put(new WowButton("IMPORT ANOTHER", SetupImport, 190, 38, 10), n.Right + 12, y);
+                return n.Bottom;
             }
-            else
-            {
-                var im = Put(new WowButton("IMPORT MY SAVE", SetupImport, 220, 42, 12), x, y);
-                Put(new WowButton("I'M NEW HERE", delegate { SetupGo(2); }, 190, 42, 11), im.Right + 12, y);
-            }
+            var im = Put(new WowButton("IMPORT MY SAVE", SetupImport, 220, 42, 12), x, y);
+            Put(new WowButton("I'M NEW HERE", delegate { SetupGo(2); }, 190, 42, 11), im.Right + 12, y);
+            return im.Bottom;
         }
 
         void SetupImport()
@@ -121,7 +136,7 @@ namespace AzerothLauncher
         }
 
         // page 3: cloud saving, and where the files are
-        void SetupFolders(int x, int y, int w)
+        int SetupFolders(int x, int y, int w)
         {
             var a = PutText("A.  Cloud saving", 13, FontStyle.Bold, Theme.Gold, x, y, w);
             y = BottomOf(a) + 4;
@@ -157,6 +172,7 @@ namespace AzerothLauncher
             }, true, x, y, w);
             var fin = Put(new WowButton("FINISH", SetupFinishFolders, 170, 38, 12), x, y + 12);
             Put(new WowButton("LATER", delegate { SetupLeave(null, null); }, 120, 38, 11), fin.Right + 12, y + 12);
+            return fin.Bottom;
         }
 
         int SetupFolderRow(string label, string key, Action chooser, bool defaultOk, int x, int y, int w)
@@ -166,9 +182,10 @@ namespace AzerothLauncher
             var name = PutText(label, 11, FontStyle.Bold, Theme.Gold, x, y, 0);
             string note = found ? (defaultOk ? "✓ found" : "✓ chosen") : (path.Length == 0 ? "not chosen yet" : "not found - please choose it");
             PutText(note, 9, FontStyle.Italic, found ? Theme.Good : Theme.Bad, name.Right + 8, y + 3, 0);
-            var pathL = PutText(path.Length > 0 ? path : Lang.T("(not set)"), 9, FontStyle.Regular, Theme.LinkBlue, x, BottomOf(name), w - 130, false);
+            int btnW = (int)(100 * Theme.Zoom);
+            var pathL = PutText(path.Length > 0 ? path : Lang.T("(not set)"), 9, FontStyle.Regular, Theme.LinkBlue, x, BottomOf(name), w - btnW - 12, false);
             int h = BottomOf(pathL) - y;
-            Put(new WowButton(found ? "CHANGE" : "CHOOSE", chooser, 100, 28, 9), x + w - (int)(100 * Theme.Zoom), y + Math.Max(0, (h - (int)(28 * Theme.Zoom)) / 2));
+            Put(new WowButton(found ? "CHANGE" : "CHOOSE", chooser, 100, 28, 9), x + w - btnW, y + Math.Max(0, (h - (int)(28 * Theme.Zoom)) / 2));
             return Math.Max(BottomOf(pathL), y + (int)(28 * Theme.Zoom)) + 6;
         }
 
@@ -205,17 +222,18 @@ namespace AzerothLauncher
         }
 
         // page 4: addons, all optional; AZS Stats is asked about on its own
-        void SetupAddons(int x, int y, int w)
+        int SetupAddons(int x, int y, int w)
         {
             var q = PutText("Your settings are saved.\n\nWould you like to download addons? They are all optional: " +
                             "you choose each one you want.", 12, FontStyle.Regular, Theme.Text, x, y, w);
             y = BottomOf(q) + 14;
             var yes = Put(new WowButton("YES, ADDONS", delegate { SetupGo(4); }, 200, 42, 12), x, y);
             Put(new WowButton("NO THANKS", delegate { SetupLeave(null, null); }, 170, 42, 11), yes.Right + 12, y);
-            Put(new WowButton("ENABLE / DISABLE MY ADDONS", delegate { SetupLeave("installed", null); }, 300, 34, 10), x, BottomOf(yes) + 10);
+            var en = Put(new WowButton("ENABLE / DISABLE MY ADDONS", delegate { SetupLeave("installed", null); }, 300, 34, 10), x, BottomOf(yes) + 10);
+            return en.Bottom;
         }
 
-        void SetupStats(int x, int y, int w)
+        int SetupStats(int x, int y, int w)
         {
             var q = PutText("Do you want to track your stats in and out of the game?", 13, FontStyle.Bold, Theme.Gold, x, y, w);
             var p = PutText("AZS Stats records your runs while you play (/azs in game) and fills the launcher's STATS page: records, " +
@@ -223,6 +241,7 @@ namespace AzerothLauncher
             y = BottomOf(p) + 14;
             var yes = Put(new WowButton("YES, TRACK MY STATS", delegate { SetupLeave("download", true); }, 250, 42, 12), x, y);
             Put(new WowButton("NO", delegate { SetupLeave("download", false); }, 140, 42, 12), yes.Right + 12, y);
+            return yes.Bottom;
         }
 
         // setup ends: what was chosen is saved (nothing when it was left before the folders page: it is asked again next
