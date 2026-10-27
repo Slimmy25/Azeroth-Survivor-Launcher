@@ -74,3 +74,5 @@ the launcher is to use.
   save imported into it and your cloud files are never touched. RUN SETUP AGAIN can't lose your settings this way:
   cancelling it just goes back with everything as it was.
 - With no language chosen yet, the launcher starts in English (setup asks for the language first).
+- Gear Planner and Talent Tree Builder fit their box: no scroll bar. The planner's slots and the talent trees' icons are
+  sized to the room there is, and the planner's set bonuses sit under its totals.

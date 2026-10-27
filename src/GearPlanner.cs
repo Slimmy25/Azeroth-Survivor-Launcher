@@ -28,11 +28,11 @@ namespace AzerothLauncher
                 return;
             }
             int top = GuideTop, w = PW - 40;                  // the trail above leads to the talents and the other tools
-            // the sheet keeps its size and scrolls in a small window
-            var sp = MakeThinScroll(panel, new Rectangle(20, top, w, PH - 12 - top), Theme.Panel, Theme.Bronze, Theme.GoldDim, Theme.Gold);
-            var sheet = new GearSheet(plannerClass, plannerSlots, GearIcons());
-            sheet.Bounds = new Rectangle(0, 0, sp.ClientSize.Width - 4, sheet.NeededHeight);
-            sp.Controls.Add(sheet);
+            // the sheet fits the box: its slots are sized to the room there is, so nothing scrolls
+            int h = PH - 12 - top;
+            var sheet = new GearSheet(plannerClass, plannerSlots, GearIcons(), h);
+            sheet.Bounds = new Rectangle(20, top, w, h);
+            panel.Controls.Add(sheet);
         }
 
         // a new class: its gear goes (each class has its own), the jewelry stays
@@ -88,7 +88,7 @@ namespace AzerothLauncher
         readonly Font fTitle = Theme.F(13, FontStyle.Bold), fText = Theme.F(9.5f), fBold = Theme.F(9.5f, FontStyle.Bold),
                       fSmall = Theme.F(8.25f), fHead = Theme.F(11, FontStyle.Bold);   // made with the section's zoom; cached
         readonly ToolTip tip = new ToolTip();
-        readonly int slotSize = Math.Max(26, (int)(44 * Theme.Zoom)), slotGap = Math.Max(4, (int)(7 * Theme.Zoom));
+        int slotSize = Math.Max(26, (int)(44 * Theme.Zoom)), slotGap = Math.Max(4, (int)(7 * Theme.Zoom));
         static string chosenSlot = "Head";                   // the slot the selector shows (kept while the launcher runs)
         string hover;
         int hoverRow = -1;
@@ -105,9 +105,17 @@ namespace AzerothLauncher
             SlotEdge = Theme.Hex("#45414f"), Gold = Theme.Hex("#f0c050"), Bright = Theme.Hex("#f5e9c8"), Dim = Theme.Hex("#9c8a64");
 
         // the height that shows every slot (the title, eight rows of slots and the weapons)
-        public int NeededHeight { get { return 40 + (int)(fTitle.Height + fSmall.Height) + 9 * (slotSize + slotGap) + 14 + SetsHeight; } }
-        // the room under the weapons for the sets worn: two sets of four (or an 8-piece and its 4-piece) and a third
-        int SetsHeight { get { return (int)(fBold.Height * 5 + fSmall.Height * 13) + 16; } }
+        public int NeededHeight { get { return 40 + (int)(fTitle.Height + fSmall.Height) + 9 * (slotSize + slotGap) + 14; } }
+
+        // a sheet that fits a height: its slots (and the gaps between them) are sized so the whole sheet fits it
+        public GearSheet(string cls, Dictionary<string, object> slots, Dictionary<string, string> gearIcons, int height)
+            : this(cls, slots, gearIcons)
+        {
+            int fixedH = 40 + (int)(fTitle.Height + fSmall.Height) + 14;
+            int row = Math.Max(24, (height - fixedH) / 9);    // a slot and its gap
+            slotSize = Math.Max(20, Math.Min((int)(44 * Theme.Zoom), row * 44 / 51));
+            slotGap = Math.Max(3, row - slotSize);
+        }
 
         public GearSheet(string cls, Dictionary<string, object> slots, Dictionary<string, string> gearIcons)
         {
@@ -277,12 +285,12 @@ namespace AzerothLauncher
             string txt = Lang.T("The bonuses of everything chosen, added together, with the set bonuses reached. Click a piece to add a star (up to 5, then back to 0); right-click to take it off.") +
                          " " + Lang.T(Items.StarsNotCounted);
             if (unknown > 0) txt = Lang.T("Pieces with bonuses not known yet") + ": " + unknown + ". " + txt;
-            Para(g, txt, fSmall, Dim, mid.X, mid.Y + boxH + 8, mid.Width, mid.Bottom);
+            float noteH = Para(g, txt, fSmall, Dim, mid.X, mid.Y + boxH + 8, mid.Width, mid.Bottom);
 
-            // under the weapons, across the sheet: every set worn, its 4-piece and 8-piece bonuses (bright when
+            // under the totals, in the middle of the sheet: every set worn, its 4-piece and 8-piece bonuses (bright when
             // reached), so two sets of four show and count both, and an 8-piece shows its 4-piece too
-            var setsBox = new Rectangle(sheet.X + 12, by + s + 12, sheet.Width - 24, sheet.Bottom - 8 - (by + s + 12));
-            DrawSets(g, setsBox);
+            int setsTop = (int)(mid.Y + boxH + 8 + noteH + 8);
+            DrawSets(g, new Rectangle(mid.X, setsTop, mid.Width, by - 8 - setsTop));   // above the weapons
 
             // the selector: what the chosen slot can hold, each with its picture
             Selector(g, pick);

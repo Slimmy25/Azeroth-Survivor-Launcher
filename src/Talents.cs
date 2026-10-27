@@ -234,16 +234,23 @@ namespace AzerothLauncher
         const int Cols = 4, Rows = 7;
         public TalentBuild Build;                            // set: a test build, click to add a point, right-click to take one back
 
-        public TalentTreeView(TalentTree tree, int width)
+        int cellSize;
+
+        public TalentTreeView(TalentTree tree, int width) : this(tree, width, int.MaxValue) { }
+
+        // a tree that fits a height too: its cells are as big as both allow (the tree is as wide as its grid then)
+        public TalentTreeView(TalentTree tree, int width, int maxHeight)
         {
             SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer |
                      ControlStyles.ResizeRedraw, true);
             this.tree = tree;
             int cell = Math.Max(30, (width - 16) / Cols);
-            Size = new Size(width, 30 + Rows * cell + 8);
+            if (maxHeight != int.MaxValue) cell = Math.Max(22, Math.Min(cell, (maxHeight - 38) / Rows));
+            cellSize = cell;
+            Size = new Size(maxHeight != int.MaxValue ? Math.Min(width, cell * Cols + 16) : width, 30 + Rows * cell + 8);
         }
 
-        int Cell { get { return Math.Max(30, (Width - 16) / Cols); } }
+        int Cell { get { return cellSize; } }
 
         protected override void OnPaint(PaintEventArgs e)
         {

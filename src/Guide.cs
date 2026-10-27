@@ -497,20 +497,21 @@ namespace AzerothLauncher
             y += Math.Max(reset.Height, left.Height) + 6;
             var trees = Talents.Of(cls);
             var views = new List<TalentTreeView>();
+            // the three trees fit the box: their cells as big as its width and height allow, the trees centred
             int gap = 8, tw3 = (w - gap * (trees.Count - 1)) / Math.Max(1, trees.Count), th = 0;
+            int roomH = sp.ClientSize.Height - y - 8;
+            int cellFit = Math.Max(22, Math.Min(Math.Max(30, (tw3 - 16) / 4), (roomH - 38) / 7));   // as TalentTreeView works it out
+            int realW = Math.Min(tw3, cellFit * 4 + 16);
+            int x0 = x + Math.Max(0, (w - (realW * trees.Count + gap * (trees.Count - 1))) / 2);
             for (int i = 0; i < trees.Count; i++)
             {
-                var tv = new TalentTreeView(trees[i], tw3);
+                var tv = new TalentTreeView(trees[i], tw3, roomH);
                 tv.Build = build;
-                tv.Location = new Point(x + i * (tw3 + gap), y);
+                tv.Location = new Point(x0 + i * (realW + gap), y);
                 sp.Controls.Add(tv);
                 views.Add(tv);
                 th = Math.Max(th, tv.Height);
             }
-            var pad = new Panel();
-            pad.BackColor = bg;
-            pad.Bounds = new Rectangle(x, y + th, 1, 12);
-            sp.Controls.Add(pad);
             Action show = delegate
             {
                 var spent = new List<string>();
