@@ -1685,3 +1685,5 @@ Your Gear Planner set:
 = Il tuo set del pianificatore:
 Spells that affect this:
 = Incantesimi che lo influenzano:
+Found your game and its saves: first-time setup skipped. Every setting is in Options.
+= Gioco e salvataggi trovati: configurazione iniziale saltata. Tutte le impostazioni sono in Opzioni.

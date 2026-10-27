@@ -1686,3 +1686,5 @@ Your Gear Planner set:
 = A tervezőben összeállított szetted:
 Spells that affect this:
 = Varázslatok, amelyek hatnak rá:
+Found your game and its saves: first-time setup skipped. Every setting is in Options.
+= A játék és a mentései megvannak: az első beállítás kimarad. Minden beállítás a Beállításokban található.

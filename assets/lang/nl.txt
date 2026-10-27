@@ -1685,3 +1685,5 @@ Your Gear Planner set:
 = Je set uit de uitrustingsplanner:
 Spells that affect this:
 = Spreuken die deze beïnvloeden:
+Found your game and its saves: first-time setup skipped. Every setting is in Options.
+= Je spel en de opgeslagen spellen zijn gevonden: de eerste installatie wordt overgeslagen. Alle instellingen staan onder Opties.

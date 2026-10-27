@@ -1686,3 +1686,5 @@ Your Gear Planner set:
 = 装備プランナーのセット：
 Spells that affect this:
 = これに影響する呪文:
+Found your game and its saves: first-time setup skipped. Every setting is in Options.
+= ゲームとセーブデータが見つかりました。初回セットアップを省略しました。すべての設定はオプションにあります。

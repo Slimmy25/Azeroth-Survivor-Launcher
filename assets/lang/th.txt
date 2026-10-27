@@ -1686,3 +1686,5 @@ Your Gear Planner set:
 = ชุดจากตัววางแผนอุปกรณ์ของคุณ:
 Spells that affect this:
 = คาถาที่ส่งผลต่อคาถานี้:
+Found your game and its saves: first-time setup skipped. Every setting is in Options.
+= พบเกมและเซฟของคุณแล้ว: ข้ามการตั้งค่าครั้งแรก การตั้งค่าทั้งหมดอยู่ในตัวเลือก

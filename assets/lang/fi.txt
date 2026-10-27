@@ -1685,3 +1685,5 @@ Your Gear Planner set:
 = Varustesuunnittelijan settisi:
 Spells that affect this:
 = Loitsut, jotka vaikuttavat siihen:
+Found your game and its saves: first-time setup skipped. Every setting is in Options.
+= Peli ja sen tallennukset löytyivät: ensiasennus ohitettiin. Kaikki asetukset ovat Asetuksissa.

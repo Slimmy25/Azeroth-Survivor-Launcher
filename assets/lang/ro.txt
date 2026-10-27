@@ -1686,3 +1686,5 @@ Your Gear Planner set:
 = Setul tău din planificator:
 Spells that affect this:
 = Vrăji care o influențează:
+Found your game and its saves: first-time setup skipped. Every setting is in Options.
+= Jocul și salvările lui au fost găsite: configurarea inițială este omisă. Toate setările sunt în Opțiuni.

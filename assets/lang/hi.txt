@@ -1686,3 +1686,5 @@ Your Gear Planner set:
 = आपका गियर योजनाकार सेट:
 Spells that affect this:
 = इसे प्रभावित करने वाले मंत्र:
+Found your game and its saves: first-time setup skipped. Every setting is in Options.
+= आपका गेम और उसके सेव मिल गए: पहली बार का सेटअप छोड़ दिया गया। सभी सेटिंग्स विकल्प में हैं।

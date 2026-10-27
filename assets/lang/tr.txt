@@ -1686,3 +1686,5 @@ Your Gear Planner set:
 = Ekipman planlayıcı setin:
 Spells that affect this:
 = Bunu etkileyen büyüler:
+Found your game and its saves: first-time setup skipped. Every setting is in Options.
+= Oyununuz ve kayıtları bulundu: ilk kurulum atlandı. Tüm ayarlar Seçenekler bölümünde.

@@ -105,7 +105,7 @@ namespace AzerothLauncher
                     var src = new Rectangle((pic.Width - s) / 2, (int)(pic.Height * 0.04), s, s);
                     g.DrawImage(pic, r, src, GraphicsUnit.Pixel);
                 }
-                else g.DrawImage(pic, r);
+                else Theme.Draw(g, pic, r);
                 g.Clip = clip;
                 using (var p = new Pen(frame, 1.5f)) g.DrawPath(p, path);
             }
@@ -286,7 +286,7 @@ namespace AzerothLauncher
             Image cp = ClassPic != null ? SpellIcons.Class(ClassPic, this) : null;
             if (cp != null) Armory.Picture(g, Rectangle.Inflate(frame, -5, -5), cp, false, false, Accent);
             else if (Letters != null) Armory.Icon(g, Rectangle.Inflate(frame, -6, -6), Accent, Letters, true);
-            else if (Theme.Portrait != null) g.DrawImage(Theme.Portrait, Rectangle.Inflate(frame, -4, -4));
+            else if (Theme.Portrait != null) Theme.Draw(g, Theme.Portrait, Rectangle.Inflate(frame, -4, -4));
             using (var p = new Pen(Accent, 2)) using (var path = Armory.Round(frame, 6)) g.DrawPath(p, path);
             int x = r.X + Pic + 16;
             Armory.Text(g, Heading, Theme.F(18, FontStyle.Bold), Accent, new Rectangle(x, r.Y + 8, r.Right - x, 30),

@@ -1686,3 +1686,5 @@ Your Gear Planner set:
 = Twój zestaw z planera:
 Spells that affect this:
 = Zaklęcia, które na nie wpływają:
+Found your game and its saves: first-time setup skipped. Every setting is in Options.
+= Znaleziono grę i jej zapisy: pierwsza konfiguracja pominięta. Wszystkie ustawienia są w Opcjach.

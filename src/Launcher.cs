@@ -263,47 +263,96 @@ namespace AzerothLauncher
 
         // ------------------------------------------------------------------ drawing the launcher
         // the launcher art (layout after the WoW Retro Launcher); the newest patch notes in the News panel
+        // what never changes on the home screen (the picture, the title, its byline, the headings, the game version) is
+        // drawn once into a picture of its own; a repaint copies the part it needs and draws only what moves on top
+        Bitmap homeLayer;
+        string homeLayerKey;
+        readonly Dictionary<string, SizeF> newsMeasured = new Dictionary<string, SizeF>();
+
+        // the whole window is drawn by OnPaint from the picture above: no fill first (it only makes the window flicker)
+        protected override void OnPaintBackground(PaintEventArgs e)
+        {
+            if (homeLayer == null || e.ClipRectangle.Right > W || e.ClipRectangle.Bottom > H) base.OnPaintBackground(e);
+        }
+
+        Bitmap HomeLayer()
+        {
+            string key = Lang.Code + "|" + Theme.FontName + "|" + W + "x" + H;
+            if (homeLayer != null && homeLayerKey == key) return homeLayer;
+            if (homeLayer != null) homeLayer.Dispose();
+            homeLayer = new Bitmap(W, H, System.Drawing.Imaging.PixelFormat.Format32bppPArgb);
+            homeLayer.SetResolution(96, 96);
+            homeLayerKey = key;
+            using (Graphics g = Graphics.FromImage(homeLayer))
+            {
+                Image bg = Retro.Get("background");
+                if (bg != null) Theme.Draw(g, bg, new Rectangle(0, 0, W, H));
+                else g.Clear(Theme.BgBottom);
+                Theme.Smooth(g);
+                g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
+                // title: "Azeroth Survivors" in big gold letters over the section area, the emblem to its right
+                using (var path = new GraphicsPath())
+                using (var sf = new StringFormat())
+                {
+                    path.AddString("Azeroth Survivors", Theme.TitleFamily(), (int)FontStyle.Bold, 58f, new PointF(0, 0), sf);   // the decorative title font
+                    RectangleF b = path.GetBounds();
+                    Image em = Theme.Logo;
+                    int emW = em != null ? 128 : 0, emH = em != null ? em.Height * 128 / em.Width : 0;
+                    float total = b.Width + (em != null ? 16 + emW : 0);
+                    float x0 = 8 + (670 - total) / 2, y0 = 70 + (120 - b.Height) / 2;
+                    using (var m = new Matrix())
+                    {
+                        m.Translate(x0 - b.X, y0 - b.Y);
+                        path.Transform(m);
+                    }
+                    using (var sh = new GraphicsPath())
+                    {
+                        sh.AddPath(path, false);
+                        using (var m = new Matrix()) { m.Translate(3, 4); sh.Transform(m); }
+                        using (var sb = new SolidBrush(Color.FromArgb(200, 0, 0, 0))) g.FillPath(sb, sh);
+                    }
+                    RectangleF pb = path.GetBounds();
+                    using (var lg = new LinearGradientBrush(pb, Theme.Hex("#fff1b8"), Theme.Hex("#c9821a"), LinearGradientMode.Vertical))
+                        g.FillPath(lg, path);
+                    using (var pen = new Pen(Theme.Hex("#4a2a08"), 2f)) g.DrawPath(pen, path);
+                    if (em != null) g.DrawImage(em, pb.Right + 16, 70 + (120 - emH) / 2, emW, emH);
+                    // under the title: who made the game
+                    string by = Lang.T("A Game Made By Aethus");
+                    Font byf = Theme.F(13, FontStyle.Italic);
+                    float bw = g.MeasureString(by, byf).Width, bx = pb.Left + (pb.Width - bw) / 2, byy = pb.Bottom + 12;
+                    using (var bsh = new SolidBrush(Color.Black)) g.DrawString(by, byf, bsh, bx + 1, byy + 1);
+                    using (var bb = new SolidBrush(Theme.Hex("#e8d9a8"))) g.DrawString(by, byf, bb, bx, byy);
+                }
+                using (var gold = new SolidBrush(Retro.Gold))
+                using (var shadow = new SolidBrush(Color.Black))
+                {
+                    Font hf = Theme.F(11);
+                    g.DrawString(Lang.T("News"), hf, shadow, 729, 205);    // after the Discord symbol
+                    g.DrawString(Lang.T("News"), hf, gold, 728, 204);
+                    g.DrawString(Lang.T("Launcher"), hf, shadow, 698, 447);
+                    g.DrawString(Lang.T("Launcher"), hf, gold, 697, 446);
+                }
+                string version = Data.GameVersion;
+                using (var vb = new SolidBrush(Theme.Hex("#b8a27a")))            // bottom-left corner
+                    g.DrawString(Lang.T("Game version") + (version.Length > 0 ? ": " + version : ""), Theme.F(9.5f), vb, 12, 670);   // a little bigger
+            }
+            return homeLayer;
+        }
+
         protected override void OnPaint(PaintEventArgs e)
         {
             Graphics g = e.Graphics;
-            Image bg = Retro.Get("background");
-            if (bg != null) g.DrawImage(bg, 0, 0, W, H);
-            else g.Clear(Theme.BgBottom);
+            Rectangle clip = Rectangle.Intersect(e.ClipRectangle, new Rectangle(0, 0, W, H));
+            if (clip.Width > 0 && clip.Height > 0)
+            {
+                g.InterpolationMode = InterpolationMode.NearestNeighbor;
+                g.PixelOffsetMode = PixelOffsetMode.Half;
+                g.CompositingMode = CompositingMode.SourceCopy;
+                g.DrawImage(HomeLayer(), clip, clip, GraphicsUnit.Pixel);
+                g.CompositingMode = CompositingMode.SourceOver;
+            }
             Theme.Smooth(g);
             g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
-            // title: "Azeroth Survivors" in big gold letters over the section area, the emblem to its right
-            using (var path = new GraphicsPath())
-            using (var sf = new StringFormat())
-            {
-                path.AddString("Azeroth Survivors", Theme.TitleFamily(), (int)FontStyle.Bold, 58f, new PointF(0, 0), sf);   // the decorative title font
-                RectangleF b = path.GetBounds();
-                Image em = Theme.Logo;
-                int emW = em != null ? 128 : 0, emH = em != null ? em.Height * 128 / em.Width : 0;
-                float total = b.Width + (em != null ? 16 + emW : 0);
-                float x0 = 8 + (670 - total) / 2, y0 = 70 + (120 - b.Height) / 2;
-                using (var m = new Matrix())
-                {
-                    m.Translate(x0 - b.X, y0 - b.Y);
-                    path.Transform(m);
-                }
-                using (var sh = new GraphicsPath())
-                {
-                    sh.AddPath(path, false);
-                    using (var m = new Matrix()) { m.Translate(3, 4); sh.Transform(m); }
-                    using (var sb = new SolidBrush(Color.FromArgb(200, 0, 0, 0))) g.FillPath(sb, sh);
-                }
-                RectangleF pb = path.GetBounds();
-                using (var lg = new LinearGradientBrush(pb, Theme.Hex("#fff1b8"), Theme.Hex("#c9821a"), LinearGradientMode.Vertical))
-                    g.FillPath(lg, path);
-                using (var pen = new Pen(Theme.Hex("#4a2a08"), 2f)) g.DrawPath(pen, path);
-                if (em != null) g.DrawImage(em, pb.Right + 16, 70 + (120 - emH) / 2, emW, emH);
-                // under the title: who made the game
-                string by = Lang.T("A Game Made By Aethus");
-                Font byf = Theme.F(13, FontStyle.Italic);
-                float bw = g.MeasureString(by, byf).Width, bx = pb.Left + (pb.Width - bw) / 2, byy = pb.Bottom + 12;
-                using (var bsh = new SolidBrush(Color.Black)) g.DrawString(by, byf, bsh, bx + 1, byy + 1);
-                using (var bb = new SolidBrush(Theme.Hex("#e8d9a8"))) g.DrawString(by, byf, bb, bx, byy);
-            }
             // News: the newest patch note
             var posts = Data.Changelog;
             if (posts.Count > 0)
@@ -326,7 +375,9 @@ namespace AzerothLauncher
                         string l = lines[i].Trim();
                         if (l.Length == 0 || l.Trim('-', '=', '_', '\u2014', '\u2013').Length == 0) continue;   // blank or a rule
                         if (l.StartsWith("- ") || l.StartsWith("* ")) l = "\u2022 " + l.Substring(2);
-                        SizeF sz = g.MeasureString(l, bf, NewsTextW);
+                        SizeF sz;                            // measured once per line and font
+                        string mk = l + "\u0001" + bf.Size + bf.Name;
+                        if (!newsMeasured.TryGetValue(mk, out sz)) { sz = g.MeasureString(l, bf, NewsTextW); newsMeasured[mk] = sz; }
                         if (y + sz.Height > NewsArea.Y && y < NewsArea.Bottom)
                         {
                             var box = new RectangleF(700, y, NewsTextW, sz.Height + 2);
@@ -345,15 +396,6 @@ namespace AzerothLauncher
                     }
                 }
             }
-            using (var gold = new SolidBrush(Retro.Gold))
-            using (var shadow = new SolidBrush(Color.Black))
-            {
-                Font hf = Theme.F(11);
-                g.DrawString(Lang.T("News"), hf, shadow, 729, 205);    // after the Discord symbol
-                g.DrawString(Lang.T("News"), hf, gold, 728, 204);
-                g.DrawString(Lang.T("Launcher"), hf, shadow, 698, 447);
-                g.DrawString(Lang.T("Launcher"), hf, gold, 697, 446);
-            }
             WeeklyRecap(g);
             // bottom bar: the status above PLAY says everything
             using (var gb = new SolidBrush(Retro.Gold))
@@ -365,7 +407,7 @@ namespace AzerothLauncher
                 using (var sb = new SolidBrush(Theme.Hex("#fff2b0")))
                 {
                     // centred over PLAY; a long status that would run off the window ends at the right edge instead
-                    string st = Lang.T(status == "Ready." && !ClientPresent()
+                    string st = Lang.T(status == "Ready." && !ClientPresentPaint()
                         ? (RequireLauncherInstall ? "Game client not found. Press INSTALL to download it first."
                                                   : "Game client not found. Press INSTALL, or set the game folder in Options.")
                         : status);
@@ -395,20 +437,35 @@ namespace AzerothLauncher
                         g.DrawString(st, stf, sb, sx, playBtn.Top - 26);
                     }
                 }
-                string version = Data.GameVersion;
-                using (var vb = new SolidBrush(Theme.Hex("#b8a27a")))            // bottom-left corner
-                    g.DrawString(Lang.T("Game version") + (version.Length > 0 ? ": " + version : ""), Theme.F(9.5f), vb, 12, 670);   // a little bigger
             }
         }
 
+        // the paint asks often; the disk is asked at most every 2 seconds
+        bool clientPresentSeen;
+        DateTime clientPresentAt;
+        bool ClientPresentPaint()
+        {
+            if ((DateTime.UtcNow - clientPresentAt).TotalSeconds > 2) { clientPresentSeen = ClientPresent(); clientPresentAt = DateTime.UtcNow; }
+            return clientPresentSeen;
+        }
+
         // ---- "This week": a card in the empty lower left of the home screen (AZS Stats' runs of the last 7 days)
+        RunStats recapStats;
+        DateTime recapAt;
+
         void WeeklyRecap(Graphics g)
         {
             // under the Launcher buttons: "This week" (AZS Stats' runs of the last 7 days) and the play time AZS Stats
             // counts in game, together in one small card
             var lines = new List<string[]>();                // { heading, text }
             RunStats st = null;
-            try { st = StatsEnabled() ? AddonStats() : null; } catch (Exception) { }
+            // AZS Stats' file is looked at most every 3 seconds (a repaint happens often: hovering, the news, a button)
+            if ((DateTime.UtcNow - recapAt).TotalSeconds > 3)
+            {
+                try { recapStats = StatsEnabled() ? AddonStats() : null; } catch (Exception) { recapStats = null; }
+                recapAt = DateTime.UtcNow;
+            }
+            st = recapStats;
             if (st != null && st.History.Count > 0) lines.Add(new[] { Lang.T("This week"), WeekText(st) });
             PlayStats ps = st != null ? st.Play : new PlayStats();
             if (ps.Sessions > 0 && StatsEnabled() && Cfg.Bool("home_playtime", true))
@@ -808,7 +865,35 @@ namespace AzerothLauncher
                 return;
             }
             setupAsked = true;
+            if (AdoptExistingInstall()) return;
             RunSetup();
+        }
+
+        // No settings of the launcher's own (its folder next to it is gone: a new copy of the exe, the folder moved or
+        // deleted) does not mean a new player. When the game is here and has been played (its save or its config folder
+        // exist), the launcher just carries on with them: setup is skipped, everything is in Options as usual.
+        bool AdoptExistingInstall()
+        {
+            try
+            {
+                string game = GameDir();
+                if (!File.Exists(Path.Combine(game, Util.GameExe))) return false;
+                SyncSettings ss = SyncSettings();
+                bool played = Directory.Exists(ss.SaveDir) && Directory.GetFileSystemEntries(ss.SaveDir).Length > 0;
+                bool configured = Directory.Exists(ss.ConfigDir) && Directory.GetFileSystemEntries(ss.ConfigDir).Length > 0;
+                if (!played && !configured) return false;
+                Cfg.Set("setup_done", true);
+                Cfg.Set("installed_by_launcher", true);        // the player's own copy counts as installed
+                if (!Cfg.Has("cloud_enabled")) Cfg.Set("cloud_enabled", false);
+                if (!Cfg.Has("stats_enabled")) Cfg.Set("stats_enabled", Stats.AddonPath(AddonsDir()) != null);
+                Cfg.Save();
+                SetStatus("Found your game and its saves: first-time setup skipped. Every setting is in Options.");
+                RefreshGates();
+                RefreshPlayLabel();
+                Invalidate();
+                return true;
+            }
+            catch (Exception) { return false; }
         }
 
         // First-time setup, and RUN SETUP AGAIN: the save, folders, cloud saving and addons questions. Nothing is

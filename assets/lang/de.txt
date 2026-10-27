@@ -1685,3 +1685,5 @@ Your Gear Planner set:
 = Dein Ausrüstungsplaner-Set:
 Spells that affect this:
 = Zauber, die ihn beeinflussen:
+Found your game and its saves: first-time setup skipped. Every setting is in Options.
+= Dein Spiel und seine Spielstände wurden gefunden: Die Ersteinrichtung wird übersprungen. Alle Einstellungen findest du unter Optionen.

@@ -274,13 +274,17 @@ namespace AzerothLauncher
 
         static readonly Bitmap measureBmp = new Bitmap(1, 1);
 
-        // lays the words out (and draws them when g is given); returns the height. Measured and drawn the same way
-        // (GDI+, typographic), so the spaces and the links sit exactly where the text says
-        int Flow(Graphics draw)
+        // the words, laid out once: where each one goes (a repaint, while scrolling for example, only draws them)
+        struct Placed { public string Word; public float X, Y, W; public GuideLink Link; }
+        readonly List<Placed> placed = new List<Placed>();
+
+        // lays the words out (measured and drawn the same way, GDI+ typographic, so the spaces and the links sit
+        // exactly where the text says) and sizes the control
+        int Flow(Graphics unused)
         {
             hot.Clear();
-            Graphics g = draw ?? Graphics.FromImage(measureBmp);
-            try
+            placed.Clear();
+            using (Graphics g = Graphics.FromImage(measureBmp))
             {
                 g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;   // as the guide's other text
                 using (var sf = (StringFormat)StringFormat.GenericTypographic.Clone())
@@ -293,7 +297,6 @@ namespace AzerothLauncher
                     {
                         GuideLink link = run.Value;
                         Font f = link != null ? linkFont : font;
-                        Color c = link == null ? ForeColor : (link == over ? Theme.Hex("#fff2b0") : Theme.Hex("#e8b84a"));
                         // a link stays in one piece when it fits on a line; plain text wraps word by word
                         string[] words = link != null ? new[] { run.Key } : Regex.Split(run.Key, "( )");
                         foreach (string word in words)
@@ -302,24 +305,39 @@ namespace AzerothLauncher
                             if (word == " ") { if (x > 0) x += spaceW; continue; }
                             float w = g.MeasureString(word, f, PointF.Empty, sf).Width;
                             if (x > 0 && x + w > wrap) { x = 0; y += lineH; }
-                            if (draw != null)
-                                using (var b = new SolidBrush(c)) draw.DrawString(word, f, b, x, y, sf);
+                            var pw = new Placed();
+                            pw.Word = word; pw.X = x; pw.Y = y; pw.W = w; pw.Link = link;
+                            placed.Add(pw);
                             if (link != null) hot.Add(new KeyValuePair<RectangleF, GuideLink>(new RectangleF(x, y, w, lineH), link));
                             x += w;
                         }
                     }
                     int h = (int)Math.Ceiling(y) + lineH;
-                    if (draw == null) Size = new Size(wrap, h);
+                    Size = new Size(wrap, h);
                     return h;
                 }
             }
-            finally { if (draw == null) g.Dispose(); }
         }
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            e.Graphics.Clear(BackColor);
-            Flow(e.Graphics);
+            Graphics g = e.Graphics;
+            g.Clear(BackColor);
+            g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
+            int lineH = font.Height + 1;
+            using (var sf = (StringFormat)StringFormat.GenericTypographic.Clone())
+            using (var plain = new SolidBrush(ForeColor))
+            using (var gold = new SolidBrush(Theme.Hex("#e8b84a")))
+            using (var lit = new SolidBrush(Theme.Hex("#fff2b0")))
+            {
+                sf.FormatFlags |= StringFormatFlags.MeasureTrailingSpaces | StringFormatFlags.NoWrap;
+                foreach (var pw in placed)
+                {
+                    if (pw.Y + lineH < e.ClipRectangle.Top || pw.Y > e.ClipRectangle.Bottom) continue;   // out of sight
+                    Brush b = pw.Link == null ? plain : pw.Link == over ? lit : gold;
+                    g.DrawString(pw.Word, pw.Link != null ? linkFont : font, b, pw.X, pw.Y, sf);
+                }
+            }
         }
 
         GuideLink At(Point p)
@@ -470,7 +488,7 @@ namespace AzerothLauncher
             if (icon != null)
             {
                 th = Math.Max(th, 36);
-                g.DrawImage(icon, new Rectangle(10, 8, 32, 32));
+                Theme.Draw(g, icon, new Rectangle(10, 8, 32, 32));
                 using (var p = new Pen(Theme.Hex("#8a7040"), 1)) g.DrawRectangle(p, 10, 8, 32, 32);
             }
             TextRenderer.DrawText(g, title, tf, new Rectangle(10 + ix, icon != null ? 14 : 8, W - 20 - ix, th), Theme.Gold, BackColor,

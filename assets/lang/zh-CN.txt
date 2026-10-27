@@ -1686,3 +1686,5 @@ Your Gear Planner set:
 = 你的装备规划器套装：
 Spells that affect this:
 = 影响此法术的法术：
+Found your game and its saves: first-time setup skipped. Every setting is in Options.
+= 已找到你的游戏和存档：已跳过首次设置。所有设置都在“选项”中。

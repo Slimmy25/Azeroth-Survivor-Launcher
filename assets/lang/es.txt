@@ -1685,3 +1685,5 @@ Your Gear Planner set:
 = Tu conjunto del planificador:
 Spells that affect this:
 = Hechizos que lo afectan:
+Found your game and its saves: first-time setup skipped. Every setting is in Options.
+= Se encontraron tu juego y sus partidas guardadas: se omitió la configuración inicial. Todos los ajustes están en Opciones.

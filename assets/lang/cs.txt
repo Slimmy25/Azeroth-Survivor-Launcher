@@ -1686,3 +1686,5 @@ Your Gear Planner set:
 = Vaše sada z plánovače:
 Spells that affect this:
 = Kouzla, která ho ovlivňují:
+Found your game and its saves: first-time setup skipped. Every setting is in Options.
+= Hra a její uložené pozice nalezeny: první nastavení přeskočeno. Všechna nastavení jsou v Možnostech.

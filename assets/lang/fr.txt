@@ -1685,3 +1685,5 @@ Your Gear Planner set:
 = Votre ensemble du planificateur :
 Spells that affect this:
 = Sorts qui l’affectent :
+Found your game and its saves: first-time setup skipped. Every setting is in Options.
+= Votre jeu et ses sauvegardes ont été trouvés : la configuration initiale est ignorée. Tous les réglages sont dans Options.

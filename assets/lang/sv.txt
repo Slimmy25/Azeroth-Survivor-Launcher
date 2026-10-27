@@ -1685,3 +1685,5 @@ Your Gear Planner set:
 = Ditt set från utrustningsplaneraren:
 Spells that affect this:
 = Besvärjelser som påverkar den:
+Found your game and its saves: first-time setup skipped. Every setting is in Options.
+= Spelet och dess sparfiler hittades: förstagångsinställningen hoppas över. Alla inställningar finns under Alternativ.
