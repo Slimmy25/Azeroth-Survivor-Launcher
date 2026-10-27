@@ -17,8 +17,9 @@ Windows client, `AzerothSurvivors.exe`. The game, its code, its data, its patch 
   The Guide was written for the launcher from what the game shows and says.
 - **Patch notes** in News and Changelog (`assets/changelog.txt`) are the game's own, by Aethus.
 - **The game's addon API** used by the AZS addons is documented by the game.
-- **The launcher's emblem** (`assets/logo.png`, the shield with its two heroes) is Azeroth Survivors' own art, and
-  belongs to Aethus.
+- **The game's logo** (the gold "AS" on its blue globe: the launcher's shortcut and window icon,
+  `assets/AzerothSurvivors.ico`, and the small round picture in the corner of its windows, `assets/portrait.png`) is
+  Aethus's work and belongs to Aethus.
 
 ## World of Warcraft and Blizzard Entertainment
 
@@ -119,6 +120,8 @@ recordings of the game by Slimjim.
 
 ## Fonts, logos and tools
 
+- **The launcher's emblem** (`assets/logo.png`: the two cat heroes with their weapons over the shield, beside the
+  title on the home screen) is **Slimjim**'s own art.
 - **Source Serif 4** (the launcher's text font, `assets/fonts`, unchanged), by **Adobe**, under the SIL Open Font
   License 1.1: `assets/fonts/SourceSerif4-OFL.txt`. <https://github.com/adobe-fonts/source-serif>
 - **The Discord logo** (`assets/discord`), from Discord's brand assets, used to link to the game's Discord.
