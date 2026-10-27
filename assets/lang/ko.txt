@@ -1714,3 +1714,5 @@ AZS Stats
 = AZS Stats
 Cloud saving stays off. You can turn it on later in Options > CLOUD SAVE.
 = 클라우드 저장은 꺼진 상태로 둡니다. 나중에 옵션 > CLOUD SAVE에서 켤 수 있습니다.
+The launcher's whole Guide inside the game (/handbook): every topic and page, each class's spells with their icons and what changes them, each class's gear, the Talent Tree Builder and the Gear Planner, the same as in the launcher.
+= 런처의 가이드 전체를 게임 안에서(/handbook): 모든 주제와 페이지, 각 직업의 주문과 아이콘 및 그것을 바꾸는 것, 각 직업의 장비, 특성 트리 빌더와 장비 플래너. 런처와 똑같습니다.

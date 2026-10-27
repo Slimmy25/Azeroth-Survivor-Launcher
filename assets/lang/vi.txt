@@ -1714,3 +1714,5 @@ AZS Stats
 = AZS Stats
 Cloud saving stays off. You can turn it on later in Options > CLOUD SAVE.
 = Lưu đám mây vẫn tắt. Bạn có thể bật sau trong Tùy chọn > CLOUD SAVE.
+The launcher's whole Guide inside the game (/handbook): every topic and page, each class's spells with their icons and what changes them, each class's gear, the Talent Tree Builder and the Gear Planner, the same as in the launcher.
+= Toàn bộ hướng dẫn của trình khởi chạy ngay trong game (/handbook): mọi chủ đề và trang, phép của từng lớp kèm biểu tượng và những gì thay đổi chúng, trang bị của từng lớp, Trình tạo cây thiên phú và Trình lập kế hoạch trang bị, giống hệt trong trình khởi chạy.

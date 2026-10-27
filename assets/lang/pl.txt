@@ -1714,3 +1714,5 @@ AZS Stats
 = AZS Stats
 Cloud saving stays off. You can turn it on later in Options > CLOUD SAVE.
 = Zapis w chmurze pozostaje wyłączony. Możesz go włączyć później w Opcje > CLOUD SAVE.
+The launcher's whole Guide inside the game (/handbook): every topic and page, each class's spells with their icons and what changes them, each class's gear, the Talent Tree Builder and the Gear Planner, the same as in the launcher.
+= Cały przewodnik launchera w grze (/handbook): każdy temat i strona, zaklęcia każdej klasy z ikonami i tym, co je zmienia, ekwipunek każdej klasy, kreator drzewek talentów i planer ekwipunku, tak samo jak w launcherze.

@@ -1713,3 +1713,5 @@ AZS Stats
 = AZS Stats
 Cloud saving stays off. You can turn it on later in Options > CLOUD SAVE.
 = Penyimpanan cloud tetap mati. Kamu bisa menyalakannya nanti di Opsi > CLOUD SAVE.
+The launcher's whole Guide inside the game (/handbook): every topic and page, each class's spells with their icons and what changes them, each class's gear, the Talent Tree Builder and the Gear Planner, the same as in the launcher.
+= Seluruh panduan peluncur di dalam game (/handbook): setiap topik dan halaman, mantra tiap kelas beserta ikon dan apa yang mengubahnya, perlengkapan tiap kelas, Pembuat Pohon Talenta, dan Perencana Perlengkapan, sama seperti di peluncur.
