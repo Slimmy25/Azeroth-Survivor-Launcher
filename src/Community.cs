@@ -50,18 +50,47 @@ namespace AzerothLauncher
             return list;
         }
 
-        // Headline videos: while they run they are the only ones in Community (in place of the rotating build
-        // videos), swapping every 10 minutes like the build videos do. A video with no Title gets its title and
-        // channel from YouTube (oEmbed) the first time it is shown.
-        static readonly GuideVideo[] Headlines = new GuideVideo[]
+        // The big streamers' videos (videos/big-streamers/videos.txt): the front page's featured videos until their date,
+        // swapping every 10 minutes like the build videos do, and always first in MORE VIDEOS. A video with no title
+        // gets its title and channel from YouTube (oEmbed) the first time it is shown. Every other video is a content
+        // creator's (videos/content-creators).
+        static GuideVideo[] headlines;
+        static DateTime headlineUntil = DateTime.MinValue;
+
+        static GuideVideo[] Headlines
         {
-            new GuideVideo { Title = "Blizzard WISHES they made this..", Url = "https://www.youtube.com/watch?v=Suq82njFIuI",
-                             Author = "Asmongold TV", AuthorUrl = "https://www.youtube.com/@AsmonTV" },
-            new GuideVideo { Url = "https://www.youtube.com/watch?v=BKrbMA02fbQ" },
-            new GuideVideo { Url = "https://www.youtube.com/watch?v=ryyXRezVAsc" },
-            new GuideVideo { Url = "https://www.youtube.com/watch?v=AxcvhgPfYHU" },
-        };
-        static readonly DateTime HeadlineUntil = new DateTime(2026, 11, 9, 23, 59, 59);   // two weeks from Oct 26, 2026
+            get
+            {
+                if (headlines != null) return headlines;
+                var list = new List<GuideVideo>();
+                try
+                {
+                    foreach (string raw in Util.ReadResource("AS.big-streamers.txt").Replace("\r\n", "\n").Split('\n'))
+                    {
+                        string line = raw.Trim();
+                        if (line.Length == 0 || line.StartsWith("#")) continue;
+                        if (line.StartsWith("@until"))
+                        {
+                            DateTime d;
+                            if (DateTime.TryParseExact(line.Substring(6).Trim(), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture,
+                                                       System.Globalization.DateTimeStyles.None, out d))
+                                headlineUntil = d.AddDays(1).AddSeconds(-1);
+                            continue;
+                        }
+                        string[] f = line.Split('|');
+                        var v = new GuideVideo { Url = f[0].Trim() };
+                        if (f.Length > 1) v.Title = f[1].Trim();
+                        if (f.Length > 2) v.Author = f[2].Trim();
+                        if (f.Length > 3) v.AuthorUrl = f[3].Trim();
+                        list.Add(v);
+                    }
+                }
+                catch (Exception) { }
+                headlines = list.ToArray();
+                return headlines;
+            }
+        }
+        static DateTime HeadlineUntil { get { var h = Headlines; return headlineUntil; } }
 
         static bool HeadlineOn { get { return Headlines.Length > 0 && DateTime.Now <= HeadlineUntil; } }
 
@@ -180,7 +209,7 @@ namespace AzerothLauncher
                     PW - 20 - (int)(200 * Theme.Zoom), 8);
         }
 
-        // MORE VIDEOS: the headline videos first, always at the top in their own order (while they run), then all the
+        // MORE VIDEOS: the big streamers' videos first, always at the top in their own order, then all the
         // other videos in a random order, shuffled again each time MORE VIDEOS is opened; a click plays it here
         bool communityMore;
         List<GuideVideo> moreOrder;                          // the order shown, kept while the page is open
@@ -188,7 +217,7 @@ namespace AzerothLauncher
         static List<GuideVideo> MoreVideos()
         {
             var list = new List<GuideVideo>();
-            if (HeadlineOn) list.AddRange(Headlines);
+            list.AddRange(Headlines);                       // the big streamers: always first, in their order
             int ti;
             var rest = new List<GuideVideo>();
             foreach (var v in BuildVideos(out ti)) if (!list.Contains(v) && !rest.Contains(v)) rest.Add(v);

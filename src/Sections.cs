@@ -24,6 +24,10 @@ namespace AzerothLauncher
         Point? dragOffset;
         List<KeyValuePair<string, Action>> crumbs = new List<KeyValuePair<string, Action>>();
         readonly List<KeyValuePair<Rectangle, Action>> hot = new List<KeyValuePair<Rectangle, Action>>();
+        // a step's drop-down (the other choices at that level), and where its arrow was drawn
+        readonly Dictionary<int, List<KeyValuePair<string, Action>>> menus = new Dictionary<int, List<KeyValuePair<string, Action>>>();
+        readonly List<KeyValuePair<Rectangle, int>> arrows = new List<KeyValuePair<Rectangle, int>>();
+        int hoverArrow = -1;
         int hover = -1;                                      // the step under the pointer (-2: the back arrow)
 
         public SideHead()
@@ -44,7 +48,16 @@ namespace AzerothLauncher
         public void SetCrumbs(List<KeyValuePair<string, Action>> list)
         {
             crumbs = list ?? new List<KeyValuePair<string, Action>>();
+            menus.Clear();
             hover = -1;
+            Invalidate();
+        }
+
+        // the choices of step i (not the first one): a small arrow beside it opens them
+        public void SetMenu(int i, List<KeyValuePair<string, Action>> items)
+        {
+            if (i <= 0 || items == null || items.Count == 0) return;
+            menus[i] = items;
             Invalidate();
         }
 
@@ -61,6 +74,7 @@ namespace AzerothLauncher
             using (var p = new Pen(Theme.Hex("#c49a48"), 2)) g.DrawRectangle(p, 22, 7, w - 26, 21);
             Theme.Smooth(g);
             hot.Clear();
+            arrows.Clear();
             int x = 50;
             Rectangle bb = BackBox;
             if (!bb.IsEmpty)
@@ -79,8 +93,9 @@ namespace AzerothLauncher
                 sf.Trimming = StringTrimming.EllipsisCharacter;
                 // from the end: the steps that fit; the first ones go when the trail is too long
                 var widths = new List<float>();
+                float arrowW = 14;
                 for (int i = 0; i < crumbs.Count; i++)
-                    widths.Add(g.MeasureString(Lang.T(crumbs[i].Key), i == crumbs.Count - 1 ? f : fs).Width);
+                    widths.Add(g.MeasureString(Lang.T(crumbs[i].Key), i == crumbs.Count - 1 ? f : fs).Width + (menus.ContainsKey(i) ? arrowW : 0));
                 float sep = g.MeasureString(" › ", fs).Width;
                 int first = 0;
                 float total = 0;
@@ -91,9 +106,19 @@ namespace AzerothLauncher
                     bool last = i == crumbs.Count - 1;
                     string t = Lang.T(crumbs[i].Key);
                     float tw = Math.Min(widths[i], right - x);
-                    var r = new RectangleF(x, 7, Math.Max(1, tw), 22);
+                    bool menu = menus.ContainsKey(i);
+                    var r = new RectangleF(x, 7, Math.Max(1, tw - (menu ? arrowW : 0)), 22);
                     Color c = last ? Theme.Hex("#fff0b0") : (hover == i ? Color.White : Theme.Hex("#d9c48a"));
                     using (var b = new SolidBrush(c)) g.DrawString(t, last ? f : fs, b, r, sf);
+                    if (menu)
+                    {
+                        // the drop-down arrow: the other choices at this step
+                        var ar = new Rectangle((int)r.Right + 1, 11, (int)arrowW - 2, 14);
+                        if (hoverArrow == i) using (var b = new SolidBrush(Theme.Hex("#3a2c18"))) g.FillRectangle(b, ar);
+                        using (var b = new SolidBrush(hoverArrow == i ? Color.White : Theme.Hex("#d9c48a")))
+                            g.FillPolygon(b, new[] { new PointF(ar.X + 2, ar.Y + 5), new PointF(ar.Right - 2, ar.Y + 5), new PointF(ar.X + ar.Width / 2f, ar.Y + 10) });
+                        arrows.Add(new KeyValuePair<Rectangle, int>(ar, i));
+                    }
                     if (!last && crumbs[i].Value != null)
                     {
                         hot.Add(new KeyValuePair<Rectangle, Action>(Rectangle.Round(r), crumbs[i].Value));
@@ -130,11 +155,17 @@ namespace AzerothLauncher
             return -1;
         }
 
+        int ArrowAt(Point pt)
+        {
+            foreach (var a in arrows) if (a.Key.Contains(pt)) return a.Value;
+            return -1;
+        }
+
         protected override void OnMouseMove(MouseEventArgs e)
         {
-            int h = HotAt(e.Location);
-            if (h != hover) { hover = h; Invalidate(); }
-            Cursor = CloseBox.Contains(e.Location) || h != -1 ? Cursors.Hand : Cursors.Default;
+            int h = HotAt(e.Location), ha = ArrowAt(e.Location);
+            if (h != hover || ha != hoverArrow) { hover = h; hoverArrow = ha; Invalidate(); }
+            Cursor = CloseBox.Contains(e.Location) || h != -1 || ha != -1 ? Cursors.Hand : Cursors.Default;
             if (dragOffset.HasValue && Owner2 != null)
             {
                 Point s = PointToScreen(e.Location);
@@ -143,7 +174,28 @@ namespace AzerothLauncher
             base.OnMouseMove(e);
         }
 
-        protected override void OnMouseLeave(EventArgs e) { if (hover != -1) { hover = -1; Invalidate(); } base.OnMouseLeave(e); }
+        protected override void OnMouseLeave(EventArgs e) { if (hover != -1 || hoverArrow != -1) { hover = -1; hoverArrow = -1; Invalidate(); } base.OnMouseLeave(e); }
+
+        void ShowMenu(int i, Rectangle at)
+        {
+            List<KeyValuePair<string, Action>> items;
+            if (!menus.TryGetValue(i, out items)) return;
+            var m = new ContextMenuStrip();
+            m.ShowImageMargin = false;
+            m.BackColor = Theme.Hex("#16151e");
+            m.ForeColor = Theme.Hex("#f5e9c8");
+            m.Font = Theme.F(9.5f);
+            foreach (var kv in items)
+            {
+                Action act = kv.Value;
+                var it = new ToolStripMenuItem(Lang.T(kv.Key));
+                it.ForeColor = kv.Key == crumbs[i].Key ? Theme.Hex("#f0c050") : Theme.Hex("#f5e9c8");   // where you are now
+                it.Click += delegate { WowButton.Fire(act); };
+                m.Items.Add(it);
+            }
+            m.Closed += delegate { BeginInvoke(new Action(m.Dispose)); };
+            m.Show(this, new Point(at.X - 6, Height - 4));
+        }
 
         protected override void OnMouseDown(MouseEventArgs e)
         {
@@ -165,6 +217,11 @@ namespace AzerothLauncher
                 if (Moved != null && Owner2 != null) Moved(Owner2.Location);
             }
             else if (e.Button == MouseButtons.Left && CloseBox.Contains(e.Location)) WowButton.Fire(CloseClicked);
+            else if (e.Button == MouseButtons.Left && ArrowAt(e.Location) >= 0)
+            {
+                int i = ArrowAt(e.Location);
+                foreach (var a in arrows) if (a.Value == i) ShowMenu(i, a.Key);
+            }
             else if (e.Button == MouseButtons.Left)
             {
                 int h = HotAt(e.Location);
@@ -486,6 +543,9 @@ namespace AzerothLauncher
             trail.Add(new KeyValuePair<string, Action>(title, null));
             sideHead.SetCrumbs(trail);
         }
+
+        // the drop-down of trail step i: name, action, name, action, ...
+        void SetCrumbMenu(int i, List<KeyValuePair<string, Action>> items) { sideHead.SetMenu(i, items); }
 
         void SetCrumbs(params object[] steps)                // "Guide", action, "Theorycrafting", action, ..., "Priest", null
         {
@@ -847,6 +907,16 @@ namespace AzerothLauncher
         {
             bool dl = addonMode == "download";
             ClearPanel(dl ? "Download More" : "Addons");
+            if (dl)                                          // Addons › Download More ▾ : its tabs
+            {
+                var l = new List<KeyValuePair<string, Action>>();
+                for (int i = 0; i < Data.AddonCategories.Length; i++)
+                {
+                    int n = i;
+                    l.Add(new KeyValuePair<string, Action>(Data.AddonCategories[i], delegate { addonCategory = n; BuildPanel("Addons"); }));
+                }
+                SetCrumbMenu(1, l);
+            }
             if (dl)
             {
                 // the categories, a row of tabs across the top (the back arrow in the title bar returns to My Addons)
@@ -1606,6 +1676,16 @@ namespace AzerothLauncher
             if (optionsLang)
                 SetCrumbs("Options", (Action)delegate { optionsLang = false; optionsTab = 0; BuildPanel("Options"); },
                           "Launcher", (Action)delegate { optionsLang = false; BuildPanel("Options"); }, "Language", null);
+            if (optionsLang)                                 // Options › Launcher ▾ : the other tabs
+            {
+                var l = new List<KeyValuePair<string, Action>>();
+                for (int i = 0; i < OptionTabs.Length; i++)
+                {
+                    int n = i;
+                    l.Add(new KeyValuePair<string, Action>(OptionTabs[i], delegate { optionsTab = n; optionsLang = false; BuildPanel("Options"); }));
+                }
+                SetCrumbMenu(1, l);
+            }
             var sp = MakeScroll(panel, new Rectangle(8, top0, PW - 16, PH - 8 - top0), Theme.Panel, Theme.Panel);
             int pageW = sp.ClientSize.Width + 16;             // the page's width, in the same terms as the section's
             putInto = sp;

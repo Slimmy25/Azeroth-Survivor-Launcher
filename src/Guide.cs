@@ -198,8 +198,36 @@ namespace AzerothLauncher
                 b.Location = new Point(x0 + (i % cols) * (cw + gap), y0 + (i / cols) * (ch + gap));
                 inner.Controls.Add(b);
             }
-            panel.Controls.Add(box);
-            box.BringToFront();
+            // behind it, the launcher's own picture (its starry mountains), not a black page
+            var back = new Panel();
+            back.Bounds = new Rectangle(20, top, PW - 40, avail);
+            back.BackgroundImage = PromptBackdrop();
+            back.BackgroundImageLayout = ImageLayout.Stretch;
+            box.Location = new Point(box.Left - back.Left, box.Top - back.Top);
+            back.Controls.Add(box);
+            panel.Controls.Add(back);
+            back.BringToFront();
+        }
+
+        static Image promptBackdrop;
+
+        // the part of the launcher's background that lies behind the section window
+        static Image PromptBackdrop()
+        {
+            if (promptBackdrop != null) return promptBackdrop;
+            Image bg = Retro.Get("background");
+            if (bg == null) return null;
+            var area = new Rectangle(6, 198, 674, 376);     // the section window (SideRect), in the launcher's 1100 x 690
+            var bmp = new Bitmap(area.Width, area.Height);
+            using (var g = Graphics.FromImage(bmp))
+            {
+                g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                float sx = bg.Width / 1100f, sy = bg.Height / 690f;
+                g.DrawImage(bg, new Rectangle(0, 0, area.Width, area.Height),
+                            new RectangleF(area.X * sx, area.Y * sy, area.Width * sx, area.Height * sy), GraphicsUnit.Pixel);
+            }
+            promptBackdrop = bmp;
+            return bmp;
         }
 
         GuideSearchBox guideSearch;
@@ -228,6 +256,61 @@ namespace AzerothLauncher
         {
             PanelGuideView();
             GuideTrail();
+            GuideTrailMenus();
+        }
+
+        // the drop-downs of the trail: the groups, a group's topics and tools, a topic's pages, the classes
+        void GuideTrailMenus()
+        {
+            var topics = Data.Guide;
+            Func<List<KeyValuePair<string, Action>>> groups = delegate
+            {
+                var l = new List<KeyValuePair<string, Action>>();
+                for (int g = 0; g < GuideGroups.Length; g++) { int gg = g; l.Add(new KeyValuePair<string, Action>(GroupName(g), delegate { GuideGroupPage(gg); })); }
+                return l;
+            };
+            Func<int, List<KeyValuePair<string, Action>>> tabsOf = delegate(int g)
+            {
+                var l = new List<KeyValuePair<string, Action>>();
+                foreach (int tab in GroupTabs(g, topics))
+                {
+                    int tt = tab;
+                    string name = tab == -2 ? TalentBuilder : tab == -3 ? GearPlanner : topics[tab].Title;
+                    l.Add(new KeyValuePair<string, Action>(name, delegate { if (tt < 0) OpenGuideTab(tt); else SetGuideView(tt, -1); }));
+                }
+                return l;
+            };
+            Func<Action<string>, List<KeyValuePair<string, Action>>> classes = delegate(Action<string> pick)
+            {
+                var l = new List<KeyValuePair<string, Action>>();
+                foreach (string c in BuilderClasses) { string cc = c; l.Add(new KeyValuePair<string, Action>(c, delegate { pick(cc); })); }
+                return l;
+            };
+            if (gVideo != null || guideQuery.Trim().Length > 0) return;
+            if (gBuilder || gPlanner)
+            {
+                SetCrumbMenu(1, groups());
+                SetCrumbMenu(2, tabsOf(2));
+                if (gBuilder && gTalents != null)
+                    SetCrumbMenu(3, classes(delegate(string c) { PlannerClass(c); gTalents = c; BuildPanel("Guide"); }));
+                if (gPlanner && plannerClass != null)
+                    SetCrumbMenu(3, classes(delegate(string c) { PlannerClass(c); BuildPanel("Guide"); }));
+                return;
+            }
+            if (gTopic < 0 || gTopic >= topics.Count)
+            {
+                if (guideGroupPage >= 0) SetCrumbMenu(1, groups());
+                return;
+            }
+            int t = gTopic;
+            SetCrumbMenu(1, groups());
+            SetCrumbMenu(2, tabsOf(GroupOf(topics[t].Title)));
+            if (gPage >= 0 && topics[t].Pages.Count > 0)
+            {
+                var l = new List<KeyValuePair<string, Action>>();
+                for (int p = 0; p < topics[t].Pages.Count; p++) { int pp = p; l.Add(new KeyValuePair<string, Action>(topics[t].Pages[p].Title, delegate { SetGuideView(t, pp); })); }
+                SetCrumbMenu(3, l);
+            }
         }
 
         void PanelGuideView()
