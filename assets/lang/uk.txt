@@ -1760,3 +1760,31 @@ Stars decide which set bonuses you reach. How much each star adds to a piece is 
 = Зірки визначають, яких бонусів комплектів ви досягаєте. Скільки кожна зірка додає предмету, поки невідомо, тож тут це не враховується.
 A complete interface: a run clock with the boss timeline and next-boss countdown, boss bars, enemy health plates and floating combat numbers, hero, target, party and pet frames, a skill bar with cooldowns and rank gems, a combat meter, a ring minimap and glass-styled chat. Every part can be turned on or off (/aether).
 = Повний інтерфейс: годинник забігу зі шкалою босів і відліком до наступного, смуги босів, смужки здоров'я ворогів і спливні бойові числа, рамки героя, цілі, групи й улюбленця, панель умінь із перезарядкою та каменями рангів, бойовий лічильник, кругла мінікарта й чат у стилі скла. Кожну частину можна ввімкнути чи вимкнути (/aether).
+The game has closed and your progress is still uploading to the cloud. Try again in a moment.
+= Гру закрито, а ваш прогрес ще завантажується в хмару. Спробуйте ще раз за мить.
+Finish the first-time setup first.
+= Спершу завершіть початкове налаштування.
+REQUIRES INSTALL
+= ПОТРІБНЕ ВСТАНОВЛЕННЯ
+Created if not found
+= Буде створено, якщо немає
+Folders found at their usual place are used as they are. A folder that is not there yet is created when setup is done; you can choose another one instead.
+= Теки на звичному місці використовуються як є. Теку, якої ще немає, буде створено після завершення налаштування; замість неї можна вибрати іншу.
+Would you like to download addons?
+= Бажаєте завантажити аддони?
+They are all optional: you choose each one you want in Addons > DOWNLOAD MORE.
+= Усі необов'язкові: кожен обираєте в Аддони > DOWNLOAD MORE.
+Ready to download the game
+= Готово до завантаження гри
+Azeroth Survivors is not on this PC yet. The launcher will now download it into this folder:\n{0}\n\nThe download shows in the bar at the bottom. You can stop it there at any time.
+= Azeroth Survivors ще немає на цьому ПК. Лаунчер зараз завантажить гру в цю теку:\n{0}\n\nЗавантаження видно на смузі внизу. Зупинити його там можна будь-коли.
+DOWNLOAD THE GAME
+= ЗАВАНТАЖИТИ ГРУ
+CANCEL SETUP
+= СКАСУВАТИ НАЛАШТУВАННЯ
+Setup was cancelled
+= Налаштування скасовано
+This launcher is here to help you play and manage Azeroth Survivors: it installs the game, keeps your progress safe in the cloud, manages your addons and shows your stats and the Guide. Without setup it has little to offer.\n\nStart setup again whenever you are ready.
+= Цей лаунчер допомагає грати в Azeroth Survivors і керувати нею: встановлює гру, зберігає прогрес у хмарі, керує аддонами та показує статистику й посібник. Без налаштування йому майже нічого запропонувати.\n\nЗапустіть налаштування знову, коли будете готові.
+START SETUP AGAIN
+= ПОЧАТИ НАЛАШТУВАННЯ ЗНОВУ

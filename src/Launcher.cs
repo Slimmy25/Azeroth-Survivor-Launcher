@@ -670,7 +670,11 @@ namespace AzerothLauncher
             if (GameRunningFlag) { playBtn.Label = "PLAYING..."; playBtn.FontSize = 24; }
             else if (Installing) { playBtn.Label = "INSTALLING"; playBtn.FontSize = 18; }
             else if (Updating) { playBtn.Label = "UPDATING"; playBtn.FontSize = 20; }
-            else { playBtn.Label = ClientPresent() ? "PLAY" : "INSTALL"; playBtn.FontSize = 24; }
+            else if (ClientPresent()) { playBtn.Label = "PLAY"; playBtn.FontSize = 24; }
+            else { playBtn.Label = "REQUIRES INSTALL"; playBtn.FontSize = 13; }
+            // grayed out until the first-time setup is done (it installs the game too)
+            playBtn.GrayedTip = "Finish the first-time setup first.";
+            playBtn.Grayed = !GameRunningFlag && !Installing && !Updating && !Cfg.Bool("setup_done", false) && !PreviewMode;
             Invalidate(new Rectangle(0, 578, W, H - 578));
             RefreshGates();
         }
@@ -907,7 +911,7 @@ namespace AzerothLauncher
         // downloaded here: the game is only downloaded when the player presses INSTALL (and says they don't have it).
         public void RunSetup()
         {
-            if (GameRunningFlag) { Info("Setup", "Close the game first, then run setup again."); return; }
+            if (GameRunningFlag) { Info("Setup", Util.GameRunning() ? "Close the game first, then run setup again." : StillUploading); return; }
             if (Updating || Installing) { SetStatus("Please wait until the launcher update or the install has finished."); return; }
             ShowSetupDialog();
         }
@@ -1281,15 +1285,16 @@ namespace AzerothLauncher
                         p.WaitForExit();                     // returns on normal exit or crash
                     }
                     // The game updates itself when it starts: it closes and opens again (possibly through a helper in its
-                    // folder). So after it closes, the launcher waits a moment for it to come back: 10 s after a plain
-                    // close, up to 90 s when its files changed (it updated). Only when it stays closed is the session over.
+                    // folder). So after it closes, the launcher waits a moment for it to come back: 3 s after a plain
+                    // close (a helper starts at once), up to 45 s when its files changed (it updated). Only when it stays
+                    // closed is the session over; then the upload starts straight away.
                     while (true)
                     {
                         while (GameProcessRunning(gameDir)) Thread.Sleep(2000);
                         bool patched = GameFilesStamp(gameDir) > stamp;
                         if (patched) Ui(delegate { SetStatus("The game updated itself and is opening again..."); });
                         bool back = false;
-                        for (int i = 0; i < (patched ? 180 : 20) && !back; i++)
+                        for (int i = 0; i < (patched ? 90 : 6) && !back; i++)
                         {
                             Thread.Sleep(500);
                             back = GameProcessRunning(gameDir);
@@ -1307,13 +1312,11 @@ namespace AzerothLauncher
                 if (launched)
                 {
                     SyncLog("Game closed.", Level.Info);
-                    Thread.Sleep(2000);                      // short pause, then pop back up in front
-                    Ui(ShowWindowFront);
+                    Ui(ShowWindowFront);                     // back up in front
                     if (eng == null) Ui(delegate { SetCloudNote("Game has closed."); });
                 }
                 if (launched && eng != null)
                 {
-                    Thread.Sleep(1000);                      // the upload starts once the game has stayed closed
                     try
                     {
                         if (eng.Push(false))
@@ -1358,25 +1361,28 @@ namespace AzerothLauncher
             return newest;
         }
 
-        // the game, or any other program started from the game's folder (an updater helper), is running
+        // the game, or any other program of the game's folder (an updater helper) is running: looked up by the names of
+        // the .exe files in that folder and the folders right under it (fast: no need to open every running program)
         static bool GameProcessRunning(string gameDir)
         {
             if (Util.GameRunning()) return true;
-            string root;
-            try { root = Path.GetFullPath(gameDir).TrimEnd('\\') + "\\"; }
-            catch (Exception) { return false; }
-            int me = Process.GetCurrentProcess().Id;
-            foreach (Process pr in Process.GetProcesses())
+            try
             {
-                try
+                var names = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                foreach (string f in Directory.GetFiles(gameDir, "*.exe")) names.Add(Path.GetFileNameWithoutExtension(f));
+                foreach (string d in Directory.GetDirectories(gameDir))
+                    try { foreach (string f in Directory.GetFiles(d, "*.exe")) names.Add(Path.GetFileNameWithoutExtension(f)); }
+                    catch (Exception) { }
+                names.Remove(Path.GetFileNameWithoutExtension(Application.ExecutablePath));   // the launcher itself
+                foreach (string n in names)
                 {
-                    if (pr.Id == me) continue;
-                    string path = pr.MainModule.FileName;    // some processes refuse this: skipped
-                    if (path != null && path.StartsWith(root, StringComparison.OrdinalIgnoreCase)) return true;
+                    Process[] found = Process.GetProcessesByName(n);
+                    bool any = found.Length > 0;
+                    foreach (Process pr in found) pr.Dispose();
+                    if (any) return true;
                 }
-                catch (Exception) { }
-                finally { pr.Dispose(); }
             }
+            catch (Exception) { }
             return false;
         }
 
@@ -1416,6 +1422,9 @@ namespace AzerothLauncher
             RunStats st = AddonStats();
             return st != null ? st.Play : new PlayStats();
         }
+
+        // the game has closed, but its session is still finishing (the cloud upload)
+        const string StillUploading = "The game has closed and your progress is still uploading to the cloud. Try again in a moment.";
 
         void SessionDone(List<string> problems)
         {
@@ -1462,7 +1471,7 @@ namespace AzerothLauncher
             }
             if (GameRunningFlag)
             {
-                Info("Install", "Close the game first, then install it again.");
+                Info("Install", Util.GameRunning() ? "Close the game first, then install it again." : StillUploading);
                 return;
             }
             setupAfterInstall = forSetup;
@@ -1519,8 +1528,10 @@ namespace AzerothLauncher
                         setupAfterInstall = false;
                         RefreshPlayLabel();
                         SetStatus("Download cancelled.");
+                        SetupDownloadCancelled();            // started from setup: setup is cancelled with it
                         return;
                     }
+                    setupDownloading = false;                // (the download from setup has ended)
                     if (error != null)
                     {
                         Installing = false;

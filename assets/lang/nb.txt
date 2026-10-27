@@ -1759,3 +1759,31 @@ Stars decide which set bonuses you reach. How much each star adds to a piece is 
 = Stjerner avgjør hvilke settbonuser du når. Hvor mye hver stjerne gir en del, er ikke kjent ennå, så det telles ikke med her.
 A complete interface: a run clock with the boss timeline and next-boss countdown, boss bars, enemy health plates and floating combat numbers, hero, target, party and pet frames, a skill bar with cooldowns and rank gems, a combat meter, a ring minimap and glass-styled chat. Every part can be turned on or off (/aether).
 = Et komplett grensesnitt: en løpsklokke med bosstidslinje og nedtelling til neste boss, bosslinjer, livslinjer over fiender og svevende kamptall, rammer for helt, mål, gruppe og kjæledyr, en ferdighetslinje med nedkjøling og rangsteiner, en kampmåler, et rundt minikart og chat i glasstil. Hver del kan slås på eller av (/aether).
+The game has closed and your progress is still uploading to the cloud. Try again in a moment.
+= Spillet er lukket, og fremgangen din lastes fortsatt opp til skyen. Prøv igjen om et øyeblikk.
+Finish the first-time setup first.
+= Fullfør førstegangsoppsettet først.
+REQUIRES INSTALL
+= KREVER INSTALLASJON
+Created if not found
+= Opprettes hvis den ikke finnes
+Folders found at their usual place are used as they are. A folder that is not there yet is created when setup is done; you can choose another one instead.
+= Mapper på sitt vanlige sted brukes som de er. En mappe som ikke finnes ennå, opprettes når oppsettet er ferdig; du kan velge en annen i stedet.
+Would you like to download addons?
+= Vil du laste ned addons?
+They are all optional: you choose each one you want in Addons > DOWNLOAD MORE.
+= Alle er valgfrie: du velger hver enkelt under Addons > DOWNLOAD MORE.
+Ready to download the game
+= Klar til å laste ned spillet
+Azeroth Survivors is not on this PC yet. The launcher will now download it into this folder:\n{0}\n\nThe download shows in the bar at the bottom. You can stop it there at any time.
+= Azeroth Survivors er ikke på denne PC-en ennå. Launcheren laster det nå ned til denne mappen:\n{0}\n\nNedlastingen vises i linjen nederst. Du kan stoppe den der når som helst.
+DOWNLOAD THE GAME
+= LAST NED SPILLET
+CANCEL SETUP
+= AVBRYT OPPSETT
+Setup was cancelled
+= Oppsettet ble avbrutt
+This launcher is here to help you play and manage Azeroth Survivors: it installs the game, keeps your progress safe in the cloud, manages your addons and shows your stats and the Guide. Without setup it has little to offer.\n\nStart setup again whenever you are ready.
+= Denne launcheren hjelper deg å spille og administrere Azeroth Survivors: den installerer spillet, holder fremgangen din trygg i skyen, administrerer addons og viser statistikken din og guiden. Uten oppsett har den lite å by på.\n\nStart oppsettet på nytt når du er klar.
+START SETUP AGAIN
+= START OPPSETTET PÅ NYTT

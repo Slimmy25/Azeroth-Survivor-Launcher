@@ -1759,3 +1759,31 @@ Stars decide which set bonuses you reach. How much each star adds to a piece is 
 = Tähdet ratkaisevat, mitkä settibonukset saavutat. Sitä, paljonko kukin tähti lisää osaan, ei vielä tiedetä, joten sitä ei lasketa tässä.
 A complete interface: a run clock with the boss timeline and next-boss countdown, boss bars, enemy health plates and floating combat numbers, hero, target, party and pet frames, a skill bar with cooldowns and rank gems, a combat meter, a ring minimap and glass-styled chat. Every part can be turned on or off (/aether).
 = Kokonainen käyttöliittymä: juoksukello pomojen aikajanalla ja lähtölaskennalla seuraavaan pomoon, pomopalkit, vihollisten terveyspalkit ja leijuvat taistelunumerot, sankarin, kohteen, ryhmän ja lemmikin kehykset, taitopalkki latausajoilla ja tasokivillä, taistelumittari, pyöreä minikartta ja lasityylinen chat. Jokaisen osan voi kytkeä päälle tai pois (/aether).
+The game has closed and your progress is still uploading to the cloud. Try again in a moment.
+= Peli on suljettu, ja edistymistäsi lähetetään vielä pilveen. Yritä hetken päästä uudelleen.
+Finish the first-time setup first.
+= Viimeistele ensin käyttöönotto.
+REQUIRES INSTALL
+= VAATII ASENNUKSEN
+Created if not found
+= Luodaan, jos ei löydy
+Folders found at their usual place are used as they are. A folder that is not there yet is created when setup is done; you can choose another one instead.
+= Tavallisesta paikastaan löytyvät kansiot käytetään sellaisenaan. Puuttuva kansio luodaan, kun käyttöönotto on valmis; voit valita tilalle toisen.
+Would you like to download addons?
+= Haluatko ladata lisäosia?
+They are all optional: you choose each one you want in Addons > DOWNLOAD MORE.
+= Kaikki ovat vapaaehtoisia: valitset jokaisen kohdassa Lisäosat > DOWNLOAD MORE.
+Ready to download the game
+= Valmis lataamaan pelin
+Azeroth Survivors is not on this PC yet. The launcher will now download it into this folder:\n{0}\n\nThe download shows in the bar at the bottom. You can stop it there at any time.
+= Azeroth Survivors ei ole vielä tällä koneella. Käynnistin lataa sen nyt tähän kansioon:\n{0}\n\nLataus näkyy alareunan palkissa. Voit pysäyttää sen siellä milloin tahansa.
+DOWNLOAD THE GAME
+= LATAA PELI
+CANCEL SETUP
+= PERUUTA KÄYTTÖÖNOTTO
+Setup was cancelled
+= Käyttöönotto peruttiin
+This launcher is here to help you play and manage Azeroth Survivors: it installs the game, keeps your progress safe in the cloud, manages your addons and shows your stats and the Guide. Without setup it has little to offer.\n\nStart setup again whenever you are ready.
+= Tämä käynnistin auttaa sinua pelaamaan ja hallitsemaan Azeroth Survivorsia: se asentaa pelin, pitää edistymisesi turvassa pilvessä, hallitsee lisäosiasi ja näyttää tilastosi ja oppaan. Ilman käyttöönottoa sillä on vähän annettavaa.\n\nAloita käyttöönotto uudelleen, kun olet valmis.
+START SETUP AGAIN
+= ALOITA UUDELLEEN

@@ -1760,3 +1760,31 @@ Stars decide which set bonuses you reach. How much each star adds to a piece is 
 = Τα αστέρια καθορίζουν ποια μπόνους σετ πετυχαίνεις. Το πόσο προσθέτει κάθε αστέρι σε ένα κομμάτι δεν είναι ακόμα γνωστό, οπότε δεν μετριέται εδώ.
 A complete interface: a run clock with the boss timeline and next-boss countdown, boss bars, enemy health plates and floating combat numbers, hero, target, party and pet frames, a skill bar with cooldowns and rank gems, a combat meter, a ring minimap and glass-styled chat. Every part can be turned on or off (/aether).
 = Πλήρες περιβάλλον: ρολόι διαδρομής με χρονολόγιο αφεντικών και αντίστροφη μέτρηση για το επόμενο, μπάρες αφεντικών, μπάρες ζωής εχθρών και αιωρούμενοι αριθμοί μάχης, πλαίσια ήρωα, στόχου, ομάδας και κατοικιδίου, μπάρα ικανοτήτων με χρόνους επαναφόρτισης και πετράδια βαθμίδας, μετρητής μάχης, στρογγυλός μικροχάρτης και συνομιλία σε γυάλινο στιλ. Κάθε μέρος ανοίγει ή κλείνει (/aether).
+The game has closed and your progress is still uploading to the cloud. Try again in a moment.
+= Το παιχνίδι έκλεισε και η πρόοδός σου ανεβαίνει ακόμα στο cloud. Δοκίμασε ξανά σε λίγο.
+Finish the first-time setup first.
+= Ολοκλήρωσε πρώτα την αρχική ρύθμιση.
+REQUIRES INSTALL
+= ΑΠΑΙΤΕΙ ΕΓΚΑΤΑΣΤΑΣΗ
+Created if not found
+= Δημιουργείται αν δεν βρεθεί
+Folders found at their usual place are used as they are. A folder that is not there yet is created when setup is done; you can choose another one instead.
+= Οι φάκελοι στη συνηθισμένη τους θέση χρησιμοποιούνται ως έχουν. Ένας φάκελος που δεν υπάρχει ακόμα δημιουργείται στο τέλος της ρύθμισης· μπορείς να διαλέξεις άλλον.
+Would you like to download addons?
+= Θέλεις να κατεβάσεις πρόσθετα;
+They are all optional: you choose each one you want in Addons > DOWNLOAD MORE.
+= Είναι όλα προαιρετικά: διαλέγεις όποιο θέλεις στο Πρόσθετα > DOWNLOAD MORE.
+Ready to download the game
+= Έτοιμο για λήψη του παιχνιδιού
+Azeroth Survivors is not on this PC yet. The launcher will now download it into this folder:\n{0}\n\nThe download shows in the bar at the bottom. You can stop it there at any time.
+= Το Azeroth Survivors δεν υπάρχει ακόμα σε αυτόν τον υπολογιστή. Ο launcher θα το κατεβάσει τώρα σε αυτόν τον φάκελο:\n{0}\n\nΗ λήψη φαίνεται στη γραμμή κάτω. Μπορείς να τη σταματήσεις εκεί όποτε θέλεις.
+DOWNLOAD THE GAME
+= ΛΗΨΗ ΠΑΙΧΝΙΔΙΟΥ
+CANCEL SETUP
+= ΑΚΥΡΩΣΗ ΡΥΘΜΙΣΗΣ
+Setup was cancelled
+= Η ρύθμιση ακυρώθηκε
+This launcher is here to help you play and manage Azeroth Survivors: it installs the game, keeps your progress safe in the cloud, manages your addons and shows your stats and the Guide. Without setup it has little to offer.\n\nStart setup again whenever you are ready.
+= Αυτός ο launcher σε βοηθά να παίζεις και να διαχειρίζεσαι το Azeroth Survivors: εγκαθιστά το παιχνίδι, κρατά την πρόοδό σου ασφαλή στο cloud, διαχειρίζεται τα πρόσθετα και δείχνει τα στατιστικά σου και τον οδηγό. Χωρίς ρύθμιση έχει λίγα να προσφέρει.\n\nΞεκίνα ξανά τη ρύθμιση όποτε είσαι έτοιμος.
+START SETUP AGAIN
+= ΝΕΑ ΕΝΑΡΞΗ ΡΥΘΜΙΣΗΣ

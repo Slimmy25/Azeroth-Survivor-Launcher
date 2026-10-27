@@ -1760,3 +1760,31 @@ Stars decide which set bonuses you reach. How much each star adds to a piece is 
 = सितारे तय करते हैं कि आप कौन से सेट बोनस हासिल करते हैं। हर सितारा किसी टुकड़े में कितना जोड़ता है, यह अभी पता नहीं, इसलिए यहाँ इसे नहीं गिना जाता।
 A complete interface: a run clock with the boss timeline and next-boss countdown, boss bars, enemy health plates and floating combat numbers, hero, target, party and pet frames, a skill bar with cooldowns and rank gems, a combat meter, a ring minimap and glass-styled chat. Every part can be turned on or off (/aether).
 = एक पूरा इंटरफ़ेस: बॉस टाइमलाइन और अगले बॉस की उलटी गिनती वाली रन घड़ी, बॉस बार, दुश्मनों की हेल्थ प्लेटें और तैरते युद्ध अंक, हीरो, लक्ष्य, पार्टी और पालतू के फ़्रेम, कूलडाउन और रैंक रत्नों वाली स्किल बार, कॉम्बैट मीटर, गोल मिनीमैप और कांच-शैली की चैट। हर हिस्सा चालू या बंद किया जा सकता है (/aether)।
+The game has closed and your progress is still uploading to the cloud. Try again in a moment.
+= गेम बंद हो गया है और आपकी प्रगति अभी भी क्लाउड पर अपलोड हो रही है। थोड़ी देर में फिर से कोशिश करें।
+Finish the first-time setup first.
+= पहले शुरुआती सेटअप पूरा करें।
+REQUIRES INSTALL
+= इंस्टॉल ज़रूरी
+Created if not found
+= न मिलने पर बनाया जाएगा
+Folders found at their usual place are used as they are. A folder that is not there yet is created when setup is done; you can choose another one instead.
+= अपनी सामान्य जगह पर मिले फ़ोल्डर वैसे ही इस्तेमाल होते हैं। जो फ़ोल्डर अभी नहीं है, वह सेटअप पूरा होने पर बनाया जाता है; आप उसकी जगह कोई और चुन सकते हैं।
+Would you like to download addons?
+= क्या आप ऐडऑन डाउनलोड करना चाहेंगे?
+They are all optional: you choose each one you want in Addons > DOWNLOAD MORE.
+= सभी वैकल्पिक हैं: आप हर एक को Addons > DOWNLOAD MORE में चुनते हैं।
+Ready to download the game
+= गेम डाउनलोड करने के लिए तैयार
+Azeroth Survivors is not on this PC yet. The launcher will now download it into this folder:\n{0}\n\nThe download shows in the bar at the bottom. You can stop it there at any time.
+= Azeroth Survivors अभी इस पीसी पर नहीं है। लॉन्चर अब इसे इस फ़ोल्डर में डाउनलोड करेगा:\n{0}\n\nडाउनलोड नीचे की पट्टी में दिखता है। आप उसे वहीं कभी भी रोक सकते हैं।
+DOWNLOAD THE GAME
+= गेम डाउनलोड करें
+CANCEL SETUP
+= सेटअप रद्द करें
+Setup was cancelled
+= सेटअप रद्द किया गया
+This launcher is here to help you play and manage Azeroth Survivors: it installs the game, keeps your progress safe in the cloud, manages your addons and shows your stats and the Guide. Without setup it has little to offer.\n\nStart setup again whenever you are ready.
+= यह लॉन्चर Azeroth Survivors खेलने और संभालने में आपकी मदद के लिए है: यह गेम इंस्टॉल करता है, आपकी प्रगति क्लाउड में सुरक्षित रखता है, ऐडऑन संभालता है और आपके आँकड़े व गाइड दिखाता है। सेटअप के बिना इसके पास देने को बहुत कम है।\n\nजब तैयार हों, सेटअप फिर से शुरू करें।
+START SETUP AGAIN
+= सेटअप फिर से शुरू करें

@@ -1760,3 +1760,31 @@ Stars decide which set bonuses you reach. How much each star adds to a piece is 
 = Звёзды определяют, каких бонусов комплектов вы достигаете. Сколько каждая звезда добавляет предмету, пока неизвестно, поэтому здесь это не учитывается.
 A complete interface: a run clock with the boss timeline and next-boss countdown, boss bars, enemy health plates and floating combat numbers, hero, target, party and pet frames, a skill bar with cooldowns and rank gems, a combat meter, a ring minimap and glass-styled chat. Every part can be turned on or off (/aether).
 = Полный интерфейс: часы забега с шкалой боссов и отсчётом до следующего, полосы боссов, полоски здоровья врагов и всплывающие боевые цифры, рамки героя, цели, группы и питомца, панель умений с перезарядкой и камнями рангов, боевой счётчик, круглая миникарта и чат в стиле стекла. Каждую часть можно включить или выключить (/aether).
+The game has closed and your progress is still uploading to the cloud. Try again in a moment.
+= Игра закрыта, а ваш прогресс ещё загружается в облако. Попробуйте ещё раз через мгновение.
+Finish the first-time setup first.
+= Сначала завершите первоначальную настройку.
+REQUIRES INSTALL
+= ТРЕБУЕТСЯ УСТАНОВКА
+Created if not found
+= Будет создана, если нет
+Folders found at their usual place are used as they are. A folder that is not there yet is created when setup is done; you can choose another one instead.
+= Папки на привычном месте используются как есть. Папка, которой ещё нет, будет создана по завершении настройки; вместо неё можно выбрать другую.
+Would you like to download addons?
+= Хотите скачать аддоны?
+They are all optional: you choose each one you want in Addons > DOWNLOAD MORE.
+= Все они необязательны: каждый выбирается в Аддоны > DOWNLOAD MORE.
+Ready to download the game
+= Готово к загрузке игры
+Azeroth Survivors is not on this PC yet. The launcher will now download it into this folder:\n{0}\n\nThe download shows in the bar at the bottom. You can stop it there at any time.
+= Azeroth Survivors ещё нет на этом ПК. Лаунчер сейчас скачает игру в эту папку:\n{0}\n\nЗагрузка видна на полосе внизу. Остановить её там можно в любой момент.
+DOWNLOAD THE GAME
+= СКАЧАТЬ ИГРУ
+CANCEL SETUP
+= ОТМЕНИТЬ НАСТРОЙКУ
+Setup was cancelled
+= Настройка отменена
+This launcher is here to help you play and manage Azeroth Survivors: it installs the game, keeps your progress safe in the cloud, manages your addons and shows your stats and the Guide. Without setup it has little to offer.\n\nStart setup again whenever you are ready.
+= Этот лаунчер помогает играть в Azeroth Survivors и управлять ею: устанавливает игру, хранит прогресс в облаке, управляет аддонами и показывает статистику и руководство. Без настройки ему почти нечего предложить.\n\nЗапустите настройку снова, когда будете готовы.
+START SETUP AGAIN
+= НАЧАТЬ НАСТРОЙКУ ЗАНОВО
