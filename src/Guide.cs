@@ -807,6 +807,7 @@ namespace AzerothLauncher
                     {
                         PlannerClass(gc);
                         plannerSlots[p.Slot] = p;
+                        GearSheet.Stars.Remove(p.Slot);       // a new piece starts at 0 stars
                         OpenGuideTab(-3);
                     }), x, 6);
                     // the set's bonuses, under its pieces (the game's own words, from its armory)

@@ -1751,3 +1751,7 @@ Wear armor pieces of a set to see its bonuses here. Four pieces of two sets give
 = {0}% de tus rangos
 waiting for clarification from dev
 = esperando aclaración del desarrollador
+The bonuses of everything chosen, added together, with the set bonuses reached. Click a piece to add a star (up to 5, then back to 0); right-click to take it off.
+= Las bonificaciones de todo lo elegido, sumadas, con las bonificaciones de conjunto alcanzadas. Haz clic en una pieza para añadir una estrella (hasta 5, luego vuelve a 0); clic derecho para quitarla.
+Stars decide which set bonuses you reach. What a star adds to a piece is not disclosed by the game, so it is not counted here.
+= Las estrellas deciden qué bonificaciones de conjunto alcanzas. El juego no revela cuánto añade una estrella a una pieza, así que aquí no se cuenta.

@@ -1751,3 +1751,7 @@ Wear armor pieces of a set to see its bonuses here. Four pieces of two sets give
 = {0} % deiner Ränge
 waiting for clarification from dev
 = wartet auf Klärung durch den Entwickler
+The bonuses of everything chosen, added together, with the set bonuses reached. Click a piece to add a star (up to 5, then back to 0); right-click to take it off.
+= Die Boni aller gewählten Teile zusammengerechnet, mit den erreichten Setboni. Klicke auf ein Teil, um einen Stern hinzuzufügen (bis 5, dann zurück auf 0); Rechtsklick legt es ab.
+Stars decide which set bonuses you reach. What a star adds to a piece is not disclosed by the game, so it is not counted here.
+= Sterne entscheiden, welche Setboni du erreichst. Was ein Stern einem Teil bringt, verrät das Spiel nicht, daher wird es hier nicht mitgezählt.

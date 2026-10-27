@@ -1752,3 +1752,7 @@ Wear armor pieces of a set to see its bonuses here. Four pieces of two sets give
 = rangjaid {0}%-a
 waiting for clarification from dev
 = a fejlesztő pontosítására vár
+The bonuses of everything chosen, added together, with the set bonuses reached. Click a piece to add a star (up to 5, then back to 0); right-click to take it off.
+= Az összes kiválasztott darab bónusza összeadva, az elért szettbónuszokkal. Kattints egy darabra csillag hozzáadásához (legfeljebb 5, utána vissza 0-ra); jobb kattintással leveheted.
+Stars decide which set bonuses you reach. What a star adds to a piece is not disclosed by the game, so it is not counted here.
+= A csillagok döntik el, mely szettbónuszokat éred el. Hogy egy csillag mit ad egy darabhoz, a játék nem árulja el, ezért itt nem számít bele.

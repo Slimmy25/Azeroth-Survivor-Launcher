@@ -1752,3 +1752,7 @@ Wear armor pieces of a set to see its bonuses here. Four pieces of two sets give
 = 你所有等级的 {0}%
 waiting for clarification from dev
 = 等待开发者说明
+The bonuses of everything chosen, added together, with the set bonuses reached. Click a piece to add a star (up to 5, then back to 0); right-click to take it off.
+= 所选全部装备的加成之和，包括已达成的套装加成。点击装备可加一颗星（最多 5 颗，之后归 0）；右键点击可卸下。
+Stars decide which set bonuses you reach. What a star adds to a piece is not disclosed by the game, so it is not counted here.
+= 星级决定你能达成哪些套装加成。游戏没有公开一颗星会为装备增加多少，因此这里不计算。

@@ -231,8 +231,7 @@ namespace AzerothLauncher
             s.Append("rarities = {");
             foreach (string r in Items.Rarities) s.Append(" ").Append(Q(r)).Append(",");
             s.Append(" },\n");
-            // gear[class] = { { rarity, slot, name, health, known, { stat = value, ... }, card, { factor at 1..5 stars },
-            //                   { estimate at 1..5 stars }, { pending at 1..5 stars: not known yet, counted at 0 } }, ... }
+            // gear[class] = { { rarity, slot, name, health, known, { stat = value, ... }, card }, ... }
             s.Append("gear = {\n");
             var classes = new List<string>();
             foreach (var p in Items.Gear) if (!classes.Contains(p.Class)) classes.Add(p.Class);
@@ -247,13 +246,7 @@ namespace AzerothLauncher
                     s.Append("\t{ ").Append(Q(p.Rarity)).Append(", ").Append(Q(p.Slot)).Append(", ").Append(Q(p.Name)).Append(", ")
                      .Append(p.Health).Append(", ").Append(p.Known ? "true" : "false").Append(", {");
                     if (p.Known) foreach (var b in p.Bonuses) s.Append(" [").Append(Q(b.Stat)).Append("] = ").Append(N(b.Value)).Append(",");
-                    s.Append(" }, ").Append(Q(nl >= 0 ? card.Substring(nl + 1) : card)).Append(", {");
-                    for (int st = 1; st <= 5; st++) s.Append(" ").Append(N(Items.StarFactor(p, st))).Append(",");
-                    s.Append(" }, {");
-                    for (int st = 1; st <= 5; st++) s.Append(" ").Append(Items.StarEstimate(p, st) ? "true" : "false").Append(",");
-                    s.Append(" }, {");
-                    for (int st = 1; st <= 5; st++) s.Append(" ").Append(Items.StarPending(p, st) ? "true" : "false").Append(",");
-                    s.Append(" } },\n");
+                    s.Append(" }, ").Append(Q(nl >= 0 ? card.Substring(nl + 1) : card)).Append(" },\n");
                 }
                 s.Append("},\n");
             }

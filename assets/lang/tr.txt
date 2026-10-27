@@ -1752,3 +1752,7 @@ Wear armor pieces of a set to see its bonuses here. Four pieces of two sets give
 = rütbelerinin %{0}'i
 waiting for clarification from dev
 = geliştiriciden açıklama bekleniyor
+The bonuses of everything chosen, added together, with the set bonuses reached. Click a piece to add a star (up to 5, then back to 0); right-click to take it off.
+= Seçilen her şeyin bonusları toplamı, ulaşılan set bonuslarıyla. Yıldız eklemek için bir parçaya tıkla (en fazla 5, sonra yeniden 0); çıkarmak için sağ tıkla.
+Stars decide which set bonuses you reach. What a star adds to a piece is not disclosed by the game, so it is not counted here.
+= Yıldızlar hangi set bonuslarına ulaşacağını belirler. Bir yıldızın parçaya ne kattığını oyun açıklamıyor, bu yüzden burada sayılmaz.

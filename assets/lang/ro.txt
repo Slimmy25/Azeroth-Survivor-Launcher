@@ -1752,3 +1752,7 @@ Wear armor pieces of a set to see its bonuses here. Four pieces of two sets give
 = {0}% din rangurile tale
 waiting for clarification from dev
 = se așteaptă lămuriri de la dezvoltator
+The bonuses of everything chosen, added together, with the set bonuses reached. Click a piece to add a star (up to 5, then back to 0); right-click to take it off.
+= Bonusurile tuturor pieselor alese, adunate, cu bonusurile de set atinse. Clic pe o piesă pentru a adăuga o stea (până la 5, apoi înapoi la 0); clic dreapta pentru a o scoate.
+Stars decide which set bonuses you reach. What a star adds to a piece is not disclosed by the game, so it is not counted here.
+= Stelele decid ce bonusuri de set atingi. Cât adaugă o stea unei piese, jocul nu dezvăluie, așa că aici nu se socotește.

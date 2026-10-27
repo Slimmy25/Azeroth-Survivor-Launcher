@@ -1751,3 +1751,7 @@ Wear armor pieces of a set to see its bonuses here. Four pieces of two sets give
 = {0}% van je rangen
 waiting for clarification from dev
 = wacht op uitleg van de ontwikkelaar
+The bonuses of everything chosen, added together, with the set bonuses reached. Click a piece to add a star (up to 5, then back to 0); right-click to take it off.
+= De bonussen van alles wat gekozen is bij elkaar opgeteld, met de behaalde setbonussen. Klik op een stuk om een ster toe te voegen (tot 5, dan terug naar 0); rechtsklik om het af te doen.
+Stars decide which set bonuses you reach. What a star adds to a piece is not disclosed by the game, so it is not counted here.
+= Sterren bepalen welke setbonussen je haalt. Wat een ster aan een stuk toevoegt, maakt het spel niet bekend, dus dat telt hier niet mee.

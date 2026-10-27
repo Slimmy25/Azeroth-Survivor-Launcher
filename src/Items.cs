@@ -342,7 +342,6 @@ namespace AzerothLauncher
         static readonly Dictionary<string, string> setNames = new Dictionary<string, string>();       // "Priest|Legendary" -> Faith
         static readonly Dictionary<string, SetBonus> fourPiece = new Dictionary<string, SetBonus>();   // rarity -> bonus
         static readonly Dictionary<string, string> eightPiece = new Dictionary<string, string>();      // "Priest|Legendary" -> text
-        static readonly Dictionary<string, string[]> starRules = new Dictionary<string, string[]>();   // rarity -> 5 steps
 
         static void LoadSets()
         {
@@ -373,7 +372,6 @@ namespace AzerothLauncher
                         fourPiece[f[0]] = sb;
                     }
                     else if (section == "eight" && f.Length >= 3) eightPiece[Cap(f[0]) + "|" + f[1]] = f[2];
-                    else if (section == "stars" && f.Length >= 6) starRules[f[0]] = new[] { f[1], f[2], f[3], f[4], f[5] };
                 }
             }
             catch (Exception) { }
@@ -402,90 +400,9 @@ namespace AzerothLauncher
             return eightPiece.TryGetValue(cls + "|" + rarity, out t) ? t : null;
         }
 
-        // the text shown where a star's numbers are not known yet
-        public const string StarsPending = "waiting for clarification from dev";
-
-        // only armor takes stars here: weapons wait until the dev says how theirs work
-        public static bool TakesStars(GearPiece p) { return IsArmor(p); }
-
-        // true when what a piece's stars add is not known yet (gear-sets.txt says "?", or the piece is a weapon): the
-        // piece then counts as at 0 stars
-        public static bool StarPending(GearPiece p, int stars)
-        {
-            Load();
-            if (p == null || stars <= 0) return false;
-            if (!TakesStars(p)) return true;
-            string[] rule;
-            return !starRules.TryGetValue(p.Rarity, out rule) || rule[Math.Min(stars, 5) - 1] == "?";
-        }
-
-        // how much stronger a piece is at its stars: 1 at 0 stars, and 1 while its stars are pending (StarPending).
-        // A number in gear-sets.txt is used as it stands; "top" lifts the piece to 95% of the same slot's 5-star
-        // top-row piece, compared by the size of their bonuses (each stat against its usual size on top-row gear).
-        public static double StarFactor(GearPiece p, int stars)
-        {
-            Load();
-            if (p == null || stars <= 0 || StarPending(p, stars)) return 1;
-            stars = Math.Min(stars, 5);
-            string[] rule;
-            if (!starRules.TryGetValue(p.Rarity, out rule)) return 1;
-            if (rule[stars - 1] != "top") return 1 + Num(rule[stars - 1]) / 100;
-            double four = rule[3] == "top" || rule[3] == "?" ? 1 : 1 + Num(rule[3]) / 100;
-            string[] t3rule;
-            if (!starRules.TryGetValue("Legendary", out t3rule) || t3rule[4] == "top" || t3rule[4] == "?") return 1;   // nothing to reach yet
-            double t3five = 1 + Num(t3rule[4]) / 100;
-            GearPiece t3 = null;
-            foreach (var q in Gear) if (q.Class == p.Class && q.Rarity == "Legendary" && q.Slot == p.Slot && q.Known) { t3 = q; break; }
-            double mine = Power(p), theirs = Power(t3);
-            if (mine <= 0 || theirs <= 0) return Math.Max(four, 0.95 * t3five);
-            return Math.Max(four, 0.95 * t3five * theirs / mine);
-        }
-
-        // true when a piece's number at these stars is worked out here rather than read from the game: "top"
-        public static bool StarEstimate(GearPiece p, int stars)
-        {
-            Load();
-            if (p == null || stars <= 0 || StarPending(p, stars)) return false;
-            string[] rule;
-            return starRules.TryGetValue(p.Rarity, out rule) && rule[Math.Min(stars, 5) - 1] == "top";
-        }
-
-        static Dictionary<string, double> weights;
-        static double Power(GearPiece p)
-        {
-            if (p == null || !p.Known) return 0;
-            if (weights == null)
-            {
-                var sum = new Dictionary<string, double>();
-                var n = new Dictionary<string, int>();
-                foreach (bool t3Only in new[] { false, true })      // tier 3's sizes win; the rest fill the gaps
-                    foreach (var q in Gear)
-                    {
-                        if (!q.Known || (t3Only && q.Rarity != "Legendary")) continue;
-                        var vals = new List<KeyValuePair<string, double>>();
-                        foreach (var x in q.Bonuses) vals.Add(new KeyValuePair<string, double>(x.Stat, Math.Abs(x.Value)));
-                        if (q.Health > 0) vals.Add(new KeyValuePair<string, double>("hp", q.Health));
-                        foreach (var kv in vals)
-                        {
-                            string key = (t3Only ? "3|" : "a|") + kv.Key;
-                            double s0; int n0;
-                            sum.TryGetValue(key, out s0); n.TryGetValue(key, out n0);
-                            sum[key] = s0 + kv.Value; n[key] = n0 + 1;
-                        }
-                    }
-                weights = new Dictionary<string, double>();
-                foreach (var kv in sum)
-                {
-                    string stat = kv.Key.Substring(2);
-                    double avg = kv.Value / n[kv.Key];
-                    if (kv.Key.StartsWith("3|") || !weights.ContainsKey(stat)) weights[stat] = avg;
-                }
-            }
-            double w, total = 0;
-            foreach (var x in p.Bonuses) if (weights.TryGetValue(x.Stat, out w) && w > 0) total += Math.Abs(x.Value) / w;
-            if (p.Health > 0 && weights.TryGetValue("hp", out w) && w > 0) total += p.Health / w;
-            return total;
-        }
+        // Stars (0 to 5, every piece, weapons too) decide which set bonuses a set reaches. What a star adds to a piece's
+        // own numbers, and what it costs, the game does not disclose: nothing here counts it.
+        public const string StarsNotCounted = "Stars decide which set bonuses you reach. What a star adds to a piece is not disclosed by the game, so it is not counted here.";
 
         public static List<GearPiece> GearOf(string cls, string slot)
         {
@@ -504,20 +421,16 @@ namespace AzerothLauncher
         // the card of a piece, as plain lines
         public static string Card(GearPiece p) { return Card(p, 0); }
 
-        // the card at a number of stars (0 to 5): its numbers grown by them, and its set's bonuses
+        // the card at a number of stars (0 to 5; its numbers stay as they are), and its set's bonuses
         public static string Card(GearPiece p, int stars)
         {
             var b = new StringBuilder();
             b.Append(p.Name).Append('\n').Append(p.Rarity).Append(' ').Append(p.Kind == "Weapon" ? "" : p.Kind + " · ").Append(p.Slot);
-            double f = StarFactor(p, stars);
-            string est = StarEstimate(p, stars) ? "~" : "";
-            if (stars > 0)
-                b.Append("\n").Append(Lang.T("Stars")).Append(": ").Append(stars).Append("/5")
-                 .Append(StarPending(p, stars) ? ": " + Lang.T(StarsPending) : est.Length > 0 ? "  (~ " + Lang.T("estimate") + ")" : "");
+            if (stars > 0) b.Append("\n").Append(Lang.T("Stars")).Append(": ").Append(stars).Append("/5");
             if (p.Known)
             {
-                if (p.Health > 0) b.Append("\n").Append(est).Append("+").Append((int)Math.Round(p.Health * f)).Append(" Health");
-                foreach (var x in p.Bonuses) b.Append("\nEquip: ").Append(est).Append(stars > 0 ? BonusText(x.Stat, x.Value * f) : x.Text);
+                if (p.Health > 0) b.Append("\n+").Append(p.Health).Append(" Health");
+                foreach (var x in p.Bonuses) b.Append("\nEquip: ").Append(x.Text);
             }
             else b.Append("\n").Append(Lang.T("Its bonuses are not known yet."));
             if (IsArmor(p))
@@ -552,7 +465,7 @@ namespace AzerothLauncher
             l.Add("@topic Items | Every piece of gear and every ring, trinket and amulet, with what it does and where it drops");
             l.Add("Every class has its own gear: one set for each rarity, nine pieces each (Head, Shoulder, Chest, Waist, Legs, Feet, Wrist, Hands and the weapon). A hunter's weapon goes in the Ranged slot; rogues also wear an Off Hand dagger and shamans a shield. Each boss drops one piece on its own roll, likelier on each Heroic level and after each miss; a piece you already have pays marks instead. Marks raise a piece from 0 to 5 stars, and a set's pieces worn together give 4-piece and 8-piece bonuses (Gear & the Armory). Rings, trinkets and amulets are the same for every class: guardians' lairs and battleground caches offer them during a run.");
             l.Add("");
-            l.Add("The bonuses below are those of a piece at 0 stars; each rarity ends with its set's 4-piece and 8-piece bonuses. Sets can be mixed: four pieces of one set and four of another give both 4-piece bonuses. Try it out, stars included, in the Gear Planner (Guide > Theorycrafting).");
+            l.Add("The bonuses below are those of a piece at 0 stars; each rarity ends with its set's 4-piece and 8-piece bonuses. Sets can be mixed: four pieces of one set and four of another give both 4-piece bonuses. Try it out in the Gear Planner (Guide > Theorycrafting): click a piece to add a star; stars decide which set bonuses you reach.");
             l.Add("@page Rings, Trinkets & Amulets | The jewelry every hero is offered, with its numbers");
             l.Add("Offered again while worn, a ring, trinket or amulet is empowered: its numbers grow toward three times their own. The numbers below are those of its first pick.");
             foreach (string kind in new[] { "Ring", "Trinket", "Amulet" })

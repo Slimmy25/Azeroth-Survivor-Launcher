@@ -3,10 +3,6 @@ Set bonuses, entered by hand from the game's own armory (0.121.0): the set box o
         stars). The stats are those the Gear Planner can add; a bonus with a condition is text only.
 @eight  class | rarity | text               the 8-piece bonus (all 8 armor pieces at 3+ stars; empowered at 5 stars on all
         eight: half again as strong). Each class's own.
-@stars  rarity | 1 | 2 | 3 | 4 | 5          what each star adds to an ARMOR piece's own bonuses, in percent of its
-        0-star numbers ("12" = +12%). "top": the piece reaches 95% of the same slot's 5-star top-row (Legendary) piece.
-        "?": not known yet; the launcher then counts the piece at 0 stars and says "waiting for clarification from
-        dev". Weapons have no stars in the launcher until the dev says how they work.
 Lines starting with # and everything above the first === line are ignored.
 ===
 @four
@@ -81,11 +77,3 @@ druid | Rare | Entangling Roots strikes 3 more enemies.
 druid | Epic | Starfire bursts on every enemy within 6 yards of its target for 35% of its damage.
 druid | PvP | Shred strikes 2 more enemies, has a 33% chance to stun them for 1 sec and comes back 40% sooner, and you deal 100% more damage to enemies you stun, root, slow or fear.
 druid | Legendary | Hurricane is 40% wider and lasts 40% longer.
-
-@stars
-Common | ? | ? | ? | ? | ?
-Uncommon | ? | ? | ? | ? | ?
-Rare | ? | ? | ? | ? | ?
-Epic | ? | ? | ? | ? | ?
-PvP | ? | ? | ? | ? | ?
-Legendary | ? | ? | ? | ? | ?

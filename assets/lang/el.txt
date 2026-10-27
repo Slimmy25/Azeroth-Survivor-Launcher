@@ -1752,3 +1752,7 @@ Wear armor pieces of a set to see its bonuses here. Four pieces of two sets give
 = {0}% των βαθμίδων σου
 waiting for clarification from dev
 = αναμονή για διευκρίνιση από τον δημιουργό
+The bonuses of everything chosen, added together, with the set bonuses reached. Click a piece to add a star (up to 5, then back to 0); right-click to take it off.
+= Τα μπόνους όλων των επιλογών μαζί, με τα μπόνους σετ που επιτεύχθηκαν. Κάνε κλικ σε ένα κομμάτι για να προσθέσεις αστέρι (έως 5, μετά πίσω στο 0)· δεξί κλικ για να το βγάλεις.
+Stars decide which set bonuses you reach. What a star adds to a piece is not disclosed by the game, so it is not counted here.
+= Τα αστέρια καθορίζουν ποια μπόνους σετ πετυχαίνεις. Το τι προσθέτει ένα αστέρι σε ένα κομμάτι δεν το αποκαλύπτει το παιχνίδι, οπότε δεν μετριέται εδώ.

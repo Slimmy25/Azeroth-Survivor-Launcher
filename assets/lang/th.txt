@@ -1752,3 +1752,7 @@ Wear armor pieces of a set to see its bonuses here. Four pieces of two sets give
 = {0}% ของระดับทั้งหมด
 waiting for clarification from dev
 = รอคำชี้แจงจากผู้พัฒนา
+The bonuses of everything chosen, added together, with the set bonuses reached. Click a piece to add a star (up to 5, then back to 0); right-click to take it off.
+= โบนัสของทุกชิ้นที่เลือกรวมกัน พร้อมโบนัสเซ็ตที่ได้ คลิกที่ชิ้นเพื่อเพิ่มดาว (สูงสุด 5 แล้วกลับเป็น 0) คลิกขวาเพื่อถอด
+Stars decide which set bonuses you reach. What a star adds to a piece is not disclosed by the game, so it is not counted here.
+= ดาวกำหนดว่าคุณได้โบนัสเซ็ตใดบ้าง เกมไม่เปิดเผยว่าดาวเพิ่มอะไรให้ชิ้น จึงไม่นับที่นี่

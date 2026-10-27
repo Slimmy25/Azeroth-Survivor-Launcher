@@ -197,19 +197,19 @@ local function Choices(class, slot)
 		local g = D().gear[class] or {};
 		for i = 1, table.getn(g) do
 			if ( g[i][2] == slot ) then table.insert(out, { name = g[i][3], rarity = g[i][1], slot = slot, health = g[i][4], known = g[i][5], stats = g[i][6], card = g[i][7],
-			                                                f = g[i][8], est = g[i][9], pend = g[i][10] }); end
+			                                                }); end
 		end
 	end
 	return out;
 end
 
--- the totals: each piece grown by its stars, and the 4-piece bonus of every set worn at 4 pieces of 1+ stars (two sets of
--- four give both). worn[rarity] = { pieces, at 1+ stars, at 3+, at 5 }
+-- the totals: the pieces' bonuses, and the 4-piece bonus of every set worn at 4 pieces of 1+ stars (two sets of four give
+-- both). Stars decide the set bonuses reached; what a star adds to a piece the game does not disclose, so it is not
+-- counted. worn[rarity] = { pieces, at 1+ stars, at 3+, at 5 }
 local WEAPON_SLOTS = { ["Main Hand"] = true, ["Off Hand"] = true, ["Ranged"] = true };
-local STARS_PENDING = "waiting for clarification from dev";
+local STARS_NOT_COUNTED = "Stars decide which set bonuses you reach. What a star adds to a piece is not disclosed by the game, so it is not counted here.";
 local function Totals(class)
-	local t, health, unknown, est, worn = {}, 0, 0, false, {};
-	local pending = false;
+	local t, health, unknown, worn = {}, 0, 0, {};
 	for slot, p in pairs(planner.slots) do
 		local st = planner.stars[slot] or 0;
 		if ( p.slot and not WEAPON_SLOTS[p.slot] ) then
@@ -221,11 +221,8 @@ local function Totals(class)
 			if ( st >= 5 ) then c[4] = c[4] + 1; end
 		end
 		if ( p.known ) then
-			local f = (st > 0 and p.f and p.f[st]) or 1;
-			if ( st > 0 and p.est and p.est[st] ) then est = true; end
-			if ( st > 0 and p.pend and p.pend[st] ) then pending = true; end
-			health = health + math.floor((p.health or 0) * f + 0.5);
-			for k, v in pairs(p.stats or {}) do t[k] = (t[k] or 0) + v * f; end
+			health = health + (p.health or 0);
+			for k, v in pairs(p.stats or {}) do t[k] = (t[k] or 0) + v; end
 		else unknown = unknown + 1; end
 	end
 	local sets = (D().sets or {})[class or ""] or {};
@@ -234,7 +231,7 @@ local function Totals(class)
 			for k, v in pairs(sets[r][3] or {}) do t[k] = (t[k] or 0) + v; end
 		end
 	end
-	return t, health, unknown, est, worn, pending;
+	return t, health, unknown, worn;
 end
 
 local function ItemTooltip(owner, p)
@@ -244,11 +241,7 @@ local function ItemTooltip(owner, p)
 	local card = p.card or "";
 	if ( not p.known ) then card = card .. "\n(its bonuses are not known yet)"; end
 	local st = (p.slot and planner.slots[p.slot] == p) and (planner.stars[p.slot] or 0) or 0;
-	if ( st > 0 and p.pend and p.pend[st] ) then
-		card = "Stars: " .. st .. "/5: " .. STARS_PENDING .. "\n" .. card;
-	elseif ( st > 0 and p.f and p.f[st] ) then
-		card = "Stars: " .. st .. "/5 (bonuses x" .. string.format("%.2f", p.f[st]) .. ((p.est and p.est[st]) and ", an estimate" or "") .. ")\n" .. card;
-	end
+	if ( st > 0 ) then card = "Stars: " .. st .. "/5\n" .. card; end
 	for line in string.gfind(card, "[^\n]+") do
 		if ( string.find(line, "^Equip:") or string.find(line, "^%+") ) then GameTooltip:AddLine(line, 0.12, 1, 0, 1);
 		else GameTooltip:AddLine(line, 0.9, 0.87, 0.75, 1); end
@@ -268,20 +261,20 @@ end
 
 local function ItemsGear(out)
 	local class = view.gear;
-	local t, health, unknown, est, worn, pending = Totals(class);
+	local t, health, unknown, worn = Totals(class);
 	local lines = {};
 	for i = 1, table.getn(STAT_ROWS) do
 		local r = STAT_ROWS[i];
 		local v = (r[2] == "health") and health or (t[r[2]] or 0);
-		local txt = ((est and v ~= 0) and "~" or "") .. "+" .. Fmt(v) .. (r[3] or "");
+		local txt = "+" .. Fmt(v) .. (r[3] or "");
 		if ( r[2] == "health" and (t["health%"] or 0) ~= 0 ) then txt = txt .. " +" .. Fmt(t["health%"]) .. "%"; end
 		table.insert(lines, { r[1], txt });
 	end
 	table.insert(out, { kind = "buttons", items = { { text = "Clear", go = function() planner.slots = {}; planner.stars = {}; end },
 	                                                { text = "Talent trees", go = function() local c = view.gear; view.gear = nil; view.talents = c; end } } });
 	table.insert(out, { kind = "stats", lines = lines, note = (unknown > 0 and ("Pieces with bonuses not known yet: " .. unknown .. ". ") or "") ..
-	                    "The bonuses of everything chosen, added together, with each piece's stars and the set bonuses reached. A number marked ~ is an estimate." ..
-	                    (pending and (" Stars: " .. STARS_PENDING .. ".") or "") });
+	                    "The bonuses of everything chosen, added together, with the set bonuses reached. Click a piece in Slots to add a star (up to 5, then back to 0). " ..
+	                    STARS_NOT_COUNTED });
 	-- the sets worn: their pieces, and their 4-piece and 8-piece bonuses
 	local sets = (D().sets or {})[class] or {};
 	local rar = D().rarities or {};
@@ -313,29 +306,21 @@ local function ItemsGear(out)
 	for i = 1, table.getn(slots) do
 		local s, p = slots[i], planner.slots[slots[i]];
 		local st = planner.stars[s] or 0;
-		if ( WEAPON_SLOTS[s] ) then st = 0; end
-		table.insert(out, { kind = "row", label = s, text = p and (p.name .. (p.slot and st > 0 and ("  (" .. st .. " stars)") or "")) or "Empty", rarity = p and p.rarity, item = p,
-		                    selected = (planner.pick == s), go = function() planner.pick = s; end });
+		-- a click on a piece: one more star (after 5 back to 0); on an empty slot: pick it
+		table.insert(out, { kind = "row", label = s, text = p and (p.name .. (p.slot and st > 0 and ("  [" .. st .. "]") or "")) or "Empty", rarity = p and p.rarity, item = p,
+		                    selected = (planner.pick == s), go = function()
+		                        if ( p and p.slot ) then planner.stars[s] = math.mod((planner.stars[s] or 0) + 1, 6); end
+		                        planner.pick = s;
+		                    end });
 	end
 	table.insert(out, { kind = "head", text = "Choose: " .. planner.pick });
-	-- the stars of the piece in this slot: 0 to 5, armor only (weapons wait for the dev)
-	if ( planner.pick == "Main Hand" or planner.pick == "Off Hand" or planner.pick == "Ranged" ) then
-		table.insert(out, { kind = "note", text = "Stars: " .. STARS_PENDING });
-	elseif ( not (planner.pick == "Neck" or string.find(planner.pick, "Finger") or string.find(planner.pick, "Trinket")) ) then
-		local items, cur = {}, planner.stars[planner.pick] or 0;
-		for n = 0, 5 do
-			local k = n;
-			table.insert(items, { text = (k == cur) and ("[" .. k .. "]") or tostring(k), go = function() planner.stars[planner.pick] = k; end });
-		end
-		table.insert(out, { kind = "buttons", items = items, width = 44, right = "Stars" });
-	end
-	table.insert(out, { kind = "row", label = "", text = "Empty", go = function() planner.slots[planner.pick] = nil; end });
+	table.insert(out, { kind = "row", label = "", text = "Empty", go = function() planner.slots[planner.pick] = nil; planner.stars[planner.pick] = nil; end });
 	local ch = Choices(class, planner.pick);
 	for i = 1, table.getn(ch) do
 		local p = ch[i];
 		local worn = planner.slots[planner.pick] and planner.slots[planner.pick].name == p.name;
 		table.insert(out, { kind = "row", label = p.rarity, text = p.name .. (p.known and "" or " *"), rarity = p.rarity, item = p, selected = worn,
-		                    go = function() planner.slots[planner.pick] = p; end });
+		                    go = function() planner.slots[planner.pick] = p; planner.stars[planner.pick] = nil; end });   -- a new piece: 0 stars
 	end
 	return out;
 end
@@ -354,7 +339,7 @@ local function Items()
 			table.insert(cards, { title = c, desc = "", go = function()
 				view.prompt = nil;
 				if ( tool == "gear" ) then
-					if ( planner.class ~= c ) then planner.slots = {}; planner.pick = "Head"; end
+					if ( planner.class ~= c ) then planner.slots = {}; planner.stars = {}; planner.pick = "Head"; end
 					planner.class = c; view.gear = c;
 				else view.talents = c; end
 			end });
@@ -369,7 +354,7 @@ local function Items()
 		                                           "A new row opens for every 5 points spent in a tree; the purple ones are the milestones at 10, 20 and 30 points." });
 		table.insert(out, { kind = "buttons", items = { { text = "Reset", go = function() build.pts = {}; end },
 		                                                { text = "Gear Planner", go = function() local c = view.talents; view.talents = nil; build.class = nil;
-		                                                    if ( planner.class ~= c ) then planner.slots = {}; planner.pick = "Head"; end
+		                                                    if ( planner.class ~= c ) then planner.slots = {}; planner.stars = {}; planner.pick = "Head"; end
 		                                                    planner.class = c; view.gear = c; end } },
 		                    right = "Points: " .. TotalPts() .. " / 51" });
 		table.insert(out, { kind = "trees", class = view.talents });
@@ -461,8 +446,7 @@ local function Items()
 			local g = data.gear[class];
 			for i = 1, table.getn(g) do
 				if ( g[i][1] == rar[r] ) then
-					table.insert(list, { name = g[i][3], rarity = g[i][1], slot = g[i][2], health = g[i][4], known = g[i][5], stats = g[i][6], card = g[i][7],
-					                     f = g[i][8], est = g[i][9], pend = g[i][10] });
+					table.insert(list, { name = g[i][3], rarity = g[i][1], slot = g[i][2], health = g[i][4], known = g[i][5], stats = g[i][6], card = g[i][7] });
 				end
 			end
 			if ( table.getn(list) > 0 ) then
@@ -794,9 +778,9 @@ local function LayMore(it, y)
 				local p, cls = this.p, this.class;
 				if ( not p ) then return; end
 				Go(function()
-					if ( planner.class ~= cls ) then planner.slots = {}; end
+					if ( planner.class ~= cls ) then planner.slots = {}; planner.stars = {}; end
 					planner.class = cls;
-					planner.slots[p.slot] = p;
+					planner.slots[p.slot] = p; planner.stars[p.slot] = nil;   -- a new piece: 0 stars
 					planner.pick = p.slot;
 					view.gear = cls;
 				end);

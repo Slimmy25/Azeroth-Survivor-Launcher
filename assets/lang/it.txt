@@ -1751,3 +1751,7 @@ Wear armor pieces of a set to see its bonuses here. Four pieces of two sets give
 = {0}% dei tuoi gradi
 waiting for clarification from dev
 = in attesa di chiarimenti dallo sviluppatore
+The bonuses of everything chosen, added together, with the set bonuses reached. Click a piece to add a star (up to 5, then back to 0); right-click to take it off.
+= I bonus di tutto ciò che è scelto, sommati, con i bonus del set raggiunti. Clicca su un pezzo per aggiungere una stella (fino a 5, poi torna a 0); clic destro per toglierlo.
+Stars decide which set bonuses you reach. What a star adds to a piece is not disclosed by the game, so it is not counted here.
+= Le stelle decidono quali bonus del set raggiungi. Quanto una stella aggiunge a un pezzo il gioco non lo rivela, quindi qui non viene contato.

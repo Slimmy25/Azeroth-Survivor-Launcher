@@ -481,14 +481,17 @@ Head, Shoulders, Chest, Hands, Wrist, Waist, Legs, Feet and Main Hand. The final
 - Codex: every ring, trinket and amulet the game has offered you.
 
 # Marks
-Every boss pays your class marks: more in harder zones and on higher Heroic levels, and half on normal. Bosses that return in endless mode pay more each time. Marks are kept per class.
+Marks come from completing Heroic runs, and a piece you already own pays marks the moment it drops from a boss, even if you do not finish the run. Bosses that return in endless mode pay more each time.
+- Marks belong to the class that earned them: they do not carry over from your main.
+- Spend them in the armory on stars (see Stars).
+- The goal is to be fully geared and fully upgraded before you start the next Heroic level. If you are good, start it earlier.
 
 # Stars
-Spend marks in the armory to raise a piece from 0 to 5 stars. Each star adds to the piece's own bonuses. How much each star adds: waiting for clarification from dev.
-- A set's stars open as your class beats Heroic levels in that set's zones: Heroic I opens 1 star, Heroic II 2 stars, and so on.
-- Lower sets cost less, and their 5th star is a big one, so your favourite set stays viable at the end. That last star costs what the top sets' does: 30 marks. How strong it makes them: waiting for clarification from dev.
-- Every other class that has a set's armor at a star rank makes that rank 5% cheaper for yours, up to 40%.
-- Weapons and stars: waiting for clarification from dev.
+Every piece, weapons included, can be upgraded from 0 to 5 stars with marks. Each star adds to the piece's own bonuses.
+- Marks can only upgrade as high as you have won Heroics: Heroic I opens the 1st star, Heroic II the 2nd, Heroic III the 3rd (and with it the 8-piece bonuses, which need 3 stars), Heroic IV the 4th and Heroic V the 5th. A set's stars open in that set's own zones.
+- How much a star adds, and what each star costs, the game does not disclose. The Gear Planner does not count it.
+- Lower sets cost less to upgrade, and every other class that has a set's armor at a star rank makes that rank 5% cheaper for yours, up to 40%.
+- An upgraded lower set never matches a higher set that is fully upgraded, but it leans into the spells you like to play: upgrade the set whose 8-piece bonus suits you.
 
 # Set bonuses
 - 4-piece: four armor pieces of one set at 1 star or more give the set's bonus. It is the same for every class: common +25% gold and +30% pickup range, uncommon 1.5% of your max health per second after 3 seconds unhurt, rare +1 target to every ability, epic 6% chance for an ability to strike twice, PvP +12% damage reduction with 5 or more enemies close, legendary +30% critical damage.
