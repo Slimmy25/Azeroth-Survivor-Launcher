@@ -1790,3 +1790,7 @@ START SETUP AGAIN
 = SPUSTIT NASTAVENÍ ZNOVU
 Search every page for "{0}"
 = Hledat „{0}“ na všech stránkách
+Every piece a {0} can wear, with its bonuses, the bosses that drop it and each set's bonuses.
+= Každý kus, který může {0} nosit, s bonusy, bossy, kteří ho upouštějí, a bonusy každé sady.
+{0} GEAR
+= {0}: VÝSTROJ

@@ -1789,3 +1789,7 @@ START SETUP AGAIN
 = START OPPSETTET PÅ NYTT
 Search every page for "{0}"
 = Søk etter «{0}» på alle sider
+Every piece a {0} can wear, with its bonuses, the bosses that drop it and each set's bonuses.
+= Hver del en {0} kan bære, med bonusene, bossene som slipper den og hvert setts bonuser.
+{0} GEAR
+= {0}: UTSTYR

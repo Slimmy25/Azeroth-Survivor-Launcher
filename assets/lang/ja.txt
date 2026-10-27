@@ -1790,3 +1790,7 @@ START SETUP AGAIN
 = セットアップを再開
 Search every page for "{0}"
 = すべてのページで「{0}」を検索
+Every piece a {0} can wear, with its bonuses, the bosses that drop it and each set's bonuses.
+= {0}が装備できるすべての装備と、そのボーナス、落とすボス、各セットのボーナス。
+{0} GEAR
+= {0}の装備

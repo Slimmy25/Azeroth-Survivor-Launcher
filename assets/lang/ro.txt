@@ -1790,3 +1790,7 @@ START SETUP AGAIN
 = REPORNEȘTE CONFIGURAREA
 Search every page for "{0}"
 = Caută „{0}” în toate paginile
+Every piece a {0} can wear, with its bonuses, the bosses that drop it and each set's bonuses.
+= Fiecare piesă pe care o poate purta un {0}, cu bonusurile ei, boșii care o scapă și bonusurile fiecărui set.
+{0} GEAR
+= {0}: ECHIPAMENT

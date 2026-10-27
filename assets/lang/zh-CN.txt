@@ -1790,3 +1790,7 @@ START SETUP AGAIN
 = 重新开始设置
 Search every page for "{0}"
 = 在所有页面中搜索“{0}”
+Every piece a {0} can wear, with its bonuses, the bosses that drop it and each set's bonuses.
+= {0}可穿戴的每件装备，及其加成、掉落首领和各套装加成。
+{0} GEAR
+= {0}装备

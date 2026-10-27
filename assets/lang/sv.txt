@@ -1789,3 +1789,7 @@ START SETUP AGAIN
 = STARTA KONFIGURATIONEN IGEN
 Search every page for "{0}"
 = Sök efter ”{0}” på alla sidor
+Every piece a {0} can wear, with its bonuses, the bosses that drop it and each set's bonuses.
+= Varje del en {0} kan bära, med sina bonusar, bossarna som släpper den och varje sets bonusar.
+{0} GEAR
+= {0}: UTRUSTNING

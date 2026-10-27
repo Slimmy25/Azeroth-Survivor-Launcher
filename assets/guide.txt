@@ -470,6 +470,9 @@ Each boss drops one piece of gear for your class, on its own roll. The zone deci
 - Bad luck protection: each kill of a boss that misses its piece makes that piece likelier to drop the next time.
 - A piece you already own pays marks instead.
 
+# Each class's gear
+Every piece of every class, with its bonuses, the bosses that drop it and each set's 4-piece and 8-piece bonuses: Warrior Gear, Paladin Gear, Hunter Gear, Rogue Gear, Priest Gear, Shaman Gear, Mage Gear, Warlock Gear and Druid Gear.
+
 # Slots
 Head, Shoulders, Chest, Hands, Wrist, Waist, Legs, Feet and Main Hand. The final boss of a zone drops the main-hand weapon.
 

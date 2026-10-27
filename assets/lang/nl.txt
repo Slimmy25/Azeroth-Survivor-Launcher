@@ -1789,3 +1789,7 @@ START SETUP AGAIN
 = INSTALLATIE OPNIEUW
 Search every page for "{0}"
 = Zoek "{0}" op alle pagina's
+Every piece a {0} can wear, with its bonuses, the bosses that drop it and each set's bonuses.
+= Elk stuk dat een {0} kan dragen, met zijn bonussen, de bazen die het laten vallen en de bonussen van elke set.
+{0} GEAR
+= {0}: UITRUSTING

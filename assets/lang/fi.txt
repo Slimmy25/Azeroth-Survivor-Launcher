@@ -1789,3 +1789,7 @@ START SETUP AGAIN
 = ALOITA UUDELLEEN
 Search every page for "{0}"
 = Hae ”{0}” kaikilta sivuilta
+Every piece a {0} can wear, with its bonuses, the bosses that drop it and each set's bonuses.
+= Jokainen osa, jota {0} voi käyttää, bonuksineen, sen pudottavat pomot ja kunkin setin bonukset.
+{0} GEAR
+= {0}: VARUSTEET

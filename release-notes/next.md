@@ -66,3 +66,6 @@ the launcher is to use.
   the last line) to see every page your words are found in.
 - Options and STATS have no row of tabs any more: the tab is a step of the path at the top (Options › Folders,
   Stats › Priest › Records). Hover or click it for the list of the other tabs. The page gets that room.
+- Guide > Classes: a class page no longer lists its gear piece by piece. A button (PRIEST GEAR ›) opens the class's gear
+  page instead: every piece with its bonuses, the bosses that drop it and each set's bonuses.
+- Guide > Gear & the Armory: a new "Each class's gear" line links straight to each class's gear page.

@@ -1790,3 +1790,7 @@ START SETUP AGAIN
 = НАЧАТЬ НАСТРОЙКУ ЗАНОВО
 Search every page for "{0}"
 = Искать «{0}» на всех страницах
+Every piece a {0} can wear, with its bonuses, the bosses that drop it and each set's bonuses.
+= Каждый предмет, который может носить {0}, с бонусами, боссами, с которых он падает, и бонусами каждого комплекта.
+{0} GEAR
+= {0}: СНАРЯЖЕНИЕ
