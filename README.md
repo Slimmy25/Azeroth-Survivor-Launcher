@@ -12,6 +12,17 @@ The launcher does not contain or host the game: it downloads it from the game's 
 `Azeroth Survivors Launcher.exe`. Put it in the folder where the game is, or where you want it installed. It needs
 nothing else: it runs on the .NET Framework 4.8 that comes with Windows 10 and 11.
 
+<table>
+  <tr>
+    <td align="center"><img src="docs/screenshots/home-community.png" width="420" alt="The home screen with a featured Community video"><br><sub>Home: featured Community videos</sub></td>
+    <td align="center"><img src="docs/screenshots/stats-abilities.png" width="420" alt="The STATS page, Abilities tab"><br><sub>STATS: your runs, abilities and records</sub></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="docs/screenshots/talent-tree-builder.png" width="420" alt="The Talent Tree Builder asking which class to build for"><br><sub>Theorycrafting: the Talent Tree Builder</sub></td>
+    <td align="center"><img src="docs/screenshots/gear-planner.png" width="420" alt="The Gear Planner, laid out like the game's character sheet"><br><sub>Theorycrafting: the Gear Planner</sub></td>
+  </tr>
+</table>
+
 ---
 
 ## What it does
