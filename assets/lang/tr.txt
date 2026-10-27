@@ -1714,3 +1714,5 @@ AZS Stats
 = AZS Stats
 Cloud saving stays off. You can turn it on later in Options > CLOUD SAVE.
 = Bulut kaydı kapalı kalır. Daha sonra Seçenekler > CLOUD SAVE'den açabilirsin.
+The launcher's whole Guide inside the game (/handbook): every topic and page, each class's spells with their icons and what changes them, each class's gear, the Talent Tree Builder and the Gear Planner, the same as in the launcher.
+= Başlatıcının tüm rehberi oyunun içinde (/handbook): her konu ve sayfa, her sınıfın büyüleri simgeleri ve onları değiştirenlerle, her sınıfın ekipmanı, Yetenek Ağacı Oluşturucu ve Ekipman Planlayıcı, başlatıcıdakiyle aynı.
