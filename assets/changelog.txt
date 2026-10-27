@@ -2,6 +2,29 @@ Patch notes shown in the launcher's Changelog. The launcher sorts them by versio
 Every post starts with its title on the first line. Posts are separated by a line with only === on it.
 Everything above the first === line is ignored.
 ===
+0.121.0
+-------
+Heroic difficulty and gear upgrades: beat zones on Heroic I to V, earn marks from every boss, and upgrade your gear with stars. Full sets change how one of your class's spells plays, and any set can stay viable at the end.
+
+* Heroic I to V replaces Run Options: pick it with the Difficulty button beside Play, which shows each level's enemy health and damage, rewards and twists. Each level makes the horde and bosses tougher and adds two twists: elite packs, relentless bosses, stronger guardians, a leaner purse, horde affixes, the old tower and gaze mechanics, harsher failed mechanics, halved healing, and a final boss that brings a friend.
+* Heroic I of a zone opens once any of your classes beats it, and beating Heroic N there opens the next level for every class. A class can play a zone's Heroic once it has beaten that zone itself.
+* Horde affixes from Heroic III, changing every week (Heroic V has two at once): Bolstering (each death makes the enemies within 12 yards 20% tougher and stronger, stacking up to triple), Sanguine (slain elites leave wide pools that heal the horde 10% a second) and Explosive (an orb every 15 seconds that bursts for 40% of your health unless destroyed; area spells pass through it: it takes five direct hits, aimed spells and weapon swings).
+* Bosses aim a little ahead of where you are running: blasts, breaths, charges, beams, volleys and rains lead you, and further on each Heroic level. Change direction instead of running in a straight line.
+* Boss drop chances and talent experience rise with the Heroic level. Against the Odds and the co-op feats that asked for maxed Run Options now ask for Heroic III or harder.
+* Marks: every boss pays your class marks, more in harder zones and on higher Heroic levels (normal pays half), and bosses that return in endless pay more each time. A piece you already own pays marks instead of nothing.
+* Bad luck protection: each boss kill that misses a piece makes that piece likelier to drop next time.
+* Star upgrades: spend marks in the armory to raise a piece from 0 to 5 stars. A set's stars open as your class beats Heroic levels in the set's zones (Heroic II opens 2 stars, and so on). Lower sets are cheaper, and every other class that has a set's armor at a star rank makes that rank 5% cheaper for yours, up to 40%.
+* Each star adds to the piece's own bonuses: 5 stars make tier 3 gear 60% stronger. Lower sets gain more from each star, and their 5th star is a big one that lifts them to 95% of 5-star tier 3, so your favourite set stays viable at the end. That last star costs what tier 3's does (30 marks).
+* 4-piece bonuses: four armor pieces of one set at 1 star or more give its bonus, from more gold and pickup range on the common set to more critical damage on the legendary one.
+* 8-piece bonuses: all eight armor pieces of one set at 3 stars or more change how one of your class's spells plays, a different one for each set. Fireball splits, Aimed Shot pierces, Execute strikes more of the most wounded enemies and its kills cut your cooldowns, Consecration, Blizzard and Volley move with you, and so on: check each set in the armory. At 5 stars on all eight, the bonus is empowered: half again as strong.
+* The PvP sets are built around crowd control: your stun, root, slow or fear spell (Hammer of Justice, Concussive Shot, Kidney Shot, Psychic Scream, Frost Nova, Death Coil, Shred) hits more enemies, harder and more often, and all your damage is higher against enemies you stun, root, slow or fear.
+* Armor tooltips show their set, as in the original game: its name with how many pieces you wear, the pieces, and its 4-piece and 8-piece bonuses with the stars they need (character pane, C).
+* Weapon glows: weapons at 5 stars glow with Icy Chill, and two achievements open Crusader (Champion of Naxxramas) and Fiery Weapon (Radiant Armory). Pick your class's glow, or none, on any weapon in the armory; a picked glow also replaces a legendary weapon's own.
+* Armory collection: pieces still to find in your zones show as tiles with their boss and drop chance. Once you have them all, star progress takes their place: each set's stars per piece, its 4 and 8-piece bonuses and how many stars are open. Small gear bonuses show their tenths (+0.3% critical strike instead of +0%).
+* New achievements for stars, set bonuses, full and empowered sets, marks, endless bosses and Heroic, with a new Heroic tab.
+* In co-op, the host picks the Heroic level and every player needs it open. Everyone earns their own marks, drops and clears.
+* Co-op is easier: each extra player adds 20% less enemy health, horde size and damage than before.
+===
 0.120.5
 -------
 Co-op works on more networks: players whose home, school or work network blocked the co-op server can join and host again.

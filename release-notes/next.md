@@ -8,3 +8,5 @@
 ### Guide
 - No more NEXT button at the end of Guide pages: hover a step of the path at the top to go to any other page or topic.
   The Changelog keeps its PREVIOUS and NEXT.
+### News and Changelog
+- Patch notes for the game's 0.121.0 update: Heroic I to V, marks, star upgrades, 4- and 8-piece set bonuses.
