@@ -114,11 +114,11 @@ namespace AzerothLauncher
             bool have = addonPath != null;
             bool off = have && addonPath.EndsWith(Addons.DisabledSuffix, StringComparison.OrdinalIgnoreCase);
             // the addon is brought up to date by the launcher before every game, so only a missing addon needs a button
-            int top = 8;
+            int pageTop = 8;
             if (!have)
             {
                 Put(new WowButton("INSTALL STATS ADDON", InstallStatsAddon, 230, 32, 10), PW - 20 - (int)(230 * Theme.Zoom), 8);
-                top = 8 + (int)(32 * Theme.Zoom) + 8;
+                pageTop = 8 + (int)(32 * Theme.Zoom) + 8;
             }
 
             RunStats st = null;
@@ -131,7 +131,7 @@ namespace AzerothLauncher
             if (statsTab < 0 || statsTab >= StatTabs.Length) statsTab = 0;
             if (cls != null) SetCrumbs("Stats", (Action)delegate { SetStatsView(null, 1); }, cls.Name, null);   // back to all classes
 
-            var sp = MakeThinScroll(panel, new Rectangle(20, top, PW - 40, PH - 12 - top), Armory.Page, Theme.Bronze,
+            var sp = MakeThinScroll(panel, new Rectangle(20, pageTop, PW - 40, PH - 12 - pageTop), Armory.Page, Theme.Bronze,
                                     Armory.SlotEdge, Theme.GoldDim);
             int w = sp.ClientSize.Width - 10;
             int y = 4;
