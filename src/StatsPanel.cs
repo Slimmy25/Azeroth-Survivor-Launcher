@@ -111,11 +111,15 @@ namespace AzerothLauncher
             ClearPanel("Stats");
             string addonsDir = AddonsDir();
             string addonPath = Stats.AddonPath(addonsDir);
-            bool have = addonPath != null, outdated = have && Stats.AddonOutdated(addonsDir);
+            bool have = addonPath != null;
             bool off = have && addonPath.EndsWith(Addons.DisabledSuffix, StringComparison.OrdinalIgnoreCase);
-            if (!have) Put(new WowButton("INSTALL STATS ADDON", InstallStatsAddon, 230, 32, 10), PW - 20 - 230, 12);
-            else if (outdated) Put(new WowButton("UPDATE STATS ADDON", InstallStatsAddon, 230, 32, 10), PW - 20 - 230, 12);
-            else Put(new WowButton("REFRESH", delegate { BuildPanel("Stats"); }, 120, 32, 10), PW - 20 - 120, 12);
+            // the addon is brought up to date by the launcher before every game, so only a missing addon needs a button
+            int top = 8;
+            if (!have)
+            {
+                Put(new WowButton("INSTALL STATS ADDON", InstallStatsAddon, 230, 32, 10), PW - 20 - (int)(230 * Theme.Zoom), 8);
+                top = 8 + (int)(32 * Theme.Zoom) + 8;
+            }
 
             RunStats st = null;
             string err = null;
@@ -125,9 +129,9 @@ namespace AzerothLauncher
             StatBlock cls = data && statsClass != null ? st.Class(statsClass) : null;
             if (cls == null) statsClass = null;
             if (statsTab < 0 || statsTab >= StatTabs.Length) statsTab = 0;
-            if (cls != null) Put(new WowButton("‹ ALL CLASSES", delegate { SetStatsView(null, 1); }, 170, 32, 10), 84, 12);
+            if (cls != null) SetCrumbs("Stats", (Action)delegate { SetStatsView(null, 1); }, cls.Name, null);   // back to all classes
 
-            var sp = MakeThinScroll(panel, new Rectangle(20, 56, PW - 40, PH - 12 - 56), Armory.Page, Theme.Bronze,
+            var sp = MakeThinScroll(panel, new Rectangle(20, top, PW - 40, PH - 12 - top), Armory.Page, Theme.Bronze,
                                     Armory.SlotEdge, Theme.GoldDim);
             int w = sp.ClientSize.Width - 10;
             int y = 4;

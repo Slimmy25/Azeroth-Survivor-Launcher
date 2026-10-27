@@ -1628,3 +1628,29 @@ Amulet
 = ताबीज़
 ITEMS
 = वस्तुएँ
+Pick one: these interfaces can't be on together. Switching one on asks to switch the other off.
+= एक चुनें: ये इंटरफ़ेस एक साथ चालू नहीं हो सकते। एक को चालू करने पर दूसरे को बंद करने के लिए पूछा जाता है।
+{0} can't be on together with {1}: {2}.
+= {0} को {1} के साथ चालू नहीं किया जा सकता: {2}।
+Switch {0} off and turn {1} on?
+= {0} बंद करके {1} चालू करें?
+both replace the game's interface
+= दोनों गेम का इंटरफ़ेस बदल देते हैं
+both set raid marks on bosses and party members
+= दोनों बॉस और पार्टी सदस्यों पर रेड निशान लगाते हैं
+UI
+= UI
+MISC
+= अन्य
+AZS ADDONS
+= AZS ऐडऑन
+Gameplay
+= गेमप्ले
+Theorycrafting
+= थ्योरी
+New Player
+= नए खिलाड़ी
+Search
+= खोजें
+Talents
+= टैलेंट

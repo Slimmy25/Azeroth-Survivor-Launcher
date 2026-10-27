@@ -1628,3 +1628,29 @@ Amulet
 = 护身符
 ITEMS
 = 物品
+Pick one: these interfaces can't be on together. Switching one on asks to switch the other off.
+= 选一个：这些界面不能同时开启。开启其中一个时会询问是否关闭另一个。
+{0} can't be on together with {1}: {2}.
+= {0} 不能与 {1} 同时开启：{2}。
+Switch {0} off and turn {1} on?
+= 关闭 {0} 并开启 {1}？
+both replace the game's interface
+= 两者都会替换游戏界面
+both set raid marks on bosses and party members
+= 两者都会给首领和队友加上团队标记
+UI
+= 界面
+MISC
+= 其他
+AZS ADDONS
+= AZS 插件
+Gameplay
+= 玩法
+Theorycrafting
+= 理论
+New Player
+= 新玩家
+Search
+= 搜索
+Talents
+= 天赋
