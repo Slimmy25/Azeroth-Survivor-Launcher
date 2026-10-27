@@ -49,3 +49,15 @@
 ### The Guide
 - At the end of a page, **NEXT** takes you to the next page of the topic, then to the next topic of the same group
   (Getting Started, Controls, Your First Run, ...), so the New Player guide reads in order.
+
+### Theorycrafting
+- The Talent Tree Builder and the Gear Planner both start with one question in the middle of the window: "What class
+  do you want to build for?". The class rows are gone; change class from the trail (Gear Planner › Priest).
+- The two tools are linked and share the class: GEAR PLANNER › on the talent trees, TALENTS › in the Gear Planner.
+- Gear Planner: the Run Stats panel is replaced by a selector. Click a slot and the panel lists what it can hold,
+  each with its picture at the size of its name (rings, trinkets and amulets always; gear once AZS Stats has seen
+  it worn), in its rarity's color. Click one to put it in, or Empty.
+- With a set in the Gear Planner, the hover texts of spells and talents show their numbers with it: damage with the
+  set's damage bonus, cooldowns and "every N sec" with its cooldown bonus, "within N yd" with its area bonus, and a
+  line saying which bonuses are counted. It is an estimate (bonuses added together), and the set is forgotten when
+  the launcher closes.
