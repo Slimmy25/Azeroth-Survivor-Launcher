@@ -1667,3 +1667,19 @@ Turn cloud saving on to keep your save and your addons' settings in Google Drive
 = Ota pilvitallennus käyttöön, niin tallennuksesi ja lisäosien asetukset pysyvät Google Drivessa, OneDrivessa tai Dropboxissa.
 Disabled when AZS Stats is not active
 = Pois käytöstä, kun AZS Stats ei ole käytössä
+What class do you want to build for?
+= Mille luokalle haluat rakentaa buildin?
+TALENTS ›
+= KYVYT ›
+GEAR PLANNER ›
+= VARUSTESUUNNITTELIJA ›
+damage
+= vahinkoa
+cooldowns
+= latausaikoja
+area
+= aluetta
+Numbers with your Gear Planner set:
+= Luvut varustesuunnittelijan setilläsi:
+Your Gear Planner set:
+= Varustesuunnittelijan settisi:

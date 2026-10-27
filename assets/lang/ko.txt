@@ -1668,3 +1668,19 @@ Turn cloud saving on to keep your save and your addons' settings in Google Drive
 = 클라우드 저장을 켜면 저장과 애드온 설정을 Google Drive, OneDrive 또는 Dropbox에 보관합니다.
 Disabled when AZS Stats is not active
 = AZS Stats가 활성화되지 않으면 사용할 수 없음
+What class do you want to build for?
+= 어떤 직업으로 빌드를 짤까요?
+TALENTS ›
+= 특성 ›
+GEAR PLANNER ›
+= 장비 설계기 ›
+damage
+= 피해
+cooldowns
+= 재사용 대기시간
+area
+= 범위
+Numbers with your Gear Planner set:
+= 장비 설계기 세트를 반영한 수치:
+Your Gear Planner set:
+= 장비 설계기 세트:

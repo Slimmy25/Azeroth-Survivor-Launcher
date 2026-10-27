@@ -1667,3 +1667,19 @@ Turn cloud saving on to keep your save and your addons' settings in Google Drive
 = Slå cloud-gem til for at have dit gem og dine addons' indstillinger i Google Drive, OneDrive eller Dropbox.
 Disabled when AZS Stats is not active
 = Deaktiveret, når AZS Stats ikke er aktiv
+What class do you want to build for?
+= Hvilken klasse vil du bygge til?
+TALENTS ›
+= TALENTER ›
+GEAR PLANNER ›
+= UDSTYRSPLANLÆGGER ›
+damage
+= skade
+cooldowns
+= nedkølinger
+area
+= område
+Numbers with your Gear Planner set:
+= Tal med dit sæt fra udstyrsplanlæggeren:
+Your Gear Planner set:
+= Dit sæt fra udstyrsplanlæggeren:

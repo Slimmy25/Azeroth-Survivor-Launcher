@@ -417,6 +417,7 @@ namespace AzerothLauncher
             if (box == null || box.IsDisposed) box = new GuideHover();
             box.icon = icon;
             box.title = title;
+            body = GearEffect.Apply(title, body);              // the Gear Planner's set, when there is one
             box.body = body;
             Font tf = Theme.F(10.5f, FontStyle.Bold), bf = Theme.F(9.5f);
             int th = TextRenderer.MeasureText(title, tf, new Size(W - 20 - (icon != null ? 40 : 0), 0), TextFormatFlags.WordBreak).Height;

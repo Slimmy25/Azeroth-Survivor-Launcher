@@ -132,11 +132,13 @@ namespace AzerothLauncher
         {
             var topics = Data.Guide;
             Action home = GuideMainPage;
-            Action builder = delegate { OpenGuideTab(-2); };
+            Action builder = delegate { OpenGuideTab(-2); };    // the class question again
             Action theory = delegate { GuideGroupPage(2); };
             if (gVideo != null) { SetCrumbs("Guide", home, gVideo.Title.Length > 0 ? gVideo.Title : "Video", null); return; }
             if (gTalents != null && gBuilder) { SetCrumbs("Guide", home, GroupName(2), theory, TalentBuilder, builder, gTalents, null); return; }
             if (gBuilder) { SetCrumbs("Guide", home, GroupName(2), theory, TalentBuilder, null); return; }
+            Action planner = delegate { plannerClass = null; OpenGuideTab(-3); };
+            if (gPlanner && plannerClass != null) { SetCrumbs("Guide", home, GroupName(2), theory, GearPlanner, planner, plannerClass, null); return; }
             if (gPlanner) { SetCrumbs("Guide", home, GroupName(2), theory, GearPlanner, null); return; }
             if (guideQuery.Trim().Length > 0) { SetCrumbs("Guide", home, "Search", null); return; }
             if ((gTopic < 0 || gTopic >= topics.Count) && guideGroupPage >= 0) { SetCrumbs("Guide", home, GroupName(guideGroupPage), null); return; }
@@ -165,27 +167,39 @@ namespace AzerothLauncher
         void GuideBuilderHome()
         {
             GuideHeader(TalentBuilder, Data.Guide);
-            var sp = MakeThinScroll(panel, new Rectangle(20, GuideTop, PW - 40, PH - 12 - GuideTop), Theme.Panel, Theme.Bronze,
-                                    Theme.GoldDim, Theme.Gold);
-            int w = sp.ClientSize.Width - 8, y = 4;
-            var hint = UI.Text("Pick a class to open its three talent trees. Click a talent to add a point, right-click to take one back: " +
-                               "a build of up to 51 points, kept for each class.", 10, FontStyle.Regular, Theme.Text, sp.BackColor, w, true);
-            hint.Size = VStack.Measure(hint);
-            hint.Location = new Point(4, y);
-            sp.Controls.Add(hint);
-            y += hint.Height + 10;
-            const int cols = 3, gap = 8;
-            int cw = (w - gap * (cols - 1)) / cols;
-            int i = 0;
-            foreach (string c in BuilderClasses)
+            ClassPrompt(delegate(string cls) { PlannerClass(cls); gTalents = cls; BuildPanel("Guide"); });
+        }
+
+        // the question both theorycrafting tools open with, in the middle of the window: which class to build for
+        void ClassPrompt(Action<string> pick)
+        {
+            const int cols = 3;
+            int gap = (int)(8 * Theme.Zoom), bw = 150, bh = 36;
+            int cw = (int)(bw * Theme.Zoom), ch = (int)(bh * Theme.Zoom);
+            var q = UI.Text("What class do you want to build for?", 13, FontStyle.Bold, Theme.Gold, Theme.Panel, 0);
+            q.Size = VStack.Measure(q);
+            int boxW = Math.Max(q.Width, cols * cw + (cols - 1) * gap) + 40;
+            int rows = (BuilderClasses.Length + cols - 1) / cols;
+            int boxH = 20 + q.Height + 14 + rows * ch + (rows - 1) * gap + 20;
+            int top = GuideTop, avail = PH - 8 - top;
+            var box = new Bordered(Theme.Hex("#c49a48"), 2);
+            box.Bounds = new Rectangle((PW - boxW) / 2, top + Math.Max(0, (avail - boxH) / 2), boxW, boxH);
+            var inner = new Panel();
+            inner.Dock = DockStyle.Fill;
+            inner.BackColor = Theme.Panel;
+            box.Controls.Add(inner);
+            q.Location = new Point((boxW - 4 - q.Width) / 2, 18);
+            inner.Controls.Add(q);
+            int x0 = (boxW - 4 - (cols * cw + (cols - 1) * gap)) / 2, y0 = q.Bottom + 14;
+            for (int i = 0; i < BuilderClasses.Length; i++)
             {
-                if (Talents.Of(c).Count == 0) continue;
-                string cls = c;
-                var b = new WowButton(c.ToUpperInvariant(), delegate { gTalents = cls; BuildPanel("Guide"); }, (int)(cw / Theme.Zoom), 40, 10);
-                b.Location = new Point(4 + (i % cols) * (cw + gap), y + (i / cols) * (b.Height + gap));
-                sp.Controls.Add(b);
-                i++;
+                string cls = BuilderClasses[i];
+                var b = new WowButton(cls.ToUpperInvariant(), delegate { pick(cls); }, bw, bh, 10);
+                b.Location = new Point(x0 + (i % cols) * (cw + gap), y0 + (i / cols) * (ch + gap));
+                inner.Controls.Add(b);
             }
+            panel.Controls.Add(box);
+            box.BringToFront();
         }
 
         GuideSearchBox guideSearch;
@@ -264,7 +278,7 @@ namespace AzerothLauncher
             Color bg = sp.BackColor;
             int w = sp.ClientSize.Width - 8, x = 4, y = 4;
             var left = UI.Text("", 11, FontStyle.Bold, Theme.Gold, bg, w - 140, false);
-            left.Bounds = new Rectangle(x, y + 6, w - 200, Theme.F(11, FontStyle.Bold).Height + 4);
+            left.Bounds = new Rectangle(x, y + 6, w - 360, Theme.F(11, FontStyle.Bold).Height + 4);
             sp.Controls.Add(left);
             var reset = new WowButton("RESET", delegate { build.Reset(); }, 120, 30, 9);
             reset.Location = new Point(x + w - reset.Width, y);
@@ -278,6 +292,10 @@ namespace AzerothLauncher
             }, 34, 30, 11);
             help.Location = new Point(reset.Left - help.Width - 6, y);
             sp.Controls.Add(help);
+            // the same class's gear, in the Gear Planner (the two tools share the class)
+            var gear = new WowButton("GEAR PLANNER ›", delegate { PlannerClass(cls); OpenGuideTab(-3); }, 150, 30, 9);
+            gear.Location = new Point(help.Left - gear.Width - 6, y);
+            sp.Controls.Add(gear);
             y += Math.Max(reset.Height, left.Height) + 6;
             var trees = Talents.Of(cls);
             var views = new List<TalentTreeView>();

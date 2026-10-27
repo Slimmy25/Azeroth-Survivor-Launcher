@@ -1668,3 +1668,19 @@ Turn cloud saving on to keep your save and your addons' settings in Google Drive
 = Bật lưu đám mây để giữ bản lưu và cài đặt addon của bạn trong Google Drive, OneDrive hoặc Dropbox.
 Disabled when AZS Stats is not active
 = Bị tắt khi AZS Stats chưa bật
+What class do you want to build for?
+= Bạn muốn lên build cho lớp nhân vật nào?
+TALENTS ›
+= THIÊN PHÚ ›
+GEAR PLANNER ›
+= TRÌNH LÊN TRANG BỊ ›
+damage
+= sát thương
+cooldowns
+= thời gian hồi
+area
+= phạm vi
+Numbers with your Gear Planner set:
+= Chỉ số kèm bộ trang bị từ trình lên trang bị:
+Your Gear Planner set:
+= Bộ trang bị từ trình lên trang bị của bạn:

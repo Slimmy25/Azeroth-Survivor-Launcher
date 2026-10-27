@@ -1667,3 +1667,19 @@ Turn cloud saving on to keep your save and your addons' settings in Google Drive
 = Nyalakan simpan cloud untuk menyimpan save dan pengaturan addon-mu di Google Drive, OneDrive, atau Dropbox.
 Disabled when AZS Stats is not active
 = Nonaktif selama AZS Stats tidak aktif
+What class do you want to build for?
+= Kamu ingin membuat build untuk kelas apa?
+TALENTS ›
+= TALENTA ›
+GEAR PLANNER ›
+= PERENCANA PERLENGKAPAN ›
+damage
+= kerusakan
+cooldowns
+= cooldown
+area
+= area
+Numbers with your Gear Planner set:
+= Angka dengan set perencana perlengkapanmu:
+Your Gear Planner set:
+= Set perencana perlengkapanmu:

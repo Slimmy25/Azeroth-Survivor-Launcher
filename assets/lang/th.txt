@@ -1668,3 +1668,19 @@ Turn cloud saving on to keep your save and your addons' settings in Google Drive
 = เปิดเซฟคลาวด์เพื่อเก็บเซฟและการตั้งค่าแอดออนไว้ใน Google Drive, OneDrive หรือ Dropbox
 Disabled when AZS Stats is not active
 = ปิดใช้งานเมื่อ AZS Stats ไม่ได้เปิดอยู่
+What class do you want to build for?
+= คุณอยากจัดบิลด์ให้คลาสไหน?
+TALENTS ›
+= ทาเลนต์ ›
+GEAR PLANNER ›
+= ตัววางแผนอุปกรณ์ ›
+damage
+= ความเสียหาย
+cooldowns
+= คูลดาวน์
+area
+= พื้นที่
+Numbers with your Gear Planner set:
+= ตัวเลขเมื่อรวมชุดจากตัววางแผนอุปกรณ์:
+Your Gear Planner set:
+= ชุดจากตัววางแผนอุปกรณ์ของคุณ:
