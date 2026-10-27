@@ -1,0 +1,23 @@
+# Developer tool: reads the items out of the game at wow.aethus.pl (tools/game_items.py) and puts assets/items.txt
+# on the "game-items" branch, to be copied into main. Run by hand: Actions > Game items.
+name: Game items
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  read:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Read the items from the game
+        run: python3 tools/game_items.py
+      - name: Keep the result on the game-items branch
+        run: |
+          mkdir /tmp/pub && cp assets/items.txt items-debug.txt /tmp/pub/ && cd /tmp/pub
+          git init -q -b game-items && git config user.name bot && git config user.email bot@users.noreply.github.com
+          git add -A && git commit -qm "items from the game"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" HEAD:game-items

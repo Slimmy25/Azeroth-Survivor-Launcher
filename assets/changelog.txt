@@ -2,6 +2,21 @@ Patch notes shown in the launcher's Changelog. The launcher sorts them by versio
 Every post starts with its title on the first line. Posts are separated by a line with only === on it.
 Everything above the first === line is ignored.
 ===
+0.120.3
+-------
+Co-op fix: joining another party after your last one ended works again.
+
+* After your host left, you were kicked, or a lobby closed on you, the next party you joined could stay out of sync with its host (nothing arriving, the run never starting for you, or the host not seeing you). Each new party now starts fresh.
+===
+0.120.2
+-------
+Co-op runs survive connection drops: a player whose connection blips reconnects on their own and the run goes on.
+
+* If your connection to the co-op server drops mid-run (a Wi-Fi hiccup, a network switch, a server-side hiccup), the game reconnects by itself within a few seconds and nothing that happened meanwhile is lost. Before, any drop ended the run for that player, and for the whole party when it was the host.
+* While a player reconnects, the others may see the game pause for them for a moment. A player gone for good (no reconnect within about a minute) leaves the party as before.
+* The chat tells everyone when a player's connection drops ("Grom lost connection, reconnecting...") and when they are back, and the player is greyed out in the party frames meanwhile. You are told too when it is your own connection.
+* Closing the game or leaving on purpose still ends things at once.
+===
 0.120.1
 -------
 Co-op achievements fixed: a boss's killing blow now counts for the whole party, not just the player who landed it.
