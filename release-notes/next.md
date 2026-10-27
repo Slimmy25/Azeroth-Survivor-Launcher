@@ -14,9 +14,8 @@
 - Warrior, Paladin and Hunter gear now has its bonuses too, read from the game's item cards: every piece of every
   rarity, including the Legendary weapons Sulfuras, Ashbringer and Rhok'delar (each also makes your spells strike 1
   more target). No piece of these three classes shows * any more.
-- Rogue, Shaman, Mage, Warlock and Druid gear has its bonuses too, so every class's gear is known now. The only pieces
-  still marked * are the Rogue's Thunderfury and Kingsfall and the Mage's Frostfire Boots, Bindings, Gloves and Atiesh
-  (not shown yet).
+- Rogue, Shaman, Mage, Warlock and Druid gear has its bonuses too, so every class's gear is known now. Only the Mage's
+  Atiesh still shows *; Thunderfury and Kingsfall (Rogue) and the Frostfire Boots, Bindings and Gloves (Mage) are in.
 - Rogues and shamans get their **Off Hand** in the Gear Planner: the rogue's second dagger and the shaman's shield,
   each with its own bonuses.
 - Each class page (Guide > Gameplay > Classes) now ends with its **Gear**: every piece that class can wear, rarity by
@@ -43,6 +42,7 @@
   addon's own name.
 - My Addons shows each addon's name with its author ("Survivor UI By morderous"); for an addon not from Download More,
   its own title and author.
+- The OTHER ADDONS heading is gone for now: addons not from Download More are listed under AZS ADDONS.
 
 ### First-time setup
 - First-time setup now happens inside the launcher's section window, not in a box over a darkened launcher. It asks for
