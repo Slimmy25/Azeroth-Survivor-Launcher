@@ -24,19 +24,29 @@ jobs:
           FIND: ${{ inputs.find }}
         run: |
           python3 - <<'PY'
-          import os, re
+          import json, os, re
           rx = re.compile(os.environ["FIND"], re.I)
-          hits = [l for l in open("game-strings.txt", encoding="utf-8").read().split("\n") if rx.search(l)]
-          print("%d matches" % len(hits))
+          text = open("game-strings.txt", encoding="utf-8").read()
+          en, hits = {}, []
+          for m in re.finditer(r'"([a-z_]+\.[A-Za-z0-9_.]+)":\s*"((?:[^"\\]|\\.)*)"', text):
+              if m.group(1) not in en:   # the first of each key is the English one
+                  try:
+                      en[m.group(1)] = json.loads('"' + m.group(2) + '"')
+                  except Exception:
+                      en[m.group(1)] = m.group(2)
+          for k, v in en.items():
+              if rx.search(k) or rx.search(v):
+                  hits.append(k + " = " + v)
+          print("%d texts, %d match" % (len(en), len(hits)))
           chunk, n = "", 0
           for l in hits + [None]:
               if l is None or len(chunk) + len(l) > 3500:
                   if chunk and n < 10:
-                      print("::notice::" + chunk.replace("%", "%25").replace("\n", "%0A"))
+                      print("::notice::" + chunk.replace("%", "%25").replace("\r", "").replace("\n", "%0A"))
                       n += 1
                   chunk = ""
               if l is not None:
-                  chunk += l[:3000] + "\n"
+                  chunk += l[:1500] + "\n"
           PY
       # The texts are the game's own (its code and translations): they are kept as a short-lived download of this run
       # (Actions > the run > Artifacts), never on a branch of this repository
