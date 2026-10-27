@@ -83,6 +83,10 @@ download links in `addons/sources.txt`, so the launcher can download them all fr
 | Addon | Author | Original |
 | --- | --- | --- |
 | Azerloot | Kindagrey | <https://github.com/Kindagrey/Azerloot> (its newest release) |
+| BlackwellUI (BUI) | Blackwell | <https://github.com/Blackwellcode/BlackwellUI> (its newest release) |
+| Bordo UI | BordoBereli | <https://github.com/threenox/BordoUI> (its newest release; GPL-3.0) |
+| Damage Meter (AZS Spell Meter) | Kexo | <https://github.com/kex0/AZSSpellMeter> (its newest release) |
+| LuckyOdds | Cadoky | <https://github.com/cadoky/LuckyOdds> (its newest release) |
 | Keijin UI | KeijinDE | <https://github.com/KeijinDE/KeijinUI_modern-as-ui> |
 | Survivor UI (with Survivor Plates) | morderous | <https://github.com/morderous/survivor-ui> (its newest release, the addon zip; GPL-3.0) |
 | SurvivorsDragonUi | Mxgwyn | <https://github.com/migwynkriid13/SurvivorsDragonUi> |

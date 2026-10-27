@@ -1688,3 +1688,11 @@ Spells that affect this:
 = 影响此法术的法术：
 Found your game and its saves: first-time setup skipped. Every setting is in Options.
 = 已找到你的游戏和存档：已跳过首次设置。所有设置都在“选项”中。
+A complete interface: a centered combat bar with your health and buffs, an XP bar with kills and gold, boss timers with arrows, party frames, nameplates, map pins and a bigger damage font.
+= 完整的界面：居中的战斗栏显示生命和增益效果，经验条显示击杀数和金币，带箭头的首领计时器，队伍框体，姓名板，地图标记和更大的伤害字体。
+A small panel with your chance of a Rare, Epic or Legendary card at your current luck, and the Battleground Caches and guardian lairs on your minimap (/lucky).
+= 一个小面板，显示你在当前幸运值下获得稀有、史诗或传说卡牌的几率，并在小地图上标出战场宝箱和守护者巢穴（/lucky）。
+Damage per spell with the kills of each spell, plus healing, boss damage, damage taken and your party's damage, each in its own window if you like.
+= 按法术统计伤害和每个法术的击杀数，另有治疗、首领伤害、承受伤害和队伍伤害，可各自单独开一个窗口。
+A complete interface in a dark cyberpunk style: a new combat HUD with action bars, a cast bar, character and build panels, a damage meter, chat, minimap and nameplates.
+= 暗黑赛博朋克风格的完整界面：全新的战斗 HUD，包含动作条、施法条、角色和构筑面板、伤害统计、聊天、小地图和姓名板。
