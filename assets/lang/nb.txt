@@ -1627,3 +1627,29 @@ Amulet
 = Amulett
 ITEMS
 = GJENSTANDER
+Pick one: these interfaces can't be on together. Switching one on asks to switch the other off.
+= Velg én: disse grensesnittene kan ikke være på samtidig. Når du slår på ett, blir du spurt om det andre skal slås av.
+{0} can't be on together with {1}: {2}.
+= {0} kan ikke være på samtidig med {1}: {2}.
+Switch {0} off and turn {1} on?
+= Slå av {0} og slå på {1}?
+both replace the game's interface
+= begge erstatter spillets grensesnitt
+both set raid marks on bosses and party members
+= begge setter raidmerker på bosser og gruppemedlemmer
+UI
+= UI
+MISC
+= DIVERSE
+AZS ADDONS
+= AZS-ADDONS
+Gameplay
+= Spilling
+Theorycrafting
+= Teori
+New Player
+= Nye spillere
+Search
+= Søk
+Talents
+= Talenter

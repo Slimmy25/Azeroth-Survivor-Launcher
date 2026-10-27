@@ -1627,3 +1627,29 @@ Amulet
 = Amuletti
 ITEMS
 = ESINEET
+Pick one: these interfaces can't be on together. Switching one on asks to switch the other off.
+= Valitse yksi: näitä käyttöliittymiä ei voi käyttää yhtä aikaa. Kun otat yhden käyttöön, sinulta kysytään, poistetaanko toinen.
+{0} can't be on together with {1}: {2}.
+= {0} ei voi olla käytössä yhtä aikaa kuin {1}: {2}.
+Switch {0} off and turn {1} on?
+= Poistetaanko {0} käytöstä ja otetaanko {1} käyttöön?
+both replace the game's interface
+= molemmat korvaavat pelin käyttöliittymän
+both set raid marks on bosses and party members
+= molemmat asettavat raid-merkit pomoihin ja ryhmän jäseniin
+UI
+= UI
+MISC
+= MUUT
+AZS ADDONS
+= AZS-LISÄOSAT
+Gameplay
+= Pelattavuus
+Theorycrafting
+= Teoria
+New Player
+= Uudet pelaajat
+Search
+= Haku
+Talents
+= Kyvyt

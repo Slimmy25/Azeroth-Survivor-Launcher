@@ -148,8 +148,8 @@ namespace AzerothLauncher
             if (v != null) FetchTitle(v);
             var intro = PutText(HeadlineOn ? "Featured video. All credit goes to the people who made it."
                                            : "A build video made by a player. All credit goes to the people who made it.",
-                                9.5f, FontStyle.Italic, Theme.GoldDim, 24, 18, PW - 24 - (int)(200 * Theme.Zoom) - 34);
-            int top = Math.Max((int)(12 + 32 * Theme.Zoom) + 12, BottomOf(intro) + 6);
+                                9.5f, FontStyle.Italic, Theme.GoldDim, 24, 12, PW - 24 - (int)(200 * Theme.Zoom) - 34);
+            int top = Math.Max(8 + (int)(32 * Theme.Zoom) + 8, BottomOf(intro) + 6);
             if (v == null)
             {
                 PutText("No community videos yet.", 11, FontStyle.Italic, Theme.GoldDim, 24, top + 8, 0);
@@ -177,7 +177,7 @@ namespace AzerothLauncher
             pic.BringToFront();
             if (MoreVideos().Count > 1)
                 Put(new WowButton("MORE VIDEOS ›", delegate { communityMore = true; moreOrder = null; BuildPanel("Community"); }, 200, 30, 9),
-                    PW - 20 - (int)(200 * Theme.Zoom), 12);
+                    PW - 20 - (int)(200 * Theme.Zoom), 8);
         }
 
         // MORE VIDEOS: the headline videos first, always at the top in their own order (while they run), then all the
@@ -234,7 +234,7 @@ namespace AzerothLauncher
             if (moreOrder == null) moreOrder = MoreVideos();
             var list = moreOrder;
             foreach (var mv in list) FetchTitle(mv);
-            int top = (int)(12 + 32 * Theme.Zoom) + 10;
+            int top = 8;
             var sp = MakeScroll(panel, new Rectangle(20, top, PW - 40, PH - 12 - top), Theme.Panel, Theme.Bronze);
             const int cols = 3, gap = 12;
             int cw = (sp.ClientSize.Width - 20 - gap * (cols - 1)) / cols, ph = cw * 9 / 16;

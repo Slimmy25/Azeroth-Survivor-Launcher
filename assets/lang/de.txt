@@ -1627,3 +1627,29 @@ Amulet
 = Amulett
 ITEMS
 = GEGENSTÄNDE
+Pick one: these interfaces can't be on together. Switching one on asks to switch the other off.
+= Wähle eins: Diese Oberflächen können nicht gleichzeitig an sein. Schaltest du eine ein, wirst du gefragt, ob die andere aus soll.
+{0} can't be on together with {1}: {2}.
+= {0} kann nicht gleichzeitig mit {1} an sein: {2}.
+Switch {0} off and turn {1} on?
+= {0} ausschalten und {1} einschalten?
+both replace the game's interface
+= beide ersetzen die Oberfläche des Spiels
+both set raid marks on bosses and party members
+= beide setzen Schlachtzugsmarkierungen auf Bosse und Gruppenmitglieder
+UI
+= UI
+MISC
+= SONSTIGES
+AZS ADDONS
+= AZS-ADDONS
+Gameplay
+= Spielablauf
+Theorycrafting
+= Theorycrafting
+New Player
+= Neue Spieler
+Search
+= Suche
+Talents
+= Talente

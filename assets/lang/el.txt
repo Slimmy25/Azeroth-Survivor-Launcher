@@ -1628,3 +1628,29 @@ Amulet
 = Φυλαχτό
 ITEMS
 = ΑΝΤΙΚΕΙΜΕΝΑ
+Pick one: these interfaces can't be on together. Switching one on asks to switch the other off.
+= Διαλέξτε ένα: αυτές οι διεπαφές δεν μπορούν να είναι ενεργές μαζί. Ενεργοποιώντας μία, ερωτάστε αν θα απενεργοποιηθεί η άλλη.
+{0} can't be on together with {1}: {2}.
+= Το {0} δεν μπορεί να είναι ενεργό μαζί με το {1}: {2}.
+Switch {0} off and turn {1} on?
+= Απενεργοποίηση του {0} και ενεργοποίηση του {1};
+both replace the game's interface
+= και τα δύο αντικαθιστούν τη διεπαφή του παιχνιδιού
+both set raid marks on bosses and party members
+= και τα δύο βάζουν σημάδια raid σε αρχηγούς και μέλη της ομάδας
+UI
+= UI
+MISC
+= ΔΙΑΦΟΡΑ
+AZS ADDONS
+= ΠΡΟΣΘΕΤΑ AZS
+Gameplay
+= Παιχνίδι
+Theorycrafting
+= Θεωρία
+New Player
+= Νέοι παίκτες
+Search
+= Αναζήτηση
+Talents
+= Ταλέντα

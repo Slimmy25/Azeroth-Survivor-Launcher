@@ -1627,3 +1627,29 @@ Amulet
 = Jimat
 ITEMS
 = BARANG
+Pick one: these interfaces can't be on together. Switching one on asks to switch the other off.
+= Pilih satu: antarmuka ini tidak bisa menyala bersamaan. Menyalakan satu akan menanyakan apakah yang lain dimatikan.
+{0} can't be on together with {1}: {2}.
+= {0} tidak bisa menyala bersamaan dengan {1}: {2}.
+Switch {0} off and turn {1} on?
+= Matikan {0} dan nyalakan {1}?
+both replace the game's interface
+= keduanya mengganti antarmuka game
+both set raid marks on bosses and party members
+= keduanya memasang penanda raid pada bos dan anggota party
+UI
+= UI
+MISC
+= LAINNYA
+AZS ADDONS
+= ADDON AZS
+Gameplay
+= Gameplay
+Theorycrafting
+= Teori
+New Player
+= Pemain baru
+Search
+= Cari
+Talents
+= Talenta

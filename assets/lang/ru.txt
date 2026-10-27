@@ -1628,3 +1628,29 @@ Amulet
 = Амулет
 ITEMS
 = ПРЕДМЕТЫ
+Pick one: these interfaces can't be on together. Switching one on asks to switch the other off.
+= Выберите один: эти интерфейсы нельзя включить вместе. При включении одного вас спросят, выключить ли другой.
+{0} can't be on together with {1}: {2}.
+= {0} нельзя включить вместе с {1}: {2}.
+Switch {0} off and turn {1} on?
+= Выключить {0} и включить {1}?
+both replace the game's interface
+= оба заменяют интерфейс игры
+both set raid marks on bosses and party members
+= оба ставят рейдовые метки на боссов и членов группы
+UI
+= UI
+MISC
+= РАЗНОЕ
+AZS ADDONS
+= АДДОНЫ AZS
+Gameplay
+= Геймплей
+Theorycrafting
+= Теория
+New Player
+= Новичкам
+Search
+= Поиск
+Talents
+= Таланты

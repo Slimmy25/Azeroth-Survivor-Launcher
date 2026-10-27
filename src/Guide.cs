@@ -24,7 +24,7 @@ namespace AzerothLauncher
 
         // under the back arrow row, or under the topic tabs when they are shown
         int guideTabsBottom;
-        int GuideTop { get { return guideTabsBottom > 0 ? guideTabsBottom : (int)(12 + 32 * Theme.Zoom) + 10; } }
+        int GuideTop { get { return guideTabsBottom > 0 ? guideTabsBottom : 8; } }
         int guideLastTopic;                                  // the tab to go back to when the search is emptied
         bool guideFocusSearch;
 
@@ -82,16 +82,18 @@ namespace AzerothLauncher
             else SetGuideView(tab, -1);
         }
 
-        // The guide's header, like Options: the search box beside the back arrow, the three groups, then the topics of the
-        // open group as smaller tabs (wrapping onto more rows when needed)
+        // The guide's header: the title bar shows where you are (GuideTrail); the search box is on the main page and on
+        // its results only, so a topic or a tool has the whole window
         void GuideHeader(string title, List<GuideTopic> topics)
         {
             ClearPanel(title);
-            topics = Data.Guide;
-            int sx = 20 + (int)(52 * Theme.Zoom) + 12, sh = (int)(32 * Theme.Zoom);
-            var search = new GuideSearchBox(PW - 20 - sx, sh);
+            guideTabsBottom = 8;
+            bool searchShown = guideQuery.Length > 0 || (guideMain && !gBuilder && !gPlanner && gTopic < 0 && gTalents == null);
+            if (!searchShown) return;
+            int sh = (int)(32 * Theme.Zoom);
+            var search = new GuideSearchBox(PW - 40, sh);
             search.Text = guideQuery;
-            Put(search, sx, 12);
+            Put(search, 20, 8);
             if (guideQuery.Length == 0)
                 search.TextChanged += delegate
                 {
@@ -103,40 +105,46 @@ namespace AzerothLauncher
                 };
             if (guideFocusSearch) { guideFocusSearch = false; search.Focus(); search.SelectionStart = search.TextLength; }
             guideSearch = search;
-            if (gBuilder || gPlanner) guideGroup = 2;
-            else if (gTopic >= 0 && gTopic < topics.Count) guideGroup = GroupOf(topics[gTopic].Title);
-            bool searching = guideQuery.Length > 0 || (guideMain && !gBuilder && !gPlanner && gTopic < 0);   // no group picked
-            // the groups: one row, sharing the width
-            int y = 12 + sh + 6, n = GuideGroups.Length, gapG = 6;
-            int gw = (int)(((PW - 40) - gapG * (n - 1)) / (float)n / Theme.Zoom);
-            for (int g = 0; g < n; g++)
+            guideTabsBottom = 8 + sh + 8;
+        }
+
+        static string GroupName(int g)
+        {
+            string n = GuideGroups[g][0].ToLowerInvariant();
+            return char.ToUpperInvariant(n[0]) + n.Substring(1).Replace("player", "Player");
+        }
+
+        void GuideMainPage()
+        {
+            gTopic = -1; gPage = -1; guideQuery = ""; gBuilder = false; gPlanner = false; gTalents = null; gVideo = null; guideMain = true;
+            BuildPanel("Guide");
+        }
+
+        // the trail in the title bar: Guide › Gameplay › Classes › Priest, each step a way back
+        void GuideTrail()
+        {
+            var topics = Data.Guide;
+            Action home = GuideMainPage;
+            Action builder = delegate { OpenGuideTab(-2); };
+            if (gVideo != null) { SetCrumbs("Guide", home, gVideo.Title.Length > 0 ? gVideo.Title : "Video", null); return; }
+            if (gTalents != null && gBuilder) { SetCrumbs("Guide", home, GroupName(2), home, TalentBuilder, builder, gTalents, null); return; }
+            if (gBuilder) { SetCrumbs("Guide", home, GroupName(2), home, TalentBuilder, null); return; }
+            if (gPlanner) { SetCrumbs("Guide", home, GroupName(2), home, GearPlanner, null); return; }
+            if (guideQuery.Trim().Length > 0) { SetCrumbs("Guide", home, "Search", null); return; }
+            if (gTopic < 0 || gTopic >= topics.Count) { SetCrumbs("Guide", null); return; }
+            int t = gTopic, pg = gPage;
+            GuideTopic topic = topics[t];
+            string group = GroupName(GroupOf(topic.Title));
+            Action toTopic = delegate { SetGuideView(t, -1); };
+            if (gTalents != null)
             {
-                int grp = g;
-                var gb = new WowButton(GuideGroups[g][0], delegate
-                {
-                    var tabs = GroupTabs(grp, Data.Guide);
-                    guideGroup = grp;
-                    if (tabs.Count > 0) OpenGuideTab(tabs[0]);
-                }, gw, 28, 9);
-                gb.Selected = g == guideGroup && !searching;
-                Put(gb, 20 + g * (gb.Width + gapG), y);
+                Action toPage = delegate { SetGuideView(t, pg); };
+                if (pg >= 0 && pg < topic.Pages.Count) SetCrumbs("Guide", home, group, home, topic.Title, toTopic, topic.Pages[pg].Title, toPage, "Talents", null);
+                else SetCrumbs("Guide", home, group, home, topic.Title, toTopic, "Talents", null);
+                return;
             }
-            y += (int)(28 * Theme.Zoom) + 6;
-            // the open group's topics
-            int x = 20, rowH = (int)(22 * Theme.Zoom), gap = 3, right = PW - 20;
-            using (var g = CreateGraphics())
-                foreach (int tab in GroupTabs(guideGroup, topics))
-                {
-                    int t = tab;
-                    string label = (tab == -2 ? TalentBuilder : tab == -3 ? GearPlanner : topics[tab].Title).ToUpperInvariant();
-                    int tw = (int)(g.MeasureString(Lang.T(label), Theme.F(7.5f)).Width / Theme.Zoom) + 12;
-                    var b = new WowButton(label, delegate { OpenGuideTab(t); }, tw, 22, 7.5f);
-                    b.Selected = !searching && (tab == -2 ? gBuilder : tab == -3 ? gPlanner : (!gBuilder && !gPlanner && tab == gTopic));
-                    if (x + b.Width > right && x > 20) { x = 20; y += rowH + gap; }
-                    Put(b, x, y);
-                    x += b.Width + gap;
-                }
-            guideTabsBottom = y + rowH + 8;
+            if (pg >= 0 && pg < topic.Pages.Count) SetCrumbs("Guide", home, group, home, topic.Title, toTopic, topic.Pages[pg].Title, null);
+            else SetCrumbs("Guide", home, group, home, topic.Title, null);
         }
 
         static readonly string[] BuilderClasses = { "Warrior", "Paladin", "Hunter", "Rogue", "Priest", "Shaman", "Mage", "Warlock", "Druid" };
@@ -190,6 +198,12 @@ namespace AzerothLauncher
 
         void PanelGuide()
         {
+            PanelGuideView();
+            GuideTrail();
+        }
+
+        void PanelGuideView()
+        {
             if (VideoCard.Embed == null) VideoCard.Embed = delegate(GuideVideo v) { gVideo = v; BuildPanel("Guide"); return true; };
             if (Cfg.Data.ContainsKey("guide_read")) { Cfg.Remove("guide_read"); if (!PreviewMode) Cfg.Save(); }   // no longer tracked
             if (gVideo != null) { GuideVideoPlayer(gVideo); return; }
@@ -215,10 +229,11 @@ namespace AzerothLauncher
             ClearPanel(v.Title.Length > 0 ? v.Title : "Video");
             int bw = (int)(190 * Theme.Zoom);
             string url = v.Url;
-            Put(new WowButton("OPEN IN BROWSER ›", delegate { Util.OpenInShell(url); }, 190, 32, 9), PW - 20 - bw, 12);
+            Put(new WowButton("OPEN IN BROWSER ›", delegate { Util.OpenInShell(url); }, 190, 32, 9), PW - 20 - bw, 8);
+            guideTabsBottom = 8 + (int)(32 * Theme.Zoom) + 8;
             var frame = new Bordered(Theme.CardEdge, 1);
             frame.Bounds = new Rectangle(20, GuideTop, PW - 40, PH - 12 - GuideTop);
-            Put(frame, 20, 52);
+            panel.Controls.Add(frame);
             var web = VideoView.Make(v);
             web.Dock = DockStyle.Fill;
             frame.Controls.Add(web);
@@ -227,14 +242,7 @@ namespace AzerothLauncher
         // ---- a class's three talent trees, as in the game, with a test build of up to 51 points (cleared on leaving)
         void GuideTalents(string cls)
         {
-            guideTabsBottom = 0;
-            if (gBuilder) GuideHeader(cls + " Talents", Data.Guide);   // from the Talent Tree Builder: its tabs stay
-            else
-            {
-                ClearPanel(cls + " Talents");
-                int bw = (int)(170 * Theme.Zoom);
-                Put(new WowButton("‹ " + cls.ToUpperInvariant(), delegate { gTalents = null; BuildPanel("Guide"); }, 170, 32, 9), PW - 20 - bw, 12);
-            }
+            GuideHeader(cls + " Talents", Data.Guide);
             if (liveBuild == null || liveBuildCls != cls) { liveBuild = TalentBuild.Parse("", cls); liveBuildCls = cls; }
             var build = liveBuild;
             var sp = MakeThinScroll(panel, new Rectangle(20, GuideTop, PW - 40, PH - 12 - GuideTop), GuideCardBg, Theme.Bronze,
@@ -242,20 +250,21 @@ namespace AzerothLauncher
             Color bg = sp.BackColor;
             int w = sp.ClientSize.Width - 8, x = 4, y = 4;
             var left = UI.Text("", 11, FontStyle.Bold, Theme.Gold, bg, w - 140, false);
-            left.Bounds = new Rectangle(x, y + 6, w - 150, Theme.F(11, FontStyle.Bold).Height + 4);
+            left.Bounds = new Rectangle(x, y + 6, w - 200, Theme.F(11, FontStyle.Bold).Height + 4);
             sp.Controls.Add(left);
             var reset = new WowButton("RESET", delegate { build.Reset(); }, 120, 30, 9);
             reset.Location = new Point(x + w - reset.Width, y);
             sp.Controls.Add(reset);
+            // how talents work, on a button beside RESET (saves the room the text took)
+            var help = new WowButton("?", delegate
+            {
+                Info("Talents", "Click a talent to add a point, right-click to take one back. As in the game, each row opens once " +
+                     "its own tree has 5 points for every row above it; a build takes no more than 51 points. The purple " +
+                     "ones are the milestones at 10, 20 and 30 points.");
+            }, 34, 30, 11);
+            help.Location = new Point(reset.Left - help.Width - 6, y);
+            sp.Controls.Add(help);
             y += Math.Max(reset.Height, left.Height) + 6;
-            var hint = UI.Text("Click a talent to add a point, right-click to take one back. As in the game, each row opens once " +
-                               "its own tree has 5 points for every row above it; a build takes no more than 51 points. The purple " +
-                               "ones are the milestones at 10, 20 and 30 points.",
-                               9.5f, FontStyle.Regular, Theme.GoldDim, bg, w, true);
-            hint.Size = VStack.Measure(hint);
-            hint.Location = new Point(x, y);
-            sp.Controls.Add(hint);
-            y += hint.Height + 10;
             var trees = Talents.Of(cls);
             var views = new List<TalentTreeView>();
             int gap = 8, tw3 = (w - gap * (trees.Count - 1)) / Math.Max(1, trees.Count), th = 0;
@@ -465,15 +474,7 @@ namespace AzerothLauncher
             GuidePage shown = inPage ? topic.Pages[gPage] : topic;
             GuideHeader(shown.Title, topics);
 
-            int count = inPage ? topic.Pages.Count : topics.Count, at = inPage ? gPage : gTopic;
-            int bh = (int)(34 * Theme.Zoom), by = PH - 12 - bh, tIndex = gTopic;
-            if (at > 0)
-                Put(new WowButton("‹ PREVIOUS", delegate { if (inPage) SetGuideView(tIndex, at - 1); else SetGuideView(at - 1, -1); }, 150, 34, 10), 20, by);
-            if (at + 1 < count)
-                Put(new WowButton("NEXT ›", delegate { if (inPage) SetGuideView(tIndex, at + 1); else SetGuideView(at + 1, -1); }, 150, 34, 10), PW - 20 - (int)(150 * Theme.Zoom), by);
-            var dots = new GuideDots(count, at, PW / 3, bh);
-            Put(dots, (PW - dots.Width) / 2, by);
-
+            int by = PH - 2;                                 // no PREVIOUS / NEXT row: the article has the whole window
             var sp = MakeThinScroll(panel, new Rectangle(20, GuideTop, PW - 40, by - 10 - GuideTop), GuideCardBg, Theme.Bronze,
                                     Theme.GoldDim, Theme.Gold);
             GuideBody(sp, inPage ? topic.Title : "Guide", shown);

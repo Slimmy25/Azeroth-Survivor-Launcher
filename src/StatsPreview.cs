@@ -210,7 +210,7 @@ namespace AzerothLauncher
                 app.ShowSide();
                 string build = sec;
                 if (sec == "Addons Download") { build = "Addons"; app.addonMode = "download"; app.addonCategory = 0; }
-                else if (sec == "Addons Download 112") { build = "Addons"; app.addonMode = "download"; app.addonCategory = 1; }
+                else if (sec == "Addons Download 112") { build = "Addons"; app.addonMode = "download"; app.addonCategory = 3; }
                 else if (sec == "Addons") app.addonMode = "installed";
                 app.current = build;
                 if (sec == "Guide") { app.gTopic = -1; app.gPage = -1; app.guideQuery = "frost"; }   // the search, with a word typed

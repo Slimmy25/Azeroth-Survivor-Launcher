@@ -11,15 +11,20 @@ using System.Windows.Forms;
 namespace AzerothLauncher
 {
     // the bronze title bar: round emblem portrait, the section's name, a red X
+    // The section window's title bar: the back arrow, then the trail of where you are ("Guide › Theorycrafting ›
+    // Talent Tree Builder › Priest"): click a step to go back to it. The red X closes the section.
     public class SideHead : Control
     {
-        string title = "Addons";
         public Action CloseClicked;
+        public Action BackClicked;                           // null: no back arrow
         public Form Owner2;
         bool closable = true;
         public bool Closable { get { return closable; } set { closable = value; Invalidate(); } }   // no X on Community
         public Action<Point> Moved;
         Point? dragOffset;
+        List<KeyValuePair<string, Action>> crumbs = new List<KeyValuePair<string, Action>>();
+        readonly List<KeyValuePair<Rectangle, Action>> hot = new List<KeyValuePair<Rectangle, Action>>();
+        int hover = -1;                                      // the step under the pointer (-2: the back arrow)
 
         public SideHead()
         {
@@ -29,9 +34,22 @@ namespace AzerothLauncher
             BackColor = Theme.Hex("#0e0d14");
         }
 
-        public string Title { get { return title; } set { title = value; Invalidate(); } }
+        public string Title
+        {
+            get { return crumbs.Count > 0 ? crumbs[crumbs.Count - 1].Key : ""; }
+            set { crumbs = new List<KeyValuePair<string, Action>> { new KeyValuePair<string, Action>(value, null) }; Invalidate(); }
+        }
+
+        // the trail; the last step is where you are (its action is not used)
+        public void SetCrumbs(List<KeyValuePair<string, Action>> list)
+        {
+            crumbs = list ?? new List<KeyValuePair<string, Action>>();
+            hover = -1;
+            Invalidate();
+        }
 
         Rectangle CloseBox { get { return closable ? new Rectangle(Width - 27, 9, 18, 18) : Rectangle.Empty; } }
+        Rectangle BackBox { get { return BackClicked != null ? new Rectangle(44, 8, 30, 20) : Rectangle.Empty; } }
 
         protected override void OnPaint(PaintEventArgs e)
         {
@@ -42,27 +60,81 @@ namespace AzerothLauncher
             if (bar != null) g.DrawImage(bar, new Rectangle(22, 7, w - 26, 22));
             using (var p = new Pen(Theme.Hex("#c49a48"), 2)) g.DrawRectangle(p, 22, 7, w - 26, 21);
             Theme.Smooth(g);
-            using (var sf = new StringFormat())
-            using (var b = new SolidBrush(Theme.Hex("#fff0b0")))
+            hot.Clear();
+            int x = 50;
+            Rectangle bb = BackBox;
+            if (!bb.IsEmpty)
+            {
+                using (var b = new SolidBrush(hover == -2 ? Theme.Hex("#3a2c18") : Theme.Hex("#1c160e"))) g.FillRectangle(b, bb);
+                using (var p = new Pen(Theme.Hex("#d6a640"), 1.5f)) g.DrawRectangle(p, bb);
+                using (var b = new SolidBrush(Theme.Hex("#fff0b0")))
+                    g.FillPolygon(b, new[] { new PointF(bb.X + 11, bb.Y + 10), new PointF(bb.X + 19, bb.Y + 4), new PointF(bb.X + 19, bb.Y + 16) });
+                x = bb.Right + 8;
+            }
+            int right = (closable ? Width - 32 : Width - 8);
+            Font f = Theme.F(11, FontStyle.Bold), fs = Theme.F(10);
+            using (var sf = new StringFormat(StringFormatFlags.NoWrap))
             {
                 sf.LineAlignment = StringAlignment.Center;
-                g.DrawString(Lang.T(title), Theme.F(11, FontStyle.Bold), b, new RectangleF(50, 7, w - 86, 22), sf);
+                sf.Trimming = StringTrimming.EllipsisCharacter;
+                // from the end: the steps that fit; the first ones go when the trail is too long
+                var widths = new List<float>();
+                for (int i = 0; i < crumbs.Count; i++)
+                    widths.Add(g.MeasureString(Lang.T(crumbs[i].Key), i == crumbs.Count - 1 ? f : fs).Width);
+                float sep = g.MeasureString(" › ", fs).Width;
+                int first = 0;
+                float total = 0;
+                for (int i = 0; i < crumbs.Count; i++) total += widths[i] + (i > 0 ? sep : 0);
+                while (first < crumbs.Count - 1 && x + total > right) { total -= widths[first] + sep; first++; }
+                for (int i = first; i < crumbs.Count; i++)
+                {
+                    bool last = i == crumbs.Count - 1;
+                    string t = Lang.T(crumbs[i].Key);
+                    float tw = Math.Min(widths[i], right - x);
+                    var r = new RectangleF(x, 7, Math.Max(1, tw), 22);
+                    Color c = last ? Theme.Hex("#fff0b0") : (hover == i ? Color.White : Theme.Hex("#d9c48a"));
+                    using (var b = new SolidBrush(c)) g.DrawString(t, last ? f : fs, b, r, sf);
+                    if (!last && crumbs[i].Value != null)
+                    {
+                        hot.Add(new KeyValuePair<Rectangle, Action>(Rectangle.Round(r), crumbs[i].Value));
+                        if (hover == i)
+                            using (var p = new Pen(Theme.Hex("#d9c48a"))) g.DrawLine(p, r.X, r.Bottom - 4, r.X + tw, r.Bottom - 4);
+                    }
+                    x += (int)tw;
+                    if (!last)
+                    {
+                        using (var b = new SolidBrush(Theme.Hex("#a08850"))) g.DrawString(" › ", fs, b, new RectangleF(x, 7, sep + 2, 22), sf);
+                        x += (int)sep;
+                    }
+                    if (x >= right) break;
+                }
             }
             if (Theme.Portrait != null) g.DrawImage(Theme.Portrait, 2, 1, 36, 36);
-            Rectangle x = CloseBox;
-            if (x.IsEmpty) return;
-            using (var b = new SolidBrush(Theme.Hex("#2a1c1c"))) g.FillRectangle(b, x);
-            using (var p = new Pen(Theme.Hex("#d6a640"), 2)) g.DrawRectangle(p, x);
+            Rectangle xb = CloseBox;
+            if (xb.IsEmpty) return;
+            using (var b = new SolidBrush(Theme.Hex("#2a1c1c"))) g.FillRectangle(b, xb);
+            using (var p = new Pen(Theme.Hex("#d6a640"), 2)) g.DrawRectangle(p, xb);
             using (var p = new Pen(Theme.Hex("#e53a22"), 3))
             {
-                g.DrawLine(p, x.X + 5, x.Y + 5, x.X + 13, x.Y + 13);
-                g.DrawLine(p, x.X + 13, x.Y + 5, x.X + 5, x.Y + 13);
+                g.DrawLine(p, xb.X + 5, xb.Y + 5, xb.X + 13, xb.Y + 13);
+                g.DrawLine(p, xb.X + 13, xb.Y + 5, xb.X + 5, xb.Y + 13);
             }
+        }
+
+        int HotAt(Point pt)
+        {
+            if (BackBox.Contains(pt)) return -2;
+            for (int i = 0; i < crumbs.Count; i++)
+                foreach (var h in hot)
+                    if (h.Key.Contains(pt) && h.Value == crumbs[i].Value) return i;
+            return -1;
         }
 
         protected override void OnMouseMove(MouseEventArgs e)
         {
-            Cursor = CloseBox.Contains(e.Location) ? Cursors.Hand : Cursors.Default;
+            int h = HotAt(e.Location);
+            if (h != hover) { hover = h; Invalidate(); }
+            Cursor = CloseBox.Contains(e.Location) || h != -1 ? Cursors.Hand : Cursors.Default;
             if (dragOffset.HasValue && Owner2 != null)
             {
                 Point s = PointToScreen(e.Location);
@@ -70,6 +142,8 @@ namespace AzerothLauncher
             }
             base.OnMouseMove(e);
         }
+
+        protected override void OnMouseLeave(EventArgs e) { if (hover != -1) { hover = -1; Invalidate(); } base.OnMouseLeave(e); }
 
         protected override void OnMouseDown(MouseEventArgs e)
         {
@@ -91,6 +165,12 @@ namespace AzerothLauncher
                 if (Moved != null && Owner2 != null) Moved(Owner2.Location);
             }
             else if (e.Button == MouseButtons.Left && CloseBox.Contains(e.Location)) WowButton.Fire(CloseClicked);
+            else if (e.Button == MouseButtons.Left)
+            {
+                int h = HotAt(e.Location);
+                if (h == -2) WowButton.Fire(BackClicked);
+                else if (h >= 0) WowButton.Fire(crumbs[h].Value);
+            }
             base.OnMouseUp(e);
         }
     }
@@ -176,7 +256,7 @@ namespace AzerothLauncher
             var body = new Panel();
             body.Dock = DockStyle.Fill;
             body.BackColor = dark;
-            body.Padding = new Padding(8, 6, 8, 0);
+            body.Padding = new Padding(4, 2, 4, 4);
             inner.Controls.Add(body);
             sideHead = new SideHead();
             sideHead.Dock = DockStyle.Top;
@@ -255,7 +335,8 @@ namespace AzerothLauncher
         }
 
         // the section area: its top level with the top of the word "News", its bottom level with the Launcher buttons
-        static readonly Rectangle SideRect = new Rectangle(8, 207, 670, 541 - 207);
+        // (a little taller than the News column: from under the game's name down to the bottom bar, for more room)
+        static readonly Rectangle SideRect = new Rectangle(6, 198, 674, 574 - 198);
 
         void ShowSide()
         {
@@ -387,7 +468,32 @@ namespace AzerothLauncher
                 c.Dispose();
             }
             SetSideTitle(title);
-            if (current != "Community" || communityPlaying != null || communityMore) Put(UI.BackArrow(GoBack), 20, 12);
+            // the back arrow and the trail live in the title bar: "Addons › Download More"
+            bool back = current != "Community" || communityPlaying != null || communityMore;
+            sideHead.BackClicked = back ? (Action)GoBack : null;
+            var trail = new List<KeyValuePair<string, Action>>();
+            string sec = current;
+            if (sec != null && sec != "Home" && sec != title)
+                trail.Add(new KeyValuePair<string, Action>(sec, delegate { SectionRoot(sec); }));
+            trail.Add(new KeyValuePair<string, Action>(title, null));
+            sideHead.SetCrumbs(trail);
+        }
+
+        void SetCrumbs(params object[] steps)                // "Guide", action, "Theorycrafting", action, ..., "Priest", null
+        {
+            var trail = new List<KeyValuePair<string, Action>>();
+            for (int i = 0; i + 1 < steps.Length; i += 2) trail.Add(new KeyValuePair<string, Action>((string)steps[i], steps[i + 1] as Action));
+            sideHead.SetCrumbs(trail);
+        }
+
+        // a section's first page, from the trail in the title bar
+        void SectionRoot(string name)
+        {
+            if (name == "Guide") { GuideMainPage(); return; }
+            if (name == "Addons") addonMode = "installed";
+            if (name == "Changelog") clView = ClNewest;
+            if (name == "Community") { LeaveCommunityVideo(); communityMore = false; }
+            BuildPanel(name);
         }
 
         // the back arrow: one step back inside the section, or out of the section when at its first page
@@ -479,8 +585,8 @@ namespace AzerothLauncher
             else if (clView == ClList) { title = "All Patch Notes"; btn = "‹ LATEST"; back = ClNewest; }
             else { title = Data.PostTitle(entries[clView]); btn = "‹ ALL PATCH NOTES"; back = ClList; }
             ClearPanel(title);
-            Put(new WowButton(btn, delegate { SetChangelogView(back); }, 190, 32, 10), PW - 20 - (int)(190 * Theme.Zoom), 12);
-            int top = (int)(12 + 32 * Theme.Zoom) + 10, bottom = PH;
+            Put(new WowButton(btn, delegate { SetChangelogView(back); }, 190, 32, 10), PW - 20 - (int)(190 * Theme.Zoom), 8);
+            int top = 8 + (int)(32 * Theme.Zoom) + 6, bottom = PH;
             if (clView >= 0 || clView == ClNewest)           // PREVIOUS (older) / NEXT (newer), always at the bottom
             {
                 int v = clView == ClNewest ? 0 : clView;
@@ -646,10 +752,10 @@ namespace AzerothLauncher
             ClearPanel("About Launcher");
             if (ShowLauncherChangelog)
             {
-                var about = Put(new WowButton("ABOUT", delegate { aboutLog = false; BuildPanel("About Launcher"); }, 130, 32, 10), 84, 12);
+                var about = Put(new WowButton("ABOUT", delegate { aboutLog = false; BuildPanel("About Launcher"); }, 130, 32, 10), 20, 8);
                 about.Selected = !aboutLog;
                 var log = Put(new WowButton("LAUNCHER CHANGELOG", delegate { aboutLog = true; BuildPanel("About Launcher"); }, 230, 32, 10),
-                              84 + 130 + 10, 12);
+                              20 + (int)(140 * Theme.Zoom), 8);
                 log.Selected = aboutLog;
             }
             else aboutLog = false;
@@ -657,7 +763,7 @@ namespace AzerothLauncher
                                   Theme.Credit, Theme.Panel, 0);
             credits.TextAlign = ContentAlignment.TopRight;
             credits.Size = VStack.Measure(credits);
-            Put(credits, PW - 20 - credits.Width, 56);
+            Put(credits, PW - 20 - credits.Width, ShowLauncherChangelog ? 8 + (int)(32 * Theme.Zoom) + 6 : 8);
             var line = Put(UI.Line(Theme.GoldDim, PW - 40, 2), 20, BottomOf(credits) + 4);
             var box = UI.Log(Theme.Panel, 11);
             box.Bounds = new Rectangle(20, BottomOf(line) + 10, PW - 34, PH - BottomOf(line) - 18);
@@ -732,23 +838,19 @@ namespace AzerothLauncher
             ClearPanel(dl ? "Download More" : "Addons");
             if (dl)
             {
-                // the back arrow returns to My Addons; the categories are a row of tabs filling the rest, as in Options
-                int x0 = 20 + (int)(52 * Theme.Zoom) + 10, wAll = PW - 20 - x0, cw = wAll / Data.AddonCategories.Length;
+                // the categories, a row of tabs across the top (the back arrow in the title bar returns to My Addons)
+                int x0 = 20, wAll = PW - 20 - x0, cw = wAll / Data.AddonCategories.Length;
                 for (int i = 0; i < Data.AddonCategories.Length; i++)
                 {
                     int n = i;
                     var b = new WowButton(Data.AddonCategories[i], delegate { addonCategory = n; BuildPanel("Addons"); },
                                           (int)((cw - 6) / Theme.Zoom), 32, 10);
                     b.Selected = i == addonCategory;          // the open category: filled gold
-                    Put(b, x0 + i * cw, 12);
+                    Put(b, x0 + i * cw, 8);
                 }
-                AddonsDownloadView(53);
+                AddonsDownloadView(8 + (int)(32 * Theme.Zoom) + 6);
             }
-            else
-            {
-                Put(new WowButton("DOWNLOAD MORE ›", delegate { SetAddonMode("download"); }, 190, 32, 10), PW - 20 - 190, 12);
-                AddonsInstalledView(52);
-            }
+            else AddonsInstalledView(8);
         }
 
         void SetAddonMode(string mode)
@@ -859,6 +961,15 @@ namespace AzerothLauncher
                 if (a.Category == Data.AddonCategories[cat]) items.Add(a);
             items.Sort(delegate(AddonEntry a, AddonEntry b) { return string.Compare(a.Name, b.Name, StringComparison.OrdinalIgnoreCase); });   // A to Z
             int y0 = 4;
+            if (Data.AddonCategories[cat] == Data.UiCategory)
+            {
+                var pick = UI.Text("Pick one: these interfaces can't be on together. Switching one on asks to switch the other off.",
+                                   9, FontStyle.Italic, Theme.GoldDim, listbg, sp.ClientSize.Width - 24);
+                pick.Size = VStack.Measure(pick);
+                pick.Location = new Point(10, 6);
+                sp.Controls.Add(pick);
+                y0 = pick.Bottom + 6;
+            }
             if (Data.AddonCategories[cat] == Data.MyAddonsCategory)
             {
                 var hint = UI.Text("Put addon .zip files in the My Addons folder; they stay on this PC.", 9, FontStyle.Italic,
@@ -1094,10 +1205,12 @@ namespace AzerothLauncher
             }
             int bottom = PH - 12;
             // --- right column: REFRESH and FOLDER, toggle all, the counter, two profiles at the bottom ---
-            int cx = PW - 20 - 190;
-            Put(new WowButton("REFRESH", delegate { BuildPanel("Addons"); }, 92, 28, 9), cx, top);
-            Put(new WowButton("FOLDER", delegate { Util.OpenInShell(dir); }, 92, 28, 9), cx + 98, top);
-            var toggle = Put(new WowButton("TOGGLE ALL", ToggleAllAddons, 190, 34, 11), cx, top + 28 + 6);
+            int cx = PW - 20 - (int)(190 * Theme.Zoom);
+            var more = Put(new WowButton("DOWNLOAD MORE ›", delegate { SetAddonMode("download"); }, 190, 32, 10), cx, top);
+            int rtop = BottomOf(more) + 6;
+            var refresh = Put(new WowButton("REFRESH", delegate { BuildPanel("Addons"); }, 92, 28, 9), cx, rtop);
+            Put(new WowButton("FOLDER", delegate { Util.OpenInShell(dir); }, 92, 28, 9), cx + (int)(98 * Theme.Zoom), rtop);
+            var toggle = Put(new WowButton("TOGGLE ALL", ToggleAllAddons, 190, 34, 11), cx, BottomOf(refresh) + 6);
             addonCount = UI.Text("", 10, FontStyle.Italic, Theme.GoldDim, Theme.Panel, 0);
             addonCount.AutoSize = false;
             addonCount.TextAlign = ContentAlignment.TopCenter;   // centred under TOGGLE ALL
@@ -1140,14 +1253,15 @@ namespace AzerothLauncher
             var cats = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
             foreach (var e in Data.Addons)
                 foreach (string f in AddonFoldersOf(e.Name)) if (!cats.ContainsKey(f)) cats[f] = e.Category;
+            // every addon of Download More that is not a WoW 1.12 one is an AZS addon here (UI, Gameplay and Misc together)
             Func<string, string> catOf = delegate(string folder)
             {
                 string c;
-                if (cats.TryGetValue(folder, out c)) return c;
-                if (folder.StartsWith("AZS", StringComparison.OrdinalIgnoreCase)) return Data.AddonCategories[0];
+                if (cats.TryGetValue(folder, out c)) return c == Data.Wow112Category || c == Data.MyAddonsCategory ? c : Data.AzsAddonsHeading;
+                if (folder.StartsWith("AZS", StringComparison.OrdinalIgnoreCase)) return Data.AzsAddonsHeading;
                 return "OTHER ADDONS";
             };
-            var order = new List<string>(Data.AddonCategories);
+            var order = new List<string> { Data.AzsAddonsHeading, Data.Wow112Category };
             order.Add(Data.MyAddonsCategory);
             order.Add("OTHER ADDONS");
             addons.Sort(delegate(KeyValuePair<string, bool> p1, KeyValuePair<string, bool> p2)
@@ -1235,6 +1349,32 @@ namespace AzerothLauncher
                 cb.Checked = !want;
                 settingCheck = false;
                 return;
+            }
+            if (want)
+            {
+                // an addon it can't be on with is on: ask before switching that one off
+                var on = new List<string>();
+                string why = "";
+                try
+                {
+                    var installed = Addons.Scan(AddonsDir());
+                    foreach (var pt in Addons.PartnersOf(AddonsDir(), name, installed))
+                        foreach (var a in installed)
+                            if (a.Key == pt.Key && a.Value && !on.Contains(a.Key)) { on.Add(a.Key); why = pt.Value.Why; }
+                }
+                catch (Exception) { }
+                if (on.Count > 0)
+                {
+                    string others = string.Join(", ", on.ToArray());
+                    if (!Ask("Addons", Lang.F("{0} can't be on together with {1}: {2}.", name, others, Lang.T(why)) + "\n\n" +
+                                       Lang.F("Switch {0} off and turn {1} on?", others, name)))
+                    {
+                        settingCheck = true;
+                        cb.Checked = false;
+                        settingCheck = false;
+                        return;
+                    }
+                }
             }
             try { Addons.SetEnabled(AddonsDir(), name, want); }
             catch (Exception e)
@@ -1367,13 +1507,13 @@ namespace AzerothLauncher
             if (!CloudEnabled())
             {
                 var t = PutText("Cloud saving is turned off.\nYour progress stays on this PC only.", 12, FontStyle.Regular,
-                                Theme.Text, 20, 56, 0);
+                                Theme.Text, 20, 8, 0);
                 Put(new WowButton("TURN ON CLOUD SAVING", delegate { SetCloudEnabled(true); }, 290, 38, 11), 20, BottomOf(t) + 12);
                 return;
             }
             var intro = PutText("PLAY downloads the newest state, starts the game and uploads your progress after you close it. " +
                                 "One complete state wins; the overwritten one is backed up as a ZIP first.", 10, FontStyle.Regular,
-                                Theme.Text, 20, 52, Math.Min(570, PW - 40));
+                                Theme.Text, 20, 8, Math.Min(570, PW - 40));
             int y = BottomOf(intro) + 8;
             var lab = PutText("Sync folder", 11, FontStyle.Bold, Theme.Gold, 20, y, 0);
             string cloud = Cfg.Str("cloud_dir");
@@ -1423,15 +1563,15 @@ namespace AzerothLauncher
             // a setting changed on this tab rebuilds it: it stays where it was scrolled to
             int keep = optionsPage != null && !optionsPage.IsDisposed && optionsPageTab == optionsTab ? -optionsPage.AutoScrollPosition.Y : 0;
             ClearPanel("Options");
-            int x0 = 20 + (int)(52 * Theme.Zoom) + 10, wAll = PW - 20 - x0, cw = wAll / OptionTabs.Length;
+            int x0 = 20, wAll = PW - 20 - x0, cw = wAll / OptionTabs.Length;
             for (int i = 0; i < OptionTabs.Length; i++)
             {
                 int n = i;
                 var b = new WowButton(OptionTabs[i], delegate { optionsTab = n; BuildPanel("Options"); }, (int)((cw - 6) / Theme.Zoom), 32, 10);
                 b.Selected = i == optionsTab;
-                Put(b, x0 + i * cw, 12);
+                Put(b, x0 + i * cw, 8);
             }
-            int top0 = (int)(12 + 32 * Theme.Zoom) + 10;
+            int top0 = 8 + (int)(32 * Theme.Zoom) + 6;
             var sp = MakeScroll(panel, new Rectangle(8, top0, PW - 16, PH - 8 - top0), Theme.Panel, Theme.Panel);
             int pageW = sp.ClientSize.Width + 16;             // the page's width, in the same terms as the section's
             putInto = sp;

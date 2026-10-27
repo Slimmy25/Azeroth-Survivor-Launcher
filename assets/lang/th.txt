@@ -1628,3 +1628,29 @@ Amulet
 = สร้อยคอ
 ITEMS
 = ไอเท็ม
+Pick one: these interfaces can't be on together. Switching one on asks to switch the other off.
+= เลือกหนึ่งอัน: อินเทอร์เฟซเหล่านี้เปิดพร้อมกันไม่ได้ เมื่อเปิดอันหนึ่งจะถามว่าจะปิดอีกอันไหม
+{0} can't be on together with {1}: {2}.
+= {0} เปิดพร้อมกับ {1} ไม่ได้: {2}
+Switch {0} off and turn {1} on?
+= ปิด {0} แล้วเปิด {1} ไหม?
+both replace the game's interface
+= ทั้งสองแทนที่อินเทอร์เฟซของเกม
+both set raid marks on bosses and party members
+= ทั้งสองติดเครื่องหมายเรดให้บอสและสมาชิกปาร์ตี้
+UI
+= UI
+MISC
+= อื่น ๆ
+AZS ADDONS
+= แอดออน AZS
+Gameplay
+= การเล่น
+Theorycrafting
+= ทฤษฎี
+New Player
+= ผู้เล่นใหม่
+Search
+= ค้นหา
+Talents
+= ทาเลนต์

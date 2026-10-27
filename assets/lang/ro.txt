@@ -1628,3 +1628,29 @@ Amulet
 = Amuletă
 ITEMS
 = OBIECTE
+Pick one: these interfaces can't be on together. Switching one on asks to switch the other off.
+= Alege una: aceste interfețe nu pot fi pornite împreună. Pornirea uneia te întreabă dacă o oprești pe cealaltă.
+{0} can't be on together with {1}: {2}.
+= {0} nu poate fi pornit împreună cu {1}: {2}.
+Switch {0} off and turn {1} on?
+= Oprești {0} și pornești {1}?
+both replace the game's interface
+= amândouă înlocuiesc interfața jocului
+both set raid marks on bosses and party members
+= amândouă pun marcaje de raid pe boși și pe membrii grupului
+UI
+= UI
+MISC
+= DIVERSE
+AZS ADDONS
+= ADDONURI AZS
+Gameplay
+= Joc
+Theorycrafting
+= Teorie
+New Player
+= Jucători noi
+Search
+= Căutare
+Talents
+= Talente

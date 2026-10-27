@@ -1628,3 +1628,29 @@ Amulet
 = Dây chuyền
 ITEMS
 = VẬT PHẨM
+Pick one: these interfaces can't be on together. Switching one on asks to switch the other off.
+= Chọn một: các giao diện này không thể bật cùng lúc. Bật một cái sẽ hỏi có tắt cái kia không.
+{0} can't be on together with {1}: {2}.
+= {0} không thể bật cùng lúc với {1}: {2}.
+Switch {0} off and turn {1} on?
+= Tắt {0} và bật {1}?
+both replace the game's interface
+= cả hai đều thay giao diện của game
+both set raid marks on bosses and party members
+= cả hai đều đặt dấu raid lên trùm và thành viên nhóm
+UI
+= UI
+MISC
+= KHÁC
+AZS ADDONS
+= ADDON AZS
+Gameplay
+= Lối chơi
+Theorycrafting
+= Lý thuyết
+New Player
+= Người chơi mới
+Search
+= Tìm kiếm
+Talents
+= Thiên phú

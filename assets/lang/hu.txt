@@ -1628,3 +1628,29 @@ Amulet
 = Amulett
 ITEMS
 = TÁRGYAK
+Pick one: these interfaces can't be on together. Switching one on asks to switch the other off.
+= Válassz egyet: ezek a felületek nem lehetnek egyszerre bekapcsolva. Az egyik bekapcsolásakor rákérdez a másik kikapcsolására.
+{0} can't be on together with {1}: {2}.
+= {0} nem lehet egyszerre bekapcsolva ezzel: {1}: {2}.
+Switch {0} off and turn {1} on?
+= Kikapcsolod: {0}, és bekapcsolod: {1}?
+both replace the game's interface
+= mindkettő lecseréli a játék felületét
+both set raid marks on bosses and party members
+= mindkettő raidjelölőt tesz a főellenségekre és a csapattagokra
+UI
+= UI
+MISC
+= EGYÉB
+AZS ADDONS
+= AZS-KIEGÉSZÍTŐK
+Gameplay
+= Játékmenet
+Theorycrafting
+= Elmélet
+New Player
+= Új játékosok
+Search
+= Keresés
+Talents
+= Tehetségek

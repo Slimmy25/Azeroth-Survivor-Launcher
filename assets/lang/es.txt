@@ -1627,3 +1627,29 @@ Amulet
 = Amuleto
 ITEMS
 = OBJETOS
+Pick one: these interfaces can't be on together. Switching one on asks to switch the other off.
+= Elige una: estas interfaces no pueden estar activadas a la vez. Al activar una se te pregunta si desactivar la otra.
+{0} can't be on together with {1}: {2}.
+= {0} no puede estar activado a la vez que {1}: {2}.
+Switch {0} off and turn {1} on?
+= ¿Desactivar {0} y activar {1}?
+both replace the game's interface
+= ambos reemplazan la interfaz del juego
+both set raid marks on bosses and party members
+= ambos ponen marcas de banda a los jefes y a los miembros del grupo
+UI
+= IU
+MISC
+= VARIOS
+AZS ADDONS
+= ADDONS AZS
+Gameplay
+= Jugabilidad
+Theorycrafting
+= Teoría
+New Player
+= Jugadores nuevos
+Search
+= Buscar
+Talents
+= Talentos

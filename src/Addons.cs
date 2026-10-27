@@ -52,6 +52,13 @@ namespace AzerothLauncher
         {
             new Conflict { Preferred = new[] { "SurvivorUI", "SurvivorsUI" }, Other = new[] { "AZSMinorMods" },
                            Why = "both set raid marks on bosses and party members" },
+            // the interfaces (Download More > UI): pick one. Survivor UI is kept when two are found on.
+            new Conflict { Preferred = new[] { "SurvivorUI", "SurvivorsUI" }, Other = new[] { "SurvivorsDragonUi" },
+                           Why = "both replace the game's interface" },
+            new Conflict { Preferred = new[] { "SurvivorUI", "SurvivorsUI" }, Other = new[] { "KeijinUI" },
+                           Why = "both replace the game's interface" },
+            new Conflict { Preferred = new[] { "SurvivorsDragonUi" }, Other = new[] { "KeijinUI" },
+                           Why = "both replace the game's interface" },
         };
 
         static string Key(string s)
