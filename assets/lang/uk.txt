@@ -1756,3 +1756,5 @@ The bonuses of everything chosen, added together, with the set bonuses reached. 
 = Бонуси всього вибраного разом, із досягнутими бонусами комплектів. Клацніть предмет, щоб додати зірку (до 5, потім знову 0); правий клік знімає його.
 Stars decide which set bonuses you reach. What a star adds to a piece is not disclosed by the game, so it is not counted here.
 = Зірки визначають, яких бонусів комплектів ви досягаєте. Що зірка додає предмету, гра не розкриває, тож тут це не враховується.
+Stars decide which set bonuses you reach. How much each star adds to a piece is not known yet, so it is not counted here.
+= Зірки визначають, яких бонусів комплектів ви досягаєте. Скільки кожна зірка додає предмету, поки невідомо, тож тут це не враховується.

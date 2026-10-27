@@ -1756,3 +1756,5 @@ The bonuses of everything chosen, added together, with the set bonuses reached. 
 = Tổng phần thưởng của mọi món đã chọn, kèm thưởng bộ đã đạt. Bấm vào một món để thêm sao (tối đa 5, rồi về 0); bấm chuột phải để tháo.
 Stars decide which set bonuses you reach. What a star adds to a piece is not disclosed by the game, so it is not counted here.
 = Sao quyết định bạn đạt được thưởng bộ nào. Trò chơi không tiết lộ một sao thêm gì cho món đồ, nên ở đây không tính.
+Stars decide which set bonuses you reach. How much each star adds to a piece is not known yet, so it is not counted here.
+= Sao quyết định bạn đạt được thưởng bộ nào. Hiện chưa biết mỗi sao thêm bao nhiêu cho món đồ, nên ở đây không tính.

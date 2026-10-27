@@ -1756,3 +1756,5 @@ The bonuses of everything chosen, added together, with the set bonuses reached. 
 = Premie wszystkich wybranych przedmiotów razem, z osiągniętymi premiami za zestaw. Kliknij część, aby dodać gwiazdkę (do 5, potem z powrotem 0); prawy przycisk, aby ją zdjąć.
 Stars decide which set bonuses you reach. What a star adds to a piece is not disclosed by the game, so it is not counted here.
 = Gwiazdki decydują, jakie premie za zestaw osiągasz. Ile gwiazdka dodaje części, gra nie ujawnia, więc nie jest to tu liczone.
+Stars decide which set bonuses you reach. How much each star adds to a piece is not known yet, so it is not counted here.
+= Gwiazdki decydują, jakie premie za zestaw osiągasz. Ile każda gwiazdka dodaje części, nie wiadomo jeszcze, więc nie jest to tu liczone.

@@ -1755,3 +1755,5 @@ The bonuses of everything chosen, added together, with the set bonuses reached. 
 = Os bônus de tudo o que foi escolhido, somados, com os bônus de conjunto alcançados. Clique em uma peça para adicionar uma estrela (até 5, depois volta a 0); clique direito para tirá-la.
 Stars decide which set bonuses you reach. What a star adds to a piece is not disclosed by the game, so it is not counted here.
 = As estrelas decidem quais bônus de conjunto você alcança. O jogo não revela o que uma estrela acrescenta a uma peça, por isso não é contado aqui.
+Stars decide which set bonuses you reach. How much each star adds to a piece is not known yet, so it is not counted here.
+= As estrelas decidem quais bônus de conjunto você alcança. Ainda não se sabe quanto cada estrela acrescenta a uma peça, por isso não é contado aqui.

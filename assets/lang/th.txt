@@ -1756,3 +1756,5 @@ The bonuses of everything chosen, added together, with the set bonuses reached. 
 = โบนัสของทุกชิ้นที่เลือกรวมกัน พร้อมโบนัสเซ็ตที่ได้ คลิกที่ชิ้นเพื่อเพิ่มดาว (สูงสุด 5 แล้วกลับเป็น 0) คลิกขวาเพื่อถอด
 Stars decide which set bonuses you reach. What a star adds to a piece is not disclosed by the game, so it is not counted here.
 = ดาวกำหนดว่าคุณได้โบนัสเซ็ตใดบ้าง เกมไม่เปิดเผยว่าดาวเพิ่มอะไรให้ชิ้น จึงไม่นับที่นี่
+Stars decide which set bonuses you reach. How much each star adds to a piece is not known yet, so it is not counted here.
+= ดาวกำหนดว่าคุณได้โบนัสเซ็ตใดบ้าง ยังไม่ทราบว่าดาวแต่ละดวงเพิ่มให้ชิ้นเท่าไร จึงไม่นับที่นี่

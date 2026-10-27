@@ -1756,3 +1756,5 @@ The bonuses of everything chosen, added together, with the set bonuses reached. 
 = 選んだすべての装備のボーナスの合計と、達成したセットボーナス。装備をクリックすると星が1つ増えます（最大5、その次は0に戻る）。右クリックで外します。
 Stars decide which set bonuses you reach. What a star adds to a piece is not disclosed by the game, so it is not counted here.
 = 星は到達するセットボーナスを決めます。星が装備に何を加えるかはゲームで公開されていないため、ここでは計算しません。
+Stars decide which set bonuses you reach. How much each star adds to a piece is not known yet, so it is not counted here.
+= 星は到達するセットボーナスを決めます。星1つが装備にどれだけ加えるかはまだ分かっていないため、ここでは計算しません。

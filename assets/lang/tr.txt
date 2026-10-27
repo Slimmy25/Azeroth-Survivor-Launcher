@@ -1756,3 +1756,5 @@ The bonuses of everything chosen, added together, with the set bonuses reached. 
 = Seçilen her şeyin bonusları toplamı, ulaşılan set bonuslarıyla. Yıldız eklemek için bir parçaya tıkla (en fazla 5, sonra yeniden 0); çıkarmak için sağ tıkla.
 Stars decide which set bonuses you reach. What a star adds to a piece is not disclosed by the game, so it is not counted here.
 = Yıldızlar hangi set bonuslarına ulaşacağını belirler. Bir yıldızın parçaya ne kattığını oyun açıklamıyor, bu yüzden burada sayılmaz.
+Stars decide which set bonuses you reach. How much each star adds to a piece is not known yet, so it is not counted here.
+= Yıldızlar hangi set bonuslarına ulaşacağını belirler. Her yıldızın parçaya ne kadar kattığı henüz bilinmiyor, bu yüzden burada sayılmaz.

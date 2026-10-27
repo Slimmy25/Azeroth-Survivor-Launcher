@@ -1756,3 +1756,5 @@ The bonuses of everything chosen, added together, with the set bonuses reached. 
 = 선택한 모든 장비의 보너스 합계와 달성한 세트 보너스입니다. 장비를 클릭하면 별이 하나 추가됩니다(최대 5개, 그다음 0으로). 오른쪽 클릭으로 해제합니다.
 Stars decide which set bonuses you reach. What a star adds to a piece is not disclosed by the game, so it is not counted here.
 = 별은 어떤 세트 보너스에 도달하는지 결정합니다. 별이 장비에 무엇을 더하는지는 게임이 공개하지 않으므로 여기서는 계산하지 않습니다.
+Stars decide which set bonuses you reach. How much each star adds to a piece is not known yet, so it is not counted here.
+= 별은 어떤 세트 보너스에 도달하는지 결정합니다. 별 하나가 장비에 얼마나 더하는지는 아직 알려지지 않아 여기서는 계산하지 않습니다.

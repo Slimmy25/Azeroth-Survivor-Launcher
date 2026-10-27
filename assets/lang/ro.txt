@@ -1756,3 +1756,5 @@ The bonuses of everything chosen, added together, with the set bonuses reached. 
 = Bonusurile tuturor pieselor alese, adunate, cu bonusurile de set atinse. Clic pe o piesă pentru a adăuga o stea (până la 5, apoi înapoi la 0); clic dreapta pentru a o scoate.
 Stars decide which set bonuses you reach. What a star adds to a piece is not disclosed by the game, so it is not counted here.
 = Stelele decid ce bonusuri de set atingi. Cât adaugă o stea unei piese, jocul nu dezvăluie, așa că aici nu se socotește.
+Stars decide which set bonuses you reach. How much each star adds to a piece is not known yet, so it is not counted here.
+= Stelele decid ce bonusuri de set atingi. Cât adaugă fiecare stea unei piese încă nu se știe, așa că aici nu se socotește.

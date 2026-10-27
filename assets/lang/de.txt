@@ -1755,3 +1755,5 @@ The bonuses of everything chosen, added together, with the set bonuses reached. 
 = Die Boni aller gewählten Teile zusammengerechnet, mit den erreichten Setboni. Klicke auf ein Teil, um einen Stern hinzuzufügen (bis 5, dann zurück auf 0); Rechtsklick legt es ab.
 Stars decide which set bonuses you reach. What a star adds to a piece is not disclosed by the game, so it is not counted here.
 = Sterne entscheiden, welche Setboni du erreichst. Was ein Stern einem Teil bringt, verrät das Spiel nicht, daher wird es hier nicht mitgezählt.
+Stars decide which set bonuses you reach. How much each star adds to a piece is not known yet, so it is not counted here.
+= Sterne entscheiden, welche Setboni du erreichst. Wie viel jeder Stern einem Teil bringt, ist noch nicht bekannt, daher wird es hier nicht mitgezählt.

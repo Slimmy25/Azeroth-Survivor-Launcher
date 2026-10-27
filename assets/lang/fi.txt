@@ -1755,3 +1755,5 @@ The bonuses of everything chosen, added together, with the set bonuses reached. 
 = Kaikkien valintojen bonukset yhteensä saavutettujen settibonusten kanssa. Napsauta osaa lisätäksesi tähden (enintään 5, sitten takaisin 0:aan); oikea napsautus riisuu sen.
 Stars decide which set bonuses you reach. What a star adds to a piece is not disclosed by the game, so it is not counted here.
 = Tähdet ratkaisevat, mitkä settibonukset saavutat. Peli ei kerro, mitä tähti lisää osaan, joten sitä ei lasketa tässä.
+Stars decide which set bonuses you reach. How much each star adds to a piece is not known yet, so it is not counted here.
+= Tähdet ratkaisevat, mitkä settibonukset saavutat. Sitä, paljonko kukin tähti lisää osaan, ei vielä tiedetä, joten sitä ei lasketa tässä.

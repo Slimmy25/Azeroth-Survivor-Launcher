@@ -1755,3 +1755,5 @@ The bonuses of everything chosen, added together, with the set bonuses reached. 
 = Bonusene fra alt som er valgt, lagt sammen, med oppnådde settbonuser. Klikk på en del for å gi den en stjerne (opptil 5, så tilbake til 0); høyreklikk for å ta den av.
 Stars decide which set bonuses you reach. What a star adds to a piece is not disclosed by the game, so it is not counted here.
 = Stjerner avgjør hvilke settbonuser du når. Hva en stjerne gir en del, oppgir ikke spillet, så det telles ikke med her.
+Stars decide which set bonuses you reach. How much each star adds to a piece is not known yet, so it is not counted here.
+= Stjerner avgjør hvilke settbonuser du når. Hvor mye hver stjerne gir en del, er ikke kjent ennå, så det telles ikke med her.
