@@ -2,6 +2,13 @@ Patch notes shown in the launcher's Changelog. The launcher sorts them by versio
 Every post starts with its title on the first line. Posts are separated by a line with only === on it.
 Everything above the first === line is ignored.
 ===
+0.120.5
+-------
+Co-op works on more networks: players whose home, school or work network blocked the co-op server can join and host again.
+
+* Some players could find a lobby but never get into it ("Joining..." then "the host left"), or could not host at all ("the co-op relay cannot be reached"), because their network blocked the port the co-op server uses. The game now tries again on the usual web port by itself.
+* When the co-op server really cannot be reached, you are told so, instead of being told the host left.
+===
 0.120.4
 -------
 Co-op lag fix: parties of three or more play smoothly again, all the way to the end of a run.
