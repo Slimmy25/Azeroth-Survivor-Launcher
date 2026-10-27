@@ -31,7 +31,7 @@ nothing else: it runs on the .NET Framework 4.8 that comes with Windows 10 and 1
 - **INSTALL** first asks whether the game is already on your PC. If it is, you point the launcher at its folder. If
   not, the launcher downloads it, with a progress bar, and installs it next to itself.
 - The download comes from one of the game's three download hosts, picked at random, and the next one is tried if a
-  host fails. The game's own download page is the last resort. Every download is checked against the game's known
+  host fails. The official game host is the backup link. Every download is checked against the game's known
   checksums before it is installed. See [Download hosts](#download-hosts).
 - **PLAY** checks for a newer launcher, then starts the game. The game updates itself when it starts (it closes and
   opens again); the launcher follows it through that restart.
@@ -151,7 +151,7 @@ team. Unofficial mirrors are never used.
 | Mirror By Community Member | Leo | SHA-256 and MD5 |
 | Mirror By Community Member | Meexa | SHA-256 and MD5 |
 | Mirror By Discord Mod | Fotze | MD5 |
-| <https://wow.aethus.pl/download> (last resort) | Aethus | a real .rar/.zip/.7z from the game's own site |
+| Official Website Host (Backup Link): <https://wow.aethus.pl/download> | Aethus | a real .rar/.zip/.7z from the official game host |
 
 The Mirror By Discord Mod (Fotze, a Google Drive copy) is checked with MD5 only, by choice. MD5 can only be fooled by whoever made the file in the
 first place, and that copy is published by a trusted head moderator, so no further measures are taken for it.
