@@ -4,7 +4,8 @@
 ## What's new
 
 ### News and Changelog
-- Patch notes for the game's 0.119.1, 0.120.0 and 0.120.1 updates: fewer co-op disconnects, any race with any class
+- Patch notes for the game's 0.119.1, 0.120.0, 0.120.1, 0.120.2 and 0.120.3 updates: co-op runs that survive a
+  dropped connection, joining a new party after the last one ended, fewer co-op disconnects, any race with any class
   (Rewards > Races), and boss kills counting for the whole party's achievements.
 
 ### Cloud Save
