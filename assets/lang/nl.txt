@@ -1759,3 +1759,31 @@ Stars decide which set bonuses you reach. How much each star adds to a piece is 
 = Sterren bepalen welke setbonussen je haalt. Hoeveel elke ster aan een stuk toevoegt, is nog niet bekend, dus dat telt hier niet mee.
 A complete interface: a run clock with the boss timeline and next-boss countdown, boss bars, enemy health plates and floating combat numbers, hero, target, party and pet frames, a skill bar with cooldowns and rank gems, a combat meter, a ring minimap and glass-styled chat. Every part can be turned on or off (/aether).
 = Een complete interface: een runklok met de bazentijdlijn en aftellen tot de volgende baas, bazenbalken, levensbalken boven vijanden en zwevende gevechtsgetallen, frames voor held, doelwit, groep en huisdier, een vaardighedenbalk met afkoeltijden en rangstenen, een gevechtsmeter, een ronde minikaart en chat in glasstijl. Elk onderdeel kan aan of uit (/aether).
+The game has closed and your progress is still uploading to the cloud. Try again in a moment.
+= Het spel is gesloten en je voortgang wordt nog naar de cloud geüpload. Probeer het zo opnieuw.
+Finish the first-time setup first.
+= Rond eerst de eerste installatie af.
+REQUIRES INSTALL
+= INSTALLATIE NODIG
+Created if not found
+= Wordt gemaakt als hij ontbreekt
+Folders found at their usual place are used as they are. A folder that is not there yet is created when setup is done; you can choose another one instead.
+= Mappen op hun gebruikelijke plek worden gebruikt zoals ze zijn. Een map die er nog niet is, wordt gemaakt als de installatie klaar is; je kunt ook een andere kiezen.
+Would you like to download addons?
+= Wil je addons downloaden?
+They are all optional: you choose each one you want in Addons > DOWNLOAD MORE.
+= Ze zijn allemaal optioneel: je kiest ze zelf in Addons > DOWNLOAD MORE.
+Ready to download the game
+= Klaar om het spel te downloaden
+Azeroth Survivors is not on this PC yet. The launcher will now download it into this folder:\n{0}\n\nThe download shows in the bar at the bottom. You can stop it there at any time.
+= Azeroth Survivors staat nog niet op deze pc. De launcher downloadt het nu naar deze map:\n{0}\n\nDe download staat in de balk onderaan. Je kunt hem daar altijd stoppen.
+DOWNLOAD THE GAME
+= SPEL DOWNLOADEN
+CANCEL SETUP
+= INSTALLATIE ANNULEREN
+Setup was cancelled
+= De installatie is geannuleerd
+This launcher is here to help you play and manage Azeroth Survivors: it installs the game, keeps your progress safe in the cloud, manages your addons and shows your stats and the Guide. Without setup it has little to offer.\n\nStart setup again whenever you are ready.
+= Deze launcher helpt je Azeroth Survivors te spelen en te beheren: hij installeert het spel, bewaart je voortgang veilig in de cloud, beheert je addons en toont je statistieken en de gids. Zonder installatie heeft hij weinig te bieden.\n\nStart de installatie opnieuw wanneer je klaar bent.
+START SETUP AGAIN
+= INSTALLATIE OPNIEUW

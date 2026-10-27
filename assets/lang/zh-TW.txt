@@ -1760,3 +1760,31 @@ Stars decide which set bonuses you reach. How much each star adds to a piece is 
 = 星級決定你能達成哪些套裝加成。每顆星為裝備增加多少目前尚不清楚，因此這裡不計算。
 A complete interface: a run clock with the boss timeline and next-boss countdown, boss bars, enemy health plates and floating combat numbers, hero, target, party and pet frames, a skill bar with cooldowns and rank gems, a combat meter, a ring minimap and glass-styled chat. Every part can be turned on or off (/aether).
 = 完整的介面：帶首領時間線和下一個首領倒數的局內時鐘、首領血條、敵人血條與浮動戰鬥數字、英雄、目標、隊伍和寵物框體、帶冷卻和等級寶石的技能列、戰鬥統計、圓形小地圖和玻璃風格聊天框。每個部分都可以單獨開關（/aether）。
+The game has closed and your progress is still uploading to the cloud. Try again in a moment.
+= 遊戲已關閉，你的進度仍在上傳到雲端。請稍後再試。
+Finish the first-time setup first.
+= 請先完成首次設定。
+REQUIRES INSTALL
+= 需要安裝
+Created if not found
+= 若不存在則建立
+Folders found at their usual place are used as they are. A folder that is not there yet is created when setup is done; you can choose another one instead.
+= 位於常規位置的資料夾將直接使用。尚不存在的資料夾會在設定完成時建立；你也可以改選其他資料夾。
+Would you like to download addons?
+= 要下載插件嗎？
+They are all optional: you choose each one you want in Addons > DOWNLOAD MORE.
+= 全部可選：在 插件 > DOWNLOAD MORE 中逐個挑選。
+Ready to download the game
+= 準備下載遊戲
+Azeroth Survivors is not on this PC yet. The launcher will now download it into this folder:\n{0}\n\nThe download shows in the bar at the bottom. You can stop it there at any time.
+= 此電腦上還沒有 Azeroth Survivors。啟動器現在會將它下載到這個資料夾：\n{0}\n\n下載進度顯示在底部的進度條中，你可以隨時在那裡停止。
+DOWNLOAD THE GAME
+= 下載遊戲
+CANCEL SETUP
+= 取消設定
+Setup was cancelled
+= 設定已取消
+This launcher is here to help you play and manage Azeroth Survivors: it installs the game, keeps your progress safe in the cloud, manages your addons and shows your stats and the Guide. Without setup it has little to offer.\n\nStart setup again whenever you are ready.
+= 本啟動器幫助你遊玩和管理 Azeroth Survivors：安裝遊戲、在雲端保護進度、管理插件，並顯示統計與指南。不進行設定，它能提供的很少。\n\n準備好後隨時重新開始設定。
+START SETUP AGAIN
+= 重新開始設定

@@ -1760,3 +1760,31 @@ Stars decide which set bonuses you reach. How much each star adds to a piece is 
 = Sao quyết định bạn đạt được thưởng bộ nào. Hiện chưa biết mỗi sao thêm bao nhiêu cho món đồ, nên ở đây không tính.
 A complete interface: a run clock with the boss timeline and next-boss countdown, boss bars, enemy health plates and floating combat numbers, hero, target, party and pet frames, a skill bar with cooldowns and rank gems, a combat meter, a ring minimap and glass-styled chat. Every part can be turned on or off (/aether).
 = Một giao diện đầy đủ: đồng hồ lượt chơi với dòng thời gian trùm và đếm ngược trùm kế tiếp, thanh trùm, thanh máu kẻ địch và số chiến đấu bay lên, khung anh hùng, mục tiêu, nhóm và thú cưng, thanh kỹ năng với thời gian hồi và đá bậc, đồng hồ đo chiến đấu, bản đồ nhỏ tròn và khung chat kiểu kính. Mỗi phần đều bật hoặc tắt được (/aether).
+The game has closed and your progress is still uploading to the cloud. Try again in a moment.
+= Trò chơi đã đóng và tiến trình của bạn vẫn đang được tải lên đám mây. Hãy thử lại sau giây lát.
+Finish the first-time setup first.
+= Hãy hoàn tất thiết lập ban đầu trước.
+REQUIRES INSTALL
+= CẦN CÀI ĐẶT
+Created if not found
+= Sẽ được tạo nếu chưa có
+Folders found at their usual place are used as they are. A folder that is not there yet is created when setup is done; you can choose another one instead.
+= Các thư mục ở vị trí thường lệ được dùng nguyên như vậy. Thư mục chưa có sẽ được tạo khi thiết lập xong; bạn có thể chọn thư mục khác thay thế.
+Would you like to download addons?
+= Bạn có muốn tải addon không?
+They are all optional: you choose each one you want in Addons > DOWNLOAD MORE.
+= Tất cả đều tùy chọn: bạn tự chọn từng cái trong Addons > DOWNLOAD MORE.
+Ready to download the game
+= Sẵn sàng tải trò chơi
+Azeroth Survivors is not on this PC yet. The launcher will now download it into this folder:\n{0}\n\nThe download shows in the bar at the bottom. You can stop it there at any time.
+= Azeroth Survivors chưa có trên PC này. Trình khởi chạy sẽ tải nó về thư mục này:\n{0}\n\nTiến trình tải hiện ở thanh bên dưới. Bạn có thể dừng ở đó bất cứ lúc nào.
+DOWNLOAD THE GAME
+= TẢI TRÒ CHƠI
+CANCEL SETUP
+= HỦY THIẾT LẬP
+Setup was cancelled
+= Đã hủy thiết lập
+This launcher is here to help you play and manage Azeroth Survivors: it installs the game, keeps your progress safe in the cloud, manages your addons and shows your stats and the Guide. Without setup it has little to offer.\n\nStart setup again whenever you are ready.
+= Trình khởi chạy này giúp bạn chơi và quản lý Azeroth Survivors: cài trò chơi, giữ tiến trình an toàn trên đám mây, quản lý addon và hiển thị thống kê cùng hướng dẫn. Không thiết lập thì nó chẳng có mấy thứ để dùng.\n\nHãy bắt đầu thiết lập lại khi bạn sẵn sàng.
+START SETUP AGAIN
+= BẮT ĐẦU THIẾT LẬP LẠI

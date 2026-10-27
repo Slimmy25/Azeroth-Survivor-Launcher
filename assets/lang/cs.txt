@@ -1760,3 +1760,31 @@ Stars decide which set bonuses you reach. How much each star adds to a piece is 
 = Hvězdy určují, jakých bonusů sad dosáhnete. Kolik každá hvězda kusu přidá, zatím není známo, proto se zde nepočítá.
 A complete interface: a run clock with the boss timeline and next-boss countdown, boss bars, enemy health plates and floating combat numbers, hero, target, party and pet frames, a skill bar with cooldowns and rank gems, a combat meter, a ring minimap and glass-styled chat. Every part can be turned on or off (/aether).
 = Kompletní rozhraní: hodiny běhu s časovou osou bossů a odpočtem do dalšího bosse, ukazatele bossů, ukazatele zdraví nepřátel a plovoucí bojová čísla, rámečky hrdiny, cíle, družiny a mazlíčka, lišta dovedností s cooldowny a drahokamy úrovní, bojový měřič, kruhová minimapa a skleněný chat. Každou část lze zapnout nebo vypnout (/aether).
+The game has closed and your progress is still uploading to the cloud. Try again in a moment.
+= Hra je zavřená a váš postup se stále nahrává do cloudu. Zkuste to za chvíli znovu.
+Finish the first-time setup first.
+= Nejprve dokončete prvotní nastavení.
+REQUIRES INSTALL
+= VYŽADUJE INSTALACI
+Created if not found
+= Vytvoří se, pokud chybí
+Folders found at their usual place are used as they are. A folder that is not there yet is created when setup is done; you can choose another one instead.
+= Složky nalezené na obvyklém místě se použijí tak, jak jsou. Složka, která ještě neexistuje, se vytvoří po dokončení nastavení; místo ní můžete zvolit jinou.
+Would you like to download addons?
+= Chcete stáhnout doplňky?
+They are all optional: you choose each one you want in Addons > DOWNLOAD MORE.
+= Všechny jsou volitelné: každý si vyberete v Doplňky > DOWNLOAD MORE.
+Ready to download the game
+= Připraveno ke stažení hry
+Azeroth Survivors is not on this PC yet. The launcher will now download it into this folder:\n{0}\n\nThe download shows in the bar at the bottom. You can stop it there at any time.
+= Azeroth Survivors na tomto PC ještě není. Launcher jej nyní stáhne do této složky:\n{0}\n\nStahování se zobrazuje v liště dole. Kdykoli ho tam můžete zastavit.
+DOWNLOAD THE GAME
+= STÁHNOUT HRU
+CANCEL SETUP
+= ZRUŠIT NASTAVENÍ
+Setup was cancelled
+= Nastavení bylo zrušeno
+This launcher is here to help you play and manage Azeroth Survivors: it installs the game, keeps your progress safe in the cloud, manages your addons and shows your stats and the Guide. Without setup it has little to offer.\n\nStart setup again whenever you are ready.
+= Tento launcher vám pomáhá hrát a spravovat Azeroth Survivors: nainstaluje hru, uchová váš postup v cloudu, spravuje doplňky a ukazuje statistiky a průvodce. Bez nastavení toho mnoho nenabízí.\n\nSpusťte nastavení znovu, až budete připraveni.
+START SETUP AGAIN
+= SPUSTIT NASTAVENÍ ZNOVU

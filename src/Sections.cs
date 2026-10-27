@@ -480,7 +480,7 @@ namespace AzerothLauncher
         void CloseSide()
         {
             if (current == "Community") return;              // the home screen's Community can only be replaced, never closed
-            if (current == "Setup") { SetupLeave(null, null); return; }   // setup closed: asked again next time
+            if (current == "Setup") return;                  // setup cannot be closed before it is done (or cancelled)
             current = "Home";
             foreach (var b in nav.Values) b.Active = false;
             RefreshStrip();
@@ -489,6 +489,7 @@ namespace AzerothLauncher
 
         public void ShowSection(string name)
         {
+            if (setupOpen && name != "Setup") { SetStatus("Finish the first-time setup first."); return; }   // setup stays up until done
             if (name == "Cloud Save") { optionsTab = 1; optionsLang = false; name = "Options"; }   // it lives in Options > CLOUD SAVE
             // everything works without the game except Cloud Save and Addons, which are grayed out until it is installed
             if ((name == "Cloud Save" || name == "Addons") && !GateOpen())

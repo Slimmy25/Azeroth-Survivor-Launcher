@@ -1760,3 +1760,31 @@ Stars decide which set bonuses you reach. How much each star adds to a piece is 
 = ดาวกำหนดว่าคุณได้โบนัสเซ็ตใดบ้าง ยังไม่ทราบว่าดาวแต่ละดวงเพิ่มให้ชิ้นเท่าไร จึงไม่นับที่นี่
 A complete interface: a run clock with the boss timeline and next-boss countdown, boss bars, enemy health plates and floating combat numbers, hero, target, party and pet frames, a skill bar with cooldowns and rank gems, a combat meter, a ring minimap and glass-styled chat. Every part can be turned on or off (/aether).
 = อินเทอร์เฟซครบชุด: นาฬิการอบพร้อมไทม์ไลน์บอสและนับถอยหลังบอสถัดไป แถบบอส แถบพลังชีวิตศัตรูและตัวเลขการต่อสู้ลอยขึ้น กรอบฮีโร่ เป้าหมาย ปาร์ตี้ และสัตว์เลี้ยง แถบสกิลพร้อมคูลดาวน์และอัญมณีระดับ มาตรวัดการต่อสู้ มินิแมปทรงกลม และแชทสไตล์กระจก ทุกส่วนเปิดหรือปิดได้ (/aether)
+The game has closed and your progress is still uploading to the cloud. Try again in a moment.
+= เกมปิดแล้ว และความคืบหน้าของคุณยังกำลังอัปโหลดขึ้นคลาวด์ ลองใหม่อีกครั้งในอีกสักครู่
+Finish the first-time setup first.
+= ตั้งค่าครั้งแรกให้เสร็จก่อน
+REQUIRES INSTALL
+= ต้องติดตั้ง
+Created if not found
+= จะสร้างให้หากไม่พบ
+Folders found at their usual place are used as they are. A folder that is not there yet is created when setup is done; you can choose another one instead.
+= โฟลเดอร์ที่อยู่ในที่ปกติจะถูกใช้ตามเดิม โฟลเดอร์ที่ยังไม่มีจะถูกสร้างเมื่อตั้งค่าเสร็จ หรือคุณจะเลือกโฟลเดอร์อื่นแทนก็ได้
+Would you like to download addons?
+= ต้องการดาวน์โหลดแอดออนไหม
+They are all optional: you choose each one you want in Addons > DOWNLOAD MORE.
+= ทั้งหมดเป็นตัวเลือก: เลือกเองทีละตัวใน Addons > DOWNLOAD MORE
+Ready to download the game
+= พร้อมดาวน์โหลดเกม
+Azeroth Survivors is not on this PC yet. The launcher will now download it into this folder:\n{0}\n\nThe download shows in the bar at the bottom. You can stop it there at any time.
+= ยังไม่มี Azeroth Survivors ในพีซีนี้ ตัวเปิดเกมจะดาวน์โหลดลงในโฟลเดอร์นี้:\n{0}\n\nการดาวน์โหลดแสดงในแถบด้านล่าง หยุดได้ที่นั่นทุกเมื่อ
+DOWNLOAD THE GAME
+= ดาวน์โหลดเกม
+CANCEL SETUP
+= ยกเลิกการตั้งค่า
+Setup was cancelled
+= ยกเลิกการตั้งค่าแล้ว
+This launcher is here to help you play and manage Azeroth Survivors: it installs the game, keeps your progress safe in the cloud, manages your addons and shows your stats and the Guide. Without setup it has little to offer.\n\nStart setup again whenever you are ready.
+= ตัวเปิดเกมนี้ช่วยให้คุณเล่นและจัดการ Azeroth Survivors: ติดตั้งเกม เก็บความคืบหน้าบนคลาวด์อย่างปลอดภัย จัดการแอดออน และแสดงสถิติกับคู่มือ หากไม่ตั้งค่าก็มีให้ใช้ไม่มาก\n\nเริ่มตั้งค่าใหม่เมื่อคุณพร้อม
+START SETUP AGAIN
+= เริ่มตั้งค่าใหม่

@@ -1760,3 +1760,31 @@ Stars decide which set bonuses you reach. How much each star adds to a piece is 
 = 星は到達するセットボーナスを決めます。星1つが装備にどれだけ加えるかはまだ分かっていないため、ここでは計算しません。
 A complete interface: a run clock with the boss timeline and next-boss countdown, boss bars, enemy health plates and floating combat numbers, hero, target, party and pet frames, a skill bar with cooldowns and rank gems, a combat meter, a ring minimap and glass-styled chat. Every part can be turned on or off (/aether).
 = 完全なインターフェース：ボスのタイムラインと次のボスまでのカウントダウン付きのランタイマー、ボスバー、敵の体力プレートと浮かぶ戦闘数値、ヒーロー・ターゲット・パーティ・ペットのフレーム、クールダウンとランクの宝石付きスキルバー、戦闘メーター、円形ミニマップ、ガラス風チャット。各部分は個別にオン・オフできます（/aether）。
+The game has closed and your progress is still uploading to the cloud. Try again in a moment.
+= ゲームは終了しましたが、進行状況をまだクラウドにアップロード中です。少し待ってからもう一度お試しください。
+Finish the first-time setup first.
+= 先に初回セットアップを完了してください。
+REQUIRES INSTALL
+= インストールが必要
+Created if not found
+= 見つからない場合は作成
+Folders found at their usual place are used as they are. A folder that is not there yet is created when setup is done; you can choose another one instead.
+= 通常の場所にあるフォルダーはそのまま使われます。まだないフォルダーはセットアップ完了時に作成されます。代わりに別のフォルダーを選ぶこともできます。
+Would you like to download addons?
+= アドオンをダウンロードしますか？
+They are all optional: you choose each one you want in Addons > DOWNLOAD MORE.
+= すべて任意です。アドオン > DOWNLOAD MORE で一つずつ選べます。
+Ready to download the game
+= ゲームのダウンロード準備完了
+Azeroth Survivors is not on this PC yet. The launcher will now download it into this folder:\n{0}\n\nThe download shows in the bar at the bottom. You can stop it there at any time.
+= Azeroth Survivors はまだこのPCにありません。ランチャーが次のフォルダーにダウンロードします：\n{0}\n\nダウンロードは下のバーに表示され、いつでもそこで止められます。
+DOWNLOAD THE GAME
+= ゲームをダウンロード
+CANCEL SETUP
+= セットアップを中止
+Setup was cancelled
+= セットアップは中止されました
+This launcher is here to help you play and manage Azeroth Survivors: it installs the game, keeps your progress safe in the cloud, manages your addons and shows your stats and the Guide. Without setup it has little to offer.\n\nStart setup again whenever you are ready.
+= このランチャーは Azeroth Survivors のプレイと管理を助けます。ゲームのインストール、クラウドでの進行状況の保護、アドオンの管理、統計とガイドの表示を行います。セットアップなしではできることはわずかです。\n\n準備ができたらもう一度セットアップを始めてください。
+START SETUP AGAIN
+= セットアップを再開

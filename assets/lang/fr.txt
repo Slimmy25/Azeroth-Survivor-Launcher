@@ -1759,3 +1759,31 @@ Stars decide which set bonuses you reach. How much each star adds to a piece is 
 = Les étoiles décident des bonus d'ensemble atteints. On ne sait pas encore ce que chaque étoile ajoute à une pièce, donc ce n'est pas compté ici.
 A complete interface: a run clock with the boss timeline and next-boss countdown, boss bars, enemy health plates and floating combat numbers, hero, target, party and pet frames, a skill bar with cooldowns and rank gems, a combat meter, a ring minimap and glass-styled chat. Every part can be turned on or off (/aether).
 = Une interface complète : une horloge de partie avec la chronologie des boss et le compte à rebours du prochain, des barres de boss, des barres de vie ennemies et des chiffres de combat flottants, des cadres de héros, cible, groupe et familier, une barre de compétences avec temps de recharge et gemmes de rang, un compteur de combat, une mini-carte ronde et un chat façon verre. Chaque partie s'active ou se désactive (/aether).
+The game has closed and your progress is still uploading to the cloud. Try again in a moment.
+= Le jeu est fermé et votre progression est encore en cours d'envoi vers le cloud. Réessayez dans un instant.
+Finish the first-time setup first.
+= Terminez d'abord la configuration initiale.
+REQUIRES INSTALL
+= INSTALLATION REQUISE
+Created if not found
+= Créé s'il est introuvable
+Folders found at their usual place are used as they are. A folder that is not there yet is created when setup is done; you can choose another one instead.
+= Les dossiers trouvés à leur place habituelle sont utilisés tels quels. Un dossier qui n'existe pas encore est créé à la fin de la configuration ; vous pouvez en choisir un autre.
+Would you like to download addons?
+= Voulez-vous télécharger des addons ?
+They are all optional: you choose each one you want in Addons > DOWNLOAD MORE.
+= Tous sont facultatifs : vous choisissez chacun dans Addons > DOWNLOAD MORE.
+Ready to download the game
+= Prêt à télécharger le jeu
+Azeroth Survivors is not on this PC yet. The launcher will now download it into this folder:\n{0}\n\nThe download shows in the bar at the bottom. You can stop it there at any time.
+= Azeroth Survivors n'est pas encore sur ce PC. Le launcher va maintenant le télécharger dans ce dossier :\n{0}\n\nLe téléchargement s'affiche dans la barre du bas. Vous pouvez l'arrêter là à tout moment.
+DOWNLOAD THE GAME
+= TÉLÉCHARGER LE JEU
+CANCEL SETUP
+= ANNULER LA CONFIGURATION
+Setup was cancelled
+= La configuration a été annulée
+This launcher is here to help you play and manage Azeroth Survivors: it installs the game, keeps your progress safe in the cloud, manages your addons and shows your stats and the Guide. Without setup it has little to offer.\n\nStart setup again whenever you are ready.
+= Ce launcher vous aide à jouer et à gérer Azeroth Survivors : il installe le jeu, garde votre progression à l'abri dans le cloud, gère vos addons et affiche vos statistiques et le guide. Sans configuration, il n'a pas grand-chose à offrir.\n\nRelancez la configuration quand vous serez prêt.
+START SETUP AGAIN
+= RECOMMENCER LA CONFIGURATION

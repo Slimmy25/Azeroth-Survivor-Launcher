@@ -1760,3 +1760,31 @@ Stars decide which set bonuses you reach. How much each star adds to a piece is 
 = 별은 어떤 세트 보너스에 도달하는지 결정합니다. 별 하나가 장비에 얼마나 더하는지는 아직 알려지지 않아 여기서는 계산하지 않습니다.
 A complete interface: a run clock with the boss timeline and next-boss countdown, boss bars, enemy health plates and floating combat numbers, hero, target, party and pet frames, a skill bar with cooldowns and rank gems, a combat meter, a ring minimap and glass-styled chat. Every part can be turned on or off (/aether).
 = 완전한 인터페이스: 보스 타임라인과 다음 보스 카운트다운이 있는 런 시계, 보스 바, 적 체력 바와 떠오르는 전투 숫자, 영웅·대상·파티·소환수 프레임, 재사용 대기시간과 랭크 보석이 있는 스킬 바, 전투 미터, 원형 미니맵, 유리 스타일 채팅. 각 부분을 따로 켜고 끌 수 있습니다(/aether).
+The game has closed and your progress is still uploading to the cloud. Try again in a moment.
+= 게임은 종료되었지만 진행 상황이 아직 클라우드에 업로드되는 중입니다. 잠시 후 다시 시도하세요.
+Finish the first-time setup first.
+= 먼저 첫 설정을 마치세요.
+REQUIRES INSTALL
+= 설치 필요
+Created if not found
+= 없으면 생성됨
+Folders found at their usual place are used as they are. A folder that is not there yet is created when setup is done; you can choose another one instead.
+= 일반적인 위치에 있는 폴더는 그대로 사용됩니다. 아직 없는 폴더는 설정이 끝날 때 만들어지며, 대신 다른 폴더를 고를 수도 있습니다.
+Would you like to download addons?
+= 애드온을 다운로드할까요?
+They are all optional: you choose each one you want in Addons > DOWNLOAD MORE.
+= 모두 선택 사항입니다. 애드온 > DOWNLOAD MORE에서 하나씩 고릅니다.
+Ready to download the game
+= 게임 다운로드 준비 완료
+Azeroth Survivors is not on this PC yet. The launcher will now download it into this folder:\n{0}\n\nThe download shows in the bar at the bottom. You can stop it there at any time.
+= Azeroth Survivors가 아직 이 PC에 없습니다. 런처가 이제 다음 폴더로 다운로드합니다:\n{0}\n\n다운로드는 아래 막대에 표시되며 언제든 그곳에서 멈출 수 있습니다.
+DOWNLOAD THE GAME
+= 게임 다운로드
+CANCEL SETUP
+= 설정 취소
+Setup was cancelled
+= 설정이 취소되었습니다
+This launcher is here to help you play and manage Azeroth Survivors: it installs the game, keeps your progress safe in the cloud, manages your addons and shows your stats and the Guide. Without setup it has little to offer.\n\nStart setup again whenever you are ready.
+= 이 런처는 Azeroth Survivors를 플레이하고 관리하도록 돕습니다. 게임을 설치하고, 진행 상황을 클라우드에 안전하게 보관하고, 애드온을 관리하며, 통계와 가이드를 보여 줍니다. 설정 없이는 제공할 것이 거의 없습니다.\n\n준비되면 설정을 다시 시작하세요.
+START SETUP AGAIN
+= 설정 다시 시작

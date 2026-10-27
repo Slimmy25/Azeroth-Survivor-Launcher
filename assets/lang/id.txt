@@ -1759,3 +1759,31 @@ Stars decide which set bonuses you reach. How much each star adds to a piece is 
 = Bintang menentukan bonus set mana yang kamu capai. Seberapa banyak tiap bintang menambah sebuah bagian belum diketahui, jadi tidak dihitung di sini.
 A complete interface: a run clock with the boss timeline and next-boss countdown, boss bars, enemy health plates and floating combat numbers, hero, target, party and pet frames, a skill bar with cooldowns and rank gems, a combat meter, a ring minimap and glass-styled chat. Every part can be turned on or off (/aether).
 = Antarmuka lengkap: jam run dengan linimasa bos dan hitung mundur bos berikutnya, bar bos, bar nyawa musuh dan angka tempur melayang, bingkai hero, target, party, dan pet, bar skill dengan cooldown dan permata peringkat, meteran tempur, minimap bundar, dan chat bergaya kaca. Setiap bagian bisa dinyalakan atau dimatikan (/aether).
+The game has closed and your progress is still uploading to the cloud. Try again in a moment.
+= Game sudah ditutup dan progresmu masih diunggah ke cloud. Coba lagi sebentar lagi.
+Finish the first-time setup first.
+= Selesaikan dulu penyiapan awal.
+REQUIRES INSTALL
+= PERLU DIINSTAL
+Created if not found
+= Dibuat jika tidak ada
+Folders found at their usual place are used as they are. A folder that is not there yet is created when setup is done; you can choose another one instead.
+= Folder di tempat biasanya dipakai apa adanya. Folder yang belum ada dibuat saat penyiapan selesai; kamu bisa memilih folder lain.
+Would you like to download addons?
+= Mau mengunduh addon?
+They are all optional: you choose each one you want in Addons > DOWNLOAD MORE.
+= Semuanya opsional: kamu memilih sendiri di Addons > DOWNLOAD MORE.
+Ready to download the game
+= Siap mengunduh game
+Azeroth Survivors is not on this PC yet. The launcher will now download it into this folder:\n{0}\n\nThe download shows in the bar at the bottom. You can stop it there at any time.
+= Azeroth Survivors belum ada di PC ini. Launcher akan mengunduhnya sekarang ke folder ini:\n{0}\n\nUnduhan tampil di bilah bawah. Kamu bisa menghentikannya di sana kapan saja.
+DOWNLOAD THE GAME
+= UNDUH GAME
+CANCEL SETUP
+= BATALKAN PENYIAPAN
+Setup was cancelled
+= Penyiapan dibatalkan
+This launcher is here to help you play and manage Azeroth Survivors: it installs the game, keeps your progress safe in the cloud, manages your addons and shows your stats and the Guide. Without setup it has little to offer.\n\nStart setup again whenever you are ready.
+= Launcher ini ada untuk membantumu bermain dan mengelola Azeroth Survivors: memasang game, menjaga progresmu di cloud, mengelola addon, serta menampilkan statistik dan panduan. Tanpa penyiapan, tidak banyak yang bisa ditawarkan.\n\nMulai lagi penyiapan kapan pun kamu siap.
+START SETUP AGAIN
+= MULAI PENYIAPAN LAGI

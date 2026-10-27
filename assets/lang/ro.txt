@@ -1760,3 +1760,31 @@ Stars decide which set bonuses you reach. How much each star adds to a piece is 
 = Stelele decid ce bonusuri de set atingi. Cât adaugă fiecare stea unei piese încă nu se știe, așa că aici nu se socotește.
 A complete interface: a run clock with the boss timeline and next-boss countdown, boss bars, enemy health plates and floating combat numbers, hero, target, party and pet frames, a skill bar with cooldowns and rank gems, a combat meter, a ring minimap and glass-styled chat. Every part can be turned on or off (/aether).
 = O interfață completă: un ceas al rundei cu cronologia boșilor și numărătoarea inversă până la următorul, bare de boși, bare de viață ale inamicilor și cifre de luptă plutitoare, cadre pentru erou, țintă, grup și animal, o bară de abilități cu reîncărcări și pietre de rang, un contor de luptă, o minihartă rotundă și chat în stil sticlă. Fiecare parte se poate porni sau opri (/aether).
+The game has closed and your progress is still uploading to the cloud. Try again in a moment.
+= Jocul s-a închis, iar progresul tău încă se încarcă în cloud. Încearcă din nou peste o clipă.
+Finish the first-time setup first.
+= Termină mai întâi configurarea inițială.
+REQUIRES INSTALL
+= NECESITĂ INSTALARE
+Created if not found
+= Se creează dacă lipsește
+Folders found at their usual place are used as they are. A folder that is not there yet is created when setup is done; you can choose another one instead.
+= Folderele găsite la locul lor obișnuit sunt folosite așa cum sunt. Un folder care încă lipsește este creat la finalul configurării; poți alege altul în locul lui.
+Would you like to download addons?
+= Vrei să descarci addon-uri?
+They are all optional: you choose each one you want in Addons > DOWNLOAD MORE.
+= Toate sunt opționale: le alegi pe fiecare în Addons > DOWNLOAD MORE.
+Ready to download the game
+= Gata de descărcarea jocului
+Azeroth Survivors is not on this PC yet. The launcher will now download it into this folder:\n{0}\n\nThe download shows in the bar at the bottom. You can stop it there at any time.
+= Azeroth Survivors nu este încă pe acest PC. Launcherul îl descarcă acum în acest folder:\n{0}\n\nDescărcarea apare în bara de jos. O poți opri acolo oricând.
+DOWNLOAD THE GAME
+= DESCARCĂ JOCUL
+CANCEL SETUP
+= ANULEAZĂ CONFIGURAREA
+Setup was cancelled
+= Configurarea a fost anulată
+This launcher is here to help you play and manage Azeroth Survivors: it installs the game, keeps your progress safe in the cloud, manages your addons and shows your stats and the Guide. Without setup it has little to offer.\n\nStart setup again whenever you are ready.
+= Acest launcher te ajută să joci și să gestionezi Azeroth Survivors: instalează jocul, îți păstrează progresul în cloud, îți gestionează addon-urile și îți arată statisticile și ghidul. Fără configurare are puțin de oferit.\n\nPornește din nou configurarea când ești gata.
+START SETUP AGAIN
+= REPORNEȘTE CONFIGURAREA
