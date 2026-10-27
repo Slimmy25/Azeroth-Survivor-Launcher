@@ -1719,3 +1719,5 @@ Folders
 = Carpetas
 Graphics
 = Gráficos
+The bonuses of everything chosen, added together, at 0 stars: stars and set bonuses are not counted.
+= Las bonificaciones de todo lo elegido, sumadas, a 0 estrellas: no se cuentan las estrellas ni las bonificaciones de conjunto.

@@ -1719,3 +1719,5 @@ Folders
 = Dossiers
 Graphics
 = Graphismes
+The bonuses of everything chosen, added together, at 0 stars: stars and set bonuses are not counted.
+= Les bonus de tout ce qui est choisi, additionnés, à 0 étoile : les étoiles et les bonus d'ensemble ne sont pas comptés.

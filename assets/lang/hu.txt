@@ -1720,3 +1720,5 @@ Folders
 = Mappák
 Graphics
 = Grafika
+The bonuses of everything chosen, added together, at 0 stars: stars and set bonuses are not counted.
+= Az összes kiválasztott darab bónusza összeadva, 0 csillagon: a csillagok és a szettbónuszok nem számítanak bele.

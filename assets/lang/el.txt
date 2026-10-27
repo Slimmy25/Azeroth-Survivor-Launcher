@@ -1720,3 +1720,5 @@ Folders
 = Φάκελοι
 Graphics
 = Γραφικά
+The bonuses of everything chosen, added together, at 0 stars: stars and set bonuses are not counted.
+= Τα μπόνους όλων των επιλογών μαζί, στα 0 αστέρια: τα αστέρια και τα μπόνους σετ δεν μετρώνται.

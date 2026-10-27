@@ -1720,3 +1720,5 @@ Folders
 = Foldery
 Graphics
 = Grafika
+The bonuses of everything chosen, added together, at 0 stars: stars and set bonuses are not counted.
+= Premie wszystkich wybranych przedmiotów razem, przy 0 gwiazdkach: gwiazdki i premie za zestaw nie są liczone.

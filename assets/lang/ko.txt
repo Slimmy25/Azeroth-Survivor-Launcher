@@ -1720,3 +1720,5 @@ Folders
 = 폴더
 Graphics
 = 그래픽
+The bonuses of everything chosen, added together, at 0 stars: stars and set bonuses are not counted.
+= 선택한 모든 장비의 보너스 합계(별 0개 기준): 별과 세트 보너스는 포함되지 않습니다.

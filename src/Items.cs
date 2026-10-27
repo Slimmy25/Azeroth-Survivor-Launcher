@@ -363,9 +363,9 @@ namespace AzerothLauncher
             var l = new List<string>();
             if (Gear.Count == 0 && Jewelry.Count == 0) return l;
             l.Add("@topic Items | Every piece of gear and every ring, trinket and amulet, with what it does and where it drops");
-            l.Add("Every class has its own gear: one set for each rarity, nine pieces each (Head, Shoulder, Chest, Waist, Legs, Feet, Wrist, Hands and the weapon). A hunter's weapon goes in the Ranged slot; rogues also wear an Off Hand dagger and shamans a shield. Each boss drops one piece on its own roll; a piece you already have adds nothing. Rings, trinkets and amulets are the same for every class: guardians' lairs and battleground caches offer them during a run.");
+            l.Add("Every class has its own gear: one set for each rarity, nine pieces each (Head, Shoulder, Chest, Waist, Legs, Feet, Wrist, Hands and the weapon). A hunter's weapon goes in the Ranged slot; rogues also wear an Off Hand dagger and shamans a shield. Each boss drops one piece on its own roll, likelier on each Heroic level and after each miss; a piece you already have pays marks instead. Marks raise a piece from 0 to 5 stars, and a set's pieces worn together give 4-piece and 8-piece bonuses (Gear & the Armory). Rings, trinkets and amulets are the same for every class: guardians' lairs and battleground caches offer them during a run.");
             l.Add("");
-            l.Add("Try a set out in the Gear Planner (Guide > Theorycrafting).");
+            l.Add("The bonuses below are those of a piece at 0 stars. Try a set out in the Gear Planner (Guide > Theorycrafting).");
             l.Add("@page Rings, Trinkets & Amulets | The jewelry every hero is offered, with its numbers");
             l.Add("Offered again while worn, a ring, trinket or amulet is empowered: its numbers grow toward three times their own. The numbers below are those of its first pick.");
             foreach (string kind in new[] { "Ring", "Trinket", "Amulet" })
@@ -379,7 +379,7 @@ namespace AzerothLauncher
                 foreach (string rar in Rarities)
                 {
                     string c;
-                    l.Add("# " + rar + (chance.TryGetValue(rar, out c) ? " (" + Pct(Num(c) * 100) + "% each)" : ""));
+                    l.Add("# " + rar + (chance.TryGetValue(rar, out c) ? " (" + Pct(Num(c) * 100) + "% each on normal)" : ""));
                     foreach (var p in Gear)
                     {
                         if (p.Class != cls || p.Rarity != rar) continue;

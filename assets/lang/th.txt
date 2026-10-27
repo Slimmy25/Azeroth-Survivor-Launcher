@@ -1720,3 +1720,5 @@ Folders
 = โฟลเดอร์
 Graphics
 = กราฟิก
+The bonuses of everything chosen, added together, at 0 stars: stars and set bonuses are not counted.
+= โบนัสของทุกชิ้นที่เลือกรวมกัน ที่ 0 ดาว: ไม่นับดาวและโบนัสเซ็ต

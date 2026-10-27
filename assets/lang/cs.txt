@@ -1720,3 +1720,5 @@ Folders
 = Složky
 Graphics
 = Grafika
+The bonuses of everything chosen, added together, at 0 stars: stars and set bonuses are not counted.
+= Bonusy všeho vybraného dohromady, při 0 hvězdách: hvězdy a bonusy sad se nepočítají.

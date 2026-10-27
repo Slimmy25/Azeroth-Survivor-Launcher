@@ -420,6 +420,7 @@ Every zone ends with a final boss. Beat it to open the next zone, for that class
 Every boss has its own moves: charges, blinks behind you, eggs that hatch, totems and more. Before a big attack the ground is marked. Step out of the marker: getting caught hurts twice as much. The horde also grows tougher as the minutes pass, so the last bosses are the real test.
 - Several bosses can be up at once if you have not finished the last one when the next arrives.
 - Below 30% health a boss enrages and uses its abilities more often: save your cooldowns and your distance for that part.
+- Bosses aim a little ahead of where you are running: blasts, breaths, charges, beams, volleys and rains lead you, and more so on each Heroic level. Change direction instead of running in a straight line.
 
 @topic Level-Ups & Cards | How your hero grows during a run
 # Picking cards
@@ -465,7 +466,9 @@ Guardians are big monsters that wait in their lairs. A red flag on the minimap p
 
 @topic Gear & the Armory | Boss loot, your collection and how your hero looks
 # Boss gear
-Each boss drops one piece of gear for your class, on its own roll. The zone decides the rarity: common, uncommon, rare, epic, PvP and legendary. The rarer the gear, the lower the chance: from 60% in Elwynn Forest down to 20% in the last two zones. A piece you already own adds nothing. Gear is kept per class.
+Each boss drops one piece of gear for your class, on its own roll. The zone decides the rarity: common, uncommon, rare, epic, PvP and legendary. The rarer the gear, the lower the chance: from 60% in Elwynn Forest down to 20% in the last two zones on normal, and higher on each Heroic level. Gear is kept per class.
+- Bad luck protection: each kill of a boss that misses its piece makes that piece likelier to drop the next time.
+- A piece you already own pays marks instead.
 
 # Slots
 Head, Shoulders, Chest, Hands, Wrist, Waist, Legs, Feet and Main Hand. The final boss of a zone drops the main-hand weapon.
@@ -474,12 +477,31 @@ Head, Shoulders, Chest, Hands, Wrist, Waist, Legs, Feet and Main Hand. The final
 - Character: race, gender, looks, and the gear you wear.
 - Collection: every piece for your class by rarity. Click a piece to see its bonuses and the bosses that drop it. A piece can be worn, or only shown as a look.
 - Drop Tables: every zone's bosses, their arrival times, and the piece and chance each one drops.
+- Collection also shows the pieces still to find in your zones, with their boss and drop chance. Once you have them all, it shows each set's star progress instead: stars per piece, its 4-piece and 8-piece bonuses and how many stars are open.
 - Codex: every ring, trinket and amulet the game has offered you.
+
+# Marks
+Every boss pays your class marks: more in harder zones and on higher Heroic levels, and half on normal. Bosses that return in endless mode pay more each time. Marks are kept per class.
+
+# Stars
+Spend marks in the armory to raise a piece from 0 to 5 stars. Each star adds to the piece's own bonuses: at 5 stars, tier 3 gear is 60% stronger.
+- A set's stars open as your class beats Heroic levels in that set's zones: Heroic II opens 2 stars, and so on.
+- Lower sets cost less and gain more from each star. Their 5th star is a big one that lifts them to 95% of 5-star tier 3, so your favourite set stays viable at the end. That last star costs what tier 3's does: 30 marks.
+- Every other class that has a set's armor at a star rank makes that rank 5% cheaper for yours, up to 40%.
+
+# Set bonuses
+- 4-piece: four armor pieces of one set at 1 star or more give the set's bonus, from more gold and pickup range on the common set to more critical damage on the legendary one.
+- 8-piece: all eight armor pieces of one set at 3 stars or more change how one of your class's spells plays, a different spell for each set. For example, Fireball splits, Aimed Shot pierces, and Consecration, Blizzard and Volley move with you. At 5 stars on all eight the bonus is empowered: half again as strong.
+- The PvP sets are built around crowd control: your stun, root, slow or fear spell (Hammer of Justice, Concussive Shot, Kidney Shot, Psychic Scream, Frost Nova, Death Coil, Shred) hits more enemies, harder and more often, and all your damage is higher against enemies you stun, root, slow or fear.
+- An armor piece's tooltip (character pane, C) shows its set: the set's name with how many pieces you wear, its pieces, and its 4-piece and 8-piece bonuses with the stars they need. Each set's own bonuses are in the armory.
+
+# Weapon glows
+Weapons at 5 stars glow with Icy Chill, and two achievements open Crusader (Champion of Naxxramas) and Fiery Weapon (Radiant Armory). Pick your class's glow, or none, on any weapon in the armory. A picked glow also replaces a legendary weapon's own.
 - Talents, Achievements and Rewards: see their own topics.
 
 @topic Talents | Talent points, trees and specs
 # Earning points
-Every run pays talent experience to the class you played: for time survived, kills, bosses and a win, and more in harder zones. Run Options can raise it too.
+Every run pays talent experience to the class you played: for time survived, kills, bosses and a win, and more in harder zones and on higher Heroic levels.
 
 # Spending points
 - Each class has three talent trees.
@@ -492,7 +514,7 @@ Every class page in the Classes topic shows its three full trees, and which tale
 
 @topic Achievements & Rewards | Account-wide goals and what they unlock
 # Achievements
-Achievements are earned by every hero of every class, for your whole account. They come in five groups: Zones, Classes, Collection, Feats and Lifetime. Win zones, collect gear, survive long into a run, or chase special feats like big kill counts and winning without gear.
+Achievements are earned by every hero of every class, for your whole account. They come in groups: Zones, Classes, Collection, Feats, Lifetime and Heroic. Win zones, collect gear, survive long into a run, or chase special feats like big kill counts and winning without gear.
 
 # Rewards
 Achievements give points to spend on the Rewards tab. Rewards are account-wide too.
@@ -503,12 +525,22 @@ Achievements give points to spend on the Rewards tab. Rewards are account-wide t
 - Co-op achievements: earned by everyone in the party. A boss's killing blow counts for every player still in the run, whoever lands it.
 You can take back points spent on perks and spend them again; the panel shows how many resets you have left.
 
-@topic Run Options & Endless | Harder runs for better rewards, and what comes after a win
-# Run Options
-On the main screen, Run Options makes the horde harder: more enemies, more health, harder hits, faster movement. In return you get more talent experience and better odds of boss loot, up to x2. Past that the run only gets harder.
+@topic Heroic & Endless | Heroic I to V for better rewards, and what comes after a win
+# Heroic I to V
+Pick a Heroic level with the Difficulty button beside Play. It shows each level's enemy health and damage, its rewards and its twists. Each level makes the horde and the bosses tougher and adds two twists, such as elite packs, relentless bosses, stronger guardians, a leaner purse, horde affixes, the old tower and gaze mechanics, harsher failed mechanics, halved healing, and a final boss that brings a friend.
+- In return, boss drop chances, talent experience and marks rise with the Heroic level, and Heroic levels open your gear's stars (see Gear & the Armory).
+- Heroic I of a zone opens once any of your classes beats the zone. Beating Heroic N there opens the next level for every class.
+- A class can play a zone's Heroic once it has beaten that zone itself.
+- Against the Odds, and the co-op feats that asked for maxed Run Options before, now ask for Heroic III or harder.
+
+# Horde affixes
+From Heroic III the horde has an affix that changes every week; Heroic V has two at once.
+- Bolstering: each death makes the enemies within 12 yards 20% tougher and stronger, stacking up to triple.
+- Sanguine: slain elites leave wide pools that heal the horde 10% a second.
+- Explosive: an orb appears every 15 seconds and bursts for 40% of your health unless you destroy it. Area spells pass through it: it takes five direct hits from aimed spells and weapon swings.
 
 # Endless mode
-After you beat a zone's final boss you can keep going in endless mode. A random boss from the zone arrives every five minutes and the horde keeps growing stronger. See how long you can last; some achievements ask for it.
+After you beat a zone's final boss you can keep going in endless mode. A random boss from the zone arrives every five minutes and the horde keeps growing stronger. Each boss that returns pays more marks than the time before. See how long you can last; some achievements ask for it.
 
 @topic Co-op | Playing with friends
 # Joining and hosting
@@ -516,15 +548,15 @@ Press Co-op on the main screen.
 - Lobbies: public games of your version. Click one to join (some need a password).
 - Host: name your lobby, choose who can find it (public, or private by code), set the number of players (up to 5) and an optional password.
 - Join by code: type a friend's lobby code.
-You play the hero on your own picker. The host chooses the zone, and you can only join zones you have opened with the class you bring.
+You play the hero on your own picker. The host chooses the zone and the Heroic level, and you can only join zones (and Heroic levels) you have opened with the class you bring.
 
 # How co-op plays
 - Experience and gold are shared; caches are each hero's own to buy.
-- Every extra hero makes the horde bigger and the bosses tougher, but the party also finds more chests.
+- Every extra hero makes the horde bigger and the bosses tougher (each extra hero adds 20% less than before 0.121.0), but the party also finds more chests.
 - When you pick a card, only you pause while the others fight on.
 - A fallen hero is down, not out: stand next to them for 6 seconds to bring them back. The run ends when every hero is down.
 - Your heals, Battle Shout and Power Word: Shield also help friends within 30 yards.
-- Every hero rolls on a slain boss's gear for their own class, and a guardian slain by anyone rewards everyone.
+- Every hero rolls on a slain boss's gear for their own class and earns their own marks and clears, and a guardian slain by anyone rewards everyone.
 - Everything you win goes to your own save.
 
 @topic Addons | Add-ons for the game's interface, and where they go

@@ -34,7 +34,7 @@ namespace AzerothLauncher
         public const string TalentBuilder = "Talent Tree Builder";
         static readonly string[][] GuideGroups =
         {
-            new[] { "NEW PLAYER", "Getting Started", "Controls", "Your First Run", "Tips for New Players", "Run Options & Endless",
+            new[] { "NEW PLAYER", "Getting Started", "Controls", "Your First Run", "Tips for New Players", "Heroic & Endless",
                     "Achievements & Rewards", "Addons" },
             new[] { "GAMEPLAY", "Classes", "Races", "Zones & Bosses", "Level-Ups & Cards", "Talents", "Pickups, Caches & Guardians",
                     "Gear & the Armory", "Items", "Co-op" },

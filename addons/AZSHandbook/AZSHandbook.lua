@@ -51,7 +51,7 @@ local TOPIC_ICONS = { ["Getting Started"] = "INV_Misc_Book_09", ["Build Guides"]
                       ["Zones & Bosses"] = "INV_Misc_Map_01", ["Level-Ups & Cards"] = "Spell_Holy_SealOfWisdom",
                       ["Pickups, Caches & Guardians"] = "INV_Misc_Coin_01", ["Gear & the Armory"] = "INV_Chest_Plate06",
                       ["Talents"] = "Ability_Marksmanship", ["Achievements & Rewards"] = "INV_Misc_Bag_10",
-                      ["Run Options & Endless"] = "Spell_Shadow_DeathScream", ["Co-op"] = "Ability_Warrior_BattleShout",
+                      ["Heroic & Endless"] = "Spell_Shadow_DeathScream", ["Co-op"] = "Ability_Warrior_BattleShout",
                       ["Tips for New Players"] = "INV_Misc_Note_01" };
 
 local function SetPicture(tex, title)
@@ -241,7 +241,7 @@ local function ItemsGear(out)
 	table.insert(out, { kind = "buttons", items = { { text = "Clear", go = function() planner.slots = {}; end },
 	                                                { text = "Talent trees", go = function() local c = view.gear; view.gear = nil; view.talents = c; end } } });
 	table.insert(out, { kind = "stats", lines = lines, note = (unknown > 0 and ("Pieces with bonuses not known yet: " .. unknown .. ". ") or "") ..
-	                    "The bonuses of everything chosen, added together." });
+	                    "The bonuses of everything chosen, added together, at 0 stars: stars and set bonuses are not counted." });
 	table.insert(out, { kind = "head", text = "Slots" });
 	local slots = GearSlots(class);
 	for i = 1, table.getn(slots) do

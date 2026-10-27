@@ -1719,3 +1719,5 @@ Folders
 = Pastas
 Graphics
 = Gráficos
+The bonuses of everything chosen, added together, at 0 stars: stars and set bonuses are not counted.
+= Os bônus de tudo o que foi escolhido, somados, com 0 estrelas: estrelas e bônus de conjunto não são contados.

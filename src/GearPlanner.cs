@@ -243,7 +243,7 @@ namespace AzerothLauncher
                 new[] { "Area", Val(t, "area", "%") }, new[] { "Targets", Val(t, "targets", "") }, new[] { "Echo", Val(t, "echo", "%") },
                 new[] { "Speed", Val(t, "speed", "%") }, new[] { "Regen", Val(t, "regen", "") }, new[] { "Pickup", Val(t, "pickup", "%") },
             });
-            string txt = Lang.T("The bonuses of everything chosen, added together. A piece marked * has bonuses not known yet: it adds nothing here.");
+            string txt = Lang.T("The bonuses of everything chosen, added together, at 0 stars: stars and set bonuses are not counted.");
             if (unknown > 0) txt = Lang.T("Pieces with bonuses not known yet") + ": " + unknown + ". " + txt;
             using (var b = new SolidBrush(Dim)) g.DrawString(txt, fSmall, b, new RectangleF(mid.X, mid.Y + boxH + 8, mid.Width, mid.Bottom - mid.Y - boxH - 8));
 

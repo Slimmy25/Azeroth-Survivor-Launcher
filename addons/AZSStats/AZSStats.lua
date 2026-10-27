@@ -566,6 +566,9 @@ function AZSStats_Record(s)
 	if ( run.cname == "" ) then run.cname = Pretty(run.class); end
 	if ( run.rname == "" ) then run.rname = Pretty(run.race); end
 	if ( run.zname == "" ) then run.zname = Pretty(run.zone); end
+	-- the run's modifiers (AZS_ZONE.mods: enemy density, health, damage and speed in percent, "100 100 100 100" on a
+	-- normal run), kept with the run so harder runs (Heroic, since the game's 0.121.0) can be told apart later
+	if ( type(AZS_ZONE) == "table" and type(AZS_ZONE.mods) == "string" ) then run.mods = AZS_ZONE.mods; end
 	run.abilities = Abilities();
 	-- from the live side (AZSStatsLive.lua): legendaries picked up, level-ups that saved you, time spent down in co-op
 	local deadT = 0;
