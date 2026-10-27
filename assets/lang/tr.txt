@@ -1654,3 +1654,7 @@ Search
 = Ara
 Talents
 = Yetenekler
+CONFLICT: PICK ONE
+= ÇAKIŞMA: BİRİNİ SEÇ
+these two can't be on together: untick the one you don't want.
+= bu ikisi aynı anda açık olamaz: istemediğinin işaretini kaldır.

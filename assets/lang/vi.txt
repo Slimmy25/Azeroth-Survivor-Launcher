@@ -1654,3 +1654,7 @@ Search
 = Tìm kiếm
 Talents
 = Thiên phú
+CONFLICT: PICK ONE
+= XUNG ĐỘT: CHỌN MỘT
+these two can't be on together: untick the one you don't want.
+= hai addon này không thể bật cùng lúc: bỏ chọn cái bạn không muốn.

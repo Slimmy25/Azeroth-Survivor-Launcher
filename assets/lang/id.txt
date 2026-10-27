@@ -1653,3 +1653,7 @@ Search
 = Cari
 Talents
 = Talenta
+CONFLICT: PICK ONE
+= KONFLIK: PILIH SATU
+these two can't be on together: untick the one you don't want.
+= keduanya tidak bisa menyala bersamaan: hapus centang yang tidak kamu mau.

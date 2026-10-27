@@ -1653,3 +1653,7 @@ Search
 = Søk
 Talents
 = Talenter
+CONFLICT: PICK ONE
+= KONFLIKT: VELG ÉN
+these two can't be on together: untick the one you don't want.
+= disse to kan ikke være på samtidig: fjern haken ved den du ikke vil ha.

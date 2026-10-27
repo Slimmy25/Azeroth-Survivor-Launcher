@@ -1164,7 +1164,17 @@ namespace AzerothLauncher
             if (!HostUsable()) return false;
             Form h = Host;
             var bmp = new Bitmap(Math.Max(1, h.ClientSize.Width), Math.Max(1, h.ClientSize.Height));
-            try { h.DrawToBitmap(bmp, new Rectangle(Point.Empty, bmp.Size)); } catch (Exception) { }
+            // the launcher as it is on screen (DrawToBitmap leaves the section window and its scrolled lists black, and
+            // is slow enough to flash): copied from the screen, then dimmed
+            bool copied = false;
+            try
+            {
+                using (var g = Graphics.FromImage(bmp))
+                    g.CopyFromScreen(h.PointToScreen(Point.Empty), Point.Empty, bmp.Size);
+                copied = true;
+            }
+            catch (Exception) { }
+            if (!copied) try { h.DrawToBitmap(bmp, new Rectangle(Point.Empty, bmp.Size)); } catch (Exception) { }
             using (var g = Graphics.FromImage(bmp))
             using (var dim = new SolidBrush(Color.FromArgb(175, 0, 0, 0))) g.FillRectangle(dim, 0, 0, bmp.Width, bmp.Height);
             shade = new Panel();

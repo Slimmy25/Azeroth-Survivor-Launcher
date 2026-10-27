@@ -1654,3 +1654,7 @@ Search
 = 검색
 Talents
 = 특성
+CONFLICT: PICK ONE
+= 충돌: 하나를 고르세요
+these two can't be on together: untick the one you don't want.
+= 이 둘은 함께 켤 수 없습니다: 원하지 않는 쪽의 체크를 해제하세요.

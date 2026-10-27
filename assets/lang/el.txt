@@ -1654,3 +1654,7 @@ Search
 = Αναζήτηση
 Talents
 = Ταλέντα
+CONFLICT: PICK ONE
+= ΣΥΓΚΡΟΥΣΗ: ΔΙΑΛΕΞΤΕ ΕΝΑ
+these two can't be on together: untick the one you don't want.
+= αυτά τα δύο δεν μπορούν να είναι ενεργά μαζί: ξετσεκάρετε αυτό που δεν θέλετε.

@@ -1193,9 +1193,8 @@ namespace AzerothLauncher
             List<KeyValuePair<string, bool>> addons;
             try
             {
-                // addons that can't be on together, both found on: the preferred one stays (see Addons.Conflicts)
-                var off = Addons.EnforceConflicts(dir);
-                if (off.Count > 0) SetStatus(string.Join(", ", off.ToArray()) + " " + Lang.T("switched off: it conflicts with another addon that is on."));
+                // addons that can't be on together and are both on are shown first, for the player to pick one (PLAY
+                // keeps the preferred one if nobody picks)
                 addons = Addons.Scan(dir);
             }
             catch (Exception e)
@@ -1261,7 +1260,21 @@ namespace AzerothLauncher
                 if (folder.StartsWith("AZS", StringComparison.OrdinalIgnoreCase)) return Data.AzsAddonsHeading;
                 return "OTHER ADDONS";
             };
-            var order = new List<string> { Data.AzsAddonsHeading, Data.Wow112Category };
+            // the pairs that can't be on together and are both on: at the top, joined by a red bracket, until one is off
+            var pairs = new List<KeyValuePair<string, string>>();
+            var onNow = new Dictionary<string, bool>();
+            foreach (var a in addons) onNow[a.Key] = a.Value;
+            foreach (var a in addons)
+                if (a.Value)
+                    foreach (var pt in Addons.PartnersOf(dir, a.Key, addons))
+                        if (Addons.IsPreferred(dir, a.Key, pt.Value) && onNow.ContainsKey(pt.Key) && onNow[pt.Key])
+                            pairs.Add(new KeyValuePair<string, string>(a.Key, pt.Key));
+            conflicted = new HashSet<string>();
+            foreach (var pr in pairs) { conflicted.Add(pr.Key); conflicted.Add(pr.Value); }
+            const string ConflictHeading = "CONFLICT: PICK ONE";
+            Func<string, string> plainCat = catOf;
+            catOf = delegate(string folder) { return conflicted.Contains(folder) ? ConflictHeading : plainCat(folder); };
+            var order = new List<string> { ConflictHeading, Data.AzsAddonsHeading, Data.Wow112Category };
             order.Add(Data.MyAddonsCategory);
             order.Add("OTHER ADDONS");
             addons.Sort(delegate(KeyValuePair<string, bool> p1, KeyValuePair<string, bool> p2)
@@ -1270,11 +1283,6 @@ namespace AzerothLauncher
                 if (c1 != c2) return c1.CompareTo(c2);
                 return string.Compare(p1.Key, p2.Key, StringComparison.OrdinalIgnoreCase);
             });
-            // the conflicting pairs both installed: a red bracket joins their rows, with CONFLICT down it
-            var pairs = new List<KeyValuePair<string, string>>();
-            foreach (var a in addons)
-                foreach (var pt in Addons.PartnersOf(dir, a.Key, addons))
-                    if (Addons.IsPreferred(dir, a.Key, pt.Value)) pairs.Add(new KeyValuePair<string, string>(a.Key, pt.Key));
             int linkW = pairs.Count > 0 ? 20 * pairs.Count : 0;
             var rowBox = new Dictionary<string, Rectangle>();
             string lastCat = null;
@@ -1285,7 +1293,7 @@ namespace AzerothLauncher
                 if (cat != lastCat)
                 {
                     lastCat = cat;
-                    var hd = UI.Text(cat, 9, FontStyle.Bold, Theme.Gold, listbg, 0);
+                    var hd = UI.Text(cat, 9, FontStyle.Bold, cat == ConflictHeading ? Theme.Hex("#e0503a") : Theme.Gold, listbg, 0);
                     hd.Size = VStack.Measure(hd);
                     hd.Location = new Point(6, y + (y > 2 ? 8 : 2));
                     sp.Controls.Add(hd);
@@ -1321,7 +1329,7 @@ namespace AzerothLauncher
                 link.Tick1 = y1 - lt;
                 link.Tick2 = y2 - lt;
                 WowButton.Tips.SetToolTip(link, pairs[i].Key + " / " + pairs[i].Value + ": " +
-                                          Lang.T("these two can't be on together. Switching one on switches the other off."));
+                                          Lang.T("these two can't be on together: untick the one you don't want."));
                 sp.Controls.Add(link);
                 link.BringToFront();
             }
@@ -1329,6 +1337,7 @@ namespace AzerothLauncher
         }
 
         bool settingCheck;
+        HashSet<string> conflicted;                         // My Addons: the addons shown first, in a conflict
 
         void UpdateAddonCount()
         {
@@ -1388,6 +1397,12 @@ namespace AzerothLauncher
             }
             cb.ForeColor = want ? Theme.Text : Theme.GoldDim;
             UpdateAddonCount();
+            if (!want && conflicted != null && conflicted.Contains(name))
+            {
+                BuildPanel("Addons");                        // the conflict is settled: the rows go back in A to Z order
+                SetStatus(name + " disabled.");
+                return;
+            }
             SetStatus(name + " " + (want ? "enabled" : "disabled") + ".");
             if (want)
             {

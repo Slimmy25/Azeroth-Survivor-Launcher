@@ -1654,3 +1654,7 @@ Search
 = Пошук
 Talents
 = Таланти
+CONFLICT: PICK ONE
+= КОНФЛІКТ: ВИБЕРІТЬ ОДИН
+these two can't be on together: untick the one you don't want.
+= ці два не можна вмикати разом: зніміть позначку з того, який не потрібен.

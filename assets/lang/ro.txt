@@ -1654,3 +1654,7 @@ Search
 = Căutare
 Talents
 = Talente
+CONFLICT: PICK ONE
+= CONFLICT: ALEGE UNUL
+these two can't be on together: untick the one you don't want.
+= aceste două nu pot fi pornite împreună: debifează-l pe cel pe care nu-l vrei.
