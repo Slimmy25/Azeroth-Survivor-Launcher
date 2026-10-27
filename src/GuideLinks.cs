@@ -185,12 +185,12 @@ namespace AzerothLauncher
             // the bosses' names are found too, but link nowhere: "Mr. Smite" stays plain instead of linking Smite
             foreach (string boss in Items.BossNames()) if (!links.ContainsKey(boss) && !terms.Contains(boss)) terms.Add(boss);
             terms.Sort(delegate(string a, string b) { return b.Length.CompareTo(a.Length); });   // longest first
-            // a name is found only as written (its possessive too: "Ignite's"), so "fear" or "execute" in a sentence
-            // stays plain text
+            // a name is found only as written (its possessive and plural too: "Ignite's", "Wraths"), so "fear" or
+            // "execute" in a sentence stays plain text
             var parts = new List<string>();
             foreach (string term in terms) parts.Add(Regex.Escape(term));
             finder = parts.Count == 0 ? null
-                : new Regex(@"(?<![A-Za-z'])(" + string.Join("|", parts.ToArray()) + @")(?:'s)?(?![A-Za-z])");
+                : new Regex(@"(?<![A-Za-z'])(" + string.Join("|", parts.ToArray()) + @")(?:'s|s)?(?![A-Za-z])");
         }
 
         static GuideLink Find(string matched)

@@ -365,8 +365,12 @@ namespace AzerothLauncher
         readonly GuideText text;
         readonly List<KeyValuePair<Rectangle, Talent>> chips = new List<KeyValuePair<Rectangle, Talent>>();
         readonly List<KeyValuePair<Rectangle, KeyValuePair<string, string>>> spellChips = new List<KeyValuePair<Rectangle, KeyValuePair<string, string>>>();
+        // the class's set bonuses whose text names this spell: { "Faith 8-piece", its text, the rarity }
+        readonly List<string[]> setBonuses = new List<string[]>();
+        readonly List<KeyValuePair<Rectangle, string[]>> setChips = new List<KeyValuePair<Rectangle, string[]>>();
         Talent over;
         string overSpell;
+        string[] overSet;
         const int Ic = 34;
 
         static string Base(string n) { return Regex.Replace(n ?? "", @"\s*\(.*\)$", "").Trim(); }
@@ -414,6 +418,27 @@ namespace AzerothLauncher
             this.line = line;
             this.className = className;
             changers = Talents.Changing(className, Regex.Replace(name, @"\s*\(.*\)$", ""));
+            // the sets whose 8-piece bonus names this spell, word for word (as for the spells above)
+            try
+            {
+                var setPool = new List<KeyValuePair<string, string>>();
+                var rarityOf = new Dictionary<string, string>();
+                foreach (string rar in Items.Rarities)
+                {
+                    string eight = Items.EightPiece(className ?? "", rar);
+                    if (eight == null) continue;
+                    string key = Items.SetName(className, rar) + " 8-piece";
+                    setPool.Add(new KeyValuePair<string, string>(key, eight));
+                    rarityOf[key] = rar;
+                }
+                string me = Base(name);
+                // its name as written, or more than one of it ("Every 4 Wraths", "Every 3 Sinister Strikes")
+                var word = new Regex(@"(?<![A-Za-z'])" + Regex.Escape(me) + @"(?:s|'s)?(?![A-Za-z])");
+                if (me.Length >= 3)
+                    foreach (var kv in setPool)
+                        if (word.IsMatch(kv.Value)) setBonuses.Add(new[] { kv.Key, kv.Value, rarityOf[kv.Key] });
+            }
+            catch (Exception) { }
             BackColor = Theme.Hex("#15121c");
             text = new GuideText(line, 9.5f, Theme.Text, BackColor, width - Ic - 26, topic, page);
             text.Location = new Point(Ic + 18, 24);
@@ -421,6 +446,7 @@ namespace AzerothLauncher
             int h = text.Bottom + 6;
             if (changers.Count > 0) h += 26;
             if (affecting.Count > 0) h += 26;
+            if (setBonuses.Count > 0) h += 26;
             Size = new Size(width, Math.Max(h, Ic + 14));
         }
 
@@ -443,11 +469,39 @@ namespace AzerothLauncher
             using (var b = new SolidBrush(Theme.Gold)) g.DrawString(name, Theme.F(10.5f, FontStyle.Bold), b, Ic + 16, 5);
             chips.Clear();
             spellChips.Clear();
+            setChips.Clear();
             Font lf = Theme.F(8, FontStyle.Italic);
-            float y = Height - 24 - (affecting.Count > 0 && changers.Count > 0 ? 26 : 0);
+            int rowsBelow = (changers.Count > 0 ? 1 : 0) + (affecting.Count > 0 ? 1 : 0) + (setBonuses.Count > 0 ? 1 : 0);
+            float y = Height - 24 - 26 * Math.Max(0, rowsBelow - 1);
             if (changers.Count > 0) { ChipRow(g, lf, y); y += 26; }
-            if (affecting.Count == 0) return;
-            // the other spells that name this one: their icons, each a link to its own row
+            if (affecting.Count > 0) { SpellChipRow(g, lf, y); y += 26; }
+            if (setBonuses.Count > 0) SetChipRow(g, lf, y);
+        }
+
+        // the sets whose 8-piece bonus changes this spell: each set's name in its rarity's colour; the hover reads it
+        void SetChipRow(Graphics g, Font lf, float y)
+        {
+            float sx = Ic + 18;
+            string label = Lang.T("Set bonuses that change it:");
+            using (var b = new SolidBrush(Theme.GoldDim)) g.DrawString(label, lf, b, sx, y + 3);
+            sx += g.MeasureString(label, lf).Width + 4;
+            Font cf = Theme.F(8, FontStyle.Bold);
+            foreach (var sb in setBonuses)
+            {
+                SizeF sz = g.MeasureString(sb[0], cf);
+                var r = new Rectangle((int)sx, (int)y, (int)sz.Width + 8, 18);
+                if (r.Right > Width - 6) break;
+                using (var b = new SolidBrush(Theme.Hex("#1e1a26"))) g.FillRectangle(b, r);
+                using (var p = new Pen(sb == overSet ? Theme.Hex("#fff2b0") : GearSheet.RarityColor(sb[2]), 1)) g.DrawRectangle(p, r);
+                using (var b = new SolidBrush(GearSheet.RarityColor(sb[2]))) g.DrawString(sb[0], cf, b, r.X + 4, r.Y + (r.Height - sz.Height) / 2);
+                setChips.Add(new KeyValuePair<Rectangle, string[]>(r, sb));
+                sx = r.Right + 4;
+            }
+        }
+
+        // the other spells that name this one: their icons, each a link to its own row
+        void SpellChipRow(Graphics g, Font lf, float y)
+        {
             float sx = Ic + 18;
             string slabel = Lang.T("Spells that change it:");
             using (var b = new SolidBrush(Theme.GoldDim)) g.DrawString(slabel, lf, b, sx, y + 3);
@@ -491,10 +545,13 @@ namespace AzerothLauncher
             foreach (var c in chips) if (Rectangle.Inflate(c.Key, 2, 2).Contains(e.Location)) t = c.Value;
             string s = null, sText = null;
             foreach (var c in spellChips) if (Rectangle.Inflate(c.Key, 2, 2).Contains(e.Location)) { s = c.Value.Key; sText = c.Value.Value; }
-            if (t != over || s != overSpell) { over = t; overSpell = s; Invalidate(); }
+            string[] st = null;
+            foreach (var c in setChips) if (Rectangle.Inflate(c.Key, 2, 2).Contains(e.Location)) st = c.Value;
+            if (t != over || s != overSpell || st != overSet) { over = t; overSpell = s; overSet = st; Invalidate(); }
             Cursor = t != null || s != null ? Cursors.Hand : Cursors.Default;   // a click opens the talent's trees / the spell's row
             if (t != null) GuideHover.Show(this, t.Name, Talents.HoverText(t), SpellIcons.Icon(t.Icon, null));
             else if (s != null) GuideHover.Show(this, s, sText, SpellIcons.Spell(s, null));
+            else if (st != null) GuideHover.Show(this, st[0], st[1] + "\n\n" + Lang.T("all 8 at 3+ stars, half again as strong at 5"), null);
             else if (new Rectangle(8, 8, Ic, Ic).Contains(e.Location) || e.Y < 24)
                 GuideHover.Show(this, name, SpellHover(), SpellIcons.Spell(Regex.Replace(name, @"\s*\(.*\)$", ""), null));
             else GuideHover.Hide();
@@ -517,13 +574,19 @@ namespace AzerothLauncher
                 foreach (var a in affecting) n.Add(a.Key);
                 s += "\n\n" + Lang.T("Spells that change it:") + " " + string.Join(", ", n.ToArray());
             }
+            if (setBonuses.Count > 0)
+            {
+                var n = new List<string>();
+                foreach (var sb in setBonuses) n.Add(sb[0]);
+                s += "\n\n" + Lang.T("Set bonuses that change it:") + " " + string.Join(", ", n.ToArray());
+            }
             return s;
         }
 
         protected override void OnMouseLeave(EventArgs e)
         {
             base.OnMouseLeave(e);
-            if (over != null || overSpell != null) { over = null; overSpell = null; Invalidate(); }
+            if (over != null || overSpell != null || overSet != null) { over = null; overSpell = null; overSet = null; Invalidate(); }
             GuideHover.Hide();
         }
 

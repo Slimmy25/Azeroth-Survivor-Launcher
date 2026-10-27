@@ -402,20 +402,38 @@ namespace AzerothLauncher
             return eightPiece.TryGetValue(cls + "|" + rarity, out t) ? t : null;
         }
 
-        // how much stronger a piece is at its stars: 1 at 0 stars. Stars 1 to 4 are an estimate (gear-sets.txt), and
-        // the 5th star of a lower set lifts it to 95% of the same slot's 5-star tier 3 piece, compared by the size of
-        // their bonuses (each stat against its usual size on tier 3 gear).
+        // the text shown where a star's numbers are not known yet
+        public const string StarsPending = "waiting for clarification from dev";
+
+        // only armor takes stars here: weapons wait until the dev says how theirs work
+        public static bool TakesStars(GearPiece p) { return IsArmor(p); }
+
+        // true when what a piece's stars add is not known yet (gear-sets.txt says "?", or the piece is a weapon): the
+        // piece then counts as at 0 stars
+        public static bool StarPending(GearPiece p, int stars)
+        {
+            Load();
+            if (p == null || stars <= 0) return false;
+            if (!TakesStars(p)) return true;
+            string[] rule;
+            return !starRules.TryGetValue(p.Rarity, out rule) || rule[Math.Min(stars, 5) - 1] == "?";
+        }
+
+        // how much stronger a piece is at its stars: 1 at 0 stars, and 1 while its stars are pending (StarPending).
+        // A number in gear-sets.txt is used as it stands; "top" lifts the piece to 95% of the same slot's 5-star
+        // top-row piece, compared by the size of their bonuses (each stat against its usual size on top-row gear).
         public static double StarFactor(GearPiece p, int stars)
         {
             Load();
-            if (p == null || stars <= 0) return 1;
+            if (p == null || stars <= 0 || StarPending(p, stars)) return 1;
             stars = Math.Min(stars, 5);
             string[] rule;
             if (!starRules.TryGetValue(p.Rarity, out rule)) return 1;
             if (rule[stars - 1] != "top") return 1 + Num(rule[stars - 1]) / 100;
-            double four = rule[3] == "top" ? 1 : 1 + Num(rule[3]) / 100;
+            double four = rule[3] == "top" || rule[3] == "?" ? 1 : 1 + Num(rule[3]) / 100;
             string[] t3rule;
-            double t3five = starRules.TryGetValue("Legendary", out t3rule) && t3rule[4] != "top" ? 1 + Num(t3rule[4]) / 100 : 1.6;
+            if (!starRules.TryGetValue("Legendary", out t3rule) || t3rule[4] == "top" || t3rule[4] == "?") return 1;   // nothing to reach yet
+            double t3five = 1 + Num(t3rule[4]) / 100;
             GearPiece t3 = null;
             foreach (var q in Gear) if (q.Class == p.Class && q.Rarity == "Legendary" && q.Slot == p.Slot && q.Known) { t3 = q; break; }
             double mine = Power(p), theirs = Power(t3);
@@ -423,12 +441,13 @@ namespace AzerothLauncher
             return Math.Max(four, 0.95 * t3five * theirs / mine);
         }
 
-        // true when a piece's number at these stars is an estimate (not straight from the game or its patch notes)
+        // true when a piece's number at these stars is worked out here rather than read from the game: "top"
         public static bool StarEstimate(GearPiece p, int stars)
         {
-            if (p == null || stars <= 0) return false;
-            if (stars >= 5) return p.Rarity != "Legendary";   // tier 3 at 5 stars: +60%, from the patch notes
-            return true;
+            Load();
+            if (p == null || stars <= 0 || StarPending(p, stars)) return false;
+            string[] rule;
+            return starRules.TryGetValue(p.Rarity, out rule) && rule[Math.Min(stars, 5) - 1] == "top";
         }
 
         static Dictionary<string, double> weights;
@@ -492,7 +511,9 @@ namespace AzerothLauncher
             b.Append(p.Name).Append('\n').Append(p.Rarity).Append(' ').Append(p.Kind == "Weapon" ? "" : p.Kind + " · ").Append(p.Slot);
             double f = StarFactor(p, stars);
             string est = StarEstimate(p, stars) ? "~" : "";
-            if (stars > 0) b.Append("\n").Append(Lang.T("Stars")).Append(": ").Append(stars).Append("/5").Append(est.Length > 0 ? "  (~ " + Lang.T("estimate") + ")" : "");
+            if (stars > 0)
+                b.Append("\n").Append(Lang.T("Stars")).Append(": ").Append(stars).Append("/5")
+                 .Append(StarPending(p, stars) ? ": " + Lang.T(StarsPending) : est.Length > 0 ? "  (~ " + Lang.T("estimate") + ")" : "");
             if (p.Known)
             {
                 if (p.Health > 0) b.Append("\n").Append(est).Append("+").Append((int)Math.Round(p.Health * f)).Append(" Health");

@@ -1739,3 +1739,15 @@ estimate
 = perkiraan
 not entered yet
 = belum dimasukkan
+Reached
+= Tercapai
+none yet
+= belum ada
+Set bonuses that change it:
+= Bonus set yang mengubahnya:
+Wear armor pieces of a set to see its bonuses here. Four pieces of two sets give both 4-piece bonuses.
+= Kenakan bagian zirah dari sebuah set untuk melihat bonusnya di sini. Empat bagian dari dua set memberi kedua bonus 4 bagian.
+{0}% of your ranks
+= {0}% dari peringkatmu
+waiting for clarification from dev
+= menunggu penjelasan dari pengembang

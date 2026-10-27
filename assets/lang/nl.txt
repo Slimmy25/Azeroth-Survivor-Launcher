@@ -1739,3 +1739,15 @@ estimate
 = schatting
 not entered yet
 = nog niet ingevoerd
+Reached
+= Behaald
+none yet
+= nog geen
+Set bonuses that change it:
+= Setbonussen die het veranderen:
+Wear armor pieces of a set to see its bonuses here. Four pieces of two sets give both 4-piece bonuses.
+= Draag pantserstukken van een set om hier de bonussen te zien. Vier stukken van twee sets geven beide 4-delige bonussen.
+{0}% of your ranks
+= {0}% van je rangen
+waiting for clarification from dev
+= wacht op uitleg van de ontwikkelaar

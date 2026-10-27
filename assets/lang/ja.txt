@@ -1740,3 +1740,15 @@ estimate
 = 推定
 not entered yet
 = 未入力
+Reached
+= 達成
+none yet
+= まだなし
+Set bonuses that change it:
+= これを変えるセットボーナス:
+Wear armor pieces of a set to see its bonuses here. Four pieces of two sets give both 4-piece bonuses.
+= セットの防具を装備すると、ここにボーナスが表示されます。2つのセットを4つずつ装備すると、両方の4点ボーナスが得られます。
+{0}% of your ranks
+= ランク全体の{0}%
+waiting for clarification from dev
+= 開発者からの説明待ち

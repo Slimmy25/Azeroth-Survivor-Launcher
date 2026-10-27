@@ -1739,3 +1739,15 @@ estimate
 = stima
 not entered yet
 = non ancora inserito
+Reached
+= Raggiunto
+none yet
+= ancora nessuno
+Set bonuses that change it:
+= Bonus del set che lo cambiano:
+Wear armor pieces of a set to see its bonuses here. Four pieces of two sets give both 4-piece bonuses.
+= Indossa pezzi d'armatura di un set per vederne qui i bonus. Quattro pezzi di due set danno entrambi i bonus a 4 pezzi.
+{0}% of your ranks
+= {0}% dei tuoi gradi
+waiting for clarification from dev
+= in attesa di chiarimenti dallo sviluppatore

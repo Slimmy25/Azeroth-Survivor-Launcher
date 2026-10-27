@@ -209,12 +209,16 @@ local function Abilities()
 	local b, name = Block();
 	local list = Sorted(classKey and b.abilities or DB().abilities, function(v) return Num(v.picks); end);
 	Head(out, "Abilities  -  " .. name);
+	-- every rank put into a spell, of every run: each spell's share is how much you lean on it
+	local allRanks = 0;
+	for i = 1, table.getn(list) do allRanks = allRanks + Num(list[i].v.ranks); end
 	for i = 1, table.getn(list) do
 		local a = list[i].v;
 		local nm = a.name or S().Pretty(list[i].key);
 		Row(out, { icon = SpellIcon(nm), name = nm, hex = "f5e9c8",
 		           sub = "Picked in " .. Big(a.picks) .. " runs (" .. Pct(a.picks, b.runs) .. ") · Win rate " .. Pct(a.wins, a.picks),
-		           value = Big(a.dmg) .. " damage", vsub = Num(a.bestRank) > 0 and ("Best rank " .. a.bestRank) or "",
+		           value = Big(a.dmg) .. " damage", vsub = (Num(a.bestRank) > 0 and ("Best rank " .. a.bestRank) or "") ..
+		                   (allRanks > 0 and Num(a.ranks) > 0 and (" · " .. math.floor(Num(a.ranks) * 100 / allRanks + 0.5) .. "% of your ranks") or ""),
 		           bar = Num(a.picks) / math.max(1, Num(b.runs)), bhex = "b39b62" });
 	end
 	if ( table.getn(list) == 0 ) then Note(out, "No abilities recorded yet."); end
@@ -389,8 +393,14 @@ local function History()
 		if ( (not classKey or r.class == classKey) and shown < 40 ) then
 			shown = shown + 1;
 			local hex = r.kind == "victory" and "1eff00" or r.kind == "defeat" and "ff4040" or "9d9d9d";
+			-- the run's spell focus: each spell with its rank and its share of the run's ranks, the biggest first
 			local parts = {};
-			for j = 1, table.getn(r.abilities or {}) do table.insert(parts, r.abilities[j].name or "?"); end
+			if ( AZSStats_SpellFocus ) then
+				local focus = AZSStats_SpellFocus(r.abilities);
+				for j = 1, table.getn(focus) do table.insert(parts, focus[j].name .. " " .. focus[j].rank .. " (" .. focus[j].pct .. "%)"); end
+			else
+				for j = 1, table.getn(r.abilities or {}) do table.insert(parts, r.abilities[j].name or "?"); end
+			end
 			Row(out, { icon = ClassIcon(r.class), name = (r.result or "") .. " · " .. (r.cname or "") .. " · " .. (r.zname or ""), hex = hex,
 			           sub = (r.date or "") .. (r.party and ("  with " .. r.party) or "") .. (r.killer and ("  slain by " .. r.killer) or ""),
 			           sub2 = table.concat(parts, ", "), value = Clock(r.t), vhex = hex,

@@ -674,6 +674,9 @@ namespace AzerothLauncher
         {
             var rows = new RowsBlock();
             rows.Empty = Lang.T("Abilities are recorded for runs played with the newest AZS Stats.");
+            // every rank put into a spell, of every run: each spell's share is how much you lean on it
+            double allRanks = 0;
+            foreach (var x in list) allRanks += x.Ranks;
             for (int i = 0; i < Math.Min(max, list.Count); i++)
             {
                 AbilityStat a = list[i];
@@ -690,6 +693,9 @@ namespace AzerothLauncher
                 row.Sub = Lang.T("Picked in " + Big(a.Picks) + " runs (" + Pct(a.Picks, runs) + "%) · Win rate " + Pct(a.Wins, a.Picks) + "%");
                 row.Value = Lang.T(Big(a.Damage) + " damage");
                 if (a.BestRank > 0) row.ValueSub = Lang.T("Best rank " + Big(a.BestRank));
+                if (allRanks > 0 && a.Ranks > 0)
+                    row.ValueSub = (row.ValueSub ?? "").Length > 0 ? row.ValueSub + " · " + Lang.F("{0}% of your ranks", Pct(a.Ranks, allRanks))
+                                                                     : Lang.F("{0}% of your ranks", Pct(a.Ranks, allRanks));
                 row.Bar = share;
                 rows.Rows.Add(row);
             }
@@ -778,8 +784,14 @@ namespace AzerothLauncher
                 row.Name = Lang.T(ResultName(r.Kind, r.Result)) + " · " + Pair(r.Class, r.Race.Length > 0 ? "(" + r.Race + ")" : "") +
                            (r.Zone.Length > 0 ? " · " + r.Zone : "");
                 row.NameColor = rc;
+                // the run's spell focus: each spell with its rank and its share of the run's ranks, the biggest first
                 var parts = new List<string>();
-                foreach (var a in r.Abilities) parts.Add(a.Picks > 0 ? a.Name + " " + Big(a.Picks) : a.Name);
+                double runRanks = 0;
+                foreach (var a in r.Abilities) runRanks += Math.Max(1, a.Picks);
+                var byRank = new List<AbilityStat>(r.Abilities);
+                byRank.Sort(delegate(AbilityStat x, AbilityStat y) { return y.Picks.CompareTo(x.Picks); });
+                foreach (var a in byRank)
+                    parts.Add(a.Picks > 0 ? a.Name + " " + Big(a.Picks) + " (" + Pct(Math.Max(1, a.Picks), runRanks) + "%)" : a.Name);
                 row.Sub = (r.Date.Length > 0 ? r.Date + "   " : "") +
                           (parts.Count > 0 ? string.Join(", ", parts.ToArray())
                                            : Lang.T("Survived " + Clock(r.Time) + " · Level " + Big(r.Level) + " · Kills " + Big(r.Kills) +

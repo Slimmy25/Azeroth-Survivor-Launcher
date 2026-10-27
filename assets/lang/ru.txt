@@ -1740,3 +1740,15 @@ estimate
 = оценка
 not entered yet
 = ещё не внесено
+Reached
+= Достигнуто
+none yet
+= пока нет
+Set bonuses that change it:
+= Бонусы комплектов, меняющие его:
+Wear armor pieces of a set to see its bonuses here. Four pieces of two sets give both 4-piece bonuses.
+= Наденьте предметы брони из комплекта, чтобы увидеть здесь его бонусы. По четыре предмета из двух комплектов дают оба бонуса за 4 предмета.
+{0}% of your ranks
+= {0}% ваших рангов
+waiting for clarification from dev
+= ожидает уточнения от разработчика

@@ -1740,3 +1740,15 @@ estimate
 = becslés
 not entered yet
 = még nincs megadva
+Reached
+= Elérve
+none yet
+= még egy sem
+Set bonuses that change it:
+= Szettbónuszok, amelyek módosítják:
+Wear armor pieces of a set to see its bonuses here. Four pieces of two sets give both 4-piece bonuses.
+= Viselj egy szett páncéldarabjait, hogy itt lásd a bónuszait. Két szett négy-négy darabja mindkét 4 darabos bónuszt adja.
+{0}% of your ranks
+= rangjaid {0}%-a
+waiting for clarification from dev
+= a fejlesztő pontosítására vár

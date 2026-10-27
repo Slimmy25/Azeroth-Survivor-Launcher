@@ -1740,3 +1740,15 @@ estimate
 = ค่าประมาณ
 not entered yet
 = ยังไม่ได้ใส่
+Reached
+= ได้แล้ว
+none yet
+= ยังไม่มี
+Set bonuses that change it:
+= โบนัสเซ็ตที่เปลี่ยนสิ่งนี้:
+Wear armor pieces of a set to see its bonuses here. Four pieces of two sets give both 4-piece bonuses.
+= สวมชิ้นเกราะของเซ็ตเพื่อดูโบนัสที่นี่ สี่ชิ้นจากสองเซ็ตให้โบนัส 4 ชิ้นทั้งสองเซ็ต
+{0}% of your ranks
+= {0}% ของระดับทั้งหมด
+waiting for clarification from dev
+= รอคำชี้แจงจากผู้พัฒนา

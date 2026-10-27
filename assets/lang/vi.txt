@@ -1740,3 +1740,15 @@ estimate
 = ước tính
 not entered yet
 = chưa nhập
+Reached
+= Đã đạt
+none yet
+= chưa có
+Set bonuses that change it:
+= Thưởng bộ thay đổi nó:
+Wear armor pieces of a set to see its bonuses here. Four pieces of two sets give both 4-piece bonuses.
+= Mặc các món giáp của một bộ để xem thưởng bộ ở đây. Bốn món của hai bộ cho cả hai thưởng 4 món.
+{0}% of your ranks
+= {0}% số bậc của bạn
+waiting for clarification from dev
+= đang chờ nhà phát triển làm rõ

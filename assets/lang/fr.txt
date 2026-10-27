@@ -1739,3 +1739,15 @@ estimate
 = estimation
 not entered yet
 = pas encore saisi
+Reached
+= Atteint
+none yet
+= aucun pour l'instant
+Set bonuses that change it:
+= Bonus d'ensemble qui le modifient :
+Wear armor pieces of a set to see its bonuses here. Four pieces of two sets give both 4-piece bonuses.
+= Portez des pièces d'armure d'un ensemble pour voir ses bonus ici. Quatre pièces de deux ensembles donnent les deux bonus 4 pièces.
+{0}% of your ranks
+= {0} % de vos rangs
+waiting for clarification from dev
+= en attente de précisions du développeur

@@ -1740,3 +1740,15 @@ estimate
 = 估計值
 not entered yet
 = 尚未錄入
+Reached
+= 已達成
+none yet
+= 暫無
+Set bonuses that change it:
+= 改變它的套裝加成：
+Wear armor pieces of a set to see its bonuses here. Four pieces of two sets give both 4-piece bonuses.
+= 穿上某套裝的護甲即可在此查看其加成。兩套各穿 4 件可同時獲得兩個 4 件加成。
+{0}% of your ranks
+= 你所有等級的 {0}%
+waiting for clarification from dev
+= 等待開發者說明
