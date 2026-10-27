@@ -21,7 +21,7 @@ nothing else: it runs on the .NET Framework 4.8 that comes with Windows 10 and 1
   not, the launcher downloads it, with a progress bar, and installs it next to itself.
 - The download comes from one of the game's three download hosts, picked at random, and the next one is tried if a
   host fails. The game's own download page is the last resort. Every download is checked against the game's known
-  checksums before it is installed.
+  checksums before it is installed. See [Download hosts](#download-hosts).
 - **PLAY** checks for a newer launcher, then starts the game. The game updates itself when it starts (it closes and
   opens again); the launcher follows it through that restart.
 - Nothing is downloaded until you press INSTALL. First-time setup only asks questions, all inside the launcher:
@@ -126,6 +126,21 @@ be installed. The exe appears in `dist`. Every push is also built on GitHub (**A
 Code signing is optional: `sign_build.bat` explains it. Never commit `sign_config.bat` or a certificate
 (`.gitignore` keeps them out).
 
+
+## Download hosts
+
+The launcher only downloads the game from hosts officially endorsed by both Aethus and the Azeroth Survivors mod
+team. Unofficial mirrors are never used.
+
+| Host | Run by | Check |
+| --- | --- | --- |
+| The game's download server | the game's team | SHA-256 and MD5 |
+| `azerothsurvivors-mirror.sandervspl.dev` | sandervspl | SHA-256 and MD5 |
+| Google Drive copy | a head moderator of the official Discord | MD5 |
+| <https://wow.aethus.pl/download> (last resort) | Aethus | a real .rar/.zip/.7z from the game's own site |
+
+The Google Drive copy is checked with MD5 only, by choice. MD5 can only be fooled by whoever made the file in the
+first place, and that copy is published by a trusted head moderator, so no further measures are taken for it.
 ## License
 
 The launcher's code and the AZS addons are under the [MIT License](LICENSE). Everything that comes from someone else

@@ -26,7 +26,10 @@ namespace AzerothLauncher
         public const string ClientUser = "AzerothSurvivors_uSZfhjS", ClientPassword = "AzerothSurvivors_uSZfhjS";
         // The developers' backup host: a page with a link to the newest archive and its SHA-256 (no login).
         public const string ClientMirrorUrl = "https://azerothsurvivors-mirror.sandervspl.dev/";
-        // A third host, on Google Drive (the same game in its own archive, so its own MD5).
+        // A third host, on Google Drive (the same game in its own archive, so its own MD5). This copy is published by one
+        // of the head moderators of the official Discord, a trusted source: it is kept with its MD5 check and no further
+        // measures, by choice (MD5 can only be fooled by the person who made the file, see "Download hosts" in the
+        // README). Only hosts endorsed by both Aethus and the mod team are ever used; no unofficial mirrors.
         public const string ClientDriveId = "12EHYJrgdANtgZvND49L_cxQwoObTbkWq";
         // The last resort: the game's own download page. Never one of the three picked at random; only tried after
         // all three have failed. Its archive may be newer than the checksums below, so it is accepted when it is a
