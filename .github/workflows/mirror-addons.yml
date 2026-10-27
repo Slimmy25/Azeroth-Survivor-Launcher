@@ -56,10 +56,12 @@ jobs:
                 (cd addons && zip -qr "../mirror/$file" "${parts[@]}")
                 ;;
               github-latest:*)                           # the newest release's .zip of a GitHub repository
-                repo="${url#github-latest:}"
+                # "github-latest:<owner>/<repo>:<prefix>" takes only a .zip whose name starts with <prefix>
+                spec="${url#github-latest:}"; repo="${spec%%:*}"; prefix=""
+                if [ "$spec" != "$repo" ]; then prefix="${spec#*:}"; fi
                 zipurl="$(curl -fsSL -H "Accept: application/vnd.github+json" "https://api.github.com/repos/$repo/releases/latest" \
-                          | jq -r '[.assets[] | select(.name | test("\\.zip$"; "i"))][0].browser_download_url')"
-                if [ -z "$zipurl" ] || [ "$zipurl" = "null" ]; then echo "::error::$repo has no .zip in its latest release"; exit 1; fi
+                          | jq -r --arg p "$prefix" '[.assets[] | select((.name | test("\\.zip$"; "i")) and (.name | startswith($p)))][0].browser_download_url')"
+                if [ -z "$zipurl" ] || [ "$zipurl" = "null" ]; then echo "::error::$repo has no .zip${prefix:+ starting with $prefix} in its latest release"; exit 1; fi
                 echo "Downloading $file from $zipurl (latest release of $repo)"
                 curl -fsSL --retry 3 -A "AzerothSurvivorsLauncher/1.0" -o "mirror/$file" "$zipurl"
                 ;;

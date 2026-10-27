@@ -1622,3 +1622,5 @@ switched off: the two conflict.
 = kikapcsolva: a kettő ütközik.
 these two can't be on together. Switching one on switches the other off.
 = ez a kettő nem lehet egyszerre bekapcsolva. Ha az egyiket bekapcsolod, a másik kikapcsol.
+Flat, dark unit frames and a compact action bar, Plater-style nameplates (Survivor Plates), luck and card odds on the XP bar, a tabbed chat panel and automatic raid marks. Can't be on together with AZS Minor Mods.
+= Lapos, sötét egységkeretek és tömör akciósáv, Plater-stílusú névtáblák (Survivor Plates), szerencse és kártyaesélyek az XP-sávon, füles csevegőpanel és automatikus raidjelölők. Nem lehet egyszerre bekapcsolva az AZS Minor Modsszal.
