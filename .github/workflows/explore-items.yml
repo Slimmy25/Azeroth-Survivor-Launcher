@@ -1,0 +1,12 @@
+# Temporary developer probe (tools/explore_items.py): findings appear as notes on the run. Removed when done.
+name: Explore items
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 tools/explore_items.py
