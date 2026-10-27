@@ -32,3 +32,28 @@
 - New in Download More under UI: AetherHUD by Rehabrocket, a complete interface (run clock with the boss timeline, boss
   bars, enemy plates, unit frames, skill bar, combat meter, ring minimap). Like the other interfaces it is pick-one:
   switching it on switches Survivor UI, SurvivorsDragonUi, Keijin UI, Bordo UI or BlackwellUI off.
+
+### First-time setup (Major Update)
+- Setup no longer opens with "Welcome, Adventurer": each page sits at the top of the window like every other section,
+  with "Step X of 4" in the top right corner.
+- Setup can't be closed or left for later until it is done: no LATER button, and the window's close button waits.
+  Other sections stay closed while it runs.
+- New order: language, your save, cloud and folders, then AZS Stats, then the other addons.
+- Folders that aren't there yet say "Created if not found" and are created when setup is done (no more "not found -
+  please choose it" warning and "Finish anyway?" question for the game's own folders).
+- When the game isn't on the PC yet, setup ends with a page that says it will download the game, with DOWNLOAD THE GAME
+  and CANCEL SETUP. Cancelling setup, or stopping that download, shows a last page that explains what the launcher is
+  for, with START SETUP AGAIN.
+- PLAY is grayed out until setup is done; without the game it reads REQUIRES INSTALL.
+
+### Everything else (Major Update)
+- After the game closes, the launcher notices much sooner: it waits 3 seconds for the game to come back (45 seconds
+  after the game updated itself) instead of 10 and 90, without the extra pauses, and it checks for the game far more
+  cheaply. While your progress is still uploading, RUN SETUP AGAIN and INSTALL say so instead of "Close the game first".
+- The back arrow goes back along the way you came (the Guide page, Options tab or Stats tab you were on), not just one
+  level up.
+- A click on a word in the path at the top opens its list right there, where the hover list opens (it used to open at
+  the bottom right).
+- No more NEXT button at the end of Guide pages: hover or click a step of the path at the top to go to any other page or
+  topic. The Changelog keeps its PREVIOUS and NEXT.
+- Options > GRAPHICS no longer starts with "The game's own settings. They take effect the next time the game starts."

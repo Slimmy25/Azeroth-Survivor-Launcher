@@ -646,41 +646,7 @@ namespace AzerothLauncher
             var sp = MakeThinScroll(panel, new Rectangle(20, GuideTop, PW - 40, by - 10 - GuideTop), GuideCardBg, Theme.Bronze,
                                     Theme.GoldDim, Theme.Gold);
             GuideBody(sp, inPage ? topic.Title : "Guide", shown);
-            // NEXT at the end of the page: the topic's next page, else the next topic of the same group (New Player's
-            // topics one after the other), so the guide reads in order
-            string nextTitle = null;
-            Action next = null;
-            int t = gTopic;
-            if (inPage && gPage + 1 < topic.Pages.Count)
-            {
-                int np = gPage + 1;
-                nextTitle = topic.Pages[np].Title;
-                next = delegate { SetGuideView(t, np); };
-            }
-            else
-            {
-                var tabs = GroupTabs(GroupOf(topic.Title), topics);
-                int at = tabs.IndexOf(t);
-                if (at >= 0 && at + 1 < tabs.Count)
-                {
-                    int nt = tabs[at + 1];
-                    nextTitle = nt == -2 ? TalentBuilder : nt == -3 ? GearPlanner : topics[nt].Title;
-                    next = delegate { if (nt < 0) OpenGuideTab(nt); else SetGuideView(nt, -1); };
-                }
-            }
-            if (topic.Title == "Classes" && inPage) next = null;   // a class page: the path above leads to the other classes
-            if (next != null)
-            {
-                int bottom = 0;
-                foreach (Control c in sp.Controls) bottom = Math.Max(bottom, c.Bottom);
-                var nb = new WowButton(Lang.T("NEXT") + ": " + Lang.T(nextTitle).ToUpperInvariant() + " ›", next, 300, 30, 9);
-                nb.Location = new Point(sp.ClientSize.Width - 8 - nb.Width - 10, bottom + 6);
-                sp.Controls.Add(nb);
-                var pad = new Panel();
-                pad.BackColor = sp.BackColor;
-                pad.Bounds = new Rectangle(4, nb.Bottom, 1, 10);
-                sp.Controls.Add(pad);
-            }
+            // no NEXT at the end of a page: the path above (hover a step) leads to every other page or topic
         }
 
         void GuideBody(ScrollPanel sp, string crumb, GuidePage page)
