@@ -23,6 +23,14 @@
 - New featured video in the front page's rotation and at the top of MORE VIDEOS: https://www.youtube.com/watch?v=AxcvhgPfYHU
 
 ### The Guide
+- New topic **Items** (Gameplay): every class's gear in every rarity (Common, Uncommon, Rare, Epic, PvP, Legendary)
+  with the boss and zone that drop each piece and the chance, and every ring, trinket and amulet with what it does
+  and its numbers, read from the game itself. Item names are links: point at one for its card, click it for its page.
+- New **Gear Planner** (Theorycrafting): a character sheet laid out like the game's (C). Pick a class, click a slot to
+  put in a piece of its gear, an amulet, two rings and two trinkets, and see what they add up to: Health, Damage,
+  Haste, Crit, Crit Dmg, Armor, Area, Targets, Echo, Speed, Regen and Pickup, and the Run Stats panel beside it.
+  Right-click a slot to empty it. For now the bonuses of the Priest's Legendary and PvP gear are in; the other
+  pieces are listed and marked * until their bonuses are added.
 - Races: how to open any race to any class on the Rewards tab (new in the game's 0.120.0).
 - Achievements & Rewards: the Races reward, and co-op achievements counting for the whole party.
 - Talent Tree Builder: leaving a class's talent trees now clears the points you put in, so every visit starts from an

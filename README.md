@@ -45,16 +45,20 @@ Everything a player needs, in three groups:
   rewards, and how addons work.
 - **Gameplay**: all nine classes (each with its spell pool, the spells' icons and the talents that change them),
   races, all twelve zones and their bosses, level-ups and cards, talents, pickups, caches and guardians, gear and the
-  Armory, and co-op.
-- **Theorycrafting**: the **Talent Tree Builder** and players' **Build Guides**.
+  Armory, **Items** (every class's gear in every rarity with the boss that drops it, and every ring, trinket and
+  amulet with its numbers), and co-op.
+- **Theorycrafting**: the **Talent Tree Builder**, the **Gear Planner** and players' **Build Guides**.
 
 A search box covers every page. Hovering a spell, talent or item shows what the game itself says about it. Short
 how-to videos play inside the launcher. The same guide is in the game with the **AZS Handbook** addon (`/handbook`).
 
 ### Tools to theorycraft
 - **Talent Tree Builder**: all three trees of every class, as in the game. Click to add a point and right-click to
-  take one back. Each row opens with 5 points per row above it in its own tree, up to 51 points. Each class keeps
-  its own build.
+  take one back. Each row opens with 5 points per row above it in its own tree, up to 51 points. The build is
+  cleared when you leave the trees.
+- **Gear Planner**: a character sheet laid out like the game's. Put a class's gear and any rings, trinkets and
+  amulet in its slots and see what they add, on the sheet's stats and the Run Stats beside it. Gear whose bonuses
+  are not known yet is marked.
 - **Build Guides**: players' build videos, credited to them, for every class.
 - **STATS** (optional, with the AZS Stats addon): every run's result and DPS, DPS over time, your best builds with
   their spells, records per class, race and zone (highest DPS solo and in co-op), level-up saves, legendaries, a
