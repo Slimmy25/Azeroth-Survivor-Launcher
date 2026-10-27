@@ -3,7 +3,7 @@ import re, struct, sys, os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from game_talents import get, wasm_url, memory
 data = get(wasm_url()); mem = memory(data)
-u = lambda q: struct.unpack_from("<I", mem, q)[0]
+u = lambda q: struct.unpack_from("<I", mem, q)[0] if 0 <= q <= len(mem) - 4 else 0
 fl = lambda q: struct.unpack_from("<f", mem, q)[0]
 out = []; say = out.append
 def word(w):
@@ -23,7 +23,11 @@ def raw(a, b):
         if q % 4: line.append("%02x" % mem[q]); q += 1; continue
         line.append(word(u(q))); q += 4
     return " ".join(line)
-say(raw(0x506ab0, 0x507280))
+import traceback
+try:
+    say(raw(0x506ab0, 0x507280))
+except Exception:
+    say(traceback.format_exc())
 for k in range(10):
     a = 0x480f54 + k * 92
     say("pvp %d: %s" % (k, " ".join(word(u(a + 4 * i)) for i in range(23))))
