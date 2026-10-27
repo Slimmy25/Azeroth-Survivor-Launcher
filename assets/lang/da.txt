@@ -1685,3 +1685,5 @@ Your Gear Planner set:
 = Dit sæt fra udstyrsplanlæggeren:
 Spells that affect this:
 = Besværgelser, der påvirker den:
+Found your game and its saves: first-time setup skipped. Every setting is in Options.
+= Dit spil og dets gemte spil blev fundet: førstegangsopsætningen springes over. Alle indstillinger findes under Indstillinger.

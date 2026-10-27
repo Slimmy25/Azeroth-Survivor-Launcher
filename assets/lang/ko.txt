@@ -1686,3 +1686,5 @@ Your Gear Planner set:
 = 장비 설계기 세트:
 Spells that affect this:
 = 이 주문에 영향을 주는 주문:
+Found your game and its saves: first-time setup skipped. Every setting is in Options.
+= 게임과 저장 파일을 찾았습니다. 첫 설정을 건너뜁니다. 모든 설정은 옵션에 있습니다.

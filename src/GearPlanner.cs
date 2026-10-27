@@ -298,7 +298,7 @@ namespace AzerothLauncher
                     else
                     {
                         Image img = IconOf(o);
-                        if (img != null) g.DrawImage(img, icon);
+                        if (img != null) Theme.Draw(g, img, icon);
                         else
                         {
                             using (var b = new SolidBrush(Color.FromArgb(70, RarityColor(RarityOf(o))))) g.FillRectangle(b, icon);
@@ -352,7 +352,7 @@ namespace AzerothLauncher
             if (o != null)
             {
                 Image img = IconOf(o);
-                if (img != null) g.DrawImage(img, Rectangle.Inflate(r, -2, -2));
+                if (img != null) Theme.Draw(g, img, Rectangle.Inflate(r, -2, -2));
                 else
                 {
                     using (var b = new SolidBrush(Color.FromArgb(70, RarityColor(RarityOf(o))))) g.FillRectangle(b, Rectangle.Inflate(r, -3, -3));

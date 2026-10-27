@@ -1686,3 +1686,5 @@ Your Gear Planner set:
 = Ваш набор из планировщика:
 Spells that affect this:
 = Заклинания, которые на него влияют:
+Found your game and its saves: first-time setup skipped. Every setting is in Options.
+= Игра и её сохранения найдены: первоначальная настройка пропущена. Все параметры находятся в разделе «Настройки».

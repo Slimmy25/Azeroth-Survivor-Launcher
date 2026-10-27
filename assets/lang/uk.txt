@@ -1686,3 +1686,5 @@ Your Gear Planner set:
 = Ваш набір із планувальника:
 Spells that affect this:
 = Заклинання, які на нього впливають:
+Found your game and its saves: first-time setup skipped. Every setting is in Options.
+= Гру та її збереження знайдено: початкове налаштування пропущено. Усі параметри — у «Налаштуваннях».

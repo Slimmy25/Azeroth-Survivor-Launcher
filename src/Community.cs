@@ -787,7 +787,7 @@ namespace AzerothLauncher
                 {
                     float s = Math.Max((float)Width / img.Width, Height / (img.Height * 0.75f));
                     float iw = img.Width * s, ih = img.Height * s;
-                    g.DrawImage(img, (Width - iw) / 2, (Height - ih) / 2, iw, ih);
+                    Theme.Draw(g, img, (Width - iw) / 2, (Height - ih) / 2, iw, ih);
                     if (!hover) using (var dim = new SolidBrush(Color.FromArgb(50, 0, 0, 0))) g.FillRectangle(dim, r);
                 }
                 else

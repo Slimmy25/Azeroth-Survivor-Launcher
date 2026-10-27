@@ -70,7 +70,7 @@ namespace AzerothLauncher
             g.Clear(BackColor);
             int w = Math.Max(Width, 200);
             Image bar = Retro.Get("long");                  // the launcher's blue stone, framed in gold
-            if (bar != null) g.DrawImage(bar, new Rectangle(22, 7, w - 26, 22));
+            if (bar != null) Theme.Draw(g, bar, new Rectangle(22, 7, w - 26, 22));
             using (var p = new Pen(Theme.Hex("#c49a48"), 2)) g.DrawRectangle(p, 22, 7, w - 26, 21);
             Theme.Smooth(g);
             hot.Clear();
@@ -136,7 +136,7 @@ namespace AzerothLauncher
                     if (x >= right) break;
                 }
             }
-            if (Theme.Portrait != null) g.DrawImage(Theme.Portrait, 2, 1, 36, 36);
+            if (Theme.Portrait != null) Theme.Draw(g, Theme.Portrait, new Rectangle(2, 1, 36, 36));
             Rectangle xb = CloseBox;
             if (xb.IsEmpty) return;
             using (var b = new SolidBrush(Theme.Hex("#2a1c1c"))) g.FillRectangle(b, xb);

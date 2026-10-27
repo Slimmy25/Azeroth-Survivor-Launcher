@@ -1685,3 +1685,5 @@ Your Gear Planner set:
 = Settet ditt fra utstyrsplanleggeren:
 Spells that affect this:
 = Trylleformler som påvirker den:
+Found your game and its saves: first-time setup skipped. Every setting is in Options.
+= Spillet og lagringene ble funnet: førstegangsoppsettet hoppes over. Alle innstillinger finner du under Alternativer.

@@ -152,9 +152,87 @@ namespace AzerothLauncher
             {
                 using (Stream s = Util.ResourceStream(name))
                 using (var tmp = Image.FromStream(s))
-                    return new Bitmap(tmp);
+                    return Fast(tmp);
             }
             catch (Exception) { return null; }
+        }
+
+        // ---- speed: pictures are kept premultiplied (GDI+ draws those several times faster) and, once drawn at a
+        // size, kept at that size, so a repaint copies pixels instead of resampling the picture every time
+        public static Bitmap Fast(Image src)
+        {
+            var b = new Bitmap(src.Width, src.Height, System.Drawing.Imaging.PixelFormat.Format32bppPArgb);
+            b.SetResolution(96, 96);
+            using (var g = Graphics.FromImage(b))
+            {
+                g.CompositingMode = CompositingMode.SourceCopy;
+                g.DrawImage(src, new Rectangle(0, 0, src.Width, src.Height), 0, 0, src.Width, src.Height, GraphicsUnit.Pixel);
+            }
+            return b;
+        }
+
+        static readonly Dictionary<Image, Dictionary<long, Bitmap>> scaled = new Dictionary<Image, Dictionary<long, Bitmap>>();
+        static int scaledCount;
+
+        // the picture at w x h, made once (high quality) and kept
+        public static Image Scaled(Image src, int w, int h)
+        {
+            if (src == null || w <= 0 || h <= 0) return src;
+            lock (scaled)
+            {
+                Dictionary<long, Bitmap> sizes;
+                if (!scaled.TryGetValue(src, out sizes)) scaled[src] = sizes = new Dictionary<long, Bitmap>();
+                long key = ((long)w << 32) | (uint)h;
+                Bitmap b;
+                if (sizes.TryGetValue(key, out b)) return b;
+                if (scaledCount > 1500)                      // a long session with many pictures: start over
+                {
+                    foreach (var d in scaled.Values) foreach (var bm in d.Values) bm.Dispose();
+                    scaled.Clear();
+                    scaledCount = 0;
+                    scaled[src] = sizes = new Dictionary<long, Bitmap>();
+                }
+                try
+                {
+                    b = new Bitmap(w, h, System.Drawing.Imaging.PixelFormat.Format32bppPArgb);
+                    b.SetResolution(96, 96);
+                    using (var g = Graphics.FromImage(b))
+                    {
+                        g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                        g.PixelOffsetMode = PixelOffsetMode.HighQuality;
+                        g.CompositingQuality = CompositingQuality.HighQuality;
+                        using (var ia = new System.Drawing.Imaging.ImageAttributes())
+                        {
+                            ia.SetWrapMode(WrapMode.TileFlipXY);   // no faded edge
+                            g.DrawImage(src, new Rectangle(0, 0, w, h), 0, 0, src.Width, src.Height, GraphicsUnit.Pixel, ia);
+                        }
+                    }
+                }
+                catch (Exception) { return src; }           // a picture being replaced: drawn as it is
+                sizes[key] = b;
+                scaledCount++;
+                return b;
+            }
+        }
+
+        // draws the picture into r from its kept copy at that size: a plain copy of pixels
+        public static void Draw(Graphics g, Image img, Rectangle r)
+        {
+            if (img == null || r.Width <= 0 || r.Height <= 0) return;
+            Image s = Scaled(img, r.Width, r.Height);
+            InterpolationMode im = g.InterpolationMode;
+            PixelOffsetMode pm = g.PixelOffsetMode;
+            g.InterpolationMode = InterpolationMode.NearestNeighbor;
+            g.PixelOffsetMode = PixelOffsetMode.Half;
+            try { g.DrawImage(s, r.X, r.Y, r.Width, r.Height); }
+            catch (Exception) { }
+            g.InterpolationMode = im;
+            g.PixelOffsetMode = pm;
+        }
+
+        public static void Draw(Graphics g, Image img, float x, float y, float w, float h)
+        {
+            Draw(g, img, new Rectangle((int)Math.Round(x), (int)Math.Round(y), (int)Math.Round(w), (int)Math.Round(h)));
         }
 
         public static void Smooth(Graphics g)
@@ -265,7 +343,20 @@ namespace AzerothLauncher
 
         // the biggest font size (from size down) at which the label fits the button: on one line, or on two when a
         // translation is long, but never cut off and never with a word broken in the middle
+        static readonly Dictionary<string, float> fitted = new Dictionary<string, float>();
+
+        // the label's font size that fits, worked out once per label, size and room (a repaint only looks it up)
         public static float FitLabel(Graphics g, string label, float size, float width, float height)
+        {
+            string key = label + "\u0001" + size + "|" + width + "|" + height + "|" + Theme.Zoom + "|" + Theme.FontName;
+            float r;
+            lock (fitted) if (fitted.TryGetValue(key, out r)) return r;
+            r = FitLabelNow(g, label, size, width, height);
+            lock (fitted) { if (fitted.Count > 4000) fitted.Clear(); fitted[key] = r; }
+            return r;
+        }
+
+        static float FitLabelNow(Graphics g, string label, float size, float width, float height)
         {
             float fs = size;
             for (; fs > 5.5f; fs -= 0.5f)
@@ -341,9 +432,7 @@ namespace AzerothLauncher
         {
             int i = grayed ? 3 : down ? 2 : (hover || active || selected) ? 1 : 0;
             Image img = Skin.Length > i && Skin[i] != null ? Skin[i] : Skin[0];
-            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-            g.PixelOffsetMode = PixelOffsetMode.HighQuality;
-            g.DrawImage(img, new Rectangle(0, 0, w, h));
+            Theme.Draw(g, img, new Rectangle(0, 0, w, h));
             Theme.Smooth(g);
             Color fg = grayed ? Theme.Hex("#9a948a") : (hover || selected) ? Theme.Hex("#fff2b0") : Theme.Hex("#f2c14e");
             float tx = 0, tw = w;
@@ -1062,6 +1151,39 @@ namespace AzerothLauncher
     }
 
     // Base for the pop-up windows: dark frame with a gold border, the back arrow top left, content stacked below.
+    // the darkened picture of the launcher behind a dialog shown inside it: drawn from a kept picture, only the part
+    // that needs it (a plain Panel with a BackgroundImage redraws the whole picture, slowly, whenever the dialog changes)
+    public class ShadePanel : Panel
+    {
+        Bitmap pic;
+
+        public ShadePanel(Bitmap pic)
+        {
+            this.pic = pic;
+            SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer, true);
+            BackColor = Color.Black;
+        }
+
+        protected override void OnPaintBackground(PaintEventArgs e) { }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            Graphics g = e.Graphics;
+            if (pic == null) { g.Clear(Color.Black); return; }
+            Rectangle r = Rectangle.Intersect(e.ClipRectangle, new Rectangle(0, 0, pic.Width, pic.Height));
+            g.CompositingMode = CompositingMode.SourceCopy;
+            g.InterpolationMode = InterpolationMode.NearestNeighbor;
+            g.PixelOffsetMode = PixelOffsetMode.Half;
+            if (r.Width > 0 && r.Height > 0) g.DrawImage(pic, r, r, GraphicsUnit.Pixel);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && pic != null) { pic.Dispose(); pic = null; }
+            base.Dispose(disposing);
+        }
+    }
+
     public class WowDialog : Form
     {
         protected readonly VStack Body;
@@ -1073,6 +1195,7 @@ namespace AzerothLauncher
             Text = Lang.T(title);
             Icon = Theme.AppIcon;
             BackColor = Theme.BgBottom;
+            DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             ShowInTaskbar = true;          // its own taskbar button, so it does not depend on the launcher being open
@@ -1093,8 +1216,28 @@ namespace AzerothLauncher
         }
 
         // starts a page: empties the window and puts the back arrow in its corner
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        static extern IntPtr SendMessage(IntPtr h, int msg, IntPtr w, IntPtr l);
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        static extern bool RedrawWindow(IntPtr h, IntPtr rect, IntPtr rgn, uint flags);
+        bool pageFrozen;
+
+        // a new page is put together out of sight and shown at once (not drawn piece by piece as it is built)
+        void FreezePage(bool on)
+        {
+            if (!frame.IsHandleCreated) { pageFrozen = false; return; }
+            if (on && !pageFrozen) { SendMessage(frame.Handle, 0x000B, IntPtr.Zero, IntPtr.Zero); pageFrozen = true; }
+            else if (!on && pageFrozen)
+            {
+                pageFrozen = false;
+                SendMessage(frame.Handle, 0x000B, new IntPtr(1), IntPtr.Zero);
+                RedrawWindow(frame.Handle, IntPtr.Zero, IntPtr.Zero, 0x0004 | 0x0001 | 0x0080 | 0x0100 | 0x0400);
+            }
+        }
+
         protected void Begin()
         {
+            FreezePage(true);
             Body.ClearItems();
             Body.Add(UI.BackArrow(delegate { if (BackAction != null) BackAction(); }), Align.Left, 20, 12, 0, 0);
         }
@@ -1105,7 +1248,8 @@ namespace AzerothLauncher
             Body.Arrange(0);
             frame.Size = new Size(Body.Width + 4, Body.Height + 4);
             ClientSize = new Size(frame.Width + 20, frame.Height + 20);
-            frame.Invalidate();
+            if (pageFrozen) FreezePage(false);
+            else frame.Invalidate();
         }
 
         protected override void OnKeyDown(KeyEventArgs e)
@@ -1150,8 +1294,11 @@ namespace AzerothLauncher
         // ---- shown inside the launcher: over a darkened picture of it, and nothing behind it can be clicked until it
         // is answered. No window of its own (when the launcher is hidden or minimized, it opens as a window instead).
         public static Form Host;                              // the launcher, set when it starts
-        Panel shade;
+        ShadePanel shade;
         bool closedInside;
+
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        static extern uint MsgWaitForMultipleObjectsEx(uint count, IntPtr handles, uint ms, uint wake, uint flags);
 
         static bool HostUsable()
         {
@@ -1163,7 +1310,7 @@ namespace AzerothLauncher
         {
             if (!HostUsable()) return false;
             Form h = Host;
-            var bmp = new Bitmap(Math.Max(1, h.ClientSize.Width), Math.Max(1, h.ClientSize.Height));
+            var bmp = new Bitmap(Math.Max(1, h.ClientSize.Width), Math.Max(1, h.ClientSize.Height), System.Drawing.Imaging.PixelFormat.Format32bppPArgb);
             // the launcher as it is on screen (DrawToBitmap leaves the section window and its scrolled lists black, and
             // is slow enough to flash): copied from the screen, then dimmed
             bool copied = false;
@@ -1177,8 +1324,7 @@ namespace AzerothLauncher
             if (!copied) try { h.DrawToBitmap(bmp, new Rectangle(Point.Empty, bmp.Size)); } catch (Exception) { }
             using (var g = Graphics.FromImage(bmp))
             using (var dim = new SolidBrush(Color.FromArgb(175, 0, 0, 0))) g.FillRectangle(dim, 0, 0, bmp.Width, bmp.Height);
-            shade = new Panel();
-            shade.BackgroundImage = bmp;
+            shade = new ShadePanel(bmp);
             shade.Bounds = new Rectangle(Point.Empty, h.ClientSize);
             TopMost = false;
             ShowInTaskbar = false;
@@ -1204,15 +1350,12 @@ namespace AzerothLauncher
 
         void RemoveShade()
         {
-            Panel s = shade;
+            ShadePanel s = shade;
             shade = null;
             if (s == null) return;
             if (s.Controls.Contains(this)) s.Controls.Remove(this);
             if (s.Parent != null) s.Parent.Controls.Remove(s);
-            Image img = s.BackgroundImage;
-            s.BackgroundImage = null;
-            s.Dispose();
-            if (img != null) img.Dispose();
+            s.Dispose();                                     // and its picture
         }
 
         // like ShowDialog, but inside the launcher: returns when it is closed
@@ -1222,7 +1365,8 @@ namespace AzerothLauncher
             while (!closedInside && !IsDisposed && Host != null && !Host.IsDisposed)
             {
                 Application.DoEvents();
-                if (!closedInside) System.Threading.Thread.Sleep(10);
+                // sleeps until the next click, key or paint arrives (not a fixed pause: the dialog answers at once)
+                if (!closedInside) MsgWaitForMultipleObjectsEx(0, IntPtr.Zero, 100, 0x04FF, 0x0004);
             }
             RemoveShade();
             return DialogResult;
@@ -1314,12 +1458,10 @@ namespace AzerothLauncher
         {
             Image img = hover ? hot : normal;
             if (img == null) return;
-            e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
-            e.Graphics.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
             // the symbol keeps its own proportions (65 x 48), centred
             float s = Math.Min((float)Width / img.Width, (float)Height / img.Height);
             float w = img.Width * s, h = img.Height * s;
-            e.Graphics.DrawImage(img, (Width - w) / 2, (Height - h) / 2, w, h);
+            Theme.Draw(e.Graphics, img, (Width - w) / 2, (Height - h) / 2, w, h);
         }
     }
 

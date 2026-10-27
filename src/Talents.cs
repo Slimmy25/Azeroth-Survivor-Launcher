@@ -281,7 +281,7 @@ namespace AzerothLauncher
                 var r = new Rectangle(x0 + t.Col * cell + (cell - ic) / 2, y0 + t.Row * cell + (cell - ic) / 2 - 3, ic, ic);
                 cells.Add(new KeyValuePair<Rectangle, Talent>(r, t));
                 Image img = SpellIcons.Icon(t.Icon, this);
-                if (img != null) g.DrawImage(img, r);
+                if (img != null) Theme.Draw(g, img, r);
                 else using (var b = new SolidBrush(Theme.Hex("#2a2218"))) g.FillRectangle(b, r);
                 int have = Build != null ? Build.Get(t) : 0;
                 bool locked = Build != null && have == 0 && !Build.Open(t);
@@ -437,7 +437,7 @@ namespace AzerothLauncher
             }
             var ir = new Rectangle(8, 8, Ic, Ic);
             Image img = SpellIcons.Spell(Regex.Replace(name, @"\s*\(.*\)$", ""), this);
-            if (img != null) g.DrawImage(img, ir);
+            if (img != null) Theme.Draw(g, img, ir);
             else using (var b = new SolidBrush(Theme.Hex("#2a2218"))) g.FillRectangle(b, ir);
             using (var p = new Pen(Theme.Hex("#8a7040"), 1)) g.DrawRectangle(p, ir);
             using (var b = new SolidBrush(Theme.Gold)) g.DrawString(name, Theme.F(10.5f, FontStyle.Bold), b, Ic + 16, 5);
@@ -457,7 +457,7 @@ namespace AzerothLauncher
                 if (sx + 18 > Width - 6) break;
                 var r = new Rectangle((int)sx, (int)y, 18, 18);
                 Image si = SpellIcons.Spell(sp.Key, this);
-                if (si != null) g.DrawImage(si, r);
+                if (si != null) Theme.Draw(g, si, r);
                 else using (var b = new SolidBrush(Theme.Hex("#2a2218"))) g.FillRectangle(b, r);
                 using (var p = new Pen(sp.Key == overSpell ? Theme.Hex("#fff2b0") : Theme.Hex("#8a7040"), 1)) g.DrawRectangle(p, r);
                 spellChips.Add(new KeyValuePair<Rectangle, KeyValuePair<string, string>>(r, sp));
@@ -476,7 +476,7 @@ namespace AzerothLauncher
                 Image ti = SpellIcons.Icon(t.Icon, this);
                 var r = new Rectangle((int)x, (int)y, 18, 18);
                 if (x + 18 > Width - 6) break;
-                if (ti != null) g.DrawImage(ti, r);
+                if (ti != null) Theme.Draw(g, ti, r);
                 else using (var b = new SolidBrush(Theme.Hex("#2a2218"))) g.FillRectangle(b, r);
                 using (var p = new Pen(t == over ? Theme.Hex("#fff2b0") : Theme.Hex("#8a7040"), 1)) g.DrawRectangle(p, r);
                 chips.Add(new KeyValuePair<Rectangle, Talent>(r, t));

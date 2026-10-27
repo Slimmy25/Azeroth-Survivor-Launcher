@@ -1327,7 +1327,7 @@ namespace AzerothLauncher
                     // YouTube's picture has black bars above and below: fill the box with its middle
                     float s = Math.Max((float)tw / img.Width, (float)th / (img.Height * (ytId != null ? 0.75f : 1f)));
                     float iw = img.Width * s, ih = img.Height * s;
-                    g.DrawImage(img, pic.X + (tw - iw) / 2, pic.Y + (th - ih) / 2, iw, ih);
+                    Theme.Draw(g, img, pic.X + (tw - iw) / 2, pic.Y + (th - ih) / 2, iw, ih);
                     if (!hover) using (var dim = new SolidBrush(Color.FromArgb(50, 0, 0, 0))) g.FillRectangle(dim, pic);
                 }
                 else

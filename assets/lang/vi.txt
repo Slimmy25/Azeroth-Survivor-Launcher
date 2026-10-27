@@ -1686,3 +1686,5 @@ Your Gear Planner set:
 = Bộ trang bị từ trình lên trang bị của bạn:
 Spells that affect this:
 = Phép ảnh hưởng đến phép này:
+Found your game and its saves: first-time setup skipped. Every setting is in Options.
+= Đã tìm thấy trò chơi và bản lưu: bỏ qua thiết lập lần đầu. Mọi cài đặt đều nằm trong Tùy chọn.

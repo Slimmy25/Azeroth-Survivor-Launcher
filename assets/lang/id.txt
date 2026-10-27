@@ -1685,3 +1685,5 @@ Your Gear Planner set:
 = Set perencana perlengkapanmu:
 Spells that affect this:
 = Mantra yang memengaruhinya:
+Found your game and its saves: first-time setup skipped. Every setting is in Options.
+= Game dan simpanannya ditemukan: penyiapan pertama dilewati. Semua pengaturan ada di Opsi.
