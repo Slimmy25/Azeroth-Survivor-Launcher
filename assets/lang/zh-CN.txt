@@ -1758,3 +1758,5 @@ Stars decide which set bonuses you reach. What a star adds to a piece is not dis
 = 星级决定你能达成哪些套装加成。游戏没有公开一颗星会为装备增加多少，因此这里不计算。
 Stars decide which set bonuses you reach. How much each star adds to a piece is not known yet, so it is not counted here.
 = 星级决定你能达成哪些套装加成。每颗星为装备增加多少目前尚不清楚，因此这里不计算。
+A complete interface: a run clock with the boss timeline and next-boss countdown, boss bars, enemy health plates and floating combat numbers, hero, target, party and pet frames, a skill bar with cooldowns and rank gems, a combat meter, a ring minimap and glass-styled chat. Every part can be turned on or off (/aether).
+= 完整的界面：带首领时间线和下一个首领倒计时的局内时钟、首领血条、敌人血条与浮动战斗数字、英雄、目标、队伍和宠物框体、带冷却和等级宝石的技能栏、战斗统计、圆形小地图和玻璃风格聊天框。每个部分都可以单独开关（/aether）。
