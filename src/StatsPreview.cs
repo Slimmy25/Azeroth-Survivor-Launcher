@@ -118,14 +118,14 @@ namespace AzerothLauncher
                     PreviewShot(app, Path.Combine(outDir, "guide-builder.png"));
                     app.gBuilder = false;
                 }
-                {   // the Gear Planner: a Priest in the Faith set with some jewelry
+                {   // the Gear Planner: a Priest in the Transcendence (Epic) set with some jewelry
                     app.current = "Guide";
                     app.ShowSide();
                     app.gTopic = -1; app.gPage = -1; app.gTalents = null; app.gBuilder = false; app.gPlanner = true;
                     app.plannerClass = "Priest";
                     app.plannerSlots.Clear();
                     foreach (var p in Items.Gear)
-                        if (p.Class == "Priest" && p.Rarity == "Legendary") app.plannerSlots[p.Slot == "Main Hand" ? "Main Hand" : p.Slot] = p;
+                        if (p.Class == "Priest" && p.Rarity == "Epic") app.plannerSlots[p.Slot == "Main Hand" ? "Main Hand" : p.Slot] = p;
                     foreach (var j in Items.Jewelry)
                     {
                         if (j.Key == "accuria") app.plannerSlots["Finger 1"] = j;
