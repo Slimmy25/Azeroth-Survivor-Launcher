@@ -449,7 +449,7 @@ namespace AzerothLauncher
             if (affecting.Count == 0) return;
             // the other spells that name this one: their icons, each a link to its own row
             float sx = Ic + 18;
-            string slabel = Lang.T("Spells that affect this:");
+            string slabel = Lang.T("Spells that change it:");
             using (var b = new SolidBrush(Theme.GoldDim)) g.DrawString(slabel, lf, b, sx, y + 3);
             sx += g.MeasureString(slabel, lf).Width + 4;
             foreach (var sp in affecting)
@@ -515,7 +515,7 @@ namespace AzerothLauncher
             {
                 var n = new List<string>();
                 foreach (var a in affecting) n.Add(a.Key);
-                s += "\n\n" + Lang.T("Spells that affect this:") + " " + string.Join(", ", n.ToArray());
+                s += "\n\n" + Lang.T("Spells that change it:") + " " + string.Join(", ", n.ToArray());
             }
             return s;
         }

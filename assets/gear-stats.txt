@@ -1,7 +1,7 @@
 Gear bonuses, entered by hand from the game's own item cards (the Armory's Collection: click a piece). The game works
 these numbers out as it runs, so they are not in its files like the rest of assets/items.txt.
 One piece per line:   class | rarity | slot | health | bonus=value, bonus=value, ...
-rarity: Common, Uncommon, Rare, Epic, PvP, Legendary.   slot: Head, Shoulder, Chest, Waist, Legs, Feet, Wrist, Hands, Main Hand (a hunter's weapon: Ranged)
+rarity: Common, Uncommon, Rare, Epic, PvP, Legendary.   slot: Head, Shoulder, Chest, Waist, Legs, Feet, Wrist, Hands, Main Hand (a hunter's weapon: Ranged), Off Hand (a rogue's second dagger, a shaman's shield)
 bonus (as the card says it; percent bonuses as their percent):
   damage, cooldown, health% (max health), crit, critdmg, armor (damage reduction), regen (health per second),
   speed, area, pickup, xp, gold, luck, echo (chance to cast twice), lifesteal, killheal, targets, thorns, buff
@@ -247,3 +247,309 @@ priest | PvP | Feet | 0 | speed=21, cooldown=4.1, regen=0.6
 priest | PvP | Wrist | 24 | cooldown=7, regen=0.8
 priest | PvP | Hands | 0 | crit=3.4, critdmg=17, pickup=168, damage=6.1, speed=3
 priest | PvP | Main Hand | 0 | damage=34, area=8.1, crit=1.6
+# Rogue, Common
+rogue | Common | Head | 8 | crit=0.7
+rogue | Common | Shoulder | 4 | area=2.8
+rogue | Common | Chest | 13 | armor=1.4
+rogue | Common | Waist | 0 | pickup=8.4, gold=4.2
+rogue | Common | Legs | 10 | regen=0.2
+rogue | Common | Feet | 0 | speed=5.3
+rogue | Common | Wrist | 0 | cooldown=1.8
+rogue | Common | Hands | 0 | crit=0.8, critdmg=4.2, pickup=42
+rogue | Common | Main Hand | 0 | damage=8.4
+rogue | Common | Off Hand | 6 | damage=4.2
+# Rogue, Uncommon
+rogue | Uncommon | Head | 14 | crit=1.2, cooldown=1.4, regen=0.2
+rogue | Uncommon | Shoulder | 15 | area=4.8, regen=0.3
+rogue | Uncommon | Chest | 21 | armor=2.4, damage=2.1, speed=1.1
+rogue | Uncommon | Waist | 0 | pickup=14, gold=7.1, area=2.8, crit=0.6
+rogue | Uncommon | Legs | 17 | regen=0.4, damage=2.1, crit=0.7
+rogue | Uncommon | Feet | 7 | speed=8.9, armor=1.1
+rogue | Uncommon | Wrist | 6 | cooldown=4
+rogue | Uncommon | Hands | 0 | crit=2.1, critdmg=7.1, pickup=71, speed=1.4
+rogue | Uncommon | Main Hand | 0 | damage=14, cooldown=1.4, regen=0.2
+rogue | Uncommon | Off Hand | 18 | damage=7.1, regen=0.3
+# Rogue, Rare
+rogue | Rare | Head | 21 | crit=1.8, cooldown=2.2, regen=0.3
+rogue | Rare | Shoulder | 24 | area=7, regen=0.4
+rogue | Rare | Chest | 32 | armor=3.5, damage=3.4, speed=1.7
+rogue | Rare | Waist | 0 | pickup=21, gold=11, area=4.5, crit=0.9
+rogue | Rare | Legs | 25 | regen=0.5, damage=3.4, crit=1.1
+rogue | Rare | Feet | 11 | speed=13, armor=1.7
+rogue | Rare | Wrist | 9 | cooldown=6.1
+rogue | Rare | Hands | 0 | crit=3.2, critdmg=11, pickup=105, speed=2.2
+rogue | Rare | Main Hand | 0 | damage=21, cooldown=2.2, regen=0.3
+rogue | Rare | Off Hand | 27 | damage=11, regen=0.4
+# Rogue, Epic
+rogue | Epic | Head | 29 | crit=2.5, cooldown=3.4, regen=0.5
+rogue | Epic | Shoulder | 35 | area=9.8, regen=0.7
+rogue | Epic | Chest | 44 | armor=4.9, damage=5, speed=2.5
+rogue | Epic | Waist | 0 | pickup=29, gold=15, area=6.7, crit=1.3
+rogue | Epic | Legs | 34 | regen=0.7, damage=5, crit=1.7
+rogue | Epic | Feet | 17 | speed=18, armor=2.5
+rogue | Epic | Wrist | 13 | cooldown=8.6
+rogue | Epic | Hands | 0 | crit=4.6, critdmg=15, pickup=147, speed=3.4
+rogue | Epic | Main Hand | 0 | damage=29, cooldown=3.4, regen=0.5
+rogue | Epic | Off Hand | 40 | damage=15, regen=0.7
+# Rogue, PvP
+rogue | PvP | Head | 34 | crit=2.8, cooldown=4.1, regen=0.6
+rogue | PvP | Shoulder | 41 | area=11, regen=0.8
+rogue | PvP | Chest | 50 | armor=5.6, damage=6.1, speed=3
+rogue | PvP | Waist | 0 | pickup=34, gold=17, area=8.1, crit=1.6
+rogue | PvP | Legs | 39 | regen=0.8, damage=6.1, crit=2
+rogue | PvP | Feet | 20 | speed=21, armor=3
+rogue | PvP | Wrist | 16 | cooldown=10
+rogue | PvP | Hands | 0 | crit=5.4, critdmg=17, pickup=168, speed=4.1
+rogue | PvP | Main Hand | 0 | damage=34, cooldown=4.1, regen=0.6
+rogue | PvP | Off Hand | 46 | damage=17, regen=0.8
+# Rogue, Legendary
+rogue | Legendary | Head | 39 | crit=3.2, cooldown=4.8, regen=0.7, echo=4.2
+rogue | Legendary | Shoulder | 48 | area=13, regen=1, echo=4.2
+rogue | Legendary | Chest | 58 | armor=6.4, damage=7.1, speed=3.6, echo=4.2
+rogue | Legendary | Waist | 0 | pickup=39, gold=19, area=9.5, crit=1.9, echo=4.2
+rogue | Legendary | Legs | 45 | regen=1, damage=7.1, crit=2.4, echo=4.2
+rogue | Legendary | Feet | 24 | speed=24, armor=3.6, echo=4.2
+rogue | Legendary | Wrist | 19 | cooldown=12, echo=4.2
+rogue | Legendary | Hands | 0 | crit=6.2, critdmg=19, pickup=193, speed=4.8, echo=4.2
+# Shaman, Common
+shaman | Common | Head | 8 | crit=0.7
+shaman | Common | Shoulder | 4 | area=2.8
+shaman | Common | Chest | 13 | armor=1.4
+shaman | Common | Waist | 0 | pickup=8.4, gold=4.2
+shaman | Common | Legs | 10 | regen=0.2
+shaman | Common | Feet | 0 | speed=5.3
+shaman | Common | Wrist | 0 | cooldown=1.8
+shaman | Common | Hands | 0 | crit=0.8, critdmg=4.2, pickup=42
+shaman | Common | Main Hand | 0 | damage=8.4
+shaman | Common | Off Hand | 6 | damage=4.2
+# Shaman, Uncommon
+shaman | Uncommon | Head | 22 | crit=1.2, regen=0.3
+shaman | Uncommon | Shoulder | 7 | area=4.8, damage=2.1, speed=1.1
+shaman | Uncommon | Chest | 21 | armor=2.4, area=2.8, crit=0.6
+shaman | Uncommon | Waist | 0 | pickup=14, gold=7.1, damage=2.1, crit=0.7
+shaman | Uncommon | Legs | 24 | regen=0.4, armor=1.1
+shaman | Uncommon | Feet | 6 | speed=8.9, cooldown=1.1
+shaman | Uncommon | Wrist | 0 | cooldown=3, speed=1.4, crit=0.7
+shaman | Uncommon | Hands | 0 | crit=1.4, critdmg=7.1, pickup=71, cooldown=1.4, regen=0.2
+shaman | Uncommon | Main Hand | 8 | damage=14, regen=0.3
+shaman | Uncommon | Off Hand | 10 | damage=9.2, speed=1.1
+# Shaman, Rare
+shaman | Rare | Head | 34 | crit=1.8, regen=0.4
+shaman | Rare | Shoulder | 11 | area=7, damage=3.4, speed=1.7
+shaman | Rare | Chest | 32 | armor=3.5, area=4.5, crit=0.9
+shaman | Rare | Waist | 0 | pickup=21, gold=11, damage=3.4, crit=1.1
+shaman | Rare | Legs | 36 | regen=0.5, armor=1.7
+shaman | Rare | Feet | 9 | speed=13, cooldown=1.7
+shaman | Rare | Wrist | 0 | cooldown=4.4, speed=2.2, crit=1.1
+shaman | Rare | Hands | 0 | crit=2.1, critdmg=11, pickup=105, cooldown=2.2, regen=0.3
+shaman | Rare | Main Hand | 13 | damage=21, regen=0.4
+shaman | Rare | Off Hand | 14 | damage=14, speed=1.7
+# Shaman, Epic
+shaman | Epic | Head | 49 | crit=2.5, regen=0.7
+shaman | Epic | Shoulder | 15 | area=9.8, damage=5, speed=2.5
+shaman | Epic | Chest | 44 | armor=4.9, area=6.7, crit=1.3
+shaman | Epic | Waist | 0 | pickup=29, gold=15, damage=5, crit=1.7
+shaman | Epic | Legs | 51 | regen=0.7, armor=2.5
+shaman | Epic | Feet | 13 | speed=18, cooldown=2.5
+shaman | Epic | Wrist | 0 | cooldown=6.1, speed=3.4, crit=1.7
+shaman | Epic | Hands | 0 | crit=2.9, critdmg=15, pickup=147, cooldown=3.4, regen=0.5
+shaman | Epic | Main Hand | 20 | damage=29, regen=0.7
+shaman | Epic | Off Hand | 20 | damage=20, speed=2.5
+# Shaman, PvP
+shaman | PvP | Head | 58 | crit=2.8, regen=0.8
+shaman | PvP | Shoulder | 17 | area=11, damage=6.1, speed=3
+shaman | PvP | Chest | 50 | armor=5.6, area=8.1, crit=1.6
+shaman | PvP | Waist | 0 | pickup=34, gold=17, damage=6.1, crit=2
+shaman | PvP | Legs | 59 | regen=0.8, armor=3
+shaman | PvP | Feet | 16 | speed=21, cooldown=3
+shaman | PvP | Wrist | 0 | cooldown=7, speed=4.1, crit=2
+shaman | PvP | Hands | 0 | crit=3.4, critdmg=17, pickup=168, cooldown=4.1, regen=0.6
+shaman | PvP | Main Hand | 24 | damage=34, regen=0.8
+shaman | PvP | Off Hand | 22 | damage=23, speed=3
+# Shaman, Legendary
+shaman | Legendary | Head | 68 | crit=3.2, regen=1, echo=4.2
+shaman | Legendary | Shoulder | 19 | area=13, damage=7.1, speed=3.6, echo=4.2
+shaman | Legendary | Chest | 58 | armor=6.4, area=9.5, crit=1.9, echo=4.2
+shaman | Legendary | Waist | 0 | pickup=39, gold=19, damage=7.1, crit=2.4, echo=4.2
+shaman | Legendary | Legs | 69 | regen=1, armor=3.6, echo=4.2
+shaman | Legendary | Feet | 19 | speed=24, cooldown=3.6, echo=4.2
+shaman | Legendary | Wrist | 0 | cooldown=8.1, speed=4.8, crit=2.4, echo=4.2
+shaman | Legendary | Hands | 0 | crit=3.9, critdmg=19, pickup=193, cooldown=4.8, regen=0.7, echo=4.2
+shaman | Legendary | Main Hand | 29 | damage=39, regen=1, targets=1
+shaman | Legendary | Off Hand | 26 | damage=26, speed=3.6, targets=1
+# Mage, Common
+mage | Common | Head | 8 | crit=0.7
+mage | Common | Shoulder | 4 | area=2.8
+mage | Common | Chest | 13 | armor=1.4
+mage | Common | Waist | 0 | pickup=8.4, gold=4.2
+mage | Common | Legs | 10 | regen=0.2
+mage | Common | Feet | 0 | speed=5.3
+mage | Common | Wrist | 0 | cooldown=1.8
+mage | Common | Hands | 0 | crit=0.8, critdmg=4.2, pickup=42
+mage | Common | Main Hand | 0 | damage=8.4
+# Mage, Uncommon
+mage | Uncommon | Head | 14 | crit=1.9, damage=2.1
+mage | Uncommon | Shoulder | 14 | area=4.8, armor=1.1
+mage | Uncommon | Chest | 27 | armor=2.4, cooldown=1.1
+mage | Uncommon | Waist | 0 | pickup=14, gold=7.1, speed=1.4, crit=0.7
+mage | Uncommon | Legs | 17 | regen=0.6, cooldown=1.4
+mage | Uncommon | Feet | 8 | speed=8.9, regen=0.3
+mage | Uncommon | Wrist | 0 | cooldown=3, damage=2.1, speed=1.1
+mage | Uncommon | Hands | 0 | crit=2, critdmg=7.1, pickup=71, area=2.8
+mage | Uncommon | Main Hand | 0 | damage=16, crit=0.7
+# Mage, Rare
+mage | Rare | Head | 21 | crit=2.9, damage=3.4
+mage | Rare | Shoulder | 22 | area=7, armor=1.7
+mage | Rare | Chest | 41 | armor=3.5, cooldown=1.7
+mage | Rare | Waist | 0 | pickup=21, gold=11, speed=2.2, crit=1.1
+mage | Rare | Legs | 25 | regen=0.9, cooldown=2.2
+mage | Rare | Feet | 13 | speed=13, regen=0.4
+mage | Rare | Wrist | 0 | cooldown=4.4, damage=3.4, speed=1.7
+mage | Rare | Hands | 0 | crit=3, critdmg=11, pickup=105, area=4.5
+mage | Rare | Main Hand | 0 | damage=24, crit=1.1
+# Mage, Epic
+mage | Epic | Head | 29 | crit=4.1, damage=5
+mage | Epic | Shoulder | 32 | area=9.8, armor=2.5
+mage | Epic | Chest | 57 | armor=4.9, cooldown=2.5
+mage | Epic | Waist | 0 | pickup=29, gold=15, speed=3.4, crit=1.7
+mage | Epic | Legs | 34 | regen=1.2, cooldown=3.4
+mage | Epic | Feet | 20 | speed=18, regen=0.7
+mage | Epic | Wrist | 0 | cooldown=6.1, damage=5, speed=2.5
+mage | Epic | Hands | 0 | crit=4.3, critdmg=15, pickup=147, area=6.7
+mage | Epic | Main Hand | 0 | damage=34, crit=1.7
+# Mage, PvP
+mage | PvP | Head | 34 | crit=4.8, damage=6.1
+mage | PvP | Shoulder | 37 | area=11, armor=3
+mage | PvP | Chest | 66 | armor=5.6, cooldown=3
+mage | PvP | Waist | 0 | pickup=34, gold=17, speed=4.1, crit=2
+mage | PvP | Legs | 39 | regen=1.4, cooldown=4.1
+mage | PvP | Feet | 24 | speed=21, regen=0.8
+mage | PvP | Wrist | 0 | cooldown=7, damage=6.1, speed=3
+mage | PvP | Hands | 0 | crit=5, critdmg=17, pickup=168, area=8.1
+mage | PvP | Main Hand | 0 | damage=40, crit=2
+# Mage, Legendary
+mage | Legendary | Head | 39 | crit=5.6, damage=7.1, echo=4.2
+mage | Legendary | Shoulder | 43 | area=13, armor=3.6, echo=4.2
+mage | Legendary | Chest | 77 | armor=6.4, cooldown=3.6, echo=4.2
+mage | Legendary | Waist | 0 | pickup=39, gold=19, speed=4.8, crit=2.4, echo=4.2
+mage | Legendary | Legs | 45 | regen=1.7, cooldown=4.8, echo=4.2
+# Warlock, Common
+warlock | Common | Head | 8 | crit=0.7
+warlock | Common | Shoulder | 4 | area=2.8
+warlock | Common | Chest | 13 | armor=1.4
+warlock | Common | Waist | 0 | pickup=8.4, gold=4.2
+warlock | Common | Legs | 10 | regen=0.2
+warlock | Common | Feet | 0 | speed=5.3
+warlock | Common | Wrist | 0 | cooldown=1.8
+warlock | Common | Hands | 0 | crit=0.8, critdmg=4.2, pickup=42
+warlock | Common | Main Hand | 0 | damage=8.4
+# Warlock, Uncommon
+warlock | Uncommon | Head | 14 | crit=1.9, speed=1.4
+warlock | Uncommon | Shoulder | 7 | area=4.8, cooldown=1.4, regen=0.2
+warlock | Uncommon | Chest | 29 | armor=2.4, regen=0.3
+warlock | Uncommon | Waist | 0 | pickup=14, gold=7.1, damage=2.1, speed=1.1
+warlock | Uncommon | Legs | 17 | regen=0.4, area=2.8, crit=0.6
+warlock | Uncommon | Feet | 0 | speed=8.9, damage=2.1, crit=0.7
+warlock | Uncommon | Wrist | 7 | cooldown=3, armor=1.1
+warlock | Uncommon | Hands | 6 | crit=1.4, critdmg=7.1, pickup=71, cooldown=1.1
+warlock | Uncommon | Main Hand | 0 | damage=14, speed=1.4, crit=0.7
+# Warlock, Rare
+warlock | Rare | Head | 21 | crit=2.9, speed=2.2
+warlock | Rare | Shoulder | 11 | area=7, cooldown=2.2, regen=0.3
+warlock | Rare | Chest | 45 | armor=3.5, regen=0.4
+warlock | Rare | Waist | 0 | pickup=21, gold=11, damage=3.4, speed=1.7
+warlock | Rare | Legs | 25 | regen=0.5, area=4.5, crit=0.9
+warlock | Rare | Feet | 0 | speed=13, damage=3.4, crit=1.1
+warlock | Rare | Wrist | 11 | cooldown=4.4, armor=1.7
+warlock | Rare | Hands | 9 | crit=2.1, critdmg=11, pickup=105, cooldown=1.7
+warlock | Rare | Main Hand | 0 | damage=21, speed=2.2, crit=1.1
+# Warlock, Epic
+warlock | Epic | Head | 29 | crit=4.1, speed=3.4
+warlock | Epic | Shoulder | 15 | area=9.8, cooldown=3.4, regen=0.5
+warlock | Epic | Chest | 64 | armor=4.9, regen=0.7
+warlock | Epic | Waist | 0 | pickup=29, gold=15, damage=5, speed=2.5
+warlock | Epic | Legs | 34 | regen=0.7, area=6.7, crit=1.3
+warlock | Epic | Feet | 0 | speed=18, damage=5, crit=1.7
+warlock | Epic | Wrist | 17 | cooldown=6.1, armor=2.5
+warlock | Epic | Hands | 13 | crit=2.9, critdmg=15, pickup=147, cooldown=2.5
+warlock | Epic | Main Hand | 0 | damage=29, speed=3.4, crit=1.7
+# Warlock, PvP
+warlock | PvP | Head | 34 | crit=4.8, speed=4.1
+warlock | PvP | Shoulder | 17 | area=11, cooldown=4.1, regen=0.6
+warlock | PvP | Chest | 74 | armor=5.6, regen=0.8
+warlock | PvP | Waist | 0 | pickup=34, gold=17, damage=6.1, speed=3
+warlock | PvP | Legs | 39 | regen=0.8, area=8.1, crit=1.6
+warlock | PvP | Feet | 0 | speed=21, damage=6.1, crit=2
+warlock | PvP | Wrist | 20 | cooldown=7, armor=3
+warlock | PvP | Hands | 16 | crit=3.4, critdmg=17, pickup=168, cooldown=3
+warlock | PvP | Main Hand | 0 | damage=34, speed=4.1, crit=2
+# Warlock, Legendary
+warlock | Legendary | Head | 39 | crit=5.6, speed=4.8, echo=4.2
+warlock | Legendary | Shoulder | 19 | area=13, cooldown=4.8, regen=0.7, echo=4.2
+warlock | Legendary | Chest | 87 | armor=6.4, regen=1, echo=4.2
+warlock | Legendary | Waist | 0 | pickup=39, gold=19, damage=7.1, speed=3.6, echo=4.2
+warlock | Legendary | Legs | 45 | regen=1, area=9.5, crit=1.9, echo=4.2
+warlock | Legendary | Feet | 0 | speed=24, damage=7.1, crit=2.4, echo=4.2
+warlock | Legendary | Wrist | 24 | cooldown=8.1, armor=3.6, echo=4.2
+warlock | Legendary | Hands | 19 | crit=3.9, critdmg=19, pickup=193, cooldown=3.6, echo=4.2
+warlock | Legendary | Main Hand | 0 | damage=39, speed=4.8, crit=2.4, targets=1
+# Druid, Common
+druid | Common | Head | 8 | crit=0.7
+druid | Common | Shoulder | 4 | area=2.8
+druid | Common | Chest | 13 | armor=1.4
+druid | Common | Waist | 0 | pickup=8.4, gold=4.2
+druid | Common | Legs | 10 | regen=0.2
+druid | Common | Feet | 0 | speed=5.3
+druid | Common | Wrist | 0 | cooldown=1.8
+druid | Common | Hands | 0 | crit=0.8, critdmg=4.2, pickup=42
+druid | Common | Main Hand | 0 | damage=8.4
+# Druid, Uncommon
+druid | Uncommon | Head | 21 | crit=1.2, armor=1.1
+druid | Uncommon | Shoulder | 13 | area=4.8, cooldown=1.1
+druid | Uncommon | Chest | 21 | armor=2.4, speed=1.4, crit=0.7
+druid | Uncommon | Waist | 0 | pickup=14, gold=7.1, cooldown=1.4, regen=0.2
+druid | Uncommon | Legs | 25 | regen=0.6
+druid | Uncommon | Feet | 0 | speed=10, damage=2.1
+druid | Uncommon | Wrist | 0 | cooldown=3, area=2.8, crit=0.6
+druid | Uncommon | Hands | 0 | crit=2.1, critdmg=7.1, pickup=71, damage=2.1
+druid | Uncommon | Main Hand | 7 | damage=14, armor=1.1
+# Druid, Rare
+druid | Rare | Head | 32 | crit=1.8, armor=1.7
+druid | Rare | Shoulder | 20 | area=7, cooldown=1.7
+druid | Rare | Chest | 32 | armor=3.5, speed=2.2, crit=1.1
+druid | Rare | Waist | 0 | pickup=21, gold=11, cooldown=2.2, regen=0.3
+druid | Rare | Legs | 38 | regen=1
+druid | Rare | Feet | 0 | speed=15, damage=3.4
+druid | Rare | Wrist | 0 | cooldown=4.4, area=4.5, crit=0.9
+druid | Rare | Hands | 0 | crit=3.2, critdmg=11, pickup=105, damage=3.4
+druid | Rare | Main Hand | 11 | damage=21, armor=1.7
+# Druid, Epic
+druid | Epic | Head | 46 | crit=2.5, armor=2.5
+druid | Epic | Shoulder | 28 | area=9.8, cooldown=2.5
+druid | Epic | Chest | 44 | armor=4.9, speed=3.4, crit=1.7
+druid | Epic | Waist | 0 | pickup=29, gold=15, cooldown=3.4, regen=0.5
+druid | Epic | Legs | 54 | regen=1.4
+druid | Epic | Feet | 0 | speed=21, damage=5
+druid | Epic | Wrist | 0 | cooldown=6.1, area=6.7, crit=1.3
+druid | Epic | Hands | 0 | crit=4.6, critdmg=15, pickup=147, damage=5
+druid | Epic | Main Hand | 17 | damage=29, armor=2.5
+# Druid, PvP
+druid | PvP | Head | 54 | crit=2.8, armor=3
+druid | PvP | Shoulder | 33 | area=11, cooldown=3
+druid | PvP | Chest | 50 | armor=5.6, speed=4.1, crit=2
+druid | PvP | Waist | 0 | pickup=34, gold=17, cooldown=4.1, regen=0.6
+druid | PvP | Legs | 63 | regen=1.7
+druid | PvP | Feet | 0 | speed=24, damage=6.1
+druid | PvP | Wrist | 0 | cooldown=7, area=8.1, crit=1.6
+druid | PvP | Hands | 0 | crit=5.4, critdmg=17, pickup=168, damage=6.1
+druid | PvP | Main Hand | 20 | damage=34, armor=3
+# Druid, Legendary
+druid | Legendary | Head | 63 | crit=3.2, armor=3.6, echo=4.2
+druid | Legendary | Shoulder | 38 | area=13, cooldown=3.6, echo=4.2
+druid | Legendary | Chest | 58 | armor=6.4, speed=4.8, crit=2.4, echo=4.2
+druid | Legendary | Waist | 0 | pickup=39, gold=19, cooldown=4.8, regen=0.7, echo=4.2
+druid | Legendary | Legs | 74 | regen=1.9, echo=4.2
+druid | Legendary | Feet | 0 | speed=28, damage=7.1, echo=4.2
+druid | Legendary | Wrist | 0 | cooldown=8.1, area=9.5, crit=1.9, echo=4.2
+druid | Legendary | Hands | 0 | crit=6.2, critdmg=19, pickup=193, damage=7.1, echo=4.2
+druid | Legendary | Main Hand | 24 | damage=39, armor=3.6, targets=1

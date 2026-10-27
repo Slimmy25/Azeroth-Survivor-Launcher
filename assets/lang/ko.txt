@@ -1696,3 +1696,9 @@ Damage per spell with the kills of each spell, plus healing, boss damage, damage
 = 주문별 피해와 각 주문의 처치 수, 그리고 치유, 보스 피해, 받은 피해, 파티 피해. 원하면 각각 별도의 창으로.
 A complete interface in a dark cyberpunk style: a new combat HUD with action bars, a cast bar, character and build panels, a damage meter, chat, minimap and nameplates.
 = 어두운 사이버펑크 스타일의 완전한 인터페이스: 행동 단축바, 시전 바, 캐릭터와 빌드 패널, 피해 측정기, 채팅, 미니맵, 이름표를 갖춘 새 전투 HUD.
+Gear
+= 장비
+Every piece a {0} can wear. Point at one to read it, click it to try it in the Gear Planner.
+= {0}이(가) 착용할 수 있는 모든 장비. 가리키면 설명을 보고, 클릭하면 장비 플래너에서 시험해 볼 수 있습니다.
+Spells that change it:
+= 이 주문을 바꾸는 주문:

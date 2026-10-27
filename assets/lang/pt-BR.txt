@@ -1695,3 +1695,9 @@ Damage per spell with the kills of each spell, plus healing, boss damage, damage
 = Dano por feitiço com os abates de cada feitiço, além de cura, dano em chefes, dano recebido e o dano do seu grupo, cada um na sua própria janela se quiser.
 A complete interface in a dark cyberpunk style: a new combat HUD with action bars, a cast bar, character and build panels, a damage meter, chat, minimap and nameplates.
 = Uma interface completa em estilo cyberpunk escuro: um novo HUD de combate com barras de ação, barra de conjuração, painéis de personagem e de build, medidor de dano, chat, minimapa e placas de nome.
+Gear
+= Equipamento
+Every piece a {0} can wear. Point at one to read it, click it to try it in the Gear Planner.
+= Cada peça que um {0} pode usar. Aponte para ler, clique para testar no Planejador de Equipamento.
+Spells that change it:
+= Feitiços que o mudam:

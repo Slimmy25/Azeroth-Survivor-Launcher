@@ -1696,3 +1696,9 @@ Damage per spell with the kills of each spell, plus healing, boss damage, damage
 = हर मंत्र का डैमेज और हर मंत्र से मारे गए दुश्मन, साथ में हीलिंग, बॉस डैमेज, मिला हुआ डैमेज और आपकी पार्टी का डैमेज, चाहें तो हर एक अपनी अलग विंडो में।
 A complete interface in a dark cyberpunk style: a new combat HUD with action bars, a cast bar, character and build panels, a damage meter, chat, minimap and nameplates.
 = गहरे साइबरपंक अंदाज़ में एक पूरा इंटरफ़ेस: एक्शन बार, कास्ट बार, कैरेक्टर और बिल्ड पैनल, डैमेज मीटर, चैट, मिनीमैप और नेमप्लेट के साथ नया युद्ध HUD।
+Gear
+= गियर
+Every piece a {0} can wear. Point at one to read it, click it to try it in the Gear Planner.
+= हर वह चीज़ जो {0} पहन सकता है। पढ़ने के लिए उस पर पॉइंटर रखें, गियर प्लानर में आज़माने के लिए क्लिक करें।
+Spells that change it:
+= इसे बदलने वाले मंत्र:

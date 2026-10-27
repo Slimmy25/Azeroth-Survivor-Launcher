@@ -1695,3 +1695,9 @@ Damage per spell with the kills of each spell, plus healing, boss damage, damage
 = Schade per spreuk met de kills van elke spreuk, plus genezing, schade aan bazen, ontvangen schade en de schade van je groep, desgewenst elk in een eigen venster.
 A complete interface in a dark cyberpunk style: a new combat HUD with action bars, a cast bar, character and build panels, a damage meter, chat, minimap and nameplates.
 = Een complete interface in een donkere cyberpunkstijl: een nieuwe gevechts-HUD met actiebalken, castbalk, personage- en buildpanelen, schademeter, chat, minikaart en naamplaatjes.
+Gear
+= Uitrusting
+Every piece a {0} can wear. Point at one to read it, click it to try it in the Gear Planner.
+= Elk stuk dat een {0} kan dragen. Wijs het aan om het te lezen, klik om het in de uitrustingsplanner te proberen.
+Spells that change it:
+= Spreuken die deze veranderen:
