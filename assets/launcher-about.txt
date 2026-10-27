@@ -9,7 +9,7 @@ A community launcher for Azeroth Survivors, the game made by Aethus. Made by Sli
 
 # Installing addons automatically
 - Download More installs addons with one click and offers an update when a newer copy is out
-- The AZS addons (AZS Stats, AZS Handbook, AZS Minor Mods, AZS Transparency) are built into the launcher and brought up to date by themselves before the game starts
+- The AZS addons (AZS Stats, AZS Handbook, AZS Minor Mods) are built into the launcher and brought up to date by themselves before the game starts
 - Switch addons on and off, keep two addon profiles, and uninstall any addon from your AddOns folder
 
 # Helping cloud save on Windows PCs and Linux

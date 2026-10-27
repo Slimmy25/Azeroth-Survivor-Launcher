@@ -1768,7 +1768,7 @@ namespace AzerothLauncher
                 SetCrumbMenu(2, langs);
             }
             var sp = MakeScroll(panel, new Rectangle(8, top0, PW - 16, PH - 8 - top0), Theme.Panel, Theme.Panel);
-            int pageW = sp.ClientSize.Width + 16;             // the page's width, in the same terms as the section's
+            int pageW = sp.ClientSize.Width - 6;              // the page's width: what shows inside the scroll box, beside its bar
             putInto = sp;
             try
             {
