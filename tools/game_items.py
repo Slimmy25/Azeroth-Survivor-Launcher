@@ -16,6 +16,8 @@ CLASSES = ["warrior", "paladin", "hunter", "rogue", "priest", "shaman", "mage", 
 ARMOR = {"warrior": "plate", "paladin": "plate", "hunter": "mail", "rogue": "leather", "priest": "cloth",
          "shaman": "mail", "mage": "cloth", "warlock": "cloth", "druid": "leather"}
 SLOTS = ["Head", "Shoulder", "Chest", "Waist", "Legs", "Feet", "Wrist", "Hands"]   # the order of the game's nouns
+WOW_CLASS = {1: "warrior", 2: "paladin", 3: "hunter", 4: "rogue", 5: "priest", 7: "shaman", 8: "mage", 9: "warlock",
+             11: "druid"}                                                      # the game's class numbers
 RARITIES = ["Common", "Uncommon", "Rare", "Epic", "Legendary"]                     # the five class sets, in order
 
 
@@ -103,7 +105,7 @@ def main():
     first = "Increases all damage you deal by {p}."
     runs = re.findall(r"Reduces the cooldown of your spells by \{p\}\.[^\x00-\x1f\"]*", text)
     if runs and first in text:
-        stats = [first] + re.split(r"(?<=\.)(?=[A-Z])", max(runs, key=len))
+        stats = [first] + re.split(r"(?<=\.)[a-z]?(?=[A-Z])", max(runs, key=len))
     debug.append("stat texts: %d" % len(stats))
     amulets = sorted((k[7:], v) for k, v in en.items() if k.startswith("amulet."))
 
@@ -205,7 +207,7 @@ def main():
         out.append("%s | %g" % (name, round(v, 4)))
     out.append("@pvp")
     for cid, a, h, weapons in sorted(pvp):
-        cls = CLASSES[cid - 1] if cid <= len(CLASSES) else str(cid)
+        cls = WOW_CLASS.get(cid, str(cid))
         out.append(" | ".join([cls, a, h] + ["%s / %s" % w for w in weapons]))
     out.append("@armor")
     for cls in CLASSES:

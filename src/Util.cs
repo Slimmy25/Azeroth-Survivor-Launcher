@@ -726,7 +726,10 @@ namespace AzerothLauncher
                 var list = new List<GuideTopic>();
                 GuideTopic topic = null;
                 GuidePage target = null;
-                foreach (string raw in Util.ReadResource("AS.guide.txt").Replace("\r\n", "\n").Split('\n'))
+                // guide.txt, then the "Items" topic written out from the game's items (Items.cs)
+                var source = new List<string>(Util.ReadResource("AS.guide.txt").Replace("\r\n", "\n").Split('\n'));
+                try { source.AddRange(Items.GuideLines()); } catch (Exception) { }
+                foreach (string raw in source)
                 {
                     string line = raw.TrimEnd();
                     bool isTopic = line.StartsWith("@topic ", StringComparison.Ordinal);

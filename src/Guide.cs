@@ -37,8 +37,8 @@ namespace AzerothLauncher
             new[] { "NEW PLAYER", "Getting Started", "Controls", "Your First Run", "Tips for New Players", "Run Options & Endless",
                     "Achievements & Rewards", "Addons" },
             new[] { "GAMEPLAY", "Classes", "Races", "Zones & Bosses", "Level-Ups & Cards", "Talents", "Pickups, Caches & Guardians",
-                    "Gear & the Armory", "Co-op" },
-            new[] { "THEORYCRAFTING", TalentBuilder, "Build Guides" },
+                    "Gear & the Armory", "Items", "Co-op" },
+            new[] { "THEORYCRAFTING", TalentBuilder, GearPlanner, "Build Guides" },
         };
         int guideGroup;                                       // the group whose tabs are shown
         bool guideMain = true;                                // the main page: every topic as a card, by group
@@ -59,6 +59,7 @@ namespace AzerothLauncher
             for (int i = 1; i < GuideGroups[group].Length; i++)
             {
                 if (GuideGroups[group][i] == TalentBuilder) { list.Add(-2); continue; }
+                if (GuideGroups[group][i] == GearPlanner) { list.Add(-3); continue; }
                 for (int t = 0; t < topics.Count; t++)
                     if (string.Equals(topics[t].Title, GuideGroups[group][i], StringComparison.OrdinalIgnoreCase)) { list.Add(t); break; }
             }
@@ -76,7 +77,8 @@ namespace AzerothLauncher
         void OpenGuideTab(int tab)
         {
             guideQuery = "";
-            if (tab == -2) { gVideo = null; gTalents = null; gBuilder = true; guideMain = false; guideGroup = 2; if (current == "Guide") BuildPanel("Guide"); }
+            if (tab == -2) { gVideo = null; gTalents = null; gBuilder = true; gPlanner = false; guideMain = false; guideGroup = 2; if (current == "Guide") BuildPanel("Guide"); }
+            else if (tab == -3) { gVideo = null; gTalents = null; gBuilder = false; gPlanner = true; guideMain = false; guideGroup = 2; if (current == "Guide") BuildPanel("Guide"); }
             else SetGuideView(tab, -1);
         }
 
@@ -96,14 +98,14 @@ namespace AzerothLauncher
                     guideQuery = search.Text;
                     if (guideQuery.Length == 0) return;
                     guideFocusSearch = true;
-                    gBuilder = false;
+                    gBuilder = false; gPlanner = false;
                     SetGuideView(-1, -1);                     // the results take the topic's place
                 };
             if (guideFocusSearch) { guideFocusSearch = false; search.Focus(); search.SelectionStart = search.TextLength; }
             guideSearch = search;
-            if (gBuilder) guideGroup = 2;
+            if (gBuilder || gPlanner) guideGroup = 2;
             else if (gTopic >= 0 && gTopic < topics.Count) guideGroup = GroupOf(topics[gTopic].Title);
-            bool searching = guideQuery.Length > 0 || (guideMain && !gBuilder && gTopic < 0);   // no group picked
+            bool searching = guideQuery.Length > 0 || (guideMain && !gBuilder && !gPlanner && gTopic < 0);   // no group picked
             // the groups: one row, sharing the width
             int y = 12 + sh + 6, n = GuideGroups.Length, gapG = 6;
             int gw = (int)(((PW - 40) - gapG * (n - 1)) / (float)n / Theme.Zoom);
@@ -126,10 +128,10 @@ namespace AzerothLauncher
                 foreach (int tab in GroupTabs(guideGroup, topics))
                 {
                     int t = tab;
-                    string label = (tab == -2 ? TalentBuilder : topics[tab].Title).ToUpperInvariant();
+                    string label = (tab == -2 ? TalentBuilder : tab == -3 ? GearPlanner : topics[tab].Title).ToUpperInvariant();
                     int tw = (int)(g.MeasureString(Lang.T(label), Theme.F(7.5f)).Width / Theme.Zoom) + 12;
                     var b = new WowButton(label, delegate { OpenGuideTab(t); }, tw, 22, 7.5f);
-                    b.Selected = !searching && (tab == -2 ? gBuilder : (!gBuilder && tab == gTopic));
+                    b.Selected = !searching && (tab == -2 ? gBuilder : tab == -3 ? gPlanner : (!gBuilder && !gPlanner && tab == gTopic));
                     if (x + b.Width > right && x > 20) { x = 20; y += rowH + gap; }
                     Put(b, x, y);
                     x += b.Width + gap;
@@ -172,7 +174,7 @@ namespace AzerothLauncher
         {
             gVideo = null;
             gTalents = null;
-            gBuilder = false;
+            gBuilder = false; gPlanner = false;
             guideMain = false;
             gTopic = topic;
             gPage = page;
@@ -193,6 +195,7 @@ namespace AzerothLauncher
             if (gVideo != null) { GuideVideoPlayer(gVideo); return; }
             if (gTalents != null && Talents.Of(gTalents).Count > 0) { GuideTalents(gTalents); return; }
             if (gBuilder) { GuideBuilderHome(); return; }
+            if (gPlanner) { GuideGearPlanner(); return; }
             GuideLinks.Reset();                              // the game's tooltips AZS Stats has seen since the last time
             var topics = Data.Guide;
             guideTabsBottom = 0;
@@ -320,6 +323,11 @@ namespace AzerothLauncher
                             {
                                 c.Title = TalentBuilder;
                                 c.Desc = Lang.T("Pick a class and try out a build of up to 51 points on its three talent trees.");
+                            }
+                            else if (t == -3)
+                            {
+                                c.Title = GearPlanner;
+                                c.Desc = Lang.T("Put gear and jewelry on a character sheet like the game's and see what they add.");
                             }
                             else
                             {
