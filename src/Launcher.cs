@@ -493,7 +493,7 @@ namespace AzerothLauncher
                     Font h2 = hf, b2 = bf;
                     for (float sz = 8; sz >= 6; sz -= 0.25f)
                     {
-                        h2 = Theme.FFit(sz, FontStyle.Bold); b2 = Theme.FFit(sz);
+                        h2 = Theme.FFit(sz, FontStyle.Bold); b2 = Theme.FFit(sz, FontStyle.Regular);
                         if (g.MeasureString(head, h2).Width + 2 + g.MeasureString(lines[i][1], b2).Width <= box.Width - 16) break;
                     }
                     float hw = g.MeasureString(head, h2).Width;
