@@ -1794,3 +1794,5 @@ Every piece a {0} can wear, with its bonuses, the bosses that drop it and each s
 = हर टुकड़ा जो एक {0} पहन सकता है, उसके बोनस, उसे गिराने वाले बॉस और हर सेट के बोनस के साथ।
 {0} GEAR
 = {0}: गियर
+I'm sorry the launcher could not help this time. Everything it set up has been taken away again; your game, your saves and your cloud files are untouched.\n\nIf you need more help, please contact Slimjim in the Discord. Best of luck!
+= हमें खेद है कि इस बार लॉन्चर मदद नहीं कर सका। इसने जो कुछ सेट किया था, वह फिर से हटा दिया गया है; आपका गेम, सेव और क्लाउड फ़ाइलें अछूती हैं।\n\nअगर और मदद चाहिए, तो Discord में Slimjim से संपर्क करें। शुभकामनाएँ!

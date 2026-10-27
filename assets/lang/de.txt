@@ -1793,3 +1793,5 @@ Every piece a {0} can wear, with its bonuses, the bosses that drop it and each s
 = Jedes Teil, das ein {0} tragen kann, mit seinen Boni, den Bossen, die es fallen lassen, und den Boni jedes Sets.
 {0} GEAR
 = {0}: AUSRÜSTUNG
+I'm sorry the launcher could not help this time. Everything it set up has been taken away again; your game, your saves and your cloud files are untouched.\n\nIf you need more help, please contact Slimjim in the Discord. Best of luck!
+= Es tut uns leid, dass der Launcher diesmal nicht helfen konnte. Alles, was er eingerichtet hat, wurde wieder entfernt; dein Spiel, deine Spielstände und deine Cloud-Dateien sind unberührt.\n\nWenn du mehr Hilfe brauchst, wende dich an Slimjim im Discord. Viel Glück!

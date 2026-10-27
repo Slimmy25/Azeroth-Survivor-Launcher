@@ -1793,3 +1793,5 @@ Every piece a {0} can wear, with its bonuses, the bosses that drop it and each s
 = Varje del en {0} kan bära, med sina bonusar, bossarna som släpper den och varje sets bonusar.
 {0} GEAR
 = {0}: UTRUSTNING
+I'm sorry the launcher could not help this time. Everything it set up has been taken away again; your game, your saves and your cloud files are untouched.\n\nIf you need more help, please contact Slimjim in the Discord. Best of luck!
+= Vi beklagar att startprogrammet inte kunde hjälpa till den här gången. Allt det ställde in har tagits bort igen; ditt spel, dina sparfiler och dina molnfiler är orörda.\n\nOm du behöver mer hjälp, kontakta Slimjim på Discord. Lycka till!

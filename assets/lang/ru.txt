@@ -1794,3 +1794,5 @@ Every piece a {0} can wear, with its bonuses, the bosses that drop it and each s
 = Каждый предмет, который может носить {0}, с бонусами, боссами, с которых он падает, и бонусами каждого комплекта.
 {0} GEAR
 = {0}: СНАРЯЖЕНИЕ
+I'm sorry the launcher could not help this time. Everything it set up has been taken away again; your game, your saves and your cloud files are untouched.\n\nIf you need more help, please contact Slimjim in the Discord. Best of luck!
+= Жаль, что лаунчер не смог помочь на этот раз. Всё, что он настроил, удалено; игра, сохранения и файлы в облаке не тронуты.\n\nЕсли нужна помощь, напишите Slimjim в Discord. Удачи!

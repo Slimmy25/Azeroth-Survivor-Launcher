@@ -76,18 +76,11 @@ namespace AzerothLauncher
             return false;
         }
 
-        // the saved choice, else the Windows language, else English
+        // the saved choice, else English (setup asks for the language first)
         public static string Default(string saved)
         {
             if (!string.IsNullOrEmpty(saved) && Has(saved)) return saved;
-            CultureInfo ui = CultureInfo.CurrentUICulture;
-            string name = ui.Name.ToLowerInvariant(), two = ui.TwoLetterISOLanguageName.ToLowerInvariant();
-            string pick;
-            if (two == "zh") pick = name.Contains("tw") || name.Contains("hk") || name.Contains("mo") || name.Contains("hant") ? "zh-TW" : "zh-CN";
-            else if (two == "pt") pick = "pt-BR";
-            else if (two == "no" || two == "nn" || two == "nb") pick = "nb";
-            else pick = two;
-            return Has(pick) ? pick : "en";
+            return "en";
         }
 
         public static void Load(string code)

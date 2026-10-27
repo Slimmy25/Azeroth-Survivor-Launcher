@@ -1793,3 +1793,5 @@ Every piece a {0} can wear, with its bonuses, the bosses that drop it and each s
 = Elk stuk dat een {0} kan dragen, met zijn bonussen, de bazen die het laten vallen en de bonussen van elke set.
 {0} GEAR
 = {0}: UITRUSTING
+I'm sorry the launcher could not help this time. Everything it set up has been taken away again; your game, your saves and your cloud files are untouched.\n\nIf you need more help, please contact Slimjim in the Discord. Best of luck!
+= Het spijt ons dat de launcher deze keer niet kon helpen. Alles wat hij had ingesteld is weer weggehaald; je spel, je opslagbestanden en je cloudbestanden zijn niet aangeraakt.\n\nHeb je meer hulp nodig, neem dan contact op met Slimjim op Discord. Veel succes!

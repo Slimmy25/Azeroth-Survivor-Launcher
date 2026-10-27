@@ -69,3 +69,8 @@ the launcher is to use.
 - Guide > Classes: a class page no longer lists its gear piece by piece. A button (PRIEST GEAR ›) opens the class's gear
   page instead: every piece with its bonuses, the bosses that drop it and each set's bonuses.
 - Guide > Gear & the Armory: a new "Each class's gear" line links straight to each class's gear page.
+- Cancelling a first-time setup now takes away everything the launcher made: its own folder (settings, log, the
+  unfinished download) and the folders setup created while they are still empty, so only the exe is left. The game, a
+  save imported into it and your cloud files are never touched. RUN SETUP AGAIN can't lose your settings this way:
+  cancelling it just goes back with everything as it was.
+- With no language chosen yet, the launcher starts in English (setup asks for the language first).

@@ -1793,3 +1793,5 @@ Every piece a {0} can wear, with its bonuses, the bosses that drop it and each s
 = Setiap bagian yang bisa dipakai {0}, dengan bonusnya, bos yang menjatuhkannya, dan bonus tiap set.
 {0} GEAR
 = {0}: PERLENGKAPAN
+I'm sorry the launcher could not help this time. Everything it set up has been taken away again; your game, your saves and your cloud files are untouched.\n\nIf you need more help, please contact Slimjim in the Discord. Best of luck!
+= Maaf, launcher tidak bisa membantu kali ini. Semua yang disiapkannya sudah dihapus lagi; game, simpanan, dan file cloud-mu tidak disentuh.\n\nJika butuh bantuan lebih, hubungi Slimjim di Discord. Semoga berhasil!

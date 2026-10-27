@@ -1794,3 +1794,5 @@ Every piece a {0} can wear, with its bonuses, the bosses that drop it and each s
 = {0}が装備できるすべての装備と、そのボーナス、落とすボス、各セットのボーナス。
 {0} GEAR
 = {0}の装備
+I'm sorry the launcher could not help this time. Everything it set up has been taken away again; your game, your saves and your cloud files are untouched.\n\nIf you need more help, please contact Slimjim in the Discord. Best of luck!
+= 今回はランチャーがお役に立てず申し訳ありません。ランチャーが設定したものはすべて元に戻しました。ゲーム、セーブデータ、クラウドのファイルには触れていません。\n\nさらにサポートが必要な場合は、Discord で Slimjim に連絡してください。幸運を祈ります！

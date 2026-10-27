@@ -1794,3 +1794,5 @@ Every piece a {0} can wear, with its bonuses, the bosses that drop it and each s
 = Fiecare piesă pe care o poate purta un {0}, cu bonusurile ei, boșii care o scapă și bonusurile fiecărui set.
 {0} GEAR
 = {0}: ECHIPAMENT
+I'm sorry the launcher could not help this time. Everything it set up has been taken away again; your game, your saves and your cloud files are untouched.\n\nIf you need more help, please contact Slimjim in the Discord. Best of luck!
+= Ne pare rău că launcherul nu a putut ajuta de data aceasta. Tot ce a configurat a fost eliminat; jocul, salvările și fișierele din cloud au rămas neatinse.\n\nDacă ai nevoie de ajutor, contactează-l pe Slimjim pe Discord. Mult noroc!

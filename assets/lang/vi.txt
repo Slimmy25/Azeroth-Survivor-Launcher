@@ -1794,3 +1794,5 @@ Every piece a {0} can wear, with its bonuses, the bosses that drop it and each s
 = Mọi món mà {0} có thể mặc, kèm thưởng, trùm làm rơi và thưởng của từng bộ.
 {0} GEAR
 = TRANG BỊ {0}
+I'm sorry the launcher could not help this time. Everything it set up has been taken away again; your game, your saves and your cloud files are untouched.\n\nIf you need more help, please contact Slimjim in the Discord. Best of luck!
+= Rất tiếc trình khởi chạy lần này đã không giúp được bạn. Mọi thứ nó thiết lập đều đã được gỡ bỏ; trò chơi, bản lưu và tệp trên đám mây của bạn vẫn nguyên vẹn.\n\nNếu cần thêm trợ giúp, hãy liên hệ Slimjim trên Discord. Chúc may mắn!

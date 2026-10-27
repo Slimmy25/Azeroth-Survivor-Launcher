@@ -1794,3 +1794,5 @@ Every piece a {0} can wear, with its bonuses, the bosses that drop it and each s
 = ทุกชิ้นที่ {0} สวมได้ พร้อมโบนัส บอสที่ดรอป และโบนัสของแต่ละเซ็ต
 {0} GEAR
 = อุปกรณ์ {0}
+I'm sorry the launcher could not help this time. Everything it set up has been taken away again; your game, your saves and your cloud files are untouched.\n\nIf you need more help, please contact Slimjim in the Discord. Best of luck!
+= ขออภัยที่ตัวเปิดเกมช่วยไม่ได้ในครั้งนี้ ทุกอย่างที่ตั้งไว้ถูกลบออกแล้ว เกม เซฟ และไฟล์บนคลาวด์ของคุณไม่ถูกแตะต้อง\n\nหากต้องการความช่วยเหลือเพิ่มเติม ติดต่อ Slimjim ใน Discord ขอให้โชคดี!
