@@ -57,7 +57,7 @@ warrior | PvP | Feet | 0 | speed=21, damage=6.1, crit=2
 warrior | PvP | Wrist | 20 | cooldown=7, armor=3
 warrior | PvP | Hands | 16 | crit=3.4, critdmg=17, pickup=168, cooldown=3
 warrior | PvP | Main Hand | 0 | damage=34, speed=4.1, crit=2
-# Warrior, Legendary (Dreadnaught set; the Gauntlets and Sulfuras have not been shown yet)
+# Warrior, Legendary (Dreadnaught set, Sulfuras, Hand of Ragnaros)
 warrior | Legendary | Head | 39 | crit=5.6, speed=4.8, echo=4.2
 warrior | Legendary | Shoulder | 19 | area=13, cooldown=4.8, regen=0.7, echo=4.2
 warrior | Legendary | Chest | 87 | armor=6.4, regen=1, echo=4.2
@@ -65,6 +65,8 @@ warrior | Legendary | Waist | 0 | pickup=39, gold=19, damage=7.1, speed=3.6, ech
 warrior | Legendary | Legs | 45 | regen=1, area=9.5, crit=1.9, echo=4.2
 warrior | Legendary | Feet | 0 | speed=24, damage=7.1, crit=2.4, echo=4.2
 warrior | Legendary | Wrist | 24 | cooldown=8.1, armor=3.6, echo=4.2
+warrior | Legendary | Hands | 19 | crit=3.9, critdmg=19, pickup=193, cooldown=3.6, echo=4.2
+warrior | Legendary | Main Hand | 0 | damage=39, speed=4.8, crit=2.4, targets=1
 # Paladin, Common (Squire's set, Wooden Maul)
 paladin | Common | Head | 8 | crit=0.7
 paladin | Common | Shoulder | 4 | area=2.8

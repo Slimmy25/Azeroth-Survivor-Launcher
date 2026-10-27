@@ -12,6 +12,6 @@
   (Transcendence) sets and their staves join Legendary and PvP. All 54 Priest pieces count in the Gear Planner's
   totals and in the spell and talent hover numbers; none is marked * any more.
 - Warrior, Paladin and Hunter gear now has its bonuses too, read from the game's item cards: every piece of every
-  rarity, including Ashbringer and Rhok'delar (each also makes your spells strike 1 more target). Only the Warrior's
-  Dreadnaught Gauntlets and Sulfuras still show *.
+  rarity, including the Legendary weapons Sulfuras, Ashbringer and Rhok'delar (each also makes your spells strike 1
+  more target). No piece of these three classes shows * any more.
 - A hunter's bow or gun goes in the **Ranged** slot of the Gear Planner, as in the game, instead of Main Hand.
