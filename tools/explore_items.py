@@ -34,20 +34,12 @@ def dump(at, n=24):
         parts.append("%x%s" % (w, ("=" + txt) if txt else ""))
     return " ".join(parts)
 
-for key in [b"accuria", b"quick_strike", b"soulstone", b"mark_of_fordring", b"fire_lord", b"INV_Jewelry_Ring_15", b"Acolyte's", b"Devout", b"Circlet", b"Leggings"]:
-    i = mem.find(key)
-    hits = []
-    j = 0
-    while len(hits) < 4:
-        j = mem.find(key, j)
-        if j < 0: break
-        hits.append(j); j += 1
-    for h in hits:
-        rr = refs(h)
-        say("KEY %s at %x refs %s" % (key.decode(), h, [hex(x) for x in rr[:6]]))
-        for r in rr[:3]:
-            say("  @%x-16: %s" % (r, dump(r - 16, 28)))
+def rows(start, end, step):
+    for a in range(start, end, step):
+        say("%x: %s" % (a, dump(a, step // 4)))
 
+rows(0x506740, 0x506740 + 40 * 46, 40)
+rows(0x4d7c00, 0x4d8000, 64)
 text = "\n".join(out)
 # annotations: chunks of about 3500 characters
 chunk, n = "", 0
