@@ -30,5 +30,5 @@
   a red bracket. Untick the one you don't want and both go back to their place in A to Z order.
 - Uninstalling an addon (its X) no longer flashes the launcher's background and a black screen before asking: the
   question now opens straight over the launcher as it is. The same goes for every question inside the launcher.
-- The README's list of download hosts names who runs each one: the Mirror By Community Member (Leo), the Community
-  Mirror (Meexa) and a link provided by Fotze.
+- The README's list of download hosts names who runs each one: a Mirror By Community Member (Leo), a Mirror By
+  Community Member (Meexa) and the Google Drive Link Provided by Fotze.

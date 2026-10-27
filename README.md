@@ -138,11 +138,11 @@ team. Unofficial mirrors are never used.
 | Host | Run by | Check |
 | --- | --- | --- |
 | Mirror By Community Member | Leo | SHA-256 and MD5 |
-| Community Mirror | Meexa | SHA-256 and MD5 |
-| A link provided | Fotze | MD5 |
+| Mirror By Community Member | Meexa | SHA-256 and MD5 |
+| Google Drive Link Provided | Fotze | MD5 |
 | <https://wow.aethus.pl/download> (last resort) | Aethus | a real .rar/.zip/.7z from the game's own site |
 
-The link provided by Fotze (a Google Drive copy) is checked with MD5 only, by choice. MD5 can only be fooled by whoever made the file in the
+The Google Drive link provided by Fotze is checked with MD5 only, by choice. MD5 can only be fooled by whoever made the file in the
 first place, and that copy is published by a trusted head moderator, so no further measures are taken for it.
 
 ## License
