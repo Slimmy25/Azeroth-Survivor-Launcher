@@ -212,9 +212,86 @@ namespace AzerothLauncher
             s.Append("names = {");
             foreach (string n in names) s.Append(" ").Append(Q(n)).Append(",");
             s.Append(" },\n");
+            GearAndSpells(s, topics);
             s.Append("};\n");
             cached = s.ToString();
             return cached;
+        }
+
+        static string N(double v) { return v.ToString("0.###", System.Globalization.CultureInfo.InvariantCulture); }
+
+        // the gear of every class (with its card and its bonuses), the jewelry, and for each class's spells the other
+        // spells that name them: the same the launcher's Guide, Gear Planner and class pages show
+        static void GearAndSpells(StringBuilder s, List<GuideTopic> topics)
+        {
+            s.Append("rarities = {");
+            foreach (string r in Items.Rarities) s.Append(" ").Append(Q(r)).Append(",");
+            s.Append(" },\n");
+            // gear[class] = { { rarity, slot, name, health, known, { stat = value, ... }, card }, ... }
+            s.Append("gear = {\n");
+            var classes = new List<string>();
+            foreach (var p in Items.Gear) if (!classes.Contains(p.Class)) classes.Add(p.Class);
+            foreach (string c in classes)
+            {
+                s.Append("[").Append(Q(c)).Append("] = {\n");
+                foreach (var p in Items.Gear)
+                {
+                    if (p.Class != c) continue;
+                    string card = Items.Card(p);
+                    int nl = card.IndexOf('\n');
+                    s.Append("\t{ ").Append(Q(p.Rarity)).Append(", ").Append(Q(p.Slot)).Append(", ").Append(Q(p.Name)).Append(", ")
+                     .Append(p.Health).Append(", ").Append(p.Known ? "true" : "false").Append(", {");
+                    if (p.Known) foreach (var b in p.Bonuses) s.Append(" [").Append(Q(b.Stat)).Append("] = ").Append(N(b.Value)).Append(",");
+                    s.Append(" }, ").Append(Q(nl >= 0 ? card.Substring(nl + 1) : card)).Append(" },\n");
+                }
+                s.Append("},\n");
+            }
+            s.Append("},\n");
+            // jewels = { { kind, name, icon, { stat = value }, card }, ... }
+            s.Append("jewels = {\n");
+            foreach (var j in Items.Jewelry)
+            {
+                s.Append("\t{ ").Append(Q(j.Kind)).Append(", ").Append(Q(j.Name)).Append(", ").Append(Q(j.Icon)).Append(", {");
+                var sum = new Dictionary<string, double>();
+                foreach (var b in j.Bonuses) { double v; sum.TryGetValue(b.Stat, out v); sum[b.Stat] = v + b.Value; }
+                foreach (var kv in sum) s.Append(" [").Append(Q(kv.Key)).Append("] = ").Append(N(kv.Value)).Append(",");
+                s.Append(" }, ").Append(Q(string.Join("\n", j.Lines.ToArray()))).Append(" },\n");
+            }
+            s.Append("},\n");
+            // spellchanges[class][spell key] = { other spells of the class whose text names it }
+            s.Append("spellchanges = {\n");
+            foreach (var t in topics)
+            {
+                if (t.Title != "Classes") continue;
+                foreach (var pg in t.Pages)
+                {
+                    var pool = new List<KeyValuePair<string, string>>();
+                    string sec = "";
+                    foreach (string raw in pg.Body.Split('\n'))
+                    {
+                        string line = raw.Trim();
+                        if (line.StartsWith("# ")) { sec = line.Substring(2).Trim(); continue; }
+                        if (!sec.StartsWith("Spell pool") || !line.StartsWith("- ")) continue;
+                        var m = System.Text.RegularExpressions.Regex.Match(line.Substring(2).Trim(), @"^(.+?(?: \([^)]*\))?): (?=[a-z0-9])(.+)$");
+                        if (!m.Success) continue;
+                        string game = GuideLinks.GameTip(System.Text.RegularExpressions.Regex.Replace(m.Groups[1].Value, @"\s*\(.*\)$", ""));
+                        pool.Add(new KeyValuePair<string, string>(m.Groups[1].Value, game ?? m.Groups[2].Value));
+                    }
+                    if (pool.Count == 0) continue;
+                    var lines = new StringBuilder();
+                    foreach (var kv in pool)
+                    {
+                        var by = SpellRow.Mentioning(kv.Key, pool);
+                        if (by.Count == 0) continue;
+                        lines.Append("\t[").Append(Q(Key(System.Text.RegularExpressions.Regex.Replace(kv.Key, @"\s*\(.*\)$", "")))).Append("] = {");
+                        foreach (var b in by) lines.Append(" ").Append(Q(b.Key)).Append(",");
+                        lines.Append(" },\n");
+                    }
+                    if (lines.Length == 0) continue;
+                    s.Append("[").Append(Q(pg.Title)).Append("] = {\n").Append(lines.ToString()).Append("},\n");
+                }
+            }
+            s.Append("},\n");
         }
 
         public static string Key(string name)
