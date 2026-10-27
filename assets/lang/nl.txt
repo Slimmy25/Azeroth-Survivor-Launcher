@@ -1701,3 +1701,15 @@ Every piece a {0} can wear. Point at one to read it, click it to try it in the G
 = Elk stuk dat een {0} kan dragen. Wijs het aan om het te lezen, klik om het in de uitrustingsplanner te proberen.
 Spells that change it:
 = Spreuken die deze veranderen:
+Which language do you want the launcher in?
+= In welke taal wil je de launcher?
+Step {0} of {1}
+= Stap {0} van {1}
+Your save
+= Je opgeslagen spel
+Cloud & folders
+= Cloud & mappen
+AZS Stats
+= AZS Stats
+Cloud saving stays off. You can turn it on later in Options > CLOUD SAVE.
+= Opslaan in de cloud blijft uit. Je kunt het later aanzetten in Opties > CLOUD SAVE.

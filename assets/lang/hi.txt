@@ -1702,3 +1702,15 @@ Every piece a {0} can wear. Point at one to read it, click it to try it in the G
 = हर वह चीज़ जो {0} पहन सकता है। पढ़ने के लिए उस पर पॉइंटर रखें, गियर प्लानर में आज़माने के लिए क्लिक करें।
 Spells that change it:
 = इसे बदलने वाले मंत्र:
+Which language do you want the launcher in?
+= आप लॉन्चर किस भाषा में चाहते हैं?
+Step {0} of {1}
+= चरण {0} / {1}
+Your save
+= आपका सेव
+Cloud & folders
+= क्लाउड और फ़ोल्डर
+AZS Stats
+= AZS Stats
+Cloud saving stays off. You can turn it on later in Options > CLOUD SAVE.
+= क्लाउड सेविंग बंद रहेगी। आप इसे बाद में विकल्प > CLOUD SAVE में चालू कर सकते हैं।

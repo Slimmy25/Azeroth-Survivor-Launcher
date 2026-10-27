@@ -1702,3 +1702,15 @@ Every piece a {0} can wear. Point at one to read it, click it to try it in the G
 = Fiecare piesă pe care o poate purta un {0}. Arată spre ea ca să o citești, dă clic ca să o încerci în planificatorul de echipament.
 Spells that change it:
 = Vrăji care o schimbă:
+Which language do you want the launcher in?
+= În ce limbă vrei launcherul?
+Step {0} of {1}
+= Pasul {0} din {1}
+Your save
+= Salvarea ta
+Cloud & folders
+= Cloud și foldere
+AZS Stats
+= AZS Stats
+Cloud saving stays off. You can turn it on later in Options > CLOUD SAVE.
+= Salvarea în cloud rămâne oprită. O poți porni mai târziu din Opțiuni > CLOUD SAVE.

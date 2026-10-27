@@ -1701,3 +1701,15 @@ Every piece a {0} can wear. Point at one to read it, click it to try it in the G
 = Alt utstyr en {0} kan bruke. Pek på et stykke for å lese det, klikk for å prøve det i utstyrsplanleggeren.
 Spells that change it:
 = Trylleformler som endrer den:
+Which language do you want the launcher in?
+= Hvilket språk vil du ha startprogrammet på?
+Step {0} of {1}
+= Trinn {0} av {1}
+Your save
+= Lagringen din
+Cloud & folders
+= Sky og mapper
+AZS Stats
+= AZS Stats
+Cloud saving stays off. You can turn it on later in Options > CLOUD SAVE.
+= Skylagring forblir av. Du kan slå det på senere under Alternativer > CLOUD SAVE.

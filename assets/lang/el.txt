@@ -1702,3 +1702,15 @@ Every piece a {0} can wear. Point at one to read it, click it to try it in the G
 = Κάθε κομμάτι που μπορεί να φορέσει ένας {0}. Δείξε το για να το διαβάσεις, κάνε κλικ για να το δοκιμάσεις στον σχεδιαστή εξοπλισμού.
 Spells that change it:
 = Ξόρκια που την αλλάζουν:
+Which language do you want the launcher in?
+= Σε ποια γλώσσα θέλεις τον launcher;
+Step {0} of {1}
+= Βήμα {0} από {1}
+Your save
+= Η αποθήκευσή σου
+Cloud & folders
+= Cloud & φάκελοι
+AZS Stats
+= AZS Stats
+Cloud saving stays off. You can turn it on later in Options > CLOUD SAVE.
+= Η αποθήκευση στο cloud μένει κλειστή. Μπορείς να την ανοίξεις αργότερα στις Επιλογές > CLOUD SAVE.

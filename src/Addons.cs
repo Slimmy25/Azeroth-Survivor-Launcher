@@ -198,7 +198,95 @@ namespace AzerothLauncher
             return missing;
         }
 
+        // ---- an addon that comes as several folders (Survivor UI with Survivor Plates, BugSack with !BugGrabber): one of
+        // them is the addon's own (its name), the others come with it. They are shown as one and switched together.
+        static string Squash(string s)
+        {
+            var b = new System.Text.StringBuilder();
+            foreach (char c in (s ?? "").ToLowerInvariant()) if (char.IsLetterOrDigit(c)) b.Append(c);
+            return b.ToString();
+        }
+
+        // the Download More entry a folder belongs to, or null
+        public static AddonEntry EntryOf(string folder)
+        {
+            try
+            {
+                foreach (var e in Data.Addons)
+                    foreach (string f in e.Folders) if (string.Equals(f, folder, StringComparison.OrdinalIgnoreCase)) return e;
+            }
+            catch (Exception) { }
+            return null;
+        }
+
+        // the entry's own folder: the one named like the addon (not a "!" library)
+        public static string MainFolder(AddonEntry e)
+        {
+            if (e == null || e.Folders.Count == 0) return null;
+            string n = Squash(Regex.Replace(e.Name, @"\s+By\s+.*$", "", RegexOptions.IgnoreCase));
+            foreach (string f in e.Folders) if (!f.StartsWith("!") && (n.StartsWith(Squash(f)) || Squash(f).StartsWith(n))) return f;
+            foreach (string f in e.Folders) if (!f.StartsWith("!")) return f;
+            return e.Folders[0];
+        }
+
+        // the folders that come with this one (empty for a single-folder addon, or for a folder that is a companion)
+        public static List<string> CompanionsOf(string folder)
+        {
+            var l = new List<string>();
+            AddonEntry e = EntryOf(folder);
+            if (e == null || e.Folders.Count < 2 || !string.Equals(MainFolder(e), folder, StringComparison.OrdinalIgnoreCase)) return l;
+            foreach (string f in e.Folders) if (!string.Equals(f, folder, StringComparison.OrdinalIgnoreCase)) l.Add(f);
+            return l;
+        }
+
+        // a folder that only comes with another one, when that one is installed: not listed on its own
+        public static bool IsCompanion(string addonDir, string folder)
+        {
+            AddonEntry e = EntryOf(folder);
+            if (e == null || e.Folders.Count < 2) return false;
+            string main = MainFolder(e);
+            if (string.Equals(main, folder, StringComparison.OrdinalIgnoreCase)) return false;
+            return Directory.Exists(Path.Combine(addonDir, main)) || Directory.Exists(Path.Combine(addonDir, main + DisabledSuffix));
+        }
+
+        // "Survivor UI By morderous" for a Download More addon; else the addon's title, and its author from its .toc
+        public static string DisplayName(string addonDir, string folder)
+        {
+            AddonEntry e = EntryOf(folder);
+            if (e != null) return e.Name;
+            string title = TocTitle(addonDir, folder), author = TocField(addonDir, folder, "Author");
+            string n = string.IsNullOrEmpty(title) ? folder : title;
+            return author.Length > 0 && n.IndexOf(" By ", StringComparison.OrdinalIgnoreCase) < 0 ? n + " By " + author : n;
+        }
+
+        static string TocField(string addonDir, string name, string field)
+        {
+            foreach (string folder in new[] { name, name + DisabledSuffix })
+            {
+                string toc = Path.Combine(Path.Combine(addonDir, folder), name + ".toc");
+                try
+                {
+                    if (!File.Exists(toc)) continue;
+                    foreach (string line in File.ReadAllLines(toc))
+                    {
+                        var m = Regex.Match(line, @"^##\s*" + field + @"\s*:\s*(.+)$");
+                        if (m.Success) return Regex.Replace(m.Groups[1].Value, @"\|c[0-9a-fA-F]{8}|\|r", "").Trim();
+                    }
+                }
+                catch (Exception) { }
+            }
+            return "";
+        }
+
+        // switches an addon on or off, with the folders that come with it
         public static void SetEnabled(string addonDir, string name, bool enabled)
+        {
+            SetEnabledOne(addonDir, name, enabled);
+            foreach (string c in CompanionsOf(name))
+                try { SetEnabledOne(addonDir, c, enabled); } catch (Exception) { }   // a companion not installed: nothing to do
+        }
+
+        static void SetEnabledOne(string addonDir, string name, bool enabled)
         {
             string on = Path.Combine(addonDir, name), off = on + DisabledSuffix;
             if (enabled)

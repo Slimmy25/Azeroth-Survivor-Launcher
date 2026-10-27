@@ -1701,3 +1701,15 @@ Every piece a {0} can wear. Point at one to read it, click it to try it in the G
 = Jokainen varuste, jota {0} voi käyttää. Osoita lukeaksesi, napsauta kokeillaksesi varustesuunnittelijassa.
 Spells that change it:
 = Loitsut, jotka muuttavat sitä:
+Which language do you want the launcher in?
+= Millä kielellä haluat käynnistimen?
+Step {0} of {1}
+= Vaihe {0}/{1}
+Your save
+= Tallennuksesi
+Cloud & folders
+= Pilvi ja kansiot
+AZS Stats
+= AZS Stats
+Cloud saving stays off. You can turn it on later in Options > CLOUD SAVE.
+= Pilvitallennus pysyy pois päältä. Voit ottaa sen käyttöön myöhemmin kohdassa Asetukset > CLOUD SAVE.

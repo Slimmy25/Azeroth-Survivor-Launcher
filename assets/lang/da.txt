@@ -1701,3 +1701,15 @@ Every piece a {0} can wear. Point at one to read it, click it to try it in the G
 = Alt udstyr en {0} kan bære. Peg på et stykke for at læse det, klik for at prøve det i udstyrsplanlæggeren.
 Spells that change it:
 = Besværgelser, der ændrer den:
+Which language do you want the launcher in?
+= Hvilket sprog vil du have launcheren på?
+Step {0} of {1}
+= Trin {0} af {1}
+Your save
+= Dit gemte spil
+Cloud & folders
+= Sky og mapper
+AZS Stats
+= AZS Stats
+Cloud saving stays off. You can turn it on later in Options > CLOUD SAVE.
+= Skygemning forbliver slået fra. Du kan slå det til senere under Indstillinger > CLOUD SAVE.

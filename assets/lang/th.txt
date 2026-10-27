@@ -1702,3 +1702,15 @@ Every piece a {0} can wear. Point at one to read it, click it to try it in the G
 = อุปกรณ์ทุกชิ้นที่ {0} สวมใส่ได้ ชี้เพื่ออ่าน คลิกเพื่อลองในตัววางแผนอุปกรณ์
 Spells that change it:
 = คาถาที่เปลี่ยนคาถานี้:
+Which language do you want the launcher in?
+= คุณต้องการใช้ตัวเปิดเกมภาษาอะไร
+Step {0} of {1}
+= ขั้นตอน {0} จาก {1}
+Your save
+= เซฟของคุณ
+Cloud & folders
+= คลาวด์และโฟลเดอร์
+AZS Stats
+= AZS Stats
+Cloud saving stays off. You can turn it on later in Options > CLOUD SAVE.
+= การบันทึกบนคลาวด์ยังคงปิดอยู่ คุณเปิดได้ภายหลังที่ ตัวเลือก > CLOUD SAVE

@@ -1702,3 +1702,15 @@ Every piece a {0} can wear. Point at one to read it, click it to try it in the G
 = Усе, що може носити {0}. Наведіть, щоб прочитати, клацніть, щоб приміряти в планувальнику спорядження.
 Spells that change it:
 = Заклинання, які його змінюють:
+Which language do you want the launcher in?
+= Якою мовою показувати лаунчер?
+Step {0} of {1}
+= Крок {0} з {1}
+Your save
+= Ваше збереження
+Cloud & folders
+= Хмара й теки
+AZS Stats
+= AZS Stats
+Cloud saving stays off. You can turn it on later in Options > CLOUD SAVE.
+= Хмарне збереження залишиться вимкненим. Увімкнути його можна пізніше в Налаштування > CLOUD SAVE.

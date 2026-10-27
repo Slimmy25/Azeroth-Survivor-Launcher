@@ -1702,3 +1702,15 @@ Every piece a {0} can wear. Point at one to read it, click it to try it in the G
 = Bir {0} için giyilebilecek her parça. Okumak için üzerine gel, Ekipman Planlayıcı'da denemek için tıkla.
 Spells that change it:
 = Bunu değiştiren büyüler:
+Which language do you want the launcher in?
+= Başlatıcıyı hangi dilde istiyorsun?
+Step {0} of {1}
+= Adım {0}/{1}
+Your save
+= Kaydın
+Cloud & folders
+= Bulut ve klasörler
+AZS Stats
+= AZS Stats
+Cloud saving stays off. You can turn it on later in Options > CLOUD SAVE.
+= Bulut kaydı kapalı kalır. Daha sonra Seçenekler > CLOUD SAVE'den açabilirsin.

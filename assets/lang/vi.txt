@@ -1702,3 +1702,15 @@ Every piece a {0} can wear. Point at one to read it, click it to try it in the G
 = Mọi món {0} có thể mặc. Trỏ vào để đọc, bấm để thử trong Trình lập kế hoạch trang bị.
 Spells that change it:
 = Phép làm thay đổi phép này:
+Which language do you want the launcher in?
+= Bạn muốn trình khởi chạy dùng ngôn ngữ nào?
+Step {0} of {1}
+= Bước {0}/{1}
+Your save
+= Bản lưu của bạn
+Cloud & folders
+= Đám mây và thư mục
+AZS Stats
+= AZS Stats
+Cloud saving stays off. You can turn it on later in Options > CLOUD SAVE.
+= Lưu đám mây vẫn tắt. Bạn có thể bật sau trong Tùy chọn > CLOUD SAVE.

@@ -1702,3 +1702,15 @@ Every piece a {0} can wear. Point at one to read it, click it to try it in the G
 = Každý kus, který {0} může nosit. Najeď na něj pro popis, kliknutím ho vyzkoušíš v plánovači výbavy.
 Spells that change it:
 = Kouzla, která ho mění:
+Which language do you want the launcher in?
+= V jakém jazyce chceš launcher?
+Step {0} of {1}
+= Krok {0} z {1}
+Your save
+= Tvůj postup
+Cloud & folders
+= Cloud a složky
+AZS Stats
+= AZS Stats
+Cloud saving stays off. You can turn it on later in Options > CLOUD SAVE.
+= Ukládání do cloudu zůstane vypnuté. Zapnout ho můžeš později v Možnosti > CLOUD SAVE.

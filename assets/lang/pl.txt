@@ -1702,3 +1702,15 @@ Every piece a {0} can wear. Point at one to read it, click it to try it in the G
 = Każdy element, który {0} może nosić. Wskaż go, aby przeczytać, kliknij, aby wypróbować w planerze ekwipunku.
 Spells that change it:
 = Zaklęcia, które je zmieniają:
+Which language do you want the launcher in?
+= W jakim języku ma być launcher?
+Step {0} of {1}
+= Krok {0} z {1}
+Your save
+= Twój zapis
+Cloud & folders
+= Chmura i foldery
+AZS Stats
+= AZS Stats
+Cloud saving stays off. You can turn it on later in Options > CLOUD SAVE.
+= Zapis w chmurze pozostaje wyłączony. Możesz go włączyć później w Opcje > CLOUD SAVE.

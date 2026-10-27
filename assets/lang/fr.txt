@@ -1701,3 +1701,15 @@ Every piece a {0} can wear. Point at one to read it, click it to try it in the G
 = Chaque pièce qu’un {0} peut porter. Survolez-la pour la lire, cliquez pour l’essayer dans le planificateur d’équipement.
 Spells that change it:
 = Sorts qui le modifient :
+Which language do you want the launcher in?
+= Dans quelle langue voulez-vous le lanceur ?
+Step {0} of {1}
+= Étape {0} sur {1}
+Your save
+= Votre sauvegarde
+Cloud & folders
+= Cloud et dossiers
+AZS Stats
+= AZS Stats
+Cloud saving stays off. You can turn it on later in Options > CLOUD SAVE.
+= La sauvegarde cloud reste désactivée. Vous pourrez l’activer plus tard dans Options > CLOUD SAVE.
