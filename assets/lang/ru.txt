@@ -97,8 +97,6 @@ The game client is still being installed. If you quit now, it is cut short.
 = Игра ещё устанавливается. Если выйти сейчас, установка прервётся.
 Updating
 = Идёт обновление
-The game is still being updated. If you quit now, the update is cut short. Nothing is lost: a half-finished change is undone the next time the launcher starts.
-= Игра ещё обновляется. Если выйти сейчас, обновление прервётся. Ничего не потеряется: недоделанное изменение откатится при следующем запуске лаунчера.
 The game is still running. If you quit the launcher now, your saves will NOT be uploaded automatically.
 = Игра всё ещё запущена. Если закрыть лаунчер сейчас, твои сохранения НЕ будут выгружены автоматически.
 Setup saved.
@@ -213,14 +211,6 @@ KEEP LOCAL
 = ОСТАВИТЬ ЛОКАЛЬНЫЕ
 Save game
 = Сохранение игры
-Game update
-= Обновление игры
-Update available
-= Доступно обновление
-New version:
-= Новая версия:
-Your version:
-= Твоя версия:
 not recorded yet
 = ещё не записана
 Download size:
@@ -229,22 +219,8 @@ What is new
 = Что нового
 Your addons, settings and saves are left alone. If anything goes wrong, the old game files are put back.
 = Твои аддоны, настройки и сохранения не трогаются. Если что-то пойдёт не так, старые файлы игры вернутся на место.
-UPDATE NOW
-= ОБНОВИТЬ СЕЙЧАС
 NOT NOW
 = НЕ СЕЙЧАС
-SKIP THIS VERSION
-= ПРОПУСТИТЬ ВЕРСИЮ
-I ALREADY HAVE THIS VERSION
-= У МЕНЯ УЖЕ ЕСТЬ ЭТА ВЕРСИЯ
-The update is being installed. Please wait until it has finished.
-= Обновление устанавливается. Подожди, пока оно завершится.
-Downloading the update...
-= Скачивание обновления...
-Download the update
-= Скачать обновление
-Step 1: download the update in your web browser.
-= Шаг 1: скачай обновление в браузере.
 OPEN DOWNLOAD AGAIN
 = ОТКРЫТЬ ЗАГРУЗКУ СНОВА
 Step 2: when the download has finished, come back here.
@@ -255,32 +231,16 @@ Checking the file...
 = Проверка файла...
 CANCELLING...
 = ОТМЕНА...
-Updating to {0}
-= Обновление до {0}
 Please keep the launcher open until this has finished.
 = Не закрывай лаунчер, пока это не закончится.
 {0} of {1}  ({#2}%)
 = {0} из {1}  ({2}%)
 {0} downloaded
 = Скачано {0}
-Update installed
-= Обновление установлено
-Update failed
-= Ошибка обновления
 CLOSE
 = ЗАКРЫТЬ
 TRY AGAIN
 = ПОВТОРИТЬ
-Version {0} is installed.
-= Установлена версия {0}.
-{#0} files updated.
-= Обновлено файлов: {0}.
-{#0} file updated.
-= Обновлено файлов: {0}.
-{#0} files updated, {#1} removed.
-= Обновлено файлов: {0}, удалено: {1}.
-{#0} file updated, {#1} removed.
-= Обновлено файлов: {0}, удалено: {1}.
 Install
 = Установка
 Install the game from this file?
@@ -303,14 +263,6 @@ Install complete - press PLAY.
 = Установка завершена - нажми ИГРАТЬ.
 Install complete. Press PLAY to enter Azeroth.
 = Установка завершена. Нажми ИГРАТЬ, чтобы войти в Азерот.
-The last game update was cut off before it finished. Your game files were put back exactly as they were.
-= Последнее обновление игры прервалось до завершения. Файлы игры возвращены точно в прежнее состояние.
-You can run the update again with the UPDATE button.
-= Обновление можно запустить снова кнопкой ОБНОВИТЬ.
-The last game update was cut off, and some game files could not be put back automatically.
-= Последнее обновление игры прервалось, и некоторые файлы игры не удалось вернуть автоматически.
-The old versions are kept in the folder "{0}" inside the game folder. Copy them back over the game files, or reinstall the game.
-= Старые версии лежат в папке «{0}» внутри папки игры. Скопируй их обратно поверх файлов игры или переустанови игру.
 Checking for updates...
 = Проверка обновлений...
 The update check failed ({0}).
@@ -343,46 +295,18 @@ Downloading the new launcher... {0}
 = Скачивание нового лаунчера... {0}
 Launcher update failed.
 = Ошибка обновления лаунчера.
-Update checking is not switched on in this launcher yet (it has no update address).
-= Проверка обновлений в этом лаунчере пока не включена (нет адреса обновлений).
 The game is not installed yet. Press INSTALL first.
 = Игра ещё не установлена. Сначала нажми УСТАНОВИТЬ.
 Could not check for updates.
 = Не удалось проверить обновления.
 You have the newest version ({0}).
 = У тебя самая новая версия ({0}).
-Update {0} is available.
-= Доступно обновление {0}.
-A game update ({0}) is available.
-= Доступно обновление игры ({0}).
-Version {0} skipped. The UPDATE button still offers it.
-= Версия {0} пропущена. Кнопка ОБНОВИТЬ по-прежнему её предлагает.
-Noted: you have version {0}.
-= Отмечено: у тебя версия {0}.
-Install the update from this file?
-= Установить обновление из этого файла?
-Choose the update file you downloaded
-= Выбери скачанный файл обновления
-Update archive (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|All files (*.*)|*.*
-= Архив обновления (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|Все файлы (*.*)|*.*
 Close the game first, then try again.
 = Сначала закрой игру, затем попробуй снова.
 Checking the download...
 = Проверка загрузки...
 The downloaded file does not match its checksum, so nothing was installed. Please try again later.
 = Скачанный файл не совпадает со своей контрольной суммой, поэтому ничего не установлено. Попробуй позже.
-That file is not this update (its checksum does not match), so nothing was installed. Download it again from the update page.
-= Этот файл не является этим обновлением (контрольная сумма не совпадает), поэтому ничего не установлено. Скачай его заново со страницы обновления.
-The update failed ({0}).
-= Ошибка обновления ({0}).
-Updated to {0} - press PLAY.
-= Обновлено до {0} - нажми ИГРАТЬ.
-Game updated to {0}. Press PLAY to enter Azeroth.
-= Игра обновлена до {0}. Нажми ИГРАТЬ, чтобы войти в Азерот.
-Update cancelled.
-= Обновление отменено.
-Update failed.
-= Ошибка обновления.
 Another task is still running - wait for it to finish.
 = Ещё выполняется другая задача - дождись её завершения.
 Choose a sync folder inside your cloud drive first (Cloud Save or Options).
@@ -397,8 +321,6 @@ Saves uploaded at {0}
 = Сохранения выгружены в {0}
 Not everything was synced - see the Cloud Save log.
 = Синхронизировано не всё - смотри журнал в разделе «Облачное сохранение».
-The game is being updated. Please wait until that has finished.
-= Игра обновляется. Подожди, пока это закончится.
 The cloud save could NOT be loaded, so the game was not launched.
 = Облачное сохранение НЕ удалось загрузить, поэтому игра не запущена.
 See the log in Cloud Save. If your cloud drive is still syncing, wait for it to finish and press PLAY again.
@@ -693,32 +615,14 @@ The link did not give a .zip file. It must be a direct download link (share page
 = Ссылка не вернула файл .zip. Нужна прямая ссылка на скачивание (страницы обмена вроде LimeWire не подходят).
 There is not enough free disk space.
 = Недостаточно свободного места на диске.
-Not enough free disk space for the update: about {0} is needed on the drive with the game, {1} is free.
-= Недостаточно места для обновления: на диске с игрой нужно около {0}, свободно {1}.
-The update file is not a .rar, .zip or .7z archive.
-= Файл обновления не является архивом .rar, .zip или .7z.
-An earlier update was cut off and its files could not be put back yet.
-= Предыдущее обновление прервалось, и его файлы пока не удалось вернуть.
 The old files are kept in:
 = Старые файлы лежат в:
-Unpacking the update. This can take a few minutes...
-= Распаковка обновления. Это может занять несколько минут...
 Installing the new files...
 = Установка новых файлов...
-The update did not contain any files to install.
-= В обновлении не было файлов для установки.
-{0} is missing after the update.
-= После обновления отсутствует {0}.
 A game file is in use. Close the game and anything else using its folder, then try again.
 = Файл игры используется. Закрой игру и всё, что использует её папку, и попробуй снова.
-There is not enough free disk space for the update. Free some space and try again.
-= Недостаточно места для обновления. Освободи место и попробуй снова.
-The update could not be installed ({0}).
-= Не удалось установить обновление ({0}).
 No game files were changed.
 = Файлы игры не изменены.
-Some files could not be put back. The old versions are kept in:
-= Некоторые файлы не удалось вернуть. Старые версии лежат в:
 Sync folder not reachable: {0} (is your cloud drive running?)
 = Папка синхронизации недоступна: {0} (запущен ли облачный диск?)
 The game is running. Close it before you download.
@@ -1155,8 +1059,6 @@ Addons need the game. Press INSTALL to download it first.
 = Аддонам нужна игра. Сначала нажмите УСТАНОВИТЬ, чтобы скачать её.
 Game client not found. Press INSTALL to download it first.
 = Клиент игры не найден. Сначала нажмите УСТАНОВИТЬ, чтобы скачать его.
-Please wait until the game update or install has finished.
-= Подождите, пока завершится обновление или установка игры.
 Downloading the game client...
 = Загрузка клиента игры...
 The download server sent something that is not the game archive. Please try again later.
@@ -1624,3 +1526,15 @@ these two can't be on together. Switching one on switches the other off.
 = эти два нельзя включить одновременно. Если включить один, другой выключится.
 Flat, dark unit frames and a compact action bar, Plater-style nameplates (Survivor Plates), luck and card odds on the XP bar, a tabbed chat panel and automatic raid marks. Can't be on together with AZS Minor Mods.
 = Плоские тёмные рамки юнитов и компактная панель действий, индикаторы имён в стиле Plater (Survivor Plates), удача и шансы карт на полосе опыта, чат с вкладками и автоматические рейдовые метки. Нельзя включить вместе с AZS Minor Mods.
+The game updated itself and is opening again...
+= Игра обновилась сама и открывается снова...
+The game updated itself and opened again.
+= Игра обновилась сама и открылась снова.
+The game opened again.
+= Игра открылась снова.
+The launcher is still updating itself. If you quit now, the update is cut short and this launcher stays as it is.
+= Лаунчер ещё обновляется. Если выйти сейчас, обновление прервётся и этот лаунчер останется как есть.
+The launcher is updating itself. Please wait until that has finished.
+= Лаунчер обновляется. Подождите, пока он закончит.
+Please wait until the launcher update or the install has finished.
+= Подождите, пока закончится обновление лаунчера или установка.

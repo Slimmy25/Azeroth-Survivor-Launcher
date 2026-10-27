@@ -32,7 +32,7 @@ jobs:
         run: |
           set -euo pipefail
           if [ -z "$GH_TOKEN" ]; then echo "::error::Set the RELEASES_TOKEN secret first (see build.yml)."; exit 1; fi
-          # a pre-release, so it never counts as the "latest" release (that one is for game updates)
+          # a pre-release, so it never counts as the "latest" release (that one is the launcher)
           gh release view addons >/dev/null 2>&1 || \
             gh release create addons --prerelease --title "Addons" \
               --notes "Copies of the addons offered in the launcher's Download More list. Each addon belongs to its author (see the file name)."

@@ -57,7 +57,7 @@ namespace AzerothLauncher
         }
 
         // Opens a web address and follows redirects itself (GitHub and most file hosts use them).
-        // httpsOnly: every step must be https (the game updates).
+        // httpsOnly: every step must be https.
         public static HttpWebResponse Open(string url, int timeoutMs, bool httpsOnly, string what, string accept = null,
                                            Action<HttpWebRequest> prepare = null)
         {

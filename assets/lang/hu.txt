@@ -97,8 +97,6 @@ The game client is still being installed. If you quit now, it is cut short.
 = A játék telepítése még folyamatban van. Ha most kilépsz, megszakad.
 Updating
 = Frissítés folyamatban
-The game is still being updated. If you quit now, the update is cut short. Nothing is lost: a half-finished change is undone the next time the launcher starts.
-= A játék frissítése még folyamatban van. Ha most kilépsz, a frissítés megszakad. Semmi sem vész el: a félbemaradt változtatás a launcher következő indításakor visszavonódik.
 The game is still running. If you quit the launcher now, your saves will NOT be uploaded automatically.
 = A játék még fut. Ha most kilépsz a launcherből, a mentéseid NEM töltődnek fel automatikusan.
 Setup saved.
@@ -213,14 +211,6 @@ KEEP LOCAL
 = HELYI MEGTARTÁSA
 Save game
 = Játékmentés
-Game update
-= Játékfrissítés
-Update available
-= Frissítés érhető el
-New version:
-= Új verzió:
-Your version:
-= A te verziód:
 not recorded yet
 = még nincs rögzítve
 Download size:
@@ -229,22 +219,8 @@ What is new
 = Újdonságok
 Your addons, settings and saves are left alone. If anything goes wrong, the old game files are put back.
 = A kiegészítőidhez, beállításaidhoz és mentéseidhez nem nyúl. Ha valami hiba történik, a régi játékfájlok visszakerülnek.
-UPDATE NOW
-= FRISSÍTÉS MOST
 NOT NOW
 = MOST NEM
-SKIP THIS VERSION
-= EZ A VERZIÓ KIHAGYÁSA
-I ALREADY HAVE THIS VERSION
-= MÁR MEGVAN EZ A VERZIÓ
-The update is being installed. Please wait until it has finished.
-= A frissítés települ. Várj, amíg befejeződik.
-Downloading the update...
-= Frissítés letöltése...
-Download the update
-= A frissítés letöltése
-Step 1: download the update in your web browser.
-= 1. lépés: töltsd le a frissítést a böngésződben.
 OPEN DOWNLOAD AGAIN
 = LETÖLTÉS ÚJRA MEGNYITÁSA
 Step 2: when the download has finished, come back here.
@@ -255,32 +231,16 @@ Checking the file...
 = Fájl ellenőrzése...
 CANCELLING...
 = MEGSZAKÍTÁS...
-Updating to {0}
-= Frissítés erre: {0}
 Please keep the launcher open until this has finished.
 = Tartsd nyitva a launchert, amíg ez befejeződik.
 {0} of {1}  ({#2}%)
 = {0} / {1}  ({2}%)
 {0} downloaded
 = {0} letöltve
-Update installed
-= Frissítés telepítve
-Update failed
-= A frissítés sikertelen
 CLOSE
 = BEZÁRÁS
 TRY AGAIN
 = ÚJRA
-Version {0} is installed.
-= A(z) {0} verzió telepítve van.
-{#0} files updated.
-= {0} fájl frissítve.
-{#0} file updated.
-= {0} fájl frissítve.
-{#0} files updated, {#1} removed.
-= {0} fájl frissítve, {1} eltávolítva.
-{#0} file updated, {#1} removed.
-= {0} fájl frissítve, {1} eltávolítva.
 Install
 = Telepítés
 Install the game from this file?
@@ -303,14 +263,6 @@ Install complete - press PLAY.
 = Telepítés kész - nyomd meg a JÁTÉK gombot.
 Install complete. Press PLAY to enter Azeroth.
 = Telepítés kész. Nyomd meg a JÁTÉK gombot, és lépj be Azerothba.
-The last game update was cut off before it finished. Your game files were put back exactly as they were.
-= Az utolsó játékfrissítés befejezés előtt megszakadt. A játékfájljaid pontosan úgy kerültek vissza, ahogy voltak.
-You can run the update again with the UPDATE button.
-= A frissítést újra futtathatod a FRISSÍTÉS gombbal.
-The last game update was cut off, and some game files could not be put back automatically.
-= Az utolsó játékfrissítés megszakadt, és néhány játékfájlt nem sikerült automatikusan visszaállítani.
-The old versions are kept in the folder "{0}" inside the game folder. Copy them back over the game files, or reinstall the game.
-= A régi verziók a játék mappáján belüli „{0}” mappában vannak. Másold vissza őket a játékfájlok fölé, vagy telepítsd újra a játékot.
 Checking for updates...
 = Frissítések keresése...
 The update check failed ({0}).
@@ -343,46 +295,18 @@ Downloading the new launcher... {0}
 = Az új launcher letöltése... {0}
 Launcher update failed.
 = A launcher frissítése sikertelen.
-Update checking is not switched on in this launcher yet (it has no update address).
-= A frissítések ellenőrzése még nincs bekapcsolva ebben a launcherben (nincs frissítési címe).
 The game is not installed yet. Press INSTALL first.
 = A játék még nincs telepítve. Előbb nyomd meg a TELEPÍTÉS gombot.
 Could not check for updates.
 = Nem sikerült ellenőrizni a frissítéseket.
 You have the newest version ({0}).
 = A legújabb verzió van meg ({0}).
-Update {0} is available.
-= Elérhető a(z) {0} frissítés.
-A game update ({0}) is available.
-= Játékfrissítés ({0}) érhető el.
-Version {0} skipped. The UPDATE button still offers it.
-= A(z) {0} verzió kihagyva. A FRISSÍTÉS gomb továbbra is felajánlja.
-Noted: you have version {0}.
-= Feljegyezve: a(z) {0} verzió van meg.
-Install the update from this file?
-= Telepíted a frissítést ebből a fájlból?
-Choose the update file you downloaded
-= Válaszd ki a letöltött frissítési fájlt
-Update archive (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|All files (*.*)|*.*
-= Frissítési archívum (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|Minden fájl (*.*)|*.*
 Close the game first, then try again.
 = Előbb zárd be a játékot, aztán próbáld újra.
 Checking the download...
 = A letöltés ellenőrzése...
 The downloaded file does not match its checksum, so nothing was installed. Please try again later.
 = A letöltött fájl nem egyezik az ellenőrzőösszegével, ezért semmi sem települt. Próbáld újra később.
-That file is not this update (its checksum does not match), so nothing was installed. Download it again from the update page.
-= Ez a fájl nem ez a frissítés (az ellenőrzőösszeg nem egyezik), ezért semmi sem települt. Töltsd le újra a frissítés oldaláról.
-The update failed ({0}).
-= A frissítés sikertelen ({0}).
-Updated to {0} - press PLAY.
-= Frissítve erre: {0} - nyomd meg a JÁTÉK gombot.
-Game updated to {0}. Press PLAY to enter Azeroth.
-= A játék frissítve erre: {0}. Nyomd meg a JÁTÉK gombot, és lépj be Azerothba.
-Update cancelled.
-= Frissítés megszakítva.
-Update failed.
-= A frissítés sikertelen.
 Another task is still running - wait for it to finish.
 = Egy másik feladat még fut - várd meg, amíg befejeződik.
 Choose a sync folder inside your cloud drive first (Cloud Save or Options).
@@ -397,8 +321,6 @@ Saves uploaded at {0}
 = Mentések feltöltve: {0}
 Not everything was synced - see the Cloud Save log.
 = Nem minden szinkronizálódott - lásd a Felhőmentés naplóját.
-The game is being updated. Please wait until that has finished.
-= A játék frissítése folyamatban. Várj, amíg befejeződik.
 The cloud save could NOT be loaded, so the game was not launched.
 = A felhőmentést NEM sikerült betölteni, ezért a játék nem indult el.
 See the log in Cloud Save. If your cloud drive is still syncing, wait for it to finish and press PLAY again.
@@ -693,32 +615,14 @@ The link did not give a .zip file. It must be a direct download link (share page
 = A link nem adott .zip fájlt. Közvetlen letöltési linknek kell lennie (a megosztóoldalak, például a LimeWire, nem működnek).
 There is not enough free disk space.
 = Nincs elég szabad lemezterület.
-Not enough free disk space for the update: about {0} is needed on the drive with the game, {1} is free.
-= Nincs elég szabad lemezterület a frissítéshez: körülbelül {0} kell a játékot tartalmazó meghajtón, {1} szabad.
-The update file is not a .rar, .zip or .7z archive.
-= A frissítési fájl nem .rar, .zip vagy .7z archívum.
-An earlier update was cut off and its files could not be put back yet.
-= Egy korábbi frissítés megszakadt, és a fájljait még nem sikerült visszaállítani.
 The old files are kept in:
 = A régi fájlok itt vannak:
-Unpacking the update. This can take a few minutes...
-= A frissítés kicsomagolása. Ez néhány percig tarthat...
 Installing the new files...
 = Az új fájlok telepítése...
-The update did not contain any files to install.
-= A frissítés nem tartalmazott telepítendő fájlokat.
-{0} is missing after the update.
-= {0} hiányzik a frissítés után.
 A game file is in use. Close the game and anything else using its folder, then try again.
 = Egy játékfájl használatban van. Zárd be a játékot és mindent, ami a mappáját használja, aztán próbáld újra.
-There is not enough free disk space for the update. Free some space and try again.
-= Nincs elég szabad lemezterület a frissítéshez. Szabadíts fel helyet, és próbáld újra.
-The update could not be installed ({0}).
-= A frissítést nem sikerült telepíteni ({0}).
 No game files were changed.
 = Egyetlen játékfájl sem változott.
-Some files could not be put back. The old versions are kept in:
-= Néhány fájlt nem sikerült visszaállítani. A régi verziók itt vannak:
 Sync folder not reachable: {0} (is your cloud drive running?)
 = A szinkronizálási mappa nem érhető el: {0} (fut a felhőtárhelyed?)
 The game is running. Close it before you download.
@@ -1155,8 +1059,6 @@ Addons need the game. Press INSTALL to download it first.
 = A kiegészítőkhöz kell a játék. Előbb nyomd meg a TELEPÍTÉS gombot a letöltéshez.
 Game client not found. Press INSTALL to download it first.
 = A játékkliens nem található. Előbb nyomd meg a TELEPÍTÉS gombot a letöltéshez.
-Please wait until the game update or install has finished.
-= Várj, amíg a játék frissítése vagy telepítése befejeződik.
 Downloading the game client...
 = A játékkliens letöltése...
 The download server sent something that is not the game archive. Please try again later.
@@ -1624,3 +1526,15 @@ these two can't be on together. Switching one on switches the other off.
 = ez a kettő nem lehet egyszerre bekapcsolva. Ha az egyiket bekapcsolod, a másik kikapcsol.
 Flat, dark unit frames and a compact action bar, Plater-style nameplates (Survivor Plates), luck and card odds on the XP bar, a tabbed chat panel and automatic raid marks. Can't be on together with AZS Minor Mods.
 = Lapos, sötét egységkeretek és tömör akciósáv, Plater-stílusú névtáblák (Survivor Plates), szerencse és kártyaesélyek az XP-sávon, füles csevegőpanel és automatikus raidjelölők. Nem lehet egyszerre bekapcsolva az AZS Minor Modsszal.
+The game updated itself and is opening again...
+= A játék frissítette magát, és újra megnyílik...
+The game updated itself and opened again.
+= A játék frissítette magát, és újra megnyílt.
+The game opened again.
+= A játék újra megnyílt.
+The launcher is still updating itself. If you quit now, the update is cut short and this launcher stays as it is.
+= Az indító még frissíti magát. Ha most kilépsz, a frissítés megszakad, és ez az indító marad, ahogy van.
+The launcher is updating itself. Please wait until that has finished.
+= Az indító frissíti magát. Várj, amíg befejeződik.
+Please wait until the launcher update or the install has finished.
+= Várj, amíg az indító frissítése vagy a telepítés befejeződik.

@@ -22,7 +22,8 @@ nothing else: it runs on the .NET Framework 4.8 that comes with Windows 10 and 1
 - The download comes from one of the game's three download hosts, picked at random, and the next one is tried if a
   host fails. The game's own download page is the last resort. Every download is checked against the game's known
   checksums before it is installed.
-- **PLAY** checks for a newer launcher and for game updates, then starts the game.
+- **PLAY** checks for a newer launcher, then starts the game. The game updates itself when it starts (it closes and
+  opens again); the launcher follows it through that restart.
 - Nothing is downloaded until you press INSTALL. First-time setup only asks questions, all inside the launcher:
   importing a save from the website version, your folders, cloud saving and addons.
 - The launcher updates itself: a new version is checked (SHA-256) and installed when it starts.
@@ -96,7 +97,7 @@ Program Files), or when the exe is inside Google Drive, OneDrive, Dropbox or iCl
 ## What it reaches on the internet
 
 - **The game's download hosts** (in `src/Launcher.cs`): the game client.
-- **GitHub**: launcher updates, game updates, and the addons offered in Download More.
+- **GitHub**: launcher updates and the addons offered in Download More.
 - **jsDelivr** (a CDN for GitHub files): the guide's how-to videos, streamed while they play.
 - **YouTube**: community and build videos, played in a Microsoft Edge window inside the launcher, and their titles.
 - **Wowhead's image host** (`wow.zamimg.com`): spell, class, race, zone and creature pictures, shown when a page

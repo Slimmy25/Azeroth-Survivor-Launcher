@@ -1665,7 +1665,6 @@ namespace AzerothLauncher
             RefreshPlayLabel();                              // PLAY/INSTALL and the Cloud Save button follow the new folder
             Invalidate();
             RebuildCurrent();
-            if (Updater.Enabled) After(800, delegate { CheckForUpdate(false, true); });   // is it the newest version?
             return true;
         }
 

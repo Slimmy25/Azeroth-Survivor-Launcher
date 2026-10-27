@@ -96,8 +96,6 @@ The game client is still being installed. If you quit now, it is cut short.
 = Peliä asennetaan yhä. Jos lopetat nyt, asennus keskeytyy.
 Updating
 = Päivitetään
-The game is still being updated. If you quit now, the update is cut short. Nothing is lost: a half-finished change is undone the next time the launcher starts.
-= Peliä päivitetään yhä. Jos lopetat nyt, päivitys keskeytyy. Mitään ei menetetä: keskeneräinen muutos perutaan, kun launcher käynnistyy seuraavan kerran.
 The game is still running. If you quit the launcher now, your saves will NOT be uploaded automatically.
 = Peli on yhä käynnissä. Jos lopetat launcherin nyt, tallennuksiasi EI lähetetä automaattisesti.
 Setup saved.
@@ -212,14 +210,6 @@ KEEP LOCAL
 = PIDÄ PAIKALLINEN
 Save game
 = Pelitallennus
-Game update
-= Pelin päivitys
-Update available
-= Päivitys saatavilla
-New version:
-= Uusi versio:
-Your version:
-= Sinun versiosi:
 not recorded yet
 = ei vielä tallennettu
 Download size:
@@ -228,22 +218,8 @@ What is new
 = Uutta
 Your addons, settings and saves are left alone. If anything goes wrong, the old game files are put back.
 = Lisäosiisi, asetuksiisi ja tallennuksiisi ei kosketa. Jos jokin menee pieleen, vanhat pelitiedostot palautetaan.
-UPDATE NOW
-= PÄIVITÄ NYT
 NOT NOW
 = EI NYT
-SKIP THIS VERSION
-= OHITA TÄMÄ VERSIO
-I ALREADY HAVE THIS VERSION
-= MINULLA ON JO TÄMÄ VERSIO
-The update is being installed. Please wait until it has finished.
-= Päivitystä asennetaan. Odota, kunnes se on valmis.
-Downloading the update...
-= Ladataan päivitystä...
-Download the update
-= Lataa päivitys
-Step 1: download the update in your web browser.
-= Vaihe 1: lataa päivitys verkkoselaimellasi.
 OPEN DOWNLOAD AGAIN
 = AVAA LATAUS UUDELLEEN
 Step 2: when the download has finished, come back here.
@@ -254,32 +230,16 @@ Checking the file...
 = Tarkistetaan tiedostoa...
 CANCELLING...
 = PERUUTETAAN...
-Updating to {0}
-= Päivitetään versioon {0}
 Please keep the launcher open until this has finished.
 = Pidä launcher auki, kunnes tämä on valmis.
 {0} of {1}  ({#2}%)
 = {0} / {1}  ({2} %)
 {0} downloaded
 = {0} ladattu
-Update installed
-= Päivitys asennettu
-Update failed
-= Päivitys epäonnistui
 CLOSE
 = SULJE
 TRY AGAIN
 = YRITÄ UUDELLEEN
-Version {0} is installed.
-= Versio {0} on asennettu.
-{#0} files updated.
-= {0} tiedostoa päivitetty.
-{#0} file updated.
-= {0} tiedosto päivitetty.
-{#0} files updated, {#1} removed.
-= {0} tiedostoa päivitetty, {1} poistettu.
-{#0} file updated, {#1} removed.
-= {0} tiedosto päivitetty, {1} poistettu.
 Install
 = Asenna
 Install the game from this file?
@@ -302,14 +262,6 @@ Install complete - press PLAY.
 = Asennus valmis - paina PELAA.
 Install complete. Press PLAY to enter Azeroth.
 = Asennus valmis. Paina PELAA astuaksesi Azerothiin.
-The last game update was cut off before it finished. Your game files were put back exactly as they were.
-= Edellinen pelin päivitys keskeytyi ennen valmistumista. Pelitiedostosi palautettiin täsmälleen ennalleen.
-You can run the update again with the UPDATE button.
-= Voit ajaa päivityksen uudelleen PÄIVITÄ-painikkeella.
-The last game update was cut off, and some game files could not be put back automatically.
-= Edellinen pelin päivitys keskeytyi, eikä joitakin pelitiedostoja voitu palauttaa automaattisesti.
-The old versions are kept in the folder "{0}" inside the game folder. Copy them back over the game files, or reinstall the game.
-= Vanhat versiot ovat pelikansion kansiossa "{0}". Kopioi ne takaisin pelitiedostojen päälle tai asenna peli uudelleen.
 Checking for updates...
 = Etsitään päivityksiä...
 The update check failed ({0}).
@@ -342,46 +294,18 @@ Downloading the new launcher... {0}
 = Ladataan uutta launcheria... {0}
 Launcher update failed.
 = Launcherin päivitys epäonnistui.
-Update checking is not switched on in this launcher yet (it has no update address).
-= Päivitysten tarkistus ei ole vielä käytössä tässä launcherissa (sillä ei ole päivitysosoitetta).
 The game is not installed yet. Press INSTALL first.
 = Peliä ei ole vielä asennettu. Paina ensin ASENNA.
 Could not check for updates.
 = Päivityksiä ei voitu tarkistaa.
 You have the newest version ({0}).
 = Sinulla on uusin versio ({0}).
-Update {0} is available.
-= Päivitys {0} on saatavilla.
-A game update ({0}) is available.
-= Pelin päivitys ({0}) on saatavilla.
-Version {0} skipped. The UPDATE button still offers it.
-= Versio {0} ohitettu. PÄIVITÄ-painike tarjoaa sitä yhä.
-Noted: you have version {0}.
-= Merkitty: sinulla on versio {0}.
-Install the update from this file?
-= Asennetaanko päivitys tästä tiedostosta?
-Choose the update file you downloaded
-= Valitse lataamasi päivitystiedosto
-Update archive (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|All files (*.*)|*.*
-= Päivitysarkisto (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|Kaikki tiedostot (*.*)|*.*
 Close the game first, then try again.
 = Sulje peli ensin ja yritä sitten uudelleen.
 Checking the download...
 = Tarkistetaan latausta...
 The downloaded file does not match its checksum, so nothing was installed. Please try again later.
 = Ladattu tiedosto ei vastaa tarkistussummaansa, joten mitään ei asennettu. Yritä myöhemmin uudelleen.
-That file is not this update (its checksum does not match), so nothing was installed. Download it again from the update page.
-= Tiedosto ei ole tämä päivitys (tarkistussumma ei täsmää), joten mitään ei asennettu. Lataa se uudelleen päivityssivulta.
-The update failed ({0}).
-= Päivitys epäonnistui ({0}).
-Updated to {0} - press PLAY.
-= Päivitetty versioon {0} - paina PELAA.
-Game updated to {0}. Press PLAY to enter Azeroth.
-= Peli päivitetty versioon {0}. Paina PELAA astuaksesi Azerothiin.
-Update cancelled.
-= Päivitys peruutettu.
-Update failed.
-= Päivitys epäonnistui.
 Another task is still running - wait for it to finish.
 = Toinen tehtävä on yhä käynnissä - odota, että se valmistuu.
 Choose a sync folder inside your cloud drive first (Cloud Save or Options).
@@ -396,8 +320,6 @@ Saves uploaded at {0}
 = Tallennukset lähetetty klo {0}
 Not everything was synced - see the Cloud Save log.
 = Kaikkea ei synkronoitu - katso Pilvitallennuksen loki.
-The game is being updated. Please wait until that has finished.
-= Peliä päivitetään. Odota, kunnes se on valmis.
 The cloud save could NOT be loaded, so the game was not launched.
 = Pilvitallennusta EI voitu ladata, joten peliä ei käynnistetty.
 See the log in Cloud Save. If your cloud drive is still syncing, wait for it to finish and press PLAY again.
@@ -692,32 +614,14 @@ The link did not give a .zip file. It must be a direct download link (share page
 = Linkki ei antanut .zip-tiedostoa. Sen on oltava suora latauslinkki (jakosivut kuten LimeWire eivät toimi).
 There is not enough free disk space.
 = Levytilaa ei ole tarpeeksi.
-Not enough free disk space for the update: about {0} is needed on the drive with the game, {1} is free.
-= Levytilaa ei ole tarpeeksi päivitykselle: pelin asemalla tarvitaan noin {0}, vapaana on {1}.
-The update file is not a .rar, .zip or .7z archive.
-= Päivitystiedosto ei ole .rar-, .zip- tai .7z-arkisto.
-An earlier update was cut off and its files could not be put back yet.
-= Aiempi päivitys keskeytyi, eikä sen tiedostoja ole vielä voitu palauttaa.
 The old files are kept in:
 = Vanhat tiedostot ovat täällä:
-Unpacking the update. This can take a few minutes...
-= Puretaan päivitystä. Tämä voi kestää muutaman minuutin...
 Installing the new files...
 = Asennetaan uusia tiedostoja...
-The update did not contain any files to install.
-= Päivitys ei sisältänyt asennettavia tiedostoja.
-{0} is missing after the update.
-= {0} puuttuu päivityksen jälkeen.
 A game file is in use. Close the game and anything else using its folder, then try again.
 = Pelitiedosto on käytössä. Sulje peli ja kaikki muu, mikä käyttää sen kansiota, ja yritä uudelleen.
-There is not enough free disk space for the update. Free some space and try again.
-= Levytilaa ei ole tarpeeksi päivitykselle. Vapauta tilaa ja yritä uudelleen.
-The update could not be installed ({0}).
-= Päivitystä ei voitu asentaa ({0}).
 No game files were changed.
 = Pelitiedostoja ei muutettu.
-Some files could not be put back. The old versions are kept in:
-= Joitakin tiedostoja ei voitu palauttaa. Vanhat versiot ovat täällä:
 Sync folder not reachable: {0} (is your cloud drive running?)
 = Synkronointikansioon ei saada yhteyttä: {0} (onko pilvitallennustilasi käynnissä?)
 The game is running. Close it before you download.
@@ -1154,8 +1058,6 @@ Addons need the game. Press INSTALL to download it first.
 = Lisäosat tarvitsevat pelin. Paina ensin ASENNA ladataksesi sen.
 Game client not found. Press INSTALL to download it first.
 = Peliasiakasta ei löytynyt. Paina ensin ASENNA ladataksesi sen.
-Please wait until the game update or install has finished.
-= Odota, kunnes pelin päivitys tai asennus on valmis.
 Downloading the game client...
 = Ladataan peliasiakasta...
 The download server sent something that is not the game archive. Please try again later.
@@ -1623,3 +1525,15 @@ these two can't be on together. Switching one on switches the other off.
 = näitä kahta ei voi käyttää yhtä aikaa. Kun otat toisen käyttöön, toinen poistuu käytöstä.
 Flat, dark unit frames and a compact action bar, Plater-style nameplates (Survivor Plates), luck and card odds on the XP bar, a tabbed chat panel and automatic raid marks. Can't be on together with AZS Minor Mods.
 = Litteät, tummat yksikkökehykset ja kompakti toimintopalkki, Plater-tyyliset nimikyltit (Survivor Plates), onni ja korttien todennäköisyydet XP-palkissa, välilehdellinen chat-paneeli ja automaattiset raid-merkit. Ei voi olla käytössä yhtä aikaa AZS Minor Modsin kanssa.
+The game updated itself and is opening again...
+= Peli päivitti itsensä ja avautuu uudelleen...
+The game updated itself and opened again.
+= Peli päivitti itsensä ja avautui uudelleen.
+The game opened again.
+= Peli avautui uudelleen.
+The launcher is still updating itself. If you quit now, the update is cut short and this launcher stays as it is.
+= Käynnistin päivittää vielä itseään. Jos lopetat nyt, päivitys keskeytyy ja tämä käynnistin jää ennalleen.
+The launcher is updating itself. Please wait until that has finished.
+= Käynnistin päivittää itseään. Odota, että se valmistuu.
+Please wait until the launcher update or the install has finished.
+= Odota, että käynnistimen päivitys tai asennus valmistuu.

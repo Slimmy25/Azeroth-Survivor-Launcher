@@ -97,8 +97,6 @@ The game client is still being installed. If you quit now, it is cut short.
 = Jocul încă se instalează. Dacă ieși acum, instalarea va fi întreruptă.
 Updating
 = Actualizare în curs
-The game is still being updated. If you quit now, the update is cut short. Nothing is lost: a half-finished change is undone the next time the launcher starts.
-= Jocul încă se actualizează. Dacă ieși acum, actualizarea va fi întreruptă. Nu se pierde nimic: o modificare neterminată este anulată la următoarea pornire a launcherului.
 The game is still running. If you quit the launcher now, your saves will NOT be uploaded automatically.
 = Jocul încă rulează. Dacă închizi launcherul acum, salvările tale NU vor fi încărcate automat.
 Setup saved.
@@ -213,14 +211,6 @@ KEEP LOCAL
 = PĂSTREAZĂ LOCAL
 Save game
 = Salvare de joc
-Game update
-= Actualizare joc
-Update available
-= Actualizare disponibilă
-New version:
-= Versiune nouă:
-Your version:
-= Versiunea ta:
 not recorded yet
 = neînregistrată încă
 Download size:
@@ -229,22 +219,8 @@ What is new
 = Ce este nou
 Your addons, settings and saves are left alone. If anything goes wrong, the old game files are put back.
 = Addon-urile, setările și salvările tale rămân neatinse. Dacă ceva nu merge, fișierele vechi ale jocului sunt puse la loc.
-UPDATE NOW
-= ACTUALIZEAZĂ ACUM
 NOT NOW
 = NU ACUM
-SKIP THIS VERSION
-= SARI PESTE ACEASTĂ VERSIUNE
-I ALREADY HAVE THIS VERSION
-= AM DEJA ACEASTĂ VERSIUNE
-The update is being installed. Please wait until it has finished.
-= Actualizarea se instalează. Așteaptă până se termină.
-Downloading the update...
-= Se descarcă actualizarea...
-Download the update
-= Descarcă actualizarea
-Step 1: download the update in your web browser.
-= Pasul 1: descarcă actualizarea în browserul tău.
 OPEN DOWNLOAD AGAIN
 = DESCHIDE DIN NOU DESCĂRCAREA
 Step 2: when the download has finished, come back here.
@@ -255,32 +231,16 @@ Checking the file...
 = Se verifică fișierul...
 CANCELLING...
 = SE ANULEAZĂ...
-Updating to {0}
-= Actualizare la {0}
 Please keep the launcher open until this has finished.
 = Ține launcherul deschis până se termină.
 {0} of {1}  ({#2}%)
 = {0} din {1}  ({2}%)
 {0} downloaded
 = {0} descărcați
-Update installed
-= Actualizare instalată
-Update failed
-= Actualizarea a eșuat
 CLOSE
 = ÎNCHIDE
 TRY AGAIN
 = ÎNCEARCĂ DIN NOU
-Version {0} is installed.
-= Versiunea {0} este instalată.
-{#0} files updated.
-= {0} fișiere actualizate.
-{#0} file updated.
-= {0} fișier actualizat.
-{#0} files updated, {#1} removed.
-= {0} fișiere actualizate, {1} eliminate.
-{#0} file updated, {#1} removed.
-= {0} fișier actualizat, {1} eliminate.
 Install
 = Instalare
 Install the game from this file?
@@ -303,14 +263,6 @@ Install complete - press PLAY.
 = Instalare completă - apasă JOACĂ.
 Install complete. Press PLAY to enter Azeroth.
 = Instalare completă. Apasă JOACĂ pentru a intra în Azeroth.
-The last game update was cut off before it finished. Your game files were put back exactly as they were.
-= Ultima actualizare a jocului a fost întreruptă înainte de final. Fișierele jocului au fost puse la loc exact cum erau.
-You can run the update again with the UPDATE button.
-= Poți rula din nou actualizarea cu butonul ACTUALIZEAZĂ.
-The last game update was cut off, and some game files could not be put back automatically.
-= Ultima actualizare a jocului a fost întreruptă și unele fișiere nu au putut fi puse la loc automat.
-The old versions are kept in the folder "{0}" inside the game folder. Copy them back over the game files, or reinstall the game.
-= Versiunile vechi sunt în folderul „{0}” din folderul jocului. Copiază-le înapoi peste fișierele jocului sau reinstalează jocul.
 Checking for updates...
 = Se caută actualizări...
 The update check failed ({0}).
@@ -343,46 +295,18 @@ Downloading the new launcher... {0}
 = Se descarcă noul launcher... {0}
 Launcher update failed.
 = Actualizarea launcherului a eșuat.
-Update checking is not switched on in this launcher yet (it has no update address).
-= Verificarea actualizărilor nu este încă activată în acest launcher (nu are adresă de actualizare).
 The game is not installed yet. Press INSTALL first.
 = Jocul nu este încă instalat. Apasă mai întâi INSTALEAZĂ.
 Could not check for updates.
 = Nu s-au putut verifica actualizările.
 You have the newest version ({0}).
 = Ai cea mai nouă versiune ({0}).
-Update {0} is available.
-= Actualizarea {0} este disponibilă.
-A game update ({0}) is available.
-= O actualizare a jocului ({0}) este disponibilă.
-Version {0} skipped. The UPDATE button still offers it.
-= Versiunea {0} a fost sărită. Butonul ACTUALIZEAZĂ încă o oferă.
-Noted: you have version {0}.
-= Notat: ai versiunea {0}.
-Install the update from this file?
-= Instalezi actualizarea din acest fișier?
-Choose the update file you downloaded
-= Alege fișierul de actualizare descărcat
-Update archive (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|All files (*.*)|*.*
-= Arhivă actualizare (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|Toate fișierele (*.*)|*.*
 Close the game first, then try again.
 = Închide mai întâi jocul, apoi încearcă din nou.
 Checking the download...
 = Se verifică descărcarea...
 The downloaded file does not match its checksum, so nothing was installed. Please try again later.
 = Fișierul descărcat nu corespunde sumei de control, așa că nu s-a instalat nimic. Încearcă din nou mai târziu.
-That file is not this update (its checksum does not match), so nothing was installed. Download it again from the update page.
-= Acel fișier nu este această actualizare (suma de control nu corespunde), așa că nu s-a instalat nimic. Descarcă-l din nou de pe pagina actualizării.
-The update failed ({0}).
-= Actualizarea a eșuat ({0}).
-Updated to {0} - press PLAY.
-= Actualizat la {0} - apasă JOACĂ.
-Game updated to {0}. Press PLAY to enter Azeroth.
-= Joc actualizat la {0}. Apasă JOACĂ pentru a intra în Azeroth.
-Update cancelled.
-= Actualizare anulată.
-Update failed.
-= Actualizarea a eșuat.
 Another task is still running - wait for it to finish.
 = O altă sarcină încă rulează - așteaptă să se termine.
 Choose a sync folder inside your cloud drive first (Cloud Save or Options).
@@ -397,8 +321,6 @@ Saves uploaded at {0}
 = Salvări încărcate la {0}
 Not everything was synced - see the Cloud Save log.
 = Nu s-a sincronizat tot - vezi jurnalul Salvare în cloud.
-The game is being updated. Please wait until that has finished.
-= Jocul se actualizează. Așteaptă până se termină.
 The cloud save could NOT be loaded, so the game was not launched.
 = Salvarea din cloud NU a putut fi încărcată, așa că jocul nu a pornit.
 See the log in Cloud Save. If your cloud drive is still syncing, wait for it to finish and press PLAY again.
@@ -693,32 +615,14 @@ The link did not give a .zip file. It must be a direct download link (share page
 = Linkul nu a dat un fișier .zip. Trebuie să fie un link de descărcare directă (paginile de partajare precum LimeWire nu funcționează).
 There is not enough free disk space.
 = Nu există suficient spațiu liber pe disc.
-Not enough free disk space for the update: about {0} is needed on the drive with the game, {1} is free.
-= Spațiu insuficient pentru actualizare: sunt necesari aproximativ {0} pe unitatea jocului, {1} sunt liberi.
-The update file is not a .rar, .zip or .7z archive.
-= Fișierul de actualizare nu este o arhivă .rar, .zip sau .7z.
-An earlier update was cut off and its files could not be put back yet.
-= O actualizare anterioară a fost întreruptă și fișierele ei nu au putut fi încă puse la loc.
 The old files are kept in:
 = Fișierele vechi sunt păstrate în:
-Unpacking the update. This can take a few minutes...
-= Se dezarhivează actualizarea. Poate dura câteva minute...
 Installing the new files...
 = Se instalează fișierele noi...
-The update did not contain any files to install.
-= Actualizarea nu conținea fișiere de instalat.
-{0} is missing after the update.
-= {0} lipsește după actualizare.
 A game file is in use. Close the game and anything else using its folder, then try again.
 = Un fișier al jocului este folosit. Închide jocul și orice altceva folosește folderul lui, apoi încearcă din nou.
-There is not enough free disk space for the update. Free some space and try again.
-= Spațiu insuficient pentru actualizare. Eliberează spațiu și încearcă din nou.
-The update could not be installed ({0}).
-= Actualizarea nu a putut fi instalată ({0}).
 No game files were changed.
 = Niciun fișier al jocului nu a fost modificat.
-Some files could not be put back. The old versions are kept in:
-= Unele fișiere nu au putut fi puse la loc. Versiunile vechi sunt păstrate în:
 Sync folder not reachable: {0} (is your cloud drive running?)
 = Folderul de sincronizare nu este accesibil: {0} (rulează drive-ul tău cloud?)
 The game is running. Close it before you download.
@@ -1155,8 +1059,6 @@ Addons need the game. Press INSTALL to download it first.
 = Addon-urile au nevoie de joc. Apasă întâi INSTALEAZĂ ca să-l descarci.
 Game client not found. Press INSTALL to download it first.
 = Clientul jocului nu a fost găsit. Apasă întâi INSTALEAZĂ ca să-l descarci.
-Please wait until the game update or install has finished.
-= Așteaptă să se termine actualizarea sau instalarea jocului.
 Downloading the game client...
 = Se descarcă clientul jocului...
 The download server sent something that is not the game archive. Please try again later.
@@ -1624,3 +1526,15 @@ these two can't be on together. Switching one on switches the other off.
 = aceste două nu pot fi pornite împreună. Pornirea unuia îl oprește pe celălalt.
 Flat, dark unit frames and a compact action bar, Plater-style nameplates (Survivor Plates), luck and card odds on the XP bar, a tabbed chat panel and automatic raid marks. Can't be on together with AZS Minor Mods.
 = Cadre de unități plate și întunecate și o bară de acțiuni compactă, plăcuțe de nume în stil Plater (Survivor Plates), noroc și șansele cărților pe bara de XP, un panou de chat cu file și marcaje de raid automate. Nu poate fi pornit împreună cu AZS Minor Mods.
+The game updated itself and is opening again...
+= Jocul s-a actualizat singur și se deschide din nou...
+The game updated itself and opened again.
+= Jocul s-a actualizat singur și s-a deschis din nou.
+The game opened again.
+= Jocul s-a deschis din nou.
+The launcher is still updating itself. If you quit now, the update is cut short and this launcher stays as it is.
+= Launcherul încă se actualizează. Dacă ieși acum, actualizarea se întrerupe și acest launcher rămâne cum este.
+The launcher is updating itself. Please wait until that has finished.
+= Launcherul se actualizează. Așteaptă să termine.
+Please wait until the launcher update or the install has finished.
+= Așteaptă să se termine actualizarea launcherului sau instalarea.

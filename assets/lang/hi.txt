@@ -97,8 +97,6 @@ The game client is still being installed. If you quit now, it is cut short.
 = गेम अभी इंस्टॉल हो रहा है। अभी बाहर निकलने पर इंस्टॉल बीच में रुक जाएगा।
 Updating
 = अपडेट हो रहा है
-The game is still being updated. If you quit now, the update is cut short. Nothing is lost: a half-finished change is undone the next time the launcher starts.
-= गेम अभी अपडेट हो रहा है। अभी बाहर निकलने पर अपडेट बीच में रुक जाएगा। कुछ नहीं खोएगा: अधूरा बदलाव अगली बार लॉन्चर शुरू होने पर वापस ले लिया जाएगा।
 The game is still running. If you quit the launcher now, your saves will NOT be uploaded automatically.
 = गेम अभी चल रहा है। अगर आप अभी लॉन्चर बंद करते हैं, तो आपके सेव अपने-आप अपलोड नहीं होंगे।
 Setup saved.
@@ -213,14 +211,6 @@ KEEP LOCAL
 = लोकल रखें
 Save game
 = गेम सेव
-Game update
-= गेम अपडेट
-Update available
-= अपडेट उपलब्ध है
-New version:
-= नया संस्करण:
-Your version:
-= आपका संस्करण:
 not recorded yet
 = अभी दर्ज नहीं
 Download size:
@@ -229,22 +219,8 @@ What is new
 = नया क्या है
 Your addons, settings and saves are left alone. If anything goes wrong, the old game files are put back.
 = आपके ऐडऑन, सेटिंग्स और सेव नहीं छुए जाते। कुछ गड़बड़ होने पर पुरानी गेम फ़ाइलें वापस रख दी जाती हैं।
-UPDATE NOW
-= अभी अपडेट करें
 NOT NOW
 = अभी नहीं
-SKIP THIS VERSION
-= यह संस्करण छोड़ें
-I ALREADY HAVE THIS VERSION
-= यह संस्करण मेरे पास है
-The update is being installed. Please wait until it has finished.
-= अपडेट इंस्टॉल हो रहा है। कृपया पूरा होने तक रुकें।
-Downloading the update...
-= अपडेट डाउनलोड हो रहा है...
-Download the update
-= अपडेट डाउनलोड करें
-Step 1: download the update in your web browser.
-= चरण 1: अपने वेब ब्राउज़र में अपडेट डाउनलोड करें।
 OPEN DOWNLOAD AGAIN
 = डाउनलोड फिर से खोलें
 Step 2: when the download has finished, come back here.
@@ -255,32 +231,16 @@ Checking the file...
 = फ़ाइल जाँची जा रही है...
 CANCELLING...
 = रद्द हो रहा है...
-Updating to {0}
-= {0} पर अपडेट हो रहा है
 Please keep the launcher open until this has finished.
 = पूरा होने तक लॉन्चर खुला रखें।
 {0} of {1}  ({#2}%)
 = {1} में से {0}  ({2}%)
 {0} downloaded
 = {0} डाउनलोड हुआ
-Update installed
-= अपडेट इंस्टॉल हुआ
-Update failed
-= अपडेट विफल
 CLOSE
 = बंद करें
 TRY AGAIN
 = फिर से कोशिश करें
-Version {0} is installed.
-= संस्करण {0} इंस्टॉल है।
-{#0} files updated.
-= {0} फ़ाइलें अपडेट हुईं।
-{#0} file updated.
-= {0} फ़ाइल अपडेट हुई।
-{#0} files updated, {#1} removed.
-= {0} फ़ाइलें अपडेट हुईं, {1} हटाई गईं।
-{#0} file updated, {#1} removed.
-= {0} फ़ाइल अपडेट हुई, {1} हटाई गईं।
 Install
 = इंस्टॉल
 Install the game from this file?
@@ -303,14 +263,6 @@ Install complete - press PLAY.
 = इंस्टॉल पूरा - खेलें दबाएँ।
 Install complete. Press PLAY to enter Azeroth.
 = इंस्टॉल पूरा। Azeroth में जाने के लिए खेलें दबाएँ।
-The last game update was cut off before it finished. Your game files were put back exactly as they were.
-= पिछला गेम अपडेट पूरा होने से पहले रुक गया। आपकी गेम फ़ाइलें ठीक पहले जैसी वापस रख दी गईं।
-You can run the update again with the UPDATE button.
-= आप अपडेट बटन से अपडेट फिर चला सकते हैं।
-The last game update was cut off, and some game files could not be put back automatically.
-= पिछला गेम अपडेट रुक गया, और कुछ गेम फ़ाइलें अपने-आप वापस नहीं रखी जा सकीं।
-The old versions are kept in the folder "{0}" inside the game folder. Copy them back over the game files, or reinstall the game.
-= पुराने संस्करण गेम फ़ोल्डर के अंदर "{0}" फ़ोल्डर में रखे हैं। उन्हें गेम फ़ाइलों पर वापस कॉपी करें, या गेम दोबारा इंस्टॉल करें।
 Checking for updates...
 = अपडेट जाँचे जा रहे हैं...
 The update check failed ({0}).
@@ -343,46 +295,18 @@ Downloading the new launcher... {0}
 = नया लॉन्चर डाउनलोड हो रहा है... {0}
 Launcher update failed.
 = लॉन्चर अपडेट विफल।
-Update checking is not switched on in this launcher yet (it has no update address).
-= इस लॉन्चर में अपडेट जाँच अभी चालू नहीं है (इसका कोई अपडेट पता नहीं है)।
 The game is not installed yet. Press INSTALL first.
 = गेम अभी इंस्टॉल नहीं है। पहले इंस्टॉल करें दबाएँ।
 Could not check for updates.
 = अपडेट नहीं जाँचे जा सके।
 You have the newest version ({0}).
 = आपके पास सबसे नया संस्करण है ({0})।
-Update {0} is available.
-= अपडेट {0} उपलब्ध है।
-A game update ({0}) is available.
-= गेम अपडेट ({0}) उपलब्ध है।
-Version {0} skipped. The UPDATE button still offers it.
-= संस्करण {0} छोड़ा गया। अपडेट बटन अब भी इसे देता है।
-Noted: you have version {0}.
-= दर्ज किया: आपके पास संस्करण {0} है।
-Install the update from this file?
-= इस फ़ाइल से अपडेट इंस्टॉल करें?
-Choose the update file you downloaded
-= अपनी डाउनलोड की गई अपडेट फ़ाइल चुनें
-Update archive (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|All files (*.*)|*.*
-= अपडेट आर्काइव (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|सभी फ़ाइलें (*.*)|*.*
 Close the game first, then try again.
 = पहले गेम बंद करें, फिर दोबारा कोशिश करें।
 Checking the download...
 = डाउनलोड जाँचा जा रहा है...
 The downloaded file does not match its checksum, so nothing was installed. Please try again later.
 = डाउनलोड की गई फ़ाइल अपने चेकसम से मेल नहीं खाती, इसलिए कुछ भी इंस्टॉल नहीं हुआ। कृपया बाद में फिर कोशिश करें।
-That file is not this update (its checksum does not match), so nothing was installed. Download it again from the update page.
-= यह फ़ाइल यह अपडेट नहीं है (चेकसम मेल नहीं खाता), इसलिए कुछ भी इंस्टॉल नहीं हुआ। अपडेट पेज से इसे फिर डाउनलोड करें।
-The update failed ({0}).
-= अपडेट विफल ({0})।
-Updated to {0} - press PLAY.
-= {0} पर अपडेट हुआ - खेलें दबाएँ।
-Game updated to {0}. Press PLAY to enter Azeroth.
-= गेम {0} पर अपडेट हुआ। Azeroth में जाने के लिए खेलें दबाएँ।
-Update cancelled.
-= अपडेट रद्द हुआ।
-Update failed.
-= अपडेट विफल।
 Another task is still running - wait for it to finish.
 = एक और काम अभी चल रहा है - उसके पूरा होने का इंतज़ार करें।
 Choose a sync folder inside your cloud drive first (Cloud Save or Options).
@@ -397,8 +321,6 @@ Saves uploaded at {0}
 = सेव {0} पर अपलोड हुए
 Not everything was synced - see the Cloud Save log.
 = सब कुछ सिंक नहीं हुआ - क्लाउड सेव लॉग देखें।
-The game is being updated. Please wait until that has finished.
-= गेम अपडेट हो रहा है। कृपया पूरा होने तक रुकें।
 The cloud save could NOT be loaded, so the game was not launched.
 = क्लाउड सेव लोड नहीं हो सका, इसलिए गेम शुरू नहीं हुआ।
 See the log in Cloud Save. If your cloud drive is still syncing, wait for it to finish and press PLAY again.
@@ -693,32 +615,14 @@ The link did not give a .zip file. It must be a direct download link (share page
 = लिंक ने .zip फ़ाइल नहीं दी। यह सीधा डाउनलोड लिंक होना चाहिए (LimeWire जैसे शेयर पेज काम नहीं करते)।
 There is not enough free disk space.
 = डिस्क में पर्याप्त खाली जगह नहीं है।
-Not enough free disk space for the update: about {0} is needed on the drive with the game, {1} is free.
-= अपडेट के लिए पर्याप्त खाली जगह नहीं: गेम वाली ड्राइव पर लगभग {0} चाहिए, {1} खाली है।
-The update file is not a .rar, .zip or .7z archive.
-= अपडेट फ़ाइल .rar, .zip या .7z आर्काइव नहीं है।
-An earlier update was cut off and its files could not be put back yet.
-= पिछला एक अपडेट रुक गया था और उसकी फ़ाइलें अभी वापस नहीं रखी जा सकीं।
 The old files are kept in:
 = पुरानी फ़ाइलें यहाँ रखी हैं:
-Unpacking the update. This can take a few minutes...
-= अपडेट अनपैक हो रहा है। इसमें कुछ मिनट लग सकते हैं...
 Installing the new files...
 = नई फ़ाइलें इंस्टॉल हो रही हैं...
-The update did not contain any files to install.
-= अपडेट में इंस्टॉल करने के लिए कोई फ़ाइल नहीं थी।
-{0} is missing after the update.
-= अपडेट के बाद {0} मौजूद नहीं है।
 A game file is in use. Close the game and anything else using its folder, then try again.
 = एक गेम फ़ाइल इस्तेमाल में है। गेम और उसके फ़ोल्डर को इस्तेमाल करने वाली हर चीज़ बंद करें, फिर कोशिश करें।
-There is not enough free disk space for the update. Free some space and try again.
-= अपडेट के लिए पर्याप्त खाली जगह नहीं। थोड़ी जगह खाली करें और फिर कोशिश करें।
-The update could not be installed ({0}).
-= अपडेट इंस्टॉल नहीं हो सका ({0})।
 No game files were changed.
 = कोई गेम फ़ाइल नहीं बदली गई।
-Some files could not be put back. The old versions are kept in:
-= कुछ फ़ाइलें वापस नहीं रखी जा सकीं। पुराने संस्करण यहाँ रखे हैं:
 Sync folder not reachable: {0} (is your cloud drive running?)
 = सिंक फ़ोल्डर तक नहीं पहुँच सके: {0} (क्या आपकी क्लाउड ड्राइव चल रही है?)
 The game is running. Close it before you download.
@@ -1155,8 +1059,6 @@ Addons need the game. Press INSTALL to download it first.
 = ऐडऑन के लिए गेम चाहिए। पहले डाउनलोड करने के लिए इंस्टॉल करें दबाएँ।
 Game client not found. Press INSTALL to download it first.
 = गेम क्लाइंट नहीं मिला। पहले डाउनलोड करने के लिए इंस्टॉल करें दबाएँ।
-Please wait until the game update or install has finished.
-= गेम अपडेट या इंस्टॉल पूरा होने तक प्रतीक्षा करें।
 Downloading the game client...
 = गेम क्लाइंट डाउनलोड हो रहा है...
 The download server sent something that is not the game archive. Please try again later.
@@ -1624,3 +1526,15 @@ these two can't be on together. Switching one on switches the other off.
 = ये दोनों एक साथ चालू नहीं हो सकते। एक को चालू करने पर दूसरा बंद हो जाता है।
 Flat, dark unit frames and a compact action bar, Plater-style nameplates (Survivor Plates), luck and card odds on the XP bar, a tabbed chat panel and automatic raid marks. Can't be on together with AZS Minor Mods.
 = सपाट, गहरे यूनिट फ़्रेम और छोटा ऐक्शन बार, Plater जैसी नेमप्लेट (Survivor Plates), XP बार पर भाग्य और कार्डों की संभावना, टैब वाला चैट पैनल और अपने-आप रेड निशान। AZS Minor Mods के साथ एक साथ चालू नहीं हो सकता।
+The game updated itself and is opening again...
+= गेम ने ख़ुद को अपडेट किया और फिर से खुल रहा है...
+The game updated itself and opened again.
+= गेम ने ख़ुद को अपडेट किया और फिर से खुल गया।
+The game opened again.
+= गेम फिर से खुल गया।
+The launcher is still updating itself. If you quit now, the update is cut short and this launcher stays as it is.
+= लॉन्चर अभी भी ख़ुद को अपडेट कर रहा है। अभी बंद करने पर अपडेट बीच में रुक जाएगा और यह लॉन्चर जैसा है वैसा ही रहेगा।
+The launcher is updating itself. Please wait until that has finished.
+= लॉन्चर ख़ुद को अपडेट कर रहा है। कृपया उसके पूरा होने तक रुकें।
+Please wait until the launcher update or the install has finished.
+= कृपया लॉन्चर अपडेट या इंस्टॉल पूरा होने तक रुकें।

@@ -96,8 +96,6 @@ The game client is still being installed. If you quit now, it is cut short.
 = Game masih diinstal. Jika keluar sekarang, prosesnya terputus.
 Updating
 = Memperbarui
-The game is still being updated. If you quit now, the update is cut short. Nothing is lost: a half-finished change is undone the next time the launcher starts.
-= Game masih diperbarui. Jika keluar sekarang, pembaruan terputus. Tidak ada yang hilang: perubahan setengah jadi dibatalkan saat launcher dibuka lagi.
 The game is still running. If you quit the launcher now, your saves will NOT be uploaded automatically.
 = Game masih berjalan. Jika kamu keluar dari launcher sekarang, simpanan kamu TIDAK akan diunggah otomatis.
 Setup saved.
@@ -212,14 +210,6 @@ KEEP LOCAL
 = TETAP LOKAL
 Save game
 = Simpanan game
-Game update
-= Pembaruan game
-Update available
-= Pembaruan tersedia
-New version:
-= Versi baru:
-Your version:
-= Versi kamu:
 not recorded yet
 = belum tercatat
 Download size:
@@ -228,22 +218,8 @@ What is new
 = Yang baru
 Your addons, settings and saves are left alone. If anything goes wrong, the old game files are put back.
 = Addon, pengaturan, dan simpanan kamu tidak disentuh. Jika ada masalah, file game lama dikembalikan.
-UPDATE NOW
-= PERBARUI SEKARANG
 NOT NOW
 = NANTI SAJA
-SKIP THIS VERSION
-= LEWATI VERSI INI
-I ALREADY HAVE THIS VERSION
-= SAYA SUDAH PUNYA VERSI INI
-The update is being installed. Please wait until it has finished.
-= Pembaruan sedang diinstal. Harap tunggu sampai selesai.
-Downloading the update...
-= Mengunduh pembaruan...
-Download the update
-= Unduh pembaruan
-Step 1: download the update in your web browser.
-= Langkah 1: unduh pembaruan di browser web kamu.
 OPEN DOWNLOAD AGAIN
 = BUKA UNDUHAN LAGI
 Step 2: when the download has finished, come back here.
@@ -254,32 +230,16 @@ Checking the file...
 = Memeriksa file...
 CANCELLING...
 = MEMBATALKAN...
-Updating to {0}
-= Memperbarui ke {0}
 Please keep the launcher open until this has finished.
 = Biarkan launcher tetap terbuka sampai selesai.
 {0} of {1}  ({#2}%)
 = {0} dari {1}  ({2}%)
 {0} downloaded
 = {0} terunduh
-Update installed
-= Pembaruan terinstal
-Update failed
-= Pembaruan gagal
 CLOSE
 = TUTUP
 TRY AGAIN
 = COBA LAGI
-Version {0} is installed.
-= Versi {0} terinstal.
-{#0} files updated.
-= {0} file diperbarui.
-{#0} file updated.
-= {0} file diperbarui.
-{#0} files updated, {#1} removed.
-= {0} file diperbarui, {1} dihapus.
-{#0} file updated, {#1} removed.
-= {0} file diperbarui, {1} dihapus.
 Install
 = Instal
 Install the game from this file?
@@ -302,14 +262,6 @@ Install complete - press PLAY.
 = Instalasi selesai - tekan MAIN.
 Install complete. Press PLAY to enter Azeroth.
 = Instalasi selesai. Tekan MAIN untuk memasuki Azeroth.
-The last game update was cut off before it finished. Your game files were put back exactly as they were.
-= Pembaruan game terakhir terputus sebelum selesai. File game kamu dikembalikan persis seperti semula.
-You can run the update again with the UPDATE button.
-= Kamu bisa menjalankan pembaruan lagi dengan tombol PERBARUI.
-The last game update was cut off, and some game files could not be put back automatically.
-= Pembaruan game terakhir terputus, dan beberapa file game tidak bisa dikembalikan otomatis.
-The old versions are kept in the folder "{0}" inside the game folder. Copy them back over the game files, or reinstall the game.
-= Versi lama disimpan di folder "{0}" di dalam folder game. Salin kembali ke file game, atau instal ulang game.
 Checking for updates...
 = Memeriksa pembaruan...
 The update check failed ({0}).
@@ -342,46 +294,18 @@ Downloading the new launcher... {0}
 = Mengunduh launcher baru... {0}
 Launcher update failed.
 = Pembaruan launcher gagal.
-Update checking is not switched on in this launcher yet (it has no update address).
-= Pemeriksaan pembaruan belum diaktifkan di launcher ini (belum ada alamat pembaruan).
 The game is not installed yet. Press INSTALL first.
 = Game belum terinstal. Tekan INSTAL dulu.
 Could not check for updates.
 = Tidak bisa memeriksa pembaruan.
 You have the newest version ({0}).
 = Kamu memakai versi terbaru ({0}).
-Update {0} is available.
-= Pembaruan {0} tersedia.
-A game update ({0}) is available.
-= Pembaruan game ({0}) tersedia.
-Version {0} skipped. The UPDATE button still offers it.
-= Versi {0} dilewati. Tombol PERBARUI masih menawarkannya.
-Noted: you have version {0}.
-= Dicatat: kamu memakai versi {0}.
-Install the update from this file?
-= Instal pembaruan dari file ini?
-Choose the update file you downloaded
-= Pilih file pembaruan yang kamu unduh
-Update archive (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|All files (*.*)|*.*
-= Arsip pembaruan (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|Semua file (*.*)|*.*
 Close the game first, then try again.
 = Tutup game dulu, lalu coba lagi.
 Checking the download...
 = Memeriksa unduhan...
 The downloaded file does not match its checksum, so nothing was installed. Please try again later.
 = File yang diunduh tidak cocok dengan checksum-nya, jadi tidak ada yang diinstal. Silakan coba lagi nanti.
-That file is not this update (its checksum does not match), so nothing was installed. Download it again from the update page.
-= File itu bukan pembaruan ini (checksum-nya tidak cocok), jadi tidak ada yang diinstal. Unduh lagi dari halaman pembaruan.
-The update failed ({0}).
-= Pembaruan gagal ({0}).
-Updated to {0} - press PLAY.
-= Diperbarui ke {0} - tekan MAIN.
-Game updated to {0}. Press PLAY to enter Azeroth.
-= Game diperbarui ke {0}. Tekan MAIN untuk memasuki Azeroth.
-Update cancelled.
-= Pembaruan dibatalkan.
-Update failed.
-= Pembaruan gagal.
 Another task is still running - wait for it to finish.
 = Tugas lain masih berjalan - tunggu sampai selesai.
 Choose a sync folder inside your cloud drive first (Cloud Save or Options).
@@ -396,8 +320,6 @@ Saves uploaded at {0}
 = Simpanan diunggah pukul {0}
 Not everything was synced - see the Cloud Save log.
 = Tidak semua tersinkron - lihat log Simpan Cloud.
-The game is being updated. Please wait until that has finished.
-= Game sedang diperbarui. Harap tunggu sampai selesai.
 The cloud save could NOT be loaded, so the game was not launched.
 = Simpanan cloud TIDAK bisa dimuat, jadi game tidak dijalankan.
 See the log in Cloud Save. If your cloud drive is still syncing, wait for it to finish and press PLAY again.
@@ -692,32 +614,14 @@ The link did not give a .zip file. It must be a direct download link (share page
 = Tautan tidak memberikan file .zip. Harus berupa tautan unduhan langsung (halaman berbagi seperti LimeWire tidak bisa).
 There is not enough free disk space.
 = Ruang disk kosong tidak cukup.
-Not enough free disk space for the update: about {0} is needed on the drive with the game, {1} is free.
-= Ruang disk tidak cukup untuk pembaruan: perlu sekitar {0} di drive game, tersedia {1}.
-The update file is not a .rar, .zip or .7z archive.
-= File pembaruan bukan arsip .rar, .zip, atau .7z.
-An earlier update was cut off and its files could not be put back yet.
-= Pembaruan sebelumnya terputus dan file-nya belum bisa dikembalikan.
 The old files are kept in:
 = File lama disimpan di:
-Unpacking the update. This can take a few minutes...
-= Mengekstrak pembaruan. Ini bisa memakan beberapa menit...
 Installing the new files...
 = Menginstal file baru...
-The update did not contain any files to install.
-= Pembaruan tidak berisi file untuk diinstal.
-{0} is missing after the update.
-= {0} hilang setelah pembaruan.
 A game file is in use. Close the game and anything else using its folder, then try again.
 = Sebuah file game sedang dipakai. Tutup game dan apa pun yang memakai foldernya, lalu coba lagi.
-There is not enough free disk space for the update. Free some space and try again.
-= Ruang disk tidak cukup untuk pembaruan. Kosongkan sebagian ruang dan coba lagi.
-The update could not be installed ({0}).
-= Pembaruan tidak bisa diinstal ({0}).
 No game files were changed.
 = Tidak ada file game yang diubah.
-Some files could not be put back. The old versions are kept in:
-= Beberapa file tidak bisa dikembalikan. Versi lama disimpan di:
 Sync folder not reachable: {0} (is your cloud drive running?)
 = Folder sinkronisasi tidak bisa dijangkau: {0} (apakah drive cloud kamu berjalan?)
 The game is running. Close it before you download.
@@ -1154,8 +1058,6 @@ Addons need the game. Press INSTALL to download it first.
 = Addon membutuhkan game. Tekan INSTAL dulu untuk mengunduhnya.
 Game client not found. Press INSTALL to download it first.
 = Klien game tidak ditemukan. Tekan INSTAL dulu untuk mengunduhnya.
-Please wait until the game update or install has finished.
-= Tunggu hingga pembaruan atau instalasi game selesai.
 Downloading the game client...
 = Mengunduh klien game...
 The download server sent something that is not the game archive. Please try again later.
@@ -1623,3 +1525,15 @@ these two can't be on together. Switching one on switches the other off.
 = keduanya tidak bisa menyala bersamaan. Menyalakan satu akan mematikan yang lain.
 Flat, dark unit frames and a compact action bar, Plater-style nameplates (Survivor Plates), luck and card odds on the XP bar, a tabbed chat panel and automatic raid marks. Can't be on together with AZS Minor Mods.
 = Bingkai unit datar dan gelap serta bilah aksi ringkas, papan nama gaya Plater (Survivor Plates), keberuntungan dan peluang kartu di bilah XP, panel chat bertab, dan penanda raid otomatis. Tidak bisa menyala bersama AZS Minor Mods.
+The game updated itself and is opening again...
+= Game memperbarui dirinya dan sedang terbuka lagi...
+The game updated itself and opened again.
+= Game memperbarui dirinya dan terbuka lagi.
+The game opened again.
+= Game terbuka lagi.
+The launcher is still updating itself. If you quit now, the update is cut short and this launcher stays as it is.
+= Launcher masih memperbarui dirinya. Jika keluar sekarang, pembaruan terpotong dan launcher ini tetap seperti sekarang.
+The launcher is updating itself. Please wait until that has finished.
+= Launcher sedang memperbarui dirinya. Tunggu sampai selesai.
+Please wait until the launcher update or the install has finished.
+= Tunggu sampai pembaruan launcher atau pemasangan selesai.

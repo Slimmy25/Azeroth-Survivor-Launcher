@@ -1,5 +1,5 @@
 // The main launcher window: the tall narrow window with PLAY and the section buttons, the tray icon, playing
-// (cloud download -> game -> cloud upload), installing the game, cloud sync runs and game updates.
+// (cloud download -> game -> cloud upload), installing the game, cloud sync runs and the launcher's own updates.
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -42,11 +42,8 @@ namespace AzerothLauncher
         const int W = 1100, H = 690;                         // retro launcher window: sections open on the left, News on the right
 
         public Config Cfg;
-        public bool GameRunningFlag, Installing, SyncBusy, Updating, UpdateChecking, UpdateAvailable;
-        UpdateInfo updateInfo;
-        UpdateDialog updateDlg;
-        bool updateOfferPending, setupOpen, setupAsked, trayNotified, quitting;
-        string updateRecovery;
+        public bool GameRunningFlag, Installing, SyncBusy, Updating, UpdateChecking;   // Updating: the launcher's own update
+        bool setupOpen, setupAsked, trayNotified, quitting;
         readonly bool startInTray;
         readonly List<KeyValuePair<string, Level>> cloudLog = new List<KeyValuePair<string, Level>>();
         RichTextBox logBox;
@@ -95,8 +92,6 @@ namespace AzerothLauncher
             this.startInTray = startInTray;
             Theme.PickFont();
             Cfg = Config.Load();
-            string game = GameDir();                         // an update cut off by a crash or power cut is undone first
-            if (Directory.Exists(game)) updateRecovery = Updater.RecoverInterrupted(game);
 
             Text = "Azeroth Survivors Launcher";
             Icon = Theme.AppIcon;
@@ -157,15 +152,9 @@ namespace AzerothLauncher
                 if (!PreviewMode) After(300, StartupUpdateCheck);   // a newer launcher on GitHub is installed right away
                 After(500, MaybeFirstRun);
                 After(700, delegate { if ((current == null || current == "Home") && !setupOpen) ShowHomeCommunity(); });   // home: Community
-                After(900, TellUpdateRecovery);
             };
             VisibleChanged += delegate
             {
-                if (Visible && updateOfferPending)           // an update was found while the launcher was hidden
-                {
-                    updateOfferPending = false;
-                    After(600, OfferUpdate);
-                }
                 if (Visible && !setupAsked) After(500, MaybeFirstRun);   // started hidden: setup when first opened
             };
         }
@@ -756,8 +745,8 @@ namespace AzerothLauncher
             if (Updating)
             {
                 ShowWindowFront();
-                if (!Ask("Updating", "The game is still being updated. If you quit now, the update is cut short. Nothing is " +
-                         "lost: a half-finished change is undone the next time the launcher starts.\n\nQuit anyway?")) return;
+                if (!Ask("Updating", "The launcher is still updating itself. If you quit now, the update is cut short and " +
+                         "this launcher stays as it is.\n\nQuit anyway?")) return;
             }
             if (GameRunningFlag)
             {
@@ -801,7 +790,7 @@ namespace AzerothLauncher
         public void RunSetup()
         {
             if (GameRunningFlag) { Info("Setup", "Close the game first, then run setup again."); return; }
-            if (Updating || Installing) { SetStatus("Please wait until the game update or install has finished."); return; }
+            if (Updating || Installing) { SetStatus("Please wait until the launcher update or the install has finished."); return; }
             ShowSetupDialog();
         }
 
@@ -1060,7 +1049,7 @@ namespace AzerothLauncher
             }
             if (Updating)
             {
-                SetStatus("The game is being updated. Please wait until that has finished.");
+                SetStatus("The launcher is updating itself. Please wait until that has finished.");
                 return;
             }
             if (!ClientPresent())
@@ -1203,12 +1192,32 @@ namespace AzerothLauncher
                     var psi = new ProcessStartInfo(exe);
                     psi.WorkingDirectory = Path.GetDirectoryName(exe);
                     psi.UseShellExecute = false;
+                    string gameDir = Path.GetDirectoryName(exe);
+                    DateTime stamp = GameFilesStamp(gameDir);
                     using (Process p = Process.Start(psi))
                     {
                         launched = true;
                         p.WaitForExit();                     // returns on normal exit or crash
                     }
-                    while (Util.GameRunning()) Thread.Sleep(2000);   // the game may hand over to another process
+                    // The game updates itself when it starts: it closes and opens again (possibly through a helper in its
+                    // folder). So after it closes, the launcher waits a moment for it to come back: 10 s after a plain
+                    // close, up to 90 s when its files changed (it updated). Only when it stays closed is the session over.
+                    while (true)
+                    {
+                        while (GameProcessRunning(gameDir)) Thread.Sleep(2000);
+                        bool patched = GameFilesStamp(gameDir) > stamp;
+                        if (patched) Ui(delegate { SetStatus("The game updated itself and is opening again..."); });
+                        bool back = false;
+                        for (int i = 0; i < (patched ? 180 : 20) && !back; i++)
+                        {
+                            Thread.Sleep(500);
+                            back = GameProcessRunning(gameDir);
+                        }
+                        if (!back) break;
+                        stamp = GameFilesStamp(gameDir);
+                        SyncLog(patched ? "The game updated itself and opened again." : "The game opened again.", Level.Info);
+                        Ui(delegate { SetStatus("Game running."); });
+                    }
                 }
                 catch (Exception e)
                 {
@@ -1223,7 +1232,7 @@ namespace AzerothLauncher
                 }
                 if (launched && eng != null)
                 {
-                    Thread.Sleep(1000);                      // the upload starts 3 s after the game exits
+                    Thread.Sleep(1000);                      // the upload starts once the game has stayed closed
                     try
                     {
                         if (eng.Push(false))
@@ -1247,6 +1256,47 @@ namespace AzerothLauncher
             {
                 Ui(delegate { SessionDone(problems); });
             }
+        }
+
+        // the newest change to the game's own files (its exe and its Data folder's .MPQ files): later after a session
+        // means the game updated itself
+        static DateTime GameFilesStamp(string gameDir)
+        {
+            DateTime newest = DateTime.MinValue;
+            try
+            {
+                var files = new List<string>();
+                files.Add(Path.Combine(gameDir, Util.GameExe));
+                string data = Path.Combine(gameDir, "Data");
+                if (Directory.Exists(data)) files.AddRange(Directory.GetFiles(data, "*.mpq"));
+                foreach (string f in files)
+                    try { if (File.Exists(f)) { DateTime t = File.GetLastWriteTimeUtc(f); if (t > newest) newest = t; } }
+                    catch (Exception) { }
+            }
+            catch (Exception) { }
+            return newest;
+        }
+
+        // the game, or any other program started from the game's folder (an updater helper), is running
+        static bool GameProcessRunning(string gameDir)
+        {
+            if (Util.GameRunning()) return true;
+            string root;
+            try { root = Path.GetFullPath(gameDir).TrimEnd('\\') + "\\"; }
+            catch (Exception) { return false; }
+            int me = Process.GetCurrentProcess().Id;
+            foreach (Process pr in Process.GetProcesses())
+            {
+                try
+                {
+                    if (pr.Id == me) continue;
+                    string path = pr.MainModule.FileName;    // some processes refuse this: skipped
+                    if (path != null && path.StartsWith(root, StringComparison.OrdinalIgnoreCase)) return true;
+                }
+                catch (Exception) { }
+                finally { pr.Dispose(); }
+            }
+            return false;
         }
 
         // ------------------------------------------------------------------ play time
@@ -1320,7 +1370,7 @@ namespace AzerothLauncher
         {
             if (Updating)
             {
-                SetStatus("The game is being updated. Please wait until that has finished.");
+                SetStatus("The launcher is updating itself. Please wait until that has finished.");
                 return;
             }
             if (Installing)
@@ -1622,32 +1672,15 @@ namespace AzerothLauncher
                 if (!downloadInstall && (setupAfterFileInstall || !Cfg.Bool("setup_done", false)))
                     After(300, ShowSetupDialog);             // installed from a file during setup: on to the folders page
                 setupAfterFileInstall = false;
-                if (Updater.Enabled) After(800, delegate { CheckForUpdate(false, true); });   // is it already the newest?
             }
         }
 
-        // ------------------------------------------------------------------ game updates (checked at start and with UPDATE)
-        public string InstalledVersion() { return Cfg.Str("client_version").Trim(); }
-
+        // ------------------------------------------------------------------ the launcher's own updates (checked at start and with UPDATE)
+        // The game updates itself when it starts (it closes and opens again): the launcher never updates the game.
         void RefreshUpdateBtn()
         {
             updateBtn.Label = UpdateChecking ? "CHECKING" : Updating ? "UPDATING" : "UPDATE LAUNCHER";
-            updateBtn.Selected = (UpdateAvailable || launcherRelease != null) && !Updating;   // gold: an update is waiting
-        }
-
-        void TellUpdateRecovery()
-        {
-            string r = updateRecovery;
-            updateRecovery = null;
-            if (r == null) return;
-            ShowWindowFront();
-            if (r == "restored")
-                Info("Game update", "The last game update was cut off before it finished. Your game files were put back " +
-                     "exactly as they were.\n\nYou can run the update again with the UPDATE button.");
-            else
-                Warn("Game update", "The last game update was cut off, and some game files could not be put back " +
-                     "automatically.\n\nThe old versions are kept in the folder \"" + Updater.WorkDir + "\\backup\" inside the " +
-                     "game folder. Copy them back over the game files, or reinstall the game.");
+            updateBtn.Selected = launcherRelease != null && !Updating;   // gold: an update is waiting
         }
 
         void StartupUpdateCheck()
@@ -1665,15 +1698,11 @@ namespace AzerothLauncher
         // so a release whose exe never matches can't restart the launcher over and over.
         static readonly bool StartedAfterUpdate = Array.IndexOf(Environment.GetCommandLineArgs(), "--after-update") >= 0;
 
-        // The UPDATE button and the start-up check: the launcher first, then (when switched on) the game.
+        // The UPDATE button and the start-up check: the launcher itself (the game updates itself when it starts).
         // At start-up it stays quiet unless there is something to offer; the button always answers.
         void CheckLauncherUpdate(bool manual)
         {
-            if (Updating)
-            {
-                if (updateDlg != null && !updateDlg.IsDisposed) ShowUpdateDialog();
-                return;
-            }
+            if (Updating) return;
             if (UpdateChecking) return;
             UpdateChecking = true;
             RefreshUpdateBtn();
@@ -1719,19 +1748,11 @@ namespace AzerothLauncher
                 OfferLauncherUpdate(manual);
                 return;
             }
-            else if (manual && !Updater.Enabled)
+            else if (manual)
             {
                 SetStatus("The launcher is up to date (" + rel.Name + ").");
                 Info("Launcher update", "You have the newest launcher (" + rel.Name + ").");
             }
-            NextGameCheck(manual);
-        }
-
-        void NextGameCheck(bool manual)
-        {
-            if (!Updater.Enabled) return;                    // game updates are switched on in src/Update.cs
-            if (manual) CheckForUpdate(true, false);
-            else if (ClientPresent()) CheckForUpdate(false, false);
         }
 
         void OfferLauncherUpdate(bool manual)
@@ -1839,274 +1860,6 @@ namespace AzerothLauncher
             var kill = new System.Threading.Thread(delegate() { System.Threading.Thread.Sleep(3000); Environment.Exit(0); });
             kill.IsBackground = true;
             kill.Start();
-        }
-
-        // Reads update.json in the background. At start-up it stays quiet unless there is an update to offer;
-        // the UPDATE button (manual) always answers.
-        void CheckForUpdate(bool manual, bool afterInstall)
-        {
-            if (Updating) { ShowUpdateDialog(); return; }
-            if (UpdateChecking) return;
-            if (!Updater.Enabled)
-            {
-                if (manual) Info("Game update", "Update checking is not switched on in this launcher yet (it has no update address).");
-                return;
-            }
-            if (!ClientPresent())
-            {
-                if (manual) Info("Game update", "The game is not installed yet. Press INSTALL first.");
-                return;
-            }
-            UpdateChecking = true;
-            RefreshUpdateBtn();
-            if (manual) SetStatus("Checking for updates...");
-            Bg(delegate
-            {
-                UpdateInfo info = null;
-                string err = null;
-                try { info = Updater.FetchManifest(); }
-                catch (UserError e) { err = e.Message; }
-                catch (Exception e) { err = "The update check failed (" + e.Message + ")."; }
-                Ui(delegate { CheckDone(info, err, manual, afterInstall); });
-            });
-        }
-
-        void CheckDone(UpdateInfo info, string err, bool manual, bool afterInstall)
-        {
-            UpdateChecking = false;
-            if (err != null)
-            {
-                RefreshUpdateBtn();
-                if (manual)
-                {
-                    SetStatus("Could not check for updates.");
-                    Warn("Game update", err);
-                }
-                return;
-            }
-            updateInfo = info;
-            if (afterInstall && info.InstallerVersion.Length > 0)    // the file just installed has a known version
-            {
-                Cfg.Set("client_version", info.InstallerVersion);
-                Cfg.Save();
-            }
-            UpdateAvailable = Updater.Needed(InstalledVersion(), info.Version);
-            RefreshUpdateBtn();
-            if (!UpdateAvailable)
-            {
-                if (manual)
-                {
-                    SetStatus("You have the newest version (" + info.Version + ").");
-                    Info("Game update", "You have the newest version (" + info.Version + ").");
-                }
-                return;
-            }
-            SetStatus("Update " + info.Version + " is available.");
-            if (manual || Cfg.Str("update_skipped") != info.Version) OfferUpdate();
-        }
-
-        // opens the update window, unless the player is busy with something else (then it waits a moment)
-        void OfferUpdate()
-        {
-            if (updateInfo == null || Updating || Installing || GameRunningFlag) return;
-            if (setupOpen || SyncBusy)
-            {
-                After(2000, OfferUpdate);
-                return;
-            }
-            if (!Visible || WindowState == FormWindowState.Minimized)   // hidden in the tray: offered when opened
-            {
-                updateOfferPending = true;
-                Notify("A game update (" + updateInfo.Version + ") is available.");
-                return;
-            }
-            ShowUpdateDialog();
-        }
-
-        void ShowUpdateDialog()
-        {
-            if (updateInfo == null) return;
-            if (updateDlg != null && !updateDlg.IsDisposed)
-            {
-                updateDlg.Show();
-                updateDlg.WindowState = FormWindowState.Normal;
-                updateDlg.Activate();
-                return;
-            }
-            updateDlg = new UpdateDialog(this, updateInfo);
-            updateDlg.PlaceOver(this);
-            updateDlg.ShowInside();
-        }
-
-        UpdateDialog OpenUpdateDialog()
-        {
-            return updateDlg != null && !updateDlg.IsDisposed ? updateDlg : null;
-        }
-
-        public void SkipUpdate(string version)
-        {
-            Cfg.Set("update_skipped", version);
-            Cfg.Save();
-            SetStatus("Version " + version + " skipped. The UPDATE button still offers it.");
-        }
-
-        public void MarkUpToDate(string version)
-        {
-            Cfg.Set("client_version", version);
-            Cfg.Remove("update_skipped");
-            Cfg.Save();
-            UpdateAvailable = false;
-            RefreshUpdateBtn();
-            SetStatus("Noted: you have version " + version + ".");
-        }
-
-        // the update the player downloaded in the browser: the newest recent archive (after asking), or one they pick
-        public string PickUpdateFile(IWin32Window owner)
-        {
-            string archive = Archive.FindDownloaded();
-            if (archive != null)
-            {
-                var fi = new FileInfo(archive);
-                if (Msg.Show(owner, "Install the update from this file?\n\n" + fi.Name + "  (" + (fi.Length >> 20) + " MB)\nin " +
-                                    fi.DirectoryName, "Game update", MessageBoxButtons.YesNo) != DialogResult.Yes)
-                    archive = null;
-            }
-            if (archive == null)
-                using (var d = new OpenFileDialog())
-                {
-                    d.Title = Lang.T("Choose the update file you downloaded");
-                    d.InitialDirectory = Util.DownloadsDir;
-                    d.Filter = Lang.T("Update archive (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|All files (*.*)|*.*");
-                    archive = d.ShowDialog(owner) == DialogResult.OK ? d.FileName : null;
-                }
-            return archive;
-        }
-
-        // UPDATE NOW. True when the work has started. archive = a file the player downloaded in the browser.
-        public bool BeginUpdate(UpdateDialog dlg, UpdateInfo info, string archive)
-        {
-            if (Updating || Installing) return false;
-            string game = GameDir();
-            if (GameRunningFlag || Util.GameRunning())
-            {
-                Msg.Show(dlg, "Close the game first, then try again.", "Game running");
-                return false;
-            }
-            try
-            {
-                string kept = Path.Combine(game, Updater.DownloadName);   // a verified download kept from a failed install
-                string have = archive ?? (File.Exists(kept) ? kept : null);
-                if (have != null) Updater.EnsureFreeSpace(game, new FileInfo(have).Length, 1.5);
-                else Updater.EnsureFreeSpace(game, info.Size, 2.5);
-            }
-            catch (UserError e)
-            {
-                Msg.Show(dlg, e.Message, "Game update");
-                return false;
-            }
-            catch (Exception) { }
-            Updating = true;
-            RefreshPlayLabel();
-            RefreshUpdateBtn();
-            SetStatus("Updating to " + info.Version + "...");
-            dlg.CancelEvent = new ManualResetEvent(false);
-            ManualResetEvent cancel = dlg.CancelEvent;
-            Bg(delegate { UpdateWorker(info, game, archive, cancel); });
-            return true;
-        }
-
-        void UpdateWorker(UpdateInfo info, string game, string archive, ManualResetEvent cancel)
-        {
-            bool mine = archive == null;
-            string path = mine ? Path.Combine(game, Updater.DownloadName) : archive;
-            Updater.Result result = null;
-            string error = null;
-            bool cancelled = false, keep = false;
-            try
-            {
-                if (mine)
-                {
-                    if (File.Exists(path))                   // kept from an earlier try: is it this update?
-                    {
-                        Ui(delegate { UpdatePhase("install", "Checking the download..."); });
-                        if (Net.FileSha256(path) != info.Sha256) File.Delete(path);
-                    }
-                    if (!File.Exists(path))
-                    {
-                        Ui(delegate { UpdatePhase("download", "Downloading the update..."); });
-                        DateTime last = DateTime.MinValue;
-                        string digest = Net.Download(info.Url, path, true, "update", delegate(long done, long total)
-                        {
-                            DateTime now = DateTime.Now;
-                            if ((now - last).TotalSeconds >= 0.12 || (total > 0 && done >= total))
-                            {
-                                last = now;
-                                Ui(delegate { var d = OpenUpdateDialog(); if (d != null) d.SetProgress(done, total); });
-                            }
-                        }, cancel, info.Size);
-                        Ui(delegate { UpdatePhase("install", "Checking the download..."); });
-                        if (digest != info.Sha256)
-                            throw new UserError("The downloaded file does not match its checksum, so nothing was installed. " +
-                                                "Please try again later.");
-                    }
-                    keep = true;                             // verified: if the install fails, no new download is needed
-                }
-                else if (info.Sha256.Length > 0 && Net.FileSha256(path) != info.Sha256)
-                    throw new UserError("That file is not this update (its checksum does not match), so nothing was installed. " +
-                                        "Download it again from the update page.");
-                result = Updater.Apply(path, game, info.Delete, delegate(string text) { Ui(delegate { UpdatePhase("install", text); }); });
-            }
-            catch (CancelledError) { cancelled = true; }
-            catch (UserError e) { error = e.Message; }
-            catch (Exception e) { error = "The update failed (" + e.Message + ")."; }
-            finally
-            {
-                if (result != null || (mine && !keep))       // installed, or a download that is no use
-                    try { File.Delete(path); } catch (Exception) { }
-            }
-            Ui(delegate { UpdateDone(info, result, error, cancelled); });
-        }
-
-        void UpdatePhase(string phase, string text)
-        {
-            var d = OpenUpdateDialog();
-            if (d != null) d.SetPhase(phase, text);
-        }
-
-        void UpdateDone(UpdateInfo info, Updater.Result result, string error, bool cancelled)
-        {
-            Updating = false;
-            var dlg = OpenUpdateDialog();
-            if (result != null)
-            {
-                Cfg.Set("client_version", info.Version);
-                Cfg.Remove("update_skipped");
-                Cfg.Save();
-                UpdateAvailable = false;
-                SetStatus("Updated to " + info.Version + " - press PLAY.");
-                Notify("Game updated to " + info.Version + ". Press PLAY to enter Azeroth.");
-                int n = result.Added + result.Replaced;
-                if (dlg != null)
-                    dlg.ShowResult(true, "Version " + info.Version + " is installed.\nPress PLAY to enter Azeroth.",
-                                   Util.Plural(n, "file") + " updated" + (result.Removed > 0 ? ", " + result.Removed + " removed" : "") + ".");
-            }
-            else if (cancelled)
-            {
-                SetStatus("Update cancelled.");
-                if (dlg != null) dlg.ShowOffer();
-            }
-            else
-            {
-                SetStatus("Update failed.");
-                if (dlg != null) dlg.ShowResult(false, error, null);
-                else
-                {
-                    ShowWindowFront();
-                    Error("Game update", error);
-                }
-            }
-            RefreshPlayLabel();
-            RefreshUpdateBtn();
         }
     }
 }

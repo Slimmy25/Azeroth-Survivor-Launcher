@@ -96,8 +96,6 @@ The game client is still being installed. If you quit now, it is cut short.
 = Spillet installeres fortsatt. Hvis du avslutter nå, blir installasjonen avbrutt.
 Updating
 = Oppdaterer
-The game is still being updated. If you quit now, the update is cut short. Nothing is lost: a half-finished change is undone the next time the launcher starts.
-= Spillet oppdateres fortsatt. Hvis du avslutter nå, blir oppdateringen avbrutt. Ingenting går tapt: en halvferdig endring angres neste gang launcheren starter.
 The game is still running. If you quit the launcher now, your saves will NOT be uploaded automatically.
 = Spillet kjører fortsatt. Hvis du avslutter launcheren nå, blir lagringene dine IKKE lastet opp automatisk.
 Setup saved.
@@ -212,14 +210,6 @@ KEEP LOCAL
 = BEHOLD LOKALT
 Save game
 = Lagret spill
-Game update
-= Spilloppdatering
-Update available
-= Oppdatering tilgjengelig
-New version:
-= Ny versjon:
-Your version:
-= Din versjon:
 not recorded yet
 = ikke registrert ennå
 Download size:
@@ -228,22 +218,8 @@ What is new
 = Nyheter
 Your addons, settings and saves are left alone. If anything goes wrong, the old game files are put back.
 = Tilleggene, innstillingene og lagringene dine blir ikke rørt. Hvis noe går galt, legges de gamle spillfilene tilbake.
-UPDATE NOW
-= OPPDATER NÅ
 NOT NOW
 = IKKE NÅ
-SKIP THIS VERSION
-= HOPP OVER DENNE VERSJONEN
-I ALREADY HAVE THIS VERSION
-= JEG HAR ALLEREDE DENNE VERSJONEN
-The update is being installed. Please wait until it has finished.
-= Oppdateringen installeres. Vent til den er ferdig.
-Downloading the update...
-= Laster ned oppdateringen...
-Download the update
-= Last ned oppdateringen
-Step 1: download the update in your web browser.
-= Trinn 1: last ned oppdateringen i nettleseren din.
 OPEN DOWNLOAD AGAIN
 = ÅPNE NEDLASTING IGJEN
 Step 2: when the download has finished, come back here.
@@ -254,32 +230,16 @@ Checking the file...
 = Sjekker filen...
 CANCELLING...
 = AVBRYTER...
-Updating to {0}
-= Oppdaterer til {0}
 Please keep the launcher open until this has finished.
 = Hold launcheren åpen til dette er ferdig.
 {0} of {1}  ({#2}%)
 = {0} av {1}  ({2} %)
 {0} downloaded
 = {0} lastet ned
-Update installed
-= Oppdatering installert
-Update failed
-= Oppdateringen mislyktes
 CLOSE
 = LUKK
 TRY AGAIN
 = PRØV IGJEN
-Version {0} is installed.
-= Versjon {0} er installert.
-{#0} files updated.
-= {0} filer oppdatert.
-{#0} file updated.
-= {0} fil oppdatert.
-{#0} files updated, {#1} removed.
-= {0} filer oppdatert, {1} fjernet.
-{#0} file updated, {#1} removed.
-= {0} fil oppdatert, {1} fjernet.
 Install
 = Installer
 Install the game from this file?
@@ -302,14 +262,6 @@ Install complete - press PLAY.
 = Installasjonen er ferdig - trykk SPILL.
 Install complete. Press PLAY to enter Azeroth.
 = Installasjonen er ferdig. Trykk SPILL for å gå inn i Azeroth.
-The last game update was cut off before it finished. Your game files were put back exactly as they were.
-= Den siste spilloppdateringen ble avbrutt før den var ferdig. Spillfilene dine ble satt tilbake akkurat slik de var.
-You can run the update again with the UPDATE button.
-= Du kan kjøre oppdateringen på nytt med OPPDATER-knappen.
-The last game update was cut off, and some game files could not be put back automatically.
-= Den siste spilloppdateringen ble avbrutt, og noen spillfiler kunne ikke settes tilbake automatisk.
-The old versions are kept in the folder "{0}" inside the game folder. Copy them back over the game files, or reinstall the game.
-= De gamle versjonene ligger i mappen "{0}" i spillmappen. Kopier dem tilbake over spillfilene, eller installer spillet på nytt.
 Checking for updates...
 = Ser etter oppdateringer...
 The update check failed ({0}).
@@ -342,46 +294,18 @@ Downloading the new launcher... {0}
 = Laster ned den nye launcheren... {0}
 Launcher update failed.
 = Launcher-oppdateringen mislyktes.
-Update checking is not switched on in this launcher yet (it has no update address).
-= Oppdateringssjekk er ikke slått på i denne launcheren ennå (den har ingen oppdateringsadresse).
 The game is not installed yet. Press INSTALL first.
 = Spillet er ikke installert ennå. Trykk INSTALLER først.
 Could not check for updates.
 = Kunne ikke se etter oppdateringer.
 You have the newest version ({0}).
 = Du har den nyeste versjonen ({0}).
-Update {0} is available.
-= Oppdatering {0} er tilgjengelig.
-A game update ({0}) is available.
-= En spilloppdatering ({0}) er tilgjengelig.
-Version {0} skipped. The UPDATE button still offers it.
-= Versjon {0} hoppet over. OPPDATER-knappen tilbyr den fortsatt.
-Noted: you have version {0}.
-= Notert: du har versjon {0}.
-Install the update from this file?
-= Installere oppdateringen fra denne filen?
-Choose the update file you downloaded
-= Velg oppdateringsfilen du lastet ned
-Update archive (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|All files (*.*)|*.*
-= Oppdateringsarkiv (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|Alle filer (*.*)|*.*
 Close the game first, then try again.
 = Lukk spillet først, og prøv igjen.
 Checking the download...
 = Sjekker nedlastingen...
 The downloaded file does not match its checksum, so nothing was installed. Please try again later.
 = Den nedlastede filen stemmer ikke med kontrollsummen, så ingenting ble installert. Prøv igjen senere.
-That file is not this update (its checksum does not match), so nothing was installed. Download it again from the update page.
-= Den filen er ikke denne oppdateringen (kontrollsummen stemmer ikke), så ingenting ble installert. Last den ned igjen fra oppdateringssiden.
-The update failed ({0}).
-= Oppdateringen mislyktes ({0}).
-Updated to {0} - press PLAY.
-= Oppdatert til {0} - trykk SPILL.
-Game updated to {0}. Press PLAY to enter Azeroth.
-= Spillet er oppdatert til {0}. Trykk SPILL for å gå inn i Azeroth.
-Update cancelled.
-= Oppdateringen ble avbrutt.
-Update failed.
-= Oppdateringen mislyktes.
 Another task is still running - wait for it to finish.
 = En annen oppgave kjører fortsatt - vent til den er ferdig.
 Choose a sync folder inside your cloud drive first (Cloud Save or Options).
@@ -396,8 +320,6 @@ Saves uploaded at {0}
 = Lagringer lastet opp kl. {0}
 Not everything was synced - see the Cloud Save log.
 = Ikke alt ble synkronisert - se loggen under Skylagring.
-The game is being updated. Please wait until that has finished.
-= Spillet oppdateres. Vent til det er ferdig.
 The cloud save could NOT be loaded, so the game was not launched.
 = Skylagringen kunne IKKE lastes inn, så spillet ble ikke startet.
 See the log in Cloud Save. If your cloud drive is still syncing, wait for it to finish and press PLAY again.
@@ -692,32 +614,14 @@ The link did not give a .zip file. It must be a direct download link (share page
 = Lenken ga ikke en .zip-fil. Den må være en direkte nedlastingslenke (delingssider som LimeWire fungerer ikke).
 There is not enough free disk space.
 = Det er ikke nok ledig diskplass.
-Not enough free disk space for the update: about {0} is needed on the drive with the game, {1} is free.
-= Ikke nok ledig diskplass til oppdateringen: omtrent {0} trengs på stasjonen med spillet, {1} er ledig.
-The update file is not a .rar, .zip or .7z archive.
-= Oppdateringsfilen er ikke et .rar-, .zip- eller .7z-arkiv.
-An earlier update was cut off and its files could not be put back yet.
-= En tidligere oppdatering ble avbrutt, og filene kunne ikke settes tilbake ennå.
 The old files are kept in:
 = De gamle filene ligger i:
-Unpacking the update. This can take a few minutes...
-= Pakker ut oppdateringen. Dette kan ta noen minutter...
 Installing the new files...
 = Installerer de nye filene...
-The update did not contain any files to install.
-= Oppdateringen inneholdt ingen filer å installere.
-{0} is missing after the update.
-= {0} mangler etter oppdateringen.
 A game file is in use. Close the game and anything else using its folder, then try again.
 = En spillfil er i bruk. Lukk spillet og alt annet som bruker mappen, og prøv igjen.
-There is not enough free disk space for the update. Free some space and try again.
-= Ikke nok ledig diskplass til oppdateringen. Frigjør plass og prøv igjen.
-The update could not be installed ({0}).
-= Oppdateringen kunne ikke installeres ({0}).
 No game files were changed.
 = Ingen spillfiler ble endret.
-Some files could not be put back. The old versions are kept in:
-= Noen filer kunne ikke settes tilbake. De gamle versjonene ligger i:
 Sync folder not reachable: {0} (is your cloud drive running?)
 = Synkroniseringsmappen kan ikke nås: {0} (kjører skylagringen din?)
 The game is running. Close it before you download.
@@ -1154,8 +1058,6 @@ Addons need the game. Press INSTALL to download it first.
 = Tillegg trenger spillet. Trykk på INSTALLER for å laste det ned først.
 Game client not found. Press INSTALL to download it first.
 = Spillklienten ble ikke funnet. Trykk på INSTALLER for å laste den ned først.
-Please wait until the game update or install has finished.
-= Vent til spilloppdateringen eller installasjonen er ferdig.
 Downloading the game client...
 = Laster ned spillklienten...
 The download server sent something that is not the game archive. Please try again later.
@@ -1623,3 +1525,15 @@ these two can't be on together. Switching one on switches the other off.
 = disse to kan ikke være på samtidig. Slår du på det ene, slås det andre av.
 Flat, dark unit frames and a compact action bar, Plater-style nameplates (Survivor Plates), luck and card odds on the XP bar, a tabbed chat panel and automatic raid marks. Can't be on together with AZS Minor Mods.
 = Flate, mørke enhetsrammer og en kompakt handlingslinje, navneskilt i Plater-stil (Survivor Plates), flaks og kortsjanser på XP-linjen, et chatpanel med faner og automatiske raidmerker. Kan ikke være på samtidig med AZS Minor Mods.
+The game updated itself and is opening again...
+= Spillet oppdaterte seg selv og åpnes igjen...
+The game updated itself and opened again.
+= Spillet oppdaterte seg selv og åpnet seg igjen.
+The game opened again.
+= Spillet åpnet seg igjen.
+The launcher is still updating itself. If you quit now, the update is cut short and this launcher stays as it is.
+= Launcheren oppdaterer seg fortsatt. Avslutter du nå, avbrytes oppdateringen og denne launcheren blir som den er.
+The launcher is updating itself. Please wait until that has finished.
+= Launcheren oppdaterer seg. Vent til det er ferdig.
+Please wait until the launcher update or the install has finished.
+= Vent til launcher-oppdateringen eller installasjonen er ferdig.
