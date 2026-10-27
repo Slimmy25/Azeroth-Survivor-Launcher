@@ -1696,3 +1696,9 @@ Damage per spell with the kills of each spell, plus healing, boss damage, damage
 = Урон по заклинаниям с убийствами каждого заклинания, а также исцеление, урон по боссам, полученный урон и урон группы — при желании каждое в своём окне.
 A complete interface in a dark cyberpunk style: a new combat HUD with action bars, a cast bar, character and build panels, a damage meter, chat, minimap and nameplates.
 = Полный интерфейс в мрачном киберпанк-стиле: новый боевой HUD с панелями действий, полосой заклинаний, панелями персонажа и билда, измерителем урона, чатом, миникартой и табличками с именами.
+Gear
+= Снаряжение
+Every piece a {0} can wear. Point at one to read it, click it to try it in the Gear Planner.
+= Всё, что может носить {0}. Наведите, чтобы прочитать, нажмите, чтобы примерить в планировщике снаряжения.
+Spells that change it:
+= Заклинания, которые его меняют:

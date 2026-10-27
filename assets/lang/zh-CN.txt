@@ -1696,3 +1696,9 @@ Damage per spell with the kills of each spell, plus healing, boss damage, damage
 = 按法术统计伤害和每个法术的击杀数，另有治疗、首领伤害、承受伤害和队伍伤害，可各自单独开一个窗口。
 A complete interface in a dark cyberpunk style: a new combat HUD with action bars, a cast bar, character and build panels, a damage meter, chat, minimap and nameplates.
 = 暗黑赛博朋克风格的完整界面：全新的战斗 HUD，包含动作条、施法条、角色和构筑面板、伤害统计、聊天、小地图和姓名板。
+Gear
+= 装备
+Every piece a {0} can wear. Point at one to read it, click it to try it in the Gear Planner.
+= {0}能穿戴的每一件装备。指向即可查看，点击可在装备规划器中试穿。
+Spells that change it:
+= 改变此法术的法术：

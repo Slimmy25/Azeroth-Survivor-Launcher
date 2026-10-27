@@ -1696,3 +1696,9 @@ Damage per spell with the kills of each spell, plus healing, boss damage, damage
 = Sebzés varázslatonként, minden varázslat öléseivel, valamint gyógyítás, főellenség-sebzés, elszenvedett sebzés és a csapatod sebzése, ha szeretnéd, mindegyik külön ablakban.
 A complete interface in a dark cyberpunk style: a new combat HUD with action bars, a cast bar, character and build panels, a damage meter, chat, minimap and nameplates.
 = Teljes kezelőfelület sötét cyberpunk stílusban: új harci HUD akciósávokkal, varázslási sávval, karakter- és buildpanellel, sebzésmérővel, csettel, minitérképpel és névtáblákkal.
+Gear
+= Felszerelés
+Every piece a {0} can wear. Point at one to read it, click it to try it in the Gear Planner.
+= Minden darab, amit egy {0} viselhet. Mutass rá az olvasáshoz, kattints a felszerelés-tervezőben való kipróbáláshoz.
+Spells that change it:
+= Varázslatok, amelyek megváltoztatják:

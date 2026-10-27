@@ -1695,3 +1695,9 @@ Damage per spell with the kills of each spell, plus healing, boss damage, damage
 = Danni per incantesimo con le uccisioni di ogni incantesimo, più cure, danni ai boss, danni subiti e danni del gruppo, ognuno nella propria finestra se vuoi.
 A complete interface in a dark cyberpunk style: a new combat HUD with action bars, a cast bar, character and build panels, a damage meter, chat, minimap and nameplates.
 = Un’interfaccia completa in stile cyberpunk scuro: un nuovo HUD di combattimento con barre delle azioni, barra di lancio, pannelli del personaggio e della build, misuratore di danni, chat, minimappa e targhette dei nomi.
+Gear
+= Equipaggiamento
+Every piece a {0} can wear. Point at one to read it, click it to try it in the Gear Planner.
+= Ogni pezzo che un {0} può indossare. Passaci sopra per leggerlo, fai clic per provarlo nel pianificatore di equipaggiamento.
+Spells that change it:
+= Incantesimi che lo cambiano:

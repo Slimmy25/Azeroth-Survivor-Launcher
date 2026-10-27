@@ -40,6 +40,7 @@ namespace AzerothLauncher
         public static readonly string[] Classes = { "Warrior", "Paladin", "Hunter", "Rogue", "Priest", "Shaman", "Mage", "Warlock", "Druid" };
         public static readonly string[] Rarities = { "Common", "Uncommon", "Rare", "Epic", "PvP", "Legendary" };
         public static readonly string[] Slots = { "Head", "Shoulder", "Chest", "Waist", "Legs", "Feet", "Wrist", "Hands", "Main Hand" };
+        static readonly string[] WithOffHand = { "Head", "Shoulder", "Chest", "Waist", "Legs", "Feet", "Wrist", "Hands", "Main Hand", "Off Hand" };
 
         // the zones of each rarity (the Guide's Zones & Bosses): their bosses in order, and the slot each boss drops.
         // The first zone of a pair drops Head, Shoulder, Chest and Waist, the second Legs, Feet, Wrist and Hands; both
@@ -268,15 +269,17 @@ namespace AzerothLauncher
                 string k = cls.ToLowerInvariant(), arm;
                 if (!armor.TryGetValue(k, out arm)) arm = "cloth";
                 foreach (string rar in Rarities)
-                    foreach (string slot in Slots)
+                    foreach (string slot in WithOffHand)
                     {
                         var p = new GearPiece { Class = cls, Rarity = rar, Slot = slot };
-                        if (slot == "Main Hand")
+                        if (slot == "Main Hand" || slot == "Off Hand")
                         {
+                            // the second weapon (a rogue's off-hand dagger, a shaman's shield): weapons "|1|", the PvP list's 4th
+                            bool off = slot == "Off Hand";
                             string[] pv;
                             string w;
-                            if (rar == "PvP") p.Name = pvp.TryGetValue(k, out pv) && pv.Length > 2 ? pv[2] : "";
-                            else p.Name = weapons.TryGetValue(k + "|0|" + rar, out w) ? w : "";
+                            if (rar == "PvP") p.Name = pvp.TryGetValue(k, out pv) && pv.Length > (off ? 3 : 2) ? pv[off ? 3 : 2] : "";
+                            else p.Name = weapons.TryGetValue(k + (off ? "|1|" : "|0|") + rar, out w) ? w : "";
                             p.Kind = "Weapon";
                         }
                         else
@@ -296,7 +299,7 @@ namespace AzerothLauncher
                         {
                             if (z[0] != rar) continue;
                             int pair = Array.IndexOf(Zones, z) % 2;
-                            int at = Array.IndexOf(ZoneSlots[pair], slot);
+                            int at = Array.IndexOf(ZoneSlots[pair], slot == "Off Hand" ? "Main Hand" : slot);   // dropped where the main hand is
                             if (at < 0) continue;
                             string boss = z[2 + at], time = "";
                             int sp = boss.LastIndexOf(' ');
@@ -360,7 +363,7 @@ namespace AzerothLauncher
             var l = new List<string>();
             if (Gear.Count == 0 && Jewelry.Count == 0) return l;
             l.Add("@topic Items | Every piece of gear and every ring, trinket and amulet, with what it does and where it drops");
-            l.Add("Every class has its own gear: one set for each rarity, nine pieces each (Head, Shoulder, Chest, Waist, Legs, Feet, Wrist, Hands and the Main Hand weapon). Each boss drops one piece on its own roll; a piece you already have adds nothing. Rings, trinkets and amulets are the same for every class: guardians' lairs and battleground caches offer them during a run.");
+            l.Add("Every class has its own gear: one set for each rarity, nine pieces each (Head, Shoulder, Chest, Waist, Legs, Feet, Wrist, Hands and the weapon). A hunter's weapon goes in the Ranged slot; rogues also wear an Off Hand dagger and shamans a shield. Each boss drops one piece on its own roll; a piece you already have adds nothing. Rings, trinkets and amulets are the same for every class: guardians' lairs and battleground caches offer them during a run.");
             l.Add("");
             l.Add("Try a set out in the Gear Planner (Guide > Theorycrafting).");
             l.Add("@page Rings, Trinkets & Amulets | The jewelry every hero is offered, with its numbers");

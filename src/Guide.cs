@@ -693,7 +693,24 @@ namespace AzerothLauncher
                 sp.Controls.Add(c);
                 y += gap + c.Height;
             };
-            add(UI.Text(crumb.ToUpperInvariant(), 8.5f, FontStyle.Bold, GuideRed, bg, tw, crumb == "Guide"), x, 0);
+            // a class's page: its spells with their icons and the talents that change them, its gear, and its talent
+            // trees one click away (TALENT TREES at the right of the "CLASSES" line)
+            string className = null;
+            try
+            {
+                var tops = Data.Guide;
+                if (gTopic >= 0 && gTopic < tops.Count && tops[gTopic].Title == "Classes" && Talents.Of(page.Title).Count > 0)
+                    className = page.Title;
+            }
+            catch (Exception) { }
+            if (className != null)
+            {
+                string tcls = className;
+                var tb = new WowButton("TALENT TREES ›", delegate { gTalents = tcls; BuildPanel("Guide"); }, 170, 28, 9);
+                tb.Location = new Point(x + tw - tb.Width, y - 4);
+                sp.Controls.Add(tb);
+            }
+            add(UI.Text(crumb.ToUpperInvariant(), 8.5f, FontStyle.Bold, GuideRed, bg, tw - (className != null ? 130 : 0), crumb == "Guide"), x, 0);
             add(UI.Text(page.Title, 18, FontStyle.Bold, Theme.Gold, bg, tw, false), x, 2);
             if (page.Desc.Length > 0) add(UI.Text(page.Desc, 10.5f, FontStyle.Italic, Theme.GoldDim, bg, tw, false), x, 2);
             add(new GuideRule(tw, Theme.GoldDim), x, 10);
@@ -705,16 +722,6 @@ namespace AzerothLauncher
                 add(new GuideText(string.Join(" ", para.ToArray()), 10, Theme.Text, bg, tw, gTopic, gPage), x, 8);
                 para.Clear();
             };
-            // a class's page: its spells with their icons and the talents that change them, and its three talent
-            // trees drawn like the game's (in place of the guide's short list of milestones)
-            string className = null;
-            try
-            {
-                var tops = Data.Guide;
-                if (gTopic >= 0 && gTopic < tops.Count && tops[gTopic].Title == "Classes" && Talents.Of(page.Title).Count > 0)
-                    className = page.Title;
-            }
-            catch (Exception) { }
             string section = "";
             // the class's spells and what they say (the game's own text when AZS Stats saw it): for "Spells that affect this"
             var pool = new List<KeyValuePair<string, string>>();
@@ -739,21 +746,7 @@ namespace AzerothLauncher
                 int vi;
                 if (line.Length == 0) { flush(); continue; }
                 if (className != null && line.StartsWith("# ")) section = line.Substring(2).Trim();
-                if (className != null && section.StartsWith("Talent"))
-                {
-                    if (!line.StartsWith("# ")) continue;
-                    flush();
-                    add(UI.Text(line.Substring(2).Trim(), 12.5f, FontStyle.Bold, Theme.Gold, bg, tw, false), x, 16);
-                    add(new GuideRule(Math.Min(60, tw), Theme.Gold), x, 3);
-                    var specs = new List<string>();
-                    foreach (var tr in Talents.Of(className)) specs.Add(tr.Spec);
-                    add(new GuideText("The " + className + "'s three talent trees: " + string.Join(", ", specs.ToArray()) +
-                                      ". Open them to read every talent, see its milestones at 10, 20 and 30 points, and try out a build " +
-                                      "of up to 51 points.", 10, Theme.Text, bg, tw, gTopic, gPage), x, 8);
-                    string cls = className;
-                    add(new WowButton("TALENT TREES ›", delegate { gTalents = cls; BuildPanel("Guide"); }, 220, 36, 10), x, 10);
-                    continue;
-                }
+                if (className != null && section.StartsWith("Talent")) continue;   // the trees: TALENT TREES at the top
                 if (className != null && section.StartsWith("Spell pool") && line.StartsWith("- "))
                 {
                     flush();
@@ -797,10 +790,129 @@ namespace AzerothLauncher
                 else para.Add(line);
             }
             flush();
+            if (className != null && Items.Gear.Count > 0)      // the gear this class can wear, by rarity
+            {
+                add(UI.Text(Lang.T("Gear"), 12.5f, FontStyle.Bold, Theme.Gold, bg, tw, false), x, 16);
+                add(new GuideRule(Math.Min(60, tw), Theme.Gold), x, 3);
+                add(new GuideText(Lang.F("Every piece a {0} can wear. Point at one to read it, click it to try it in the Gear Planner.", Lang.T(className)),
+                                  10, Theme.Text, bg, tw, gTopic, gPage), x, 8);
+                string gc = className;
+                foreach (string rar in Items.Rarities)
+                {
+                    var pieces = new List<GearPiece>();
+                    foreach (var p in Items.Gear) if (p.Class == gc && p.Rarity == rar) pieces.Add(p);
+                    if (pieces.Count == 0) continue;
+                    add(new GearStrip(rar, pieces, tw, GearIcons(), delegate(GearPiece p)
+                    {
+                        PlannerClass(gc);
+                        plannerSlots[p.Slot] = p;
+                        OpenGuideTab(-3);
+                    }), x, 6);
+                }
+            }
             var pad = new Panel();
             pad.BackColor = bg;
             pad.Bounds = new Rectangle(4, y, 1, 18);
             sp.Controls.Add(pad);
+        }
+    }
+
+    // one rarity of a class's gear on its class page: the rarity's name, then each piece as a small box (its icon when
+    // AZS Stats has seen it, else its slot) in the rarity's colour; the hover shows the item card
+    public class GearStrip : Control
+    {
+        readonly string rarity;
+        readonly List<GearPiece> pieces;
+        readonly Dictionary<string, string> icons;
+        readonly Action<GearPiece> pick;
+        readonly List<KeyValuePair<Rectangle, GearPiece>> boxes = new List<KeyValuePair<Rectangle, GearPiece>>();
+        GearPiece over;
+        readonly int box, labelW;
+
+        public GearStrip(string rarity, List<GearPiece> pieces, int width, Dictionary<string, string> icons, Action<GearPiece> pick)
+        {
+            SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer |
+                     ControlStyles.ResizeRedraw, true);
+            this.rarity = rarity;
+            this.pieces = pieces;
+            this.icons = icons ?? new Dictionary<string, string>();
+            this.pick = pick;
+            box = Math.Max(26, (int)(40 * Theme.Zoom));
+            labelW = (int)(110 * Theme.Zoom);
+            int perRow = Math.Max(1, (width - labelW) / (box + 6));
+            int rows = (pieces.Count + perRow - 1) / perRow;
+            Size = new Size(width, rows * (box + 6));
+            for (int i = 0; i < pieces.Count; i++)
+                boxes.Add(new KeyValuePair<Rectangle, GearPiece>(
+                    new Rectangle(labelW + (i % perRow) * (box + 6), (i / perRow) * (box + 6), box, box), pieces[i]));
+        }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            Graphics g = e.Graphics;
+            g.Clear(Parent != null ? Parent.BackColor : Theme.Panel);
+            Theme.Smooth(g);
+            Color rc = GearSheet.RarityColor(rarity);
+            using (var b = new SolidBrush(rc)) g.DrawString(Lang.T(rarity), Theme.F(10, FontStyle.Bold), b, 0, (box - Theme.F(10).Height) / 2f);
+            foreach (var kv in boxes)
+            {
+                Rectangle r = kv.Key;
+                GearPiece p = kv.Value;
+                using (var b = new SolidBrush(Theme.Hex("#1b1a24"))) g.FillRectangle(b, r);
+                string ic;
+                Image img = icons.TryGetValue(p.Name, out ic) ? SpellIcons.Icon(ic, this) : null;
+                if (img != null) Theme.Draw(g, img, Rectangle.Inflate(r, -2, -2));
+                else
+                {
+                    using (var b = new SolidBrush(Color.FromArgb(60, rc))) g.FillRectangle(b, Rectangle.Inflate(r, -3, -3));
+                    string ab = p.Slot == "Main Hand" ? "MH" : p.Slot == "Off Hand" ? "OH" : p.Slot.Substring(0, Math.Min(2, p.Slot.Length));
+                    Font f = Theme.F(8.5f, FontStyle.Bold);
+                    SizeF a = g.MeasureString(ab, f);
+                    using (var b = new SolidBrush(Theme.Hex("#f5e9c8"))) g.DrawString(ab, f, b, r.X + (r.Width - a.Width) / 2, r.Y + (r.Height - a.Height) / 2);
+                }
+                using (var pen = new Pen(p == over ? Theme.Hex("#fff2b0") : rc, p == over ? 2f : 1.5f)) g.DrawRectangle(pen, r);
+                if (!p.Known)
+                    using (var b = new SolidBrush(Theme.Hex("#f5e9c8"))) g.DrawString("*", Theme.F(9, FontStyle.Bold), b, r.Right - 9, r.Y - 1);
+            }
+        }
+
+        GearPiece At(Point pt)
+        {
+            foreach (var kv in boxes) if (kv.Key.Contains(pt)) return kv.Value;
+            return null;
+        }
+
+        protected override void OnMouseMove(MouseEventArgs e)
+        {
+            base.OnMouseMove(e);
+            GearPiece p = At(e.Location);
+            if (p == over) return;
+            over = p;
+            Cursor = p != null ? Cursors.Hand : Cursors.Default;
+            Invalidate();
+            if (p != null)
+            {
+                string card = Items.Card(p);
+                int nl = card.IndexOf('\n');
+                string ic;
+                GuideHover.Show(this, p.Name, nl >= 0 ? card.Substring(nl + 1) : card,
+                                icons.TryGetValue(p.Name, out ic) ? SpellIcons.Icon(ic, null) : null);
+            }
+            else GuideHover.Hide();
+        }
+
+        protected override void OnMouseLeave(EventArgs e)
+        {
+            base.OnMouseLeave(e);
+            if (over != null) { over = null; Invalidate(); }
+            GuideHover.Hide();
+        }
+
+        protected override void OnMouseUp(MouseEventArgs e)
+        {
+            base.OnMouseUp(e);
+            GearPiece p = At(e.Location);
+            if (e.Button == MouseButtons.Left && p != null && pick != null) { GuideHover.Hide(); pick(p); }
         }
     }
 

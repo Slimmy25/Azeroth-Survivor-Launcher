@@ -1695,3 +1695,9 @@ Damage per spell with the kills of each spell, plus healing, boss damage, damage
 = Skade pr. besværgelse med drab for hver besværgelse, plus helbredelse, bossskade, modtaget skade og din gruppes skade, hver i sit eget vindue, hvis du vil.
 A complete interface in a dark cyberpunk style: a new combat HUD with action bars, a cast bar, character and build panels, a damage meter, chat, minimap and nameplates.
 = En komplet brugerflade i en mørk cyberpunk-stil: en ny kamp-HUD med handlingsbjælker, kastebjælke, karakter- og build-paneler, skadesmåler, chat, minikort og navneskilte.
+Gear
+= Udstyr
+Every piece a {0} can wear. Point at one to read it, click it to try it in the Gear Planner.
+= Alt udstyr en {0} kan bære. Peg på et stykke for at læse det, klik for at prøve det i udstyrsplanlæggeren.
+Spells that change it:
+= Besværgelser, der ændrer den:

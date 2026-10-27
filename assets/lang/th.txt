@@ -1696,3 +1696,9 @@ Damage per spell with the kills of each spell, plus healing, boss damage, damage
 = ดาเมจของแต่ละคาถาพร้อมจำนวนการสังหารของแต่ละคาถา รวมถึงการรักษา ดาเมจใส่บอส ดาเมจที่ได้รับ และดาเมจของปาร์ตี้ แยกหน้าต่างได้ตามต้องการ
 A complete interface in a dark cyberpunk style: a new combat HUD with action bars, a cast bar, character and build panels, a damage meter, chat, minimap and nameplates.
 = อินเทอร์เฟซครบชุดสไตล์ไซเบอร์พังก์โทนมืด: HUD ต่อสู้ใหม่พร้อมแถบแอ็กชัน แถบร่ายคาถา แผงตัวละครและบิลด์ มาตรวัดดาเมจ แชท มินิแมป และป้ายชื่อ
+Gear
+= อุปกรณ์
+Every piece a {0} can wear. Point at one to read it, click it to try it in the Gear Planner.
+= อุปกรณ์ทุกชิ้นที่ {0} สวมใส่ได้ ชี้เพื่ออ่าน คลิกเพื่อลองในตัววางแผนอุปกรณ์
+Spells that change it:
+= คาถาที่เปลี่ยนคาถานี้:
