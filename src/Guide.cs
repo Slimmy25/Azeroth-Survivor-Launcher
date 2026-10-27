@@ -775,6 +775,11 @@ namespace AzerothLauncher
                         plannerSlots[p.Slot] = p;
                         OpenGuideTab(-3);
                     }), x, 6);
+                    // the set's bonuses, under its pieces (the game's own words, from its armory)
+                    var four = Items.FourPiece(rar);
+                    string eight = Items.EightPiece(gc, rar);
+                    add(new GuideText(Items.SetName(gc, rar) + ": (4) " + (four != null ? four.Text : Lang.T("not entered yet")) + " [" + Lang.T("4 pieces at 1+ stars") + "]   (8) " +
+                                      (eight ?? Lang.T("not entered yet")) + " [" + Lang.T("all 8 at 3+ stars, half again as strong at 5") + "]", 9, Theme.Text, bg, tw, gTopic, gPage), x + 4, 3);
                 }
             }
             var pad = new Panel();

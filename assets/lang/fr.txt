@@ -1721,3 +1721,21 @@ Graphics
 = Graphismes
 The bonuses of everything chosen, added together, at 0 stars: stars and set bonuses are not counted.
 = Les bonus de tout ce qui est choisi, additionnés, à 0 étoile : les étoiles et les bonus d'ensemble ne sont pas comptés.
+4 pieces at 1+ stars
+= 4 pièces à 1+ étoile
+all 8 at 3+ stars, half again as strong at 5
+= les 8 à 3+ étoiles, moitié plus fort à 5
+Set bonuses
+= Bonus d'ensemble
+Stars
+= Étoiles
+stars
+= étoiles
+The bonuses of everything chosen, added together, with each piece's stars and the set bonuses reached. A number marked ~ is an estimate.
+= Les bonus de tout ce qui est choisi, additionnés, avec les étoiles de chaque pièce et les bonus d'ensemble atteints. Un nombre marqué ~ est une estimation.
+empowered
+= renforcé
+estimate
+= estimation
+not entered yet
+= pas encore saisi

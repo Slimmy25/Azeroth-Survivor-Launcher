@@ -1722,3 +1722,21 @@ Graphics
 = Grafika
 The bonuses of everything chosen, added together, at 0 stars: stars and set bonuses are not counted.
 = Premie wszystkich wybranych przedmiotów razem, przy 0 gwiazdkach: gwiazdki i premie za zestaw nie są liczone.
+4 pieces at 1+ stars
+= 4 części z 1+ gwiazdkami
+all 8 at 3+ stars, half again as strong at 5
+= wszystkie 8 z 3+ gwiazdkami, przy 5 o połowę silniejsze
+Set bonuses
+= Premie za zestaw
+Stars
+= Gwiazdki
+stars
+= gwiazdek
+The bonuses of everything chosen, added together, with each piece's stars and the set bonuses reached. A number marked ~ is an estimate.
+= Premie wszystkich wybranych przedmiotów razem, z gwiazdkami każdej części i osiągniętymi premiami za zestaw. Liczba oznaczona ~ jest szacunkiem.
+empowered
+= wzmocniony
+estimate
+= szacunek
+not entered yet
+= jeszcze nie wpisano

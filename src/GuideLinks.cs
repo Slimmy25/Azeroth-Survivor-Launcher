@@ -182,6 +182,8 @@ namespace AzerothLauncher
             byKey = new Dictionary<string, GuideLink>(StringComparer.Ordinal);
             foreach (var l in links.Values) if (!byKey.ContainsKey(Norm(l.Term))) byKey[Norm(l.Term)] = l;
             var terms = new List<string>(links.Keys);
+            // the bosses' names are found too, but link nowhere: "Mr. Smite" stays plain instead of linking Smite
+            foreach (string boss in Items.BossNames()) if (!links.ContainsKey(boss) && !terms.Contains(boss)) terms.Add(boss);
             terms.Sort(delegate(string a, string b) { return b.Length.CompareTo(a.Length); });   // longest first
             // a name is found only as written (its possessive too: "Ignite's"), so "fear" or "execute" in a sentence
             // stays plain text

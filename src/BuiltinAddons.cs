@@ -209,6 +209,10 @@ namespace AzerothLauncher
             }
             foreach (var tal in Talents.All()) if (tal.Name.Length >= 4 && !names.Contains(tal.Name)) names.Add(tal.Name);
             names.Sort(delegate(string a, string b) { return b.Length.CompareTo(a.Length); });
+            // the bosses' names: kept plain, so "Smite" in "Mr. Smite" is not taken for the spell
+            s.Append("plain = {");
+            foreach (string n in Items.BossNames()) s.Append(" ").Append(Q(n)).Append(",");
+            s.Append(" },\n");
             s.Append("names = {");
             foreach (string n in names) s.Append(" ").Append(Q(n)).Append(",");
             s.Append(" },\n");
@@ -227,7 +231,8 @@ namespace AzerothLauncher
             s.Append("rarities = {");
             foreach (string r in Items.Rarities) s.Append(" ").Append(Q(r)).Append(",");
             s.Append(" },\n");
-            // gear[class] = { { rarity, slot, name, health, known, { stat = value, ... }, card }, ... }
+            // gear[class] = { { rarity, slot, name, health, known, { stat = value, ... }, card, { factor at 1..5 stars },
+            //                   { estimate at 1..5 stars } }, ... }
             s.Append("gear = {\n");
             var classes = new List<string>();
             foreach (var p in Items.Gear) if (!classes.Contains(p.Class)) classes.Add(p.Class);
@@ -242,7 +247,28 @@ namespace AzerothLauncher
                     s.Append("\t{ ").Append(Q(p.Rarity)).Append(", ").Append(Q(p.Slot)).Append(", ").Append(Q(p.Name)).Append(", ")
                      .Append(p.Health).Append(", ").Append(p.Known ? "true" : "false").Append(", {");
                     if (p.Known) foreach (var b in p.Bonuses) s.Append(" [").Append(Q(b.Stat)).Append("] = ").Append(N(b.Value)).Append(",");
-                    s.Append(" }, ").Append(Q(nl >= 0 ? card.Substring(nl + 1) : card)).Append(" },\n");
+                    s.Append(" }, ").Append(Q(nl >= 0 ? card.Substring(nl + 1) : card)).Append(", {");
+                    for (int st = 1; st <= 5; st++) s.Append(" ").Append(N(Items.StarFactor(p, st))).Append(",");
+                    s.Append(" }, {");
+                    for (int st = 1; st <= 5; st++) s.Append(" ").Append(Items.StarEstimate(p, st) ? "true" : "false").Append(",");
+                    s.Append(" } },\n");
+                }
+                s.Append("},\n");
+            }
+            s.Append("},\n");
+            // sets[class][rarity] = { set name, 4-piece text, { stat = value }, 8-piece text }
+            s.Append("sets = {\n");
+            foreach (string c in classes)
+            {
+                s.Append("[").Append(Q(c)).Append("] = {\n");
+                foreach (string r in Items.Rarities)
+                {
+                    var four = Items.FourPiece(r);
+                    string eight = Items.EightPiece(c, r);
+                    s.Append("\t[").Append(Q(r)).Append("] = { ").Append(Q(Items.SetName(c, r))).Append(", ")
+                     .Append(Q(four != null ? four.Text : "not entered yet")).Append(", {");
+                    if (four != null) foreach (var b in four.Bonuses) s.Append(" [").Append(Q(b.Stat)).Append("] = ").Append(N(b.Value)).Append(",");
+                    s.Append(" }, ").Append(Q(eight ?? "not entered yet")).Append(" },\n");
                 }
                 s.Append("},\n");
             }

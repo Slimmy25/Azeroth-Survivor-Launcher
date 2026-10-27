@@ -17,7 +17,7 @@ local view = { topic = nil, page = nil, talents = nil, prompt = nil, gear = nil 
 -- the test build of the talent trees (forgotten when the trees are left) and the Gear Planner's pieces (kept until
 -- the game is closed), as in the launcher
 local build = { class = nil, pts = {} };
-local planner = { class = nil, slots = {}, pick = "Head" };
+local planner = { class = nil, slots = {}, pick = "Head", stars = {} };
 local CLASSES = { "Warrior", "Paladin", "Hunter", "Rogue", "Priest", "Shaman", "Mage", "Warlock", "Druid" };
 local RARITY_RGB = { Common = { 1, 1, 1 }, Uncommon = { 0.12, 1, 0 }, Rare = { 0.23, 0.56, 0.94 }, Epic = { 0.7, 0.36, 0.96 },
                      PvP = { 0.7, 0.36, 0.96 }, Legendary = { 1, 0.5, 0 }, Ring = { 0.23, 0.56, 0.94 }, Trinket = { 0.23, 0.56, 0.94 },
@@ -75,6 +75,14 @@ local function Highlight(text)
 		escaped = {};
 		for i = 1, table.getn(names) do escaped[i] = Escape(names[i]); end
 	end
+	-- the bosses' names first, kept plain: "Smite" in "Mr. Smite" is not the spell
+	local plain, kept = D().plain or {}, {};
+	for i = 1, table.getn(plain) do
+		if ( string.find(text, plain[i], 1, true) ) then
+			table.insert(kept, plain[i]);
+			text = string.gsub(text, Escape(plain[i]), "\003" .. table.getn(kept) .. "\004");
+		end
+	end
 	local marks = {};
 	for i = 1, table.getn(names) do
 		if ( string.find(text, names[i], 1, true) ) then
@@ -83,6 +91,7 @@ local function Highlight(text)
 		end
 	end
 	text = string.gsub(text, "\001(%d+)\002", function(n) return "|cffffd100" .. marks[tonumber(n)] .. "|r"; end);
+	text = string.gsub(text, "\003(%d+)\004", function(n) return kept[tonumber(n)]; end);
 	return text;
 end
 
@@ -187,21 +196,42 @@ local function Choices(class, slot)
 	else
 		local g = D().gear[class] or {};
 		for i = 1, table.getn(g) do
-			if ( g[i][2] == slot ) then table.insert(out, { name = g[i][3], rarity = g[i][1], slot = slot, health = g[i][4], known = g[i][5], stats = g[i][6], card = g[i][7] }); end
+			if ( g[i][2] == slot ) then table.insert(out, { name = g[i][3], rarity = g[i][1], slot = slot, health = g[i][4], known = g[i][5], stats = g[i][6], card = g[i][7],
+			                                                f = g[i][8], est = g[i][9] }); end
 		end
 	end
 	return out;
 end
 
-local function Totals()
-	local t, health, unknown = {}, 0, 0;
-	for _, p in pairs(planner.slots) do
+-- the totals: each piece grown by its stars, and the 4-piece bonus of every set worn at 4 pieces of 1+ stars (two sets of
+-- four give both). worn[rarity] = { pieces, at 1+ stars, at 3+, at 5 }
+local WEAPON_SLOTS = { ["Main Hand"] = true, ["Off Hand"] = true, ["Ranged"] = true };
+local function Totals(class)
+	local t, health, unknown, est, worn = {}, 0, 0, false, {};
+	for slot, p in pairs(planner.slots) do
+		local st = planner.stars[slot] or 0;
+		if ( p.slot and not WEAPON_SLOTS[p.slot] ) then
+			local c = worn[p.rarity] or { 0, 0, 0, 0 };
+			worn[p.rarity] = c;
+			c[1] = c[1] + 1;
+			if ( st >= 1 ) then c[2] = c[2] + 1; end
+			if ( st >= 3 ) then c[3] = c[3] + 1; end
+			if ( st >= 5 ) then c[4] = c[4] + 1; end
+		end
 		if ( p.known ) then
-			health = health + (p.health or 0);
-			for k, v in pairs(p.stats or {}) do t[k] = (t[k] or 0) + v; end
+			local f = (st > 0 and p.f and p.f[st]) or 1;
+			if ( st > 0 and p.est and p.est[st] ) then est = true; end
+			health = health + math.floor((p.health or 0) * f + 0.5);
+			for k, v in pairs(p.stats or {}) do t[k] = (t[k] or 0) + v * f; end
 		else unknown = unknown + 1; end
 	end
-	return t, health, unknown;
+	local sets = (D().sets or {})[class or ""] or {};
+	for r, c in pairs(worn) do
+		if ( sets[r] and c[2] >= 4 ) then
+			for k, v in pairs(sets[r][3] or {}) do t[k] = (t[k] or 0) + v; end
+		end
+	end
+	return t, health, unknown, est, worn;
 end
 
 local function ItemTooltip(owner, p)
@@ -210,6 +240,10 @@ local function ItemTooltip(owner, p)
 	GameTooltip:AddLine(p.name, c[1], c[2], c[3]);
 	local card = p.card or "";
 	if ( not p.known ) then card = card .. "\n(its bonuses are not known yet)"; end
+	local st = (p.slot and planner.slots[p.slot] == p) and (planner.stars[p.slot] or 0) or 0;
+	if ( st > 0 and p.f and p.f[st] ) then
+		card = "Stars: " .. st .. "/5 (bonuses x" .. string.format("%.2f", p.f[st]) .. ((p.est and p.est[st]) and ", an estimate" or "") .. ")\n" .. card;
+	end
 	for line in string.gfind(card, "[^\n]+") do
 		if ( string.find(line, "^Equip:") or string.find(line, "^%+") ) then GameTooltip:AddLine(line, 0.12, 1, 0, 1);
 		else GameTooltip:AddLine(line, 0.9, 0.87, 0.75, 1); end
@@ -229,27 +263,51 @@ end
 
 local function ItemsGear(out)
 	local class = view.gear;
-	local t, health, unknown = Totals();
+	local t, health, unknown, est, worn = Totals(class);
 	local lines = {};
 	for i = 1, table.getn(STAT_ROWS) do
 		local r = STAT_ROWS[i];
 		local v = (r[2] == "health") and health or (t[r[2]] or 0);
-		local txt = "+" .. Fmt(v) .. (r[3] or "");
+		local txt = ((est and v ~= 0) and "~" or "") .. "+" .. Fmt(v) .. (r[3] or "");
 		if ( r[2] == "health" and (t["health%"] or 0) ~= 0 ) then txt = txt .. " +" .. Fmt(t["health%"]) .. "%"; end
 		table.insert(lines, { r[1], txt });
 	end
-	table.insert(out, { kind = "buttons", items = { { text = "Clear", go = function() planner.slots = {}; end },
+	table.insert(out, { kind = "buttons", items = { { text = "Clear", go = function() planner.slots = {}; planner.stars = {}; end },
 	                                                { text = "Talent trees", go = function() local c = view.gear; view.gear = nil; view.talents = c; end } } });
 	table.insert(out, { kind = "stats", lines = lines, note = (unknown > 0 and ("Pieces with bonuses not known yet: " .. unknown .. ". ") or "") ..
-	                    "The bonuses of everything chosen, added together, at 0 stars: stars and set bonuses are not counted." });
+	                    "The bonuses of everything chosen, added together, with each piece's stars and the set bonuses reached. A number marked ~ is an estimate." });
+	-- the sets worn: their pieces, and their 4-piece and 8-piece bonuses
+	local sets = (D().sets or {})[class] or {};
+	local rar = D().rarities or {};
+	local any = false;
+	for i = 1, table.getn(rar) do
+		local c, s = worn[rar[i]], sets[rar[i]];
+		if ( c and s ) then
+			if ( not any ) then table.insert(out, { kind = "head", text = "Set bonuses" }); any = true; end
+			local on4, on8, emp = c[2] >= 4, c[3] >= 8, c[4] >= 8;
+			table.insert(out, { kind = "para", text = s[1] .. " " .. c[1] .. "/8\n" ..
+				"(4) " .. s[2] .. "  [" .. c[2] .. "/4 at 1+ stars]" .. (on4 and "  |cff40d040reached|r" or "") .. "\n" ..
+				"(8) " .. s[4] .. "  [" .. c[3] .. "/8 at 3+ stars]" .. (on8 and (emp and "  |cff40d040empowered|r" or "  |cff40d040reached|r") or "") });
+		end
+	end
 	table.insert(out, { kind = "head", text = "Slots" });
 	local slots = GearSlots(class);
 	for i = 1, table.getn(slots) do
 		local s, p = slots[i], planner.slots[slots[i]];
-		table.insert(out, { kind = "row", label = s, text = p and p.name or "Empty", rarity = p and p.rarity, item = p,
+		local st = planner.stars[s] or 0;
+		table.insert(out, { kind = "row", label = s, text = p and (p.name .. (p.slot and st > 0 and ("  (" .. st .. " stars)") or "")) or "Empty", rarity = p and p.rarity, item = p,
 		                    selected = (planner.pick == s), go = function() planner.pick = s; end });
 	end
 	table.insert(out, { kind = "head", text = "Choose: " .. planner.pick });
+	-- the stars of the piece in this slot: 0 to 5
+	if ( not (planner.pick == "Neck" or string.find(planner.pick, "Finger") or string.find(planner.pick, "Trinket")) ) then
+		local items, cur = {}, planner.stars[planner.pick] or 0;
+		for n = 0, 5 do
+			local k = n;
+			table.insert(items, { text = (k == cur) and ("[" .. k .. "]") or tostring(k), go = function() planner.stars[planner.pick] = k; end });
+		end
+		table.insert(out, { kind = "buttons", items = items, width = 44, right = "Stars" });
+	end
 	table.insert(out, { kind = "row", label = "", text = "Empty", go = function() planner.slots[planner.pick] = nil; end });
 	local ch = Choices(class, planner.pick);
 	for i = 1, table.getn(ch) do
@@ -381,10 +439,18 @@ local function Items()
 			local g = data.gear[class];
 			for i = 1, table.getn(g) do
 				if ( g[i][1] == rar[r] ) then
-					table.insert(list, { name = g[i][3], rarity = g[i][1], slot = g[i][2], health = g[i][4], known = g[i][5], stats = g[i][6], card = g[i][7] });
+					table.insert(list, { name = g[i][3], rarity = g[i][1], slot = g[i][2], health = g[i][4], known = g[i][5], stats = g[i][6], card = g[i][7],
+					                     f = g[i][8], est = g[i][9] });
 				end
 			end
-			if ( table.getn(list) > 0 ) then table.insert(out, { kind = "chips", label = rar[r], items = list, class = class }); end
+			if ( table.getn(list) > 0 ) then
+				table.insert(out, { kind = "chips", label = rar[r], items = list, class = class });
+				local set = ((data.sets or {})[class] or {})[rar[r]];      -- the set's bonuses, under its pieces
+				if ( set ) then
+					table.insert(out, { kind = "note", text = set[1] .. " set: (4) " .. set[2] .. " [4 pieces at 1+ stars]  (8) " .. set[4] ..
+					                    " [all 8 at 3+ stars; empowered at 5 stars: half again as strong]" });
+				end
+			end
 		end
 	end
 	return out;
@@ -552,7 +618,7 @@ local function LayMore(it, y)
 		local f = Get("buttons", function()
 			local f = CreateFrame("Frame", nil, child);
 			f.b = {};
-			for i = 1, 3 do
+			for i = 1, 6 do
 				f.b[i] = K.Button(f, "", 120, function() if ( this.go ) then Go(this.go); end end);
 				f.b[i]:SetHeight(22);
 			end
@@ -563,14 +629,16 @@ local function LayMore(it, y)
 		f:SetWidth(CW);
 		f:SetHeight(26);
 		f:SetPoint("TOPLEFT", child, "TOPLEFT", 0, -y);
-		for i = 1, 3 do
+		local w = it.width or 120;
+		for i = 1, 6 do
 			local b, d = f.b[i], it.items[i];
 			b:ClearAllPoints();
 			if ( d ) then
 				b:SetText(d.text);
+				b:SetWidth(w);
 				b.go = d.go;
-				if ( it.alignRight ) then b:SetPoint("TOPRIGHT", f, "TOPRIGHT", -(i - 1) * 126, 0);
-				else b:SetPoint("TOPLEFT", f, "TOPLEFT", (i - 1) * 126, 0); end
+				if ( it.alignRight ) then b:SetPoint("TOPRIGHT", f, "TOPRIGHT", -(i - 1) * (w + 6), 0);
+				else b:SetPoint("TOPLEFT", f, "TOPLEFT", (i - 1) * (w + 6), 0); end
 				b:Show();
 			else b:Hide(); end
 		end

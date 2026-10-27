@@ -1722,3 +1722,21 @@ Graphics
 = Γραφικά
 The bonuses of everything chosen, added together, at 0 stars: stars and set bonuses are not counted.
 = Τα μπόνους όλων των επιλογών μαζί, στα 0 αστέρια: τα αστέρια και τα μπόνους σετ δεν μετρώνται.
+4 pieces at 1+ stars
+= 4 κομμάτια με 1+ αστέρια
+all 8 at 3+ stars, half again as strong at 5
+= και τα 8 με 3+ αστέρια, μιάμιση φορά πιο δυνατό στα 5
+Set bonuses
+= Μπόνους σετ
+Stars
+= Αστέρια
+stars
+= αστέρια
+The bonuses of everything chosen, added together, with each piece's stars and the set bonuses reached. A number marked ~ is an estimate.
+= Τα μπόνους όλων των επιλογών μαζί, με τα αστέρια κάθε κομματιού και τα μπόνους σετ που επιτεύχθηκαν. Ένας αριθμός με ~ είναι εκτίμηση.
+empowered
+= ενισχυμένο
+estimate
+= εκτίμηση
+not entered yet
+= δεν έχει καταχωριστεί ακόμα

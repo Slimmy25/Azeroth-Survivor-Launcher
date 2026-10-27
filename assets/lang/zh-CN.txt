@@ -1722,3 +1722,21 @@ Graphics
 = 图形
 The bonuses of everything chosen, added together, at 0 stars: stars and set bonuses are not counted.
 = 所选全部装备的加成之和（0 星）：不计算星级和套装加成。
+4 pieces at 1+ stars
+= 4 件 1 星以上的装备
+all 8 at 3+ stars, half again as strong at 5
+= 全部 8 件 3 星以上，5 星时强一半
+Set bonuses
+= 套装加成
+Stars
+= 星级
+stars
+= 星
+The bonuses of everything chosen, added together, with each piece's stars and the set bonuses reached. A number marked ~ is an estimate.
+= 所选全部装备的加成之和，包括每件装备的星级和已达成的套装加成。带 ~ 的数字为估计值。
+empowered
+= 强化
+estimate
+= 估计值
+not entered yet
+= 尚未录入

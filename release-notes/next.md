@@ -17,7 +17,20 @@
 - Guide > Zones & Bosses: bosses aim ahead of where you are running, more so on each Heroic level.
 - Guide > Talents, Achievements and Co-op: talent experience rises with the Heroic level, the new Heroic achievements,
   Against the Odds asking for Heroic III, the host choosing the Heroic level, and co-op scaling 20% less per hero.
-- Items and Gear Planner: the bonuses shown are those of a piece at 0 stars, and the planner's totals say that stars and
-  set bonuses are not counted. Drop chances are marked as normal-difficulty chances.
-- AZS Handbook (in game): the same Guide changes, and the same note under the Gear Planner's totals.
+- Drop chances in the Items topic are marked as normal-difficulty chances.
+- AZS Handbook (in game): the same Guide changes.
 - AZS Stats (in game): every run now keeps the game's run modifiers, so Heroic runs can be told apart later.
+
+### Set bonuses and stars
+- Guide > Items: every class's gear now ends each rarity with its set's 4-piece and 8-piece bonuses, as the game's
+  armory words them. Class pages show them under each rarity's pieces too. Priest, Warrior and Paladin are entered;
+  the other classes say "not entered yet" until their sets are read.
+- Gear Planner: pick 0 to 5 stars for the piece in each slot (the buttons above the list). The totals grow with each
+  piece's stars and add the 4-piece bonus of every set worn at 4 pieces of 1+ stars, so four pieces of one set and four
+  of another give both. A Set bonuses list shows each set worn, its pieces and stars, and whether its 4-piece and
+  8-piece bonuses are reached (and empowered at 5 stars on all eight). Numbers that rest on an estimate show ~.
+- Item cards (Guide hovers and the planner) show the piece's set with its 4-piece and 8-piece bonuses, and in the
+  planner the piece's numbers at its stars.
+- AZS Handbook (in game): the same star buttons, totals, Set bonuses list and set lines on class pages.
+- Guide: "Mr. Smite" and "High Priest Venoxis" (and every other boss's name) no longer link to Smite or the Priest
+  class; in the in-game Handbook, Smite in Mr. Smite is no longer highlighted as the spell.
