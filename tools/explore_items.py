@@ -22,24 +22,23 @@ for lit in [b"lore.", b"item.equip", b"item.health", b"set.", b"noun.", b"weapon
     lits[lit] = [a for a in addrs(lit) if a >= 1048576][:6]
     say("%s at %s" % (lit.decode(), lits[lit]))
 
-subprocess.run(["wasm-decompile", "/tmp/g.wasm", "-o", "/tmp/g.dcmp"], check=True)
-src = open("/tmp/g.dcmp", encoding="utf-8", errors="replace").read()
-funcs = re.split(r"\n(?=function )", src)
-say("functions: %d" % len(funcs))
-want = set()
-for lit, al in lits.items():
-    for a in al:
-        for k, fn in enumerate(funcs):
-            if re.search(r"\b%d\b" % a, fn):
-                want.add(k); say("%s (%d) used in function #%d %s (%d chars)" % (lit.decode(), a, k, fn[:60].replace("\n", " "), len(fn)))
-for addr in (0x480378, 0x480f54, 0x4d7e00, 0x4d7d14):
-    for k, fn in enumerate(funcs):
-        if re.search(r"\b%d\b" % addr, fn):
-            want.add(k); say("table %x used in #%d %s (%d chars)" % (addr, k, fn[:40].replace("\n", " "), len(fn)))
-os.makedirs("/tmp/probe", exist_ok=True)
-for k in sorted(want):
-    open("/tmp/probe/f%d.txt" % k, "w").write(funcs[k])
-
+u = lambda q: struct.unpack_from("<I", mem, q)[0]
+fl = lambda q: struct.unpack_from("<f", mem, q)[0]
+def pairs(at, n=10):
+    return " ".join("(%d,%g)" % (u(at + 8 * k), fl(at + 8 * k + 4)) for k in range(n))
+for hv in (82.0, 45.0, 39.0, 29.0, 19.0):
+    b = struct.pack("<f", hv)
+    q = 0; c = 0
+    while c < 12:
+        q = mem.find(b, q)
+        if q < 0: break
+        if q % 4 == 0 and q >= 4 and u(q - 4) < 40:
+            say("health %g at %x: %s" % (hv, q, pairs(q - 4 - 16, 8)))
+            c += 1
+        q += 1
+for a in (0x90c588, 0x9fc588, 0xa10544, 0xa1ea04, 0xd1d22c):
+    say("0.042 @%x: %s" % (a, pairs(a - 4 - 24, 8)))
+funcs = []; want = set()
 import gzip, base64, json
 names = json.loads(os.environ.get("PROBE_FUNCS", "[]"))
 blob = {}
