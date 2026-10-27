@@ -126,7 +126,6 @@ be installed. The exe appears in `dist`. Every push is also built on GitHub (**A
 Code signing is optional: `sign_build.bat` explains it. Never commit `sign_config.bat` or a certificate
 (`.gitignore` keeps them out).
 
-
 ## Download hosts
 
 The launcher only downloads the game from hosts officially endorsed by both Aethus and the Azeroth Survivors mod
