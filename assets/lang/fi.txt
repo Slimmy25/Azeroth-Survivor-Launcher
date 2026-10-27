@@ -1653,3 +1653,7 @@ Search
 = Haku
 Talents
 = Kyvyt
+CONFLICT: PICK ONE
+= RISTIRIITA: VALITSE YKSI
+these two can't be on together: untick the one you don't want.
+= näitä kahta ei voi käyttää yhtä aikaa: poista valinta siitä, jota et halua.

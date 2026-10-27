@@ -1654,3 +1654,7 @@ Search
 = 検索
 Talents
 = タレント
+CONFLICT: PICK ONE
+= 競合：どちらか一つを選択
+these two can't be on together: untick the one you don't want.
+= この2つは同時にオンにできません：不要な方のチェックを外してください。

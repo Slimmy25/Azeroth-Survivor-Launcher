@@ -1654,3 +1654,7 @@ Search
 = Hledat
 Talents
 = Talenty
+CONFLICT: PICK ONE
+= KONFLIKT: VYBERTE JEDEN
+these two can't be on together: untick the one you don't want.
+= tyto dva nemohou být zapnuté současně: odškrtněte ten, který nechcete.

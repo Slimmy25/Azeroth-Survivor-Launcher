@@ -1654,3 +1654,7 @@ Search
 = खोजें
 Talents
 = टैलेंट
+CONFLICT: PICK ONE
+= टकराव: एक चुनें
+these two can't be on together: untick the one you don't want.
+= ये दोनों एक साथ चालू नहीं हो सकते: जो नहीं चाहिए उसका निशान हटाएँ।

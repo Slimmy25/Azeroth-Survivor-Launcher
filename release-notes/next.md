@@ -3,6 +3,9 @@
 
 ## What's new
 
+### News and Changelog
+- Patch notes for the game's 0.120.4 update: co-op parties of three or more play smoothly again.
+
 ### More room in every section
 - The section window is bigger: it now reaches from under the game's name down to the bottom bar.
 - The back arrow moved into the title bar, followed by a trail of where you are, for example
@@ -23,3 +26,9 @@
   and AZS Minor Mods. When two are found on any other way, Survivor UI is the one kept.
 - My Addons lists every addon that is not a WoW 1.12 one under one heading, AZS ADDONS.
 - My Addons: DOWNLOAD MORE moved into the right-hand column, so the buttons no longer overlap.
+- My Addons: addons that can't be on together and are both on are shown first, under CONFLICT: PICK ONE, joined by
+  a red bracket. Untick the one you don't want and both go back to their place in A to Z order.
+- Uninstalling an addon (its X) no longer flashes the launcher's background and a black screen before asking: the
+  question now opens straight over the launcher as it is. The same goes for every question inside the launcher.
+- The README's list of download hosts names who runs each one: the Mirror By Community Member (Leo), the Community
+  Mirror (Meexa) and a link provided by Fotze.

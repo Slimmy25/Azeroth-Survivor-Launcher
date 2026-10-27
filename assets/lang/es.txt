@@ -1653,3 +1653,7 @@ Search
 = Buscar
 Talents
 = Talentos
+CONFLICT: PICK ONE
+= CONFLICTO: ELIGE UNO
+these two can't be on together: untick the one you don't want.
+= estos dos no pueden estar activados a la vez: desmarca el que no quieras.

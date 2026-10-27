@@ -1654,3 +1654,7 @@ Search
 = ค้นหา
 Talents
 = ทาเลนต์
+CONFLICT: PICK ONE
+= ขัดแย้ง: เลือกหนึ่งอัน
+these two can't be on together: untick the one you don't want.
+= สองตัวนี้เปิดพร้อมกันไม่ได้: เอาเครื่องหมายออกจากตัวที่ไม่ต้องการ

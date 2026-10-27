@@ -1653,3 +1653,7 @@ Search
 = Zoeken
 Talents
 = Talenten
+CONFLICT: PICK ONE
+= CONFLICT: KIES ER ÉÉN
+these two can't be on together: untick the one you don't want.
+= deze twee kunnen niet tegelijk aan staan: vink de ene uit die je niet wilt.

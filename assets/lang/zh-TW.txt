@@ -1654,3 +1654,7 @@ Search
 = 搜尋
 Talents
 = 天賦
+CONFLICT: PICK ONE
+= 衝突：選一個
+these two can't be on together: untick the one you don't want.
+= 這兩個不能同時開啟：取消勾選你不想要的那個。

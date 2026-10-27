@@ -1654,3 +1654,7 @@ Search
 = Keresés
 Talents
 = Tehetségek
+CONFLICT: PICK ONE
+= ÜTKÖZÉS: VÁLASSZ EGYET
+these two can't be on together: untick the one you don't want.
+= ez a kettő nem lehet egyszerre bekapcsolva: vedd ki a pipát abból, amelyiket nem akarod.

@@ -10,8 +10,8 @@ does not contain.
 Windows client, `AzerothSurvivors.exe`. The game, its code, its data, its patch notes and its logo belong to Aethus.
 
 - **The game client is not in this repository and is not hosted by this project.** The launcher downloads it from
-  the game's own download hosts (`src/Launcher.cs`): the game's download server, the community mirror at
-  `azerothsurvivors-mirror.sandervspl.dev` (by sandervspl), a Google Drive copy, and, as a last resort, the game's own
+  the game's own download hosts (`src/Launcher.cs`): the Mirror By Community Member (Leo), the Community Mirror
+  (Meexa), a link provided by Fotze, and, as a last resort, the game's own
   download page, <https://wow.aethus.pl/download>. Each download is checked against the game's published checksums.
 - **Game data** the launcher shows (talent trees, spell and talent descriptions, names) is the game's own, by Aethus.
   The Guide was written for the launcher from what the game shows and says.

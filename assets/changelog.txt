@@ -2,6 +2,15 @@ Patch notes shown in the launcher's Changelog. The launcher sorts them by versio
 Every post starts with its title on the first line. Posts are separated by a line with only === on it.
 Everything above the first === line is ignored.
 ===
+0.120.4
+-------
+Co-op lag fix: parties of three or more play smoothly again, all the way to the end of a run.
+
+* Since 0.120.2, parties of 3 to 5 lagged more and more as the run went on: rubber-banding, mobs running in place, card picks not going through, and guests hit by enemies they could not see. The host's updates were being held back once a run got busy; they now go out at once, as before.
+* A single update lost on a busy co-op server no longer holds up everything after it.
+* Co-op sends the servers less of its own bookkeeping, easing the load at busy hours.
+* Reconnecting after a dropped connection still works as in 0.120.2.
+===
 0.120.3
 -------
 Co-op fix: joining another party after your last one ended works again.
