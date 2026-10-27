@@ -7,6 +7,46 @@ bonus (as the card says it; percent bonuses as their percent):
   speed, area, pickup, xp, gold, luck, echo (chance to cast twice), lifesteal, killheal, targets, thorns, buff
 Lines starting with # and everything above the first === line are ignored.
 ===
+# Priest, Common (Acolyte's set, Acolyte's Staff)
+priest | Common | Head | 8 | crit=0.7
+priest | Common | Shoulder | 4 | area=2.8
+priest | Common | Chest | 13 | armor=1.4
+priest | Common | Waist | 0 | pickup=8.4, gold=4.2
+priest | Common | Legs | 10 | regen=0.2
+priest | Common | Feet | 0 | speed=5.3
+priest | Common | Wrist | 0 | cooldown=1.8
+priest | Common | Hands | 0 | crit=0.8, critdmg=4.2, pickup=42
+priest | Common | Main Hand | 0 | damage=8.4
+# Priest, Uncommon (Devout set, Staff of the Devout)
+priest | Uncommon | Head | 14 | crit=1.8, area=2.8
+priest | Uncommon | Shoulder | 7 | area=4.8, damage=2.1, crit=0.7
+priest | Uncommon | Chest | 28 | armor=3.4
+priest | Uncommon | Waist | 6 | pickup=14, gold=7.1, cooldown=1.1
+priest | Uncommon | Legs | 17 | regen=0.4, speed=1.4, crit=0.7
+priest | Uncommon | Feet | 0 | speed=8.9, cooldown=1.4, regen=0.2
+priest | Uncommon | Wrist | 8 | cooldown=3, regen=0.3
+priest | Uncommon | Hands | 0 | crit=1.4, critdmg=7.1, pickup=71, damage=2.1, speed=1.1
+priest | Uncommon | Main Hand | 0 | damage=14, area=2.8, crit=0.6
+# Priest, Rare (Prophecy set, Staff of Prophecy)
+priest | Rare | Head | 21 | crit=2.6, area=4.5
+priest | Rare | Shoulder | 11 | area=7, damage=3.4, crit=1.1
+priest | Rare | Chest | 43 | armor=5.2
+priest | Rare | Waist | 9 | pickup=21, gold=11, cooldown=1.7
+priest | Rare | Legs | 25 | regen=0.5, speed=2.2, crit=1.1
+priest | Rare | Feet | 0 | speed=13, cooldown=2.2, regen=0.3
+priest | Rare | Wrist | 13 | cooldown=4.4, regen=0.4
+priest | Rare | Hands | 0 | crit=2.1, critdmg=11, pickup=105, damage=3.4, speed=1.7
+priest | Rare | Main Hand | 0 | damage=21, area=4.5, crit=0.9
+# Priest, Epic (Transcendence set, Benediction)
+priest | Epic | Head | 29 | crit=3.8, area=6.7
+priest | Epic | Shoulder | 15 | area=9.8, damage=5, crit=1.7
+priest | Epic | Chest | 61 | armor=7.4
+priest | Epic | Waist | 13 | pickup=29, gold=15, cooldown=2.5
+priest | Epic | Legs | 34 | regen=0.7, speed=3.4, crit=1.7
+priest | Epic | Feet | 0 | speed=18, cooldown=3.4, regen=0.5
+priest | Epic | Wrist | 20 | cooldown=6.1, regen=0.7
+priest | Epic | Hands | 0 | crit=2.9, critdmg=15, pickup=147, damage=5, speed=2.5
+priest | Epic | Main Hand | 0 | damage=29, area=6.7, crit=1.3
 # Priest, Legendary (Faith set, Anathema)
 priest | Legendary | Head | 39 | crit=5.1, area=9.5, echo=4.2
 priest | Legendary | Shoulder | 19 | area=13, damage=7.1, crit=2.4, echo=4.2
