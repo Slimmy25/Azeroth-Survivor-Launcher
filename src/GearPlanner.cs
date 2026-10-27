@@ -24,15 +24,7 @@ namespace AzerothLauncher
                 ClassPrompt(delegate(string cls) { PlannerClass(cls); BuildPanel("Guide"); });
                 return;
             }
-            int top = GuideTop, w = PW - 40;
-            // the same class's talents, in the Talent Tree Builder
-            var tal = Put(new WowButton("TALENTS ›", delegate
-            {
-                gVideo = null; gPlanner = false; gBuilder = true; guideMain = false; guideGroupPage = -1; gTalents = plannerClass;
-                BuildPanel("Guide");
-            },
-                                        130, 26, 9), PW - 20 - (int)(130 * Theme.Zoom), top);
-            top = BottomOf(tal) + 6;
+            int top = GuideTop, w = PW - 40;                  // the trail above leads to the talents and the other tools
             // the sheet keeps its size and scrolls in a small window
             var sp = MakeThinScroll(panel, new Rectangle(20, top, w, PH - 12 - top), Theme.Panel, Theme.Bronze, Theme.GoldDim, Theme.Gold);
             var sheet = new GearSheet(plannerClass, plannerSlots, GearIcons());

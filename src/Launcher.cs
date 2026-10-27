@@ -1,4 +1,4 @@
-// The main launcher window: the tall narrow window with PLAY and the section buttons, the tray icon, playing
+﻿// The main launcher window: the tall narrow window with PLAY and the section buttons, the tray icon, playing
 // (cloud download -> game -> cloud upload), installing the game, cloud sync runs and the launcher's own updates.
 using System;
 using System.Collections.Generic;
@@ -489,9 +489,16 @@ namespace AzerothLauncher
                 {
                     float y = box.Y + i * lh + (lines.Count == 1 ? 0 : (i == 0 ? 1 : -1));
                     string head = lines[i][0] + ":";
-                    float hw = g.MeasureString(head, hf).Width;
-                    g.DrawString(head, hf, gold, new RectangleF(box.X + 8, y, hw + 2, lh), sf);
-                    g.DrawString(lines[i][1], bf, text, new RectangleF(box.X + 8 + hw + 2, y, box.Width - 16 - hw - 2, lh), sf);
+                    // a long line (a long language, many hours) gets smaller letters instead of being cut off
+                    Font h2 = hf, b2 = bf;
+                    for (float sz = 8; sz >= 6; sz -= 0.25f)
+                    {
+                        h2 = Theme.FFit(sz, FontStyle.Bold); b2 = Theme.FFit(sz);
+                        if (g.MeasureString(head, h2).Width + 2 + g.MeasureString(lines[i][1], b2).Width <= box.Width - 16) break;
+                    }
+                    float hw = g.MeasureString(head, h2).Width;
+                    g.DrawString(head, h2, gold, new RectangleF(box.X + 8, y, hw + 2, lh), sf);
+                    g.DrawString(lines[i][1], b2, text, new RectangleF(box.X + 8 + hw + 2, y, box.Width - 16 - hw - 2, lh), sf);
                 }
             }
         }
@@ -919,43 +926,6 @@ namespace AzerothLauncher
                 if (!Cfg.Bool("setup_done", false)) After(200, ShowSetupDialog);
             }
             else if (r == DialogResult.No) InstallClient(!Cfg.Bool("setup_done", false));
-        }
-
-        void ShowSetupDialog()
-        {
-            // close the section window so only the setup dialog is in focus
-            current = "Home";
-            foreach (var b in nav.Values) b.Active = false;
-            RefreshStrip();
-            HideSide();
-            var dlg = new SetupDialog(this);
-            dlg.PlaceOver(this);
-            setupOpen = true;
-            try { dlg.ShowModal(Visible ? this : null); }
-            finally { setupOpen = false; }
-            if (dlg.Result != null)
-            {
-                foreach (var kv in dlg.Result) Cfg.Set(kv.Key, kv.Value);
-                foreach (string key in new[] { "addons_dir", "saved_dir", "save_dir" })
-                    if (!dlg.Result.ContainsKey(key)) Cfg.Remove(key);   // back to the default location
-                Cfg.Set("setup_done", true);
-                Cfg.Save();
-                SetStatus("Setup saved.");
-                ApplyCloudVisibility();
-                if (dlg.TrackStats.HasValue)                 // AZS Stats only when the player wants their stats tracked
-                {
-                    SetStatsEnabled(dlg.TrackStats.Value);
-                    if (dlg.TrackStats.Value && ClientPresent()) InstallStatsAddon();
-                    else if (dlg.TrackStats.Value) { Cfg.Set("stats_pending", true); Cfg.Save(); }   // once the game is installed
-                }
-                if (dlg.Goto != null)                        // page 2: straight to the Addons section
-                {
-                    addonMode = dlg.Goto;
-                    current = null;
-                    ShowSection("Addons");
-                }
-            }
-            dlg.Dispose();
         }
 
         // ------------------------------------------------------------------ cloud folder choices

@@ -1701,3 +1701,15 @@ Every piece a {0} can wear. Point at one to read it, click it to try it in the G
 = Varje del en {0} kan bära. Peka på den för att läsa, klicka för att prova den i utrustningsplaneraren.
 Spells that change it:
 = Besvärjelser som ändrar den:
+Which language do you want the launcher in?
+= Vilket språk vill du ha startprogrammet på?
+Step {0} of {1}
+= Steg {0} av {1}
+Your save
+= Din sparfil
+Cloud & folders
+= Moln och mappar
+AZS Stats
+= AZS Stats
+Cloud saving stays off. You can turn it on later in Options > CLOUD SAVE.
+= Molnsparning förblir avstängd. Du kan slå på den senare under Alternativ > CLOUD SAVE.

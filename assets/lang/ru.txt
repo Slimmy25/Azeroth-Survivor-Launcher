@@ -1702,3 +1702,15 @@ Every piece a {0} can wear. Point at one to read it, click it to try it in the G
 = Всё, что может носить {0}. Наведите, чтобы прочитать, нажмите, чтобы примерить в планировщике снаряжения.
 Spells that change it:
 = Заклинания, которые его меняют:
+Which language do you want the launcher in?
+= На каком языке показывать лаунчер?
+Step {0} of {1}
+= Шаг {0} из {1}
+Your save
+= Ваше сохранение
+Cloud & folders
+= Облако и папки
+AZS Stats
+= AZS Stats
+Cloud saving stays off. You can turn it on later in Options > CLOUD SAVE.
+= Облачное сохранение останется выключенным. Включить его можно позже в разделе Настройки > CLOUD SAVE.

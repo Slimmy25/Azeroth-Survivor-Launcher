@@ -102,10 +102,15 @@ namespace AzerothLauncher
         public static float Zoom = 1f;
         public const float SectionZoom = 0.72f;
 
-        public static Font F(float size, FontStyle style)
+        public static Font F(float size, FontStyle style) { return Make(size, style, Zoom < 1f ? 8.25f : 8.75f); }
+
+        // a label that must fit its box (a button, a small card): may go a little smaller than the usual floor
+        public static Font FFit(float size, FontStyle style) { return Make(size, style, 6.5f); }
+
+        static Font Make(float size, FontStyle style, float floor)
         {
-            // never smaller than this: readable everywhere (the compact sections allow a little less)
-            size = Math.Max(Zoom < 1f ? 8.25f : 8.75f, (float)Math.Round(size * Zoom * 4) / 4f);
+            // never smaller than the floor: readable everywhere (the compact sections allow a little less)
+            size = Math.Max(floor, (float)Math.Round(size * Zoom * 4) / 4f);
             string key = size + "|" + (int)style;
             Font f;
             if (!fonts.TryGetValue(key, out f))
@@ -361,7 +366,7 @@ namespace AzerothLauncher
             float fs = size;
             for (; fs > 5.5f; fs -= 0.5f)
             {
-                Font f = Theme.F(fs, FontStyle.Bold);
+                Font f = Theme.FFit(fs, FontStyle.Bold);
                 if (g.MeasureString(label, f).Width <= width) return fs;            // one line
                 if (fs > size * 0.8f) continue;                                    // try smaller on one line first
                 bool wordFits = true;
@@ -424,7 +429,7 @@ namespace AzerothLauncher
             string label = Lang.T(text);
             float fs = size;                                  // a longer translation gets a smaller font so it fits
             fs = FitLabel(g, label, fs, tw - 10, h - 4);
-            Theme.CenterText(g, label, Theme.F(fs, FontStyle.Bold), fg, new RectangleF(tx, 0, tw, h), shadow);
+            Theme.CenterText(g, label, Theme.FFit(fs, FontStyle.Bold), fg, new RectangleF(tx, 0, tw, h), shadow);
         }
 
         // the button is a picture from the launcher art, the label drawn on it
@@ -446,7 +451,7 @@ namespace AzerothLauncher
             string label = Lang.T(text);
             float fs = size;
             fs = FitLabel(g, label, fs, tw - 10, h - 4);
-            Theme.CenterText(g, label, Theme.F(fs, FontStyle.Bold), fg, new RectangleF(tx, down ? 1 : 0, tw, h), Color.Black);
+            Theme.CenterText(g, label, Theme.FFit(fs, FontStyle.Bold), fg, new RectangleF(tx, down ? 1 : 0, tw, h), Color.Black);
             if (selected && !grayed)                           // the current choice: a gold frame around the stone
             {
                 using (var p = new Pen(Color.FromArgb(90, Theme.Gold), 4)) g.DrawRectangle(p, 2, 2, w - 5, h - 5);

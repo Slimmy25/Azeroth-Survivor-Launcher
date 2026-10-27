@@ -1702,3 +1702,15 @@ Every piece a {0} can wear. Point at one to read it, click it to try it in the G
 = Minden darab, amit egy {0} viselhet. Mutass rá az olvasáshoz, kattints a felszerelés-tervezőben való kipróbáláshoz.
 Spells that change it:
 = Varázslatok, amelyek megváltoztatják:
+Which language do you want the launcher in?
+= Milyen nyelven szeretnéd az indítót?
+Step {0} of {1}
+= {0}. lépés / {1}
+Your save
+= A mentésed
+Cloud & folders
+= Felhő és mappák
+AZS Stats
+= AZS Stats
+Cloud saving stays off. You can turn it on later in Options > CLOUD SAVE.
+= A felhőmentés kikapcsolva marad. Később bekapcsolhatod: Beállítások > CLOUD SAVE.

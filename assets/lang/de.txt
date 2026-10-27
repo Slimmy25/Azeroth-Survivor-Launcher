@@ -1701,3 +1701,15 @@ Every piece a {0} can wear. Point at one to read it, click it to try it in the G
 = Jedes Teil, das ein {0} tragen kann. Zeige darauf, um es zu lesen, klicke, um es im Ausrüstungsplaner auszuprobieren.
 Spells that change it:
 = Zauber, die ihn verändern:
+Which language do you want the launcher in?
+= In welcher Sprache möchtest du den Launcher?
+Step {0} of {1}
+= Schritt {0} von {1}
+Your save
+= Dein Spielstand
+Cloud & folders
+= Cloud & Ordner
+AZS Stats
+= AZS Stats
+Cloud saving stays off. You can turn it on later in Options > CLOUD SAVE.
+= Cloud-Speichern bleibt aus. Du kannst es später unter Optionen > CLOUD SAVE einschalten.

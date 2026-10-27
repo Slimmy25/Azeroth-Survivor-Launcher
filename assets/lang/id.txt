@@ -1701,3 +1701,15 @@ Every piece a {0} can wear. Point at one to read it, click it to try it in the G
 = Setiap perlengkapan yang bisa dipakai {0}. Arahkan untuk membacanya, klik untuk mencobanya di Perencana Perlengkapan.
 Spells that change it:
 = Mantra yang mengubahnya:
+Which language do you want the launcher in?
+= Dalam bahasa apa kamu ingin peluncur ini?
+Step {0} of {1}
+= Langkah {0} dari {1}
+Your save
+= Simpananmu
+Cloud & folders
+= Cloud & folder
+AZS Stats
+= AZS Stats
+Cloud saving stays off. You can turn it on later in Options > CLOUD SAVE.
+= Penyimpanan cloud tetap mati. Kamu bisa menyalakannya nanti di Opsi > CLOUD SAVE.

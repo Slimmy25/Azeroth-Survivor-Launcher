@@ -76,6 +76,7 @@ namespace AzerothLauncher
             hot.Clear();
             arrows.Clear();
             menuText.Clear();
+            stepRects.Clear();
             int x = 50;
             Rectangle bb = BackBox;
             if (!bb.IsEmpty)
@@ -120,6 +121,7 @@ namespace AzerothLauncher
                             g.FillPolygon(b, new[] { new PointF(ar.X + 2, ar.Y + 5), new PointF(ar.Right - 2, ar.Y + 5), new PointF(ar.X + ar.Width / 2f, ar.Y + 10) });
                         arrows.Add(new KeyValuePair<Rectangle, int>(ar, i));
                         if (last || crumbs[i].Value == null) menuText.Add(new KeyValuePair<Rectangle, int>(Rectangle.Round(r), i));
+                        stepRects.Add(new KeyValuePair<Rectangle, int>(Rectangle.Union(Rectangle.Round(r), ar), i));
                     }
                     if (!last && crumbs[i].Value != null)
                     {
@@ -165,6 +167,39 @@ namespace AzerothLauncher
             return -1;
         }
 
+        // hovering a step that has a drop-down opens it (a click on its name still goes there); it closes when the
+        // pointer leaves both the step and the list
+        readonly List<KeyValuePair<Rectangle, int>> stepRects = new List<KeyValuePair<Rectangle, int>>();
+        int hoverStep = -1;
+        ContextMenuStrip openMenu;
+        int openMenuStep = -1, quietStep = -1;              // quietStep: just closed, not again until the pointer leaves it
+        Timer hoverTimer;
+
+        int StepAt(Point pt)
+        {
+            foreach (var a in stepRects) if (a.Key.Contains(pt)) return a.Value;
+            return -1;
+        }
+
+        Rectangle StepRect(int i)
+        {
+            foreach (var a in stepRects) if (a.Value == i) return a.Key;
+            return Rectangle.Empty;
+        }
+
+        void HoverTick()
+        {
+            Point pt = PointToClient(Cursor.Position);
+            int s = ClientRectangle.Contains(pt) ? StepAt(pt) : -1;
+            if (openMenu != null && !openMenu.IsDisposed)
+            {
+                bool inMenu = openMenu.Visible && openMenu.Bounds.Contains(Cursor.Position);
+                if (!inMenu && s != openMenuStep) openMenu.Close();
+                return;
+            }
+            if (s >= 0 && s == hoverStep && s != quietStep) ShowMenu(s, StepRect(s));
+        }
+
         int ArrowAt(Point pt)
         {
             foreach (var a in arrows) if (a.Key.Contains(pt)) return a.Value;
@@ -173,6 +208,19 @@ namespace AzerothLauncher
 
         protected override void OnMouseMove(MouseEventArgs e)
         {
+            int st = StepAt(e.Location);
+            if (st != quietStep) quietStep = -1;
+            if (st != hoverStep)
+            {
+                hoverStep = st;
+                if (hoverTimer == null)
+                {
+                    hoverTimer = new Timer();
+                    hoverTimer.Interval = 250;
+                    hoverTimer.Tick += delegate { HoverTick(); };
+                }
+                hoverTimer.Start();
+            }
             int h = HotAt(e.Location), ha = ArrowAt(e.Location);
             if (ha < 0) ha = MenuTextAt(e.Location);          // the last step's name lights its arrow
             if (h != hover || ha != hoverArrow) { hover = h; hoverArrow = ha; Invalidate(); }
@@ -191,7 +239,10 @@ namespace AzerothLauncher
         {
             List<KeyValuePair<string, Action>> items;
             if (!menus.TryGetValue(i, out items)) return;
+            if (openMenu != null && !openMenu.IsDisposed) { if (openMenuStep == i) return; openMenu.Close(); }
             var m = new ContextMenuStrip();
+            openMenu = m;
+            openMenuStep = i;
             m.ShowImageMargin = false;
             m.BackColor = Theme.Hex("#16151e");
             m.ForeColor = Theme.Hex("#f5e9c8");
@@ -204,7 +255,7 @@ namespace AzerothLauncher
                 it.Click += delegate { WowButton.Fire(act); };
                 m.Items.Add(it);
             }
-            m.Closed += delegate { BeginInvoke(new Action(m.Dispose)); };
+            m.Closed += delegate { if (openMenu == m) { quietStep = openMenuStep; openMenu = null; openMenuStep = -1; } BeginInvoke(new Action(m.Dispose)); };
             m.Show(this, new Point(at.X - 6, Height - 4));
         }
 
@@ -429,6 +480,7 @@ namespace AzerothLauncher
         void CloseSide()
         {
             if (current == "Community") return;              // the home screen's Community can only be replaced, never closed
+            if (current == "Setup") { SetupLeave(null, null); return; }   // setup closed: asked again next time
             current = "Home";
             foreach (var b in nav.Values) b.Active = false;
             RefreshStrip();
@@ -518,6 +570,7 @@ namespace AzerothLauncher
                 else if (name == "Stats") PanelStats();
                 else if (name == "About Launcher") PanelAbout();
                 else if (name == "Community") PanelCommunity();
+                else if (name == "Setup") PanelSetup();          // first-time setup (Setup.cs)
             }
             finally
             {
@@ -584,6 +637,7 @@ namespace AzerothLauncher
         // the back arrow: one step back inside the section, or out of the section when at its first page
         void GoBack()
         {
+            if (current == "Setup") { SetupBack(); return; }
             if (LeaveCommunityVideo()) return;
             if (current == "Community" && communityMore) { communityMore = false; BuildPanel("Community"); return; }
             if (current == "Addons" && addonMode == "download") { SetAddonMode("installed"); return; }
@@ -1261,7 +1315,9 @@ namespace AzerothLauncher
             if (AddonsLocked()) return;
             if (Msg.Show(side, "Uninstall " + folder + "?\n\nIts folder is deleted from your AddOns folder, with the settings it saved.",
                          "Uninstall", MessageBoxButtons.YesNo) != DialogResult.Yes) return;
-            try { Addons.Uninstall(AddonsDir(), new List<string> { folder }, SyncSettings().SavedDir); }
+            var all = new List<string> { folder };
+            all.AddRange(Addons.CompanionsOf(folder));       // the folders that came with it go too
+            try { Addons.Uninstall(AddonsDir(), all, SyncSettings().SavedDir); }
             catch (Exception e)
             {
                 Msg.Show(side, "Could not uninstall " + folder + ":\n\n" + e.Message, "Addons", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -1271,7 +1327,7 @@ namespace AzerothLauncher
             foreach (var kv in new List<KeyValuePair<string, object>>(AddonInstalls()))
             {
                 var l = Json.AsList(kv.Value);
-                if (l != null && l.Contains(folder)) { AddonInstalls().Remove(kv.Key); AddonInstalledAt().Remove(kv.Key); }
+                if (l != null && (l.Contains(folder) || all.Exists(delegate(string x) { return l.Contains(x); }))) { AddonInstalls().Remove(kv.Key); AddonInstalledAt().Remove(kv.Key); }
             }
             Cfg.Save();
             SetStatus(folder + " uninstalled.");
@@ -1374,11 +1430,17 @@ namespace AzerothLauncher
             var order = new List<string> { ConflictHeading, Data.AzsAddonsHeading, Data.Wow112Category };
             order.Add(Data.MyAddonsCategory);
             order.Add("OTHER ADDONS");
+            // one row per addon: a folder that comes with another (Survivor Plates, !BugGrabber) is part of its row;
+            // the rows go by the addon's own name ("BugSack By ..."), not by folder
+            addons.RemoveAll(delegate(KeyValuePair<string, bool> p) { return Addons.IsCompanion(dir, p.Key); });
+            var shownName = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            foreach (var a in addons) shownName[a.Key] = Addons.DisplayName(dir, a.Key);
+            Func<string, string> sortKey = delegate(string f) { return System.Text.RegularExpressions.Regex.Replace(shownName[f], "^[^A-Za-z0-9]+", ""); };
             addons.Sort(delegate(KeyValuePair<string, bool> p1, KeyValuePair<string, bool> p2)
             {
                 int c1 = order.IndexOf(catOf(p1.Key)), c2 = order.IndexOf(catOf(p2.Key));
                 if (c1 != c2) return c1.CompareTo(c2);
-                return string.Compare(p1.Key, p2.Key, StringComparison.OrdinalIgnoreCase);
+                return string.Compare(sortKey(p1.Key), sortKey(p2.Key), StringComparison.OrdinalIgnoreCase);
             });
             int linkW = pairs.Count > 0 ? 20 * pairs.Count : 0;
             var rowBox = new Dictionary<string, Rectangle>();
@@ -1400,9 +1462,10 @@ namespace AzerothLauncher
                     sp.Controls.Add(rule);
                     y = rule.Bottom + 4;
                 }
-                var cb = UI.Check(name, a.Value, a.Value ? Theme.Text : Theme.GoldDim, listbg, 11, false);
+                string label = shownName[name];
+                var cb = UI.Check(label, a.Value, a.Value ? Theme.Text : Theme.GoldDim, listbg, 11, false);
                 cb.AutoSize = false;
-                Size need = TextRenderer.MeasureText(name, cb.Font, new Size(w - 24, 0), TextFormatFlags.WordBreak);
+                Size need = TextRenderer.MeasureText(label, cb.Font, new Size(w - 24 - linkW, 0), TextFormatFlags.WordBreak);
                 cb.Bounds = new Rectangle(6, y, w - 34 - linkW, Math.Max(22, need.Height + 4));     // long names wrap
                 rowBox[name] = cb.Bounds;
                 cb.CheckedChanged += delegate { OnAddonToggle(name); };
@@ -1992,8 +2055,7 @@ namespace AzerothLauncher
             row("LANGUAGE ›", delegate { optionsLang = true; BuildPanel("Options"); }, langName);
             row("ABOUT LAUNCHER", delegate { ShowSection("About Launcher"); }, "What the launcher does.");
             row("RUN SETUP AGAIN", delegate { RunSetup(); }, "Asks again about your save, folders, cloud saving and addons. Nothing is downloaded.");
-            Put(UI.Line(Theme.Bronze, PW - 40, 1), 20, y + 4);
-            return OptionsPlayTime(PW, y + 14);
+            return y;                                        // play time: on the home screen, under the Launcher buttons
         }
 
         // the game folder: one that holds the game is the same as installing it (there is no "install from a file")

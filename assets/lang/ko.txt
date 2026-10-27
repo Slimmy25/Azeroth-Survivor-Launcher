@@ -1702,3 +1702,15 @@ Every piece a {0} can wear. Point at one to read it, click it to try it in the G
 = {0}이(가) 착용할 수 있는 모든 장비. 가리키면 설명을 보고, 클릭하면 장비 플래너에서 시험해 볼 수 있습니다.
 Spells that change it:
 = 이 주문을 바꾸는 주문:
+Which language do you want the launcher in?
+= 런처를 어떤 언어로 사용하시겠습니까?
+Step {0} of {1}
+= {1}단계 중 {0}단계
+Your save
+= 저장 파일
+Cloud & folders
+= 클라우드 및 폴더
+AZS Stats
+= AZS Stats
+Cloud saving stays off. You can turn it on later in Options > CLOUD SAVE.
+= 클라우드 저장은 꺼진 상태로 둡니다. 나중에 옵션 > CLOUD SAVE에서 켤 수 있습니다.

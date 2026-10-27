@@ -1702,3 +1702,15 @@ Every piece a {0} can wear. Point at one to read it, click it to try it in the G
 = {0}が装備できるすべてのアイテム。ポイントすると説明、クリックすると装備プランナーで試せます。
 Spells that change it:
 = これを変える呪文:
+Which language do you want the launcher in?
+= ランチャーの言語を選んでください。
+Step {0} of {1}
+= ステップ {0}/{1}
+Your save
+= セーブデータ
+Cloud & folders
+= クラウドとフォルダー
+AZS Stats
+= AZS Stats
+Cloud saving stays off. You can turn it on later in Options > CLOUD SAVE.
+= クラウド保存はオフのままです。あとでオプション > CLOUD SAVE でオンにできます。
