@@ -14,8 +14,9 @@
 - Warrior, Paladin and Hunter gear now has its bonuses too, read from the game's item cards: every piece of every
   rarity, including the Legendary weapons Sulfuras, Ashbringer and Rhok'delar (each also makes your spells strike 1
   more target). No piece of these three classes shows * any more.
-- Rogue, Shaman, Mage, Warlock and Druid gear has its bonuses too, so every class's gear is known now. Only the Mage's
-  Atiesh still shows *; Thunderfury and Kingsfall (Rogue) and the Frostfire Boots, Bindings and Gloves (Mage) are in.
+- Rogue, Shaman, Mage, Warlock and Druid gear has its bonuses too, so every class's gear is known now. Every piece of
+  every class is known now, so nothing shows * any more. The same Atiesh has its own numbers for each class: the
+  Mage's gives 46% damage, 2.4% crit and 1 more target.
 - Rogues and shamans get their **Off Hand** in the Gear Planner: the rogue's second dagger and the shaman's shield,
   each with its own bonuses.
 - Each class page (Guide > Gameplay > Classes) now ends with its **Gear**: every piece that class can wear, rarity by
