@@ -57,7 +57,7 @@ warrior | PvP | Feet | 0 | speed=21, damage=6.1, crit=2
 warrior | PvP | Wrist | 20 | cooldown=7, armor=3
 warrior | PvP | Hands | 16 | crit=3.4, critdmg=17, pickup=168, cooldown=3
 warrior | PvP | Main Hand | 0 | damage=34, speed=4.1, crit=2
-# Warrior, Legendary (Dreadnaught set; the Gauntlets and Sulfuras were not in the video yet)
+# Warrior, Legendary (Dreadnaught set; the Gauntlets and Sulfuras have not been shown yet)
 warrior | Legendary | Head | 39 | crit=5.6, speed=4.8, echo=4.2
 warrior | Legendary | Shoulder | 19 | area=13, cooldown=4.8, regen=0.7, echo=4.2
 warrior | Legendary | Chest | 87 | armor=6.4, regen=1, echo=4.2
@@ -115,12 +115,16 @@ paladin | PvP | Feet | 0 | speed=25, crit=2
 paladin | PvP | Wrist | 0 | cooldown=11, regen=0.6
 paladin | PvP | Hands | 24 | crit=3.4, critdmg=17, pickup=168, regen=0.8
 paladin | PvP | Main Hand | 0 | damage=40, speed=3
-# Paladin, Legendary (Redemption set; the Sabatons, Bracers, Gauntlets and Ashbringer were not in the video yet)
+# Paladin, Legendary (Redemption set, Ashbringer)
 paladin | Legendary | Head | 39 | crit=3.2, damage=7.1, speed=3.6, echo=4.2
 paladin | Legendary | Shoulder | 19 | area=22, crit=1.9, echo=4.2
 paladin | Legendary | Chest | 58 | armor=6.4, damage=7.1, crit=2.4, echo=4.2
 paladin | Legendary | Waist | 24 | pickup=39, gold=19, armor=3.6, echo=4.2
 paladin | Legendary | Legs | 64 | regen=1, cooldown=3.6, echo=4.2
+paladin | Legendary | Feet | 0 | speed=29, crit=2.4, echo=4.2
+paladin | Legendary | Wrist | 0 | cooldown=13, regen=0.7, echo=4.2
+paladin | Legendary | Hands | 29 | crit=3.9, critdmg=19, pickup=193, regen=1, echo=4.2
+paladin | Legendary | Main Hand | 0 | damage=46, speed=3.6, targets=1
 # Hunter, Common (Tracker's set, Short Bow)
 hunter | Common | Head | 8 | crit=0.7
 hunter | Common | Shoulder | 4 | area=2.8
@@ -161,7 +165,8 @@ hunter | Epic | Feet | 0 | speed=21, damage=5
 hunter | Epic | Wrist | 0 | cooldown=6.1, area=6.7, crit=1.3
 hunter | Epic | Hands | 0 | crit=4.6, critdmg=15, pickup=147, damage=5
 hunter | Epic | Ranged | 17 | damage=29, armor=2.5
-# Hunter, PvP (Field Marshal's set, Grand Marshal's Bullseye; the Helm was not in the video yet)
+# Hunter, PvP (Field Marshal's set, Grand Marshal's Bullseye)
+hunter | PvP | Head | 54 | crit=2.8, armor=3
 hunter | PvP | Shoulder | 33 | area=11, cooldown=3
 hunter | PvP | Chest | 50 | armor=5.6, speed=4.1, crit=2
 hunter | PvP | Waist | 0 | pickup=34, gold=17, cooldown=4.1, regen=0.6
@@ -170,7 +175,16 @@ hunter | PvP | Feet | 0 | speed=24, damage=6.1
 hunter | PvP | Wrist | 0 | cooldown=7, area=8.1, crit=1.6
 hunter | PvP | Hands | 0 | crit=5.4, critdmg=17, pickup=168, damage=6.1
 hunter | PvP | Ranged | 20 | damage=34, armor=3
-# Hunter, Legendary (Cryptstalker set, Rhok'delar): not in the video yet
+# Hunter, Legendary (Cryptstalker set, Rhok'delar, Longbow of the Ancient Keepers)
+hunter | Legendary | Head | 63 | crit=3.2, armor=3.6, echo=4.2
+hunter | Legendary | Shoulder | 38 | area=13, cooldown=3.6, echo=4.2
+hunter | Legendary | Chest | 58 | armor=6.4, speed=4.8, crit=2.4, echo=4.2
+hunter | Legendary | Waist | 0 | pickup=39, gold=19, cooldown=4.8, regen=0.7, echo=4.2
+hunter | Legendary | Legs | 74 | regen=1.9, echo=4.2
+hunter | Legendary | Feet | 0 | speed=28, damage=7.1, echo=4.2
+hunter | Legendary | Wrist | 0 | cooldown=8.1, area=9.5, crit=1.9, echo=4.2
+hunter | Legendary | Hands | 0 | crit=6.2, critdmg=19, pickup=193, damage=7.1, echo=4.2
+hunter | Legendary | Ranged | 24 | damage=39, armor=3.6, targets=1
 # Priest, Common (Acolyte's set, Acolyte's Staff)
 priest | Common | Head | 8 | crit=0.7
 priest | Common | Shoulder | 4 | area=2.8
