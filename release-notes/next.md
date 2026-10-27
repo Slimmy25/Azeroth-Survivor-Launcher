@@ -3,38 +3,3 @@
 
 ## What's new
 
-### Guide
-- Every link in the Guide now goes somewhere. A spell named in another spell's text takes you to that spell, even on
-  the same page: the page scrolls to it and its box lights up gold for a moment. A talent's name opens its class's
-  talent trees, and so do the small talent icons under a spell ("Talents that change it").
-- The question-mark mouse pointer is gone from spells, talents and links.
-
-### Navigation
-- The last step of the path at the top of a window can now be clicked too: it opens the same list as its arrow, so you
-  can switch to another page, class, tab or category from where you are. Steps that had no list now have one: Options
-  shows its tab (Options › Cloud Save) with the other tabs, Options › Launcher › Language lists the languages, Stats ›
-  a class lists the other classes, and a class's Talents lists the other classes' talents.
-
-### Cloud Save
-- The Cloud Save page now sits inside Options › CLOUD SAVE, with no second button to open it: the cloud state, CHECK
-  STATUS, DOWNLOAD, UPLOAD, EARLIER DOWNLOADS and the log are all on that tab.
-- Under each spell on a class page, below "Talents that change it", a new line "Spells that affect this" shows the
-  icons of the class's other spells whose text names that spell word for word (for example, Aimed Shot under Hunter's
-  Mark). Hover one to read it, click it to go to that spell. A longer name that only contains it ("Greater Heal" for
-  "Heal") doesn't count.
-
-### Speed
-- The whole launcher draws much faster:
-  - Pictures (the background, buttons, icons, thumbnails) are prepared once at the size they are shown, not resized
-    every time the window redraws.
-  - The home screen's background, title and headings are drawn once and reused.
-  - The Guide's text is laid out once, so scrolling a long page is smooth.
-  - The "This week" card reads AZS Stats' file every few seconds, not on every redraw.
-- Questions and the first-time setup answer at once: they wait for your click instead of checking for it every
-  10 milliseconds. A new setup page appears in one go, and the darkened launcher behind them no longer redraws itself
-  whole.
-
-### First-time setup
-- A launcher whose own settings folder ("Azeroth Survivor Launcher", next to it) is missing no longer starts the
-  first-time setup when the game is right there and has been played (its save or its config folder exists). It
-  carries on with them and says so above PLAY. Every setting is still in Options.
