@@ -1,0 +1,29 @@
+Gear bonuses, entered by hand from the game's own item cards (the Armory's Collection: click a piece). The game works
+these numbers out as it runs, so they are not in its files like the rest of assets/items.txt.
+One piece per line:   class | rarity | slot | health | bonus=value, bonus=value, ...
+rarity: Common, Uncommon, Rare, Epic, PvP, Legendary.   slot: Head, Shoulder, Chest, Waist, Legs, Feet, Wrist, Hands, Main Hand
+bonus (as the card says it; percent bonuses as their percent):
+  damage, cooldown, health% (max health), crit, critdmg, armor (damage reduction), regen (health per second),
+  speed, area, pickup, xp, gold, luck, echo (chance to cast twice), lifesteal, killheal, targets, thorns, buff
+Lines starting with # and everything above the first === line are ignored.
+===
+# Priest, Legendary (Faith set, Anathema)
+priest | Legendary | Head | 39 | crit=5.1, area=9.5, echo=4.2
+priest | Legendary | Shoulder | 19 | area=13, damage=7.1, crit=2.4, echo=4.2
+priest | Legendary | Chest | 82 | armor=10, echo=4.2
+priest | Legendary | Waist | 19 | pickup=39, gold=19, cooldown=3.6, echo=4.2
+priest | Legendary | Legs | 45 | regen=1, speed=4.8, crit=2.4, echo=4.2
+priest | Legendary | Feet | 0 | speed=24, cooldown=4.8, regen=0.7, echo=4.2
+priest | Legendary | Wrist | 29 | cooldown=8.1, regen=1, echo=4.2
+priest | Legendary | Hands | 0 | crit=3.9, critdmg=19, pickup=193, damage=7.1, speed=3.6, echo=4.2
+priest | Legendary | Main Hand | 0 | damage=39, area=9.5, crit=1.9, targets=1
+# Priest, PvP (Field Marshal's set, Grand Marshal's Stave)
+priest | PvP | Head | 34 | crit=4.4, area=8.1
+priest | PvP | Shoulder | 17 | area=11, damage=6.1, crit=2
+priest | PvP | Chest | 70 | armor=8.6
+priest | PvP | Waist | 16 | pickup=34, gold=17, cooldown=3
+priest | PvP | Legs | 39 | regen=0.8, speed=4.1, crit=2
+priest | PvP | Feet | 0 | speed=21, cooldown=4.1, regen=0.6
+priest | PvP | Wrist | 24 | cooldown=7, regen=0.8
+priest | PvP | Hands | 0 | crit=3.4, critdmg=17, pickup=168, damage=6.1, speed=3
+priest | PvP | Main Hand | 0 | damage=34, area=8.1, crit=1.6

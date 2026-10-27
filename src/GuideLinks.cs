@@ -131,6 +131,24 @@ namespace AzerothLauncher
                 int cp = classesTopic < 0 ? -1 : topics[classesTopic].Pages.FindIndex(delegate(GuidePage g) { return g.Title == tal.Class; });
                 if (!links.ContainsKey(tal.Name)) Add(tal.Name, classesTopic, cp, Talents.HoverText(tal));
             }
+            // every item: its card as the hover text; a click opens its page in the Items topic
+            int itemsTopic = topics.FindIndex(delegate(GuideTopic g) { return g.Title == "Items"; });
+            if (itemsTopic >= 0)
+            {
+                var pages = topics[itemsTopic].Pages;
+                try
+                {
+                    foreach (var piece in Items.Gear)
+                    {
+                        string cls = piece.Class + " Gear";
+                        int pg = pages.FindIndex(delegate(GuidePage g) { return g.Title == cls; });
+                        if (!links.ContainsKey(piece.Name)) Add(piece.Name, itemsTopic, pg, Items.Card(piece));
+                    }
+                    int jp = pages.FindIndex(delegate(GuidePage g) { return g.Title.StartsWith("Rings"); });
+                    foreach (var j in Items.Jewelry) if (!links.ContainsKey(j.Name)) Add(j.Name, itemsTopic, jp, Items.Card(j));
+                }
+                catch (Exception) { }
+            }
             // races, racials and zones: the game's own words; a click opens their topic
             foreach (var kv in text)
             {

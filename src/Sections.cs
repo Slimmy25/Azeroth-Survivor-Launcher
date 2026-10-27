@@ -292,7 +292,7 @@ namespace AzerothLauncher
             }
             if (name == "Guide" && current == "Guide" && side.Visible)   // the Guide's button again: back to its main page
             {
-                gTopic = -1; gPage = -1; guideQuery = ""; gBuilder = false; gTalents = null; gVideo = null; guideMain = true;
+                gTopic = -1; gPage = -1; guideQuery = ""; gBuilder = false; gPlanner = false; gTalents = null; gVideo = null; guideMain = true;
                 BuildPanel("Guide");
                 return;
             }
@@ -301,7 +301,7 @@ namespace AzerothLauncher
             foreach (var kv in nav) kv.Value.Active = kv.Key == name;
             RefreshStrip();
             if (name == "Changelog") clView = Data.Changelog.Count > 1 ? 1 : ClNewest;   // News already shows the newest
-            if (name == "Guide") { gTopic = -1; gPage = -1; guideQuery = ""; guideLastTopic = 0; gBuilder = false; gTalents = null; guideGroup = 0; guideMain = true; }   // the guide opens on its first topic
+            if (name == "Guide") { gTopic = -1; gPage = -1; guideQuery = ""; guideLastTopic = 0; gBuilder = false; gPlanner = false; gTalents = null; guideGroup = 0; guideMain = true; }   // the guide opens on its first topic
             if (name == "About Launcher") aboutLog = false;
             if (name == "Home")
             {
@@ -408,7 +408,7 @@ namespace AzerothLauncher
                 if (gPage >= 0) { SetGuideView(gTopic, -1); return; }
                 if (!guideMain && guideQuery.Length == 0)          // a topic or the builder: back to the main page
                 {
-                    gTopic = -1; gTalents = null; gBuilder = false; guideMain = true;
+                    gTopic = -1; gTalents = null; gBuilder = false; gPlanner = false; guideMain = true;
                     BuildPanel("Guide");
                     return;
                 }
