@@ -1537,3 +1537,93 @@ The launcher is updating itself. Please wait until that has finished.
 = El launcher se está actualizando. Espera a que termine.
 Please wait until the launcher update or the install has finished.
 = Espera a que termine la actualización del launcher o la instalación.
+GEAR PLANNER
+= PLANIFICADOR DE EQUIPO
+Gear Planner
+= Planificador de equipo
+Put gear and jewelry on a character sheet like the game's and see what they add.
+= Coloca equipo y joyas en una hoja de personaje como la del juego y mira lo que aportan.
+What your gear and jewelry add
+= Lo que aportan tu equipo y tus joyas
+Click a slot to choose a piece. Right-click it to empty it.
+= Haz clic en una ranura para elegir una pieza. Clic derecho para vaciarla.
+Run Stats
+= Estadísticas de la partida
+The bonuses of everything chosen, added together. A piece marked * has bonuses not known yet: it adds nothing here.
+= Las bonificaciones de todo lo elegido, sumadas. Una pieza marcada con * tiene bonificaciones aún desconocidas: aquí no suma nada.
+Pieces with bonuses not known yet
+= Piezas con bonificaciones aún desconocidas
+Empty
+= Vacío
+worn
+= equipado
+Drops from
+= Botín de
+Its bonuses are not known yet.
+= Sus bonificaciones aún no se conocen.
+Lifesteal
+= Robo de vida
+Kill Heal
+= Curación por muerte
+Thorns
+= Espinas
+Lives
+= Vidas
+Experience
+= Experiencia
+Gold
+= Oro
+Luck
+= Suerte
+Buff Power
+= Poder de mejoras
+DoT Haste
+= Velocidad de DoT
+Head
+= Cabeza
+Neck
+= Cuello
+Shoulder
+= Hombro
+Chest
+= Pecho
+Wrist
+= Muñeca
+Hands
+= Manos
+Waist
+= Cintura
+Legs
+= Piernas
+Feet
+= Pies
+Finger 1
+= Dedo 1
+Finger 2
+= Dedo 2
+Trinket 1
+= Abalorio 1
+Trinket 2
+= Abalorio 2
+Main Hand
+= Mano principal
+Common
+= Común
+Uncommon
+= Poco común
+Rare
+= Raro
+Epic
+= Épico
+PvP
+= JcJ
+Legendary
+= Legendario
+Ring
+= Anillo
+Trinket
+= Abalorio
+Amulet
+= Amuleto
+ITEMS
+= OBJETOS

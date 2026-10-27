@@ -1537,3 +1537,93 @@ The launcher is updating itself. Please wait until that has finished.
 = Le lanceur se met à jour. Patientez jusqu’à la fin.
 Please wait until the launcher update or the install has finished.
 = Patientez jusqu’à la fin de la mise à jour du lanceur ou de l’installation.
+GEAR PLANNER
+= PLANIFICATEUR D'ÉQUIPEMENT
+Gear Planner
+= Planificateur d'équipement
+Put gear and jewelry on a character sheet like the game's and see what they add.
+= Placez équipement et bijoux sur une fiche de personnage comme celle du jeu et voyez ce qu'ils apportent.
+What your gear and jewelry add
+= Ce que votre équipement et vos bijoux apportent
+Click a slot to choose a piece. Right-click it to empty it.
+= Cliquez sur un emplacement pour choisir une pièce. Clic droit pour le vider.
+Run Stats
+= Stats de la partie
+The bonuses of everything chosen, added together. A piece marked * has bonuses not known yet: it adds nothing here.
+= Les bonus de tout ce qui est choisi, additionnés. Une pièce marquée * a des bonus encore inconnus : elle n'ajoute rien ici.
+Pieces with bonuses not known yet
+= Pièces aux bonus encore inconnus
+Empty
+= Vide
+worn
+= porté
+Drops from
+= Butin de
+Its bonuses are not known yet.
+= Ses bonus ne sont pas encore connus.
+Lifesteal
+= Vol de vie
+Kill Heal
+= Soin par victime
+Thorns
+= Épines
+Lives
+= Vies
+Experience
+= Expérience
+Gold
+= Or
+Luck
+= Chance
+Buff Power
+= Puissance des buffs
+DoT Haste
+= Vitesse des DoT
+Head
+= Tête
+Neck
+= Cou
+Shoulder
+= Épaule
+Chest
+= Torse
+Wrist
+= Poignets
+Hands
+= Mains
+Waist
+= Taille
+Legs
+= Jambes
+Feet
+= Pieds
+Finger 1
+= Doigt 1
+Finger 2
+= Doigt 2
+Trinket 1
+= Bijou 1
+Trinket 2
+= Bijou 2
+Main Hand
+= Main droite
+Common
+= Commun
+Uncommon
+= Inhabituel
+Rare
+= Rare
+Epic
+= Épique
+PvP
+= JcJ
+Legendary
+= Légendaire
+Ring
+= Anneau
+Trinket
+= Bijou
+Amulet
+= Amulette
+ITEMS
+= OBJETS

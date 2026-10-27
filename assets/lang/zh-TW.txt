@@ -1538,3 +1538,93 @@ The launcher is updating itself. Please wait until that has finished.
 = 啟動器正在自我更新。請等待完成。
 Please wait until the launcher update or the install has finished.
 = 請等待啟動器更新或安裝完成。
+GEAR PLANNER
+= 裝備規劃器
+Gear Planner
+= 裝備規劃器
+Put gear and jewelry on a character sheet like the game's and see what they add.
+= 把裝備和飾品放到與遊戲相同的角色面板上，看看它們帶來什麼。
+What your gear and jewelry add
+= 你的裝備和飾品帶來的加成
+Click a slot to choose a piece. Right-click it to empty it.
+= 點擊一個欄位選擇裝備，右鍵點擊清空。
+Run Stats
+= 本局屬性
+The bonuses of everything chosen, added together. A piece marked * has bonuses not known yet: it adds nothing here.
+= 所有已選物品的加成相加。帶 * 的裝備加成尚未得知：在這裡不計入。
+Pieces with bonuses not known yet
+= 加成尚未得知的裝備
+Empty
+= 空
+worn
+= 已裝備
+Drops from
+= 掉落自
+Its bonuses are not known yet.
+= 它的加成尚未得知。
+Lifesteal
+= 生命偷取
+Kill Heal
+= 擊殺回復
+Thorns
+= 荊棘
+Lives
+= 復活次數
+Experience
+= 經驗
+Gold
+= 金幣
+Luck
+= 幸運
+Buff Power
+= 增益強度
+DoT Haste
+= 持續傷害速度
+Head
+= 頭部
+Neck
+= 頸部
+Shoulder
+= 肩部
+Chest
+= 胸部
+Wrist
+= 手腕
+Hands
+= 手
+Waist
+= 腰部
+Legs
+= 腿部
+Feet
+= 腳
+Finger 1
+= 手指 1
+Finger 2
+= 手指 2
+Trinket 1
+= 飾品 1
+Trinket 2
+= 飾品 2
+Main Hand
+= 主手
+Common
+= 普通
+Uncommon
+= 優秀
+Rare
+= 精良
+Epic
+= 史詩
+PvP
+= PvP
+Legendary
+= 傳說
+Ring
+= 戒指
+Trinket
+= 飾品
+Amulet
+= 護身符
+ITEMS
+= 物品

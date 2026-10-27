@@ -1538,3 +1538,93 @@ The launcher is updating itself. Please wait until that has finished.
 = Launcher się aktualizuje. Poczekaj, aż skończy.
 Please wait until the launcher update or the install has finished.
 = Poczekaj, aż skończy się aktualizacja launchera lub instalacja.
+GEAR PLANNER
+= PLANER EKWIPUNKU
+Gear Planner
+= Planer ekwipunku
+Put gear and jewelry on a character sheet like the game's and see what they add.
+= Załóż ekwipunek i biżuterię na kartę postaci jak w grze i zobacz, co dają.
+What your gear and jewelry add
+= Co dają twój ekwipunek i biżuteria
+Click a slot to choose a piece. Right-click it to empty it.
+= Kliknij miejsce, aby wybrać przedmiot. Prawy przycisk je opróżnia.
+Run Stats
+= Statystyki biegu
+The bonuses of everything chosen, added together. A piece marked * has bonuses not known yet: it adds nothing here.
+= Premie wszystkiego, co wybrano, zsumowane. Przedmiot oznaczony * ma jeszcze nieznane premie: tutaj nic nie dodaje.
+Pieces with bonuses not known yet
+= Przedmioty z jeszcze nieznanymi premiami
+Empty
+= Puste
+worn
+= założony
+Drops from
+= Łup z
+Its bonuses are not known yet.
+= Jego premie nie są jeszcze znane.
+Lifesteal
+= Kradzież życia
+Kill Heal
+= Leczenie za zabójstwo
+Thorns
+= Ciernie
+Lives
+= Życia
+Experience
+= Doświadczenie
+Gold
+= Złoto
+Luck
+= Szczęście
+Buff Power
+= Moc wzmocnień
+DoT Haste
+= Tempo DoT
+Head
+= Głowa
+Neck
+= Szyja
+Shoulder
+= Ramię
+Chest
+= Klatka
+Wrist
+= Nadgarstek
+Hands
+= Dłonie
+Waist
+= Pas
+Legs
+= Nogi
+Feet
+= Stopy
+Finger 1
+= Palec 1
+Finger 2
+= Palec 2
+Trinket 1
+= Błyskotka 1
+Trinket 2
+= Błyskotka 2
+Main Hand
+= Główna ręka
+Common
+= Zwykły
+Uncommon
+= Niezwykły
+Rare
+= Rzadki
+Epic
+= Epicki
+PvP
+= PvP
+Legendary
+= Legendarny
+Ring
+= Pierścień
+Trinket
+= Błyskotka
+Amulet
+= Amulet
+ITEMS
+= PRZEDMIOTY

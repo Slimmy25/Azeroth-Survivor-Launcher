@@ -1538,3 +1538,93 @@ The launcher is updating itself. Please wait until that has finished.
 = Launcher đang tự cập nhật. Vui lòng đợi đến khi xong.
 Please wait until the launcher update or the install has finished.
 = Vui lòng đợi đến khi cập nhật launcher hoặc cài đặt xong.
+GEAR PLANNER
+= TRÌNH LÊN TRANG BỊ
+Gear Planner
+= Trình lên trang bị
+Put gear and jewelry on a character sheet like the game's and see what they add.
+= Đặt trang bị và trang sức lên bảng nhân vật giống trong game và xem chúng cộng thêm gì.
+What your gear and jewelry add
+= Những gì trang bị và trang sức của bạn cộng thêm
+Click a slot to choose a piece. Right-click it to empty it.
+= Nhấp vào một ô để chọn món. Nhấp chuột phải để bỏ trống.
+Run Stats
+= Chỉ số của lượt
+The bonuses of everything chosen, added together. A piece marked * has bonuses not known yet: it adds nothing here.
+= Phần thưởng của mọi thứ đã chọn, cộng lại. Món có dấu * chưa rõ phần thưởng: ở đây nó không cộng gì.
+Pieces with bonuses not known yet
+= Món chưa rõ phần thưởng
+Empty
+= Trống
+worn
+= đang mặc
+Drops from
+= Rơi từ
+Its bonuses are not known yet.
+= Phần thưởng của nó chưa được biết.
+Lifesteal
+= Hút máu
+Kill Heal
+= Hồi máu mỗi lần hạ gục
+Thorns
+= Gai
+Lives
+= Mạng
+Experience
+= Kinh nghiệm
+Gold
+= Vàng
+Luck
+= May mắn
+Buff Power
+= Sức mạnh buff
+DoT Haste
+= Tốc độ DoT
+Head
+= Đầu
+Neck
+= Cổ
+Shoulder
+= Vai
+Chest
+= Ngực
+Wrist
+= Cổ tay
+Hands
+= Tay
+Waist
+= Thắt lưng
+Legs
+= Chân
+Feet
+= Bàn chân
+Finger 1
+= Ngón 1
+Finger 2
+= Ngón 2
+Trinket 1
+= Bùa 1
+Trinket 2
+= Bùa 2
+Main Hand
+= Tay chính
+Common
+= Thường
+Uncommon
+= Khá
+Rare
+= Hiếm
+Epic
+= Sử thi
+PvP
+= PvP
+Legendary
+= Huyền thoại
+Ring
+= Nhẫn
+Trinket
+= Bùa
+Amulet
+= Dây chuyền
+ITEMS
+= VẬT PHẨM

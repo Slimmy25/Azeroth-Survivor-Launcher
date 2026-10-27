@@ -1537,3 +1537,93 @@ The launcher is updating itself. Please wait until that has finished.
 = Launchern uppdaterar sig. Vänta tills det är klart.
 Please wait until the launcher update or the install has finished.
 = Vänta tills launcheruppdateringen eller installationen är klar.
+GEAR PLANNER
+= UTRUSTNINGSPLANERARE
+Gear Planner
+= Utrustningsplanerare
+Put gear and jewelry on a character sheet like the game's and see what they add.
+= Lägg utrustning och smycken på ett rollformulär som spelets och se vad de ger.
+What your gear and jewelry add
+= Vad din utrustning och dina smycken ger
+Click a slot to choose a piece. Right-click it to empty it.
+= Klicka på en plats för att välja en del. Högerklicka för att tömma den.
+Run Stats
+= Run-statistik
+The bonuses of everything chosen, added together. A piece marked * has bonuses not known yet: it adds nothing here.
+= Bonusarna från allt som valts, sammanlagda. En del märkt * har bonusar som ännu inte är kända: den räknas inte här.
+Pieces with bonuses not known yet
+= Delar med bonusar som ännu inte är kända
+Empty
+= Tom
+worn
+= buren
+Drops from
+= Byte från
+Its bonuses are not known yet.
+= Dess bonusar är ännu inte kända.
+Lifesteal
+= Livsstöld
+Kill Heal
+= Läkning per dödande
+Thorns
+= Taggar
+Lives
+= Liv
+Experience
+= Erfarenhet
+Gold
+= Guld
+Luck
+= Tur
+Buff Power
+= Buff-styrka
+DoT Haste
+= DoT-hastighet
+Head
+= Huvud
+Neck
+= Hals
+Shoulder
+= Axel
+Chest
+= Bröst
+Wrist
+= Handled
+Hands
+= Händer
+Waist
+= Midja
+Legs
+= Ben
+Feet
+= Fötter
+Finger 1
+= Finger 1
+Finger 2
+= Finger 2
+Trinket 1
+= Trinket 1
+Trinket 2
+= Trinket 2
+Main Hand
+= Huvudhand
+Common
+= Vanlig
+Uncommon
+= Ovanlig
+Rare
+= Sällsynt
+Epic
+= Episk
+PvP
+= PvP
+Legendary
+= Legendarisk
+Ring
+= Ring
+Trinket
+= Trinket
+Amulet
+= Amulett
+ITEMS
+= FÖREMÅL

@@ -33,15 +33,16 @@ namespace AzerothLauncher
                     foreach (string s in new List<string>(plannerSlots.Keys))
                         if (plannerSlots[s] is GearPiece) plannerSlots.Remove(s);   // the gear is the class's own; jewelry stays
                     BuildPanel("Guide");
-                }, bw, 24, 8);
+                }, bw, 24, 7);
                 b.Selected = cls == plannerClass;
                 Put(b, 20 + i * (b.Width + gap), top);
             }
             top += (int)(24 * Theme.Zoom) + 8;
-            var sheet = new GearSheet(this, plannerClass, plannerSlots);
-            sheet.Bounds = new Rectangle(20, top, w, PH - 12 - top);
-            panel.Controls.Add(sheet);
-            sheet.BringToFront();
+            // the sheet keeps its size and scrolls in a small window
+            var sp = MakeThinScroll(panel, new Rectangle(20, top, w, PH - 12 - top), Theme.Panel, Theme.Bronze, Theme.GoldDim, Theme.Gold);
+            var sheet = new GearSheet(plannerClass, plannerSlots);
+            sheet.Bounds = new Rectangle(0, 0, sp.ClientSize.Width - 4, sheet.NeededHeight);
+            sp.Controls.Add(sheet);
         }
     }
 
@@ -63,7 +64,12 @@ namespace AzerothLauncher
         static readonly Color Page = Theme.Hex("#0e0d14"), Edge = Theme.Hex("#4a3a22"), SlotBg = Theme.Hex("#1b1a24"),
             SlotEdge = Theme.Hex("#45414f"), Gold = Theme.Hex("#f0c050"), Bright = Theme.Hex("#f5e9c8"), Dim = Theme.Hex("#9c8a64");
 
-        public GearSheet(LauncherApp app, string cls, Dictionary<string, object> slots)
+        readonly int slotSize = Math.Max(26, (int)(44 * Theme.Zoom)), slotGap = Math.Max(4, (int)(7 * Theme.Zoom));
+
+        // the height that shows every slot (the title, eight rows of slots and the weapons)
+        public int NeededHeight { get { return 40 + (int)(fTitle.Height + fSmall.Height) + 9 * (slotSize + slotGap) + 14; } }
+
+        public GearSheet(string cls, Dictionary<string, object> slots)
         {
             SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer |
                      ControlStyles.ResizeRedraw, true);
@@ -163,9 +169,7 @@ namespace AzerothLauncher
             int top = sheet.Y + 16 + (int)(ts.Height + ss.Height);
 
             // the slots: two columns and the weapons under them
-            int avail = sheet.Height - top - 12;
-            int s = Math.Max(26, Math.Min(46, (avail - 7 * 6) / 9));
-            int gap = Math.Max(4, Math.Min(8, (avail - 9 * s) / 8));
+            int s = slotSize, gap = slotGap;
             int lx = sheet.X + 12, rx = sheet.Right - 12 - s;
             for (int i = 0; i < Left.Length; i++) Slot(g, Left[i], new Rectangle(lx, top + i * (s + gap), s, s));
             for (int i = 0; i < Right.Length; i++) Slot(g, Right[i], new Rectangle(rx, top + i * (s + gap), s, s));

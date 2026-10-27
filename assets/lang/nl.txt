@@ -1537,3 +1537,93 @@ The launcher is updating itself. Please wait until that has finished.
 = De launcher werkt zichzelf bij. Wacht tot dat klaar is.
 Please wait until the launcher update or the install has finished.
 = Wacht tot de launcher-update of de installatie klaar is.
+GEAR PLANNER
+= UITRUSTINGSPLANNER
+Gear Planner
+= Uitrustingsplanner
+Put gear and jewelry on a character sheet like the game's and see what they add.
+= Leg uitrusting en sieraden op een karakterblad zoals dat van de game en zie wat ze toevoegen.
+What your gear and jewelry add
+= Wat je uitrusting en sieraden toevoegen
+Click a slot to choose a piece. Right-click it to empty it.
+= Klik op een vak om een stuk te kiezen. Rechtsklik om het te legen.
+Run Stats
+= Run-statistieken
+The bonuses of everything chosen, added together. A piece marked * has bonuses not known yet: it adds nothing here.
+= De bonussen van alles wat gekozen is, bij elkaar opgeteld. Een stuk met * heeft nog onbekende bonussen: het telt hier niet mee.
+Pieces with bonuses not known yet
+= Stukken met nog onbekende bonussen
+Empty
+= Leeg
+worn
+= gedragen
+Drops from
+= Buit van
+Its bonuses are not known yet.
+= Zijn bonussen zijn nog niet bekend.
+Lifesteal
+= Levensroof
+Kill Heal
+= Genezing per kill
+Thorns
+= Doornen
+Lives
+= Levens
+Experience
+= Ervaring
+Gold
+= Goud
+Luck
+= Geluk
+Buff Power
+= Buffkracht
+DoT Haste
+= DoT-snelheid
+Head
+= Hoofd
+Neck
+= Nek
+Shoulder
+= Schouder
+Chest
+= Borst
+Wrist
+= Pols
+Hands
+= Handen
+Waist
+= Taille
+Legs
+= Benen
+Feet
+= Voeten
+Finger 1
+= Vinger 1
+Finger 2
+= Vinger 2
+Trinket 1
+= Trinket 1
+Trinket 2
+= Trinket 2
+Main Hand
+= Hoofdhand
+Common
+= Gewoon
+Uncommon
+= Ongewoon
+Rare
+= Zeldzaam
+Epic
+= Episch
+PvP
+= PvP
+Legendary
+= Legendarisch
+Ring
+= Ring
+Trinket
+= Trinket
+Amulet
+= Amulet
+ITEMS
+= VOORWERPEN

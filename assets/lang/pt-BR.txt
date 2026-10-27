@@ -1537,3 +1537,93 @@ The launcher is updating itself. Please wait until that has finished.
 = O launcher está se atualizando. Espere terminar.
 Please wait until the launcher update or the install has finished.
 = Espere terminar a atualização do launcher ou a instalação.
+GEAR PLANNER
+= PLANEJADOR DE EQUIPAMENTO
+Gear Planner
+= Planejador de equipamento
+Put gear and jewelry on a character sheet like the game's and see what they add.
+= Coloque equipamento e joias numa ficha de personagem como a do jogo e veja o que eles dão.
+What your gear and jewelry add
+= O que seu equipamento e suas joias dão
+Click a slot to choose a piece. Right-click it to empty it.
+= Clique em um espaço para escolher uma peça. Clique com o botão direito para esvaziá-lo.
+Run Stats
+= Atributos da partida
+The bonuses of everything chosen, added together. A piece marked * has bonuses not known yet: it adds nothing here.
+= Os bônus de tudo o que foi escolhido, somados. Uma peça marcada com * tem bônus ainda desconhecidos: aqui ela não soma nada.
+Pieces with bonuses not known yet
+= Peças com bônus ainda desconhecidos
+Empty
+= Vazio
+worn
+= equipado
+Drops from
+= Saque de
+Its bonuses are not known yet.
+= Os bônus dela ainda não são conhecidos.
+Lifesteal
+= Roubo de vida
+Kill Heal
+= Cura por abate
+Thorns
+= Espinhos
+Lives
+= Vidas
+Experience
+= Experiência
+Gold
+= Ouro
+Luck
+= Sorte
+Buff Power
+= Poder de bônus
+DoT Haste
+= Velocidade de DoT
+Head
+= Cabeça
+Neck
+= Pescoço
+Shoulder
+= Ombro
+Chest
+= Peito
+Wrist
+= Pulso
+Hands
+= Mãos
+Waist
+= Cintura
+Legs
+= Pernas
+Feet
+= Pés
+Finger 1
+= Dedo 1
+Finger 2
+= Dedo 2
+Trinket 1
+= Berloque 1
+Trinket 2
+= Berloque 2
+Main Hand
+= Mão principal
+Common
+= Comum
+Uncommon
+= Incomum
+Rare
+= Raro
+Epic
+= Épico
+PvP
+= JxJ
+Legendary
+= Lendário
+Ring
+= Anel
+Trinket
+= Berloque
+Amulet
+= Amuleto
+ITEMS
+= ITENS

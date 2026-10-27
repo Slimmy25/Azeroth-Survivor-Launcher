@@ -1537,3 +1537,93 @@ The launcher is updating itself. Please wait until that has finished.
 = Der Launcher aktualisiert sich. Bitte warte, bis das fertig ist.
 Please wait until the launcher update or the install has finished.
 = Bitte warte, bis das Launcher-Update oder die Installation fertig ist.
+GEAR PLANNER
+= AUSRÜSTUNGSPLANER
+Gear Planner
+= Ausrüstungsplaner
+Put gear and jewelry on a character sheet like the game's and see what they add.
+= Lege Ausrüstung und Schmuck auf einen Charakterbogen wie im Spiel und sieh, was sie dir geben.
+What your gear and jewelry add
+= Was deine Ausrüstung und dein Schmuck dir geben
+Click a slot to choose a piece. Right-click it to empty it.
+= Klicke auf einen Platz, um ein Teil zu wählen. Rechtsklick leert ihn.
+Run Stats
+= Laufwerte
+The bonuses of everything chosen, added together. A piece marked * has bonuses not known yet: it adds nothing here.
+= Die Boni aller gewählten Teile, zusammengezählt. Ein Teil mit * hat noch unbekannte Boni: Es zählt hier nicht mit.
+Pieces with bonuses not known yet
+= Teile mit noch unbekannten Boni
+Empty
+= Leer
+worn
+= getragen
+Drops from
+= Erbeutet von
+Its bonuses are not known yet.
+= Seine Boni sind noch nicht bekannt.
+Lifesteal
+= Lebensraub
+Kill Heal
+= Heilung pro Kill
+Thorns
+= Dornen
+Lives
+= Leben
+Experience
+= Erfahrung
+Gold
+= Gold
+Luck
+= Glück
+Buff Power
+= Buff-Stärke
+DoT Haste
+= DoT-Tempo
+Head
+= Kopf
+Neck
+= Hals
+Shoulder
+= Schulter
+Chest
+= Brust
+Wrist
+= Handgelenke
+Hands
+= Hände
+Waist
+= Taille
+Legs
+= Beine
+Feet
+= Füße
+Finger 1
+= Finger 1
+Finger 2
+= Finger 2
+Trinket 1
+= Schmuckstück 1
+Trinket 2
+= Schmuckstück 2
+Main Hand
+= Waffenhand
+Common
+= Gewöhnlich
+Uncommon
+= Ungewöhnlich
+Rare
+= Selten
+Epic
+= Episch
+PvP
+= PvP
+Legendary
+= Legendär
+Ring
+= Ring
+Trinket
+= Schmuckstück
+Amulet
+= Amulett
+ITEMS
+= GEGENSTÄNDE

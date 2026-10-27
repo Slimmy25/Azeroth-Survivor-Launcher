@@ -1537,3 +1537,93 @@ The launcher is updating itself. Please wait until that has finished.
 = Il launcher si sta aggiornando. Attendi che finisca.
 Please wait until the launcher update or the install has finished.
 = Attendi che finisca l’aggiornamento del launcher o l’installazione.
+GEAR PLANNER
+= PIANIFICATORE DI EQUIPAGGIAMENTO
+Gear Planner
+= Pianificatore di equipaggiamento
+Put gear and jewelry on a character sheet like the game's and see what they add.
+= Metti equipaggiamento e gioielli su una scheda del personaggio come quella del gioco e guarda cosa aggiungono.
+What your gear and jewelry add
+= Cosa aggiungono il tuo equipaggiamento e i tuoi gioielli
+Click a slot to choose a piece. Right-click it to empty it.
+= Clicca uno slot per scegliere un pezzo. Clic destro per svuotarlo.
+Run Stats
+= Statistiche della partita
+The bonuses of everything chosen, added together. A piece marked * has bonuses not known yet: it adds nothing here.
+= I bonus di tutto ciò che hai scelto, sommati. Un pezzo segnato con * ha bonus ancora sconosciuti: qui non aggiunge nulla.
+Pieces with bonuses not known yet
+= Pezzi con bonus ancora sconosciuti
+Empty
+= Vuoto
+worn
+= indossato
+Drops from
+= Bottino di
+Its bonuses are not known yet.
+= I suoi bonus non sono ancora noti.
+Lifesteal
+= Rubavita
+Kill Heal
+= Cura per uccisione
+Thorns
+= Spine
+Lives
+= Vite
+Experience
+= Esperienza
+Gold
+= Oro
+Luck
+= Fortuna
+Buff Power
+= Potenza dei potenziamenti
+DoT Haste
+= Velocità dei DoT
+Head
+= Testa
+Neck
+= Collo
+Shoulder
+= Spalle
+Chest
+= Torso
+Wrist
+= Polsi
+Hands
+= Mani
+Waist
+= Vita
+Legs
+= Gambe
+Feet
+= Piedi
+Finger 1
+= Dito 1
+Finger 2
+= Dito 2
+Trinket 1
+= Monile 1
+Trinket 2
+= Monile 2
+Main Hand
+= Mano primaria
+Common
+= Comune
+Uncommon
+= Non comune
+Rare
+= Raro
+Epic
+= Epico
+PvP
+= PvP
+Legendary
+= Leggendario
+Ring
+= Anello
+Trinket
+= Monile
+Amulet
+= Amuleto
+ITEMS
+= OGGETTI

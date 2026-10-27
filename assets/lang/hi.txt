@@ -1538,3 +1538,93 @@ The launcher is updating itself. Please wait until that has finished.
 = लॉन्चर ख़ुद को अपडेट कर रहा है। कृपया उसके पूरा होने तक रुकें।
 Please wait until the launcher update or the install has finished.
 = कृपया लॉन्चर अपडेट या इंस्टॉल पूरा होने तक रुकें।
+GEAR PLANNER
+= गियर योजनाकार
+Gear Planner
+= गियर योजनाकार
+Put gear and jewelry on a character sheet like the game's and see what they add.
+= गेम जैसी कैरेक्टर शीट पर गियर और गहने लगाएँ और देखें कि वे क्या जोड़ते हैं।
+What your gear and jewelry add
+= आपके गियर और गहने क्या जोड़ते हैं
+Click a slot to choose a piece. Right-click it to empty it.
+= कोई चीज़ चुनने के लिए स्लॉट पर क्लिक करें। खाली करने के लिए राइट-क्लिक करें।
+Run Stats
+= रन के आँकड़े
+The bonuses of everything chosen, added together. A piece marked * has bonuses not known yet: it adds nothing here.
+= चुनी गई हर चीज़ के बोनस, जोड़कर। * वाली चीज़ के बोनस अभी पता नहीं हैं: यहाँ वह कुछ नहीं जोड़ती।
+Pieces with bonuses not known yet
+= ऐसी चीज़ें जिनके बोनस अभी पता नहीं हैं
+Empty
+= खाली
+worn
+= पहना हुआ
+Drops from
+= कहाँ से गिरता है
+Its bonuses are not known yet.
+= इसके बोनस अभी पता नहीं हैं।
+Lifesteal
+= जीवन चोरी
+Kill Heal
+= हर मार पर उपचार
+Thorns
+= काँटे
+Lives
+= जानें
+Experience
+= अनुभव
+Gold
+= सोना
+Luck
+= किस्मत
+Buff Power
+= बफ़ शक्ति
+DoT Haste
+= DoT गति
+Head
+= सिर
+Neck
+= गर्दन
+Shoulder
+= कंधा
+Chest
+= छाती
+Wrist
+= कलाई
+Hands
+= हाथ
+Waist
+= कमर
+Legs
+= टाँगें
+Feet
+= पैर
+Finger 1
+= उँगली 1
+Finger 2
+= उँगली 2
+Trinket 1
+= ट्रिंकेट 1
+Trinket 2
+= ट्रिंकेट 2
+Main Hand
+= मुख्य हाथ
+Common
+= साधारण
+Uncommon
+= असाधारण
+Rare
+= दुर्लभ
+Epic
+= महाकाव्य
+PvP
+= PvP
+Legendary
+= पौराणिक
+Ring
+= अँगूठी
+Trinket
+= ट्रिंकेट
+Amulet
+= ताबीज़
+ITEMS
+= वस्तुएँ

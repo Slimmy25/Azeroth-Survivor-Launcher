@@ -1538,3 +1538,93 @@ The launcher is updating itself. Please wait until that has finished.
 = 런처가 스스로 업데이트 중입니다. 끝날 때까지 기다려 주세요.
 Please wait until the launcher update or the install has finished.
 = 런처 업데이트나 설치가 끝날 때까지 기다려 주세요.
+GEAR PLANNER
+= 장비 설계기
+Gear Planner
+= 장비 설계기
+Put gear and jewelry on a character sheet like the game's and see what they add.
+= 게임과 같은 캐릭터 창에 장비와 장신구를 착용해 보고 무엇이 더해지는지 확인하세요.
+What your gear and jewelry add
+= 장비와 장신구가 더해 주는 것
+Click a slot to choose a piece. Right-click it to empty it.
+= 칸을 클릭해 장비를 고르세요. 오른쪽 클릭으로 비웁니다.
+Run Stats
+= 런 능력치
+The bonuses of everything chosen, added together. A piece marked * has bonuses not known yet: it adds nothing here.
+= 고른 모든 것의 보너스를 더한 값입니다. *가 붙은 장비는 보너스가 아직 알려지지 않아 여기서는 아무것도 더하지 않습니다.
+Pieces with bonuses not known yet
+= 보너스가 아직 알려지지 않은 장비
+Empty
+= 비어 있음
+worn
+= 착용 중
+Drops from
+= 획득처
+Its bonuses are not known yet.
+= 보너스가 아직 알려지지 않았습니다.
+Lifesteal
+= 생명력 흡수
+Kill Heal
+= 처치 시 회복
+Thorns
+= 가시
+Lives
+= 목숨
+Experience
+= 경험치
+Gold
+= 골드
+Luck
+= 행운
+Buff Power
+= 버프 위력
+DoT Haste
+= DoT 속도
+Head
+= 머리
+Neck
+= 목
+Shoulder
+= 어깨
+Chest
+= 가슴
+Wrist
+= 손목
+Hands
+= 손
+Waist
+= 허리
+Legs
+= 다리
+Feet
+= 발
+Finger 1
+= 손가락 1
+Finger 2
+= 손가락 2
+Trinket 1
+= 장신구 1
+Trinket 2
+= 장신구 2
+Main Hand
+= 주 장비
+Common
+= 일반
+Uncommon
+= 고급
+Rare
+= 희귀
+Epic
+= 영웅
+PvP
+= PvP
+Legendary
+= 전설
+Ring
+= 반지
+Trinket
+= 장신구
+Amulet
+= 목걸이
+ITEMS
+= 아이템
