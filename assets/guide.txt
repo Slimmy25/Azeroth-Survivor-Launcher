@@ -490,9 +490,9 @@ Every boss you kill pays your class marks: more in harder zones and on higher He
 # Stars
 Spend marks in the armory to raise a piece, weapons included, from 0 to 5 stars. Each star adds to the piece's own bonuses.
 - A set's stars open as your class beats Heroic levels in that set's zones: Heroic I opens the 1st star, Heroic II the 2nd, Heroic III the 3rd (and with it the 8-piece bonuses, which need 3 stars), Heroic IV the 4th and Heroic V the 5th.
-- 5 stars make tier 3 gear 60% stronger.
-- Lower sets gain more from each star, and their 5th star is a big one: it lifts them to 95% of 5-star tier 3, so your favourite set stays viable at the end and keeps the spells you like.
-- Lower sets are cheaper to upgrade. The last star costs what tier 3's does: 30 marks.
+- 5 stars make the legendary sets 60% stronger (the patch notes call them tier 3: the sets from Gates of Ahn'Qiraj and Naxxramas).
+- Lower sets gain more from each star, and their 5th star is a big one: it lifts them to 95% of a 5-star legendary set, so your favourite set stays viable at the end and keeps the spells you like.
+- Lower sets are cheaper to upgrade. The last star costs what a legendary set's does: 30 marks.
 - Every other class that has a set's armor at a star rank makes that rank 5% cheaper for yours, up to 40%.
 - Not known yet: how much each single star adds, for each set and quality, and what each star costs. The Gear Planner does not count stars.
 

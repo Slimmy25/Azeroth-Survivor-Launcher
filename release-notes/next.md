@@ -17,7 +17,7 @@
   normal, more in harder zones, on higher Heroic levels and for returning endless bosses), a duplicate pays marks when it
   drops, marks are paid the moment the boss dies (even if you fall later), and clearing a zone pays nothing extra. Each
   Heroic level opens the next star (Heroic III also opens the 8-piece bonuses), weapons go to 5 stars too, and the
-  patch notes' numbers are listed (tier 3 60% stronger at 5 stars, lower sets 95% of it, last star 30 marks, 5% cheaper
+  patch notes' numbers are listed (the legendary sets, the patch notes' "tier 3", 60% stronger at 5 stars, lower sets 95% of it, last star 30 marks, 5% cheaper
   per other class up to 40%), with what is not known yet.
 
 ### Game update 0.122.0
