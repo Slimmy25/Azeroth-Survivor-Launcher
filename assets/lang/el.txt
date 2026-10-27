@@ -1716,3 +1716,7 @@ Cloud saving stays off. You can turn it on later in Options > CLOUD SAVE.
 = Η αποθήκευση στο cloud μένει κλειστή. Μπορείς να την ανοίξεις αργότερα στις Επιλογές > CLOUD SAVE.
 The launcher's whole Guide inside the game (/handbook): every topic and page, each class's spells with their icons and what changes them, each class's gear, the Talent Tree Builder and the Gear Planner, the same as in the launcher.
 = Όλος ο οδηγός του launcher μέσα στο παιχνίδι (/handbook): κάθε θέμα και σελίδα, τα ξόρκια κάθε κλάσης με τα εικονίδιά τους και ό,τι τα αλλάζει, ο εξοπλισμός κάθε κλάσης, ο σχεδιαστής ταλέντων και ο σχεδιαστής εξοπλισμού, ίδια με τον launcher.
+Folders
+= Φάκελοι
+Graphics
+= Γραφικά

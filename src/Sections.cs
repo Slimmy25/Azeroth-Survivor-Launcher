@@ -1374,12 +1374,12 @@ namespace AzerothLauncher
             {
                 string s = slot;
                 var prof = Json.AsDict(Json.Get(profiles, s));
-                py -= 28 + 2;
+                py -= (int)(28 * Theme.Zoom) + 2;
                 Put(new WowButton("SAVE", delegate { SaveAddonProfile(s); }, 92, 28, 9), cx, py);
-                Put(new WowButton("LOAD", delegate { LoadAddonProfile(s); }, 92, 28, 9), cx + 98, py);
+                Put(new WowButton("LOAD", delegate { LoadAddonProfile(s); }, 92, 28, 9), cx + (int)(98 * Theme.Zoom), py);
                 var info = UI.Text(prof == null ? "empty" : Addons.ProfileCount(prof, "enabled") + " on, " +
                                    Addons.ProfileCount(prof, "disabled") + " off\nsaved " + Json.Str(prof, "saved"),
-                                   9, FontStyle.Regular, Theme.Text, Theme.Panel, 190);
+                                   9, FontStyle.Regular, Theme.Text, Theme.Panel, (int)(190 * Theme.Zoom));
                 info.Size = VStack.Measure(info);
                 py -= info.Height + 2;
                 Put(info, cx, py);

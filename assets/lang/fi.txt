@@ -1715,3 +1715,7 @@ Cloud saving stays off. You can turn it on later in Options > CLOUD SAVE.
 = Pilvitallennus pysyy pois päältä. Voit ottaa sen käyttöön myöhemmin kohdassa Asetukset > CLOUD SAVE.
 The launcher's whole Guide inside the game (/handbook): every topic and page, each class's spells with their icons and what changes them, each class's gear, the Talent Tree Builder and the Gear Planner, the same as in the launcher.
 = Käynnistimen koko opas pelin sisällä (/handbook): jokainen aihe ja sivu, jokaisen luokan loitsut kuvakkeineen ja mikä niitä muuttaa, jokaisen luokan varusteet, kykypuun rakentaja ja varustesuunnittelija, samoin kuin käynnistimessä.
+Folders
+= Kansiot
+Graphics
+= Grafiikka

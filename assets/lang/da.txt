@@ -1715,3 +1715,7 @@ Cloud saving stays off. You can turn it on later in Options > CLOUD SAVE.
 = Skygemning forbliver slået fra. Du kan slå det til senere under Indstillinger > CLOUD SAVE.
 The launcher's whole Guide inside the game (/handbook): every topic and page, each class's spells with their icons and what changes them, each class's gear, the Talent Tree Builder and the Gear Planner, the same as in the launcher.
 = Hele launcherens guide i spillet (/handbook): alle emner og sider, hver klasses besværgelser med ikoner og hvad der ændrer dem, hver klasses udstyr, talenttræ-byggeren og udstyrsplanlæggeren, præcis som i launcheren.
+Folders
+= Mapper
+Graphics
+= Grafik

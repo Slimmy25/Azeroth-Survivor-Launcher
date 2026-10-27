@@ -1715,3 +1715,7 @@ Cloud saving stays off. You can turn it on later in Options > CLOUD SAVE.
 = Skylagring forblir av. Du kan slå det på senere under Alternativer > CLOUD SAVE.
 The launcher's whole Guide inside the game (/handbook): every topic and page, each class's spells with their icons and what changes them, each class's gear, the Talent Tree Builder and the Gear Planner, the same as in the launcher.
 = Hele startprogrammets guide i spillet (/handbook): hvert emne og hver side, hver klasses trylleformler med ikoner og hva som endrer dem, hver klasses utstyr, talenttre-byggeren og utstyrsplanleggeren, akkurat som i startprogrammet.
+Folders
+= Mapper
+Graphics
+= Grafikk

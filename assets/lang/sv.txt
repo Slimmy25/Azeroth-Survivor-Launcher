@@ -1715,3 +1715,7 @@ Cloud saving stays off. You can turn it on later in Options > CLOUD SAVE.
 = Molnsparning förblir avstängd. Du kan slå på den senare under Alternativ > CLOUD SAVE.
 The launcher's whole Guide inside the game (/handbook): every topic and page, each class's spells with their icons and what changes them, each class's gear, the Talent Tree Builder and the Gear Planner, the same as in the launcher.
 = Hela startprogrammets guide i spelet (/handbook): varje ämne och sida, varje klass besvärjelser med ikoner och vad som ändrar dem, varje klass utrustning, talangträdsbyggaren och utrustningsplaneraren, precis som i startprogrammet.
+Folders
+= Mappar
+Graphics
+= Grafik

@@ -1716,3 +1716,7 @@ Cloud saving stays off. You can turn it on later in Options > CLOUD SAVE.
 = Ukládání do cloudu zůstane vypnuté. Zapnout ho můžeš později v Možnosti > CLOUD SAVE.
 The launcher's whole Guide inside the game (/handbook): every topic and page, each class's spells with their icons and what changes them, each class's gear, the Talent Tree Builder and the Gear Planner, the same as in the launcher.
 = Celý průvodce launcheru ve hře (/handbook): každé téma a stránka, kouzla každého povolání s ikonami a tím, co je mění, výbava každého povolání, sestavovač talentů a plánovač výbavy, stejně jako v launcheru.
+Folders
+= Složky
+Graphics
+= Grafika
