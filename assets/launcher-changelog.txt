@@ -4,6 +4,10 @@
   the same page: the page scrolls to it and its box lights up gold for a moment. A talent's name opens its class's
   talent trees, and so do the small talent icons under a spell ("Talents that change it").
 - The question-mark mouse pointer is gone from spells, talents and links.
+- Under each spell on a class page, below "Talents that change it", a new line "Spells that affect this" shows the
+  icons of the class's other spells whose text names that spell word for word (for example, Aimed Shot under Hunter's
+  Mark). Hover one to read it, click it to go to that spell. A longer name that only contains it ("Greater Heal" for
+  "Heal") doesn't count.
 
 ## Navigation
 - The last step of the path at the top of a window can now be clicked too: it opens the same list as its arrow, so you
@@ -14,10 +18,6 @@
 ## Cloud Save
 - The Cloud Save page now sits inside Options › CLOUD SAVE, with no second button to open it: the cloud state, CHECK
   STATUS, DOWNLOAD, UPLOAD, EARLIER DOWNLOADS and the log are all on that tab.
-- Under each spell on a class page, below "Talents that change it", a new line "Spells that affect this" shows the
-  icons of the class's other spells whose text names that spell word for word (for example, Aimed Shot under Hunter's
-  Mark). Hover one to read it, click it to go to that spell. A longer name that only contains it ("Greater Heal" for
-  "Heal") doesn't count.
 
 ## Speed
 - The whole launcher draws much faster:
