@@ -64,6 +64,8 @@ jobs:
           else
             run gh release create "$TAG" --title "Azeroth Survivors Launcher $TAG" --notes-file "$notes" --latest
           fi
+          # the checksum file, made here too when the build did not leave one
+          [ -f "dist/Azeroth Survivors Launcher.sha256.txt" ] || (cd dist && sha256sum "Azeroth Survivors Launcher.exe" > "Azeroth Survivors Launcher.sha256.txt")
           run gh release upload "$TAG" "dist/Azeroth Survivors Launcher.exe" "dist/Azeroth Survivors Launcher.sha256.txt" --clobber
 
       # Players download from a separate PUBLIC repository that holds only the exe releases, never the code.
