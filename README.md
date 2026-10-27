@@ -159,5 +159,6 @@ first place, and that copy is published by a trusted head moderator, so no furth
 ## License
 
 The launcher's code and the AZS addons are under the [MIT License](LICENSE). Everything that comes from someone else
-keeps its own license and owner: see [CREDITS.md](CREDITS.md). The game's name, logo, emblem and artwork in the
-assets folder belong to Azeroth Survivors and are not covered by the MIT License.
+keeps its own license and owner: see [CREDITS.md](CREDITS.md). The game's name and its logo (the "AS" icon the
+launcher uses for its shortcut, `assets/AzerothSurvivors.ico` and `assets/portrait.png`) belong to Aethus and are not
+covered by the MIT License. The emblem beside the title (`assets/logo.png`, the cat heroes) is Slimjim's own art.
