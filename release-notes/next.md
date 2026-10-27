@@ -3,3 +3,6 @@
 
 ## What's new
 
+### News and Changelog
+- Patch notes for the game's 0.123.0 update: co-op holds together on a laggy connection (enemies no longer freeze and
+  jump, no more teleporting back, level-up cards no longer come back or pick the wrong card).
