@@ -1,7 +1,6 @@
 # v1.7 (2026-10-27)
 ## Guide
-- No more NEXT button at the end of Guide pages: hover a step of the path at the top to go to any other page or topic.
-  The Changelog keeps its PREVIOUS and NEXT.
+- Class pages no longer end with a NEXT button: hover the class's name in the path at the top to go to another class.
 ## News and Changelog
 - Patch notes for the game's 0.121.0 update: Heroic I to V, marks, star upgrades, 4- and 8-piece set bonuses.
 
