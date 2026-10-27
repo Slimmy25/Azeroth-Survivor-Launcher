@@ -3,7 +3,9 @@
 -- class with its icon and the talents that change it, every class's three talent trees as the game draws them,
 -- and the spells and talents named in the text in gold. /handbook (or /azsh), or the book by the minimap, opens it.
 -- The look is AZS Stats' (AZSKit.lua). When AZS Stats has seen a spell's tooltip in game, pointing at the spell
--- shows the game's own text.
+-- shows the game's own text. Like the launcher's Guide it also has the Talent Tree Builder (try a build: left-click
+-- adds a point, right-click takes one away) and the Gear Planner (each class's gear and the jewelry, with what the
+-- chosen pieces add up to), and each class page ends with the gear that class can wear.
 -- Lua 5.0 / 1.12 interface: scripts read `this`, `arg1`; no # operator; only the 1.12 API.
 
 local K = AZSKIT;
@@ -11,10 +13,18 @@ local W, H = 680, 560;
 local CW = W - 64;                                      -- the list's width (inside the frame, beside the scroll bar)
 local NAME = "AZS Handbook";
 
-local view = { topic = nil, page = nil, talents = nil };
+local view = { topic = nil, page = nil, talents = nil, prompt = nil, gear = nil };
+-- the test build of the talent trees (forgotten when the trees are left) and the Gear Planner's pieces (kept until
+-- the game is closed), as in the launcher
+local build = { class = nil, pts = {} };
+local planner = { class = nil, slots = {}, pick = "Head" };
+local CLASSES = { "Warrior", "Paladin", "Hunter", "Rogue", "Priest", "Shaman", "Mage", "Warlock", "Druid" };
+local RARITY_RGB = { Common = { 1, 1, 1 }, Uncommon = { 0.12, 1, 0 }, Rare = { 0.23, 0.56, 0.94 }, Epic = { 0.7, 0.36, 0.96 },
+                     PvP = { 0.7, 0.36, 0.96 }, Legendary = { 1, 0.5, 0 }, Ring = { 0.23, 0.56, 0.94 }, Trinket = { 0.23, 0.56, 0.94 },
+                     Amulet = { 0.23, 0.56, 0.94 } };
 local frame, hero, scroll, child, backBtn, homeBtn, prevBtn, nextBtn;
 
-local function D() return AZSHANDBOOK_DATA or { topics = {}, talents = {}, icons = {}, names = {} }; end
+local function D() return AZSHANDBOOK_DATA or { topics = {}, talents = {}, icons = {}, names = {}, gear = {}, jewels = {}, spellchanges = {} }; end
 local function DB()
 	if ( type(AZSHandbookDB) ~= "table" ) then AZSHandbookDB = {}; end
 	return AZSHandbookDB;
@@ -117,15 +127,172 @@ local function Changers(class, spell)
 	return out;
 end
 
+-- ---------------------------------------------------------------- the test build (the launcher's rules: up to 51
+-- points, no more than a talent's ranks, and a row opens once its tree has 5 points for every row above it)
+local function TreePts(tree, belowRow)
+	local n, pts = 0, build.pts[tree] or {};
+	local trees = D().talents[build.class] or {};
+	local t = trees[tree] and trees[tree].t or {};
+	for i = 1, table.getn(t) do
+		if ( not belowRow or t[i][3] < belowRow ) then n = n + (pts[i] or 0); end
+	end
+	return n;
+end
+
+local function TotalPts()
+	local n = 0;
+	for tr = 1, 3 do n = n + TreePts(tr); end
+	return n;
+end
+
+local function RankOf(tree, i) return (build.pts[tree] or {})[i] or 0; end
+
+local function CanAdd(tree, i, t)
+	return TotalPts() < 51 and RankOf(tree, i) < t[5] and TreePts(tree, t[3]) >= t[3] * 5;
+end
+
+-- a point can come back out when every talent further down its tree still has its 5 points a row above it
+local function CanTake(tree, i, t)
+	if ( RankOf(tree, i) <= 0 ) then return false; end
+	build.pts[tree][i] = build.pts[tree][i] - 1;
+	local ok = true;
+	local all = D().talents[build.class][tree].t;
+	for j = 1, table.getn(all) do
+		if ( RankOf(tree, j) > 0 and TreePts(tree, all[j][3]) < all[j][3] * 5 ) then ok = false; end
+	end
+	build.pts[tree][i] = build.pts[tree][i] + 1;
+	return ok;
+end
+
+-- the slots of the Gear Planner for a class: its gear's slots (a hunter's Ranged, a rogue's or shaman's Off Hand),
+-- then the jewelry
+local function GearSlots(class)
+	local slots, seen = {}, {};
+	local g = D().gear[class] or {};
+	for i = 1, table.getn(g) do
+		if ( not seen[g[i][2]] ) then seen[g[i][2]] = true; table.insert(slots, g[i][2]); end
+	end
+	for _, s in ipairs({ "Neck", "Finger 1", "Finger 2", "Trinket 1", "Trinket 2" }) do table.insert(slots, s); end
+	return slots;
+end
+
+local function Choices(class, slot)
+	local out = {};
+	if ( slot == "Neck" or string.find(slot, "Finger") or string.find(slot, "Trinket") ) then
+		local kind = (slot == "Neck" and "Amulet") or (string.find(slot, "Finger") and "Ring") or "Trinket";
+		local j = D().jewels or {};
+		for i = 1, table.getn(j) do
+			if ( j[i][1] == kind ) then table.insert(out, { name = j[i][2], rarity = kind, stats = j[i][4], card = j[i][5], known = true, health = 0, icon = j[i][3] }); end
+		end
+	else
+		local g = D().gear[class] or {};
+		for i = 1, table.getn(g) do
+			if ( g[i][2] == slot ) then table.insert(out, { name = g[i][3], rarity = g[i][1], slot = slot, health = g[i][4], known = g[i][5], stats = g[i][6], card = g[i][7] }); end
+		end
+	end
+	return out;
+end
+
+local function Totals()
+	local t, health, unknown = {}, 0, 0;
+	for _, p in pairs(planner.slots) do
+		if ( p.known ) then
+			health = health + (p.health or 0);
+			for k, v in pairs(p.stats or {}) do t[k] = (t[k] or 0) + v; end
+		else unknown = unknown + 1; end
+	end
+	return t, health, unknown;
+end
+
+local function ItemTooltip(owner, p)
+	GameTooltip:SetOwner(owner, "ANCHOR_RIGHT");
+	local c = RARITY_RGB[p.rarity] or RARITY_RGB.Common;
+	GameTooltip:AddLine(p.name, c[1], c[2], c[3]);
+	local card = p.card or "";
+	if ( not p.known ) then card = card .. "\n(its bonuses are not known yet)"; end
+	for line in string.gfind(card, "[^\n]+") do
+		if ( string.find(line, "^Equip:") or string.find(line, "^%+") ) then GameTooltip:AddLine(line, 0.12, 1, 0, 1);
+		else GameTooltip:AddLine(line, 0.9, 0.87, 0.75, 1); end
+	end
+	GameTooltip:Show();
+end
+
+-- the Gear Planner: the totals, the slots (a click picks one), and what the picked slot can hold
+local STAT_ROWS = { { "Health", "health" }, { "Damage", "damage", "%" }, { "Haste", "cooldown", "%" }, { "Crit", "crit", "%" },
+                    { "Crit Dmg", "critdmg", "%" }, { "Armor", "armor", "%" }, { "Area", "area", "%" }, { "Targets", "targets", "" },
+                    { "Echo", "echo", "%" }, { "Speed", "speed", "%" }, { "Regen", "regen", "" }, { "Pickup", "pickup", "%" } };
+
+local function Fmt(v)
+	if ( math.abs(v - math.floor(v + 0.5)) < 0.05 ) then return tostring(math.floor(v + 0.5)); end
+	return string.format("%.1f", v);
+end
+
+local function ItemsGear(out)
+	local class = view.gear;
+	local t, health, unknown = Totals();
+	local lines = {};
+	for i = 1, table.getn(STAT_ROWS) do
+		local r = STAT_ROWS[i];
+		local v = (r[2] == "health") and health or (t[r[2]] or 0);
+		local txt = "+" .. Fmt(v) .. (r[3] or "");
+		if ( r[2] == "health" and (t["health%"] or 0) ~= 0 ) then txt = txt .. " +" .. Fmt(t["health%"]) .. "%"; end
+		table.insert(lines, { r[1], txt });
+	end
+	table.insert(out, { kind = "buttons", items = { { text = "Clear", go = function() planner.slots = {}; end },
+	                                                { text = "Talent trees", go = function() local c = view.gear; view.gear = nil; view.talents = c; end } } });
+	table.insert(out, { kind = "stats", lines = lines, note = (unknown > 0 and ("Pieces with bonuses not known yet: " .. unknown .. ". ") or "") ..
+	                    "The bonuses of everything chosen, added together." });
+	table.insert(out, { kind = "head", text = "Slots" });
+	local slots = GearSlots(class);
+	for i = 1, table.getn(slots) do
+		local s, p = slots[i], planner.slots[slots[i]];
+		table.insert(out, { kind = "row", label = s, text = p and p.name or "Empty", rarity = p and p.rarity, item = p,
+		                    selected = (planner.pick == s), go = function() planner.pick = s; end });
+	end
+	table.insert(out, { kind = "head", text = "Choose: " .. planner.pick });
+	table.insert(out, { kind = "row", label = "", text = "Empty", go = function() planner.slots[planner.pick] = nil; end });
+	local ch = Choices(class, planner.pick);
+	for i = 1, table.getn(ch) do
+		local p = ch[i];
+		local worn = planner.slots[planner.pick] and planner.slots[planner.pick].name == p.name;
+		table.insert(out, { kind = "row", label = p.rarity, text = p.name .. (p.known and "" or " *"), rarity = p.rarity, item = p, selected = worn,
+		                    go = function() planner.slots[planner.pick] = p; end });
+	end
+	return out;
+end
+
 -- ---------------------------------------------------------------- what a view shows
 -- items: { kind = "head" | "para" | "bullet" | "tip" | "note" | "cards" | "spell" | "button" | "trees", ... }
 local function Items()
 	local data = D();
 	local out = {};
 	local topics = data.topics;
+	if ( view.prompt ) then
+		table.insert(out, { kind = "note", text = "What class do you want to build for?" });
+		local cards, tool = {}, view.prompt;
+		for i = 1, table.getn(CLASSES) do
+			local c = CLASSES[i];
+			table.insert(cards, { title = c, desc = "", go = function()
+				view.prompt = nil;
+				if ( tool == "gear" ) then
+					if ( planner.class ~= c ) then planner.slots = {}; planner.pick = "Head"; end
+					planner.class = c; view.gear = c;
+				else view.talents = c; end
+			end });
+		end
+		table.insert(out, { kind = "cards", items = cards });
+		return out;
+	end
+	if ( view.gear ) then return ItemsGear(out); end
 	if ( view.talents ) then
-		table.insert(out, { kind = "note", text = "Point at a talent to read it. A new row opens for every 5 points spent in a tree; " ..
-		                                           "the purple ones are the milestones at 10, 20 and 30 points." });
+		if ( build.class ~= view.talents ) then build.class, build.pts = view.talents, {}; end
+		table.insert(out, { kind = "note", text = "Point at a talent to read it. Left-click adds a point, right-click takes one away. " ..
+		                                           "A new row opens for every 5 points spent in a tree; the purple ones are the milestones at 10, 20 and 30 points." });
+		table.insert(out, { kind = "buttons", items = { { text = "Reset", go = function() build.pts = {}; end },
+		                                                { text = "Gear Planner", go = function() local c = view.talents; view.talents = nil; build.class = nil;
+		                                                    if ( planner.class ~= c ) then planner.slots = {}; planner.pick = "Head"; end
+		                                                    planner.class = c; view.gear = c; end } },
+		                    right = "Points: " .. TotalPts() .. " / 51" });
 		table.insert(out, { kind = "trees", class = view.talents });
 		return out;
 	end
@@ -135,6 +302,10 @@ local function Items()
 			local index = i;
 			table.insert(cards, { title = topics[i].title, desc = topics[i].desc, go = function() view.topic, view.page = index, nil; end });
 		end
+		table.insert(cards, { title = "Talent Tree Builder", desc = "Pick a class and try out a build of up to 51 points.", icon = "Ability_Marksmanship",
+		                      go = function() view.prompt = "talents"; end });
+		table.insert(cards, { title = "Gear Planner", desc = "Put on any gear and jewelry and see what it adds up to.", icon = "INV_Chest_Plate06",
+		                      go = function() view.prompt = "gear"; end });
 		table.insert(out, { kind = "cards", items = cards });
 		return out;
 	end
@@ -152,6 +323,10 @@ local function Items()
 	local page = view.page and topic.pages[view.page] or topic;
 	local class = (topic.title == "Classes" and data.talents[page.title]) and page.title or nil;
 	local section, para = "", {};
+	if ( class ) then
+		local c = class;
+		table.insert(out, { kind = "buttons", items = { { text = "Talent trees", go = function() view.talents = c; end } }, alignRight = true });
+	end
 	local function Flush()
 		if ( table.getn(para) > 0 ) then table.insert(out, { kind = "para", text = table.concat(para, " ") }); para = {}; end
 	end
@@ -166,14 +341,7 @@ local function Items()
 		elseif ( string.sub(line, 1, 2) == "# " ) then
 			Flush();
 			section = string.sub(line, 3);
-			table.insert(out, { kind = "head", text = section });
-			if ( class and string.sub(section, 1, 6) == "Talent" ) then
-				local specs = {};
-				for j = 1, table.getn(data.talents[class]) do table.insert(specs, data.talents[class][j].spec); end
-				table.insert(out, { kind = "para", text = "The " .. class .. "'s three talent trees: " .. table.concat(specs, ", ") .. "." });
-				local c = class;
-				table.insert(out, { kind = "button", text = "Talent trees", go = function() view.talents = c; end });
-			end
+			if ( not (class and string.sub(section, 1, 6) == "Talent") ) then table.insert(out, { kind = "head", text = section }); end
 		elseif ( class and string.sub(section, 1, 6) == "Talent" ) then
 			-- the trees have their own view
 		elseif ( string.sub(line, 1, 2) == "- " ) then
@@ -182,8 +350,9 @@ local function Items()
 			local name, rest = SplitBullet(text);
 			if ( class and string.sub(section, 1, 10) == "Spell pool" and name ) then
 				local spell = StripRank(name);
+				local sc = (data.spellchanges or {})[class] or {};
 				table.insert(out, { kind = "spell", name = name, spell = spell, text = string.upper(string.sub(rest, 1, 1)) .. string.sub(rest, 2),
-				                    icon = IconOf(spell), changers = Changers(class, spell) });
+				                    icon = IconOf(spell), changers = Changers(class, spell), spells = sc[Key(spell)] or {} });
 			else
 				-- the bullet's icon: its name's, else the first spell it names
 				local icon = name and IconOf(name);
@@ -203,6 +372,21 @@ local function Items()
 		end
 	end
 	Flush();
+	if ( class and data.gear and data.gear[class] ) then          -- the gear this class can wear, by rarity
+		table.insert(out, { kind = "head", text = "Gear" });
+		table.insert(out, { kind = "note", text = "Every piece a " .. class .. " can wear. Point at one to read it, click it to try it in the Gear Planner." });
+		local rar = data.rarities or {};
+		for r = 1, table.getn(rar) do
+			local list = {};
+			local g = data.gear[class];
+			for i = 1, table.getn(g) do
+				if ( g[i][1] == rar[r] ) then
+					table.insert(list, { name = g[i][3], rarity = g[i][1], slot = g[i][2], health = g[i][4], known = g[i][5], stats = g[i][6], card = g[i][7] });
+				end
+			end
+			if ( table.getn(list) > 0 ) then table.insert(out, { kind = "chips", label = rar[r], items = list, class = class }); end
+		end
+	end
 	return out;
 end
 
@@ -286,28 +470,226 @@ local function MakeTree()
 		c.rank:SetPoint("BOTTOMRIGHT", c, "BOTTOMRIGHT", 4, -4);
 		c:SetScript("OnEnter", function() if ( this.t ) then TalentTooltip(this, this.t, this.spec); end end);
 		c:SetScript("OnLeave", function() GameTooltip:Hide(); end);
+		c:SetScript("OnMouseUp", function()
+			if ( not this.t or not build.class ) then return; end
+			if ( arg1 == "RightButton" ) then
+				if ( CanTake(this.tree, this.i, this.t) ) then build.pts[this.tree][this.i] = build.pts[this.tree][this.i] - 1; Go(function() end); end
+			elseif ( CanAdd(this.tree, this.i, this.t) ) then
+				build.pts[this.tree] = build.pts[this.tree] or {};
+				build.pts[this.tree][this.i] = (build.pts[this.tree][this.i] or 0) + 1;
+				Go(function() end);
+			end
+		end);
 		f.cells[i] = c;
 	end
 	return f;
 end
 
-local function DrawTree(f, tree, w)
+local function DrawTree(f, tree, w, index)
 	f:SetWidth(w);
 	local cell = math.floor((w - 16) / 4);
 	f:SetHeight(30 + 7 * cell + 8);
-	f.title:SetText(tree.spec);
+	f.title:SetText(tree.spec .. "  (" .. TreePts(index) .. ")");
 	for i = 1, 28 do f.cells[i]:Hide(); f.cells[i].t = nil; end
 	for i = 1, math.min(28, table.getn(tree.t)) do
 		local t, c = tree.t[i], f.cells[i];
-		c.t, c.spec = t, tree.spec;
+		c.t, c.spec, c.tree, c.i = t, tree.spec, index, i;
 		c:ClearAllPoints();
 		c:SetPoint("TOPLEFT", f, "TOPLEFT", 8 + t[4] * cell + math.floor((cell - 34) / 2), -(30 + t[3] * cell + math.floor((cell - 34) / 2)));
 		K.Icon(c.icon, t[2]);
 		if ( t[8] ) then c.edge:SetVertexColor(0.75, 0.5, 1); else c.edge:SetVertexColor(1, 1, 1); end
-		c.rank:SetText("0/" .. t[5]);
+		local rank = RankOf(index, i);
+		c.rank:SetText(rank .. "/" .. t[5]);
+		if ( rank > 0 ) then c.rank:SetTextColor(0.12, 1, 0); c.icon:SetVertexColor(1, 1, 1);
+		elseif ( TreePts(index, t[3]) >= t[3] * 5 ) then c.rank:SetTextColor(1, 0.82, 0); c.icon:SetVertexColor(1, 1, 1);
+		else c.rank:SetTextColor(0.5, 0.5, 0.5); c.icon:SetVertexColor(0.35, 0.35, 0.35); end
 		c:Show();
 	end
 	return f:GetHeight();
+end
+
+-- under a spell: the class's other spells whose text names it
+local function LaySpellsBy(f, it, h)
+	f.sby = f.sby or Text(f, "GameFontDisableSmall");
+	f.schips = f.schips or {};
+	for i = 1, table.getn(f.schips) do f.schips[i]:Hide(); end
+	if ( table.getn(it.spells or {}) == 0 ) then f.sby:Hide(); return h; end
+	f.sby:ClearAllPoints();
+	f.sby:SetPoint("TOPLEFT", f, "TOPLEFT", 50, -(h - 2));
+	f.sby:SetText("Spells that change it:");
+	f.sby:Show();
+	local x = 50 + f.sby:GetStringWidth() + 6;
+	for i = 1, math.min(14, table.getn(it.spells)) do
+		local c = f.schips[i];
+		if ( not c ) then
+			c = CreateFrame("Frame", nil, f);
+			c:SetWidth(18);
+			c:SetHeight(18);
+			c:EnableMouse(true);
+			c.icon = c:CreateTexture(nil, "ARTWORK");
+			c.icon:SetAllPoints(c);
+			c:SetScript("OnEnter", function()
+				GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
+				GameTooltip:AddLine(this.name, 1, 0.82, 0);
+				GameTooltip:AddLine("Its text names this spell.", 0.6, 0.6, 0.6);
+				GameTooltip:Show();
+			end);
+			c:SetScript("OnLeave", function() GameTooltip:Hide(); end);
+			f.schips[i] = c;
+		end
+		c.name = it.spells[i];
+		c:ClearAllPoints();
+		c:SetPoint("TOPLEFT", f, "TOPLEFT", x + (i - 1) * 21, -(h - 5));
+		K.Icon(c.icon, IconOf(it.spells[i]) or "INV_Misc_QuestionMark");
+		c:Show();
+	end
+	return h + 20;
+end
+
+-- the Gear Planner's and the class pages' pieces: a row of buttons, the totals, a line to click, a rarity's pieces
+local function LayMore(it, y)
+	if ( it.kind == "buttons" ) then
+		local f = Get("buttons", function()
+			local f = CreateFrame("Frame", nil, child);
+			f.b = {};
+			for i = 1, 3 do
+				f.b[i] = K.Button(f, "", 120, function() if ( this.go ) then Go(this.go); end end);
+				f.b[i]:SetHeight(22);
+			end
+			f.right = Text(f, "GameFontNormal");
+			f.right:SetPoint("RIGHT", f, "RIGHT", -4, 0);
+			return f;
+		end);
+		f:SetWidth(CW);
+		f:SetHeight(26);
+		f:SetPoint("TOPLEFT", child, "TOPLEFT", 0, -y);
+		for i = 1, 3 do
+			local b, d = f.b[i], it.items[i];
+			b:ClearAllPoints();
+			if ( d ) then
+				b:SetText(d.text);
+				b.go = d.go;
+				if ( it.alignRight ) then b:SetPoint("TOPRIGHT", f, "TOPRIGHT", -(i - 1) * 126, 0);
+				else b:SetPoint("TOPLEFT", f, "TOPLEFT", (i - 1) * 126, 0); end
+				b:Show();
+			else b:Hide(); end
+		end
+		f.right:SetText(it.right or "");
+		return y + 32;
+	elseif ( it.kind == "stats" ) then
+		local f = Get("stats", function()
+			local f = CreateFrame("Frame", nil, child);
+			K.Card(f, 0.6, 0.5, 0.3);
+			f.l, f.v = {}, {};
+			for i = 1, 12 do
+				f.l[i] = Text(f, "GameFontNormalSmall");
+				f.v[i] = Text(f, "GameFontHighlightSmall");
+				f.v[i]:SetJustifyH("RIGHT");
+			end
+			f.note = Text(f, "GameFontDisableSmall");
+			return f;
+		end);
+		local half = math.floor((CW - 30) / 2);
+		for i = 1, 12 do
+			local col, row = math.floor((i - 1) / 6), math.mod(i - 1, 6);
+			local l = it.lines[i];
+			f.l[i]:ClearAllPoints();
+			f.l[i]:SetPoint("TOPLEFT", f, "TOPLEFT", 12 + col * (half + 6), -(10 + row * 15));
+			f.v[i]:ClearAllPoints();
+			f.v[i]:SetPoint("TOPRIGHT", f, "TOPLEFT", 12 + col * (half + 6) + half - 8, -(10 + row * 15));
+			f.v[i]:SetWidth(80);
+			f.l[i]:SetText(l and l[1] or "");
+			f.v[i]:SetText(l and l[2] or "");
+		end
+		f.note:ClearAllPoints();
+		f.note:SetPoint("TOPLEFT", f, "TOPLEFT", 12, -(10 + 6 * 15 + 4));
+		f.note:SetWidth(CW - 24);
+		f.note:SetText(it.note or "");
+		f:SetWidth(CW);
+		f:SetHeight(10 + 6 * 15 + 4 + 16 + 8);
+		f:SetPoint("TOPLEFT", child, "TOPLEFT", 0, -y);
+		return y + f:GetHeight() + 8;
+	elseif ( it.kind == "row" ) then
+		local f = Get("row", function()
+			local f = CreateFrame("Frame", nil, child);
+			f:EnableMouse(true);
+			f.bg = f:CreateTexture(nil, "BACKGROUND");
+			f.bg:SetAllPoints(f);
+			f.label = Text(f, "GameFontDisableSmall");
+			f.label:SetPoint("LEFT", f, "LEFT", 6, 0);
+			f.label:SetWidth(90);
+			f.text = Text(f, "GameFontHighlight");
+			f.text:SetPoint("LEFT", f, "LEFT", 100, 0);
+			f:SetScript("OnEnter", function()
+				this.bg:SetTexture(0.95, 0.76, 0.3, 0.15);
+				if ( this.item ) then ItemTooltip(this, this.item); end
+			end);
+			f:SetScript("OnLeave", function() this.bg:SetTexture(0.95, 0.76, 0.3, this.sel and 0.1 or 0); GameTooltip:Hide(); end);
+			f:SetScript("OnMouseUp", function() if ( this.go ) then Go(this.go); end end);
+			return f;
+		end);
+		f.go, f.item, f.sel = it.go, it.item, it.selected;
+		f.bg:SetTexture(0.95, 0.76, 0.3, it.selected and 0.1 or 0);
+		f.label:SetText(it.label or "");
+		f.text:SetText(it.text or "");
+		local c = it.rarity and RARITY_RGB[it.rarity] or { 0.9, 0.87, 0.75 };
+		f.text:SetTextColor(c[1], c[2], c[3]);
+		f:SetWidth(CW);
+		f:SetHeight(18);
+		f:SetPoint("TOPLEFT", child, "TOPLEFT", 0, -y);
+		return y + 19;
+	end
+	-- "chips": a rarity's pieces as small boxes, the slot's short name inside, in the rarity's colour
+	local f = Get("chips", function()
+		local f = CreateFrame("Frame", nil, child);
+		f.label = Text(f, "GameFontNormalSmall");
+		f.label:SetPoint("LEFT", f, "LEFT", 2, 0);
+		f.c = {};
+		for i = 1, 10 do
+			local c = CreateFrame("Frame", nil, f);
+			c:SetWidth(32);
+			c:SetHeight(26);
+			c:EnableMouse(true);
+			K.Card(c);
+			c.t = Text(c, "GameFontHighlightSmall");
+			c.t:SetPoint("CENTER", c, "CENTER", 0, 0);
+			c.t:SetJustifyH("CENTER");
+			c:SetScript("OnEnter", function() if ( this.p ) then ItemTooltip(this, this.p); end end);
+			c:SetScript("OnLeave", function() GameTooltip:Hide(); end);
+			c:SetScript("OnMouseUp", function()
+				local p, cls = this.p, this.class;
+				if ( not p ) then return; end
+				Go(function()
+					if ( planner.class ~= cls ) then planner.slots = {}; end
+					planner.class = cls;
+					planner.slots[p.slot] = p;
+					planner.pick = p.slot;
+					view.gear = cls;
+				end);
+			end);
+			f.c[i] = c;
+		end
+		return f;
+	end);
+	local col = RARITY_RGB[it.label] or RARITY_RGB.Common;
+	f.label:SetText(it.label);
+	f.label:SetTextColor(col[1], col[2], col[3]);
+	for i = 1, 10 do
+		local c, p = f.c[i], it.items[i];
+		if ( p ) then
+			c.p, c.class = p, it.class;
+			c:ClearAllPoints();
+			c:SetPoint("LEFT", f, "LEFT", 90 + (i - 1) * 36, 0);
+			c:SetBackdropBorderColor(col[1], col[2], col[3]);
+			local ab = (p.slot == "Main Hand" and "MH") or (p.slot == "Off Hand" and "OH") or (p.slot == "Ranged" and "Ra") or string.sub(p.slot, 1, 2);
+			c.t:SetText(ab .. (p.known and "" or "*"));
+			c:Show();
+		else c.p = nil; c:Hide(); end
+	end
+	f:SetWidth(CW);
+	f:SetHeight(28);
+	f:SetPoint("TOPLEFT", child, "TOPLEFT", 0, -y);
+	return y + 31;
 end
 
 local function Lay(items)
@@ -427,7 +809,7 @@ local function Lay(items)
 				f:SetWidth(cw);
 				f:SetHeight(ch);
 				f:SetPoint("TOPLEFT", child, "TOPLEFT", math.mod(i - 1, 2) * (cw + 8), -(y + math.floor((i - 1) / 2) * (ch + 8)));
-				SetPicture(f.icon, c.title);
+				if ( c.icon ) then K.Icon(f.icon, c.icon); else SetPicture(f.icon, c.title); end
 				f.num:SetText(i);
 				f.title:SetText(c.title);
 				f.title:SetWidth(cw - 90);
@@ -497,6 +879,7 @@ local function Lay(items)
 			else
 				f.by:Hide();
 			end
+			h = LaySpellsBy(f, it, h);
 			f:SetWidth(CW);
 			f:SetHeight(h);
 			f:SetPoint("TOPLEFT", child, "TOPLEFT", 0, -y);
@@ -511,13 +894,15 @@ local function Lay(items)
 			f.go = it.go;
 			f:SetPoint("TOPLEFT", child, "TOPLEFT", 0, -(y + 4));
 			y = y + 34;
+		elseif ( it.kind == "buttons" or it.kind == "stats" or it.kind == "row" or it.kind == "chips" ) then
+			y = LayMore(it, y);
 		elseif ( it.kind == "trees" ) then
 			local trees = D().talents[it.class] or {};
 			local tw, th = math.floor((CW - 16) / 3), 0;
 			for i = 1, table.getn(trees) do
 				local f = Get("tree", MakeTree);
 				f:SetPoint("TOPLEFT", child, "TOPLEFT", (i - 1) * (tw + 8), -y);
-				th = math.max(th, DrawTree(f, trees[i], tw));
+				th = math.max(th, DrawTree(f, trees[i], tw, i));
 			end
 			y = y + th + 8;
 		end
@@ -529,6 +914,9 @@ end
 local function Where()
 	local topics = D().topics;
 	local topic = view.topic and topics[view.topic];
+	if ( view.prompt == "gear" ) then return "Gear Planner", "Pick a class: its gear and the jewelry, and what they add up to", "Gear & the Armory"; end
+	if ( view.prompt ) then return "Talent Tree Builder", "Pick a class and try out a build of up to 51 points", "Talents"; end
+	if ( view.gear ) then return view.gear .. " Gear Planner", "Pick a slot, then a piece: the totals add everything chosen", view.gear; end
 	if ( view.talents ) then return view.talents .. " Talents", "The " .. view.talents .. "'s three talent trees, from the game", view.talents; end
 	if ( not topic ) then return "Guide", "Everything the launcher's Guide has, inside the game. Pick a topic.", "Getting Started"; end
 	local page = view.page and topic.pages[view.page];
@@ -542,11 +930,11 @@ local function Refresh()
 	hero.heading:SetText(title);
 	hero.line:SetText(line);
 	SetPicture(hero.icon, pic);
-	if ( view.topic or view.talents ) then backBtn:Show(); homeBtn:Show(); else backBtn:Hide(); homeBtn:Hide(); end
+	if ( view.topic or view.talents or view.prompt or view.gear ) then backBtn:Show(); homeBtn:Show(); else backBtn:Hide(); homeBtn:Hide(); end
 	-- previous / next: the pages of the topic, or the topics
 	local topics = D().topics;
 	local count, at = 0, 0;
-	if ( view.talents ) then count = 0;
+	if ( view.talents or view.prompt or view.gear ) then count = 0;
 	elseif ( view.topic and view.page ) then count, at = table.getn(topics[view.topic].pages), view.page;
 	elseif ( view.topic ) then count, at = table.getn(topics), view.topic; end
 	if ( count > 0 and at > 1 ) then prevBtn:Show(); else prevBtn:Hide(); end
@@ -561,7 +949,9 @@ local function Step(d)
 end
 
 local function Back()
-	if ( view.talents ) then view.talents = nil;
+	if ( view.prompt ) then view.prompt = nil;
+	elseif ( view.gear ) then view.gear = nil;
+	elseif ( view.talents ) then view.talents = nil; build.class = nil;
 	elseif ( view.page ) then view.page = nil;
 	else view.topic = nil; end
 end
@@ -574,7 +964,7 @@ local function Build()
 
 	hero = K.Hero(frame, W - 40);
 	hero:SetPoint("TOPLEFT", frame, "TOPLEFT", 20, -30);
-	homeBtn = K.Button(hero, "Home", 70, function() Go(function() view.topic, view.page, view.talents = nil, nil, nil; end); end);
+	homeBtn = K.Button(hero, "Home", 70, function() Go(function() view.topic, view.page, view.talents, view.prompt, view.gear = nil, nil, nil, nil, nil; build.class = nil; end); end);
 	homeBtn:SetPoint("TOPRIGHT", hero, "TOPRIGHT", -10, -10);
 	backBtn = K.Button(hero, "Back", 70, function() Go(Back); end);
 	backBtn:SetPoint("RIGHT", homeBtn, "LEFT", -4, 0);
@@ -603,9 +993,9 @@ local function Open(what)
 	what = string.lower(what or "");
 	local topics = D().topics;
 	for i = 1, table.getn(topics) do
-		if ( string.lower(topics[i].title) == what ) then view.topic, view.page, view.talents = i, nil, nil; return true; end
+		if ( string.lower(topics[i].title) == what ) then view.topic, view.page, view.talents, view.prompt, view.gear = i, nil, nil, nil, nil; return true; end
 		for j = 1, table.getn(topics[i].pages) do
-			if ( string.lower(topics[i].pages[j].title) == what ) then view.topic, view.page, view.talents = i, j, nil; return true; end
+			if ( string.lower(topics[i].pages[j].title) == what ) then view.topic, view.page, view.talents, view.prompt, view.gear = i, j, nil, nil, nil; return true; end
 		end
 	end
 	return false;
