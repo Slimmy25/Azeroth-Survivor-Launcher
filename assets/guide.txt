@@ -544,7 +544,7 @@ Pick a Heroic level with the Difficulty button beside Play. It shows each level'
 # Horde affixes
 From Heroic III the horde has an affix that changes every week; Heroic V has two at once.
 - Bolstering: each death makes the enemies within 12 yards 20% tougher and stronger, stacking up to triple.
-- Sanguine: slain elites leave wide pools that heal the horde 10% a second.
+- Sanguine: slain elites leave wide pools that heal the horde 10% a second (the horde only, not bosses or lair guardians).
 - Explosive: an orb appears every 15 seconds and bursts for 40% of your health unless you destroy it. Area spells pass through it: it takes five direct hits from aimed spells and weapon swings.
 
 # Endless mode
@@ -553,10 +553,11 @@ After you beat a zone's final boss you can keep going in endless mode. A random 
 @topic Co-op | Playing with friends
 # Joining and hosting
 Press Co-op on the main screen.
-- Lobbies: public games of your version. Click one to join (some need a password).
-- Host: name your lobby, choose who can find it (public, or private by code), set the number of players (up to 5) and an optional password.
+- Lobbies: public games of your version. Each shows its zone, its difficulty (Normal, or the Heroic level in red), the host's class, the party's classes and the open seats. Click one to join (some need a password).
+- Filters: by zone and by difficulty. "Can join" hides every lobby whose zone or Heroic level your class has not opened yet, and a lobby you cannot join says which of the two you are missing.
+- Host: name your lobby, choose who can find it (public, or private by code), set the number of players (up to 5) and an optional password. Hosting shows the run you will host (hero, zone, difficulty), with a Change difficulty button.
 - Join by code: type a friend's lobby code.
-You play the hero on your own picker. The host chooses the zone and the Heroic level, and you can only join zones (and Heroic levels) you have opened with the class you bring.
+You play the hero on your own picker. The host chooses the zone and the Heroic level, and everyone in the party sees them change at once. You can only join zones (and Heroic levels) you have opened with the class you bring: a hero who has not is marked in red and stays behind when the host enters.
 
 # How co-op plays
 - Experience and gold are shared; caches are each hero's own to buy.
@@ -565,6 +566,7 @@ You play the hero on your own picker. The host chooses the zone and the Heroic l
 - A fallen hero is down, not out: stand next to them for 6 seconds to bring them back. The run ends when every hero is down.
 - Your heals, Battle Shout and Power Word: Shield also help friends within 30 yards.
 - Every hero rolls on a slain boss's gear for their own class and earns their own marks and clears, and a guardian slain by anyone rewards everyone.
+- A Heroic clear counts the moment the final boss falls, even if someone leaves before every level-up card is picked.
 - Everything you win goes to your own save.
 
 @topic Addons | Add-ons for the game's interface, and where they go

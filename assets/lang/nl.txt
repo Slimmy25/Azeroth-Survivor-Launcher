@@ -1757,3 +1757,5 @@ Stars decide which set bonuses you reach. What a star adds to a piece is not dis
 = Sterren bepalen welke setbonussen je haalt. Wat een ster aan een stuk toevoegt, maakt het spel niet bekend, dus dat telt hier niet mee.
 Stars decide which set bonuses you reach. How much each star adds to a piece is not known yet, so it is not counted here.
 = Sterren bepalen welke setbonussen je haalt. Hoeveel elke ster aan een stuk toevoegt, is nog niet bekend, dus dat telt hier niet mee.
+A complete interface: a run clock with the boss timeline and next-boss countdown, boss bars, enemy health plates and floating combat numbers, hero, target, party and pet frames, a skill bar with cooldowns and rank gems, a combat meter, a ring minimap and glass-styled chat. Every part can be turned on or off (/aether).
+= Een complete interface: een runklok met de bazentijdlijn en aftellen tot de volgende baas, bazenbalken, levensbalken boven vijanden en zwevende gevechtsgetallen, frames voor held, doelwit, groep en huisdier, een vaardighedenbalk met afkoeltijden en rangstenen, een gevechtsmeter, een ronde minikaart en chat in glasstijl. Elk onderdeel kan aan of uit (/aether).

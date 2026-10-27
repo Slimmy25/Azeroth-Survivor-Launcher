@@ -2,6 +2,21 @@ Patch notes shown in the launcher's Changelog. The launcher sorts them by versio
 Every post starts with its title on the first line. Posts are separated by a line with only === on it.
 Everything above the first === line is ignored.
 ===
+0.122.0
+-------
+Co-op improvements, and its window shows every lobby's difficulty, with a filter for it. Heroic clears in co-op always count, updates survive a dropped connection, and Again after a run no longer leaves a ghost chest or your rune buffs behind.
+
+* Co-op lag improvements: with many parties playing at once, the co-op servers fell behind. Enemies stood still, level-ups repeated and didn't go through, and guests ran seconds to minutes behind their host. The servers now keep up. This works as soon as the servers are updated, whatever version you play.
+* Co-op lobbies show their difficulty (Normal, or the Heroic level in red) next to the zone, the host's class, the party's classes and the open seats. A new Difficulty filter sits beside the zone filter, and "Can join" hides every lobby whose zone or Heroic level your class hasn't opened yet. A lobby you can't join says which of the two you're missing.
+* Hosting shows the run you'll host (hero, zone, difficulty), with a Change difficulty button.
+* In a party, everyone sees the zone and difficulty the host has picked, updated the moment the host changes them. Anyone who hasn't opened that zone or Heroic level with their class is marked in red and stays behind when the host enters.
+* Fire Nova shows its ring of fire and plays its own sound. It used to show nothing and play the sound of dropping a totem.
+* Sanguine pools no longer heal bosses or lair guardians, only the horde.
+* A download that loses its connection ("connection closed by the remote host" and the like) now picks up where it stopped instead of failing the whole update.
+* Co-op: beating a zone on Heroic now counts the moment the final boss falls. Leaving before everyone had picked their level-up cards lost the clear, so the next Heroic level and your set's stars stayed closed. If that happened to you, beat that Heroic level again to open them.
+* Again after a run: no more ghost chest from the last run (one you could see but not open), and a speed rune you had no longer keeps you fast in the new run.
+* Again after a run also clears away the last run's companions and the light pillars along the edge.
+===
 0.121.0
 -------
 Heroic difficulty and gear upgrades: beat zones on Heroic I to V, earn marks from every boss, and upgrade your gear with stars. Full sets change how one of your class's spells plays, and any set can stay viable at the end.

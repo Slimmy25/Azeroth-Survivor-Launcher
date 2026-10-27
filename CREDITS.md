@@ -83,6 +83,7 @@ download links in `addons/sources.txt`, so the launcher can download them all fr
 
 | Addon | Author | Original |
 | --- | --- | --- |
+| AetherHUD | Rehabrocket | <https://github.com/NORehabRocket/AetherHUD> (its newest release) |
 | Azerloot | Kindagrey | <https://github.com/Kindagrey/Azerloot> (its newest release) |
 | BlackwellUI (BUI) | Blackwell | <https://github.com/Blackwellcode/BlackwellUI> (its newest release) |
 | Bordo UI | BordoBereli | <https://github.com/threenox/BordoUI> (its newest release; GPL-3.0) |

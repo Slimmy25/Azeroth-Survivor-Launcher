@@ -19,3 +19,16 @@
   Heroic level opens the next star (Heroic III also opens the 8-piece bonuses), weapons go to 5 stars too, and the
   patch notes' numbers are listed (tier 3 60% stronger at 5 stars, lower sets 95% of it, last star 30 marks, 5% cheaper
   per other class up to 40%), with what is not known yet.
+
+### Game update 0.122.0
+- News and Changelog: the patch notes for 0.122.0 (co-op lag, lobby difficulty and its filter, Heroic clears in co-op,
+  Sanguine, Fire Nova, resumed downloads, Again after a run).
+- Guide > Co-op: lobbies show their difficulty, the Difficulty filter and "Can join", hosting with Change difficulty,
+  everyone seeing the host's zone and difficulty at once (a hero who has not opened them stays behind), and a Heroic
+  clear counting the moment the final boss falls.
+- Guide > Heroic & Endless: Sanguine pools heal only the horde, not bosses or lair guardians.
+
+### Addons
+- New in Download More under UI: AetherHUD by Rehabrocket, a complete interface (run clock with the boss timeline, boss
+  bars, enemy plates, unit frames, skill bar, combat meter, ring minimap). Like the other interfaces it is pick-one:
+  switching it on switches Survivor UI, SurvivorsDragonUi, Keijin UI, Bordo UI or BlackwellUI off.
