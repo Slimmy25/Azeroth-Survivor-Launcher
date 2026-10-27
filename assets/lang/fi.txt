@@ -1613,3 +1613,11 @@ Click a talent to add a point, right-click to take one back. As in the game, eac
 = Klikkaa kykyä lisätäksesi pisteen, oikea klikkaus ottaa sen pois. Kuten pelissä, jokainen rivi aukeaa, kun sen omassa puussa on 5 pistettä jokaista yläpuolista riviä kohden; build vie enintään 51 pistettä. Violetit ovat 10, 20 ja 30 pisteen virstanpylväät.
 Watched!
 = Katsottu!
+CONFLICT
+= RISTIRIITA
+switched off: it conflicts with another addon that is on.
+= poistettu käytöstä: se on ristiriidassa toisen käytössä olevan lisäosan kanssa.
+switched off: the two conflict.
+= poistettu käytöstä: nämä kaksi ovat ristiriidassa.
+these two can't be on together. Switching one on switches the other off.
+= näitä kahta ei voi käyttää yhtä aikaa. Kun otat toisen käyttöön, toinen poistuu käytöstä.

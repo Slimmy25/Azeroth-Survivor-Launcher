@@ -659,7 +659,7 @@ namespace AzerothLauncher
     public class AddonEntry
     {
         public string Category, Name, Url, Description;
-        public List<string> Tags = new List<string>();
+        public List<string> Folders = new List<string>();    // its folders in the AddOns folder (addons.txt's 4th field)
     }
 
     public class GuidePage
@@ -856,7 +856,7 @@ namespace AzerothLauncher
                     e.Description = f.Length > 4 ? string.Join("|", f, 4, f.Length - 4).Trim() : "";
                     if (f.Length > 3)
                         foreach (string t in f[3].Split(','))
-                            if (t.Trim().Length > 0) e.Tags.Add(t.Trim().ToUpperInvariant());
+                            if (t.Trim().Length > 0) e.Folders.Add(t.Trim());
                     if (e.Name.Length > 0 && e.Url.Length > 0) addons.Add(e);
                 }
                 return addons;

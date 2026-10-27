@@ -1614,3 +1614,11 @@ Click a talent to add a point, right-click to take one back. As in the game, eac
 = Kliknij talent, aby dodać punkt, prawym przyciskiem go cofniesz. Jak w grze, każdy rząd otwiera się, gdy jego drzewko ma 5 punktów za każdy rząd powyżej; build bierze najwyżej 51 punktów. Fioletowe to kamienie milowe przy 10, 20 i 30 punktach.
 Watched!
 = Obejrzane!
+CONFLICT
+= KONFLIKT
+switched off: it conflicts with another addon that is on.
+= wyłączony: koliduje z innym włączonym dodatkiem.
+switched off: the two conflict.
+= wyłączony: te dwa ze sobą kolidują.
+these two can't be on together. Switching one on switches the other off.
+= tych dwóch nie można mieć włączonych naraz. Włączenie jednego wyłącza drugi.

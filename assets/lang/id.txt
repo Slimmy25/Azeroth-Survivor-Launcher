@@ -1613,3 +1613,11 @@ Click a talent to add a point, right-click to take one back. As in the game, eac
 = Klik talenta untuk menambah poin, klik kanan untuk mengambilnya kembali. Seperti di game, tiap baris terbuka setelah pohonnya punya 5 poin untuk setiap baris di atasnya; build memakai paling banyak 51 poin. Yang ungu adalah tonggak di 10, 20, dan 30 poin.
 Watched!
 = Sudah ditonton!
+CONFLICT
+= KONFLIK
+switched off: it conflicts with another addon that is on.
+= dimatikan: bentrok dengan addon lain yang menyala.
+switched off: the two conflict.
+= dimatikan: keduanya bentrok.
+these two can't be on together. Switching one on switches the other off.
+= keduanya tidak bisa menyala bersamaan. Menyalakan satu akan mematikan yang lain.

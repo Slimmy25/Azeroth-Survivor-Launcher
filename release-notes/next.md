@@ -7,6 +7,12 @@
 - Patch notes for the game's 0.119.1, 0.120.0 and 0.120.1 updates: fewer co-op disconnects, any race with any class
   (Rewards > Races), and boss kills counting for the whole party's achievements.
 
+### Cloud Save
+- Cloud Save no longer copies the AddOns folder itself, only your addons' settings and your save. Before, an older copy
+  of an addon from another PC could replace one you had just updated.
+- When settings arrive from the cloud for an addon in Download More that isn't installed on this PC, the launcher
+  installs it, at PLAY or after DOWNLOAD in Cloud Save. Addons switched off stay off.
+
 ### Community
 - Hovering the Discord symbol on the News line now shows where it goes: https://discord.gg/azerothsurvivors
 - MORE VIDEOS: a video you have watched for more than 45 seconds now has a "Watched!" tag over its picture (only the
@@ -27,6 +33,10 @@
   your pointer has been away from it for 3 seconds (change it in its options, right-click the bag). New: /mbb open
   and /mbb close.
 - MinimapButtonBag's bag button now sits on the right of the minimap, no longer under the game's damage meter button.
+- Addons that can't be on together are now marked as a conflict. The first pair is Survivor UI and AZS Minor Mods
+  (both set raid marks on bosses and party members). In My Addons a red bracket joins the two, with CONFLICT down it.
+  Switching one on switches the other off. When both end up on any other way (an install, a profile, TOGGLE ALL, or
+  by hand), Survivor UI is kept and AZS Minor Mods goes off; PLAY checks this too.
 - AZS Minor Mods, chat: one setting now, "No level-up, stat bonus or new spell lines in chat". It hides
   "Congratulations, you have reached level 12!", "You have gained 3% damage, 12 maximum health…" and "You have
   learned a new spell: Cleave (Level 1)", in every language the game has. "Remove bloat from chat" is folded into it.
@@ -34,3 +44,7 @@
 - AZS Minor Mods, new setting: "Plain action bar". The gryphons and the bar's art go, leaving just the six spell
   squares (the racial button and the character and talent buttons are hidden too). Untick it and the bar comes back
   as it was; the character and talent panels still open with their keys (C and N).
+
+### Other
+- GitHub now shows the launcher's license as MIT. The note that the game's name, logo and artwork are not covered
+  moved from LICENSE to the README.

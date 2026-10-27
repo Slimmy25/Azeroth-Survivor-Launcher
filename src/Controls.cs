@@ -1312,4 +1312,52 @@ namespace AzerothLauncher
             e.Graphics.DrawImage(img, (Width - w) / 2, (Height - h) / 2, w, h);
         }
     }
+
+    // Two addons that can't be on together (Addons > My Addons): a red bracket from one's row to the other's, with
+    // CONFLICT written down it.
+    public class ConflictLink : Control
+    {
+        static readonly Color Red = Color.FromArgb(200, 68, 47);
+
+        readonly Font font = Theme.F(7.5f, FontStyle.Bold);   // made with the section's zoom; cached, not disposed
+
+        public ConflictLink()
+        {
+            SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer |
+                     ControlStyles.ResizeRedraw, true);
+        }
+
+        public int Tick1, Tick2;                             // where the two rows' middles are, inside this control
+
+        // the height the word needs (the bracket is made at least this tall, round the middle of the two rows)
+        public int WordHeight()
+        {
+            return TextRenderer.MeasureText(Lang.T("CONFLICT"), font).Width + 10;
+        }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            Graphics g = e.Graphics;
+            g.Clear(BackColor);
+            g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
+            int x = Width / 2, t1 = Math.Max(1, Tick1), t2 = Math.Min(Height - 2, Tick2);
+            string word = Lang.T("CONFLICT");
+            Font f = font;
+            SizeF ts = g.MeasureString(word, f);
+            float mid = Height / 2f, half = ts.Width / 2f + 3;
+            using (var pen = new Pen(Red, 2f))
+            {
+                // the ticks out to each row, and the line between them (open where the word is)
+                g.DrawLine(pen, 0, t1, x, t1);
+                g.DrawLine(pen, 0, t2, x, t2);
+                g.DrawLine(pen, x, Math.Min(t1, mid - half), x, mid - half);
+                g.DrawLine(pen, x, mid + half, x, Math.Max(t2, mid + half));
+            }
+            var state = g.Save();
+            g.TranslateTransform(x, mid);
+            g.RotateTransform(-90);
+            using (var b = new SolidBrush(Red)) g.DrawString(word, f, b, -ts.Width / 2f, -ts.Height / 2f);
+            g.Restore(state);
+        }
+    }
 }

@@ -1613,3 +1613,11 @@ Click a talent to add a point, right-click to take one back. As in the game, eac
 = Klik op een talent voor een punt, rechtsklik om het terug te nemen. Zoals in het spel opent elke rij zodra haar eigen boom 5 punten heeft voor elke rij erboven; een build neemt hoogstens 51 punten. De paarse zijn de mijlpalen bij 10, 20 en 30 punten.
 Watched!
 = Bekeken!
+CONFLICT
+= CONFLICT
+switched off: it conflicts with another addon that is on.
+= uitgeschakeld: het botst met een andere ingeschakelde addon.
+switched off: the two conflict.
+= uitgeschakeld: de twee botsen.
+these two can't be on together. Switching one on switches the other off.
+= deze twee kunnen niet tegelijk aan staan. Zet je de ene aan, dan gaat de andere uit.

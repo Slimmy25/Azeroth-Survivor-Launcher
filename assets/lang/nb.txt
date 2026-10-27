@@ -1613,3 +1613,11 @@ Click a talent to add a point, right-click to take one back. As in the game, eac
 = Klikk på et talent for å legge til et poeng, høyreklikk for å ta det tilbake. Som i spillet åpnes hver rad når treet har 5 poeng for hver rad over; et build tar høyst 51 poeng. De lilla er milepælene ved 10, 20 og 30 poeng.
 Watched!
 = Sett!
+CONFLICT
+= KONFLIKT
+switched off: it conflicts with another addon that is on.
+= slått av: det er i konflikt med et annet addon som er på.
+switched off: the two conflict.
+= slått av: de to er i konflikt.
+these two can't be on together. Switching one on switches the other off.
+= disse to kan ikke være på samtidig. Slår du på det ene, slås det andre av.

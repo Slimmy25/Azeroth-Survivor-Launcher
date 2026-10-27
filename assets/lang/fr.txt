@@ -1613,3 +1613,11 @@ Click a talent to add a point, right-click to take one back. As in the game, eac
 = Clique sur un talent pour ajouter un point, clic droit pour le retirer. Comme en jeu, chaque rangée s'ouvre quand son propre arbre a 5 points pour chaque rangée au-dessus ; un build prend 51 points au plus. Les violets sont les paliers à 10, 20 et 30 points.
 Watched!
 = Vu !
+CONFLICT
+= CONFLIT
+switched off: it conflicts with another addon that is on.
+= désactivé : il est en conflit avec un autre addon activé.
+switched off: the two conflict.
+= désactivé : les deux sont en conflit.
+these two can't be on together. Switching one on switches the other off.
+= ces deux-là ne peuvent pas être activés ensemble. En activer un désactive l’autre.

@@ -38,6 +38,144 @@ namespace AzerothLauncher
             return list;
         }
 
+        // ---- addons that can't be on together. Each pair: the preferred one first. Switching one on switches the other
+        // off; when both are found on any other way (installed, a profile, TOGGLE ALL, by hand), the preferred one
+        // stays and the other is switched off. A folder matches by its name or its .toc Title, letters and digits
+        // only, without case ("Survivor UI", "SurvivorUI" and "Survivor_UI" are one).
+        public class Conflict
+        {
+            public string[] Preferred, Other;                // the names that match each side
+            public string Why;                               // shown in the status line
+        }
+
+        public static readonly Conflict[] Conflicts =
+        {
+            new Conflict { Preferred = new[] { "SurvivorUI", "SurvivorsUI" }, Other = new[] { "AZSMinorMods" },
+                           Why = "both set raid marks on bosses and party members" },
+        };
+
+        static string Key(string s)
+        {
+            var sb = new System.Text.StringBuilder();
+            foreach (char c in s ?? "") if (char.IsLetterOrDigit(c)) sb.Append(char.ToLowerInvariant(c));
+            return sb.ToString();
+        }
+
+        static string TocTitle(string addonDir, string name)
+        {
+            foreach (string folder in new[] { name, name + DisabledSuffix })
+            {
+                string toc = Path.Combine(Path.Combine(addonDir, folder), name + ".toc");
+                try
+                {
+                    if (!File.Exists(toc)) continue;
+                    foreach (string line in File.ReadAllLines(toc))
+                    {
+                        var m = Regex.Match(line, @"^##\s*Title\s*:\s*(.+)$");
+                        if (m.Success) return Regex.Replace(m.Groups[1].Value, @"\|c[0-9a-fA-F]{8}|\|r", "");
+                    }
+                }
+                catch (Exception) { }
+            }
+            return "";
+        }
+
+        static bool Matches(string addonDir, string name, string[] names)
+        {
+            string k = Key(name), t = Key(TocTitle(addonDir, name));
+            foreach (string n in names) if (Key(n) == k || (t.Length > 0 && Key(n) == t)) return true;
+            return false;
+        }
+
+        // the installed addons that conflict with this one (and the rule)
+        public static List<KeyValuePair<string, Conflict>> PartnersOf(string addonDir, string name, List<KeyValuePair<string, bool>> installed)
+        {
+            var list = new List<KeyValuePair<string, Conflict>>();
+            foreach (var c in Conflicts)
+            {
+                string[] other = Matches(addonDir, name, c.Preferred) ? c.Other : Matches(addonDir, name, c.Other) ? c.Preferred : null;
+                if (other == null) continue;
+                foreach (var a in installed)
+                    if (a.Key != name && Matches(addonDir, a.Key, other)) list.Add(new KeyValuePair<string, Conflict>(a.Key, c));
+            }
+            return list;
+        }
+
+        public static bool IsPreferred(string addonDir, string name, Conflict c) { return Matches(addonDir, name, c.Preferred); }
+
+        // switched on by hand: the addons it conflicts with go off; returns them
+        public static List<string> SwitchOffPartners(string addonDir, string name)
+        {
+            var off = new List<string>();
+            var installed = Scan(addonDir);
+            foreach (var p in PartnersOf(addonDir, name, installed))
+                foreach (var a in installed)
+                    if (a.Key == p.Key && a.Value) { SetEnabled(addonDir, a.Key, false); off.Add(a.Key); }
+            return off;
+        }
+
+        // both sides of a pair on: the preferred one stays, the other goes off; returns what went off
+        public static List<string> EnforceConflicts(string addonDir)
+        {
+            var off = new List<string>();
+            if (string.IsNullOrEmpty(addonDir) || !Directory.Exists(addonDir)) return off;
+            var installed = Scan(addonDir);
+            foreach (var a in installed)
+            {
+                if (!a.Value) continue;
+                foreach (var p in PartnersOf(addonDir, a.Key, installed))
+                {
+                    if (!IsPreferred(addonDir, a.Key, p.Value)) continue;
+                    foreach (var b in installed)
+                        if (b.Key == p.Key && b.Value && !off.Contains(b.Key))
+                            try { SetEnabled(addonDir, b.Key, false); off.Add(b.Key); }
+                            catch (Exception) { }
+                }
+            }
+            return off;
+        }
+
+        // ---- Cloud Save syncs only the addons' settings. The Download More addons that have settings here (a file in
+        // the settings folder named like one of its folders: "<Folder>.lua") but none of their folders in the AddOns
+        // folder, enabled or switched off: the launcher installs them.
+        public static List<AddonEntry> MissingForSettings(string addonDir, string savedDir, List<AddonEntry> catalog)
+        {
+            var missing = new List<AddonEntry>();
+            if (string.IsNullOrEmpty(addonDir) || string.IsNullOrEmpty(savedDir) || !Directory.Exists(savedDir)) return missing;
+            var stems = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            var stack = new Stack<string>();
+            stack.Push(savedDir);
+            while (stack.Count > 0)
+            {
+                string cur = stack.Pop();
+                try
+                {
+                    foreach (string f in Directory.GetFiles(cur))
+                    {
+                        string n = Path.GetFileName(f);
+                        if (n.EndsWith(".lua", StringComparison.OrdinalIgnoreCase) || n.EndsWith(".lua.bak", StringComparison.OrdinalIgnoreCase))
+                            stems.Add(n.Split('.')[0]);
+                    }
+                    foreach (string d in Directory.GetDirectories(cur)) if (!Util.IsLink(d)) stack.Push(d);
+                }
+                catch (Exception) { }
+            }
+            var present = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            if (Directory.Exists(addonDir)) foreach (var a in Scan(addonDir)) present.Add(a.Key);
+            foreach (var e in catalog)
+            {
+                if (e.Folders.Count == 0 || File.Exists(e.Url)) continue;   // no folders known, or a zip kept on this PC
+                bool has = false, settings = false;
+                foreach (string f in e.Folders)
+                {
+                    if (present.Contains(f)) has = true;
+                    if (stems.Contains(f)) settings = true;
+                }
+                if (settings && !has) missing.Add(e);
+            }
+            return missing;
+        }
+
         public static void SetEnabled(string addonDir, string name, bool enabled)
         {
             string on = Path.Combine(addonDir, name), off = on + DisabledSuffix;

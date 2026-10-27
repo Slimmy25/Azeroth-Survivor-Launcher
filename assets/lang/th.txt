@@ -1614,3 +1614,11 @@ Click a talent to add a point, right-click to take one back. As in the game, eac
 = คลิกทาเลนต์เพื่อเพิ่มแต้ม คลิกขวาเพื่อนำออก เหมือนในเกม แต่ละแถวจะเปิดเมื่อต้นของมันมี 5 แต้มต่อทุกแถวที่อยู่ด้านบน บิลด์ใช้ได้สูงสุด 51 แต้ม สีม่วงคือหลักไมล์ที่ 10, 20 และ 30 แต้ม
 Watched!
 = ดูแล้ว!
+CONFLICT
+= ขัดแย้ง
+switched off: it conflicts with another addon that is on.
+= ปิดแล้ว: ขัดแย้งกับแอดออนอื่นที่เปิดอยู่
+switched off: the two conflict.
+= ปิดแล้ว: ทั้งสองขัดแย้งกัน
+these two can't be on together. Switching one on switches the other off.
+= สองตัวนี้เปิดพร้อมกันไม่ได้ เปิดตัวหนึ่งแล้วอีกตัวจะปิด

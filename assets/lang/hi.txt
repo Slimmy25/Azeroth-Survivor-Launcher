@@ -1614,3 +1614,11 @@ Click a talent to add a point, right-click to take one back. As in the game, eac
 = किसी प्रतिभा पर क्लिक से एक अंक जुड़ता है, राइट-क्लिक से वापस। गेम की तरह, हर पंक्ति तब खुलती है जब उसके अपने वृक्ष में ऊपर की हर पंक्ति के लिए 5 अंक हों; बिल्ड में अधिकतम 51 अंक। बैंगनी वाले 10, 20 और 30 अंकों के पड़ाव हैं।
 Watched!
 = देखा गया!
+CONFLICT
+= टकराव
+switched off: it conflicts with another addon that is on.
+= बंद किया गया: यह चालू किसी दूसरे ऐडऑन से टकराता है।
+switched off: the two conflict.
+= बंद किया गया: ये दोनों आपस में टकराते हैं।
+these two can't be on together. Switching one on switches the other off.
+= ये दोनों एक साथ चालू नहीं हो सकते। एक को चालू करने पर दूसरा बंद हो जाता है।

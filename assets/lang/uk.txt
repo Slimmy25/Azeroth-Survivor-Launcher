@@ -1614,3 +1614,11 @@ Click a talent to add a point, right-click to take one back. As in the game, eac
 = Клацання по таланту додає очко, праве клацання прибирає. Як у грі, кожен ряд відкривається, коли в його дереві є 5 очок за кожен ряд вище; білд бере не більше 51 очка. Фіолетові — віхи на 10, 20 і 30 очках.
 Watched!
 = Переглянуто!
+CONFLICT
+= КОНФЛІКТ
+switched off: it conflicts with another addon that is on.
+= вимкнено: конфліктує з іншим увімкненим аддоном.
+switched off: the two conflict.
+= вимкнено: ці два конфліктують.
+these two can't be on together. Switching one on switches the other off.
+= ці два не можна вмикати одночасно. Якщо ввімкнути один, інший вимкнеться.
