@@ -1658,3 +1658,13 @@ CONFLICT: PICK ONE
 = ÇAKIŞMA: BİRİNİ SEÇ
 these two can't be on together: untick the one you don't want.
 = bu ikisi aynı anda açık olamaz: istemediğinin işaretini kaldır.
+LANGUAGE ›
+= DİL ›
+OPEN CLOUD SAVE ›
+= BULUT KAYDINI AÇ ›
+Sync now, the log, and earlier downloads.
+= Şimdi eşitle, günlük ve önceki indirmeler.
+Turn cloud saving on to keep your save and your addons' settings in Google Drive, OneDrive or Dropbox.
+= Kaydını ve eklentilerinin ayarlarını Google Drive, OneDrive veya Dropbox'ta tutmak için bulut kaydını aç.
+Disabled when AZS Stats is not active
+= AZS Stats etkin değilken devre dışı

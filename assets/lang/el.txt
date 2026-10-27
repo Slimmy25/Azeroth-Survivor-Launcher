@@ -1658,3 +1658,13 @@ CONFLICT: PICK ONE
 = ΣΥΓΚΡΟΥΣΗ: ΔΙΑΛΕΞΤΕ ΕΝΑ
 these two can't be on together: untick the one you don't want.
 = αυτά τα δύο δεν μπορούν να είναι ενεργά μαζί: ξετσεκάρετε αυτό που δεν θέλετε.
+LANGUAGE ›
+= ΓΛΩΣΣΑ ›
+OPEN CLOUD SAVE ›
+= ΑΝΟΙΓΜΑ ΑΠΟΘΗΚΕΥΣΗΣ CLOUD ›
+Sync now, the log, and earlier downloads.
+= Συγχρονισμός τώρα, το αρχείο καταγραφής και οι προηγούμενες λήψεις.
+Turn cloud saving on to keep your save and your addons' settings in Google Drive, OneDrive or Dropbox.
+= Ενεργοποιήστε την αποθήκευση cloud για να κρατάτε την αποθήκευση και τις ρυθμίσεις των πρόσθετων στο Google Drive, OneDrive ή Dropbox.
+Disabled when AZS Stats is not active
+= Απενεργοποιημένο όσο το AZS Stats δεν είναι ενεργό

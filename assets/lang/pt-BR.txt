@@ -1657,3 +1657,13 @@ CONFLICT: PICK ONE
 = CONFLITO: ESCOLHA UM
 these two can't be on together: untick the one you don't want.
 = estes dois não podem ficar ligados juntos: desmarque o que você não quer.
+LANGUAGE ›
+= IDIOMA ›
+OPEN CLOUD SAVE ›
+= ABRIR SALVAMENTO NA NUVEM ›
+Sync now, the log, and earlier downloads.
+= Sincronizar agora, o registro e os downloads anteriores.
+Turn cloud saving on to keep your save and your addons' settings in Google Drive, OneDrive or Dropbox.
+= Ligue o salvamento na nuvem para manter seu save e as configurações dos seus addons no Google Drive, OneDrive ou Dropbox.
+Disabled when AZS Stats is not active
+= Desativado enquanto o AZS Stats não estiver ativo

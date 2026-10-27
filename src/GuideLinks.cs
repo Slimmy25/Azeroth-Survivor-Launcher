@@ -131,6 +131,9 @@ namespace AzerothLauncher
                 int cp = classesTopic < 0 ? -1 : topics[classesTopic].Pages.FindIndex(delegate(GuidePage g) { return g.Title == tal.Class; });
                 if (!links.ContainsKey(tal.Name)) Add(tal.Name, classesTopic, cp, Talents.HoverText(tal));
             }
+            // the theorycrafting tools: a click opens them (-2 the Talent Tree Builder, -3 the Gear Planner)
+            Add("Talent Tree Builder", -2, -1, "Pick a class and try out a build of up to 51 points on its three talent trees.");
+            Add("Gear Planner", -3, -1, "Put gear and jewelry on a character sheet like the game's and see what they add.");
             // every item: its card as the hover text; a click opens its page in the Items topic
             int itemsTopic = topics.FindIndex(delegate(GuideTopic g) { return g.Title == "Items"; });
             if (itemsTopic >= 0)
@@ -247,7 +250,7 @@ namespace AzerothLauncher
             Flow(null);
         }
 
-        bool Clickable(GuideLink l) { return l != null && l.Topic >= 0 && !(l.Topic == here && l.Page == herePage); }
+        bool Clickable(GuideLink l) { return l != null && (l.Topic >= 0 || l.Topic <= -2) && !(l.Topic == here && l.Page == herePage); }
 
         static readonly Bitmap measureBmp = new Bitmap(1, 1);
 

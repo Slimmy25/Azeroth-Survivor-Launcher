@@ -1658,3 +1658,13 @@ CONFLICT: PICK ONE
 = ÜTKÖZÉS: VÁLASSZ EGYET
 these two can't be on together: untick the one you don't want.
 = ez a kettő nem lehet egyszerre bekapcsolva: vedd ki a pipát abból, amelyiket nem akarod.
+LANGUAGE ›
+= NYELV ›
+OPEN CLOUD SAVE ›
+= FELHŐMENTÉS MEGNYITÁSA ›
+Sync now, the log, and earlier downloads.
+= Szinkronizálás most, a napló és a korábbi letöltések.
+Turn cloud saving on to keep your save and your addons' settings in Google Drive, OneDrive or Dropbox.
+= Kapcsold be a felhőmentést, hogy a mentésed és a kiegészítők beállításai a Google Drive-on, OneDrive-on vagy Dropboxon legyenek.
+Disabled when AZS Stats is not active
+= Kikapcsolva, amíg az AZS Stats nem aktív

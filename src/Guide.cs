@@ -43,6 +43,7 @@ namespace AzerothLauncher
         int guideGroup;                                       // the group whose tabs are shown
         bool guideMain = true;                                // the main page: every topic as a card, by group
         bool gBuilder;                                        // the Talent Tree Builder is open
+        int guideGroupPage = -1;                              // the main page shows only this group (Theorycrafting button)
 
         static int GroupOf(string title)
         {
@@ -77,6 +78,7 @@ namespace AzerothLauncher
         void OpenGuideTab(int tab)
         {
             guideQuery = "";
+            guideGroupPage = -1;
             if (tab == -2) { gVideo = null; gTalents = null; gBuilder = true; gPlanner = false; guideMain = false; guideGroup = 2; if (current == "Guide") BuildPanel("Guide"); }
             else if (tab == -3) { gVideo = null; gTalents = null; gBuilder = false; gPlanner = true; guideMain = false; guideGroup = 2; if (current == "Guide") BuildPanel("Guide"); }
             else SetGuideView(tab, -1);
@@ -114,9 +116,14 @@ namespace AzerothLauncher
             return char.ToUpperInvariant(n[0]) + n.Substring(1).Replace("player", "Player");
         }
 
-        void GuideMainPage()
+        void GuideMainPage() { GuideGroupPage(-1); }
+
+        // the main page, or one group's page (Guide › Theorycrafting): its topics and tools as cards
+        public void GuideGroupPage(int group)
         {
             gTopic = -1; gPage = -1; guideQuery = ""; gBuilder = false; gPlanner = false; gTalents = null; gVideo = null; guideMain = true;
+            guideGroupPage = group;
+            if (current != "Guide" || !side.Visible) ShowSection("Guide");
             BuildPanel("Guide");
         }
 
@@ -126,25 +133,30 @@ namespace AzerothLauncher
             var topics = Data.Guide;
             Action home = GuideMainPage;
             Action builder = delegate { OpenGuideTab(-2); };
+            Action theory = delegate { GuideGroupPage(2); };
             if (gVideo != null) { SetCrumbs("Guide", home, gVideo.Title.Length > 0 ? gVideo.Title : "Video", null); return; }
-            if (gTalents != null && gBuilder) { SetCrumbs("Guide", home, GroupName(2), home, TalentBuilder, builder, gTalents, null); return; }
-            if (gBuilder) { SetCrumbs("Guide", home, GroupName(2), home, TalentBuilder, null); return; }
-            if (gPlanner) { SetCrumbs("Guide", home, GroupName(2), home, GearPlanner, null); return; }
+            if (gTalents != null && gBuilder) { SetCrumbs("Guide", home, GroupName(2), theory, TalentBuilder, builder, gTalents, null); return; }
+            if (gBuilder) { SetCrumbs("Guide", home, GroupName(2), theory, TalentBuilder, null); return; }
+            if (gPlanner) { SetCrumbs("Guide", home, GroupName(2), theory, GearPlanner, null); return; }
             if (guideQuery.Trim().Length > 0) { SetCrumbs("Guide", home, "Search", null); return; }
+            if ((gTopic < 0 || gTopic >= topics.Count) && guideGroupPage >= 0) { SetCrumbs("Guide", home, GroupName(guideGroupPage), null); return; }
             if (gTopic < 0 || gTopic >= topics.Count) { SetCrumbs("Guide", null); return; }
             int t = gTopic, pg = gPage;
             GuideTopic topic = topics[t];
-            string group = GroupName(GroupOf(topic.Title));
+            int gi = GroupOf(topic.Title);
+            string group = GroupName(gi);
+            Action main = GuideMainPage;
+            home = delegate { GuideGroupPage(gi); };   // the group's step opens its page
             Action toTopic = delegate { SetGuideView(t, -1); };
             if (gTalents != null)
             {
                 Action toPage = delegate { SetGuideView(t, pg); };
-                if (pg >= 0 && pg < topic.Pages.Count) SetCrumbs("Guide", home, group, home, topic.Title, toTopic, topic.Pages[pg].Title, toPage, "Talents", null);
-                else SetCrumbs("Guide", home, group, home, topic.Title, toTopic, "Talents", null);
+                if (pg >= 0 && pg < topic.Pages.Count) SetCrumbs("Guide", main, group, home, topic.Title, toTopic, topic.Pages[pg].Title, toPage, "Talents", null);
+                else SetCrumbs("Guide", main, group, home, topic.Title, toTopic, "Talents", null);
                 return;
             }
-            if (pg >= 0 && pg < topic.Pages.Count) SetCrumbs("Guide", home, group, home, topic.Title, toTopic, topic.Pages[pg].Title, null);
-            else SetCrumbs("Guide", home, group, home, topic.Title, null);
+            if (pg >= 0 && pg < topic.Pages.Count) SetCrumbs("Guide", main, group, home, topic.Title, toTopic, topic.Pages[pg].Title, null);
+            else SetCrumbs("Guide", main, group, home, topic.Title, null);
         }
 
         static readonly string[] BuilderClasses = { "Warrior", "Paladin", "Hunter", "Rogue", "Priest", "Shaman", "Mage", "Warlock", "Druid" };
@@ -180,6 +192,8 @@ namespace AzerothLauncher
 
         void SetGuideView(int topic, int page)
         {
+            if (topic <= -2) { if (current != "Guide" || !side.Visible) ShowSection("Guide"); OpenGuideTab(topic); return; }   // a tool's link
+            guideGroupPage = -1;
             gVideo = null;
             gTalents = null;
             gBuilder = false; gPlanner = false;
@@ -318,6 +332,7 @@ namespace AzerothLauncher
                     int ch = (int)(108 * Theme.Zoom);
                     for (int g = 0; g < GuideGroups.Length; g++)
                     {
+                        if (guideGroupPage >= 0 && g != guideGroupPage) continue;
                         var tabs = GroupTabs(g, topics);
                         if (tabs.Count == 0) continue;
                         var head = UI.Text(GuideGroups[g][0], 11, FontStyle.Bold, Theme.Gold, sp.BackColor, 0);
@@ -384,6 +399,18 @@ namespace AzerothLauncher
                     hits.Add(new KeyValuePair<int, int>(t, p));
                     lines.Add(line);
                 }
+            // the tools too (Talent Tree Builder, Gear Planner): first
+            var tools = new[] { new[] { "-2", TalentBuilder, "Pick a class and try out a build of up to 51 points on its three talent trees." },
+                                new[] { "-3", GearPlanner, "Put gear and jewelry on a character sheet like the game's and see what they add." } };
+            for (int k = tools.Length - 1; k >= 0; k--)
+            {
+                string all = (tools[k][1] + " " + tools[k][2] + " theorycrafting").ToLowerInvariant();
+                bool ok = true;
+                foreach (string wd in words) if (all.IndexOf(wd, StringComparison.Ordinal) < 0) { ok = false; break; }
+                if (!ok) continue;
+                hits.Insert(0, new KeyValuePair<int, int>(int.Parse(tools[k][0]), -1));
+                lines.Insert(0, Lang.T(tools[k][2]));
+            }
             if (hits.Count == 0)
             {
                 var none = UI.Text(Lang.T("Nothing in the guide matches") + " \"" + q + "\".", 11, FontStyle.Italic, Theme.GoldDim, sp.BackColor, w - 8, false);
@@ -395,6 +422,13 @@ namespace AzerothLauncher
             GuideGrid(sp, 4, w, hits.Count, delegate(int i, GuideCard c)
             {
                 var h = hits[i];
+                if (h.Key < 0)
+                {
+                    c.Title = h.Key == -2 ? TalentBuilder : GearPlanner;
+                    c.Desc = GroupName(2) + " · " + lines[i];
+                    c.Pressed += delegate { OpenGuideTab(h.Key); };
+                    return;
+                }
                 GuideTopic topic = topics[h.Key];
                 c.Title = h.Value < 0 ? topic.Title : topic.Pages[h.Value].Title;
                 c.Desc = (h.Value < 0 ? "" : topic.Title + " · ") + lines[i];   // where it is, and the line it was found in
@@ -478,6 +512,40 @@ namespace AzerothLauncher
             var sp = MakeThinScroll(panel, new Rectangle(20, GuideTop, PW - 40, by - 10 - GuideTop), GuideCardBg, Theme.Bronze,
                                     Theme.GoldDim, Theme.Gold);
             GuideBody(sp, inPage ? topic.Title : "Guide", shown);
+            // NEXT at the end of the page: the topic's next page, else the next topic of the same group (New Player's
+            // topics one after the other), so the guide reads in order
+            string nextTitle = null;
+            Action next = null;
+            int t = gTopic;
+            if (inPage && gPage + 1 < topic.Pages.Count)
+            {
+                int np = gPage + 1;
+                nextTitle = topic.Pages[np].Title;
+                next = delegate { SetGuideView(t, np); };
+            }
+            else
+            {
+                var tabs = GroupTabs(GroupOf(topic.Title), topics);
+                int at = tabs.IndexOf(t);
+                if (at >= 0 && at + 1 < tabs.Count)
+                {
+                    int nt = tabs[at + 1];
+                    nextTitle = nt == -2 ? TalentBuilder : nt == -3 ? GearPlanner : topics[nt].Title;
+                    next = delegate { if (nt < 0) OpenGuideTab(nt); else SetGuideView(nt, -1); };
+                }
+            }
+            if (next != null)
+            {
+                int bottom = 0;
+                foreach (Control c in sp.Controls) bottom = Math.Max(bottom, c.Bottom);
+                var nb = new WowButton(Lang.T("NEXT") + ": " + Lang.T(nextTitle).ToUpperInvariant() + " ›", next, 300, 30, 9);
+                nb.Location = new Point(sp.ClientSize.Width - 8 - nb.Width - 10, bottom + 6);
+                sp.Controls.Add(nb);
+                var pad = new Panel();
+                pad.BackColor = sp.BackColor;
+                pad.Bounds = new Rectangle(4, nb.Bottom, 1, 10);
+                sp.Controls.Add(pad);
+            }
         }
 
         void GuideBody(ScrollPanel sp, string crumb, GuidePage page)

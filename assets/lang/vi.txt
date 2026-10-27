@@ -1658,3 +1658,13 @@ CONFLICT: PICK ONE
 = XUNG ĐỘT: CHỌN MỘT
 these two can't be on together: untick the one you don't want.
 = hai addon này không thể bật cùng lúc: bỏ chọn cái bạn không muốn.
+LANGUAGE ›
+= NGÔN NGỮ ›
+OPEN CLOUD SAVE ›
+= MỞ LƯU ĐÁM MÂY ›
+Sync now, the log, and earlier downloads.
+= Đồng bộ ngay, nhật ký và các bản tải trước.
+Turn cloud saving on to keep your save and your addons' settings in Google Drive, OneDrive or Dropbox.
+= Bật lưu đám mây để giữ bản lưu và cài đặt addon của bạn trong Google Drive, OneDrive hoặc Dropbox.
+Disabled when AZS Stats is not active
+= Bị tắt khi AZS Stats chưa bật

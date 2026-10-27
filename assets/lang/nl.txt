@@ -1657,3 +1657,13 @@ CONFLICT: PICK ONE
 = CONFLICT: KIES ER ÉÉN
 these two can't be on together: untick the one you don't want.
 = deze twee kunnen niet tegelijk aan staan: vink de ene uit die je niet wilt.
+LANGUAGE ›
+= TAAL ›
+OPEN CLOUD SAVE ›
+= CLOUDOPSLAG OPENEN ›
+Sync now, the log, and earlier downloads.
+= Nu synchroniseren, het logboek en eerdere downloads.
+Turn cloud saving on to keep your save and your addons' settings in Google Drive, OneDrive or Dropbox.
+= Zet cloudopslag aan om je opslag en de instellingen van je addons in Google Drive, OneDrive of Dropbox te bewaren.
+Disabled when AZS Stats is not active
+= Uitgeschakeld zolang AZS Stats niet actief is

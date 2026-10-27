@@ -1658,3 +1658,13 @@ CONFLICT: PICK ONE
 = KONFLIKT: VYBERTE JEDEN
 these two can't be on together: untick the one you don't want.
 = tyto dva nemohou být zapnuté současně: odškrtněte ten, který nechcete.
+LANGUAGE ›
+= JAZYK ›
+OPEN CLOUD SAVE ›
+= OTEVŘÍT UKLÁDÁNÍ DO CLOUDU ›
+Sync now, the log, and earlier downloads.
+= Synchronizovat teď, protokol a dřívější stažení.
+Turn cloud saving on to keep your save and your addons' settings in Google Drive, OneDrive or Dropbox.
+= Zapněte ukládání do cloudu, abyste měli uloženou hru a nastavení doplňků v Google Drive, OneDrive nebo Dropboxu.
+Disabled when AZS Stats is not active
+= Vypnuto, dokud není AZS Stats aktivní

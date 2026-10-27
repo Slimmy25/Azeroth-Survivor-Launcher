@@ -1658,3 +1658,13 @@ CONFLICT: PICK ONE
 = ขัดแย้ง: เลือกหนึ่งอัน
 these two can't be on together: untick the one you don't want.
 = สองตัวนี้เปิดพร้อมกันไม่ได้: เอาเครื่องหมายออกจากตัวที่ไม่ต้องการ
+LANGUAGE ›
+= ภาษา ›
+OPEN CLOUD SAVE ›
+= เปิดเซฟคลาวด์ ›
+Sync now, the log, and earlier downloads.
+= ซิงก์ตอนนี้ บันทึก และไฟล์ที่ดาวน์โหลดก่อนหน้า
+Turn cloud saving on to keep your save and your addons' settings in Google Drive, OneDrive or Dropbox.
+= เปิดเซฟคลาวด์เพื่อเก็บเซฟและการตั้งค่าแอดออนไว้ใน Google Drive, OneDrive หรือ Dropbox
+Disabled when AZS Stats is not active
+= ปิดใช้งานเมื่อ AZS Stats ไม่ได้เปิดอยู่

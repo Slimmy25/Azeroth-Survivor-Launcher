@@ -371,8 +371,15 @@ namespace AzerothLauncher
                 ShowWindowFront();
                 return;
             }
+            if (name == "Stats" && !StatsAddonActive())     // the Stats page needs AZS Stats on
+            {
+                SetStatus(StatsNeedAddon);
+                if (current == "Stats") { current = null; ShowSection("Community"); }
+                return;
+            }
             if (name == "Guide" && current == "Guide" && side.Visible)   // the Guide's button again: back to its main page
             {
+                guideGroupPage = -1;
                 gTopic = -1; gPage = -1; guideQuery = ""; gBuilder = false; gPlanner = false; gTalents = null; gVideo = null; guideMain = true;
                 BuildPanel("Guide");
                 return;
@@ -444,6 +451,7 @@ namespace AzerothLauncher
                 panel.ResumeLayout();
                 if (freeze) Freeze(false);
             }
+            if (name == "Addons") RefreshGates();             // AZS Stats switched on or off: the Stats buttons follow
         }
 
         public void RebuildCurrent()
@@ -502,6 +510,8 @@ namespace AzerothLauncher
             if (LeaveCommunityVideo()) return;
             if (current == "Community" && communityMore) { communityMore = false; BuildPanel("Community"); return; }
             if (current == "Addons" && addonMode == "download") { SetAddonMode("installed"); return; }
+            if (current == "Options" && optionsLang) { optionsLang = false; BuildPanel("Options"); return; }
+            if (current == "Cloud Save") { optionsTab = 1; optionsLang = false; ShowSection("Options"); return; }
             if (current == "Changelog")
             {
                 if (clView >= 0) { SetChangelogView(ClList); return; }
@@ -519,6 +529,7 @@ namespace AzerothLauncher
                     return;
                 }
                 if (guideQuery.Length > 0) { guideQuery = ""; SetGuideView(guideLastTopic, -1); return; }
+                if (guideGroupPage >= 0) { GuideMainPage(); return; }   // a group's page: back to every group
             }
             CloseSide();
         }
@@ -1397,6 +1408,7 @@ namespace AzerothLauncher
             }
             cb.ForeColor = want ? Theme.Text : Theme.GoldDim;
             UpdateAddonCount();
+            RefreshGates();                                  // the Stats buttons follow AZS Stats
             if (!want && conflicted != null && conflicted.Contains(name))
             {
                 BuildPanel("Addons");                        // the conflict is settled: the rows go back in A to Z order
@@ -1519,6 +1531,7 @@ namespace AzerothLauncher
         void PanelCloud()
         {
             ClearPanel("Cloud Save");
+            SetCrumbs("Options", (Action)delegate { optionsTab = 1; optionsLang = false; ShowSection("Options"); }, "Cloud Save", null);
             if (!CloudEnabled())
             {
                 var t = PutText("Cloud saving is turned off.\nYour progress stays on this PC only.", 12, FontStyle.Regular,
@@ -1567,8 +1580,11 @@ namespace AzerothLauncher
 
         // ------------------------------------------------------------------ Options
         // Options: a bar of tabs across the top (beside the back arrow) and one short page per tab
-        static readonly string[] OptionTabs = { "FOLDERS", "GAME", "GENERAL", "LANGUAGE", "LAUNCHER" };
+        // FOLDERS, CLOUD SAVE (its settings and its page), GRAPHICS and GAMEPLAY (the game's own settings), LAUNCHER (how
+        // the launcher behaves, its language, About, setup)
+        static readonly string[] OptionTabs = { "FOLDERS", "CLOUD SAVE", "GRAPHICS", "GAMEPLAY", "LAUNCHER" };
         int optionsTab;
+        bool optionsLang;                                     // Options › Launcher › Language: the list of languages
 
         ScrollPanel optionsPage;                             // the page shown, so a rebuild of the same tab keeps its place
         int optionsPageTab = -1;
@@ -1582,21 +1598,25 @@ namespace AzerothLauncher
             for (int i = 0; i < OptionTabs.Length; i++)
             {
                 int n = i;
-                var b = new WowButton(OptionTabs[i], delegate { optionsTab = n; BuildPanel("Options"); }, (int)((cw - 6) / Theme.Zoom), 32, 10);
+                var b = new WowButton(OptionTabs[i], delegate { optionsTab = n; optionsLang = false; BuildPanel("Options"); }, (int)((cw - 6) / Theme.Zoom), 32, 10);
                 b.Selected = i == optionsTab;
                 Put(b, x0 + i * cw, 8);
             }
             int top0 = 8 + (int)(32 * Theme.Zoom) + 6;
+            if (optionsLang)
+                SetCrumbs("Options", (Action)delegate { optionsLang = false; optionsTab = 0; BuildPanel("Options"); },
+                          "Launcher", (Action)delegate { optionsLang = false; BuildPanel("Options"); }, "Language", null);
             var sp = MakeScroll(panel, new Rectangle(8, top0, PW - 16, PH - 8 - top0), Theme.Panel, Theme.Panel);
             int pageW = sp.ClientSize.Width + 16;             // the page's width, in the same terms as the section's
             putInto = sp;
             try
             {
                 int end;
-                if (optionsTab == 0) end = OptionsFolders(pageW);
-                else if (optionsTab == 1) end = OptionsGame(pageW);
-                else if (optionsTab == 2) end = OptionsGeneral(pageW);
-                else if (optionsTab == 3) end = OptionsLanguage(pageW);
+                if (optionsLang) end = OptionsLanguage(pageW);
+                else if (optionsTab == 0) end = OptionsFolders(pageW);
+                else if (optionsTab == 1) end = OptionsCloud(pageW);
+                else if (optionsTab == 2) end = OptionsGame(pageW, new[] { "DISPLAY", "GRAPHICS" });
+                else if (optionsTab == 3) end = OptionsGame(pageW, new[] { "GAMEPLAY", "SOUND" });
                 else end = OptionsLauncher(pageW);
                 var pad = new Panel();
                 pad.BackColor = Theme.Panel;
@@ -1626,7 +1646,6 @@ namespace AzerothLauncher
             rows.Add(new object[] { "Game folder", GameDir(), new Action(ChooseGameFolderButton) });
             rows.Add(new object[] { "Save game folder", ss.SaveDir, new Action(ChooseSaveDir) });
             rows.Add(new object[] { "Game config folder (AddOns, addon settings)", ss.ConfigDir, new Action(ChooseConfigDir) });
-            if (CloudEnabled()) rows.Add(new object[] { "Sync folder (inside your cloud drive)", Cfg.Str("cloud_dir"), new Action(ChooseCloudDir) });
             int y = 6;
             foreach (var r in rows)
             {
@@ -1645,14 +1664,35 @@ namespace AzerothLauncher
             Put(new WowButton("IMPORT", delegate { if (ImportSave(side, SyncSettings().SaveDir) != null) SetStatus("Save imported."); }, 100, 28, 9),
                 PW - 20 - (int)(100 * Theme.Zoom), y + Math.Max(0, (ih - 28) / 2));
             y = Math.Max(BottomOf(inote), y + 30) + 5;
-            Put(UI.Line(Theme.Bronze, PW - 40, 1), 20, y + 4);
-            y += 14;
-            return OptionCheck("Cloud saving", CloudEnabled(), y, delegate(bool on) { SetCloudEnabled(on); });
+            return y;
+        }
+
+        // CLOUD SAVE: cloud saving on or off, its sync folder, and its page (sync now, the log, earlier downloads)
+        int OptionsCloud(int PW)
+        {
+            int y = 6;
+            y = OptionCheck("Cloud saving", CloudEnabled(), y, delegate(bool on) { SetCloudEnabled(on); });
+            if (!CloudEnabled())
+            {
+                var off = PutText("Turn cloud saving on to keep your save and your addons' settings in Google Drive, OneDrive or Dropbox.",
+                                  9.5f, FontStyle.Italic, Theme.GoldDim, 20, y + 2, PW - 40);
+                return BottomOf(off);
+            }
+            y += 6;
+            var lab = PutText("Sync folder (inside your cloud drive)", 11, FontStyle.Bold, Theme.Gold, 20, y, PW - 160);
+            string v = Cfg.Str("cloud_dir");
+            var val = PutText(string.IsNullOrEmpty(v) ? Lang.T("(not set)") : v, 9, FontStyle.Regular, Theme.LinkBlue, 20, BottomOf(lab), PW - 160, false);
+            Put(new WowButton("CHANGE", ChooseCloudDir, 100, 28, 9), PW - 20 - (int)(100 * Theme.Zoom), y + Math.Max(0, (BottomOf(val) - y - 28) / 2));
+            y = Math.Max(BottomOf(val), y + 30) + 10;
+            var open = Put(new WowButton("OPEN CLOUD SAVE ›", delegate { ShowSection("Cloud Save"); }, 220, 32, 10), 20, y);
+            var note = PutText("Sync now, the log, and earlier downloads.", 9.5f, FontStyle.Italic, Theme.GoldDim,
+                               20 + open.Width + 12, y + 4, PW - 40 - open.Width - 12);
+            return Math.Max(BottomOf(open), BottomOf(note)) + 6;
         }
 
         // GAME: the game's own settings (display mode, window size, graphics, sound), written into its config.toml;
         // the game reads them when it starts
-        int OptionsGame(int PW)
+        int OptionsGame(int PW, string[] groups)
         {
             string file = GameSettings.FileIn(SyncSettings().ConfigDir);
             var now = GameSettings.Read(file);
@@ -1682,6 +1722,7 @@ namespace AzerothLauncher
             string group = null;
             foreach (GameSetting gs in GameSettings.All)
             {
+                if (Array.IndexOf(groups, gs.Group) < 0) continue;   // GRAPHICS: display and graphics; GAMEPLAY: gameplay and sound
                 string cur = GameSettings.Value(now, gs);
                 GameSetting g = gs;
                 if (gs.Group != group)                       // a heading for each group: DISPLAY, GRAPHICS, SOUND, GAMEPLAY
@@ -1743,20 +1784,9 @@ namespace AzerothLauncher
             return string.Equals(a.Trim(), b.Trim(), StringComparison.OrdinalIgnoreCase);
         }
 
-        // GENERAL: how the launcher behaves, the Stats page, and the play time AZS Stats counts
-        int OptionsGeneral(int PW)
+        // the play time AZS Stats counts (at the end of LAUNCHER)
+        int OptionsPlayTime(int PW, int y)
         {
-            int y = 6;
-            y = OptionCheck("Close button hides the launcher to the tray", Cfg.Bool("close_to_tray", true), y,
-                            delegate(bool on) { Cfg.Set("close_to_tray", on); Cfg.Save(); });
-            y = OptionCheck("Minimize the launcher when the game starts", Cfg.Bool("minimize_on_play", true), y,
-                            delegate(bool on) { Cfg.Set("minimize_on_play", on); Cfg.Save(); });
-            y = OptionCheck("Show the Stats section (your play time and run records)", StatsEnabled(), y,
-                            delegate(bool on) { SetStatsEnabled(on); });
-            y = OptionCheck("Show play time on the home screen", Cfg.Bool("home_playtime", true), y,
-                            delegate(bool on) { Cfg.Set("home_playtime", on); Cfg.Save(); Invalidate(); });
-            Put(UI.Line(Theme.Bronze, PW - 40, 1), 20, y + 4);
-            y += 14;
             var head = PutText("Play time", 11, FontStyle.Bold, Theme.Gold, 20, y, 0);
             PlayStats ps = ShownPlayStats();
             long sessions = ps.Sessions;
@@ -1796,9 +1826,24 @@ namespace AzerothLauncher
                 var t = PutText(note, 9.5f, FontStyle.Italic, Theme.GoldDim, 20 + b.Width + 12, y + 2, PW - 40 - b.Width - 12);
                 y = Math.Max(BottomOf(b), BottomOf(t)) + 8;
             };
+            // how the launcher behaves (was GENERAL)
+            y = OptionCheck("Close button hides the launcher to the tray", Cfg.Bool("close_to_tray", true), y,
+                            delegate(bool on) { Cfg.Set("close_to_tray", on); Cfg.Save(); });
+            y = OptionCheck("Minimize the launcher when the game starts", Cfg.Bool("minimize_on_play", true), y,
+                            delegate(bool on) { Cfg.Set("minimize_on_play", on); Cfg.Save(); });
+            y = OptionCheck("Show the Stats section (your play time and run records)", StatsEnabled(), y,
+                            delegate(bool on) { SetStatsEnabled(on); });
+            y = OptionCheck("Show play time on the home screen", Cfg.Bool("home_playtime", true), y,
+                            delegate(bool on) { Cfg.Set("home_playtime", on); Cfg.Save(); Invalidate(); });
+            Put(UI.Line(Theme.Bronze, PW - 40, 1), 20, y + 4);
+            y += 14;
+            string langName = Lang.Code;
+            foreach (var kv in Lang.Available()) if (kv.Key == Lang.Code) langName = kv.Value;
+            row("LANGUAGE ›", delegate { optionsLang = true; BuildPanel("Options"); }, langName);
             row("ABOUT LAUNCHER", delegate { ShowSection("About Launcher"); }, "What the launcher does.");
             row("RUN SETUP AGAIN", delegate { RunSetup(); }, "Asks again about your save, folders, cloud saving and addons. Nothing is downloaded.");
-            return y;
+            Put(UI.Line(Theme.Bronze, PW - 40, 1), 20, y + 4);
+            return OptionsPlayTime(PW, y + 14);
         }
 
         // the game folder: one that holds the game is the same as installing it (there is no "install from a file")

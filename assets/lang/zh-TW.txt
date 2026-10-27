@@ -1658,3 +1658,13 @@ CONFLICT: PICK ONE
 = 衝突：選一個
 these two can't be on together: untick the one you don't want.
 = 這兩個不能同時開啟：取消勾選你不想要的那個。
+LANGUAGE ›
+= 語言 ›
+OPEN CLOUD SAVE ›
+= 開啟雲端存檔 ›
+Sync now, the log, and earlier downloads.
+= 立即同步、日誌和之前的下載。
+Turn cloud saving on to keep your save and your addons' settings in Google Drive, OneDrive or Dropbox.
+= 開啟雲端存檔，把你的存檔和插件設定保存在 Google Drive、OneDrive 或 Dropbox 中。
+Disabled when AZS Stats is not active
+= AZS Stats 未啟用時無法使用
