@@ -84,21 +84,27 @@ def main():
     debug.append("amulet rows: %d" % len(amulet_rows))
     for x in amulet_rows:
         debug.append("  %x %s | %s | %s | %d %d %d" % x)
+    # each amulet's lines: 36 bytes each; kind 0x30 is a plain bonus (its number and which stat), any other kind is
+    # one of the game's special effects (described in game)
+    amulet_lines = {}
     for x in amulet_rows:
         ptr, cnt = x[4], x[5]
+        lines = []
         for i in range(cnt):
-            q = ptr + 40 * i
-            debug.append("  effect %s %d: %s" % (x[1], i, " ".join(
-                ("%x" % u(q + 4 * j)) + ("=%g" % f(q + 4 * j) if 0x30000000 < u(q + 4 * j) < 0x48000000 else "") for j in range(10))))
-    # the texts the amulets' lines use: a table of (pointer, length) to texts with "{p}"
-    tmpl = []
-    for r in range(1048576, len(mem) - 8, 4):
-        t = s(u(r), u(r + 4))
-        if t and "{p}" in t and len(t) < 120:
-            tmpl.append((r, t))
-    debug.append("templates: %d" % len(tmpl))
-    for r, t in tmpl[:80]:
-        debug.append("  tmpl %x %s" % (r, t))
+            q = ptr + 36 * i
+            if u(q) == 0x30:
+                lines.append("%d=%g" % (u(q + 8), f(q + 4)))
+            else:
+                lines.append("special")
+                debug.append("  special %s: %s" % (x[1], " ".join("%x" % u(q + 4 * j) for j in range(9))))
+        amulet_lines[x[1]] = (x[3], x[6], lines)
+    # the stats' texts, in the game's order (the order is the stat's number): "Increases all damage you deal by {p}."
+    stats = []
+    first = "Increases all damage you deal by {p}."
+    m = re.search(r"Reduces the cooldown of your spells by \{p\}\.[\x20-\x7e]*", text)
+    if m and first in text:
+        stats = [first] + re.split(r"(?<=\.)(?=[A-Z])", m.group(0))
+    debug.append("stat texts: %d" % len(stats))
     amulets = sorted((k[7:], v) for k, v in en.items() if k.startswith("amulet."))
 
     # ---- the class sets: five (name, length, "of" flag) entries in a row, the first the class's common set
@@ -144,18 +150,23 @@ def main():
             pvp.append((cid, s(u(r), u(r + 4)), horde, weapons))
             debug.append("pvp row %x class %d: %s / %s %s" % (r, cid, fm, horde, weapons))
 
-    # ---- drop chances: a run of decreasing shares from 60% to 20%
+    # ---- drop chances: Common, Uncommon, Rare, Epic, Legendary, PvP (60% down to 20%)
+    chances = None
     for r in range(1048576, len(mem) - 24, 4):
         v = [f(r + 4 * i) for i in range(6)]
         if abs(v[0] - 0.6) < 1e-6 and (abs(v[1] - 0.5) < 1e-6 or abs(v[5] - 0.2) < 1e-6 or abs(v[2] - 0.5) < 1e-6):
             debug.append("chances at %x: %s" % (r, v))
+            if chances is None and abs(v[1] - 0.5) < 1e-6 and abs(v[4] - 0.2) < 1e-6:
+                chances = v
 
     # ---- write assets/items.txt
     out = ["Items of Azeroth Survivors, read from the game itself at wow.aethus.pl by tools/game_items.py.",
            "Do not edit by hand: run the tool again after a game update. Gear bonuses are in gear-stats.txt.",
            "@jewelry  key | Name | Icon | kind | stat | value | text   (kind: ring, trinket; value: {v} at its first pick)",
            "@set  class | rarity | set name | of   (of = 1: \"Gloves of Faith\", 0: \"Devout Leggings\")",
-           "@noun  armor | slot | noun      @weapon  class | weapon | rarity | name", "==="]
+           "@noun  armor | slot | noun      @weapon  class | weapon | rarity | name",
+           "@amulet  key | Name | Icon | tier | lines (stat=value, or special)      @stat  number | text",
+           "@chance  rarity | share      @pvp  class | Alliance | Horde | weapons (Alliance / Horde)", "==="]
     out.append("@jewelry")
     seen = set()
     for _, k, n, ic, t, v, kind in jewels:
@@ -165,7 +176,11 @@ def main():
         out.append(" | ".join([k, n, ic, "ring" if kind < 0x100 else "trinket", str(kind), "%g" % v, t]))
     out.append("@amulet")
     for key, name in amulets:
-        out.append("%s | %s" % (key, name))
+        icon, tier, lines = amulet_lines.get(key, ("", 0, []))
+        out.append(" | ".join([key, name, icon, str(tier)] + lines))
+    out.append("@stat")
+    for i, t in enumerate(stats):
+        out.append("%d | %s" % (i, t))
     out.append("@set")
     for cls in CLASSES:
         for i in range(5):
@@ -185,6 +200,9 @@ def main():
                 n = en.get("weapon.%s.%d.%d" % (cls, w, i))
                 if n:
                     out.append(" | ".join([cls, str(w), RARITIES[i], n]))
+    out.append("@chance")
+    for name, v in zip(RARITIES + ["PvP"], chances or []):
+        out.append("%s | %g" % (name, round(v, 4)))
     out.append("@pvp")
     for cid, a, h, weapons in sorted(pvp):
         cls = CLASSES[cid - 1] if cid <= len(CLASSES) else str(cid)
