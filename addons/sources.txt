@@ -12,10 +12,7 @@
 # The launcher's Download More list (assets/addons.txt) points at:
 #   https://github.com/Slimmy25/Azeroth-Survivor-Launcher-Releases/releases/download/addons/<file name>
 
-DBM-by-Gabriellus.zip           | hosted
-Death-Recap-by-Fotze.zip        | hosted
 Azerloot-by-KindaGray.zip       | github-latest:Kindagrey/Azerloot
-Chest-GPS-by-Fotze.zip          | hosted
 SurvivorsDragonUi-by-Mxgwyn.zip | https://github.com/migwynkriid13/SurvivorsDragonUi/releases/latest/download/SurvivorsDragonUi.zip
 # Survivor UI: always the addon zip (SurvivorUI-v<version>.zip), never the SurvivorUI-Installer.zip next to it
 Survivor-UI-by-morderous.zip    | github-latest:morderous/survivor-ui:SurvivorUI-v
