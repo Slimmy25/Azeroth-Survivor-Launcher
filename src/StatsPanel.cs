@@ -185,13 +185,28 @@ namespace AzerothLauncher
             }
             if (off) y = Place(sp, Note(null, "The AZS Stats addon is turned off. Turn it on in Addons to keep recording your runs.", Theme.Bad), w, y);
 
-            // --- the tabs
-            var tabs = new TabsBlock();
-            foreach (string t in StatTabs) tabs.Tabs.Add(Lang.T(t));
-            tabs.Active = statsTab;
+            // --- the tabs: no row of them, the tab is the last step of the path at the top (Stats › Priest › Records ▾),
+            // its list the other tabs
             string clsKey = cls != null ? cls.Key : null;
-            tabs.Picked = delegate(int i) { SetStatsView(clsKey, i); };
-            y = Place(sp, tabs, w, y);
+            var tabMenu = new List<KeyValuePair<string, Action>>();
+            for (int ti = 0; ti < StatTabs.Length; ti++)
+            {
+                int n = ti;
+                tabMenu.Add(new KeyValuePair<string, Action>(StatTabs[ti], delegate { SetStatsView(clsKey, n); }));
+            }
+            if (cls != null)
+            {
+                var classes = new List<KeyValuePair<string, Action>>();
+                foreach (var c in st.Classes) { string key = c.Key; classes.Add(new KeyValuePair<string, Action>(c.Name, delegate { SetStatsView(key, statsTab); })); }
+                SetCrumbs("Stats", (Action)delegate { SetStatsView(null, 1); }, cls.Name, (Action)delegate { SetStatsView(clsKey, 0); }, StatTabs[statsTab], null);
+                SetCrumbMenu(1, classes);
+                SetCrumbMenu(2, tabMenu);
+            }
+            else
+            {
+                SetCrumbs("Stats", (Action)delegate { SetStatsView(null, 0); }, StatTabs[statsTab], null);
+                SetCrumbMenu(1, tabMenu);
+            }
             if (statsTab == 0) y = Place(sp, hero, w, y);
 
             StatBlock b = cls ?? st.Total;

@@ -1753,15 +1753,8 @@ namespace AzerothLauncher
             // a setting changed on this tab rebuilds it: it stays where it was scrolled to
             int keep = optionsPage != null && !optionsPage.IsDisposed && optionsPageTab == optionsTab ? -optionsPage.AutoScrollPosition.Y : 0;
             ClearPanel("Options");
-            int x0 = 20, wAll = PW - 20 - x0, cw = wAll / OptionTabs.Length;
-            for (int i = 0; i < OptionTabs.Length; i++)
-            {
-                int n = i;
-                var b = new WowButton(OptionTabs[i], delegate { optionsTab = n; optionsLang = false; BuildPanel("Options"); }, (int)((cw - 6) / Theme.Zoom), 32, 10);
-                b.Selected = i == optionsTab;
-                Put(b, x0 + i * cw, 8);
-            }
-            int top0 = 8 + (int)(32 * Theme.Zoom) + 6;
+            // no row of tabs: the tab is a step of the path at the top (Options › Folders ▾), its list the other tabs
+            int top0 = 4;
             if (!optionsLang)
             {
                 SetCrumbs("Options", (Action)delegate { optionsLang = false; optionsTab = 0; BuildPanel("Options"); },

@@ -64,3 +64,5 @@ the launcher is to use.
 - Guide search: typing no longer jumps to a page at the first letter. A list of suggestions opens under the box as you
   type (topics, pages and the Guide's spells, items, zones and races); click one to go there, or press Enter (or pick
   the last line) to see every page your words are found in.
+- Options and STATS have no row of tabs any more: the tab is a step of the path at the top (Options › Folders,
+  Stats › Priest › Records). Hover or click it for the list of the other tabs. The page gets that room.
