@@ -1756,3 +1756,5 @@ The bonuses of everything chosen, added together, with the set bonuses reached. 
 = चुनी गई हर चीज़ के बोनस एक साथ, हासिल सेट बोनस के साथ। सितारा जोड़ने के लिए किसी टुकड़े पर क्लिक करें (5 तक, फिर वापस 0); हटाने के लिए राइट-क्लिक करें।
 Stars decide which set bonuses you reach. What a star adds to a piece is not disclosed by the game, so it is not counted here.
 = सितारे तय करते हैं कि आप कौन से सेट बोनस हासिल करते हैं। एक सितारा किसी टुकड़े में क्या जोड़ता है, गेम नहीं बताता, इसलिए यहाँ इसे नहीं गिना जाता।
+Stars decide which set bonuses you reach. How much each star adds to a piece is not known yet, so it is not counted here.
+= सितारे तय करते हैं कि आप कौन से सेट बोनस हासिल करते हैं। हर सितारा किसी टुकड़े में कितना जोड़ता है, यह अभी पता नहीं, इसलिए यहाँ इसे नहीं गिना जाता।

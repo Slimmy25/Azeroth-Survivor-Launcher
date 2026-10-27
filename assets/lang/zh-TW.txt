@@ -1756,3 +1756,5 @@ The bonuses of everything chosen, added together, with the set bonuses reached. 
 = 所選全部裝備的加成總和，包括已達成的套裝加成。點擊裝備可加一顆星（最多 5 顆，之後歸 0）；右鍵點擊可卸下。
 Stars decide which set bonuses you reach. What a star adds to a piece is not disclosed by the game, so it is not counted here.
 = 星級決定你能達成哪些套裝加成。遊戲沒有公開一顆星會為裝備增加多少，因此這裡不計算。
+Stars decide which set bonuses you reach. How much each star adds to a piece is not known yet, so it is not counted here.
+= 星級決定你能達成哪些套裝加成。每顆星為裝備增加多少目前尚不清楚，因此這裡不計算。

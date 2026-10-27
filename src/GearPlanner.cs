@@ -2,7 +2,7 @@
 // out like the game's own (C), and see what they add: the sheet's stats and the Run Stats panel beside it.
 // The numbers are the bonuses added together (Items.cs), with the 4-piece bonus of every set worn at 4 pieces of 1+ stars
 // (two sets of four give both). A click on a piece adds a star (5 at most, then back to 0): stars decide the set bonuses
-// reached; what a star adds to a piece the game does not disclose, so it is not counted. A piece whose bonuses are not
+// reached; what a star adds to a piece is not known yet, so it is not counted. A piece whose bonuses are not
 // known yet adds nothing.
 using System;
 using System.Collections.Generic;

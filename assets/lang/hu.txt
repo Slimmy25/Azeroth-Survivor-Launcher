@@ -1756,3 +1756,5 @@ The bonuses of everything chosen, added together, with the set bonuses reached. 
 = Az összes kiválasztott darab bónusza összeadva, az elért szettbónuszokkal. Kattints egy darabra csillag hozzáadásához (legfeljebb 5, utána vissza 0-ra); jobb kattintással leveheted.
 Stars decide which set bonuses you reach. What a star adds to a piece is not disclosed by the game, so it is not counted here.
 = A csillagok döntik el, mely szettbónuszokat éred el. Hogy egy csillag mit ad egy darabhoz, a játék nem árulja el, ezért itt nem számít bele.
+Stars decide which set bonuses you reach. How much each star adds to a piece is not known yet, so it is not counted here.
+= A csillagok döntik el, mely szettbónuszokat éred el. Hogy egy-egy csillag mennyit ad egy darabhoz, még nem ismert, ezért itt nem számít bele.

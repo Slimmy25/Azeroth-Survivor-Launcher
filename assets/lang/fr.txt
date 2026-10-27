@@ -1755,3 +1755,5 @@ The bonuses of everything chosen, added together, with the set bonuses reached. 
 = Les bonus de tout ce qui est choisi, additionnés, avec les bonus d'ensemble atteints. Cliquez sur une pièce pour ajouter une étoile (jusqu'à 5, puis retour à 0) ; clic droit pour la retirer.
 Stars decide which set bonuses you reach. What a star adds to a piece is not disclosed by the game, so it is not counted here.
 = Les étoiles décident des bonus d'ensemble atteints. Le jeu ne révèle pas ce qu'une étoile ajoute à une pièce, donc ce n'est pas compté ici.
+Stars decide which set bonuses you reach. How much each star adds to a piece is not known yet, so it is not counted here.
+= Les étoiles décident des bonus d'ensemble atteints. On ne sait pas encore ce que chaque étoile ajoute à une pièce, donc ce n'est pas compté ici.

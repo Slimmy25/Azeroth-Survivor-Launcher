@@ -204,10 +204,10 @@ local function Choices(class, slot)
 end
 
 -- the totals: the pieces' bonuses, and the 4-piece bonus of every set worn at 4 pieces of 1+ stars (two sets of four give
--- both). Stars decide the set bonuses reached; what a star adds to a piece the game does not disclose, so it is not
+-- both). Stars decide the set bonuses reached; what a star adds to a piece is not known yet, so it is not
 -- counted. worn[rarity] = { pieces, at 1+ stars, at 3+, at 5 }
 local WEAPON_SLOTS = { ["Main Hand"] = true, ["Off Hand"] = true, ["Ranged"] = true };
-local STARS_NOT_COUNTED = "Stars decide which set bonuses you reach. What a star adds to a piece is not disclosed by the game, so it is not counted here.";
+local STARS_NOT_COUNTED = "Stars decide which set bonuses you reach. How much each star adds to a piece is not known yet, so it is not counted here.";
 local function Totals(class)
 	local t, health, unknown, worn = {}, 0, 0, {};
 	for slot, p in pairs(planner.slots) do

@@ -401,8 +401,8 @@ namespace AzerothLauncher
         }
 
         // Stars (0 to 5, every piece, weapons too) decide which set bonuses a set reaches. What a star adds to a piece's
-        // own numbers, and what it costs, the game does not disclose: nothing here counts it.
-        public const string StarsNotCounted = "Stars decide which set bonuses you reach. What a star adds to a piece is not disclosed by the game, so it is not counted here.";
+        // own numbers, and what it costs, is not known yet: nothing here counts it.
+        public const string StarsNotCounted = "Stars decide which set bonuses you reach. How much each star adds to a piece is not known yet, so it is not counted here.";
 
         public static List<GearPiece> GearOf(string cls, string slot)
         {

@@ -1756,3 +1756,5 @@ The bonuses of everything chosen, added together, with the set bonuses reached. 
 = Бонусы всего выбранного вместе, с достигнутыми бонусами комплектов. Щёлкните по предмету, чтобы добавить звезду (до 5, затем снова 0); правый щелчок снимает его.
 Stars decide which set bonuses you reach. What a star adds to a piece is not disclosed by the game, so it is not counted here.
 = Звёзды определяют, каких бонусов комплектов вы достигаете. Что звезда добавляет предмету, игра не раскрывает, поэтому здесь это не учитывается.
+Stars decide which set bonuses you reach. How much each star adds to a piece is not known yet, so it is not counted here.
+= Звёзды определяют, каких бонусов комплектов вы достигаете. Сколько каждая звезда добавляет предмету, пока неизвестно, поэтому здесь это не учитывается.
