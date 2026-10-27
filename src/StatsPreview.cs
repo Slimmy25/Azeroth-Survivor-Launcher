@@ -118,6 +118,36 @@ namespace AzerothLauncher
                     PreviewShot(app, Path.Combine(outDir, "guide-builder.png"));
                     app.gBuilder = false;
                 }
+                {   // the Gear Planner: a Priest in the Faith set with some jewelry
+                    app.current = "Guide";
+                    app.ShowSide();
+                    app.gTopic = -1; app.gPage = -1; app.gTalents = null; app.gBuilder = false; app.gPlanner = true;
+                    app.plannerClass = "Priest";
+                    app.plannerSlots.Clear();
+                    foreach (var p in Items.Gear)
+                        if (p.Class == "Priest" && p.Rarity == "Legendary") app.plannerSlots[p.Slot == "Main Hand" ? "Main Hand" : p.Slot] = p;
+                    foreach (var j in Items.Jewelry)
+                    {
+                        if (j.Key == "accuria") app.plannerSlots["Finger 1"] = j;
+                        if (j.Key == "dragonslayer") app.plannerSlots["Finger 2"] = j;
+                        if (j.Key == "hoj") app.plannerSlots["Trinket 1"] = j;
+                        if (j.Key == "prestor") app.plannerSlots["Neck"] = j;
+                    }
+                    app.BuildPanel("Guide");
+                    Application.DoEvents();
+                    PreviewShot(app, Path.Combine(outDir, "guide-planner.png"));
+                    app.gPlanner = false;
+                    // the Items topic's Priest page
+                    int items = Data.Guide.FindIndex(delegate(GuideTopic g) { return g.Title == "Items"; });
+                    if (items >= 0)
+                        foreach (int pg in new[] { 0, 5 })
+                        {
+                            app.gTopic = items; app.gPage = pg; app.guideMain = false;
+                            app.BuildPanel("Guide");
+                            Application.DoEvents();
+                            PreviewShot(app, Path.Combine(outDir, "guide-items-" + pg + ".png"));
+                        }
+                }
                 {   // the Warrior's talent trees with a test build
                     app.current = "Guide";
                     app.ShowSide();
