@@ -1722,3 +1722,21 @@ Graphics
 = 그래픽
 The bonuses of everything chosen, added together, at 0 stars: stars and set bonuses are not counted.
 = 선택한 모든 장비의 보너스 합계(별 0개 기준): 별과 세트 보너스는 포함되지 않습니다.
+4 pieces at 1+ stars
+= 별 1개 이상 장비 4개
+all 8 at 3+ stars, half again as strong at 5
+= 8개 모두 별 3개 이상, 별 5개면 1.5배 강력
+Set bonuses
+= 세트 보너스
+Stars
+= 별
+stars
+= 별
+The bonuses of everything chosen, added together, with each piece's stars and the set bonuses reached. A number marked ~ is an estimate.
+= 선택한 모든 장비의 보너스 합계(각 장비의 별과 달성한 세트 보너스 포함). ~ 표시가 있는 숫자는 추정치입니다.
+empowered
+= 강화됨
+estimate
+= 추정치
+not entered yet
+= 아직 입력되지 않음

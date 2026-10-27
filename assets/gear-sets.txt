@@ -1,0 +1,49 @@
+Set bonuses, entered by hand from the game's own armory (0.121.0): the set box on an armor piece's card.
+@four   rarity | text | stat=value, ...    the 4-piece bonus, the same for every class (4 armor pieces of the set at 1+
+        stars). The stats are those the Gear Planner can add; a bonus with a condition is text only.
+@eight  class | rarity | text               the 8-piece bonus (all 8 armor pieces at 3+ stars; empowered at 5 stars on all
+        eight: half again as strong). Each class's own: a class not entered yet shows "not entered yet".
+@stars  rarity | 1 | 2 | 3 | 4 | 5          what each star adds to the piece's own bonuses, in percent of its 0-star
+        numbers. "top": the 5th star lifts the piece to 95% of the same slot's 5-star tier 3 (Legendary) piece.
+        Known from the patch notes: 5 stars make tier 3 60% stronger, and the 5th star of a lower set lifts it to 95%
+        of 5-star tier 3. Stars 1 to 4 are ESTIMATES (an even 12% a star) until the game's "Next star adds" is read.
+Lines starting with # and everything above the first === line are ignored.
+===
+@four
+Common | +25% gold, +30% pickup range | gold=25, pickup=30
+Uncommon | 1.5% max health per second after 3 seconds unhurt |
+Rare | +1 target to every ability | targets=1
+Epic | 6% chance for an ability to strike twice | echo=6
+PvP | +12% damage reduction with 5 or more enemies close |
+Legendary | +30% critical damage | critdmg=30
+
+@eight
+# Priest: Acolyte's, Devout, Prophecy, Transcendence, Field Marshal's, Faith
+priest | Common | Smite leaps to a second enemy for 50% of its damage.
+priest | Uncommon | When Power Word: Shield breaks it explodes for 200% of what it absorbed on everything within 8 yards.
+priest | Rare | Shadow Word: Pain strikes 2 more enemies and deals 20% more damage.
+priest | Epic | Holy Nova rings twice, the second for 60%, and is 30% wider.
+priest | PvP | Psychic Scream deals 900% more damage and comes back 40% sooner, and you deal 100% more damage to enemies you stun, root, slow or fear.
+priest | Legendary | A Mind Flay kill fires a free Mind Blast, once every 1 sec.
+# Warrior: Recruit's, Valor, Might, Wrath, Field Marshal's, Dreadnaught
+warrior | Common | Cleave strikes 2 more enemies in a 30% wider arc.
+warrior | Uncommon | Thunder Clap claps again for 50% of its damage.
+warrior | Rare | Whirlwind is 50% wider and deals 30% more damage.
+warrior | Epic | Each Bloodthirst hit gives 5% damage for 8 sec, stacking 5 times.
+warrior | PvP | Enemies hit by Mortal Strike take 20% more damage from everything for 4 sec.
+warrior | Legendary | Execute strikes 2 more of the most wounded enemies, and each of its kills takes 0.5 sec off your other spells' cooldowns.
+# Paladin: Squire's, Lightforge, Lawbringer, Judgement, Field Marshal's, Redemption
+paladin | Common | Hammer of Wrath comes back, striking again for 60%.
+paladin | Uncommon | Consecration moves with you and deals 20% more damage.
+paladin | Rare | A Holy Shock kill fires another Holy Shock, once every 1.5 sec.
+paladin | Epic | Enemies killed by Judgement explode for 15% of their max health on everything within 8 yards.
+paladin | PvP | Hammer of Justice strikes 5 more enemies, deals 300% more damage and comes back 40% sooner, and you deal 100% more damage to enemies you stun, root, slow or fear.
+paladin | Legendary | Exorcism leaps to 3 more enemies for 75% of its damage.
+
+@stars
+Common | 12 | 24 | 36 | 48 | top
+Uncommon | 12 | 24 | 36 | 48 | top
+Rare | 12 | 24 | 36 | 48 | top
+Epic | 12 | 24 | 36 | 48 | top
+PvP | 12 | 24 | 36 | 48 | top
+Legendary | 12 | 24 | 36 | 48 | 60

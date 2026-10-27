@@ -1721,3 +1721,21 @@ Graphics
 = Grafis
 The bonuses of everything chosen, added together, at 0 stars: stars and set bonuses are not counted.
 = Bonus semua yang dipilih dijumlahkan, pada 0 bintang: bintang dan bonus set tidak dihitung.
+4 pieces at 1+ stars
+= 4 bagian dengan 1+ bintang
+all 8 at 3+ stars, half again as strong at 5
+= kedelapannya dengan 3+ bintang, 5 bintang setengah kali lebih kuat
+Set bonuses
+= Bonus set
+Stars
+= Bintang
+stars
+= bintang
+The bonuses of everything chosen, added together, with each piece's stars and the set bonuses reached. A number marked ~ is an estimate.
+= Bonus semua yang dipilih dijumlahkan, dengan bintang tiap bagian dan bonus set yang tercapai. Angka bertanda ~ adalah perkiraan.
+empowered
+= diperkuat
+estimate
+= perkiraan
+not entered yet
+= belum dimasukkan

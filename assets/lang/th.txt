@@ -1722,3 +1722,21 @@ Graphics
 = กราฟิก
 The bonuses of everything chosen, added together, at 0 stars: stars and set bonuses are not counted.
 = โบนัสของทุกชิ้นที่เลือกรวมกัน ที่ 0 ดาว: ไม่นับดาวและโบนัสเซ็ต
+4 pieces at 1+ stars
+= 4 ชิ้นที่ 1+ ดาว
+all 8 at 3+ stars, half again as strong at 5
+= ครบ 8 ชิ้นที่ 3+ ดาว แรงขึ้นครึ่งหนึ่งที่ 5 ดาว
+Set bonuses
+= โบนัสเซ็ต
+Stars
+= ดาว
+stars
+= ดาว
+The bonuses of everything chosen, added together, with each piece's stars and the set bonuses reached. A number marked ~ is an estimate.
+= โบนัสของทุกชิ้นที่เลือกรวมกัน พร้อมดาวของแต่ละชิ้นและโบนัสเซ็ตที่ได้ ตัวเลขที่มี ~ เป็นค่าประมาณ
+empowered
+= เสริมพลัง
+estimate
+= ค่าประมาณ
+not entered yet
+= ยังไม่ได้ใส่

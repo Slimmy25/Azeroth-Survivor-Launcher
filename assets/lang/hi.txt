@@ -1722,3 +1722,21 @@ Graphics
 = ग्राफ़िक्स
 The bonuses of everything chosen, added together, at 0 stars: stars and set bonuses are not counted.
 = चुनी गई हर चीज़ के बोनस एक साथ जोड़े गए, 0 सितारों पर: सितारे और सेट बोनस नहीं गिने जाते।
+4 pieces at 1+ stars
+= 1+ सितारों पर 4 टुकड़े
+all 8 at 3+ stars, half again as strong at 5
+= सभी 8 पर 3+ सितारे, 5 पर डेढ़ गुना मज़बूत
+Set bonuses
+= सेट बोनस
+Stars
+= सितारे
+stars
+= सितारे
+The bonuses of everything chosen, added together, with each piece's stars and the set bonuses reached. A number marked ~ is an estimate.
+= चुनी गई हर चीज़ के बोनस एक साथ, हर टुकड़े के सितारों और हासिल सेट बोनस के साथ। ~ वाला अंक एक अनुमान है।
+empowered
+= सशक्त
+estimate
+= अनुमान
+not entered yet
+= अभी दर्ज नहीं

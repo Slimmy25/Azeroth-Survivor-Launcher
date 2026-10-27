@@ -1722,3 +1722,21 @@ Graphics
 = Графіка
 The bonuses of everything chosen, added together, at 0 stars: stars and set bonuses are not counted.
 = Бонуси всього вибраного разом, при 0 зірок: зірки та бонуси комплектів не враховуються.
+4 pieces at 1+ stars
+= 4 предмети з 1+ зірками
+all 8 at 3+ stars, half again as strong at 5
+= усі 8 з 3+ зірками, при 5 у півтора раза сильніше
+Set bonuses
+= Бонуси комплектів
+Stars
+= Зірки
+stars
+= зірок
+The bonuses of everything chosen, added together, with each piece's stars and the set bonuses reached. A number marked ~ is an estimate.
+= Бонуси всього вибраного разом, із зірками кожного предмета та досягнутими бонусами комплектів. Число з ~ — оцінка.
+empowered
+= посилений
+estimate
+= оцінка
+not entered yet
+= ще не внесено

@@ -1721,3 +1721,21 @@ Graphics
 = Grafik
 The bonuses of everything chosen, added together, at 0 stars: stars and set bonuses are not counted.
 = Bonusserne fra alt det valgte lagt sammen, ved 0 stjerner: stjerner og sætbonusser tælles ikke med.
+4 pieces at 1+ stars
+= 4 dele med 1+ stjerner
+all 8 at 3+ stars, half again as strong at 5
+= alle 8 med 3+ stjerner, halvanden gang så stærk ved 5
+Set bonuses
+= Sætbonusser
+Stars
+= Stjerner
+stars
+= stjerner
+The bonuses of everything chosen, added together, with each piece's stars and the set bonuses reached. A number marked ~ is an estimate.
+= Bonusserne fra alt det valgte lagt sammen, med hver dels stjerner og de opnåede sætbonusser. Et tal mærket ~ er et skøn.
+empowered
+= forstærket
+estimate
+= skøn
+not entered yet
+= ikke indtastet endnu
