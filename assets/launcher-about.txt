@@ -5,7 +5,7 @@ A community launcher for Azeroth Survivors, the game made by Aethus. Made by Sli
 - One click downloads and installs the whole game, right in the launcher, with a progress bar
 - The game comes from one of several hosts, picked at random; if one fails, the next is tried
 - Every download is checked against the game's known checksums, so a damaged or wrong file is never installed
-- Game updates are downloaded, checked and installed for you, and reinstalling keeps your addons and settings
+- The game updates itself when it starts (it closes and opens again); the launcher notices and keeps going. Reinstalling keeps your addons and settings
 
 # Installing addons automatically
 - Download More installs addons with one click and offers an update when a newer copy is out

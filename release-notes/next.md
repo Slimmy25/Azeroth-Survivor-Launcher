@@ -47,6 +47,14 @@
   squares (the racial button and the character and talent buttons are hidden too). Untick it and the bar comes back
   as it was; the character and talent panels still open with their keys (C and N).
 
+### Playing
+- When the game updates itself (it closes and opens again), the launcher now follows it: it waits for the game to come
+  back (up to 90 seconds when the game's files changed, 10 seconds after a normal close) and treats it as the same
+  session. Cloud Save uploads only once the game stays closed, and the status line says "The game updated itself and
+  is opening again..." meanwhile.
+- The launcher no longer has any game-update code of its own: the game handles its updates itself. The unused update
+  checker, its update dialog and its update-file tools are gone, and the UPDATE button is only for the launcher.
+
 ### Other
 - GitHub now shows the launcher's license as MIT. The note that the game's name, logo and artwork are not covered
   moved from LICENSE to the README.

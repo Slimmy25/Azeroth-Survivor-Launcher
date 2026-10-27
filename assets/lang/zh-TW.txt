@@ -97,8 +97,6 @@ The game client is still being installed. If you quit now, it is cut short.
 = 遊戲仍在安裝。現在結束會中斷安裝。
 Updating
 = 更新中
-The game is still being updated. If you quit now, the update is cut short. Nothing is lost: a half-finished change is undone the next time the launcher starts.
-= 遊戲仍在更新。現在結束會中斷更新。不會遺失任何東西：未完成的變更會在啟動器下次啟動時復原。
 The game is still running. If you quit the launcher now, your saves will NOT be uploaded automatically.
 = 遊戲仍在執行。如果現在結束啟動器，你的存檔將不會自動上傳。
 Setup saved.
@@ -213,14 +211,6 @@ KEEP LOCAL
 = 保留本機
 Save game
 = 遊戲存檔
-Game update
-= 遊戲更新
-Update available
-= 有可用的更新
-New version:
-= 新版本：
-Your version:
-= 你的版本：
 not recorded yet
 = 尚未記錄
 Download size:
@@ -229,22 +219,8 @@ What is new
 = 新內容
 Your addons, settings and saves are left alone. If anything goes wrong, the old game files are put back.
 = 你的插件、設定和存檔不會受到影響。如果發生問題，舊的遊戲檔案會被還原。
-UPDATE NOW
-= 立即更新
 NOT NOW
 = 以後再說
-SKIP THIS VERSION
-= 略過此版本
-I ALREADY HAVE THIS VERSION
-= 我已有此版本
-The update is being installed. Please wait until it has finished.
-= 正在安裝更新。請等待完成。
-Downloading the update...
-= 正在下載更新...
-Download the update
-= 下載更新
-Step 1: download the update in your web browser.
-= 第 1 步：在瀏覽器中下載更新。
 OPEN DOWNLOAD AGAIN
 = 再次開啟下載
 Step 2: when the download has finished, come back here.
@@ -255,32 +231,16 @@ Checking the file...
 = 正在檢查檔案...
 CANCELLING...
 = 正在取消...
-Updating to {0}
-= 正在更新到 {0}
 Please keep the launcher open until this has finished.
 = 完成之前請不要關閉啟動器。
 {0} of {1}  ({#2}%)
 = {0} / {1}  ({2}%)
 {0} downloaded
 = 已下載 {0}
-Update installed
-= 更新已安裝
-Update failed
-= 更新失敗
 CLOSE
 = 關閉
 TRY AGAIN
 = 重試
-Version {0} is installed.
-= 已安裝版本 {0}。
-{#0} files updated.
-= 已更新 {0} 個檔案。
-{#0} file updated.
-= 已更新 {0} 個檔案。
-{#0} files updated, {#1} removed.
-= 已更新 {0} 個檔案，移除 {1} 個。
-{#0} file updated, {#1} removed.
-= 已更新 {0} 個檔案，移除 {1} 個。
 Install
 = 安裝
 Install the game from this file?
@@ -303,14 +263,6 @@ Install complete - press PLAY.
 = 安裝完成 - 按下「開始遊戲」。
 Install complete. Press PLAY to enter Azeroth.
 = 安裝完成。按下「開始遊戲」進入艾澤拉斯。
-The last game update was cut off before it finished. Your game files were put back exactly as they were.
-= 上次遊戲更新在完成前被中斷。你的遊戲檔案已完全還原。
-You can run the update again with the UPDATE button.
-= 你可以用「更新」按鈕重新執行更新。
-The last game update was cut off, and some game files could not be put back automatically.
-= 上次遊戲更新被中斷，部分遊戲檔案無法自動還原。
-The old versions are kept in the folder "{0}" inside the game folder. Copy them back over the game files, or reinstall the game.
-= 舊版本保存在遊戲資料夾內的「{0}」資料夾中。請將它們複製回遊戲檔案，或重新安裝遊戲。
 Checking for updates...
 = 正在檢查更新...
 The update check failed ({0}).
@@ -343,46 +295,18 @@ Downloading the new launcher... {0}
 = 正在下載新的啟動器... {0}
 Launcher update failed.
 = 啟動器更新失敗。
-Update checking is not switched on in this launcher yet (it has no update address).
-= 此啟動器尚未開啟更新檢查（沒有更新位址）。
 The game is not installed yet. Press INSTALL first.
 = 遊戲尚未安裝。請先按「安裝」。
 Could not check for updates.
 = 無法檢查更新。
 You have the newest version ({0}).
 = 你使用的是最新版本（{0}）。
-Update {0} is available.
-= 更新 {0} 已推出。
-A game update ({0}) is available.
-= 有遊戲更新（{0}）可用。
-Version {0} skipped. The UPDATE button still offers it.
-= 已略過版本 {0}。「更新」按鈕仍會提供它。
-Noted: you have version {0}.
-= 已記錄：你的版本是 {0}。
-Install the update from this file?
-= 從此檔案安裝更新？
-Choose the update file you downloaded
-= 選擇你下載的更新檔案
-Update archive (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|All files (*.*)|*.*
-= 更新壓縮檔 (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|所有檔案 (*.*)|*.*
 Close the game first, then try again.
 = 請先關閉遊戲，然後重試。
 Checking the download...
 = 正在檢查下載內容...
 The downloaded file does not match its checksum, so nothing was installed. Please try again later.
 = 下載的檔案與總和檢查碼不符，因此未安裝任何內容。請稍後再試。
-That file is not this update (its checksum does not match), so nothing was installed. Download it again from the update page.
-= 該檔案不是此更新（總和檢查碼不符），因此未安裝任何內容。請從更新頁面重新下載。
-The update failed ({0}).
-= 更新失敗（{0}）。
-Updated to {0} - press PLAY.
-= 已更新到 {0} - 按下「開始遊戲」。
-Game updated to {0}. Press PLAY to enter Azeroth.
-= 遊戲已更新到 {0}。按下「開始遊戲」進入艾澤拉斯。
-Update cancelled.
-= 更新已取消。
-Update failed.
-= 更新失敗。
 Another task is still running - wait for it to finish.
 = 另一項作業仍在進行 - 請等待其完成。
 Choose a sync folder inside your cloud drive first (Cloud Save or Options).
@@ -397,8 +321,6 @@ Saves uploaded at {0}
 = 已於 {0} 上傳存檔
 Not everything was synced - see the Cloud Save log.
 = 並非所有內容都已同步 - 請查看「雲端存檔」記錄。
-The game is being updated. Please wait until that has finished.
-= 遊戲正在更新。請等待完成。
 The cloud save could NOT be loaded, so the game was not launched.
 = 無法載入雲端存檔，因此遊戲未啟動。
 See the log in Cloud Save. If your cloud drive is still syncing, wait for it to finish and press PLAY again.
@@ -693,32 +615,14 @@ The link did not give a .zip file. It must be a direct download link (share page
 = 該連結沒有傳回 .zip 檔案。必須是直接下載連結（LimeWire 等分享頁面無法使用）。
 There is not enough free disk space.
 = 磁碟可用空間不足。
-Not enough free disk space for the update: about {0} is needed on the drive with the game, {1} is free.
-= 磁碟空間不足，無法更新：遊戲所在磁碟約需 {0}，可用 {1}。
-The update file is not a .rar, .zip or .7z archive.
-= 更新檔案不是 .rar、.zip 或 .7z 壓縮檔。
-An earlier update was cut off and its files could not be put back yet.
-= 先前的一次更新被中斷，其檔案尚未能還原。
 The old files are kept in:
 = 舊檔案保存在：
-Unpacking the update. This can take a few minutes...
-= 正在解壓縮更新。這可能需要幾分鐘...
 Installing the new files...
 = 正在安裝新檔案...
-The update did not contain any files to install.
-= 更新中沒有可安裝的檔案。
-{0} is missing after the update.
-= 更新後缺少 {0}。
 A game file is in use. Close the game and anything else using its folder, then try again.
 = 某個遊戲檔案正在使用中。請關閉遊戲及任何使用其資料夾的程式，然後重試。
-There is not enough free disk space for the update. Free some space and try again.
-= 磁碟空間不足，無法更新。請釋放空間後重試。
-The update could not be installed ({0}).
-= 無法安裝更新（{0}）。
 No game files were changed.
 = 沒有變更任何遊戲檔案。
-Some files could not be put back. The old versions are kept in:
-= 部分檔案無法還原。舊版本保存在：
 Sync folder not reachable: {0} (is your cloud drive running?)
 = 無法存取同步資料夾：{0}（你的雲端硬碟是否在執行？）
 The game is running. Close it before you download.
@@ -1155,8 +1059,6 @@ Addons need the game. Press INSTALL to download it first.
 = 插件需要遊戲。請先按「安裝」下載遊戲。
 Game client not found. Press INSTALL to download it first.
 = 找不到遊戲用戶端。請先按「安裝」下載。
-Please wait until the game update or install has finished.
-= 請等待遊戲更新或安裝完成。
 Downloading the game client...
 = 正在下載遊戲用戶端...
 The download server sent something that is not the game archive. Please try again later.
@@ -1624,3 +1526,15 @@ these two can't be on together. Switching one on switches the other off.
 = 這兩個插件不能同時開啟。開啟其中一個，另一個就會關閉。
 Flat, dark unit frames and a compact action bar, Plater-style nameplates (Survivor Plates), luck and card odds on the XP bar, a tabbed chat panel and automatic raid marks. Can't be on together with AZS Minor Mods.
 = 扁平暗色的單位框架和緊湊的快捷列，Plater 風格的名條（Survivor Plates），經驗條上的幸運值和卡牌機率，帶分頁的聊天面板，以及自動團隊標記。不能與 AZS Minor Mods 同時開啟。
+The game updated itself and is opening again...
+= 遊戲已自行更新，正在重新開啟...
+The game updated itself and opened again.
+= 遊戲已自行更新並重新開啟。
+The game opened again.
+= 遊戲已重新開啟。
+The launcher is still updating itself. If you quit now, the update is cut short and this launcher stays as it is.
+= 啟動器仍在自我更新。現在退出，更新會被中斷，此啟動器保持原樣。
+The launcher is updating itself. Please wait until that has finished.
+= 啟動器正在自我更新。請等待完成。
+Please wait until the launcher update or the install has finished.
+= 請等待啟動器更新或安裝完成。

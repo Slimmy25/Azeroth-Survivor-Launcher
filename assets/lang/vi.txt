@@ -97,8 +97,6 @@ The game client is still being installed. If you quit now, it is cut short.
 = Trò chơi vẫn đang được cài. Nếu thoát bây giờ, quá trình cài sẽ bị cắt ngang.
 Updating
 = Đang cập nhật
-The game is still being updated. If you quit now, the update is cut short. Nothing is lost: a half-finished change is undone the next time the launcher starts.
-= Trò chơi vẫn đang được cập nhật. Nếu thoát bây giờ, bản cập nhật sẽ bị cắt ngang. Không mất gì cả: thay đổi dang dở sẽ được hoàn tác ở lần mở launcher tiếp theo.
 The game is still running. If you quit the launcher now, your saves will NOT be uploaded automatically.
 = Trò chơi vẫn đang chạy. Nếu thoát launcher bây giờ, bản lưu của bạn sẽ KHÔNG được tải lên tự động.
 Setup saved.
@@ -213,14 +211,6 @@ KEEP LOCAL
 = GIỮ BẢN MÁY
 Save game
 = Bản lưu trò chơi
-Game update
-= Cập nhật trò chơi
-Update available
-= Có bản cập nhật
-New version:
-= Phiên bản mới:
-Your version:
-= Phiên bản của bạn:
 not recorded yet
 = chưa ghi nhận
 Download size:
@@ -229,22 +219,8 @@ What is new
 = Có gì mới
 Your addons, settings and saves are left alone. If anything goes wrong, the old game files are put back.
 = Addon, cài đặt và bản lưu của bạn không bị động đến. Nếu có lỗi, các tệp trò chơi cũ sẽ được đặt lại.
-UPDATE NOW
-= CẬP NHẬT NGAY
 NOT NOW
 = ĐỂ SAU
-SKIP THIS VERSION
-= BỎ QUA PHIÊN BẢN NÀY
-I ALREADY HAVE THIS VERSION
-= TÔI ĐÃ CÓ PHIÊN BẢN NÀY
-The update is being installed. Please wait until it has finished.
-= Bản cập nhật đang được cài. Vui lòng đợi đến khi xong.
-Downloading the update...
-= Đang tải bản cập nhật...
-Download the update
-= Tải bản cập nhật
-Step 1: download the update in your web browser.
-= Bước 1: tải bản cập nhật trong trình duyệt.
 OPEN DOWNLOAD AGAIN
 = MỞ LẠI TRANG TẢI
 Step 2: when the download has finished, come back here.
@@ -255,32 +231,16 @@ Checking the file...
 = Đang kiểm tra tệp...
 CANCELLING...
 = ĐANG HỦY...
-Updating to {0}
-= Đang cập nhật lên {0}
 Please keep the launcher open until this has finished.
 = Vui lòng giữ launcher mở cho đến khi xong.
 {0} of {1}  ({#2}%)
 = {0} / {1}  ({2}%)
 {0} downloaded
 = Đã tải {0}
-Update installed
-= Đã cài bản cập nhật
-Update failed
-= Cập nhật thất bại
 CLOSE
 = ĐÓNG
 TRY AGAIN
 = THỬ LẠI
-Version {0} is installed.
-= Đã cài phiên bản {0}.
-{#0} files updated.
-= Đã cập nhật {0} tệp.
-{#0} file updated.
-= Đã cập nhật {0} tệp.
-{#0} files updated, {#1} removed.
-= Đã cập nhật {0} tệp, xóa {1}.
-{#0} file updated, {#1} removed.
-= Đã cập nhật {0} tệp, xóa {1}.
 Install
 = Cài đặt
 Install the game from this file?
@@ -303,14 +263,6 @@ Install complete - press PLAY.
 = Cài đặt xong - nhấn CHƠI.
 Install complete. Press PLAY to enter Azeroth.
 = Cài đặt xong. Nhấn CHƠI để bước vào Azeroth.
-The last game update was cut off before it finished. Your game files were put back exactly as they were.
-= Lần cập nhật trò chơi trước bị cắt ngang trước khi xong. Các tệp trò chơi đã được đặt lại y như cũ.
-You can run the update again with the UPDATE button.
-= Bạn có thể chạy lại bản cập nhật bằng nút CẬP NHẬT.
-The last game update was cut off, and some game files could not be put back automatically.
-= Lần cập nhật trò chơi trước bị cắt ngang và một số tệp không thể tự động đặt lại.
-The old versions are kept in the folder "{0}" inside the game folder. Copy them back over the game files, or reinstall the game.
-= Các phiên bản cũ được giữ trong thư mục "{0}" bên trong thư mục trò chơi. Hãy chép chúng đè lại lên tệp trò chơi, hoặc cài lại trò chơi.
 Checking for updates...
 = Đang kiểm tra cập nhật...
 The update check failed ({0}).
@@ -343,46 +295,18 @@ Downloading the new launcher... {0}
 = Đang tải launcher mới... {0}
 Launcher update failed.
 = Cập nhật launcher thất bại.
-Update checking is not switched on in this launcher yet (it has no update address).
-= Launcher này chưa bật kiểm tra cập nhật (chưa có địa chỉ cập nhật).
 The game is not installed yet. Press INSTALL first.
 = Trò chơi chưa được cài. Hãy nhấn CÀI ĐẶT trước.
 Could not check for updates.
 = Không thể kiểm tra cập nhật.
 You have the newest version ({0}).
 = Bạn đang dùng phiên bản mới nhất ({0}).
-Update {0} is available.
-= Đã có bản cập nhật {0}.
-A game update ({0}) is available.
-= Đã có bản cập nhật trò chơi ({0}).
-Version {0} skipped. The UPDATE button still offers it.
-= Đã bỏ qua phiên bản {0}. Nút CẬP NHẬT vẫn đề xuất nó.
-Noted: you have version {0}.
-= Đã ghi nhận: bạn có phiên bản {0}.
-Install the update from this file?
-= Cài bản cập nhật từ tệp này?
-Choose the update file you downloaded
-= Chọn tệp cập nhật bạn đã tải
-Update archive (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|All files (*.*)|*.*
-= Tệp nén cập nhật (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|Tất cả tệp (*.*)|*.*
 Close the game first, then try again.
 = Hãy đóng trò chơi trước rồi thử lại.
 Checking the download...
 = Đang kiểm tra tệp tải về...
 The downloaded file does not match its checksum, so nothing was installed. Please try again later.
 = Tệp tải về không khớp mã kiểm tra, nên chưa cài gì cả. Vui lòng thử lại sau.
-That file is not this update (its checksum does not match), so nothing was installed. Download it again from the update page.
-= Tệp đó không phải bản cập nhật này (mã kiểm tra không khớp), nên chưa cài gì cả. Hãy tải lại từ trang cập nhật.
-The update failed ({0}).
-= Cập nhật thất bại ({0}).
-Updated to {0} - press PLAY.
-= Đã cập nhật lên {0} - nhấn CHƠI.
-Game updated to {0}. Press PLAY to enter Azeroth.
-= Trò chơi đã cập nhật lên {0}. Nhấn CHƠI để bước vào Azeroth.
-Update cancelled.
-= Đã hủy cập nhật.
-Update failed.
-= Cập nhật thất bại.
 Another task is still running - wait for it to finish.
 = Một tác vụ khác vẫn đang chạy - hãy đợi nó xong.
 Choose a sync folder inside your cloud drive first (Cloud Save or Options).
@@ -397,8 +321,6 @@ Saves uploaded at {0}
 = Đã tải bản lưu lên lúc {0}
 Not everything was synced - see the Cloud Save log.
 = Chưa đồng bộ hết - xem nhật ký Lưu trên mây.
-The game is being updated. Please wait until that has finished.
-= Trò chơi đang được cập nhật. Vui lòng đợi đến khi xong.
 The cloud save could NOT be loaded, so the game was not launched.
 = KHÔNG thể tải bản lưu trên mây, nên trò chơi chưa được mở.
 See the log in Cloud Save. If your cloud drive is still syncing, wait for it to finish and press PLAY again.
@@ -693,32 +615,14 @@ The link did not give a .zip file. It must be a direct download link (share page
 = Liên kết không trả về tệp .zip. Phải là liên kết tải trực tiếp (các trang chia sẻ như LimeWire không dùng được).
 There is not enough free disk space.
 = Không đủ dung lượng đĩa trống.
-Not enough free disk space for the update: about {0} is needed on the drive with the game, {1} is free.
-= Không đủ dung lượng cho bản cập nhật: cần khoảng {0} trên ổ chứa trò chơi, còn trống {1}.
-The update file is not a .rar, .zip or .7z archive.
-= Tệp cập nhật không phải tệp nén .rar, .zip hay .7z.
-An earlier update was cut off and its files could not be put back yet.
-= Một bản cập nhật trước bị cắt ngang và chưa thể đặt lại các tệp của nó.
 The old files are kept in:
 = Các tệp cũ được giữ tại:
-Unpacking the update. This can take a few minutes...
-= Đang giải nén bản cập nhật. Có thể mất vài phút...
 Installing the new files...
 = Đang cài các tệp mới...
-The update did not contain any files to install.
-= Bản cập nhật không chứa tệp nào để cài.
-{0} is missing after the update.
-= Thiếu {0} sau khi cập nhật.
 A game file is in use. Close the game and anything else using its folder, then try again.
 = Một tệp trò chơi đang được dùng. Hãy đóng trò chơi và mọi thứ đang dùng thư mục của nó, rồi thử lại.
-There is not enough free disk space for the update. Free some space and try again.
-= Không đủ dung lượng cho bản cập nhật. Hãy giải phóng dung lượng rồi thử lại.
-The update could not be installed ({0}).
-= Không thể cài bản cập nhật ({0}).
 No game files were changed.
 = Không có tệp trò chơi nào bị thay đổi.
-Some files could not be put back. The old versions are kept in:
-= Một số tệp không thể đặt lại. Các phiên bản cũ được giữ tại:
 Sync folder not reachable: {0} (is your cloud drive running?)
 = Không truy cập được thư mục đồng bộ: {0} (ổ mây của bạn có đang chạy không?)
 The game is running. Close it before you download.
@@ -1155,8 +1059,6 @@ Addons need the game. Press INSTALL to download it first.
 = Addon cần có game. Hãy nhấn CÀI ĐẶT trước để tải về.
 Game client not found. Press INSTALL to download it first.
 = Không tìm thấy client game. Hãy nhấn CÀI ĐẶT trước để tải về.
-Please wait until the game update or install has finished.
-= Hãy đợi cập nhật hoặc cài đặt game hoàn tất.
 Downloading the game client...
 = Đang tải client game...
 The download server sent something that is not the game archive. Please try again later.
@@ -1624,3 +1526,15 @@ these two can't be on together. Switching one on switches the other off.
 = hai addon này không thể bật cùng lúc. Bật cái này thì cái kia sẽ tắt.
 Flat, dark unit frames and a compact action bar, Plater-style nameplates (Survivor Plates), luck and card odds on the XP bar, a tabbed chat panel and automatic raid marks. Can't be on together with AZS Minor Mods.
 = Khung đơn vị phẳng, tối và thanh hành động gọn, bảng tên kiểu Plater (Survivor Plates), may mắn và tỉ lệ thẻ trên thanh XP, khung chat có thẻ và dấu raid tự động. Không thể bật cùng AZS Minor Mods.
+The game updated itself and is opening again...
+= Trò chơi đã tự cập nhật và đang mở lại...
+The game updated itself and opened again.
+= Trò chơi đã tự cập nhật và đã mở lại.
+The game opened again.
+= Trò chơi đã mở lại.
+The launcher is still updating itself. If you quit now, the update is cut short and this launcher stays as it is.
+= Launcher vẫn đang tự cập nhật. Nếu thoát bây giờ, bản cập nhật bị ngắt và launcher này giữ nguyên.
+The launcher is updating itself. Please wait until that has finished.
+= Launcher đang tự cập nhật. Vui lòng đợi đến khi xong.
+Please wait until the launcher update or the install has finished.
+= Vui lòng đợi đến khi cập nhật launcher hoặc cài đặt xong.

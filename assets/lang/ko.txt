@@ -97,8 +97,6 @@ The game client is still being installed. If you quit now, it is cut short.
 = 게임이 아직 설치 중입니다. 지금 종료하면 설치가 중단됩니다.
 Updating
 = 업데이트 중
-The game is still being updated. If you quit now, the update is cut short. Nothing is lost: a half-finished change is undone the next time the launcher starts.
-= 게임이 아직 업데이트 중입니다. 지금 종료하면 업데이트가 중단됩니다. 잃는 것은 없습니다. 완료되지 않은 변경은 다음에 런처를 시작할 때 되돌려집니다.
 The game is still running. If you quit the launcher now, your saves will NOT be uploaded automatically.
 = 게임이 아직 실행 중입니다. 지금 런처를 종료하면 저장 파일이 자동으로 업로드되지 않습니다.
 Setup saved.
@@ -213,14 +211,6 @@ KEEP LOCAL
 = 로컬 유지
 Save game
 = 게임 저장 파일
-Game update
-= 게임 업데이트
-Update available
-= 업데이트 가능
-New version:
-= 새 버전:
-Your version:
-= 현재 버전:
 not recorded yet
 = 아직 기록되지 않음
 Download size:
@@ -229,22 +219,8 @@ What is new
 = 새로운 내용
 Your addons, settings and saves are left alone. If anything goes wrong, the old game files are put back.
 = 애드온, 설정, 저장 파일은 건드리지 않습니다. 문제가 생기면 이전 게임 파일이 복원됩니다.
-UPDATE NOW
-= 지금 업데이트
 NOT NOW
 = 나중에
-SKIP THIS VERSION
-= 이 버전 건너뛰기
-I ALREADY HAVE THIS VERSION
-= 이미 이 버전이 있음
-The update is being installed. Please wait until it has finished.
-= 업데이트를 설치하는 중입니다. 끝날 때까지 기다려 주세요.
-Downloading the update...
-= 업데이트 다운로드 중...
-Download the update
-= 업데이트 다운로드
-Step 1: download the update in your web browser.
-= 1단계: 웹 브라우저에서 업데이트를 다운로드하세요.
 OPEN DOWNLOAD AGAIN
 = 다운로드 다시 열기
 Step 2: when the download has finished, come back here.
@@ -255,32 +231,16 @@ Checking the file...
 = 파일 확인 중...
 CANCELLING...
 = 취소하는 중...
-Updating to {0}
-= {0}(으)로 업데이트 중
 Please keep the launcher open until this has finished.
 = 끝날 때까지 런처를 열어 두세요.
 {0} of {1}  ({#2}%)
 = {0} / {1}  ({2}%)
 {0} downloaded
 = {0} 다운로드됨
-Update installed
-= 업데이트 설치됨
-Update failed
-= 업데이트 실패
 CLOSE
 = 닫기
 TRY AGAIN
 = 다시 시도
-Version {0} is installed.
-= 버전 {0}이(가) 설치되어 있습니다.
-{#0} files updated.
-= 파일 {0}개 업데이트됨.
-{#0} file updated.
-= 파일 {0}개 업데이트됨.
-{#0} files updated, {#1} removed.
-= 파일 {0}개 업데이트됨, {1}개 제거됨.
-{#0} file updated, {#1} removed.
-= 파일 {0}개 업데이트됨, {1}개 제거됨.
 Install
 = 설치
 Install the game from this file?
@@ -303,14 +263,6 @@ Install complete - press PLAY.
 = 설치 완료 - 플레이를 누르세요.
 Install complete. Press PLAY to enter Azeroth.
 = 설치 완료. 플레이를 눌러 아제로스에 입장하세요.
-The last game update was cut off before it finished. Your game files were put back exactly as they were.
-= 마지막 게임 업데이트가 끝나기 전에 중단되었습니다. 게임 파일은 원래 상태 그대로 복원되었습니다.
-You can run the update again with the UPDATE button.
-= 업데이트 버튼으로 업데이트를 다시 실행할 수 있습니다.
-The last game update was cut off, and some game files could not be put back automatically.
-= 마지막 게임 업데이트가 중단되었고, 일부 게임 파일을 자동으로 복원하지 못했습니다.
-The old versions are kept in the folder "{0}" inside the game folder. Copy them back over the game files, or reinstall the game.
-= 이전 버전은 게임 폴더 안의 "{0}" 폴더에 보관되어 있습니다. 게임 파일 위에 다시 복사하거나 게임을 다시 설치하세요.
 Checking for updates...
 = 업데이트 확인 중...
 The update check failed ({0}).
@@ -343,46 +295,18 @@ Downloading the new launcher... {0}
 = 새 런처 다운로드 중... {0}
 Launcher update failed.
 = 런처 업데이트 실패.
-Update checking is not switched on in this launcher yet (it has no update address).
-= 이 런처에서는 아직 업데이트 확인이 켜져 있지 않습니다 (업데이트 주소가 없음).
 The game is not installed yet. Press INSTALL first.
 = 게임이 아직 설치되지 않았습니다. 먼저 설치를 누르세요.
 Could not check for updates.
 = 업데이트를 확인할 수 없습니다.
 You have the newest version ({0}).
 = 최신 버전을 사용 중입니다 ({0}).
-Update {0} is available.
-= 업데이트 {0}을(를) 사용할 수 있습니다.
-A game update ({0}) is available.
-= 게임 업데이트({0})를 사용할 수 있습니다.
-Version {0} skipped. The UPDATE button still offers it.
-= 버전 {0}을(를) 건너뛰었습니다. 업데이트 버튼에서는 계속 제공됩니다.
-Noted: you have version {0}.
-= 기록됨: 버전 {0} 사용 중.
-Install the update from this file?
-= 이 파일로 업데이트를 설치할까요?
-Choose the update file you downloaded
-= 다운로드한 업데이트 파일 선택
-Update archive (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|All files (*.*)|*.*
-= 업데이트 압축 파일 (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|모든 파일 (*.*)|*.*
 Close the game first, then try again.
 = 먼저 게임을 닫은 후 다시 시도하세요.
 Checking the download...
 = 다운로드 확인 중...
 The downloaded file does not match its checksum, so nothing was installed. Please try again later.
 = 다운로드한 파일이 체크섬과 일치하지 않아 아무것도 설치하지 않았습니다. 나중에 다시 시도하세요.
-That file is not this update (its checksum does not match), so nothing was installed. Download it again from the update page.
-= 이 파일은 이 업데이트가 아닙니다 (체크섬 불일치). 아무것도 설치하지 않았습니다. 업데이트 페이지에서 다시 다운로드하세요.
-The update failed ({0}).
-= 업데이트 실패 ({0}).
-Updated to {0} - press PLAY.
-= {0}(으)로 업데이트됨 - 플레이를 누르세요.
-Game updated to {0}. Press PLAY to enter Azeroth.
-= 게임이 {0}(으)로 업데이트되었습니다. 플레이를 눌러 아제로스에 입장하세요.
-Update cancelled.
-= 업데이트가 취소되었습니다.
-Update failed.
-= 업데이트 실패.
 Another task is still running - wait for it to finish.
 = 다른 작업이 아직 진행 중입니다 - 끝날 때까지 기다리세요.
 Choose a sync folder inside your cloud drive first (Cloud Save or Options).
@@ -397,8 +321,6 @@ Saves uploaded at {0}
 = {0}에 저장 파일 업로드함
 Not everything was synced - see the Cloud Save log.
 = 일부가 동기화되지 않았습니다 - 클라우드 저장 로그를 확인하세요.
-The game is being updated. Please wait until that has finished.
-= 게임이 업데이트 중입니다. 끝날 때까지 기다려 주세요.
 The cloud save could NOT be loaded, so the game was not launched.
 = 클라우드 저장을 불러오지 못해 게임을 실행하지 않았습니다.
 See the log in Cloud Save. If your cloud drive is still syncing, wait for it to finish and press PLAY again.
@@ -693,32 +615,14 @@ The link did not give a .zip file. It must be a direct download link (share page
 = 링크에서 .zip 파일을 받지 못했습니다. 직접 다운로드 링크여야 합니다 (LimeWire 같은 공유 페이지는 안 됩니다).
 There is not enough free disk space.
 = 디스크 여유 공간이 부족합니다.
-Not enough free disk space for the update: about {0} is needed on the drive with the game, {1} is free.
-= 업데이트에 필요한 디스크 공간이 부족합니다: 게임이 있는 드라이브에 약 {0}이(가) 필요하지만 {1}만 남아 있습니다.
-The update file is not a .rar, .zip or .7z archive.
-= 업데이트 파일이 .rar, .zip, .7z 압축 파일이 아닙니다.
-An earlier update was cut off and its files could not be put back yet.
-= 이전 업데이트가 중단되었고 그 파일을 아직 복원하지 못했습니다.
 The old files are kept in:
 = 이전 파일 보관 위치:
-Unpacking the update. This can take a few minutes...
-= 업데이트 압축 해제 중. 몇 분 걸릴 수 있습니다...
 Installing the new files...
 = 새 파일 설치 중...
-The update did not contain any files to install.
-= 업데이트에 설치할 파일이 없습니다.
-{0} is missing after the update.
-= 업데이트 후 {0}이(가) 없습니다.
 A game file is in use. Close the game and anything else using its folder, then try again.
 = 게임 파일이 사용 중입니다. 게임과 그 폴더를 사용하는 모든 것을 닫은 후 다시 시도하세요.
-There is not enough free disk space for the update. Free some space and try again.
-= 업데이트에 필요한 디스크 공간이 부족합니다. 공간을 확보한 후 다시 시도하세요.
-The update could not be installed ({0}).
-= 업데이트를 설치할 수 없습니다 ({0}).
 No game files were changed.
 = 변경된 게임 파일이 없습니다.
-Some files could not be put back. The old versions are kept in:
-= 일부 파일을 복원하지 못했습니다. 이전 버전 보관 위치:
 Sync folder not reachable: {0} (is your cloud drive running?)
 = 동기화 폴더에 접근할 수 없습니다: {0} (클라우드 드라이브가 실행 중인가요?)
 The game is running. Close it before you download.
@@ -1155,8 +1059,6 @@ Addons need the game. Press INSTALL to download it first.
 = 애드온에는 게임이 필요합니다. 먼저 설치를 눌러 다운로드하세요.
 Game client not found. Press INSTALL to download it first.
 = 게임 클라이언트를 찾을 수 없습니다. 먼저 설치를 눌러 다운로드하세요.
-Please wait until the game update or install has finished.
-= 게임 업데이트나 설치가 끝날 때까지 기다려 주세요.
 Downloading the game client...
 = 게임 클라이언트를 다운로드하는 중...
 The download server sent something that is not the game archive. Please try again later.
@@ -1624,3 +1526,15 @@ these two can't be on together. Switching one on switches the other off.
 = 이 두 애드온은 함께 켤 수 없습니다. 하나를 켜면 다른 하나는 꺼집니다.
 Flat, dark unit frames and a compact action bar, Plater-style nameplates (Survivor Plates), luck and card odds on the XP bar, a tabbed chat panel and automatic raid marks. Can't be on together with AZS Minor Mods.
 = 평평하고 어두운 유닛 프레임과 작은 행동 단축바, Plater 스타일 이름표(Survivor Plates), 경험치 바의 행운과 카드 확률, 탭이 있는 채팅 창, 자동 공격대 징표. AZS Minor Mods와 함께 켤 수 없습니다.
+The game updated itself and is opening again...
+= 게임이 스스로 업데이트하고 다시 열리는 중입니다...
+The game updated itself and opened again.
+= 게임이 스스로 업데이트하고 다시 열렸습니다.
+The game opened again.
+= 게임이 다시 열렸습니다.
+The launcher is still updating itself. If you quit now, the update is cut short and this launcher stays as it is.
+= 런처가 아직 스스로 업데이트 중입니다. 지금 종료하면 업데이트가 중단되고 이 런처는 그대로 남습니다.
+The launcher is updating itself. Please wait until that has finished.
+= 런처가 스스로 업데이트 중입니다. 끝날 때까지 기다려 주세요.
+Please wait until the launcher update or the install has finished.
+= 런처 업데이트나 설치가 끝날 때까지 기다려 주세요.

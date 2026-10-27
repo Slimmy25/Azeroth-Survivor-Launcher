@@ -96,8 +96,6 @@ The game client is still being installed. If you quit now, it is cut short.
 = O jogo ainda está sendo instalado. Se você sair agora, a instalação será interrompida.
 Updating
 = Atualização em andamento
-The game is still being updated. If you quit now, the update is cut short. Nothing is lost: a half-finished change is undone the next time the launcher starts.
-= O jogo ainda está sendo atualizado. Se você sair agora, a atualização será interrompida. Nada se perde: uma alteração incompleta é desfeita na próxima vez que o launcher iniciar.
 The game is still running. If you quit the launcher now, your saves will NOT be uploaded automatically.
 = O jogo ainda está aberto. Se você sair do launcher agora, seus salvamentos NÃO serão enviados automaticamente.
 Setup saved.
@@ -212,14 +210,6 @@ KEEP LOCAL
 = MANTER LOCAL
 Save game
 = Jogo salvo
-Game update
-= Atualização do jogo
-Update available
-= Atualização disponível
-New version:
-= Nova versão:
-Your version:
-= Sua versão:
 not recorded yet
 = ainda não registrada
 Download size:
@@ -228,22 +218,8 @@ What is new
 = O que há de novo
 Your addons, settings and saves are left alone. If anything goes wrong, the old game files are put back.
 = Seus addons, configurações e salvamentos não são tocados. Se algo der errado, os arquivos antigos do jogo são restaurados.
-UPDATE NOW
-= ATUALIZAR AGORA
 NOT NOW
 = AGORA NÃO
-SKIP THIS VERSION
-= PULAR ESTA VERSÃO
-I ALREADY HAVE THIS VERSION
-= JÁ TENHO ESTA VERSÃO
-The update is being installed. Please wait until it has finished.
-= A atualização está sendo instalada. Aguarde até terminar.
-Downloading the update...
-= Baixando a atualização...
-Download the update
-= Baixar a atualização
-Step 1: download the update in your web browser.
-= Etapa 1: baixe a atualização no seu navegador.
 OPEN DOWNLOAD AGAIN
 = ABRIR DOWNLOAD NOVAMENTE
 Step 2: when the download has finished, come back here.
@@ -254,32 +230,16 @@ Checking the file...
 = Verificando o arquivo...
 CANCELLING...
 = CANCELANDO...
-Updating to {0}
-= Atualizando para {0}
 Please keep the launcher open until this has finished.
 = Mantenha o launcher aberto até terminar.
 {0} of {1}  ({#2}%)
 = {0} de {1}  ({2}%)
 {0} downloaded
 = {0} baixados
-Update installed
-= Atualização instalada
-Update failed
-= Falha na atualização
 CLOSE
 = FECHAR
 TRY AGAIN
 = TENTAR NOVAMENTE
-Version {0} is installed.
-= A versão {0} está instalada.
-{#0} files updated.
-= {0} arquivos atualizados.
-{#0} file updated.
-= {0} arquivo atualizado.
-{#0} files updated, {#1} removed.
-= {0} arquivos atualizados, {1} removidos.
-{#0} file updated, {#1} removed.
-= {0} arquivo atualizado, {1} removidos.
 Install
 = Instalar
 Install the game from this file?
@@ -302,14 +262,6 @@ Install complete - press PLAY.
 = Instalação concluída - pressione JOGAR.
 Install complete. Press PLAY to enter Azeroth.
 = Instalação concluída. Pressione JOGAR para entrar em Azeroth.
-The last game update was cut off before it finished. Your game files were put back exactly as they were.
-= A última atualização do jogo foi interrompida antes de terminar. Seus arquivos do jogo foram deixados exatamente como estavam.
-You can run the update again with the UPDATE button.
-= Você pode rodar a atualização de novo com o botão ATUALIZAR.
-The last game update was cut off, and some game files could not be put back automatically.
-= A última atualização do jogo foi interrompida e alguns arquivos não puderam ser restaurados automaticamente.
-The old versions are kept in the folder "{0}" inside the game folder. Copy them back over the game files, or reinstall the game.
-= As versões antigas estão na pasta "{0}" dentro da pasta do jogo. Copie-as de volta sobre os arquivos do jogo ou reinstale o jogo.
 Checking for updates...
 = Procurando atualizações...
 The update check failed ({0}).
@@ -342,46 +294,18 @@ Downloading the new launcher... {0}
 = Baixando o novo launcher... {0}
 Launcher update failed.
 = Falha na atualização do launcher.
-Update checking is not switched on in this launcher yet (it has no update address).
-= A verificação de atualizações ainda não está ativada neste launcher (ele não tem endereço de atualização).
 The game is not installed yet. Press INSTALL first.
 = O jogo ainda não está instalado. Pressione INSTALAR primeiro.
 Could not check for updates.
 = Não foi possível procurar atualizações.
 You have the newest version ({0}).
 = Você tem a versão mais recente ({0}).
-Update {0} is available.
-= A atualização {0} está disponível.
-A game update ({0}) is available.
-= Uma atualização do jogo ({0}) está disponível.
-Version {0} skipped. The UPDATE button still offers it.
-= Versão {0} pulada. O botão ATUALIZAR ainda a oferece.
-Noted: you have version {0}.
-= Anotado: você tem a versão {0}.
-Install the update from this file?
-= Instalar a atualização a partir deste arquivo?
-Choose the update file you downloaded
-= Escolha o arquivo de atualização que você baixou
-Update archive (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|All files (*.*)|*.*
-= Arquivo de atualização (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|Todos os arquivos (*.*)|*.*
 Close the game first, then try again.
 = Feche o jogo primeiro e tente novamente.
 Checking the download...
 = Verificando o download...
 The downloaded file does not match its checksum, so nothing was installed. Please try again later.
 = O arquivo baixado não confere com a soma de verificação, então nada foi instalado. Tente novamente mais tarde.
-That file is not this update (its checksum does not match), so nothing was installed. Download it again from the update page.
-= Esse arquivo não é esta atualização (a soma de verificação não confere), então nada foi instalado. Baixe-o de novo na página da atualização.
-The update failed ({0}).
-= A atualização falhou ({0}).
-Updated to {0} - press PLAY.
-= Atualizado para {0} - pressione JOGAR.
-Game updated to {0}. Press PLAY to enter Azeroth.
-= Jogo atualizado para {0}. Pressione JOGAR para entrar em Azeroth.
-Update cancelled.
-= Atualização cancelada.
-Update failed.
-= Falha na atualização.
 Another task is still running - wait for it to finish.
 = Outra tarefa ainda está em andamento - aguarde terminar.
 Choose a sync folder inside your cloud drive first (Cloud Save or Options).
@@ -396,8 +320,6 @@ Saves uploaded at {0}
 = Salvamentos enviados às {0}
 Not everything was synced - see the Cloud Save log.
 = Nem tudo foi sincronizado - veja o log do Salvamento na nuvem.
-The game is being updated. Please wait until that has finished.
-= O jogo está sendo atualizado. Aguarde até terminar.
 The cloud save could NOT be loaded, so the game was not launched.
 = O salvamento na nuvem NÃO pôde ser carregado, então o jogo não foi iniciado.
 See the log in Cloud Save. If your cloud drive is still syncing, wait for it to finish and press PLAY again.
@@ -692,32 +614,14 @@ The link did not give a .zip file. It must be a direct download link (share page
 = O link não deu um arquivo .zip. Precisa ser um link de download direto (páginas de compartilhamento como LimeWire não funcionam).
 There is not enough free disk space.
 = Não há espaço livre suficiente no disco.
-Not enough free disk space for the update: about {0} is needed on the drive with the game, {1} is free.
-= Não há espaço livre suficiente para a atualização: são necessários cerca de {0} no disco do jogo, {1} estão livres.
-The update file is not a .rar, .zip or .7z archive.
-= O arquivo de atualização não é um arquivo .rar, .zip ou .7z.
-An earlier update was cut off and its files could not be put back yet.
-= Uma atualização anterior foi interrompida e seus arquivos ainda não puderam ser restaurados.
 The old files are kept in:
 = Os arquivos antigos estão em:
-Unpacking the update. This can take a few minutes...
-= Descompactando a atualização. Isso pode levar alguns minutos...
 Installing the new files...
 = Instalando os novos arquivos...
-The update did not contain any files to install.
-= A atualização não continha arquivos para instalar.
-{0} is missing after the update.
-= {0} está faltando depois da atualização.
 A game file is in use. Close the game and anything else using its folder, then try again.
 = Um arquivo do jogo está em uso. Feche o jogo e tudo o que estiver usando a pasta dele, e tente novamente.
-There is not enough free disk space for the update. Free some space and try again.
-= Não há espaço livre suficiente para a atualização. Libere espaço e tente novamente.
-The update could not be installed ({0}).
-= A atualização não pôde ser instalada ({0}).
 No game files were changed.
 = Nenhum arquivo do jogo foi alterado.
-Some files could not be put back. The old versions are kept in:
-= Alguns arquivos não puderam ser restaurados. As versões antigas estão em:
 Sync folder not reachable: {0} (is your cloud drive running?)
 = Pasta de sincronização inacessível: {0} (seu drive na nuvem está rodando?)
 The game is running. Close it before you download.
@@ -1154,8 +1058,6 @@ Addons need the game. Press INSTALL to download it first.
 = Os addons precisam do jogo. Pressione INSTALAR para baixá-lo primeiro.
 Game client not found. Press INSTALL to download it first.
 = Cliente do jogo não encontrado. Pressione INSTALAR para baixá-lo primeiro.
-Please wait until the game update or install has finished.
-= Aguarde o fim da atualização ou da instalação do jogo.
 Downloading the game client...
 = Baixando o cliente do jogo...
 The download server sent something that is not the game archive. Please try again later.
@@ -1623,3 +1525,15 @@ these two can't be on together. Switching one on switches the other off.
 = estes dois não podem ficar ligados juntos. Ligar um desliga o outro.
 Flat, dark unit frames and a compact action bar, Plater-style nameplates (Survivor Plates), luck and card odds on the XP bar, a tabbed chat panel and automatic raid marks. Can't be on together with AZS Minor Mods.
 = Quadros de unidade planos e escuros e uma barra de ações compacta, placas de nome no estilo Plater (Survivor Plates), sorte e chances das cartas na barra de XP, um painel de chat com abas e marcas de raide automáticas. Não pode ficar ligado junto com o AZS Minor Mods.
+The game updated itself and is opening again...
+= O jogo se atualizou sozinho e está abrindo de novo...
+The game updated itself and opened again.
+= O jogo se atualizou sozinho e abriu de novo.
+The game opened again.
+= O jogo abriu de novo.
+The launcher is still updating itself. If you quit now, the update is cut short and this launcher stays as it is.
+= O launcher ainda está se atualizando. Se você sair agora, a atualização é interrompida e este launcher fica como está.
+The launcher is updating itself. Please wait until that has finished.
+= O launcher está se atualizando. Espere terminar.
+Please wait until the launcher update or the install has finished.
+= Espere terminar a atualização do launcher ou a instalação.
