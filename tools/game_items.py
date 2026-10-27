@@ -86,7 +86,7 @@ def main():
     debug.append("amulet rows: %d" % len(amulet_rows))
     for x in amulet_rows:
         debug.append("  %x %s | %s | %s | %d %d %d" % x)
-    # each amulet's lines: 36 bytes each; kind 0x30 is a plain bonus (its number and which stat), any other kind is
+    # each amulet's lines: 36 bytes each; kind 0x30 (0x31 since 0.121.0) is a plain bonus (its number and which stat), any other kind is
     # one of the game's special effects (described in game)
     amulet_lines = {}
     for x in amulet_rows:
@@ -94,7 +94,7 @@ def main():
         lines = []
         for i in range(cnt):
             q = ptr + 36 * i
-            if u(q) == 0x30:
+            if u(q) in (0x30, 0x31):
                 lines.append("%d=%g" % (u(q + 8), f(q + 4)))
             else:
                 lines.append("special")
@@ -106,6 +106,7 @@ def main():
     runs = re.findall(r"Reduces the cooldown of your spells by \{p\}\.[^\x00-\x1f\"]*", text)
     if runs and first in text:
         stats = [first] + re.split(r"(?<=\.)[a-z]?(?=[A-Z])", max(runs, key=len))
+        stats = [re.sub(r"(?<=\.)[a-z]$", "", x) for x in stats]      # the letter that ends the last text
     debug.append("stat texts: %d" % len(stats))
     amulets = sorted((k[7:], v) for k, v in en.items() if k.startswith("amulet."))
 

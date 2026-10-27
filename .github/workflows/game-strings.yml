@@ -3,6 +3,10 @@ name: Game strings
 
 on:
   workflow_dispatch:
+    inputs:
+      find:
+        description: "Optional: a pattern (Python regex, case-insensitive); the matching texts are shown as notes on the run"
+        required: false
 
 permissions:
   contents: read
@@ -14,6 +18,26 @@ jobs:
       - uses: actions/checkout@v4
       - name: Read the texts from the game
         run: python3 tools/game_strings.py
+      - name: Show the texts that match the pattern
+        if: inputs.find != ''
+        env:
+          FIND: ${{ inputs.find }}
+        run: |
+          python3 - <<'PY'
+          import os, re
+          rx = re.compile(os.environ["FIND"], re.I)
+          hits = [l for l in open("game-strings.txt", encoding="utf-8").read().split("\n") if rx.search(l)]
+          print("%d matches" % len(hits))
+          chunk, n = "", 0
+          for l in hits + [None]:
+              if l is None or len(chunk) + len(l) > 3500:
+                  if chunk and n < 10:
+                      print("::notice::" + chunk.replace("%", "%25").replace("\n", "%0A"))
+                      n += 1
+                  chunk = ""
+              if l is not None:
+                  chunk += l[:3000] + "\n"
+          PY
       # The texts are the game's own (its code and translations): they are kept as a short-lived download of this run
       # (Actions > the run > Artifacts), never on a branch of this repository
       - name: Keep the result for a day
