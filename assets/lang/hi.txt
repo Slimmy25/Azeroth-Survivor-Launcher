@@ -1740,3 +1740,15 @@ estimate
 = अनुमान
 not entered yet
 = अभी दर्ज नहीं
+Reached
+= हासिल
+none yet
+= अभी कोई नहीं
+Set bonuses that change it:
+= इसे बदलने वाले सेट बोनस:
+Wear armor pieces of a set to see its bonuses here. Four pieces of two sets give both 4-piece bonuses.
+= यहाँ बोनस देखने के लिए किसी सेट के कवच टुकड़े पहनें। दो सेटों के चार-चार टुकड़े दोनों 4-टुकड़ा बोनस देते हैं।
+{0}% of your ranks
+= आपकी रैंकों का {0}%
+waiting for clarification from dev
+= डेवलपर से स्पष्टीकरण की प्रतीक्षा

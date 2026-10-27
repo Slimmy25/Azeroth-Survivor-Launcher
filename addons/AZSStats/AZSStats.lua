@@ -204,6 +204,21 @@ local function Bests(best, run)
 	return beaten;
 end
 
+-- a run's spell focus: each spell's share of the ranks you put into your spells that run, the biggest first
+-- ({ name, rank, pct }), and the ranks in all. A spell taken once (rank 1) counts 1.
+function AZSStats_SpellFocus(abilities)
+	local out, total = {}, 0;
+	if ( type(abilities) ~= "table" ) then return out, 0; end
+	for i = 1, table.getn(abilities) do
+		local r = math.max(1, Num(abilities[i].rank));
+		total = total + r;
+		table.insert(out, { name = abilities[i].name or "?", rank = r });
+	end
+	for i = 1, table.getn(out) do out[i].pct = total > 0 and math.floor(out[i].rank * 100 / total + 0.5) or 0; end
+	table.sort(out, function(a, b) return a.rank > b.rank; end);
+	return out, total;
+end
+
 -- adds a run's abilities to a list of abilities (global or one class's)
 local function AddAbilities(list, run)
 	if ( type(run.abilities) ~= "table" ) then
@@ -619,6 +634,13 @@ function AZSStats_Record(s)
 	end
 	AddBuild(db, run, records, classRecords);
 	AddAbilities(class.abilities, run);
+	-- the post-game review: which spells this run leaned on, by the ranks put into them
+	local focus, ranks = AZSStats_SpellFocus(run.abilities);
+	if ( table.getn(focus) > 1 and ranks > 0 ) then
+		local parts = {};
+		for i = 1, math.min(4, table.getn(focus)) do table.insert(parts, focus[i].name .. " " .. focus[i].pct .. "%"); end
+		Print("Spell focus (" .. ranks .. " ranks): " .. table.concat(parts, " · ") .. (focus[1].pct >= 40 and ("  |cffffd100- mostly " .. focus[1].name .. "|r") or ""));
+	end
 	Accumulate(Group(db.races, run.race, run.rname), run);
 	-- the zone: its totals, and its highest DPS (overall, alone and in co-op)
 	local zone = Group(db.zones, run.zone, run.zname);

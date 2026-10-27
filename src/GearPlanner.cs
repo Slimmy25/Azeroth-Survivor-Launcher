@@ -96,18 +96,21 @@ namespace AzerothLauncher
         public static readonly Dictionary<string, int> Stars = new Dictionary<string, int>();
         readonly List<Rectangle> starBoxes = new List<Rectangle>();
         // what Totals found: an estimate among the numbers, and every set worn (rarity -> pieces worn, at 1+, 3+, 5 stars)
-        bool estimated;
+        bool estimated, pending;
         readonly Dictionary<string, int[]> setsWorn = new Dictionary<string, int[]>();
         static readonly Color Active = Theme.Hex("#40d040");
 
         static int StarsOf(string slot) { int n; return Stars.TryGetValue(slot, out n) ? n : 0; }
         static bool GearSlot(string slot) { return slot != "Neck" && !slot.StartsWith("Finger") && !slot.StartsWith("Trinket"); }
+        static bool WeaponSlot(string slot) { return slot == "Main Hand" || slot == "Off Hand" || slot == "Ranged"; }
 
         static readonly Color Page = Theme.Hex("#0e0d14"), Edge = Theme.Hex("#4a3a22"), SlotBg = Theme.Hex("#1b1a24"),
             SlotEdge = Theme.Hex("#45414f"), Gold = Theme.Hex("#f0c050"), Bright = Theme.Hex("#f5e9c8"), Dim = Theme.Hex("#9c8a64");
 
         // the height that shows every slot (the title, eight rows of slots and the weapons)
-        public int NeededHeight { get { return 40 + (int)(fTitle.Height + fSmall.Height) + 9 * (slotSize + slotGap) + 14; } }
+        public int NeededHeight { get { return 40 + (int)(fTitle.Height + fSmall.Height) + 9 * (slotSize + slotGap) + 14 + SetsHeight; } }
+        // the room under the weapons for the sets worn: two sets of four (or an 8-piece and its 4-piece) and a third
+        int SetsHeight { get { return (int)(fBold.Height * 5 + fSmall.Height * 13) + 16; } }
 
         public GearSheet(string cls, Dictionary<string, object> slots, Dictionary<string, string> gearIcons)
         {
@@ -168,6 +171,7 @@ namespace AzerothLauncher
             health = 0;
             unknown = 0;
             estimated = false;
+            pending = false;
             setsWorn.Clear();
             foreach (var kv in slots)
             {
@@ -189,6 +193,7 @@ namespace AzerothLauncher
                     if (!p.Known) { unknown++; continue; }
                     f = Items.StarFactor(p, st);
                     if (Items.StarEstimate(p, st)) estimated = true;
+                    if (Items.StarPending(p, st)) pending = true;
                     health += (int)Math.Round(p.Health * f);
                     list = p.Bonuses;
                 }
@@ -279,32 +284,86 @@ namespace AzerothLauncher
                 new[] { "Speed", Val(t, "speed", "%") }, new[] { "Regen", Val(t, "regen", "") }, new[] { "Pickup", Val(t, "pickup", "%") },
             });
             string txt = Lang.T("The bonuses of everything chosen, added together, with each piece's stars and the set bonuses reached. A number marked ~ is an estimate.");
+            if (pending) txt += " " + Lang.T("Stars") + ": " + Lang.T(Items.StarsPending) + ".";
             if (unknown > 0) txt = Lang.T("Pieces with bonuses not known yet") + ": " + unknown + ". " + txt;
-            float y = mid.Y + boxH + 8;
-            y += Para(g, txt, fSmall, Dim, mid.X, y, mid.Width, mid.Bottom) + 6;
+            Para(g, txt, fSmall, Dim, mid.X, mid.Y + boxH + 8, mid.Width, mid.Bottom);
 
-            // the sets worn: each one's pieces, its 4-piece and 8-piece bonuses, bright when reached
-            if (setsWorn.Count > 0 && y < mid.Bottom)
-            {
-                using (var b = new SolidBrush(Gold)) g.DrawString(Lang.T("Set bonuses"), fBold, b, mid.X, y);
-                y += fBold.GetHeight(g) + 2;
-                foreach (string rar in Items.Rarities)
-                {
-                    int[] c;
-                    if (!setsWorn.TryGetValue(rar, out c) || y >= mid.Bottom) continue;
-                    y += Para(g, Items.SetName(cls, rar) + "  " + c[0] + "/8", fBold, GearSheet.RarityColor(rar), mid.X, y, mid.Width, mid.Bottom);
-                    var four = Items.FourPiece(rar);
-                    string eight = Items.EightPiece(cls, rar);
-                    bool on4 = c[1] >= 4, on8 = c[2] >= 8, emp = c[3] >= 8;
-                    y += Para(g, "(4) " + (four != null ? four.Text : Lang.T("not entered yet")) + "  [" + c[1] + "/4, 1+ " + Lang.T("stars") + "]",
-                              fSmall, on4 ? Active : Dim, mid.X + 8, y, mid.Width - 8, mid.Bottom);
-                    y += Para(g, "(8) " + (eight ?? Lang.T("not entered yet")) + "  [" + c[2] + "/8, 3+ " + Lang.T("stars") + "]" +
-                              (emp ? "  " + Lang.T("empowered") : ""), fSmall, on8 ? Active : Dim, mid.X + 8, y, mid.Width - 8, mid.Bottom) + 3;
-                }
-            }
+            // under the weapons, across the sheet: every set worn, its 4-piece and 8-piece bonuses (bright when
+            // reached), so two sets of four show and count both, and an 8-piece shows its 4-piece too
+            var setsBox = new Rectangle(sheet.X + 12, by + s + 12, sheet.Width - 24, sheet.Bottom - 8 - (by + s + 12));
+            DrawSets(g, setsBox);
 
             // the selector: what the chosen slot can hold, each with its picture
             Selector(g, pick);
+        }
+
+        void DrawSets(Graphics g, Rectangle r)
+        {
+            float y = r.Y;
+            using (var b = new SolidBrush(Gold)) g.DrawString(Lang.T("Set bonuses"), fBold, b, r.X, y);
+            y += fBold.GetHeight(g) + 2;
+            if (setsWorn.Count == 0)
+            {
+                Para(g, Lang.T("Wear armor pieces of a set to see its bonuses here. Four pieces of two sets give both 4-piece bonuses."), fSmall, Dim, r.X, y, r.Width, r.Bottom);
+                return;
+            }
+            // what is reached, in one line
+            var reached = new List<string>();
+            foreach (string rar in Items.Rarities)
+            {
+                int[] c;
+                if (!setsWorn.TryGetValue(rar, out c)) continue;
+                if (c[1] >= 4) reached.Add(Items.SetName(cls, rar) + " (4)");
+                if (c[2] >= 8) reached.Add(Items.SetName(cls, rar) + " (8)" + (c[3] >= 8 ? " " + Lang.T("empowered") : ""));
+            }
+            y += Para(g, Lang.T("Reached") + ": " + (reached.Count > 0 ? string.Join(", ", reached.ToArray()) : Lang.T("none yet")),
+                      fSmall, reached.Count > 0 ? Active : Dim, r.X, y, r.Width, r.Bottom) + 4;
+            foreach (string rar in Items.Rarities)
+            {
+                int[] c;
+                if (!setsWorn.TryGetValue(rar, out c) || y >= r.Bottom) continue;
+                y += Para(g, Items.SetName(cls, rar) + "  " + c[0] + "/8", fBold, GearSheet.RarityColor(rar), r.X, y, r.Width, r.Bottom);
+                var four = Items.FourPiece(rar);
+                string eight = Items.EightPiece(cls, rar);
+                bool on4 = c[1] >= 4, on8 = c[2] >= 8, emp = c[3] >= 8;
+                y += Rich(g, "(4) " + (four != null ? four.Text : Lang.T("not entered yet")) + "  [" + c[1] + "/4, 1+ " + Lang.T("stars") + "]",
+                          fSmall, on4 ? Active : Dim, on4, r.X + 10, y, r.Width - 10, r.Bottom);
+                y += Rich(g, "(8) " + (eight ?? Lang.T("not entered yet")) + "  [" + c[2] + "/8, 3+ " + Lang.T("stars") + "]" +
+                          (emp ? "  " + Lang.T("empowered") : ""), fSmall, on8 ? Active : Dim, on8, r.X + 10, y, r.Width - 10, r.Bottom) + 4;
+            }
+        }
+
+        // a line wrapped word by word, the spells and talents in it in gold (as the Guide links them); its height
+        static float Rich(Graphics g, string text, Font f, Color baseColor, bool bright, float x, float y, float w, float bottom)
+        {
+            float lh = f.GetHeight(g);
+            if (y + lh > bottom) return 0;
+            using (var fmt = StringFormat.GenericTypographic)
+                return RichIn(g, text, f, baseColor, bright, x, y, w, bottom, fmt);
+        }
+
+        static float RichIn(Graphics g, string text, Font f, Color baseColor, bool bright, float x, float y, float w, float bottom, StringFormat fmt)
+        {
+            float lh = f.GetHeight(g);
+            float space = g.MeasureString("a b", f, 1000, fmt).Width - g.MeasureString("ab", f, 1000, fmt).Width;
+            if (space <= 0) space = f.Size * 0.3f;
+            float cx = x, cy = y;
+            Color link = bright ? Gold : Color.FromArgb(200, 184, 154, 80);
+            foreach (var run in GuideLinks.Split(text))
+            {
+                string[] words = run.Key.Split(' ');
+                for (int i = 0; i < words.Length; i++)
+                {
+                    if (i > 0) cx += space;
+                    if (words[i].Length == 0) continue;
+                    float ww = g.MeasureString(words[i], f, 1000, fmt).Width;
+                    if (cx > x && cx + ww > x + w) { cx = x; cy += lh; }
+                    if (cy + lh > bottom) return cy - y;
+                    using (var b = new SolidBrush(run.Value != null ? link : baseColor)) g.DrawString(words[i], f, b, cx, cy, fmt);
+                    cx += ww;
+                }
+            }
+            return cy + lh - y;
         }
 
         // a paragraph wrapped to a width (cut at the bottom); its height
@@ -336,7 +395,11 @@ namespace AzerothLauncher
             float lh = Math.Max(fText.GetHeight(g) + 6, 20);
             // the stars of the piece in this slot: 0 to 5
             starBoxes.Clear();
-            if (GearSlot(chosenSlot))
+            if (WeaponSlot(chosenSlot))
+            {
+                y += Para(g, Lang.T("Stars") + ": " + Lang.T(Items.StarsPending), fSmall, Dim, r.X + 10, y, r.Width - 20, r.Bottom) + 4;
+            }
+            else if (GearSlot(chosenSlot))
             {
                 string lab = Lang.T("Stars") + ":";
                 SizeF ls = g.MeasureString(lab, fText);

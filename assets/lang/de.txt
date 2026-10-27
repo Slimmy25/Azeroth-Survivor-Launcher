@@ -1739,3 +1739,15 @@ estimate
 = Schätzung
 not entered yet
 = noch nicht eingetragen
+Reached
+= Erreicht
+none yet
+= noch keine
+Set bonuses that change it:
+= Setboni, die ihn verändern:
+Wear armor pieces of a set to see its bonuses here. Four pieces of two sets give both 4-piece bonuses.
+= Trage Rüstungsteile eines Sets, um hier seine Boni zu sehen. Je vier Teile aus zwei Sets geben beide 4-Teile-Boni.
+{0}% of your ranks
+= {0} % deiner Ränge
+waiting for clarification from dev
+= wartet auf Klärung durch den Entwickler

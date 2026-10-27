@@ -1739,3 +1739,15 @@ estimate
 = estimación
 not entered yet
 = aún sin introducir
+Reached
+= Alcanzado
+none yet
+= ninguno aún
+Set bonuses that change it:
+= Bonificaciones de conjunto que lo cambian:
+Wear armor pieces of a set to see its bonuses here. Four pieces of two sets give both 4-piece bonuses.
+= Equipa piezas de armadura de un conjunto para ver aquí sus bonificaciones. Cuatro piezas de dos conjuntos dan ambas bonificaciones de 4 piezas.
+{0}% of your ranks
+= {0}% de tus rangos
+waiting for clarification from dev
+= esperando aclaración del desarrollador

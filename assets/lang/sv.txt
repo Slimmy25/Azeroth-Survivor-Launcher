@@ -1739,3 +1739,15 @@ estimate
 = uppskattning
 not entered yet
 = inte inlagt än
+Reached
+= Uppnått
+none yet
+= inga än
+Set bonuses that change it:
+= Setbonusar som ändrar den:
+Wear armor pieces of a set to see its bonuses here. Four pieces of two sets give both 4-piece bonuses.
+= Bär rustningsdelar ur ett set för att se dess bonusar här. Fyra delar ur två set ger båda 4-delsbonusarna.
+{0}% of your ranks
+= {0} % av dina rangsteg
+waiting for clarification from dev
+= väntar på besked från utvecklaren

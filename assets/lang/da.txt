@@ -1739,3 +1739,15 @@ estimate
 = skøn
 not entered yet
 = ikke indtastet endnu
+Reached
+= Opnået
+none yet
+= ingen endnu
+Set bonuses that change it:
+= Sætbonusser, der ændrer den:
+Wear armor pieces of a set to see its bonuses here. Four pieces of two sets give both 4-piece bonuses.
+= Bær rustningsdele fra et sæt for at se dets bonusser her. Fire dele fra to sæt giver begge 4-delsbonusser.
+{0}% of your ranks
+= {0}% af dine rangtrin
+waiting for clarification from dev
+= venter på afklaring fra udvikleren

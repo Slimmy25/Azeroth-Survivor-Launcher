@@ -232,7 +232,7 @@ namespace AzerothLauncher
             foreach (string r in Items.Rarities) s.Append(" ").Append(Q(r)).Append(",");
             s.Append(" },\n");
             // gear[class] = { { rarity, slot, name, health, known, { stat = value, ... }, card, { factor at 1..5 stars },
-            //                   { estimate at 1..5 stars } }, ... }
+            //                   { estimate at 1..5 stars }, { pending at 1..5 stars: not known yet, counted at 0 } }, ... }
             s.Append("gear = {\n");
             var classes = new List<string>();
             foreach (var p in Items.Gear) if (!classes.Contains(p.Class)) classes.Add(p.Class);
@@ -251,6 +251,8 @@ namespace AzerothLauncher
                     for (int st = 1; st <= 5; st++) s.Append(" ").Append(N(Items.StarFactor(p, st))).Append(",");
                     s.Append(" }, {");
                     for (int st = 1; st <= 5; st++) s.Append(" ").Append(Items.StarEstimate(p, st) ? "true" : "false").Append(",");
+                    s.Append(" }, {");
+                    for (int st = 1; st <= 5; st++) s.Append(" ").Append(Items.StarPending(p, st) ? "true" : "false").Append(",");
                     s.Append(" } },\n");
                 }
                 s.Append("},\n");
@@ -282,6 +284,39 @@ namespace AzerothLauncher
                 foreach (var b in j.Bonuses) { double v; sum.TryGetValue(b.Stat, out v); sum[b.Stat] = v + b.Value; }
                 foreach (var kv in sum) s.Append(" [").Append(Q(kv.Key)).Append("] = ").Append(N(kv.Value)).Append(",");
                 s.Append(" }, ").Append(Q(string.Join("\n", j.Lines.ToArray()))).Append(" },\n");
+            }
+            s.Append("},\n");
+            // setchanges[class][spell key] = { { "Faith 8-piece", its text, rarity }, ... }: the class's sets whose 8-piece
+            // bonus names the spell (as written, or more than one of it: "Every 4 Wraths")
+            s.Append("setchanges = {\n");
+            foreach (var t in topics)
+            {
+                if (t.Title != "Classes") continue;
+                foreach (var pg in t.Pages)
+                {
+                    var lines = new StringBuilder();
+                    string sec = "";
+                    foreach (string raw in pg.Body.Split('\n'))
+                    {
+                        string line = raw.Trim();
+                        if (line.StartsWith("# ")) { sec = line.Substring(2).Trim(); continue; }
+                        if (!sec.StartsWith("Spell pool") || !line.StartsWith("- ")) continue;
+                        var m = System.Text.RegularExpressions.Regex.Match(line.Substring(2).Trim(), @"^(.+?(?: \([^)]*\))?): (?=[a-z0-9])(.+)$");
+                        if (!m.Success) continue;
+                        string spell = System.Text.RegularExpressions.Regex.Replace(m.Groups[1].Value, @"\s*\(.*\)$", "").Trim();
+                        if (spell.Length < 3) continue;
+                        var word = new System.Text.RegularExpressions.Regex(@"(?<![A-Za-z'])" + System.Text.RegularExpressions.Regex.Escape(spell) + @"(?:s|'s)?(?![A-Za-z])");
+                        var hits = new StringBuilder();
+                        foreach (string rar in Items.Rarities)
+                        {
+                            string eight = Items.EightPiece(pg.Title, rar);
+                            if (eight == null || !word.IsMatch(eight)) continue;
+                            hits.Append(" { ").Append(Q(Items.SetName(pg.Title, rar) + " 8-piece")).Append(", ").Append(Q(eight)).Append(", ").Append(Q(rar)).Append(" },");
+                        }
+                        if (hits.Length > 0) lines.Append("\t[").Append(Q(Key(spell))).Append("] = {").Append(hits.ToString()).Append(" },\n");
+                    }
+                    if (lines.Length > 0) s.Append("[").Append(Q(pg.Title)).Append("] = {\n").Append(lines.ToString()).Append("},\n");
+                }
             }
             s.Append("},\n");
             // spellchanges[class][spell key] = { other spells of the class whose text names it }

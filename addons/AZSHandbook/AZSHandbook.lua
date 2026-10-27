@@ -197,7 +197,7 @@ local function Choices(class, slot)
 		local g = D().gear[class] or {};
 		for i = 1, table.getn(g) do
 			if ( g[i][2] == slot ) then table.insert(out, { name = g[i][3], rarity = g[i][1], slot = slot, health = g[i][4], known = g[i][5], stats = g[i][6], card = g[i][7],
-			                                                f = g[i][8], est = g[i][9] }); end
+			                                                f = g[i][8], est = g[i][9], pend = g[i][10] }); end
 		end
 	end
 	return out;
@@ -206,8 +206,10 @@ end
 -- the totals: each piece grown by its stars, and the 4-piece bonus of every set worn at 4 pieces of 1+ stars (two sets of
 -- four give both). worn[rarity] = { pieces, at 1+ stars, at 3+, at 5 }
 local WEAPON_SLOTS = { ["Main Hand"] = true, ["Off Hand"] = true, ["Ranged"] = true };
+local STARS_PENDING = "waiting for clarification from dev";
 local function Totals(class)
 	local t, health, unknown, est, worn = {}, 0, 0, false, {};
+	local pending = false;
 	for slot, p in pairs(planner.slots) do
 		local st = planner.stars[slot] or 0;
 		if ( p.slot and not WEAPON_SLOTS[p.slot] ) then
@@ -221,6 +223,7 @@ local function Totals(class)
 		if ( p.known ) then
 			local f = (st > 0 and p.f and p.f[st]) or 1;
 			if ( st > 0 and p.est and p.est[st] ) then est = true; end
+			if ( st > 0 and p.pend and p.pend[st] ) then pending = true; end
 			health = health + math.floor((p.health or 0) * f + 0.5);
 			for k, v in pairs(p.stats or {}) do t[k] = (t[k] or 0) + v * f; end
 		else unknown = unknown + 1; end
@@ -231,7 +234,7 @@ local function Totals(class)
 			for k, v in pairs(sets[r][3] or {}) do t[k] = (t[k] or 0) + v; end
 		end
 	end
-	return t, health, unknown, est, worn;
+	return t, health, unknown, est, worn, pending;
 end
 
 local function ItemTooltip(owner, p)
@@ -241,7 +244,9 @@ local function ItemTooltip(owner, p)
 	local card = p.card or "";
 	if ( not p.known ) then card = card .. "\n(its bonuses are not known yet)"; end
 	local st = (p.slot and planner.slots[p.slot] == p) and (planner.stars[p.slot] or 0) or 0;
-	if ( st > 0 and p.f and p.f[st] ) then
+	if ( st > 0 and p.pend and p.pend[st] ) then
+		card = "Stars: " .. st .. "/5: " .. STARS_PENDING .. "\n" .. card;
+	elseif ( st > 0 and p.f and p.f[st] ) then
 		card = "Stars: " .. st .. "/5 (bonuses x" .. string.format("%.2f", p.f[st]) .. ((p.est and p.est[st]) and ", an estimate" or "") .. ")\n" .. card;
 	end
 	for line in string.gfind(card, "[^\n]+") do
@@ -263,7 +268,7 @@ end
 
 local function ItemsGear(out)
 	local class = view.gear;
-	local t, health, unknown, est, worn = Totals(class);
+	local t, health, unknown, est, worn, pending = Totals(class);
 	local lines = {};
 	for i = 1, table.getn(STAT_ROWS) do
 		local r = STAT_ROWS[i];
@@ -275,11 +280,24 @@ local function ItemsGear(out)
 	table.insert(out, { kind = "buttons", items = { { text = "Clear", go = function() planner.slots = {}; planner.stars = {}; end },
 	                                                { text = "Talent trees", go = function() local c = view.gear; view.gear = nil; view.talents = c; end } } });
 	table.insert(out, { kind = "stats", lines = lines, note = (unknown > 0 and ("Pieces with bonuses not known yet: " .. unknown .. ". ") or "") ..
-	                    "The bonuses of everything chosen, added together, with each piece's stars and the set bonuses reached. A number marked ~ is an estimate." });
+	                    "The bonuses of everything chosen, added together, with each piece's stars and the set bonuses reached. A number marked ~ is an estimate." ..
+	                    (pending and (" Stars: " .. STARS_PENDING .. ".") or "") });
 	-- the sets worn: their pieces, and their 4-piece and 8-piece bonuses
 	local sets = (D().sets or {})[class] or {};
 	local rar = D().rarities or {};
 	local any = false;
+	local reached = {};
+	for i = 1, table.getn(rar) do
+		local c, s = worn[rar[i]], sets[rar[i]];
+		if ( c and s ) then
+			if ( c[2] >= 4 ) then table.insert(reached, s[1] .. " (4)"); end
+			if ( c[3] >= 8 ) then table.insert(reached, s[1] .. " (8)" .. (c[4] >= 8 and " empowered" or "")); end
+		end
+	end
+	table.insert(out, { kind = "head", text = "Set bonuses" });
+	any = true;
+	table.insert(out, { kind = "note", text = (table.getn(reached) > 0) and ("Reached: " .. table.concat(reached, ", "))
+	                    or "Wear armor pieces of a set to see its bonuses here. Four pieces of two sets give both 4-piece bonuses." });
 	for i = 1, table.getn(rar) do
 		local c, s = worn[rar[i]], sets[rar[i]];
 		if ( c and s ) then
@@ -295,12 +313,15 @@ local function ItemsGear(out)
 	for i = 1, table.getn(slots) do
 		local s, p = slots[i], planner.slots[slots[i]];
 		local st = planner.stars[s] or 0;
+		if ( WEAPON_SLOTS[s] ) then st = 0; end
 		table.insert(out, { kind = "row", label = s, text = p and (p.name .. (p.slot and st > 0 and ("  (" .. st .. " stars)") or "")) or "Empty", rarity = p and p.rarity, item = p,
 		                    selected = (planner.pick == s), go = function() planner.pick = s; end });
 	end
 	table.insert(out, { kind = "head", text = "Choose: " .. planner.pick });
-	-- the stars of the piece in this slot: 0 to 5
-	if ( not (planner.pick == "Neck" or string.find(planner.pick, "Finger") or string.find(planner.pick, "Trinket")) ) then
+	-- the stars of the piece in this slot: 0 to 5, armor only (weapons wait for the dev)
+	if ( planner.pick == "Main Hand" or planner.pick == "Off Hand" or planner.pick == "Ranged" ) then
+		table.insert(out, { kind = "note", text = "Stars: " .. STARS_PENDING });
+	elseif ( not (planner.pick == "Neck" or string.find(planner.pick, "Finger") or string.find(planner.pick, "Trinket")) ) then
 		local items, cur = {}, planner.stars[planner.pick] or 0;
 		for n = 0, 5 do
 			local k = n;
@@ -410,7 +431,8 @@ local function Items()
 				local spell = StripRank(name);
 				local sc = (data.spellchanges or {})[class] or {};
 				table.insert(out, { kind = "spell", name = name, spell = spell, text = string.upper(string.sub(rest, 1, 1)) .. string.sub(rest, 2),
-				                    icon = IconOf(spell), changers = Changers(class, spell), spells = sc[Key(spell)] or {} });
+				                    icon = IconOf(spell), changers = Changers(class, spell), spells = sc[Key(spell)] or {},
+				                    sets = (((data.setchanges or {})[class] or {})[Key(spell)]) or {} });
 			else
 				-- the bullet's icon: its name's, else the first spell it names
 				local icon = name and IconOf(name);
@@ -440,7 +462,7 @@ local function Items()
 			for i = 1, table.getn(g) do
 				if ( g[i][1] == rar[r] ) then
 					table.insert(list, { name = g[i][3], rarity = g[i][1], slot = g[i][2], health = g[i][4], known = g[i][5], stats = g[i][6], card = g[i][7],
-					                     f = g[i][8], est = g[i][9] });
+					                     f = g[i][8], est = g[i][9], pend = g[i][10] });
 				end
 			end
 			if ( table.getn(list) > 0 ) then
@@ -607,6 +629,50 @@ local function LaySpellsBy(f, it, h)
 		c:ClearAllPoints();
 		c:SetPoint("TOPLEFT", f, "TOPLEFT", x + (i - 1) * 21, -(h - 5));
 		K.Icon(c.icon, IconOf(it.spells[i]) or "INV_Misc_QuestionMark");
+		c:Show();
+	end
+	return h + 20;
+end
+
+-- the sets whose 8-piece bonus changes the spell: their names in their rarity's colour; the hover reads the bonus
+local function LaySetsBy(f, it, h)
+	f.setby = f.setby or Text(f, "GameFontDisableSmall");
+	f.setchips = f.setchips or {};
+	for i = 1, table.getn(f.setchips) do f.setchips[i]:Hide(); end
+	if ( table.getn(it.sets or {}) == 0 ) then f.setby:Hide(); return h; end
+	f.setby:ClearAllPoints();
+	f.setby:SetPoint("TOPLEFT", f, "TOPLEFT", 50, -(h - 2));
+	f.setby:SetText("Set bonuses that change it:");
+	f.setby:Show();
+	local x = 50 + f.setby:GetStringWidth() + 6;
+	for i = 1, math.min(6, table.getn(it.sets)) do
+		local c = f.setchips[i];
+		if ( not c ) then
+			c = CreateFrame("Frame", nil, f);
+			c:SetHeight(16);
+			c:EnableMouse(true);
+			c.t = Text(c, "GameFontNormalSmall");
+			c.t:SetPoint("LEFT", c, "LEFT", 2, 0);
+			c:SetScript("OnEnter", function()
+				GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
+				local rgb = RARITY_RGB[this.rarity] or RARITY_RGB.Common;
+				GameTooltip:AddLine(this.label, rgb[1], rgb[2], rgb[3]);
+				GameTooltip:AddLine(this.text, 0.12, 1, 0, 1);
+				GameTooltip:AddLine("All 8 armor pieces at 3+ stars; at 5 stars on all eight it is empowered: half again as strong.", 0.6, 0.6, 0.6, 1);
+				GameTooltip:Show();
+			end);
+			c:SetScript("OnLeave", function() GameTooltip:Hide(); end);
+			f.setchips[i] = c;
+		end
+		local d = it.sets[i];
+		c.label, c.text, c.rarity = d[1], d[2], d[3];
+		local rgb = RARITY_RGB[d[3]] or RARITY_RGB.Common;
+		c.t:SetText(d[1]);
+		c.t:SetTextColor(rgb[1], rgb[2], rgb[3]);
+		c:SetWidth(c.t:GetStringWidth() + 6);
+		c:ClearAllPoints();
+		c:SetPoint("TOPLEFT", f, "TOPLEFT", x, -(h - 3));
+		x = x + c.t:GetStringWidth() + 12;
 		c:Show();
 	end
 	return h + 20;
@@ -948,6 +1014,7 @@ local function Lay(items)
 				f.by:Hide();
 			end
 			h = LaySpellsBy(f, it, h);
+			h = LaySetsBy(f, it, h);
 			f:SetWidth(CW);
 			f:SetHeight(h);
 			f:SetPoint("TOPLEFT", child, "TOPLEFT", 0, -y);

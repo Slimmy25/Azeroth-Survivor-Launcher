@@ -1739,3 +1739,15 @@ estimate
 = arvio
 not entered yet
 = ei vielä syötetty
+Reached
+= Saavutettu
+none yet
+= ei vielä mitään
+Set bonuses that change it:
+= Sitä muuttavat settibonukset:
+Wear armor pieces of a set to see its bonuses here. Four pieces of two sets give both 4-piece bonuses.
+= Pue setin panssariosia nähdäksesi sen bonukset tässä. Neljä osaa kahdesta setistä antaa molemmat 4 osan bonukset.
+{0}% of your ranks
+= {0} % tasoistasi
+waiting for clarification from dev
+= odottaa kehittäjän tarkennusta

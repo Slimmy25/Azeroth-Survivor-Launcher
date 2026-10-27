@@ -1740,3 +1740,15 @@ estimate
 = 추정치
 not entered yet
 = 아직 입력되지 않음
+Reached
+= 달성
+none yet
+= 아직 없음
+Set bonuses that change it:
+= 이것을 바꾸는 세트 보너스:
+Wear armor pieces of a set to see its bonuses here. Four pieces of two sets give both 4-piece bonuses.
+= 세트의 방어구를 착용하면 여기에 보너스가 표시됩니다. 두 세트를 4개씩 착용하면 4세트 보너스를 둘 다 받습니다.
+{0}% of your ranks
+= 전체 랭크의 {0}%
+waiting for clarification from dev
+= 개발자의 설명을 기다리는 중

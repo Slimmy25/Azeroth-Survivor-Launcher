@@ -23,14 +23,28 @@
 
 ### Set bonuses and stars
 - Guide > Items: every class's gear now ends each rarity with its set's 4-piece and 8-piece bonuses, as the game's
-  armory words them. Class pages show them under each rarity's pieces too. Priest, Warrior and Paladin are entered;
-  the other classes say "not entered yet" until their sets are read.
-- Gear Planner: pick 0 to 5 stars for the piece in each slot (the buttons above the list). The totals grow with each
-  piece's stars and add the 4-piece bonus of every set worn at 4 pieces of 1+ stars, so four pieces of one set and four
-  of another give both. A Set bonuses list shows each set worn, its pieces and stars, and whether its 4-piece and
-  8-piece bonuses are reached (and empowered at 5 stars on all eight). Numbers that rest on an estimate show ~.
-- Item cards (Guide hovers and the planner) show the piece's set with its 4-piece and 8-piece bonuses, and in the
-  planner the piece's numbers at its stars.
-- AZS Handbook (in game): the same star buttons, totals, Set bonuses list and set lines on class pages.
+  armory words them, for all nine classes (54 sets). Class pages show them under each rarity's pieces too, and the
+  spells named in them are highlighted.
+- Guide > Classes: a spell's box now also shows "Set bonuses that change it": the sets whose 8-piece bonus changes that
+  spell (Fireball: Frostfire 8-piece), in the set's colour. Point at one to read the bonus.
+- Gear Planner: pick 0 to 5 stars for each armor piece (the buttons above the list). Stars decide which set bonuses you
+  reach (4-piece at 1+ stars, 8-piece at 3+). What a star adds to a piece's own numbers is waiting for clarification
+  from the game's developer, so the totals count every piece at 0 stars for now; weapons have no stars yet for the same
+  reason. Everything is ready for those numbers.
+- Gear Planner: the Set bonuses list now has its own room under the weapons. Four pieces of one set and four of another
+  show and count both 4-piece bonuses, and a full set shows its 4-piece next to its 8-piece; a "Reached" line sums up
+  which bonuses you have.
+- Item cards (Guide hovers and the planner) show the piece's set with its 4-piece and 8-piece bonuses.
+- AZS Handbook (in game): the same star buttons, totals, Set bonuses list, set lines on class pages and "Set bonuses
+  that change it" on spells.
 - Guide: "Mr. Smite" and "High Priest Venoxis" (and every other boss's name) no longer link to Smite or the Priest
   class; in the in-game Handbook, Smite in Mr. Smite is no longer highlighted as the spell.
+- Guide > Gear & the Armory: the 4-piece bonuses, mixing two sets, and which PvP sets are built around crowd control
+  (the warrior's is built around Mortal Strike and the shaman's around Earth Shock).
+
+### AZS Stats: spell focus
+- At the end of a run, AZS Stats says in chat which spells the run leaned on: each spell's share of the ranks you put
+  into your spells ("Spell focus (12 ranks): Fireball 42% · Frost Nova 25% ...").
+- History (in game and in the launcher) lists each run's spells with their rank and that share, the biggest first.
+- Abilities (in game and in the launcher): each spell also shows its share of every rank you have put into spells, so
+  you can see which spell you favour over time.

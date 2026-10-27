@@ -1739,3 +1739,15 @@ estimate
 = anslag
 not entered yet
 = ikke lagt inn ennå
+Reached
+= Oppnådd
+none yet
+= ingen ennå
+Set bonuses that change it:
+= Settbonuser som endrer den:
+Wear armor pieces of a set to see its bonuses here. Four pieces of two sets give both 4-piece bonuses.
+= Bruk rustningsdeler fra et sett for å se bonusene her. Fire deler fra to sett gir begge 4-delsbonusene.
+{0}% of your ranks
+= {0} % av rangene dine
+waiting for clarification from dev
+= venter på avklaring fra utvikleren

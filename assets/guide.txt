@@ -484,16 +484,17 @@ Head, Shoulders, Chest, Hands, Wrist, Waist, Legs, Feet and Main Hand. The final
 Every boss pays your class marks: more in harder zones and on higher Heroic levels, and half on normal. Bosses that return in endless mode pay more each time. Marks are kept per class.
 
 # Stars
-Spend marks in the armory to raise a piece from 0 to 5 stars. Each star adds to the piece's own bonuses: at 5 stars, tier 3 gear is 60% stronger.
+Spend marks in the armory to raise a piece from 0 to 5 stars. Each star adds to the piece's own bonuses. How much each star adds: waiting for clarification from dev.
 - A set's stars open as your class beats Heroic levels in that set's zones: Heroic I opens 1 star, Heroic II 2 stars, and so on.
-- Lower sets cost less and gain more from each star. Their 5th star is a big one that lifts them to 95% of 5-star tier 3, so your favourite set stays viable at the end. That last star costs what tier 3's does: 30 marks.
+- Lower sets cost less, and their 5th star is a big one, so your favourite set stays viable at the end. That last star costs what the top sets' does: 30 marks. How strong it makes them: waiting for clarification from dev.
 - Every other class that has a set's armor at a star rank makes that rank 5% cheaper for yours, up to 40%.
+- Weapons and stars: waiting for clarification from dev.
 
 # Set bonuses
 - 4-piece: four armor pieces of one set at 1 star or more give the set's bonus. It is the same for every class: common +25% gold and +30% pickup range, uncommon 1.5% of your max health per second after 3 seconds unhurt, rare +1 target to every ability, epic 6% chance for an ability to strike twice, PvP +12% damage reduction with 5 or more enemies close, legendary +30% critical damage.
 - Sets can be mixed: four pieces of one set and four of another give both 4-piece bonuses.
 - 8-piece: all eight armor pieces of one set at 3 stars or more change how one of your class's spells plays, a different spell for each set. For example, Fireball splits, Aimed Shot pierces, and Consecration, Blizzard and Volley move with you. At 5 stars on all eight the bonus is empowered: half again as strong.
-- Most PvP sets are built around crowd control: their 8-piece bonus makes your stun, root, slow or fear spell (Hammer of Justice, Concussive Shot, Kidney Shot, Psychic Scream, Frost Nova, Death Coil, Shred) hit more enemies, harder and more often, and all your damage higher against enemies you stun, root, slow or fear. The warrior's is built around Mortal Strike instead.
+- Most PvP sets are built around crowd control: their 8-piece bonus makes your stun, root, slow or fear spell (Hammer of Justice, Concussive Shot, Kidney Shot, Psychic Scream, Frost Nova, Death Coil, Shred) hit more enemies, harder and more often, and all your damage higher against enemies you stun, root, slow or fear. The warrior's is built around Mortal Strike and the shaman's around Earth Shock instead.
 - An armor piece's tooltip (character pane, C) shows its set: the set's name with how many pieces you wear, its pieces, and its 4-piece and 8-piece bonuses with the stars they need. Each class's sets and their bonuses are listed under its gear in the Items topic.
 
 # Weapon glows
