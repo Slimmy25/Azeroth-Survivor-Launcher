@@ -61,3 +61,6 @@
   set's damage bonus, cooldowns and "every N sec" with its cooldown bonus, "within N yd" with its area bonus, and a
   line saying which bonuses are counted. It is an estimate (bonuses added together), and the set is forgotten when
   the launcher closes.
+- The path at the top of each window (like Guide › Theorycrafting › Talent Tree Builder) now has a small arrow on every step after the first. Click it to jump to another category at that level: another guide group, another topic or tool, another page, another class, another Options tab or another Download More category.
+- The "What class do you want to build for?" question now shows over the launcher's background picture, not a black screen.
+- Big streamer videos (Asmongold's and five more) are always first in MORE VIDEOS, and the front page features them until November 9. Every other video counts as a Content Creator video.
