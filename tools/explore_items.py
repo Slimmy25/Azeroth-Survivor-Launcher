@@ -36,6 +36,16 @@ os.makedirs("/tmp/probe", exist_ok=True)
 for k in sorted(want):
     open("/tmp/probe/f%d.txt" % k, "w").write(funcs[k])
 
+import gzip, base64, json
+names = json.loads(os.environ.get("PROBE_FUNCS", "[]"))
+blob = {}
+for k, fn in enumerate(funcs):
+    m = re.match(r"function (\w+)", fn)
+    if k in want or (m and m.group(1) in names): blob[m.group(1) if m else str(k)] = fn
+packed = base64.b64encode(gzip.compress(json.dumps(blob).encode(), 9)).decode()
+say("BLOB %d" % len(packed))
+for q in range(0, len(packed), 3400):
+    print("::notice title=blob %d::%s" % (q // 3400, packed[q:q + 3400]))
 text = "\n".join(out)
 chunk, n = "", 0
 for line in text.split("\n"):
