@@ -101,9 +101,9 @@ def main():
     # the stats' texts, in the game's order (the order is the stat's number): "Increases all damage you deal by {p}."
     stats = []
     first = "Increases all damage you deal by {p}."
-    m = re.search(r"Reduces the cooldown of your spells by \{p\}\.[\x20-\x7e]*", text)
-    if m and first in text:
-        stats = [first] + re.split(r"(?<=\.)(?=[A-Z])", m.group(0))
+    runs = re.findall(r"Reduces the cooldown of your spells by \{p\}\.[^\x00-\x1f\"]*", text)
+    if runs and first in text:
+        stats = [first] + re.split(r"(?<=\.)(?=[A-Z])", max(runs, key=len))
     debug.append("stat texts: %d" % len(stats))
     amulets = sorted((k[7:], v) for k, v in en.items() if k.startswith("amulet."))
 
