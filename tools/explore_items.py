@@ -38,10 +38,16 @@ def rows(start, end, step):
     for a in range(start, end, step):
         say("%x: %s" % (a, dump(a, step // 4)))
 
-rows(0x480378, 0x480378 + 0xe8 * 3, 0xe8 // 2 if False else 116)
-rows(0x480f54, 0x480f54 + 0x5c * 4, 92)
-rows(0x47df90, 0x47df90 + 36 * 12, 36)
-rows(0x506ab0, 0x506ab0 + 40 * 30, 40)
+# runs of 5-6 increasing small floats (rarity tiers?) anywhere in the data
+seen = 0
+for a in range(1048576, len(mem) - 24, 4):
+    v = [f(a + 4 * k) for k in range(6)]
+    if all(0.001 <= x <= 5000 for x in v) and all(v[k] < v[k + 1] for k in range(5)) and v[5] / v[0] < 20 and v[5] / v[0] > 1.5:
+        if len(set(round(x, 4) for x in v)) == 6 and all(abs(x * 1000 - round(x * 1000)) < 1e-3 or abs(x - round(x)) < 1e-6 for x in v):
+            say("%x: %s" % (a, " ".join("%g" % x for x in v)))
+            seen += 1
+            if seen > 120: break
+rows(0x480378 + 0xe8 * 3, 0x480378 + 0xe8 * 9, 116)
 text = "\n".join(out)
 # annotations: chunks of about 3500 characters
 chunk, n = "", 0
