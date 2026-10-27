@@ -151,7 +151,7 @@ team. Unofficial mirrors are never used.
 | Mirror By Community Member | Leo | SHA-256 and MD5 |
 | Mirror By Community Member | Meexa | SHA-256 and MD5 |
 | Mirror By Discord Mod | Fotze | MD5 |
-| Official Website Host (Backup Link): <https://wow.aethus.pl/download> | Aethus | a real .rar/.zip/.7z from the official game host |
+| Official Website Host (Backup Link) | Aethus | a real .rar/.zip/.7z from the official game host |
 
 The Mirror By Discord Mod (Fotze, a Google Drive copy) is checked with MD5 only, by choice. MD5 can only be fooled by whoever made the file in the
 first place, and that copy is published by a trusted head moderator, so no further measures are taken for it.
