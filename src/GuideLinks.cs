@@ -17,13 +17,14 @@ namespace AzerothLauncher
     {
         public string Term = "", Tip = "";
         public int Topic = -1, Page = -1;                    // where a click goes (-1, -1: nowhere, a hover text only)
+        public string Class;                                 // a talent: its class (a click opens its talent trees)
     }
 
     public static class GuideLinks
     {
         static Dictionary<string, GuideLink> links;
         static Regex finder;
-        public static Action<int, int> Navigate;             // set by the launcher: open the Guide at that topic / page
+        public static Action<GuideLink> Navigate;            // set by the launcher: open the Guide where the link goes
         public static Func<Dictionary<string, string>> CapturedTips;   // set by the launcher: the game's tooltips AZS Stats saw
         static Dictionary<string, GuideLink> byKey;           // the same links by Norm(name): "shadowbolt" -> Shadow Bolt
 
@@ -129,7 +130,12 @@ namespace AzerothLauncher
             foreach (var tal in Talents.All())
             {
                 int cp = classesTopic < 0 ? -1 : topics[classesTopic].Pages.FindIndex(delegate(GuidePage g) { return g.Title == tal.Class; });
-                if (!links.ContainsKey(tal.Name)) Add(tal.Name, classesTopic, cp, Talents.HoverText(tal));
+                if (!links.ContainsKey(tal.Name))
+                {
+                    Add(tal.Name, classesTopic, cp, Talents.HoverText(tal));
+                    GuideLink tl;
+                    if (links.TryGetValue(tal.Name, out tl)) tl.Class = tal.Class;
+                }
             }
             // the theorycrafting tools: a click opens them (-2 the Talent Tree Builder, -3 the Gear Planner)
             Add("Talent Tree Builder", -2, -1, "Pick a class and try out a build of up to 51 points on its three talent trees.");
@@ -195,6 +201,19 @@ namespace AzerothLauncher
         }
 
         // what the game (or, until AZS Stats has seen it in game, the guide) says a name does; null if nothing
+        // the link is the page's (or topic's) own title: it goes to that page itself
+        public static bool IsPage(GuideLink l)
+        {
+            try
+            {
+                var topics = Data.Guide;
+                if (l.Topic < 0 || l.Topic >= topics.Count) return false;
+                string title = l.Page >= 0 && l.Page < topics[l.Topic].Pages.Count ? topics[l.Topic].Pages[l.Page].Title : topics[l.Topic].Title;
+                return title == l.Term;
+            }
+            catch (Exception) { return false; }
+        }
+
         public static string GameTip(string name)
         {
             if (links == null) Build();
@@ -250,7 +269,8 @@ namespace AzerothLauncher
             Flow(null);
         }
 
-        bool Clickable(GuideLink l) { return l != null && (l.Topic >= 0 || l.Topic <= -2) && !(l.Topic == here && l.Page == herePage); }
+        // every link goes somewhere, a spell on this same page too (to its row); only a page's link to itself does not
+        bool Clickable(GuideLink l) { return l != null && (l.Topic >= 0 || l.Topic <= -2) && !(l.Topic == here && l.Page == herePage && GuideLinks.IsPage(l)); }
 
         static readonly Bitmap measureBmp = new Bitmap(1, 1);
 
@@ -314,7 +334,7 @@ namespace AzerothLauncher
             GuideLink l = At(e.Location);
             if (l == over) return;
             over = l;
-            Cursor = Clickable(l) ? Cursors.Hand : (l != null ? Cursors.Help : Cursors.Default);
+            Cursor = Clickable(l) ? Cursors.Hand : Cursors.Default;
             Invalidate();
             if (l != null && l.Tip.Length > 0) GuideHover.Show(this, l.Term, l.Tip);
             else GuideHover.Hide();
@@ -334,7 +354,7 @@ namespace AzerothLauncher
             GuideLink l = At(e.Location);
             if (e.Button != MouseButtons.Left || !Clickable(l) || GuideLinks.Navigate == null) return;
             GuideHover.Hide();
-            GuideLinks.Navigate(l.Topic, l.Page);
+            GuideLinks.Navigate(l);
         }
     }
 

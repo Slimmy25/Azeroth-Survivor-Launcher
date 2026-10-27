@@ -310,7 +310,7 @@ namespace AzerothLauncher
             base.OnMouseMove(e);
             Talent t = At(e.Location);
             if (t != over) { over = t; Invalidate(); }
-            Cursor = t != null ? (Build != null ? Cursors.Hand : Cursors.Help) : Cursors.Default;
+            Cursor = t != null && Build != null ? Cursors.Hand : Cursors.Default;
             if (t != null) ShowTip(t);
             else GuideHover.Hide();
         }
@@ -391,7 +391,7 @@ namespace AzerothLauncher
             using (var path = Armory.Round(box, 6))
             {
                 using (var b = new SolidBrush(BackColor)) g.FillPath(b, path);
-                using (var p = new Pen(Theme.Hex("#3a2e1e"), 1)) g.DrawPath(p, path);
+                using (var p = new Pen(lit ? Theme.Gold : Theme.Hex("#3a2e1e"), lit ? 2 : 1)) g.DrawPath(p, path);
             }
             var ir = new Rectangle(8, 8, Ic, Ic);
             Image img = SpellIcons.Spell(Regex.Replace(name, @"\s*\(.*\)$", ""), this);
@@ -425,7 +425,7 @@ namespace AzerothLauncher
             Talent t = null;
             foreach (var c in chips) if (Rectangle.Inflate(c.Key, 2, 2).Contains(e.Location)) t = c.Value;
             if (t != over) { over = t; Invalidate(); }
-            Cursor = t != null ? Cursors.Help : Cursors.Default;
+            Cursor = t != null ? Cursors.Hand : Cursors.Default;   // a talent: a click opens its class's talent trees
             if (t != null) GuideHover.Show(this, t.Name, Talents.HoverText(t), SpellIcons.Icon(t.Icon, null));
             else if (new Rectangle(8, 8, Ic, Ic).Contains(e.Location) || e.Y < 24)
                 GuideHover.Show(this, name, SpellHover(), SpellIcons.Spell(Regex.Replace(name, @"\s*\(.*\)$", ""), null));
@@ -451,6 +451,41 @@ namespace AzerothLauncher
             base.OnMouseLeave(e);
             if (over != null) { over = null; Invalidate(); }
             GuideHover.Hide();
+        }
+
+        protected override void OnMouseUp(MouseEventArgs e)
+        {
+            base.OnMouseUp(e);
+            if (e.Button != MouseButtons.Left || over == null || GuideLinks.Navigate == null) return;
+            GuideHover.Hide();
+            var l = new GuideLink();
+            l.Term = over.Name;
+            l.Class = className;
+            l.Topic = -1;
+            l.Page = -1;
+            try
+            {
+                var topics = Data.Guide;
+                l.Topic = topics.FindIndex(delegate(GuideTopic g) { return g.Title == "Classes"; });
+                if (l.Topic >= 0) l.Page = topics[l.Topic].Pages.FindIndex(delegate(GuidePage g) { return g.Title == className; });
+            }
+            catch (Exception) { }
+            if (l.Topic >= 0) GuideLinks.Navigate(l);
+        }
+
+        // the spell's name without "(Rank 2)" and the like
+        public string Spell { get { return Regex.Replace(name, @"\s*\(.*\)$", ""); } }
+
+        bool lit;
+        // lit up in gold for a moment: a link brought you here
+        public void Flash()
+        {
+            lit = true;
+            Invalidate();
+            var t = new System.Windows.Forms.Timer();
+            t.Interval = 1600;
+            t.Tick += delegate { t.Stop(); t.Dispose(); lit = false; if (!IsDisposed) Invalidate(); };
+            t.Start();
         }
     }
 }

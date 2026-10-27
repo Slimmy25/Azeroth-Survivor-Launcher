@@ -145,10 +145,18 @@ namespace AzerothLauncher
                 RunStats st = AddonStats();
                 return st != null ? st.Tooltips : null;
             };
-            GuideLinks.Navigate = delegate(int t, int pg)      // a link in the Guide's text (GuideLinks.cs)
+            GuideLinks.Navigate = delegate(GuideLink l)        // a link in the Guide's text (GuideLinks.cs)
             {
                 if (current != "Guide" || !side.Visible) ShowSection("Guide");
-                SetGuideView(t, pg);
+                if (l.Class != null)                             // a talent: its class's talent trees
+                {
+                    SetGuideView(l.Topic, l.Page);
+                    gTalents = l.Class;
+                    BuildPanel("Guide");
+                    return;
+                }
+                SetGuideView(l.Topic, l.Page);
+                After(30, delegate { ShowSpellRow(l.Term); });   // a spell: its row on the page, scrolled to and lit up
             };
             Resize += delegate { if (WindowState == FormWindowState.Minimized) After(1, HideToTray); };
             Shown += delegate
@@ -653,12 +661,7 @@ namespace AzerothLauncher
             LayoutNav();
             if (!CloudEnabled()) SetCloudNote("");
             Invalidate();
-            if (current == "Cloud Save" && !CloudEnabled())
-            {
-                current = null;
-                ShowSection("Home");
-            }
-            else RebuildCurrent();
+            RebuildCurrent();
         }
 
         public void SetCloudEnabled(bool on)
@@ -1016,7 +1019,7 @@ namespace AzerothLauncher
                 ShowWindowFront();
                 Error("Cloud Save", err);
             }
-            if (current == "Cloud Save") RebuildCurrent();
+            if (current == "Options" && optionsTab == 1 && !optionsLang) RebuildCurrent();   // Options > CLOUD SAVE
             // settings downloaded: the addons they belong to are installed if they are missing
             if (ok && err == null && (kind == "pull" || kind == "restore"))
                 Bg(delegate

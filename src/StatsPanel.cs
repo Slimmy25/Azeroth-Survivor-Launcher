@@ -124,7 +124,13 @@ namespace AzerothLauncher
             StatBlock cls = data && statsClass != null ? st.Class(statsClass) : null;
             if (cls == null) statsClass = null;
             if (statsTab < 0 || statsTab >= StatTabs.Length) statsTab = 0;
-            if (cls != null) SetCrumbs("Stats", (Action)delegate { SetStatsView(null, 1); }, cls.Name, null);   // back to all classes
+            if (cls != null)
+            {
+                SetCrumbs("Stats", (Action)delegate { SetStatsView(null, 1); }, cls.Name, null);   // back to all classes
+                var l = new List<KeyValuePair<string, Action>>();                                   // › Priest ▾ : another class
+                foreach (var c in st.Classes) { string key = c.Key; l.Add(new KeyValuePair<string, Action>(c.Name, delegate { SetStatsView(key, statsTab); })); }
+                SetCrumbMenu(1, l);
+            }
 
             var sp = MakeThinScroll(panel, new Rectangle(20, pageTop, PW - 40, PH - 12 - pageTop), Armory.Page, Theme.Bronze,
                                     Armory.SlotEdge, Theme.GoldDim);

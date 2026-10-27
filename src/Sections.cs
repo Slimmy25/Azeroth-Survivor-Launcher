@@ -75,6 +75,7 @@ namespace AzerothLauncher
             Theme.Smooth(g);
             hot.Clear();
             arrows.Clear();
+            menuText.Clear();
             int x = 50;
             Rectangle bb = BackBox;
             if (!bb.IsEmpty)
@@ -118,6 +119,7 @@ namespace AzerothLauncher
                         using (var b = new SolidBrush(hoverArrow == i ? Color.White : Theme.Hex("#d9c48a")))
                             g.FillPolygon(b, new[] { new PointF(ar.X + 2, ar.Y + 5), new PointF(ar.Right - 2, ar.Y + 5), new PointF(ar.X + ar.Width / 2f, ar.Y + 10) });
                         arrows.Add(new KeyValuePair<Rectangle, int>(ar, i));
+                        if (last || crumbs[i].Value == null) menuText.Add(new KeyValuePair<Rectangle, int>(Rectangle.Round(r), i));
                     }
                     if (!last && crumbs[i].Value != null)
                     {
@@ -155,6 +157,14 @@ namespace AzerothLauncher
             return -1;
         }
 
+        // the name of a step with a drop-down and nothing else to do (the last step): a click opens its drop-down
+        readonly List<KeyValuePair<Rectangle, int>> menuText = new List<KeyValuePair<Rectangle, int>>();
+        int MenuTextAt(Point pt)
+        {
+            foreach (var a in menuText) if (a.Key.Contains(pt)) return a.Value;
+            return -1;
+        }
+
         int ArrowAt(Point pt)
         {
             foreach (var a in arrows) if (a.Key.Contains(pt)) return a.Value;
@@ -164,6 +174,7 @@ namespace AzerothLauncher
         protected override void OnMouseMove(MouseEventArgs e)
         {
             int h = HotAt(e.Location), ha = ArrowAt(e.Location);
+            if (ha < 0) ha = MenuTextAt(e.Location);          // the last step's name lights its arrow
             if (h != hover || ha != hoverArrow) { hover = h; hoverArrow = ha; Invalidate(); }
             Cursor = CloseBox.Contains(e.Location) || h != -1 || ha != -1 ? Cursors.Hand : Cursors.Default;
             if (dragOffset.HasValue && Owner2 != null)
@@ -227,6 +238,11 @@ namespace AzerothLauncher
                 int h = HotAt(e.Location);
                 if (h == -2) WowButton.Fire(BackClicked);
                 else if (h >= 0) WowButton.Fire(crumbs[h].Value);
+                else
+                {
+                    int m = MenuTextAt(e.Location);
+                    if (m >= 0) foreach (var a in arrows) if (a.Value == m) ShowMenu(m, a.Key);
+                }
             }
             base.OnMouseUp(e);
         }
@@ -421,6 +437,7 @@ namespace AzerothLauncher
 
         public void ShowSection(string name)
         {
+            if (name == "Cloud Save") { optionsTab = 1; optionsLang = false; name = "Options"; }   // it lives in Options > CLOUD SAVE
             // everything works without the game except Cloud Save and Addons, which are grayed out until it is installed
             if ((name == "Cloud Save" || name == "Addons") && !GateOpen())
             {
@@ -571,7 +588,6 @@ namespace AzerothLauncher
             if (current == "Community" && communityMore) { communityMore = false; BuildPanel("Community"); return; }
             if (current == "Addons" && addonMode == "download") { SetAddonMode("installed"); return; }
             if (current == "Options" && optionsLang) { optionsLang = false; BuildPanel("Options"); return; }
-            if (current == "Cloud Save") { optionsTab = 1; optionsLang = false; ShowSection("Options"); return; }
             if (current == "Changelog")
             {
                 if (clView >= 0) { SetChangelogView(ClList); return; }
@@ -1673,18 +1689,21 @@ namespace AzerothLauncher
                 Put(b, x0 + i * cw, 8);
             }
             int top0 = 8 + (int)(32 * Theme.Zoom) + 6;
+            if (!optionsLang)
+            {
+                SetCrumbs("Options", (Action)delegate { optionsLang = false; optionsTab = 0; BuildPanel("Options"); },
+                          OptionTabName(optionsTab), null);
+                SetCrumbMenu(1, OptionTabMenu());
+            }
             if (optionsLang)
                 SetCrumbs("Options", (Action)delegate { optionsLang = false; optionsTab = 0; BuildPanel("Options"); },
                           "Launcher", (Action)delegate { optionsLang = false; BuildPanel("Options"); }, "Language", null);
             if (optionsLang)                                 // Options › Launcher ▾ : the other tabs
             {
-                var l = new List<KeyValuePair<string, Action>>();
-                for (int i = 0; i < OptionTabs.Length; i++)
-                {
-                    int n = i;
-                    l.Add(new KeyValuePair<string, Action>(OptionTabs[i], delegate { optionsTab = n; optionsLang = false; BuildPanel("Options"); }));
-                }
-                SetCrumbMenu(1, l);
+                SetCrumbMenu(1, OptionTabMenu());
+                var langs = new List<KeyValuePair<string, Action>>();   // › Language ▾ : the languages themselves
+                foreach (var kv in Lang.Available()) { string code = kv.Key; langs.Add(new KeyValuePair<string, Action>(kv.Value, delegate { SetLanguage(code); })); }
+                SetCrumbMenu(2, langs);
             }
             var sp = MakeScroll(panel, new Rectangle(8, top0, PW - 16, PH - 8 - top0), Theme.Panel, Theme.Panel);
             int pageW = sp.ClientSize.Width + 16;             // the page's width, in the same terms as the section's
@@ -1707,6 +1726,23 @@ namespace AzerothLauncher
             optionsPage = sp;
             optionsPageTab = optionsTab;
             if (keep > 0) sp.AutoScrollPosition = new Point(0, keep);
+        }
+
+        static string OptionTabName(int i)                 // "CLOUD SAVE" -> "Cloud Save", for the trail
+        {
+            string[] names = { "Folders", "Cloud Save", "Graphics", "Gameplay", "Launcher" };
+            return i >= 0 && i < names.Length ? names[i] : "Options";
+        }
+
+        List<KeyValuePair<string, Action>> OptionTabMenu()
+        {
+            var l = new List<KeyValuePair<string, Action>>();
+            for (int i = 0; i < OptionTabs.Length; i++)
+            {
+                int n = i;
+                l.Add(new KeyValuePair<string, Action>(OptionTabName(i), delegate { optionsTab = n; optionsLang = false; BuildPanel("Options"); }));
+            }
+            return l;
         }
 
         int OptionCheck(string text, bool value, int y, Action<bool> changed)
@@ -1763,11 +1799,45 @@ namespace AzerothLauncher
             string v = Cfg.Str("cloud_dir");
             var val = PutText(string.IsNullOrEmpty(v) ? Lang.T("(not set)") : v, 9, FontStyle.Regular, Theme.LinkBlue, 20, BottomOf(lab), PW - 160, false);
             Put(new WowButton("CHANGE", ChooseCloudDir, 100, 28, 9), PW - 20 - (int)(100 * Theme.Zoom), y + Math.Max(0, (BottomOf(val) - y - 28) / 2));
-            y = Math.Max(BottomOf(val), y + 30) + 10;
-            var open = Put(new WowButton("OPEN CLOUD SAVE ›", delegate { ShowSection("Cloud Save"); }, 220, 32, 10), 20, y);
-            var note = PutText("Sync now, the log, and earlier downloads.", 9.5f, FontStyle.Italic, Theme.GoldDim,
-                               20 + open.Width + 12, y + 4, PW - 40 - open.Width - 12);
-            return Math.Max(BottomOf(open), BottomOf(note)) + 6;
+            y = Math.Max(BottomOf(val), y + 30) + 6;
+            if (!GateOpen())                                  // syncing needs the game installed
+            {
+                var need = PutText(CloudNeedsGame, 9.5f, FontStyle.Italic, Theme.GoldDim, 20, y, PW - 40);
+                return BottomOf(need) + 6;
+            }
+            // what was the Cloud Save page: the state in the cloud, sync now, earlier downloads and the log
+            var intro = PutText("PLAY downloads the newest state, starts the game and uploads your progress after you close it. " +
+                                "One complete state wins; the overwritten one is backed up as a ZIP first.", 9.5f, FontStyle.Regular,
+                                Theme.Text, 20, y, PW - 40);
+            y = BottomOf(intro) + 6;
+            string info = "Not synced yet.";
+            try { if (v.Length > 0 && Directory.Exists(v)) info = "Cloud: " + new SyncEngine(SyncSettings()).CloudInfo(); }
+            catch (Exception) { }
+            var infoL = PutText(info, 9, FontStyle.Italic, Theme.GoldDim, 20, y + 4, PW - 20 - 170 - 30);
+            WowButton keptBtn = null;
+            keptBtn = new WowButton("EARLIER DOWNLOADS", delegate { ShowKeptDownloads(keptBtn); }, 170, 24, 8);
+            Put(keptBtn, PW - 20 - (int)(170 * Theme.Zoom), y);
+            y = Math.Max(BottomOf(infoL), y + (int)(24 * Theme.Zoom)) + 8;
+            int bw = (int)(170 * Theme.Zoom) + 12;
+            Put(new WowButton("CHECK STATUS", delegate { RunSync("status", false, false); }, 170, 34, 10), 20, y);
+            Put(new WowButton("DOWNLOAD", delegate { RunSync("pull", true, false); }, 170, 34, 10), 20 + bw, y);
+            Put(new WowButton("UPLOAD", delegate { RunSync("push", true, false); }, 170, 34, 10), 20 + 2 * bw, y);
+            y += (int)(34 * Theme.Zoom) + 8;
+            var frame = new Bordered(Theme.Bronze, 1);
+            frame.Bounds = new Rectangle(20, y, PW - 40, 210);
+            Put(frame, 20, y);
+            var box = UI.Log(Theme.Ink, 9);
+            box.Dock = DockStyle.Fill;
+            frame.Controls.Add(box);
+            lock (cloudLog)
+            {
+                int from = Math.Max(0, cloudLog.Count - 200);
+                for (int i = from; i < cloudLog.Count; i++) UI.Append(box, cloudLog[i].Key + "\n", UI.LevelColor(cloudLog[i].Value), null);
+            }
+            box.SelectionStart = box.TextLength;
+            box.ScrollToCaret();
+            logBox = box;
+            return frame.Bottom + 6;
         }
 
         // GAME: the game's own settings (display mode, window size, graphics, sound), written into its config.toml;
