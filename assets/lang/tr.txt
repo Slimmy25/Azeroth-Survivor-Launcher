@@ -1538,3 +1538,93 @@ The launcher is updating itself. Please wait until that has finished.
 = Başlatıcı kendini güncelliyor. Lütfen bitmesini bekle.
 Please wait until the launcher update or the install has finished.
 = Lütfen başlatıcı güncellemesi ya da kurulum bitene kadar bekle.
+GEAR PLANNER
+= EKİPMAN PLANLAYICI
+Gear Planner
+= Ekipman planlayıcı
+Put gear and jewelry on a character sheet like the game's and see what they add.
+= Ekipman ve takıları oyundakine benzer bir karakter sayfasına koy ve ne kattıklarını gör.
+What your gear and jewelry add
+= Ekipmanının ve takılarının kattıkları
+Click a slot to choose a piece. Right-click it to empty it.
+= Bir parça seçmek için bir yuvaya tıkla. Boşaltmak için sağ tıkla.
+Run Stats
+= Koşu istatistikleri
+The bonuses of everything chosen, added together. A piece marked * has bonuses not known yet: it adds nothing here.
+= Seçilen her şeyin bonusları, toplanmış hâlde. * ile işaretli parçanın bonusları henüz bilinmiyor: burada hiçbir şey katmaz.
+Pieces with bonuses not known yet
+= Bonusları henüz bilinmeyen parçalar
+Empty
+= Boş
+worn
+= giyili
+Drops from
+= Düşüren
+Its bonuses are not known yet.
+= Bonusları henüz bilinmiyor.
+Lifesteal
+= Can çalma
+Kill Heal
+= Öldürme başına iyileşme
+Thorns
+= Dikenler
+Lives
+= Canlar
+Experience
+= Deneyim
+Gold
+= Altın
+Luck
+= Şans
+Buff Power
+= Buff gücü
+DoT Haste
+= DoT hızı
+Head
+= Baş
+Neck
+= Boyun
+Shoulder
+= Omuz
+Chest
+= Göğüs
+Wrist
+= Bilek
+Hands
+= Eller
+Waist
+= Bel
+Legs
+= Bacaklar
+Feet
+= Ayaklar
+Finger 1
+= Parmak 1
+Finger 2
+= Parmak 2
+Trinket 1
+= Tılsım 1
+Trinket 2
+= Tılsım 2
+Main Hand
+= Ana el
+Common
+= Sıradan
+Uncommon
+= Sıra dışı
+Rare
+= Nadir
+Epic
+= Destansı
+PvP
+= PvP
+Legendary
+= Efsanevi
+Ring
+= Yüzük
+Trinket
+= Tılsım
+Amulet
+= Muska
+ITEMS
+= EŞYALAR

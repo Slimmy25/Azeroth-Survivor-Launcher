@@ -1538,3 +1538,93 @@ The launcher is updating itself. Please wait until that has finished.
 = Ο εκκινητής ενημερώνεται. Περιμένετε να τελειώσει.
 Please wait until the launcher update or the install has finished.
 = Περιμένετε να τελειώσει η ενημέρωση του εκκινητή ή η εγκατάσταση.
+GEAR PLANNER
+= ΣΧΕΔΙΑΣΤΗΣ ΕΞΟΠΛΙΣΜΟΥ
+Gear Planner
+= Σχεδιαστής εξοπλισμού
+Put gear and jewelry on a character sheet like the game's and see what they add.
+= Βάλτε εξοπλισμό και κοσμήματα σε ένα φύλλο χαρακτήρα σαν του παιχνιδιού και δείτε τι προσθέτουν.
+What your gear and jewelry add
+= Τι προσθέτουν ο εξοπλισμός και τα κοσμήματά σας
+Click a slot to choose a piece. Right-click it to empty it.
+= Κάντε κλικ σε μια θέση για να διαλέξετε κομμάτι. Δεξί κλικ για να την αδειάσετε.
+Run Stats
+= Στατιστικά γύρου
+The bonuses of everything chosen, added together. A piece marked * has bonuses not known yet: it adds nothing here.
+= Τα μπόνους όλων όσων επιλέξατε, προστιθέμενα. Ένα κομμάτι με * έχει μπόνους που δεν είναι ακόμη γνωστά: εδώ δεν προσθέτει τίποτα.
+Pieces with bonuses not known yet
+= Κομμάτια με μπόνους που δεν είναι ακόμη γνωστά
+Empty
+= Κενό
+worn
+= φοριέται
+Drops from
+= Πέφτει από
+Its bonuses are not known yet.
+= Τα μπόνους του δεν είναι ακόμη γνωστά.
+Lifesteal
+= Κλοπή ζωής
+Kill Heal
+= Θεραπεία ανά φόνο
+Thorns
+= Αγκάθια
+Lives
+= Ζωές
+Experience
+= Εμπειρία
+Gold
+= Χρυσός
+Luck
+= Τύχη
+Buff Power
+= Ισχύς ενισχύσεων
+DoT Haste
+= Ταχύτητα DoT
+Head
+= Κεφάλι
+Neck
+= Λαιμός
+Shoulder
+= Ώμος
+Chest
+= Στήθος
+Wrist
+= Καρπός
+Hands
+= Χέρια
+Waist
+= Μέση
+Legs
+= Πόδια
+Feet
+= Πέλματα
+Finger 1
+= Δάχτυλο 1
+Finger 2
+= Δάχτυλο 2
+Trinket 1
+= Μπιχλιμπίδι 1
+Trinket 2
+= Μπιχλιμπίδι 2
+Main Hand
+= Κύριο χέρι
+Common
+= Κοινό
+Uncommon
+= Ασυνήθιστο
+Rare
+= Σπάνιο
+Epic
+= Επικό
+PvP
+= PvP
+Legendary
+= Θρυλικό
+Ring
+= Δαχτυλίδι
+Trinket
+= Μπιχλιμπίδι
+Amulet
+= Φυλαχτό
+ITEMS
+= ΑΝΤΙΚΕΙΜΕΝΑ

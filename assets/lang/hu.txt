@@ -1538,3 +1538,93 @@ The launcher is updating itself. Please wait until that has finished.
 = Az indító frissíti magát. Várj, amíg befejeződik.
 Please wait until the launcher update or the install has finished.
 = Várj, amíg az indító frissítése vagy a telepítés befejeződik.
+GEAR PLANNER
+= FELSZERELÉS-TERVEZŐ
+Gear Planner
+= Felszerelés-tervező
+Put gear and jewelry on a character sheet like the game's and see what they add.
+= Tedd a felszerelést és az ékszereket egy, a játékéhoz hasonló karakterlapra, és nézd meg, mit adnak.
+What your gear and jewelry add
+= Amit a felszerelésed és az ékszereid adnak
+Click a slot to choose a piece. Right-click it to empty it.
+= Kattints egy helyre egy tárgy választásához. Jobb kattintás kiüríti.
+Run Stats
+= Futás statisztikái
+The bonuses of everything chosen, added together. A piece marked * has bonuses not known yet: it adds nothing here.
+= Minden kiválasztott tárgy bónusza összeadva. A *-gal jelölt tárgy bónuszai még nem ismertek: itt nem ad hozzá semmit.
+Pieces with bonuses not known yet
+= Tárgyak még ismeretlen bónuszokkal
+Empty
+= Üres
+worn
+= viselt
+Drops from
+= Zsákmány innen
+Its bonuses are not known yet.
+= A bónuszai még nem ismertek.
+Lifesteal
+= Életlopás
+Kill Heal
+= Gyógyulás ölésenként
+Thorns
+= Tövisek
+Lives
+= Életek
+Experience
+= Tapasztalat
+Gold
+= Arany
+Luck
+= Szerencse
+Buff Power
+= Buffok ereje
+DoT Haste
+= DoT-gyorsaság
+Head
+= Fej
+Neck
+= Nyak
+Shoulder
+= Váll
+Chest
+= Mellkas
+Wrist
+= Csukló
+Hands
+= Kéz
+Waist
+= Derék
+Legs
+= Láb
+Feet
+= Lábfej
+Finger 1
+= Ujj 1
+Finger 2
+= Ujj 2
+Trinket 1
+= Csecsebecse 1
+Trinket 2
+= Csecsebecse 2
+Main Hand
+= Fő kéz
+Common
+= Közönséges
+Uncommon
+= Szokatlan
+Rare
+= Ritka
+Epic
+= Epikus
+PvP
+= PvP
+Legendary
+= Legendás
+Ring
+= Gyűrű
+Trinket
+= Csecsebecse
+Amulet
+= Amulett
+ITEMS
+= TÁRGYAK

@@ -1538,3 +1538,93 @@ The launcher is updating itself. Please wait until that has finished.
 = Launcherul se actualizează. Așteaptă să termine.
 Please wait until the launcher update or the install has finished.
 = Așteaptă să se termine actualizarea launcherului sau instalarea.
+GEAR PLANNER
+= PLANIFICATOR DE ECHIPAMENT
+Gear Planner
+= Planificator de echipament
+Put gear and jewelry on a character sheet like the game's and see what they add.
+= Pune echipament și bijuterii pe o fișă de personaj ca a jocului și vezi ce adaugă.
+What your gear and jewelry add
+= Ce adaugă echipamentul și bijuteriile tale
+Click a slot to choose a piece. Right-click it to empty it.
+= Dă clic pe un loc pentru a alege o piesă. Clic dreapta îl golește.
+Run Stats
+= Statisticile rundei
+The bonuses of everything chosen, added together. A piece marked * has bonuses not known yet: it adds nothing here.
+= Bonusurile a tot ce e ales, adunate. O piesă marcată cu * are bonusuri încă necunoscute: aici nu adaugă nimic.
+Pieces with bonuses not known yet
+= Piese cu bonusuri încă necunoscute
+Empty
+= Gol
+worn
+= purtat
+Drops from
+= Pradă de la
+Its bonuses are not known yet.
+= Bonusurile ei nu sunt încă cunoscute.
+Lifesteal
+= Furt de viață
+Kill Heal
+= Vindecare la ucidere
+Thorns
+= Spini
+Lives
+= Vieți
+Experience
+= Experiență
+Gold
+= Aur
+Luck
+= Noroc
+Buff Power
+= Puterea buffurilor
+DoT Haste
+= Viteza DoT
+Head
+= Cap
+Neck
+= Gât
+Shoulder
+= Umăr
+Chest
+= Piept
+Wrist
+= Încheietură
+Hands
+= Mâini
+Waist
+= Talie
+Legs
+= Picioare
+Feet
+= Tălpi
+Finger 1
+= Deget 1
+Finger 2
+= Deget 2
+Trinket 1
+= Podoabă 1
+Trinket 2
+= Podoabă 2
+Main Hand
+= Mâna principală
+Common
+= Comun
+Uncommon
+= Neobișnuit
+Rare
+= Rar
+Epic
+= Epic
+PvP
+= PvP
+Legendary
+= Legendar
+Ring
+= Inel
+Trinket
+= Podoabă
+Amulet
+= Amuletă
+ITEMS
+= OBIECTE

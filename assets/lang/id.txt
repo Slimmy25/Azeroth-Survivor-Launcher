@@ -1537,3 +1537,93 @@ The launcher is updating itself. Please wait until that has finished.
 = Launcher sedang memperbarui dirinya. Tunggu sampai selesai.
 Please wait until the launcher update or the install has finished.
 = Tunggu sampai pembaruan launcher atau pemasangan selesai.
+GEAR PLANNER
+= PERENCANA PERLENGKAPAN
+Gear Planner
+= Perencana perlengkapan
+Put gear and jewelry on a character sheet like the game's and see what they add.
+= Pasang perlengkapan dan perhiasan di lembar karakter seperti di game dan lihat apa yang mereka tambahkan.
+What your gear and jewelry add
+= Yang ditambahkan perlengkapan dan perhiasanmu
+Click a slot to choose a piece. Right-click it to empty it.
+= Klik slot untuk memilih barang. Klik kanan untuk mengosongkannya.
+Run Stats
+= Statistik run
+The bonuses of everything chosen, added together. A piece marked * has bonuses not known yet: it adds nothing here.
+= Bonus dari semua yang dipilih, dijumlahkan. Barang bertanda * bonusnya belum diketahui: di sini tidak menambah apa pun.
+Pieces with bonuses not known yet
+= Barang yang bonusnya belum diketahui
+Empty
+= Kosong
+worn
+= dipakai
+Drops from
+= Jatuh dari
+Its bonuses are not known yet.
+= Bonusnya belum diketahui.
+Lifesteal
+= Curi nyawa
+Kill Heal
+= Pulih per bunuh
+Thorns
+= Duri
+Lives
+= Nyawa
+Experience
+= Pengalaman
+Gold
+= Emas
+Luck
+= Keberuntungan
+Buff Power
+= Kekuatan buff
+DoT Haste
+= Kecepatan DoT
+Head
+= Kepala
+Neck
+= Leher
+Shoulder
+= Bahu
+Chest
+= Dada
+Wrist
+= Pergelangan
+Hands
+= Tangan
+Waist
+= Pinggang
+Legs
+= Kaki
+Feet
+= Telapak kaki
+Finger 1
+= Jari 1
+Finger 2
+= Jari 2
+Trinket 1
+= Trinket 1
+Trinket 2
+= Trinket 2
+Main Hand
+= Tangan utama
+Common
+= Biasa
+Uncommon
+= Tidak biasa
+Rare
+= Langka
+Epic
+= Epik
+PvP
+= PvP
+Legendary
+= Legendaris
+Ring
+= Cincin
+Trinket
+= Trinket
+Amulet
+= Jimat
+ITEMS
+= BARANG

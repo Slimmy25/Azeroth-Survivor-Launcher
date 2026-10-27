@@ -1538,3 +1538,93 @@ The launcher is updating itself. Please wait until that has finished.
 = ランチャーが自身を更新しています。終わるまでお待ちください。
 Please wait until the launcher update or the install has finished.
 = ランチャーの更新かインストールが終わるまでお待ちください。
+GEAR PLANNER
+= 装備プランナー
+Gear Planner
+= 装備プランナー
+Put gear and jewelry on a character sheet like the game's and see what they add.
+= ゲームと同じようなキャラクターシートに装備とアクセサリーを付けて、何が加わるかを確かめます。
+What your gear and jewelry add
+= 装備とアクセサリーが加えるもの
+Click a slot to choose a piece. Right-click it to empty it.
+= スロットをクリックして装備を選びます。右クリックで外します。
+Run Stats
+= ランの能力値
+The bonuses of everything chosen, added together. A piece marked * has bonuses not known yet: it adds nothing here.
+= 選んだものすべてのボーナスの合計です。* の付いた装備はボーナスがまだ分かっていないため、ここでは何も加えません。
+Pieces with bonuses not known yet
+= ボーナスがまだ分からない装備
+Empty
+= 空き
+worn
+= 装備中
+Drops from
+= ドロップ元
+Its bonuses are not known yet.
+= ボーナスはまだ分かっていません。
+Lifesteal
+= ライフスティール
+Kill Heal
+= キル回復
+Thorns
+= ソーン
+Lives
+= ライフ
+Experience
+= 経験値
+Gold
+= ゴールド
+Luck
+= 幸運
+Buff Power
+= バフの強さ
+DoT Haste
+= DoT速度
+Head
+= 頭
+Neck
+= 首
+Shoulder
+= 肩
+Chest
+= 胸
+Wrist
+= 手首
+Hands
+= 手
+Waist
+= 腰
+Legs
+= 脚
+Feet
+= 足
+Finger 1
+= 指 1
+Finger 2
+= 指 2
+Trinket 1
+= トリンケット 1
+Trinket 2
+= トリンケット 2
+Main Hand
+= メインハンド
+Common
+= コモン
+Uncommon
+= アンコモン
+Rare
+= レア
+Epic
+= エピック
+PvP
+= PvP
+Legendary
+= レジェンダリー
+Ring
+= 指輪
+Trinket
+= トリンケット
+Amulet
+= アミュレット
+ITEMS
+= アイテム

@@ -1537,3 +1537,93 @@ The launcher is updating itself. Please wait until that has finished.
 = Käynnistin päivittää itseään. Odota, että se valmistuu.
 Please wait until the launcher update or the install has finished.
 = Odota, että käynnistimen päivitys tai asennus valmistuu.
+GEAR PLANNER
+= VARUSTESUUNNITTELIJA
+Gear Planner
+= Varustesuunnittelija
+Put gear and jewelry on a character sheet like the game's and see what they add.
+= Pue varusteet ja korut pelin kaltaiselle hahmolomakkeelle ja katso, mitä ne antavat.
+What your gear and jewelry add
+= Mitä varusteesi ja korusi antavat
+Click a slot to choose a piece. Right-click it to empty it.
+= Valitse esine napsauttamalla paikkaa. Tyhjennä se hiiren oikealla painikkeella.
+Run Stats
+= Juoksun tilastot
+The bonuses of everything chosen, added together. A piece marked * has bonuses not known yet: it adds nothing here.
+= Kaikkien valittujen bonukset yhteenlaskettuina. Tähdellä * merkityn esineen bonukset eivät ole vielä tiedossa: se ei lisää tässä mitään.
+Pieces with bonuses not known yet
+= Esineet, joiden bonukset eivät ole vielä tiedossa
+Empty
+= Tyhjä
+worn
+= puettu
+Drops from
+= Pudottaa
+Its bonuses are not known yet.
+= Sen bonukset eivät ole vielä tiedossa.
+Lifesteal
+= Elämänvarkaus
+Kill Heal
+= Parannus tappoa kohti
+Thorns
+= Piikit
+Lives
+= Elämät
+Experience
+= Kokemus
+Gold
+= Kulta
+Luck
+= Onni
+Buff Power
+= Buffien voima
+DoT Haste
+= DoT-nopeus
+Head
+= Pää
+Neck
+= Kaula
+Shoulder
+= Olka
+Chest
+= Rinta
+Wrist
+= Ranne
+Hands
+= Kädet
+Waist
+= Vyötärö
+Legs
+= Jalat
+Feet
+= Jalkaterät
+Finger 1
+= Sormi 1
+Finger 2
+= Sormi 2
+Trinket 1
+= Koriste 1
+Trinket 2
+= Koriste 2
+Main Hand
+= Pääkäsi
+Common
+= Tavallinen
+Uncommon
+= Epätavallinen
+Rare
+= Harvinainen
+Epic
+= Eeppinen
+PvP
+= PvP
+Legendary
+= Legendaarinen
+Ring
+= Sormus
+Trinket
+= Koriste
+Amulet
+= Amuletti
+ITEMS
+= ESINEET

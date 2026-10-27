@@ -1538,3 +1538,93 @@ The launcher is updating itself. Please wait until that has finished.
 = Spouštěč se aktualizuje. Počkejte prosím, až to skončí.
 Please wait until the launcher update or the install has finished.
 = Počkejte prosím, až skončí aktualizace spouštěče nebo instalace.
+GEAR PLANNER
+= PLÁNOVAČ VÝBAVY
+Gear Planner
+= Plánovač výbavy
+Put gear and jewelry on a character sheet like the game's and see what they add.
+= Nasaďte výbavu a šperky na list postavy jako ve hře a podívejte se, co přidávají.
+What your gear and jewelry add
+= Co přidává vaše výbava a šperky
+Click a slot to choose a piece. Right-click it to empty it.
+= Kliknutím na pozici vyberete kus. Pravým tlačítkem ji vyprázdníte.
+Run Stats
+= Statistiky běhu
+The bonuses of everything chosen, added together. A piece marked * has bonuses not known yet: it adds nothing here.
+= Bonusy všeho vybraného, sečtené dohromady. Kus označený * má zatím neznámé bonusy: tady nic nepřidává.
+Pieces with bonuses not known yet
+= Kusy se zatím neznámými bonusy
+Empty
+= Prázdné
+worn
+= nošeno
+Drops from
+= Padá z
+Its bonuses are not known yet.
+= Jeho bonusy zatím nejsou známé.
+Lifesteal
+= Krádež života
+Kill Heal
+= Léčení za zabití
+Thorns
+= Trny
+Lives
+= Životy
+Experience
+= Zkušenosti
+Gold
+= Zlato
+Luck
+= Štěstí
+Buff Power
+= Síla buffů
+DoT Haste
+= Rychlost DoT
+Head
+= Hlava
+Neck
+= Krk
+Shoulder
+= Rameno
+Chest
+= Hruď
+Wrist
+= Zápěstí
+Hands
+= Ruce
+Waist
+= Pas
+Legs
+= Nohy
+Feet
+= Chodidla
+Finger 1
+= Prst 1
+Finger 2
+= Prst 2
+Trinket 1
+= Cetka 1
+Trinket 2
+= Cetka 2
+Main Hand
+= Hlavní ruka
+Common
+= Běžný
+Uncommon
+= Neobvyklý
+Rare
+= Vzácný
+Epic
+= Epický
+PvP
+= PvP
+Legendary
+= Legendární
+Ring
+= Prsten
+Trinket
+= Cetka
+Amulet
+= Amulet
+ITEMS
+= PŘEDMĚTY

@@ -1538,3 +1538,93 @@ The launcher is updating itself. Please wait until that has finished.
 = ลันเชอร์กำลังอัปเดตตัวเอง โปรดรอจนเสร็จ
 Please wait until the launcher update or the install has finished.
 = โปรดรอจนการอัปเดตลันเชอร์หรือการติดตั้งเสร็จ
+GEAR PLANNER
+= ตัววางแผนอุปกรณ์
+Gear Planner
+= ตัววางแผนอุปกรณ์
+Put gear and jewelry on a character sheet like the game's and see what they add.
+= ใส่อุปกรณ์และเครื่องประดับบนหน้าตัวละครแบบเดียวกับในเกม แล้วดูว่าได้อะไรเพิ่ม
+What your gear and jewelry add
+= สิ่งที่อุปกรณ์และเครื่องประดับของคุณเพิ่มให้
+Click a slot to choose a piece. Right-click it to empty it.
+= คลิกช่องเพื่อเลือกชิ้น คลิกขวาเพื่อเอาออก
+Run Stats
+= ค่าสถานะของรอบ
+The bonuses of everything chosen, added together. A piece marked * has bonuses not known yet: it adds nothing here.
+= โบนัสของทุกชิ้นที่เลือกรวมกัน ชิ้นที่มีเครื่องหมาย * ยังไม่รู้โบนัส จึงไม่นับรวมที่นี่
+Pieces with bonuses not known yet
+= ชิ้นที่ยังไม่รู้โบนัส
+Empty
+= ว่าง
+worn
+= สวมอยู่
+Drops from
+= ดรอปจาก
+Its bonuses are not known yet.
+= ยังไม่รู้โบนัสของชิ้นนี้
+Lifesteal
+= ดูดเลือด
+Kill Heal
+= ฟื้นพลังต่อการสังหาร
+Thorns
+= หนาม
+Lives
+= ชีวิต
+Experience
+= ประสบการณ์
+Gold
+= ทอง
+Luck
+= โชค
+Buff Power
+= พลังบัฟ
+DoT Haste
+= ความเร็ว DoT
+Head
+= ศีรษะ
+Neck
+= คอ
+Shoulder
+= ไหล่
+Chest
+= อก
+Wrist
+= ข้อมือ
+Hands
+= มือ
+Waist
+= เอว
+Legs
+= ขา
+Feet
+= เท้า
+Finger 1
+= นิ้ว 1
+Finger 2
+= นิ้ว 2
+Trinket 1
+= เครื่องราง 1
+Trinket 2
+= เครื่องราง 2
+Main Hand
+= มือหลัก
+Common
+= ธรรมดา
+Uncommon
+= ไม่ธรรมดา
+Rare
+= หายาก
+Epic
+= มหากาพย์
+PvP
+= PvP
+Legendary
+= ตำนาน
+Ring
+= แหวน
+Trinket
+= เครื่องราง
+Amulet
+= สร้อยคอ
+ITEMS
+= ไอเท็ม

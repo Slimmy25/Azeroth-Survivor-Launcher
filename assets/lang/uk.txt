@@ -1538,3 +1538,93 @@ The launcher is updating itself. Please wait until that has finished.
 = Лаунчер оновлюється. Зачекайте, доки він закінчить.
 Please wait until the launcher update or the install has finished.
 = Зачекайте, доки закінчиться оновлення лаунчера або встановлення.
+GEAR PLANNER
+= ПЛАНУВАЛЬНИК СПОРЯДЖЕННЯ
+Gear Planner
+= Планувальник спорядження
+Put gear and jewelry on a character sheet like the game's and see what they add.
+= Одягніть спорядження й прикраси на аркуш персонажа, як у грі, і подивіться, що вони дають.
+What your gear and jewelry add
+= Що дають ваше спорядження й прикраси
+Click a slot to choose a piece. Right-click it to empty it.
+= Натисніть на комірку, щоб вибрати предмет. Правий клік очищає її.
+Run Stats
+= Характеристики забігу
+The bonuses of everything chosen, added together. A piece marked * has bonuses not known yet: it adds nothing here.
+= Бонуси всього вибраного, складені разом. Предмет із * має ще невідомі бонуси: тут він нічого не додає.
+Pieces with bonuses not known yet
+= Предмети з ще невідомими бонусами
+Empty
+= Порожньо
+worn
+= одягнено
+Drops from
+= Здобич із
+Its bonuses are not known yet.
+= Його бонуси ще невідомі.
+Lifesteal
+= Вампіризм
+Kill Heal
+= Лікування за вбивство
+Thorns
+= Шипи
+Lives
+= Життя
+Experience
+= Досвід
+Gold
+= Золото
+Luck
+= Удача
+Buff Power
+= Сила бафів
+DoT Haste
+= Швидкість DoT
+Head
+= Голова
+Neck
+= Шия
+Shoulder
+= Плече
+Chest
+= Груди
+Wrist
+= Зап'ястя
+Hands
+= Кисті
+Waist
+= Пояс
+Legs
+= Ноги
+Feet
+= Ступні
+Finger 1
+= Палець 1
+Finger 2
+= Палець 2
+Trinket 1
+= Аксесуар 1
+Trinket 2
+= Аксесуар 2
+Main Hand
+= Права рука
+Common
+= Звичайний
+Uncommon
+= Незвичайний
+Rare
+= Рідкісний
+Epic
+= Епічний
+PvP
+= PvP
+Legendary
+= Легендарний
+Ring
+= Перстень
+Trinket
+= Аксесуар
+Amulet
+= Амулет
+ITEMS
+= ПРЕДМЕТИ
