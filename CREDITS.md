@@ -83,9 +83,6 @@ download links in `addons/sources.txt`, so the launcher can download them all fr
 | Addon | Author | Original |
 | --- | --- | --- |
 | Azerloot | Kindagrey | <https://github.com/Kindagrey/Azerloot> (its newest release) |
-| Chest GPS | Fotze | shared by the author |
-| DBM | Gabriellus | shared by the author |
-| Death Recap | Fotze | shared by the author |
 | Keijin UI | KeijinDE | <https://github.com/KeijinDE/KeijinUI_modern-as-ui> |
 | Survivor UI (with Survivor Plates) | morderous | <https://github.com/morderous/survivor-ui> (its newest release, the addon zip; GPL-3.0) |
 | SurvivorsDragonUi | Mxgwyn | <https://github.com/migwynkriid13/SurvivorsDragonUi> |

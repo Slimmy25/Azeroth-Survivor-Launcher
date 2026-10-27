@@ -3,3 +3,6 @@
 
 ## What's new
 
+### Addons
+- DBM by Gabriellus, Death Recap by Fotze and Chest GPS by Fotze are no longer in Download More: they hadn't been
+  approved by the mod team beforehand. Copies already installed stay in your AddOns folder until you remove them.

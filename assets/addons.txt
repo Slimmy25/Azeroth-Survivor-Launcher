@@ -6,10 +6,7 @@
 # The fourth field: the addon's folders in the AddOns folder, comma-separated (Cloud Save installs an addon whose
 # saved settings come from the cloud while its folders are missing). The description is optional. Lines starting with # are ignored.
 
-GAMEPLAY | DBM by Gabriellus | https://github.com/Slimmy25/Azeroth-Survivor-Launcher-Releases/releases/download/addons/DBM-by-Gabriellus.zip | AzerothSurvivorsBossMods
-GAMEPLAY | Death Recap By Fotze | https://github.com/Slimmy25/Azeroth-Survivor-Launcher-Releases/releases/download/addons/Death-Recap-by-Fotze.zip | AZS_DeathRecap
 GAMEPLAY | Azerloot By Kindagray | https://github.com/Slimmy25/Azeroth-Survivor-Launcher-Releases/releases/download/addons/Azerloot-by-KindaGray.zip | Azerloot
-GAMEPLAY | Chest GPS By Fotze | https://github.com/Slimmy25/Azeroth-Survivor-Launcher-Releases/releases/download/addons/Chest-GPS-by-Fotze.zip | ChestGPS
 UI | SurvivorsDragonU By Mxgwyn | https://github.com/Slimmy25/Azeroth-Survivor-Launcher-Releases/releases/download/addons/SurvivorsDragonUi-by-Mxgwyn.zip | SurvivorsDragonUi
 UI | Survivor UI By morderous | https://github.com/Slimmy25/Azeroth-Survivor-Launcher-Releases/releases/download/addons/Survivor-UI-by-morderous.zip | SurvivorUI,SurvivorPlates | Flat, dark unit frames and a compact action bar, Plater-style nameplates (Survivor Plates), luck and card odds on the XP bar, a tabbed chat panel and automatic raid marks. Can't be on together with AZS Minor Mods.
 UI | Keijin UI By Keijin | https://github.com/Slimmy25/Azeroth-Survivor-Launcher-Releases/releases/download/addons/Keijin-UI-by-Keijin.zip | KeijinUI
