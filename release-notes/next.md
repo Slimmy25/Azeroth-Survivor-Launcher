@@ -31,4 +31,4 @@
 - Uninstalling an addon (its X) no longer flashes the launcher's background and a black screen before asking: the
   question now opens straight over the launcher as it is. The same goes for every question inside the launcher.
 - The README's list of download hosts names who runs each one: a Mirror By Community Member (Leo), a Mirror By
-  Community Member (Meexa) and the Google Drive Link Provided by Fotze.
+  Community Member (Meexa) and a Mirror By Discord Mod (Fotze).
