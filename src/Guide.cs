@@ -668,6 +668,7 @@ namespace AzerothLauncher
                     next = delegate { if (nt < 0) OpenGuideTab(nt); else SetGuideView(nt, -1); };
                 }
             }
+            if (topic.Title == "Classes" && inPage) next = null;   // a class page: the path above leads to the other classes
             if (next != null)
             {
                 int bottom = 0;

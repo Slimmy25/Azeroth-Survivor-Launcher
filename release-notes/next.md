@@ -3,3 +3,5 @@
 
 ## What's new
 
+### Guide
+- Class pages no longer end with a NEXT button: hover the class's name in the path at the top to go to another class.
