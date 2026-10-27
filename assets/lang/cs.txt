@@ -1614,3 +1614,11 @@ Click a talent to add a point, right-click to take one back. As in the game, eac
 = Kliknutím na talent přidáš bod, pravým kliknutím ho vrátíš. Jako ve hře se každá řada otevře, až má její strom 5 bodů za každou řadu nad ní; build vezme nejvýše 51 bodů. Fialové jsou milníky na 10, 20 a 30 bodech.
 Watched!
 = Zhlédnuto!
+CONFLICT
+= KONFLIKT
+switched off: it conflicts with another addon that is on.
+= vypnuto: koliduje s jiným zapnutým doplňkem.
+switched off: the two conflict.
+= vypnuto: ty dva spolu kolidují.
+these two can't be on together. Switching one on switches the other off.
+= tyto dva nemohou být zapnuté současně. Zapnutím jednoho se druhý vypne.

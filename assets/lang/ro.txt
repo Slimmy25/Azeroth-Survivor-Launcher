@@ -1614,3 +1614,11 @@ Click a talent to add a point, right-click to take one back. As in the game, eac
 = Clic pe un talent adaugă un punct, clic dreapta îl ia înapoi. Ca în joc, fiecare rând se deschide când arborele lui are 5 puncte pentru fiecare rând de deasupra; un build ia cel mult 51 de puncte. Cele mov sunt pragurile de la 10, 20 și 30 de puncte.
 Watched!
 = Vizionat!
+CONFLICT
+= CONFLICT
+switched off: it conflicts with another addon that is on.
+= oprit: intră în conflict cu alt addon pornit.
+switched off: the two conflict.
+= oprit: cele două intră în conflict.
+these two can't be on together. Switching one on switches the other off.
+= aceste două nu pot fi pornite împreună. Pornirea unuia îl oprește pe celălalt.

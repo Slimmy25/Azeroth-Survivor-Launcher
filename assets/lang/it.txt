@@ -1613,3 +1613,11 @@ Click a talent to add a point, right-click to take one back. As in the game, eac
 = Clic su un talento per aggiungere un punto, clic destro per toglierlo. Come nel gioco, ogni riga si apre quando il suo albero ha 5 punti per ogni riga sopra; una build prende al massimo 51 punti. Quelli viola sono le tappe a 10, 20 e 30 punti.
 Watched!
 = Visto!
+CONFLICT
+= CONFLITTO
+switched off: it conflicts with another addon that is on.
+= disattivato: è in conflitto con un altro addon attivo.
+switched off: the two conflict.
+= disattivato: i due sono in conflitto.
+these two can't be on together. Switching one on switches the other off.
+= questi due non possono essere attivi insieme. Attivandone uno, l’altro si disattiva.

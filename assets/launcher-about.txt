@@ -13,7 +13,7 @@ A community launcher for Azeroth Survivors, the game made by Aethus. Made by Sli
 - Switch addons on and off, keep two addon profiles, and uninstall any addon from your AddOns folder
 
 # Helping cloud save on Windows PCs and Linux
-- Keeps your save game, AddOns and addon settings in your own cloud folder (Google Drive, OneDrive, Dropbox or any synced folder) and carries them between your machines
+- Keeps your save game and your addons' settings in your own cloud folder (Google Drive, OneDrive, Dropbox or any synced folder) and carries them between your machines, installing any addon whose settings arrive without it
 - Downloads your progress before the game starts and uploads it when the game closes, even after a crash
 - Asks which progress to keep when two machines changed it, and keeps backups before anything is replaced
 

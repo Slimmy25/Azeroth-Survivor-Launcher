@@ -1614,3 +1614,11 @@ Click a talent to add a point, right-click to take one back. As in the game, eac
 = Kattints egy tehetségre egy pontért, jobb kattintással visszaveszed. Mint a játékban, minden sor akkor nyílik meg, ha a saját fájában minden fölötte lévő sorra 5 pont jut; egy build legfeljebb 51 pontot vesz fel. A lilák a 10, 20 és 30 pontos mérföldkövek.
 Watched!
 = Megnézve!
+CONFLICT
+= ÜTKÖZÉS
+switched off: it conflicts with another addon that is on.
+= kikapcsolva: ütközik egy másik bekapcsolt kiegészítővel.
+switched off: the two conflict.
+= kikapcsolva: a kettő ütközik.
+these two can't be on together. Switching one on switches the other off.
+= ez a kettő nem lehet egyszerre bekapcsolva. Ha az egyiket bekapcsolod, a másik kikapcsol.

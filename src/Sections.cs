@@ -1080,7 +1080,13 @@ namespace AzerothLauncher
                 return;
             }
             List<KeyValuePair<string, bool>> addons;
-            try { addons = Addons.Scan(dir); }
+            try
+            {
+                // addons that can't be on together, both found on: the preferred one stays (see Addons.Conflicts)
+                var off = Addons.EnforceConflicts(dir);
+                if (off.Count > 0) SetStatus(string.Join(", ", off.ToArray()) + " " + Lang.T("switched off: it conflicts with another addon that is on."));
+                addons = Addons.Scan(dir);
+            }
             catch (Exception e)
             {
                 PutText(e.Message, 11, FontStyle.Regular, Theme.Text, 20, top, PW - 40);
@@ -1150,6 +1156,13 @@ namespace AzerothLauncher
                 if (c1 != c2) return c1.CompareTo(c2);
                 return string.Compare(p1.Key, p2.Key, StringComparison.OrdinalIgnoreCase);
             });
+            // the conflicting pairs both installed: a red bracket joins their rows, with CONFLICT down it
+            var pairs = new List<KeyValuePair<string, string>>();
+            foreach (var a in addons)
+                foreach (var pt in Addons.PartnersOf(dir, a.Key, addons))
+                    if (Addons.IsPreferred(dir, a.Key, pt.Value)) pairs.Add(new KeyValuePair<string, string>(a.Key, pt.Key));
+            int linkW = pairs.Count > 0 ? 20 * pairs.Count : 0;
+            var rowBox = new Dictionary<string, Rectangle>();
             string lastCat = null;
             foreach (var a in addons)
             {
@@ -1171,7 +1184,8 @@ namespace AzerothLauncher
                 var cb = UI.Check(name, a.Value, a.Value ? Theme.Text : Theme.GoldDim, listbg, 11, false);
                 cb.AutoSize = false;
                 Size need = TextRenderer.MeasureText(name, cb.Font, new Size(w - 24, 0), TextFormatFlags.WordBreak);
-                cb.Bounds = new Rectangle(6, y, w - 34, Math.Max(22, need.Height + 4));     // long names wrap
+                cb.Bounds = new Rectangle(6, y, w - 34 - linkW, Math.Max(22, need.Height + 4));     // long names wrap
+                rowBox[name] = cb.Bounds;
                 cb.CheckedChanged += delegate { OnAddonToggle(name); };
                 sp.Controls.Add(cb);
                 // its folder out of the AddOns folder (with the settings it saved)
@@ -1180,6 +1194,22 @@ namespace AzerothLauncher
                 sp.Controls.Add(del);
                 addonRows[name] = cb;
                 y += cb.Height + 1;
+            }
+            for (int i = 0; i < pairs.Count; i++)
+            {
+                Rectangle r1 = rowBox[pairs[i].Key], r2 = rowBox[pairs[i].Value];
+                var link = new ConflictLink();
+                int y1 = Math.Min(r1.Top + r1.Height / 2, r2.Top + r2.Height / 2), y2 = Math.Max(r1.Top + r1.Height / 2, r2.Top + r2.Height / 2);
+                link.BackColor = listbg;
+                int need = link.WordHeight(), mid = (y1 + y2) / 2;
+                int lt = Math.Max(0, Math.Min(y1 - 1, mid - need / 2)), lb = Math.Max(y2 + 2, mid + need / 2);
+                link.Bounds = new Rectangle(6 + w - 34 - linkW + i * 20, lt, 20, lb - lt);
+                link.Tick1 = y1 - lt;
+                link.Tick2 = y2 - lt;
+                WowButton.Tips.SetToolTip(link, pairs[i].Key + " / " + pairs[i].Value + ": " +
+                                          Lang.T("these two can't be on together. Switching one on switches the other off."));
+                sp.Controls.Add(link);
+                link.BringToFront();
             }
             UpdateAddonCount();
         }
@@ -1219,6 +1249,19 @@ namespace AzerothLauncher
             cb.ForeColor = want ? Theme.Text : Theme.GoldDim;
             UpdateAddonCount();
             SetStatus(name + " " + (want ? "enabled" : "disabled") + ".");
+            if (want)
+            {
+                // the addons it conflicts with go off
+                List<string> off;
+                try { off = Addons.SwitchOffPartners(AddonsDir(), name); }
+                catch (Exception e) { SetStatus(e.Message); return; }
+                if (off.Count > 0)
+                {
+                    BuildPanel("Addons");
+                    SetStatus(name + " enabled. " + string.Join(", ", off.ToArray()) + " " +
+                              Lang.T("switched off: the two conflict."));
+                }
+            }
         }
 
         void ToggleAllAddons()

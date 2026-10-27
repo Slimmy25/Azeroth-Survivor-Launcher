@@ -65,8 +65,9 @@ The home screen features videos made by the community, in rotation. **MORE VIDEO
 the launcher, streamed from YouTube and never saved on your PC, with the creator's name linking to their channel.
 
 ### Also
-- **Cloud Save**: your save, AddOns and addon settings kept in Google Drive, OneDrive or Dropbox and shared between
-  your PCs.
+- **Cloud Save**: your save and your addons' settings kept in Google Drive, OneDrive or Dropbox and shared between
+  your PCs. The addons themselves aren't copied (an old copy could replace a newer one): when settings arrive for an
+  addon from Download More that isn't installed, the launcher installs it.
 - **News and Changelog**: every patch note of the game, newest first.
 - **Options**: the game's own settings (display, graphics, sound, gameplay) with a plain explanation for each, your
   folders, and the launcher's own settings.
@@ -127,4 +128,5 @@ Code signing is optional: `sign_build.bat` explains it. Never commit `sign_confi
 ## License
 
 The launcher's code and the AZS addons are under the [MIT License](LICENSE). Everything that comes from someone else
-keeps its own license and owner: see [CREDITS.md](CREDITS.md).
+keeps its own license and owner: see [CREDITS.md](CREDITS.md). The game's name, logo, emblem and artwork in the
+assets folder belong to Azeroth Survivors and are not covered by the MIT License.

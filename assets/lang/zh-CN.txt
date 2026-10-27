@@ -1614,3 +1614,11 @@ Click a talent to add a point, right-click to take one back. As in the game, eac
 = 点击天赋加一点，右键收回。与游戏中一样，每一行要在本系天赋树中为上方每一行投入 5 点后才会开启；配置最多 51 点。紫色的是 10、20 和 30 点的里程碑。
 Watched!
 = 已看过！
+CONFLICT
+= 冲突
+switched off: it conflicts with another addon that is on.
+= 已关闭：它与另一个已开启的插件冲突。
+switched off: the two conflict.
+= 已关闭：两者冲突。
+these two can't be on together. Switching one on switches the other off.
+= 这两个插件不能同时开启。开启其中一个，另一个就会关闭。

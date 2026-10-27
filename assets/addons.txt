@@ -1,18 +1,19 @@
 # Addons offered in Addons > DOWNLOAD MORE. One addon per line:
-#   CATEGORY | Name shown | https://direct-link-to/addon.zip | (unused) | description
+#   CATEGORY | Name shown | https://direct-link-to/addon.zip | Folder,Folder | description
 # CATEGORY is AZS ADDONS (the addons made for Azeroth Survivors) or WOW 1.12 ADDONS. A link "local:<name>.zip" is a zip kept next to the launcher (listed only where it exists).
 # A link "builtin:<folder>" is an AZS addon the launcher carries inside itself (BuiltinAddons.cs): installed from the
 # launcher, kept up to date by it.
-# The fourth field is no longer used (it was a filter) and is left empty. The description is optional. Lines starting with # are ignored.
+# The fourth field: the addon's folders in the AddOns folder, comma-separated (Cloud Save installs an addon whose
+# saved settings come from the cloud while its folders are missing). The description is optional. Lines starting with # are ignored.
 
-AZS ADDONS | DBM by Gabriellus | https://github.com/Slimmy25/Azeroth-Survivor-Launcher-Releases/releases/download/addons/DBM-by-Gabriellus.zip | 
-AZS ADDONS | Death Recap By Fotze | https://github.com/Slimmy25/Azeroth-Survivor-Launcher-Releases/releases/download/addons/Death-Recap-by-Fotze.zip | 
-AZS ADDONS | Azerloot By Kindagray | https://github.com/Slimmy25/Azeroth-Survivor-Launcher-Releases/releases/download/addons/Azerloot-by-KindaGray.zip | 
-AZS ADDONS | Chest GPS By Fotze | https://github.com/Slimmy25/Azeroth-Survivor-Launcher-Releases/releases/download/addons/Chest-GPS-by-Fotze.zip | 
-AZS ADDONS | SurvivorsDragonU By Mxgwyn | https://github.com/Slimmy25/Azeroth-Survivor-Launcher-Releases/releases/download/addons/SurvivorsDragonUi-by-Mxgwyn.zip | 
-AZS ADDONS | Keijin UI By Keijin | https://github.com/Slimmy25/Azeroth-Survivor-Launcher-Releases/releases/download/addons/Keijin-UI-by-Keijin.zip | 
-AZS ADDONS | AZS Stats By Slimjim | https://github.com/Slimmy25/Azeroth-Survivor-Launcher-Releases/releases/download/addons/AZS-Stats-by-Slimjim.zip | | All your stats in game (/azs) and on the STATS page: runs, records, abilities, classes, play time, your Nemesis and co-op with friends.
-AZS ADDONS | AZS Handbook By Slimjim | builtin:AZSHandbook | | The launcher's whole New Player Guide inside the game (/handbook): every topic and page, each class's spells with their icons and the talents that change them, and all the talent trees.
-AZS ADDONS | AZS Minor Mods By Slimjim | builtin:AZSMinorMods | | Small changes, each on or off (/azsmods or its minimap button): no level-up, stat bonus or new spell lines in chat, boss markers (Skull, Cross, Moon), a blinking Square on a friend who falls, a plain action bar with just the six squares, move and lock the UI, hide the target frame and the camera at 50.
-WOW 1.12 ADDONS | MinimapButtonBag By Tunhadil & LaYt | https://github.com/Slimmy25/Azeroth-Survivor-Launcher-Releases/releases/download/addons/MinimapButtonBag-by-Tunhadil-LaYt.zip | | Converted for Azeroth Survivors. Puts every minimap button into one bag button: click it and they open in a bar (/mbb).
-WOW 1.12 ADDONS | BugSack By Fritti & Rabbit | https://github.com/Slimmy25/Azeroth-Survivor-Launcher-Releases/releases/download/addons/BugSack-by-Fritti-Rabbit.zip | | Converted for Azeroth Survivors. Catches every Lua error (with !BugGrabber) and shows them in one window: /bugsack or its minimap button.
+AZS ADDONS | DBM by Gabriellus | https://github.com/Slimmy25/Azeroth-Survivor-Launcher-Releases/releases/download/addons/DBM-by-Gabriellus.zip | AzerothSurvivorsBossMods
+AZS ADDONS | Death Recap By Fotze | https://github.com/Slimmy25/Azeroth-Survivor-Launcher-Releases/releases/download/addons/Death-Recap-by-Fotze.zip | AZS_DeathRecap
+AZS ADDONS | Azerloot By Kindagray | https://github.com/Slimmy25/Azeroth-Survivor-Launcher-Releases/releases/download/addons/Azerloot-by-KindaGray.zip | Azerloot
+AZS ADDONS | Chest GPS By Fotze | https://github.com/Slimmy25/Azeroth-Survivor-Launcher-Releases/releases/download/addons/Chest-GPS-by-Fotze.zip | ChestGPS
+AZS ADDONS | SurvivorsDragonU By Mxgwyn | https://github.com/Slimmy25/Azeroth-Survivor-Launcher-Releases/releases/download/addons/SurvivorsDragonUi-by-Mxgwyn.zip | SurvivorsDragonUi
+AZS ADDONS | Keijin UI By Keijin | https://github.com/Slimmy25/Azeroth-Survivor-Launcher-Releases/releases/download/addons/Keijin-UI-by-Keijin.zip | KeijinUI
+AZS ADDONS | AZS Stats By Slimjim | https://github.com/Slimmy25/Azeroth-Survivor-Launcher-Releases/releases/download/addons/AZS-Stats-by-Slimjim.zip | AZSStats | All your stats in game (/azs) and on the STATS page: runs, records, abilities, classes, play time, your Nemesis and co-op with friends.
+AZS ADDONS | AZS Handbook By Slimjim | builtin:AZSHandbook | AZSHandbook | The launcher's whole New Player Guide inside the game (/handbook): every topic and page, each class's spells with their icons and the talents that change them, and all the talent trees.
+AZS ADDONS | AZS Minor Mods By Slimjim | builtin:AZSMinorMods | AZSMinorMods | Small changes, each on or off (/azsmods or its minimap button): no level-up, stat bonus or new spell lines in chat, boss markers (Skull, Cross, Moon), a blinking Square on a friend who falls, a plain action bar with just the six squares, move and lock the UI, hide the target frame and the camera at 50.
+WOW 1.12 ADDONS | MinimapButtonBag By Tunhadil & LaYt | https://github.com/Slimmy25/Azeroth-Survivor-Launcher-Releases/releases/download/addons/MinimapButtonBag-by-Tunhadil-LaYt.zip | MBB | Converted for Azeroth Survivors. Puts every minimap button into one bag button: click it and they open in a bar (/mbb).
+WOW 1.12 ADDONS | BugSack By Fritti & Rabbit | https://github.com/Slimmy25/Azeroth-Survivor-Launcher-Releases/releases/download/addons/BugSack-by-Fritti-Rabbit.zip | !BugGrabber,BugSack | Converted for Azeroth Survivors. Catches every Lua error (with !BugGrabber) and shows them in one window: /bugsack or its minimap button.

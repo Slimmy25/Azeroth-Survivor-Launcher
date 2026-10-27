@@ -1613,3 +1613,11 @@ Click a talent to add a point, right-click to take one back. As in the game, eac
 = Klicka på en talang för att lägga en poäng, högerklicka för att ta tillbaka den. Som i spelet öppnas varje rad när dess eget träd har 5 poäng för varje rad ovanför; en build tar högst 51 poäng. De lila är milstolparna vid 10, 20 och 30 poäng.
 Watched!
 = Sedd!
+CONFLICT
+= KONFLIKT
+switched off: it conflicts with another addon that is on.
+= avstängt: det krockar med ett annat tillägg som är på.
+switched off: the two conflict.
+= avstängt: de två krockar.
+these two can't be on together. Switching one on switches the other off.
+= de här två kan inte vara på samtidigt. Slår du på det ena stängs det andra av.

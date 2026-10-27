@@ -1614,3 +1614,11 @@ Click a talent to add a point, right-click to take one back. As in the game, eac
 = タレントをクリックでポイント追加、右クリックで戻します。ゲームと同じく、各段はそのツリーで上の段1つにつき5ポイント入れると開きます。ビルドは最大51ポイントです。紫は10・20・30ポイントのマイルストーンです。
 Watched!
 = 視聴済み！
+CONFLICT
+= 競合
+switched off: it conflicts with another addon that is on.
+= オフにしました：オンになっている別のアドオンと競合します。
+switched off: the two conflict.
+= オフにしました：この2つは競合します。
+these two can't be on together. Switching one on switches the other off.
+= この2つは同時にオンにできません。片方をオンにするともう片方はオフになります。

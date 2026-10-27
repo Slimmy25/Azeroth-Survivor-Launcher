@@ -1614,3 +1614,11 @@ Click a talent to add a point, right-click to take one back. As in the game, eac
 = Nhấp vào thiên phú để thêm điểm, nhấp chuột phải để lấy lại. Như trong game, mỗi hàng mở khi cây của nó có 5 điểm cho mỗi hàng phía trên; build dùng tối đa 51 điểm. Màu tím là các mốc 10, 20 và 30 điểm.
 Watched!
 = Đã xem!
+CONFLICT
+= XUNG ĐỘT
+switched off: it conflicts with another addon that is on.
+= đã tắt: nó xung đột với một addon khác đang bật.
+switched off: the two conflict.
+= đã tắt: hai addon này xung đột.
+these two can't be on together. Switching one on switches the other off.
+= hai addon này không thể bật cùng lúc. Bật cái này thì cái kia sẽ tắt.

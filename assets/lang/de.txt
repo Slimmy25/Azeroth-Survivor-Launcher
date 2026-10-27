@@ -1613,3 +1613,11 @@ Click a talent to add a point, right-click to take one back. As in the game, eac
 = Klicke auf ein Talent für einen Punkt, Rechtsklick nimmt ihn zurück. Wie im Spiel öffnet sich jede Reihe, sobald ihr eigener Baum 5 Punkte für jede Reihe darüber hat; ein Build nimmt höchstens 51 Punkte. Die lilafarbenen sind die Meilensteine bei 10, 20 und 30 Punkten.
 Watched!
 = Gesehen!
+CONFLICT
+= KONFLIKT
+switched off: it conflicts with another addon that is on.
+= ausgeschaltet: es verträgt sich nicht mit einem anderen eingeschalteten Addon.
+switched off: the two conflict.
+= ausgeschaltet: die beiden vertragen sich nicht.
+these two can't be on together. Switching one on switches the other off.
+= diese beiden können nicht gleichzeitig an sein. Schaltest du eins ein, geht das andere aus.

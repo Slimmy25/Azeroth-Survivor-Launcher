@@ -4,7 +4,9 @@
 // them can share one folder and this launcher keeps the sync memory of the old one.
 //
 // No merging: per area one complete state wins and the overwritten one is backed up as a ZIP first.
-// Areas: save game, AddOns, addon settings. Uploads update the cloud folder in place (no .asl-new / .asl-old
+// Areas: save game and addon settings. The AddOns folder itself is not synced (an older copy from another PC could
+// replace an addon updated here): an addon whose settings come from the cloud is installed by the launcher instead.
+// Uploads update the cloud folder in place (no .asl-new / .asl-old
 // folders inside the cloud drive); downloads swap the local folder through a staging copy.
 //   <sync folder>\manifest.json   fingerprints of the last upload
 //   <sync folder>\data\save|addons|saved
@@ -106,7 +108,6 @@ namespace AzerothLauncher
             string cloudData = Path.Combine(settings.CloudDir ?? "", "data");
             Sets = new List<SyncSet>();
             Sets.Add(new SyncSet("save", "Save game", settings.SaveDir, cloudData, new[] { "language.txt" }, false));
-            Sets.Add(new SyncSet("addons", "AddOns", settings.AddonsDir, cloudData, null, true));
             Sets.Add(new SyncSet("saved", "Addon settings", settings.SavedDir, cloudData, null, true));
         }
 

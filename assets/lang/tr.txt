@@ -1614,3 +1614,11 @@ Click a talent to add a point, right-click to take one back. As in the game, eac
 = Bir yeteneğe tıklayınca puan eklenir, sağ tıklayınca geri alınır. Oyundaki gibi her sıra, kendi ağacında üstündeki her sıra için 5 puan olunca açılır; bir build en fazla 51 puan alır. Mor olanlar 10, 20 ve 30 puandaki kilometre taşlarıdır.
 Watched!
 = İzlendi!
+CONFLICT
+= ÇAKIŞMA
+switched off: it conflicts with another addon that is on.
+= kapatıldı: açık olan başka bir eklentiyle çakışıyor.
+switched off: the two conflict.
+= kapatıldı: ikisi çakışıyor.
+these two can't be on together. Switching one on switches the other off.
+= bu ikisi aynı anda açık olamaz. Birini açınca diğeri kapanır.

@@ -1005,6 +1005,48 @@ namespace AzerothLauncher
                 Error("Cloud Save", err);
             }
             if (current == "Cloud Save") RebuildCurrent();
+            // settings downloaded: the addons they belong to are installed if they are missing
+            if (ok && err == null && (kind == "pull" || kind == "restore"))
+                Bg(delegate
+                {
+                    if (InstallAddonsForSettings().Count > 0)
+                        Ui(delegate { if (current == "Addons") BuildPanel("Addons"); });
+                });
+        }
+
+        // Cloud Save syncs only the addons' settings: a Download More addon whose settings are here but whose folders
+        // are not is installed (on a background thread). Returns the names installed.
+        List<string> InstallAddonsForSettings()
+        {
+            var done = new List<string>();
+            SyncSettings ss = SyncSettings();
+            List<AddonEntry> missing;
+            try { missing = Addons.MissingForSettings(ss.AddonsDir, ss.SavedDir, Data.Addons); }
+            catch (Exception e) { SyncLog("  Addons for the synced settings not checked: " + e.Message, Level.Warn); return done; }
+            foreach (var entry in missing)
+            {
+                try
+                {
+                    Directory.CreateDirectory(ss.AddonsDir);
+                    List<string> names;
+                    BuiltinAddon builtin = BuiltinAddons.Find(entry.Url);
+                    if (builtin != null) { BuiltinAddons.Install(ss.AddonsDir, builtin); names = new List<string> { builtin.Folder }; }
+                    else names = Archive.InstallAddonZip(entry.Url, ss.AddonsDir);
+                    string name = entry.Name;
+                    var rec = new List<object>();
+                    foreach (string n in names) rec.Add(n);
+                    Ui(delegate
+                    {
+                        AddonInstalls()[name] = rec;
+                        AddonInstalledAt()[name] = DateTime.UtcNow.ToString("o", CultureInfo.InvariantCulture);
+                        Cfg.Save();
+                    });
+                    SyncLog(name + " installed: its settings came from the cloud.", Level.Good);
+                    done.Add(name);
+                }
+                catch (Exception e) { SyncLog("  " + entry.Name + " not installed: " + e.Message, Level.Warn); }
+            }
+            return done;
         }
 
         // ------------------------------------------------------------------ play: download newest -> run game -> upload
@@ -1121,6 +1163,7 @@ namespace AzerothLauncher
                         return;
                     }
                     Ui(delegate { SetCloudNote(""); });
+                    InstallAddonsForSettings();              // the addons whose settings came from the cloud
                 }
                 else if (cloudOnButNoFolder) problems.Add("No sync folder set - launched without cloud sync.");
                 // the AZS Stats addon this launcher carries goes in right before the game starts: after the cloud
@@ -1144,6 +1187,8 @@ namespace AzerothLauncher
                         SyncLog(f + " addon removed (it is no longer part of the launcher).", Level.Info);
                     foreach (string f in BuiltinAddons.UpdateInstalled(SyncSettings().AddonsDir))
                         SyncLog(f + " addon updated to the launcher's version.", Level.Info);
+                    foreach (string f in Addons.EnforceConflicts(SyncSettings().AddonsDir))
+                        SyncLog(f + " addon switched off: it conflicts with another addon that is on.", Level.Info);
                 }
                 catch (Exception e) { SyncLog("  AZS addons not updated: " + e.Message, Level.Warn); }
                 SyncLog("Starting Azeroth Survivors ...", Level.Info);
