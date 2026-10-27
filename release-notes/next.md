@@ -18,3 +18,7 @@
 ### Cloud Save
 - The Cloud Save page now sits inside Options › CLOUD SAVE, with no second button to open it: the cloud state, CHECK
   STATUS, DOWNLOAD, UPLOAD, EARLIER DOWNLOADS and the log are all on that tab.
+- Under each spell on a class page, below "Talents that change it", a new line "Spells that affect this" shows the
+  icons of the class's other spells whose text names that spell word for word (for example, Aimed Shot under Hunter's
+  Mark). Hover one to read it, click it to go to that spell. A longer name that only contains it ("Greater Heal" for
+  "Heal") doesn't count.

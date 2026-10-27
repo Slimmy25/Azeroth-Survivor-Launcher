@@ -1683,3 +1683,5 @@ Numbers with your Gear Planner set:
 = Valeurs avec votre ensemble du planificateur :
 Your Gear Planner set:
 = Votre ensemble du planificateur :
+Spells that affect this:
+= Sorts qui l’affectent :

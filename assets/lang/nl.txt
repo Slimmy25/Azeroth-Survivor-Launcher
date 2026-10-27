@@ -1683,3 +1683,5 @@ Numbers with your Gear Planner set:
 = Getallen met je set uit de uitrustingsplanner:
 Your Gear Planner set:
 = Je set uit de uitrustingsplanner:
+Spells that affect this:
+= Spreuken die deze beïnvloeden:

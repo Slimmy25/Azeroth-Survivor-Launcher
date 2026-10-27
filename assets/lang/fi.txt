@@ -1683,3 +1683,5 @@ Numbers with your Gear Planner set:
 = Luvut varustesuunnittelijan setilläsi:
 Your Gear Planner set:
 = Varustesuunnittelijan settisi:
+Spells that affect this:
+= Loitsut, jotka vaikuttavat siihen:

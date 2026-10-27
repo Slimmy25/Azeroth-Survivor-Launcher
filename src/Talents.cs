@@ -2,7 +2,7 @@
 // tools/game_talents.py), and the pieces the New Player Guide's class pages draw them with:
 //   * TalentTreeView: one spec's tree, its talents' icons on the game's grid (7 rows, 4 columns) with their ranks,
 //     the 10, 20 and 30 point milestones marked; pointing at a talent shows its text and the spells it changes
-//   * SpellRow: one spell of the class, its icon, the guide's line about it, and the talents that change it
+//   * SpellRow: one spell of the class, its icon, the guide's line about it, and the talents that change it, and the spells that name it
 // The icons come from the same place as the STATS page's (Wowhead's image host, cached; SpellIcons.cs).
 using System;
 using System.Collections.Generic;
@@ -360,13 +360,54 @@ namespace AzerothLauncher
     {
         readonly string name, line, className;
         readonly List<Talent> changers;
+        readonly List<KeyValuePair<string, string>> affecting;   // the class's other spells whose text names this one
+        readonly int topic, page;
         readonly GuideText text;
         readonly List<KeyValuePair<Rectangle, Talent>> chips = new List<KeyValuePair<Rectangle, Talent>>();
+        readonly List<KeyValuePair<Rectangle, KeyValuePair<string, string>>> spellChips = new List<KeyValuePair<Rectangle, KeyValuePair<string, string>>>();
         Talent over;
+        string overSpell;
         const int Ic = 34;
 
-        public SpellRow(string name, string line, string className, int width, int topic, int page)
+        static string Base(string n) { return Regex.Replace(n ?? "", @"\s*\(.*\)$", "").Trim(); }
+
+        // the spells of the pool (name -> its text) whose text says this spell's name, word for word. A longer name
+        // that holds it ("Greater Heal" for "Heal") is not a mention of it
+        public static List<KeyValuePair<string, string>> Mentioning(string spell, List<KeyValuePair<string, string>> pool)
         {
+            var list = new List<KeyValuePair<string, string>>();
+            string me = Base(spell);
+            if (me.Length < 3 || pool == null) return list;
+            var longer = new List<string>();
+            foreach (var kv in pool)
+            {
+                string n = Base(kv.Key);
+                if (n.Length > me.Length && n.Contains(me) && !longer.Contains(n)) longer.Add(n);
+            }
+            longer.Sort(delegate(string a, string b) { return b.Length.CompareTo(a.Length); });
+            var seen = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            var word = new Regex(@"(?<![A-Za-z'])" + Regex.Escape(me) + @"(?![A-Za-z])");
+            foreach (var kv in pool)
+            {
+                string n = Base(kv.Key);
+                if (string.Equals(n, me, StringComparison.OrdinalIgnoreCase) || seen.Contains(n)) continue;
+                string t = kv.Value ?? "";
+                foreach (string l in longer) t = t.Replace(l, "");
+                if (!word.IsMatch(t)) continue;
+                seen.Add(n);
+                list.Add(new KeyValuePair<string, string>(n, kv.Value));
+            }
+            return list;
+        }
+
+        public SpellRow(string name, string line, string className, int width, int topic, int page)
+            : this(name, line, className, width, topic, page, null) { }
+
+        public SpellRow(string name, string line, string className, int width, int topic, int page, List<KeyValuePair<string, string>> pool)
+        {
+            this.topic = topic;
+            this.page = page;
+            affecting = Mentioning(name, pool);
             SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer |
                      ControlStyles.ResizeRedraw, true);
             this.name = name;
@@ -379,6 +420,7 @@ namespace AzerothLauncher
             Controls.Add(text);
             int h = text.Bottom + 6;
             if (changers.Count > 0) h += 26;
+            if (affecting.Count > 0) h += 26;
             Size = new Size(width, Math.Max(h, Ic + 14));
         }
 
@@ -400,9 +442,32 @@ namespace AzerothLauncher
             using (var p = new Pen(Theme.Hex("#8a7040"), 1)) g.DrawRectangle(p, ir);
             using (var b = new SolidBrush(Theme.Gold)) g.DrawString(name, Theme.F(10.5f, FontStyle.Bold), b, Ic + 16, 5);
             chips.Clear();
-            if (changers.Count == 0) return;
-            float x = Ic + 18, y = Height - 24;
-            Font lf = Theme.F(8, FontStyle.Italic), cf = Theme.F(8, FontStyle.Bold);
+            spellChips.Clear();
+            Font lf = Theme.F(8, FontStyle.Italic);
+            float y = Height - 24 - (affecting.Count > 0 && changers.Count > 0 ? 26 : 0);
+            if (changers.Count > 0) { ChipRow(g, lf, y); y += 26; }
+            if (affecting.Count == 0) return;
+            // the other spells that name this one: their icons, each a link to its own row
+            float sx = Ic + 18;
+            string slabel = Lang.T("Spells that affect this:");
+            using (var b = new SolidBrush(Theme.GoldDim)) g.DrawString(slabel, lf, b, sx, y + 3);
+            sx += g.MeasureString(slabel, lf).Width + 4;
+            foreach (var sp in affecting)
+            {
+                if (sx + 18 > Width - 6) break;
+                var r = new Rectangle((int)sx, (int)y, 18, 18);
+                Image si = SpellIcons.Spell(sp.Key, this);
+                if (si != null) g.DrawImage(si, r);
+                else using (var b = new SolidBrush(Theme.Hex("#2a2218"))) g.FillRectangle(b, r);
+                using (var p = new Pen(sp.Key == overSpell ? Theme.Hex("#fff2b0") : Theme.Hex("#8a7040"), 1)) g.DrawRectangle(p, r);
+                spellChips.Add(new KeyValuePair<Rectangle, KeyValuePair<string, string>>(r, sp));
+                sx += 22;
+            }
+        }
+
+        void ChipRow(Graphics g, Font lf, float y)
+        {
+            float x = Ic + 18;
             string label = Lang.T("Talents that change it:");
             using (var b = new SolidBrush(Theme.GoldDim)) g.DrawString(label, lf, b, x, y + 3);
             x += g.MeasureString(label, lf).Width + 4;
@@ -424,9 +489,12 @@ namespace AzerothLauncher
             base.OnMouseMove(e);
             Talent t = null;
             foreach (var c in chips) if (Rectangle.Inflate(c.Key, 2, 2).Contains(e.Location)) t = c.Value;
-            if (t != over) { over = t; Invalidate(); }
-            Cursor = t != null ? Cursors.Hand : Cursors.Default;   // a talent: a click opens its class's talent trees
+            string s = null, sText = null;
+            foreach (var c in spellChips) if (Rectangle.Inflate(c.Key, 2, 2).Contains(e.Location)) { s = c.Value.Key; sText = c.Value.Value; }
+            if (t != over || s != overSpell) { over = t; overSpell = s; Invalidate(); }
+            Cursor = t != null || s != null ? Cursors.Hand : Cursors.Default;   // a click opens the talent's trees / the spell's row
             if (t != null) GuideHover.Show(this, t.Name, Talents.HoverText(t), SpellIcons.Icon(t.Icon, null));
+            else if (s != null) GuideHover.Show(this, s, sText, SpellIcons.Spell(s, null));
             else if (new Rectangle(8, 8, Ic, Ic).Contains(e.Location) || e.Y < 24)
                 GuideHover.Show(this, name, SpellHover(), SpellIcons.Spell(Regex.Replace(name, @"\s*\(.*\)$", ""), null));
             else GuideHover.Hide();
@@ -443,19 +511,35 @@ namespace AzerothLauncher
                 foreach (var t in changers) n.Add(t.Name + " (" + t.Spec + ")");
                 s += "\n\n" + Lang.T("Talents that change it:") + " " + string.Join(", ", n.ToArray());
             }
+            if (affecting.Count > 0)
+            {
+                var n = new List<string>();
+                foreach (var a in affecting) n.Add(a.Key);
+                s += "\n\n" + Lang.T("Spells that affect this:") + " " + string.Join(", ", n.ToArray());
+            }
             return s;
         }
 
         protected override void OnMouseLeave(EventArgs e)
         {
             base.OnMouseLeave(e);
-            if (over != null) { over = null; Invalidate(); }
+            if (over != null || overSpell != null) { over = null; overSpell = null; Invalidate(); }
             GuideHover.Hide();
         }
 
         protected override void OnMouseUp(MouseEventArgs e)
         {
             base.OnMouseUp(e);
+            if (e.Button == MouseButtons.Left && overSpell != null && GuideLinks.Navigate != null)
+            {
+                GuideHover.Hide();
+                var sl = new GuideLink();                     // another spell: its own row, on this page
+                sl.Term = overSpell;
+                sl.Topic = topic;
+                sl.Page = page;
+                GuideLinks.Navigate(sl);
+                return;
+            }
             if (e.Button != MouseButtons.Left || over == null || GuideLinks.Navigate == null) return;
             GuideHover.Hide();
             var l = new GuideLink();

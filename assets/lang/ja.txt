@@ -1684,3 +1684,5 @@ Numbers with your Gear Planner set:
 = 装備プランナーのセットを反映した数値：
 Your Gear Planner set:
 = 装備プランナーのセット：
+Spells that affect this:
+= これに影響する呪文:

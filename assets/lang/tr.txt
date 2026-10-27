@@ -1684,3 +1684,5 @@ Numbers with your Gear Planner set:
 = Ekipman planlayıcı setinle sayılar:
 Your Gear Planner set:
 = Ekipman planlayıcı setin:
+Spells that affect this:
+= Bunu etkileyen büyüler:

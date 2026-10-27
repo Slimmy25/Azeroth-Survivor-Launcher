@@ -1684,3 +1684,5 @@ Numbers with your Gear Planner set:
 = Αριθμοί με το σετ του σχεδιαστή σας:
 Your Gear Planner set:
 = Το σετ του σχεδιαστή σας:
+Spells that affect this:
+= Ξόρκια που την επηρεάζουν:

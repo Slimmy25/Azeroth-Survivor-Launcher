@@ -1684,3 +1684,5 @@ Numbers with your Gear Planner set:
 = Számok a tervezőben összeállított szetteddel:
 Your Gear Planner set:
 = A tervezőben összeállított szetted:
+Spells that affect this:
+= Varázslatok, amelyek hatnak rá:

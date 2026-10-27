@@ -1683,3 +1683,5 @@ Numbers with your Gear Planner set:
 = Siffror med ditt set från utrustningsplaneraren:
 Your Gear Planner set:
 = Ditt set från utrustningsplaneraren:
+Spells that affect this:
+= Besvärjelser som påverkar den:

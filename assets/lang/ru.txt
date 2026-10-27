@@ -1684,3 +1684,5 @@ Numbers with your Gear Planner set:
 = Числа с вашим набором из планировщика:
 Your Gear Planner set:
 = Ваш набор из планировщика:
+Spells that affect this:
+= Заклинания, которые на него влияют:

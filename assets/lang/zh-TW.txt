@@ -1684,3 +1684,5 @@ Numbers with your Gear Planner set:
 = 計入裝備規劃器套裝後的數值：
 Your Gear Planner set:
 = 你的裝備規劃器套裝：
+Spells that affect this:
+= 影響此法術的法術：

@@ -1683,3 +1683,5 @@ Numbers with your Gear Planner set:
 = Tal med dit sæt fra udstyrsplanlæggeren:
 Your Gear Planner set:
 = Dit sæt fra udstyrsplanlæggeren:
+Spells that affect this:
+= Besværgelser, der påvirker den:

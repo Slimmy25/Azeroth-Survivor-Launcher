@@ -1683,3 +1683,5 @@ Numbers with your Gear Planner set:
 = Tall med settet ditt fra utstyrsplanleggeren:
 Your Gear Planner set:
 = Settet ditt fra utstyrsplanleggeren:
+Spells that affect this:
+= Trylleformler som påvirker den:

@@ -1683,3 +1683,5 @@ Numbers with your Gear Planner set:
 = Números con tu conjunto del planificador:
 Your Gear Planner set:
 = Tu conjunto del planificador:
+Spells that affect this:
+= Hechizos que lo afectan:

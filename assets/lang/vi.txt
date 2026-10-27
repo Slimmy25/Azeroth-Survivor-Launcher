@@ -1684,3 +1684,5 @@ Numbers with your Gear Planner set:
 = Chỉ số kèm bộ trang bị từ trình lên trang bị:
 Your Gear Planner set:
 = Bộ trang bị từ trình lên trang bị của bạn:
+Spells that affect this:
+= Phép ảnh hưởng đến phép này:

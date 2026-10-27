@@ -1683,3 +1683,5 @@ Numbers with your Gear Planner set:
 = Angka dengan set perencana perlengkapanmu:
 Your Gear Planner set:
 = Set perencana perlengkapanmu:
+Spells that affect this:
+= Mantra yang memengaruhinya:

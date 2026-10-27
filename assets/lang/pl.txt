@@ -1684,3 +1684,5 @@ Numbers with your Gear Planner set:
 = Liczby z twoim zestawem z planera:
 Your Gear Planner set:
 = Twój zestaw z planera:
+Spells that affect this:
+= Zaklęcia, które na nie wpływają:
