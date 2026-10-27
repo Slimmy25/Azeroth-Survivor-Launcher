@@ -259,6 +259,27 @@ namespace AzerothLauncher
             GuideTrailMenus();
         }
 
+        // a link to a spell: its row on the page, scrolled to near the top and lit up
+        void ShowSpellRow(string term)
+        {
+            if (current != "Guide") return;
+            string want = Regex.Replace(term ?? "", @"\s*\(.*\)$", "");
+            SpellRow row = null;
+            var stack = new Stack<Control>();
+            stack.Push(panel);
+            while (stack.Count > 0 && row == null)
+            {
+                Control c = stack.Pop();
+                var r = c as SpellRow;
+                if (r != null && string.Equals(r.Spell, want, StringComparison.OrdinalIgnoreCase)) { row = r; break; }
+                foreach (Control k in c.Controls) stack.Push(k);
+            }
+            if (row == null) return;
+            var sp = row.Parent as ScrollPanel;
+            if (sp != null) sp.ScrollTo(row.Top - sp.AutoScrollPosition.Y - 12);
+            row.Flash();
+        }
+
         // the drop-downs of the trail: the groups, a group's topics and tools, a topic's pages, the classes
         void GuideTrailMenus()
         {
@@ -310,6 +331,18 @@ namespace AzerothLauncher
                 var l = new List<KeyValuePair<string, Action>>();
                 for (int p = 0; p < topics[t].Pages.Count; p++) { int pp = p; l.Add(new KeyValuePair<string, Action>(topics[t].Pages[p].Title, delegate { SetGuideView(t, pp); })); }
                 SetCrumbMenu(3, l);
+            }
+            if (gTalents != null)                            // › Talents ▾ : another class's talent trees
+            {
+                var l = new List<KeyValuePair<string, Action>>();
+                for (int p = 0; p < topics[t].Pages.Count; p++)
+                {
+                    int pp = p;
+                    string cls = topics[t].Pages[p].Title;
+                    if (Talents.Of(cls).Count == 0) continue;
+                    l.Add(new KeyValuePair<string, Action>(cls, delegate { SetGuideView(t, pp); gTalents = cls; BuildPanel("Guide"); }));
+                }
+                SetCrumbMenu(gPage >= 0 ? 4 : 3, l);
             }
         }
 
