@@ -11,3 +11,5 @@ jobs:
       - uses: actions/checkout@v4
       - run: sudo apt-get install -y -q wabt >/dev/null
       - run: python3 tools/explore_items.py
+        env:
+          PROBE_FUNCS: '["f_hxrb", "f_awdb"]'

@@ -32,6 +32,10 @@ for lit, al in lits.items():
         for k, fn in enumerate(funcs):
             if re.search(r"\b%d\b" % a, fn):
                 want.add(k); say("%s (%d) used in function #%d %s (%d chars)" % (lit.decode(), a, k, fn[:60].replace("\n", " "), len(fn)))
+for addr in (0x480378, 0x480f54, 0x4d7e00, 0x4d7d14):
+    for k, fn in enumerate(funcs):
+        if re.search(r"\b%d\b" % addr, fn):
+            want.add(k); say("table %x used in #%d %s (%d chars)" % (addr, k, fn[:40].replace("\n", " "), len(fn)))
 os.makedirs("/tmp/probe", exist_ok=True)
 for k in sorted(want):
     open("/tmp/probe/f%d.txt" % k, "w").write(funcs[k])
@@ -41,7 +45,7 @@ names = json.loads(os.environ.get("PROBE_FUNCS", "[]"))
 blob = {}
 for k, fn in enumerate(funcs):
     m = re.match(r"function (\w+)", fn)
-    if k in want or (m and m.group(1) in names): blob[m.group(1) if m else str(k)] = fn
+    if (k in want and len(fn) < 30000) or (m and m.group(1) in names): blob[m.group(1) if m else str(k)] = fn
 packed = base64.b64encode(gzip.compress(json.dumps(blob).encode(), 9)).decode()
 say("BLOB %d" % len(packed))
 for q in range(0, len(packed), 3400):
