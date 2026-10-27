@@ -70,32 +70,30 @@ def main():
     for j in jewels:
         debug.append("  %x %s | %s | %s | %s | %g | %x" % j)
 
-    # ---- the amulets: their names are in the translations; where their numbers are, the debug notes say
+    # ---- the amulets: key, name, icon (three strings) and three small numbers, one after the other
+    amulet_rows = []
+    for r in range(1048576, len(mem) - 40, 4):
+        k = s(u(r), u(r + 4))
+        if not k or ("amulet." + k) not in en:
+            continue
+        n = s(u(r + 8), u(r + 12))
+        ic = s(u(r + 16), u(r + 20))
+        if n != en["amulet." + k] or not ic or not re.fullmatch(r"(INV|Spell|Ability)_[A-Za-z0-9_]+", ic):
+            continue
+        amulet_rows.append((r, k, n, ic, u(r + 24), u(r + 28), u(r + 32)))
+    debug.append("amulet rows: %d" % len(amulet_rows))
+    for x in amulet_rows:
+        debug.append("  %x %s | %s | %s | %d %d %d" % x)
+    if amulet_rows:
+        end = amulet_rows[-1][0] + 36
+        for q in range(end, end + 40 * 40, 40):
+            debug.append("after %x: %s" % (q, " ".join(
+                ("%x" % u(q + 4 * i)) + ("=%g" % f(q + 4 * i) if 0x30000000 < u(q + 4 * i) < 0x48000000 else "") for i in range(10))))
+        start = amulet_rows[0][0]
+        for q in range(start - 40 * 30, start, 40):
+            debug.append("before %x: %s" % (q, " ".join(
+                ("%x" % u(q + 4 * i)) + ("=%g" % f(q + 4 * i) if 0x30000000 < u(q + 4 * i) < 0x48000000 else "") for i in range(10))))
     amulets = sorted((k[7:], v) for k, v in en.items() if k.startswith("amulet."))
-    for key, name in amulets:
-        hits = []
-        b = name.encode("utf-8")
-        q = 0
-        while len(hits) < 4:
-            q = mem.find(b, q)
-            if q < 0:
-                break
-            hits.append(q); q += 1
-        for h in hits:
-            refs = []
-            pb = struct.pack("<I", h)
-            q = 0
-            while len(refs) < 3:
-                q = mem.find(pb, q)
-                if q < 0:
-                    break
-                if q % 4 == 0:
-                    refs.append(q)
-                q += 1
-            for rf in refs:
-                debug.append("amulet %s name at %x ref %x: %s" % (key, h, rf, " ".join(
-                    ("%x" % u(rf - 16 + 4 * i)) + ("=%g" % f(rf - 16 + 4 * i) if 0x30000000 < u(rf - 16 + 4 * i) < 0x48000000 else "")
-                    for i in range(24))))
 
     # ---- the class sets: five (name, length, "of" flag) entries in a row, the first the class's common set
     flags = {}
@@ -122,29 +120,28 @@ def main():
                 r += 1
             q += 1
 
-    # ---- the PvP sets: the Alliance and Horde names and their weapons
-    pvp_debug = []
-    for word in ("Field Marshal's", "Grand Marshal's", "High Warlord's"):
-        q = 0
-        while True:
-            q = mem.find(word.encode(), q)
-            if q < 0:
-                break
-            m = re.match(rb"[\x20-\x7e]+", bytes(mem[q:q + 60]))
-            pvp_debug.append("%x %s" % (q, m.group(0).decode() if m else ""))
-            q += 1
-    debug.extend("pvp text " + x for x in pvp_debug[:40])
-    for p in [int(x.split()[0], 16) for x in pvp_debug[:20]]:
-        for ln in range(8, 40):
-            pb = struct.pack("<II", p, ln)
-            r = mem.find(pb)
-            if r >= 0 and r % 4 == 0:
-                debug.append("pvp ref %x len %d at %x: %s" % (p, ln, r, " ".join("%x" % u(r - 8 + 4 * i) for i in range(30))))
+    # ---- the PvP sets: the Alliance and Horde name, the weapons (Alliance and Horde), the class
+    pvp = []
+    fm = en.get("set.pvp.alliance") or "Field Marshal's"
+    for r in range(1048576, len(mem) - 96, 4):
+        if s(u(r), u(r + 4)) != fm:
+            continue
+        horde = s(u(r + 8), u(r + 12))
+        wp, wn, cid = u(r + 16), u(r + 20), u(r + 88)
+        if not horde or not 1 <= wn <= 4 or not 1 <= cid <= 11:
+            continue
+        weapons = []
+        for i in range(wn):
+            q = wp + 24 * i
+            weapons.append((s(u(q + 4), u(q + 8)), s(u(q + 16), u(q + 20))))
+        if all(a and h for a, h in weapons):
+            pvp.append((cid, fm, horde, weapons))
+            debug.append("pvp row %x class %d: %s / %s %s" % (r, cid, fm, horde, weapons))
 
     # ---- drop chances: a run of decreasing shares from 60% to 20%
     for r in range(1048576, len(mem) - 24, 4):
         v = [f(r + 4 * i) for i in range(6)]
-        if abs(v[0] - 0.6) < 1e-6 and abs(v[5] - 0.2) < 1e-6:
+        if abs(v[0] - 0.6) < 1e-6 and (abs(v[1] - 0.5) < 1e-6 or abs(v[5] - 0.2) < 1e-6 or abs(v[2] - 0.5) < 1e-6):
             debug.append("chances at %x: %s" % (r, v))
 
     # ---- write assets/items.txt
@@ -182,6 +179,10 @@ def main():
                 n = en.get("weapon.%s.%d.%d" % (cls, w, i))
                 if n:
                     out.append(" | ".join([cls, str(w), RARITIES[i], n]))
+    out.append("@pvp")
+    for cid, a, h, weapons in sorted(pvp):
+        cls = CLASSES[cid - 1] if cid <= len(CLASSES) else str(cid)
+        out.append(" | ".join([cls, a, h] + ["%s / %s" % w for w in weapons]))
     out.append("@armor")
     for cls in CLASSES:
         out.append("%s | %s" % (cls, ARMOR[cls]))
