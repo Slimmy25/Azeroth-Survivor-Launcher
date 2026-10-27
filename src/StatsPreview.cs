@@ -136,7 +136,7 @@ namespace AzerothLauncher
                     app.BuildPanel("Guide");
                     Application.DoEvents();
                     PreviewShot(app, Path.Combine(outDir, "guide-planner.png"));
-                    var stack = new Stack<Control>();
+                    var stack = new System.Collections.Generic.Stack<Control>();
                     stack.Push(app.panel);
                     while (stack.Count > 0)
                     {
