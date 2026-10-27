@@ -22,3 +22,19 @@
   icons of the class's other spells whose text names that spell word for word (for example, Aimed Shot under Hunter's
   Mark). Hover one to read it, click it to go to that spell. A longer name that only contains it ("Greater Heal" for
   "Heal") doesn't count.
+
+### Speed
+- The whole launcher draws much faster:
+  - Pictures (the background, buttons, icons, thumbnails) are prepared once at the size they are shown, not resized
+    every time the window redraws.
+  - The home screen's background, title and headings are drawn once and reused.
+  - The Guide's text is laid out once, so scrolling a long page is smooth.
+  - The "This week" card reads AZS Stats' file every few seconds, not on every redraw.
+- Questions and the first-time setup answer at once: they wait for your click instead of checking for it every
+  10 milliseconds. A new setup page appears in one go, and the darkened launcher behind them no longer redraws itself
+  whole.
+
+### First-time setup
+- A launcher whose own settings folder ("Azeroth Survivor Launcher", next to it) is missing no longer starts the
+  first-time setup when the game is right there and has been played (its save or its config folder exists). It
+  carries on with them and says so above PLAY. Every setting is still in Options.
