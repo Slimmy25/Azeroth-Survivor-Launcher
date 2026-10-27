@@ -13,3 +13,6 @@
 ### Everything else
 - Addons > My Addons: the profiles' LOAD buttons no longer run past the right edge.
 - The path at the top of Options shows the tab's name in your language (Folders, Graphics).
+- Options > GRAPHICS: the window size buttons wrap onto a second line instead of running past the right edge, and
+  every Options tab keeps its contents inside the box.
+- About Launcher no longer lists AZS Transparency, which was removed in v1.0.
