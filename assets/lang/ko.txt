@@ -1790,3 +1790,7 @@ START SETUP AGAIN
 = 설정 다시 시작
 Search every page for "{0}"
 = 모든 페이지에서 "{0}" 검색
+Every piece a {0} can wear, with its bonuses, the bosses that drop it and each set's bonuses.
+= {0}가 착용할 수 있는 모든 장비와 그 보너스, 떨어뜨리는 보스, 각 세트 보너스.
+{0} GEAR
+= {0} 장비

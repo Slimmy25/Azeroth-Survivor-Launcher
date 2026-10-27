@@ -1790,3 +1790,7 @@ START SETUP AGAIN
 = ΝΕΑ ΕΝΑΡΞΗ ΡΥΘΜΙΣΗΣ
 Search every page for "{0}"
 = Αναζήτηση του «{0}» σε όλες τις σελίδες
+Every piece a {0} can wear, with its bonuses, the bosses that drop it and each set's bonuses.
+= Κάθε κομμάτι που μπορεί να φορέσει ένας {0}, με τα μπόνους του, τα αφεντικά που το ρίχνουν και τα μπόνους κάθε σετ.
+{0} GEAR
+= {0}: ΕΞΟΠΛΙΣΜΟΣ

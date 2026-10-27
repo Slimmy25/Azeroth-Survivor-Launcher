@@ -1790,3 +1790,7 @@ START SETUP AGAIN
 = เริ่มตั้งค่าใหม่
 Search every page for "{0}"
 = ค้นหา "{0}" ในทุกหน้า
+Every piece a {0} can wear, with its bonuses, the bosses that drop it and each set's bonuses.
+= ทุกชิ้นที่ {0} สวมได้ พร้อมโบนัส บอสที่ดรอป และโบนัสของแต่ละเซ็ต
+{0} GEAR
+= อุปกรณ์ {0}

@@ -1790,3 +1790,7 @@ START SETUP AGAIN
 = सेटअप फिर से शुरू करें
 Search every page for "{0}"
 = हर पेज में "{0}" खोजें
+Every piece a {0} can wear, with its bonuses, the bosses that drop it and each set's bonuses.
+= हर टुकड़ा जो एक {0} पहन सकता है, उसके बोनस, उसे गिराने वाले बॉस और हर सेट के बोनस के साथ।
+{0} GEAR
+= {0}: गियर

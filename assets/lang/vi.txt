@@ -1790,3 +1790,7 @@ START SETUP AGAIN
 = BẮT ĐẦU THIẾT LẬP LẠI
 Search every page for "{0}"
 = Tìm "{0}" trên mọi trang
+Every piece a {0} can wear, with its bonuses, the bosses that drop it and each set's bonuses.
+= Mọi món mà {0} có thể mặc, kèm thưởng, trùm làm rơi và thưởng của từng bộ.
+{0} GEAR
+= TRANG BỊ {0}

@@ -839,30 +839,24 @@ namespace AzerothLauncher
                 else para.Add(line);
             }
             flush();
-            if (className != null && Items.Gear.Count > 0)      // the gear this class can wear, by rarity
+            // the gear this class can wear: behind a button, the class's page of the Items topic (every piece with its
+            // bonuses, the bosses that drop it and each set's bonuses)
+            if (className != null && Items.Gear.Count > 0)
             {
-                add(UI.Text(Lang.T("Gear"), 12.5f, FontStyle.Bold, Theme.Gold, bg, tw, false), x, 16);
-                add(new GuideRule(Math.Min(60, tw), Theme.Gold), x, 3);
-                add(new GuideText(Lang.F("Every piece a {0} can wear. Point at one to read it, click it to try it in the Gear Planner.", Lang.T(className)),
-                                  10, Theme.Text, bg, tw, gTopic, gPage), x, 8);
-                string gc = className;
-                foreach (string rar in Items.Rarities)
+                int it = -1, ip = -1;
+                var tops = Data.Guide;
+                for (int t = 0; t < tops.Count && ip < 0; t++)
+                    if (tops[t].Title == "Items")
+                        for (int p = 0; p < tops[t].Pages.Count; p++)
+                            if (tops[t].Pages[p].Title == className + " Gear") { it = t; ip = p; break; }
+                if (ip >= 0)
                 {
-                    var pieces = new List<GearPiece>();
-                    foreach (var p in Items.Gear) if (p.Class == gc && p.Rarity == rar) pieces.Add(p);
-                    if (pieces.Count == 0) continue;
-                    add(new GearStrip(rar, pieces, tw, GearIcons(), delegate(GearPiece p)
-                    {
-                        PlannerClass(gc);
-                        plannerSlots[p.Slot] = p;
-                        GearSheet.Stars.Remove(p.Slot);       // a new piece starts at 0 stars
-                        OpenGuideTab(-3);
-                    }), x, 6);
-                    // the set's bonuses, under its pieces (the game's own words, from its armory)
-                    var four = Items.FourPiece(rar);
-                    string eight = Items.EightPiece(gc, rar);
-                    add(new GuideText(Items.SetName(gc, rar) + ": (4) " + (four != null ? four.Text : Lang.T("not entered yet")) + " [" + Lang.T("4 pieces at 1+ stars") + "]   (8) " +
-                                      (eight ?? Lang.T("not entered yet")) + " [" + Lang.T("all 8 at 3+ stars, half again as strong at 5") + "]", 9, Theme.Text, bg, tw, gTopic, gPage), x + 4, 3);
+                    add(UI.Text(Lang.T("Gear"), 12.5f, FontStyle.Bold, Theme.Gold, bg, tw, false), x, 16);
+                    add(new GuideRule(Math.Min(60, tw), Theme.Gold), x, 3);
+                    add(new GuideText(Lang.F("Every piece a {0} can wear, with its bonuses, the bosses that drop it and each set's bonuses.", Lang.T(className)),
+                                      10, Theme.Text, bg, tw, gTopic, gPage), x, 8);
+                    int gt = it, gp = ip;
+                    add(new WowButton(Lang.F("{0} GEAR", Lang.T(className).ToUpperInvariant()) + " ›", delegate { SetGuideView(gt, gp); }, 260, 34, 10), x, 8);
                 }
             }
             var pad = new Panel();

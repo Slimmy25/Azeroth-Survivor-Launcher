@@ -1789,3 +1789,7 @@ START SETUP AGAIN
 = RIAVVIA LA CONFIGURAZIONE
 Search every page for "{0}"
 = Cerca «{0}» in tutte le pagine
+Every piece a {0} can wear, with its bonuses, the bosses that drop it and each set's bonuses.
+= Ogni pezzo che un {0} può indossare, con i suoi bonus, i boss che lo lasciano e i bonus di ogni set.
+{0} GEAR
+= {0}: EQUIPAGGIAMENTO

@@ -1790,3 +1790,7 @@ START SETUP AGAIN
 = BEÁLLÍTÁS ÚJRAKEZDÉSE
 Search every page for "{0}"
 = „{0}” keresése minden oldalon
+Every piece a {0} can wear, with its bonuses, the bosses that drop it and each set's bonuses.
+= Minden darab, amit egy {0} viselhet, a bónuszaival, az azt ejtő főellenségekkel és minden szett bónuszaival.
+{0} GEAR
+= {0}: FELSZERELÉS

@@ -1789,3 +1789,7 @@ START SETUP AGAIN
 = MULAI PENYIAPAN LAGI
 Search every page for "{0}"
 = Cari "{0}" di semua halaman
+Every piece a {0} can wear, with its bonuses, the bosses that drop it and each set's bonuses.
+= Setiap bagian yang bisa dipakai {0}, dengan bonusnya, bos yang menjatuhkannya, dan bonus tiap set.
+{0} GEAR
+= {0}: PERLENGKAPAN

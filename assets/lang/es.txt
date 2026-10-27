@@ -1789,3 +1789,7 @@ START SETUP AGAIN
 = EMPEZAR DE NUEVO
 Search every page for "{0}"
 = Buscar «{0}» en todas las páginas
+Every piece a {0} can wear, with its bonuses, the bosses that drop it and each set's bonuses.
+= Cada pieza que puede llevar un {0}, con sus bonificaciones, los jefes que la sueltan y las bonificaciones de cada conjunto.
+{0} GEAR
+= {0}: EQUIPO
