@@ -311,6 +311,8 @@ rogue | Legendary | Legs | 45 | regen=1, damage=7.1, crit=2.4, echo=4.2
 rogue | Legendary | Feet | 24 | speed=24, armor=3.6, echo=4.2
 rogue | Legendary | Wrist | 19 | cooldown=12, echo=4.2
 rogue | Legendary | Hands | 0 | crit=6.2, critdmg=19, pickup=193, speed=4.8, echo=4.2
+rogue | Legendary | Main Hand | 0 | damage=39, cooldown=4.8, regen=0.7, targets=1
+rogue | Legendary | Off Hand | 55 | damage=19, regen=1, targets=1
 # Shaman, Common
 shaman | Common | Head | 8 | crit=0.7
 shaman | Common | Shoulder | 4 | area=2.8
@@ -433,6 +435,9 @@ mage | Legendary | Shoulder | 43 | area=13, armor=3.6, echo=4.2
 mage | Legendary | Chest | 77 | armor=6.4, cooldown=3.6, echo=4.2
 mage | Legendary | Waist | 0 | pickup=39, gold=19, speed=4.8, crit=2.4, echo=4.2
 mage | Legendary | Legs | 45 | regen=1.7, cooldown=4.8, echo=4.2
+mage | Legendary | Feet | 29 | speed=24, regen=1, echo=4.2
+mage | Legendary | Wrist | 0 | cooldown=8.1, damage=7.1, speed=3.6, echo=4.2
+mage | Legendary | Hands | 0 | crit=5.8, critdmg=19, pickup=193, area=9.5, echo=4.2
 # Warlock, Common
 warlock | Common | Head | 8 | crit=0.7
 warlock | Common | Shoulder | 4 | area=2.8

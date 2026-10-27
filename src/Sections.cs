@@ -1410,8 +1410,7 @@ namespace AzerothLauncher
             {
                 string c;
                 if (cats.TryGetValue(folder, out c)) return c == Data.Wow112Category || c == Data.MyAddonsCategory ? c : Data.AzsAddonsHeading;
-                if (folder.StartsWith("AZS", StringComparison.OrdinalIgnoreCase)) return Data.AzsAddonsHeading;
-                return "OTHER ADDONS";
+                return Data.AzsAddonsHeading;                // any other folder too (for now: no OTHER ADDONS heading)
             };
             // the pairs that can't be on together and are both on: at the top, joined by a red bracket, until one is off
             var pairs = new List<KeyValuePair<string, string>>();
