@@ -1793,3 +1793,5 @@ Every piece a {0} can wear, with its bonuses, the bosses that drop it and each s
 = Cada peça que um {0} pode usar, com seus bônus, os chefes que a derrubam e os bônus de cada conjunto.
 {0} GEAR
 = {0}: EQUIPAMENTO
+I'm sorry the launcher could not help this time. Everything it set up has been taken away again; your game, your saves and your cloud files are untouched.\n\nIf you need more help, please contact Slimjim in the Discord. Best of luck!
+= Sentimos que o launcher não tenha ajudado desta vez. Tudo o que ele configurou foi removido; seu jogo, seus saves e seus arquivos na nuvem não foram tocados.\n\nSe precisar de mais ajuda, fale com o Slimjim no Discord. Boa sorte!

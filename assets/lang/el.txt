@@ -1794,3 +1794,5 @@ Every piece a {0} can wear, with its bonuses, the bosses that drop it and each s
 = Κάθε κομμάτι που μπορεί να φορέσει ένας {0}, με τα μπόνους του, τα αφεντικά που το ρίχνουν και τα μπόνους κάθε σετ.
 {0} GEAR
 = {0}: ΕΞΟΠΛΙΣΜΟΣ
+I'm sorry the launcher could not help this time. Everything it set up has been taken away again; your game, your saves and your cloud files are untouched.\n\nIf you need more help, please contact Slimjim in the Discord. Best of luck!
+= Λυπούμαστε που ο launcher δεν βοήθησε αυτή τη φορά. Ό,τι ρύθμισε αφαιρέθηκε ξανά· το παιχνίδι, οι αποθηκεύσεις και τα αρχεία σου στο cloud έμειναν ανέγγιχτα.\n\nΑν χρειάζεσαι περισσότερη βοήθεια, επικοινώνησε με τον Slimjim στο Discord. Καλή τύχη!

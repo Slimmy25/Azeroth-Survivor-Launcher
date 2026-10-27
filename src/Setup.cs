@@ -19,6 +19,8 @@ namespace AzerothLauncher
         bool? setupStats;                                     // the answer to the AZS Stats question
         string setupAddons;                                   // "download" when the player wants addons, else null
         bool setupDownloading;                                // the game's download was started from setup
+        bool setupFirstTime;                                  // setup was never done before (not RUN SETUP AGAIN)
+        readonly List<string> setupCreated = new List<string>();   // the folders setup created, deepest last
         string setupImported;
         Dictionary<string, string> setupVals, setupDefaults;
         Dictionary<string, object> setupResult;
@@ -37,6 +39,8 @@ namespace AzerothLauncher
             setupDefaults["save_dir"] = Util.DefaultSaveDir;
             setupVals["cloud_dir"] = "";
             foreach (var kv in setupDefaults) setupVals[kv.Key] = kv.Value;
+            Config.Frozen = false;                            // (after a cancelled first setup: saving again)
+            setupFirstTime = !Cfg.Bool("setup_done", false);
             setupImported = null;
             setupResult = null;
             setupStats = null;
@@ -274,15 +278,21 @@ namespace AzerothLauncher
             return dl.Bottom;
         }
 
-        // setup (or the game's download started from it) was cancelled: nothing is saved, and the section window stays
-        // up with the last page
+        // setup (or the game's download started from it) was cancelled. RUN SETUP AGAIN: back to the home screen with
+        // the settings as they were. A first setup: the launcher takes away what it made (CleanUpFirstSetup) and the
+        // section window stays up with the last page
         void SetupCancel()
         {
-            setupResult = null;
+            if (!setupFirstTime)
+            {
+                setupResult = null;
+                SetupLeave(null, null);
+                return;
+            }
+            CleanUpFirstSetup();
             setupStats = null;
             setupAddons = null;
             Cfg.Set("setup_done", false);
-            Cfg.Save();
             setupOpen = true;
             current = "Setup";
             foreach (var b in nav.Values) b.Active = false;
@@ -290,6 +300,24 @@ namespace AzerothLauncher
             ShowSide();
             RefreshPlayLabel();
             SetupGo(6);
+        }
+
+        // A cancelled first setup leaves nothing of the launcher's behind but the exe: its own folder (settings, log,
+        // backups, the unfinished download in temp) and the folders setup created while they are still empty. The game,
+        // a save imported into it and the cloud folder are never touched. Nothing is saved again until setup restarts.
+        void CleanUpFirstSetup()
+        {
+            Config.Frozen = true;
+            try { Util.DeleteTreeQuiet(Path.Combine(Util.LauncherDir, "temp")); } catch (Exception) { }
+            for (int i = setupCreated.Count - 1; i >= 0; i--)
+                try
+                {
+                    string d = setupCreated[i];
+                    if (Directory.Exists(d) && Directory.GetFileSystemEntries(d).Length == 0) Directory.Delete(d);
+                }
+                catch (Exception) { }
+            setupCreated.Clear();
+            try { Util.DeleteTreeQuiet(Util.DataDir); } catch (Exception) { }
         }
 
         // the game's download, started from setup, was stopped: setup is cancelled with it
@@ -304,9 +332,9 @@ namespace AzerothLauncher
         int SetupCancelled(int x, int y, int w)
         {
             var q = PutText("Setup was cancelled", 13, FontStyle.Bold, Theme.Gold, x, y, w);
-            var p = PutText("This launcher is here to help you play and manage Azeroth Survivors: it installs the game, keeps your " +
-                            "progress safe in the cloud, manages your addons and shows your stats and the Guide. Without setup it " +
-                            "has little to offer.\n\nStart setup again whenever you are ready.", 11, FontStyle.Regular, Theme.Text, x, BottomOf(q) + 4, w);
+            var p = PutText("I'm sorry the launcher could not help this time. Everything it set up has been taken away again; your " +
+                            "game, your saves and your cloud files are untouched.\n\nIf you need more help, please contact Slimjim " +
+                            "in the Discord. Best of luck!", 11, FontStyle.Regular, Theme.Text, x, BottomOf(q) + 4, w);
             y = BottomOf(p) + 14;
             var again = Put(new WowButton("START SETUP AGAIN", ShowSetupDialog, 250, 42, 12), x, y);
             return again.Bottom;
@@ -327,7 +355,16 @@ namespace AzerothLauncher
                 foreach (string key in new[] { "addons_dir", "saved_dir", "save_dir" })
                 {
                     string d = setupResult.ContainsKey(key) ? (string)setupResult[key] : setupDefaults[key];
-                    try { if (!string.IsNullOrEmpty(d) && !Directory.Exists(d)) Directory.CreateDirectory(d); }
+                    try
+                    {
+                        if (string.IsNullOrEmpty(d) || Directory.Exists(d)) continue;
+                        // every folder on the way that is not there yet: taken away again if a first setup is cancelled
+                        var made = new List<string>();
+                        for (string up = Path.GetFullPath(d); !string.IsNullOrEmpty(up) && !Directory.Exists(up); up = Path.GetDirectoryName(up))
+                            made.Insert(0, up);
+                        Directory.CreateDirectory(d);
+                        if (setupFirstTime) setupCreated.AddRange(made);
+                    }
                     catch (Exception) { }
                 }
                 Cfg.Set("setup_done", true);

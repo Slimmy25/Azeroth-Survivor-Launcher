@@ -1794,3 +1794,5 @@ Every piece a {0} can wear, with its bonuses, the bosses that drop it and each s
 = Každý kus, který může {0} nosit, s bonusy, bossy, kteří ho upouštějí, a bonusy každé sady.
 {0} GEAR
 = {0}: VÝSTROJ
+I'm sorry the launcher could not help this time. Everything it set up has been taken away again; your game, your saves and your cloud files are untouched.\n\nIf you need more help, please contact Slimjim in the Discord. Best of luck!
+= Je nám líto, že vám launcher tentokrát nepomohl. Vše, co nastavil, bylo opět odstraněno; vaší hry, uložených pozic ani souborů v cloudu se to nedotklo.\n\nPokud potřebujete další pomoc, kontaktujte Slimjima na Discordu. Hodně štěstí!

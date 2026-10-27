@@ -1794,3 +1794,5 @@ Every piece a {0} can wear, with its bonuses, the bosses that drop it and each s
 = Minden darab, amit egy {0} viselhet, a bónuszaival, az azt ejtő főellenségekkel és minden szett bónuszaival.
 {0} GEAR
 = {0}: FELSZERELÉS
+I'm sorry the launcher could not help this time. Everything it set up has been taken away again; your game, your saves and your cloud files are untouched.\n\nIf you need more help, please contact Slimjim in the Discord. Best of luck!
+= Sajnáljuk, hogy a launcher most nem tudott segíteni. Mindent, amit beállított, újra eltávolított; a játékodhoz, a mentéseidhez és a felhős fájljaidhoz nem nyúlt.\n\nHa további segítség kell, keresd Slimjimet a Discordon. Sok szerencsét!

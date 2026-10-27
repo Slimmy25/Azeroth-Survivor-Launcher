@@ -1793,3 +1793,5 @@ Every piece a {0} can wear, with its bonuses, the bosses that drop it and each s
 = Jokainen osa, jota {0} voi käyttää, bonuksineen, sen pudottavat pomot ja kunkin setin bonukset.
 {0} GEAR
 = {0}: VARUSTEET
+I'm sorry the launcher could not help this time. Everything it set up has been taken away again; your game, your saves and your cloud files are untouched.\n\nIf you need more help, please contact Slimjim in the Discord. Best of luck!
+= Olemme pahoillamme, ettei käynnistin voinut auttaa tällä kertaa. Kaikki sen tekemä on poistettu; peliisi, tallennuksiisi ja pilvitiedostoihisi ei koskettu.\n\nJos tarvitset lisää apua, ota yhteyttä Slimjimiin Discordissa. Onnea matkaan!

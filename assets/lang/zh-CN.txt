@@ -1794,3 +1794,5 @@ Every piece a {0} can wear, with its bonuses, the bosses that drop it and each s
 = {0}可穿戴的每件装备，及其加成、掉落首领和各套装加成。
 {0} GEAR
 = {0}装备
+I'm sorry the launcher could not help this time. Everything it set up has been taken away again; your game, your saves and your cloud files are untouched.\n\nIf you need more help, please contact Slimjim in the Discord. Best of luck!
+= 很抱歉这次启动器没能帮上忙。它所做的设置已全部移除；你的游戏、存档和云端文件均未被改动。\n\n如需更多帮助，请在 Discord 联系 Slimjim。祝你好运！

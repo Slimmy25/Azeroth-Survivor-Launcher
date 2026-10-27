@@ -286,8 +286,13 @@ namespace AzerothLauncher
             return c;
         }
 
+        // a first-time setup was cancelled and the launcher's own files were removed: nothing is written again until
+        // setup starts over (Setup.cs)
+        public static bool Frozen;
+
         public void Save()
         {
+            if (Frozen) return;
             try
             {
                 Directory.CreateDirectory(AppDir);

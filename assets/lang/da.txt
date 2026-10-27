@@ -1793,3 +1793,5 @@ Every piece a {0} can wear, with its bonuses, the bosses that drop it and each s
 = Alle dele en {0} kan bære, med deres bonusser, bosserne der taber dem, og hvert sæts bonusser.
 {0} GEAR
 = {0}: UDSTYR
+I'm sorry the launcher could not help this time. Everything it set up has been taken away again; your game, your saves and your cloud files are untouched.\n\nIf you need more help, please contact Slimjim in the Discord. Best of luck!
+= Vi beklager, at launcheren ikke kunne hjælpe denne gang. Alt, hvad den satte op, er fjernet igen; dit spil, dine gemte spil og dine skyfiler er urørte.\n\nHar du brug for mere hjælp, så kontakt Slimjim på Discord. Held og lykke!

@@ -1794,3 +1794,5 @@ Every piece a {0} can wear, with its bonuses, the bosses that drop it and each s
 = Bir {0} sınıfının giyebileceği her parça; bonusları, onu düşüren boss'lar ve her setin bonuslarıyla.
 {0} GEAR
 = {0}: EKİPMAN
+I'm sorry the launcher could not help this time. Everything it set up has been taken away again; your game, your saves and your cloud files are untouched.\n\nIf you need more help, please contact Slimjim in the Discord. Best of luck!
+= Başlatıcı bu sefer yardımcı olamadığı için üzgünüz. Kurduğu her şey yeniden kaldırıldı; oyununa, kayıtlarına ve bulut dosyalarına dokunulmadı.\n\nDaha fazla yardım gerekirse Discord'da Slimjim ile iletişime geç. Bol şans!
