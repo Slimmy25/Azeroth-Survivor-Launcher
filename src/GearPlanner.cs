@@ -52,6 +52,14 @@ namespace AzerothLauncher
             {
                 RunStats st = AddonStats();
                 if (st != null)
+                    foreach (var kv in st.ItemIcons)          // every piece any hero has worn (AZS Stats keeps them)
+                    {
+                        string ic = kv.Value;
+                        int cut = ic.LastIndexOfAny(new[] { '\\', '/' });
+                        if (cut >= 0) ic = ic.Substring(cut + 1);
+                        if (ic.Length > 0) d[kv.Key] = ic.ToLowerInvariant();
+                    }
+                if (st != null)
                     foreach (var a in st.Armory)
                         foreach (var it in a.Gear)
                         {

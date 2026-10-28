@@ -737,6 +737,7 @@ namespace AzerothLauncher
                 // guide.txt, then the "Items" topic written out from the game's items (Items.cs)
                 var source = new List<string>(Util.ReadResource("AS.guide.txt").Replace("\r\n", "\n").Split('\n'));
                 try { source.AddRange(Items.GuideLines()); } catch (Exception) { }
+                try { source.AddRange(Transmog.GuideLines()); } catch (Exception) { }
                 foreach (string raw in source)
                 {
                     string line = raw.TrimEnd();

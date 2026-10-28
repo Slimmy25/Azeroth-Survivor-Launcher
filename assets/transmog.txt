@@ -1,0 +1,47 @@
+Transmog: the looks of Azeroth Survivors, entered by hand from the game's own Armory (0.123.0): Appearances, Tabards
+and weapon glows. They add nothing to a hero's numbers. One look per line:
+  kind | slot | name | how it is earned | icon (the game's icon name, when known; empty until it is)
+kind: appearance, tabard, glow. An icon left empty is learned in game by AZS Stats when a hero wears the look.
+Lines starting with # and everything above the first === line are ignored.
+===
+# Appearances (any class; each comes with an achievement)
+appearance | Head | Defias Bandana | You're Fired: defeat Edwin VanCleef with a Fire spell. |
+appearance | Head | Zul'Gurub Mask | Suck It, Hakkar!: defeat Hakkar with Drain Life. |
+appearance | Head | Gnomish Mind Control Cap | Eye Caramba!: defeat C'Thun without taking any damage from him. |
+appearance | Head | Gnomish Goggles | Blue Screen of Death: defeat Azuregos with an Arcane spell. |
+appearance | Head | Admiral's Hat | Better Together: complete your first zone with at least one other player. |
+appearance | Head | Bloodsail Admiral's Hat | Five of a Kind: complete any zone in co-op with all 5 players using the same class. |
+appearance | Head | Embrace of the Lycan | Things That Go Bump in the Night: complete Duskwood with at least one other player, without any player dying. |
+appearance | Head | Whitemane's Chapeau | Holy Frame Drops: defeat High Inquisitor Whitemane in co-op with 5 Paladins, all having Consecration as their highest-ranked spell. Consecration must deliver the killing blow. |
+appearance | Back | Onyxia Scale Cloak | Bad Dragon!: have a summoned pet deliver the killing blow to Nefarian. |
+appearance | Back | Glacial Cloak | no u: slay Sapphiron with a Frostbolt as the killing blow. |
+appearance | Back | Dashing Scarlet Cloak | Spin to Win: defeat Herod with Whirlwind. |
+appearance | Back | Cape of the Brotherhood | The Brotherhood Falls: defeat Edwin VanCleef in co-op with 5 players, all using different classes. |
+appearance | Back | Cloak of the Brood Lord | Dragonslayers: defeat Azuregos and Nefarian, each with at least one other player. |
+appearance | Back | Cloak of the Devoured | The Old Gods Have No Friends: defeat C'Thun on Heroic III or harder with at least one other player. |
+# Tabards (a look for the tabard slot; battleground tabards come with their zone's achievement, the others are bought)
+tabard | Tabard | Warsong Battle Tabard | Warsong Gulch's achievement. |
+tabard | Tabard | Silverwing Battle Tabard | Warsong Gulch's achievement. |
+tabard | Tabard | Arathor Battle Tabard | Arathi Basin's achievement. |
+tabard | Tabard | Defilers Battle Tabard | Arathi Basin's achievement. |
+tabard | Tabard | Stormpike Battle Tabard | Alterac Valley's achievement. |
+tabard | Tabard | Frostwolf Battle Tabard | Alterac Valley's achievement. |
+tabard | Tabard | Scarlet Crusade Tabard | The Spin to Win achievement. |
+tabard | Tabard | Contest Winner's Tabard | The Against All Odds achievement. |
+tabard | Tabard | Stormwind Tabard | Buy for 10. |
+tabard | Tabard | Tabard of Lordaeron | Buy for 15. |
+tabard | Tabard | Tabard of Stromgarde | Buy for 15. |
+tabard | Tabard | Tabard of Theramore | Buy for 15. |
+tabard | Tabard | Tabard of Dalaran | Buy for 15. |
+tabard | Tabard | Darkmoon Faire Tabard | Buy for 15. |
+tabard | Tabard | Tabard of the Alliance | Buy for 15. |
+tabard | Tabard | Tabard of the Horde | Buy for 15. |
+tabard | Tabard | Tabard of the Argent Dawn | Buy for 20. |
+tabard | Tabard | Tabard of Flame | Buy for 20. |
+tabard | Tabard | Tabard of Frost | Buy for 20. |
+tabard | Tabard | Alliance Officer's Tabard | Buy for 25. |
+tabard | Tabard | Horde Officer's Tabard | Buy for 25. |
+# Weapon glows (any weapon in the armory; a picked glow also replaces a legendary weapon's own)
+glow | Weapon | Icy Chill | Weapons at 5 stars. |
+glow | Weapon | Crusader | The Champion of Naxxramas achievement. |
+glow | Weapon | Fiery Weapon | The Radiant Armory achievement. |

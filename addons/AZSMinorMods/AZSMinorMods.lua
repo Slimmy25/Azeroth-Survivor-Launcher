@@ -10,7 +10,9 @@
 --   * Move the UI: unlock it, drag the player, target and party frames, the minimap, buffs, cast bar, action bars and
 --     where you want them, then lock it again. The places are kept (Reset puts them back).
 --   * Hide the target frame: this game picks its own targets, so the frame can go.
---   * Plain action bar: the gryphons and the bar's art go, and only the six spell squares are left.
+--   * Plain action bar: the gryphons and the bar's art go, and only the six spell squares are left, with the bar
+--     no wider than they are (and the two page arrows), so it leaves no empty space.
+--   * Cooldown numbers: each spell square shows the seconds until its spell is ready again.
 -- /azsmods (or the gear by the minimap) opens the settings window: every one of these on or off.
 -- Lua 5.0 / 1.12 interface: scripts read `this`, `event`, `arg1`, `arg2`; no # operator; only the 1.12 API.
 
@@ -50,6 +52,7 @@ local function DB()
 	if ( d.hideLevel == nil ) then d.hideLevel = true; end
 	if ( d.camera == nil ) then d.camera = true; end
 	if ( d.plainBar == nil ) then d.plainBar = false; end
+	if ( d.cooldowns == nil ) then d.cooldowns = true; end
 	d.box, d.bloat, d.x, d.y = nil, nil, nil, nil;          -- the retired Say & Party box and "Remove bloat"
 	if ( d.bossMarks == nil ) then d.bossMarks = true; end
 	if ( d.deathMarks == nil ) then d.deathMarks = true; end
@@ -380,9 +383,45 @@ local function BarArt(alpha)
 	end
 end
 
+-- the bar's own width and its page arrows' places, kept to put back when the plain bar is turned off
+local barWidth, arrowUp, arrowDown;
+local function Narrow(on)
+	if ( not MainMenuBar or not ActionButton1 or not ActionButton6 ) then return; end
+	if ( not barWidth ) then
+		barWidth = MainMenuBar:GetWidth();
+		if ( ActionBarUpButton and ActionBarUpButton.GetPoint ) then arrowUp = { ActionBarUpButton:GetPoint(1) }; end
+		if ( ActionBarDownButton and ActionBarDownButton.GetPoint ) then arrowDown = { ActionBarDownButton:GetPoint(1) }; end
+	end
+	if ( on ) then
+		-- as wide as the six squares, plus room for the two page arrows on their right, as in the default bar
+		local left = ActionButton1:GetLeft() and MainMenuBar:GetLeft() and (ActionButton1:GetLeft() - MainMenuBar:GetLeft()) or 8;
+		local squares = ActionButton6:GetRight() and ActionButton1:GetLeft() and (ActionButton6:GetRight() - ActionButton1:GetLeft()) or 252;
+		MainMenuBar:SetWidth(left + squares + 34);
+		if ( ActionBarUpButton ) then
+			ActionBarUpButton:ClearAllPoints();
+			ActionBarUpButton:SetPoint("TOPLEFT", ActionButton6, "TOPRIGHT", 2, 6);
+		end
+		if ( ActionBarDownButton ) then
+			ActionBarDownButton:ClearAllPoints();
+			ActionBarDownButton:SetPoint("BOTTOMLEFT", ActionButton6, "BOTTOMRIGHT", 2, -6);
+		end
+	else
+		MainMenuBar:SetWidth(barWidth);
+		if ( ActionBarUpButton and arrowUp and arrowUp[1] ) then
+			ActionBarUpButton:ClearAllPoints();
+			ActionBarUpButton:SetPoint(arrowUp[1], arrowUp[2], arrowUp[3], arrowUp[4], arrowUp[5]);
+		end
+		if ( ActionBarDownButton and arrowDown and arrowDown[1] ) then
+			ActionBarDownButton:ClearAllPoints();
+			ActionBarDownButton:SetPoint(arrowDown[1], arrowDown[2], arrowDown[3], arrowDown[4], arrowDown[5]);
+		end
+	end
+end
+
 local function PlainBar(on)
 	if ( not MainMenuBar ) then return; end
 	BarArt(on and 0 or 1);
+	pcall(Narrow, on);
 	for i = 1, table.getn(PLAIN_HIDE) do
 		local f = getglobal(PLAIN_HIDE[i]);
 		if ( f ) then
@@ -397,6 +436,38 @@ local function PlainBar(on)
 		end
 	end
 end
+
+-- the cooldown numbers: the seconds until each spell square's spell is ready again. The game's spells (AZS_SPELLS, the
+-- racial last) are in the order of the squares, ActionButton1 to 6.
+local cdText = {};
+local cdFrame = CreateFrame("Frame");
+local cdAcc = 0;
+cdFrame:SetScript("OnUpdate", function()
+	cdAcc = cdAcc + (arg1 or 0);
+	if ( cdAcc < 0.1 ) then return; end
+	cdAcc = 0;
+	local on = DB().cooldowns;
+	local spells = type(AZS_SPELLS) == "table" and AZS_SPELLS or {};
+	local n = table.getn(spells);
+	for i = 1, 6 do
+		local btn = getglobal("ActionButton" .. i);
+		if ( btn ) then
+			local t = cdText[i];
+			if ( not t ) then
+				t = btn:CreateFontString(nil, "OVERLAY", "NumberFontNormalLarge");
+				t:SetPoint("CENTER", btn, "CENTER", 0, 0);
+				t:SetTextColor(1, 0.82, 0);
+				cdText[i] = t;
+			end
+			local sp = (i < n) and spells[i] or nil;      -- (the last is the racial)
+			local left = sp and tonumber(sp.cd) or 0;
+			if ( on and left and left > 0.1 ) then
+				t:SetText(left >= 10 and tostring(math.floor(left + 0.5)) or string.format("%.1f", left));
+				t:Show();
+			else t:Hide(); end
+		end
+	end
+end);
 
 -- ---------------------------------------------------------------- the settings window
 local win;
@@ -425,7 +496,7 @@ local function Check(parent, label, y, get, set)
 end
 
 local function WinBuild()
-	win = K.Window("AZSMinorModsFrame", NAME, 420, 500);
+	win = K.Window("AZSMinorModsFrame", NAME, 420, 528);
 	local hero = K.Hero(win, 380);
 	hero:SetPoint("TOPLEFT", win, "TOPLEFT", 20, -30);
 	K.Icon(hero.icon, "INV_Misc_Gear_02");
@@ -443,6 +514,7 @@ local function WinBuild()
 	Row("Blink a Square over a friend who falls", function() return DB().deathMarks; end, function(v) DB().deathMarks = v; end);
 	Row("Hide the target frame", function() return DB().hideTarget; end, function(v) DB().hideTarget = v; TargetFrameHidden(v); end);
 	Row("Plain action bar: no gryphons, just the 6 squares", function() return DB().plainBar; end, function(v) DB().plainBar = v; PlainBar(v); end);
+	Row("Cooldown numbers on the spell squares", function() return DB().cooldowns; end, function(v) DB().cooldowns = v; end);
 	Row("Unlock the UI to move it (untick to lock)", function() return DB().unlocked; end, function(v) AZSMinorMods_SetUnlocked(v); end);
 	Row("Minimap button", function() local m = DB().minimap; return not (m and m.hide); end,
 	    function(v) if ( AZSMinorMods_Mini ) then local m = DB().minimap; if ( (m and m.hide and true or false) == v ) then AZSMinorMods_Mini.Toggle(); end end end);

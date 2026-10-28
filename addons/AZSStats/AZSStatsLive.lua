@@ -453,6 +453,11 @@ local function CaptureArmory()
 			tex = string.gsub(tostring(tex or ""), "^.*\\", "");
 			table.insert(a.gear, { slot = label, name = name or "?", color = color or "ffffff", id = tonumber(id) or 0, icon = tex });
 			any = true;
+			-- every piece's icon, kept for good (by its name): the launcher's Guide, Gear Planner and Transmog show them
+			if ( name and tex ~= "" ) then
+				if ( type(AZSStatsDB.icons) ~= "table" ) then AZSStatsDB.icons = {}; end
+				AZSStatsDB.icons[name] = tex;
+			end
 		end
 	end
 	if ( type(AZS_STATS) == "table" ) then

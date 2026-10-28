@@ -388,6 +388,7 @@ namespace AzerothLauncher
         // the game's own tooltips of abilities, as AZS Stats saw them in game: spell name -> its text
         public readonly Dictionary<string, string> Tooltips = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
         public readonly List<ArmoryChar> Armory = new List<ArmoryChar>();         // each class's hero, the newest first
+        public readonly Dictionary<string, string> ItemIcons = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);   // every piece worn: name -> icon
 
         public StatBlock Class(string key)
         {
@@ -559,6 +560,8 @@ namespace AzerothLauncher
                     st.Armory.Add(ac);
                 }
             st.Armory.Sort(delegate(ArmoryChar x, ArmoryChar y) { return string.CompareOrdinal(y.Date, x.Date); });
+            var icons = LuaReader.Tab(db, "icons");
+            if (icons != null) foreach (var kv in icons) { string ic = Convert.ToString(kv.Value); if (!string.IsNullOrEmpty(ic)) st.ItemIcons[kv.Key] = ic; }
 
             // the same creature faces for the addon's own Nemesis tab (in the background)
             try
