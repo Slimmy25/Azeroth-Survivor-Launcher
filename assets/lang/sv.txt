@@ -1890,4 +1890,4 @@ Importing a save is in Change Folder ▾ in the path above.
 That folder does not exist.
 = Den mappen finns inte.
 The path at the top shows where you are, for example Guide › Classes › Priest (in the picture below). Click a step's name to go back to it. Point at a step, or its ▾, for the places beside it. The arrow on the left goes back the way you came; the X takes you home.
-= Sökvägen överst visar var du är, till exempel Guide › Klasser › Präst (på bilden nedan). Klicka på ett stegs namn för att gå tillbaka dit. Peka på ett steg, eller dess ▾, för platserna bredvid. Pilen till vänster går tillbaka samma väg som du kom; X:et tar dig hem.
+= Sökvägen överst visar var du är, till exempel Guide › Klasser › Priest (på bilden nedan). Klicka på ett stegs namn för att gå tillbaka dit. Peka på ett steg, eller dess ▾, för platserna bredvid. Pilen till vänster går tillbaka samma väg som du kom; X:et tar dig hem.

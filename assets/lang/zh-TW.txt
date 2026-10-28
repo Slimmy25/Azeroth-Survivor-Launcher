@@ -1891,4 +1891,4 @@ Importing a save is in Change Folder ▾ in the path above.
 That folder does not exist.
 = 該資料夾不存在。
 The path at the top shows where you are, for example Guide › Classes › Priest (in the picture below). Click a step's name to go back to it. Point at a step, or its ▾, for the places beside it. The arrow on the left goes back the way you came; the X takes you home.
-= 上方的路徑顯示你所在的位置，例如 指南 › 職業 › 牧師（見下圖）。點擊某一步的名稱即可回到那裡。指向某一步或它的 ▾ 可查看旁邊的位置。左邊的箭頭沿來路返回；X 帶你回到首頁。
+= 上方的路徑顯示你所在的位置，例如 指南 › 職業 › Priest（見下圖）。點擊某一步的名稱即可回到那裡。指向某一步或它的 ▾ 可查看旁邊的位置。左邊的箭頭沿來路返回；X 帶你回到首頁。
