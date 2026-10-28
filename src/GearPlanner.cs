@@ -44,6 +44,15 @@ namespace AzerothLauncher
             plannerClass = cls;
         }
 
+        // Clear every transient Gear Planner choice when the user leaves it, including jewelry, stars and the selected slot.
+        void ResetPlannerState()
+        {
+            plannerSlots.Clear();
+            plannerClass = null;
+            GearSheet.ResetView();
+            PlannerTotals = null;
+        }
+
         // the gear's real icons (assets\item-icons.txt); a piece that is not a real item shows "Image soon"
         Dictionary<string, string> GearIcons() { return Items.GearIcons; }
 
