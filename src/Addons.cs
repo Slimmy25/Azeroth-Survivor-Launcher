@@ -50,8 +50,9 @@ namespace AzerothLauncher
 
         public static readonly Conflict[] Conflicts =
         {
-            // two run-statistics addons: AZS Stats (the launcher's STATS page reads it) is kept
-            new Conflict { Preferred = new[] { "AZSStats" }, Other = new[] { "AzerothStats" },
+            // two run-statistics addons that don't need to be on together. Maidenhead's Azeroth Stats always has the right
+            // of way: when both are found on, AZS Stats is the one switched off (Slimjim, 2026-10-28)
+            new Conflict { Preferred = new[] { "AzerothStats" }, Other = new[] { "AZSStats" },
                            Why = "both record your runs and statistics" },
             new Conflict { Preferred = new[] { "SurvivorUI", "SurvivorsUI" }, Other = new[] { "AZSMinorMods" },
                            Why = "both set raid marks on bosses and party members" },

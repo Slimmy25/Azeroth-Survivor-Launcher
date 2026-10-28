@@ -78,10 +78,10 @@
   left corner in the right column, so both columns lean in towards the middle.
 
 ### Addons
-- AZS Stats and Azeroth Stats can't be on together (both record your runs): AZS Stats is kept, as the STATS page
-  reads it.
-- Fix: installing AZS Stats no longer removes Azeroth Stats or moves its saved data (an old name of AZS Stats was
-  "Azeroth Stats", and the launcher took Maidenhead's addon for it).
+- Maidenhead's Azeroth Stats and AZS Stats can't be on together (both record your runs). Maidenhead's addon has the
+  right of way: when both are found on, AZS Stats is switched off.
+- Fix: the launcher never takes Maidenhead's Azeroth Stats for anything of its own: installing or updating AZS Stats
+  leaves its folder and saved data alone.
 
 ### AZS Stats
 - Every run keeps its Heroic affixes (from the game's 0.124.0); a run's summary on the STATS page lists them.

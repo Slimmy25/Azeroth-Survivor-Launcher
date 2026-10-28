@@ -401,10 +401,8 @@ namespace AzerothLauncher
         public const string FileName = AddonFolder + ".lua";
         public const string FacesFile = AddonFolder + "Faces.lua";
         static readonly string[] AddonFiles = { AddonFolder + ".toc", AddonFolder + ".lua", AddonFolder + "Live.lua", AddonFolder + "Icons.lua", AddonFolder + "UI.lua", AddonFolder + "Bounty.lua" };
-        // its earlier names ("AS Time Tracker", "Azeroth Stats"): replaced, and their records carried over, when
-        // AZS Stats is installed; until then their files are read
-        // ("Azeroth Stats" was one too, but that name is now Maidenhead's own addon in Download More: it is never taken for
-        // an old AZS Stats, never replaced, and its saved data is never read or moved)
+        // its earlier name ("AS Time Tracker"): replaced, and its records carried over, when AZS Stats is installed;
+        // until then its file is read. Any other addon's folders and saved data are never touched.
         static readonly string[][] OldNames = { new[] { "ASTimeTracker", "ASTimeTrackerDB" } };
 
         // the newest AZSStats.lua (else an earlier version's file) in the addon settings folder
@@ -815,7 +813,7 @@ namespace AzerothLauncher
             return null;
         }
 
-        // installed, but not the version built into this launcher (or still the old "Azeroth Stats")
+        // installed, but not the version built into this launcher (or still the old "AS Time Tracker")
         public static bool AddonOutdated(string addonsDir)
         {
             string dir = AddonPath(addonsDir);
@@ -866,7 +864,7 @@ namespace AzerothLauncher
             foreach (string o in olds) Util.DeleteTreeQuiet(o);
         }
 
-        // ASTimeTracker.lua / AzerothStats.lua -> AZSStats.lua next to it (the variable renamed), where there is none
+        // ASTimeTracker.lua -> AZSStats.lua next to it (the variable renamed), where there is none
         // yet; the newest name first
         static void MoveOldRecords(string savedDir)
         {

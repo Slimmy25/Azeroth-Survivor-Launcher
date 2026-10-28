@@ -6,7 +6,7 @@
 // being picked (a profile picked for the first time starts from the current ones). Nothing is ever lost: what is
 // replaced was stored first.
 // Never copied or replaced: the AddOns folder (the profile's switches do that), Logs, the save game, the launcher's
-// own folder and the run histories (AZS Stats, Azeroth Stats), which stay shared so no run is lost or split.
+// own folder and the run histories (AZS Stats, and Maidenhead's Azeroth Stats), which stay shared so no run is lost or split.
 // Copies live in the launcher's folder ("Addon Profiles"), only on this PC; cloud saves are never touched (the next
 // sync simply uploads whatever addon settings are in place, as always).
 using System;

@@ -1,5 +1,5 @@
 -- AZS Stats: keeps a record of every Azeroth Survivors run, your play time, who kills you and who you play with.
--- (It replaces "AS Time Tracker" and "Azeroth Stats"; the launcher carries their records over.)
+-- (It replaces "AS Time Tracker"; the launcher carries its records over.)
 --
 -- When a run ends (the hero fell, won or left), the game sends the run's results as the AZSEND addon
 -- message (the same table AZS_GetRunSummary() returns). This addon adds each run to:
