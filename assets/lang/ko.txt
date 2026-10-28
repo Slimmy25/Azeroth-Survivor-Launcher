@@ -1910,3 +1910,7 @@ Its version, what's new and who made it.
 = 버전, 새로운 점, 만든 사람.
 The first-time setup's steps again, with your settings as they are.
 = 첫 설정 단계를 다시, 설정은 그대로.
+An in-game helper (/fieldkit): elite-only nameplates, boss frames with their debuffs, a health bar with your shield, buffs and a low-health warning, crits, stats, gold and chest prices, a damage meter, chests and lairs on the minimap, and the camera.
+= 게임 안 도우미(/fieldkit): 정예 전용 이름표, 약화 효과가 표시되는 보스 프레임, 보호막이 보이는 생명력 바, 버프와 생명력 부족 경고, 치명타, 능력치, 골드와 상자 가격, 피해 측정기, 미니맵의 상자와 소굴, 그리고 카메라.
+Your run history and build statistics, kept in game: run reports and comparisons, and a HUD you set up yourself with up to eight numbers.
+= 게임 안에 남는 런 기록과 빌드 통계: 런 보고서와 비교, 그리고 숫자를 최대 8개까지 직접 설정하는 HUD.

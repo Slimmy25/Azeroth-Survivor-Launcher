@@ -1910,3 +1910,7 @@ Its version, what's new and who made it.
 = Versiunea, noutățile și cine l-a făcut.
 The first-time setup's steps again, with your settings as they are.
 = Pașii primei configurări din nou, cu setările tale așa cum sunt.
+An in-game helper (/fieldkit): elite-only nameplates, boss frames with their debuffs, a health bar with your shield, buffs and a low-health warning, crits, stats, gold and chest prices, a damage meter, chests and lairs on the minimap, and the camera.
+= Un ajutor în joc (/fieldkit): plăcuțe de nume doar pentru elite, cadre de boss cu slăbirile lor, bară de viață cu scutul tău, buff-uri și avertizare la viață scăzută, lovituri critice, statistici, aur și prețurile cuferelor, contor de daune, cufere și vizuini pe minihartă, și camera.
+Your run history and build statistics, kept in game: run reports and comparisons, and a HUD you set up yourself with up to eight numbers.
+= Istoricul rundelor tale și statistici de build în joc: rapoarte și comparații ale rundelor, și un HUD pe care îl configurezi singur cu până la opt numere.

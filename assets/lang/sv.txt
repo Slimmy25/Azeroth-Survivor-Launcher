@@ -1909,3 +1909,7 @@ Its version, what's new and who made it.
 = Version, nyheter och vem som gjorde den.
 The first-time setup's steps again, with your settings as they are.
 = Förstagångsinställningens steg igen, med dina inställningar som de är.
+An in-game helper (/fieldkit): elite-only nameplates, boss frames with their debuffs, a health bar with your shield, buffs and a low-health warning, crits, stats, gold and chest prices, a damage meter, chests and lairs on the minimap, and the camera.
+= En hjälpreda i spelet (/fieldkit): namnskyltar bara för eliter, bossramar med deras debuffs, en hälsomätare med din sköld, buffs och varning vid låg hälsa, kritiska träffar, statistik, guld och kistpriser, en skademätare, kistor och lyor på minikartan samt kameran.
+Your run history and build statistics, kept in game: run reports and comparisons, and a HUD you set up yourself with up to eight numbers.
+= Din körningshistorik och build-statistik i spelet: körningsrapporter och jämförelser, och en HUD du ställer in själv med upp till åtta siffror.

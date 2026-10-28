@@ -1910,3 +1910,7 @@ Its version, what's new and who made it.
 = バージョン、新機能、作った人。
 The first-time setup's steps again, with your settings as they are.
 = 初回セットアップの手順をもう一度（設定はそのまま）。
+An in-game helper (/fieldkit): elite-only nameplates, boss frames with their debuffs, a health bar with your shield, buffs and a low-health warning, crits, stats, gold and chest prices, a damage meter, chests and lairs on the minimap, and the camera.
+= ゲーム内ヘルパー（/fieldkit）：エリートだけのネームプレート、デバフ付きのボスフレーム、シールド付きの体力バー、バフと低体力警告、クリティカル、ステータス、ゴールドと宝箱の価格、ダメージメーター、ミニマップ上の宝箱と巣、そしてカメラ。
+Your run history and build statistics, kept in game: run reports and comparisons, and a HUD you set up yourself with up to eight numbers.
+= ゲーム内に残るラン履歴とビルド統計：ランのレポートと比較、そして最大8つの数値を自分で設定できるHUD。

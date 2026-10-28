@@ -1909,3 +1909,7 @@ Its version, what's new and who made it.
 = Sen versio, uutuudet ja tekijät.
 The first-time setup's steps again, with your settings as they are.
 = Ensiasetuksen vaiheet uudelleen, asetuksesi sellaisinaan.
+An in-game helper (/fieldkit): elite-only nameplates, boss frames with their debuffs, a health bar with your shield, buffs and a low-health warning, crits, stats, gold and chest prices, a damage meter, chests and lairs on the minimap, and the camera.
+= Pelinsisäinen apuri (/fieldkit): nimikyltit vain eliiteille, pomojen kehykset heikennyksineen, elämäpalkki kilpesi kanssa, buffit ja varoitus vähäisestä elämästä, kriittiset osumat, tilastot, kulta ja arkkujen hinnat, vahinkomittari, arkut ja luolat minikartalla sekä kamera.
+Your run history and build statistics, kept in game: run reports and comparisons, and a HUD you set up yourself with up to eight numbers.
+= Juoksuhistoriasi ja buildien tilastot pelissä: juoksuraportit ja vertailut sekä itse säädettävä HUD, jossa on enintään kahdeksan lukua.

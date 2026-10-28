@@ -1910,3 +1910,7 @@ Its version, what's new and who made it.
 = Phiên bản, điểm mới và người làm ra nó.
 The first-time setup's steps again, with your settings as they are.
 = Các bước thiết lập lần đầu một lần nữa, giữ nguyên cài đặt của bạn.
+An in-game helper (/fieldkit): elite-only nameplates, boss frames with their debuffs, a health bar with your shield, buffs and a low-health warning, crits, stats, gold and chest prices, a damage meter, chests and lairs on the minimap, and the camera.
+= Trợ thủ trong game (/fieldkit): bảng tên chỉ cho quái tinh anh, khung trùm kèm hiệu ứng suy yếu, thanh máu có khiên của bạn, buff và cảnh báo máu thấp, chí mạng, chỉ số, vàng và giá rương, đồng hồ sát thương, rương và hang ổ trên bản đồ nhỏ, và camera.
+Your run history and build statistics, kept in game: run reports and comparisons, and a HUD you set up yourself with up to eight numbers.
+= Lịch sử lượt chơi và thống kê build ngay trong game: báo cáo và so sánh các lượt, và một HUD bạn tự thiết lập với tối đa tám con số.

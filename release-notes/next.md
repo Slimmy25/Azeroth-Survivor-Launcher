@@ -25,7 +25,14 @@
   button for every rarity's set (they empty the planner first, as in the launcher), and the chosen piece's name above
   the list of pieces.
 
+### Gear Planner (layout)
+- The T1–T5 tier numbers sit on the inner side of each piece: by the top right corner in the left column and by the top
+  left corner in the right column, so both columns lean in towards the middle.
+
 ### Addons
+- Download More: two new addons by Maidenhead, Azeroth FieldKit (an in-game helper: elite nameplates, boss frames,
+  a damage meter, chests and lairs on the minimap and more) and Azeroth Stats (run history, run reports and a HUD
+  you set up yourself).
 - Addons update themselves: when an installed Download More addon has a newer copy on GitHub, the launcher updates it
   right away, without asking (at start, and when the game closes). Never while the game is running; the log lists
   each one.

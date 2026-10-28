@@ -1910,3 +1910,7 @@ Its version, what's new and who made it.
 = Sürümü, yenilikler ve onu yapanlar.
 The first-time setup's steps again, with your settings as they are.
 = İlk kurulumun adımları yeniden, ayarların olduğu gibi.
+An in-game helper (/fieldkit): elite-only nameplates, boss frames with their debuffs, a health bar with your shield, buffs and a low-health warning, crits, stats, gold and chest prices, a damage meter, chests and lairs on the minimap, and the camera.
+= Oyun içi yardımcı (/fieldkit): yalnızca elitler için isim plakaları, zayıflatmalarıyla boss çerçeveleri, kalkanını gösteren can çubuğu, güçlendirmeler ve düşük can uyarısı, kritikler, istatistikler, altın ve sandık fiyatları, hasar ölçer, mini haritada sandıklar ve inler, ve kamera.
+Your run history and build statistics, kept in game: run reports and comparisons, and a HUD you set up yourself with up to eight numbers.
+= Oyun içinde koşu geçmişin ve build istatistiklerin: koşu raporları ve karşılaştırmalar, ve en fazla sekiz sayıyla kendin kurduğun bir HUD.

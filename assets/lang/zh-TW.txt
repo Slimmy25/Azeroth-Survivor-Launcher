@@ -1910,3 +1910,7 @@ Its version, what's new and who made it.
 = 它的版本、更新內容和製作者。
 The first-time setup's steps again, with your settings as they are.
 = 再走一遍首次設定的步驟，你的設定保持不變。
+An in-game helper (/fieldkit): elite-only nameplates, boss frames with their debuffs, a health bar with your shield, buffs and a low-health warning, crits, stats, gold and chest prices, a damage meter, chests and lairs on the minimap, and the camera.
+= 遊戲內助手（/fieldkit）：只顯示菁英的名牌、帶減益效果的首領框架、顯示護盾的生命條、增益和低生命警告、致命一擊、屬性、金幣和寶箱價格、傷害統計、小地圖上的寶箱和巢穴，以及鏡頭。
+Your run history and build statistics, kept in game: run reports and comparisons, and a HUD you set up yourself with up to eight numbers.
+= 遊戲內保存的對局紀錄和配裝統計：對局報告與比較，以及可自行設定、最多八個數字的HUD。

@@ -1910,3 +1910,7 @@ Its version, what's new and who made it.
 = इसका संस्करण, नया क्या है और इसे किसने बनाया।
 The first-time setup's steps again, with your settings as they are.
 = पहली बार के सेटअप के चरण फिर से, आपकी सेटिंग्स जैसी हैं वैसी।
+An in-game helper (/fieldkit): elite-only nameplates, boss frames with their debuffs, a health bar with your shield, buffs and a low-health warning, crits, stats, gold and chest prices, a damage meter, chests and lairs on the minimap, and the camera.
+= खेल के अंदर एक सहायक (/fieldkit): सिर्फ़ एलीट के लिए नेमप्लेट, बॉस फ़्रेम उनके डीबफ़ के साथ, आपकी ढाल के साथ हेल्थ बार, बफ़ और कम हेल्थ की चेतावनी, क्रिट, आँकड़े, सोना और संदूक की कीमतें, डैमेज मीटर, मिनीमैप पर संदूक और मांदें, और कैमरा।
+Your run history and build statistics, kept in game: run reports and comparisons, and a HUD you set up yourself with up to eight numbers.
+= खेल के अंदर आपके रन का इतिहास और बिल्ड के आँकड़े: रन रिपोर्ट और तुलना, और एक HUD जिसे आप खुद आठ तक संख्याओं के साथ सेट करते हैं।

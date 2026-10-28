@@ -550,10 +550,11 @@ namespace AzerothLauncher
                 }
                 using (var p = new Pen(RarityColor(RarityOf(o)), 2f)) g.DrawRectangle(p, r);
                 int st = o is GearPiece ? StarsOf(slot) : 0;
-                if (st > 0)                                   // its stars: T1 to T5 just outside the box, by its top right corner
-                {
-                    string n = "T" + st;
-                    using (var b = new SolidBrush(Gold)) g.DrawString(n, fTier, b, r.Right + 1, r.Y - 2);
+                if (st > 0)                                   // its stars: T1 to T5 just outside the box, on its inner side
+                {                                             // (left column: by the top right corner; right column: top left),
+                    string n = "T" + st;                      // so both columns lean in towards the stats in the middle
+                    float x = r.X + r.Width / 2 < ClientSize.Width / 2 ? r.Right + 1 : r.X - 1 - g.MeasureString(n, fTier).Width;
+                    using (var b = new SolidBrush(Gold)) g.DrawString(n, fTier, b, x, r.Y - 2);
                 }
             }
             else

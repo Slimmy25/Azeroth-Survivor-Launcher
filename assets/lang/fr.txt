@@ -1909,3 +1909,7 @@ Its version, what's new and who made it.
 = Sa version, les nouveautés et qui l’a fait.
 The first-time setup's steps again, with your settings as they are.
 = Les étapes de la première configuration à nouveau, avec vos réglages tels quels.
+An in-game helper (/fieldkit): elite-only nameplates, boss frames with their debuffs, a health bar with your shield, buffs and a low-health warning, crits, stats, gold and chest prices, a damage meter, chests and lairs on the minimap, and the camera.
+= Un assistant en jeu (/fieldkit) : plaques de nom pour les élites seulement, cadres de boss avec leurs affaiblissements, barre de vie avec votre bouclier, améliorations et alerte de vie basse, critiques, statistiques, or et prix des coffres, compteur de dégâts, coffres et repaires sur la minicarte, et la caméra.
+Your run history and build statistics, kept in game: run reports and comparisons, and a HUD you set up yourself with up to eight numbers.
+= Votre historique de parties et vos statistiques de builds en jeu : rapports et comparaisons de parties, et un HUD que vous réglez vous-même avec jusqu'à huit chiffres.

@@ -1909,3 +1909,7 @@ Its version, what's new and who made it.
 = Versinya, yang baru, dan siapa pembuatnya.
 The first-time setup's steps again, with your settings as they are.
 = Langkah-langkah penyiapan awal lagi, dengan pengaturanmu seperti adanya.
+An in-game helper (/fieldkit): elite-only nameplates, boss frames with their debuffs, a health bar with your shield, buffs and a low-health warning, crits, stats, gold and chest prices, a damage meter, chests and lairs on the minimap, and the camera.
+= Pembantu di dalam game (/fieldkit): papan nama khusus elite, bingkai bos dengan debuff-nya, bar darah dengan perisaimu, buff dan peringatan darah rendah, kritikal, statistik, emas dan harga peti, pengukur damage, peti dan sarang di minimap, serta kamera.
+Your run history and build statistics, kept in game: run reports and comparisons, and a HUD you set up yourself with up to eight numbers.
+= Riwayat run dan statistik build kamu di dalam game: laporan dan perbandingan run, dan HUD yang kamu atur sendiri dengan hingga delapan angka.

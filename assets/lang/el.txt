@@ -1910,3 +1910,7 @@ Its version, what's new and who made it.
 = Η έκδοσή του, τι νέο υπάρχει και ποιος το έφτιαξε.
 The first-time setup's steps again, with your settings as they are.
 = Τα βήματα της πρώτης ρύθμισης ξανά, με τις ρυθμίσεις σου όπως είναι.
+An in-game helper (/fieldkit): elite-only nameplates, boss frames with their debuffs, a health bar with your shield, buffs and a low-health warning, crits, stats, gold and chest prices, a damage meter, chests and lairs on the minimap, and the camera.
+= Ένας βοηθός μέσα στο παιχνίδι (/fieldkit): πινακίδες ονομάτων μόνο για elite, πλαίσια boss με τις αδυναμίες τους, μπάρα ζωής με την ασπίδα σου, buffs και προειδοποίηση χαμηλής ζωής, κρίσιμα χτυπήματα, στατιστικά, χρυσός και τιμές σεντουκιών, μετρητής ζημιάς, σεντούκια και φωλιές στον μικροχάρτη και η κάμερα.
+Your run history and build statistics, kept in game: run reports and comparisons, and a HUD you set up yourself with up to eight numbers.
+= Το ιστορικό των runs σου και στατιστικά build μέσα στο παιχνίδι: αναφορές και συγκρίσεις runs, και ένα HUD που στήνεις μόνος σου με έως οκτώ αριθμούς.

@@ -1910,3 +1910,7 @@ Its version, what's new and who made it.
 = Jeho verze, novinky a kdo ho vytvořil.
 The first-time setup's steps again, with your settings as they are.
 = Kroky prvního nastavení znovu, s nastavením, jak je máte.
+An in-game helper (/fieldkit): elite-only nameplates, boss frames with their debuffs, a health bar with your shield, buffs and a low-health warning, crits, stats, gold and chest prices, a damage meter, chests and lairs on the minimap, and the camera.
+= Pomocník ve hře (/fieldkit): jmenovky jen pro elity, rámečky bossů s jejich oslabeními, ukazatel zdraví se štítem, buffy a varování při nízkém zdraví, kritické zásahy, statistiky, zlato a ceny truhel, měřič poškození, truhly a doupata na minimapě a kamera.
+Your run history and build statistics, kept in game: run reports and comparisons, and a HUD you set up yourself with up to eight numbers.
+= Historie tvých běhů a statistiky sestav přímo ve hře: zprávy o bězích a jejich porovnání a HUD, který si nastavíš sám, až s osmi čísly.
