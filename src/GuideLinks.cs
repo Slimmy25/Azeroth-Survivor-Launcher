@@ -163,6 +163,18 @@ namespace AzerothLauncher
                     if (links.TryGetValue(tal.Name, out tl)) tl.Class = tal.Class;
                 }
             }
+            // every Transmog look: how to earn it; a real item's hover also shows its 3D model picture (Wowhead's model viewer)
+            int tmTopic = topics.FindIndex(delegate(GuideTopic g) { return g.Title == "Transmog"; });
+            try
+            {
+                foreach (var look in Transmog.All)
+                {
+                    string pageName = look.Kind == "appearance" ? "Appearances" : look.Kind == "tabard" ? "Tabards" : "Weapon Glows";
+                    int tp = tmTopic < 0 ? -1 : topics[tmTopic].Pages.FindIndex(delegate(GuidePage g) { return g.Title == pageName; });
+                    Add(look.Name, tmTopic, tp, look.How);
+                }
+            }
+            catch (Exception) { }
             // the theorycrafting tools: a click opens them (-2 the Talent Tree Builder, -3 the Gear Planner)
             Add("Talent Tree Builder", -2, -1, "Pick a class and try out a build of up to 51 points on its three talent trees.");
             Add("Gear Planner", -3, -1, "Put gear and jewelry on a character sheet like the game's and see what they add.");
@@ -382,7 +394,7 @@ namespace AzerothLauncher
             over = l;
             Cursor = Clickable(l) ? Cursors.Hand : Cursors.Default;
             Invalidate();
-            if (l != null && l.Tip.Length > 0) GuideHover.Show(this, l.Term, l.Tip);
+            if (l != null && l.Tip.Length > 0) GuideHover.Show(this, l.Term, l.Tip, null, SpellIcons.HasItemModel(l.Term) ? l.Term : null);
             else GuideHover.Hide();
         }
 
@@ -452,7 +464,8 @@ namespace AzerothLauncher
             return (int)Math.Ceiling(y) + lineH;
         }
         Image icon;                                           // the spell's or talent's icon, beside its name
-        const int W = 300;
+        string model;                                         // a real item's name: its model picture under the text
+        const int W = 300, ModelH = 230;
 
         GuideHover()
         {
@@ -478,10 +491,15 @@ namespace AzerothLauncher
 
         public static void Show(Control owner, string title, string body) { Show(owner, title, body, null); }
 
-        public static void Show(Control owner, string title, string body, Image icon)
+        public static void Show(Control owner, string title, string body, Image icon) { Show(owner, title, body, icon, null); }
+
+        // model: a real item's name (assets\item-models.txt): its 3D model picture from Wowhead's model viewer is shown
+        // under the text (it loads the first time, then comes from the cache)
+        public static void Show(Control owner, string title, string body, Image icon, string model)
         {
             if (box == null || box.IsDisposed) box = new GuideHover();
             box.icon = icon;
+            box.model = model;
             box.title = title;
             body = GearEffect.Apply(title, body);              // the Gear Planner's set, when there is one
             box.body = body;
@@ -491,7 +509,7 @@ namespace AzerothLauncher
             int bh;
             using (var mg = Graphics.FromImage(measure)) bh = box.Flow(mg, bf, false);
             Point p = Cursor.Position;
-            var size = new Size(W, th + bh + 22);
+            var size = new Size(W, th + bh + 22 + (model != null ? ModelH + 8 : 0));
             Rectangle screen = Screen.FromPoint(p).WorkingArea;
             int x = Math.Min(p.X + 16, screen.Right - size.Width - 4), y = p.Y + 20;
             if (y + size.Height > screen.Bottom) y = p.Y - size.Height - 8;
@@ -525,6 +543,21 @@ namespace AzerothLauncher
             g.TranslateTransform(10, 10 + th);
             Flow(g, bf, true);
             g.Restore(st);
+            if (model != null)
+            {
+                var r = new Rectangle(10, Height - ModelH - 10, W - 20, ModelH);
+                using (var b = new SolidBrush(Theme.Hex("#0b0910"))) g.FillRectangle(b, r);
+                Image pic = SpellIcons.ItemModel(model, this);
+                if (pic != null)
+                {
+                    float k = Math.Min((float)r.Width / pic.Width, (float)r.Height / pic.Height);
+                    int w = (int)(pic.Width * k), h = (int)(pic.Height * k);
+                    g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                    g.DrawImage(pic, new Rectangle(r.X + (r.Width - w) / 2, r.Y + (r.Height - h) / 2, w, h));
+                }
+                else TextRenderer.DrawText(g, Lang.T("Loading the 3D model…"), Theme.F(9), r, Theme.GoldDim, TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
+                using (var p = new Pen(Theme.Hex("#8a7040"), 1)) g.DrawRectangle(p, r);
+            }
         }
     }
 }

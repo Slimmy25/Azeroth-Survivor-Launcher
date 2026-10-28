@@ -1,7 +1,7 @@
 Transmog: the looks of Azeroth Survivors, entered by hand from the game's own Armory (0.123.0): Appearances, Tabards
 and weapon glows. They add nothing to a hero's numbers. One look per line:
   kind | slot | name | how it is earned | icon (the game's icon name, when known; empty until it is)
-kind: appearance, tabard, glow. An icon left empty is learned in game by AZS Stats when a hero wears the look.
+kind: appearance, tabard, glow. An icon is left empty until it is known. A look that is a real item shows its 3D model on mouseover (item-models.txt).
 Lines starting with # and everything above the first === line are ignored.
 ===
 # Appearances (any class; each comes with an achievement)
