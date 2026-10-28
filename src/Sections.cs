@@ -1989,8 +1989,8 @@ namespace AzerothLauncher
         // the game's preferences move to another profile: the current ones are stored under the profile being left,
         // then the picked profile's own come back (first time: it starts from the current ones). False on a failure.
         // Each of the three (No profile, Profile 1, Profile 2) is a complete state of its own: which addons are on or off,
-        // and the game's preferences (its options and graphics, key bindings, chat, camera, layout and every addon's saved
-        // settings, AddonProfiles.cs). Leaving one stores both as they are now under it; the one picked gets its own back.
+        // and the interface (where its frames sit, chat and every addon's saved settings; not graphics or key bindings,
+        // AddonProfiles.cs). Leaving one stores both as they are now under it; the one picked gets its own back.
         // A choice picked for the first time starts from the current state. So going back and forth between any of the
         // three always lands where that one was left.
         bool SwitchAddonPreferences(string to)

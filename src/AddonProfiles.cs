@@ -1,5 +1,6 @@
-// Addon profiles' own game preferences. Profile 1 and Profile 2 each keep a copy of the game's preferences (the
-// benilla-config folder: options, key bindings, chat windows, camera, layout and the addons' saved settings), so a
+// Addon profiles' own interface. Profile 1 and Profile 2 each keep a copy of the interface's state (from the
+// benilla-config folder: where frames sit, chat windows and the addons' saved settings; never the game's options such
+// as graphics, nor key bindings, which stay shared), so a
 // heavy UI addon can change them without leaving them set in a way that makes the next UI addon look wrong. "No
 // profile" (the default, recommended) keeps the game's own shared preferences: while it is in use, nothing is copied.
 // Switching stores the current preferences under the profile being left, then puts back the ones of the profile
@@ -48,6 +49,9 @@ namespace AzerothLauncher
             if (top.Equals("AddOns", StringComparison.OrdinalIgnoreCase) || top.Equals("Logs", StringComparison.OrdinalIgnoreCase)) return true;
             if (Under(file, ss.AddonsDir) || Under(file, ss.SaveDir) || Under(file, Util.DataDir)) return true;
             string name = Path.GetFileName(file);
+            // the game's own options (config.toml: graphics, sound, display and the like) and key bindings stay shared by
+            // every profile: a profile is only about the interface (where its frames sit, chat, every addon's settings)
+            if (name.Equals("config.toml", StringComparison.OrdinalIgnoreCase) || name.IndexOf("bind", StringComparison.OrdinalIgnoreCase) >= 0) return true;
             return name.StartsWith("AZSStats", StringComparison.OrdinalIgnoreCase) || name.StartsWith("AzerothStats", StringComparison.OrdinalIgnoreCase);
         }
 
