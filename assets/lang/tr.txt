@@ -1891,4 +1891,4 @@ Importing a save is in Change Folder ▾ in the path above.
 That folder does not exist.
 = Bu klasör yok.
 The path at the top shows where you are, for example Guide › Classes › Priest (in the picture below). Click a step's name to go back to it. Point at a step, or its ▾, for the places beside it. The arrow on the left goes back the way you came; the X takes you home.
-= Üstteki yol nerede olduğunu gösterir, örneğin Rehber › Sınıflar › Rahip (aşağıdaki resimde). Bir adıma dönmek için adının üzerine tıkla. Yanındaki yerler için bir adımın ya da ▾ işaretinin üzerine gel. Soldaki ok geldiğin yoldan geri götürür; X seni ana sayfaya götürür.
+= Üstteki yol nerede olduğunu gösterir, örneğin Rehber › Sınıflar › Priest (aşağıdaki resimde). Bir adıma dönmek için adının üzerine tıkla. Yanındaki yerler için bir adımın ya da ▾ işaretinin üzerine gel. Soldaki ok geldiğin yoldan geri götürür; X seni ana sayfaya götürür.

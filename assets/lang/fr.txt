@@ -1890,4 +1890,4 @@ Importing a save is in Change Folder ▾ in the path above.
 That folder does not exist.
 = Ce dossier n’existe pas.
 The path at the top shows where you are, for example Guide › Classes › Priest (in the picture below). Click a step's name to go back to it. Point at a step, or its ▾, for the places beside it. The arrow on the left goes back the way you came; the X takes you home.
-= Le chemin en haut montre où vous êtes, par exemple Guide › Classes › Prêtre (sur l’image ci-dessous). Cliquez sur le nom d’une étape pour y revenir. Pointez une étape, ou son ▾, pour les endroits voisins. La flèche à gauche revient par où vous êtes venu ; le X vous ramène à l’accueil.
+= Le chemin en haut montre où vous êtes, par exemple Guide › Classes › Priest (sur l’image ci-dessous). Cliquez sur le nom d’une étape pour y revenir. Pointez une étape, ou son ▾, pour les endroits voisins. La flèche à gauche revient par où vous êtes venu ; le X vous ramène à l’accueil.

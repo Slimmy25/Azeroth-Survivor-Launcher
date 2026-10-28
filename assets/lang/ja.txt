@@ -1891,4 +1891,4 @@ Importing a save is in Change Folder ▾ in the path above.
 That folder does not exist.
 = そのフォルダーは存在しません。
 The path at the top shows where you are, for example Guide › Classes › Priest (in the picture below). Click a step's name to go back to it. Point at a step, or its ▾, for the places beside it. The arrow on the left goes back the way you came; the X takes you home.
-= 上のパスは今いる場所を示します。例：ガイド › クラス › プリースト（下の画像）。ステップの名前をクリックするとそこへ戻ります。ステップやその ▾ にポインターを合わせると、隣の場所が表示されます。左の矢印は来た道を戻り、X はホームへ戻ります。
+= 上のパスは今いる場所を示します。例：ガイド › クラス › Priest（下の画像）。ステップの名前をクリックするとそこへ戻ります。ステップやその ▾ にポインターを合わせると、隣の場所が表示されます。左の矢印は来た道を戻り、X はホームへ戻ります。
