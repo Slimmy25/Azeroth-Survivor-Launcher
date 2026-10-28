@@ -1,7 +1,7 @@
 # Reads a CMaNGOS / VMaNGOS world database dump (item_template) and prints "Name|item id|display id" for every item
 # whose name is in the given name files (lines "kind | slot | name | ..." or plain names): the lowest entry with that
 # name. Used by .github/workflows/item-models.yml for the Transmog looks' Wowhead model pictures.
-# Usage: python3 item_models.py transmog.txt [more files] < world.sql
+# Usage: python3 item_models.py transmog.txt [more files, or plain lists of names] < world.sql
 import re, sys
 
 def rows(sql):
@@ -32,8 +32,9 @@ def rows(sql):
 
 wanted = set()
 for path in sys.argv[1:]:
-    on = False
-    for line in open(path, encoding="utf-8-sig"):
+    text = open(path, encoding="utf-8-sig").read()
+    on = "===" not in text                     # a plain list of names: every line
+    for line in text.splitlines():
         line = line.strip()
         if line == "===": on = True; continue
         if not on or not line or line.startswith("#"): continue
