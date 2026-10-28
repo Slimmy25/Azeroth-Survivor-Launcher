@@ -1934,3 +1934,9 @@ No profile in use: the game's preferences are shared again.
 = Без профиля: настройки игры снова общие.
 Love the game? Support the Dev by buying him a coffee
 = Нравится игра? Поддержите разработчика — угостите его кофе
+Join the community!
+= Присоединяйтесь к сообществу!
+ADVANCED SETTINGS
+= РАСШИРЕННЫЕ НАСТРОЙКИ
+BASIC SETTINGS
+= ОСНОВНЫЕ НАСТРОЙКИ

@@ -1934,3 +1934,9 @@ No profile in use: the game's preferences are shared again.
 = プロファイルなし：ゲーム設定は再び共通になりました。
 Love the game? Support the Dev by buying him a coffee
 = ゲームが好き？コーヒーをおごって開発者を応援しよう
+Join the community!
+= コミュニティに参加しよう！
+ADVANCED SETTINGS
+= 詳細設定
+BASIC SETTINGS
+= 基本設定

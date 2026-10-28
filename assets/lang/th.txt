@@ -1934,3 +1934,9 @@ No profile in use: the game's preferences are shared again.
 = ไม่ใช้โปรไฟล์: การตั้งค่าเกมกลับมาใช้ร่วมกันแล้ว
 Love the game? Support the Dev by buying him a coffee
 = ชอบเกมนี้ไหม? สนับสนุนผู้พัฒนาด้วยการเลี้ยงกาแฟเขาสักแก้ว
+Join the community!
+= มาร่วมชุมชนกัน!
+ADVANCED SETTINGS
+= การตั้งค่าขั้นสูง
+BASIC SETTINGS
+= การตั้งค่าพื้นฐาน

@@ -1934,3 +1934,9 @@ No profile in use: the game's preferences are shared again.
 = 无配置：游戏设置重新共用。
 Love the game? Support the Dev by buying him a coffee
 = 喜欢这款游戏吗？请开发者喝杯咖啡来支持他
+Join the community!
+= 加入社区！
+ADVANCED SETTINGS
+= 高级设置
+BASIC SETTINGS
+= 基本设置

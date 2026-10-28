@@ -1933,3 +1933,9 @@ No profile in use: the game's preferences are shared again.
 = Tanpa profil: pengaturan game kembali dipakai bersama.
 Love the game? Support the Dev by buying him a coffee
 = Suka game-nya? Dukung developernya dengan membelikannya kopi
+Join the community!
+= Gabung ke komunitas!
+ADVANCED SETTINGS
+= PENGATURAN LANJUTAN
+BASIC SETTINGS
+= PENGATURAN DASAR

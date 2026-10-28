@@ -1933,3 +1933,9 @@ No profile in use: the game's preferences are shared again.
 = Sin perfil: las preferencias del juego vuelven a ser compartidas.
 Love the game? Support the Dev by buying him a coffee
 = ¿Te encanta el juego? Apoya al desarrollador invitándole a un café
+Join the community!
+= ¡Únete a la comunidad!
+ADVANCED SETTINGS
+= AJUSTES AVANZADOS
+BASIC SETTINGS
+= AJUSTES BÁSICOS

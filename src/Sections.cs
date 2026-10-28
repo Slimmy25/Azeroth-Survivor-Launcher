@@ -1526,7 +1526,18 @@ namespace AzerothLauncher
             string active = ActiveAddonProfile();
             // stacked upwards from the bottom of the column: Profile 2, Profile 1, then No profile (the default). Profiles 1
             // and 2 each keep their own game preferences (AddonProfiles.cs); No profile keeps the game's shared ones
-            foreach (string slot in new[] { "2", "1", "none" })
+            // Basic (the default) hides the profiles: only ADVANCED SETTINGS sits at the bottom. Advanced shows the three
+            // profile choices with BASIC SETTINGS under them to go back (Slimjim, 2026-10-28)
+            bool advanced = Cfg.Bool("addons_advanced", false);
+            py -= (int)(28 * Theme.Zoom) + 2;
+            Put(new WowButton(advanced ? "BASIC SETTINGS" : "ADVANCED SETTINGS", delegate
+            {
+                Cfg.Set("addons_advanced", !advanced);
+                Cfg.Save();
+                BuildPanel("Addons");
+            }, 190, 28, 9), cx, py);
+            py -= 8;
+            foreach (string slot in advanced ? new[] { "2", "1", "none" } : new string[0])
             {
                 string s = slot;
                 string text;

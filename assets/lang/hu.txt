@@ -1934,3 +1934,9 @@ No profile in use: the game's preferences are shared again.
 = Nincs profil: a játék beállításai ismét közösek.
 Love the game? Support the Dev by buying him a coffee
 = Szereted a játékot? Támogasd a fejlesztőt egy kávéval
+Join the community!
+= Csatlakozz a közösséghez!
+ADVANCED SETTINGS
+= SPECIÁLIS BEÁLLÍTÁSOK
+BASIC SETTINGS
+= ALAPBEÁLLÍTÁSOK

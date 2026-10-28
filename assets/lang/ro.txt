@@ -1934,3 +1934,9 @@ No profile in use: the game's preferences are shared again.
 = Fără profil: preferințele jocului sunt din nou comune.
 Love the game? Support the Dev by buying him a coffee
 = Îți place jocul? Susține dezvoltatorul cumpărându-i o cafea
+Join the community!
+= Alătură-te comunității!
+ADVANCED SETTINGS
+= SETĂRI AVANSATE
+BASIC SETTINGS
+= SETĂRI DE BAZĂ

@@ -1933,3 +1933,9 @@ No profile in use: the game's preferences are shared again.
 = Ingen profil: spelets inställningar är gemensamma igen.
 Love the game? Support the Dev by buying him a coffee
 = Älskar du spelet? Stöd utvecklaren genom att bjuda honom på en kaffe
+Join the community!
+= Gå med i gemenskapen!
+ADVANCED SETTINGS
+= AVANCERADE INSTÄLLNINGAR
+BASIC SETTINGS
+= GRUNDINSTÄLLNINGAR

@@ -1934,3 +1934,9 @@ No profile in use: the game's preferences are shared again.
 = कोई प्रोफ़ाइल नहीं: खेल की पसंद फिर से साझा है।
 Love the game? Support the Dev by buying him a coffee
 = खेल पसंद है? डेवलपर को एक कॉफ़ी पिलाकर उनका साथ दें
+Join the community!
+= समुदाय से जुड़ें!
+ADVANCED SETTINGS
+= उन्नत सेटिंग्स
+BASIC SETTINGS
+= बुनियादी सेटिंग्स

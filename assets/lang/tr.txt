@@ -1934,3 +1934,9 @@ No profile in use: the game's preferences are shared again.
 = Profil yok: oyun tercihleri yeniden ortak.
 Love the game? Support the Dev by buying him a coffee
 = Oyunu sevdin mi? Geliştiriciye bir kahve ısmarlayarak destek ol
+Join the community!
+= Topluluğa katıl!
+ADVANCED SETTINGS
+= GELİŞMİŞ AYARLAR
+BASIC SETTINGS
+= TEMEL AYARLAR

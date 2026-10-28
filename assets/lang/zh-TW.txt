@@ -1934,3 +1934,9 @@ No profile in use: the game's preferences are shared again.
 = 無設定檔：遊戲設定重新共用。
 Love the game? Support the Dev by buying him a coffee
 = 喜歡這款遊戲嗎？請開發者喝杯咖啡來支持他
+Join the community!
+= 加入社群！
+ADVANCED SETTINGS
+= 進階設定
+BASIC SETTINGS
+= 基本設定

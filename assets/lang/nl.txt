@@ -1933,3 +1933,9 @@ No profile in use: the game's preferences are shared again.
 = Geen profiel: de spelvoorkeuren zijn weer gedeeld.
 Love the game? Support the Dev by buying him a coffee
 = Vind je het spel geweldig? Steun de ontwikkelaar met een kopje koffie
+Join the community!
+= Word lid van de community!
+ADVANCED SETTINGS
+= GEAVANCEERDE INSTELLINGEN
+BASIC SETTINGS
+= BASISINSTELLINGEN

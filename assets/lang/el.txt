@@ -1934,3 +1934,9 @@ No profile in use: the game's preferences are shared again.
 = Χωρίς προφίλ: οι προτιμήσεις του παιχνιδιού είναι ξανά κοινές.
 Love the game? Support the Dev by buying him a coffee
 = Σου αρέσει το παιχνίδι; Στήριξε τον δημιουργό κερνώντας τον έναν καφέ
+Join the community!
+= Έλα στην κοινότητα!
+ADVANCED SETTINGS
+= ΣΥΝΘΕΤΕΣ ΡΥΘΜΙΣΕΙΣ
+BASIC SETTINGS
+= ΒΑΣΙΚΕΣ ΡΥΘΜΙΣΕΙΣ

@@ -127,14 +127,14 @@ namespace AzerothLauncher
             updateBtn.Visible = false;
             // the News line: Discord's own symbol (Blurple, from discord.com/branding, unaltered) left of "News", and
             // CHANGELOG at the very end of the line
-            discordIcon = new BrandIcon(Theme.LoadImage("AS.discord-blurple.png"), Theme.LoadImage("AS.discord-white.png"), DiscordUrl);   // the hover shows where it goes
+            discordIcon = new BrandIcon(Theme.LoadImage("AS.discord-blurple.png"), Theme.LoadImage("AS.discord-white.png"), Lang.T("Join the community!") + "\n" + DiscordUrl);   // the hover ends with where it goes
             discordIcon.Bounds = new Rectangle(697, 203, 26, 20);
             nav["Changelog"] = Place(new WowButton("CHANGELOG", delegate { OpenMain("Changelog"); }, 110, 22, 8), 1085 - 110, 201);
             nav["Changelog"].Skin = Retro.Button;
             discordIcon.Click += delegate { Util.OpenInShell(DiscordUrl); };
             Controls.Add(discordIcon);
             // a subtle heart left of the Discord symbol: support the game's developer (Aethus)
-            var heart = new HeartIcon(Lang.T("Love the game? Support the Dev by buying him a coffee"));
+            var heart = new HeartIcon(Lang.T("Love the game? Support the Dev by buying him a coffee") + "\n" + SupportUrl);
             heart.Bounds = new Rectangle(679, 205, 16, 16);
             heart.Click += delegate { Util.OpenInShell(SupportUrl); };
             Controls.Add(heart);

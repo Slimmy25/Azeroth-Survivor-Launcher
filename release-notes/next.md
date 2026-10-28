@@ -30,7 +30,8 @@
 - One of the two boxes is always ticked, never neither: unticking the ticked one does nothing, ticking the other
   switches to it.
 - A small heart left of the Discord symbol opens the game developer's Buy Me a Coffee page ("Love the game? Support
-  the Dev by buying him a coffee").
+  the Dev by buying him a coffee"), with the page's address at the bottom of its hover note.
+- The Discord symbol's hover note says "Join the community!", with the invite link at the bottom.
 
 ### Gear Planner (layout)
 - The explanation under the stat boxes is now a button, "How are gear stats calculated?", in the top right corner of
@@ -46,6 +47,8 @@
 - New choice above them: No profile [Recommended], the default. It keeps no copy of its own and only switches
   addons; the game's preferences stay shared. Coming back to it from a profile brings back the preferences you had.
 - A small "?" beside each of the three explains what it does.
+- The profiles are hidden by default: the Addons section shows only ADVANCED SETTINGS at the bottom of the right
+  column. It brings back all three profile choices, with BASIC SETTINGS under them to hide them again (remembered).
 - Download More: two new addons by Maidenhead, Azeroth FieldKit (an in-game helper: elite nameplates, boss frames,
   a damage meter, chests and lairs on the minimap and more) and Azeroth Stats (run history, run reports and a HUD
   you set up yourself).

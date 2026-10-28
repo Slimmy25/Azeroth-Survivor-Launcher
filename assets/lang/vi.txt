@@ -1934,3 +1934,9 @@ No profile in use: the game's preferences are shared again.
 = Không hồ sơ: tùy chỉnh game lại dùng chung.
 Love the game? Support the Dev by buying him a coffee
 = Thích game này? Ủng hộ nhà phát triển bằng một ly cà phê
+Join the community!
+= Tham gia cộng đồng!
+ADVANCED SETTINGS
+= CÀI ĐẶT NÂNG CAO
+BASIC SETTINGS
+= CÀI ĐẶT CƠ BẢN
