@@ -16,7 +16,9 @@ namespace AzerothLauncher
     public class SideHead : Control
     {
         public Action CloseClicked;
-        public Action HelpClicked;                           // the ? beside the X: how the path at the top works
+        public Action HelpClicked;                           // "Lost?" beside the X: how the path at the top works
+        bool helpShown;                                      // only on a section's other pages, never on its main page
+        public bool HelpShown { get { return helpShown; } set { if (helpShown != value) { helpShown = value; Invalidate(); } } }
         public Action BackClicked;                           // null: no back arrow
         public Form Owner2;
         bool closable = true;
@@ -65,7 +67,7 @@ namespace AzerothLauncher
         Rectangle CloseBox { get { return closable ? new Rectangle(Width - 27, 9, 18, 18) : Rectangle.Empty; } }
         // "Lost?" beside the X: for anyone not sure how to get around (its width follows the word in the language)
         int HelpW { get { return 26 + (int)TextRenderer.MeasureText(Lang.T("Lost?"), Theme.F(9, FontStyle.Bold)).Width; } }
-        Rectangle HelpBox { get { return HelpClicked != null ? new Rectangle(Width - (closable ? 32 : 9) - HelpW, 9, HelpW, 18) : Rectangle.Empty; } }
+        Rectangle HelpBox { get { return HelpClicked != null && helpShown ? new Rectangle(Width - (closable ? 32 : 9) - HelpW, 9, HelpW, 18) : Rectangle.Empty; } }
         Rectangle BackBox { get { return BackClicked != null ? new Rectangle(44, 8, 30, 20) : Rectangle.Empty; } }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -91,7 +93,7 @@ namespace AzerothLauncher
                     g.FillPolygon(b, new[] { new PointF(bb.X + 11, bb.Y + 10), new PointF(bb.X + 19, bb.Y + 4), new PointF(bb.X + 19, bb.Y + 16) });
                 x = bb.Right + 8;
             }
-            int right = (closable ? Width - 32 : Width - 8) - (HelpClicked != null ? HelpW + 5 : 0);
+            int right = (closable ? Width - 32 : Width - 8) - (HelpClicked != null && helpShown ? HelpW + 5 : 0);
             Font f = Theme.F(11, FontStyle.Bold), fs = Theme.F(10);
             using (var sf = new StringFormat(StringFormatFlags.NoWrap))
             {
@@ -600,6 +602,7 @@ namespace AzerothLauncher
                 else if (name == "Community") PanelCommunity();
                 else if (name == "Setup") PanelSetup();          // first-time setup (Setup.cs)
                 RememberView(name);                              // the back arrow's way (History.cs)
+                sideHead.HelpShown = !OnMainPage(name);          // "Lost?" only away from the section's main page
             }
             finally
             {
@@ -608,6 +611,22 @@ namespace AzerothLauncher
                 if (freeze) Freeze(false);
             }
             if (name == "Addons") RefreshGates();             // AZS Stats switched on or off: the Stats buttons follow
+        }
+
+        // the section is on its main page (where its big button takes you): no "Lost?" there
+        bool OnMainPage(string name)
+        {
+            switch (name)
+            {
+                case "Community": return !communityMore;
+                case "Options": return optionsTab == 0 && !optionsLang;
+                case "Stats": return statsTab == 0 && statsClass == null;
+                case "Addons": return addonMode == "installed";
+                case "Changelog": return clView == (Data.Changelog.Count > 1 ? 1 : ClNewest);
+                case "About Launcher": return !aboutLog;
+                case "Guide": return guideMain && gTopic < 0 && guideQuery.Length == 0 && !gBuilder && !gPlanner && gTalents == null && gVideo == null;
+                default: return true;                         // setup and the rest: no "Lost?"
+            }
         }
 
         public void RebuildCurrent()
