@@ -1957,3 +1957,17 @@ both record your runs and statistics
 = ambos registram suas partidas e estatísticas
 4 piece: four pieces at 1 star. 8 piece: all eight at 3 stars. Everything else in the planner is emptied.
 = 4 peças: quatro peças com 1 estrela. 8 peças: as oito com 3 estrelas. Todo o resto do planejador é esvaziado.
+ROLLBACK
+= REVERTER
+Rollback
+= Reverter
+DONE
+= PRONTO
+[Outdated]
+= [Desatualizado]
+Newest (updates on)
+= Mais recente (atualizações ligadas)
+The launcher keeps the addons it downloads. Pick an older copy to install it in place of the newest; your addon settings stay as they are. Until you pick Newest, it is marked [Outdated] and not updated.
+= O launcher guarda os addons que baixa. Escolha uma cópia mais antiga para instalá-la no lugar da mais recente; as configurações do addon continuam. Até você escolher Mais recente, ele fica marcado [Desatualizado] e não é atualizado.
+No kept copies yet: they are kept from now on, each time an addon is installed or updated.
+= Ainda não há cópias: elas são guardadas a partir de agora, sempre que um addon é instalado ou atualizado.

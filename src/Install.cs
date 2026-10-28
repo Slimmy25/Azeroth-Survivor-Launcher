@@ -431,7 +431,10 @@ namespace AzerothLauncher
         }
 
         // Downloads an addon .zip straight from its link and unpacks it into addonDir. Returns the top-level folder names.
-        public static List<string> InstallAddonZip(string url, string addonDir)
+        public static List<string> InstallAddonZip(string url, string addonDir) { return InstallAddonZip(url, addonDir, null); }
+
+        // keepAs: where a copy of the downloaded .zip is kept (Addon Archive, for rollback), or null
+        public static List<string> InstallAddonZip(string url, string addonDir, string keepAs)
         {
             Directory.CreateDirectory(addonDir);
             Directory.CreateDirectory(Util.TempDir);
@@ -443,7 +446,9 @@ namespace AzerothLauncher
                 if (Kind(tmp) != "zip")
                     throw new UserError("The link did not give a .zip file. It must be a direct download link " +
                                         "(share pages such as LimeWire do not work).");
-                return ExtractZip(tmp, addonDir);
+                var tops = ExtractZip(tmp, addonDir);
+                if (keepAs != null) try { File.Copy(tmp, keepAs, true); } catch (Exception) { }
+                return tops;
             }
             catch (UserError e)
             {

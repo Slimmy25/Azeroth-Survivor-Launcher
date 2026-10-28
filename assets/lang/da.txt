@@ -1957,3 +1957,17 @@ both record your runs and statistics
 = begge registrerer dine løb og statistik
 4 piece: four pieces at 1 star. 8 piece: all eight at 3 stars. Everything else in the planner is emptied.
 = 4 dele: fire dele med 1 stjerne. 8 dele: alle otte med 3 stjerner. Alt andet i planlæggeren tømmes.
+ROLLBACK
+= RULLE TILBAGE
+Rollback
+= Rul tilbage
+DONE
+= FÆRDIG
+[Outdated]
+= [Forældet]
+Newest (updates on)
+= Nyeste (opdateringer til)
+The launcher keeps the addons it downloads. Pick an older copy to install it in place of the newest; your addon settings stay as they are. Until you pick Newest, it is marked [Outdated] and not updated.
+= Launcheren gemmer de addons, den henter. Vælg en ældre kopi for at installere den i stedet for den nyeste; dine addon-indstillinger bliver. Indtil du vælger Nyeste, er den markeret [Forældet] og opdateres ikke.
+No kept copies yet: they are kept from now on, each time an addon is installed or updated.
+= Ingen gemte kopier endnu: de gemmes fra nu af, hver gang et addon installeres eller opdateres.

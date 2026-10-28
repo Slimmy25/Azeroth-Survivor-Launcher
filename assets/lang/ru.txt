@@ -1958,3 +1958,17 @@ both record your runs and statistics
 = оба записывают ваши забеги и статистику
 4 piece: four pieces at 1 star. 8 piece: all eight at 3 stars. Everything else in the planner is emptied.
 = 4 предмета: четыре с 1 звездой. 8 предметов: все восемь с 3 звёздами. Всё остальное в планировщике очищается.
+ROLLBACK
+= ОТКАТ
+Rollback
+= Откат
+DONE
+= ГОТОВО
+[Outdated]
+= [Устарело]
+Newest (updates on)
+= Новейшая (обновления включены)
+The launcher keeps the addons it downloads. Pick an older copy to install it in place of the newest; your addon settings stay as they are. Until you pick Newest, it is marked [Outdated] and not updated.
+= Лаунчер хранит скачанные аддоны. Выберите более старую копию, чтобы установить её вместо новейшей; настройки аддона сохранятся. Пока вы не выберете «Новейшая», он помечен [Устарело] и не обновляется.
+No kept copies yet: they are kept from now on, each time an addon is installed or updated.
+= Копий пока нет: теперь они сохраняются при каждой установке или обновлении аддона.

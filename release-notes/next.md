@@ -16,3 +16,12 @@
 ### Gear Planner
 - A piece's stars show as a column of 5 small stars on the inner side of its box (it was T1 to T5): a left click fills
   the next one, and after the fifth they empty again. The AZS Handbook shows the same 5 stars beside each piece.
+
+### Addons
+- ROLLBACK (Addons › Advanced settings): the launcher keeps the last 10 copies of each Download More addon it
+  downloads. Pick an older copy to install it in place of the newest: your addon settings and customization stay as
+  they are. A rolled-back addon shows [Outdated] beside its name in My Addons (it still switches on and off) and is
+  not updated automatically until you pick Newest again or install it from Download More.
+
+### Launcher
+- When the launcher updates itself while it is in the taskbar or the tray, it does so quietly: no Windows notice.

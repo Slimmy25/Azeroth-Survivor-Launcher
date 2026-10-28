@@ -739,7 +739,7 @@ namespace AzerothLauncher
             bool open = name == current && side.Visible;
             if (name == "Options") { optionsTab = 0; optionsLang = false; }
             if (name == "Stats") { statsTab = 0; statsClass = null; }
-            if (name == "Addons") { addonMode = "installed"; addonCategory = 0; askUninstallName = askUninstallFolder = null; }
+            if (name == "Addons") { addonMode = "installed"; addonCategory = 0; askUninstallName = askUninstallFolder = null; rollbackOpen = false; }
             if (name == "About Launcher") aboutLog = false;
             if (name == "Community") communityMore = false;
             if (!open) { ShowSection(name); return; }
@@ -752,7 +752,7 @@ namespace AzerothLauncher
         void SectionRoot(string name)
         {
             if (name == "Guide") { GuideMainPage(); return; }
-            if (name == "Addons") { addonMode = "installed"; addonCategory = 0; askUninstallName = askUninstallFolder = null; }
+            if (name == "Addons") { addonMode = "installed"; addonCategory = 0; askUninstallName = askUninstallFolder = null; rollbackOpen = false; }
             if (name == "Options") { optionsTab = 0; optionsLang = false; }
             if (name == "Stats") { statsTab = 0; statsClass = null; }
             if (name == "About Launcher") aboutLog = false;
@@ -1129,6 +1129,7 @@ namespace AzerothLauncher
         {
             addonMode = mode;
             askUninstallName = askUninstallFolder = null;
+            rollbackOpen = false;
             BuildPanel("Addons");
         }
 
@@ -1157,6 +1158,117 @@ namespace AzerothLauncher
         // ---- addon updates: when each Download More addon was installed (UTC), against when its copy on GitHub
         // was last uploaded (the release's asset dates, asked once a session). Newer on GitHub: UPDATE.
         Dictionary<string, object> AddonInstalledAt() { return Cfg.Section("addon_installed_at"); }
+        Dictionary<string, object> AddonPins() { return Cfg.Section("addon_pins"); }   // addon name -> the kept copy rolled back to
+
+        // ---- ROLLBACK (Addons › Advanced): an older kept copy replaces the addon's folders. Its saved settings are not in
+        // those folders, so they stay. The addon keeps its on/off switch, and is pinned: [Outdated], no automatic update.
+        bool rollbackOpen;
+
+        void RollbackAddon(string name, string zip)
+        {
+            if (AddonsLocked() || addonDlBusy) return;
+            addonDlBusy = true;
+            string dir = AddonsDir();
+            var olds = AddonFoldersOf(name);
+            SetStatus("Installing " + name + " (" + AddonArchive.Label(zip) + ")...");
+            Bg(delegate
+            {
+                string err = null;
+                List<string> names = null;
+                try
+                {
+                    bool off = false;
+                    foreach (string f in olds)
+                    {
+                        string bare = f.EndsWith(Addons.DisabledSuffix) ? f.Substring(0, f.Length - Addons.DisabledSuffix.Length) : f;
+                        foreach (string p in new[] { Path.Combine(dir, bare), Path.Combine(dir, bare + Addons.DisabledSuffix) })
+                            if (Directory.Exists(p)) { if (p.EndsWith(Addons.DisabledSuffix)) off = true; Directory.Delete(p, true); }
+                    }
+                    names = Archive.InstallAddonZip(zip, dir);
+                    if (off)                                   // it was switched off: it stays off
+                        foreach (string n in names)
+                        {
+                            string on = Path.Combine(dir, n), to = on + Addons.DisabledSuffix;
+                            if (Directory.Exists(on) && !Directory.Exists(to)) Directory.Move(on, to);
+                        }
+                }
+                catch (Exception e) { err = e.Message; }
+                Ui(delegate
+                {
+                    addonDlBusy = false;
+                    if (err != null) { Msg.Show(this, "Could not install " + name + ":\n\n" + err, "Addons", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
+                    var rec = new List<object>();
+                    foreach (string n in names) rec.Add(n);
+                    AddonInstalls()[name] = rec;
+                    AddonPins()[name] = Path.GetFileName(zip);
+                    Cfg.Save();
+                    SetStatus(name + " installed (" + AddonArchive.Label(zip) + ").");
+                    if (current == "Addons") BuildPanel("Addons");
+                });
+            });
+        }
+
+        // NEWEST: the pin goes and the addon is updated to the copy on GitHub
+        void UnpinAddon(string name)
+        {
+            AddonPins().Remove(name);
+            Cfg.Save();
+            foreach (var e in Data.Addons) if (e.Name == name) { DownloadAddon(e.Name, e.Url); return; }
+            BuildPanel("Addons");
+        }
+
+        // the ROLLBACK column: a button per addon with kept copies; its list holds each copy (newest first) and NEWEST
+        void AddonsRollbackPanel(int cx, int top)
+        {
+            addonCount = null;
+            int w = (int)(190 * Theme.Zoom);
+            var head = UI.Text("Rollback", 11, FontStyle.Bold, Theme.Gold, Theme.Panel, w);
+            head.Size = VStack.Measure(head);
+            Put(head, cx, top);
+            var body = UI.Text("The launcher keeps the addons it downloads. Pick an older copy to install it in place of the newest; your addon settings stay as they are. Until you pick Newest, it is marked [Outdated] and not updated.",
+                               9, FontStyle.Regular, Theme.Text, Theme.Panel, w);
+            body.Size = VStack.Measure(body);
+            Put(body, cx, BottomOf(head) + 6);
+            int y = BottomOf(body) + 10;
+            int any = 0;
+            foreach (var e in Data.Addons)
+            {
+                if (BuiltinAddons.Find(e.Url) != null || AddonFoldersOf(e.Name).Count == 0) continue;
+                var vers = AddonArchive.Versions(e.Name);
+                if (vers.Count == 0) continue;
+                any++;
+                string name = e.Name;
+                string pin = Json.Str(AddonPins(), name);
+                WowButton b = null;
+                b = new WowButton(name + (pin.Length > 0 ? " *" : "") + " ▾", delegate
+                {
+                    var menu = new ContextMenuStrip();
+                    menu.Font = Theme.F(9.5f, FontStyle.Regular);
+                    var newest = new ToolStripMenuItem(Lang.T("Newest (updates on)"), null, delegate { UnpinAddon(name); });
+                    newest.Checked = pin.Length == 0;
+                    menu.Items.Add(newest);
+                    menu.Items.Add(new ToolStripSeparator());
+                    foreach (string z in vers)
+                    {
+                        string zz = z;
+                        var it = new ToolStripMenuItem(AddonArchive.Label(z), null, delegate { RollbackAddon(name, zz); });
+                        it.Checked = pin == Path.GetFileName(z);
+                        menu.Items.Add(it);
+                    }
+                    menu.Show(b, new Point(0, b.Height));
+                }, 190, 26, 8);
+                Put(b, cx, y);
+                y = BottomOf(b) + 4;
+            }
+            if (any == 0)
+            {
+                var none = UI.Text("No kept copies yet: they are kept from now on, each time an addon is installed or updated.", 9, FontStyle.Italic, Theme.GoldDim, Theme.Panel, w);
+                none.Size = VStack.Measure(none);
+                Put(none, cx, y);
+                y = BottomOf(none) + 8;
+            }
+            Put(new WowButton("DONE", delegate { rollbackOpen = false; BuildPanel("Addons"); }, 190, 28, 9), cx, y + 6);
+        }
         static Dictionary<string, DateTime> mirrorDates;     // zip file name -> uploaded (UTC); null: not asked yet
         static bool mirrorAsking;
 
@@ -1235,6 +1347,7 @@ namespace AzerothLauncher
         bool AddonHasUpdate(AddonEntry it)
         {
             if (mirrorDates == null || it.Category == Data.MyAddonsCategory || !Net.IsWebAddress(it.Url)) return false;
+            if (AddonPins().ContainsKey(it.Name)) return false;   // rolled back on purpose: left as it is
             string file = Uri.UnescapeDataString(it.Url.Substring(it.Url.LastIndexOf('/') + 1));
             DateTime up;
             if (!mirrorDates.TryGetValue(file, out up)) return false;
@@ -1420,7 +1533,11 @@ namespace AzerothLauncher
                 try
                 {
                     if (builtin != null) { BuiltinAddons.Install(dir, builtin); names = new List<string> { builtin.Folder }; }
-                    else names = Archive.InstallAddonZip(url, dir);
+                    else
+                    {
+                        names = Archive.InstallAddonZip(url, dir, Net.IsWebAddress(url) ? AddonArchive.NewPath(name) : null);
+                        AddonArchive.Tidy(name);              // kept for ROLLBACK (Addons › Advanced)
+                    }
                 }
                 catch (Exception e) { err = e.Message.Length > 0 ? e.Message : e.GetType().Name; }
                 Ui(delegate
@@ -1433,6 +1550,7 @@ namespace AzerothLauncher
                         foreach (string n in names) rec.Add(n);
                         AddonInstalls()[name] = rec;
                         AddonInstalledAt()[name] = DateTime.UtcNow.ToString("o", System.Globalization.CultureInfo.InvariantCulture);
+                        AddonPins().Remove(name);            // the newest copy: no longer [Outdated]
                         Cfg.Save();
                         if (after != null) try { after(); } catch (Exception) { }
                         if (current == "Addons" || current == "Stats") BuildPanel(current);
@@ -1560,6 +1678,7 @@ namespace AzerothLauncher
             // --- right column: REFRESH and FOLDER, toggle all, the counter, two profiles at the bottom ---
             int cx = PW - 20 - (int)(190 * Theme.Zoom);
             if (askUninstallName != null || askUninstallFolder != null) AddonsUninstallAsk(cx, top);
+            else if (rollbackOpen) AddonsRollbackPanel(cx, top);
             else {
             var more = Put(new WowButton("DOWNLOAD MORE ›", delegate { SetAddonMode("download"); }, 190, 32, 10), cx, top);
             int rtop = BottomOf(more) + 6;
@@ -1586,6 +1705,11 @@ namespace AzerothLauncher
                 Cfg.Save();
                 BuildPanel("Addons");
             }, 190, 28, 9), cx, py);
+            if (advanced)                                    // ROLLBACK: older kept copies of the addons (its own column)
+            {
+                py -= (int)(28 * Theme.Zoom) + 4;
+                Put(new WowButton("ROLLBACK", delegate { rollbackOpen = true; BuildPanel("Addons"); }, 190, 28, 9), cx, py);
+            }
             py -= 8;
             foreach (string slot in advanced ? new[] { "2", "1", "none" } : new string[0])
             {
@@ -1675,6 +1799,14 @@ namespace AzerothLauncher
             addons.RemoveAll(delegate(KeyValuePair<string, bool> p) { return Addons.IsCompanion(dir, p.Key); });
             var shownName = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
             foreach (var a in addons) shownName[a.Key] = Addons.DisplayName(dir, a.Key);
+            // the folders of rolled-back addons (shown with [Outdated])
+            var pinnedFolders = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            foreach (var kv in AddonPins())
+                foreach (string f in AddonFoldersOf(kv.Key))
+                {
+                    pinnedFolders.Add(f);
+                    pinnedFolders.Add(f.EndsWith(Addons.DisabledSuffix) ? f.Substring(0, f.Length - Addons.DisabledSuffix.Length) : f + Addons.DisabledSuffix);
+                }
             Func<string, string> sortKey = delegate(string f) { return System.Text.RegularExpressions.Regex.Replace(shownName[f], "^[^A-Za-z0-9]+", ""); };
             addons.Sort(delegate(KeyValuePair<string, bool> p1, KeyValuePair<string, bool> p2)
             {
@@ -1703,6 +1835,7 @@ namespace AzerothLauncher
                     y = rule.Bottom + 4;
                 }
                 string label = shownName[name];
+                if (pinnedFolders.Contains(name)) label += "  " + Lang.T("[Outdated]");   // rolled back on purpose (ROLLBACK)
                 var cb = UI.Check(label, a.Value, a.Value ? Theme.Text : Theme.GoldDim, listbg, 11, false);
                 cb.AutoSize = false;
                 Size need = TextRenderer.MeasureText(label, cb.Font, new Size(w - 24 - linkW, 0), TextFormatFlags.WordBreak);

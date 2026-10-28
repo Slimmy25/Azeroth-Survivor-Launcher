@@ -1958,3 +1958,17 @@ both record your runs and statistics
 = どちらもランと統計を記録します
 4 piece: four pieces at 1 star. 8 piece: all eight at 3 stars. Everything else in the planner is emptied.
 = 4点：4つを星1で。8点：8つすべてを星3で。プランナーの他の装備はすべて外れます。
+ROLLBACK
+= ロールバック
+Rollback
+= ロールバック
+DONE
+= 完了
+[Outdated]
+= [旧版]
+Newest (updates on)
+= 最新（更新オン）
+The launcher keeps the addons it downloads. Pick an older copy to install it in place of the newest; your addon settings stay as they are. Until you pick Newest, it is marked [Outdated] and not updated.
+= ランチャーはダウンロードしたアドオンを保管します。古いコピーを選ぶと最新版の代わりにインストールされ、アドオンの設定はそのまま残ります。最新を選ぶまで［旧版］と表示され、更新されません。
+No kept copies yet: they are kept from now on, each time an addon is installed or updated.
+= まだ保管されたコピーはありません。今後、アドオンをインストール・更新するたびに保管されます。

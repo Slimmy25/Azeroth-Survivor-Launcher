@@ -1957,3 +1957,17 @@ both record your runs and statistics
 = beide houden je runs en statistieken bij
 4 piece: four pieces at 1 star. 8 piece: all eight at 3 stars. Everything else in the planner is emptied.
 = 4 stuks: vier stukken met 1 ster. 8 stuks: alle acht met 3 sterren. Al het andere in de planner wordt leeggemaakt.
+ROLLBACK
+= TERUGZETTEN
+Rollback
+= Terugzetten
+DONE
+= KLAAR
+[Outdated]
+= [Verouderd]
+Newest (updates on)
+= Nieuwste (updates aan)
+The launcher keeps the addons it downloads. Pick an older copy to install it in place of the newest; your addon settings stay as they are. Until you pick Newest, it is marked [Outdated] and not updated.
+= De launcher bewaart de addons die hij downloadt. Kies een oudere kopie om die in plaats van de nieuwste te installeren; je addon-instellingen blijven. Tot je Nieuwste kiest, is hij gemarkeerd als [Verouderd] en wordt hij niet bijgewerkt.
+No kept copies yet: they are kept from now on, each time an addon is installed or updated.
+= Nog geen kopieën: ze worden vanaf nu bewaard, elke keer dat een addon wordt geïnstalleerd of bijgewerkt.

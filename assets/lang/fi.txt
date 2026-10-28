@@ -1957,3 +1957,17 @@ both record your runs and statistics
 = molemmat tallentavat juoksusi ja tilastosi
 4 piece: four pieces at 1 star. 8 piece: all eight at 3 stars. Everything else in the planner is emptied.
 = 4 osaa: neljä osaa 1 tähdellä. 8 osaa: kaikki kahdeksan 3 tähdellä. Kaikki muu suunnittelijassa tyhjennetään.
+ROLLBACK
+= PALAUTUS
+Rollback
+= Palautus
+DONE
+= VALMIS
+[Outdated]
+= [Vanhentunut]
+Newest (updates on)
+= Uusin (päivitykset päällä)
+The launcher keeps the addons it downloads. Pick an older copy to install it in place of the newest; your addon settings stay as they are. Until you pick Newest, it is marked [Outdated] and not updated.
+= Käynnistin säilyttää lataamansa lisäosat. Valitse vanhempi kopio asentaaksesi sen uusimman tilalle; lisäosan asetukset säilyvät. Kunnes valitset Uusin, se on merkitty [Vanhentunut] eikä päivity.
+No kept copies yet: they are kept from now on, each time an addon is installed or updated.
+= Ei vielä kopioita: niitä säilytetään tästä lähtien aina, kun lisäosa asennetaan tai päivitetään.

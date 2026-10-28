@@ -1917,11 +1917,8 @@ namespace AzerothLauncher
                 After(3000, delegate { OfferLauncherUpdate(false); });
                 return;
             }
-            if (!manual && !Visible)                         // hidden in the tray: the gold UPDATE button waits
-            {
-                Notify("A new launcher (" + rel.Name + ") is available. Open the launcher and press UPDATE.");
-                return;
-            }
+            if (!manual && (!Visible || WindowState == FormWindowState.Minimized))   // in the tray or the taskbar: the gold UPDATE
+                return;                                      // button waits, quietly (no Windows notice)
             if (GameRunningFlag || Installing || SyncBusy || Updating)
             {
                 if (manual) Info("Launcher update", "Finish what is running first (the game, an install or a cloud sync), then press UPDATE again.");
@@ -1949,7 +1946,7 @@ namespace AzerothLauncher
                 After(5000, ForceLauncherUpdate);
                 return;
             }
-            Notify("Updating the launcher to " + rel.Name + "...");
+            SetStatus("Updating the launcher to " + rel.Name + "...");   // quietly: no Windows notice (Slimjim, 2026-10-28)
             DownloadLauncher(rel, true);
         }
 
