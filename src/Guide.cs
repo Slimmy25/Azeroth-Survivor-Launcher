@@ -519,24 +519,34 @@ namespace AzerothLauncher
             tools.BackColor = bg;
             tools.Bounds = new Rectangle(x + w + 10, y, boxW, sp.ClientSize.Height - y - 8);
             var toolTitle = UI.Text(Lang.T("SAVED BUILDS"), 10, FontStyle.Bold, Theme.Gold, bg, boxW - 20);
+            toolTitle.TextAlign = ContentAlignment.MiddleCenter;
             toolTitle.Location = new Point(10, 12);
             tools.Controls.Add(toolTitle);
+            var fieldX = 16;
+            var fieldW = boxW - 32;
             var buildName = new TextBox();
             buildName.Font = Theme.F(9, FontStyle.Regular);
             buildName.BackColor = Theme.Hex("#211b2a");
             buildName.ForeColor = Theme.Gold;
             buildName.BorderStyle = BorderStyle.FixedSingle;
-            buildName.Location = new Point(10, 42);
-            buildName.Width = boxW - 24;
+            buildName.Location = new Point(fieldX, 42);
+            buildName.Width = fieldW;
             tools.Controls.Add(buildName);
             var saved = new ComboBox();
             saved.DropDownStyle = ComboBoxStyle.DropDownList;
             saved.Font = Theme.F(9, FontStyle.Regular);
             saved.BackColor = Theme.Hex("#211b2a");
             saved.ForeColor = Theme.Gold;
-            saved.Location = new Point(10, 76);
-            saved.Width = boxW - 24;
+            saved.Location = new Point(fieldX, 76);
+            saved.Width = fieldW;
             tools.Controls.Add(saved);
+            // Keep the four actions centred and distribute their gaps through the remaining height,
+            // so the last button sits close to the bottom edge like the Gear Planner's controls.
+            int actionW = Math.Max(100, boxW - 40);
+            int actionX = (boxW - actionW) / 2;
+            int actionH = 28;
+            int actionGap = Math.Max(4, (tools.ClientSize.Height - 110 - 8 - actionH * 4) / 3);
+            int actionY = 110;
             Func<Dictionary<string, object>> classBuilds = delegate
             {
                 var cfg = Config.Load();
@@ -564,8 +574,8 @@ namespace AzerothLauncher
                 cfg.Save();
                 refreshSaved();
                 saved.SelectedItem = name;
-            }, boxW - 24, 28, 9);
-            saveBuild.Location = new Point(10, 110);
+            }, actionW, actionH, 9);
+            saveBuild.Location = new Point(actionX, actionY);
             tools.Controls.Add(saveBuild);
             var loadBuild = new WowButton(Lang.T("LOAD"), delegate
             {
@@ -585,15 +595,15 @@ namespace AzerothLauncher
                     foreach (var t in ordered)
                         for (int i = 0; i < loaded.Get(t); i++) build.Add(t);
                 }
-            }, boxW - 24, 28, 9);
-            loadBuild.Location = new Point(10, 144);
+            }, actionW, actionH, 9);
+            loadBuild.Location = new Point(actionX, actionY + actionH + actionGap);
             tools.Controls.Add(loadBuild);
             var exportBuild = new WowButton(Lang.T("EXPORT"), delegate
             {
                 try { Clipboard.SetText(build.Save()); MessageBox.Show(Lang.T("Build code copied to the clipboard."), Lang.T("Talent Tree Builder"), MessageBoxButtons.OK, MessageBoxIcon.Information); }
                 catch (Exception) { MessageBox.Show(Lang.T("Could not copy the build code."), Lang.T("Talent Tree Builder"), MessageBoxButtons.OK, MessageBoxIcon.Warning); }
-            }, boxW - 24, 28, 9);
-            exportBuild.Location = new Point(10, 178);
+            }, actionW, actionH, 9);
+            exportBuild.Location = new Point(actionX, actionY + (actionH + actionGap) * 2);
             tools.Controls.Add(exportBuild);
             var importBuild = new WowButton(Lang.T("IMPORT"), delegate
             {
@@ -637,8 +647,8 @@ namespace AzerothLauncher
                     foreach (var t in ordered)
                         for (int i = 0; i < imported.Get(t); i++) build.Add(t);
                 }
-            }, boxW - 24, 28, 9);
-            importBuild.Location = new Point(10, 212);
+            }, actionW, actionH, 9);
+            importBuild.Location = new Point(actionX, actionY + (actionH + actionGap) * 3);
             tools.Controls.Add(importBuild);
             sp.Controls.Add(tools);
             refreshSaved();

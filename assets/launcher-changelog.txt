@@ -1,3 +1,13 @@
+# v2.3 (2026-10-28)
+## In short
+The Talent Tree Builder's saved-build menu now follows the Gear Planner's proportions, with centred fields and evenly spaced action buttons down to the bottom.
+
+## Talent Tree Builder
+- The SAVED BUILDS panel keeps the same 60/40 layout pattern as the Gear Planner, with its title and action buttons centred.
+- SAVE, LOAD, EXPORT and IMPORT are evenly spaced vertically, using the panel's available height.
+
+---
+
 # v2.2 (2026-10-28)
 ## In short
 Talent builds can now be saved by name for each class, loaded later, exported as shareable codes, and imported from codes. The Guide and Community video pages also get small usability refinements.
