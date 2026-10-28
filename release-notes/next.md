@@ -66,7 +66,8 @@
   list made from the CMaNGOS Classic database and Wowhead's item data (assets/item-icons.txt). Pieces the game made up
   say "Image soon" in place of a picture. In the Gear Planner, STATS > Armory, and in game in the AZS Handbook (which
   uses the game's own icon files).
-- Guide > Transmog: hover a look that is a real World of Warcraft item (20 of them) to see its 3D model picture from
+- Guide > Transmog: hover a look that is a real World of Warcraft item (22 of them: the Defias Bandana shows the
+  Red Defias Mask and the Zul'Gurub Mask the Bad Mojo Mask) to see its 3D model picture from
   Wowhead's model viewer, beside how to earn it.
 - AZS Minor Mods: new Mark minibosses (on by default). Each zone's bosses before its final boss (as the Guide's Zones &
   Bosses lists them) get a Star, a Triangle and a Diamond, so the Skull and Cross are left for the final boss. Boss
