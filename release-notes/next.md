@@ -22,6 +22,10 @@
   downloads. Pick an older copy to install it in place of the newest: your addon settings and customization stay as
   they are. A rolled-back addon shows [Outdated] beside its name in My Addons (it still switches on and off) and is
   not updated automatically until you pick Newest again or install it from Download More.
+- No profile, Profile 1 and Profile 2 are each a complete state of their own: which addons are on or off, and the
+  game's preferences (options and graphics, key bindings, chat, camera, layout and every addon's saved settings).
+  Switching stores the one you leave exactly as it is and brings back the one you pick as you left it; a choice
+  picked for the first time starts from where you are. LOAD works on a profile that was never saved.
 
 ### Launcher
 - When the launcher updates itself while it is in the taskbar or the tray, it does so quietly: no Windows notice.

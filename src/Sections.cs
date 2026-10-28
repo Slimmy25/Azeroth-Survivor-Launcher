@@ -1988,6 +1988,11 @@ namespace AzerothLauncher
 
         // the game's preferences move to another profile: the current ones are stored under the profile being left,
         // then the picked profile's own come back (first time: it starts from the current ones). False on a failure.
+        // Each of the three (No profile, Profile 1, Profile 2) is a complete state of its own: which addons are on or off,
+        // and the game's preferences (its options and graphics, key bindings, chat, camera, layout and every addon's saved
+        // settings, AddonProfiles.cs). Leaving one stores both as they are now under it; the one picked gets its own back.
+        // A choice picked for the first time starts from the current state. So going back and forth between any of the
+        // three always lands where that one was left.
         bool SwitchAddonPreferences(string to)
         {
             string from = ActiveAddonProfile();
@@ -1995,6 +2000,9 @@ namespace AzerothLauncher
             try
             {
                 var ss = SyncSettings();
+                var profiles = Cfg.Section("addon_profiles");
+                var now = Addons.MakeProfile(Addons.Scan(AddonsDir()));   // the switches as they are, kept under the one left
+                profiles[from] = now;
                 AddonProfiles.Store(ss, from);
                 if (AddonProfiles.Has(to)) AddonProfiles.Restore(ss, to);
             }
@@ -2008,13 +2016,26 @@ namespace AzerothLauncher
             return true;
         }
 
+        // the picked one's own switches, where it has some (unknown, newer addons are left as they are)
+        int ApplyAddonSwitches(string slot, List<string> errors, List<string> unknown)
+        {
+            var prof = Json.AsDict(Json.Get(Cfg.Section("addon_profiles"), slot));
+            return prof == null ? 0 : Addons.ApplyProfile(AddonsDir(), prof, errors, unknown);
+        }
+
         void UseNoAddonProfile()
         {
             if (AddonsLocked()) return;
             if (ActiveAddonProfile() == "none") { SetStatus(Lang.T("No profile in use: the game's preferences are shared again.")); return; }
             if (!SwitchAddonPreferences("none")) return;
+            var errors = new List<string>();
+            try { ApplyAddonSwitches("none", errors, new List<string>()); }
+            catch (Exception e) { errors.Add(e.Message); }
             SetStatus(Lang.T("No profile in use: the game's preferences are shared again."));
             BuildPanel("Addons");
+            if (errors.Count > 0)
+                Msg.Show(side, "Some addons could not be changed:\n\n" + string.Join("\n", errors), "Addons",
+                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
         void SaveAddonProfile(string slot)
@@ -2035,18 +2056,12 @@ namespace AzerothLauncher
 
         void LoadAddonProfile(string slot)
         {
-            var prof = Json.AsDict(Json.Get(Cfg.Section("addon_profiles"), slot));
-            if (prof == null)
-            {
-                SetStatus("Profile " + slot + " is empty - press SAVE to store the current toggles.");
-                return;
-            }
             if (AddonsLocked()) return;
             if (!SwitchAddonPreferences(slot)) return;      // this profile's own game preferences first, then its switches
             var errors = new List<string>();
             var unknown = new List<string>();
             int changed;
-            try { changed = Addons.ApplyProfile(AddonsDir(), prof, errors, unknown); }
+            try { changed = ApplyAddonSwitches(slot, errors, unknown); }
             catch (Exception e)
             {
                 Msg.Show(side, e.Message, "Addons");
