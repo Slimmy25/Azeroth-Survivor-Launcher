@@ -1,0 +1,8 @@
+Netherwind Gloves|16913|inv_gauntlets_14
+Stormrage Belt|16903|inv_belt_06
+Shadowcraft Gloves|16712|inv_gauntlets_24
+Dragonstalker's Bracers|16935|inv_bracer_17
+Gauntlets of Ten Storms|16948|inv_gauntlets_11
+High Warlord's Battle Mace|23464|inv_hammer_02
+Plagueheart Gloves|22509|inv_gauntlets_17
+Wildheart Spaulders|16718|inv_shoulder_01

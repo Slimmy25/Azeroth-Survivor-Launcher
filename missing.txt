@@ -1,0 +1,275 @@
+Acolyte's Belt
+Acolyte's Bindings
+Acolyte's Boots
+Acolyte's Circlet
+Acolyte's Gloves
+Acolyte's Leggings
+Acolyte's Mantle
+Acolyte's Robes
+Acolyte's Staff
+Aegis of the Ten Storms
+Ahn'Qiraj Rifle
+Apprentice's Belt
+Apprentice's Bindings
+Apprentice's Circlet
+Apprentice's Gloves
+Apprentice's Leggings
+Apprentice's Mantle
+Apprentice's Robes
+Apprentice's Staff
+Arcanist Circlet
+Arcanist's Staff
+Bastard Sword of Valor
+Beaststalker's Bracers
+Beaststalker's Breastplate
+Beaststalker's Gauntlets
+Beaststalker's Greaves
+Beaststalker's Helm
+Beaststalker's Legguards
+Beaststalker's Spaulders
+Belt of Elements
+Belt of Prophecy
+Bindings of Prophecy
+Blackwing Mace
+Blackwing Shiv
+Bloodfang Cover
+Bonescythe Belt
+Bonescythe Boots
+Bonescythe Chestpiece
+Bonescythe Cover
+Bonescythe Gloves
+Bonescythe Pants
+Bonescythe Spaulders
+Boots of Faith
+Bow of the Dragonflight
+Bracers of Elements
+Bracers of Wrath
+Breastplate of Elements
+Cenarion Chestpiece
+Cenarion Cover
+Cenarion Pants
+Cenarion Staff
+Circlet of Transcendence
+Crested Shield
+Cryptstalker Belt
+Cryptstalker Bracers
+Cryptstalker Breastplate
+Cryptstalker Gauntlets
+Cryptstalker Greaves
+Cryptstalker Helm
+Devout Bindings
+Devout Boots
+Devout Circlet
+Devout Leggings
+Devout Robes
+Doomhammer
+Dreadmist Bindings
+Dreadmist Boots
+Dreadmist Circlet
+Dreadmist Gloves
+Dreadmist Robes
+Dreadmist Staff
+Dreadnaught Girdle
+Dreadnaught Helm
+Dreamwalker Belt
+Dreamwalker Bracers
+Dreamwalker Chestpiece
+Dreamwalker Cover
+Dreamwalker Gloves
+Dreamwalker Pants
+Earthfury Breastplate
+Earthfury Greaves
+Earthfury Hammer
+Earthfury Helm
+Earthfury Spaulders
+Earthshatter Belt
+Earthshatter Bracers
+Earthshatter Breastplate
+Earthshatter Gauntlets
+Earthshatter Greaves
+Earthshatter Helm
+Felheart Bindings
+Felheart Boots
+Felheart Circlet
+Felheart Leggings
+Felheart Mantle
+Felheart Staff
+Field Marshal's Belt
+Field Marshal's Bindings
+Field Marshal's Boots
+Field Marshal's Bracers
+Field Marshal's Breastplate
+Field Marshal's Chestpiece
+Field Marshal's Circlet
+Field Marshal's Cover
+Field Marshal's Gauntlets
+Field Marshal's Girdle
+Field Marshal's Gloves
+Field Marshal's Greaves
+Field Marshal's Helm
+Field Marshal's Leggings
+Field Marshal's Legguards
+Field Marshal's Legplates
+Field Marshal's Mantle
+Field Marshal's Pants
+Field Marshal's Pauldrons
+Field Marshal's Robes
+Field Marshal's Sabatons
+Field Marshal's Spaulders
+Footpad's Belt
+Footpad's Boots
+Footpad's Bracers
+Footpad's Chestpiece
+Footpad's Cover
+Footpad's Gloves
+Footpad's Spaulders
+Frostfire Boots
+Frostfire Mantle
+Frostfire Robes
+Giantstalker's Gauntlets
+Giantstalker's Greaves
+Giantstalker's Helm
+Giantstalker's Legguards
+Giantstalker's Spaulders
+Girdle of Might
+Girdle of Valor
+Girdle of Wrath
+Gloves of Transcendence
+Greaves of Elements
+Hammer of the Lightforge
+Hammer of the Squire
+Helm of Elements
+Helm of Ten Storms
+Hunting Bow of the Wilds
+Judgement Bracers
+Judgement Girdle
+Judgement Helm
+Judgement Pauldrons
+Lawbringer Breastplate
+Lawbringer Girdle
+Lawbringer Pauldrons
+Lawbringer Sabatons
+Leggings of Prophecy
+Legguards of Elements
+Legguards of Ten Storms
+Lightforge Girdle
+Lightforge Pauldrons
+Lightforge Sabatons
+Lightforged Hammer
+Mace of the Elements
+Magister's Circlet
+Magister's Staff
+Mantle of Faith
+Mantle of Transcendence
+Nemesis Bindings
+Nemesis Circlet
+Nemesis Mantle
+Netherwind Circlet
+Netherwind Leggings
+Nightslayer Bracers
+Nightslayer Kris
+Nightslayer Spaulders
+Novice's Belt
+Novice's Bindings
+Novice's Boots
+Novice's Circlet
+Novice's Gloves
+Novice's Leggings
+Novice's Mantle
+Novice's Robes
+Novice's Staff
+Pauldrons of Valor
+Plagueheart Boots
+Plagueheart Mantle
+Plagueheart Robes
+Primal Bracers
+Primal Breastplate
+Primal Gauntlets
+Primal Greaves
+Primal Helm
+Primal Legguards
+Primal Spaulders
+Ravager's Greatblade
+Recruit's Bracers
+Recruit's Breastplate
+Recruit's Gauntlets
+Recruit's Girdle
+Recruit's Helm
+Recruit's Legplates
+Recruit's Pauldrons
+Recruit's Sabatons
+Redemption Bracers
+Redemption Breastplate
+Redemption Gauntlets
+Redemption Helm
+Redemption Legplates
+Redemption Pauldrons
+Redemption Sabatons
+Robes of Faith
+Rusty Shiv
+Sabatons of Valor
+Shadowcraft Chestpiece
+Shadowcraft Cover
+Shadowcraft Dirk
+Shield of the Earthshatter
+Short Bow
+Spaulders of Elements
+Spaulders of Ten Storms
+Squire's Bracers
+Squire's Breastplate
+Squire's Gauntlets
+Squire's Girdle
+Squire's Helm
+Squire's Legplates
+Squire's Pauldrons
+Squire's Sabatons
+Staff of Prophecy
+Staff of the Devout
+Staff of the Moon
+Stormrage Chestpiece
+Stormrage Gloves
+Stormrage Pants
+Stormrage Spaulders
+Thicket Belt
+Thicket Boots
+Thicket Bracers
+Thicket Chestpiece
+Thicket Cover
+Thicket Gloves
+Thicket Pants
+Thicket Spaulders
+Totem Shield
+Tracker's Bracers
+Tracker's Breastplate
+Tracker's Gauntlets
+Tracker's Greaves
+Tracker's Helm
+Tracker's Legguards
+Tracker's Spaulders
+Warlord's Belt
+Warlord's Bindings
+Warlord's Boots
+Warlord's Bracers
+Warlord's Breastplate
+Warlord's Chestpiece
+Warlord's Circlet
+Warlord's Cover
+Warlord's Gauntlets
+Warlord's Girdle
+Warlord's Gloves
+Warlord's Greaves
+Warlord's Helm
+Warlord's Leggings
+Warlord's Legguards
+Warlord's Legplates
+Warlord's Mantle
+Warlord's Pants
+Warlord's Pauldrons
+Warlord's Robes
+Warlord's Sabatons
+Warlord's Spaulders
+Wildheart Chestpiece
+Wildheart Cover
+Wildheart Pants
+Wildheart Staff
+Worn Claymore

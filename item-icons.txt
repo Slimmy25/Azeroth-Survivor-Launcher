@@ -1,0 +1,198 @@
+# Item name|item id|icon name: the game's gear pieces that are real World of Warcraft items, from the CMaNGOS
+# Classic world database (https://github.com/cmangos/classic-db) and Wowhead's item data. The launcher shows
+# https://wow.zamimg.com/images/wow/icons/large/<icon>.jpg for a piece. Made by Actions > Item icons.
+Anathema|18609|inv_staff_12
+Apprentice's Boots|55|inv_boots_09
+Arcanist Belt|16802|inv_belt_30
+Arcanist Bindings|16799|inv_belt_29
+Arcanist Boots|16800|inv_boots_07
+Arcanist Gloves|16801|inv_gauntlets_14
+Arcanist Leggings|16796|inv_pants_08
+Arcanist Mantle|16797|inv_shoulder_02
+Arcanist Robes|16798|inv_chest_cloth_03
+Ashbringer|13262|inv_sword_48
+Assassin's Blade|1935|inv_weapon_shortblade_24
+Atiesh, Greatstaff of the Guardian|22589|inv_staff_medivh
+Beaststalker's Belt|16680|inv_belt_28
+Belt of Faith|22518|inv_belt_08
+Belt of Ten Storms|16944|inv_belt_14
+Belt of Transcendence|16925|inv_belt_22
+Benediction|18608|inv_staff_30
+Bindings of Faith|22519|inv_bracer_13
+Bindings of Transcendence|16926|inv_bracer_09
+Blackhand Doomsaw|12583|inv_weapon_halberd_04
+Bloodfang Belt|16910|inv_belt_23
+Bloodfang Boots|16906|inv_boots_08
+Bloodfang Bracers|16911|inv_bracer_02
+Bloodfang Chestpiece|16905|inv_chest_cloth_07
+Bloodfang Gloves|16907|inv_gauntlets_21
+Bloodfang Pants|16909|inv_pants_06
+Bloodfang Spaulders|16832|inv_shoulder_23
+Bonescythe Bracers|22483|inv_bracer_15
+Boots of Prophecy|16811|inv_boots_07
+Boots of Transcendence|16919|inv_boots_07
+Bracers of Might|16861|inv_bracer_19
+Bracers of Ten Storms|16943|inv_bracer_16
+Bracers of Valor|16735|inv_bracer_18
+Breastplate of Might|16865|inv_chest_plate16
+Breastplate of Ten Storms|16950|inv_chest_chain_11
+Breastplate of Valor|16730|inv_chest_plate03
+Breastplate of Wrath|16966|inv_chest_plate16
+Cenarion Belt|16828|inv_belt_06
+Cenarion Boots|16829|inv_boots_08
+Cenarion Bracers|16830|inv_bracer_03
+Cenarion Gloves|16831|inv_gauntlets_07
+Cenarion Spaulders|16836|inv_shoulder_07
+Circlet of Faith|22514|inv_crown_01
+Circlet of Prophecy|16813|inv_helmet_34
+Cryptstalker Legguards|22437|inv_pants_mail_15
+Cryptstalker Spaulders|22439|inv_shoulder_14
+Devout Belt|16696|inv_belt_10
+Devout Gloves|16692|inv_gauntlets_14
+Devout Mantle|16695|inv_shoulder_02
+Dragonstalker's Belt|16936|inv_belt_28
+Dragonstalker's Bracers|16935|inv_bracer_17
+Dragonstalker's Breastplate|16942|inv_chest_chain_03
+Dragonstalker's Gauntlets|16940|inv_gauntlets_10
+Dragonstalker's Greaves|16941|inv_boots_plate_07
+Dragonstalker's Helm|16939|inv_helmet_05
+Dragonstalker's Legguards|16938|inv_pants_03
+Dragonstalker's Spaulders|16937|inv_shoulder_10
+Dreadmist Belt|16702|inv_belt_12
+Dreadmist Leggings|16699|inv_pants_08
+Dreadmist Mantle|16701|inv_misc_bone_taurenskull_01
+Dreadnaught Bracers|22423|inv_bracer_15
+Dreadnaught Breastplate|22416|inv_chest_plate02
+Dreadnaught Gauntlets|22421|inv_gauntlets_28
+Dreadnaught Legplates|22417|inv_pants_plate_05
+Dreadnaught Pauldrons|22419|inv_shoulder_29
+Dreadnaught Sabatons|22420|inv_boots_plate_06
+Dreamwalker Boots|22492|inv_boots_chain_05
+Dreamwalker Spaulders|22491|inv_shoulder_14
+Earthfury Belt|16838|inv_belt_14
+Earthfury Bracers|16840|inv_bracer_16
+Earthfury Gauntlets|16839|inv_gauntlets_11
+Earthfury Legguards|16843|inv_pants_03
+Earthshatter Legguards|22465|inv_pants_mail_15
+Earthshatter Spaulders|22467|inv_shoulder_14
+Fang of the Faceless|19859|inv_weapon_shortblade_30
+Felheart Belt|16806|inv_belt_13
+Felheart Gloves|16805|inv_gauntlets_19
+Felheart Robes|16809|inv_chest_cloth_09
+Footpad's Pants|48|inv_pants_02
+Frostfire Belt|22502|inv_belt_03
+Frostfire Bindings|22503|inv_bracer_13
+Frostfire Circlet|22498|inv_crown_01
+Frostfire Gloves|22501|inv_gauntlets_17
+Frostfire Leggings|22497|inv_pants_cloth_05
+Gauntlets of Elements|16672|inv_gauntlets_11
+Gauntlets of Might|16863|inv_gauntlets_10
+Gauntlets of Ten Storms|16948|inv_gauntlets_11
+Gauntlets of Valor|16737|inv_gauntlets_26
+Gauntlets of Wrath|16964|inv_gauntlets_10
+Giantstalker's Belt|16851|inv_belt_28
+Giantstalker's Bracers|16850|inv_bracer_17
+Giantstalker's Breastplate|16845|inv_chest_chain_03
+Gloves of Faith|22517|inv_gauntlets_17
+Gloves of Prophecy|16812|inv_gauntlets_14
+Gnarled Staff|2030|inv_staff_10
+Grand Marshal's Bullseye|18833|inv_weapon_bow_12
+Grand Marshal's Claymore|18876|inv_sword_39
+Grand Marshal's Demolisher|23455|inv_hammer_23
+Grand Marshal's Dirk|18838|inv_weapon_shortblade_26
+Grand Marshal's Mageblade|23451|inv_weapon_shortblade_26
+Grand Marshal's Stave|18873|inv_staff_14
+Greaves of Ten Storms|16949|inv_boots_plate_06
+Helm of Might|16866|inv_helmet_09
+Helm of Valor|16731|inv_helmet_02
+Helm of Wrath|16963|inv_helmet_71
+High Warlord's Battle Mace|23464|inv_hammer_02
+High Warlord's Greatsword|18877|inv_sword_48
+High Warlord's Razor|18840|inv_weapon_shortblade_13
+High Warlord's Recurve|18835|inv_weapon_bow_08
+High Warlord's Shield Wall|18826|inv_shield_19
+High Warlord's Spellblade|23466|inv_weapon_shortblade_26
+High Warlord's War Staff|18874|inv_misc_bone_elfskull_01
+Judgement Breastplate|16958|inv_chest_plate03
+Judgement Gauntlets|16956|inv_gauntlets_29
+Judgement Legplates|16954|inv_pants_04
+Judgement Sabatons|16957|inv_boots_plate_09
+Kingsfall|22802|inv_weapon_shortblade_37
+Lawbringer Bracers|16857|inv_bracer_18
+Lawbringer Gauntlets|16860|inv_gauntlets_29
+Lawbringer Helm|16854|inv_helmet_05
+Lawbringer Legplates|16855|inv_pants_04
+Leggings of Faith|22513|inv_pants_cloth_05
+Leggings of Transcendence|16922|inv_pants_08
+Legplates of Might|16867|inv_pants_04
+Legplates of Valor|16732|inv_pants_04
+Legplates of Wrath|16962|inv_pants_04
+Lightforge Bracers|16722|inv_bracer_14
+Lightforge Breastplate|16726|inv_chest_plate03
+Lightforge Gauntlets|16724|inv_gauntlets_19
+Lightforge Helm|16727|inv_helmet_08
+Lightforge Legplates|16728|inv_pants_04
+Magister's Belt|16685|inv_belt_08
+Magister's Bindings|16683|inv_jewelry_ring_23
+Magister's Boots|16682|inv_boots_02
+Magister's Gloves|16684|inv_gauntlets_17
+Magister's Leggings|16687|inv_pants_06
+Magister's Mantle|16689|inv_shoulder_23
+Magister's Robes|16688|inv_chest_cloth_25
+Mantle of Prophecy|16816|inv_shoulder_02
+Nemesis Belt|16933|inv_belt_13
+Nemesis Boots|16927|inv_boots_05
+Nemesis Gloves|16928|inv_gauntlets_19
+Nemesis Leggings|16930|inv_pants_07
+Nemesis Robes|16931|inv_chest_leather_01
+Netherwind Belt|16818|inv_belt_22
+Netherwind Bindings|16918|inv_bracer_09
+Netherwind Boots|16912|inv_boots_07
+Netherwind Gloves|16913|inv_gauntlets_14
+Netherwind Mantle|16917|inv_shoulder_32
+Netherwind Robes|16916|inv_chest_cloth_03
+Nightslayer Belt|16827|inv_belt_23
+Nightslayer Boots|16824|inv_boots_08
+Nightslayer Chestpiece|16820|inv_chest_cloth_07
+Nightslayer Cover|16821|inv_helmet_41
+Nightslayer Gloves|16826|inv_gauntlets_21
+Nightslayer Pants|16822|inv_pants_06
+Pauldrons of Might|16868|inv_shoulder_15
+Pauldrons of Wrath|16961|inv_shoulder_34
+Plagueheart Belt|22510|inv_belt_03
+Plagueheart Bindings|22511|inv_bracer_13
+Plagueheart Circlet|22506|inv_crown_01
+Plagueheart Gloves|22509|inv_gauntlets_17
+Plagueheart Leggings|22505|inv_pants_cloth_05
+Primal Belt|15003|inv_belt_23
+Redemption Girdle|22431|inv_belt_22
+Rhok'delar, Longbow of the Ancient Keepers|18713|inv_weapon_bow_01
+Robes of Prophecy|16815|inv_chest_cloth_03
+Robes of Transcendence|16923|inv_chest_cloth_03
+Round Buckler|2377|inv_shield_09
+Sabatons of Might|16862|inv_boots_plate_04
+Sabatons of Wrath|16965|inv_boots_plate_04
+Shadowcraft Belt|16713|inv_belt_03
+Shadowcraft Boots|16711|inv_boots_08
+Shadowcraft Bracers|16710|inv_bracer_07
+Shadowcraft Gloves|16712|inv_gauntlets_24
+Shadowcraft Pants|16709|inv_pants_02
+Shadowcraft Spaulders|16708|inv_shoulder_07
+Spiked Club|4564|inv_mace_14
+Staff of Dominance|18842|inv_staff_13
+Staff of the Shadow Flame|19356|inv_staff_06
+Stormrage Belt|16903|inv_belt_06
+Stormrage Boots|16898|inv_boots_08
+Stormrage Bracers|16904|inv_bracer_03
+Stormrage Cover|16900|inv_helmet_09
+Sulfuras, Hand of Ragnaros|17182|inv_hammer_unique_sulfuras
+Thief's Blade|5192|inv_sword_24
+Thunderfury, Blessed Blade of the Windseeker|19019|inv_sword_39
+Tracker's Belt|9916|inv_belt_17
+Wildheart Belt|16716|inv_belt_15
+Wildheart Boots|16715|inv_boots_08
+Wildheart Bracers|16714|inv_bracer_09
+Wildheart Gloves|16717|inv_gauntlets_17
+Wildheart Spaulders|16718|inv_shoulder_01
+Wooden Maul|1820|inv_hammer_15
+Worn Dagger|2092|inv_weapon_shortblade_05
