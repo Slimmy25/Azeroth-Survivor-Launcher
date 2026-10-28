@@ -362,6 +362,7 @@ namespace AzerothLauncher
     public class StatRun
     {
         public string Result = "", Kind = "", Date = "", Hero = "", ClassKey = "", Class = "", Race = "", Zone = "", Party = "", Killer = "";
+        public string Affixes = "";                          // the run's Heroic affixes as the game names them ("sanguine,explosive"), since 0.124.0
         public double Time, Level, Kills, Damage, Gold, Bosses, Dps;          // Dps: from the game's damage meter
         public double Elites, Guardians, Taken, Chests, Legendary, Saves;
         public readonly Dictionary<string, double> Highs = new Dictionary<string, double>();   // the run's highlights (crit, hit, heal, burst1, burst5)
@@ -402,7 +403,9 @@ namespace AzerothLauncher
         static readonly string[] AddonFiles = { AddonFolder + ".toc", AddonFolder + ".lua", AddonFolder + "Live.lua", AddonFolder + "Icons.lua", AddonFolder + "UI.lua", AddonFolder + "Bounty.lua" };
         // its earlier names ("AS Time Tracker", "Azeroth Stats"): replaced, and their records carried over, when
         // AZS Stats is installed; until then their files are read
-        static readonly string[][] OldNames = { new[] { "ASTimeTracker", "ASTimeTrackerDB" }, new[] { "AzerothStats", "AzerothStatsDB" } };
+        // ("Azeroth Stats" was one too, but that name is now Maidenhead's own addon in Download More: it is never taken for
+        // an old AZS Stats, never replaced, and its saved data is never read or moved)
+        static readonly string[][] OldNames = { new[] { "ASTimeTracker", "ASTimeTrackerDB" } };
 
         // the newest AZSStats.lua (else an earlier version's file) in the addon settings folder
         public static string FindFile(string savedDir)
@@ -728,6 +731,7 @@ namespace AzerothLauncher
             run.Class = LuaReader.Text(h, "cname");
             run.Race = LuaReader.Text(h, "rname");
             run.Zone = LuaReader.Text(h, "zname");
+            run.Affixes = LuaReader.Text(h, "affixes");
             run.Time = LuaReader.Num(h, "t");
             run.Level = LuaReader.Num(h, "lvl");
             run.Kills = LuaReader.Num(h, "kills");

@@ -1946,3 +1946,13 @@ Mute
 = Sessiz
 A talent of more than one class
 = Birden fazla sınıfın yeteneği
+The line at the top is a path: it shows where you are, from the section you opened to the page you are on. Click any step to go straight back to it. Point at a step, or its ▾, to see the other pages at that level and pick one. The arrow on the left goes back the way you came, and the X takes you home. I chose a path instead of rows of buttons because this box is small, and I needed every bit of space for what is in it.
+= Üstteki satır bir yoldur: açtığın bölümden bulunduğun sayfaya kadar nerede olduğunu gösterir. Doğrudan geri dönmek için herhangi bir adıma tıkla. Aynı seviyedeki diğer sayfaları görüp birini seçmek için bir adımın ya da ▾ işaretinin üzerine gel. Soldaki ok geldiğin yoldan geri gider, X ise seni ana sayfaya götürür. Düğme sıraları yerine yol kullandım çünkü bu kutu küçük ve içeriği için her bir alana ihtiyacım vardı.
+Heroic affixes
+= Kahramanlık ekleri
+Looks for a newer launcher now and installs it (it also does this by itself at every start).
+= Şimdi daha yeni bir başlatıcı arar ve kurar (her açılışta bunu kendisi de yapar).
+FUTURE BUILD SAVE + IMPORT / EXPORT CATEGORY
+= YAKINDA: BUILD KAYDETME + İÇE / DIŞA AKTARMA
+both record your runs and statistics
+= ikisi de koşularını ve istatistiklerini kaydeder

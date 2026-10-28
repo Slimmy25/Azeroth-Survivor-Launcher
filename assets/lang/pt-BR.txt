@@ -1945,3 +1945,13 @@ Mute
 = Silenciar
 A talent of more than one class
 = Um talento de mais de uma classe
+The line at the top is a path: it shows where you are, from the section you opened to the page you are on. Click any step to go straight back to it. Point at a step, or its ▾, to see the other pages at that level and pick one. The arrow on the left goes back the way you came, and the X takes you home. I chose a path instead of rows of buttons because this box is small, and I needed every bit of space for what is in it.
+= A linha no topo é um caminho: mostra onde você está, da seção que abriu até a página em que está. Clique em qualquer passo para voltar direto a ele. Aponte para um passo, ou seu ▾, para ver as outras páginas daquele nível e escolher uma. A seta à esquerda volta pelo caminho que você fez, e o X leva você ao início. Escolhi um caminho em vez de fileiras de botões porque esta caixa é pequena e eu precisava de todo o espaço para o conteúdo.
+Heroic affixes
+= Afixos heroicos
+Looks for a newer launcher now and installs it (it also does this by itself at every start).
+= Procura agora um launcher mais novo e o instala (também faz isso sozinho a cada início).
+FUTURE BUILD SAVE + IMPORT / EXPORT CATEGORY
+= EM BREVE: SALVAR BUILD + IMPORTAR / EXPORTAR
+both record your runs and statistics
+= ambos registram suas partidas e estatísticas

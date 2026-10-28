@@ -1946,3 +1946,13 @@ Mute
 = ミュート
 A talent of more than one class
 = 複数のクラスにある才能
+The line at the top is a path: it shows where you are, from the section you opened to the page you are on. Click any step to go straight back to it. Point at a step, or its ▾, to see the other pages at that level and pick one. The arrow on the left goes back the way you came, and the X takes you home. I chose a path instead of rows of buttons because this box is small, and I needed every bit of space for what is in it.
+= 上の行は道筋です。開いたセクションから今いるページまで、現在地を示します。どのステップをクリックしてもそこへすぐ戻れます。ステップやその▾にポインターを合わせると、同じ階層の他のページが表示され、選べます。左の矢印は来た道を戻り、Xはホームに戻ります。このボックスは小さく、中身のためにできるだけ場所が必要だったので、ボタンの列ではなく道筋にしました。
+Heroic affixes
+= ヒロイック・アフィックス
+Looks for a newer launcher now and installs it (it also does this by itself at every start).
+= 今すぐ新しいランチャーを探してインストールします（起動のたびにも自動で行います）。
+FUTURE BUILD SAVE + IMPORT / EXPORT CATEGORY
+= 今後追加：ビルド保存 + インポート / エクスポート
+both record your runs and statistics
+= どちらもランと統計を記録します

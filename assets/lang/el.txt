@@ -1946,3 +1946,13 @@ Mute
 = Σίγαση
 A talent of more than one class
 = Ταλέντο σε περισσότερες από μία κλάσεις
+The line at the top is a path: it shows where you are, from the section you opened to the page you are on. Click any step to go straight back to it. Point at a step, or its ▾, to see the other pages at that level and pick one. The arrow on the left goes back the way you came, and the X takes you home. I chose a path instead of rows of buttons because this box is small, and I needed every bit of space for what is in it.
+= Η γραμμή στην κορυφή είναι μια διαδρομή: δείχνει πού βρίσκεσαι, από την ενότητα που άνοιξες ως τη σελίδα όπου είσαι. Κάνε κλικ σε οποιοδήποτε βήμα για να επιστρέψεις κατευθείαν εκεί. Δείξε ένα βήμα ή το ▾ του για να δεις τις άλλες σελίδες στο ίδιο επίπεδο και να διαλέξεις μία. Το βέλος αριστερά γυρίζει πίσω από τον δρόμο που ήρθες και το X σε πάει στην αρχή. Διάλεξα διαδρομή αντί για σειρές κουμπιών επειδή αυτό το πλαίσιο είναι μικρό και χρειαζόμουν κάθε κομμάτι χώρου για το περιεχόμενο.
+Heroic affixes
+= Ηρωικά affixes
+Looks for a newer launcher now and installs it (it also does this by itself at every start).
+= Ψάχνει τώρα για νεότερο launcher και τον εγκαθιστά (το κάνει και μόνος του σε κάθε εκκίνηση).
+FUTURE BUILD SAVE + IMPORT / EXPORT CATEGORY
+= ΜΕΛΛΟΝΤΙΚΗ ΑΠΟΘΗΚΕΥΣΗ BUILD + ΕΙΣΑΓΩΓΗ / ΕΞΑΓΩΓΗ
+both record your runs and statistics
+= και τα δύο καταγράφουν τα runs και τα στατιστικά σου

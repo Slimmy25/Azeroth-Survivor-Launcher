@@ -1945,3 +1945,13 @@ Mute
 = Mykistä
 A talent of more than one class
 = Useamman luokan kyky
+The line at the top is a path: it shows where you are, from the section you opened to the page you are on. Click any step to go straight back to it. Point at a step, or its ▾, to see the other pages at that level and pick one. The arrow on the left goes back the way you came, and the X takes you home. I chose a path instead of rows of buttons because this box is small, and I needed every bit of space for what is in it.
+= Ylhäällä oleva rivi on polku: se näyttää, missä olet, avaamastasi osiosta sivulle, jolla olet. Napsauta mitä tahansa vaihetta palataksesi suoraan siihen. Osoita vaihetta tai sen ▾-merkkiä nähdäksesi saman tason muut sivut ja valitaksesi yhden. Vasemman reunan nuoli palaa tulemaasi reittiä, ja X vie sinut kotiin. Valitsin polun painikerivien sijaan, koska tämä laatikko on pieni ja tarvitsin kaiken tilan sisällölle.
+Heroic affixes
+= Sankariaffiksit
+Looks for a newer launcher now and installs it (it also does this by itself at every start).
+= Etsii uudemman käynnistimen nyt ja asentaa sen (se tekee tämän myös itse joka käynnistyksellä).
+FUTURE BUILD SAVE + IMPORT / EXPORT CATEGORY
+= TULOSSA: BUILDIN TALLENNUS + TUONTI / VIENTI
+both record your runs and statistics
+= molemmat tallentavat juoksusi ja tilastosi

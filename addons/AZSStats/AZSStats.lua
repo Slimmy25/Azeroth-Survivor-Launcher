@@ -584,6 +584,9 @@ function AZSStats_Record(s)
 	-- the run's modifiers (AZS_ZONE.mods: enemy density, health, damage and speed in percent, "100 100 100 100" on a
 	-- normal run), kept with the run so harder runs (Heroic, since the game's 0.121.0) can be told apart later
 	if ( type(AZS_ZONE) == "table" and type(AZS_ZONE.mods) == "string" ) then run.mods = AZS_ZONE.mods; end
+	-- the run's Heroic affixes (AZS_ZONE.affixes, since the game's 0.124.0: "sanguine,explosive", always in English;
+	-- empty or missing on a run without them)
+	if ( type(AZS_ZONE) == "table" and type(AZS_ZONE.affixes) == "string" and AZS_ZONE.affixes ~= "" ) then run.affixes = AZS_ZONE.affixes; end
 	run.abilities = Abilities();
 	-- from the live side (AZSStatsLive.lua): legendaries picked up, level-ups that saved you, time spent down in co-op
 	local deadT = 0;

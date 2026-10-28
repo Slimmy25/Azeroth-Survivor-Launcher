@@ -1945,3 +1945,13 @@ Mute
 = Demp
 A talent of more than one class
 = Et talent hos flere klasser
+The line at the top is a path: it shows where you are, from the section you opened to the page you are on. Click any step to go straight back to it. Point at a step, or its ▾, to see the other pages at that level and pick one. The arrow on the left goes back the way you came, and the X takes you home. I chose a path instead of rows of buttons because this box is small, and I needed every bit of space for what is in it.
+= Linjen øverst er en sti: den viser hvor du er, fra delen du åpnet til siden du er på. Klikk på et trinn for å gå rett tilbake dit. Pek på et trinn, eller ▾-en, for å se de andre sidene på samme nivå og velge en. Pilen til venstre går tilbake veien du kom, og X-en tar deg hjem. Jeg valgte en sti i stedet for rader med knapper fordi denne boksen er liten, og jeg trengte all plassen til innholdet.
+Heroic affixes
+= Heroiske affikser
+Looks for a newer launcher now and installs it (it also does this by itself at every start).
+= Ser etter en nyere launcher nå og installerer den (det gjør den også selv ved hver oppstart).
+FUTURE BUILD SAVE + IMPORT / EXPORT CATEGORY
+= KOMMER: LAGRE BUILD + IMPORT / EKSPORT
+both record your runs and statistics
+= begge registrerer løpene og statistikken din

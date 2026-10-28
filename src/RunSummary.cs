@@ -17,6 +17,16 @@ namespace AzerothLauncher
             string result = r.Kind == "victory" ? Lang.T("Victory") : r.Kind == "defeat" ? Lang.T("Defeat") : Lang.T("Left early");
             l.Add(result + " · " + r.Class + (r.Race.Length > 0 ? " (" + r.Race + ")" : "") + (r.Zone.Length > 0 ? " · " + r.Zone : ""));
             if (r.Date.Length > 0) l.Add(r.Date + (r.Party.Length > 0 ? "  ·  " + Lang.T("with") + " " + r.Party : ""));
+            if (r.Affixes.Length > 0)                         // the run's Heroic affixes (game names, "sanguine,explosive")
+            {
+                var ax = new List<string>();
+                foreach (string a in r.Affixes.Split(','))
+                {
+                    string s = a.Trim();
+                    if (s.Length > 0) ax.Add(char.ToUpperInvariant(s[0]) + s.Substring(1));
+                }
+                if (ax.Count > 0) l.Add(Lang.T("Heroic affixes") + ": " + string.Join(", ", ax.ToArray()));
+            }
             l.Add("");
             l.Add(Lang.F("Survived {0} · level {1} · {2} kills · {3} DPS", RsClk(r.Time), RsN(r.Level), RsN(r.Kills), RsN(r.Dps)));
             var bits = new List<string>();

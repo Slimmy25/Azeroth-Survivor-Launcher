@@ -1945,3 +1945,13 @@ Mute
 = Bisukan
 A talent of more than one class
 = Talenta lebih dari satu kelas
+The line at the top is a path: it shows where you are, from the section you opened to the page you are on. Click any step to go straight back to it. Point at a step, or its ▾, to see the other pages at that level and pick one. The arrow on the left goes back the way you came, and the X takes you home. I chose a path instead of rows of buttons because this box is small, and I needed every bit of space for what is in it.
+= Baris di atas adalah jalur: menunjukkan di mana kamu berada, dari bagian yang kamu buka sampai halaman tempatmu sekarang. Klik langkah mana pun untuk langsung kembali ke sana. Arahkan ke sebuah langkah, atau ▾-nya, untuk melihat halaman lain di tingkat itu dan memilih satu. Panah di kiri kembali lewat jalan yang kamu lalui, dan X membawamu ke beranda. Aku memilih jalur alih-alih deretan tombol karena kotak ini kecil, dan aku butuh setiap ruang untuk isinya.
+Heroic affixes
+= Afiks Heroik
+Looks for a newer launcher now and installs it (it also does this by itself at every start).
+= Mencari launcher yang lebih baru sekarang dan memasangnya (juga dilakukan sendiri setiap kali mulai).
+FUTURE BUILD SAVE + IMPORT / EXPORT CATEGORY
+= MENDATANG: SIMPAN BUILD + IMPOR / EKSPOR
+both record your runs and statistics
+= keduanya mencatat run dan statistikmu

@@ -1945,3 +1945,13 @@ Mute
 = Ljud av
 A talent of more than one class
 = En talang hos flera klasser
+The line at the top is a path: it shows where you are, from the section you opened to the page you are on. Click any step to go straight back to it. Point at a step, or its ▾, to see the other pages at that level and pick one. The arrow on the left goes back the way you came, and the X takes you home. I chose a path instead of rows of buttons because this box is small, and I needed every bit of space for what is in it.
+= Raden högst upp är en sökväg: den visar var du är, från avsnittet du öppnade till sidan du är på. Klicka på ett steg för att gå direkt tillbaka dit. Peka på ett steg, eller dess ▾, för att se de andra sidorna på samma nivå och välja en. Pilen till vänster går tillbaka vägen du kom, och X:et tar dig hem. Jag valde en sökväg i stället för rader med knappar eftersom den här rutan är liten och jag behövde allt utrymme till innehållet.
+Heroic affixes
+= Heroiska affix
+Looks for a newer launcher now and installs it (it also does this by itself at every start).
+= Letar efter en nyare launcher nu och installerar den (det gör den också själv vid varje start).
+FUTURE BUILD SAVE + IMPORT / EXPORT CATEGORY
+= KOMMER: SPARA BUILD + IMPORT / EXPORT
+both record your runs and statistics
+= båda registrerar dina körningar och statistik

@@ -9,8 +9,21 @@
   for another folder count as new too. A launcher started where it was set up carries on as before.
 
 ### Options
+- Options › Launcher is the end of its path: nothing on it opens a step of its own any more. LANGUAGE opens a list of
+  the languages right under its button, UPDATE LAUNCHER is back (looks for a newer launcher now), and About the
+  launcher is written out at the bottom of the page, rewritten in simple words with everything the launcher does.
 - Options › Launcher: no Settings step in the path any more. LANGUAGE, ABOUT LAUNCHER and RUN SETUP AGAIN are buttons
   on the Launcher page itself.
+
+### Path and Lost?
+- Every step of the path at the top looks the same, the first one included: one font, one size, one colour.
+- "Lost?" explains the path in general words (no example page any more), and why it is used: the box is small and
+  needs every bit of space.
+
+### Talent Tree Builder
+- The trees sit on the left; the right side holds a box for the coming build tools (save a build, export and import
+  builds), sized like the Gear Planner's two boxes.
+- The "?" beside RESET is pointed at, not clicked.
 
 ### Gear Planner
 - Tier Bonus empties the whole planner before it fills in the set: armor, weapons and jewelry, with their stars. What
@@ -22,6 +35,9 @@
   the list of pieces.
 
 ### Community
+- A new video in Big Streamers.
+- The round X over a playing video goes back to the featured video of your ticked group, also when you had opened it
+  from MORE VIDEOS.
 - YouTube videos no longer flash a white page before they start: the player stays behind "Loading the video..." until
   the video (or its ad) plays.
 - Esc closes a YouTube video (in fullscreen it leaves fullscreen first).
@@ -62,6 +78,13 @@
   left corner in the right column, so both columns lean in towards the middle.
 
 ### Addons
+- AZS Stats and Azeroth Stats can't be on together (both record your runs): AZS Stats is kept, as the STATS page
+  reads it.
+- Fix: installing AZS Stats no longer removes Azeroth Stats or moves its saved data (an old name of AZS Stats was
+  "Azeroth Stats", and the launcher took Maidenhead's addon for it).
+
+### AZS Stats
+- Every run keeps its Heroic affixes (from the game's 0.124.0); a run's summary on the STATS page lists them.
 - Profile 1 and Profile 2 each keep their own game preferences (options, key bindings, chat windows, camera, layout
   and the addons' saved settings). LOAD stores the preferences you have under the profile you leave and brings back
   the picked profile's own, so a heavy UI addon can't leave the game looking wrong for the next one. Run histories

@@ -1946,3 +1946,13 @@ Mute
 = Ztlumit
 A talent of more than one class
 = Talent více povolání
+The line at the top is a path: it shows where you are, from the section you opened to the page you are on. Click any step to go straight back to it. Point at a step, or its ▾, to see the other pages at that level and pick one. The arrow on the left goes back the way you came, and the X takes you home. I chose a path instead of rows of buttons because this box is small, and I needed every bit of space for what is in it.
+= Řádek nahoře je cesta: ukazuje, kde jsi, od sekce, kterou jsi otevřel, po stránku, na které jsi. Klikni na kterýkoli krok a vrátíš se rovnou na něj. Najeď na krok nebo jeho ▾ a uvidíš ostatní stránky na stejné úrovni. Šipka vlevo jde zpět cestou, kterou jsi přišel, a X tě vezme domů. Cestu jsem zvolil místo řad tlačítek, protože tohle okno je malé a potřeboval jsem každý kousek místa pro obsah.
+Heroic affixes
+= Hrdinské afixy
+Looks for a newer launcher now and installs it (it also does this by itself at every start).
+= Hned zkontroluje novější launcher a nainstaluje ho (dělá to i sám při každém spuštění).
+FUTURE BUILD SAVE + IMPORT / EXPORT CATEGORY
+= BUDOUCÍ UKLÁDÁNÍ BUILDŮ + IMPORT / EXPORT
+both record your runs and statistics
+= oba zaznamenávají tvé běhy a statistiky

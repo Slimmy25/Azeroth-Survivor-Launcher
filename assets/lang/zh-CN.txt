@@ -1946,3 +1946,13 @@ Mute
 = 静音
 A talent of more than one class
 = 多个职业共有的天赋
+The line at the top is a path: it shows where you are, from the section you opened to the page you are on. Click any step to go straight back to it. Point at a step, or its ▾, to see the other pages at that level and pick one. The arrow on the left goes back the way you came, and the X takes you home. I chose a path instead of rows of buttons because this box is small, and I needed every bit of space for what is in it.
+= 顶部这一行是路径：显示你所在的位置，从打开的栏目到当前页面。点击任意一步即可直接回到那里。指向某一步或它的 ▾，可以看到同一层的其他页面并选择。左边的箭头沿来路返回，X 带你回到首页。我用路径代替一排排按钮，因为这个框很小，需要把所有空间留给内容。
+Heroic affixes
+= 英雄词缀
+Looks for a newer launcher now and installs it (it also does this by itself at every start).
+= 立即查找更新的启动器并安装（每次启动时也会自动这样做）。
+FUTURE BUILD SAVE + IMPORT / EXPORT CATEGORY
+= 即将推出：保存构筑 + 导入 / 导出
+both record your runs and statistics
+= 两者都会记录你的对局和统计

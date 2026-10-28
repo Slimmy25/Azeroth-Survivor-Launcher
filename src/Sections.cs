@@ -100,7 +100,8 @@ namespace AzerothLauncher
             if (note.Length > 0)
                 TextRenderer.DrawText(g, note, Theme.F(9, FontStyle.Bold), new Rectangle(right, 0, NoteW, Height), Theme.Hex("#e0a040"),
                                       TextFormatFlags.Right | TextFormatFlags.VerticalCenter | TextFormatFlags.NoPrefix | TextFormatFlags.SingleLine);
-            Font f = Theme.F(11, FontStyle.Bold), fs = Theme.F(10);
+            // every step looks the same, the first (root) included: one font, one size, one colour (white under the pointer)
+            Font f = Theme.F(10.5f, FontStyle.Bold), fs = f;
             using (var sf = new StringFormat(StringFormatFlags.NoWrap))
             {
                 sf.LineAlignment = StringAlignment.Center;
@@ -122,7 +123,7 @@ namespace AzerothLauncher
                     float tw = Math.Min(widths[i], right - x);
                     bool menu = menus.ContainsKey(i);
                     var r = new RectangleF(x, 7, Math.Max(1, tw - (menu ? arrowW : 0)), 22);
-                    Color c = last ? Theme.Hex("#fff0b0") : (hover == i ? Color.White : Theme.Hex("#d9c48a"));
+                    Color c = !last && hover == i ? Color.White : Theme.Hex("#e6cf8c");
                     using (var b = new SolidBrush(c)) g.DrawString(t, last ? f : fs, b, r, sf);
                     if (menu)
                     {
@@ -638,7 +639,7 @@ namespace AzerothLauncher
             if (name == "Addons") RefreshGates();             // AZS Stats switched on or off: the Stats buttons follow
         }
 
-        const string LostNote = "The path at the top shows where you are, for example Guide › Classes › Priest (in the picture below). Click a step's name to go back to it. Point at a step, or its ▾, for the places beside it. The arrow on the left goes back the way you came; the X takes you home.";
+        const string LostNote = "The line at the top is a path: it shows where you are, from the section you opened to the page you are on. Click any step to go straight back to it. Point at a step, or its ▾, to see the other pages at that level and pick one. The arrow on the left goes back the way you came, and the X takes you home. I chose a path instead of rows of buttons because this box is small, and I needed every bit of space for what is in it.";
 
         // the "Lost?" note's picture: a small path like the one at the top, Guide › Classes › Priest ▾, drawn the same way
         static Bitmap pathExample;
@@ -666,7 +667,7 @@ namespace AzerothLauncher
                 for (int i = 0; i < steps.Length; i++)
                 {
                     bool last = i == steps.Length - 1;
-                    using (var b = new SolidBrush(last ? Theme.Hex("#f5e9c8") : Theme.Hex("#e6cf8c"))) g.DrawString(steps[i], f, b, x, 8);
+                    using (var b = new SolidBrush(Theme.Hex("#e6cf8c"))) g.DrawString(steps[i], f, b, x, 8);   // all steps alike, as on the path
                     x += g.MeasureString(steps[i], f).Width;
                     if (last)
                         using (var b = new SolidBrush(Theme.Hex("#f0c050"))) g.DrawString("▾", Theme.F(9), b, x - 2, 9);
@@ -2341,13 +2342,45 @@ namespace AzerothLauncher
                             delegate(bool on) { SetStatsEnabled(on); });
             y = OptionCheck("Show play time on the home screen", Cfg.Bool("home_playtime", true), y,
                             delegate(bool on) { Cfg.Set("home_playtime", on); Cfg.Save(); Invalidate(); });
-            // Language, About Launcher and Run setup again: right here on the Launcher page (no Settings step in the path)
+            // Launcher is the end of the path (Options › Launcher): everything it holds is on this page, nothing opens a
+            // step of its own. The language is picked from a list under its button; About is written out at the bottom.
             string langName = Lang.Code;
             foreach (var kv in Lang.Available()) if (kv.Key == Lang.Code) langName = kv.Value;
             y += 8;
-            row("LANGUAGE", delegate { optionsLang = true; BuildPanel("Options"); }, Lang.F("The launcher's language (now {0}).", langName));
-            row("ABOUT LAUNCHER", delegate { ShowSection("About Launcher"); }, "Its version, what's new and who made it.");
+            row("UPDATE LAUNCHER", delegate { CheckLauncherUpdate(true); }, "Looks for a newer launcher now and installs it (it also does this by itself at every start).");
+            WowButton langBtn = null;
+            Action pickLang = delegate
+            {
+                var menu = new ContextMenuStrip();
+                menu.Font = Theme.F(9.5f, FontStyle.Regular);
+                foreach (var kv in Lang.Available())
+                {
+                    string code = kv.Key;
+                    var it = new ToolStripMenuItem(kv.Value.Replace("&", "&&"), null, delegate { SetLanguage(code); });
+                    it.Checked = code == Lang.Code;
+                    menu.Items.Add(it);
+                }
+                if (langBtn != null) menu.Show(langBtn, new Point(0, langBtn.Height));
+            };
+            langBtn = Put(new WowButton(Lang.T("LANGUAGE") + " ▾", pickLang, bw, 30, 9), 20, y);
+            var langNote = PutText(Lang.F("The launcher's language (now {0}).", langName), 9.5f, FontStyle.Italic, Theme.GoldDim,
+                                   20 + langBtn.Width + 12, y + 2, PW - 40 - langBtn.Width - 12, false);
+            y = Math.Max(BottomOf(langBtn), BottomOf(langNote)) + 8;
             row("RUN SETUP AGAIN", delegate { RunSetup(); }, "The first-time setup's steps again, with your settings as they are.");
+            // ABOUT LAUNCHER: what the launcher is and does, in simple words (assets/launcher-about.txt), right on this page
+            y += 10;
+            var line = Put(UI.Line(Theme.GoldDim, PW - 40, 1), 20, y);
+            y = BottomOf(line) + 8;
+            foreach (string raw in Data.About.Split('\n'))
+            {
+                string ln = raw.TrimEnd();
+                if (ln.Length == 0) continue;
+                Control t;
+                if (ln.StartsWith("#")) t = PutText(ln.TrimStart('#', ' '), 12, FontStyle.Bold, Theme.Gold, 20, y + 4, PW - 40, false);
+                else if (ln.StartsWith("- ")) t = PutText("•  " + ln.Substring(2), 9.5f, FontStyle.Regular, Theme.Text, 30, y, PW - 50, false);
+                else t = PutText(ln, 9.5f, FontStyle.Regular, Theme.Text, 20, y, PW - 40, false);
+                y = BottomOf(t) + 3;
+            }
             return y;                                                     // play time: on the home screen, under the Launcher buttons
         }
 

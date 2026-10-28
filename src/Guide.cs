@@ -490,22 +490,42 @@ namespace AzerothLauncher
             var sp = MakeThinScroll(panel, new Rectangle(20, GuideTop, PW - 40, PH - 12 - GuideTop), GuideCardBg, Theme.Bronze,
                                     Theme.GoldDim, Theme.Gold);
             Color bg = sp.BackColor;
-            int w = sp.ClientSize.Width - 8, x = 4, y = 4;
+            int full = sp.ClientSize.Width - 8, x = 4, y = 4;
+            // the trees on the left, a box on the right, sized as the Gear Planner's sheet and selector (Slimjim, 2026-10-28,
+            // to see how it looks). INTENT (coming soon, Slimjim): that box becomes the build's own place: SAVE TALENT
+            // TREE (named builds kept per class), EXPORT (a build as a short code to share) and IMPORT (paste someone's
+            // code). TalentBuild already turns a build into text and back (TalentBuild.Parse), the base for both.
+            int boxW = Math.Min(full * 2 / 5, 280);
+            int w = full - boxW - 10;
             var left = UI.Text("", 11, FontStyle.Bold, Theme.Gold, bg, w - 140, false);
             left.Bounds = new Rectangle(x, y + 6, w - 200, Theme.F(11, FontStyle.Bold).Height + 4);   // (no Gear Planner button: the path leads there)
             sp.Controls.Add(left);
             var reset = new WowButton("RESET", delegate { build.Reset(); }, 120, 30, 9);
             reset.Location = new Point(x + w - reset.Width, y);
             sp.Controls.Add(reset);
-            // how talents work, on a button beside RESET (saves the room the text took)
-            var help = new WowButton("?", delegate
-            {
-                Info("Talents", "Click a talent to add a point, right-click to take one back. As in the game, each row opens once " +
-                     "its own tree has 5 points for every row above it; a build takes no more than 51 points. The purple " +
-                     "ones are the milestones at 10, 20 and 30 points.");
-            }, 34, 30, 11);
-            help.Location = new Point(reset.Left - help.Width - 6, y);
+            // how talents work: a "?" beside RESET that is pointed at, not clicked (like "Lost?" and the addon profiles)
+            var help = UI.Text("?", 11, FontStyle.Bold, Theme.Panel, Theme.Gold, 0, false);
+            help.AutoSize = false;
+            help.TextAlign = ContentAlignment.MiddleCenter;
+            help.Size = new Size((int)(24 * Theme.Zoom), (int)(24 * Theme.Zoom));
+            help.Cursor = Cursors.Help;
+            help.Location = new Point(reset.Left - help.Width - 8, y + (reset.Height - help.Height) / 2);
             sp.Controls.Add(help);
+            var helpTip = new ToolTip { AutoPopDelay = 30000, InitialDelay = 150, ReshowDelay = 100 };
+            helpTip.SetToolTip(help, Lang.T("Click a talent to add a point, right-click to take one back. As in the game, each row opens once " +
+                     "its own tree has 5 points for every row above it; a build takes no more than 51 points. The purple " +
+                     "ones are the milestones at 10, 20 and 30 points."));
+            help.Disposed += delegate { helpTip.Dispose(); };
+            // the box for the future build tools (see INTENT above), filling the right side
+            var future = new Bordered(Theme.GoldDim, 1);
+            future.BackColor = bg;
+            future.Bounds = new Rectangle(x + w + 10, y, boxW, sp.ClientSize.Height - y - 8);
+            var futureText = UI.Text("FUTURE BUILD SAVE + IMPORT / EXPORT CATEGORY", 10, FontStyle.Bold, Theme.GoldDim, bg, boxW - 24);
+            futureText.AutoSize = false;
+            futureText.TextAlign = ContentAlignment.MiddleCenter;
+            futureText.Dock = DockStyle.Fill;
+            future.Controls.Add(futureText);
+            sp.Controls.Add(future);
             y += Math.Max(reset.Height, left.Height) + 6;
             var trees = Talents.Of(cls);
             var views = new List<TalentTreeView>();
@@ -514,7 +534,7 @@ namespace AzerothLauncher
             int roomH = sp.ClientSize.Height - y - 8;
             int cellFit = Math.Max(22, Math.Min(Math.Max(30, (tw3 - 16) / 4), (roomH - 38) / 7));   // as TalentTreeView works it out
             int realW = Math.Min(tw3, cellFit * 4 + 16);
-            int x0 = x + Math.Max(0, (w - (realW * trees.Count + gap * (trees.Count - 1))) / 2);
+            int x0 = x;                                     // the trees start at the left (they were centred)
             for (int i = 0; i < trees.Count; i++)
             {
                 var tv = new TalentTreeView(trees[i], tw3, roomH);

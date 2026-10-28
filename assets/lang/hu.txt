@@ -1946,3 +1946,13 @@ Mute
 = Némítás
 A talent of more than one class
 = Több kaszt talentuma
+The line at the top is a path: it shows where you are, from the section you opened to the page you are on. Click any step to go straight back to it. Point at a step, or its ▾, to see the other pages at that level and pick one. The arrow on the left goes back the way you came, and the X takes you home. I chose a path instead of rows of buttons because this box is small, and I needed every bit of space for what is in it.
+= A felső sor egy útvonal: megmutatja, hol vagy, a megnyitott résztől az aktuális oldalig. Kattints bármelyik lépésre, hogy egyenesen oda térj vissza. Mutass egy lépésre vagy a ▾ jelére, hogy lásd az azonos szintű többi oldalt, és válassz egyet. A bal oldali nyíl azon az úton megy vissza, amerre jöttél, az X pedig a kezdőlapra visz. Gombsorok helyett azért választottam útvonalat, mert ez a doboz kicsi, és minden helyre szükségem volt a tartalomhoz.
+Heroic affixes
+= Hősi affixek
+Looks for a newer launcher now and installs it (it also does this by itself at every start).
+= Most megkeresi az újabb indítót és telepíti (minden indításkor magától is megteszi).
+FUTURE BUILD SAVE + IMPORT / EXPORT CATEGORY
+= HAMAROSAN: BUILD MENTÉSE + IMPORT / EXPORT
+both record your runs and statistics
+= mindkettő rögzíti a futásaidat és statisztikáidat

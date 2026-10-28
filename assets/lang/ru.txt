@@ -1946,3 +1946,13 @@ Mute
 = Без звука
 A talent of more than one class
 = Талант нескольких классов
+The line at the top is a path: it shows where you are, from the section you opened to the page you are on. Click any step to go straight back to it. Point at a step, or its ▾, to see the other pages at that level and pick one. The arrow on the left goes back the way you came, and the X takes you home. I chose a path instead of rows of buttons because this box is small, and I needed every bit of space for what is in it.
+= Строка сверху — это путь: она показывает, где вы, от открытого раздела до текущей страницы. Нажмите на любой шаг, чтобы сразу вернуться к нему. Наведите на шаг или его ▾, чтобы увидеть другие страницы этого уровня и выбрать одну. Стрелка слева возвращает по пройденному пути, а X ведёт на главную. Я выбрал путь вместо рядов кнопок, потому что это окно маленькое и мне нужно было всё место для содержимого.
+Heroic affixes
+= Героические аффиксы
+Looks for a newer launcher now and installs it (it also does this by itself at every start).
+= Ищет новую версию лаунчера сейчас и устанавливает её (он делает это и сам при каждом запуске).
+FUTURE BUILD SAVE + IMPORT / EXPORT CATEGORY
+= СКОРО: СОХРАНЕНИЕ БИЛДА + ИМПОРТ / ЭКСПОРТ
+both record your runs and statistics
+= оба записывают ваши забеги и статистику

@@ -1946,3 +1946,13 @@ Mute
 = ปิดเสียง
 A talent of more than one class
 = พรสวรรค์ของหลายอาชีพ
+The line at the top is a path: it shows where you are, from the section you opened to the page you are on. Click any step to go straight back to it. Point at a step, or its ▾, to see the other pages at that level and pick one. The arrow on the left goes back the way you came, and the X takes you home. I chose a path instead of rows of buttons because this box is small, and I needed every bit of space for what is in it.
+= บรรทัดด้านบนคือเส้นทาง: บอกว่าคุณอยู่ตรงไหน ตั้งแต่ส่วนที่เปิดจนถึงหน้าที่อยู่ คลิกขั้นใดก็ได้เพื่อกลับไปที่นั่นทันที ชี้ที่ขั้นหรือ ▾ ของมันเพื่อดูหน้าอื่นในระดับเดียวกันและเลือก ลูกศรทางซ้ายย้อนกลับตามทางที่มา และ X พาคุณกลับหน้าแรก ผมเลือกใช้เส้นทางแทนแถวปุ่มเพราะกล่องนี้เล็ก และต้องการพื้นที่ทั้งหมดสำหรับเนื้อหา
+Heroic affixes
+= แอฟฟิกซ์ฮีโร่อิก
+Looks for a newer launcher now and installs it (it also does this by itself at every start).
+= ค้นหาลันเชอร์รุ่นใหม่ตอนนี้และติดตั้ง (และทำเองทุกครั้งที่เปิด)
+FUTURE BUILD SAVE + IMPORT / EXPORT CATEGORY
+= เร็วๆ นี้: บันทึกบิลด์ + นำเข้า / ส่งออก
+both record your runs and statistics
+= ทั้งคู่บันทึกการเล่นและสถิติของคุณ

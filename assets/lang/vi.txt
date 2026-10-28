@@ -1946,3 +1946,13 @@ Mute
 = Tắt tiếng
 A talent of more than one class
 = Thiên phú của nhiều lớp
+The line at the top is a path: it shows where you are, from the section you opened to the page you are on. Click any step to go straight back to it. Point at a step, or its ▾, to see the other pages at that level and pick one. The arrow on the left goes back the way you came, and the X takes you home. I chose a path instead of rows of buttons because this box is small, and I needed every bit of space for what is in it.
+= Dòng trên cùng là một đường dẫn: cho biết bạn đang ở đâu, từ mục bạn mở đến trang bạn đang xem. Bấm vào bất kỳ bước nào để quay lại ngay đó. Trỏ vào một bước, hoặc dấu ▾ của nó, để xem các trang khác cùng cấp và chọn một trang. Mũi tên bên trái quay lại đường bạn đã đi, còn X đưa bạn về trang chủ. Tôi chọn đường dẫn thay vì các hàng nút vì khung này nhỏ và tôi cần mọi chỗ trống cho nội dung.
+Heroic affixes
+= Phụ tố Anh hùng
+Looks for a newer launcher now and installs it (it also does this by itself at every start).
+= Tìm launcher mới hơn ngay bây giờ và cài đặt (nó cũng tự làm việc này mỗi lần khởi động).
+FUTURE BUILD SAVE + IMPORT / EXPORT CATEGORY
+= SẮP CÓ: LƯU BUILD + NHẬP / XUẤT
+both record your runs and statistics
+= cả hai đều ghi lại lượt chơi và thống kê của bạn

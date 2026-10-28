@@ -787,6 +787,7 @@ namespace AzerothLauncher
         {
             if (current != "Community" || communityPlaying == null) return false;
             communityPlaying = null;
+            communityMore = false;                            // back to the featured video of the ticked group, not MORE VIDEOS
             StopEdge();
             BuildPanel("Community");
             return true;

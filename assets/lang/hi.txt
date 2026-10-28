@@ -1946,3 +1946,13 @@ Mute
 = म्यूट
 A talent of more than one class
 = एक से ज़्यादा क्लास का टैलेंट
+The line at the top is a path: it shows where you are, from the section you opened to the page you are on. Click any step to go straight back to it. Point at a step, or its ▾, to see the other pages at that level and pick one. The arrow on the left goes back the way you came, and the X takes you home. I chose a path instead of rows of buttons because this box is small, and I needed every bit of space for what is in it.
+= ऊपर की लाइन एक रास्ता है: यह दिखाती है कि आप कहाँ हैं, खोले गए सेक्शन से उस पेज तक जिस पर आप हैं। किसी भी कदम पर क्लिक करें और सीधे वहीं लौटें। किसी कदम या उसके ▾ पर पॉइंटर रखें, उसी स्तर के दूसरे पेज देखें और एक चुनें। बाईं ओर का तीर उसी रास्ते से वापस जाता है जिससे आप आए, और X आपको होम पर ले जाता है। मैंने बटनों की कतारों की जगह रास्ता चुना क्योंकि यह बॉक्स छोटा है और मुझे इसकी सामग्री के लिए हर थोड़ी जगह चाहिए थी।
+Heroic affixes
+= हीरोइक एफ़िक्स
+Looks for a newer launcher now and installs it (it also does this by itself at every start).
+= अभी नया लॉन्चर खोजता है और इंस्टॉल करता है (हर शुरुआत पर यह खुद भी ऐसा करता है)।
+FUTURE BUILD SAVE + IMPORT / EXPORT CATEGORY
+= आगे: बिल्ड सेव + इम्पोर्ट / एक्सपोर्ट
+both record your runs and statistics
+= दोनों आपके रन और आँकड़े दर्ज करते हैं
