@@ -1796,3 +1796,7 @@ Every piece a {0} can wear, with its bonuses, the bosses that drop it and each s
 = {0}: ΕΞΟΠΛΙΣΜΟΣ
 I'm sorry the launcher could not help this time. Everything it set up has been taken away again; your game, your saves and your cloud files are untouched.\n\nIf you need more help, please contact Slimjim in the Discord. Best of luck!
 = Λυπούμαστε που ο launcher δεν βοήθησε αυτή τη φορά. Ό,τι ρύθμισε αφαιρέθηκε ξανά· το παιχνίδι, οι αποθηκεύσεις και τα αρχεία σου στο cloud έμειναν ανέγγιχτα.\n\nΑν χρειάζεσαι περισσότερη βοήθεια, επικοινώνησε με τον Slimjim στο Discord. Καλή τύχη!
+The path at the top
+= Η διαδρομή επάνω
+This window has no rows of buttons, to give its pages as much room as possible. The path at the top does their job: each step is where you are (Guide › Classes › Priest).\n\nClick a step to go back to it. Point at a step with ▾, or click it, for the list of places beside it (the other tabs, classes or pages). The arrow on the left goes back the way you came, and the X takes you home.
+= Αυτό το παράθυρο δεν έχει σειρές κουμπιών, ώστε οι σελίδες να έχουν όσο το δυνατόν περισσότερο χώρο. Τη δουλειά τους κάνει η διαδρομή επάνω: κάθε βήμα δείχνει πού βρίσκεσαι (Οδηγός › Κλάσεις › Ιερέας).\n\nΚάνε κλικ σε ένα βήμα για να γυρίσεις εκεί. Δείξε ένα βήμα με ▾ ή κάνε κλικ για τη λίστα των διπλανών μερών (άλλες καρτέλες, κλάσεις ή σελίδες). Το βέλος αριστερά γυρίζει από τον δρόμο που ήρθες και το X σε πάει στην αρχή.

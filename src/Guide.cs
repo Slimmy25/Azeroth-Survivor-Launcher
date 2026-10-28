@@ -759,8 +759,22 @@ namespace AzerothLauncher
                 var tb = new WowButton("TALENT TREES ›", delegate { gTalents = tcls; BuildPanel("Guide"); }, 170, 28, 9);
                 tb.Location = new Point(x + tw - tb.Width, y - 4);
                 sp.Controls.Add(tb);
+                // beside it: the class's gear page (every piece, its bonuses, the bosses and each set's bonuses)
+                int it = -1, ip = -1;
+                var tops2 = Data.Guide;
+                for (int t = 0; t < tops2.Count && ip < 0; t++)
+                    if (tops2[t].Title == "Items")
+                        for (int p = 0; p < tops2[t].Pages.Count; p++)
+                            if (tops2[t].Pages[p].Title == className + " Gear") { it = t; ip = p; break; }
+                if (ip >= 0 && Items.Gear.Count > 0)
+                {
+                    int gt = it, gp = ip;
+                    var gb = new WowButton(Lang.F("{0} GEAR", Lang.T(className).ToUpperInvariant()) + " ›", delegate { SetGuideView(gt, gp); }, 170, 28, 9);
+                    gb.Location = new Point(tb.Left - gb.Width - 6, y - 4);
+                    sp.Controls.Add(gb);
+                }
             }
-            add(UI.Text(crumb.ToUpperInvariant(), 8.5f, FontStyle.Bold, GuideRed, bg, tw - (className != null ? 130 : 0), crumb == "Guide"), x, 0);
+            add(UI.Text(crumb.ToUpperInvariant(), 8.5f, FontStyle.Bold, GuideRed, bg, tw - (className != null ? 260 : 0), crumb == "Guide"), x, 0);
             add(UI.Text(page.Title, 18, FontStyle.Bold, Theme.Gold, bg, tw, false), x, 2);
             if (page.Desc.Length > 0) add(UI.Text(page.Desc, 10.5f, FontStyle.Italic, Theme.GoldDim, bg, tw, false), x, 2);
             add(new GuideRule(tw, Theme.GoldDim), x, 10);
@@ -840,26 +854,7 @@ namespace AzerothLauncher
                 else para.Add(line);
             }
             flush();
-            // the gear this class can wear: behind a button, the class's page of the Items topic (every piece with its
-            // bonuses, the bosses that drop it and each set's bonuses)
-            if (className != null && Items.Gear.Count > 0)
-            {
-                int it = -1, ip = -1;
-                var tops = Data.Guide;
-                for (int t = 0; t < tops.Count && ip < 0; t++)
-                    if (tops[t].Title == "Items")
-                        for (int p = 0; p < tops[t].Pages.Count; p++)
-                            if (tops[t].Pages[p].Title == className + " Gear") { it = t; ip = p; break; }
-                if (ip >= 0)
-                {
-                    add(UI.Text(Lang.T("Gear"), 12.5f, FontStyle.Bold, Theme.Gold, bg, tw, false), x, 16);
-                    add(new GuideRule(Math.Min(60, tw), Theme.Gold), x, 3);
-                    add(new GuideText(Lang.F("Every piece a {0} can wear, with its bonuses, the bosses that drop it and each set's bonuses.", Lang.T(className)),
-                                      10, Theme.Text, bg, tw, gTopic, gPage), x, 8);
-                    int gt = it, gp = ip;
-                    add(new WowButton(Lang.F("{0} GEAR", Lang.T(className).ToUpperInvariant()) + " ›", delegate { SetGuideView(gt, gp); }, 260, 34, 10), x, 8);
-                }
-            }
+            // the class's gear: its button sits beside TALENT TREES at the top of the page
             var pad = new Panel();
             pad.BackColor = bg;
             pad.Bounds = new Rectangle(4, y, 1, 18);

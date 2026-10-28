@@ -220,6 +220,16 @@ namespace AzerothLauncher
             }
         }
 
+        // the icons come 56 px wide: drawn at 56, 42 or 28 px (a clean share of that) they stay sharp, where any other
+        // size in between looks soft. The largest of those that fits.
+        public static int CrispIcon(int room)
+        {
+            if (room >= 56) return 56;
+            if (room >= 42) return 42;
+            if (room >= 28) return 28;
+            return room;
+        }
+
         // draws the picture into r from its kept copy at that size: a plain copy of pixels
         public static void Draw(Graphics g, Image img, Rectangle r)
         {

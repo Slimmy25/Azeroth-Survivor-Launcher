@@ -1796,3 +1796,7 @@ Every piece a {0} can wear, with its bonuses, the bosses that drop it and each s
 = {0}: VÝSTROJ
 I'm sorry the launcher could not help this time. Everything it set up has been taken away again; your game, your saves and your cloud files are untouched.\n\nIf you need more help, please contact Slimjim in the Discord. Best of luck!
 = Je nám líto, že vám launcher tentokrát nepomohl. Vše, co nastavil, bylo opět odstraněno; vaší hry, uložených pozic ani souborů v cloudu se to nedotklo.\n\nPokud potřebujete další pomoc, kontaktujte Slimjima na Discordu. Hodně štěstí!
+The path at the top
+= Cesta nahoře
+This window has no rows of buttons, to give its pages as much room as possible. The path at the top does their job: each step is where you are (Guide › Classes › Priest).\n\nClick a step to go back to it. Point at a step with ▾, or click it, for the list of places beside it (the other tabs, classes or pages). The arrow on the left goes back the way you came, and the X takes you home.
+= Toto okno nemá řady tlačítek, aby stránky měly co nejvíc místa. Jejich práci dělá cesta nahoře: každý krok ukazuje, kde jste (Průvodce › Třídy › Kněz).\n\nKliknutím na krok se k němu vrátíte. Najeďte na krok s ▾ nebo na něj klikněte pro seznam míst vedle něj (další karty, třídy nebo stránky). Šipka vlevo vás vrátí cestou, kudy jste přišli, a X vás vezme domů.

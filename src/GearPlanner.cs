@@ -472,7 +472,11 @@ namespace AzerothLauncher
             if (o != null)
             {
                 Image img = IconOf(o);
-                if (img != null) Theme.Draw(g, img, Rectangle.Inflate(r, -2, -2));
+                if (img != null)                              // at a sharp size, centred in the slot
+                {
+                    int ic = Theme.CrispIcon(r.Width - 4);
+                    Theme.Draw(g, img, new Rectangle(r.X + (r.Width - ic) / 2, r.Y + (r.Height - ic) / 2, ic, ic));
+                }
                 else
                 {
                     using (var b = new SolidBrush(Color.FromArgb(70, RarityColor(RarityOf(o))))) g.FillRectangle(b, Rectangle.Inflate(r, -3, -3));
@@ -482,13 +486,13 @@ namespace AzerothLauncher
                 }
                 using (var p = new Pen(RarityColor(RarityOf(o)), 2f)) g.DrawRectangle(p, r);
                 int st = o is GearPiece ? StarsOf(slot) : 0;
-                if (st > 0)                                   // its stars: a small counter in the corner
+                if (st > 0)                                   // its stars: T1 to T5 in the top right corner
                 {
-                    string n = st.ToString();
-                    SizeF ns = g.MeasureString(n, fBold);
-                    var cr = new RectangleF(r.Right - ns.Width - 3, r.Bottom - ns.Height - 1, ns.Width + 2, ns.Height);
+                    string n = "T" + st;
+                    SizeF ns = g.MeasureString(n, fSmall);
+                    var cr = new RectangleF(r.Right - ns.Width - 2, r.Y + 1, ns.Width + 1, ns.Height);
                     using (var b = new SolidBrush(Color.FromArgb(210, 10, 8, 14))) g.FillRectangle(b, cr);
-                    using (var b = new SolidBrush(Gold)) g.DrawString(n, fBold, b, cr.X + 1, cr.Y);
+                    using (var b = new SolidBrush(Gold)) g.DrawString(n, fSmall, b, cr.X + 1, cr.Y);
                 }
             }
             else

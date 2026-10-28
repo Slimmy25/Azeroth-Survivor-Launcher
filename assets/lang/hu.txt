@@ -1796,3 +1796,7 @@ Every piece a {0} can wear, with its bonuses, the bosses that drop it and each s
 = {0}: FELSZERELÉS
 I'm sorry the launcher could not help this time. Everything it set up has been taken away again; your game, your saves and your cloud files are untouched.\n\nIf you need more help, please contact Slimjim in the Discord. Best of luck!
 = Sajnáljuk, hogy a launcher most nem tudott segíteni. Mindent, amit beállított, újra eltávolított; a játékodhoz, a mentéseidhez és a felhős fájljaidhoz nem nyúlt.\n\nHa további segítség kell, keresd Slimjimet a Discordon. Sok szerencsét!
+The path at the top
+= A felső útvonal
+This window has no rows of buttons, to give its pages as much room as possible. The path at the top does their job: each step is where you are (Guide › Classes › Priest).\n\nClick a step to go back to it. Point at a step with ▾, or click it, for the list of places beside it (the other tabs, classes or pages). The arrow on the left goes back the way you came, and the X takes you home.
+= Ebben az ablakban nincsenek gombsorok, hogy az oldalaknak minél több helyük legyen. A feladatukat a felső útvonal látja el: minden lépés megmutatja, hol vagy (Útmutató › Kasztok › Pap).\n\nKattints egy lépésre, hogy visszamenj oda. Mutass egy ▾ jelű lépésre, vagy kattints rá, a mellette lévő helyek listájáért (a többi fül, kaszt vagy oldal). A bal oldali nyíl azon az úton visz vissza, amerre jöttél, az X pedig haza.

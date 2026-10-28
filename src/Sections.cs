@@ -16,6 +16,7 @@ namespace AzerothLauncher
     public class SideHead : Control
     {
         public Action CloseClicked;
+        public Action HelpClicked;                           // the ? beside the X: how the path at the top works
         public Action BackClicked;                           // null: no back arrow
         public Form Owner2;
         bool closable = true;
@@ -62,6 +63,7 @@ namespace AzerothLauncher
         }
 
         Rectangle CloseBox { get { return closable ? new Rectangle(Width - 27, 9, 18, 18) : Rectangle.Empty; } }
+        Rectangle HelpBox { get { return HelpClicked != null ? new Rectangle(Width - (closable ? 50 : 27), 9, 18, 18) : Rectangle.Empty; } }
         Rectangle BackBox { get { return BackClicked != null ? new Rectangle(44, 8, 30, 20) : Rectangle.Empty; } }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -87,7 +89,7 @@ namespace AzerothLauncher
                     g.FillPolygon(b, new[] { new PointF(bb.X + 11, bb.Y + 10), new PointF(bb.X + 19, bb.Y + 4), new PointF(bb.X + 19, bb.Y + 16) });
                 x = bb.Right + 8;
             }
-            int right = (closable ? Width - 32 : Width - 8);
+            int right = (closable ? Width - 32 : Width - 8) - (HelpClicked != null ? 23 : 0);
             Font f = Theme.F(11, FontStyle.Bold), fs = Theme.F(10);
             using (var sf = new StringFormat(StringFormatFlags.NoWrap))
             {
@@ -139,6 +141,14 @@ namespace AzerothLauncher
                 }
             }
             if (Theme.Portrait != null) Theme.Draw(g, Theme.Portrait, new Rectangle(2, 1, 36, 36));
+            Rectangle hb = HelpBox;
+            if (!hb.IsEmpty)
+            {
+                using (var b = new SolidBrush(Theme.Hex("#1c1a26"))) g.FillRectangle(b, hb);
+                using (var p = new Pen(Theme.Hex("#d6a640"), 2)) g.DrawRectangle(p, hb);
+                using (var sf = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center })
+                using (var b = new SolidBrush(Theme.Hex("#f0c050"))) g.DrawString("?", Theme.F(10, FontStyle.Bold), b, new RectangleF(hb.X, hb.Y + 1, hb.Width, hb.Height), sf);
+            }
             Rectangle xb = CloseBox;
             if (xb.IsEmpty) return;
             using (var b = new SolidBrush(Theme.Hex("#2a1c1c"))) g.FillRectangle(b, xb);
@@ -224,7 +234,7 @@ namespace AzerothLauncher
             int h = HotAt(e.Location), ha = ArrowAt(e.Location);
             if (ha < 0) ha = MenuTextAt(e.Location);          // the last step's name lights its arrow
             if (h != hover || ha != hoverArrow) { hover = h; hoverArrow = ha; Invalidate(); }
-            Cursor = CloseBox.Contains(e.Location) || h != -1 || ha != -1 ? Cursors.Hand : Cursors.Default;
+            Cursor = CloseBox.Contains(e.Location) || HelpBox.Contains(e.Location) || h != -1 || ha != -1 ? Cursors.Hand : Cursors.Default;
             if (dragOffset.HasValue && Owner2 != null)
             {
                 Point s = PointToScreen(e.Location);
@@ -269,7 +279,7 @@ namespace AzerothLauncher
 
         protected override void OnMouseDown(MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left && !CloseBox.Contains(e.Location) && Owner2 != null)
+            if (e.Button == MouseButtons.Left && !CloseBox.Contains(e.Location) && !HelpBox.Contains(e.Location) && Owner2 != null)
             {
                 Point s = PointToScreen(e.Location);
                 dragOffset = new Point(s.X - Owner2.Left, s.Y - Owner2.Top);   // drag the title bar to move the window
@@ -287,6 +297,7 @@ namespace AzerothLauncher
                 if (Moved != null && Owner2 != null) Moved(Owner2.Location);
             }
             else if (e.Button == MouseButtons.Left && CloseBox.Contains(e.Location)) WowButton.Fire(CloseClicked);
+            else if (e.Button == MouseButtons.Left && HelpBox.Contains(e.Location)) WowButton.Fire(HelpClicked);
             else if (e.Button == MouseButtons.Left && ArrowAt(e.Location) >= 0) ClickMenu(ArrowAt(e.Location));
             else if (e.Button == MouseButtons.Left)
             {
@@ -393,6 +404,13 @@ namespace AzerothLauncher
             sideHead.Dock = DockStyle.Top;
             // (no Owner2: the section area does not move)
             sideHead.CloseClicked = CloseSide;
+            sideHead.HelpClicked = delegate
+            {
+                Info("The path at the top", "This window has no rows of buttons, to give its pages as much room as possible. " +
+                     "The path at the top does their job: each step is where you are (Guide › Classes › Priest).\n\n" +
+                     "Click a step to go back to it. Point at a step with ▾, or click it, for the list of places beside it " +
+                     "(the other tabs, classes or pages). The arrow on the left goes back the way you came, and the X takes you home.");
+            };
             sideHead.Moved = delegate(Point p)
             {
                 Cfg.Set("side_pos", new List<object> { (long)p.X, (long)p.Y });

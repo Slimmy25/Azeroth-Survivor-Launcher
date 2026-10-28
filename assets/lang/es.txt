@@ -1795,3 +1795,7 @@ Every piece a {0} can wear, with its bonuses, the bosses that drop it and each s
 = {0}: EQUIPO
 I'm sorry the launcher could not help this time. Everything it set up has been taken away again; your game, your saves and your cloud files are untouched.\n\nIf you need more help, please contact Slimjim in the Discord. Best of luck!
 = Sentimos que el launcher no haya podido ayudar esta vez. Todo lo que configuró se ha quitado; tu juego, tus partidas guardadas y tus archivos en la nube no se han tocado.\n\nSi necesitas más ayuda, contacta con Slimjim en Discord. ¡Mucha suerte!
+The path at the top
+= La ruta de arriba
+This window has no rows of buttons, to give its pages as much room as possible. The path at the top does their job: each step is where you are (Guide › Classes › Priest).\n\nClick a step to go back to it. Point at a step with ▾, or click it, for the list of places beside it (the other tabs, classes or pages). The arrow on the left goes back the way you came, and the X takes you home.
+= Esta ventana no tiene filas de botones para dar a sus páginas el máximo espacio. La ruta de arriba hace su trabajo: cada paso es dónde estás (Guía › Clases › Sacerdote).\n\nHaz clic en un paso para volver a él. Señala un paso con ▾, o haz clic en él, para ver los lugares de al lado (las otras pestañas, clases o páginas). La flecha de la izquierda vuelve por donde viniste y la X te lleva al inicio.

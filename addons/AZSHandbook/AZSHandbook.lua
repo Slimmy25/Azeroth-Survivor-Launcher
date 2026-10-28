@@ -307,7 +307,7 @@ local function ItemsGear(out)
 		local s, p = slots[i], planner.slots[slots[i]];
 		local st = planner.stars[s] or 0;
 		-- a click on a piece: one more star (after 5 back to 0); on an empty slot: pick it
-		table.insert(out, { kind = "row", label = s, text = p and (p.name .. (p.slot and st > 0 and ("  [" .. st .. "]") or "")) or "Empty", rarity = p and p.rarity, item = p,
+		table.insert(out, { kind = "row", label = s, text = p and (p.name .. (p.slot and st > 0 and ("  T" .. st) or "")) or "Empty", rarity = p and p.rarity, item = p,
 		                    selected = (planner.pick == s), go = function()
 		                        if ( p and p.slot ) then planner.stars[s] = math.mod((planner.stars[s] or 0) + 1, 6); end
 		                        planner.pick = s;

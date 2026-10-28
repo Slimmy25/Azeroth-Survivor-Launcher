@@ -1796,3 +1796,7 @@ Every piece a {0} can wear, with its bonuses, the bosses that drop it and each s
 = TRANG BỊ {0}
 I'm sorry the launcher could not help this time. Everything it set up has been taken away again; your game, your saves and your cloud files are untouched.\n\nIf you need more help, please contact Slimjim in the Discord. Best of luck!
 = Rất tiếc trình khởi chạy lần này đã không giúp được bạn. Mọi thứ nó thiết lập đều đã được gỡ bỏ; trò chơi, bản lưu và tệp trên đám mây của bạn vẫn nguyên vẹn.\n\nNếu cần thêm trợ giúp, hãy liên hệ Slimjim trên Discord. Chúc may mắn!
+The path at the top
+= Đường dẫn phía trên
+This window has no rows of buttons, to give its pages as much room as possible. The path at the top does their job: each step is where you are (Guide › Classes › Priest).\n\nClick a step to go back to it. Point at a step with ▾, or click it, for the list of places beside it (the other tabs, classes or pages). The arrow on the left goes back the way you came, and the X takes you home.
+= Cửa sổ này không có các hàng nút, để các trang có nhiều chỗ nhất. Đường dẫn phía trên làm thay việc đó: mỗi bước cho biết bạn đang ở đâu (Hướng dẫn › Lớp › Priest).\n\nBấm một bước để quay lại đó. Trỏ vào bước có ▾, hoặc bấm vào nó, để xem danh sách nơi bên cạnh (các thẻ, lớp hoặc trang khác). Mũi tên bên trái quay lại theo đường bạn đã đi, còn X đưa bạn về trang chính.

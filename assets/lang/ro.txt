@@ -1796,3 +1796,7 @@ Every piece a {0} can wear, with its bonuses, the bosses that drop it and each s
 = {0}: ECHIPAMENT
 I'm sorry the launcher could not help this time. Everything it set up has been taken away again; your game, your saves and your cloud files are untouched.\n\nIf you need more help, please contact Slimjim in the Discord. Best of luck!
 = Ne pare rău că launcherul nu a putut ajuta de data aceasta. Tot ce a configurat a fost eliminat; jocul, salvările și fișierele din cloud au rămas neatinse.\n\nDacă ai nevoie de ajutor, contactează-l pe Slimjim pe Discord. Mult noroc!
+The path at the top
+= Calea de sus
+This window has no rows of buttons, to give its pages as much room as possible. The path at the top does their job: each step is where you are (Guide › Classes › Priest).\n\nClick a step to go back to it. Point at a step with ▾, or click it, for the list of places beside it (the other tabs, classes or pages). The arrow on the left goes back the way you came, and the X takes you home.
+= Această fereastră nu are rânduri de butoane, ca paginile să aibă cât mai mult loc. Calea de sus le ține locul: fiecare pas arată unde ești (Ghid › Clase › Preot).\n\nApasă pe un pas ca să te întorci la el. Arată un pas cu ▾ sau apasă pe el pentru lista locurilor de lângă (celelalte file, clase sau pagini). Săgeata din stânga te întoarce pe drumul pe care ai venit, iar X te duce acasă.
