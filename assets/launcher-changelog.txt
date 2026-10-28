@@ -1,3 +1,16 @@
+# v2.2 (2026-10-28)
+## In short
+Talent builds can now be saved by name for each class, loaded later, exported as shareable codes, and imported from codes. The Guide and Community video pages also get small usability refinements.
+
+## Talent Tree Builder
+- Talent builds can be saved by name for each class, loaded later, exported as a shareable code, and imported from a code.
+
+## Videos
+- Guide videos: no EXIT FULLSCREEN button over a fullscreen video any more; the player's own button or Esc brings it back. No "Lost?" while a Guide video plays.
+- Community: no line about whose video it is above the featured video (the ticked box says it), and "Lost?" is shown in MORE VIDEOS.
+
+---
+
 # v2.1 (2026-10-28)
 ## In short
 A big one. Addon profiles each keep their own interface, there's a ROLLBACK for addons and an Advanced settings mode, uninstalling happens inside the launcher, and two new addons by Maidenhead are in Download More. Videos open without a white flash and close with Esc, the Guide's own videos have a YouTube-style player, the Gear Planner shows five small stars, the Talent Tree Builder makes room for saving builds, the Guide follows the game's 0.124 and 0.125 updates, and Options › Launcher holds everything on one page.
