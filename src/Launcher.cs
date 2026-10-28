@@ -128,14 +128,14 @@ namespace AzerothLauncher
             // the News line: Discord's own symbol (Blurple, from discord.com/branding, unaltered) left of "News", and
             // CHANGELOG at the very end of the line
             discordIcon = new BrandIcon(Theme.LoadImage("AS.discord-blurple.png"), Theme.LoadImage("AS.discord-white.png"), Lang.T("Join the community!") + "\n" + DiscordUrl);   // the hover ends with where it goes
-            discordIcon.Bounds = new Rectangle(697, 203, 26, 20);
+            discordIcon.Bounds = new Rectangle(725, 203, 26, 20);
             nav["Changelog"] = Place(new WowButton("CHANGELOG", delegate { OpenMain("Changelog"); }, 110, 22, 8), 1085 - 110, 201);
             nav["Changelog"].Skin = Retro.Button;
             discordIcon.Click += delegate { Util.OpenInShell(DiscordUrl); };
             Controls.Add(discordIcon);
-            // a subtle heart left of the Discord symbol: support the game's developer (Aethus)
+            // the enlarged support heart, followed immediately by the Discord icon
             var heart = new HeartIcon(Lang.T("Love the game? Support the Dev by buying him a coffee") + "\n" + SupportUrl);
-            heart.Bounds = new Rectangle(679, 205, 16, 16);
+            heart.Bounds = new Rectangle(697, 203, 26, 20);
             heart.Click += delegate { Util.OpenInShell(SupportUrl); };
             Controls.Add(heart);
             LayoutNav();
@@ -358,8 +358,8 @@ namespace AzerothLauncher
                 using (var shadow = new SolidBrush(Color.Black))
                 {
                     Font hf = Theme.F(11);
-                    g.DrawString(Lang.T("News"), hf, shadow, 729, 205);    // after the Discord symbol
-                    g.DrawString(Lang.T("News"), hf, gold, 728, 204);
+                    g.DrawString(Lang.T("News"), hf, shadow, 757, 205);    // centered after the heart and Discord icons
+                    g.DrawString(Lang.T("News"), hf, gold, 756, 204);
                     g.DrawString(Lang.T("Launcher"), hf, shadow, 698, 447);
                     g.DrawString(Lang.T("Launcher"), hf, gold, 697, 446);
                 }
