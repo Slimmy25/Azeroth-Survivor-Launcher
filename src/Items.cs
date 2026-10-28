@@ -377,6 +377,40 @@ namespace AzerothLauncher
             catch (Exception) { }
         }
 
+        // the real icons of the gear that are real World of Warcraft items (assets\item-icons.txt: name -> icon name, shown
+        // from Wowhead's image host); a piece without one shows "Image soon"
+        static Dictionary<string, string> gearIcons;
+
+        public static Dictionary<string, string> GearIcons
+        {
+            get
+            {
+                if (gearIcons != null) return gearIcons;
+                var d = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+                try
+                {
+                    foreach (string raw in Util.ReadResource("AS.item-icons.txt").Replace("\r\n", "\n").Split('\n'))
+                    {
+                        if (raw.StartsWith("#")) continue;
+                        string[] f = raw.Split('|');
+                        if (f.Length >= 3 && f[2].Trim().Length > 0) d[f[0].Trim()] = f[2].Trim().ToLowerInvariant();
+                    }
+                }
+                catch (Exception) { }
+                return gearIcons = d;
+            }
+        }
+
+        // an item's real icon name by its name: a gear piece from the list above, or a ring, trinket or amulet's own; else null
+        public static string IconFor(string name)
+        {
+            if (string.IsNullOrEmpty(name)) return null;
+            string ic;
+            if (GearIcons.TryGetValue(name.Trim(), out ic)) return ic;
+            foreach (var j in Jewelry) if (string.Equals(j.Name, name.Trim(), StringComparison.OrdinalIgnoreCase) && j.Icon.Length > 0) return j.Icon.ToLowerInvariant();
+            return null;
+        }
+
         public static bool IsArmor(GearPiece p) { return p != null && p.Kind != "Weapon"; }
 
         public static string SetName(string cls, string rarity)

@@ -222,6 +222,15 @@ namespace AzerothLauncher
 
         // the icons come 56 px wide: drawn at 56, 42 or 28 px (a clean share of that) they stay sharp, where any other
         // size in between looks soft. The largest of those that fits.
+        // where a real item's picture will go but there is none yet: "Image soon" in small letters, in the rarity's colour
+        public static void ImageSoon(Graphics g, Rectangle r, Color c)
+        {
+            using (var b = new SolidBrush(Color.FromArgb(50, c))) g.FillRectangle(b, r);
+            Font f = F(r.Height >= 44 ? 8f : 6.5f, FontStyle.Bold);
+            TextRenderer.DrawText(g, Lang.T("Image soon"), f, Rectangle.Inflate(r, -1, 0), Mix(c, Color.White, 0.55),
+                                  TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter | TextFormatFlags.WordBreak | TextFormatFlags.NoPadding);
+        }
+
         public static int CrispIcon(int room)
         {
             if (room >= 56) return 56;

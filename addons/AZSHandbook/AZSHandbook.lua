@@ -228,8 +228,13 @@ local function Totals(class)
 	return t, health, unknown, worn;
 end
 
--- a piece's own icon: none yet (AZS Stats no longer collects icons); the piece's data icon or the slot stands in
-local function ItemIcon(name) return nil; end
+-- a piece's own icon: the real item's icon (the launcher writes them, itemicons), the game's own texture; else nil
+-- and the piece shows "Image soon"
+local function ItemIcon(name)
+	local icons = D().itemicons;
+	if ( type(icons) == "table" and name and icons[name] ) then return icons[name]; end
+	return nil;
+end
 
 local function ItemTooltip(owner, p)
 	GameTooltip:SetOwner(owner, "ANCHOR_RIGHT");
@@ -819,7 +824,7 @@ local function LayMore(it, y)
 				c.t:SetText("");
 			else
 				c.icon:Hide();
-				c.t:SetText(ab .. (p.known and "" or "*"));
+				c.t:SetText("Image\nsoon");             -- not a real item: no picture yet
 			end
 			c:Show();
 		else c.p = nil; c:Hide(); end

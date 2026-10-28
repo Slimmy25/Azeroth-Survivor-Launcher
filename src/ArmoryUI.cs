@@ -121,8 +121,12 @@ namespace AzerothLauncher
                     g.FillPath(lg, path);
                 using (var p = new Pen(color, 2)) g.DrawPath(p, path);
             }
-            Text(g, letters, Theme.F(r.Height >= 40 ? 13 : 10, FontStyle.Bold), Bright, r,
-                 TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter | TextFormatFlags.SingleLine);
+            if (letters == Lang.T("Image soon"))                 // no real picture yet: the words, small, on two lines
+                Text(g, letters, Theme.F(r.Height >= 40 ? 7.5f : 6.5f, FontStyle.Bold), Bright, Rectangle.Inflate(r, -2, 0),
+                     TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter | TextFormatFlags.WordBreak);
+            else
+                Text(g, letters, Theme.F(r.Height >= 40 ? 13 : 10, FontStyle.Bold), Bright, r,
+                     TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter | TextFormatFlags.SingleLine);
         }
 
         static GraphicsPath Ellipse(Rectangle r)
