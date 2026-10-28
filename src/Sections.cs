@@ -1688,8 +1688,9 @@ namespace AzerothLauncher
             var profiles = Cfg.Section("addon_profiles");
             int py = bottom;
             string active = ActiveAddonProfile();
-            if (!advanced)
             {
+                // Keep the familiar addon actions at the top in both Basic and Advanced views.
+                // Advanced profile controls are anchored separately at the bottom.
                 var more = Put(new WowButton("DOWNLOAD MORE ›", delegate { SetAddonMode("download"); }, 190, 32, 10), cx, top);
                 int rtop = BottomOf(more) + 6;
                 var refresh = Put(new WowButton("REFRESH", delegate { BuildPanel("Addons"); }, 92, 28, 9), cx, rtop);
@@ -1721,23 +1722,23 @@ namespace AzerothLauncher
                 string text;
                 if (s == "none")
                 {
-                    py -= (int)(28 * Theme.Zoom) + 2;
-                    Put(new WowButton("USE", delegate { UseNoAddonProfile(); }, 190, 28, 9), cx, py);
+                    py -= (int)(24 * Theme.Zoom) + 1;
+                    Put(new WowButton("USE", delegate { UseNoAddonProfile(); }, 190, 24, 9), cx, py);
                     text = Lang.T(active == "none" ? "In use" : "Not in use");
                 }
                 else
                 {
                     var prof = Json.AsDict(Json.Get(profiles, s));
-                    py -= (int)(28 * Theme.Zoom) + 2;
-                    Put(new WowButton("SAVE", delegate { SaveAddonProfile(s); }, 92, 28, 9), cx, py);
-                    Put(new WowButton("LOAD", delegate { LoadAddonProfile(s); }, 92, 28, 9), cx + (int)(98 * Theme.Zoom), py);
-                    text = Lang.T(prof == null ? "empty" : Addons.ProfileCount(prof, "enabled") + " on, " +
-                                  Addons.ProfileCount(prof, "disabled") + " off\nsaved " + Json.Str(prof, "saved"));
-                    if (active == s) text = Lang.T("In use") + "\n" + text;
+                    py -= (int)(24 * Theme.Zoom) + 1;
+                    Put(new WowButton("SAVE", delegate { SaveAddonProfile(s); }, 92, 24, 9), cx, py);
+                    Put(new WowButton("LOAD", delegate { LoadAddonProfile(s); }, 92, 24, 9), cx + (int)(98 * Theme.Zoom), py);
+                    text = active == s ? Lang.T("In use") :
+                           Lang.T(prof == null ? "empty" : Addons.ProfileCount(prof, "enabled") + " on, " +
+                                  Addons.ProfileCount(prof, "disabled") + " off, saved " + Json.Str(prof, "saved"));
                 }
                 var info = UI.Text(text, 9, FontStyle.Regular, active == s ? Theme.Gold : Theme.Text, Theme.Panel, (int)(190 * Theme.Zoom), false);
                 info.Size = VStack.Measure(info);
-                py -= info.Height + 2;
+                py -= info.Height + 1;
                 Put(info, cx, py);
                 // Profile 1 and 2 can carry a name of the player's own: click the name to type one (Enter keeps it, Esc
                 // leaves it, an empty name goes back to "Profile 1")
@@ -1802,7 +1803,7 @@ namespace AzerothLauncher
                 var tt = new ToolTip { AutoPopDelay = 30000, InitialDelay = 150, ReshowDelay = 100 };
                 tt.SetToolTip(q, Lang.T(note));
                 q.Disposed += delegate { tt.Dispose(); };
-                py -= 8;
+                py -= 3;
             }
             }
             // --- left: scrollable list with one switch per addon ---
