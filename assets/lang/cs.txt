@@ -1820,3 +1820,49 @@ Click a folder to change it, or use Change ▾ in the path above. Importing a sa
 = Kliknutím na složku ji změníte, nebo použijte Změnit ▾ v cestě nahoře. Je tam i import uložené pozice.
 Language ({0}), About Launcher and Run setup again: in Settings ▾ in the path above.
 = Jazyk ({0}), O launcheru a Spustit nastavení znovu: v Nastavení ▾ v cestě nahoře.
+Biggest crit: {0}
+= Největší kritický zásah: {0}
+Biggest heal: {0}
+= Největší léčení: {0}
+Highlights
+= Zajímavosti
+Left early
+= Odchod předčasně
+Legendaries picked up: {0}
+= Sebrané legendy: {0}
+Level-ups that saved you: {0}
+= Úrovně, které vás zachránily: {0}
+Most kills in 5 seconds: {0}
+= Nejvíc zabití za 5 sekund: {0}
+Run summary
+= Shrnutí běhu
+Spell focus
+= Zaměření kouzel
+Survived {0} · level {1} · {2} kills · {3} DPS
+= Přežito {0} · úroveň {1} · {2} zabití · {3} DPS
+Your best DPS of your last {0} {1} runs
+= Vaše nejlepší DPS z posledních {0} běhů za {1}
+Your longest of your last {0} {1} runs
+= Váš nejdelší z posledních {0} běhů za {1}
+with
+= s
+{0} bosses
+= {0} bossů
+{0} caches
+= {0} truhel
+{0} damage dealt
+= {0} způsobeného poškození
+{0} did {1}% of the damage
+= {0} způsobil(a) {1} % poškození
+{0} elites
+= {0} elit
+{0} gold
+= {0} zlata
+{0} guardians
+= {0} strážců
+{0} kills a minute
+= {0} zabití za minutu
+{0} taken
+= {0} utrženo
+click a run for its summary
+= klikněte na běh pro jeho shrnutí

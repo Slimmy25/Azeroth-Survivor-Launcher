@@ -25,3 +25,9 @@ A community launcher for Azeroth Survivors, the game made by Aethus. Made by Sli
 
 # Look
 The launcher layout is inspired by the WoW Retro Launcher by Parquelle (https://github.com/Parquelle/WoWRetroLauncher). All of its artwork is original, drawn for this launcher.
+
+# Thanks
+- Keijin has been there since the beginning, and is the main reason I wanted to get into this.
+- Kraatos spent a little time helping me launch into open source; I'm grateful for his insight on problems still to come.
+- Maidenhead, a friend and fellow coder, makes cool addons and also inspired me to get started.
+- The Mod team has shown overwhelming support for keeping this transparent, and has given me a fair and reasonable time to put my addon up for review. At the time of writing it is still pending review: fingers crossed!

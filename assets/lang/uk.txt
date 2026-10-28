@@ -1820,3 +1820,49 @@ Click a folder to change it, or use Change ▾ in the path above. Importing a sa
 = Клацніть теку, щоб змінити її, або скористайтеся «Змінити ▾» у шляху вгорі. Там і імпорт збереження.
 Language ({0}), About Launcher and Run setup again: in Settings ▾ in the path above.
 = Мова ({0}), «Про лаунчер» і «Запустити налаштування знову»: у «Налаштування ▾» в шляху вгорі.
+Biggest crit: {0}
+= Найсильніший крит: {0}
+Biggest heal: {0}
+= Найсильніше зцілення: {0}
+Highlights
+= Яскраві моменти
+Left early
+= Покинуто рано
+Legendaries picked up: {0}
+= Підібрано легендарних: {0}
+Level-ups that saved you: {0}
+= Підвищення рівня, що врятували: {0}
+Most kills in 5 seconds: {0}
+= Найбільше вбивств за 5 секунд: {0}
+Run summary
+= Підсумок забігу
+Spell focus
+= Наголос на закляттях
+Survived {0} · level {1} · {2} kills · {3} DPS
+= Вижив {0} · рівень {1} · {2} вбивств · {3} DPS
+Your best DPS of your last {0} {1} runs
+= Найкращий DPS з останніх {0} забігів за {1}
+Your longest of your last {0} {1} runs
+= Найдовший з останніх {0} забігів за {1}
+with
+= з
+{0} bosses
+= {0} босів
+{0} caches
+= {0} схованок
+{0} damage dealt
+= завдано {0} шкоди
+{0} did {1}% of the damage
+= {0} завдав {1}% шкоди
+{0} elites
+= {0} елітних
+{0} gold
+= {0} золота
+{0} guardians
+= {0} вартових
+{0} kills a minute
+= {0} вбивств за хвилину
+{0} taken
+= отримано {0}
+click a run for its summary
+= клацніть забіг, щоб побачити підсумок

@@ -1819,3 +1819,49 @@ Click a folder to change it, or use Change ▾ in the path above. Importing a sa
 = Napsauta kansiota vaihtaaksesi sen tai käytä yläreunan polun kohtaa Vaihda ▾. Tallennuksen tuonti on myös siellä.
 Language ({0}), About Launcher and Run setup again: in Settings ▾ in the path above.
 = Kieli ({0}), Tietoja käynnistimestä ja Suorita käyttöönotto uudelleen: yläreunan polun kohdassa Asetukset ▾.
+Biggest crit: {0}
+= Suurin kriittinen: {0}
+Biggest heal: {0}
+= Suurin parannus: {0}
+Highlights
+= Kohokohdat
+Left early
+= Lähti kesken
+Legendaries picked up: {0}
+= Kerätyt legendaariset: {0}
+Level-ups that saved you: {0}
+= Pelastaneet tasonnousut: {0}
+Most kills in 5 seconds: {0}
+= Eniten tappoja 5 sekunnissa: {0}
+Run summary
+= Juoksun yhteenveto
+Spell focus
+= Loitsujen painotus
+Survived {0} · level {1} · {2} kills · {3} DPS
+= Selvisit {0} · taso {1} · {2} tappoa · {3} DPS
+Your best DPS of your last {0} {1} runs
+= Paras DPS viimeisistä {0} {1}-juoksustasi
+Your longest of your last {0} {1} runs
+= Pisin viimeisistä {0} {1}-juoksustasi
+with
+= kanssa
+{0} bosses
+= {0} pomoa
+{0} caches
+= {0} arkkua
+{0} damage dealt
+= {0} vahinkoa tehty
+{0} did {1}% of the damage
+= {0} teki {1} % vahingosta
+{0} elites
+= {0} eliittiä
+{0} gold
+= {0} kultaa
+{0} guardians
+= {0} vartijaa
+{0} kills a minute
+= {0} tappoa minuutissa
+{0} taken
+= {0} otettu
+click a run for its summary
+= napsauta juoksua nähdäksesi yhteenvedon

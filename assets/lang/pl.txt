@@ -1820,3 +1820,49 @@ Click a folder to change it, or use Change ▾ in the path above. Importing a sa
 = Kliknij folder, aby go zmienić, lub użyj Zmień ▾ w ścieżce u góry. Import zapisu też tam jest.
 Language ({0}), About Launcher and Run setup again: in Settings ▾ in the path above.
 = Język ({0}), O launcherze i Uruchom konfigurację ponownie: w Ustawienia ▾ w ścieżce u góry.
+Biggest crit: {0}
+= Największe trafienie krytyczne: {0}
+Biggest heal: {0}
+= Największe leczenie: {0}
+Highlights
+= Najlepsze chwile
+Left early
+= Opuszczono wcześnie
+Legendaries picked up: {0}
+= Zebrane legendarne: {0}
+Level-ups that saved you: {0}
+= Awanse, które cię uratowały: {0}
+Most kills in 5 seconds: {0}
+= Najwięcej zabójstw w 5 sekund: {0}
+Run summary
+= Podsumowanie przebiegu
+Spell focus
+= Skupienie na czarach
+Survived {0} · level {1} · {2} kills · {3} DPS
+= Przetrwano {0} · poziom {1} · {2} zabójstw · {3} DPS
+Your best DPS of your last {0} {1} runs
+= Twoje najlepsze DPS z ostatnich {0} przebiegów jako {1}
+Your longest of your last {0} {1} runs
+= Twój najdłuższy z ostatnich {0} przebiegów jako {1}
+with
+= z
+{0} bosses
+= {0} bossów
+{0} caches
+= {0} skrzyń
+{0} damage dealt
+= {0} zadanych obrażeń
+{0} did {1}% of the damage
+= {0} zadał {1}% obrażeń
+{0} elites
+= {0} elit
+{0} gold
+= {0} złota
+{0} guardians
+= {0} strażników
+{0} kills a minute
+= {0} zabójstw na minutę
+{0} taken
+= {0} otrzymanych
+click a run for its summary
+= kliknij przebieg, aby zobaczyć podsumowanie

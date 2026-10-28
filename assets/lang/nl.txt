@@ -1819,3 +1819,49 @@ Click a folder to change it, or use Change ▾ in the path above. Importing a sa
 = Klik op een map om hem te wijzigen, of gebruik Wijzigen ▾ in het pad hierboven. Een opslag importeren staat daar ook.
 Language ({0}), About Launcher and Run setup again: in Settings ▾ in the path above.
 = Taal ({0}), Over de launcher en Installatie opnieuw: onder Instellingen ▾ in het pad hierboven.
+Biggest crit: {0}
+= Grootste kritieke treffer: {0}
+Biggest heal: {0}
+= Grootste genezing: {0}
+Highlights
+= Hoogtepunten
+Left early
+= Vroeg verlaten
+Legendaries picked up: {0}
+= Legendarische opgepakt: {0}
+Level-ups that saved you: {0}
+= Levelups die je redden: {0}
+Most kills in 5 seconds: {0}
+= Meeste kills in 5 seconden: {0}
+Run summary
+= Runoverzicht
+Spell focus
+= Spreukfocus
+Survived {0} · level {1} · {2} kills · {3} DPS
+= Overleefd {0} · level {1} · {2} kills · {3} DPS
+Your best DPS of your last {0} {1} runs
+= Je beste DPS van je laatste {0} {1}-runs
+Your longest of your last {0} {1} runs
+= Je langste van je laatste {0} {1}-runs
+with
+= met
+{0} bosses
+= {0} bazen
+{0} caches
+= {0} kisten
+{0} damage dealt
+= {0} schade gedaan
+{0} did {1}% of the damage
+= {0} deed {1}% van de schade
+{0} elites
+= {0} elites
+{0} gold
+= {0} goud
+{0} guardians
+= {0} wachters
+{0} kills a minute
+= {0} kills per minuut
+{0} taken
+= {0} ontvangen
+click a run for its summary
+= klik op een run voor het overzicht

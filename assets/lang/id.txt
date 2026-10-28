@@ -1819,3 +1819,49 @@ Click a folder to change it, or use Change ▾ in the path above. Importing a sa
 = Klik folder untuk mengubahnya, atau gunakan Ubah ▾ di jalur atas. Impor simpanan juga ada di sana.
 Language ({0}), About Launcher and Run setup again: in Settings ▾ in the path above.
 = Bahasa ({0}), Tentang Launcher dan Jalankan penyiapan lagi: di Pengaturan ▾ pada jalur atas.
+Biggest crit: {0}
+= Kritikal terbesar: {0}
+Biggest heal: {0}
+= Penyembuhan terbesar: {0}
+Highlights
+= Sorotan
+Left early
+= Keluar lebih awal
+Legendaries picked up: {0}
+= Legendaris diambil: {0}
+Level-ups that saved you: {0}
+= Naik level yang menyelamatkanmu: {0}
+Most kills in 5 seconds: {0}
+= Kill terbanyak dalam 5 detik: {0}
+Run summary
+= Ringkasan run
+Spell focus
+= Fokus mantra
+Survived {0} · level {1} · {2} kills · {3} DPS
+= Bertahan {0} · level {1} · {2} kill · {3} DPS
+Your best DPS of your last {0} {1} runs
+= DPS terbaikmu dari {0} run {1} terakhir
+Your longest of your last {0} {1} runs
+= Run terlama dari {0} run {1} terakhir
+with
+= bersama
+{0} bosses
+= {0} bos
+{0} caches
+= {0} peti
+{0} damage dealt
+= {0} kerusakan diberikan
+{0} did {1}% of the damage
+= {0} memberi {1}% kerusakan
+{0} elites
+= {0} elit
+{0} gold
+= {0} emas
+{0} guardians
+= {0} penjaga
+{0} kills a minute
+= {0} kill per menit
+{0} taken
+= {0} diterima
+click a run for its summary
+= klik sebuah run untuk ringkasannya

@@ -4,6 +4,13 @@ The Azeroth Survivors Launcher is made by **Slimjim** ([Slimmy25](https://github
 other people's work. This page says where everything comes from, who owns it, and what this repository does and
 does not contain.
 
+## Thanks: the people who peer reviewed this work
+
+- **Keijin** has been there since the beginning, and is the main reason I wanted to get into this.
+- **Kraatos** spent a little time helping me launch into open source; I'm grateful for his insight on problems still to come.
+- **Maidenhead**, a friend and fellow coder, makes cool addons and also inspired me to get started.
+- **The Mod team** of the Azeroth Survivors Discord has shown overwhelming support for keeping this transparent, and has given me a fair and reasonable time to put my addon up for review. At the time of writing it is still pending review: fingers crossed!
+
 ## The game: Azeroth Survivors, by Aethus
 
 **Azeroth Survivors** is made by **Aethus**. It is played at <https://wow.aethus.pl/> (in the browser) and as a

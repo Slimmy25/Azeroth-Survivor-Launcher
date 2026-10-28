@@ -35,11 +35,6 @@ namespace AzerothLauncher
                 foreach (var h in st.History) { SpellIcons.Zone(h.Zone, null); foreach (var ab in h.Abilities) SpellIcons.Spell(ab.Name, null); }
                 SpellIcons.WaitForAll(30000);
             }
-            if (st != null && st.History.Count > 0)          // "share a run": the picture of the newest victory (or run)
-            {
-                StatRun pick = st.History.Find(delegate(StatRun x) { return x.Kind == "victory"; }) ?? st.History[0];
-                using (Bitmap card = RunCard(pick)) card.Save(Path.Combine(outDir, "share-run.png"), ImageFormat.Png);
-            }
             foreach (string cls in new[] { null, topClass })
             {
                 for (int tab = 0; tab < StatTabs.Length; tab++)

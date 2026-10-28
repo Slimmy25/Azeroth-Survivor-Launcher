@@ -1819,3 +1819,49 @@ Click a folder to change it, or use Change ▾ in the path above. Importing a sa
 = Klicke auf einen Ordner, um ihn zu ändern, oder nutze Ändern ▾ im Pfad oben. Dort kannst du auch einen Spielstand importieren.
 Language ({0}), About Launcher and Run setup again: in Settings ▾ in the path above.
 = Sprache ({0}), Über den Launcher und Einrichtung erneut ausführen: unter Einstellungen ▾ im Pfad oben.
+Biggest crit: {0}
+= Größter kritischer Treffer: {0}
+Biggest heal: {0}
+= Größte Heilung: {0}
+Highlights
+= Highlights
+Left early
+= Vorzeitig verlassen
+Legendaries picked up: {0}
+= Aufgehobene Legendäre: {0}
+Level-ups that saved you: {0}
+= Stufenaufstiege, die dich retteten: {0}
+Most kills in 5 seconds: {0}
+= Meiste Kills in 5 Sekunden: {0}
+Run summary
+= Laufübersicht
+Spell focus
+= Zauberfokus
+Survived {0} · level {1} · {2} kills · {3} DPS
+= Überlebt {0} · Stufe {1} · {2} Kills · {3} DPS
+Your best DPS of your last {0} {1} runs
+= Deine beste DPS deiner letzten {0} {1}-Läufe
+Your longest of your last {0} {1} runs
+= Dein längster deiner letzten {0} {1}-Läufe
+with
+= mit
+{0} bosses
+= {0} Bosse
+{0} caches
+= {0} Truhen
+{0} damage dealt
+= {0} Schaden verursacht
+{0} did {1}% of the damage
+= {0} verursachte {1} % des Schadens
+{0} elites
+= {0} Elite
+{0} gold
+= {0} Gold
+{0} guardians
+= {0} Wächter
+{0} kills a minute
+= {0} Kills pro Minute
+{0} taken
+= {0} erlitten
+click a run for its summary
+= Klicke einen Lauf für seine Übersicht an

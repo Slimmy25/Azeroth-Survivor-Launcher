@@ -1820,3 +1820,49 @@ Click a folder to change it, or use Change ▾ in the path above. Importing a sa
 = Κάνε κλικ σε έναν φάκελο για να τον αλλάξεις ή χρησιμοποίησε Αλλαγή ▾ στη διαδρομή επάνω. Εκεί είναι και η εισαγωγή αποθήκευσης.
 Language ({0}), About Launcher and Run setup again: in Settings ▾ in the path above.
 = Γλώσσα ({0}), Σχετικά με τον launcher και Εκτέλεση ρύθμισης ξανά: στις Ρυθμίσεις ▾ στη διαδρομή επάνω.
+Biggest crit: {0}
+= Μεγαλύτερο κρίσιμο: {0}
+Biggest heal: {0}
+= Μεγαλύτερη θεραπεία: {0}
+Highlights
+= Στιγμιότυπα
+Left early
+= Αποχώρηση νωρίς
+Legendaries picked up: {0}
+= Θρυλικά που μάζεψες: {0}
+Level-ups that saved you: {0}
+= Ανεβάσματα επιπέδου που σε έσωσαν: {0}
+Most kills in 5 seconds: {0}
+= Περισσότερες εξοντώσεις σε 5 δευτερόλεπτα: {0}
+Run summary
+= Σύνοψη διαδρομής
+Spell focus
+= Εστίαση ξορκιών
+Survived {0} · level {1} · {2} kills · {3} DPS
+= Επιβίωσες {0} · επίπεδο {1} · {2} εξοντώσεις · {3} DPS
+Your best DPS of your last {0} {1} runs
+= Το καλύτερο DPS από τις τελευταίες {0} διαδρομές {1}
+Your longest of your last {0} {1} runs
+= Η μακρύτερη από τις τελευταίες {0} διαδρομές {1}
+with
+= με
+{0} bosses
+= {0} αφεντικά
+{0} caches
+= {0} σεντούκια
+{0} damage dealt
+= {0} ζημιά προκλήθηκε
+{0} did {1}% of the damage
+= Το {0} έκανε το {1}% της ζημιάς
+{0} elites
+= {0} επίλεκτοι
+{0} gold
+= {0} χρυσός
+{0} guardians
+= {0} φύλακες
+{0} kills a minute
+= {0} εξοντώσεις το λεπτό
+{0} taken
+= {0} δέχτηκες
+click a run for its summary
+= κάνε κλικ σε μια διαδρομή για τη σύνοψή της

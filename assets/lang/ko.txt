@@ -1820,3 +1820,49 @@ Click a folder to change it, or use Change ▾ in the path above. Importing a sa
 = 폴더를 클릭해 바꾸거나 위 경로의 변경 ▾ 을 사용하세요. 저장 파일 가져오기도 거기 있습니다.
 Language ({0}), About Launcher and Run setup again: in Settings ▾ in the path above.
 = 언어({0}), 런처 정보, 설정 다시 실행: 위 경로의 설정 ▾ 에 있습니다.
+Biggest crit: {0}
+= 최대 치명타: {0}
+Biggest heal: {0}
+= 최대 치유: {0}
+Highlights
+= 하이라이트
+Left early
+= 중도 이탈
+Legendaries picked up: {0}
+= 주운 전설: {0}
+Level-ups that saved you: {0}
+= 목숨을 구한 레벨 업: {0}
+Most kills in 5 seconds: {0}
+= 5초 동안 최다 처치: {0}
+Run summary
+= 런 요약
+Spell focus
+= 주문 비중
+Survived {0} · level {1} · {2} kills · {3} DPS
+= 생존 {0} · 레벨 {1} · {2} 처치 · {3} DPS
+Your best DPS of your last {0} {1} runs
+= 최근 {0}번의 {1} 런 중 최고 DPS
+Your longest of your last {0} {1} runs
+= 최근 {0}번의 {1} 런 중 최장
+with
+= 함께
+{0} bosses
+= 보스 {0}
+{0} caches
+= 보관함 {0}
+{0} damage dealt
+= 준 피해 {0}
+{0} did {1}% of the damage
+= {0}이(가) 피해의 {1}%를 입힘
+{0} elites
+= 정예 {0}
+{0} gold
+= 골드 {0}
+{0} guardians
+= 수호자 {0}
+{0} kills a minute
+= 분당 {0} 처치
+{0} taken
+= 받은 피해 {0}
+click a run for its summary
+= 런을 클릭하면 요약이 나옵니다

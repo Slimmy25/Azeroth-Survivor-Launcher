@@ -1820,3 +1820,49 @@ Click a folder to change it, or use Change ▾ in the path above. Importing a sa
 = Bấm vào một thư mục để đổi, hoặc dùng Thay đổi ▾ ở đường dẫn phía trên. Nhập bản lưu cũng ở đó.
 Language ({0}), About Launcher and Run setup again: in Settings ▾ in the path above.
 = Ngôn ngữ ({0}), Giới thiệu trình khởi chạy và Chạy lại thiết lập: trong Cài đặt ▾ ở đường dẫn phía trên.
+Biggest crit: {0}
+= Chí mạng lớn nhất: {0}
+Biggest heal: {0}
+= Hồi máu lớn nhất: {0}
+Highlights
+= Điểm nổi bật
+Left early
+= Rời sớm
+Legendaries picked up: {0}
+= Huyền thoại nhặt được: {0}
+Level-ups that saved you: {0}
+= Lần lên cấp cứu bạn: {0}
+Most kills in 5 seconds: {0}
+= Hạ gục nhiều nhất trong 5 giây: {0}
+Run summary
+= Tóm tắt lượt chơi
+Spell focus
+= Trọng tâm phép
+Survived {0} · level {1} · {2} kills · {3} DPS
+= Sống sót {0} · cấp {1} · {2} hạ gục · {3} DPS
+Your best DPS of your last {0} {1} runs
+= DPS cao nhất trong {0} lượt {1} gần đây
+Your longest of your last {0} {1} runs
+= Lượt dài nhất trong {0} lượt {1} gần đây
+with
+= cùng
+{0} bosses
+= {0} trùm
+{0} caches
+= {0} rương
+{0} damage dealt
+= {0} sát thương gây ra
+{0} did {1}% of the damage
+= {0} gây {1}% sát thương
+{0} elites
+= {0} tinh nhuệ
+{0} gold
+= {0} vàng
+{0} guardians
+= {0} hộ vệ
+{0} kills a minute
+= {0} hạ gục mỗi phút
+{0} taken
+= {0} nhận vào
+click a run for its summary
+= bấm vào một lượt để xem tóm tắt

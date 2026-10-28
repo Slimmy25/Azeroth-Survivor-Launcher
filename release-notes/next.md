@@ -25,3 +25,11 @@
   Settings ▾) instead of a row of buttons.
 - Options > Folders: no CHANGE buttons; click a folder to change it, or use Change ▾ in the path, where importing a
   save is too.
+
+### Major Update, part 3
+- STATS > History: clicking a run no longer makes a picture for Discord. It opens a short post-game summary of that run
+  instead: its result, time, level, kills and DPS, what it fought and earned, and a few fun highlights (kills a minute,
+  biggest crit and heal, most kills in 5 seconds, the spells it leaned on, the spell that did most of the damage, how it
+  compares with your other runs of that class, and who killed you).
+- About Launcher and CREDITS.md thank the people who peer reviewed this work: Keijin, Kraatos, Maidenhead and the
+  Discord's Mod team.
