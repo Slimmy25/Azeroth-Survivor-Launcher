@@ -48,7 +48,7 @@ jobs:
             dist/Azeroth Survivors Launcher.sha256.txt
 
       - name: Attach the exe to the release
-        if: github.event_name == 'release' || startsWith(github.ref, 'refs/tags/') || inputs.release != '' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
+        if: github.event_name == 'release' || startsWith(github.ref, 'refs/tags/') || inputs.release != '' || (github.event_name == 'push' && github.ref == 'refs/heads/main') || (github.event_name == 'push' && github.ref == 'refs/heads/main')
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
@@ -74,14 +74,16 @@ jobs:
       # Players download from a separate PUBLIC repository that holds only the exe releases, never the code.
       # Needs the secret RELEASES_TOKEN: a fine-grained token with "Contents: Read and write" on that repository.
       - name: Publish the exe on the public downloads repository
-        if: github.event_name == 'release' || startsWith(github.ref, 'refs/tags/') || inputs.release != ''
+        if: github.event_name == 'release' || startsWith(github.ref, 'refs/tags/') || inputs.release != '' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
           PUBLIC_TOKEN: ${{ secrets.RELEASES_TOKEN }}
           PUBLIC_REPO: Slimmy25/Azeroth-Survivor-Launcher-Releases
-          TAG: ${{ inputs.release || github.event.release.tag_name || github.ref_name }}
+          TAG: ${{ inputs.release || github.event.release.tag_name || (startsWith(github.ref, 'refs/tags/') && github.ref_name) || '' }}
         run: |
+          if [ -z "$TAG" ]; then TAG="$(head -n 1 assets/launcher-changelog.txt | awk '{print $2}')"; fi
+          if [ -z "$TAG" ]; then echo "::error::Could not determine the release tag from the launcher changelog"; exit 1; fi
           if [ -z "$PUBLIC_TOKEN" ]; then
             echo "::warning::The RELEASES_TOKEN secret is not set, so nothing was published on $PUBLIC_REPO."
             exit 0
