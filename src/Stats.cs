@@ -385,10 +385,7 @@ namespace AzerothLauncher
         public CoopStat Coop = new CoopStat();
         public readonly List<StatRun> Builds = new List<StatRun>();               // best builds kept by the addon
         public readonly Dictionary<string, double> BossKills = new Dictionary<string, double>(StringComparer.OrdinalIgnoreCase);   // bosses you beat
-        // the game's own tooltips of abilities, as AZS Stats saw them in game: spell name -> its text
-        public readonly Dictionary<string, string> Tooltips = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
         public readonly List<ArmoryChar> Armory = new List<ArmoryChar>();         // each class's hero, the newest first
-        public readonly Dictionary<string, string> ItemIcons = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);   // every piece worn: name -> icon
 
         public StatBlock Class(string key)
         {
@@ -521,13 +518,6 @@ namespace AzerothLauncher
             foreach (var h in LuaReader.List(LuaReader.Tab(db, "builds"))) st.Builds.Add(ReadRun(h));
             var bk = LuaReader.Tab(db, "bossKills");
             if (bk != null) foreach (var kv in bk) st.BossKills[kv.Key] = LuaReader.Num(bk, kv.Key);
-            var tips = LuaReader.Tab(db, "tooltips");
-            if (tips != null)
-                foreach (var kv in tips)
-                {
-                    string tipText = LuaReader.Text(kv.Value as Dictionary<string, object>, "text");
-                    if (tipText.Length > 0) st.Tooltips[kv.Key] = tipText;
-                }
 
             // the armory: each class's hero, gear and numbers
             var arm = LuaReader.Tab(db, "armory");
@@ -551,7 +541,7 @@ namespace AzerothLauncher
                         it.Name = LuaReader.Text(g, "name");
                         it.Color = LuaReader.Text(g, "color");
                         if (it.Color.Length != 6) it.Color = "ffffff";
-                        it.Icon = LuaReader.Text(g, "icon");
+                        it.Icon = "";                                // AZS Stats no longer collects icons
                         it.Id = LuaReader.Num(g, "id");
                         ac.Gear.Add(it);
                     }
@@ -560,8 +550,6 @@ namespace AzerothLauncher
                     st.Armory.Add(ac);
                 }
             st.Armory.Sort(delegate(ArmoryChar x, ArmoryChar y) { return string.CompareOrdinal(y.Date, x.Date); });
-            var icons = LuaReader.Tab(db, "icons");
-            if (icons != null) foreach (var kv in icons) { string ic = Convert.ToString(kv.Value); if (!string.IsNullOrEmpty(ic)) st.ItemIcons[kv.Key] = ic; }
 
             // the same creature faces for the addon's own Nemesis tab (in the background)
             try

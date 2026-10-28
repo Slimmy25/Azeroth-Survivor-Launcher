@@ -110,14 +110,8 @@ end
 
 local function StripRank(name) return (string.gsub(name or "", "%s*%(.-%)%s*$", "")); end
 
--- the game's own tooltip text of a spell, when AZS Stats has seen it
-local function GameTip(name)
-	if ( type(AZSStatsDB) == "table" and type(AZSStatsDB.tooltips) == "table" ) then
-		local t = AZSStatsDB.tooltips[name];
-		if ( type(t) == "table" and t.text ) then return t.text; end
-	end
-	return nil;
-end
+-- (AZS Stats no longer writes down the game's tooltips, so there is no game text to show here)
+local function GameTip(name) return nil; end
 
 -- the talents of a class that change a spell
 local function Changers(class, spell)
@@ -234,12 +228,8 @@ local function Totals(class)
 	return t, health, unknown, worn;
 end
 
--- a piece's own icon, the game's art: AZS Stats keeps the icon of every piece any hero has worn (AZSStatsDB.icons)
-local function ItemIcon(name)
-	local icons = type(AZSStatsDB) == "table" and AZSStatsDB.icons;
-	if ( type(icons) == "table" and name and icons[name] ) then return icons[name]; end
-	return nil;
-end
+-- a piece's own icon: none yet (AZS Stats no longer collects icons); the piece's data icon or the slot stands in
+local function ItemIcon(name) return nil; end
 
 local function ItemTooltip(owner, p)
 	GameTooltip:SetOwner(owner, "ANCHOR_RIGHT");

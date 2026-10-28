@@ -44,33 +44,10 @@ namespace AzerothLauncher
             plannerClass = cls;
         }
 
-        // the icons of the gear AZS Stats has seen worn (the game's own icons, by the piece's name)
+        // the gear's icons: none for now. AZS Stats no longer collects them; an online source will fill this later.
         Dictionary<string, string> GearIcons()
         {
-            var d = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-            try
-            {
-                RunStats st = AddonStats();
-                if (st != null)
-                    foreach (var kv in st.ItemIcons)          // every piece any hero has worn (AZS Stats keeps them)
-                    {
-                        string ic = kv.Value;
-                        int cut = ic.LastIndexOfAny(new[] { '\\', '/' });
-                        if (cut >= 0) ic = ic.Substring(cut + 1);
-                        if (ic.Length > 0) d[kv.Key] = ic.ToLowerInvariant();
-                    }
-                if (st != null)
-                    foreach (var a in st.Armory)
-                        foreach (var it in a.Gear)
-                        {
-                            string ic = it.Icon ?? "";
-                            int cut = ic.LastIndexOfAny(new[] { '\\', '/' });
-                            if (cut >= 0) ic = ic.Substring(cut + 1);
-                            if (ic.Length > 0 && it.Name.Length > 0 && !d.ContainsKey(it.Name)) d[it.Name] = ic.ToLowerInvariant();
-                        }
-            }
-            catch (Exception) { }
-            return d;
+            return new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
         }
 
         // the gear in the planner, added up: the hover texts of spells and talents show their numbers with it

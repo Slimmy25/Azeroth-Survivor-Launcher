@@ -10,10 +10,6 @@
 -- died within 1 second and within 5 seconds. Each run keeps its own (run.hi in the history); your best ever, and per
 -- class, are kept in AZSStatsDB.highs and AZSStatsDB.classes[class].highs. Beating one says so in chat at once.
 --
--- Tooltips: whenever the game shows the tooltip of one of your abilities (hover a spell on the action bar, a level-up
--- card or anywhere else), its text is written down in AZSStatsDB.tooltips under the spell's name, so the launcher's
--- New Player Guide can show what the game itself says the spell does.
---
 -- Menus: while you pick a level-up card or an item (in co-op the fight goes on around you, and the game keeps you
 -- safe with Divine Shield), kills are not counted for "most kills in 1 / 5 seconds".
 --
@@ -380,50 +376,21 @@ function AZSStats_LiveRunEnded(db, run, classBlock, newClassDps)
 	if ( r == cur ) then cur.hi = {}; cur.announced = {}; end
 end
 
--- ---- the game's own tooltips of your abilities
-local function TipKey(name)
-	local k = string.lower(tostring(name or ""));
-	k = string.gsub(k, "%s*%(.-%)%s*$", "");
-	k = string.gsub(k, "%s+%d+$", "");
-	k = string.gsub(k, "[^%a%d]", "");
-	return k;
-end
-
-local lastTip = "";
-local function CaptureTooltip()
-	if ( not GameTooltip or not GameTooltip:IsVisible() or type(AZSStatsDB) ~= "table" ) then return; end
-	local first = getglobal("GameTooltipTextLeft1");
-	local name = first and first:GetText();
-	if ( not name or name == "" ) then return; end
-	local k = TipKey(name);
-	if ( not AZSSTATS_SPELL_ICONS or not AZSSTATS_SPELL_ICONS[k] ) then return; end      -- only abilities
-	local lines = {};
-	local n = GameTooltip.NumLines and GameTooltip:NumLines() or 12;
-	for i = 2, math.min(n, 20) do
-		local l, r = getglobal("GameTooltipTextLeft" .. i), getglobal("GameTooltipTextRight" .. i);
-		local lt = l and l:IsVisible() and l:GetText() or nil;
-		local rt = r and r:IsVisible() and r:GetText() or nil;
-		if ( lt and lt ~= "" ) then
-			if ( rt and rt ~= "" ) then lt = lt .. "   " .. rt; end
-			table.insert(lines, lt);
+-- AZS Stats keeps your own runs, records and Nemesis log only: it does not collect game text or icons for the
+-- launcher. What older versions wrote down for it (tooltips, item icons) is cleared once.
+local cleanFrame = CreateFrame("Frame");
+cleanFrame:RegisterEvent("VARIABLES_LOADED");
+cleanFrame:SetScript("OnEvent", function()
+	if ( type(AZSStatsDB) ~= "table" ) then return; end
+	AZSStatsDB.tooltips = nil;
+	AZSStatsDB.icons = nil;
+	if ( type(AZSStatsDB.armory) == "table" ) then
+		for _, a in pairs(AZSStatsDB.armory) do
+			if ( type(a) == "table" and type(a.gear) == "table" ) then
+				for i = 1, table.getn(a.gear) do if ( type(a.gear[i]) == "table" ) then a.gear[i].icon = nil; end end
+			end
 		end
 	end
-	if ( table.getn(lines) == 0 ) then return; end
-	local text = table.concat(lines, "\n");
-	if ( name .. text == lastTip ) then return; end
-	lastTip = name .. text;
-	if ( type(AZSStatsDB.tooltips) ~= "table" ) then AZSStatsDB.tooltips = {}; end
-	local clean = string.gsub(name, "%s*%(.-%)%s*$", "");
-	AZSStatsDB.tooltips[clean] = { text = text, title = name, date = date and date("%Y-%m-%d") or "" };
-end
-
-local tipFrame = CreateFrame("Frame");
-local tipAcc = 0;
-tipFrame:SetScript("OnUpdate", function()
-	tipAcc = tipAcc + (arg1 or 0);
-	if ( tipAcc < 0.25 ) then return; end
-	tipAcc = 0;
-	pcall(CaptureTooltip);
 end);
 
 -- ---- the armory, for the launcher's STATS > Armory: what each class's hero wears, and their numbers on the
@@ -449,15 +416,8 @@ local function CaptureArmory()
 			local _, _, color = string.find(link, "|c%x%x(%x%x%x%x%x%x)");
 			local _, _, name = string.find(link, "%[(.-)%]");
 			local _, _, id = string.find(link, "item:(%d+)");
-			local tex = GetInventoryItemTexture and GetInventoryItemTexture("player", slot) or "";
-			tex = string.gsub(tostring(tex or ""), "^.*\\", "");
-			table.insert(a.gear, { slot = label, name = name or "?", color = color or "ffffff", id = tonumber(id) or 0, icon = tex });
+			table.insert(a.gear, { slot = label, name = name or "?", color = color or "ffffff", id = tonumber(id) or 0 });
 			any = true;
-			-- every piece's icon, kept for good (by its name): the launcher's Guide, Gear Planner and Transmog show them
-			if ( name and tex ~= "" ) then
-				if ( type(AZSStatsDB.icons) ~= "table" ) then AZSStatsDB.icons = {}; end
-				AZSStatsDB.icons[name] = tex;
-			end
 		end
 	end
 	if ( type(AZS_STATS) == "table" ) then

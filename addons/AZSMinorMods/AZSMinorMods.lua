@@ -5,8 +5,11 @@
 --     with those words too, /azsmods unhide <words> stops that. What players say is never hidden.
 --   * The camera goes as far out as the game allows, 50 yards (the Max Camera Distance setting at its top), and starts there. Turn it off in
 --     /azsmods to keep the game's own setting.
---   * Boss markers: every boss alive gets a raid marker, the first a Skull, the second a Cross, the third a Moon.
---   * In co-op, a friend who falls gets the Square over their head, blinking 5 times.
+--   * Boss markers: every boss alive gets a raid marker, the first a Skull, the second a Cross, the third a Diamond.
+--   * Miniboss markers: the zone's bosses before its final boss (the Guide's Zones & Bosses list) get a Star, a
+--     Triangle and a Diamond instead, so the Skull and Cross are left for the final boss.
+--   * In co-op, a friend who falls gets a marker over their head, blinking on and off 15 times. Each friend has their
+--     own (Square, Moon, Circle), so several can be down at once. Those three are kept for this alone.
 --   * Move the UI: unlock it, drag the player, target and party frames, the minimap, buffs, cast bar, action bars and
 --     where you want them, then lock it again. The places are kept (Reset puts them back).
 --   * Hide the target frame: this game picks its own targets, so the frame can go.
@@ -56,6 +59,7 @@ local function DB()
 	d.box, d.bloat, d.x, d.y = nil, nil, nil, nil;          -- the retired Say & Party box and "Remove bloat"
 	if ( d.bossMarks == nil ) then d.bossMarks = true; end
 	if ( d.deathMarks == nil ) then d.deathMarks = true; end
+	if ( d.miniMarks == nil ) then d.miniMarks = true; end
 	if ( d.hideTarget == nil ) then d.hideTarget = false; end
 	if ( type(d.places) ~= "table" ) then d.places = {}; end
 	if ( type(d.words) ~= "table" ) then d.words = {}; end
@@ -161,11 +165,45 @@ local function Camera(zoomOut)
 end
 
 -- ---------------------------------------------------------------- raid markers on bosses, and on friends who fall
--- The game's raid markers (they work alone and in co-op): the bosses alive get a Skull, a Cross and a Moon, in the
--- order they came (AZS_GetBosses). A marker needs the boss as a unit: the target, the mouseover, a friend's target,
--- or, when none of those is it, a quick target-and-back by its name.
-local BOSS_ICONS = { 8, 7, 5 };                          -- Skull, Cross, Moon
-local SQUARE = 6;
+-- The game's raid markers (they work alone and in co-op): the bosses alive get a Skull, a Cross and a Diamond, in the
+-- order they came (AZS_GetBosses). With miniboss markers on, the minibosses among them get a Star, a Triangle and a
+-- Diamond, and the Skull and Cross go to the rest (the final boss, and whoever it brings). A marker needs the boss as
+-- a unit: the target, the mouseover, a friend's target, or, when none of those is it, a quick target-and-back by its
+-- name. Square, Moon and Circle are never put on a boss: they blink over friends who fall.
+local BOSS_ICONS = { 8, 7, 3 };                          -- Skull, Cross, Diamond
+local FINAL_ICONS = { 8, 7 };                            -- Skull, Cross (with miniboss markers on)
+local MINI_ICONS = { 1, 4, 3 };                          -- Star, Triangle, Diamond
+local DEATH_ICONS = { 6, 5, 2 };                         -- Square, Moon, Circle: one for each friend who falls
+local DEATH_BLINKS = 15;                                 -- on and off this many times
+
+-- the minibosses: every zone's bosses before its final boss, as the Guide lists them (names without case)
+local MINIBOSSES = {
+	-- Elwynn Forest (final boss Edwin VanCleef is left to the boss markers)
+	["hogger"] = true, ["mother fang"] = true, ["rhahk'zor"] = true, ["mr. smite"] = true,
+	-- Duskwood (final boss Morbent Fel is left to the boss markers)
+	["naraxis"] = true, ["mor'ladim"] = true, ["stitches"] = true, ["lupos"] = true,
+	-- Warsong Gulch (final boss Lord Kazzak is left to the boss markers)
+	["doomguard commander"] = true, ["mannoroth's herald"] = true, ["varimathras"] = true, ["lord hel'nurath"] = true,
+	-- Un'Goro Crater (final boss King Mosh is left to the boss markers)
+	["ravasaur matriarch"] = true, ["uhk'loc"] = true, ["lar'korwi"] = true, ["tyrant devilsaur"] = true,
+	-- Arathi Basin (final boss Lord Aliden Perenolde is left to the boss markers)
+	["kovork"] = true, ["nimar the slayer"] = true, ["marez cowl"] = true, ["lord falconcrest"] = true,
+	-- Feralas (final boss King Gordok is left to the boss markers)
+	["zevrim thornhoof"] = true, ["alzzin the wildshaper"] = true, ["tendris warpwood"] = true, ["immol'thar"] = true,
+	-- Gurubashi Arena (final boss Hakkar the Soulflayer is left to the boss markers)
+	["high priestess jeklik"] = true, ["high priest venoxis"] = true, ["bloodlord mandokir"] = true, ["jin'do the hexxer"] = true,
+	-- Scarlet Monastery (final boss High Inquisitor Whitemane is left to the boss markers)
+	["houndmaster loksey"] = true, ["arcanist doan"] = true, ["herod"] = true, ["scarlet commander mograine"] = true,
+	-- Alterac Valley (final boss Azuregos is left to the boss markers)
+	["korrak the bloodrager"] = true, ["ivus the forest lord"] = true, ["lokholar the ice lord"] = true, ["glacius the frozen titan"] = true,
+	-- Blackrock Mountain (final boss Nefarian is left to the boss markers)
+	["general angerforge"] = true, ["warchief rend blackhand"] = true, ["emperor dagran thaurissan"] = true, ["majordomo executus"] = true,
+	-- Gates of Ahn'Qiraj (final boss C'Thun is left to the boss markers)
+	["kurinnaxx"] = true, ["general rajaxx"] = true, ["princess huhuran"] = true, ["ossirian the unscarred"] = true,
+	-- Naxxramas (final boss Kel'Thuzad is left to the boss markers)
+	["anub'rekhan"] = true, ["noth the plaguebringer"] = true, ["patchwerk"] = true, ["sapphiron"] = true,
+};
+local function IsMini(name) return name and MINIBOSSES[string.lower(name)] and true or false; end
 local marked = {};                                        -- boss id -> its marker
 local tries = {};                                         -- boss id -> target-and-back tries (at most 3)
 local fallen = {};                                        -- party unit -> was down at the last look
@@ -207,36 +245,57 @@ local function MarkBoss(name, icon, id)
 end
 
 local function BossMarks()
-	if ( not DB().bossMarks or type(AZS_GetBosses) ~= "function" ) then return; end
+	local d = DB();
+	if ( not (d.bossMarks or d.miniMarks) or type(AZS_GetBosses) ~= "function" ) then return; end
 	-- only while a run is being played: out of it the list can still hold the last run's bosses
 	if ( type(AZS_GetPhase) == "function" and AZS_GetPhase() ~= "playing" ) then return; end
 	local ok, bosses = pcall(AZS_GetBosses);
 	if ( not ok or type(bosses) ~= "table" ) then return; end
 	local alive = {};
+	local bossList = d.miniMarks and FINAL_ICONS or BOSS_ICONS;
+	local nb, nm = 0, 0;                                   -- bosses and minibosses so far, each in the order they came
 	for i = 1, table.getn(bosses) do
 		local b = bosses[i];
 		if ( b.id ) then alive[b.id] = true; end
-		if ( i <= table.getn(BOSS_ICONS) and b.id and b.name and marked[b.id] ~= BOSS_ICONS[i] ) then
-			if ( MarkBoss(b.name, BOSS_ICONS[i], b.id) ) then marked[b.id] = BOSS_ICONS[i]; end
+		local icon = nil;
+		if ( d.miniMarks and IsMini(b.name) ) then
+			nm = nm + 1;
+			icon = MINI_ICONS[nm];
+		else
+			nb = nb + 1;
+			if ( d.bossMarks ) then icon = bossList[nb]; end
+		end
+		if ( icon and b.id and b.name and marked[b.id] ~= icon ) then
+			if ( MarkBoss(b.name, icon, b.id) ) then marked[b.id] = icon; end
 		end
 	end
 	for id in pairs(marked) do if ( not alive[id] ) then marked[id] = nil; end end
 	for id in pairs(tries) do if ( not alive[id] ) then tries[id] = nil; end end
 end
 
--- a friend down in co-op: the Square over their head, on and off 5 times
+-- a friend down in co-op: their own marker over their head, on and off 15 times. The first three friends have their
+-- own (Square, Moon, Circle); a fourth (a party of 5) takes whichever of the three is free, or waits for one.
+local function DeathIcon(u, i)
+	local used = {};
+	for v, b in pairs(blinks) do if ( v ~= u and b.icon ) then used[b.icon] = true; end end
+	if ( DEATH_ICONS[i] and not used[DEATH_ICONS[i]] ) then return DEATH_ICONS[i]; end
+	for k = 1, table.getn(DEATH_ICONS) do if ( not used[DEATH_ICONS[k]] ) then return DEATH_ICONS[k]; end end
+	return nil;
+end
+
 local function DeathMarks(now)
 	if ( not DB().deathMarks ) then return; end
 	for i = 1, 4 do
 		local u = "party" .. i;
 		local down = UnitExists(u) and (UnitIsDeadOrGhost and UnitIsDeadOrGhost(u) or UnitHealth(u) == 0) and true or false;
-		if ( down and not fallen[u] ) then blinks[u] = { left = 10, at = now, on = false }; end
+		if ( down and not fallen[u] ) then blinks[u] = { left = DEATH_BLINKS * 2, at = now, on = false, slot = i }; end
 		fallen[u] = down;
 	end
 	for u, b in pairs(blinks) do
-		if ( now >= b.at ) then
+		if ( not b.icon ) then b.icon = DeathIcon(u, b.slot); end
+		if ( b.icon and now >= b.at ) then
 			b.on = not b.on;
-			if ( UnitExists(u) ) then pcall(SetRaidTarget, u, b.on and SQUARE or 0); end
+			if ( UnitExists(u) ) then pcall(SetRaidTarget, u, b.on and b.icon or 0); end
 			b.left = b.left - 1;
 			b.at = now + 0.4;
 			if ( b.left <= 0 ) then
@@ -510,8 +569,9 @@ local function WinBuild()
 	Row("No level-up, stat bonus or new spell lines in chat", function() return DB().hideLevel; end, function(v) DB().hideLevel = v; end);
 	Row("Camera as far out as it goes (50)", function() return DB().camera; end,
 	    function(v) DB().camera = v; Camera(v); end);
-	Row("Mark bosses: Skull, Cross, Moon", function() return DB().bossMarks; end, function(v) DB().bossMarks = v; end);
-	Row("Blink a Square over a friend who falls", function() return DB().deathMarks; end, function(v) DB().deathMarks = v; end);
+	Row("Mark bosses: Skull, Cross, Diamond", function() return DB().bossMarks; end, function(v) DB().bossMarks = v; end);
+	Row("Mark minibosses: Star, Triangle, Diamond", function() return DB().miniMarks; end, function(v) DB().miniMarks = v; end);
+	Row("Blink a marker over a friend who falls (15 times)", function() return DB().deathMarks; end, function(v) DB().deathMarks = v; end);
 	Row("Hide the target frame", function() return DB().hideTarget; end, function(v) DB().hideTarget = v; TargetFrameHidden(v); end);
 	Row("Plain action bar: no gryphons, just the 6 squares", function() return DB().plainBar; end, function(v) DB().plainBar = v; PlainBar(v); end);
 	Row("Cooldown numbers on the spell squares", function() return DB().cooldowns; end, function(v) DB().cooldowns = v; end);
