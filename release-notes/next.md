@@ -17,3 +17,9 @@
 - "Lost?" no longer opens a window over the launcher, and it is not clicked: point at it and a small note beside it
   explains the path at the top, with an example (Guide › Classes › Priest) and a small picture of it. The note goes away
   when the pointer leaves.
+- "Lost?" shows in every section that has a path to follow, its first page included (the Changelog's too). Only
+  Community, which has nothing to find your way around, has none.
+
+### Changelog
+- CHANGELOG opens on the list of every patch note to pick from, instead of the second newest one (News already shows
+  the newest).

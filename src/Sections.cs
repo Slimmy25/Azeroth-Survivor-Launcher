@@ -551,7 +551,7 @@ namespace AzerothLauncher
             current = name;
             foreach (var kv in nav) kv.Value.Active = kv.Key == name;
             RefreshStrip();
-            if (name == "Changelog") clView = Data.Changelog.Count > 1 ? 1 : ClNewest;   // News already shows the newest
+            if (name == "Changelog") clView = ClList;          // the list of every patch note to pick from
             if (name == "Guide") { gTopic = -1; gPage = -1; guideQuery = ""; guideLastTopic = 0; gBuilder = false; gPlanner = false; gTalents = null; guideGroup = 0; guideMain = true; }   // the guide opens on its first topic
             if (name == "About Launcher") aboutLog = false;
             if (name == "Home")
@@ -609,7 +609,7 @@ namespace AzerothLauncher
                 else if (name == "Community") PanelCommunity();
                 else if (name == "Setup") PanelSetup();          // first-time setup (Setup.cs)
                 RememberView(name);                              // the back arrow's way (History.cs)
-                sideHead.HelpShown = !OnMainPage(name);          // "Lost?" only away from the section's main page
+                sideHead.HelpShown = name != "Community" && name != "Setup";   // "Lost?" wherever there is a path to follow (not Community)
             }
             finally
             {
@@ -660,22 +660,6 @@ namespace AzerothLauncher
                 }
             }
             return pathExample = bmp;
-        }
-
-        // the section is on its main page (where its big button takes you): no "Lost?" there
-        bool OnMainPage(string name)
-        {
-            switch (name)
-            {
-                case "Community": return !communityMore;
-                case "Options": return optionsTab == 0 && !optionsLang;
-                case "Stats": return statsTab == 0 && statsClass == null;
-                case "Addons": return addonMode == "installed";
-                case "Changelog": return clView == (Data.Changelog.Count > 1 ? 1 : ClNewest);
-                case "About Launcher": return !aboutLog;
-                case "Guide": return guideMain && gTopic < 0 && guideQuery.Length == 0 && !gBuilder && !gPlanner && gTalents == null && gVideo == null;
-                default: return true;                         // setup and the rest: no "Lost?"
-            }
         }
 
         public void RebuildCurrent()
@@ -741,7 +725,7 @@ namespace AzerothLauncher
             if (name == "Community") communityMore = false;
             if (!open) { ShowSection(name); return; }
             if (name == "Community") LeaveCommunityVideo();
-            if (name == "Changelog") clView = Data.Changelog.Count > 1 ? 1 : ClNewest;
+            if (name == "Changelog") clView = ClList;
             BuildPanel(name);
         }
 
@@ -753,7 +737,7 @@ namespace AzerothLauncher
             if (name == "Options") { optionsTab = 0; optionsLang = false; }
             if (name == "Stats") { statsTab = 0; statsClass = null; }
             if (name == "About Launcher") aboutLog = false;
-            if (name == "Changelog") clView = ClNewest;
+            if (name == "Changelog") clView = ClList;
             if (name == "Community") { LeaveCommunityVideo(); communityMore = false; }
             BuildPanel(name);
         }
@@ -771,7 +755,7 @@ namespace AzerothLauncher
             if (current == "Changelog")
             {
                 if (clView >= 0) { SetChangelogView(ClList); return; }
-                if (clView == ClList) { SetChangelogView(ClNewest); return; }
+                if (clView == ClNewest) { SetChangelogView(ClList); return; }   // the list is the Changelog's first page
             }
             if (current == "Guide")
             {
