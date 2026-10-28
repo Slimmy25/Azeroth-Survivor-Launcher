@@ -31,6 +31,7 @@ def rows(sql):
 
 
 wanted = set()
+byid = {}                                     # a look whose item has another name: item id -> the look's name
 for path in sys.argv[1:]:
     text = open(path, encoding="utf-8-sig").read()
     on = "===" not in text                     # a plain list of names: every line
@@ -39,7 +40,9 @@ for path in sys.argv[1:]:
         if line == "===": on = True; continue
         if not on or not line or line.startswith("#"): continue
         f = [x.strip() for x in line.split("|")]
-        wanted.add((f[2] if len(f) >= 3 else f[0]).lower())
+        name = f[2] if len(f) >= 3 else f[0]
+        if len(f) >= 6 and f[5].isdigit(): byid[int(f[5])] = name
+        else: wanted.add(name.lower())
 
 sql = sys.stdin.read()
 table = re.search(r"CREATE TABLE `item_template` \((.*?)\n\)", sql, re.S)
@@ -54,7 +57,8 @@ for cols, v in rows(sql):
     name = (d.get("name") or "").strip()
     disp = d.get("displayid") or d.get("display_id") or "0"
     disp = int(disp) if disp.isdigit() else 0
+    if entry in byid and disp: best[byid[entry]] = (entry, disp); continue
     if not name or not disp or (wanted and name.lower() not in wanted): continue
-    if name not in best or entry < best[name][0]: best[name] = (entry, disp)
+    if name not in best or (entry < best[name][0] and best[name][0] not in byid): best[name] = (entry, disp)
 for name in sorted(best):
     print(name + "|" + str(best[name][0]) + "|" + str(best[name][1]))

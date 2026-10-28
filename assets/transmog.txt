@@ -1,12 +1,13 @@
 Transmog: the looks of Azeroth Survivors, entered by hand from the game's own Armory (0.123.0): Appearances, Tabards
 and weapon glows. They add nothing to a hero's numbers. One look per line:
-  kind | slot | name | how it is earned | icon (the game's icon name, when known; empty until it is)
+  kind | slot | name | how it is earned | icon (the game's icon name, when known; empty until it is) | item
+  item: the real World of Warcraft item the look is (its Wowhead classic item id), when its name differs from the look's
 kind: appearance, tabard, glow. An icon is left empty until it is known. A look that is a real item shows its 3D model on mouseover (item-models.txt).
 Lines starting with # and everything above the first === line are ignored.
 ===
 # Appearances (any class; each comes with an achievement)
-appearance | Head | Defias Bandana | You're Fired: defeat Edwin VanCleef with a Fire spell. |
-appearance | Head | Zul'Gurub Mask | Suck It, Hakkar!: defeat Hakkar with Drain Life. |
+appearance | Head | Defias Bandana | You're Fired: defeat Edwin VanCleef with a Fire spell. | | 7997
+appearance | Head | Zul'Gurub Mask | Suck It, Hakkar!: defeat Hakkar with Drain Life. | | 9470
 appearance | Head | Gnomish Mind Control Cap | Eye Caramba!: defeat C'Thun without taking any damage from him. |
 appearance | Head | Gnomish Goggles | Blue Screen of Death: defeat Azuregos with an Arcane spell. |
 appearance | Head | Admiral's Hat | Better Together: complete your first zone with at least one other player. |
