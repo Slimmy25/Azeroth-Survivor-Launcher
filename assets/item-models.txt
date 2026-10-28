@@ -7,6 +7,7 @@ Cape of the Brotherhood|5193|22998
 Cloak of the Brood Lord|19378|28891
 Cloak of the Devoured|22731|35139
 Contest Winner's Tabard|19160|31676
+Defias Bandana|7997|15308
 Embrace of the Lycan|9479|18392
 Frostwolf Battle Tabard|19031|31527
 Glacial Cloak|22658|35076
@@ -20,3 +21,4 @@ Tabard of Frost|23709|37061
 Tabard of the Argent Dawn|22999|35396
 Warsong Battle Tabard|19505|32031
 Whitemane's Chapeau|7720|16224
+Zul'Gurub Mask|9470|18689
