@@ -1890,3 +1890,5 @@ Importing a save is in Change Folder ▾ in the path above.
 = 导入存档在上方路径的“更改文件夹 ▾”中。
 That folder does not exist.
 = 该文件夹不存在。
+The path at the top shows where you are. Click a step to go back to it, or point at its ▾ for the places beside it. The arrow on the left goes back the way you came; the X takes you home.
+= 上方的路径显示你所在的位置。点击某一步即可回到那里，或指向它的 ▾ 查看旁边的地方。左侧箭头按原路返回；X 带你回到首页。

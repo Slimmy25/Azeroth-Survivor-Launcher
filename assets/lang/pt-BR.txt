@@ -1889,3 +1889,5 @@ Importing a save is in Change Folder ▾ in the path above.
 = Importar um save fica em Alterar pasta ▾, no caminho acima.
 That folder does not exist.
 = Essa pasta não existe.
+The path at the top shows where you are. Click a step to go back to it, or point at its ▾ for the places beside it. The arrow on the left goes back the way you came; the X takes you home.
+= O caminho no topo mostra onde você está. Clique em um passo para voltar a ele, ou aponte para o ▾ dele para ver os lugares ao lado. A seta à esquerda volta pelo caminho que você veio; o X leva ao início.

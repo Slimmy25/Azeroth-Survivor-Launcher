@@ -1889,3 +1889,5 @@ Importing a save is in Change Folder ▾ in the path above.
 = Einen Spielstand importieren findest du unter Ordner ändern ▾ im Pfad oben.
 That folder does not exist.
 = Diesen Ordner gibt es nicht.
+The path at the top shows where you are. Click a step to go back to it, or point at its ▾ for the places beside it. The arrow on the left goes back the way you came; the X takes you home.
+= Der Pfad oben zeigt, wo du bist. Klicke auf einen Schritt, um dorthin zurückzugehen, oder zeige auf sein ▾ für die Orte daneben. Der Pfeil links geht den Weg zurück, den du gekommen bist; das X bringt dich nach Hause.

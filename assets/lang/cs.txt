@@ -1890,3 +1890,5 @@ Importing a save is in Change Folder ▾ in the path above.
 = Import uložené hry najdete v nabídce Změnit složku ▾ v cestě nahoře.
 That folder does not exist.
 = Tato složka neexistuje.
+The path at the top shows where you are. Click a step to go back to it, or point at its ▾ for the places beside it. The arrow on the left goes back the way you came; the X takes you home.
+= Cesta nahoře ukazuje, kde jste. Kliknutím na krok se na něj vrátíte, nebo najeďte na jeho ▾ pro místa vedle něj. Šipka vlevo vás vrátí cestou, kterou jste přišli; X vás vezme domů.

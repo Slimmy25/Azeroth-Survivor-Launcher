@@ -1889,3 +1889,5 @@ Importing a save is in Change Folder ▾ in the path above.
 = Mengimpor simpanan ada di Ubah folder ▾ pada jalur di atas.
 That folder does not exist.
 = Folder itu tidak ada.
+The path at the top shows where you are. Click a step to go back to it, or point at its ▾ for the places beside it. The arrow on the left goes back the way you came; the X takes you home.
+= Jalur di atas menunjukkan posisimu. Klik sebuah langkah untuk kembali ke sana, atau arahkan ke ▾-nya untuk tempat di sebelahnya. Panah di kiri kembali lewat jalan yang kamu lalui; X membawamu ke beranda.
