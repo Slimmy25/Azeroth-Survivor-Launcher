@@ -7,6 +7,7 @@
 - The big section buttons (and the icons on the right) always take you to that section's main page, even when you are
   already on one of its other pages: Options goes back to Options › Folders from Cloud Save or the language list,
   Stats to its first page for every class, Addons to your installed addons, and so on.
+- "Lost?" only shows when you are on one of a section's other pages, never on its main page (Community's included).
 
 ### Options
 - Folders: every folder has an OPEN LOCATION button (opens it in Explorer) and a CHANGE FOLDER button beside it again,
