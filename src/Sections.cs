@@ -1086,10 +1086,18 @@ namespace AzerothLauncher
             if (string.IsNullOrEmpty(saveDir)) saveDir = Util.DefaultSaveDir;
             try { SaveImport.Read(file); }
             catch (Exception e) { Msg.Show(owner, e.Message, "Import save", MessageBoxButtons.OK, MessageBoxIcon.Error); return null; }
-            if (File.Exists(Path.Combine(saveDir, SaveImport.SaveFile)) &&
-                Msg.Show(owner, "This PC already has progress in the game.\n\nReplace it with " + Path.GetFileName(file) +
-                                "?\nWhat is there now is kept as a backup in the game's Saves folder.", "Import save",
-                         MessageBoxButtons.YesNo) != DialogResult.Yes) return null;
+            if (File.Exists(Path.Combine(saveDir, SaveImport.SaveFile)))
+            {
+                Form previousHost = WowDialog.Host;
+                try
+                {
+                    if (side != null && side.Visible) WowDialog.Host = side;
+                    if (Msg.Show(owner, "This PC already has progress in the game.\n\nReplace it with " + Path.GetFileName(file) +
+                                 "?\nWhat is there now is kept as a backup in the game's Saves folder.", "Import save",
+                                 MessageBoxButtons.YesNo) != DialogResult.Yes) return null;
+                }
+                finally { WowDialog.Host = previousHost; }
+            }
             try { SaveImport.Import(file, saveDir); }
             catch (Exception e)
             {

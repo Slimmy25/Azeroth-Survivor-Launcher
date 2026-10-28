@@ -247,6 +247,18 @@ namespace AzerothLauncher
             return Msg.Show(this, msg, title, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
         }
 
+        // Confirmation prompts stay inside the open section panel instead of opening another window.
+        bool AskOverSection(string title, string msg)
+        {
+            Form previousHost = WowDialog.Host;
+            try
+            {
+                if (side != null && side.Visible) WowDialog.Host = side;
+                return Ask(title, msg);
+            }
+            finally { WowDialog.Host = previousHost; }
+        }
+
         public void Info(string title, string msg) { Msg.Show(this, msg, title, MessageBoxButtons.OK, MessageBoxIcon.Information); }
         public void Warn(string title, string msg) { Msg.Show(this, msg, title, MessageBoxButtons.OK, MessageBoxIcon.Warning); }
         public void Error(string title, string msg) { Msg.Show(this, msg, title, MessageBoxButtons.OK, MessageBoxIcon.Error); }
@@ -1924,7 +1936,7 @@ namespace AzerothLauncher
                 if (manual) Info("Launcher update", "Finish what is running first (the game, an install or a cloud sync), then press UPDATE again.");
                 return;
             }
-            if (!Ask("Launcher update", "A new version of the launcher is on GitHub: " + rel.Name + ".\n\nUpdate now? The new launcher" +
+            if (!AskOverSection("Launcher update", "A new version of the launcher is on GitHub: " + rel.Name + ".\n\nUpdate now? The new launcher" +
                      (rel.Size > 0 ? " (" + Util.FmtSize(rel.Size) + ")" : "") + " is downloaded, checked and started in place of this one. " +
                      "Your settings stay as they are."))
             {
