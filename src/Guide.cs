@@ -572,12 +572,8 @@ namespace AzerothLauncher
             }, actionW, actionH, 9);
             saveBuild.Location = new Point(actionX, actionY);
             tools.Controls.Add(saveBuild);
-            var loadBuild = new WowButton(Lang.T("LOAD"), delegate
+            Action applyBuild = delegate(TalentBuild loaded)
             {
-                if (saved.SelectedItem == null) return;
-                object code;
-                if (!classBuilds().TryGetValue(Convert.ToString(saved.SelectedItem), out code)) return;
-                TalentBuild loaded = TalentBuild.Parse(Convert.ToString(code), cls);
                 build.Reset();
                 foreach (var tr in Talents.Of(cls))
                 {
@@ -590,12 +586,21 @@ namespace AzerothLauncher
                     foreach (var t in ordered)
                         for (int i = 0; i < loaded.Get(t); i++) build.Add(t);
                 }
-            }, actionW, actionH, 9);
+            };
+            Action loadSelected = delegate
+            {
+                if (saved.SelectedItem == null) return;
+                object code;
+                if (!classBuilds().TryGetValue(Convert.ToString(saved.SelectedItem), out code)) return;
+                applyBuild(TalentBuild.Parse(Convert.ToString(code), cls));
+            };
+            saved.SelectedIndexChanged += delegate { loadSelected(); };
+            var loadBuild = new WowButton(Lang.T("LOAD"), loadSelected, actionW, actionH, 9);
             loadBuild.Location = new Point(actionX, actionY + actionH + actionGap);
             tools.Controls.Add(loadBuild);
             var exportBuild = new WowButton(Lang.T("EXPORT"), delegate
             {
-                try { Clipboard.SetText(build.Save()); MessageBox.Show(Lang.T("Build code copied to the clipboard."), Lang.T("Talent Tree Builder"), MessageBoxButtons.OK, MessageBoxIcon.Information); }
+                try { Clipboard.SetText(build.ShareCode(cls)); MessageBox.Show(Lang.T("Build code copied to the clipboard."), Lang.T("Talent Tree Builder"), MessageBoxButtons.OK, MessageBoxIcon.Information); }
                 catch (Exception) { MessageBox.Show(Lang.T("Could not copy the build code."), Lang.T("Talent Tree Builder"), MessageBoxButtons.OK, MessageBoxIcon.Warning); }
             }, actionW, actionH, 9);
             exportBuild.Location = new Point(actionX, actionY + (actionH + actionGap) * 2);
@@ -629,18 +634,14 @@ namespace AzerothLauncher
                     code = input.Text.Trim();
                 }
                 if (code.Length == 0) return;
-                TalentBuild imported = TalentBuild.Parse(code, cls);
-                build.Reset();
-                foreach (var tr in Talents.Of(cls))
+                TalentBuild imported;
+                string error;
+                if (!TalentBuild.TryParseShareCode(code, cls, out imported, out error))
                 {
-                    var ordered = new List<Talent>(tr.Talents);
-                    ordered.Sort(delegate(Talent a, Talent b)
-                    {
-                        int row = a.Row.CompareTo(b.Row);
-                        return row != 0 ? row : a.Col.CompareTo(b.Col);
-                    });
-                    foreach (var t in ordered)
-                        for (int i = 0; i < imported.Get(t); i++) build.Add(t);
+                    MessageBox.Show(error, Lang.T("IMPORT BUILD"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                applyBuild(imported);
                 }
             }, actionW, actionH, 9);
             importBuild.Location = new Point(actionX, actionY + (actionH + actionGap) * 3);
