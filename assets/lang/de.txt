@@ -1979,3 +1979,18 @@ No profile is the game as it normally is, kept as a full copy in its own isolate
 = Kein Profil ist das Spiel, wie es normalerweise ist, als vollständige Kopie in einem eigenen, abgetrennten Bereich: welche Addons an sind, wo die Oberfläche sitzt und die Einstellungen aller Addons. Solange du es nutzt, ändert der Launcher nichts, und wenn du aus einem Profil zurückkehrst, ist es genau so, wie du es verlassen hast. Wenn die Spieleinstellungen nicht verändert werden sollen, nimm diese Einstellung.
 Click to give this profile a name of your own.
 = Klicke, um dem Profil einen eigenen Namen zu geben.
+
+SAVED BUILDS
+= GESPEICHERTE BUILDS
+
+EXPORT
+= EXPORTIEREN
+
+Enter a name for this build.
+= Gib einen Namen für diesen Build ein.
+
+Build code copied to the clipboard.
+= Der Build-Code wurde in die Zwischenablage kopiert.
+
+Could not copy the build code.
+= Der Build-Code konnte nicht kopiert werden.
