@@ -1895,3 +1895,9 @@ Bring in a save from elsewhere (a backup, another PC) into the save game folder.
 = Bawa simpanan dari tempat lain (cadangan, PC lain) ke folder simpanan game.
 The Talent Tree Builder, the Gear Planner and the build guides.
 = Pembuat Pohon Talenta, Perencana Perlengkapan, dan panduan build.
+FULLSCREEN
+= LAYAR PENUH
+EXIT FULLSCREEN
+= KELUAR LAYAR PENUH
+This video can't play here right now.
+= Video ini tidak dapat diputar di sini sekarang.

@@ -1896,3 +1896,9 @@ Bring in a save from elsewhere (a backup, another PC) into the save game folder.
 = นำเซฟจากที่อื่น (ข้อมูลสำรอง, พีซีเครื่องอื่น) เข้ามาในโฟลเดอร์เซฟเกม
 The Talent Tree Builder, the Gear Planner and the build guides.
 = ตัวสร้างต้นทาเลนต์ ตัววางแผนอุปกรณ์ และคู่มือบิลด์
+FULLSCREEN
+= เต็มจอ
+EXIT FULLSCREEN
+= ออกจากเต็มจอ
+This video can't play here right now.
+= ไม่สามารถเล่นวิดีโอนี้ที่นี่ได้ในตอนนี้

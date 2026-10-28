@@ -466,12 +466,17 @@ namespace AzerothLauncher
             ClearPanel(v.Title.Length > 0 ? v.Title : "Video");
             int bw = (int)(190 * Theme.Zoom);
             string url = v.Url;
-            Put(new WowButton("OPEN IN BROWSER ›", delegate { Util.OpenInShell(url); }, 190, 32, 9), PW - 20 - bw, 8);
+            WebBrowser web = null;
+            // FULLSCREEN: the launcher's own button (it does not rely on the page's), the video over the whole screen at
+            // the same point. The guide's own videos (hosted with the launcher's releases) have no OPEN IN BROWSER.
+            Put(new WowButton("FULLSCREEN", delegate { if (web != null) VideoView.Fullscreen(web, v); }, 190, 32, 9), PW - 20 - bw, 8);
+            if (!VideoView.OwnHosted(url))
+                Put(new WowButton("OPEN IN BROWSER ›", delegate { Util.OpenInShell(url); }, 190, 32, 9), PW - 20 - 2 * bw - 8, 8);
             guideTabsBottom = 8 + (int)(32 * Theme.Zoom) + 8;
             var frame = new Bordered(Theme.CardEdge, 1);
             frame.Bounds = new Rectangle(20, GuideTop, PW - 40, PH - 12 - GuideTop);
             panel.Controls.Add(frame);
-            var web = VideoView.Make(v);
+            web = VideoView.Make(v);
             web.Dock = DockStyle.Fill;
             frame.Controls.Add(web);
         }
@@ -1128,12 +1133,33 @@ namespace AzerothLauncher
             }
         }
 
+        // the guide's own videos: hosted with the launcher's releases (through jsDelivr or GitHub)
+        public static bool OwnHosted(string url)
+        {
+            string u = (url ?? "").ToLowerInvariant();
+            return u.Contains("slimmy25/azeroth-survivor") || u.Contains("github.com") || u.Contains("githubusercontent.com");
+        }
+
+        // the launcher's FULLSCREEN button: the video over the whole screen, from where it is now
+        public static void Fullscreen(WebBrowser web, GuideVideo v)
+        {
+            double t = 0, vol = 0.15;
+            try { if (web != null && web.Document != null) Read(web, ref t, ref vol); } catch (Exception) { }
+            Full(web, v, t, vol);
+        }
+
         // the guide's player; fullscreen opens the same video in a window over the whole screen, at the same point
         public static WebBrowser Make(GuideVideo v)
         {
             WebBrowser web = null;
             var bridge = new Bridge();
-            bridge.OnToggle = delegate(double t, double vol)
+            bridge.OnToggle = delegate(double t, double vol) { Full(web, v, t, vol); };
+            web = Build(v, 0, 0.15, false, bridge);
+            return web;
+        }
+
+        static void Full(WebBrowser web, GuideVideo v, double t, double vol)
+        {
             {
                 Pause(web);
                 var full = new Form();
@@ -1155,6 +1181,12 @@ namespace AzerothLauncher
                 {
                     if (e.KeyCode == Keys.Escape) { try { Read(fweb, ref backAt, ref backVol); } catch (Exception) { } full.Close(); }
                 };
+                // the way back, the launcher's own button over the video (the page's own may not answer)
+                var exit = new WowButton("EXIT FULLSCREEN", delegate { try { Read(fweb, ref backAt, ref backVol); } catch (Exception) { } full.Close(); }, 170, 30, 9);
+                exit.Location = new Point(full.ClientSize.Width - exit.Width - 16, 14);
+                exit.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+                full.Controls.Add(exit);
+                exit.BringToFront();
                 full.FormClosed += delegate
                 {
                     fweb.Dispose();
@@ -1162,9 +1194,7 @@ namespace AzerothLauncher
                 };
                 full.Show();
                 full.Activate();
-            };
-            web = Build(v, 0, 0.15, false, bridge);
-            return web;
+            }
         }
 
         static void Pause(WebBrowser w)
@@ -1209,12 +1239,12 @@ namespace AzerothLauncher
                 "<style>html,body{margin:0;height:100%;background:" + (fullscreen ? "#000" : "#0e0d14") + ";overflow:hidden;font-family:Georgia,serif;color:#d7cea4}" +
                 "video{width:100%;height:100%;background:#000;display:block}" +
                 "#fs{position:absolute;top:10px;right:10px;padding:5px 12px;background:rgba(14,13,20,.75);color:#f2c14e;border:1px solid #b39b62;" +
-                "font:bold 13px Georgia,serif;cursor:pointer;opacity:.35}#fs:hover{opacity:1}" +
+                "font:bold 13px Georgia,serif;cursor:pointer;opacity:.35;display:none}#fs:hover{opacity:1}" +   // the launcher's own buttons do this now (double-click and F still work)
                 "#err{display:none;position:absolute;left:0;right:0;top:40%;text-align:center;font-size:15px}</style></head><body>" +
                 "<video id=\"v\" controls autoplay preload=\"auto\"" + (poster.Length > 0 && start <= 0 ? " poster=\"" + Html(poster) + "\"" : "") +
                 " src=\"" + Html(v.Url) + "\"></video>" +
                 "<div id=\"fs\" title=\"" + Html(label) + "\">" + (fullscreen ? "&#x2715; " : "&#x26F6; ") + Html(label) + "</div>" +
-                "<div id=\"err\">" + Html(Lang.T("This video can't play here. Use OPEN IN BROWSER.")) + "</div>" +
+                "<div id=\"err\">" + Html(Lang.T(OwnHosted(v.Url) ? "This video can't play here right now." : "This video can't play here. Use OPEN IN BROWSER.")) + "</div>" +
                 "<script>var v=document.getElementById('v');" +
                 "v.volume=" + volume.ToString("0.###", System.Globalization.CultureInfo.InvariantCulture) + ";" +       // 15% to start
                 "var at=" + start.ToString("0.###", System.Globalization.CultureInfo.InvariantCulture) + ";" +

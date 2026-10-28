@@ -1896,3 +1896,9 @@ Bring in a save from elsewhere (a backup, another PC) into the save game folder.
 = Перенесіть збереження з іншого місця (резервна копія, інший ПК) до теки збережень.
 The Talent Tree Builder, the Gear Planner and the build guides.
 = Конструктор дерев талантів, планувальник спорядження та гайди з білдів.
+FULLSCREEN
+= НА ВЕСЬ ЕКРАН
+EXIT FULLSCREEN
+= ВИЙТИ З ПОВНОЕКРАННОГО
+This video can't play here right now.
+= Це відео зараз не відтворюється тут.

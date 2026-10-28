@@ -1896,3 +1896,9 @@ Bring in a save from elsewhere (a backup, another PC) into the save game folder.
 = 把其他地方（备份、另一台电脑）的存档导入存档文件夹。
 The Talent Tree Builder, the Gear Planner and the build guides.
 = 天赋树构建器、装备规划器和构建指南。
+FULLSCREEN
+= 全屏
+EXIT FULLSCREEN
+= 退出全屏
+This video can't play here right now.
+= 此视频暂时无法在这里播放。

@@ -1896,3 +1896,9 @@ Bring in a save from elsewhere (a backup, another PC) into the save game folder.
 = कहीं और से सेव (बैकअप, दूसरा पीसी) सेव गेम फ़ोल्डर में लाएँ।
 The Talent Tree Builder, the Gear Planner and the build guides.
 = टैलेंट ट्री बिल्डर, गियर प्लानर और बिल्ड गाइड।
+FULLSCREEN
+= फ़ुल स्क्रीन
+EXIT FULLSCREEN
+= फ़ुल स्क्रीन से बाहर
+This video can't play here right now.
+= यह वीडियो अभी यहाँ नहीं चल सकता।

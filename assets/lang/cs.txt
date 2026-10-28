@@ -1896,3 +1896,9 @@ Bring in a save from elsewhere (a backup, another PC) into the save game folder.
 = Přeneste uloženou hru odjinud (zálohu, jiné PC) do složky uložených her.
 The Talent Tree Builder, the Gear Planner and the build guides.
 = Stavitel stromů talentů, plánovač výbavy a návody na buildy.
+FULLSCREEN
+= CELÁ OBRAZOVKA
+EXIT FULLSCREEN
+= UKONČIT CELOU OBRAZOVKU
+This video can't play here right now.
+= Toto video se tu teď nedá přehrát.

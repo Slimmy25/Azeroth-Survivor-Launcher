@@ -1895,3 +1895,9 @@ Bring in a save from elsewhere (a backup, another PC) into the save game folder.
 = Hol einen Spielstand von woanders (eine Sicherung, ein anderer PC) in den Spielstand-Ordner.
 The Talent Tree Builder, the Gear Planner and the build guides.
 = Der Talentbaum-Planer, der Ausrüstungsplaner und die Build-Guides.
+FULLSCREEN
+= VOLLBILD
+EXIT FULLSCREEN
+= VOLLBILD BEENDEN
+This video can't play here right now.
+= Dieses Video kann hier gerade nicht abgespielt werden.

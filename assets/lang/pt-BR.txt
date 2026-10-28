@@ -1895,3 +1895,9 @@ Bring in a save from elsewhere (a backup, another PC) into the save game folder.
 = Traga um save de outro lugar (um backup, outro PC) para a pasta de saves.
 The Talent Tree Builder, the Gear Planner and the build guides.
 = O construtor de árvores de talentos, o planejador de equipamento e os guias de builds.
+FULLSCREEN
+= TELA CHEIA
+EXIT FULLSCREEN
+= SAIR DA TELA CHEIA
+This video can't play here right now.
+= Este vídeo não pode ser reproduzido aqui agora.
