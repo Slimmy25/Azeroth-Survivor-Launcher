@@ -2000,3 +2000,6 @@ Codex neck piece:
 
 Codex neck piece that remakes it:
 = Codex-Halsschmuck, der diesen Zauber verändert:
+
+The steps at the top show where you are in the launcher. Select an earlier step to return to it. Hover over a step or its arrow to see other pages at that level. The left arrow returns to the previous page; the X closes this section and returns home.
+= Die Schritte oben zeigen, wo du dich im Launcher befindest. Wähle einen früheren Schritt, um zurückzukehren. Bewege den Mauszeiger über einen Schritt oder seinen Pfeil, um andere Seiten auf dieser Ebene zu sehen. Der linke Pfeil führt zur vorherigen Seite zurück; X schließt diesen Bereich und kehrt zur Startseite zurück.

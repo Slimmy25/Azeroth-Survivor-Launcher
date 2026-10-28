@@ -1985,3 +1985,6 @@ Codex neck piece:
 
 Codex neck piece that remakes it:
 = Codex-halsketting die deze spreuk verandert:
+
+The steps at the top show where you are in the launcher. Select an earlier step to return to it. Hover over a step or its arrow to see other pages at that level. The left arrow returns to the previous page; the X closes this section and returns home.
+= De stappen bovenaan laten zien waar je bent in de launcher. Kies een eerdere stap om terug te gaan. Beweeg de muis over een stap of de pijl om andere pagina’s op dat niveau te zien. De pijl links gaat terug naar de vorige pagina; de X sluit dit onderdeel en gaat naar het startscherm.

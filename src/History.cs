@@ -12,7 +12,7 @@ namespace AzerothLauncher
         {
             public string Section, GTalents, GuideQuery, AddonMode;
             public int GTopic, GPage, GuideGroupPage, GuideGroup, GuideLastTopic, ClView, OptionsTab, StatsTab;
-            public bool GBuilder, GPlanner, GuideMain, OptionsLang, CommunityMore;
+            public bool GBuilder, GPlanner, GuideMain, OptionsLang, OptionsAbout, CommunityMore;
 
             // the same place (the search text aside: typing is not a new step)
             public bool SamePlace(ViewState o)
@@ -20,7 +20,7 @@ namespace AzerothLauncher
                 return o != null && Section == o.Section && GTalents == o.GTalents && AddonMode == o.AddonMode &&
                        GTopic == o.GTopic && GPage == o.GPage && GuideGroupPage == o.GuideGroupPage && GuideGroup == o.GuideGroup &&
                        ClView == o.ClView && OptionsTab == o.OptionsTab && StatsTab == o.StatsTab && GBuilder == o.GBuilder &&
-                       GPlanner == o.GPlanner && GuideMain == o.GuideMain && OptionsLang == o.OptionsLang &&
+                       GPlanner == o.GPlanner && GuideMain == o.GuideMain && OptionsLang == o.OptionsLang && OptionsAbout == o.OptionsAbout &&
                        CommunityMore == o.CommunityMore && (GuideQuery.Length > 0) == (o.GuideQuery.Length > 0);
             }
         }
@@ -35,7 +35,7 @@ namespace AzerothLauncher
                 Section = section, GTalents = gTalents, GuideQuery = guideQuery ?? "", AddonMode = addonMode,
                 GTopic = gTopic, GPage = gPage, GuideGroupPage = guideGroupPage, GuideGroup = guideGroup, GuideLastTopic = guideLastTopic,
                 ClView = clView, OptionsTab = optionsTab, StatsTab = statsTab,
-                GBuilder = gBuilder, GPlanner = gPlanner, GuideMain = guideMain, OptionsLang = optionsLang, CommunityMore = communityMore
+                GBuilder = gBuilder, GPlanner = gPlanner, GuideMain = guideMain, OptionsLang = optionsLang, OptionsAbout = optionsAbout, CommunityMore = communityMore
             };
         }
 
@@ -57,10 +57,12 @@ namespace AzerothLauncher
             history.RemoveAt(history.Count - 1);
             ViewState v = history[history.Count - 1];
             if (v.Section == "Stats" && !StatsAddonActive()) { history.RemoveAt(history.Count - 1); return BackInHistory(); }
+            bool leavingPlanner = gPlanner && !v.GPlanner;
             gTalents = v.GTalents; guideQuery = v.GuideQuery; addonMode = v.AddonMode;
             gTopic = v.GTopic; gPage = v.GPage; guideGroupPage = v.GuideGroupPage; guideGroup = v.GuideGroup; guideLastTopic = v.GuideLastTopic;
             clView = v.ClView; optionsTab = v.OptionsTab; statsTab = v.StatsTab;
-            gBuilder = v.GBuilder; gPlanner = v.GPlanner; guideMain = v.GuideMain; optionsLang = v.OptionsLang; communityMore = v.CommunityMore;
+            gBuilder = v.GBuilder; gPlanner = v.GPlanner; guideMain = v.GuideMain; optionsLang = v.OptionsLang; optionsAbout = v.OptionsAbout; communityMore = v.CommunityMore;
+            if (leavingPlanner) ResetPlannerState();
             gVideo = null;
             current = v.Section;
             foreach (var kv in nav) kv.Value.Active = kv.Key == v.Section;

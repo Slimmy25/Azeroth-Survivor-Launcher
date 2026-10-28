@@ -466,6 +466,41 @@ namespace AzerothLauncher
     }
 
     // the hover box: the name in gold, then what it does, in the launcher's dark and gold
+    // A non-clickable question mark with the same gold bevel and themed hover panel as the global help.
+    public class HoverHelpButton : Control
+    {
+        readonly string title, body;
+        public HoverHelpButton(string title, string body)
+        {
+            this.title = title ?? "";
+            this.body = body ?? "";
+            SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer |
+                     ControlStyles.ResizeRedraw, true);
+            Size = new Size(Math.Max(20, (int)(24 * Theme.Zoom)), Math.Max(16, (int)(18 * Theme.Zoom)));
+            Cursor = Cursors.Help;
+            BackColor = Theme.Hex("#1c1a26");
+        }
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            Graphics g = e.Graphics;
+            g.Clear(BackColor);
+            using (var b = new SolidBrush(Theme.Hex("#1c1a26"))) g.FillRectangle(b, ClientRectangle);
+            using (var p = new Pen(Theme.Hex("#d6a640"), 2)) g.DrawRectangle(p, 1, 1, Width - 3, Height - 3);
+            TextRenderer.DrawText(g, "?", Theme.F(10, FontStyle.Bold), ClientRectangle, Theme.Hex("#f0c050"),
+                                  TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter | TextFormatFlags.NoPrefix);
+        }
+        protected override void OnMouseEnter(EventArgs e)
+        {
+            base.OnMouseEnter(e);
+            GuideHover.ShowHelp(this, Lang.T(title), Lang.T(body));
+        }
+        protected override void OnMouseLeave(EventArgs e)
+        {
+            GuideHover.Hide();
+            base.OnMouseLeave(e);
+        }
+    }
+
     public class GuideHover : Form
     {
         static GuideHover box;
@@ -548,12 +583,22 @@ namespace AzerothLauncher
         {
             if (box == null || box.IsDisposed) box = new GuideHover();
             box.picture = picture;
-            Show(owner, title, body, null, null);
+            ShowCore(owner, title, body, null, null, false);
         }
 
-        // model: a real item's name (assets\item-models.txt): its 3D model picture from Wowhead's model viewer is shown
+        public static void ShowHelp(Control owner, string title, string body)
+        {
+            ShowCore(owner, title, body, null, null, false);
+        }
+
+        // model: a real item's name (assets\\item-models.txt): its 3D model picture from Wowhead's model viewer is shown
         // under the text (it loads the first time, then comes from the cache)
         public static void Show(Control owner, string title, string body, Image icon, string model)
+        {
+            ShowCore(owner, title, body, icon, model, true);
+        }
+
+        static void ShowCore(Control owner, string title, string body, Image icon, string model, bool applyGear)
         {
             if (box == null || box.IsDisposed) box = new GuideHover();
             box.icon = icon;
@@ -562,7 +607,7 @@ namespace AzerothLauncher
             box.picture = null;                               // a picture is for the one note that passed it
             box.shownPicture = pic;
             box.title = title;
-            body = GearEffect.Apply(title, body);              // the Gear Planner's set, when there is one
+            if (applyGear) body = GearEffect.Apply(title, body); // only content hovers get the planner's live totals
             box.body = body;
             Font tf = Theme.F(10.5f, FontStyle.Bold), bf = Theme.F(9.5f);
             int th = TextRenderer.MeasureText(title, tf, new Size(W - 20 - (icon != null ? 40 : 0), 0), TextFormatFlags.WordBreak | TextFormatFlags.NoPrefix).Height;

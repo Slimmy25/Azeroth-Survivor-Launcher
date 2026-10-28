@@ -1986,3 +1986,6 @@ Codex neck piece:
 
 Codex neck piece that remakes it:
 = इस मंत्र को बदलने वाला कोडेक्स गले का आभूषण:
+
+The steps at the top show where you are in the launcher. Select an earlier step to return to it. Hover over a step or its arrow to see other pages at that level. The left arrow returns to the previous page; the X closes this section and returns home.
+= ऊपर दिए गए चरण बताते हैं कि आप लॉन्चर में कहाँ हैं। वापस जाने के लिए कोई पिछला चरण चुनें। उसी स्तर के दूसरे पेज देखने के लिए किसी चरण या उसके तीर पर माउस ले जाएँ। बायाँ तीर पिछले पेज पर लौटता है; X इस सेक्शन को बंद करके होम पर लौटता है।

@@ -1986,3 +1986,6 @@ Codex neck piece:
 
 Codex neck piece that remakes it:
 = Намисто Кодексу, що змінює це заклинання:
+
+The steps at the top show where you are in the launcher. Select an earlier step to return to it. Hover over a step or its arrow to see other pages at that level. The left arrow returns to the previous page; the X closes this section and returns home.
+= Кроки вгорі показують, де ви перебуваєте в лаунчері. Виберіть попередній крок, щоб повернутися. Наведіть курсор на крок або його стрілку, щоб побачити інші сторінки цього рівня. Ліва стрілка повертає на попередню сторінку; X закриває цей розділ і повертає на головну.

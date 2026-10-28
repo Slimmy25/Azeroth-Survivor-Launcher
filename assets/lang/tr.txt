@@ -1986,3 +1986,6 @@ Codex neck piece:
 
 Codex neck piece that remakes it:
 = Bu büyüyü değiştiren Codex kolyesi:
+
+The steps at the top show where you are in the launcher. Select an earlier step to return to it. Hover over a step or its arrow to see other pages at that level. The left arrow returns to the previous page; the X closes this section and returns home.
+= Üstteki adımlar başlatıcıda nerede olduğunuzu gösterir. Geri dönmek için önceki bir adımı seçin. Aynı düzeydeki diğer sayfaları görmek için bir adımın veya okunun üzerine gelin. Soldaki ok önceki sayfaya döner; X bu bölümü kapatıp ana sayfaya döner.

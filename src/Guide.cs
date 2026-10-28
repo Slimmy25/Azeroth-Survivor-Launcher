@@ -79,6 +79,7 @@ namespace AzerothLauncher
         void OpenGuideTab(int tab)
         {
             if (tab == -4) { GuideGroupPage(2); return; }    // Theorycrafting (inside Gameplay)
+            if (gPlanner && tab != -3) ResetPlannerState();
             guideQuery = "";
             guideGroupPage = -1;
             if (tab == -2) { gVideo = null; gTalents = null; gBuilder = true; gPlanner = false; guideMain = false; guideGroup = 2; if (current == "Guide") BuildPanel("Guide"); }
@@ -205,6 +206,7 @@ namespace AzerothLauncher
         // the main page, or one group's page (Guide › Theorycrafting): its topics and tools as cards
         public void GuideGroupPage(int group)
         {
+            if (gPlanner) ResetPlannerState();
             gTopic = -1; gPage = -1; guideQuery = ""; gBuilder = false; gPlanner = false; gTalents = null; gVideo = null; guideMain = true;
             guideGroupPage = group;
             if (current != "Guide" || !side.Visible) ShowSection("Guide");
@@ -224,7 +226,7 @@ namespace AzerothLauncher
             if (gVideo != null) { SetCrumbs("Guide", home, gVideo.Title.Length > 0 ? gVideo.Title : "Video", null); return; }
             if (gTalents != null && gBuilder) { SetCrumbs("Guide", home, gp, gameplay, th, theory, TalentBuilder, builder, gTalents, null); return; }
             if (gBuilder) { SetCrumbs("Guide", home, gp, gameplay, th, theory, TalentBuilder, null); return; }
-            Action planner = delegate { plannerClass = null; OpenGuideTab(-3); };
+            Action planner = delegate { ResetPlannerState(); plannerClass = null; OpenGuideTab(-3); };
             if (gPlanner && plannerClass != null) { SetCrumbs("Guide", home, gp, gameplay, th, theory, GearPlanner, planner, plannerClass, null); return; }
             if (gPlanner) { SetCrumbs("Guide", home, gp, gameplay, th, theory, GearPlanner, null); return; }
             if (guideQuery.Trim().Length > 0) { SetCrumbs("Guide", home, "Search", null); return; }
@@ -324,6 +326,7 @@ namespace AzerothLauncher
         void SetGuideView(int topic, int page)
         {
             if (topic <= -2) { if (current != "Guide" || !side.Visible) ShowSection("Guide"); OpenGuideTab(topic); return; }   // a tool's link
+            if (gPlanner) ResetPlannerState();
             guideGroupPage = -1;
             gVideo = null;
             gTalents = null;
@@ -501,19 +504,11 @@ namespace AzerothLauncher
             var reset = new WowButton("RESET", delegate { build.Reset(); }, 120, 30, 9);
             reset.Location = new Point(x + w - reset.Width, y);
             sp.Controls.Add(reset);
-            // how talents work: a "?" beside RESET that is pointed at, not clicked (like "Lost?" and the addon profiles)
-            var help = UI.Text("?", 11, FontStyle.Bold, Theme.Panel, Theme.Gold, 0, false);
-            help.AutoSize = false;
-            help.TextAlign = ContentAlignment.MiddleCenter;
-            help.Size = new Size((int)(24 * Theme.Zoom), (int)(24 * Theme.Zoom));
-            help.Cursor = Cursors.Help;
+            // Hover-only help uses the same gold-bevel question mark and popup as the global help.
+            var help = new HoverHelpButton("Talent Tree Builder",
+                "Click a talent to add a point, right-click to take one back. A talent takes no more points than its ranks, and a build no more than 51; the purple ones are the milestones at 10, 20 and 30 points.");
             help.Location = new Point(reset.Left - help.Width - 8, y + (reset.Height - help.Height) / 2);
             sp.Controls.Add(help);
-            var helpTip = new ToolTip { AutoPopDelay = 30000, InitialDelay = 150, ReshowDelay = 100 };
-            helpTip.SetToolTip(help, Lang.T("Click a talent to add a point, right-click to take one back. As in the game, each row opens once " +
-                     "its own tree has 5 points for every row above it; a build takes no more than 51 points. The purple " +
-                     "ones are the milestones at 10, 20 and 30 points."));
-            help.Disposed += delegate { helpTip.Dispose(); };
             // Named builds are kept in the launcher's own config, separately for each class.
             var tools = new Bordered(Theme.GoldDim, 1);
             tools.BackColor = bg;
@@ -542,8 +537,8 @@ namespace AzerothLauncher
             tools.Controls.Add(saved);
             // Keep the four actions centred and distribute their gaps through the remaining height,
             // so the last button sits close to the bottom edge like the Gear Planner's controls.
-            int actionW = Math.Max(100, boxW - 40);
-            int actionX = (boxW - actionW) / 2;
+            int actionW = Math.Min(boxW - 32, Math.Max(150, (int)(boxW * 0.62)));
+            int actionX = (tools.ClientSize.Width - actionW) / 2;
             int actionH = 28;
             int actionGap = Math.Max(4, (tools.ClientSize.Height - 110 - 8 - actionH * 4) / 3);
             int actionY = 110;

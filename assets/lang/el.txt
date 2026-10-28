@@ -2001,3 +2001,6 @@ Codex neck piece:
 
 Codex neck piece that remakes it:
 = Κολιέ Codex που μεταμορφώνει αυτό το ξόρκι:
+
+The steps at the top show where you are in the launcher. Select an earlier step to return to it. Hover over a step or its arrow to see other pages at that level. The left arrow returns to the previous page; the X closes this section and returns home.
+= Τα βήματα στην κορυφή δείχνουν πού βρίσκεσαι στον launcher. Επίλεξε ένα προηγούμενο βήμα για να επιστρέψεις. Πέρασε τον δείκτη πάνω από ένα βήμα ή το βέλος του για να δεις άλλες σελίδες στο ίδιο επίπεδο. Το αριστερό βέλος επιστρέφει στην προηγούμενη σελίδα· το X κλείνει αυτή την ενότητα και επιστρέφει στην αρχική.

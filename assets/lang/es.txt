@@ -1985,3 +1985,6 @@ Codex neck piece:
 
 Codex neck piece that remakes it:
 = Collar del Códice que transforma este hechizo:
+
+The steps at the top show where you are in the launcher. Select an earlier step to return to it. Hover over a step or its arrow to see other pages at that level. The left arrow returns to the previous page; the X closes this section and returns home.
+= Los pasos de arriba muestran dónde estás en el launcher. Selecciona un paso anterior para volver. Pasa el cursor por un paso o su flecha para ver otras páginas de ese nivel. La flecha izquierda vuelve a la página anterior; la X cierra esta sección y vuelve al inicio.

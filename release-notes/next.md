@@ -8,3 +8,9 @@
 - The Gear Planner and AZS Handbook show Codex neck pieces only for the class whose spell they remake.
 
 - Added translations for the Codex spell-link labels across all 26 launcher languages.
+
+- Class item guides now show each set's 4-piece and 8-piece bonuses in the rarity header.
+- Gear Planner selections and star levels reset when leaving the planner; the calculation help is now a themed, hover-only question mark at the bottom-right of the gear sheet.
+- Talent Builder help now uses the launcher's themed hover panel, and its Save/Load/Export/Import buttons are centered and evenly spaced.
+- The navigation help text is clearer and no longer picks up the Gear Planner's live-stat example.
+- Added an About Launcher button and a dedicated About Launcher subpage under Options → Launcher.

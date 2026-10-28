@@ -581,18 +581,19 @@ namespace AzerothLauncher
                 foreach (string rar in Rarities)
                 {
                     string c;
-                    l.Add("# " + rar + (chance.TryGetValue(rar, out c) ? " (" + Pct(Num(c) * 100) + "% each on normal)" : ""));
+                    var four = FourPiece(rar);
+                    string eight = EightPiece(cls, rar);
+                    string fourText = four != null ? four.Text : "Not entered yet.";
+                    string eightText = eight ?? "Not entered yet.";
+                    l.Add("# " + rar + (chance.TryGetValue(rar, out c) ? " (" + Pct(Num(c) * 100) + "% each on normal)" : "") +
+                          " — " + SetName(cls, rar) + " | 4-piece (4 armor at 1+ stars): " + fourText +
+                          " | 8-piece (8 armor at 3+ stars; empowered at 5): " + eightText);
                     foreach (var p in Gear)
                     {
                         if (p.Class != cls || p.Rarity != rar) continue;
                         string bon = p.Known ? (p.Health > 0 ? "+" + p.Health + " Health. " : "") + JoinBonuses(p) : "Bonuses not known yet.";
                         l.Add("- " + p.Name + " (" + p.Slot + "): " + bon + " Drops from " + string.Join(" or ", p.Drops.ToArray()) + ".");
                     }
-                    // the set's bonuses, under its pieces
-                    var four = FourPiece(rar);
-                    string eight = EightPiece(cls, rar);
-                    l.Add("- " + SetName(cls, rar) + " 4-piece bonus (4 armor pieces at 1+ stars): " + (four != null ? four.Text : "Not entered yet."));
-                    l.Add("- " + SetName(cls, rar) + " 8-piece bonus (all 8 armor pieces at 3+ stars; empowered at 5 stars on all eight, half again as strong): " + (eight ?? "Not entered yet."));
                 }
             }
             return l;

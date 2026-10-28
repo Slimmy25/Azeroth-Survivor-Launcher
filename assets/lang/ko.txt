@@ -1986,3 +1986,6 @@ Codex neck piece:
 
 Codex neck piece that remakes it:
 = 이 주문을 바꾸는 코덱스 목걸이:
+
+The steps at the top show where you are in the launcher. Select an earlier step to return to it. Hover over a step or its arrow to see other pages at that level. The left arrow returns to the previous page; the X closes this section and returns home.
+= 위쪽 단계는 런처에서 현재 위치를 보여 줍니다. 이전 단계를 선택하면 돌아갈 수 있습니다. 같은 단계의 다른 페이지를 보려면 단계나 화살표에 마우스를 올리세요. 왼쪽 화살표는 이전 페이지로 돌아가고, X는 이 섹션을 닫고 홈으로 돌아갑니다.

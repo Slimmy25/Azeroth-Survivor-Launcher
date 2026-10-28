@@ -534,7 +534,8 @@ namespace AzerothLauncher
         // closing a section goes back to the home screen, which shows Community; Community itself cannot be closed
         void CloseSide()
         {
-            if (current == "Community") return;              // the home screen's Community can only be replaced, never closed
+            if (current == "Community") return;
+            if (current == "Guide" && gPlanner) ResetPlannerState();              // the home screen's Community can only be replaced, never closed
             if (current == "Setup") return;                  // setup cannot be closed before it is done (or cancelled)
             current = "Home";
             foreach (var b in nav.Values) b.Active = false;
@@ -545,7 +546,8 @@ namespace AzerothLauncher
         public void ShowSection(string name)
         {
             if (setupOpen && name != "Setup") { SetStatus("Finish the first-time setup first."); return; }   // setup stays up until done
-            if (name == "Cloud Save") { optionsTab = 1; optionsLang = false; name = "Options"; }   // it lives in Options > CLOUD SAVE
+            if (name != "Options") optionsAbout = false;
+            if (name == "Cloud Save") { optionsTab = 1; optionsLang = false; optionsAbout = false; name = "Options"; }   // it lives in Options > CLOUD SAVE
             // everything works without the game except Cloud Save and Addons, which are grayed out until it is installed
             if ((name == "Cloud Save" || name == "Addons") && !GateOpen())
             {
@@ -561,12 +563,14 @@ namespace AzerothLauncher
             }
             if (name == "Guide" && current == "Guide" && side.Visible)   // the Guide's button again: back to its main page
             {
+                if (gPlanner) ResetPlannerState();
                 guideGroupPage = -1;
                 gTopic = -1; gPage = -1; guideQuery = ""; gBuilder = false; gPlanner = false; gTalents = null; gVideo = null; guideMain = true;
                 BuildPanel("Guide");
                 return;
             }
             if (name == current && name != "Home" && side.Visible) return;   // already open: clicking its button again does nothing
+            if (current == "Guide" && name != "Guide" && gPlanner) ResetPlannerState();
             current = name;
             foreach (var kv in nav) kv.Value.Active = kv.Key == name;
             RefreshStrip();
@@ -641,7 +645,7 @@ namespace AzerothLauncher
             if (name == "Addons") RefreshGates();             // AZS Stats switched on or off: the Stats buttons follow
         }
 
-        const string LostNote = "The line at the top is a path: it shows where you are, from the section you opened to the page you are on. Click any step to go straight back to it. Point at a step, or its ▾, to see the other pages at that level and pick one. The arrow on the left goes back the way you came, and the X takes you home. I chose a path instead of rows of buttons because this box is small, and I needed every bit of space for what is in it.";
+        const string LostNote = "The steps at the top show where you are in the launcher. Select an earlier step to return to it. Hover over a step or its arrow to see other pages at that level. The left arrow returns to the previous page; the X closes this section and returns home.";
 
         // the "Lost?" note's picture: a small path like the one at the top, Guide › Classes › Priest ▾, drawn the same way
         static Bitmap pathExample;
@@ -2225,6 +2229,7 @@ namespace AzerothLauncher
         static readonly string[] OptionTabs = { "FOLDERS", "CLOUD SAVE", "GRAPHICS", "GAMEPLAY", "LAUNCHER" };
         int optionsTab;
         bool optionsLang;                                     // Options › Launcher › Language: the list of languages
+        bool optionsAbout;                                    // Options › Launcher › About Launcher: the launcher's overview
 
         ScrollPanel optionsPage;                             // the page shown, so a rebuild of the same tab keeps its place
         int optionsPageTab = -1;
@@ -2236,8 +2241,13 @@ namespace AzerothLauncher
             ClearPanel("Options");
             // no row of tabs: the tab is a step of the path at the top (Options › Folders ▾), its list the other tabs
             int top0 = 4;
-            Action home = delegate { optionsLang = false; optionsTab = 0; BuildPanel("Options"); };
-            if (optionsLang)                                 // Options › Launcher › Language ▾ : the languages themselves
+            Action home = delegate { optionsLang = false; optionsAbout = false; optionsTab = 0; BuildPanel("Options"); };
+            if (optionsAbout)
+            {
+                SetCrumbs("Options", home, "Launcher", (Action)delegate { optionsAbout = false; optionsLang = false; optionsTab = 4; BuildPanel("Options"); }, "About Launcher", null);
+                SetCrumbMenu(1, OptionTabMenu());
+            }
+            else if (optionsLang)                                 // Options › Launcher › Language ▾ : the languages themselves
             {
                 // (no list of languages here: a language is only picked on the page itself, never by passing over the path)
                 SetCrumbs("Options", home, "Launcher", (Action)delegate { optionsLang = false; optionsTab = 4; BuildPanel("Options"); }, "Language", null);
@@ -2254,7 +2264,8 @@ namespace AzerothLauncher
             try
             {
                 int end;
-                if (optionsLang) end = OptionsLanguage(pageW);
+                if (optionsAbout) end = OptionsAbout(pageW);
+                else if (optionsLang) end = OptionsLanguage(pageW);
                 else if (optionsTab == 0) end = OptionsFolders(pageW);
                 else if (optionsTab == 1) end = OptionsCloud(pageW);
                 else if (optionsTab == 2) end = OptionsGame(pageW, new[] { "DISPLAY", "GRAPHICS" });
@@ -2575,10 +2586,14 @@ namespace AzerothLauncher
                                    20 + langBtn.Width + 12, y + 2, PW - 40 - langBtn.Width - 12, false);
             y = Math.Max(BottomOf(langBtn), BottomOf(langNote)) + 8;
             row("RUN SETUP AGAIN", delegate { RunSetup(); }, "The first-time setup's steps again, with your settings as they are.");
-            // ABOUT LAUNCHER: what the launcher is and does, in simple words (assets/launcher-about.txt), right on this page
-            y += 10;
-            var line = Put(UI.Line(Theme.GoldDim, PW - 40, 1), 20, y);
-            y = BottomOf(line) + 8;
+            row(Lang.T("ABOUT LAUNCHER"), delegate { optionsAbout = true; optionsLang = false; BuildPanel("Options"); },
+                "What the launcher does and how its parts fit together.");
+            return y;                                                     // play time: on the home screen, under the Launcher buttons
+        }
+
+        int OptionsAbout(int PW)
+        {
+            int y = 8;
             foreach (string raw in Data.About.Split('\n'))
             {
                 string ln = raw.TrimEnd();
@@ -2589,7 +2604,7 @@ namespace AzerothLauncher
                 else t = PutText(ln, 9.5f, FontStyle.Regular, Theme.Text, 20, y, PW - 40, false);
                 y = BottomOf(t) + 3;
             }
-            return y;                                                     // play time: on the home screen, under the Launcher buttons
+            return y;
         }
 
         // the game folder: one that holds the game is the same as installing it (there is no "install from a file")

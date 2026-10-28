@@ -94,6 +94,13 @@ namespace AzerothLauncher
 
         static readonly string[] ArmorSlots = { "Head", "Shoulder", "Chest", "Waist", "Legs", "Feet", "Wrist", "Hands" };
 
+        public static void ResetView()
+        {
+            Stars.Clear();
+            chosenSlot = "Head";
+            tierMode = false;
+        }
+
         // a set put in the planner at once: 4 pieces at 1 star (its 4-piece bonus) or all 8 at 3 stars (both bonuses). It is a
         // starting point, not a pile: the whole planner is emptied first (armor, weapons and jewelry, with their stars),
         // then filled with the set picked. Slimjim's call (2026-10-28): a Tier Bonus button replaces what was calculated.
@@ -299,15 +306,13 @@ namespace AzerothLauncher
                 new[] { "Area", Val(t, "area", "%") }, new[] { "Targets", Val(t, "targets", "") }, new[] { "Echo", Val(t, "echo", "%") },
                 new[] { "Speed", Val(t, "speed", "%") }, new[] { "Regen", Val(t, "regen", "") }, new[] { "Pickup", Val(t, "pickup", "%") },
             });
-            // the explanation is a button now (Slimjim, 2026-10-28): "How are gear stats calculated?" in the sheet's top
-            // right corner, above Hands; a click shows the text that used to sit under the stat boxes
+            // The gear-calculation explanation is a hover-only question mark, matching the global help button.
             unknownPieces = unknown;
-            string hl = Lang.T("How are gear stats calculated?");
-            Size hs = TextRenderer.MeasureText(hl, fSmall);
-            helpBox = new Rectangle(rx + s - hs.Width - 12, sheet.Y + 8, hs.Width + 12, hs.Height + 6);
-            using (var b = new SolidBrush(hoverHelp ? Theme.Hex("#252331") : SlotBg)) g.FillRectangle(b, helpBox);
-            using (var p = new Pen(Edge)) g.DrawRectangle(p, helpBox);
-            TextRenderer.DrawText(g, hl, fSmall, helpBox, Gold, TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter | TextFormatFlags.NoPrefix);
+            helpBox = new Rectangle(sheet.Right - 28, sheet.Bottom - 25, 22, 18);
+            using (var b = new SolidBrush(hoverHelp ? Theme.Hex("#3a2c18") : Theme.Hex("#1c1a26"))) g.FillRectangle(b, helpBox);
+            using (var p = new Pen(Theme.Hex("#d6a640"), 2)) g.DrawRectangle(p, helpBox);
+            TextRenderer.DrawText(g, "?", Theme.F(10, FontStyle.Bold), helpBox, Theme.Hex("#f0c050"),
+                                  TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter | TextFormatFlags.NoPrefix);
 
             // under the totals, in the middle of the sheet (where the explanation was): every set worn, its 4-piece and
             // 8-piece bonuses (bright when reached), so two sets of four show and count both, and an 8-piece shows its 4-piece too
@@ -618,8 +623,19 @@ namespace AzerothLauncher
             for (int i = 0; i < tierBoxes.Count; i++) if (tierBoxes[i].Key.Contains(e.Location)) ht = i;
             if (hm != hoverMode || ht != hoverTier) { hoverMode = hm; hoverTier = ht; Invalidate(); }
             bool hh = helpBox.Contains(e.Location);
-            if (hh != hoverHelp) { hoverHelp = hh; Invalidate(); }
-            Cursor = s != null || r >= 0 || hm >= 0 || ht >= 0 || hh ? Cursors.Hand : Cursors.Default;
+            if (hh != hoverHelp)
+            {
+                hoverHelp = hh;
+                Invalidate();
+                if (hh)
+                {
+                    string body = Lang.T("The bonuses of everything chosen, added together, with the set bonuses reached. Click a piece to add a star (up to 5, then back to 0); right-click to take it off.");
+                    if (unknownPieces > 0) body = Lang.T("Pieces with bonuses not known yet") + ": " + unknownPieces + ". " + body;
+                    GuideHover.ShowHelp(this, Lang.T("How are gear stats calculated?"), body);
+                }
+                else GuideHover.Hide();
+            }
+            Cursor = hh ? Cursors.Help : (s != null || r >= 0 || hm >= 0 || ht >= 0 ? Cursors.Hand : Cursors.Default);
             if (s != hover || r != hoverRow)
             {
                 hover = s;
@@ -635,18 +651,11 @@ namespace AzerothLauncher
             base.OnMouseMove(e);
         }
 
-        protected override void OnMouseLeave(EventArgs e) { hover = null; hoverRow = -1; tip.SetToolTip(this, null); Invalidate(); base.OnMouseLeave(e); }
+        protected override void OnMouseLeave(EventArgs e) { hover = null; hoverRow = -1; hoverHelp = false; GuideHover.Hide(); tip.SetToolTip(this, null); Invalidate(); base.OnMouseLeave(e); }
 
         protected override void OnMouseUp(MouseEventArgs e)
         {
             base.OnMouseUp(e);
-            if (e.Button == MouseButtons.Left && helpBox.Contains(e.Location))
-            {
-                string txt = Lang.T("The bonuses of everything chosen, added together, with the set bonuses reached. Click a piece to add a star (up to 5, then back to 0); right-click to take it off.");
-                if (unknownPieces > 0) txt = Lang.T("Pieces with bonuses not known yet") + ": " + unknownPieces + ". " + txt;
-                Msg.Show(FindForm(), txt, Lang.T("How are gear stats calculated?"));
-                return;
-            }
             if (e.Button == MouseButtons.Left)
             {
                 foreach (var m in modeBoxes)
