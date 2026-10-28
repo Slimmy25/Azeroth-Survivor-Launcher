@@ -43,3 +43,8 @@
   letters, once a hero has worn the piece.
 - AZS Minor Mods: the plain action bar is no wider than its six squares and the two page arrows, so it leaves no empty
   space. New: cooldown numbers on the spell squares, the seconds until each spell is ready again (on by default).
+
+### Major Update, part 5
+- README: six new screenshots of the finished launcher, each showing something different (home and Community, STATS,
+  the Talent Tree Builder, the Gear Planner, a class's gear page and the path at the top).
+- Gear Planner: its note under the totals is shorter, which leaves more room for the set bonuses.

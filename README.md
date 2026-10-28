@@ -14,12 +14,16 @@ nothing else: it runs on the .NET Framework 4.8 that comes with Windows 10 and 1
 
 <table>
   <tr>
-    <td align="center"><img src="docs/screenshots/home-community.png" width="420" alt="The home screen with a featured Community video"><br><sub>Home: featured Community videos</sub></td>
-    <td align="center"><img src="docs/screenshots/stats-abilities.png" width="420" alt="The STATS page, Abilities tab"><br><sub>STATS: your runs, abilities and records</sub></td>
+    <td align="center"><img src="docs/screenshots/home-community.png" width="420" alt="The home screen with a featured Community video"><br><sub>Home: featured Community videos and the game's news</sub></td>
+    <td align="center"><img src="docs/screenshots/stats-overview.png" width="420" alt="The STATS page: your survivor and your runs"><br><sub>STATS: every run, your records and your DPS over time</sub></td>
   </tr>
   <tr>
-    <td align="center"><img src="docs/screenshots/talent-tree-builder.png" width="420" alt="The Talent Tree Builder asking which class to build for"><br><sub>Theorycrafting: the Talent Tree Builder</sub></td>
-    <td align="center"><img src="docs/screenshots/gear-planner.png" width="420" alt="The Gear Planner, laid out like the game's character sheet"><br><sub>Theorycrafting: the Gear Planner</sub></td>
+    <td align="center"><img src="docs/screenshots/talent-tree-builder.png" width="420" alt="The Talent Tree Builder with a Warrior build"><br><sub>Theorycrafting: try a talent build on the game's trees</sub></td>
+    <td align="center"><img src="docs/screenshots/gear-planner-tier-bonus.png" width="420" alt="The Gear Planner, laid out like the game's character sheet"><br><sub>Theorycrafting: the Gear Planner, a piece at a time or a whole set</sub></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="docs/screenshots/guide-class-gear.png" width="420" alt="A class's gear page in the Guide"><br><sub>Guide: every piece of a class's gear, its bonuses and its set</sub></td>
+    <td align="center"><img src="docs/screenshots/options-path.png" width="420" alt="Options with the path at the top"><br><sub>The path at the top: every page one click away, no rows of buttons</sub></td>
   </tr>
 </table>
 
