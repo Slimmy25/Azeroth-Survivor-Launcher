@@ -372,6 +372,8 @@ namespace AzerothLauncher
         readonly GuideText text;
         readonly List<KeyValuePair<Rectangle, Talent>> chips = new List<KeyValuePair<Rectangle, Talent>>();
         readonly List<KeyValuePair<Rectangle, KeyValuePair<string, string>>> spellChips = new List<KeyValuePair<Rectangle, KeyValuePair<string, string>>>();
+        // set by the launcher: a set chip clicked opens the Gear Planner with that set put on (class, rarity)
+        public static Action<string, string> OpenSet;
         // the class's set bonuses whose text names this spell: { "Faith 8-piece", its text, the rarity }
         readonly List<string[]> setBonuses = new List<string[]>();
         readonly List<KeyValuePair<Rectangle, string[]>> setChips = new List<KeyValuePair<Rectangle, string[]>>();
@@ -555,7 +557,7 @@ namespace AzerothLauncher
             string[] st = null;
             foreach (var c in setChips) if (Rectangle.Inflate(c.Key, 2, 2).Contains(e.Location)) st = c.Value;
             if (t != over || s != overSpell || st != overSet) { over = t; overSpell = s; overSet = st; Invalidate(); }
-            Cursor = t != null || s != null ? Cursors.Hand : Cursors.Default;   // a click opens the talent's trees / the spell's row
+            Cursor = t != null || s != null || st != null ? Cursors.Hand : Cursors.Default;   // a click opens the talent's trees / the spell's row / the set in the planner
             if (t != null) GuideHover.Show(this, t.Name, Talents.HoverText(t), SpellIcons.Icon(t.Icon, null));
             else if (s != null) GuideHover.Show(this, s, sText, SpellIcons.Spell(s, null));
             else if (st != null) GuideHover.Show(this, st[0], st[1] + "\n\n" + Lang.T("all 8 at 3+ stars, half again as strong at 5"), null);
@@ -600,6 +602,13 @@ namespace AzerothLauncher
         protected override void OnMouseUp(MouseEventArgs e)
         {
             base.OnMouseUp(e);
+            if (e.Button == MouseButtons.Left && overSet != null && OpenSet != null)
+            {
+                GuideHover.Hide();
+                string[] set = overSet;
+                WowButton.Fire(delegate { OpenSet(className, set[2]); });   // the full set (its 8-piece) in the planner
+                return;
+            }
             if (e.Button == MouseButtons.Left && overSpell != null && GuideLinks.Navigate != null)
             {
                 GuideHover.Hide();

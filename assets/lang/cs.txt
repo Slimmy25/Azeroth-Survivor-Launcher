@@ -1800,3 +1800,23 @@ The path at the top
 = Cesta nahoře
 This window has no rows of buttons, to give its pages as much room as possible. The path at the top does their job: each step is where you are (Guide › Classes › Priest).\n\nClick a step to go back to it. Point at a step with ▾, or click it, for the list of places beside it (the other tabs, classes or pages). The arrow on the left goes back the way you came, and the X takes you home.
 = Toto okno nemá řady tlačítek, aby stránky měly co nejvíc místa. Jejich práci dělá cesta nahoře: každý krok ukazuje, kde jste (Průvodce › Třídy › Kněz).\n\nKliknutím na krok se k němu vrátíte. Najeďte na krok s ▾ nebo na něj klikněte pro seznam míst vedle něj (další karty, třídy nebo stránky). Šipka vlevo vás vrátí cestou, kudy jste přišli, a X vás vezme domů.
+Single Item
+= Jeden předmět
+Tier Bonus
+= Bonus sady
+4 piece
+= 4 kusy
+8 piece
+= 8 kusů
+Settings
+= Nastavení
+Change
+= Změnit
+Run setup again
+= Spustit nastavení znovu
+4 piece: four pieces at T1. 8 piece: all eight at T3. The other slots keep what they hold.
+= 4 kusy: čtyři kusy na T1. 8 kusů: všech osm na T3. Ostatní pozice si nechají, co mají.
+Click a folder to change it, or use Change ▾ in the path above. Importing a save is there too.
+= Kliknutím na složku ji změníte, nebo použijte Změnit ▾ v cestě nahoře. Je tam i import uložené pozice.
+Language ({0}), About Launcher and Run setup again: in Settings ▾ in the path above.
+= Jazyk ({0}), O launcheru a Spustit nastavení znovu: v Nastavení ▾ v cestě nahoře.

@@ -1800,3 +1800,23 @@ The path at the top
 = 상단 경로
 This window has no rows of buttons, to give its pages as much room as possible. The path at the top does their job: each step is where you are (Guide › Classes › Priest).\n\nClick a step to go back to it. Point at a step with ▾, or click it, for the list of places beside it (the other tabs, classes or pages). The arrow on the left goes back the way you came, and the X takes you home.
 = 이 창에는 페이지에 최대한 많은 공간을 주기 위해 버튼 줄이 없습니다. 대신 상단 경로가 그 역할을 합니다. 각 단계가 현재 위치를 보여 줍니다(가이드 › 직업 › 사제).\n\n단계를 클릭하면 그곳으로 돌아갑니다. ▾ 가 있는 단계를 가리키거나 클릭하면 그 옆의 장소(다른 탭, 직업, 페이지) 목록이 나옵니다. 왼쪽 화살표는 온 길을 되돌아가고, X는 홈으로 갑니다.
+Single Item
+= 단일 아이템
+Tier Bonus
+= 세트 보너스
+4 piece
+= 4세트
+8 piece
+= 8세트
+Settings
+= 설정
+Change
+= 변경
+Run setup again
+= 설정 다시 실행
+4 piece: four pieces at T1. 8 piece: all eight at T3. The other slots keep what they hold.
+= 4세트: 4개를 T1로. 8세트: 8개 모두 T3로. 다른 칸은 그대로 둡니다.
+Click a folder to change it, or use Change ▾ in the path above. Importing a save is there too.
+= 폴더를 클릭해 바꾸거나 위 경로의 변경 ▾ 을 사용하세요. 저장 파일 가져오기도 거기 있습니다.
+Language ({0}), About Launcher and Run setup again: in Settings ▾ in the path above.
+= 언어({0}), 런처 정보, 설정 다시 실행: 위 경로의 설정 ▾ 에 있습니다.

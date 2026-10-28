@@ -1800,3 +1800,23 @@ The path at the top
 = ऊपर का रास्ता
 This window has no rows of buttons, to give its pages as much room as possible. The path at the top does their job: each step is where you are (Guide › Classes › Priest).\n\nClick a step to go back to it. Point at a step with ▾, or click it, for the list of places beside it (the other tabs, classes or pages). The arrow on the left goes back the way you came, and the X takes you home.
 = इस विंडो में बटनों की पंक्तियाँ नहीं हैं, ताकि पेजों को ज़्यादा से ज़्यादा जगह मिले। ऊपर का रास्ता उनका काम करता है: हर कदम बताता है कि आप कहाँ हैं (गाइड › क्लासें › प्रीस्ट)।\n\nकिसी कदम पर वापस जाने के लिए उस पर क्लिक करें। ▾ वाले कदम पर पॉइंटर ले जाएँ या क्लिक करें, आस-पास की जगहों की सूची के लिए (दूसरे टैब, क्लासें या पेज)। बाईं ओर का तीर आपको आए रास्ते से वापस ले जाता है और X आपको होम पर।
+Single Item
+= एकल आइटम
+Tier Bonus
+= टियर बोनस
+4 piece
+= 4 टुकड़े
+8 piece
+= 8 टुकड़े
+Settings
+= सेटिंग्स
+Change
+= बदलें
+Run setup again
+= सेटअप फिर से चलाएँ
+4 piece: four pieces at T1. 8 piece: all eight at T3. The other slots keep what they hold.
+= 4 टुकड़े: चार टुकड़े T1 पर। 8 टुकड़े: सभी आठ T3 पर। बाकी स्लॉट जैसे हैं वैसे रहते हैं।
+Click a folder to change it, or use Change ▾ in the path above. Importing a save is there too.
+= फ़ोल्डर बदलने के लिए उस पर क्लिक करें, या ऊपर रास्ते में बदलें ▾ का उपयोग करें। सेव इंपोर्ट भी वहीं है।
+Language ({0}), About Launcher and Run setup again: in Settings ▾ in the path above.
+= भाषा ({0}), लॉन्चर के बारे में और सेटअप फिर से चलाएँ: ऊपर रास्ते में सेटिंग्स ▾ में।

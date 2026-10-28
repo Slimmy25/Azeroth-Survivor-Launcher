@@ -101,6 +101,33 @@ namespace AzerothLauncher
 
         static int StarsOf(string slot) { int n; return Stars.TryGetValue(slot, out n) ? n : 0; }
 
+        // the list beside the sheet: Single Item (what the chosen slot can hold) or Tier Bonus (a whole set at once)
+        static bool tierMode;
+        readonly List<KeyValuePair<Rectangle, bool>> modeBoxes = new List<KeyValuePair<Rectangle, bool>>();
+        readonly List<KeyValuePair<Rectangle, string[]>> tierBoxes = new List<KeyValuePair<Rectangle, string[]>>();   // { rarity, "4" or "8" }
+        int hoverMode = -1, hoverTier = -1;
+
+        static readonly string[] ArmorSlots = { "Head", "Shoulder", "Chest", "Waist", "Legs", "Feet", "Wrist", "Hands" };
+
+        // a set put in the planner at once: 4 pieces at T1 (its 4-piece bonus) or all 8 at T3 (both bonuses). The other
+        // slots keep what they hold.
+        public static void FillSet(string cls, string rarity, int pieces, Dictionary<string, object> slots)
+        {
+            int n = 0;
+            foreach (string slot in ArmorSlots)
+            {
+                if (n >= pieces) break;
+                foreach (var p in Items.GearOf(cls, slot))
+                    if (p.Rarity == rarity && Items.IsArmor(p))
+                    {
+                        slots[slot] = p;
+                        Stars[slot] = pieces >= 8 ? 3 : 1;
+                        n++;
+                        break;
+                    }
+            }
+        }
+
         static readonly Color Page = Theme.Hex("#0e0d14"), Edge = Theme.Hex("#4a3a22"), SlotBg = Theme.Hex("#1b1a24"),
             SlotEdge = Theme.Hex("#45414f"), Gold = Theme.Hex("#f0c050"), Bright = Theme.Hex("#f5e9c8"), Dim = Theme.Hex("#9c8a64");
 
@@ -388,10 +415,32 @@ namespace AzerothLauncher
         void Selector(Graphics g, Rectangle r)
         {
             rows.Clear();
-            string head = Lang.T(chosenSlot);
-            using (var b = new SolidBrush(Gold)) g.DrawString(head, fHead, b, r.X + 10, r.Y + 8);
-            float y = r.Y + 12 + fHead.GetHeight(g);
+            modeBoxes.Clear();
+            tierBoxes.Clear();
             float lh = Math.Max(fText.GetHeight(g) + 6, 20);
+            // where the header was: Single Item / Tier Bonus
+            int bh = (int)lh + 4, half = (r.Width - 24) / 2;
+            using (var sfc = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center })
+                for (int i = 0; i < 2; i++)
+                {
+                    bool tier = i == 1, on = tier == tierMode;
+                    var box = new Rectangle(r.X + 8 + i * (half + 8), r.Y + 8, half, bh);
+                    using (var b = new SolidBrush(on ? Color.FromArgb(200, 240, 192, 80) : hoverMode == i ? Theme.Hex("#252331") : SlotBg)) g.FillRectangle(b, box);
+                    using (var p = new Pen(on ? Gold : SlotEdge)) g.DrawRectangle(p, box);
+                    using (var b = new SolidBrush(on ? Color.Black : Bright)) g.DrawString(Lang.T(tier ? "Tier Bonus" : "Single Item"), fBold, b, box, sfc);
+                    modeBoxes.Add(new KeyValuePair<Rectangle, bool>(box, tier));
+                }
+            float y = r.Y + 8 + bh + 8;
+            if (tierMode) { TierRows(g, r, y, lh); return; }
+            // the slot and the name of what it holds, under those two
+            object held;
+            slots.TryGetValue(chosenSlot, out held);
+            using (var b = new SolidBrush(Gold)) g.DrawString(Lang.T(chosenSlot), fHead, b, r.X + 10, y);
+            y += fHead.GetHeight(g);
+            using (var sfn = new StringFormat(StringFormatFlags.NoWrap) { Trimming = StringTrimming.EllipsisCharacter })
+            using (var b = new SolidBrush(held != null ? RarityColor(RarityOf(held)) : Dim))
+                g.DrawString(held != null ? NameOf(held) : Lang.T("Empty"), fText, b, new RectangleF(r.X + 10, y, r.Width - 20, lh), sfn);
+            y += lh + 2;
             int ic = (int)(lh - 4);                          // the picture: as tall as the line
             object worn;
             slots.TryGetValue(chosenSlot, out worn);
@@ -436,6 +485,33 @@ namespace AzerothLauncher
                     else rows.Add(new KeyValuePair<Rectangle, object>(Rectangle.Empty, o));
                     y += lh + 1;
                 }
+        }
+
+        // Tier Bonus: one line per rarity, its name on the left and 4 piece / 8 piece side by side
+        void TierRows(Graphics g, Rectangle r, float y, float lh)
+        {
+            int bw = Math.Max(54, (int)(r.Width * 0.27f)), bh = (int)lh + 2, i = 0;
+            using (var sfc = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center })
+            using (var sfl = new StringFormat(StringFormatFlags.NoWrap) { Trimming = StringTrimming.EllipsisCharacter, LineAlignment = StringAlignment.Center })
+                foreach (string rar in Items.Rarities)
+                {
+                    if (y + bh > r.Bottom - 6) break;
+                    int x8 = r.Right - 8 - bw, x4 = x8 - 6 - bw;
+                    var label = new RectangleF(r.X + 10, y, x4 - r.X - 14, bh);
+                    using (var b = new SolidBrush(RarityColor(rar))) g.DrawString(Lang.T(rar), fBold, b, label, sfl);
+                    foreach (string n in new[] { "4", "8" })
+                    {
+                        var box = new Rectangle(n == "4" ? x4 : x8, (int)y, bw, bh);
+                        using (var b = new SolidBrush(hoverTier == i ? Theme.Hex("#252331") : SlotBg)) g.FillRectangle(b, box);
+                        using (var p = new Pen(RarityColor(rar))) g.DrawRectangle(p, box);
+                        using (var b = new SolidBrush(Bright)) g.DrawString(Lang.T(n + " piece"), fSmall, b, box, sfc);
+                        tierBoxes.Add(new KeyValuePair<Rectangle, string[]>(box, new[] { rar, n }));
+                        i++;
+                    }
+                    y += bh + 6;
+                }
+            if (y + 2 * fSmall.GetHeight(g) < r.Bottom)
+                Para(g, Lang.T("4 piece: four pieces at T1. 8 piece: all eight at T3. The other slots keep what they hold."), fSmall, Dim, r.X + 10, y + 2, r.Width - 20, r.Bottom - 4);
         }
 
         void Frame(Graphics g, Rectangle r)
@@ -523,7 +599,11 @@ namespace AzerothLauncher
         {
             string s = SlotAt(e.Location);
             int r = s == null ? RowAt(e.Location) : -1;
-            Cursor = s != null || r >= 0 ? Cursors.Hand : Cursors.Default;
+            int hm = -1, ht = -1;
+            for (int i = 0; i < modeBoxes.Count; i++) if (modeBoxes[i].Key.Contains(e.Location)) hm = i;
+            for (int i = 0; i < tierBoxes.Count; i++) if (tierBoxes[i].Key.Contains(e.Location)) ht = i;
+            if (hm != hoverMode || ht != hoverTier) { hoverMode = hm; hoverTier = ht; Invalidate(); }
+            Cursor = s != null || r >= 0 || hm >= 0 || ht >= 0 ? Cursors.Hand : Cursors.Default;
             if (s != hover || r != hoverRow)
             {
                 hover = s;
@@ -544,6 +624,13 @@ namespace AzerothLauncher
         protected override void OnMouseUp(MouseEventArgs e)
         {
             base.OnMouseUp(e);
+            if (e.Button == MouseButtons.Left)
+            {
+                foreach (var m in modeBoxes)
+                    if (m.Key.Contains(e.Location)) { tierMode = m.Value; Invalidate(); return; }
+                foreach (var t in tierBoxes)
+                    if (t.Key.Contains(e.Location)) { FillSet(cls, t.Value[0], t.Value[1] == "8" ? 8 : 4, slots); Publish(); Invalidate(); return; }
+            }
             string s = SlotAt(e.Location);
             if (s != null)
             {
@@ -554,6 +641,7 @@ namespace AzerothLauncher
                 {
                     if (worn is GearPiece) Stars[s] = (StarsOf(s) + 1) % 6;   // a click on a piece: one more star, after 5 back to 0
                     chosenSlot = s;                           // the selector shows what this slot can hold
+                    tierMode = false;
                 }
                 hover = null;                                 // the hover card shows the new stars at once
                 Publish();

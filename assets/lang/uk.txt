@@ -1800,3 +1800,23 @@ The path at the top
 = Шлях угорі
 This window has no rows of buttons, to give its pages as much room as possible. The path at the top does their job: each step is where you are (Guide › Classes › Priest).\n\nClick a step to go back to it. Point at a step with ▾, or click it, for the list of places beside it (the other tabs, classes or pages). The arrow on the left goes back the way you came, and the X takes you home.
 = У цьому вікні немає рядів кнопок, щоб сторінкам діставалося якомога більше місця. Їхню роботу робить шлях угорі: кожен крок показує, де ви (Посібник › Класи › Жрець).\n\nКлацніть крок, щоб повернутися до нього. Наведіть на крок зі ▾ або клацніть його, щоб побачити сусідні місця (інші вкладки, класи чи сторінки). Стрілка ліворуч веде назад тим шляхом, яким ви прийшли, а X — на головний екран.
+Single Item
+= Окремий предмет
+Tier Bonus
+= Бонус комплекту
+4 piece
+= 4 предмети
+8 piece
+= 8 предметів
+Settings
+= Налаштування
+Change
+= Змінити
+Run setup again
+= Запустити налаштування знову
+4 piece: four pieces at T1. 8 piece: all eight at T3. The other slots keep what they hold.
+= 4 предмети: чотири на T1. 8 предметів: усі вісім на T3. Інші комірки не змінюються.
+Click a folder to change it, or use Change ▾ in the path above. Importing a save is there too.
+= Клацніть теку, щоб змінити її, або скористайтеся «Змінити ▾» у шляху вгорі. Там і імпорт збереження.
+Language ({0}), About Launcher and Run setup again: in Settings ▾ in the path above.
+= Мова ({0}), «Про лаунчер» і «Запустити налаштування знову»: у «Налаштування ▾» в шляху вгорі.

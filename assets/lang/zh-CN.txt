@@ -1800,3 +1800,23 @@ The path at the top
 = 顶部路径
 This window has no rows of buttons, to give its pages as much room as possible. The path at the top does their job: each step is where you are (Guide › Classes › Priest).\n\nClick a step to go back to it. Point at a step with ▾, or click it, for the list of places beside it (the other tabs, classes or pages). The arrow on the left goes back the way you came, and the X takes you home.
 = 此窗口没有成排的按钮，以便页面拥有尽可能多的空间。顶部路径承担了它们的作用：每一步都表示你所在的位置（指南 › 职业 › 牧师）。\n\n点击某一步可返回该处。指向带 ▾ 的一步或点击它，可列出旁边的位置（其他标签、职业或页面）。左侧箭头沿你来时的路返回，X 返回主页。
+Single Item
+= 单件
+Tier Bonus
+= 套装加成
+4 piece
+= 4件
+8 piece
+= 8件
+Settings
+= 设置
+Change
+= 更改
+Run setup again
+= 重新运行设置
+4 piece: four pieces at T1. 8 piece: all eight at T3. The other slots keep what they hold.
+= 4件：四件 T1。8件：全部八件 T3。其他栏位保持不变。
+Click a folder to change it, or use Change ▾ in the path above. Importing a save is there too.
+= 点击文件夹即可更改，或使用上方路径中的“更改 ▾”。导入存档也在那里。
+Language ({0}), About Launcher and Run setup again: in Settings ▾ in the path above.
+= 语言（{0}）、关于启动器和重新运行设置：在上方路径的“设置 ▾”中。

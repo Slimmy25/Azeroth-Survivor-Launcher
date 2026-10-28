@@ -1800,3 +1800,23 @@ The path at the top
 = 上部のパス
 This window has no rows of buttons, to give its pages as much room as possible. The path at the top does their job: each step is where you are (Guide › Classes › Priest).\n\nClick a step to go back to it. Point at a step with ▾, or click it, for the list of places beside it (the other tabs, classes or pages). The arrow on the left goes back the way you came, and the X takes you home.
 = このウィンドウには、ページをできるだけ広く使うためボタンの列がありません。代わりに上部のパスが同じ役目を果たします。各ステップが現在地を示します（ガイド › クラス › プリースト）。\n\nステップをクリックするとそこへ戻ります。▾ のあるステップにポインターを合わせるかクリックすると、隣の場所（他のタブ、クラス、ページ）の一覧が出ます。左の矢印は来た道を戻り、X でホームに戻ります。
+Single Item
+= 単品
+Tier Bonus
+= セットボーナス
+4 piece
+= 4点
+8 piece
+= 8点
+Settings
+= 設定
+Change
+= 変更
+Run setup again
+= セットアップをやり直す
+4 piece: four pieces at T1. 8 piece: all eight at T3. The other slots keep what they hold.
+= 4点：4つをT1で。8点：8つすべてをT3で。他のスロットはそのままです。
+Click a folder to change it, or use Change ▾ in the path above. Importing a save is there too.
+= フォルダーをクリックして変更するか、上部のパスの「変更 ▾」を使ってください。セーブのインポートもそこにあります。
+Language ({0}), About Launcher and Run setup again: in Settings ▾ in the path above.
+= 言語（{0}）、ランチャーについて、セットアップをやり直す：上部パスの「設定 ▾」にあります。

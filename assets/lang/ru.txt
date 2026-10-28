@@ -1800,3 +1800,23 @@ The path at the top
 = Путь вверху
 This window has no rows of buttons, to give its pages as much room as possible. The path at the top does their job: each step is where you are (Guide › Classes › Priest).\n\nClick a step to go back to it. Point at a step with ▾, or click it, for the list of places beside it (the other tabs, classes or pages). The arrow on the left goes back the way you came, and the X takes you home.
 = В этом окне нет рядов кнопок, чтобы страницам доставалось как можно больше места. Их работу делает путь вверху: каждый шаг показывает, где вы (Руководство › Классы › Жрец).\n\nЩёлкните по шагу, чтобы вернуться к нему. Наведите на шаг со ▾ или щёлкните его, чтобы увидеть соседние места (другие вкладки, классы или страницы). Стрелка слева ведёт назад тем путём, которым вы пришли, а X — на главный экран.
+Single Item
+= Отдельный предмет
+Tier Bonus
+= Бонус комплекта
+4 piece
+= 4 предмета
+8 piece
+= 8 предметов
+Settings
+= Настройки
+Change
+= Изменить
+Run setup again
+= Запустить настройку снова
+4 piece: four pieces at T1. 8 piece: all eight at T3. The other slots keep what they hold.
+= 4 предмета: четыре на T1. 8 предметов: все восемь на T3. Остальные ячейки не меняются.
+Click a folder to change it, or use Change ▾ in the path above. Importing a save is there too.
+= Щёлкните по папке, чтобы изменить её, или используйте «Изменить ▾» в пути вверху. Там же импорт сохранения.
+Language ({0}), About Launcher and Run setup again: in Settings ▾ in the path above.
+= Язык ({0}), «О лаунчере» и «Запустить настройку снова»: в «Настройки ▾» в пути вверху.
