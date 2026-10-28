@@ -1891,3 +1891,7 @@ That folder does not exist.
 = Diesen Ordner gibt es nicht.
 The path at the top shows where you are, for example Guide › Classes › Priest (in the picture below). Click a step's name to go back to it. Point at a step, or its ▾, for the places beside it. The arrow on the left goes back the way you came; the X takes you home.
 = Der Pfad oben zeigt, wo du bist, zum Beispiel Guide › Klassen › Priest (im Bild unten). Klicke auf den Namen eines Schritts, um dorthin zurückzukehren. Zeige auf einen Schritt oder sein ▾ für die Orte daneben. Der Pfeil links führt den Weg zurück, den du gekommen bist; das X bringt dich nach Hause.
+Bring in a save from elsewhere (a backup, another PC) into the save game folder.
+= Hol einen Spielstand von woanders (eine Sicherung, ein anderer PC) in den Spielstand-Ordner.
+The Talent Tree Builder, the Gear Planner and the build guides.
+= Der Talentbaum-Planer, der Ausrüstungsplaner und die Build-Guides.

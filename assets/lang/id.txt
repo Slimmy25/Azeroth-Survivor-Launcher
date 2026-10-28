@@ -1891,3 +1891,7 @@ That folder does not exist.
 = Folder itu tidak ada.
 The path at the top shows where you are, for example Guide › Classes › Priest (in the picture below). Click a step's name to go back to it. Point at a step, or its ▾, for the places beside it. The arrow on the left goes back the way you came; the X takes you home.
 = Jalur di atas menunjukkan posisimu, misalnya Panduan › Kelas › Priest (di gambar bawah). Klik nama sebuah langkah untuk kembali ke sana. Arahkan ke langkah, atau ▾-nya, untuk tempat-tempat di sebelahnya. Panah di kiri kembali lewat jalan yang kamu tempuh; X membawamu ke beranda.
+Bring in a save from elsewhere (a backup, another PC) into the save game folder.
+= Bawa simpanan dari tempat lain (cadangan, PC lain) ke folder simpanan game.
+The Talent Tree Builder, the Gear Planner and the build guides.
+= Pembuat Pohon Talenta, Perencana Perlengkapan, dan panduan build.

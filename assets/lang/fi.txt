@@ -1891,3 +1891,7 @@ That folder does not exist.
 = Kansiota ei ole olemassa.
 The path at the top shows where you are, for example Guide › Classes › Priest (in the picture below). Click a step's name to go back to it. Point at a step, or its ▾, for the places beside it. The arrow on the left goes back the way you came; the X takes you home.
 = Yläreunan polku näyttää, missä olet, esimerkiksi Opas › Luokat › Priest (alla olevassa kuvassa). Napsauta vaiheen nimeä palataksesi siihen. Osoita vaihetta tai sen ▾-merkkiä nähdäksesi viereiset paikat. Vasemman reunan nuoli vie takaisin tulemaasi reittiä; X vie kotiin.
+Bring in a save from elsewhere (a backup, another PC) into the save game folder.
+= Tuo tallennus muualta (varmuuskopio, toinen PC) tallennuskansioon.
+The Talent Tree Builder, the Gear Planner and the build guides.
+= Kykypuun rakentaja, varustesuunnittelija ja build-oppaat.

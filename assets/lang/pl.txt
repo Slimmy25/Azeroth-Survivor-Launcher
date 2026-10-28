@@ -1892,3 +1892,7 @@ That folder does not exist.
 = Ten folder nie istnieje.
 The path at the top shows where you are, for example Guide › Classes › Priest (in the picture below). Click a step's name to go back to it. Point at a step, or its ▾, for the places beside it. The arrow on the left goes back the way you came; the X takes you home.
 = Ścieżka u góry pokazuje, gdzie jesteś, na przykład Poradnik › Klasy › Priest (na obrazku poniżej). Kliknij nazwę kroku, aby do niego wrócić. Wskaż krok lub jego ▾, aby zobaczyć miejsca obok. Strzałka po lewej wraca drogą, którą przyszedłeś; X zabiera do strony głównej.
+Bring in a save from elsewhere (a backup, another PC) into the save game folder.
+= Przenieś zapis z innego miejsca (kopia zapasowa, inny komputer) do folderu zapisów gry.
+The Talent Tree Builder, the Gear Planner and the build guides.
+= Kreator drzewek talentów, planer ekwipunku i poradniki buildów.

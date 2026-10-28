@@ -1892,3 +1892,7 @@ That folder does not exist.
 = Tato složka neexistuje.
 The path at the top shows where you are, for example Guide › Classes › Priest (in the picture below). Click a step's name to go back to it. Point at a step, or its ▾, for the places beside it. The arrow on the left goes back the way you came; the X takes you home.
 = Cesta nahoře ukazuje, kde jste, například Průvodce › Třídy › Priest (na obrázku níže). Kliknutím na název kroku se na něj vrátíte. Najeďte na krok nebo jeho ▾ a uvidíte místa vedle něj. Šipka vlevo vede zpět cestou, kterou jste přišli; X vás vrátí domů.
+Bring in a save from elsewhere (a backup, another PC) into the save game folder.
+= Přeneste uloženou hru odjinud (zálohu, jiné PC) do složky uložených her.
+The Talent Tree Builder, the Gear Planner and the build guides.
+= Stavitel stromů talentů, plánovač výbavy a návody na buildy.

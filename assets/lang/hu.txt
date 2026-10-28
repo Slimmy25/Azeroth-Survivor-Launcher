@@ -1892,3 +1892,7 @@ That folder does not exist.
 = Ez a mappa nem létezik.
 The path at the top shows where you are, for example Guide › Classes › Priest (in the picture below). Click a step's name to go back to it. Point at a step, or its ▾, for the places beside it. The arrow on the left goes back the way you came; the X takes you home.
 = A fenti útvonal mutatja, hol vagy, például Útmutató › Kasztok › Priest (a lenti képen). Egy lépés nevére kattintva visszatérsz oda. Mutass egy lépésre vagy a ▾ jelére a mellette lévő helyekért. A bal oldali nyíl visszavisz azon az úton, amelyen jöttél; az X hazavisz.
+Bring in a save from elsewhere (a backup, another PC) into the save game folder.
+= Hozz be máshonnan egy mentést (biztonsági mentés, másik gép) a mentések mappájába.
+The Talent Tree Builder, the Gear Planner and the build guides.
+= A tehetségfa-tervező, a felszerelés-tervező és a build útmutatók.
