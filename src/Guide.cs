@@ -491,11 +491,9 @@ namespace AzerothLauncher
                                     Theme.GoldDim, Theme.Gold);
             Color bg = sp.BackColor;
             int full = sp.ClientSize.Width - 8, x = 4, y = 4;
-            // the trees on the left, a box on the right, sized as the Gear Planner's sheet and selector (Slimjim, 2026-10-28,
-            // to see how it looks). INTENT (coming soon, Slimjim): that box becomes the build's own place: SAVE TALENT
-            // TREE (named builds kept per class), EXPORT (a build as a short code to share) and IMPORT (paste someone's
-            // code). TalentBuild already turns a build into text and back (TalentBuild.Parse), the base for both.
-            int boxW = Math.Min(full * 2 / 5, 280);
+            // Keep the tree editor at roughly 60% and its build controls at 40%, like the Gear Planner.
+            int boxW = Math.Max(220, full * 2 / 5);
+            boxW = Math.Min(boxW, Math.Max(220, full - 360));
             int w = full - boxW - 10;
             var left = UI.Text("", 11, FontStyle.Bold, Theme.Gold, bg, w - 140, false);
             left.Bounds = new Rectangle(x, y + 6, w - 200, Theme.F(11, FontStyle.Bold).Height + 4);   // (no Gear Planner button: the path leads there)
@@ -516,16 +514,134 @@ namespace AzerothLauncher
                      "its own tree has 5 points for every row above it; a build takes no more than 51 points. The purple " +
                      "ones are the milestones at 10, 20 and 30 points."));
             help.Disposed += delegate { helpTip.Dispose(); };
-            // the box for the future build tools (see INTENT above), filling the right side
-            var future = new Bordered(Theme.GoldDim, 1);
-            future.BackColor = bg;
-            future.Bounds = new Rectangle(x + w + 10, y, boxW, sp.ClientSize.Height - y - 8);
-            var futureText = UI.Text("FUTURE BUILD SAVE + IMPORT / EXPORT CATEGORY", 10, FontStyle.Bold, Theme.GoldDim, bg, boxW - 24);
-            futureText.AutoSize = false;
-            futureText.TextAlign = ContentAlignment.MiddleCenter;
-            futureText.Dock = DockStyle.Fill;
-            future.Controls.Add(futureText);
-            sp.Controls.Add(future);
+            // Named builds are kept in the launcher's own config, separately for each class.
+            var tools = new Bordered(Theme.GoldDim, 1);
+            tools.BackColor = bg;
+            tools.Bounds = new Rectangle(x + w + 10, y, boxW, sp.ClientSize.Height - y - 8);
+            var toolTitle = UI.Text(Lang.T("SAVED BUILDS"), 10, FontStyle.Bold, Theme.Gold, bg, boxW - 20);
+            toolTitle.Location = new Point(10, 12);
+            tools.Controls.Add(toolTitle);
+            var buildName = new TextBox();
+            buildName.Font = Theme.F(9, FontStyle.Regular);
+            buildName.BackColor = Theme.Hex("#211b2a");
+            buildName.ForeColor = Theme.Gold;
+            buildName.BorderStyle = BorderStyle.FixedSingle;
+            buildName.Location = new Point(10, 42);
+            buildName.Width = boxW - 24;
+            tools.Controls.Add(buildName);
+            var saved = new ComboBox();
+            saved.DropDownStyle = ComboBoxStyle.DropDownList;
+            saved.Font = Theme.F(9, FontStyle.Regular);
+            saved.BackColor = Theme.Hex("#211b2a");
+            saved.ForeColor = Theme.Gold;
+            saved.Location = new Point(10, 76);
+            saved.Width = boxW - 24;
+            tools.Controls.Add(saved);
+            Func<Dictionary<string, object>> classBuilds = delegate
+            {
+                var cfg = Config.Load();
+                var all = cfg.Section("talentTreeBuilds");
+                var byClass = Json.AsDict(Json.Get(all, cls));
+                if (byClass == null) { byClass = new Dictionary<string, object>(); all[cls] = byClass; }
+                return byClass;
+            };
+            Action refreshSaved = delegate
+            {
+                saved.Items.Clear();
+                foreach (var kv in classBuilds())
+                    if (kv.Value is string) saved.Items.Add(kv.Key);
+                if (saved.Items.Count > 0) saved.SelectedIndex = 0;
+            };
+            var saveBuild = new WowButton(Lang.T("SAVE"), delegate
+            {
+                string name = buildName.Text.Trim();
+                if (name.Length == 0) { MessageBox.Show(Lang.T("Enter a name for this build."), Lang.T("Talent Tree Builder"), MessageBoxButtons.OK, MessageBoxIcon.Information); buildName.Focus(); return; }
+                var cfg = Config.Load();
+                var all = cfg.Section("talentTreeBuilds");
+                var byClass = Json.AsDict(Json.Get(all, cls));
+                if (byClass == null) { byClass = new Dictionary<string, object>(); all[cls] = byClass; }
+                byClass[name] = build.Save();
+                cfg.Save();
+                refreshSaved();
+                saved.SelectedItem = name;
+            }, boxW - 24, 28, 9);
+            saveBuild.Location = new Point(10, 110);
+            tools.Controls.Add(saveBuild);
+            var loadBuild = new WowButton(Lang.T("LOAD"), delegate
+            {
+                if (saved.SelectedItem == null) return;
+                object code;
+                if (!classBuilds().TryGetValue(Convert.ToString(saved.SelectedItem), out code)) return;
+                TalentBuild loaded = TalentBuild.Parse(Convert.ToString(code), cls);
+                build.Reset();
+                foreach (var tr in Talents.Of(cls))
+                {
+                    var ordered = new List<Talent>(tr.Talents);
+                    ordered.Sort(delegate(Talent a, Talent b)
+                    {
+                        int row = a.Row.CompareTo(b.Row);
+                        return row != 0 ? row : a.Col.CompareTo(b.Col);
+                    });
+                    foreach (var t in ordered)
+                        for (int i = 0; i < loaded.Get(t); i++) build.Add(t);
+                }
+            }, boxW - 24, 28, 9);
+            loadBuild.Location = new Point(10, 144);
+            tools.Controls.Add(loadBuild);
+            var exportBuild = new WowButton(Lang.T("EXPORT"), delegate
+            {
+                try { Clipboard.SetText(build.Save()); MessageBox.Show(Lang.T("Build code copied to the clipboard."), Lang.T("Talent Tree Builder"), MessageBoxButtons.OK, MessageBoxIcon.Information); }
+                catch (Exception) { MessageBox.Show(Lang.T("Could not copy the build code."), Lang.T("Talent Tree Builder"), MessageBoxButtons.OK, MessageBoxIcon.Warning); }
+            }, boxW - 24, 28, 9);
+            exportBuild.Location = new Point(10, 178);
+            tools.Controls.Add(exportBuild);
+            var importBuild = new WowButton(Lang.T("IMPORT"), delegate
+            {
+                string code = "";
+                using (var prompt = new Form())
+                using (var input = new TextBox())
+                using (var ok = new Button())
+                using (var cancel = new Button())
+                {
+                    prompt.Text = Lang.T("IMPORT BUILD");
+                    prompt.StartPosition = FormStartPosition.CenterParent;
+                    prompt.FormBorderStyle = FormBorderStyle.FixedDialog;
+                    prompt.MinimizeBox = false;
+                    prompt.MaximizeBox = false;
+                    prompt.ClientSize = new Size(420, 150);
+                    input.Multiline = true;
+                    input.ScrollBars = ScrollBars.Vertical;
+                    input.Location = new Point(10, 10);
+                    input.Size = new Size(400, 82);
+                    try { input.Text = Clipboard.ContainsText() ? Clipboard.GetText() : ""; } catch (Exception) { }
+                    ok.Text = Lang.T("IMPORT"); ok.DialogResult = DialogResult.OK;
+                    ok.Location = new Point(230, 108); ok.Size = new Size(85, 28);
+                    cancel.Text = Lang.T("CANCEL"); cancel.DialogResult = DialogResult.Cancel;
+                    cancel.Location = new Point(325, 108); cancel.Size = new Size(85, 28);
+                    prompt.Controls.Add(input); prompt.Controls.Add(ok); prompt.Controls.Add(cancel);
+                    prompt.AcceptButton = ok; prompt.CancelButton = cancel;
+                    if (prompt.ShowDialog(panel.FindForm()) != DialogResult.OK) return;
+                    code = input.Text.Trim();
+                }
+                if (code.Length == 0) return;
+                TalentBuild imported = TalentBuild.Parse(code, cls);
+                build.Reset();
+                foreach (var tr in Talents.Of(cls))
+                {
+                    var ordered = new List<Talent>(tr.Talents);
+                    ordered.Sort(delegate(Talent a, Talent b)
+                    {
+                        int row = a.Row.CompareTo(b.Row);
+                        return row != 0 ? row : a.Col.CompareTo(b.Col);
+                    });
+                    foreach (var t in ordered)
+                        for (int i = 0; i < imported.Get(t); i++) build.Add(t);
+                }
+            }, boxW - 24, 28, 9);
+            importBuild.Location = new Point(10, 212);
+            tools.Controls.Add(importBuild);
+            sp.Controls.Add(tools);
+            refreshSaved();
             y += Math.Max(reset.Height, left.Height) + 6;
             var trees = Talents.Of(cls);
             var views = new List<TalentTreeView>();

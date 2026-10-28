@@ -1980,3 +1980,18 @@ No profile is the game as it normally is, kept as a full copy in its own isolate
 = Bez profilu je hra tak, jak normálně je, uložená jako úplná kopie ve vlastním odděleném prostoru: které doplňky jsou zapnuté, kde je rozhraní a nastavení všech doplňků. Když ho používáš, launcher nic nemění, a když se k němu z profilu vrátíš, je přesně tak, jak jsi ho nechal. Pokud nechceš, aby se předvolby hry měnily, použij toto nastavení.
 Click to give this profile a name of your own.
 = Klikni a dej profilu vlastní název.
+
+SAVED BUILDS
+= ULOŽENÉ BUILDY
+
+EXPORT
+= EXPORTOVAT
+
+Enter a name for this build.
+= Zadej název tohoto buildu.
+
+Build code copied to the clipboard.
+= Kód buildu byl zkopírován do schránky.
+
+Could not copy the build code.
+= Kód buildu se nepodařilo zkopírovat.
