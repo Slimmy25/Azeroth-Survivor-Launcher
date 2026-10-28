@@ -38,9 +38,6 @@
 - Guide > Gameplay: a new Transmog topic with every look that adds nothing: the 14 Appearances (head and back, each
   with the achievement that brings it), the Tabards (earned and bought, with their price) and the Weapon Glows, which
   move there from Gear & the Armory. They come from a small database of looks (assets/transmog.txt).
-- Item icons: AZS Stats now keeps the icon of every piece any of your heroes wears, for good. The Gear Planner shows
-  them, and in game the AZS Handbook shows the game's own icon on its gear and planner lines, in place of the slot's
-  letters, once a hero has worn the piece.
 - AZS Minor Mods: the plain action bar is no wider than its six squares and the two page arrows, so it leaves no empty
   space. New: cooldown numbers on the spell squares, the seconds until each spell is ready again (on by default).
 
@@ -50,7 +47,7 @@
 - Gear Planner: its note under the totals is shorter, which leaves more room for the set bonuses.
 
 ### Fixes and requests
-- The "?" beside the window's X now reads "Lost ?".
+- The "?" beside the window's X now reads "Lost?" (one button, in your language).
 - Community: two boxes beside its title, Big Streamers and Content Creators. Tick one and, five seconds later, the
   featured video is picked from that group's shuffle. The choice is remembered.
 - The launcher no longer pops back up by itself after the game closes. It stays in the taskbar, and only comes back
@@ -60,3 +57,15 @@
   that killed you last game, how many times it has killed you and whether it's your Nemesis. Take your Nemesis down
   and a "Nemesis slain!" celebration shows. It uses the game's own parchment, frames, icons and sounds, and the
   creature's face once the launcher has put it in AZS Stats. Click it to put it away; /azstats bounty turns it off and on.
+- AZS Stats remembers each time you took your Nemesis down and who was at your side (your party, or alone). The
+  celebration names them, and the Nemesis tab lists your last five wins over it.
+- AZS Stats only keeps your own runs, records and Nemesis log now. It no longer writes down the game's tooltips or the
+  icons of the gear your heroes wear for the launcher, and clears what older versions wrote down. Until the launcher has
+  another source for gear icons, gear shows its slot letters (in the Gear Planner, the Armory and the AZS Handbook).
+- Guide > Transmog: hover a look that is a real World of Warcraft item (20 of them) to see its 3D model picture from
+  Wowhead's model viewer, beside how to earn it.
+- AZS Minor Mods: new Mark minibosses (on by default). Each zone's bosses before its final boss (as the Guide's Zones &
+  Bosses lists them) get a Star, a Triangle and a Diamond, so the Skull and Cross are left for the final boss. Boss
+  markers are now Skull, Cross and Diamond (no more Moon).
+- AZS Minor Mods: a friend who falls blinks their own marker 15 times, on and off: Square, Moon or Circle, one each,
+  so several friends can be down at once. Those three are never put on a boss.
