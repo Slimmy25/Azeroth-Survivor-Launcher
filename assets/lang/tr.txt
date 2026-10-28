@@ -1944,3 +1944,5 @@ ADS ARE YOUTUBE. NOT ME.
 = REKLAMLAR YOUTUBE'UN. BENİM DEĞİL.
 Mute
 = Sessiz
+A talent of more than one class
+= Birden fazla sınıfın yeteneği

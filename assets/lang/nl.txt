@@ -1943,3 +1943,5 @@ ADS ARE YOUTUBE. NOT ME.
 = DE ADVERTENTIES ZIJN VAN YOUTUBE. NIET VAN MIJ.
 Mute
 = Dempen
+A talent of more than one class
+= Een talent van meer dan één klasse

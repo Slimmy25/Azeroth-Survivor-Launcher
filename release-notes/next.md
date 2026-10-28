@@ -34,6 +34,9 @@
 ### Guide
 - Links: Power Word: Shield and Shadow Word: Pain link as a whole (they stopped at the colon, as "Power Word" and
   "Shadow Word"), on the Priest page and wherever they are named, such as Co-op.
+- Talent names that more than one class has (Flurry, Deflection, Ferocity and others) follow the class page they
+  are on: on the Shaman page, Flurry is the Shaman's Flurry, with its own text. Anywhere else, the hover shows each
+  class's version.
 - Warrior: the Fury tree lists its real milestone, Flurry (it said "Fury", which is the tree, not a talent).
 
 ### Guide videos

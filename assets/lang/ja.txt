@@ -1944,3 +1944,5 @@ ADS ARE YOUTUBE. NOT ME.
 = 広告はYOUTUBEのもの。私じゃない。
 Mute
 = ミュート
+A talent of more than one class
+= 複数のクラスにある才能

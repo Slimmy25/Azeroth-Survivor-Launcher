@@ -1943,3 +1943,5 @@ ADS ARE YOUTUBE. NOT ME.
 = REKLAMEN ÄR YOUTUBES. INTE MIN.
 Mute
 = Ljud av
+A talent of more than one class
+= En talang hos flera klasser

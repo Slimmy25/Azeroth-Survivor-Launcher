@@ -1943,3 +1943,5 @@ ADS ARE YOUTUBE. NOT ME.
 = REKLAMENE ER YOUTUBES. IKKE MINE.
 Mute
 = Demp
+A talent of more than one class
+= Et talent hos flere klasser

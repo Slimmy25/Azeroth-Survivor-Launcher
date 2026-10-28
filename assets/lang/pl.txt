@@ -1944,3 +1944,5 @@ ADS ARE YOUTUBE. NOT ME.
 = REKLAMY SĄ OD YOUTUBE. NIE ODE MNIE.
 Mute
 = Wycisz
+A talent of more than one class
+= Talent kilku klas

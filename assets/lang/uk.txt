@@ -1944,3 +1944,5 @@ ADS ARE YOUTUBE. NOT ME.
 = РЕКЛАМА ВІД YOUTUBE. НЕ ВІД МЕНЕ.
 Mute
 = Вимкнути звук
+A talent of more than one class
+= Талант кількох класів

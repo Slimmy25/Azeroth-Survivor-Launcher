@@ -23,6 +23,8 @@ namespace AzerothLauncher
     public static class GuideLinks
     {
         static Dictionary<string, GuideLink> links;
+        static Dictionary<string, List<Talent>> shared;       // talent names in more than one class's tree
+        static int classesAt = -1;                            // the Classes topic
         static Regex finder;
         public static Action<GuideLink> Navigate;            // set by the launcher: open the Guide where the link goes
 
@@ -155,6 +157,18 @@ namespace AzerothLauncher
             }
             // every talent of every class: its text from the game's tree; a click opens its class's page
             int classesTopic = topics.FindIndex(delegate(GuideTopic g) { return g.Title == "Classes"; });
+            classesAt = classesTopic;
+            // a talent name found in more than one class's tree (Flurry: Warrior and Shaman) belongs to no single class:
+            // on a class page it is that class's talent (ForPage); anywhere else its hover shows every class's version
+            var byName = new Dictionary<string, List<Talent>>(StringComparer.Ordinal);
+            foreach (var tal in Talents.All())
+            {
+                List<Talent> l;
+                if (!byName.TryGetValue(tal.Name, out l)) byName[tal.Name] = l = new List<Talent>();
+                if (!l.Exists(delegate(Talent x) { return x.Class == tal.Class; })) l.Add(tal);
+            }
+            shared = new Dictionary<string, List<Talent>>(StringComparer.Ordinal);
+            foreach (var kv in byName) if (kv.Value.Count > 1) shared[kv.Key] = kv.Value;
             foreach (var tal in Talents.All())
             {
                 int cp = classesTopic < 0 ? -1 : topics[classesTopic].Pages.FindIndex(delegate(GuidePage g) { return g.Title == tal.Class; });
@@ -164,6 +178,14 @@ namespace AzerothLauncher
                     GuideLink tl;
                     if (links.TryGetValue(tal.Name, out tl)) tl.Class = tal.Class;
                 }
+            }
+            foreach (var kv in shared)
+            {
+                GuideLink tl;
+                if (!links.TryGetValue(kv.Key, out tl) || tl.Class == null) continue;   // a spell or page of that name wins
+                var tips = new List<string>();
+                foreach (var tal in kv.Value) tips.Add(Lang.T(tal.Class) + ": " + Talents.HoverText(tal));
+                tl.Tip = Lang.T("A talent of more than one class") + "\n\n" + string.Join("\n\n", tips.ToArray());
             }
             // every Transmog look: how to earn it; a real item's hover also shows its 3D model picture (Wowhead's model viewer)
             int tmTopic = topics.FindIndex(delegate(GuideTopic g) { return g.Title == "Transmog"; });
@@ -265,6 +287,29 @@ namespace AzerothLauncher
 
         static string Capital(string s) { return s.Length == 0 ? s : char.ToUpperInvariant(s[0]) + s.Substring(1); }
 
+        // a shared talent's link on a class page: that class's own talent (its page, its text); otherwise unchanged
+        static GuideLink ForPage(GuideLink l, int topic, int page)
+        {
+            List<Talent> list;
+            if (l == null || l.Class == null || shared == null || topic != classesAt || topic < 0 || !shared.TryGetValue(l.Term, out list)) return l;
+            string cls;
+            try { cls = Data.Guide[topic].Pages[page].Title; }
+            catch (Exception) { return l; }
+            foreach (var tal in list)
+                if (tal.Class == cls)
+                    return new GuideLink { Term = l.Term, Topic = topic, Page = page, Class = cls, Tip = Talents.HoverText(tal) };
+            return l;
+        }
+
+        // the same, on a page of the Guide: a talent name several classes share follows the class page it is on
+        public static List<KeyValuePair<string, GuideLink>> Split(string text, int topic, int page)
+        {
+            var runs = Split(text);
+            for (int i = 0; i < runs.Count; i++)
+                if (runs[i].Value != null) runs[i] = new KeyValuePair<string, GuideLink>(runs[i].Key, ForPage(runs[i].Value, topic, page));
+            return runs;
+        }
+
         // the text cut into plain runs and links: (text, link or null)
         public static List<KeyValuePair<string, GuideLink>> Split(string text)
         {
@@ -300,7 +345,7 @@ namespace AzerothLauncher
         {
             SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer |
                      ControlStyles.ResizeRedraw, true);
-            runs = GuideLinks.Split(text);
+            runs = GuideLinks.Split(text, topic, page);
             here = topic;
             herePage = page;
             font = Theme.F(size);

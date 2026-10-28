@@ -1944,3 +1944,5 @@ ADS ARE YOUTUBE. NOT ME.
 = 광고는 YOUTUBE 것입니다. 제 것이 아닙니다.
 Mute
 = 음소거
+A talent of more than one class
+= 여러 직업의 특성

@@ -1944,3 +1944,5 @@ ADS ARE YOUTUBE. NOT ME.
 = REKLAMY JSOU OD YOUTUBE. NE ODE MĚ.
 Mute
 = Ztlumit
+A talent of more than one class
+= Talent více povolání

@@ -1944,3 +1944,5 @@ ADS ARE YOUTUBE. NOT ME.
 = ΟΙ ΔΙΑΦΗΜΙΣΕΙΣ ΕΙΝΑΙ ΤΟΥ YOUTUBE. ΟΧΙ ΔΙΚΕΣ ΜΟΥ.
 Mute
 = Σίγαση
+A talent of more than one class
+= Ταλέντο σε περισσότερες από μία κλάσεις

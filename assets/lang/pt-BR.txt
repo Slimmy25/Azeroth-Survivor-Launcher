@@ -1943,3 +1943,5 @@ ADS ARE YOUTUBE. NOT ME.
 = OS ANÚNCIOS SÃO DO YOUTUBE. NÃO MEUS.
 Mute
 = Silenciar
+A talent of more than one class
+= Um talento de mais de uma classe

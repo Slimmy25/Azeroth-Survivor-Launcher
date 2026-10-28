@@ -1944,3 +1944,5 @@ ADS ARE YOUTUBE. NOT ME.
 = 广告来自 YOUTUBE，不是我。
 Mute
 = 静音
+A talent of more than one class
+= 多个职业共有的天赋

@@ -1944,3 +1944,5 @@ ADS ARE YOUTUBE. NOT ME.
 = विज्ञापन YOUTUBE के हैं। मेरे नहीं।
 Mute
 = म्यूट
+A talent of more than one class
+= एक से ज़्यादा क्लास का टैलेंट

@@ -1943,3 +1943,5 @@ ADS ARE YOUTUBE. NOT ME.
 = LE PUBBLICITÀ SONO DI YOUTUBE. NON MIE.
 Mute
 = Muto
+A talent of more than one class
+= Un talento di più classi
