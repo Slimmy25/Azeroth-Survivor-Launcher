@@ -1201,12 +1201,7 @@ namespace AzerothLauncher
                 {
                     if (e.KeyCode == Keys.Escape) { try { Read(fweb, ref backAt, ref backVol); } catch (Exception) { } full.Close(); }
                 };
-                // the way back, the launcher's own button over the video (the page's own may not answer)
-                var exit = new WowButton("EXIT FULLSCREEN", delegate { try { Read(fweb, ref backAt, ref backVol); } catch (Exception) { } full.Close(); }, 170, 30, 9);
-                exit.Location = new Point(full.ClientSize.Width - exit.Width - 16, 14);
-                exit.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-                full.Controls.Add(exit);
-                exit.BringToFront();
+                // the way back: the player's own fullscreen button or Esc (no extra button of the launcher's own)
                 full.FormClosed += delegate
                 {
                     fweb.Dispose();

@@ -6,3 +6,9 @@
 (a few plain sentences: what this release changes, written last)
 
 ## What's new
+
+### Videos
+- Guide videos: no EXIT FULLSCREEN button over a fullscreen video any more; the player's own button or Esc brings it
+  back. No "Lost?" while a Guide video plays.
+- Community: no line about whose video it is above the featured video (the ticked box says it), and "Lost?" is shown
+  in MORE VIDEOS.

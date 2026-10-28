@@ -628,7 +628,9 @@ namespace AzerothLauncher
                 else if (name == "Community") PanelCommunity();
                 else if (name == "Setup") PanelSetup();          // first-time setup (Setup.cs)
                 RememberView(name);                              // the back arrow's way (History.cs)
-                sideHead.HelpShown = name != "Community" && name != "Setup";   // "Lost?" wherever there is a path to follow (not Community)
+                // "Lost?" wherever there is a path to follow: not on Community's main page (but in MORE VIDEOS), not in setup,
+                // and not while a Guide video plays
+                sideHead.HelpShown = (name != "Community" || communityMore) && name != "Setup" && !(name == "Guide" && gVideo != null);
             }
             finally
             {

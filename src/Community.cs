@@ -208,11 +208,7 @@ namespace AzerothLauncher
                 Put(cb, bx, 8);
                 bx = cb.Right + 14;
             }
-            var intro = PutText(communityFilter == 1 ? "A big streamer's video. All credit goes to the people who made it."
-                                : communityFilter == 2 ? "A content creator's video. All credit goes to the people who made it."
-                                           : "A build video made by a player. All credit goes to the people who made it.",
-                                9.5f, FontStyle.Italic, Theme.GoldDim, 24, 8 + (int)(24 * Theme.Zoom), PW - 24 - (int)(200 * Theme.Zoom) - 34);
-            int top = Math.Max(8 + (int)(32 * Theme.Zoom) + 8, BottomOf(intro) + 6);
+            int top = 8 + (int)(32 * Theme.Zoom) + 8;          // (no line about whose video it is: the ticked box says it)
             if (v == null)
             {
                 PutText("No community videos yet.", 11, FontStyle.Italic, Theme.GoldDim, 24, top + 8, 0);
