@@ -1799,3 +1799,23 @@ The path at the top
 = Der Pfad oben
 This window has no rows of buttons, to give its pages as much room as possible. The path at the top does their job: each step is where you are (Guide › Classes › Priest).\n\nClick a step to go back to it. Point at a step with ▾, or click it, for the list of places beside it (the other tabs, classes or pages). The arrow on the left goes back the way you came, and the X takes you home.
 = Dieses Fenster hat keine Reihen von Knöpfen, damit die Seiten möglichst viel Platz haben. Der Pfad oben übernimmt ihre Aufgabe: Jeder Schritt zeigt, wo du bist (Guide › Klassen › Priester).\n\nKlicke auf einen Schritt, um dorthin zurückzugehen. Zeige auf einen Schritt mit ▾ oder klicke ihn an, um die Orte daneben zu sehen (die anderen Reiter, Klassen oder Seiten). Der Pfeil links geht den Weg zurück, den du gekommen bist, und das X bringt dich nach Hause.
+Single Item
+= Einzelteil
+Tier Bonus
+= Setbonus
+4 piece
+= 4 Teile
+8 piece
+= 8 Teile
+Settings
+= Einstellungen
+Change
+= Ändern
+Run setup again
+= Einrichtung erneut ausführen
+4 piece: four pieces at T1. 8 piece: all eight at T3. The other slots keep what they hold.
+= 4 Teile: vier Teile auf T1. 8 Teile: alle acht auf T3. Die anderen Plätze behalten, was sie haben.
+Click a folder to change it, or use Change ▾ in the path above. Importing a save is there too.
+= Klicke auf einen Ordner, um ihn zu ändern, oder nutze Ändern ▾ im Pfad oben. Dort kannst du auch einen Spielstand importieren.
+Language ({0}), About Launcher and Run setup again: in Settings ▾ in the path above.
+= Sprache ({0}), Über den Launcher und Einrichtung erneut ausführen: unter Einstellungen ▾ im Pfad oben.

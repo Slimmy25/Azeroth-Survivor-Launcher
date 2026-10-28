@@ -145,6 +145,13 @@ namespace AzerothLauncher
                 RunStats st = AddonStats();
                 return st != null ? st.Tooltips : null;
             };
+            SpellRow.OpenSet = delegate(string cls, string rarity)   // a set chip on a spell: that set in the Gear Planner
+            {
+                if (current != "Guide" || !side.Visible) ShowSection("Guide");
+                PlannerClass(cls);
+                GearSheet.FillSet(cls, rarity, 8, plannerSlots);
+                OpenGuideTab(-3);
+            };
             GuideLinks.Navigate = delegate(GuideLink l)        // a link in the Guide's text (GuideLinks.cs)
             {
                 if (current != "Guide" || !side.Visible) ShowSection("Guide");

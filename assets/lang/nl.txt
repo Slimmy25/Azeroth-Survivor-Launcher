@@ -1799,3 +1799,23 @@ The path at the top
 = Het pad bovenaan
 This window has no rows of buttons, to give its pages as much room as possible. The path at the top does their job: each step is where you are (Guide › Classes › Priest).\n\nClick a step to go back to it. Point at a step with ▾, or click it, for the list of places beside it (the other tabs, classes or pages). The arrow on the left goes back the way you came, and the X takes you home.
 = Dit venster heeft geen rijen knoppen, zodat de pagina's zoveel mogelijk ruimte krijgen. Het pad bovenaan doet hun werk: elke stap is waar je bent (Gids › Klassen › Priester).\n\nKlik op een stap om erheen terug te gaan. Wijs een stap met ▾ aan, of klik erop, voor de lijst met plekken ernaast (de andere tabbladen, klassen of pagina's). De pijl links gaat terug langs de weg die je kwam, en de X brengt je naar huis.
+Single Item
+= Los stuk
+Tier Bonus
+= Setbonus
+4 piece
+= 4 stuks
+8 piece
+= 8 stuks
+Settings
+= Instellingen
+Change
+= Wijzigen
+Run setup again
+= Installatie opnieuw
+4 piece: four pieces at T1. 8 piece: all eight at T3. The other slots keep what they hold.
+= 4 stuks: vier stukken op T1. 8 stuks: alle acht op T3. De andere vakken houden wat ze hebben.
+Click a folder to change it, or use Change ▾ in the path above. Importing a save is there too.
+= Klik op een map om hem te wijzigen, of gebruik Wijzigen ▾ in het pad hierboven. Een opslag importeren staat daar ook.
+Language ({0}), About Launcher and Run setup again: in Settings ▾ in the path above.
+= Taal ({0}), Over de launcher en Installatie opnieuw: onder Instellingen ▾ in het pad hierboven.

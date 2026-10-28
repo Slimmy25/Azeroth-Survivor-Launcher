@@ -1799,3 +1799,23 @@ The path at the top
 = Le chemin en haut
 This window has no rows of buttons, to give its pages as much room as possible. The path at the top does their job: each step is where you are (Guide › Classes › Priest).\n\nClick a step to go back to it. Point at a step with ▾, or click it, for the list of places beside it (the other tabs, classes or pages). The arrow on the left goes back the way you came, and the X takes you home.
 = Cette fenêtre n'a pas de rangées de boutons, pour laisser un maximum de place aux pages. Le chemin en haut fait leur travail : chaque étape indique où vous êtes (Guide › Classes › Prêtre).\n\nCliquez sur une étape pour y revenir. Pointez une étape avec ▾, ou cliquez dessus, pour la liste des endroits voisins (les autres onglets, classes ou pages). La flèche à gauche revient par où vous êtes venu, et le X vous ramène à l'accueil.
+Single Item
+= Pièce seule
+Tier Bonus
+= Bonus d'ensemble
+4 piece
+= 4 pièces
+8 piece
+= 8 pièces
+Settings
+= Réglages
+Change
+= Modifier
+Run setup again
+= Relancer la configuration
+4 piece: four pieces at T1. 8 piece: all eight at T3. The other slots keep what they hold.
+= 4 pièces : quatre pièces en T1. 8 pièces : les huit en T3. Les autres emplacements gardent ce qu'ils ont.
+Click a folder to change it, or use Change ▾ in the path above. Importing a save is there too.
+= Cliquez sur un dossier pour le modifier, ou utilisez Modifier ▾ dans le chemin en haut. L'import d'une sauvegarde s'y trouve aussi.
+Language ({0}), About Launcher and Run setup again: in Settings ▾ in the path above.
+= Langue ({0}), À propos du launcher et Relancer la configuration : dans Réglages ▾ dans le chemin en haut.

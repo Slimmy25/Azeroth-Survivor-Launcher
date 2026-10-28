@@ -1799,3 +1799,23 @@ The path at the top
 = Jalur di atas
 This window has no rows of buttons, to give its pages as much room as possible. The path at the top does their job: each step is where you are (Guide › Classes › Priest).\n\nClick a step to go back to it. Point at a step with ▾, or click it, for the list of places beside it (the other tabs, classes or pages). The arrow on the left goes back the way you came, and the X takes you home.
 = Jendela ini tidak punya deretan tombol, agar halamannya punya ruang sebanyak mungkin. Jalur di atas menggantikan tugasnya: setiap langkah menunjukkan posisimu (Panduan › Kelas › Priest).\n\nKlik sebuah langkah untuk kembali ke sana. Arahkan ke langkah ber-▾, atau klik, untuk daftar tempat di sebelahnya (tab, kelas, atau halaman lain). Panah di kiri kembali lewat jalan yang kamu lalui, dan X membawamu ke beranda.
+Single Item
+= Satu item
+Tier Bonus
+= Bonus set
+4 piece
+= 4 bagian
+8 piece
+= 8 bagian
+Settings
+= Pengaturan
+Change
+= Ubah
+Run setup again
+= Jalankan penyiapan lagi
+4 piece: four pieces at T1. 8 piece: all eight at T3. The other slots keep what they hold.
+= 4 bagian: empat bagian di T1. 8 bagian: kedelapannya di T3. Slot lain tetap seperti semula.
+Click a folder to change it, or use Change ▾ in the path above. Importing a save is there too.
+= Klik folder untuk mengubahnya, atau gunakan Ubah ▾ di jalur atas. Impor simpanan juga ada di sana.
+Language ({0}), About Launcher and Run setup again: in Settings ▾ in the path above.
+= Bahasa ({0}), Tentang Launcher dan Jalankan penyiapan lagi: di Pengaturan ▾ pada jalur atas.

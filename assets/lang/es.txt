@@ -1799,3 +1799,23 @@ The path at the top
 = La ruta de arriba
 This window has no rows of buttons, to give its pages as much room as possible. The path at the top does their job: each step is where you are (Guide › Classes › Priest).\n\nClick a step to go back to it. Point at a step with ▾, or click it, for the list of places beside it (the other tabs, classes or pages). The arrow on the left goes back the way you came, and the X takes you home.
 = Esta ventana no tiene filas de botones para dar a sus páginas el máximo espacio. La ruta de arriba hace su trabajo: cada paso es dónde estás (Guía › Clases › Sacerdote).\n\nHaz clic en un paso para volver a él. Señala un paso con ▾, o haz clic en él, para ver los lugares de al lado (las otras pestañas, clases o páginas). La flecha de la izquierda vuelve por donde viniste y la X te lleva al inicio.
+Single Item
+= Pieza suelta
+Tier Bonus
+= Bonif. de conjunto
+4 piece
+= 4 piezas
+8 piece
+= 8 piezas
+Settings
+= Ajustes
+Change
+= Cambiar
+Run setup again
+= Repetir la configuración
+4 piece: four pieces at T1. 8 piece: all eight at T3. The other slots keep what they hold.
+= 4 piezas: cuatro piezas en T1. 8 piezas: las ocho en T3. Las demás casillas conservan lo que tienen.
+Click a folder to change it, or use Change ▾ in the path above. Importing a save is there too.
+= Haz clic en una carpeta para cambiarla, o usa Cambiar ▾ en la ruta de arriba. Ahí también está importar una partida.
+Language ({0}), About Launcher and Run setup again: in Settings ▾ in the path above.
+= Idioma ({0}), Acerca del launcher y Repetir la configuración: en Ajustes ▾ en la ruta de arriba.

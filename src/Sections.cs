@@ -1006,29 +1006,21 @@ namespace AzerothLauncher
         {
             bool dl = addonMode == "download";
             ClearPanel(dl ? "Download More" : "Addons");
-            if (dl)                                          // Addons › Download More ▾ : its tabs
+            if (dl)
             {
+                // no row of tabs: the category is the last step of the path (Addons › Download More › UI ▾), its list
+                // the other categories
                 var l = new List<KeyValuePair<string, Action>>();
                 for (int i = 0; i < Data.AddonCategories.Length; i++)
                 {
                     int n = i;
                     l.Add(new KeyValuePair<string, Action>(Data.AddonCategories[i], delegate { addonCategory = n; BuildPanel("Addons"); }));
                 }
-                SetCrumbMenu(1, l);
-            }
-            if (dl)
-            {
-                // the categories, a row of tabs across the top (the back arrow in the title bar returns to My Addons)
-                int x0 = 20, wAll = PW - 20 - x0, cw = wAll / Data.AddonCategories.Length;
-                for (int i = 0; i < Data.AddonCategories.Length; i++)
-                {
-                    int n = i;
-                    var b = new WowButton(Data.AddonCategories[i], delegate { addonCategory = n; BuildPanel("Addons"); },
-                                          (int)((cw - 6) / Theme.Zoom), 32, 10);
-                    b.Selected = i == addonCategory;          // the open category: filled gold
-                    Put(b, x0 + i * cw, 8);
-                }
-                AddonsDownloadView(8 + (int)(32 * Theme.Zoom) + 6);
+                if (addonCategory < 0 || addonCategory >= Data.AddonCategories.Length) addonCategory = 0;
+                SetCrumbs("Addons", (Action)delegate { SetAddonMode("installed"); }, "Download More", (Action)delegate { BuildPanel("Addons"); },
+                          Data.AddonCategories[addonCategory], null);
+                SetCrumbMenu(2, l);
+                AddonsDownloadView(8);
             }
             else AddonsInstalledView(8);
         }
@@ -1773,21 +1765,37 @@ namespace AzerothLauncher
             ClearPanel("Options");
             // no row of tabs: the tab is a step of the path at the top (Options › Folders ▾), its list the other tabs
             int top0 = 4;
-            if (!optionsLang)
+            Action home = delegate { optionsLang = false; optionsTab = 0; BuildPanel("Options"); };
+            if (optionsLang)                                 // Options › Launcher › Language ▾ : the languages themselves
             {
-                SetCrumbs("Options", (Action)delegate { optionsLang = false; optionsTab = 0; BuildPanel("Options"); },
-                          OptionTabName(optionsTab), null);
+                SetCrumbs("Options", home, "Launcher", (Action)delegate { optionsLang = false; BuildPanel("Options"); }, "Language", null);
                 SetCrumbMenu(1, OptionTabMenu());
-            }
-            if (optionsLang)
-                SetCrumbs("Options", (Action)delegate { optionsLang = false; optionsTab = 0; BuildPanel("Options"); },
-                          "Launcher", (Action)delegate { optionsLang = false; BuildPanel("Options"); }, "Language", null);
-            if (optionsLang)                                 // Options › Launcher ▾ : the other tabs
-            {
-                SetCrumbMenu(1, OptionTabMenu());
-                var langs = new List<KeyValuePair<string, Action>>();   // › Language ▾ : the languages themselves
+                var langs = new List<KeyValuePair<string, Action>>();
                 foreach (var kv in Lang.Available()) { string code = kv.Key; langs.Add(new KeyValuePair<string, Action>(kv.Value, delegate { SetLanguage(code); })); }
                 SetCrumbMenu(2, langs);
+            }
+            else if (optionsTab == 4)                        // Options › Launcher › Settings ▾ : its other places
+            {
+                SetCrumbs("Options", home, "Launcher", (Action)delegate { BuildPanel("Options"); }, "Settings", null);
+                SetCrumbMenu(1, OptionTabMenu());
+                SetCrumbMenu(2, new List<KeyValuePair<string, Action>>
+                {
+                    new KeyValuePair<string, Action>("Settings", delegate { BuildPanel("Options"); }),
+                    new KeyValuePair<string, Action>("Language", delegate { optionsLang = true; BuildPanel("Options"); }),
+                    new KeyValuePair<string, Action>("About Launcher", delegate { ShowSection("About Launcher"); }),
+                    new KeyValuePair<string, Action>("Run setup again", delegate { RunSetup(); }),
+                });
+            }
+            else if (optionsTab == 0)                        // Options › Folders › Change ▾ : each folder, and importing a save
+            {
+                SetCrumbs("Options", home, "Folders", (Action)delegate { BuildPanel("Options"); }, "Change", null);
+                SetCrumbMenu(1, OptionTabMenu());
+                SetCrumbMenu(2, FolderMenu());
+            }
+            else
+            {
+                SetCrumbs("Options", home, OptionTabName(optionsTab), null);
+                SetCrumbMenu(1, OptionTabMenu());
             }
             var sp = MakeScroll(panel, new Rectangle(8, top0, PW - 16, PH - 8 - top0), Theme.Panel, Theme.Panel);
             int pageW = sp.ClientSize.Width - 6;              // the page's width: what shows inside the scroll box, beside its bar
@@ -1847,24 +1855,31 @@ namespace AzerothLauncher
             rows.Add(new object[] { "Save game folder", ss.SaveDir, new Action(ChooseSaveDir) });
             rows.Add(new object[] { "Game config folder (AddOns, addon settings)", ss.ConfigDir, new Action(ChooseConfigDir) });
             int y = 6;
+            // no CHANGE buttons: click a folder (or use Options › Folders › Change ▾ above) to change it
+            var hint = PutText("Click a folder to change it, or use Change ▾ in the path above. Importing a save is there too.",
+                               9, FontStyle.Italic, Theme.GoldDim, 20, y, PW - 40);
+            y = BottomOf(hint) + 8;
             foreach (var r in rows)
             {
-                var lab = PutText((string)r[0], 11, FontStyle.Bold, Theme.Gold, 20, y, PW - 160);
+                var lab = PutText((string)r[0], 11, FontStyle.Bold, Theme.Gold, 20, y, PW - 40);
                 string v = (string)r[1];
-                var val = PutText(string.IsNullOrEmpty(v) ? Lang.T("(not set)") : v, 9, FontStyle.Regular, Theme.LinkBlue, 20, BottomOf(lab), PW - 160, false);
-                int h = BottomOf(val) - y;
-                Put(new WowButton("CHANGE", (Action)r[2], 100, 28, 9), PW - 20 - (int)(100 * Theme.Zoom), y + Math.Max(0, (h - 28) / 2));
-                y = Math.Max(BottomOf(val), y + 30) + 5;
+                var val = PutText(string.IsNullOrEmpty(v) ? Lang.T("(not set)") : v, 9, FontStyle.Regular, Theme.LinkBlue, 20, BottomOf(lab), PW - 40, false);
+                Action act = (Action)r[2];
+                foreach (Control c in new Control[] { lab, val }) { c.Cursor = Cursors.Hand; c.Click += delegate { WowButton.Fire(act); }; }
+                y = BottomOf(val) + 8;
             }
-            // a save from the website: the game opens with it
-            var il = PutText("Import a save", 11, FontStyle.Bold, Theme.Gold, 20, y, PW - 160);
-            var inote = PutText("Puts in a save exported from the game (on the website: Options > Saves > Export Save), so the game opens with it.",
-                                9, FontStyle.Italic, Theme.GoldDim, 20, BottomOf(il), PW - 160);
-            int ih = BottomOf(inote) - y;
-            Put(new WowButton("IMPORT", delegate { if (ImportSave(side, SyncSettings().SaveDir) != null) SetStatus("Save imported."); }, 100, 28, 9),
-                PW - 20 - (int)(100 * Theme.Zoom), y + Math.Max(0, (ih - 28) / 2));
-            y = Math.Max(BottomOf(inote), y + 30) + 5;
             return y;
+        }
+
+        List<KeyValuePair<string, Action>> FolderMenu()
+        {
+            return new List<KeyValuePair<string, Action>>
+            {
+                new KeyValuePair<string, Action>("Game folder", ChooseGameFolderButton),
+                new KeyValuePair<string, Action>("Save game folder", ChooseSaveDir),
+                new KeyValuePair<string, Action>("Game config folder (AddOns, addon settings)", ChooseConfigDir),
+                new KeyValuePair<string, Action>("Import a save", delegate { if (ImportSave(side, SyncSettings().SaveDir) != null) SetStatus("Save imported."); }),
+            };
         }
 
         // CLOUD SAVE: cloud saving on or off, its sync folder, and its page (sync now, the log, earlier downloads)
@@ -2071,14 +2086,12 @@ namespace AzerothLauncher
                             delegate(bool on) { SetStatsEnabled(on); });
             y = OptionCheck("Show play time on the home screen", Cfg.Bool("home_playtime", true), y,
                             delegate(bool on) { Cfg.Set("home_playtime", on); Cfg.Save(); Invalidate(); });
-            Put(UI.Line(Theme.Bronze, PW - 40, 1), 20, y + 4);
-            y += 14;
+            // Language, About Launcher and Run setup again: places in the path above (Options › Launcher › Settings ▾)
             string langName = Lang.Code;
             foreach (var kv in Lang.Available()) if (kv.Key == Lang.Code) langName = kv.Value;
-            row("LANGUAGE ›", delegate { optionsLang = true; BuildPanel("Options"); }, langName);
-            row("ABOUT LAUNCHER", delegate { ShowSection("About Launcher"); }, "What the launcher does.");
-            row("RUN SETUP AGAIN", delegate { RunSetup(); }, "Asks again about your save, folders, cloud saving and addons. Nothing is downloaded.");
-            return y;                                        // play time: on the home screen, under the Launcher buttons
+            var more = PutText(Lang.F("Language ({0}), About Launcher and Run setup again: in Settings ▾ in the path above.", langName),
+                               9, FontStyle.Italic, Theme.GoldDim, 20, y + 6, PW - 40);
+            return BottomOf(more);                                        // play time: on the home screen, under the Launcher buttons
         }
 
         // the game folder: one that holds the game is the same as installing it (there is no "install from a file")

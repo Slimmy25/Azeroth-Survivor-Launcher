@@ -1800,3 +1800,23 @@ The path at the top
 = Calea de sus
 This window has no rows of buttons, to give its pages as much room as possible. The path at the top does their job: each step is where you are (Guide › Classes › Priest).\n\nClick a step to go back to it. Point at a step with ▾, or click it, for the list of places beside it (the other tabs, classes or pages). The arrow on the left goes back the way you came, and the X takes you home.
 = Această fereastră nu are rânduri de butoane, ca paginile să aibă cât mai mult loc. Calea de sus le ține locul: fiecare pas arată unde ești (Ghid › Clase › Preot).\n\nApasă pe un pas ca să te întorci la el. Arată un pas cu ▾ sau apasă pe el pentru lista locurilor de lângă (celelalte file, clase sau pagini). Săgeata din stânga te întoarce pe drumul pe care ai venit, iar X te duce acasă.
+Single Item
+= Piesă unică
+Tier Bonus
+= Bonus de set
+4 piece
+= 4 piese
+8 piece
+= 8 piese
+Settings
+= Setări
+Change
+= Schimbă
+Run setup again
+= Rulează din nou configurarea
+4 piece: four pieces at T1. 8 piece: all eight at T3. The other slots keep what they hold.
+= 4 piese: patru piese la T1. 8 piese: toate opt la T3. Celelalte locuri își păstrează conținutul.
+Click a folder to change it, or use Change ▾ in the path above. Importing a save is there too.
+= Apasă pe un folder ca să-l schimbi sau folosește Schimbă ▾ în calea de sus. Importul unei salvări e tot acolo.
+Language ({0}), About Launcher and Run setup again: in Settings ▾ in the path above.
+= Limba ({0}), Despre launcher și Rulează din nou configurarea: în Setări ▾ din calea de sus.
