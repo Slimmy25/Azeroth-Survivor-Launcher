@@ -8,6 +8,8 @@
   already on one of its other pages: Options goes back to Options › Folders from Cloud Save or the language list,
   Stats to its first page for every class, Addons to your installed addons, and so on.
 - "Lost?" only shows when you are on one of a section's other pages, never on its main page (Community's included).
+- Message boxes inside the launcher (Lost? and the others) no longer have a black box around them: just the box, over
+  the dimmed launcher.
 
 ### Options
 - Folders: every folder has an OPEN LOCATION button (opens it in Explorer) and a CHANGE FOLDER button beside it again,

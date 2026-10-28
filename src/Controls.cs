@@ -1271,7 +1271,7 @@ namespace AzerothLauncher
         {
             Body.Arrange(0);
             frame.Size = new Size(Body.Width + 4, Body.Height + 4);
-            ClientSize = new Size(frame.Width + 20, frame.Height + 20);
+            ClientSize = new Size(frame.Width + 2 * margin, frame.Height + 2 * margin);
             if (pageFrozen) FreezePage(false);
             else frame.Invalidate();
         }
@@ -1320,6 +1320,7 @@ namespace AzerothLauncher
         public static Form Host;                              // the launcher, set when it starts
         ShadePanel shade;
         bool closedInside;
+        int margin = 10;                                      // the dark edge around the frame: only as a window of its own
 
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         static extern uint MsgWaitForMultipleObjectsEx(uint count, IntPtr handles, uint ms, uint wake, uint flags);
@@ -1354,6 +1355,11 @@ namespace AzerothLauncher
             ShowInTaskbar = false;
             TopLevel = false;
             FormBorderStyle = FormBorderStyle.None;
+            // inside the launcher the frame is all there is: no dark edge around it (it showed as a black box over the
+            // dimmed launcher)
+            margin = 0;
+            frame.Location = Point.Empty;
+            ClientSize = frame.Size;
             shade.Controls.Add(this);
             h.Controls.Add(shade);
             shade.BringToFront();
