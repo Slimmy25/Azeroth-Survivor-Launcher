@@ -60,6 +60,9 @@ namespace AzerothLauncher
             l.Add("@page Weapon Glows | A glow on any weapon, picked in the armory");
             l.Add("Pick your class's glow, or none, on any weapon in the armory. A picked glow also replaces a legendary weapon's own.");
             foreach (var x in All) if (x.Kind == "glow") l.Add("- " + x.Name + ": " + x.How);
+            // Wowhead's still pictures don't show enchant glows; its live 3D dressing room does (opened in Edge, Community.cs)
+            l.Add("See them in 3D: Wowhead's live dressing room opens in a window of its own. Put a weapon in a hand, then pick its illusion (Icy Chill, Crusader or Fiery Weapon).");
+            l.Add("@video Weapon glows in 3D (Wowhead) | https://www.wowhead.com/dressing-room");
             return l;
         }
     }

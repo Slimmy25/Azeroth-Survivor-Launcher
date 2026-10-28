@@ -140,6 +140,7 @@ namespace AzerothLauncher
 
             FormClosing += OnClosingWindow;
             FormClosed += delegate { StopEdge(); };              // a Community video never outlives the launcher
+            VideoCard.Live3D = OpenLive3D;                       // Wowhead's live 3D viewer in an Edge window (Community.cs)
             VideoCard.YouTube = PlayYouTube;                     // YouTube videos play inside Community (Community.cs)
             SpellRow.OpenSet = delegate(string cls, string rarity)   // a set chip on a spell: that set in the Gear Planner
             {
@@ -856,6 +857,7 @@ namespace AzerothLauncher
         public void QuitApp()
         {
             StopEdge();
+            StopLive3D();
             if (SyncBusy)
             {
                 ShowWindowFront();

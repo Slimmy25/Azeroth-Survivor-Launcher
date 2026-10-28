@@ -17,7 +17,7 @@ local view = { topic = nil, page = nil, talents = nil, prompt = nil, gear = nil 
 -- the test build of the talent trees (forgotten when the trees are left) and the Gear Planner's pieces (kept until
 -- the game is closed), as in the launcher
 local build = { class = nil, pts = {} };
-local planner = { class = nil, slots = {}, pick = "Head", stars = {} };
+local planner = { class = nil, slots = {}, pick = "Head", stars = {}, mode = "single" };   -- mode: "single" or "tier", as in the launcher
 local CLASSES = { "Warrior", "Paladin", "Hunter", "Rogue", "Priest", "Shaman", "Mage", "Warlock", "Druid" };
 local RARITY_RGB = { Common = { 1, 1, 1 }, Uncommon = { 0.12, 1, 0 }, Rare = { 0.23, 0.56, 0.94 }, Epic = { 0.7, 0.36, 0.96 },
                      PvP = { 0.7, 0.36, 0.96 }, Legendary = { 1, 0.5, 0 }, Ring = { 0.23, 0.56, 0.94 }, Trinket = { 0.23, 0.56, 0.94 },
@@ -261,6 +261,27 @@ local function Fmt(v)
 	return string.format("%.1f", v);
 end
 
+-- Tier Bonus, as in the launcher's Gear Planner: a set is a starting point, not a pile. The whole planner (armor,
+-- weapons, jewelry and their stars) is emptied, then the set's pieces go in: 4 pieces at T1, or all 8 at T3.
+local ARMOR_ORDER = { "Head", "Shoulder", "Chest", "Waist", "Legs", "Feet", "Wrist", "Hands" };
+local function FillSet(class, rarity, pieces)
+	planner.slots = {}; planner.stars = {};
+	local n = 0;
+	for i = 1, table.getn(ARMOR_ORDER) do
+		if ( n >= pieces ) then break; end
+		local s = ARMOR_ORDER[i];
+		local ch = Choices(class, s);
+		for j = 1, table.getn(ch) do
+			if ( ch[j].rarity == rarity ) then
+				planner.slots[s] = ch[j];
+				planner.stars[s] = (pieces >= 8) and 3 or 1;
+				n = n + 1;
+				break;
+			end
+		end
+	end
+end
+
 local function ItemsGear(out)
 	local class = view.gear;
 	local t, health, unknown, worn = Totals(class);
@@ -303,6 +324,23 @@ local function ItemsGear(out)
 				"(8) " .. s[4] .. "  [" .. c[3] .. "/8 at 3+ stars]" .. (on8 and (emp and "  |cff40d040empowered|r" or "  |cff40d040reached|r") or "") });
 		end
 	end
+	-- Single Item / Tier Bonus, as in the launcher
+	table.insert(out, { kind = "buttons", items = {
+		{ text = (planner.mode == "single" and "> " or "") .. "Single Item", go = function() planner.mode = "single"; end },
+		{ text = (planner.mode == "tier" and "> " or "") .. "Tier Bonus", go = function() planner.mode = "tier"; end } } });
+	if ( planner.mode == "tier" ) then
+		table.insert(out, { kind = "head", text = "Tier Bonus" });
+		for i = 1, table.getn(rar) do
+			local r = rar[i];
+			if ( sets[r] ) then
+				table.insert(out, { kind = "buttons", right = r, items = {
+					{ text = "4 piece", go = function() FillSet(class, r, 4); end },
+					{ text = "8 piece", go = function() FillSet(class, r, 8); end } } });
+			end
+		end
+		table.insert(out, { kind = "note", text = "4 piece: four pieces at T1. 8 piece: all eight at T3. Everything else in the planner is emptied." });
+		return out;
+	end
 	table.insert(out, { kind = "head", text = "Slots" });
 	local slots = GearSlots(class);
 	for i = 1, table.getn(slots) do
@@ -315,7 +353,8 @@ local function ItemsGear(out)
 		                        planner.pick = s;
 		                    end });
 	end
-	table.insert(out, { kind = "head", text = "Choose: " .. planner.pick });
+	local held = planner.slots[planner.pick];
+	table.insert(out, { kind = "head", text = "Choose: " .. planner.pick .. (held and (" - " .. held.name) or "") });
 	table.insert(out, { kind = "row", label = "", text = "Empty", go = function() planner.slots[planner.pick] = nil; planner.stars[planner.pick] = nil; end });
 	local ch = Choices(class, planner.pick);
 	for i = 1, table.getn(ch) do

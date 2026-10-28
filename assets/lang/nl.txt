@@ -1813,8 +1813,8 @@ Change
 = Wijzigen
 Run setup again
 = Installatie opnieuw
-4 piece: four pieces at T1. 8 piece: all eight at T3. The other slots keep what they hold.
-= 4 stuks: vier stukken op T1. 8 stuks: alle acht op T3. De andere vakken houden wat ze hebben.
+4 piece: four pieces at T1. 8 piece: all eight at T3. Everything else in the planner is emptied.
+= 4 stuks: vier stukken op T1. 8 stuks: alle acht op T3. Al het andere in de planner wordt leeggemaakt.
 Click a folder to change it, or use Change ▾ in the path above. Importing a save is there too.
 = Klik op een map om hem te wijzigen, of gebruik Wijzigen ▾ in het pad hierboven. Een opslag importeren staat daar ook.
 Language ({0}), About Launcher and Run setup again: in Settings ▾ in the path above.

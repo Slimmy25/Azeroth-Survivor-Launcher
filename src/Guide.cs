@@ -1394,6 +1394,7 @@ namespace AzerothLauncher
 
         public static Func<GuideVideo, bool> Embed;          // set by the launcher: plays a web video inside the section
         public static Func<GuideVideo, bool> YouTube;        // set by the launcher: plays a YouTube video (Community.cs)
+        public static Func<GuideVideo, bool> Live3D;         // set by the launcher: a Wowhead page in an Edge window (Community.cs)
 
         public static string VideoFolder { get { return Path.Combine(Util.DataDir, "Guide Videos"); } }
 
@@ -1488,6 +1489,8 @@ namespace AzerothLauncher
         {
             base.OnMouseUp(e);
             if (e.Button != MouseButtons.Left || !ClientRectangle.Contains(e.Location)) return;
+            if (file == null && video.Url.IndexOf("wowhead.com", StringComparison.OrdinalIgnoreCase) >= 0 && Live3D != null && Live3D(video))
+                return;                                      // Wowhead's live 3D viewer needs a modern browser, not the built-in one
             if (file == null && ytId == null && Embed != null && Embed(video)) return;   // streamed inside the launcher
             if (ytId != null && YouTube != null && YouTube(video)) return;              // its own window over the section
             if (file == null) { Util.OpenInShell(video.Url); return; }

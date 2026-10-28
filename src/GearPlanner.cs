@@ -92,17 +92,12 @@ namespace AzerothLauncher
         static readonly string[] ArmorSlots = { "Head", "Shoulder", "Chest", "Waist", "Legs", "Feet", "Wrist", "Hands" };
 
         // a set put in the planner at once: 4 pieces at T1 (its 4-piece bonus) or all 8 at T3 (both bonuses). It is a
-        // starting point, not a pile: every armor slot is emptied first (what the last set put there goes), unless this
-        // is more of the same set (its 4 pieces, then its 8). Weapons and jewelry stay.
-        static string lastSetCls, lastSetRarity;
-        static int lastSetPieces;
-
+        // starting point, not a pile: the whole planner is emptied first (armor, weapons and jewelry, with their stars),
+        // then filled with the set picked. Slimjim's call (2026-10-28): a Tier Bonus button replaces what was calculated.
         public static void FillSet(string cls, string rarity, int pieces, Dictionary<string, object> slots)
         {
-            bool more = cls == lastSetCls && rarity == lastSetRarity && pieces > lastSetPieces;
-            if (!more)
-                foreach (string slot in ArmorSlots) { slots.Remove(slot); Stars.Remove(slot); }
-            lastSetCls = cls; lastSetRarity = rarity; lastSetPieces = pieces;
+            slots.Clear();
+            Stars.Clear();
             int n = 0;
             foreach (string slot in ArmorSlots)
             {
@@ -503,7 +498,7 @@ namespace AzerothLauncher
                     y += bh + 6;
                 }
             if (y + 2 * fSmall.GetHeight(g) < r.Bottom)
-                Para(g, Lang.T("4 piece: four pieces at T1. 8 piece: all eight at T3. The other slots keep what they hold."), fSmall, Dim, r.X + 10, y + 2, r.Width - 20, r.Bottom - 4);
+                Para(g, Lang.T("4 piece: four pieces at T1. 8 piece: all eight at T3. Everything else in the planner is emptied."), fSmall, Dim, r.X + 10, y + 2, r.Width - 20, r.Bottom - 4);
         }
 
         void Frame(Graphics g, Rectangle r)

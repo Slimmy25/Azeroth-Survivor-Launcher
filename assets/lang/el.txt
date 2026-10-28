@@ -1814,8 +1814,8 @@ Change
 = Αλλαγή
 Run setup again
 = Εκτέλεση ρύθμισης ξανά
-4 piece: four pieces at T1. 8 piece: all eight at T3. The other slots keep what they hold.
-= 4 κομμάτια: τέσσερα στο T1. 8 κομμάτια: και τα οκτώ στο T3. Οι άλλες θέσεις κρατούν ό,τι έχουν.
+4 piece: four pieces at T1. 8 piece: all eight at T3. Everything else in the planner is emptied.
+= 4 κομμάτια: τέσσερα στο T1. 8 κομμάτια: και τα οκτώ στο T3. Όλα τα υπόλοιπα στον σχεδιαστή αδειάζουν.
 Click a folder to change it, or use Change ▾ in the path above. Importing a save is there too.
 = Κάνε κλικ σε έναν φάκελο για να τον αλλάξεις ή χρησιμοποίησε Αλλαγή ▾ στη διαδρομή επάνω. Εκεί είναι και η εισαγωγή αποθήκευσης.
 Language ({0}), About Launcher and Run setup again: in Settings ▾ in the path above.

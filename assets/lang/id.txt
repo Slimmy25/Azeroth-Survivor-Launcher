@@ -1813,8 +1813,8 @@ Change
 = Ubah
 Run setup again
 = Jalankan penyiapan lagi
-4 piece: four pieces at T1. 8 piece: all eight at T3. The other slots keep what they hold.
-= 4 bagian: empat bagian di T1. 8 bagian: kedelapannya di T3. Slot lain tetap seperti semula.
+4 piece: four pieces at T1. 8 piece: all eight at T3. Everything else in the planner is emptied.
+= 4 bagian: empat bagian di T1. 8 bagian: kedelapannya di T3. Semua yang lain di perencana dikosongkan.
 Click a folder to change it, or use Change ▾ in the path above. Importing a save is there too.
 = Klik folder untuk mengubahnya, atau gunakan Ubah ▾ di jalur atas. Impor simpanan juga ada di sana.
 Language ({0}), About Launcher and Run setup again: in Settings ▾ in the path above.

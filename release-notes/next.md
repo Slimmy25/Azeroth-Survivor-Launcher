@@ -12,6 +12,19 @@
 - Options › Launcher: no Settings step in the path any more. LANGUAGE, ABOUT LAUNCHER and RUN SETUP AGAIN are buttons
   on the Launcher page itself.
 
+### Gear Planner
+- Tier Bonus empties the whole planner before it fills in the set: armor, weapons and jewelry, with their stars. What
+  you see is only the set you just picked.
+
+### Guide
+- Transmog › Weapon Glows: a new card opens Wowhead's live 3D dressing room in a window of its own, where the glows
+  can be seen on a weapon (Wowhead's still pictures don't show them). It closes with the launcher.
+
+### AZS Handbook
+- The Handbook's gear planner works like the launcher's: Single Item and Tier Bonus buttons, a 4 piece and an 8 piece
+  button for every rarity's set (they empty the planner first, as in the launcher), and the chosen piece's name above
+  the list of pieces.
+
 ### Addons
 - Addons update themselves: when an installed Download More addon has a newer copy on GitHub, the launcher updates it
   right away, without asking (at start, and when the game closes). Never while the game is running; the log lists

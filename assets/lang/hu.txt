@@ -1814,8 +1814,8 @@ Change
 = Módosítás
 Run setup again
 = Beállítás újra
-4 piece: four pieces at T1. 8 piece: all eight at T3. The other slots keep what they hold.
-= 4 darab: négy darab T1-en. 8 darab: mind a nyolc T3-on. A többi hely megtartja, ami benne van.
+4 piece: four pieces at T1. 8 piece: all eight at T3. Everything else in the planner is emptied.
+= 4 darab: négy darab T1-en. 8 darab: mind a nyolc T3-on. A tervezőben minden más kiürül.
 Click a folder to change it, or use Change ▾ in the path above. Importing a save is there too.
 = Kattints egy mappára a módosításhoz, vagy használd a fenti útvonal Módosítás ▾ lépését. A mentés importálása is ott van.
 Language ({0}), About Launcher and Run setup again: in Settings ▾ in the path above.

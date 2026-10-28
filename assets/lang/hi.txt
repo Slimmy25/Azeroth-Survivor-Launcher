@@ -1814,8 +1814,8 @@ Change
 = बदलें
 Run setup again
 = सेटअप फिर से चलाएँ
-4 piece: four pieces at T1. 8 piece: all eight at T3. The other slots keep what they hold.
-= 4 टुकड़े: चार टुकड़े T1 पर। 8 टुकड़े: सभी आठ T3 पर। बाकी स्लॉट जैसे हैं वैसे रहते हैं।
+4 piece: four pieces at T1. 8 piece: all eight at T3. Everything else in the planner is emptied.
+= 4 टुकड़े: चार टुकड़े T1 पर। 8 टुकड़े: सभी आठ T3 पर। प्लानर में बाकी सब खाली हो जाता है।
 Click a folder to change it, or use Change ▾ in the path above. Importing a save is there too.
 = फ़ोल्डर बदलने के लिए उस पर क्लिक करें, या ऊपर रास्ते में बदलें ▾ का उपयोग करें। सेव इंपोर्ट भी वहीं है।
 Language ({0}), About Launcher and Run setup again: in Settings ▾ in the path above.

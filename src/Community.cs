@@ -476,6 +476,34 @@ namespace AzerothLauncher
             return null;
         }
 
+        // ---- Wowhead's live 3D viewer (the weapon glows): Wowhead's still pictures don't show enchant glows, its live
+        // viewer does, and that needs a modern browser. It opens in an Edge window of its own (app mode, a profile of
+        // its own beside the video player's), streamed like a video: nothing is kept but Edge's own cache. One at a time;
+        // it closes with the launcher. Without Edge, the page opens in the web browser.
+        Process live3D;
+
+        bool OpenLive3D(GuideVideo v)
+        {
+            StopLive3D();
+            string edge = EdgePath();
+            if (edge == null) { Util.OpenInShell(v.Url); return true; }
+            try
+            {
+                string profile = Path.Combine(Path.GetTempPath(), "AzerothLauncher-3D");
+                live3D = Process.Start(edge, "--app=\"" + v.Url + "\" --user-data-dir=\"" + profile + "\"" +
+                                             " --window-size=1100,800 --no-first-run --no-default-browser-check");
+            }
+            catch (Exception) { Util.OpenInShell(v.Url); }
+            return true;
+        }
+
+        void StopLive3D()
+        {
+            try { if (live3D != null && !live3D.HasExited) live3D.Kill(); }
+            catch (Exception) { }
+            live3D = null;
+        }
+
         static string WatchUrl(GuideVideo v)
         {
             string id = VideoCard.YouTubeIdOf(v.Url);

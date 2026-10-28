@@ -1814,8 +1814,8 @@ Change
 = Thay đổi
 Run setup again
 = Chạy lại thiết lập
-4 piece: four pieces at T1. 8 piece: all eight at T3. The other slots keep what they hold.
-= 4 món: bốn món ở T1. 8 món: cả tám món ở T3. Các ô khác giữ nguyên.
+4 piece: four pieces at T1. 8 piece: all eight at T3. Everything else in the planner is emptied.
+= 4 món: bốn món ở T1. 8 món: cả tám món ở T3. Mọi thứ khác trong bộ lập kế hoạch bị xóa trống.
 Click a folder to change it, or use Change ▾ in the path above. Importing a save is there too.
 = Bấm vào một thư mục để đổi, hoặc dùng Thay đổi ▾ ở đường dẫn phía trên. Nhập bản lưu cũng ở đó.
 Language ({0}), About Launcher and Run setup again: in Settings ▾ in the path above.

@@ -1813,8 +1813,8 @@ Change
 = Alterar
 Run setup again
 = Executar a configuração de novo
-4 piece: four pieces at T1. 8 piece: all eight at T3. The other slots keep what they hold.
-= 4 peças: quatro peças em T1. 8 peças: as oito em T3. Os outros espaços mantêm o que têm.
+4 piece: four pieces at T1. 8 piece: all eight at T3. Everything else in the planner is emptied.
+= 4 peças: quatro peças em T1. 8 peças: as oito em T3. Todo o resto do planejador é esvaziado.
 Click a folder to change it, or use Change ▾ in the path above. Importing a save is there too.
 = Clique em uma pasta para alterá-la ou use Alterar ▾ no caminho acima. Importar um save também está lá.
 Language ({0}), About Launcher and Run setup again: in Settings ▾ in the path above.

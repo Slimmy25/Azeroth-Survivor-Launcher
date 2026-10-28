@@ -1814,8 +1814,8 @@ Change
 = เปลี่ยน
 Run setup again
 = เรียกใช้การตั้งค่าอีกครั้ง
-4 piece: four pieces at T1. 8 piece: all eight at T3. The other slots keep what they hold.
-= 4 ชิ้น: สี่ชิ้นที่ T1 8 ชิ้น: ครบแปดชิ้นที่ T3 ช่องอื่นคงเดิม
+4 piece: four pieces at T1. 8 piece: all eight at T3. Everything else in the planner is emptied.
+= 4 ชิ้น: สี่ชิ้นที่ T1 8 ชิ้น: ครบแปดชิ้นที่ T3 ช่องอื่นในตัววางแผนจะถูกล้างทั้งหมด
 Click a folder to change it, or use Change ▾ in the path above. Importing a save is there too.
 = คลิกโฟลเดอร์เพื่อเปลี่ยน หรือใช้ เปลี่ยน ▾ ในเส้นทางด้านบน การนำเข้าเซฟก็อยู่ที่นั่น
 Language ({0}), About Launcher and Run setup again: in Settings ▾ in the path above.
