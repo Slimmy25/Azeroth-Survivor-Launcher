@@ -103,7 +103,8 @@ namespace AzerothLauncher
         static GuideVideo Featured(List<GuideVideo> list)
         {
             if (communityFilter == 1 && Headlines.Length > 0) list = new List<GuideVideo>(Headlines);
-            else if (communityFilter == 2) { }                // the content creators: every video that is not a big streamer's
+            else if (communityFilter == 2)                    // the content creators: every video that is not a big streamer's
+                list = list.FindAll(delegate(GuideVideo v) { return Array.IndexOf(Headlines, v) < 0; });
             else if (HeadlineOn) list = new List<GuideVideo>(Headlines);
             if (list.Count == 0) return null;
             if (communityPick < 0 || communityPick >= list.Count || (DateTime.Now - communityPicked).TotalMinutes >= RotateMinutes)
@@ -258,11 +259,14 @@ namespace AzerothLauncher
 
         static List<GuideVideo> MoreVideos()
         {
+            // Community's two boxes decide what is listed: Big Streamers only theirs, Content Creators only the others
             var list = new List<GuideVideo>();
-            list.AddRange(Headlines);                       // the big streamers: always first, in their order
+            if (communityFilter != 2) list.AddRange(Headlines);   // the big streamers: always first, in their order
+            if (communityFilter == 1 && Headlines.Length > 0) return list;
             int ti;
             var rest = new List<GuideVideo>();
-            foreach (var v in BuildVideos(out ti)) if (!list.Contains(v) && !rest.Contains(v)) rest.Add(v);
+            foreach (var v in BuildVideos(out ti))
+                if (!list.Contains(v) && !rest.Contains(v) && Array.IndexOf(Headlines, v) < 0) rest.Add(v);
             var rnd = new Random();
             for (int i = rest.Count - 1; i > 0; i--)
             {
