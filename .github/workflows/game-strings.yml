@@ -7,6 +7,9 @@ on:
       find:
         description: "Optional: a pattern (Python regex, case-insensitive); the matching texts are shown as notes on the run"
         required: false
+      raw:
+        description: "Optional: a pattern searched in every readable text (not only the English ones); each match with its surroundings"
+        required: false
 
 permissions:
   contents: read
@@ -18,6 +21,30 @@ jobs:
       - uses: actions/checkout@v4
       - name: Read the texts from the game
         run: python3 tools/game_strings.py
+      - name: Show the raw texts that match the raw pattern
+        if: inputs.raw != ''
+        env:
+          RAW: ${{ inputs.raw }}
+        run: |
+          python3 - <<'PY'
+          import os, re
+          rx = re.compile(os.environ["RAW"])
+          text = open("game-strings.txt", encoding="utf-8").read()
+          hits = []
+          for m in rx.finditer(text):
+              hits.append(m.group(0))
+          uniq = sorted(set(hits))
+          print("%d matches, %d different" % (len(hits), len(uniq)))
+          chunk, n = "", 0
+          for l in uniq + [None]:
+              if l is None or len(chunk) + len(l) > 3500:
+                  if chunk and n < 30:
+                      print("::notice::" + chunk.replace("%", "%25").replace("\n", "%0A"))
+                      n += 1
+                  chunk = ""
+              if l is not None:
+                  chunk += l + "\n"
+          PY
       - name: Show the texts that match the pattern
         if: inputs.find != ''
         env:
