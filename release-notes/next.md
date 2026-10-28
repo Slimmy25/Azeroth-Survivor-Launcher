@@ -16,10 +16,6 @@
 - Tier Bonus empties the whole planner before it fills in the set: armor, weapons and jewelry, with their stars. What
   you see is only the set you just picked.
 
-### Guide
-- Transmog › Weapon Glows: a new card opens Wowhead's live 3D dressing room in a window of its own, where the glows
-  can be seen on a weapon (Wowhead's still pictures don't show them). It closes with the launcher.
-
 ### AZS Handbook
 - The Handbook's gear planner works like the launcher's: Single Item and Tier Bonus buttons, a 4 piece and an 8 piece
   button for every rarity's set (they empty the planner first, as in the launcher), and the chosen piece's name above
@@ -32,6 +28,13 @@
 - While a video plays, the right end of the header says "ADS ARE YOUTUBE. NOT ME."
 
 ### Guide
+- The game's patch notes 0.124.0 are in the Changelog.
+- Transmog › Weapon Glows: the new Unholy Weapon glow, from the co-op achievement The Insane (40 minutes in Naxxramas
+  on Heroic V with at least two other players).
+- Talents updated from the game for 0.124.0: Soul Link's shield holds at most 10% of your max health (was 25%), and
+  Improved Demoralizing Shout's extra damage counts for your allies too.
+- Transmog › Weapon Glows: a new card opens Wowhead's live 3D dressing room in a window of its own, where the glows
+  can be seen on a weapon (Wowhead's still pictures don't show them). It closes with the launcher.
 - Links: Power Word: Shield and Shadow Word: Pain link as a whole (they stopped at the colon, as "Power Word" and
   "Shadow Word"), on the Priest page and wherever they are named, such as Co-op.
 - Talent names that more than one class has (Flurry, Deflection, Ferocity and others) follow the class page they
