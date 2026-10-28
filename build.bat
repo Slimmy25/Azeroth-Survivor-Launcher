@@ -65,17 +65,6 @@ set "HASH=!HASH: =!"
 if not defined HASH goto fail
 > "dist\Azeroth Survivors Launcher.sha256.txt" echo !HASH!  Azeroth Survivors Launcher.exe
 
-rem A one-time test build may request a second filename without changing the launcher version.
-if /I "%BUILD_TEST_EXE%"=="true" (
-    copy /y "%OUT%" "dist\AZS Launcher Test.exe" >nul
-    if errorlevel 1 goto fail
-    set "HASH="
-    for /f "skip=1 tokens=*" %%H in ('certutil -hashfile "dist\AZS Launcher Test.exe" SHA256') do if not defined HASH set "HASH=%%H"
-    set "HASH=!HASH: =!"
-    if not defined HASH goto fail
-    > "dist\AZS Launcher Test.sha256.txt" echo !HASH!  AZS Launcher Test.exe
-)
-
 echo.
 echo Done.  %~dp0%OUT%
 echo It is a single file: share just the exe (or zip it). Players put it in the folder where the game is (or should be installed).
