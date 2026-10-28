@@ -1,5 +1,4 @@
-# Big streamers. Featured on the front page until this date (year-month-day), then only first in MORE VIDEOS:
-@until 2026-11-09
+# Big streamers: the featured videos while Big Streamers is ticked (the default), and always first in MORE VIDEOS.
 https://www.youtube.com/watch?v=Suq82njFIuI | Blizzard WISHES they made this.. | Asmongold TV | https://www.youtube.com/@AsmonTV
 https://www.youtube.com/watch?v=BKrbMA02fbQ
 https://www.youtube.com/watch?v=ryyXRezVAsc

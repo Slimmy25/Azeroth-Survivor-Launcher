@@ -1,5 +1,7 @@
 # v2.1 (2026-10-28)
-In short: A big one. Addon profiles each keep their own interface, there's a ROLLBACK for addons and an Advanced settings mode, uninstalling happens inside the launcher, and two new addons by Maidenhead are in Download More. Videos open without a white flash and close with Esc, the Guide's own videos have a YouTube-style player, the Gear Planner shows five small stars, the Talent Tree Builder makes room for saving builds, the Guide follows the game's 0.124 and 0.125 updates, and Options › Launcher holds everything on one page.
+## In short
+A big one. Addon profiles each keep their own interface, there's a ROLLBACK for addons and an Advanced settings mode, uninstalling happens inside the launcher, and two new addons by Maidenhead are in Download More. Videos open without a white flash and close with Esc, the Guide's own videos have a YouTube-style player, the Gear Planner shows five small stars, the Talent Tree Builder makes room for saving builds, the Guide follows the game's 0.124 and 0.125 updates, and Options › Launcher holds everything on one page.
+
 ## First-time setup
 - The launcher runs first-time setup whenever it starts in a folder with neither its own folder nor the game beside it
   (a new copy, or the exe moved somewhere new), even if it finds a game, a save or settings from before. Settings made
@@ -25,6 +27,8 @@ In short: A big one. Addon profiles each keep their own interface, there's a ROL
 ## Gear Planner
 - Tier Bonus empties the whole planner before it fills in the set: armor, weapons and jewelry, with their stars. What
   you see is only the set you just picked.
+- A piece's stars show as a column of 5 small stars on the inner side of its box (it was T1 to T5): a left click fills
+  the next one, and after the fifth they empty again. The AZS Handbook shows the same 5 stars beside each piece.
 
 ## AZS Handbook
 - The Handbook's gear planner works like the launcher's: Single Item and Tier Bonus buttons, a 4 piece and an 8 piece
@@ -54,6 +58,14 @@ In short: A big one. Addon profiles each keep their own interface, there's a ROL
   are on: on the Shaman page, Flurry is the Shaman's Flurry, with its own text. Anywhere else, the hover shows each
   class's version.
 - Warrior: the Fury tree lists its real milestone, Flurry (it said "Fury", which is the tree, not a talent).
+- The game's patch notes 0.125.0 are in the Changelog.
+- Co-op: a run needs at least two players, the lobby's party chat and each guest's ping, fewer extra enemies per
+  player, enemies 20% weaker in a party, and faster revives with more allies.
+- Mage: heals for 0.5% of all the damage it deals.
+- Gear & the Armory › Stars: a lower set at 5 stars gets the legendary sets' stats it lacks and reaches 90% (common)
+  to 98% (PvP) of a 5-star legendary set (it said 95% for all).
+- Gear: the legendary (tier 3) sets' armor has half the echo it had (the Items pages, the Gear Planner and the AZS
+  Handbook); their weapons are unchanged.
 
 ## Guide videos
 - The Guide's own videos have a new control bar that looks like YouTube's: a red progress bar, play, volume, the
@@ -79,16 +91,6 @@ In short: A big one. Addon profiles each keep their own interface, there's a ROL
   right of way: when both are found on, AZS Stats is switched off.
 - Fix: the launcher never takes Maidenhead's Azeroth Stats for anything of its own: installing or updating AZS Stats
   leaves its folder and saved data alone.
-
-## AZS Stats
-- Every run keeps its Heroic affixes (from the game's 0.124.0); a run's summary on the STATS page lists them.
-- Profile 1 and Profile 2 each keep their own game preferences (options, key bindings, chat windows, camera, layout
-  and the addons' saved settings). LOAD stores the preferences you have under the profile you leave and brings back
-  the picked profile's own, so a heavy UI addon can't leave the game looking wrong for the next one. Run histories
-  (AZS Stats, Azeroth Stats), the save game and cloud saves are never part of a profile.
-- New choice above them: No profile [Recommended], the default. It keeps no copy of its own and only switches
-  addons; the game's preferences stay shared. Coming back to it from a profile brings back the preferences you had.
-- A small "?" beside each of the three explains what it does.
 - Uninstalling an addon no longer opens a window: the question takes the place of the right-hand column of My
   Addons (UNINSTALL or CANCEL), so the whole list stays in view while you decide. UNINSTALL in Download More opens
   it there too.
@@ -100,11 +102,29 @@ In short: A big one. Addon profiles each keep their own interface, there's a ROL
 - Addons update themselves: when an installed Download More addon has a newer copy on GitHub, the launcher updates it
   right away, without asking (at start, and when the game closes). Never while the game is running; the log lists
   each one.
+- ROLLBACK (Addons › Advanced settings): the launcher keeps the last 10 copies of each Download More addon it
+  downloads. Pick an older copy to install it in place of the newest: your addon settings and customization stay as
+  they are. A rolled-back addon shows [Outdated] beside its name in My Addons (it still switches on and off) and is
+  not updated automatically until you pick Newest again or install it from Download More.
+- No profile, Profile 1 and Profile 2 are each a complete state of their own: which addons are on or off, and the
+  interface (where its frames sit, chat windows and every addon's saved settings). The game's graphics and other
+  options, and key bindings, are not part of a profile: they stay the same in all three.
+  Switching stores the one you leave exactly as it is and brings back the one you pick as you left it; a choice
+  picked for the first time starts from where you are. LOAD works on a profile that was never saved.
+- The "?" notes of No profile, Profile 1 and Profile 2 say what each one is: a full copy of itself in its own isolated
+  space, back exactly the way you left it whenever you return to it.
+- Profile 1 and Profile 2 can have names of your own: click a profile's name, type one and press Enter (an empty name
+  brings back "Profile 1" or "Profile 2").
+
+## AZS Stats
+- Every run keeps its Heroic affixes (from the game's 0.124.0); a run's summary on the STATS page lists them.
+
+## Launcher
+- When the launcher updates itself while it is in the taskbar or the tray, it does so quietly: no Windows notice.
 
 ## Fixes
 - An "&" in a name (Gear & the Armory, Pickups, Caches & Guardians) shows as "&" in the path's lists and the hover
   notes, no longer as an underline.
-
 # v2.0 (2026-10-27)
 In short: MORE VIDEOS follows your Big Streamers / Content Creators choice, Tier Bonus starts a set fresh, "Lost?" became a small hover note, every step of the path goes straight there, Theorycrafting moved into Gameplay, and the launcher no longer comes back empty from the taskbar.
 ## Community

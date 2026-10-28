@@ -50,12 +50,11 @@ namespace AzerothLauncher
             return list;
         }
 
-        // The big streamers' videos (videos/big-streamers/videos.txt): the front page's featured videos until their date,
-        // swapping every 10 minutes like the build videos do, and always first in MORE VIDEOS. A video with no title
+        // The big streamers' videos (videos/big-streamers/videos.txt): the featured videos while Big Streamers is ticked
+        // (the default), swapping every 10 minutes like the build videos do, and always first in MORE VIDEOS. A video with no title
         // gets its title and channel from YouTube (oEmbed) the first time it is shown. Every other video is a content
         // creator's (videos/content-creators).
         static GuideVideo[] headlines;
-        static DateTime headlineUntil = DateTime.MinValue;
 
         static GuideVideo[] Headlines
         {
@@ -69,14 +68,7 @@ namespace AzerothLauncher
                     {
                         string line = raw.Trim();
                         if (line.Length == 0 || line.StartsWith("#")) continue;
-                        if (line.StartsWith("@until"))
-                        {
-                            DateTime d;
-                            if (DateTime.TryParseExact(line.Substring(6).Trim(), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture,
-                                                       System.Globalization.DateTimeStyles.None, out d))
-                                headlineUntil = d.AddDays(1).AddSeconds(-1);
-                            continue;
-                        }
+                        if (line.StartsWith("@")) continue;    // (an old "@until" date line: no longer used)
                         string[] f = line.Split('|');
                         var v = new GuideVideo { Url = f[0].Trim() };
                         if (f.Length > 1) v.Title = f[1].Trim();
@@ -90,9 +82,6 @@ namespace AzerothLauncher
                 return headlines;
             }
         }
-        static DateTime HeadlineUntil { get { var h = Headlines; return headlineUntil; } }
-
-        static bool HeadlineOn { get { return Headlines.Length > 0 && DateTime.Now <= HeadlineUntil; } }
 
         // the featured video: a headline video while they run, otherwise a random build video; a different one
         // every 10 minutes (while nothing is playing)
@@ -105,7 +94,6 @@ namespace AzerothLauncher
             if (communityFilter == 1 && Headlines.Length > 0) list = new List<GuideVideo>(Headlines);
             else if (communityFilter == 2)                    // the content creators: every video that is not a big streamer's
                 list = list.FindAll(delegate(GuideVideo v) { return Array.IndexOf(Headlines, v) < 0; });
-            else if (HeadlineOn) list = new List<GuideVideo>(Headlines);
             if (list.Count == 0) return null;
             if (communityPick < 0 || communityPick >= list.Count || (DateTime.Now - communityPicked).TotalMinutes >= RotateMinutes)
             {
@@ -222,7 +210,6 @@ namespace AzerothLauncher
             }
             var intro = PutText(communityFilter == 1 ? "A big streamer's video. All credit goes to the people who made it."
                                 : communityFilter == 2 ? "A content creator's video. All credit goes to the people who made it."
-                                : HeadlineOn ? "Featured video. All credit goes to the people who made it."
                                            : "A build video made by a player. All credit goes to the people who made it.",
                                 9.5f, FontStyle.Italic, Theme.GoldDim, 24, 8 + (int)(24 * Theme.Zoom), PW - 24 - (int)(200 * Theme.Zoom) - 34);
             int top = Math.Max(8 + (int)(32 * Theme.Zoom) + 8, BottomOf(intro) + 6);
