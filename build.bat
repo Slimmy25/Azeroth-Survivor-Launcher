@@ -61,6 +61,14 @@ if errorlevel 1 goto fail
 
 powershell -NoProfile -Command "Get-FileHash -Algorithm SHA256 '%OUT%' | ForEach-Object { $_.Hash.ToLower() + '  ' + (Split-Path $_.Path -Leaf) } | Set-Content -Encoding ascii 'dist\Azeroth Survivors Launcher.sha256.txt'"
 
+rem A one-time test build may request a second filename without changing the launcher version.
+if /I "%BUILD_TEST_EXE%"=="true" (
+    copy /y "%OUT%" "dist\AZS Launcher Test.exe" >nul
+    if errorlevel 1 goto fail
+    powershell -NoProfile -Command "Get-FileHash -Algorithm SHA256 'dist\AZS Launcher Test.exe' | ForEach-Object { $_.Hash.ToLower() + '  ' + (Split-Path $_.Path -Leaf) } | Set-Content -Encoding ascii 'dist\AZS Launcher Test.sha256.txt'"
+    if errorlevel 1 goto fail
+)
+
 echo.
 echo Done.  %~dp0%OUT%
 echo It is a single file: share just the exe (or zip it). Players put it in the folder where the game is (or should be installed).
