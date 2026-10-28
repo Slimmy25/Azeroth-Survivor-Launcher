@@ -1913,3 +1913,5 @@ An in-game helper (/fieldkit): elite-only nameplates, boss frames with their deb
 = Pelinsisäinen apuri (/fieldkit): nimikyltit vain eliiteille, pomojen kehykset heikennyksineen, elämäpalkki kilpesi kanssa, buffit ja varoitus vähäisestä elämästä, kriittiset osumat, tilastot, kulta ja arkkujen hinnat, vahinkomittari, arkut ja luolat minikartalla sekä kamera.
 Your run history and build statistics, kept in game: run reports and comparisons, and a HUD you set up yourself with up to eight numbers.
 = Juoksuhistoriasi ja buildien tilastot pelissä: juoksuraportit ja vertailut sekä itse säädettävä HUD, jossa on enintään kahdeksan lukua.
+How are gear stats calculated?
+= Miten varusteiden arvot lasketaan?

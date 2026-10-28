@@ -179,7 +179,8 @@ namespace AzerothLauncher
             if (communityPlaying != null) { CommunityPlayer(communityPlaying); return; }
             if (communityMore) { CommunityMoreVideos(); return; }
             ClearPanel("Community");
-            if (communityFilter < 0) { string cf = Cfg.Str("community_filter"); communityFilter = cf == "1" ? 1 : cf == "2" ? 2 : 0; }
+            // Big Streamers is ticked at every start (Slimjim, 2026-10-28) until the player picks Content Creators; that choice is kept
+            if (communityFilter < 0) communityFilter = Cfg.Str("community_filter") == "2" ? 2 : 1;
             int ti;
             GuideVideo v = Featured(BuildVideos(out ti));
             if (v != null) FetchTitle(v);

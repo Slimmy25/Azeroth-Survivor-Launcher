@@ -1914,3 +1914,5 @@ An in-game helper (/fieldkit): elite-only nameplates, boss frames with their deb
 = ゲーム内ヘルパー（/fieldkit）：エリートだけのネームプレート、デバフ付きのボスフレーム、シールド付きの体力バー、バフと低体力警告、クリティカル、ステータス、ゴールドと宝箱の価格、ダメージメーター、ミニマップ上の宝箱と巣、そしてカメラ。
 Your run history and build statistics, kept in game: run reports and comparisons, and a HUD you set up yourself with up to eight numbers.
 = ゲーム内に残るラン履歴とビルド統計：ランのレポートと比較、そして最大8つの数値を自分で設定できるHUD。
+How are gear stats calculated?
+= 装備のステータスはどう計算される？

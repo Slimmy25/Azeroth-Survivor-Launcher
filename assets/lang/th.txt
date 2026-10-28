@@ -1914,3 +1914,5 @@ An in-game helper (/fieldkit): elite-only nameplates, boss frames with their deb
 = ตัวช่วยในเกม (/fieldkit): ป้ายชื่อเฉพาะอีลีท กรอบบอสพร้อมดีบัฟ แถบพลังชีวิตพร้อมโล่ บัฟและคำเตือนเลือดน้อย คริติคอล ค่าสถานะ ทองและราคาหีบ มิเตอร์ดาเมจ หีบและรังบนมินิแมป และกล้อง
 Your run history and build statistics, kept in game: run reports and comparisons, and a HUD you set up yourself with up to eight numbers.
 = ประวัติการเล่นและสถิติบิลด์ของคุณในเกม: รายงานและการเปรียบเทียบแต่ละรอบ และ HUD ที่ตั้งค่าเองได้สูงสุดแปดตัวเลข
+How are gear stats calculated?
+= ค่าสถานะของอุปกรณ์คำนวณอย่างไร?

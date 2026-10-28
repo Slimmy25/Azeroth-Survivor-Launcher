@@ -25,7 +25,12 @@
   button for every rarity's set (they empty the planner first, as in the launcher), and the chosen piece's name above
   the list of pieces.
 
+### Community
+- Big Streamers is ticked whenever the launcher starts, until you pick Content Creators; that choice is remembered.
+
 ### Gear Planner (layout)
+- The explanation under the stat boxes is now a button, "How are gear stats calculated?", in the top right corner of
+  the character sheet above Hands; click it to read it. The set bonuses move up into its place.
 - The T1–T5 tier numbers sit on the inner side of each piece: by the top right corner in the left column and by the top
   left corner in the right column, so both columns lean in towards the middle.
 

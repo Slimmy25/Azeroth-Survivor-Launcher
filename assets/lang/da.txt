@@ -1913,3 +1913,5 @@ An in-game helper (/fieldkit): elite-only nameplates, boss frames with their deb
 = En hjælper i spillet (/fieldkit): navneskilte kun for eliter, bossrammer med deres debuffs, en livsbjælke med dit skjold, buffs og en advarsel ved lavt liv, kritiske slag, statistik, guld og kistepriser, en skadesmåler, kister og huler på minikortet og kameraet.
 Your run history and build statistics, kept in game: run reports and comparisons, and a HUD you set up yourself with up to eight numbers.
 = Din løbshistorik og build-statistik i spillet: løbsrapporter og sammenligninger og en HUD, du selv sætter op med op til otte tal.
+How are gear stats calculated?
+= Hvordan beregnes udstyrets statistik?

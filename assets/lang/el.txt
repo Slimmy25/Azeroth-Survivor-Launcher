@@ -1914,3 +1914,5 @@ An in-game helper (/fieldkit): elite-only nameplates, boss frames with their deb
 = Ένας βοηθός μέσα στο παιχνίδι (/fieldkit): πινακίδες ονομάτων μόνο για elite, πλαίσια boss με τις αδυναμίες τους, μπάρα ζωής με την ασπίδα σου, buffs και προειδοποίηση χαμηλής ζωής, κρίσιμα χτυπήματα, στατιστικά, χρυσός και τιμές σεντουκιών, μετρητής ζημιάς, σεντούκια και φωλιές στον μικροχάρτη και η κάμερα.
 Your run history and build statistics, kept in game: run reports and comparisons, and a HUD you set up yourself with up to eight numbers.
 = Το ιστορικό των runs σου και στατιστικά build μέσα στο παιχνίδι: αναφορές και συγκρίσεις runs, και ένα HUD που στήνεις μόνος σου με έως οκτώ αριθμούς.
+How are gear stats calculated?
+= Πώς υπολογίζονται τα στατιστικά του εξοπλισμού;

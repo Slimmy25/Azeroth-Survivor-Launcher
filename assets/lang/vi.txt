@@ -1914,3 +1914,5 @@ An in-game helper (/fieldkit): elite-only nameplates, boss frames with their deb
 = Trợ thủ trong game (/fieldkit): bảng tên chỉ cho quái tinh anh, khung trùm kèm hiệu ứng suy yếu, thanh máu có khiên của bạn, buff và cảnh báo máu thấp, chí mạng, chỉ số, vàng và giá rương, đồng hồ sát thương, rương và hang ổ trên bản đồ nhỏ, và camera.
 Your run history and build statistics, kept in game: run reports and comparisons, and a HUD you set up yourself with up to eight numbers.
 = Lịch sử lượt chơi và thống kê build ngay trong game: báo cáo và so sánh các lượt, và một HUD bạn tự thiết lập với tối đa tám con số.
+How are gear stats calculated?
+= Chỉ số trang bị được tính thế nào?

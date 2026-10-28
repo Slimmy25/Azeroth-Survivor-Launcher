@@ -1913,3 +1913,5 @@ An in-game helper (/fieldkit): elite-only nameplates, boss frames with their deb
 = Een hulp in het spel (/fieldkit): naamplaatjes alleen voor elites, bossframes met hun debuffs, een levensbalk met je schild, buffs en een waarschuwing bij weinig leven, kritieke treffers, statistieken, goud en kistprijzen, een schademeter, kisten en holen op de minimap, en de camera.
 Your run history and build statistics, kept in game: run reports and comparisons, and a HUD you set up yourself with up to eight numbers.
 = Je rungeschiedenis en buildstatistieken in het spel: runverslagen en vergelijkingen, en een HUD die je zelf instelt met maximaal acht getallen.
+How are gear stats calculated?
+= Hoe worden de uitrustingsstatistieken berekend?

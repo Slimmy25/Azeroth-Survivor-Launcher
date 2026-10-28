@@ -1914,3 +1914,5 @@ An in-game helper (/fieldkit): elite-only nameplates, boss frames with their deb
 = Помощник в игре (/fieldkit): таблички только для элиты, рамки боссов с их ослаблениями, полоса здоровья с вашим щитом, баффы и предупреждение о низком здоровье, криты, характеристики, золото и цены сундуков, измеритель урона, сундуки и логова на миникарте и камера.
 Your run history and build statistics, kept in game: run reports and comparisons, and a HUD you set up yourself with up to eight numbers.
 = История забегов и статистика билдов прямо в игре: отчёты и сравнения забегов и HUD, который вы настраиваете сами, до восьми чисел.
+How are gear stats calculated?
+= Как считаются характеристики снаряжения?

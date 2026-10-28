@@ -1914,3 +1914,5 @@ An in-game helper (/fieldkit): elite-only nameplates, boss frames with their deb
 = Játékon belüli segéd (/fieldkit): névtáblák csak elitekhez, boss-keretek a gyengítéseikkel, életcsík a pajzsoddal, buffok és figyelmeztetés alacsony életnél, kritikus találatok, statisztikák, arany és ládaárak, sebzésmérő, ládák és barlangok a minitérképen, és a kamera.
 Your run history and build statistics, kept in game: run reports and comparisons, and a HUD you set up yourself with up to eight numbers.
 = A futásaid előzményei és build-statisztikák a játékban: futásjelentések és összehasonlítások, és egy HUD, amit magad állítasz be legfeljebb nyolc számmal.
+How are gear stats calculated?
+= Hogyan számolódnak a felszerelés értékei?

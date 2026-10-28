@@ -73,6 +73,9 @@ namespace AzerothLauncher
         int slotSize = Math.Max(26, (int)(44 * Theme.Zoom)), slotGap = Math.Max(4, (int)(7 * Theme.Zoom));
         static string chosenSlot = "Head";                   // the slot the selector shows (kept while the launcher runs)
         string hover;
+        Rectangle helpBox;
+        int unknownPieces;                                    // "How are gear stats calculated?" above Hands
+        bool hoverHelp;
         int hoverRow = -1;
         static readonly object EmptyRow = new object();
         // each slot's stars, 0 to 5 (kept while the launcher runs, like the slots): a click on the piece adds one
@@ -296,13 +299,19 @@ namespace AzerothLauncher
                 new[] { "Area", Val(t, "area", "%") }, new[] { "Targets", Val(t, "targets", "") }, new[] { "Echo", Val(t, "echo", "%") },
                 new[] { "Speed", Val(t, "speed", "%") }, new[] { "Regen", Val(t, "regen", "") }, new[] { "Pickup", Val(t, "pickup", "%") },
             });
-            string txt = Lang.T("The bonuses of everything chosen, added together, with the set bonuses reached. Click a piece to add a star (up to 5, then back to 0); right-click to take it off.");
-            if (unknown > 0) txt = Lang.T("Pieces with bonuses not known yet") + ": " + unknown + ". " + txt;
-            float noteH = Para(g, txt, fSmall, Dim, mid.X, mid.Y + boxH + 8, mid.Width, mid.Bottom);
+            // the explanation is a button now (Slimjim, 2026-10-28): "How are gear stats calculated?" in the sheet's top
+            // right corner, above Hands; a click shows the text that used to sit under the stat boxes
+            unknownPieces = unknown;
+            string hl = Lang.T("How are gear stats calculated?");
+            Size hs = TextRenderer.MeasureText(hl, fSmall);
+            helpBox = new Rectangle(rx + s - hs.Width - 12, sheet.Y + 8, hs.Width + 12, hs.Height + 6);
+            using (var b = new SolidBrush(hoverHelp ? Theme.Hex("#252331") : SlotBg)) g.FillRectangle(b, helpBox);
+            using (var p = new Pen(Edge)) g.DrawRectangle(p, helpBox);
+            TextRenderer.DrawText(g, hl, fSmall, helpBox, Gold, TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter | TextFormatFlags.NoPrefix);
 
-            // under the totals, in the middle of the sheet: every set worn, its 4-piece and 8-piece bonuses (bright when
-            // reached), so two sets of four show and count both, and an 8-piece shows its 4-piece too
-            int setsTop = (int)(mid.Y + boxH + 8 + noteH + 8);
+            // under the totals, in the middle of the sheet (where the explanation was): every set worn, its 4-piece and
+            // 8-piece bonuses (bright when reached), so two sets of four show and count both, and an 8-piece shows its 4-piece too
+            int setsTop = mid.Y + boxH + 8;
             DrawSets(g, new Rectangle(mid.X, setsTop, mid.Width, by - 8 - setsTop));   // above the weapons
 
             // the selector: what the chosen slot can hold, each with its picture
@@ -589,7 +598,9 @@ namespace AzerothLauncher
             for (int i = 0; i < modeBoxes.Count; i++) if (modeBoxes[i].Key.Contains(e.Location)) hm = i;
             for (int i = 0; i < tierBoxes.Count; i++) if (tierBoxes[i].Key.Contains(e.Location)) ht = i;
             if (hm != hoverMode || ht != hoverTier) { hoverMode = hm; hoverTier = ht; Invalidate(); }
-            Cursor = s != null || r >= 0 || hm >= 0 || ht >= 0 ? Cursors.Hand : Cursors.Default;
+            bool hh = helpBox.Contains(e.Location);
+            if (hh != hoverHelp) { hoverHelp = hh; Invalidate(); }
+            Cursor = s != null || r >= 0 || hm >= 0 || ht >= 0 || hh ? Cursors.Hand : Cursors.Default;
             if (s != hover || r != hoverRow)
             {
                 hover = s;
@@ -610,6 +621,13 @@ namespace AzerothLauncher
         protected override void OnMouseUp(MouseEventArgs e)
         {
             base.OnMouseUp(e);
+            if (e.Button == MouseButtons.Left && helpBox.Contains(e.Location))
+            {
+                string txt = Lang.T("The bonuses of everything chosen, added together, with the set bonuses reached. Click a piece to add a star (up to 5, then back to 0); right-click to take it off.");
+                if (unknownPieces > 0) txt = Lang.T("Pieces with bonuses not known yet") + ": " + unknownPieces + ". " + txt;
+                Msg.Show(FindForm(), txt, Lang.T("How are gear stats calculated?"));
+                return;
+            }
             if (e.Button == MouseButtons.Left)
             {
                 foreach (var m in modeBoxes)

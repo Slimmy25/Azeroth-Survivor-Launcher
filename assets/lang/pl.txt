@@ -1914,3 +1914,5 @@ An in-game helper (/fieldkit): elite-only nameplates, boss frames with their deb
 = Pomocnik w grze (/fieldkit): tabliczki tylko dla elit, ramki bossów z ich osłabieniami, pasek zdrowia z twoją tarczą, wzmocnienia i ostrzeżenie o niskim zdrowiu, trafienia krytyczne, statystyki, złoto i ceny skrzyń, licznik obrażeń, skrzynie i legowiska na minimapie oraz kamera.
 Your run history and build statistics, kept in game: run reports and comparisons, and a HUD you set up yourself with up to eight numbers.
 = Historia twoich rozgrywek i statystyki buildów w grze: raporty i porównania rozgrywek oraz HUD, który ustawiasz sam, z maksymalnie ośmioma liczbami.
+How are gear stats calculated?
+= Jak liczone są statystyki wyposażenia?

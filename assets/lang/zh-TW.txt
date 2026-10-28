@@ -1914,3 +1914,5 @@ An in-game helper (/fieldkit): elite-only nameplates, boss frames with their deb
 = 遊戲內助手（/fieldkit）：只顯示菁英的名牌、帶減益效果的首領框架、顯示護盾的生命條、增益和低生命警告、致命一擊、屬性、金幣和寶箱價格、傷害統計、小地圖上的寶箱和巢穴，以及鏡頭。
 Your run history and build statistics, kept in game: run reports and comparisons, and a HUD you set up yourself with up to eight numbers.
 = 遊戲內保存的對局紀錄和配裝統計：對局報告與比較，以及可自行設定、最多八個數字的HUD。
+How are gear stats calculated?
+= 裝備屬性如何計算？

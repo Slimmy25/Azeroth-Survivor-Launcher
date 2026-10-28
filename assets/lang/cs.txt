@@ -1914,3 +1914,5 @@ An in-game helper (/fieldkit): elite-only nameplates, boss frames with their deb
 = Pomocník ve hře (/fieldkit): jmenovky jen pro elity, rámečky bossů s jejich oslabeními, ukazatel zdraví se štítem, buffy a varování při nízkém zdraví, kritické zásahy, statistiky, zlato a ceny truhel, měřič poškození, truhly a doupata na minimapě a kamera.
 Your run history and build statistics, kept in game: run reports and comparisons, and a HUD you set up yourself with up to eight numbers.
 = Historie tvých běhů a statistiky sestav přímo ve hře: zprávy o bězích a jejich porovnání a HUD, který si nastavíš sám, až s osmi čísly.
+How are gear stats calculated?
+= Jak se počítají statistiky výbavy?
