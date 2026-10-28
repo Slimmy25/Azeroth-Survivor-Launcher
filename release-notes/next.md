@@ -42,3 +42,9 @@
 - Guide videos: a FULLSCREEN button above the video, the launcher's own, so fullscreen always works (it plays on from
   the same point; EXIT FULLSCREEN, Esc, double-click or F bring it back). The guide's own videos (hosted with the
   launcher) no longer have an OPEN IN BROWSER button.
+
+### Fixes
+- The launcher no longer comes back empty from the taskbar. Minimizing keeps it in the taskbar (it used to hide itself
+  to the tray a moment later, and clicking it in between showed Windows' opening animation and nothing else), and
+  coming back draws everything again, its section included. "Minimize when the game starts" minimizes it to the taskbar
+  too, instead of hiding it.

@@ -161,7 +161,15 @@ namespace AzerothLauncher
                 SetGuideView(l.Topic, l.Page);
                 After(30, delegate { ShowSpellRow(l.Term); });   // a spell: its row on the page, scrolled to and lit up
             };
-            Resize += delegate { if (WindowState == FormWindowState.Minimized) After(1, HideToTray); };
+            // minimizing keeps the launcher in the taskbar (it used to hide itself to the tray a moment later, and a
+            // click on the taskbar at that moment opened an empty window). Coming back, everything is drawn again.
+            Resize += delegate
+            {
+                if (WindowState == FormWindowState.Minimized) { wasMinimized = true; return; }
+                if (!wasMinimized) return;
+                wasMinimized = false;
+                After(1, RepaintAfterRestore);
+            };
             Shown += delegate
             {
                 if (startInTray) Hide();
@@ -792,6 +800,25 @@ namespace AzerothLauncher
             tray.Text = t.Length > 63 ? t.Substring(0, 63) : t;
         }
 
+        bool wasMinimized;
+
+        // back from the taskbar: the section shown again (the game's start may have closed it) and every part redrawn
+        void RepaintAfterRestore()
+        {
+            if (!Visible || WindowState == FormWindowState.Minimized) return;
+            try
+            {
+                if (side != null && !side.Visible && !setupOpen)
+                {
+                    if (current != null && current != "Home") { ShowSide(); BuildPanel(current); }
+                    else ShowHomeCommunity();
+                }
+                Invalidate(true);
+                Update();
+            }
+            catch (Exception) { }
+        }
+
         void HideToTray()
         {
             Hide();
@@ -861,11 +888,12 @@ namespace AzerothLauncher
             Application.Exit();
         }
 
-        // the launcher and the section window both out of the way (the game started)
+        // the launcher out of the way (the game started): minimized to the taskbar, not hidden, so a click on its
+        // taskbar button always brings it back
         void HideAll()
         {
             HideSide();
-            HideToTray();
+            if (Visible) WindowState = FormWindowState.Minimized;
         }
 
         // ------------------------------------------------------------------ first-time setup
