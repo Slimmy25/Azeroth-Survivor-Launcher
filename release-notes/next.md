@@ -12,3 +12,7 @@
   to 98% (PvP) of a 5-star legendary set (it said 95% for all).
 - Gear: the legendary (tier 3) sets' armor has half the echo it had (the Items pages, the Gear Planner and the AZS
   Handbook); their weapons are unchanged.
+
+### Gear Planner
+- A piece's stars show as a column of 5 small stars on the inner side of its box (it was T1 to T5): a left click fills
+  the next one, and after the fifth they empty again. The AZS Handbook shows the same 5 stars beside each piece.

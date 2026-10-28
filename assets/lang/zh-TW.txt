@@ -1956,3 +1956,5 @@ FUTURE BUILD SAVE + IMPORT / EXPORT CATEGORY
 = 即將推出：儲存配置 + 匯入 / 匯出
 both record your runs and statistics
 = 兩者都會記錄你的對局和統計
+4 piece: four pieces at 1 star. 8 piece: all eight at 3 stars. Everything else in the planner is emptied.
+= 4件：四件 1 星。8件：全部八件 3 星。規劃器中的其他內容都會清空。

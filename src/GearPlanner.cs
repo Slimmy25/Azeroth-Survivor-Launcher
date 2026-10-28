@@ -94,7 +94,7 @@ namespace AzerothLauncher
 
         static readonly string[] ArmorSlots = { "Head", "Shoulder", "Chest", "Waist", "Legs", "Feet", "Wrist", "Hands" };
 
-        // a set put in the planner at once: 4 pieces at T1 (its 4-piece bonus) or all 8 at T3 (both bonuses). It is a
+        // a set put in the planner at once: 4 pieces at 1 star (its 4-piece bonus) or all 8 at 3 stars (both bonuses). It is a
         // starting point, not a pile: the whole planner is emptied first (armor, weapons and jewelry, with their stars),
         // then filled with the set picked. Slimjim's call (2026-10-28): a Tier Bonus button replaces what was calculated.
         public static void FillSet(string cls, string rarity, int pieces, Dictionary<string, object> slots)
@@ -273,12 +273,12 @@ namespace AzerothLauncher
 
             // the slots: two columns and the weapons under them
             int s = slotSize, gap = slotGap;
-            int tierW = (int)Math.Ceiling(TextRenderer.MeasureText("T5", fTier).Width * 0.8) + 2;   // room for a piece's T1-T5 on its right
+            int tierW = Math.Max(6, s / 5) + 3;                // room for a piece's column of 5 small stars on its inner side
             int lx = sheet.X + 12, rx = sheet.Right - 8 - tierW - s;
             for (int i = 0; i < Left.Length; i++) Slot(g, Left[i], new Rectangle(lx, top + i * (s + gap), s, s));
             for (int i = 0; i < Right.Length; i++) Slot(g, Right[i], new Rectangle(rx, top + i * (s + gap), s, s));
             int by = top + 8 * (s + gap);
-            int bgap = gap + tierW;                           // the weapons: room for their T1-T5 between them
+            int bgap = gap + tierW;                           // the weapons: room for their stars between them
             int bx = sheet.X + (sheet.Width - (3 * s + 2 * bgap)) / 2;
             for (int i = 0; i < Bottom.Length; i++) Slot(g, Bottom[i], new Rectangle(bx + i * (s + bgap), by, s, s));
 
@@ -507,7 +507,7 @@ namespace AzerothLauncher
                     y += bh + 6;
                 }
             if (y + 2 * fSmall.GetHeight(g) < r.Bottom)
-                Para(g, Lang.T("4 piece: four pieces at T1. 8 piece: all eight at T3. Everything else in the planner is emptied."), fSmall, Dim, r.X + 10, y + 2, r.Width - 20, r.Bottom - 4);
+                Para(g, Lang.T("4 piece: four pieces at 1 star. 8 piece: all eight at 3 stars. Everything else in the planner is emptied."), fSmall, Dim, r.X + 10, y + 2, r.Width - 20, r.Bottom - 4);
         }
 
         void Frame(Graphics g, Rectangle r)
@@ -532,6 +532,21 @@ namespace AzerothLauncher
                 using (var b = new SolidBrush(Bright)) g.DrawString(row[1], fText, b, r.Right - 8 - vs.Width, y);
                 y += lh;
             }
+        }
+
+        // a small five-pointed star: gold when earned, a dim outline when not
+        static void DrawStar(Graphics g, RectangleF r, bool on)
+        {
+            var pts = new PointF[10];
+            float cx = r.X + r.Width / 2, cy = r.Y + r.Height / 2 + r.Height * 0.04f, ro = r.Width / 2, ri = ro * 0.45f;
+            for (int i = 0; i < 10; i++)
+            {
+                double a = -Math.PI / 2 + i * Math.PI / 5;
+                float rad = i % 2 == 0 ? ro : ri;
+                pts[i] = new PointF(cx + (float)(Math.Cos(a) * rad), cy + (float)(Math.Sin(a) * rad));
+            }
+            if (on) using (var b = new SolidBrush(Gold)) g.FillPolygon(b, pts);
+            else using (var p = new Pen(Color.FromArgb(110, 156, 138, 100), 1f)) g.DrawPolygon(p, pts);
         }
 
         void Slot(Graphics g, string slot, Rectangle r)
@@ -559,11 +574,12 @@ namespace AzerothLauncher
                 }
                 using (var p = new Pen(RarityColor(RarityOf(o)), 2f)) g.DrawRectangle(p, r);
                 int st = o is GearPiece ? StarsOf(slot) : 0;
-                if (st > 0)                                   // its stars: T1 to T5 just outside the box, on its inner side
-                {                                             // (left column: by the top right corner; right column: top left),
-                    string n = "T" + st;                      // so both columns lean in towards the stats in the middle
-                    float x = r.X + r.Width / 2 < ClientSize.Width / 2 ? r.Right + 1 : r.X - 1 - g.MeasureString(n, fTier).Width;
-                    using (var b = new SolidBrush(Gold)) g.DrawString(n, fTier, b, x, r.Y - 2);
+                if (o is GearPiece)                           // its stars: a column of 5 small stars just outside the box, on its inner
+                {                                             // side (left column: right of it; right column: left of it), filled
+                    float ss = Math.Max(6, r.Height / 5f);    // from the top as a left click adds one, dim outlines for the rest
+                    bool leftCol = r.X + r.Width / 2 < ClientSize.Width / 2;
+                    float sx = leftCol ? r.Right + 2 : r.X - 2 - ss;
+                    for (int i = 0; i < 5; i++) DrawStar(g, new RectangleF(sx, r.Y + i * (r.Height / 5f) + (r.Height / 5f - ss) / 2, ss, ss), i < st);
                 }
             }
             else

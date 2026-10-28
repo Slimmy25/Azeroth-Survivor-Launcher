@@ -262,7 +262,7 @@ local function Fmt(v)
 end
 
 -- Tier Bonus, as in the launcher's Gear Planner: a set is a starting point, not a pile. The whole planner (armor,
--- weapons, jewelry and their stars) is emptied, then the set's pieces go in: 4 pieces at T1, or all 8 at T3.
+-- weapons, jewelry and their stars) is emptied, then the set's pieces go in: 4 pieces at 1 star, or all 8 at 3 stars.
 local ARMOR_ORDER = { "Head", "Shoulder", "Chest", "Waist", "Legs", "Feet", "Wrist", "Hands" };
 local function FillSet(class, rarity, pieces)
 	planner.slots = {}; planner.stars = {};
@@ -280,6 +280,13 @@ local function FillSet(class, rarity, pieces)
 			end
 		end
 	end
+end
+
+-- a piece's stars as in the launcher: five small stars, the earned ones gold, the rest dim (the 1.12 font has no star
+-- sign, so they are asterisks)
+local function Stars5(n)
+	n = n or 0;
+	return "|cffffd100" .. string.rep("*", n) .. "|r|cff555555" .. string.rep("*", 5 - n) .. "|r";
 end
 
 local function ItemsGear(out)
@@ -338,7 +345,7 @@ local function ItemsGear(out)
 					{ text = "8 piece", go = function() FillSet(class, r, 8); end } } });
 			end
 		end
-		table.insert(out, { kind = "note", text = "4 piece: four pieces at T1. 8 piece: all eight at T3. Everything else in the planner is emptied." });
+		table.insert(out, { kind = "note", text = "4 piece: four pieces at 1 star. 8 piece: all eight at 3 stars. Everything else in the planner is emptied." });
 		return out;
 	end
 	table.insert(out, { kind = "head", text = "Slots" });
@@ -347,7 +354,7 @@ local function ItemsGear(out)
 		local s, p = slots[i], planner.slots[slots[i]];
 		local st = planner.stars[s] or 0;
 		-- a click on a piece: one more star (after 5 back to 0); on an empty slot: pick it
-		table.insert(out, { kind = "row", label = s, text = p and (p.name .. (p.slot and st > 0 and ("  T" .. st) or "")) or "Empty", rarity = p and p.rarity, item = p,
+		table.insert(out, { kind = "row", label = s, text = p and (p.name .. (p.slot and ("  " .. Stars5(st)) or "")) or "Empty", rarity = p and p.rarity, item = p,
 		                    selected = (planner.pick == s), go = function()
 		                        if ( p and p.slot ) then planner.stars[s] = math.mod((planner.stars[s] or 0) + 1, 6); end
 		                        planner.pick = s;

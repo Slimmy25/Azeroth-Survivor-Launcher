@@ -1955,3 +1955,5 @@ FUTURE BUILD SAVE + IMPORT / EXPORT CATEGORY
 = KOMMER: LAGRE BUILD + IMPORT / EKSPORT
 both record your runs and statistics
 = begge registrerer løpene og statistikken din
+4 piece: four pieces at 1 star. 8 piece: all eight at 3 stars. Everything else in the planner is emptied.
+= 4 deler: fire deler med 1 stjerne. 8 deler: alle åtte med 3 stjerner. Alt annet i planleggeren tømmes.

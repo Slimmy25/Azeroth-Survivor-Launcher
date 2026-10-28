@@ -1956,3 +1956,5 @@ FUTURE BUILD SAVE + IMPORT / EXPORT CATEGORY
 = ΜΕΛΛΟΝΤΙΚΗ ΑΠΟΘΗΚΕΥΣΗ BUILD + ΕΙΣΑΓΩΓΗ / ΕΞΑΓΩΓΗ
 both record your runs and statistics
 = και τα δύο καταγράφουν τα runs και τα στατιστικά σου
+4 piece: four pieces at 1 star. 8 piece: all eight at 3 stars. Everything else in the planner is emptied.
+= 4 κομμάτια: τέσσερα με 1 αστέρι. 8 κομμάτια: και τα οκτώ με 3 αστέρια. Όλα τα υπόλοιπα στον σχεδιαστή αδειάζουν.

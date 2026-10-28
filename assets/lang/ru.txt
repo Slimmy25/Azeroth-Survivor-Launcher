@@ -1956,3 +1956,5 @@ FUTURE BUILD SAVE + IMPORT / EXPORT CATEGORY
 = СКОРО: СОХРАНЕНИЕ БИЛДА + ИМПОРТ / ЭКСПОРТ
 both record your runs and statistics
 = оба записывают ваши забеги и статистику
+4 piece: four pieces at 1 star. 8 piece: all eight at 3 stars. Everything else in the planner is emptied.
+= 4 предмета: четыре с 1 звездой. 8 предметов: все восемь с 3 звёздами. Всё остальное в планировщике очищается.

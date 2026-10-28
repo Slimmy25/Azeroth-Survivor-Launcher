@@ -1955,3 +1955,5 @@ FUTURE BUILD SAVE + IMPORT / EXPORT CATEGORY
 = À VENIR : SAUVEGARDE DE BUILD + IMPORT / EXPORT
 both record your runs and statistics
 = les deux enregistrent vos parties et statistiques
+4 piece: four pieces at 1 star. 8 piece: all eight at 3 stars. Everything else in the planner is emptied.
+= 4 pièces : quatre pièces à 1 étoile. 8 pièces : les huit à 3 étoiles. Tout le reste du planificateur est vidé.

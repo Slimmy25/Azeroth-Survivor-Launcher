@@ -1955,3 +1955,5 @@ FUTURE BUILD SAVE + IMPORT / EXPORT CATEGORY
 = KÜNFTIG: BUILD SPEICHERN + IMPORT / EXPORT
 both record your runs and statistics
 = beide zeichnen deine Runs und Statistiken auf
+4 piece: four pieces at 1 star. 8 piece: all eight at 3 stars. Everything else in the planner is emptied.
+= 4 Teile: vier Teile mit 1 Stern. 8 Teile: alle acht mit 3 Sternen. Alles andere im Planer wird geleert.

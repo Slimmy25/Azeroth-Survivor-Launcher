@@ -1956,3 +1956,5 @@ FUTURE BUILD SAVE + IMPORT / EXPORT CATEGORY
 = HAMAROSAN: BUILD MENTÉSE + IMPORT / EXPORT
 both record your runs and statistics
 = mindkettő rögzíti a futásaidat és statisztikáidat
+4 piece: four pieces at 1 star. 8 piece: all eight at 3 stars. Everything else in the planner is emptied.
+= 4 darab: négy darab 1 csillaggal. 8 darab: mind a nyolc 3 csillaggal. A tervezőben minden más kiürül.

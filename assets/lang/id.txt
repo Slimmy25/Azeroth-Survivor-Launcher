@@ -1955,3 +1955,5 @@ FUTURE BUILD SAVE + IMPORT / EXPORT CATEGORY
 = MENDATANG: SIMPAN BUILD + IMPOR / EKSPOR
 both record your runs and statistics
 = keduanya mencatat run dan statistikmu
+4 piece: four pieces at 1 star. 8 piece: all eight at 3 stars. Everything else in the planner is emptied.
+= 4 bagian: empat bagian bintang 1. 8 bagian: kedelapannya bintang 3. Semua yang lain di perencana dikosongkan.

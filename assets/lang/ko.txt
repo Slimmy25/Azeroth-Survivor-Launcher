@@ -1956,3 +1956,5 @@ FUTURE BUILD SAVE + IMPORT / EXPORT CATEGORY
 = 추가 예정: 빌드 저장 + 가져오기 / 내보내기
 both record your runs and statistics
 = 둘 다 런과 통계를 기록합니다
+4 piece: four pieces at 1 star. 8 piece: all eight at 3 stars. Everything else in the planner is emptied.
+= 4세트: 4개를 별 1개로. 8세트: 8개 모두 별 3개로. 플래너의 나머지는 모두 비워집니다.
