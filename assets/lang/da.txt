@@ -1889,5 +1889,5 @@ Importing a save is in Change Folder ▾ in the path above.
 = Import af et gem findes under Skift mappe ▾ i stien ovenfor.
 That folder does not exist.
 = Den mappe findes ikke.
-The path at the top shows where you are. Click a step to go back to it, or point at its ▾ for the places beside it. The arrow on the left goes back the way you came; the X takes you home.
-= Stien øverst viser, hvor du er. Klik på et trin for at gå tilbage til det, eller peg på dets ▾ for stederne ved siden af. Pilen til venstre går tilbage ad den vej, du kom; X tager dig hjem.
+The path at the top shows where you are, for example Guide › Classes › Priest (in the picture below). Click a step's name to go back to it. Point at a step, or its ▾, for the places beside it. The arrow on the left goes back the way you came; the X takes you home.
+= Stien øverst viser, hvor du er, for eksempel Guide › Klasser › Præst (på billedet nedenfor). Klik på et trins navn for at gå tilbage til det. Peg på et trin eller dets ▾ for stederne ved siden af. Pilen til venstre går tilbage ad den vej, du kom; X'et fører dig hjem.

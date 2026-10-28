@@ -465,6 +465,7 @@ namespace AzerothLauncher
         }
         Image icon;                                           // the spell's or talent's icon, beside its name
         string model;                                         // a real item's name: its model picture under the text
+        Image picture, shownPicture;                          // a picture under the text (ShowPicture)
         const int W = 300, ModelH = 230;
 
         GuideHover()
@@ -493,6 +494,14 @@ namespace AzerothLauncher
 
         public static void Show(Control owner, string title, string body, Image icon) { Show(owner, title, body, icon, null); }
 
+        // a note with a picture under its text (the "Lost?" note's example path)
+        public static void ShowPicture(Control owner, string title, string body, Image picture)
+        {
+            if (box == null || box.IsDisposed) box = new GuideHover();
+            box.picture = picture;
+            Show(owner, title, body, null, null);
+        }
+
         // model: a real item's name (assets\item-models.txt): its 3D model picture from Wowhead's model viewer is shown
         // under the text (it loads the first time, then comes from the cache)
         public static void Show(Control owner, string title, string body, Image icon, string model)
@@ -500,6 +509,9 @@ namespace AzerothLauncher
             if (box == null || box.IsDisposed) box = new GuideHover();
             box.icon = icon;
             box.model = model;
+            Image pic = box.picture;
+            box.picture = null;                               // a picture is for the one note that passed it
+            box.shownPicture = pic;
             box.title = title;
             body = GearEffect.Apply(title, body);              // the Gear Planner's set, when there is one
             box.body = body;
@@ -509,7 +521,7 @@ namespace AzerothLauncher
             int bh;
             using (var mg = Graphics.FromImage(measure)) bh = box.Flow(mg, bf, false);
             Point p = Cursor.Position;
-            var size = new Size(W, th + bh + 22 + (model != null ? ModelH + 8 : 0));
+            var size = new Size(W, th + bh + 22 + (model != null ? ModelH + 8 : 0) + (pic != null ? pic.Height + 10 : 0));
             Rectangle screen = Screen.FromPoint(p).WorkingArea;
             int x = Math.Min(p.X + 16, screen.Right - size.Width - 4), y = p.Y + 20;
             if (y + size.Height > screen.Bottom) y = p.Y - size.Height - 8;
@@ -543,6 +555,8 @@ namespace AzerothLauncher
             g.TranslateTransform(10, 10 + th);
             Flow(g, bf, true);
             g.Restore(st);
+            if (shownPicture != null)
+                g.DrawImage(shownPicture, (Width - shownPicture.Width) / 2, Height - shownPicture.Height - 10, shownPicture.Width, shownPicture.Height);
             if (model != null)
             {
                 var r = new Rectangle(10, Height - ModelH - 10, W - 20, ModelH);

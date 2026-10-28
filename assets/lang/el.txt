@@ -1890,5 +1890,5 @@ Importing a save is in Change Folder ▾ in the path above.
 = Η εισαγωγή αποθήκευσης βρίσκεται στο Αλλαγή φακέλου ▾ στη διαδρομή επάνω.
 That folder does not exist.
 = Αυτός ο φάκελος δεν υπάρχει.
-The path at the top shows where you are. Click a step to go back to it, or point at its ▾ for the places beside it. The arrow on the left goes back the way you came; the X takes you home.
-= Η διαδρομή επάνω δείχνει πού βρίσκεσαι. Κάνε κλικ σε ένα βήμα για να επιστρέψεις σε αυτό ή δείξε το ▾ του για τα μέρη δίπλα του. Το βέλος αριστερά γυρίζει πίσω από όπου ήρθες· το X σε πάει στην αρχή.
+The path at the top shows where you are, for example Guide › Classes › Priest (in the picture below). Click a step's name to go back to it. Point at a step, or its ▾, for the places beside it. The arrow on the left goes back the way you came; the X takes you home.
+= Η διαδρομή επάνω δείχνει πού βρίσκεσαι, για παράδειγμα Οδηγός › Κλάσεις › Ιερέας (στην εικόνα παρακάτω). Κάνε κλικ στο όνομα ενός βήματος για να επιστρέψεις σε αυτό. Δείξε ένα βήμα ή το ▾ του για τα μέρη δίπλα του. Το βέλος αριστερά γυρίζει πίσω από τον δρόμο που ήρθες· το X σε πάει στην αρχή.

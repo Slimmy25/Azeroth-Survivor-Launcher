@@ -1890,5 +1890,5 @@ Importing a save is in Change Folder ▾ in the path above.
 = การนำเข้าเซฟอยู่ใน เปลี่ยนโฟลเดอร์ ▾ ในเส้นทางด้านบน
 That folder does not exist.
 = ไม่มีโฟลเดอร์นั้น
-The path at the top shows where you are. Click a step to go back to it, or point at its ▾ for the places beside it. The arrow on the left goes back the way you came; the X takes you home.
-= เส้นทางด้านบนบอกว่าคุณอยู่ที่ไหน คลิกขั้นใดเพื่อกลับไปที่นั่น หรือชี้ที่ ▾ ของมันเพื่อดูที่อื่นข้างๆ ลูกศรด้านซ้ายพากลับทางที่มา ส่วน X พากลับหน้าแรก
+The path at the top shows where you are, for example Guide › Classes › Priest (in the picture below). Click a step's name to go back to it. Point at a step, or its ▾, for the places beside it. The arrow on the left goes back the way you came; the X takes you home.
+= เส้นทางด้านบนบอกว่าคุณอยู่ที่ไหน เช่น คู่มือ › คลาส › นักบวช (ในภาพด้านล่าง) คลิกชื่อขั้นเพื่อกลับไปที่นั่น ชี้ที่ขั้นหรือ ▾ ของมันเพื่อดูที่อื่นๆ ข้างเคียง ลูกศรด้านซ้ายพากลับทางเดิมที่มา ส่วน X พากลับหน้าแรก
