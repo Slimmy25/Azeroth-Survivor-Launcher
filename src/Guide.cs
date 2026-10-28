@@ -552,7 +552,7 @@ namespace AzerothLauncher
                     if (kv.Value is string) saved.Items.Add(kv.Key);
                 if (saved.Items.Count > 0) saved.SelectedIndex = 0;
             };
-            var saveBuild = new WowButton("SAVE", delegate
+            var saveBuild = new WowButton(Lang.T("SAVE"), delegate
             {
                 string name = buildName.Text.Trim();
                 if (name.Length == 0) { MessageBox.Show(Lang.T("Enter a name for this build."), Lang.T("Talent Tree Builder"), MessageBoxButtons.OK, MessageBoxIcon.Information); buildName.Focus(); return; }
@@ -567,7 +567,7 @@ namespace AzerothLauncher
             }, boxW - 24, 28, 9);
             saveBuild.Location = new Point(10, 110);
             tools.Controls.Add(saveBuild);
-            var loadBuild = new WowButton("LOAD", delegate
+            var loadBuild = new WowButton(Lang.T("LOAD"), delegate
             {
                 if (saved.SelectedItem == null) return;
                 object code;
@@ -580,14 +580,14 @@ namespace AzerothLauncher
             }, boxW - 24, 28, 9);
             loadBuild.Location = new Point(10, 144);
             tools.Controls.Add(loadBuild);
-            var exportBuild = new WowButton("EXPORT", delegate
+            var exportBuild = new WowButton(Lang.T("EXPORT"), delegate
             {
                 try { Clipboard.SetText(build.Save()); MessageBox.Show(Lang.T("Build code copied to the clipboard."), Lang.T("Talent Tree Builder"), MessageBoxButtons.OK, MessageBoxIcon.Information); }
                 catch (Exception) { MessageBox.Show(Lang.T("Could not copy the build code."), Lang.T("Talent Tree Builder"), MessageBoxButtons.OK, MessageBoxIcon.Warning); }
             }, boxW - 24, 28, 9);
             exportBuild.Location = new Point(10, 178);
             tools.Controls.Add(exportBuild);
-            var importBuild = new WowButton("IMPORT", delegate
+            var importBuild = new WowButton(Lang.T("IMPORT"), delegate
             {
                 string code = "";
                 using (var prompt = new Form())
