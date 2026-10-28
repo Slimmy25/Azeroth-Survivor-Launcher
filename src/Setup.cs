@@ -376,6 +376,7 @@ namespace AzerothLauncher
                     catch (Exception) { }
                 }
                 Cfg.Set("setup_done", true);
+                Cfg.Set("setup_folder", Util.LauncherDir);       // the folder this setup was for (a copy elsewhere sets up again)
                 Cfg.Save();
                 RefreshPlayLabel();                           // PLAY is no longer grayed out
                 SetStatus("Setup saved.");

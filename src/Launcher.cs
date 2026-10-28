@@ -899,7 +899,11 @@ namespace AzerothLauncher
         // ------------------------------------------------------------------ first-time setup
         void MaybeFirstRun()
         {
-            if (setupAsked || setupOpen || Cfg.Bool("setup_done", false) || PreviewMode) return;
+            // a new folder (neither the launcher's folder nor the game beside the exe), or settings made for another
+            // folder: first-time setup, whatever the settings say, to set up this copy for a new player
+            bool newPlace = !File.Exists(Path.Combine(Util.LauncherDir, Util.GameExe)) &&
+                            (Util.NewFolderAtStart || (Cfg.Str("setup_folder").Length > 0 && !SameFolder(Cfg.Str("setup_folder"), Util.LauncherDir)));
+            if (setupAsked || setupOpen || PreviewMode || (!newPlace && Cfg.Bool("setup_done", false))) return;
             if (!Visible) return;                            // started hidden: asked when the window is first opened
             if (startupLauncherCheck || Updating)           // a launcher update may restart us first
             {
@@ -907,8 +911,15 @@ namespace AzerothLauncher
                 return;
             }
             setupAsked = true;
+            if (newPlace) { Cfg.Set("setup_done", false); RunSetup(); return; }
             if (AdoptExistingInstall()) return;
             RunSetup();
+        }
+
+        static bool SameFolder(string a, string b)
+        {
+            try { return string.Equals(Path.GetFullPath(a).TrimEnd('\\'), Path.GetFullPath(b).TrimEnd('\\'), StringComparison.OrdinalIgnoreCase); }
+            catch (Exception) { return string.Equals(a, b, StringComparison.OrdinalIgnoreCase); }
         }
 
         // No settings of the launcher's own (its folder next to it is gone: a new copy of the exe, the folder moved or
@@ -925,6 +936,7 @@ namespace AzerothLauncher
                 bool configured = Directory.Exists(ss.ConfigDir) && Directory.GetFileSystemEntries(ss.ConfigDir).Length > 0;
                 if (!played && !configured) return false;
                 Cfg.Set("setup_done", true);
+                Cfg.Set("setup_folder", Util.LauncherDir);       // the folder this setup was for
                 Cfg.Set("installed_by_launcher", true);        // the player's own copy counts as installed
                 if (!Cfg.Has("cloud_enabled")) Cfg.Set("cloud_enabled", false);
                 if (!Cfg.Has("stats_enabled")) Cfg.Set("stats_enabled", Stats.AddonPath(AddonsDir()) != null);

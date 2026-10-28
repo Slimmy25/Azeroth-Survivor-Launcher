@@ -363,6 +363,11 @@ namespace AzerothLauncher
         public const string DataFolderName = "Azeroth Survivor Launcher";
         static string dataDir;
         static bool dataBesideExe;
+        static bool newFolder;
+
+        // the exe started in a folder with neither the launcher's own folder nor the game beside it (a new copy, a new
+        // place): a new player as far as the launcher is concerned, so first-time setup runs whatever else it finds
+        public static bool NewFolderAtStart { get { InitData(); return newFolder; } }
         static readonly object dataLock = new object();
 
         public static string DataDir { get { InitData(); return dataDir; } }
@@ -378,6 +383,7 @@ namespace AzerothLauncher
             {
                 if (dataDir != null) return;
                 string beside = Path.Combine(LauncherDir, DataFolderName);
+                newFolder = !Directory.Exists(beside) && !File.Exists(Path.Combine(LauncherDir, GameExe));
                 if (!InCloudDrive(LauncherDir) && Writable(beside))
                 {
                     dataDir = beside;
