@@ -1980,3 +1980,18 @@ No profile is the game as it normally is, kept as a full copy in its own isolate
 = Το «Χωρίς προφίλ» είναι το παιχνίδι όπως είναι κανονικά, ως πλήρες αντίγραφο σε δικό του απομονωμένο χώρο: ποια addons είναι ενεργά, πού βρίσκεται η διεπαφή και οι ρυθμίσεις κάθε addon. Όσο το χρησιμοποιείς, το launcher δεν αλλάζει τίποτα, και όταν γυρίσεις σε αυτό από ένα προφίλ είναι ακριβώς όπως το άφησες. Αν δεν θέλεις να αλλάζουν οι προτιμήσεις του παιχνιδιού, χρησιμοποίησε αυτή τη ρύθμιση.
 Click to give this profile a name of your own.
 = Κάνε κλικ για να δώσεις στο προφίλ δικό σου όνομα.
+
+SAVED BUILDS
+= ΑΠΟΘΗΚΕΥΜΕΝΑ BUILDS
+
+EXPORT
+= ΕΞΑΓΩΓΗ
+
+Enter a name for this build.
+= Δώσε όνομα σε αυτό το build.
+
+Build code copied to the clipboard.
+= Ο κωδικός του build αντιγράφηκε στο πρόχειρο.
+
+Could not copy the build code.
+= Δεν ήταν δυνατή η αντιγραφή του κωδικού build.
