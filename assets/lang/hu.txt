@@ -1890,5 +1890,5 @@ Importing a save is in Change Folder ▾ in the path above.
 = Mentés importálása a fenti útvonal Mappa módosítása ▾ menüjében van.
 That folder does not exist.
 = Ez a mappa nem létezik.
-The path at the top shows where you are. Click a step to go back to it, or point at its ▾ for the places beside it. The arrow on the left goes back the way you came; the X takes you home.
-= A fenti útvonal mutatja, hol vagy. Kattints egy lépésre, hogy visszatérj oda, vagy mutass a ▾ jelére a mellette lévő helyekért. A bal oldali nyíl visszavisz azon az úton, amelyen jöttél; az X hazavisz.
+The path at the top shows where you are, for example Guide › Classes › Priest (in the picture below). Click a step's name to go back to it. Point at a step, or its ▾, for the places beside it. The arrow on the left goes back the way you came; the X takes you home.
+= A fenti útvonal mutatja, hol vagy, például Útmutató › Kasztok › Pap (a lenti képen). Egy lépés nevére kattintva visszatérsz oda. Mutass egy lépésre vagy a ▾ jelére a mellette lévő helyekért. A bal oldali nyíl visszavisz azon az úton, amelyen jöttél; az X hazavisz.

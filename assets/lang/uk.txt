@@ -1890,5 +1890,5 @@ Importing a save is in Change Folder ▾ in the path above.
 = Імпорт збереження — у меню «Змінити теку ▾» у шляху вище.
 That folder does not exist.
 = Цієї теки не існує.
-The path at the top shows where you are. Click a step to go back to it, or point at its ▾ for the places beside it. The arrow on the left goes back the way you came; the X takes you home.
-= Шлях угорі показує, де ви. Натисніть на крок, щоб повернутися до нього, або наведіть на його ▾, щоб побачити сусідні місця. Стрілка ліворуч повертає тим самим шляхом; X веде на головну.
+The path at the top shows where you are, for example Guide › Classes › Priest (in the picture below). Click a step's name to go back to it. Point at a step, or its ▾, for the places beside it. The arrow on the left goes back the way you came; the X takes you home.
+= Шлях угорі показує, де ви, наприклад Посібник › Класи › Жрець (на зображенні нижче). Клацніть назву кроку, щоб повернутися до нього. Наведіть на крок або його ▾, щоб побачити сусідні місця. Стрілка ліворуч веде назад тим самим шляхом; X повертає на головну.

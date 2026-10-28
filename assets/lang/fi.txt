@@ -1889,5 +1889,5 @@ Importing a save is in Change Folder ▾ in the path above.
 = Tallennuksen tuonti löytyy kohdasta Vaihda kansio ▾ yllä olevasta polusta.
 That folder does not exist.
 = Kansiota ei ole olemassa.
-The path at the top shows where you are. Click a step to go back to it, or point at its ▾ for the places beside it. The arrow on the left goes back the way you came; the X takes you home.
-= Yläpolku näyttää, missä olet. Napsauta vaihetta palataksesi siihen tai osoita sen ▾-merkkiä nähdäksesi viereiset paikat. Vasen nuoli palaa tietä, jota tulit; X vie kotiin.
+The path at the top shows where you are, for example Guide › Classes › Priest (in the picture below). Click a step's name to go back to it. Point at a step, or its ▾, for the places beside it. The arrow on the left goes back the way you came; the X takes you home.
+= Yläreunan polku näyttää, missä olet, esimerkiksi Opas › Luokat › Pappi (alla olevassa kuvassa). Napsauta vaiheen nimeä palataksesi siihen. Osoita vaihetta tai sen ▾-merkkiä nähdäksesi viereiset paikat. Vasemman reunan nuoli vie takaisin tulemaasi reittiä; X vie kotiin.

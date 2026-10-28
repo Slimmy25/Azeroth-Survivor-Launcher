@@ -1890,5 +1890,5 @@ Importing a save is in Change Folder ▾ in the path above.
 = Импорт сохранения — в меню «Сменить папку ▾» в пути выше.
 That folder does not exist.
 = Эта папка не существует.
-The path at the top shows where you are. Click a step to go back to it, or point at its ▾ for the places beside it. The arrow on the left goes back the way you came; the X takes you home.
-= Путь вверху показывает, где вы. Нажмите на шаг, чтобы вернуться к нему, или наведите на его ▾, чтобы увидеть соседние места. Стрелка слева возвращает назад тем же путём; X ведёт на главную.
+The path at the top shows where you are, for example Guide › Classes › Priest (in the picture below). Click a step's name to go back to it. Point at a step, or its ▾, for the places beside it. The arrow on the left goes back the way you came; the X takes you home.
+= Путь вверху показывает, где вы, например Руководство › Классы › Жрец (на картинке ниже). Нажмите на название шага, чтобы вернуться к нему. Наведите на шаг или его ▾, чтобы увидеть соседние места. Стрелка слева ведёт назад тем же путём; X возвращает на главную.

@@ -1890,5 +1890,5 @@ Importing a save is in Change Folder ▾ in the path above.
 = Importul unei salvări este în Schimbă dosarul ▾, în calea de sus.
 That folder does not exist.
 = Acel dosar nu există.
-The path at the top shows where you are. Click a step to go back to it, or point at its ▾ for the places beside it. The arrow on the left goes back the way you came; the X takes you home.
-= Calea de sus arată unde te afli. Fă clic pe un pas ca să revii la el sau indică ▾-ul său pentru locurile de alături. Săgeata din stânga te întoarce pe drumul pe care ai venit; X te duce acasă.
+The path at the top shows where you are, for example Guide › Classes › Priest (in the picture below). Click a step's name to go back to it. Point at a step, or its ▾, for the places beside it. The arrow on the left goes back the way you came; the X takes you home.
+= Calea de sus arată unde ești, de exemplu Ghid › Clase › Preot (în imaginea de mai jos). Fă clic pe numele unui pas ca să revii la el. Indică un pas, sau ▾-ul lui, pentru locurile de lângă. Săgeata din stânga te întoarce pe drumul pe care ai venit; X-ul te duce acasă.

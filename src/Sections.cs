@@ -238,7 +238,7 @@ namespace AzerothLauncher
             int h = HotAt(e.Location), ha = ArrowAt(e.Location);
             if (ha < 0) ha = MenuTextAt(e.Location);          // the last step's name lights its arrow
             if (h != hover || ha != hoverArrow) { hover = h; hoverArrow = ha; Invalidate(); }
-            Cursor = CloseBox.Contains(e.Location) || HelpBox.Contains(e.Location) || h != -1 || ha != -1 ? Cursors.Hand : Cursors.Default;
+            Cursor = CloseBox.Contains(e.Location) || h != -1 || ha != -1 ? Cursors.Hand : Cursors.Default;   // "Lost?" is not clicked: pointed at
             // "Lost?": a small note while the pointer is on it (no window over the launcher)
             bool onHelp = HelpBox.Contains(e.Location);
             if (onHelp && !helpTip) { helpTip = true; WowButton.Fire(HelpClicked); }
@@ -307,7 +307,7 @@ namespace AzerothLauncher
                 if (Moved != null && Owner2 != null) Moved(Owner2.Location);
             }
             else if (e.Button == MouseButtons.Left && CloseBox.Contains(e.Location)) WowButton.Fire(CloseClicked);
-            else if (e.Button == MouseButtons.Left && HelpBox.Contains(e.Location)) WowButton.Fire(HelpClicked);
+            else if (e.Button == MouseButtons.Left && HelpBox.Contains(e.Location)) { }   // "Lost?" only answers the pointer
             else if (e.Button == MouseButtons.Left && ArrowAt(e.Location) >= 0) ClickMenu(ArrowAt(e.Location));
             else if (e.Button == MouseButtons.Left)
             {
@@ -420,7 +420,7 @@ namespace AzerothLauncher
             sideHead.CloseClicked = CloseSide;
             sideHead.HelpClicked = delegate                  // a small note beside "Lost?", not a window over the launcher
             {
-                GuideHover.Show(sideHead, Lang.T("Lost?"), Lang.T(LostNote));
+                GuideHover.ShowPicture(sideHead, Lang.T("Lost?"), Lang.T(LostNote), PathExample());
             };
             sideHead.Moved = delegate(Point p)
             {
@@ -620,7 +620,47 @@ namespace AzerothLauncher
             if (name == "Addons") RefreshGates();             // AZS Stats switched on or off: the Stats buttons follow
         }
 
-        const string LostNote = "The path at the top shows where you are. Click a step to go back to it, or point at its ▾ for the places beside it. The arrow on the left goes back the way you came; the X takes you home.";
+        const string LostNote = "The path at the top shows where you are, for example Guide › Classes › Priest (in the picture below). Click a step's name to go back to it. Point at a step, or its ▾, for the places beside it. The arrow on the left goes back the way you came; the X takes you home.";
+
+        // the "Lost?" note's picture: a small path like the one at the top, Guide › Classes › Priest ▾, drawn the same way
+        static Bitmap pathExample;
+
+        static Bitmap PathExample()
+        {
+            if (pathExample != null) return pathExample;
+            var bmp = new Bitmap(280, 34);
+            using (var g = Graphics.FromImage(bmp))
+            {
+                g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+                g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
+                g.Clear(Theme.Hex("#120e18"));
+                using (var p = new Pen(Theme.Hex("#8a7040"), 1)) g.DrawRectangle(p, 0, 0, bmp.Width - 1, bmp.Height - 1);
+                // the back arrow
+                var ab = new Rectangle(8, 7, 26, 20);
+                using (var b = new SolidBrush(Theme.Hex("#1c1a26"))) g.FillRectangle(b, ab);
+                using (var p = new Pen(Theme.Hex("#d6a640"), 1)) g.DrawRectangle(p, ab);
+                using (var b = new SolidBrush(Theme.Hex("#f0c050")))
+                    g.FillPolygon(b, new[] { new PointF(ab.X + 9, ab.Y + 10), new PointF(ab.X + 16, ab.Y + 5), new PointF(ab.X + 16, ab.Y + 15) });
+                // the steps
+                Font f = Theme.F(10, FontStyle.Bold);
+                float x = 44;
+                string[] steps = { Lang.T("Guide"), Lang.T("Classes"), Lang.T("Priest") };
+                for (int i = 0; i < steps.Length; i++)
+                {
+                    bool last = i == steps.Length - 1;
+                    using (var b = new SolidBrush(last ? Theme.Hex("#f5e9c8") : Theme.Hex("#e6cf8c"))) g.DrawString(steps[i], f, b, x, 8);
+                    x += g.MeasureString(steps[i], f).Width;
+                    if (last)
+                        using (var b = new SolidBrush(Theme.Hex("#f0c050"))) g.DrawString("▾", Theme.F(9), b, x - 2, 9);
+                    else
+                    {
+                        using (var b = new SolidBrush(Theme.Hex("#a08850"))) g.DrawString("›", f, b, x, 8);
+                        x += g.MeasureString("› ", f).Width;
+                    }
+                }
+            }
+            return pathExample = bmp;
+        }
 
         // the section is on its main page (where its big button takes you): no "Lost?" there
         bool OnMainPage(string name)
