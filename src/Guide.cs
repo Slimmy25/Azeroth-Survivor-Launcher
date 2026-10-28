@@ -476,7 +476,7 @@ namespace AzerothLauncher
             Color bg = sp.BackColor;
             int w = sp.ClientSize.Width - 8, x = 4, y = 4;
             var left = UI.Text("", 11, FontStyle.Bold, Theme.Gold, bg, w - 140, false);
-            left.Bounds = new Rectangle(x, y + 6, w - 360, Theme.F(11, FontStyle.Bold).Height + 4);
+            left.Bounds = new Rectangle(x, y + 6, w - 200, Theme.F(11, FontStyle.Bold).Height + 4);   // (no Gear Planner button: the path leads there)
             sp.Controls.Add(left);
             var reset = new WowButton("RESET", delegate { build.Reset(); }, 120, 30, 9);
             reset.Location = new Point(x + w - reset.Width, y);
@@ -490,10 +490,6 @@ namespace AzerothLauncher
             }, 34, 30, 11);
             help.Location = new Point(reset.Left - help.Width - 6, y);
             sp.Controls.Add(help);
-            // the same class's gear, in the Gear Planner (the two tools share the class)
-            var gear = new WowButton("GEAR PLANNER ›", delegate { PlannerClass(cls); OpenGuideTab(-3); }, 150, 30, 9);
-            gear.Location = new Point(help.Left - gear.Width - 6, y);
-            sp.Controls.Add(gear);
             y += Math.Max(reset.Height, left.Height) + 6;
             var trees = Talents.Of(cls);
             var views = new List<TalentTreeView>();
