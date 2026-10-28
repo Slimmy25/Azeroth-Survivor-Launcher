@@ -49,7 +49,7 @@ local CLASS_COORDS = { warrior = { 0, 0.25, 0, 0.25 }, mage = { 0.25, 0.49609375
 local TOPIC_ICONS = { ["Getting Started"] = "INV_Misc_Book_09", ["Build Guides"] = "INV_Misc_Spyglass_02", ["Controls"] = "INV_Misc_Gear_01",
                       ["Your First Run"] = "Ability_Rogue_Sprint", ["Classes"] = "INV_Sword_04", ["Races"] = "INV_Misc_Head_Human_01",
                       ["Zones & Bosses"] = "INV_Misc_Map_01", ["Level-Ups & Cards"] = "Spell_Holy_SealOfWisdom",
-                      ["Pickups, Caches & Guardians"] = "INV_Misc_Coin_01", ["Gear & the Armory"] = "INV_Chest_Plate06",
+                      ["Pickups, Caches & Guardians"] = "INV_Misc_Coin_01", ["Gear & the Armory"] = "INV_Chest_Plate06", ["Transmog"] = "INV_Shirt_GuildTabard_01",
                       ["Talents"] = "Ability_Marksmanship", ["Achievements & Rewards"] = "INV_Misc_Bag_10",
                       ["Heroic & Endless"] = "Spell_Shadow_DeathScream", ["Co-op"] = "Ability_Warrior_BattleShout",
                       ["Tips for New Players"] = "INV_Misc_Note_01" };
@@ -232,6 +232,13 @@ local function Totals(class)
 		end
 	end
 	return t, health, unknown, worn;
+end
+
+-- a piece's own icon, the game's art: AZS Stats keeps the icon of every piece any hero has worn (AZSStatsDB.icons)
+local function ItemIcon(name)
+	local icons = type(AZSStatsDB) == "table" and AZSStatsDB.icons;
+	if ( type(icons) == "table" and name and icons[name] ) then return icons[name]; end
+	return nil;
 end
 
 local function ItemTooltip(owner, p)
@@ -736,8 +743,12 @@ local function LayMore(it, y)
 			f.label = Text(f, "GameFontDisableSmall");
 			f.label:SetPoint("LEFT", f, "LEFT", 6, 0);
 			f.label:SetWidth(90);
+			f.icon = f:CreateTexture(nil, "ARTWORK");
+			f.icon:SetWidth(16);
+			f.icon:SetHeight(16);
+			f.icon:SetPoint("LEFT", f, "LEFT", 98, 0);
 			f.text = Text(f, "GameFontHighlight");
-			f.text:SetPoint("LEFT", f, "LEFT", 100, 0);
+			f.text:SetPoint("LEFT", f, "LEFT", 118, 0);
 			f:SetScript("OnEnter", function()
 				this.bg:SetTexture(0.95, 0.76, 0.3, 0.15);
 				if ( this.item ) then ItemTooltip(this, this.item); end
@@ -750,6 +761,12 @@ local function LayMore(it, y)
 		f.bg:SetTexture(0.95, 0.76, 0.3, it.selected and 0.1 or 0);
 		f.label:SetText(it.label or "");
 		f.text:SetText(it.text or "");
+		local ic = it.item and (ItemIcon(it.item.name) or it.item.icon);   -- the game's own icon, when known
+		if ( ic ) then
+			if ( not string.find(ic, "\\", 1, true) ) then ic = "Interface\\Icons\\" .. ic; end
+			f.icon:SetTexture(ic);
+			f.icon:Show();
+		else f.icon:Hide(); end
 		local c = it.rarity and RARITY_RGB[it.rarity] or { 0.9, 0.87, 0.75 };
 		f.text:SetTextColor(c[1], c[2], c[3]);
 		f:SetWidth(CW);
@@ -800,7 +817,20 @@ local function LayMore(it, y)
 			c:SetPoint("LEFT", f, "LEFT", 90 + (i - 1) * 36, 0);
 			c:SetBackdropBorderColor(col[1], col[2], col[3]);
 			local ab = (p.slot == "Main Hand" and "MH") or (p.slot == "Off Hand" and "OH") or (p.slot == "Ranged" and "Ra") or string.sub(p.slot, 1, 2);
-			c.t:SetText(ab .. (p.known and "" or "*"));
+			local ic = ItemIcon(p.name);                   -- the game's own icon once a hero has worn it; else the slot
+			if ( not c.icon ) then
+				c.icon = c:CreateTexture(nil, "ARTWORK");
+				c.icon:SetPoint("TOPLEFT", c, "TOPLEFT", 3, -3);
+				c.icon:SetPoint("BOTTOMRIGHT", c, "BOTTOMRIGHT", -3, 3);
+			end
+			if ( ic ) then
+				c.icon:SetTexture(string.find(ic, "\\", 1, true) and ic or ("Interface\\Icons\\" .. ic));
+				c.icon:Show();
+				c.t:SetText("");
+			else
+				c.icon:Hide();
+				c.t:SetText(ab .. (p.known and "" or "*"));
+			end
 			c:Show();
 		else c.p = nil; c:Hide(); end
 	end

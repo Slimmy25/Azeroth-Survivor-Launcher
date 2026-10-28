@@ -482,6 +482,7 @@ Head, Shoulders, Chest, Hands, Wrist, Waist, Legs, Feet and Main Hand. The final
 - Drop Tables: every zone's bosses, their arrival times, and the piece and chance each one drops.
 - Collection also shows the pieces still to find in your zones, with their boss and drop chance. Once you have them all, it shows each set's star progress instead: stars per piece, its 4-piece and 8-piece bonuses and how many stars are open.
 - Codex: every ring, trinket and amulet the game has offered you.
+- Talents, Achievements and Rewards: see their own topics.
 
 # Marks
 Every boss you kill pays your class marks: more in harder zones and on higher Heroic levels, and half on normal. Bosses that return in endless mode pay more each time. A piece you already own pays marks instead when a boss drops it.
@@ -506,9 +507,8 @@ Spend marks in the armory to raise a piece, weapons included, from 0 to 5 stars.
 - Most PvP sets are built around crowd control: their 8-piece bonus makes your stun, root, slow or fear spell (Hammer of Justice, Concussive Shot, Kidney Shot, Psychic Scream, Frost Nova, Death Coil, Shred) hit more enemies, harder and more often, and all your damage higher against enemies you stun, root, slow or fear. The warrior's is built around Mortal Strike and the shaman's around Earth Shock instead.
 - An armor piece's tooltip (character pane, C) shows its set: the set's name with how many pieces you wear, its pieces, and its 4-piece and 8-piece bonuses with the stars they need. Each class's sets and their bonuses are listed under its gear in the Items topic.
 
-# Weapon glows
-Weapons at 5 stars glow with Icy Chill, and two achievements open Crusader (Champion of Naxxramas) and Fiery Weapon (Radiant Armory). Pick your class's glow, or none, on any weapon in the armory. A picked glow also replaces a legendary weapon's own.
-- Talents, Achievements and Rewards: see their own topics.
+# Looks
+Appearances, tabards and weapon glows only change how your hero looks: see the Transmog topic.
 
 @topic Talents | Talent points, trees and specs
 # Earning points

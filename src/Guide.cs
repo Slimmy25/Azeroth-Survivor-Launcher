@@ -37,7 +37,7 @@ namespace AzerothLauncher
             new[] { "NEW PLAYER", "Getting Started", "Controls", "Your First Run", "Tips for New Players", "Heroic & Endless",
                     "Achievements & Rewards", "Addons" },
             new[] { "GAMEPLAY", "Classes", "Races", "Zones & Bosses", "Level-Ups & Cards", "Talents", "Pickups, Caches & Guardians",
-                    "Gear & the Armory", "Items", "Co-op" },
+                    "Gear & the Armory", "Items", "Transmog", "Co-op" },
             new[] { "THEORYCRAFTING", TalentBuilder, GearPlanner, "Build Guides" },
         };
         int guideGroup;                                       // the group whose tabs are shown

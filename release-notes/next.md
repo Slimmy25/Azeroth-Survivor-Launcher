@@ -33,3 +33,13 @@
   compares with your other runs of that class, and who killed you).
 - About Launcher and CREDITS.md thank the people who peer reviewed this work: Keijin, Kraatos, Maidenhead and the
   Discord's Mod team.
+
+### Major Update, part 4
+- Guide > Gameplay: a new Transmog topic with every look that adds nothing: the 14 Appearances (head and back, each
+  with the achievement that brings it), the Tabards (earned and bought, with their price) and the Weapon Glows, which
+  move there from Gear & the Armory. They come from a small database of looks (assets/transmog.txt).
+- Item icons: AZS Stats now keeps the icon of every piece any of your heroes wears, for good. The Gear Planner shows
+  them, and in game the AZS Handbook shows the game's own icon on its gear and planner lines, in place of the slot's
+  letters, once a hero has worn the piece.
+- AZS Minor Mods: the plain action bar is no wider than its six squares and the two page arrows, so it leaves no empty
+  space. New: cooldown numbers on the spell squares, the seconds until each spell is ready again (on by default).
