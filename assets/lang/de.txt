@@ -1931,3 +1931,5 @@ No profile doesn't do what Profile 1 and Profile 2 do: it keeps no copy of its o
 = Kein Profil tut nicht, was Profil 1 und 2 tun: Es hat keine eigene Kopie. Es schaltet nur Addons an und aus, und die Spieleinstellungen bleiben so, wie das Spiel und deine Addons sie hinterlassen, für alles gemeinsam. Wenn die Spieleinstellungen nicht verändert werden sollen, nimm diese Einstellung.
 No profile in use: the game's preferences are shared again.
 = Kein Profil aktiv: Die Spieleinstellungen sind wieder gemeinsam.
+Love the game? Support the Dev by buying him a coffee
+= Du liebst das Spiel? Unterstütze den Entwickler mit einem Kaffee

@@ -27,6 +27,10 @@
 
 ### Community
 - Big Streamers is ticked whenever the launcher starts, until you pick Content Creators; that choice is remembered.
+- One of the two boxes is always ticked, never neither: unticking the ticked one does nothing, ticking the other
+  switches to it.
+- A small heart left of the Discord symbol opens the game developer's Buy Me a Coffee page ("Love the game? Support
+  the Dev by buying him a coffee").
 
 ### Gear Planner (layout)
 - The explanation under the stat boxes is now a button, "How are gear stats calculated?", in the top right corner of

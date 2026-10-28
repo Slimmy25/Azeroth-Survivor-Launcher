@@ -1931,3 +1931,5 @@ No profile doesn't do what Profile 1 and Profile 2 do: it keeps no copy of its o
 = Sin perfil no hace lo que hacen los perfiles 1 y 2: no guarda copia propia. Solo activa y desactiva addons, y las preferencias del juego quedan como las dejan el juego y tus addons, compartidas por todo. Si no quieres que se cambien las preferencias del juego, usa esta opción.
 No profile in use: the game's preferences are shared again.
 = Sin perfil: las preferencias del juego vuelven a ser compartidas.
+Love the game? Support the Dev by buying him a coffee
+= ¿Te encanta el juego? Apoya al desarrollador invitándole a un café

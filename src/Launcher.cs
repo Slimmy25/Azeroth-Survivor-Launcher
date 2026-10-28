@@ -42,6 +42,7 @@ namespace AzerothLauncher
         public const string ClientMd5 = "7748bfdffaccd2f46d868cf69ad3e72c";                                       //   (760497456 bytes)
         public const string ClientDriveMd5 = "81887cd5d56dcca3b7dd086b0b498cf6";                                  // the Google Drive archive
         public const string DiscordUrl = "https://discord.gg/azerothsurvivors";
+        public const string SupportUrl = "https://buymeacoffee.com/aethusx";      // the game's developer's own page
 
         const int W = 1100, H = 690;                         // retro launcher window: sections open on the left, News on the right
 
@@ -132,6 +133,11 @@ namespace AzerothLauncher
             nav["Changelog"].Skin = Retro.Button;
             discordIcon.Click += delegate { Util.OpenInShell(DiscordUrl); };
             Controls.Add(discordIcon);
+            // a subtle heart left of the Discord symbol: support the game's developer (Aethus)
+            var heart = new HeartIcon(Lang.T("Love the game? Support the Dev by buying him a coffee"));
+            heart.Bounds = new Rectangle(679, 205, 16, 16);
+            heart.Click += delegate { Util.OpenInShell(SupportUrl); };
+            Controls.Add(heart);
             LayoutNav();
 
             BuildSide();

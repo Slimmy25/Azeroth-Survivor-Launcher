@@ -194,6 +194,9 @@ namespace AzerothLauncher
                 cb.Size = VStack.Measure(cb);
                 cb.CheckedChanged += delegate
                 {
+                    // always one box ticked, never neither (Slimjim, 2026-10-28): unticking the ticked one ticks it again
+                    if (!((CheckBox)cb).Checked && communityFilter == which) { ((CheckBox)cb).Checked = true; return; }
+                    if (((CheckBox)cb).Checked && communityFilter == which) return;   // re-ticked above: nothing changed
                     communityFilter = ((CheckBox)cb).Checked ? which : (communityFilter == which ? 0 : communityFilter);
                     Cfg.Set("community_filter", communityFilter);
                     Cfg.Save();

@@ -1932,3 +1932,5 @@ No profile doesn't do what Profile 1 and Profile 2 do: it keeps no copy of its o
 = 「無設定檔」不會做設定檔 1 和 2 所做的事：它沒有自己的副本。它只開關插件，遊戲設定保持遊戲和插件留下的樣子，所有設定共用。如果你不想修改遊戲設定，請使用此選項。
 No profile in use: the game's preferences are shared again.
 = 無設定檔：遊戲設定重新共用。
+Love the game? Support the Dev by buying him a coffee
+= 喜歡這款遊戲嗎？請開發者喝杯咖啡來支持他

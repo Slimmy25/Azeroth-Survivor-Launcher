@@ -1932,3 +1932,5 @@ No profile doesn't do what Profile 1 and Profile 2 do: it keeps no copy of its o
 = Không hồ sơ không làm điều Hồ sơ 1 và 2 làm: nó không giữ bản sao riêng. Nó chỉ bật tắt addon, còn tùy chỉnh game giữ nguyên như game và addon của bạn để lại, dùng chung cho mọi thứ. Nếu bạn không muốn tùy chỉnh game bị thay đổi, hãy dùng cài đặt này.
 No profile in use: the game's preferences are shared again.
 = Không hồ sơ: tùy chỉnh game lại dùng chung.
+Love the game? Support the Dev by buying him a coffee
+= Thích game này? Ủng hộ nhà phát triển bằng một ly cà phê

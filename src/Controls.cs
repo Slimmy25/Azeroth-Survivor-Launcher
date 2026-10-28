@@ -1495,6 +1495,39 @@ namespace AzerothLauncher
         }
     }
 
+    // A small, quiet heart (left of the Discord symbol on the News line): a link to support the game's developer.
+    // Drawn, not an image: dim red, brighter under the pointer.
+    public class HeartIcon : Control
+    {
+        bool hover;
+
+        public HeartIcon(string tip)
+        {
+            SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer |
+                     ControlStyles.SupportsTransparentBackColor, true);
+            BackColor = Color.Transparent;
+            Cursor = Cursors.Hand;
+            WowButton.Tips.SetToolTip(this, tip);
+        }
+
+        protected override void OnMouseEnter(EventArgs e) { hover = true; Invalidate(); base.OnMouseEnter(e); }
+        protected override void OnMouseLeave(EventArgs e) { hover = false; Invalidate(); base.OnMouseLeave(e); }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            var g = e.Graphics;
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            float s = Math.Min(Width, Height) - 2, x = (Width - s) / 2f, y = (Height - s) / 2f + 1;
+            using (var p = new System.Drawing.Drawing2D.GraphicsPath())
+            {
+                p.AddBezier(x + s / 2, y + s * 0.95f, x - s * 0.15f, y + s * 0.45f, x + s * 0.12f, y - s * 0.12f, x + s / 2, y + s * 0.25f);
+                p.AddBezier(x + s / 2, y + s * 0.25f, x + s * 0.88f, y - s * 0.12f, x + s * 1.15f, y + s * 0.45f, x + s / 2, y + s * 0.95f);
+                p.CloseFigure();
+                using (var b = new SolidBrush(hover ? Color.FromArgb(230, 92, 92) : Color.FromArgb(150, 170, 70, 70))) g.FillPath(b, p);
+            }
+        }
+    }
+
     // Two addons that can't be on together (Addons > My Addons): a red bracket from one's row to the other's, with
     // CONFLICT written down it.
     public class ConflictLink : Control

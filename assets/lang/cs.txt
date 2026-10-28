@@ -1932,3 +1932,5 @@ No profile doesn't do what Profile 1 and Profile 2 do: it keeps no copy of its o
 = Bez profilu nedělá to, co profily 1 a 2: nemá vlastní kopii. Jen zapíná a vypíná doplňky a předvolby hry zůstávají tak, jak je hra a tvé doplňky nechají, společné pro všechno. Pokud nechceš, aby se předvolby hry měnily, použij toto nastavení.
 No profile in use: the game's preferences are shared again.
 = Bez profilu: předvolby hry jsou zase společné.
+Love the game? Support the Dev by buying him a coffee
+= Líbí se ti hra? Podpoř vývojáře a kup mu kávu

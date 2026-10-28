@@ -1932,3 +1932,5 @@ No profile doesn't do what Profile 1 and Profile 2 do: it keeps no copy of its o
 = «Без профиля» не делает того, что профили 1 и 2: у него нет своей копии. Он только включает и выключает аддоны, а настройки игры остаются такими, какими их оставили игра и ваши аддоны, общими для всего. Если не хотите, чтобы настройки игры менялись, выберите этот вариант.
 No profile in use: the game's preferences are shared again.
 = Без профиля: настройки игры снова общие.
+Love the game? Support the Dev by buying him a coffee
+= Нравится игра? Поддержите разработчика — угостите его кофе

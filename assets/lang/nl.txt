@@ -1931,3 +1931,5 @@ No profile doesn't do what Profile 1 and Profile 2 do: it keeps no copy of its o
 = Geen profiel doet niet wat profiel 1 en 2 doen: het heeft geen eigen kopie. Het zet alleen addons aan en uit, en de spelvoorkeuren blijven zoals het spel en je addons ze achterlaten, gedeeld door alles. Wil je de spelvoorkeuren niet laten wijzigen, gebruik dan deze instelling.
 No profile in use: the game's preferences are shared again.
 = Geen profiel: de spelvoorkeuren zijn weer gedeeld.
+Love the game? Support the Dev by buying him a coffee
+= Vind je het spel geweldig? Steun de ontwikkelaar met een kopje koffie

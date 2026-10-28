@@ -1931,3 +1931,5 @@ No profile doesn't do what Profile 1 and Profile 2 do: it keeps no copy of its o
 = Tanpa profil tidak melakukan apa yang dilakukan Profil 1 dan 2: tidak menyimpan salinan sendiri. Hanya menyalakan dan mematikan addon, dan pengaturan game tetap seperti yang ditinggalkan game dan addon-mu, dipakai bersama. Jika kamu tidak ingin pengaturan game diubah, pakai pengaturan ini.
 No profile in use: the game's preferences are shared again.
 = Tanpa profil: pengaturan game kembali dipakai bersama.
+Love the game? Support the Dev by buying him a coffee
+= Suka game-nya? Dukung developernya dengan membelikannya kopi

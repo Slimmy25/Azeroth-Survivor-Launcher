@@ -1932,3 +1932,5 @@ No profile doesn't do what Profile 1 and Profile 2 do: it keeps no copy of its o
 = Bez profilu nie robi tego, co profile 1 i 2: nie ma własnej kopii. Tylko włącza i wyłącza dodatki, a ustawienia gry zostają takie, jak zostawią je gra i twoje dodatki, wspólne dla wszystkiego. Jeśli nie chcesz zmieniać ustawień gry, użyj tej opcji.
 No profile in use: the game's preferences are shared again.
 = Bez profilu: ustawienia gry znów są wspólne.
+Love the game? Support the Dev by buying him a coffee
+= Kochasz tę grę? Wesprzyj twórcę, stawiając mu kawę

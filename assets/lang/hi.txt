@@ -1932,3 +1932,5 @@ No profile doesn't do what Profile 1 and Profile 2 do: it keeps no copy of its o
 = कोई प्रोफ़ाइल नहीं वह नहीं करता जो प्रोफ़ाइल 1 और 2 करती हैं: इसकी अपनी कोई कॉपी नहीं होती। यह सिर्फ़ ऐडऑन चालू और बंद करता है, और खेल की पसंद वैसी ही रहती है जैसी खेल और आपके ऐडऑन छोड़ते हैं, सबके लिए एक जैसी। अगर आप नहीं चाहते कि खेल की पसंद बदले, तो यही सेटिंग इस्तेमाल करें।
 No profile in use: the game's preferences are shared again.
 = कोई प्रोफ़ाइल नहीं: खेल की पसंद फिर से साझा है।
+Love the game? Support the Dev by buying him a coffee
+= खेल पसंद है? डेवलपर को एक कॉफ़ी पिलाकर उनका साथ दें

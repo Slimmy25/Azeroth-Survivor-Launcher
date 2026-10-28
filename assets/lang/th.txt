@@ -1932,3 +1932,5 @@ No profile doesn't do what Profile 1 and Profile 2 do: it keeps no copy of its o
 = ไม่ใช้โปรไฟล์ไม่ได้ทำแบบโปรไฟล์ 1 และ 2: ไม่มีสำเนาของตัวเอง แค่เปิดปิดแอดออน และการตั้งค่าเกมจะคงอยู่ตามที่เกมและแอดออนทิ้งไว้ ใช้ร่วมกันทั้งหมด หากไม่ต้องการให้การตั้งค่าเกมเปลี่ยน ให้ใช้ตัวเลือกนี้
 No profile in use: the game's preferences are shared again.
 = ไม่ใช้โปรไฟล์: การตั้งค่าเกมกลับมาใช้ร่วมกันแล้ว
+Love the game? Support the Dev by buying him a coffee
+= ชอบเกมนี้ไหม? สนับสนุนผู้พัฒนาด้วยการเลี้ยงกาแฟเขาสักแก้ว

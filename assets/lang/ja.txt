@@ -1932,3 +1932,5 @@ No profile doesn't do what Profile 1 and Profile 2 do: it keeps no copy of its o
 = 「プロファイルなし」はプロファイル1と2のような働きはしません。独自のコピーを持たず、アドオンのオン・オフだけを切り替え、ゲーム設定はゲームとアドオンが残したまま共通で使われます。ゲーム設定を変更したくない場合は、これを使ってください。
 No profile in use: the game's preferences are shared again.
 = プロファイルなし：ゲーム設定は再び共通になりました。
+Love the game? Support the Dev by buying him a coffee
+= ゲームが好き？コーヒーをおごって開発者を応援しよう

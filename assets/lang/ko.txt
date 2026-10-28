@@ -1932,3 +1932,5 @@ No profile doesn't do what Profile 1 and Profile 2 do: it keeps no copy of its o
 = 프로필 없음은 프로필 1, 2와 같은 일을 하지 않습니다. 자체 사본이 없고 애드온을 켜고 끄기만 하며, 게임 설정은 게임과 애드온이 남긴 그대로 모두가 함께 씁니다. 게임 설정을 바꾸고 싶지 않다면 이 설정을 쓰세요.
 No profile in use: the game's preferences are shared again.
 = 프로필 없음: 게임 설정을 다시 함께 씁니다.
+Love the game? Support the Dev by buying him a coffee
+= 게임이 마음에 드나요? 커피 한 잔으로 개발자를 응원하세요

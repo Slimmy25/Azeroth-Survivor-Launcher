@@ -1932,3 +1932,5 @@ No profile doesn't do what Profile 1 and Profile 2 do: it keeps no copy of its o
 = Profil yok, Profil 1 ve 2'nin yaptığını yapmaz: kendi kopyası yoktur. Yalnızca eklentileri açıp kapatır; oyun tercihleri oyunun ve eklentilerinin bıraktığı gibi kalır, her şey için ortaktır. Oyun tercihlerinin değişmesini istemiyorsan bu ayarı kullan.
 No profile in use: the game's preferences are shared again.
 = Profil yok: oyun tercihleri yeniden ortak.
+Love the game? Support the Dev by buying him a coffee
+= Oyunu sevdin mi? Geliştiriciye bir kahve ısmarlayarak destek ol

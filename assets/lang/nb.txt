@@ -1931,3 +1931,5 @@ No profile doesn't do what Profile 1 and Profile 2 do: it keeps no copy of its o
 = Ingen profil gjør ikke det profil 1 og 2 gjør: den har ingen egen kopi. Den slår bare tillegg av og på, og spillets innstillinger blir slik spillet og tilleggene dine lar dem være, felles for alt. Hvis du ikke vil at spillets innstillinger skal endres, bruk denne.
 No profile in use: the game's preferences are shared again.
 = Ingen profil i bruk: spillets innstillinger er felles igjen.
+Love the game? Support the Dev by buying him a coffee
+= Elsker du spillet? Støtt utvikleren ved å kjøpe ham en kopp kaffe

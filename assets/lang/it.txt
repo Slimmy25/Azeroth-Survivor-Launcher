@@ -1931,3 +1931,5 @@ No profile doesn't do what Profile 1 and Profile 2 do: it keeps no copy of its o
 = Nessun profilo non fa ciò che fanno i profili 1 e 2: non tiene una copia propria. Attiva e disattiva solo gli addon, e le preferenze del gioco restano come le lasciano il gioco e i tuoi addon, condivise da tutto. Se non vuoi che le preferenze del gioco cambino, usa questa impostazione.
 No profile in use: the game's preferences are shared again.
 = Nessun profilo: le preferenze del gioco sono di nuovo condivise.
+Love the game? Support the Dev by buying him a coffee
+= Ti piace il gioco? Sostieni lo sviluppatore offrendogli un caffè

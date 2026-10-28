@@ -1932,3 +1932,5 @@ No profile doesn't do what Profile 1 and Profile 2 do: it keeps no copy of its o
 = A Nincs profil nem azt csinálja, amit az 1. és 2. profil: nincs saját másolata. Csak be- és kikapcsolja a kiegészítőket, a játék beállításai pedig úgy maradnak, ahogy a játék és a kiegészítőid hagyják, mindenhez közösen. Ha nem szeretnéd, hogy a játék beállításai változzanak, ezt használd.
 No profile in use: the game's preferences are shared again.
 = Nincs profil: a játék beállításai ismét közösek.
+Love the game? Support the Dev by buying him a coffee
+= Szereted a játékot? Támogasd a fejlesztőt egy kávéval
