@@ -518,7 +518,7 @@ namespace AzerothLauncher
             var tools = new Bordered(Theme.GoldDim, 1);
             tools.BackColor = bg;
             tools.Bounds = new Rectangle(x + w + 10, y, boxW, sp.ClientSize.Height - y - 8);
-            var toolTitle = UI.Text("SAVED BUILDS", 10, FontStyle.Bold, Theme.Gold, bg, boxW - 20);
+            var toolTitle = UI.Text(Lang.T("SAVED BUILDS"), 10, FontStyle.Bold, Theme.Gold, bg, boxW - 20);
             toolTitle.Location = new Point(10, 12);
             tools.Controls.Add(toolTitle);
             var buildName = new TextBox();
@@ -575,8 +575,16 @@ namespace AzerothLauncher
                 TalentBuild loaded = TalentBuild.Parse(Convert.ToString(code), cls);
                 build.Reset();
                 foreach (var tr in Talents.Of(cls))
-                    foreach (var t in tr.Talents)
+                {
+                    var ordered = new List<Talent>(tr.Talents);
+                    ordered.Sort(delegate(Talent a, Talent b)
+                    {
+                        int row = a.Row.CompareTo(b.Row);
+                        return row != 0 ? row : a.Col.CompareTo(b.Col);
+                    });
+                    foreach (var t in ordered)
                         for (int i = 0; i < loaded.Get(t); i++) build.Add(t);
+                }
             }, boxW - 24, 28, 9);
             loadBuild.Location = new Point(10, 144);
             tools.Controls.Add(loadBuild);
@@ -619,8 +627,16 @@ namespace AzerothLauncher
                 TalentBuild imported = TalentBuild.Parse(code, cls);
                 build.Reset();
                 foreach (var tr in Talents.Of(cls))
-                    foreach (var t in tr.Talents)
+                {
+                    var ordered = new List<Talent>(tr.Talents);
+                    ordered.Sort(delegate(Talent a, Talent b)
+                    {
+                        int row = a.Row.CompareTo(b.Row);
+                        return row != 0 ? row : a.Col.CompareTo(b.Col);
+                    });
+                    foreach (var t in ordered)
                         for (int i = 0; i < imported.Get(t); i++) build.Add(t);
+                }
             }, boxW - 24, 28, 9);
             importBuild.Location = new Point(10, 212);
             tools.Controls.Add(importBuild);
