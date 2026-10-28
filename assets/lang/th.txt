@@ -1880,3 +1880,13 @@ Loading the 3D model…
 = กำลังโหลดโมเดล 3 มิติ…
 Image soon
 = รูปภาพเร็วๆ นี้
+CHANGE FOLDER
+= เปลี่ยนโฟลเดอร์
+OPEN LOCATION
+= เปิดตำแหน่ง
+Change Folder
+= เปลี่ยนโฟลเดอร์
+Importing a save is in Change Folder ▾ in the path above.
+= การนำเข้าเซฟอยู่ใน เปลี่ยนโฟลเดอร์ ▾ ในเส้นทางด้านบน
+That folder does not exist.
+= ไม่มีโฟลเดอร์นั้น

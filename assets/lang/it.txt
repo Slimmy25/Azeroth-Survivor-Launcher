@@ -1879,3 +1879,13 @@ Loading the 3D model…
 = Caricamento del modello 3D…
 Image soon
 = Immagine a breve
+CHANGE FOLDER
+= CAMBIA CARTELLA
+OPEN LOCATION
+= APRI POSIZIONE
+Change Folder
+= Cambia cartella
+Importing a save is in Change Folder ▾ in the path above.
+= Importare un salvataggio è in Cambia cartella ▾, nel percorso qui sopra.
+That folder does not exist.
+= Quella cartella non esiste.

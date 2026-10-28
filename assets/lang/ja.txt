@@ -1880,3 +1880,13 @@ Loading the 3D model…
 = 3Dモデルを読み込み中…
 Image soon
 = 画像は近日
+CHANGE FOLDER
+= フォルダーを変更
+OPEN LOCATION
+= 場所を開く
+Change Folder
+= フォルダーを変更
+Importing a save is in Change Folder ▾ in the path above.
+= セーブのインポートは上のパスの「フォルダーを変更 ▾」にあります。
+That folder does not exist.
+= そのフォルダーは存在しません。

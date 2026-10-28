@@ -1879,3 +1879,13 @@ Loading the 3D model…
 = Ladataan 3D-mallia…
 Image soon
 = Kuva tulossa
+CHANGE FOLDER
+= VAIHDA KANSIO
+OPEN LOCATION
+= AVAA SIJAINTI
+Change Folder
+= Vaihda kansio
+Importing a save is in Change Folder ▾ in the path above.
+= Tallennuksen tuonti löytyy kohdasta Vaihda kansio ▾ yllä olevasta polusta.
+That folder does not exist.
+= Kansiota ei ole olemassa.

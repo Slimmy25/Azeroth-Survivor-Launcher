@@ -1880,3 +1880,13 @@ Loading the 3D model…
 = 3B model yükleniyor…
 Image soon
 = Görsel yakında
+CHANGE FOLDER
+= KLASÖRÜ DEĞİŞTİR
+OPEN LOCATION
+= KONUMU AÇ
+Change Folder
+= Klasörü değiştir
+Importing a save is in Change Folder ▾ in the path above.
+= Kayıt içe aktarma, yukarıdaki yolda Klasörü değiştir ▾ altında.
+That folder does not exist.
+= Bu klasör yok.

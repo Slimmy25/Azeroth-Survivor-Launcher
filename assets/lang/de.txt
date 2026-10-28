@@ -1879,3 +1879,13 @@ Loading the 3D model…
 = 3D-Modell wird geladen…
 Image soon
 = Bild folgt
+CHANGE FOLDER
+= ORDNER ÄNDERN
+OPEN LOCATION
+= ORT ÖFFNEN
+Change Folder
+= Ordner ändern
+Importing a save is in Change Folder ▾ in the path above.
+= Einen Spielstand importieren findest du unter Ordner ändern ▾ im Pfad oben.
+That folder does not exist.
+= Diesen Ordner gibt es nicht.

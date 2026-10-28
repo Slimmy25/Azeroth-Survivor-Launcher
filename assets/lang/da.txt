@@ -1879,3 +1879,13 @@ Loading the 3D model…
 = Indlæser 3D-modellen…
 Image soon
 = Billede snart
+CHANGE FOLDER
+= SKIFT MAPPE
+OPEN LOCATION
+= ÅBN PLACERING
+Change Folder
+= Skift mappe
+Importing a save is in Change Folder ▾ in the path above.
+= Import af et gem findes under Skift mappe ▾ i stien ovenfor.
+That folder does not exist.
+= Den mappe findes ikke.

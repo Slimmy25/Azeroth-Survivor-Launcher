@@ -426,13 +426,13 @@ namespace AzerothLauncher
             strip.Width = 32;
             strip.BackColor = dark;
             body.Controls.Add(strip);
-            homeBtn = new IconButton(Icons.Home, delegate { current = null; ShowSection("Community"); });   // home: Community
+            homeBtn = new IconButton(Icons.Home, delegate { if (current == "Community" && side.Visible) OpenMain("Community"); else { current = null; ShowSection("Community"); } });   // home: Community
             strip.Controls.Add(homeBtn);
             var icons = new Action<Graphics, float, float, Color>[] { Icons.Book, Icons.Cloud, Icons.AddonsIcon, Icons.Scroll, Icons.Trophy, Icons.Gear, Icons.Info };
             for (int i = 0; i < SectionNames.Length; i++)
             {
                 string n = SectionNames[i];
-                var b = new IconButton(icons[i], delegate { if (n != current) ShowSection(n); });
+                var b = new IconButton(icons[i], delegate { OpenMain(n); });   // always the section's main page
                 stripBtns[n] = b;
                 strip.Controls.Add(b);
             }
@@ -653,11 +653,38 @@ namespace AzerothLauncher
             sideHead.SetCrumbs(trail);
         }
 
+        // a major button (the big section buttons, the icon strip): always the section's main page, even when that
+        // section is already open on one of its other pages (Options on Cloud Save goes back to Options › Folders)
+        public void OpenMain(string name)
+        {
+            if (setupOpen) { ShowSection(name); return; }
+            if (name == "Cloud Save")                         // its own page: Options › Cloud Save
+            {
+                if (current == "Options" && side.Visible) { optionsTab = 1; optionsLang = false; BuildPanel("Options"); }
+                else ShowSection(name);
+                return;
+            }
+            if (name == "Guide") { ShowSection("Guide"); return; }   // the Guide's button already goes to its main page
+            bool open = name == current && side.Visible;
+            if (name == "Options") { optionsTab = 0; optionsLang = false; }
+            if (name == "Stats") { statsTab = 0; statsClass = null; }
+            if (name == "Addons") { addonMode = "installed"; addonCategory = 0; }
+            if (name == "About Launcher") aboutLog = false;
+            if (name == "Community") communityMore = false;
+            if (!open) { ShowSection(name); return; }
+            if (name == "Community") LeaveCommunityVideo();
+            if (name == "Changelog") clView = Data.Changelog.Count > 1 ? 1 : ClNewest;
+            BuildPanel(name);
+        }
+
         // a section's first page, from the trail in the title bar
         void SectionRoot(string name)
         {
             if (name == "Guide") { GuideMainPage(); return; }
-            if (name == "Addons") addonMode = "installed";
+            if (name == "Addons") { addonMode = "installed"; addonCategory = 0; }
+            if (name == "Options") { optionsTab = 0; optionsLang = false; }
+            if (name == "Stats") { statsTab = 0; statsClass = null; }
+            if (name == "About Launcher") aboutLog = false;
             if (name == "Changelog") clView = ClNewest;
             if (name == "Community") { LeaveCommunityVideo(); communityMore = false; }
             BuildPanel(name);
@@ -1790,7 +1817,7 @@ namespace AzerothLauncher
             }
             else if (optionsTab == 0)                        // Options › Folders › Change ▾ : each folder, and importing a save
             {
-                SetCrumbs("Options", home, "Folders", (Action)delegate { BuildPanel("Options"); }, "Change", null);
+                SetCrumbs("Options", home, "Folders", (Action)delegate { BuildPanel("Options"); }, "Change Folder", null);
                 SetCrumbMenu(1, OptionTabMenu());
                 SetCrumbMenu(2, FolderMenu());
             }
@@ -1857,20 +1884,34 @@ namespace AzerothLauncher
             rows.Add(new object[] { "Save game folder", ss.SaveDir, new Action(ChooseSaveDir) });
             rows.Add(new object[] { "Game config folder (AddOns, addon settings)", ss.ConfigDir, new Action(ChooseConfigDir) });
             int y = 6;
-            // no CHANGE buttons: click a folder (or use Options › Folders › Change ▾ above) to change it
-            var hint = PutText("Click a folder to change it, or use Change ▾ in the path above. Importing a save is there too.",
+            // each folder: OPEN LOCATION (in Explorer) and CHANGE FOLDER beside it; importing a save is in Change Folder ▾ above
+            var hint = PutText("Importing a save is in Change Folder ▾ in the path above.",
                                9, FontStyle.Italic, Theme.GoldDim, 20, y, PW - 40);
             y = BottomOf(hint) + 8;
+            int bw = (int)(140 * Theme.Zoom), gap = (int)(8 * Theme.Zoom), room = PW - 40 - 2 * bw - gap - 10;
             foreach (var r in rows)
             {
-                var lab = PutText((string)r[0], 11, FontStyle.Bold, Theme.Gold, 20, y, PW - 40);
+                var lab = PutText((string)r[0], 11, FontStyle.Bold, Theme.Gold, 20, y, room);
                 string v = (string)r[1];
-                var val = PutText(string.IsNullOrEmpty(v) ? Lang.T("(not set)") : v, 9, FontStyle.Regular, Theme.LinkBlue, 20, BottomOf(lab), PW - 40, false);
+                var val = PutText(string.IsNullOrEmpty(v) ? Lang.T("(not set)") : v, 9, FontStyle.Regular, Theme.LinkBlue, 20, BottomOf(lab), room, false);
                 Action act = (Action)r[2];
-                foreach (Control c in new Control[] { lab, val }) { c.Cursor = Cursors.Hand; c.Click += delegate { WowButton.Fire(act); }; }
-                y = BottomOf(val) + 8;
+                int by = y + Math.Max(0, (BottomOf(val) - y - (int)(28 * Theme.Zoom)) / 2);
+                Put(new WowButton("CHANGE FOLDER", act, 140, 28, 8.5f), PW - 20 - bw, by);
+                var open = new WowButton("OPEN LOCATION", delegate { OpenLocation(v); }, 140, 28, 8.5f);
+                open.GrayedTip = "That folder does not exist.";
+                open.Grayed = string.IsNullOrEmpty(v) || !Directory.Exists(v);
+                Put(open, PW - 20 - 2 * bw - gap, by);
+                y = Math.Max(BottomOf(val), by + (int)(28 * Theme.Zoom)) + 10;
             }
             return y;
+        }
+
+        // a folder in Explorer
+        void OpenLocation(string dir)
+        {
+            if (string.IsNullOrEmpty(dir) || !Directory.Exists(dir)) { SetStatus("That folder does not exist."); return; }
+            try { System.Diagnostics.Process.Start("explorer.exe", "\"" + dir + "\""); }
+            catch (Exception) { SetStatus("That folder does not exist."); }
         }
 
         List<KeyValuePair<string, Action>> FolderMenu()
@@ -1896,10 +1937,16 @@ namespace AzerothLauncher
                 return BottomOf(off);
             }
             y += 6;
-            var lab = PutText("Sync folder (inside your cloud drive)", 11, FontStyle.Bold, Theme.Gold, 20, y, PW - 160);
+            int cbw = (int)(140 * Theme.Zoom), cgap = (int)(8 * Theme.Zoom);
+            var lab = PutText("Sync folder (inside your cloud drive)", 11, FontStyle.Bold, Theme.Gold, 20, y, PW - 50 - 2 * cbw - cgap);
             string v = Cfg.Str("cloud_dir");
-            var val = PutText(string.IsNullOrEmpty(v) ? Lang.T("(not set)") : v, 9, FontStyle.Regular, Theme.LinkBlue, 20, BottomOf(lab), PW - 160, false);
-            Put(new WowButton("CHANGE", ChooseCloudDir, 100, 28, 9), PW - 20 - (int)(100 * Theme.Zoom), y + Math.Max(0, (BottomOf(val) - y - 28) / 2));
+            var val = PutText(string.IsNullOrEmpty(v) ? Lang.T("(not set)") : v, 9, FontStyle.Regular, Theme.LinkBlue, 20, BottomOf(lab), PW - 50 - 2 * cbw - cgap, false);
+            int cby = y + Math.Max(0, (BottomOf(val) - y - 28) / 2);
+            Put(new WowButton("CHANGE FOLDER", ChooseCloudDir, 140, 28, 8.5f), PW - 20 - cbw, cby);
+            var openCloud = new WowButton("OPEN LOCATION", delegate { OpenLocation(v); }, 140, 28, 8.5f);
+            openCloud.GrayedTip = "That folder does not exist.";
+            openCloud.Grayed = string.IsNullOrEmpty(v) || !Directory.Exists(v);
+            Put(openCloud, PW - 20 - 2 * cbw - cgap, cby);
             y = Math.Max(BottomOf(val), y + 30) + 6;
             if (!GateOpen())                                  // syncing needs the game installed
             {

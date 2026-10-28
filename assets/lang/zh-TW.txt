@@ -1880,3 +1880,13 @@ Loading the 3D model…
 = 正在載入 3D 模型…
 Image soon
 = 圖片即將推出
+CHANGE FOLDER
+= 變更資料夾
+OPEN LOCATION
+= 開啟位置
+Change Folder
+= 變更資料夾
+Importing a save is in Change Folder ▾ in the path above.
+= 匯入存檔在上方路徑的「變更資料夾 ▾」中。
+That folder does not exist.
+= 該資料夾不存在。
