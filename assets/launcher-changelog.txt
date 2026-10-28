@@ -1,3 +1,17 @@
+# v2.4 (2026-10-28)
+## In short
+Talent builds now load as soon as you select their saved name, and share codes have a validated, versioned format for reliable importing between players. The test executable is removed; this is the sole launcher release.
+
+## Talent Tree Builder
+- Selecting a saved build name immediately loads that build.
+- EXPORT creates a compact share code containing the format version, class and talent allocations.
+- IMPORT validates the whole code and explains class mismatches or invalid builds instead of silently producing an empty build.
+
+## Release
+- Removed the separate test executable from local builds, CI artifacts and published releases.
+
+---
+
 # v2.3 (2026-10-28)
 ## In short
 The Talent Tree Builder's saved-build menu now follows the Gear Planner's proportions, with centred fields and evenly spaced action buttons down to the bottom.
