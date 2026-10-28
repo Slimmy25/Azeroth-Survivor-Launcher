@@ -1677,29 +1677,31 @@ namespace AzerothLauncher
                 return;
             }
             int bottom = PH - 12;
-            // --- right column: REFRESH and FOLDER, toggle all, the counter, two profiles at the bottom ---
+            // Advanced settings are a replacement for the basic right-hand submenu, not an extra layer over it.
+            // Keeping both sets of controls visible made the profile stack run into DOWNLOAD MORE / REFRESH /
+            // TOGGLE ALL on shorter windows. The left addon list stays visible in either mode.
             int cx = PW - 20 - (int)(190 * Theme.Zoom);
+            bool advanced = Cfg.Bool("addons_advanced", false);
             if (askUninstallName != null || askUninstallFolder != null) AddonsUninstallAsk(cx, top);
             else if (rollbackOpen) AddonsRollbackPanel(cx, top);
             else {
-            var more = Put(new WowButton("DOWNLOAD MORE ›", delegate { SetAddonMode("download"); }, 190, 32, 10), cx, top);
-            int rtop = BottomOf(more) + 6;
-            var refresh = Put(new WowButton("REFRESH", delegate { BuildPanel("Addons"); }, 92, 28, 9), cx, rtop);
-            Put(new WowButton("FOLDER", delegate { Util.OpenInShell(dir); }, 92, 28, 9), cx + (int)(98 * Theme.Zoom), rtop);
-            var toggle = Put(new WowButton("TOGGLE ALL", ToggleAllAddons, 190, 34, 11), cx, BottomOf(refresh) + 6);
-            addonCount = UI.Text("", 10, FontStyle.Italic, Theme.GoldDim, Theme.Panel, 0);
-            addonCount.AutoSize = false;
-            addonCount.TextAlign = ContentAlignment.TopCenter;   // centred under TOGGLE ALL
-            addonCount.Bounds = new Rectangle(cx, BottomOf(toggle) + 2, toggle.Width, 20);
-            Put(addonCount, cx, BottomOf(toggle) + 2);
             var profiles = Cfg.Section("addon_profiles");
             int py = bottom;
             string active = ActiveAddonProfile();
-            // stacked upwards from the bottom of the column: Profile 2, Profile 1, then No profile (the default). Profiles 1
-            // and 2 each keep their own game preferences (AddonProfiles.cs); No profile keeps the game's shared ones
-            // Basic (the default) hides the profiles: only ADVANCED SETTINGS sits at the bottom. Advanced shows the three
-            // profile choices with BASIC SETTINGS under them to go back (Slimjim, 2026-10-28)
-            bool advanced = Cfg.Bool("addons_advanced", false);
+            if (!advanced)
+            {
+                var more = Put(new WowButton("DOWNLOAD MORE ›", delegate { SetAddonMode("download"); }, 190, 32, 10), cx, top);
+                int rtop = BottomOf(more) + 6;
+                var refresh = Put(new WowButton("REFRESH", delegate { BuildPanel("Addons"); }, 92, 28, 9), cx, rtop);
+                Put(new WowButton("FOLDER", delegate { Util.OpenInShell(dir); }, 92, 28, 9), cx + (int)(98 * Theme.Zoom), rtop);
+                var toggle = Put(new WowButton("TOGGLE ALL", ToggleAllAddons, 190, 34, 11), cx, BottomOf(refresh) + 6);
+                addonCount = UI.Text("", 10, FontStyle.Italic, Theme.GoldDim, Theme.Panel, 0);
+                addonCount.AutoSize = false;
+                addonCount.TextAlign = ContentAlignment.TopCenter;
+                addonCount.Bounds = new Rectangle(cx, BottomOf(toggle) + 2, toggle.Width, 20);
+                Put(addonCount, cx, BottomOf(toggle) + 2);
+            }
+            // The basic view has one bottom button; the advanced view replaces it with profile controls and rollback.
             py -= (int)(28 * Theme.Zoom) + 2;
             Put(new WowButton(advanced ? "BASIC SETTINGS" : "ADVANCED SETTINGS", delegate
             {
