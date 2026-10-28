@@ -1865,3 +1865,13 @@ with
 = {0} subiti
 click a run for its summary
 = clicca una partita per il riepilogo
+Lost
+= Perso
+Big Streamers
+= Grandi streamer
+Content Creators
+= Creatori di contenuti
+A big streamer's video. All credit goes to the people who made it.
+= Un video di un grande streamer. Tutto il merito va a chi l'ha fatto.
+A content creator's video. All credit goes to the people who made it.
+= Un video di un creatore di contenuti. Tutto il merito va a chi l'ha fatto.

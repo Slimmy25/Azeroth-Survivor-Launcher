@@ -21,7 +21,8 @@ namespace AzerothLauncher
         public const bool RequireLauncherInstall = true;
 
         // Where the game is downloaded from, and the download server's login (shared with every player, so it is fine
-        // in the open). The launcher downloads it itself (BeginClientDownload), into a "temp" folder beside the launcher.
+        // in the open). The launcher downloads it itself (BeginClientDownload), into its own temp folder beside the launcher
+        // ("Azeroth Survivors Launcher - Temp": a name no other folder has, so nothing of the player's is ever wiped).
         public const string ClientUrl = "https://budapestmix.hu:5000/download";
         public const string ClientUser = "AzerothSurvivors_uSZfhjS", ClientPassword = "AzerothSurvivors_uSZfhjS";
         // The developers' backup host: a page with a link to the newest archive and its SHA-256 (no login).
@@ -1286,10 +1287,13 @@ namespace AzerothLauncher
                     psi.UseShellExecute = false;
                     string gameDir = Path.GetDirectoryName(exe);
                     DateTime stamp = GameFilesStamp(gameDir);
+                    sessionUpdated = false;
+                    sessionCrashed = false;
                     using (Process p = Process.Start(psi))
                     {
                         launched = true;
                         p.WaitForExit();                     // returns on normal exit or crash
+                        try { sessionCrashed = p.ExitCode != 0; } catch (Exception) { }
                     }
                     // The game updates itself when it starts: it closes and opens again (possibly through a helper in its
                     // folder). So after it closes, the launcher waits a moment for it to come back: 3 s after a plain
@@ -1299,6 +1303,7 @@ namespace AzerothLauncher
                     {
                         while (GameProcessRunning(gameDir)) Thread.Sleep(2000);
                         bool patched = GameFilesStamp(gameDir) > stamp;
+                        if (patched) sessionUpdated = true;
                         if (patched) Ui(delegate { SetStatus("The game updated itself and is opening again..."); });
                         bool back = false;
                         for (int i = 0; i < (patched ? 90 : 6) && !back; i++)
@@ -1318,8 +1323,7 @@ namespace AzerothLauncher
                 }
                 if (launched)
                 {
-                    SyncLog("Game closed.", Level.Info);
-                    Ui(ShowWindowFront);                     // back up in front
+                    SyncLog("Game closed." + (sessionCrashed ? " (it did not close normally)" : ""), Level.Info);
                     if (eng == null) Ui(delegate { SetCloudNote("Game has closed."); });
                 }
                 if (launched && eng != null)
@@ -1433,13 +1437,18 @@ namespace AzerothLauncher
         // the game has closed, but its session is still finishing (the cloud upload)
         const string StillUploading = "The game has closed and your progress is still uploading to the cloud. Try again in a moment.";
 
+        volatile bool sessionUpdated, sessionCrashed;
+
         void SessionDone(List<string> problems)
         {
             GameRunningFlag = false;
             Invalidate();                                    // the play time the game just saved
             RefreshPlayLabel();
             SetTrayTitle("Idle");
-            ShowWindowFront();                               // the launcher stays up front after the session
+            // the launcher comes back up only when there is something to say: the game updated itself, it crashed, or
+            // something went wrong (an upload). Otherwise it stays where it is (in the taskbar or the tray) until the
+            // player opens it again
+            if (problems.Count > 0 || sessionUpdated || sessionCrashed) ShowWindowFront();
             if (problems.Count > 0) Warn("Launcher", string.Join("\n\n", problems));
         }
 
@@ -1493,7 +1502,7 @@ namespace AzerothLauncher
             RefreshPlayLabel();
             SetStatus("Downloading the game client...");
             SetDownloadBar(true, 0, 0);
-            string temp = Path.Combine(Util.LauncherDir, "temp");
+            string temp = Path.Combine(Util.LauncherDir, Util.DownloadTempName);
             string dest = Util.LauncherDir;
             installCancel = new ManualResetEvent(false);
             ManualResetEvent cancel = installCancel;

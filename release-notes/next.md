@@ -48,3 +48,15 @@
 - README: six new screenshots of the finished launcher, each showing something different (home and Community, STATS,
   the Talent Tree Builder, the Gear Planner, a class's gear page and the path at the top).
 - Gear Planner: its note under the totals is shorter, which leaves more room for the set bonuses.
+
+### Fixes and requests
+- The "?" beside the window's X now reads "Lost ?".
+- Community: two boxes beside its title, Big Streamers and Content Creators. Tick one and, five seconds later, the
+  featured video is picked from that group's shuffle. The choice is remembered.
+- The launcher no longer pops back up by itself after the game closes. It stays in the taskbar, and only comes back
+  when the game updated, crashed or something needs your attention.
+- The game download's temporary folder is now called "Azeroth Survivors Launcher - Temp", so it's clear whose it is.
+- AZS Stats, new in game: a bounty board. When a run starts, a WANTED poster shows for a few seconds with the creature
+  that killed you last game, how many times it has killed you and whether it's your Nemesis. Take your Nemesis down
+  and a "Nemesis slain!" celebration shows. It uses the game's own parchment, frames, icons and sounds, and the
+  creature's face once the launcher has put it in AZS Stats. Click it to put it away; /azstats bounty turns it off and on.

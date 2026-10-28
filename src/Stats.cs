@@ -1,4 +1,4 @@
-// Long-term stats: the AZS Stats addon (built into the launcher, addons\AZSStats; also in Download More) records
+﻿// Long-term stats: the AZS Stats addon (built into the launcher, addons\AZSStats; also in Download More) records
 // every run, the play time, deaths and co-op runs in its saved-variable file, AZSStats.lua in the game's addon settings folder
 // (benilla-config\saved). This file
 // reads that Lua table and installs the addon; the STATS section (Sections.cs) shows what it found, together with
@@ -402,7 +402,7 @@ namespace AzerothLauncher
         public const string AddonFolder = "AZSStats", DbName = "AZSStatsDB";
         public const string FileName = AddonFolder + ".lua";
         public const string FacesFile = AddonFolder + "Faces.lua";
-        static readonly string[] AddonFiles = { AddonFolder + ".toc", AddonFolder + ".lua", AddonFolder + "Live.lua", AddonFolder + "Icons.lua", AddonFolder + "UI.lua" };
+        static readonly string[] AddonFiles = { AddonFolder + ".toc", AddonFolder + ".lua", AddonFolder + "Live.lua", AddonFolder + "Icons.lua", AddonFolder + "UI.lua", AddonFolder + "Bounty.lua" };
         // its earlier names ("AS Time Tracker", "Azeroth Stats"): replaced, and their records carried over, when
         // AZS Stats is installed; until then their files are read
         static readonly string[][] OldNames = { new[] { "ASTimeTracker", "ASTimeTrackerDB" }, new[] { "AzerothStats", "AzerothStatsDB" } };

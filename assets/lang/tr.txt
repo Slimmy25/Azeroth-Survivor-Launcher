@@ -1866,3 +1866,13 @@ with
 = {0} alındı
 click a run for its summary
 = özet için bir koşuya tıkla
+Lost
+= Kayboldun
+Big Streamers
+= Büyük yayıncılar
+Content Creators
+= İçerik üreticileri
+A big streamer's video. All credit goes to the people who made it.
+= Büyük bir yayıncının videosu. Tüm emek yapanlara aittir.
+A content creator's video. All credit goes to the people who made it.
+= Bir içerik üreticisinin videosu. Tüm emek yapanlara aittir.

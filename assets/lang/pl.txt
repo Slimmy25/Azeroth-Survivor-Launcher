@@ -1866,3 +1866,13 @@ with
 = {0} otrzymanych
 click a run for its summary
 = kliknij przebieg, aby zobaczyć podsumowanie
+Lost
+= Zgubiony
+Big Streamers
+= Duzi streamerzy
+Content Creators
+= Twórcy treści
+A big streamer's video. All credit goes to the people who made it.
+= Film dużego streamera. Cała zasługa należy do twórców.
+A content creator's video. All credit goes to the people who made it.
+= Film twórcy treści. Cała zasługa należy do twórców.

@@ -8,3 +8,4 @@ AZSStatsLive.lua
 AZSStatsIcons.lua
 AZSStatsFaces.lua
 AZSStatsUI.lua
+AZSStatsBounty.lua

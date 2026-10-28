@@ -1866,3 +1866,13 @@ with
 = 받은 피해 {0}
 click a run for its summary
 = 런을 클릭하면 요약이 나옵니다
+Lost
+= 길을 잃음
+Big Streamers
+= 대형 스트리머
+Content Creators
+= 콘텐츠 크리에이터
+A big streamer's video. All credit goes to the people who made it.
+= 대형 스트리머의 영상입니다. 모든 공은 제작자에게 있습니다.
+A content creator's video. All credit goes to the people who made it.
+= 콘텐츠 크리에이터의 영상입니다. 모든 공은 제작자에게 있습니다.

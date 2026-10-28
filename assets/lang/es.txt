@@ -1865,3 +1865,13 @@ with
 = {0} recibido
 click a run for its summary
 = haz clic en una partida para ver su resumen
+Lost
+= Perdido
+Big Streamers
+= Grandes streamers
+Content Creators
+= Creadores de contenido
+A big streamer's video. All credit goes to the people who made it.
+= Un vídeo de un gran streamer. Todo el mérito es de quienes lo hicieron.
+A content creator's video. All credit goes to the people who made it.
+= Un vídeo de un creador de contenido. Todo el mérito es de quienes lo hicieron.

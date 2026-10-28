@@ -1865,3 +1865,13 @@ with
 = {0} otettu
 click a run for its summary
 = napsauta juoksua nähdäksesi yhteenvedon
+Lost
+= Eksyksissä
+Big Streamers
+= Isot striimaajat
+Content Creators
+= Sisällöntuottajat
+A big streamer's video. All credit goes to the people who made it.
+= Ison striimaajan video. Kaikki kunnia sen tekijöille.
+A content creator's video. All credit goes to the people who made it.
+= Sisällöntuottajan video. Kaikki kunnia sen tekijöille.

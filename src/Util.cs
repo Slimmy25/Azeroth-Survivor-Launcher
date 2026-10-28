@@ -369,6 +369,8 @@ namespace AzerothLauncher
         public static bool DataBesideExe { get { InitData(); return dataBesideExe; } }
         public static string StateDir { get { return DataDir; } }
         public static string TempDir { get { return Path.Combine(DataDir, "temp"); } }
+        // the game's download, beside the launcher: a folder name of this project's own, never a player's "temp"
+        public const string DownloadTempName = "Azeroth Survivors Launcher - Temp";
 
         static void InitData()
         {

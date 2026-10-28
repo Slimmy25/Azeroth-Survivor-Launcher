@@ -935,6 +935,8 @@ SlashCmdList["AZSSTATS"] = function(msg)
 		ShowCoop();
 	elseif ( cmd == "window" or cmd == "show" ) then
 		if ( AZSStats_Toggle ) then AZSStats_Toggle(); end
+	elseif ( cmd == "bounty" ) then
+		if ( AZSStats_Bounty ) then AZSStats_Bounty(); end
 	elseif ( cmd == "nemesis" ) then
 		ShowNemesis();
 	elseif ( cmd == "classes" or cmd == "class" ) then
@@ -962,7 +964,7 @@ SlashCmdList["AZSSTATS"] = function(msg)
 	elseif ( cmd == "minimap" ) then
 		if ( AZSStats_ToggleMinimapButton ) then AZSStats_ToggleMinimapButton(); end
 	else
-		Print("/azstats, /azstats last, /azstats best, /azstats classes, /azstats deaths, /azstats nemesis, /azstats coop, /azstats quiet, /azstats minimap, /azstats tracker; /azs or the minimap button opens the window, /azstats reset");
+		Print("/azstats, /azstats last, /azstats best, /azstats classes, /azstats deaths, /azstats nemesis, /azstats coop, /azstats bounty, /azstats quiet, /azstats minimap, /azstats tracker; /azs or the minimap button opens the window, /azstats reset");
 	end
 end
 

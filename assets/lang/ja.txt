@@ -1866,3 +1866,13 @@ with
 = 被ダメージ {0}
 click a run for its summary
 = ランをクリックすると概要を表示
+Lost
+= 迷った
+Big Streamers
+= 人気配信者
+Content Creators
+= コンテンツクリエイター
+A big streamer's video. All credit goes to the people who made it.
+= 人気配信者の動画です。すべての功績は制作者のものです。
+A content creator's video. All credit goes to the people who made it.
+= コンテンツクリエイターの動画です。すべての功績は制作者のものです。

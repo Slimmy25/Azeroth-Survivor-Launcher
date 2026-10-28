@@ -63,7 +63,9 @@ namespace AzerothLauncher
         }
 
         Rectangle CloseBox { get { return closable ? new Rectangle(Width - 27, 9, 18, 18) : Rectangle.Empty; } }
-        Rectangle HelpBox { get { return HelpClicked != null ? new Rectangle(Width - (closable ? 50 : 27), 9, 18, 18) : Rectangle.Empty; } }
+        // "Lost ?" beside the X: for anyone not sure how to get around (its width follows the word in the language)
+        int HelpW { get { return 26 + (int)TextRenderer.MeasureText(Lang.T("Lost"), Theme.F(9, FontStyle.Bold)).Width; } }
+        Rectangle HelpBox { get { return HelpClicked != null ? new Rectangle(Width - (closable ? 32 : 9) - HelpW, 9, HelpW, 18) : Rectangle.Empty; } }
         Rectangle BackBox { get { return BackClicked != null ? new Rectangle(44, 8, 30, 20) : Rectangle.Empty; } }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -89,7 +91,7 @@ namespace AzerothLauncher
                     g.FillPolygon(b, new[] { new PointF(bb.X + 11, bb.Y + 10), new PointF(bb.X + 19, bb.Y + 4), new PointF(bb.X + 19, bb.Y + 16) });
                 x = bb.Right + 8;
             }
-            int right = (closable ? Width - 32 : Width - 8) - (HelpClicked != null ? 23 : 0);
+            int right = (closable ? Width - 32 : Width - 8) - (HelpClicked != null ? HelpW + 5 : 0);
             Font f = Theme.F(11, FontStyle.Bold), fs = Theme.F(10);
             using (var sf = new StringFormat(StringFormatFlags.NoWrap))
             {
@@ -147,7 +149,7 @@ namespace AzerothLauncher
                 using (var b = new SolidBrush(Theme.Hex("#1c1a26"))) g.FillRectangle(b, hb);
                 using (var p = new Pen(Theme.Hex("#d6a640"), 2)) g.DrawRectangle(p, hb);
                 using (var sf = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center })
-                using (var b = new SolidBrush(Theme.Hex("#f0c050"))) g.DrawString("?", Theme.F(10, FontStyle.Bold), b, new RectangleF(hb.X, hb.Y + 1, hb.Width, hb.Height), sf);
+                using (var b = new SolidBrush(Theme.Hex("#f0c050"))) g.DrawString(Lang.T("Lost") + " ?", Theme.F(9, FontStyle.Bold), b, new RectangleF(hb.X, hb.Y + 1, hb.Width, hb.Height), sf);
             }
             Rectangle xb = CloseBox;
             if (xb.IsEmpty) return;

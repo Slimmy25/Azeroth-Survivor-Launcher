@@ -1866,3 +1866,13 @@ with
 = {0} utrženo
 click a run for its summary
 = klikněte na běh pro jeho shrnutí
+Lost
+= Ztracen?
+Big Streamers
+= Velcí streameři
+Content Creators
+= Tvůrci obsahu
+A big streamer's video. All credit goes to the people who made it.
+= Video velkého streamera. Veškeré zásluhy patří jeho tvůrcům.
+A content creator's video. All credit goes to the people who made it.
+= Video tvůrce obsahu. Veškeré zásluhy patří jeho tvůrcům.

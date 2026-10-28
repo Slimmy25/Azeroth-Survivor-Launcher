@@ -1866,3 +1866,13 @@ with
 = ได้รับ {0}
 click a run for its summary
 = คลิกที่รอบเพื่อดูสรุป
+Lost
+= หลงทาง
+Big Streamers
+= สตรีมเมอร์ใหญ่
+Content Creators
+= ครีเอเตอร์
+A big streamer's video. All credit goes to the people who made it.
+= วิดีโอจากสตรีมเมอร์ใหญ่ เครดิตทั้งหมดเป็นของผู้สร้าง
+A content creator's video. All credit goes to the people who made it.
+= วิดีโอจากครีเอเตอร์ เครดิตทั้งหมดเป็นของผู้สร้าง

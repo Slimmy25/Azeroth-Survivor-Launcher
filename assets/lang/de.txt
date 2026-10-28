@@ -1865,3 +1865,13 @@ with
 = {0} erlitten
 click a run for its summary
 = Klicke einen Lauf für seine Übersicht an
+Lost
+= Verirrt
+Big Streamers
+= Große Streamer
+Content Creators
+= Content Creator
+A big streamer's video. All credit goes to the people who made it.
+= Ein Video eines großen Streamers. Alle Ehre gebührt den Machern.
+A content creator's video. All credit goes to the people who made it.
+= Ein Video eines Content Creators. Alle Ehre gebührt den Machern.

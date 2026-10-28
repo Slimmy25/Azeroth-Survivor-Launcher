@@ -1866,3 +1866,13 @@ with
 = {0} δέχτηκες
 click a run for its summary
 = κάνε κλικ σε μια διαδρομή για τη σύνοψή της
+Lost
+= Χάθηκες
+Big Streamers
+= Μεγάλοι streamers
+Content Creators
+= Δημιουργοί περιεχομένου
+A big streamer's video. All credit goes to the people who made it.
+= Βίντεο μεγάλου streamer. Όλα τα εύσημα ανήκουν στους δημιουργούς του.
+A content creator's video. All credit goes to the people who made it.
+= Βίντεο δημιουργού περιεχομένου. Όλα τα εύσημα ανήκουν στους δημιουργούς του.
