@@ -59,14 +59,21 @@ if errorlevel 1 goto fail
 if exist "%~dp0sign_build.bat" call "%~dp0sign_build.bat" "%OUT%"
 if errorlevel 1 goto fail
 
-powershell -NoProfile -Command "Get-FileHash -Algorithm SHA256 '%OUT%' | ForEach-Object { $_.Hash.ToLower() + '  ' + (Split-Path $_.Path -Leaf) } | Set-Content -Encoding ascii 'dist\Azeroth Survivors Launcher.sha256.txt'"
+set "HASH="
+for /f "skip=1 tokens=*" %%H in ('certutil -hashfile "%OUT%" SHA256') do if not defined HASH set "HASH=%%H"
+set "HASH=!HASH: =!"
+if not defined HASH goto fail
+> "dist\Azeroth Survivors Launcher.sha256.txt" echo !HASH!  Azeroth Survivors Launcher.exe
 
 rem A one-time test build may request a second filename without changing the launcher version.
 if /I "%BUILD_TEST_EXE%"=="true" (
     copy /y "%OUT%" "dist\AZS Launcher Test.exe" >nul
     if errorlevel 1 goto fail
-    powershell -NoProfile -Command "Get-FileHash -Algorithm SHA256 'dist\AZS Launcher Test.exe' | ForEach-Object { $_.Hash.ToLower() + '  ' + (Split-Path $_.Path -Leaf) } | Set-Content -Encoding ascii 'dist\AZS Launcher Test.sha256.txt'"
-    if errorlevel 1 goto fail
+    set "HASH="
+    for /f "skip=1 tokens=*" %%H in ('certutil -hashfile "dist\AZS Launcher Test.exe" SHA256') do if not defined HASH set "HASH=%%H"
+    set "HASH=!HASH: =!"
+    if not defined HASH goto fail
+    > "dist\AZS Launcher Test.sha256.txt" echo !HASH!  AZS Launcher Test.exe
 )
 
 echo.
