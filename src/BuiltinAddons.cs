@@ -251,6 +251,10 @@ namespace AzerothLauncher
                 s.Append("},\n");
             }
             s.Append("},\n");
+            // itemicons[name] = the real icon of a gear piece that is a real item (the game's own texture in game)
+            s.Append("itemicons = {\n");
+            foreach (var kv in Items.GearIcons) s.Append("[").Append(Q(kv.Key)).Append("] = ").Append(Q(kv.Value)).Append(",\n");
+            s.Append("},\n");
             // sets[class][rarity] = { set name, 4-piece text, { stat = value }, 8-piece text }
             s.Append("sets = {\n");
             foreach (string c in classes)

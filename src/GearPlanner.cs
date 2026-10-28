@@ -44,11 +44,8 @@ namespace AzerothLauncher
             plannerClass = cls;
         }
 
-        // the gear's icons: none for now. AZS Stats no longer collects them; an online source will fill this later.
-        Dictionary<string, string> GearIcons()
-        {
-            return new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-        }
+        // the gear's real icons (assets\item-icons.txt); a piece that is not a real item shows "Image soon"
+        Dictionary<string, string> GearIcons() { return Items.GearIcons; }
 
         // the gear in the planner, added up: the hover texts of spells and talents show their numbers with it
         public static Dictionary<string, double> PlannerTotals;
@@ -452,6 +449,7 @@ namespace AzerothLauncher
                     {
                         Image img = IconOf(o);
                         if (img != null) Theme.Draw(g, img, icon);
+                        else if (o is GearPiece) Theme.ImageSoon(g, icon, RarityColor(RarityOf(o)));
                         else
                         {
                             using (var b = new SolidBrush(Color.FromArgb(70, RarityColor(RarityOf(o))))) g.FillRectangle(b, icon);
@@ -537,6 +535,7 @@ namespace AzerothLauncher
                     int ic = Theme.CrispIcon(r.Width - 4);
                     Theme.Draw(g, img, new Rectangle(r.X + (r.Width - ic) / 2, r.Y + (r.Height - ic) / 2, ic, ic));
                 }
+                else if (o is GearPiece) Theme.ImageSoon(g, Rectangle.Inflate(r, -3, -3), RarityColor(RarityOf(o)));
                 else
                 {
                     using (var b = new SolidBrush(Color.FromArgb(70, RarityColor(RarityOf(o))))) g.FillRectangle(b, Rectangle.Inflate(r, -3, -3));

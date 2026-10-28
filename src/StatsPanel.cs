@@ -460,8 +460,8 @@ namespace AzerothLauncher
                     row.Name = it.Name;
                     row.NameColor = Theme.Hex("#" + it.Color);
                     row.IconColor = row.NameColor;
-                    row.Icon = Armory.Initials(it.Name);
-                    row.IconName = it.Icon.Length > 0 ? it.Icon.ToLowerInvariant() : null;
+                    row.IconName = Items.IconFor(it.Name);          // its real icon (a real item), else "Image soon"
+                    row.Icon = row.IconName != null ? Armory.Initials(it.Name) : Lang.T("Image soon");
                     row.Sub = Lang.T(it.Slot);
                     row.SubColor = Armory.Dim;
                     gear.Rows.Add(row);
