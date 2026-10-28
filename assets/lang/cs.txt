@@ -1978,3 +1978,5 @@ Profile 2 keeps a full copy of itself in its own isolated space, apart from Prof
 = Profil 2 si drží úplnou kopii sebe sama ve vlastním odděleném prostoru, mimo profil 1 a Bez profilu: které doplňky jsou zapnuté, kde je rozhraní a nastavení všech doplňků. Velký UI doplněk tu může věci měnit, aniž by sáhl na ostatní, a když se k profilu 2 vrátíš, je přesně tak, jak jsi ho nechal.
 No profile is the game as it normally is, kept as a full copy in its own isolated space: which addons are on, where the interface sits and every addon's settings. While you use it the launcher changes nothing, and when you come back to it from a profile it is exactly the way you left it. If you don't want the game's preferences changed, use this setting.
 = Bez profilu je hra tak, jak normálně je, uložená jako úplná kopie ve vlastním odděleném prostoru: které doplňky jsou zapnuté, kde je rozhraní a nastavení všech doplňků. Když ho používáš, launcher nic nemění, a když se k němu z profilu vrátíš, je přesně tak, jak jsi ho nechal. Pokud nechceš, aby se předvolby hry měnily, použij toto nastavení.
+Click to give this profile a name of your own.
+= Klikni a dej profilu vlastní název.

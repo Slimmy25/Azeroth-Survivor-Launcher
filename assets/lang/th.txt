@@ -1978,3 +1978,5 @@ Profile 2 keeps a full copy of itself in its own isolated space, apart from Prof
 = โปรไฟล์ 2 เก็บสำเนาเต็มของตัวเองไว้ในพื้นที่แยกของตัวเอง ต่างหากจากโปรไฟล์ 1 และไม่ใช้โปรไฟล์: แอดออนไหนเปิดอยู่ ตำแหน่งอินเทอร์เฟซ และการตั้งค่าของทุกแอดออน แอดออน UI ขนาดใหญ่เปลี่ยนสิ่งต่างๆ ที่นี่ได้โดยไม่กระทบอันอื่น และเมื่อกลับมาที่โปรไฟล์ 2 ทุกอย่างจะเหมือนตอนที่คุณออกไปทุกประการ
 No profile is the game as it normally is, kept as a full copy in its own isolated space: which addons are on, where the interface sits and every addon's settings. While you use it the launcher changes nothing, and when you come back to it from a profile it is exactly the way you left it. If you don't want the game's preferences changed, use this setting.
 = ไม่ใช้โปรไฟล์คือเกมตามปกติ เก็บเป็นสำเนาเต็มไว้ในพื้นที่แยกของตัวเอง: แอดออนไหนเปิดอยู่ ตำแหน่งอินเทอร์เฟซ และการตั้งค่าของทุกแอดออน ระหว่างที่ใช้ ลันเชอร์ไม่เปลี่ยนอะไรเลย และเมื่อกลับมาจากโปรไฟล์ ทุกอย่างจะเหมือนตอนที่คุณออกไปทุกประการ หากไม่ต้องการให้การตั้งค่าเกมเปลี่ยน ให้ใช้ตัวเลือกนี้
+Click to give this profile a name of your own.
+= คลิกเพื่อตั้งชื่อโปรไฟล์นี้เอง

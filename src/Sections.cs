@@ -1735,10 +1735,57 @@ namespace AzerothLauncher
                 info.Size = VStack.Measure(info);
                 py -= info.Height + 2;
                 Put(info, cx, py);
-                var head = UI.Text(s == "none" ? "No profile [Recommended]" : "Profile " + s, 11, FontStyle.Bold, Theme.Gold, Theme.Panel, 0);
+                // Profile 1 and 2 can carry a name of the player's own: click the name to type one (Enter keeps it, Esc
+                // leaves it, an empty name goes back to "Profile 1")
+                string custom = s == "none" ? "" : Json.Str(Cfg.Section("addon_profile_names"), s);
+                var head = custom.Length > 0 ? UI.Text(custom, 11, FontStyle.Bold, Theme.Gold, Theme.Panel, 0, false)
+                                             : UI.Text(s == "none" ? "No profile [Recommended]" : "Profile " + s, 11, FontStyle.Bold, Theme.Gold, Theme.Panel, 0);
                 head.Size = VStack.Measure(head);
+                if (head.Width > (int)(160 * Theme.Zoom)) { head.AutoSize = false; head.AutoEllipsis = true; head.Width = (int)(160 * Theme.Zoom); }
                 py -= head.Height;
                 Put(head, cx, py);
+                if (s != "none")
+                {
+                    head.Cursor = Cursors.IBeam;
+                    var rt = new ToolTip { InitialDelay = 300 };
+                    rt.SetToolTip(head, Lang.T("Click to give this profile a name of your own."));
+                    head.Disposed += delegate { rt.Dispose(); };
+                    Label hl = head;
+                    head.Click += delegate
+                    {
+                        var box = new TextBox();
+                        box.Font = hl.Font;
+                        box.MaxLength = 24;
+                        box.Text = custom;
+                        box.BackColor = Theme.Ink;
+                        box.ForeColor = Theme.Gold;
+                        box.BorderStyle = BorderStyle.FixedSingle;
+                        box.Bounds = new Rectangle(hl.Left, hl.Top - 2, (int)(160 * Theme.Zoom), hl.Height + 4);
+                        hl.Parent.Controls.Add(box);
+                        box.BringToFront();
+                        box.Focus();
+                        bool done = false;
+                        Action<bool> finish = delegate(bool keep)
+                        {
+                            if (done) return;
+                            done = true;
+                            if (keep)
+                            {
+                                string n = box.Text.Trim();
+                                if (n.Length == 0) Cfg.Section("addon_profile_names").Remove(s);
+                                else Cfg.Section("addon_profile_names")[s] = n;
+                                Cfg.Save();
+                            }
+                            BeginInvoke((Action)delegate { BuildPanel("Addons"); });
+                        };
+                        box.KeyDown += delegate(object o, KeyEventArgs e)
+                        {
+                            if (e.KeyCode == Keys.Enter) { e.SuppressKeyPress = true; finish(true); }
+                            else if (e.KeyCode == Keys.Escape) { e.SuppressKeyPress = true; finish(false); }
+                        };
+                        box.LostFocus += delegate { finish(true); };
+                    };
+                }
                 // a small "?" beside the name: point at it to read what this choice does with the game's preferences
                 var q = UI.Text("?", 10, FontStyle.Bold, Theme.Panel, Theme.Gold, 0, false);
                 q.AutoSize = false;

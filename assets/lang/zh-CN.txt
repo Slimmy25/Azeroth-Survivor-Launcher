@@ -1978,3 +1978,5 @@ Profile 2 keeps a full copy of itself in its own isolated space, apart from Prof
 = 配置 2 在自己独立的空间里保存一份完整副本，与配置 1 和“无配置”分开：开启了哪些插件、界面的位置以及每个插件的设置。大型界面插件可以在这里改动而不影响其他配置，当你回到配置 2 时，一切都和你离开时完全一样。
 No profile is the game as it normally is, kept as a full copy in its own isolated space: which addons are on, where the interface sits and every addon's settings. While you use it the launcher changes nothing, and when you come back to it from a profile it is exactly the way you left it. If you don't want the game's preferences changed, use this setting.
 = “无配置”就是平常的游戏，作为完整副本保存在自己独立的空间里：开启了哪些插件、界面的位置以及每个插件的设置。使用它时启动器不会做任何改动，从某个配置回到它时，一切都和你离开时完全一样。如果你不想修改游戏设置，请使用此选项。
+Click to give this profile a name of your own.
+= 点击为此配置起一个自己的名字。

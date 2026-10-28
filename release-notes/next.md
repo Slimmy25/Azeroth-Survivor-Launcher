@@ -36,3 +36,5 @@
 - When the launcher updates itself while it is in the taskbar or the tray, it does so quietly: no Windows notice.
 - The "?" notes of No profile, Profile 1 and Profile 2 say what each one is: a full copy of itself in its own isolated
   space, back exactly the way you left it whenever you return to it.
+- Profile 1 and Profile 2 can have names of your own: click a profile's name, type one and press Enter (an empty name
+  brings back "Profile 1" or "Profile 2").
