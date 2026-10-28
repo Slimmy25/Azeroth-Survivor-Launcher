@@ -200,6 +200,63 @@ namespace AzerothLauncher
             return string.Join(";", parts.ToArray());
         }
 
+        // Compact, versioned plain-text format for sharing builds between launcher users.
+        // Example: AZST1|Warrior|Arms/deep_wounds=1;Fury/cruelty=5
+        public string ShareCode(string className) { return "AZST1|" + className + "|" + Save(); }
+
+        public static bool TryParseShareCode(string text, string className, out TalentBuild build, out string error)
+        {
+            build = null;
+            error = "";
+            string payload = (text ?? "").Trim();
+            string[] parts = payload.Split(new[] { '|' }, 3);
+            if (parts.Length == 3 && parts[0] == "AZST1")
+            {
+                if (!string.Equals(parts[1].Trim(), className, StringComparison.OrdinalIgnoreCase))
+                {
+                    error = "This code is for " + parts[1].Trim() + ". Open that class in the Talent Builder, then import it again.";
+                    return false;
+                }
+                payload = parts[2].Trim();
+            }
+            else if (payload.StartsWith("AZST", StringComparison.Ordinal))
+            {
+                error = "This talent code version is not supported. Export a new code from the launcher.";
+                return false;
+            }
+            var known = new Dictionary<string, Talent>(StringComparer.Ordinal);
+            foreach (var talent in Talents.Of(className)) known[talent.Id] = talent;
+            var seen = new HashSet<string>(StringComparer.Ordinal);
+            int total = 0;
+            foreach (string part in payload.Split(';'))
+            {
+                if (part.Trim().Length == 0) continue;
+                int eq = part.LastIndexOf('='), rank;
+                Talent talent;
+                string id = eq > 0 ? part.Substring(0, eq).Trim() : "";
+                if (eq <= 0 || !int.TryParse(part.Substring(eq + 1).Trim(), out rank) ||
+                    !known.TryGetValue(id, out talent) || rank < 1 || rank > talent.Ranks || !seen.Add(id))
+                {
+                    error = "That talent code is invalid or contains a talent that does not belong to " + className + ". Copy the whole code and try again.";
+                    return false;
+                }
+                total += rank;
+                if (total > TalentBuild.MaxPoints)
+                {
+                    error = "That talent code spends more than 51 points, so it cannot be imported.";
+                    return false;
+                }
+            }
+            build = Parse(payload, className);
+            if (build.Spent != total)
+            {
+                build = null;
+                error = "That talent code has talents whose required rows are not unlocked. Export the build again from the Talent Builder.";
+                return false;
+            }
+            return true;
+        }
+
         public static TalentBuild Parse(string text, string className)
         {
             var b = new TalentBuild();
