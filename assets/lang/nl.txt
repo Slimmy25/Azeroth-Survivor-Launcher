@@ -1485,8 +1485,8 @@ All your stats in game (/azs) and on the STATS page: runs, records, abilities, c
 = Al je statistieken in het spel (/azs) en op de STATISTIEKEN-pagina: runs, records, vaardigheden, klassen, speeltijd, je aartsvijand en co-op met vrienden.
 The launcher's whole New Player Guide inside the game (/handbook): every topic and page, each class's spells with their icons and the talents that change them, and all the talent trees.
 = De hele gids voor nieuwe spelers van de launcher in het spel (/handbook): elk onderwerp en elke pagina, de spreuken van elke klasse met hun iconen en de talenten die ze veranderen, en alle talentbomen.
-Small changes, each on or off (/azsmods or its minimap button): no level-up, stat bonus or new spell lines in chat, boss markers (Skull, Cross, Moon), a blinking Square on a friend who falls, a plain action bar with just the six squares, move and lock the UI, hide the target frame and the camera at 50.
-= Kleine wijzigingen, elk aan of uit (/azsmods of de minimapknop): geen regels over level-up, statbonus of nieuwe spreuk in de chat, baasmarkeringen (Schedel, Kruis, Maan), een knipperend Vierkant boven een gevallen vriend, een eenvoudige actiebalk met alleen de zes vakjes, de interface verplaatsen en vergrendelen, het doelkader verbergen en de camera op 50.
+Small changes, each on or off (/azsmods or its minimap button): no level-up, stat bonus or new spell lines in chat, boss markers (Skull, Cross, Diamond), miniboss markers (Star, Triangle, Diamond), a blinking marker over each friend who falls, a plain action bar with just the six squares, move and lock the UI, hide the target frame and the camera at 50.
+= Kleine wijzigingen, elk aan of uit (/azsmods of de minimapknop): geen regels over level-up, statbonus of nieuwe spreuk in de chat, baasmarkeringen (Schedel, Kruis, Diamant), minibaasmarkeringen (Ster, Driehoek, Diamant), een knipperende markering boven elke gevallen vriend, een eenvoudige actiebalk met alleen de zes vakjes, de interface verplaatsen en vergrendelen, het doelkader verbergen en de camera op 50.
 A test (/transparency): which of your spells each item upgrade makes stronger, from rings, trinkets, amulets and boss gear.
 = Een test (/transparency): welke van je spreuken elke voorwerpupgrade sterker maakt, van ringen, trinkets, amuletten en baasuitrusting.
 Converted for Azeroth Survivors. Puts every minimap button into one bag button: click it and they open in a bar (/mbb).
@@ -1865,8 +1865,8 @@ with
 = {0} ontvangen
 click a run for its summary
 = klik op een run voor het overzicht
-Lost
-= Verdwaald
+Lost?
+= Verdwaald?
 Big Streamers
 = Grote streamers
 Content Creators

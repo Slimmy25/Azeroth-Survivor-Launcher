@@ -1486,8 +1486,8 @@ All your stats in game (/azs) and on the STATS page: runs, records, abilities, c
 = Όλα τα στατιστικά σου στο παιχνίδι (/azs) και στη σελίδα ΣΤΑΤΙΣΤΙΚΑ: γύροι, ρεκόρ, ικανότητες, κλάσεις, χρόνος παιχνιδιού, η Νέμεσή σου και το co-op με φίλους.
 The launcher's whole New Player Guide inside the game (/handbook): every topic and page, each class's spells with their icons and the talents that change them, and all the talent trees.
 = Όλος ο Οδηγός νέου παίκτη του launcher μέσα στο παιχνίδι (/handbook): κάθε θέμα και σελίδα, τα ξόρκια κάθε κλάσης με τα εικονίδιά τους και τα ταλέντα που τα αλλάζουν, και όλα τα δέντρα ταλέντων.
-Small changes, each on or off (/azsmods or its minimap button): no level-up, stat bonus or new spell lines in chat, boss markers (Skull, Cross, Moon), a blinking Square on a friend who falls, a plain action bar with just the six squares, move and lock the UI, hide the target frame and the camera at 50.
-= Μικρές αλλαγές, η καθεμία ανοιχτή ή κλειστή (/azsmods ή το κουμπί του στον μικρό χάρτη): χωρίς γραμμές για νέο επίπεδο, μπόνους χαρακτηριστικών ή νέο ξόρκι στη συνομιλία, σημάδια αρχηγών (Κρανίο, Σταυρός, Φεγγάρι), ένα τετράγωνο που αναβοσβήνει πάνω από φίλο που πέφτει, απλή μπάρα ενεργειών μόνο με τα έξι τετράγωνα, μετακίνηση και κλείδωμα του UI, απόκρυψη του πλαισίου στόχου και η κάμερα στο 50.
+Small changes, each on or off (/azsmods or its minimap button): no level-up, stat bonus or new spell lines in chat, boss markers (Skull, Cross, Diamond), miniboss markers (Star, Triangle, Diamond), a blinking marker over each friend who falls, a plain action bar with just the six squares, move and lock the UI, hide the target frame and the camera at 50.
+= Μικρές αλλαγές, η καθεμία ανοιχτή ή κλειστή (/azsmods ή το κουμπί του στον μικρό χάρτη): χωρίς γραμμές για νέο επίπεδο, μπόνους χαρακτηριστικών ή νέο ξόρκι στη συνομιλία, σημάδια αρχηγών (Κρανίο, Σταυρός, Διαμάντι), σημάδια μικρών αρχηγών (Αστέρι, Τρίγωνο, Διαμάντι), ένα σημάδι που αναβοσβήνει πάνω από κάθε φίλο που πέφτει, απλή μπάρα ενεργειών μόνο με τα έξι τετράγωνα, μετακίνηση και κλείδωμα του UI, απόκρυψη του πλαισίου στόχου και η κάμερα στο 50.
 A test (/transparency): which of your spells each item upgrade makes stronger, from rings, trinkets, amulets and boss gear.
 = Μια δοκιμή (/transparency): ποια ξόρκια σου ενισχύει κάθε αναβάθμιση αντικειμένου, από δαχτυλίδια, μπιχλιμπίδια, φυλαχτά και εξοπλισμό αφεντικών.
 Converted for Azeroth Survivors. Puts every minimap button into one bag button: click it and they open in a bar (/mbb).
@@ -1866,8 +1866,8 @@ with
 = {0} δέχτηκες
 click a run for its summary
 = κάνε κλικ σε μια διαδρομή για τη σύνοψή της
-Lost
-= Χάθηκες
+Lost?
+= Χάθηκες;
 Big Streamers
 = Μεγάλοι streamers
 Content Creators

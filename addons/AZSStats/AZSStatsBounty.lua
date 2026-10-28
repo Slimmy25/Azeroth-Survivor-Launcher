@@ -1,6 +1,7 @@
 -- AZS Stats' bounty board: when a new run starts, a wanted poster shows for a few seconds with the creature that
 -- killed you last game (its face, how it did it and how many times it has killed you). When you take down your Nemesis
--- (the creature that has killed you most), a celebration shows instead. Drawn with the game's own art: the quest
+-- (the creature that has killed you most), a celebration shows instead, naming the friends who were with you; each such
+-- win is written down in AZSStatsDB.nemesisSlain (the Nemesis tab lists them). Drawn with the game's own art: the quest
 -- parchment, its frames and icons. /azstats bounty turns it off and on.
 -- Lua 5.0 / 1.12 interface: scripts read `this`, `event`, `arg1`; no # operator; only the 1.12 API.
 
@@ -30,7 +31,7 @@ local function Poster()
 	if ( poster ) then return poster; end
 	local f = CreateFrame("Frame", "AZSStatsBountyFrame", UIParent);
 	f:SetWidth(300);
-	f:SetHeight(380);
+	f:SetHeight(410);
 	f:SetPoint("CENTER", UIParent, "CENTER", 0, 90);
 	f:SetFrameStrata("DIALOG");
 	f:SetBackdrop({ bgFile = "Interface\\QuestFrame\\QuestBG", edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
@@ -116,7 +117,24 @@ local function Slain(msg)
 	local now = GetTime();
 	if ( slainAt[nem] and now - slainAt[nem] < 60 ) then return; end   -- once a minute at most
 	slainAt[nem] = now;
-	Show("NEMESIS SLAIN!", nem, "It had killed you " .. Big(kills) .. " times.\nNot this time. Well fought!",
+	-- who was with you: your party (co-op), written down with the win
+	local with = {};
+	if ( GetNumPartyMembers ) then
+		local ok, n = pcall(GetNumPartyMembers);
+		for i = 1, (ok and tonumber(n) or 0) do
+			local who = UnitName("party" .. i);
+			if ( who and who ~= "" and who ~= "Unknown" ) then table.insert(with, who); end
+		end
+	end
+	local db = DB();
+	if ( type(db.nemesisSlain) ~= "table" ) then db.nemesisSlain = {}; end
+	local zname = type(AZS_ZONE) == "table" and tostring(AZS_ZONE.zname or "") or "";
+	table.insert(db.nemesisSlain, { name = nem, date = date and date("%Y-%m-%d %H:%M") or "", zname = zname,
+	                                t = AZS_GetRunTime and Num(AZS_GetRunTime()) or 0, cname = UnitClass and UnitClass("player") or "",
+	                                with = table.concat(with, ", ") });
+	while ( table.getn(db.nemesisSlain) > 100 ) do table.remove(db.nemesisSlain, 1); end
+	local side = table.getn(with) > 0 and ("At your side: " .. table.concat(with, ", ") .. ".") or "You did it alone.";
+	Show("NEMESIS SLAIN!", nem, "It had killed you " .. Big(kills) .. " times.\nNot this time. Well fought!\n" .. side,
 	     "Interface\\Icons\\INV_Misc_Head_Dragon_01", "LEVELUP", 6);
 end
 

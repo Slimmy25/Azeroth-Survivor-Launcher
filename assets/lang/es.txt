@@ -1485,8 +1485,8 @@ All your stats in game (/azs) and on the STATS page: runs, records, abilities, c
 = Todas tus estadísticas en el juego (/azs) y en la página ESTADÍSTICAS: partidas, récords, habilidades, clases, tiempo de juego, tu Némesis y el cooperativo con amigos.
 The launcher's whole New Player Guide inside the game (/handbook): every topic and page, each class's spells with their icons and the talents that change them, and all the talent trees.
 = Toda la Guía del jugador nuevo del lanzador dentro del juego (/handbook): cada tema y página, los hechizos de cada clase con sus iconos y los talentos que los cambian, y todos los árboles de talentos.
-Small changes, each on or off (/azsmods or its minimap button): no level-up, stat bonus or new spell lines in chat, boss markers (Skull, Cross, Moon), a blinking Square on a friend who falls, a plain action bar with just the six squares, move and lock the UI, hide the target frame and the camera at 50.
-= Pequeños cambios, cada uno activable o no (/azsmods o su botón del minimapa): sin líneas de subida de nivel, bonificación de atributos ni hechizo nuevo en el chat, marcas de jefe (Calavera, Cruz, Luna), un Cuadrado parpadeante sobre un amigo caído, una barra de acción simple con solo las seis casillas, mover y bloquear la interfaz, ocultar el marco del objetivo y la cámara a 50.
+Small changes, each on or off (/azsmods or its minimap button): no level-up, stat bonus or new spell lines in chat, boss markers (Skull, Cross, Diamond), miniboss markers (Star, Triangle, Diamond), a blinking marker over each friend who falls, a plain action bar with just the six squares, move and lock the UI, hide the target frame and the camera at 50.
+= Pequeños cambios, cada uno activable o no (/azsmods o su botón del minimapa): sin líneas de subida de nivel, bonificación de atributos ni hechizo nuevo en el chat, marcas de jefe (Calavera, Cruz, Diamante), marcas de minijefe (Estrella, Triángulo, Diamante), una marca parpadeante sobre cada amigo caído, una barra de acción simple con solo las seis casillas, mover y bloquear la interfaz, ocultar el marco del objetivo y la cámara a 50.
 A test (/transparency): which of your spells each item upgrade makes stronger, from rings, trinkets, amulets and boss gear.
 = Una prueba (/transparency): qué hechizos refuerza cada mejora de objeto, de anillos, abalorios, amuletos y equipo de jefes.
 Converted for Azeroth Survivors. Puts every minimap button into one bag button: click it and they open in a bar (/mbb).
@@ -1865,8 +1865,8 @@ with
 = {0} recibido
 click a run for its summary
 = haz clic en una partida para ver su resumen
-Lost
-= Perdido
+Lost?
+= ¿Perdido?
 Big Streamers
 = Grandes streamers
 Content Creators

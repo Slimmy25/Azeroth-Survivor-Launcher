@@ -1486,8 +1486,8 @@ All your stats in game (/azs) and on the STATS page: runs, records, abilities, c
 = Wszystkie twoje statystyki w grze (/azs) i na stronie STATYSTYKI: runy, rekordy, umiejętności, klasy, czas gry, twój Nemezis i co-op ze znajomymi.
 The launcher's whole New Player Guide inside the game (/handbook): every topic and page, each class's spells with their icons and the talents that change them, and all the talent trees.
 = Cały poradnik dla nowych graczy z launchera w grze (/handbook): każdy temat i strona, zaklęcia każdej klasy z ikonami i talentami, które je zmieniają, oraz wszystkie drzewka talentów.
-Small changes, each on or off (/azsmods or its minimap button): no level-up, stat bonus or new spell lines in chat, boss markers (Skull, Cross, Moon), a blinking Square on a friend who falls, a plain action bar with just the six squares, move and lock the UI, hide the target frame and the camera at 50.
-= Drobne zmiany, każda osobno wł. lub wył. (/azsmods lub jego przycisk przy minimapie): bez linijek o nowym poziomie, premii do statystyk i nowym zaklęciu na czacie, znaczniki bossów (Czaszka, Krzyżyk, Księżyc), migający Kwadrat nad poległym przyjacielem, prosty pasek akcji z samymi sześcioma polami, przesuwanie i blokowanie interfejsu, ukrycie ramki celu i kamera na 50.
+Small changes, each on or off (/azsmods or its minimap button): no level-up, stat bonus or new spell lines in chat, boss markers (Skull, Cross, Diamond), miniboss markers (Star, Triangle, Diamond), a blinking marker over each friend who falls, a plain action bar with just the six squares, move and lock the UI, hide the target frame and the camera at 50.
+= Drobne zmiany, każda osobno wł. lub wył. (/azsmods lub jego przycisk przy minimapie): bez linijek o nowym poziomie, premii do statystyk i nowym zaklęciu na czacie, znaczniki bossów (Czaszka, Krzyżyk, Romb), znaczniki minibossów (Gwiazda, Trójkąt, Romb), migający znacznik nad każdym poległym przyjacielem, prosty pasek akcji z samymi sześcioma polami, przesuwanie i blokowanie interfejsu, ukrycie ramki celu i kamera na 50.
 A test (/transparency): which of your spells each item upgrade makes stronger, from rings, trinkets, amulets and boss gear.
 = Test (/transparency): które twoje zaklęcia wzmacnia każde ulepszenie przedmiotu, z pierścieni, ozdób, amuletów i ekwipunku bossów.
 Converted for Azeroth Survivors. Puts every minimap button into one bag button: click it and they open in a bar (/mbb).
@@ -1866,8 +1866,8 @@ with
 = {0} otrzymanych
 click a run for its summary
 = kliknij przebieg, aby zobaczyć podsumowanie
-Lost
-= Zgubiony
+Lost?
+= Zgubiony?
 Big Streamers
 = Duzi streamerzy
 Content Creators

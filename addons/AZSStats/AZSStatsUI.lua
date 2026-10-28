@@ -298,6 +298,25 @@ local function Nemesis()
 		Head(out, "Your nemesis: " .. killers[1].key);
 		Tiles(out, { { Big(killers[1].v.kills), "Times it killed you" }, { Pct(killers[1].v.kills, deaths), "Of your deaths" },
 		             { Big(deaths), "Deaths" }, { Big(Num(beaten[killers[1].key])), "Times you beat it" } });
+		-- the times you took your Nemesis down, and who was at your side (AZSStatsBounty.lua writes them down)
+		local wins = {};
+		if ( type(db.nemesisSlain) == "table" ) then
+			for i = table.getn(db.nemesisSlain), 1, -1 do
+				local w = db.nemesisSlain[i];
+				if ( type(w) == "table" and w.name == killers[1].key ) then table.insert(wins, w); end
+				if ( table.getn(wins) >= 5 ) then break; end
+			end
+		end
+		if ( table.getn(wins) > 0 ) then
+			Head(out, "When you took it down");
+			for i = 1, table.getn(wins) do
+				local w = wins[i];
+				local side = (w.with and w.with ~= "") and ("With " .. w.with) or "Alone";
+				Row(out, { icon = NpcIcon(killers[1].key), name = side, hex = "40ff40",
+				           sub = (w.cname or "") .. ((w.zname and w.zname ~= "") and (" · " .. w.zname) or ""),
+				           value = Clock(Num(w.t)), vsub = w.date or "" });
+			end
+		end
 	end
 	Head(out, "Who kills you");
 	for i = 1, math.min(15, table.getn(killers)) do

@@ -141,11 +141,6 @@ namespace AzerothLauncher
             FormClosing += OnClosingWindow;
             FormClosed += delegate { StopEdge(); };              // a Community video never outlives the launcher
             VideoCard.YouTube = PlayYouTube;                     // YouTube videos play inside Community (Community.cs)
-            GuideLinks.CapturedTips = delegate                  // the abilities' tooltips AZS Stats wrote down in game
-            {
-                RunStats st = AddonStats();
-                return st != null ? st.Tooltips : null;
-            };
             SpellRow.OpenSet = delegate(string cls, string rarity)   // a set chip on a spell: that set in the Gear Planner
             {
                 if (current != "Guide" || !side.Visible) ShowSection("Guide");

@@ -1486,8 +1486,8 @@ All your stats in game (/azs) and on the STATS page: runs, records, abilities, c
 = 你在游戏内（/azs）和统计页面的全部数据：对局、纪录、技能、职业、游戏时间、你的宿敌以及与好友的合作。
 The launcher's whole New Player Guide inside the game (/handbook): every topic and page, each class's spells with their icons and the talents that change them, and all the talent trees.
 = 在游戏内查看启动器完整的新手指南（/handbook）：每个主题和页面，各职业的法术及其图标和改变它们的天赋，以及所有天赋树。
-Small changes, each on or off (/azsmods or its minimap button): no level-up, stat bonus or new spell lines in chat, boss markers (Skull, Cross, Moon), a blinking Square on a friend who falls, a plain action bar with just the six squares, move and lock the UI, hide the target frame and the camera at 50.
-= 一些小改动，每项可单独开关（/azsmods 或其小地图按钮）：聊天中不显示升级、属性加成和新法术的行，首领标记（骷髅、叉、月亮），倒下的队友头上闪烁的方块，只有六个格子的简洁动作条，移动并锁定界面，隐藏目标框体，镜头距离50。
+Small changes, each on or off (/azsmods or its minimap button): no level-up, stat bonus or new spell lines in chat, boss markers (Skull, Cross, Diamond), miniboss markers (Star, Triangle, Diamond), a blinking marker over each friend who falls, a plain action bar with just the six squares, move and lock the UI, hide the target frame and the camera at 50.
+= 一些小改动，每项可单独开关（/azsmods 或其小地图按钮）：聊天中不显示升级、属性加成和新法术的行，首领标记（骷髅、叉、菱形），小首领标记（星星、三角、菱形），每位倒下的队友头上各自闪烁的标记，只有六个格子的简洁动作条，移动并锁定界面，隐藏目标框体，镜头距离50。
 A test (/transparency): which of your spells each item upgrade makes stronger, from rings, trinkets, amulets and boss gear.
 = 一个测试（/transparency）：戒指、饰品、护符和首领装备的每次物品升级会强化你的哪些法术。
 Converted for Azeroth Survivors. Puts every minimap button into one bag button: click it and they open in a bar (/mbb).
@@ -1866,8 +1866,8 @@ with
 = 承受 {0}
 click a run for its summary
 = 点击某局查看总结
-Lost
-= 迷路了
+Lost?
+= 迷路了？
 Big Streamers
 = 大主播
 Content Creators

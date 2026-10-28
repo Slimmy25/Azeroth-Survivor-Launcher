@@ -1486,8 +1486,8 @@ All your stats in game (/azs) and on the STATS page: runs, records, abilities, c
 = ゲーム内（/azs）と統計ページですべての統計を：ラン、記録、アビリティ、クラス、プレイ時間、宿敵、フレンドとの協力プレイ。
 The launcher's whole New Player Guide inside the game (/handbook): every topic and page, each class's spells with their icons and the talents that change them, and all the talent trees.
 = ランチャーの初心者ガイド全体をゲーム内で（/handbook）：すべてのトピックとページ、各クラスの呪文とアイコン、それを変える才能、そしてすべての才能ツリー。
-Small changes, each on or off (/azsmods or its minimap button): no level-up, stat bonus or new spell lines in chat, boss markers (Skull, Cross, Moon), a blinking Square on a friend who falls, a plain action bar with just the six squares, move and lock the UI, hide the target frame and the camera at 50.
-= 小さな変更をそれぞれオン/オフ（/azsmods またはミニマップボタン）：チャットにレベルアップ・能力ボーナス・新しい呪文の行を出さない、ボスのマーク（ドクロ、バツ、月）、倒れた仲間の頭上で点滅する四角、6つのマスだけのシンプルなアクションバー、UIの移動と固定、ターゲット枠を隠す、カメラ距離50。
+Small changes, each on or off (/azsmods or its minimap button): no level-up, stat bonus or new spell lines in chat, boss markers (Skull, Cross, Diamond), miniboss markers (Star, Triangle, Diamond), a blinking marker over each friend who falls, a plain action bar with just the six squares, move and lock the UI, hide the target frame and the camera at 50.
+= 小さな変更をそれぞれオン/オフ（/azsmods またはミニマップボタン）：チャットにレベルアップ・能力ボーナス・新しい呪文の行を出さない、ボスのマーク（ドクロ、バツ、ダイヤ）、中ボスのマーク（星、三角、ダイヤ）、倒れた仲間それぞれの頭上で点滅するマーク、6つのマスだけのシンプルなアクションバー、UIの移動と固定、ターゲット枠を隠す、カメラ距離50。
 A test (/transparency): which of your spells each item upgrade makes stronger, from rings, trinkets, amulets and boss gear.
 = テスト（/transparency）：指輪、トリンケット、アミュレット、ボス装備のアップグレードがそれぞれどの呪文を強くするか。
 Converted for Azeroth Survivors. Puts every minimap button into one bag button: click it and they open in a bar (/mbb).
@@ -1866,8 +1866,8 @@ with
 = 被ダメージ {0}
 click a run for its summary
 = ランをクリックすると概要を表示
-Lost
-= 迷った
+Lost?
+= 迷った？
 Big Streamers
 = 人気配信者
 Content Creators

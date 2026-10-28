@@ -1486,8 +1486,8 @@ All your stats in game (/azs) and on the STATS page: runs, records, abilities, c
 = Уся ваша статистика в грі (/azs) і на сторінці СТАТИСТИКА: забіги, рекорди, здібності, класи, час у грі, ваш Немезис і кооператив із друзями.
 The launcher's whole New Player Guide inside the game (/handbook): every topic and page, each class's spells with their icons and the talents that change them, and all the talent trees.
 = Увесь посібник новачка з лаунчера просто в грі (/handbook): кожна тема й сторінка, заклинання кожного класу з іконками й талантами, що їх змінюють, і всі дерева талантів.
-Small changes, each on or off (/azsmods or its minimap button): no level-up, stat bonus or new spell lines in chat, boss markers (Skull, Cross, Moon), a blinking Square on a friend who falls, a plain action bar with just the six squares, move and lock the UI, hide the target frame and the camera at 50.
-= Невеликі зміни, кожну можна ввімкнути чи вимкнути (/azsmods або його кнопка біля мінімапи): без рядків про новий рівень, бонус до характеристик і нове закляття в чаті, мітки босів (череп, хрест, місяць), блимаючий квадрат над полеглим другом, проста панель дій лише з шести клітинок, переміщення й закріплення інтерфейсу, приховання рамки цілі та камера на 50.
+Small changes, each on or off (/azsmods or its minimap button): no level-up, stat bonus or new spell lines in chat, boss markers (Skull, Cross, Diamond), miniboss markers (Star, Triangle, Diamond), a blinking marker over each friend who falls, a plain action bar with just the six squares, move and lock the UI, hide the target frame and the camera at 50.
+= Невеликі зміни, кожну можна ввімкнути чи вимкнути (/azsmods або його кнопка біля мінімапи): без рядків про новий рівень, бонус до характеристик і нове закляття в чаті, мітки босів (череп, хрест, ромб), мітки мінібосів (зірка, трикутник, ромб), блимаюча мітка над кожним полеглим другом, проста панель дій лише з шести клітинок, переміщення й закріплення інтерфейсу, приховання рамки цілі та камера на 50.
 A test (/transparency): which of your spells each item upgrade makes stronger, from rings, trinkets, amulets and boss gear.
 = Тест (/transparency): які ваші заклинання посилює кожне покращення предмета — від кілець, аксесуарів, амулетів і спорядження босів.
 Converted for Azeroth Survivors. Puts every minimap button into one bag button: click it and they open in a bar (/mbb).
@@ -1866,8 +1866,8 @@ with
 = отримано {0}
 click a run for its summary
 = клацніть забіг, щоб побачити підсумок
-Lost
-= Заблукали
+Lost?
+= Заблукали?
 Big Streamers
 = Великі стримери
 Content Creators

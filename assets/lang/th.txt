@@ -1486,8 +1486,8 @@ All your stats in game (/azs) and on the STATS page: runs, records, abilities, c
 = สถิติทั้งหมดของคุณในเกม (/azs) และในหน้าสถิติ: รอบการเล่น สถิติสูงสุด ความสามารถ อาชีพ เวลาเล่น ศัตรูคู่แค้นของคุณ และการเล่นร่วมกับเพื่อน
 The launcher's whole New Player Guide inside the game (/handbook): every topic and page, each class's spells with their icons and the talents that change them, and all the talent trees.
 = คู่มือผู้เล่นใหม่ทั้งหมดของตัวเปิดเกมในเกม (/handbook): ทุกหัวข้อและหน้า เวทมนตร์ของแต่ละอาชีพพร้อมไอคอนและทาเลนต์ที่เปลี่ยนมัน และต้นทาเลนต์ทั้งหมด
-Small changes, each on or off (/azsmods or its minimap button): no level-up, stat bonus or new spell lines in chat, boss markers (Skull, Cross, Moon), a blinking Square on a friend who falls, a plain action bar with just the six squares, move and lock the UI, hide the target frame and the camera at 50.
-= การเปลี่ยนแปลงเล็กๆ เปิดหรือปิดได้ทีละอย่าง (/azsmods หรือปุ่มที่มินิแมป): ไม่มีบรรทัดเลเวลอัป โบนัสค่าสถานะ หรือคาถาใหม่ในแชท, เครื่องหมายบอส (หัวกะโหลก กากบาท พระจันทร์), สี่เหลี่ยมกะพริบเหนือเพื่อนที่ล้ม, แถบแอคชันเรียบๆ มีแค่หกช่อง, ย้ายและล็อก UI, ซ่อนกรอบเป้าหมาย และกล้องที่ 50
+Small changes, each on or off (/azsmods or its minimap button): no level-up, stat bonus or new spell lines in chat, boss markers (Skull, Cross, Diamond), miniboss markers (Star, Triangle, Diamond), a blinking marker over each friend who falls, a plain action bar with just the six squares, move and lock the UI, hide the target frame and the camera at 50.
+= การเปลี่ยนแปลงเล็กๆ เปิดหรือปิดได้ทีละอย่าง (/azsmods หรือปุ่มที่มินิแมป): ไม่มีบรรทัดเลเวลอัป โบนัสค่าสถานะ หรือคาถาใหม่ในแชท, เครื่องหมายบอส (หัวกะโหลก กากบาท เพชร), เครื่องหมายมินิบอส (ดาว สามเหลี่ยม เพชร), เครื่องหมายกะพริบเหนือเพื่อนแต่ละคนที่ล้ม, แถบแอคชันเรียบๆ มีแค่หกช่อง, ย้ายและล็อก UI, ซ่อนกรอบเป้าหมาย และกล้องที่ 50
 A test (/transparency): which of your spells each item upgrade makes stronger, from rings, trinkets, amulets and boss gear.
 = การทดสอบ (/transparency): การอัปเกรดไอเทมแต่ละครั้งทำให้เวทมนตร์ใดของคุณแรงขึ้น จากแหวน ของห้อย เครื่องราง และอุปกรณ์บอส
 Converted for Azeroth Survivors. Puts every minimap button into one bag button: click it and they open in a bar (/mbb).
@@ -1866,8 +1866,8 @@ with
 = ได้รับ {0}
 click a run for its summary
 = คลิกที่รอบเพื่อดูสรุป
-Lost
-= หลงทาง
+Lost?
+= หลงทาง?
 Big Streamers
 = สตรีมเมอร์ใหญ่
 Content Creators
