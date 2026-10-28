@@ -1,0 +1,59 @@
+# Developer tool: builds assets/item-icons.txt ("Item name|item id|icon name") for every gear piece of the game that is
+# a real World of Warcraft item: the item from the CMaNGOS Classic world database (https://github.com/cmangos/classic-db),
+# its icon name from Wowhead's public item data. The launcher shows the icons from Wowhead's image host. Also downloads
+# 8 random icons as samples. Puts it all on the private "item-icons" branch. Run by hand: Actions > Item icons.
+name: Item icons
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Find the items
+        run: |
+          git clone -q --depth 1 https://github.com/cmangos/classic-db.git /tmp/db || echo "::error::clone failed"
+          f=$(ls /tmp/db/Full_DB/*.sql* | head -1)
+          case "$f" in
+            *.gz) zcat "$f" > /tmp/world.sql ;;
+            *.zip) unzip -p "$f" > /tmp/world.sql ;;
+            *.7z) 7z x -so "$f" > /tmp/world.sql ;;
+            *) cp "$f" /tmp/world.sql ;;
+          esac
+          python3 tools/gear_names.py assets/items.txt > /tmp/names.txt
+          python3 tools/item_models.py /tmp/names.txt < /tmp/world.sql > /tmp/found.txt || echo "::error::parse failed"
+          echo "::notice::gear names $(wc -l < /tmp/names.txt), real items $(wc -l < /tmp/found.txt)"
+      - name: Their icons
+        run: |
+          : > /tmp/icons.txt
+          first=1
+          while IFS='|' read -r name id disp; do
+            j=$(curl -s -A "Mozilla/5.0" "https://nether.wowhead.com/classic/tooltip/item/$id")
+            [ $first = 1 ] && echo "::notice::sample: $(echo "$j" | head -c 300)" && first=0
+            icon=$(echo "$j" | jq -r '.icon // empty' 2>/dev/null)
+            [ -n "$icon" ] && echo "$name|$id|$(echo "$icon" | tr 'A-Z' 'a-z')" >> /tmp/icons.txt
+            sleep 0.2
+          done < /tmp/found.txt
+          echo "::notice::icons $(wc -l < /tmp/icons.txt)"
+          comm -23 <(sort /tmp/names.txt) <(cut -d'|' -f1 /tmp/icons.txt | sort) > /tmp/missing.txt
+          echo "::notice::no icon (not a real item): $(wc -l < /tmp/missing.txt)"
+          { echo "# Item name|item id|icon name: the game's gear pieces that are real World of Warcraft items, from the CMaNGOS"
+            echo "# Classic world database (https://github.com/cmangos/classic-db) and Wowhead's item data. The launcher shows"
+            echo "# https://wow.zamimg.com/images/wow/icons/large/<icon>.jpg for a piece. Made by Actions > Item icons."
+            cat /tmp/icons.txt; } > /tmp/item-icons.txt
+      - name: Keep it on the item-icons branch, with 8 samples
+        run: |
+          mkdir -p /tmp/pub/samples && cp /tmp/item-icons.txt /tmp/missing.txt /tmp/pub/
+          shuf -n 8 /tmp/icons.txt > /tmp/pub/samples/samples.txt
+          while IFS='|' read -r name id icon; do
+            curl -s -o "/tmp/pub/samples/$icon.jpg" "https://wow.zamimg.com/images/wow/icons/large/$icon.jpg"
+          done < /tmp/pub/samples/samples.txt
+          cd /tmp/pub
+          git init -q -b item-icons && git config user.name bot && git config user.email bot@users.noreply.github.com
+          git add -A && git commit -qm "item icons"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" HEAD:item-icons
