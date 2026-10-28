@@ -1,4 +1,5 @@
 # v2.1 (2026-10-28)
+In short: A big one. Addon profiles each keep their own interface, there's a ROLLBACK for addons and an Advanced settings mode, uninstalling happens inside the launcher, and two new addons by Maidenhead are in Download More. Videos open without a white flash and close with Esc, the Guide's own videos have a YouTube-style player, the Gear Planner shows five small stars, the Talent Tree Builder makes room for saving builds, the Guide follows the game's 0.124 and 0.125 updates, and Options › Launcher holds everything on one page.
 ## First-time setup
 - The launcher runs first-time setup whenever it starts in a folder with neither its own folder nor the game beside it
   (a new copy, or the exe moved somewhere new), even if it finds a game, a save or settings from before. Settings made
@@ -105,6 +106,7 @@
   notes, no longer as an underline.
 
 # v2.0 (2026-10-27)
+In short: MORE VIDEOS follows your Big Streamers / Content Creators choice, Tier Bonus starts a set fresh, "Lost?" became a small hover note, every step of the path goes straight there, Theorycrafting moved into Gameplay, and the launcher no longer comes back empty from the taskbar.
 ## Community
 - MORE VIDEOS follows the two boxes: with Big Streamers ticked it lists only the big streamers' videos, with Content
   Creators ticked only the content creators' (and the featured video comes from that group too). With neither, it lists
@@ -152,6 +154,7 @@
   too, instead of hiding it.
 
 # v1.9 (2026-10-27)
+In short: Easier to get around: the big section buttons always open the main page, every step of the path can be clicked, Options › Folders has its OPEN LOCATION and CHANGE FOLDER buttons back, and the Gear Planner's star numbers no longer cover the icons.
 ## Getting around
 - The big section buttons (and the icons on the right) always take you to that section's main page, even when you are
   already on one of its other pages: Options goes back to Options › Folders from Cloud Save or the language list,
@@ -171,6 +174,7 @@
 - Talent Tree Builder: no GEAR PLANNER button above the trees (the path at the top leads there).
 
 # v1.8 (2026-10-27)
+In short: The first big part of the Major Update: a new first-time setup that can't be skipped, PLAY waits until setup is done, the back arrow follows the way you came, Guide search works as you type, the Gear Planner gets clickable stars and Single Item / Tier Bonus, and Options and Stats lose their rows of tabs.
 This is a very large, but scattered update: it touches many different parts of the launcher, from the first-time setup to
 the Guide and the Gear Planner, rather than one big feature. Taken together it is a big step up in how easy and simple
 the launcher is to use.
@@ -318,6 +322,7 @@ the launcher is to use.
   so several friends can be down at once. Those three are never put on a boss.
 
 # v1.7 (2026-10-27)
+In short: Ready for the game's Heroic update: the Guide explains Heroic I to V, marks, stars and set bonuses, the Gear Planner shows stars and set bonuses, and AZS Stats tells you which spells each run leaned on.
 ## Guide
 - Class pages no longer end with a NEXT button: hover the class's name in the path at the top to go to another class.
 ## News and Changelog
@@ -364,6 +369,7 @@ the launcher is to use.
   you can see which spell you favour over time.
 
 # v1.6 (2026-10-27)
+In short: Small fixes: RUN SETUP AGAIN starts over properly, setup pages scroll instead of running off the edge, and a few buttons no longer spill past their box.
 ## First-time setup
 - RUN SETUP AGAIN (Options > LAUNCHER) now asks everything from the start, as if nothing had been set up: language
   first, every folder at its usual place, cloud saving on with no folder chosen yet. What you had stays until you
@@ -379,6 +385,7 @@ the launcher is to use.
 - About Launcher no longer lists AZS Transparency, which was removed in v1.0.
 
 # v1.5 (2026-10-27)
+In short: Every class's gear now has its real bonuses, rogues and shamans get their Off Hand, the in-game AZS Handbook has everything the launcher's Guide has, addons made of several folders switch on and off as one, and first-time setup moved inside the launcher.
 ## News and Changelog
 - Patch notes for the game's 0.120.5 update: co-op works on networks that blocked the co-op server, and an unreachable
   server is reported as such instead of "the host left".
@@ -436,6 +443,7 @@ the launcher is to use.
   is Aethus's.
 
 # v1.4 (2026-10-27)
+In short: Download More only lists addons the mod team has approved: three were taken out, and Bordo UI, BlackwellUI and LuckyOdds were added.
 ## Addons
 - DBM by Gabriellus, Death Recap by Fotze and Chest GPS by Fotze are no longer in Download More: they hadn't been
   approved by the mod team beforehand. Copies already installed stay in your AddOns folder until you remove them.
@@ -444,6 +452,7 @@ the launcher is to use.
   only one UI can be on at a time: turning one on asks before switching the other off.
 
 # v1.3 (2026-10-27)
+In short: Every link in the Guide goes somewhere, spells show which other spells affect them, the whole launcher draws much faster, and first-time setup no longer starts again by mistake.
 ## Guide
 - Every link in the Guide now goes somewhere. A spell named in another spell's text takes you to that spell, even on
   the same page: the page scrolls to it and its box lights up gold for a moment. A talent's name opens its class's
@@ -481,6 +490,7 @@ the launcher is to use.
   carries on with them and says so above PLAY. Every setting is still in Options.
 
 # v1.2 (2026-10-27)
+In short: More room everywhere: a bigger window, a path at the top instead of rows of buttons, and Cloud Save moved into Options. Download More gets UI, Gameplay and Misc tabs, there's a new THEORYCRAFTING button, and the Gear Planner and Talent Tree Builder now work together.
 ## News and Changelog
 - Patch notes for the game's 0.120.4 update: co-op parties of three or more play smoothly again.
 
@@ -544,6 +554,7 @@ the launcher is to use.
 - Big streamer videos (Asmongold's and five more) are always first in MORE VIDEOS, and the front page features them until November 9. Every other video counts as a Content Creator video.
 
 # v1.1 (2026-10-27)
+In short: New Items topic and a Gear Planner to try out gear, cloud save no longer copies whole addon folders, Survivor UI joins Download More (with a warning when two addons can't be on together), and the launcher now follows the game when it updates itself.
 ## News and Changelog
 - Patch notes for the game's 0.119.1, 0.120.0, 0.120.1, 0.120.2 and 0.120.3 updates: co-op runs that survive a
   dropped connection, joining a new party after the last one ended, fewer co-op disconnects, any race with any class
@@ -610,6 +621,7 @@ the launcher is to use.
   moved from LICENSE to the README.
 
 # v1.0 (2026-10-26)
+In short: The first full release. Setup now only asks questions and installs the game when you say so, the Guide is split into New Player, Gameplay and Theorycrafting with a new Talent Tree Builder, every addon is optional and off until you pick it, AZS Minor Mods and AZS Stats got lots of new features, and YouTube videos play right inside the launcher.
 ## Getting the game
 - Nothing downloads on its own any more. First-time setup only asks questions, and **INSTALL** asks whether the game
   is already on your PC: point to its folder, or let the launcher download it.
