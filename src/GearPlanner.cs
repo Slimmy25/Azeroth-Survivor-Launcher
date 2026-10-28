@@ -171,13 +171,13 @@ namespace AzerothLauncher
             var p = o as GearPiece;
             if (p != null) return p.Name;
             var j = o as Jewel;
-            return j != null ? j.Name : "";
+            return j != null ? (j.IsCodex ? j.Name + " — " + j.Spell : j.Name) : "";
         }
 
         Image IconOf(object o)
         {
             var j = o as Jewel;
-            if (j != null) return SpellIcons.Icon(j.Icon.ToLowerInvariant(), this);
+            if (j != null) return j.IsCodex ? SpellIcons.Spell(j.Spell, this) : SpellIcons.Icon(j.Icon.ToLowerInvariant(), this);
             var p = o as GearPiece;
             string ic;
             if (p != null && gearIcons.TryGetValue(p.Name, out ic)) return SpellIcons.Icon(ic, this);
@@ -400,7 +400,7 @@ namespace AzerothLauncher
         List<object> Choices(string slot)
         {
             var l = new List<object> { EmptyRow };
-            if (slot == "Neck") foreach (var j in Items.JewelryOf("Amulet")) l.Add(j);
+            if (slot == "Neck") foreach (var j in Items.JewelryOf("Amulet")) if (!j.IsCodex || j.Class == cls) l.Add(j);
             else if (slot.StartsWith("Finger")) foreach (var j in Items.JewelryOf("Ring")) l.Add(j);
             else if (slot.StartsWith("Trinket")) foreach (var j in Items.JewelryOf("Trinket")) l.Add(j);
             else foreach (var p in Items.GearOf(cls, slot)) l.Add(p);

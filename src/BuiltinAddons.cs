@@ -280,7 +280,24 @@ namespace AzerothLauncher
                 var sum = new Dictionary<string, double>();
                 foreach (var b in j.Bonuses) { double v; sum.TryGetValue(b.Stat, out v); sum[b.Stat] = v + b.Value; }
                 foreach (var kv in sum) s.Append(" [").Append(Q(kv.Key)).Append("] = ").Append(N(kv.Value)).Append(",");
-                s.Append(" }, ").Append(Q(string.Join("\n", j.Lines.ToArray()))).Append(" },\n");
+                s.Append(" }, ").Append(Q(string.Join("\n", j.Lines.ToArray()))).Append(", ").Append(Q(j.Class)).Append(", ").Append(Q(j.Spell)).Append(" },\n");
+            }
+            s.Append("},\n");
+            // codexchanges[class][spell key] = the class-specific neck piece that remakes that spell.
+            s.Append("codexchanges = {\n");
+            foreach (string cls in Items.Classes)
+            {
+                bool classHas = false;
+                foreach (var j in Items.Jewelry) if (j.IsCodex && j.Class == cls) { classHas = true; break; }
+                if (!classHas) continue;
+                s.Append("[").Append(Q(cls)).Append("] = {\n");
+                foreach (var j in Items.Jewelry)
+                {
+                    if (!j.IsCodex || j.Class != cls) continue;
+                    s.Append("[").Append(Q(Key(j.Spell))).Append("] = { { ")
+                     .Append(Q(j.Name)).Append(", ").Append(Q(j.Spell)).Append(", ").Append(Q(Items.Card(j))).Append(" }, },\n");
+                }
+                s.Append("},\n");
             }
             s.Append("},\n");
             // setchanges[class][spell key] = { { "Faith 8-piece", its text, rarity }, ... }: the class's sets whose 8-piece

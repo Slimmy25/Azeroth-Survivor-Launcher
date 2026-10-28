@@ -377,9 +377,12 @@ namespace AzerothLauncher
         // the class's set bonuses whose text names this spell: { "Faith 8-piece", its text, the rarity }
         readonly List<string[]> setBonuses = new List<string[]>();
         readonly List<KeyValuePair<Rectangle, string[]>> setChips = new List<KeyValuePair<Rectangle, string[]>>();
+        readonly List<Jewel> codexItems = new List<Jewel>();
+        readonly List<KeyValuePair<Rectangle, Jewel>> codexChips = new List<KeyValuePair<Rectangle, Jewel>>();
         Talent over;
         string overSpell;
         string[] overSet;
+        Jewel overCodex;
         const int Ic = 34;
 
         static string Base(string n) { return Regex.Replace(n ?? "", @"\s*\(.*\)$", "").Trim(); }
@@ -427,6 +430,8 @@ namespace AzerothLauncher
             this.line = line;
             this.className = className;
             changers = Talents.Changing(className, Regex.Replace(name, @"\s*\(.*\)$", ""));
+            foreach (var j in Items.Jewelry)
+                if (j.IsCodex && j.Class == className && string.Equals(j.Spell, Base(name), StringComparison.OrdinalIgnoreCase)) codexItems.Add(j);
             // the sets whose 8-piece bonus names this spell, word for word (as for the spells above)
             try
             {
@@ -456,6 +461,7 @@ namespace AzerothLauncher
             if (changers.Count > 0) h += 26;
             if (affecting.Count > 0) h += 26;
             if (setBonuses.Count > 0) h += 26;
+            if (codexItems.Count > 0) h += 26;
             Size = new Size(width, Math.Max(h, Ic + 14));
         }
 
@@ -479,12 +485,14 @@ namespace AzerothLauncher
             chips.Clear();
             spellChips.Clear();
             setChips.Clear();
+            codexChips.Clear();
             Font lf = Theme.F(8, FontStyle.Italic);
-            int rowsBelow = (changers.Count > 0 ? 1 : 0) + (affecting.Count > 0 ? 1 : 0) + (setBonuses.Count > 0 ? 1 : 0);
+            int rowsBelow = (changers.Count > 0 ? 1 : 0) + (affecting.Count > 0 ? 1 : 0) + (setBonuses.Count > 0 ? 1 : 0) + (codexItems.Count > 0 ? 1 : 0);
             float y = Height - 24 - 26 * Math.Max(0, rowsBelow - 1);
             if (changers.Count > 0) { ChipRow(g, lf, y); y += 26; }
             if (affecting.Count > 0) { SpellChipRow(g, lf, y); y += 26; }
-            if (setBonuses.Count > 0) SetChipRow(g, lf, y);
+            if (setBonuses.Count > 0) { SetChipRow(g, lf, y); y += 26; }
+            if (codexItems.Count > 0) CodexChipRow(g, lf, y);
         }
 
         // the sets whose 8-piece bonus changes this spell: each set's name in its rarity's colour; the hover reads it
@@ -528,6 +536,29 @@ namespace AzerothLauncher
             }
         }
 
+        // The Codex neck piece that remakes this spell; clicking it opens Items > Codex.
+        void CodexChipRow(Graphics g, Font lf, float y)
+        {
+            float x = Ic + 18;
+            string label = "Codex neck piece:";
+            using (var b = new SolidBrush(Theme.GoldDim)) g.DrawString(label, lf, b, x, y + 3);
+            x += g.MeasureString(label, lf).Width + 4;
+            Font cf = Theme.F(8, FontStyle.Bold);
+            foreach (var j in codexItems)
+            {
+                string name = j.Name;
+                SizeF sz = g.MeasureString(name, cf);
+                int width = Math.Min((int)sz.Width + 8, Width - (int)x - 6);
+                if (width < 24) break;
+                var r = new Rectangle((int)x, (int)y, width, 18);
+                using (var b = new SolidBrush(Theme.Hex("#1e1a26"))) g.FillRectangle(b, r);
+                using (var p = new Pen(j == overCodex ? Theme.Hex("#fff2b0") : GearSheet.RarityColor("Legendary"), 1)) g.DrawRectangle(p, r);
+                using (var b = new SolidBrush(GearSheet.RarityColor("Legendary"))) g.DrawString(name, cf, b, new RectangleF(r.X + 4, r.Y + 2, r.Width - 8, r.Height - 4));
+                codexChips.Add(new KeyValuePair<Rectangle, Jewel>(r, j));
+                x = r.Right + 4;
+            }
+        }
+
         void ChipRow(Graphics g, Font lf, float y)
         {
             float x = Ic + 18;
@@ -556,11 +587,14 @@ namespace AzerothLauncher
             foreach (var c in spellChips) if (Rectangle.Inflate(c.Key, 2, 2).Contains(e.Location)) { s = c.Value.Key; sText = c.Value.Value; }
             string[] st = null;
             foreach (var c in setChips) if (Rectangle.Inflate(c.Key, 2, 2).Contains(e.Location)) st = c.Value;
-            if (t != over || s != overSpell || st != overSet) { over = t; overSpell = s; overSet = st; Invalidate(); }
-            Cursor = t != null || s != null || st != null ? Cursors.Hand : Cursors.Default;   // a click opens the talent's trees / the spell's row / the set in the planner
+            Jewel cj = null;
+            foreach (var c in codexChips) if (Rectangle.Inflate(c.Key, 2, 2).Contains(e.Location)) cj = c.Value;
+            if (t != over || s != overSpell || st != overSet || cj != overCodex) { over = t; overSpell = s; overSet = st; overCodex = cj; Invalidate(); }
+            Cursor = t != null || s != null || st != null || cj != null ? Cursors.Hand : Cursors.Default;   // a click opens the talent's trees / the spell's row / the set in the planner
             if (t != null) GuideHover.Show(this, t.Name, Talents.HoverText(t), SpellIcons.Icon(t.Icon, null));
             else if (s != null) GuideHover.Show(this, s, sText, SpellIcons.Spell(s, null));
             else if (st != null) GuideHover.Show(this, st[0], st[1] + "\n\n" + Lang.T("all 8 at 3+ stars, half again as strong at 5"), null);
+            else if (cj != null) GuideHover.Show(this, cj.Name, Items.Card(cj), SpellIcons.Spell(cj.Spell, null));
             else if (new Rectangle(8, 8, Ic, Ic).Contains(e.Location) || e.Y < 24)
                 GuideHover.Show(this, name, SpellHover(), SpellIcons.Spell(Regex.Replace(name, @"\s*\(.*\)$", ""), null));
             else GuideHover.Hide();
@@ -589,19 +623,34 @@ namespace AzerothLauncher
                 foreach (var sb in setBonuses) n.Add(sb[0]);
                 s += "\n\n" + Lang.T("Set bonuses that change it:") + " " + string.Join(", ", n.ToArray());
             }
+            if (codexItems.Count > 0)
+            {
+                var n = new List<string>();
+                foreach (var j in codexItems) n.Add(j.Name);
+                s += "\n\nCodex neck piece that remakes it: " + string.Join(", ", n.ToArray());
+            }
             return s;
         }
 
         protected override void OnMouseLeave(EventArgs e)
         {
             base.OnMouseLeave(e);
-            if (over != null || overSpell != null || overSet != null) { over = null; overSpell = null; overSet = null; Invalidate(); }
+            if (over != null || overSpell != null || overSet != null || overCodex != null) { over = null; overSpell = null; overSet = null; overCodex = null; Invalidate(); }
             GuideHover.Hide();
         }
 
         protected override void OnMouseUp(MouseEventArgs e)
         {
             base.OnMouseUp(e);
+            if (e.Button == MouseButtons.Left && overCodex != null && GuideLinks.Navigate != null)
+            {
+                GuideHover.Hide();
+                var topics = Data.Guide;
+                int ti = topics.FindIndex(delegate(GuideTopic g) { return g.Title == "Items"; });
+                int pi = ti < 0 ? -1 : topics[ti].Pages.FindIndex(delegate(GuidePage g) { return g.Title == "Codex"; });
+                if (ti >= 0 && pi >= 0) GuideLinks.Navigate(new GuideLink { Term = overCodex.Name, Topic = ti, Page = pi, Tip = Items.Card(overCodex) });
+                return;
+            }
             if (e.Button == MouseButtons.Left && overSet != null && OpenSet != null)
             {
                 GuideHover.Hide();

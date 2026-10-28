@@ -216,7 +216,9 @@ namespace AzerothLauncher
                         if (!links.ContainsKey(piece.Name)) Add(piece.Name, itemsTopic, pg, Items.Card(piece));
                     }
                     int jp = pages.FindIndex(delegate(GuidePage g) { return g.Title.StartsWith("Rings"); });
-                    foreach (var j in Items.Jewelry) if (!links.ContainsKey(j.Name)) Add(j.Name, itemsTopic, jp, Items.Card(j));
+                    int cp = pages.FindIndex(delegate(GuidePage g) { return g.Title == "Codex"; });
+                    foreach (var j in Items.Jewelry) if (j.IsCodex && !links.ContainsKey(j.Name)) Add(j.Name, itemsTopic, cp, Items.Card(j));
+                    foreach (var j in Items.Jewelry) if (!j.IsCodex && !links.ContainsKey(j.Name)) Add(j.Name, itemsTopic, jp, Items.Card(j));
                 }
                 catch (Exception) { }
             }

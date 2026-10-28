@@ -24,7 +24,7 @@ local RARITY_RGB = { Common = { 1, 1, 1 }, Uncommon = { 0.12, 1, 0 }, Rare = { 0
                      Amulet = { 0.23, 0.56, 0.94 } };
 local frame, hero, scroll, child, backBtn, homeBtn, prevBtn, nextBtn;
 
-local function D() return AZSHANDBOOK_DATA or { topics = {}, talents = {}, icons = {}, names = {}, gear = {}, jewels = {}, spellchanges = {} }; end
+local function D() return AZSHANDBOOK_DATA or { topics = {}, talents = {}, icons = {}, names = {}, gear = {}, jewels = {}, spellchanges = {}, codexchanges = {} }; end
 local function DB()
 	if ( type(AZSHandbookDB) ~= "table" ) then AZSHandbookDB = {}; end
 	return AZSHandbookDB;
@@ -185,7 +185,7 @@ local function Choices(class, slot)
 		local kind = (slot == "Neck" and "Amulet") or (string.find(slot, "Finger") and "Ring") or "Trinket";
 		local j = D().jewels or {};
 		for i = 1, table.getn(j) do
-			if ( j[i][1] == kind ) then table.insert(out, { name = j[i][2], rarity = kind, stats = j[i][4], card = j[i][5], known = true, health = 0, icon = j[i][3] }); end
+			if ( j[i][1] == kind and (not j[i][6] or j[i][6] == "" or j[i][6] == class) ) then table.insert(out, { name = j[i][2] .. ((j[i][7] and j[i][7] ~= "") and (" — " .. j[i][7]) or ""), rarity = kind, stats = j[i][4], card = j[i][5], known = true, health = 0, icon = D().icons[Key(j[i][7] or "")] or j[i][3] }); end
 		end
 	else
 		local g = D().gear[class] or {};
@@ -463,9 +463,10 @@ local function Items()
 			if ( class and string.sub(section, 1, 10) == "Spell pool" and name ) then
 				local spell = StripRank(name);
 				local sc = (data.spellchanges or {})[class] or {};
+                local cc = (data.codexchanges or {})[class] or {};
 				table.insert(out, { kind = "spell", name = name, spell = spell, text = string.upper(string.sub(rest, 1, 1)) .. string.sub(rest, 2),
 				                    icon = IconOf(spell), changers = Changers(class, spell), spells = sc[Key(spell)] or {},
-				                    sets = (((data.setchanges or {})[class] or {})[Key(spell)]) or {} });
+				                    sets = (((data.setchanges or {})[class] or {})[Key(spell)]) or {}, codex = cc[Key(spell)] or {} });
 			else
 				-- the bullet's icon: its name's, else the first spell it names
 				local icon = name and IconOf(name);
@@ -549,6 +550,11 @@ local function SpellTooltip(owner, it)
 		for i = 1, table.getn(it.changers) do
 			GameTooltip:AddLine(it.changers[i][1][1] .. "  (" .. it.changers[i][2] .. ")", 0.37, 0.83, 0.37);
 		end
+	end
+	if ( table.getn(it.codex or {}) > 0 ) then
+		GameTooltip:AddLine(" ");
+		GameTooltip:AddLine("Codex neck piece that remakes it:", 0.6, 0.6, 0.6);
+		for i = 1, table.getn(it.codex) do GameTooltip:AddLine(it.codex[i][1], 1, 0.5, 0); end
 	end
 	GameTooltip:Show();
 end
@@ -667,6 +673,59 @@ local function LaySpellsBy(f, it, h)
 end
 
 -- the sets whose 8-piece bonus changes the spell: their names in their rarity's colour; the hover reads the bonus
+-- The Codex neck piece that remakes this spell; the item name links to Items > Codex.
+local function LayCodexBy(f, it, h)
+	f.cby = f.cby or Text(f, "GameFontDisableSmall");
+	f.ccchips = f.ccchips or {};
+	for i = 1, table.getn(f.ccchips) do f.ccchips[i]:Hide(); end
+	if ( table.getn(it.codex or {}) == 0 ) then f.cby:Hide(); return h; end
+	f.cby:ClearAllPoints();
+	f.cby:SetPoint("TOPLEFT", f, "TOPLEFT", 50, -(h - 2));
+	f.cby:SetText("Codex neck piece:");
+	f.cby:Show();
+	local x = 50 + f.cby:GetStringWidth() + 6;
+	for i = 1, math.min(3, table.getn(it.codex)) do
+		local d = it.codex[i];
+		local c = f.ccchips[i];
+		if ( not c ) then
+			c = CreateFrame("Button", nil, f);
+			c:SetHeight(18);
+			c:EnableMouse(true);
+			c.t = Text(c, "GameFontNormalSmall");
+			c.t:SetPoint("LEFT", c, "LEFT", 4, 0);
+			c:SetScript("OnEnter", function()
+				GameTooltip:SetOwner(this, "ANCHOR_RIGHT");
+				GameTooltip:AddLine(this.label, 1, 0.82, 0);
+				for line in string.gfind(this.card or "", "[^\n]+") do GameTooltip:AddLine(line, 1, 1, 1, 1); end
+				GameTooltip:Show();
+			end);
+			c:SetScript("OnLeave", function() GameTooltip:Hide(); end);
+			c:SetScript("OnClick", function()
+				Go(function()
+					local topics = D().topics or {};
+					for ti = 1, table.getn(topics) do
+						if ( topics[ti].title == "Items" ) then
+							view.topic, view.page, view.prompt = ti, nil, nil;
+							for pi = 1, table.getn(topics[ti].pages or {}) do if ( topics[ti].pages[pi].title == "Codex" ) then view.page = pi; break; end end
+							break;
+						end
+					end
+				end);
+			end);
+			f.ccchips[i] = c;
+		end
+		c.label, c.card = d[1], d[3];
+		c.t:SetText(d[1]);
+		c.t:SetTextColor(1, 0.5, 0);
+		c:SetWidth(math.min(c.t:GetStringWidth() + 8, CW - x - 4));
+		c:ClearAllPoints();
+		c:SetPoint("TOPLEFT", f, "TOPLEFT", x, -(h - 3));
+		x = x + c:GetWidth() + 4;
+		c:Show();
+	end
+	return h + 20;
+end
+
 local function LaySetsBy(f, it, h)
 	f.setby = f.setby or Text(f, "GameFontDisableSmall");
 	f.setchips = f.setchips or {};
@@ -1072,6 +1131,7 @@ local function Lay(items)
 			end
 			h = LaySpellsBy(f, it, h);
 			h = LaySetsBy(f, it, h);
+			h = LayCodexBy(f, it, h);
 			f:SetWidth(CW);
 			f:SetHeight(h);
 			f:SetPoint("TOPLEFT", child, "TOPLEFT", 0, -y);

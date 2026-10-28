@@ -31,6 +31,8 @@ namespace AzerothLauncher
     public class Jewel
     {
         public string Key = "", Name = "", Icon = "", Kind = "";   // Kind: Ring, Trinket, Amulet
+        public string Class = "", Spell = "";
+        public bool IsCodex;
         public List<ItemBonus> Bonuses = new List<ItemBonus>();
         public List<string> Lines = new List<string>();      // every line, the special effects too
     }
@@ -98,6 +100,41 @@ namespace AzerothLauncher
 
         static List<GearPiece> gear;
         static List<Jewel> jewels;
+        static readonly string[] CodexRows =
+        {
+            "Druid|Starfire|Eye of the Splitting Sky|Starfire: +1 target~Starfire: +20% damage~Starfire's hits leap to 2 more enemies for 30%",
+            "Druid|Rejuvenation|The Eternal Talisman|Rejuvenation: +26% healing~Rejuvenation: -35% cooldown~While Rejuvenation heals you, 5% of the damage you deal heals you too",
+            "Druid|Shred|Medallion of the Bladestorm|Shred: +4 targets~Shred: +50% damage~Shred's hits leap to 2 more enemies for 50%",
+            "Warlock|Drain Life|Pendant of the Plague|Drain Life: +3 targets~Drain Life: +90% damage~Enemies that die with Drain Life on them explode for 20% of their max health, at most 2 times a second",
+            "Warlock|Death Coil|Eye of the Splitting Sky|Death Coil: +1 target~Death Coil: +20% damage~Death Coil's hits leap to 2 more enemies for 30%",
+            "Warlock|Hellfire|Heart of the Earthshaker|Hellfire: +60% area~Hellfire: +35% damage~Hellfire's hits stun for 1.5 sec",
+            "Warlock|Immolate|Pendant of the Plague|Immolate: +3 targets~Immolate: +90% damage~Enemies that die with Immolate on them explode for 20% of their max health, at most 2 times a second",
+            "Mage|Fireball|Eye of the Splitting Sky|Fireball: +1 target~Fireball: +20% damage~Fireball's hits leap to 2 more enemies for 30%",
+            "Mage|Arcane Missiles|Stormcaller's Amulet|Arcane Missiles: +4 targets~Arcane Missiles: +20% damage~30% chance for Arcane Missiles's hits to strike again for 100%",
+            "Mage|Flamestrike|Amulet of the Inferno|Flamestrike: +50% area~Flamestrike: +100% duration~Flamestrike: +50% damage~Enemies Flamestrike kills explode for 30% of their max health, at most 2 times a second",
+            "Mage|Ice Barrier|The Eternal Talisman|Ice Barrier: +26% absorb~Ice Barrier: -35% cooldown~Ice Barrier: +100% absorb~A broken shield bursts for 50% of what it absorbed on enemies within 10 yd",
+            "Shaman|Healing Wave|The Eternal Talisman|Healing Wave: +26% healing~Healing Wave: -35% cooldown~Healing Wave also shields you for 40% of your max health",
+            "Shaman|Lightning Shield|The Eternal Talisman|Lightning Shield: +60% damage~25% chance to stun a melee attacker for 1.5 sec",
+            "Shaman|Earth Shock|Eye of the Splitting Sky|Earth Shock: +1 target~Earth Shock: +20% damage~Earth Shock's hits leap to 2 more enemies for 30%",
+            "Priest|Shadow Word: Pain|Pendant of the Plague|Shadow Word: Pain: +3 targets~Shadow Word: Pain: +90% damage~Enemies that die with Shadow Word: Pain on them explode for 20% of their max health, at most 2 times a second",
+            "Priest|Mind Blast|Eye of the Splitting Sky|Mind Blast: +1 target~Mind Blast: +20% damage~Mind Blast's hits leap to 2 more enemies for 30%",
+            "Priest|Holy Fire|Eye of the Splitting Sky|Holy Fire: +1 target~Holy Fire: +20% damage~Holy Fire's hits leap to 2 more enemies for 30%",
+            "Priest|Psychic Scream|Heart of the Earthshaker|Psychic Scream: +60% area~Psychic Scream: +35% damage~Psychic Scream's hits stun for 1.5 sec",
+            "Rogue|Seal Fate|Charm of the Fated Hour|Seal Fate: +60% damage~Seal Fate: +100% proc rate",
+            "Rogue|Ghostly Strike|Medallion of the Bladestorm|Ghostly Strike: +4 targets~Ghostly Strike: +50% damage~Ghostly Strike: +100% absorb",
+            "Rogue|Kidney Shot|Medallion of the Bladestorm|Kidney Shot: +4 targets~Kidney Shot: +50% damage~Kidney Shot: +100% stun duration",
+            "Rogue|Sinister Strike|Medallion of the Bladestorm|Sinister Strike: +4 targets~Sinister Strike: +50% damage~Sinister Strike's hits burn and bleed for 80% more over 6 sec",
+            "Hunter|Volley|Amulet of the Inferno|Volley: +50% area~Volley: +100% duration~Volley: +50% damage~Enemies Volley kills explode for 30% of their max health, at most 2 times a second",
+            "Hunter|Concussive Shot|Eye of the Splitting Sky|Concussive Shot: +1 target~Concussive Shot: +20% damage~Concussive Shot's hits leap to 2 more enemies for 30%",
+            "Hunter|Hunter's Mark|Charm of the Fated Hour|Hunter's Mark: +60% damage~Hunter's Mark: +40% area",
+            "Paladin|Divine Shield|The Eternal Talisman|Divine Shield: +100% duration~Divine Shield: -35% cooldown~Enemies you kill during Divine Shield explode for 20% of their max health, at most 2 times a second",
+            "Paladin|Holy Wrath|Heart of the Earthshaker|Holy Wrath: +60% area~Holy Wrath: +35% damage~Holy Wrath's hits stun for 1.5 sec",
+            "Paladin|Exorcism|Eye of the Splitting Sky|Exorcism: +1 target~Exorcism: +20% damage~Exorcism's hits leap to 2 more enemies for 30%",
+            "Warrior|Whirlwind|Heart of the Earthshaker|Whirlwind: +60% area~Whirlwind: +35% damage~Whirlwind's hits stun for 1.5 sec",
+            "Warrior|Execute|The Reaper's Amulet|Execute: +45% damage~A kill with Execute readies it again at once~Execute's hits splash 50% on enemies within 6 yd",
+            "Warrior|Bloodthirst|Medallion of the Bladestorm|Bloodthirst: +4 targets~Bloodthirst: +50% damage~Bloodthirst's hits burn and bleed for 80% more over 6 sec~Bloodthirst also shields you for 30% of your max health",
+            "Warrior|Rend|Pendant of the Plague|Rend: +3 targets~Rend: +90% damage~Enemies that die with Rend on them explode for 20% of their max health, at most 2 times a second"
+        };
         static Dictionary<string, string> chance;
 
         public static List<GearPiece> Gear { get { Load(); return gear; } }
@@ -250,6 +287,19 @@ namespace AzerothLauncher
                     jw.Lines.Add(shown);
                     if (st.Length > 0) jw.Bonuses.Add(new ItemBonus { Stat = st, Value = shownV, Text = shown });
                 }
+                j.Add(jw);
+            }
+            // Codex neck pieces, transcribed from the supplied in-game video: one entry per class/spell pair.
+            foreach (string row in CodexRows)
+            {
+                string[] f = row.Split('|');
+                if (f.Length < 4) continue;
+                var jw = new Jewel { Key = "codex_" + f[0].ToLowerInvariant() + "_" + f[1].ToLowerInvariant().Replace(" ", "_"),
+                    Name = f[2], Icon = f[1], Kind = "Amulet", Class = f[0], Spell = f[1], IsCodex = true };
+                jw.Lines.Add("Legendary amulet - remakes " + jw.Spell);
+                foreach (string effect in f[3].Split('~')) if (effect.Length > 0) jw.Lines.Add(effect);
+                jw.Lines.Add("Offered only once your hero knows the spell.");
+                jw.Lines.Add("Offered again while worn, it is empowered.");
                 j.Add(jw);
             }
             // the bonuses entered from the game's item cards
@@ -486,8 +536,8 @@ namespace AzerothLauncher
         public static string Card(Jewel j)
         {
             var b = new StringBuilder();
-            b.Append(j.Name).Append('\n').Append(Lang.T(j.Kind));
-            foreach (string l in j.Lines) b.Append("\n").Append(l);
+            b.Append(j.Name).Append('\n').Append(j.IsCodex ? "Legendary amulet - remakes " + j.Spell : Lang.T(j.Kind));
+            foreach (string l in j.Lines) if (!j.IsCodex || !l.StartsWith("Legendary amulet - remakes ")) b.Append("\n").Append(l);
             return b.ToString();
         }
 
@@ -501,11 +551,27 @@ namespace AzerothLauncher
             l.Add("");
             l.Add("The bonuses below are those of a piece at 0 stars; each rarity ends with its set's 4-piece and 8-piece bonuses. Sets can be mixed: four pieces of one set and four of another give both 4-piece bonuses. Try it out in the Gear Planner (Guide > Theorycrafting): click a piece to add a star; stars decide which set bonuses you reach.");
             l.Add("@page Rings, Trinkets & Amulets | The jewelry every hero is offered, with its numbers");
-            l.Add("Offered again while worn, a ring, trinket or amulet is empowered: its numbers grow toward three times their own. The numbers below are those of its first pick.");
+            l.Add("Offered again while worn, a ring, trinket or ordinary amulet is empowered: its numbers grow toward three times their own. The numbers below are those of its first pick.");
             foreach (string kind in new[] { "Ring", "Trinket", "Amulet" })
             {
                 l.Add("# " + kind + "s");
-                foreach (var j in JewelryOf(kind)) l.Add("- " + j.Name + ": " + string.Join(" ", j.Lines.ToArray()));
+                foreach (var j in JewelryOf(kind))
+                {
+                    if (j.IsCodex) continue;
+                    l.Add("- " + j.Name + ": " + string.Join(" ", j.Lines.ToArray()));
+                }
+            }
+            l.Add("@page Codex | Legendary neck pieces that remake class spells");
+            l.Add("Each Codex neck piece is tied to one class and one spell. It is offered only once your hero knows that spell; while worn, it can be offered again and empowered. Select your class in the Gear Planner to see only its Codex pieces.");
+            foreach (string cls in Classes)
+            {
+                bool header = false;
+                foreach (var j in Jewelry)
+                {
+                    if (!j.IsCodex || j.Class != cls) continue;
+                    if (!header) { l.Add("# " + cls); header = true; }
+                    l.Add("- " + j.Spell + ": " + j.Name + " — " + string.Join(" ", j.Lines.ToArray()));
+                }
             }
             foreach (string cls in Classes)
             {
