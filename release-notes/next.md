@@ -12,3 +12,7 @@
 - Tier Bonus: a set is a starting point, not a pile. Picking one empties every armor slot first, so nothing from the
   set picked before stays (4-piece Common, then 8-piece PvP, then 4-piece Legendary leaves only the 4 Legendary
   pieces). Only more of the same set adds to it (its 4 pieces, then its 8). Weapons and jewelry stay.
+
+### Lost?
+- "Lost?" no longer opens a window over the launcher. Point at it (or click it) and a small note beside it explains the
+  path at the top; it goes away when the pointer leaves.

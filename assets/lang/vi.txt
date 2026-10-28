@@ -1890,3 +1890,5 @@ Importing a save is in Change Folder ▾ in the path above.
 = Nhập bản lưu nằm trong Đổi thư mục ▾ ở đường dẫn phía trên.
 That folder does not exist.
 = Thư mục đó không tồn tại.
+The path at the top shows where you are. Click a step to go back to it, or point at its ▾ for the places beside it. The arrow on the left goes back the way you came; the X takes you home.
+= Đường dẫn phía trên cho biết bạn đang ở đâu. Bấm vào một bước để quay lại đó, hoặc trỏ vào ▾ của nó để xem các nơi bên cạnh. Mũi tên bên trái quay lại theo đường bạn đã đi; X đưa bạn về trang chính.

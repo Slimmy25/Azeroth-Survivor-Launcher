@@ -1890,3 +1890,5 @@ Importing a save is in Change Folder ▾ in the path above.
 = セーブのインポートは上のパスの「フォルダーを変更 ▾」にあります。
 That folder does not exist.
 = そのフォルダーは存在しません。
+The path at the top shows where you are. Click a step to go back to it, or point at its ▾ for the places beside it. The arrow on the left goes back the way you came; the X takes you home.
+= 上のパスは現在地を示します。ステップをクリックするとそこへ戻り、▾にポインターを合わせると隣の場所が表示されます。左の矢印は来た道を戻り、Xでホームへ戻ります。

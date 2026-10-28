@@ -1889,3 +1889,5 @@ Importing a save is in Change Folder ▾ in the path above.
 = Een save importeren staat onder Map wijzigen ▾ in het pad hierboven.
 That folder does not exist.
 = Die map bestaat niet.
+The path at the top shows where you are. Click a step to go back to it, or point at its ▾ for the places beside it. The arrow on the left goes back the way you came; the X takes you home.
+= Het pad bovenaan laat zien waar je bent. Klik op een stap om ernaar terug te gaan, of wijs zijn ▾ aan voor de plekken ernaast. De pijl links gaat terug zoals je kwam; de X brengt je naar huis.

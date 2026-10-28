@@ -239,6 +239,10 @@ namespace AzerothLauncher
             if (ha < 0) ha = MenuTextAt(e.Location);          // the last step's name lights its arrow
             if (h != hover || ha != hoverArrow) { hover = h; hoverArrow = ha; Invalidate(); }
             Cursor = CloseBox.Contains(e.Location) || HelpBox.Contains(e.Location) || h != -1 || ha != -1 ? Cursors.Hand : Cursors.Default;
+            // "Lost?": a small note while the pointer is on it (no window over the launcher)
+            bool onHelp = HelpBox.Contains(e.Location);
+            if (onHelp && !helpTip) { helpTip = true; WowButton.Fire(HelpClicked); }
+            else if (!onHelp && helpTip) { helpTip = false; GuideHover.Hide(); }
             if (dragOffset.HasValue && Owner2 != null)
             {
                 Point s = PointToScreen(e.Location);
@@ -247,7 +251,9 @@ namespace AzerothLauncher
             base.OnMouseMove(e);
         }
 
-        protected override void OnMouseLeave(EventArgs e) { if (hover != -1 || hoverArrow != -1) { hover = -1; hoverArrow = -1; Invalidate(); } base.OnMouseLeave(e); }
+        bool helpTip;                                        // the "Lost?" note is showing
+
+        protected override void OnMouseLeave(EventArgs e) { if (helpTip) { helpTip = false; GuideHover.Hide(); } if (hover != -1 || hoverArrow != -1) { hover = -1; hoverArrow = -1; Invalidate(); } base.OnMouseLeave(e); }
 
         void ShowMenu(int i, Rectangle at)
         {
@@ -412,12 +418,9 @@ namespace AzerothLauncher
             sideHead.Dock = DockStyle.Top;
             // (no Owner2: the section area does not move)
             sideHead.CloseClicked = CloseSide;
-            sideHead.HelpClicked = delegate
+            sideHead.HelpClicked = delegate                  // a small note beside "Lost?", not a window over the launcher
             {
-                Info("The path at the top", "This window has no rows of buttons, to give its pages as much room as possible. " +
-                     "The path at the top does their job: each step is where you are (Guide › Classes › Priest).\n\n" +
-                     "Click a step to go back to it. Point at a step with ▾, or click it, for the list of places beside it " +
-                     "(the other tabs, classes or pages). The arrow on the left goes back the way you came, and the X takes you home.");
+                GuideHover.Show(sideHead, Lang.T("Lost?"), Lang.T(LostNote));
             };
             sideHead.Moved = delegate(Point p)
             {
@@ -616,6 +619,8 @@ namespace AzerothLauncher
             }
             if (name == "Addons") RefreshGates();             // AZS Stats switched on or off: the Stats buttons follow
         }
+
+        const string LostNote = "The path at the top shows where you are. Click a step to go back to it, or point at its ▾ for the places beside it. The arrow on the left goes back the way you came; the X takes you home.";
 
         // the section is on its main page (where its big button takes you): no "Lost?" there
         bool OnMainPage(string name)

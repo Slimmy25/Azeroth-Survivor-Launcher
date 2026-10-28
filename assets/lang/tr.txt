@@ -1890,3 +1890,5 @@ Importing a save is in Change Folder ▾ in the path above.
 = Kayıt içe aktarma, yukarıdaki yolda Klasörü değiştir ▾ altında.
 That folder does not exist.
 = Bu klasör yok.
+The path at the top shows where you are. Click a step to go back to it, or point at its ▾ for the places beside it. The arrow on the left goes back the way you came; the X takes you home.
+= Üstteki yol nerede olduğunu gösterir. Bir adıma tıklayıp oraya dön ya da yanındaki yerler için ▾ işaretinin üzerine gel. Soldaki ok geldiğin yoldan geri götürür; X ana sayfaya götürür.

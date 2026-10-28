@@ -1890,3 +1890,5 @@ Importing a save is in Change Folder ▾ in the path above.
 = सेव इम्पोर्ट करना ऊपर के पथ में फ़ोल्डर बदलें ▾ में है।
 That folder does not exist.
 = वह फ़ोल्डर मौजूद नहीं है।
+The path at the top shows where you are. Click a step to go back to it, or point at its ▾ for the places beside it. The arrow on the left goes back the way you came; the X takes you home.
+= ऊपर का पथ दिखाता है कि आप कहाँ हैं। किसी चरण पर क्लिक करके वहाँ लौटें, या उसके ▾ पर पॉइंटर रखें ताकि पास की जगहें दिखें। बाईं ओर का तीर आपके आए रास्ते से वापस ले जाता है; X आपको होम ले जाता है।
