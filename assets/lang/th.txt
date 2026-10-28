@@ -1902,3 +1902,11 @@ EXIT FULLSCREEN
 = ออกจากเต็มจอ
 This video can't play here right now.
 = ไม่สามารถเล่นวิดีโอนี้ที่นี่ได้ในตอนนี้
+Addons updated: {0}.
+= อัปเดตแอดออนแล้ว: {0}
+The launcher's language (now {0}).
+= ภาษาของตัวเปิดเกม (ตอนนี้ {0})
+Its version, what's new and who made it.
+= เวอร์ชัน สิ่งใหม่ และผู้สร้าง
+The first-time setup's steps again, with your settings as they are.
+= ขั้นตอนการตั้งค่าครั้งแรกอีกครั้ง โดยการตั้งค่าของคุณคงเดิม

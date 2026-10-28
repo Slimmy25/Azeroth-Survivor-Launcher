@@ -1902,3 +1902,11 @@ EXIT FULLSCREEN
 = KILÉPÉS A TELJES KÉPERNYŐBŐL
 This video can't play here right now.
 = Ez a videó most nem játszható le itt.
+Addons updated: {0}.
+= Frissített kiegészítők: {0}.
+The launcher's language (now {0}).
+= Az indító nyelve (most {0}).
+Its version, what's new and who made it.
+= A verziója, az újdonságok és a készítői.
+The first-time setup's steps again, with your settings as they are.
+= Az első beállítás lépései újra, a beállításaid változatlanul.

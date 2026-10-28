@@ -1901,3 +1901,11 @@ EXIT FULLSCREEN
 = ESCI DA SCHERMO INTERO
 This video can't play here right now.
 = Questo video non può essere riprodotto qui al momento.
+Addons updated: {0}.
+= Addon aggiornati: {0}.
+The launcher's language (now {0}).
+= La lingua del launcher (ora {0}).
+Its version, what's new and who made it.
+= La sua versione, le novità e chi l’ha fatto.
+The first-time setup's steps again, with your settings as they are.
+= I passaggi della prima configurazione di nuovo, con le tue impostazioni come sono.

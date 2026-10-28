@@ -1902,3 +1902,11 @@ EXIT FULLSCREEN
 = IEȘI DIN ECRAN COMPLET
 This video can't play here right now.
 = Acest videoclip nu poate fi redat aici acum.
+Addons updated: {0}.
+= Addonuri actualizate: {0}.
+The launcher's language (now {0}).
+= Limba launcherului (acum {0}).
+Its version, what's new and who made it.
+= Versiunea, noutățile și cine l-a făcut.
+The first-time setup's steps again, with your settings as they are.
+= Pașii primei configurări din nou, cu setările tale așa cum sunt.

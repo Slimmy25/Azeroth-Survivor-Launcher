@@ -1901,3 +1901,11 @@ EXIT FULLSCREEN
 = SALIR DE PANTALLA COMPLETA
 This video can't play here right now.
 = Este vídeo no se puede reproducir aquí ahora mismo.
+Addons updated: {0}.
+= Addons actualizados: {0}.
+The launcher's language (now {0}).
+= El idioma del launcher (ahora {0}).
+Its version, what's new and who made it.
+= Su versión, las novedades y quién lo hizo.
+The first-time setup's steps again, with your settings as they are.
+= Los pasos de la configuración inicial otra vez, con tus ajustes como están.

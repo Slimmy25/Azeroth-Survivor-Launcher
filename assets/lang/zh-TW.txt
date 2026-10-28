@@ -1902,3 +1902,11 @@ EXIT FULLSCREEN
 = 結束全螢幕
 This video can't play here right now.
 = 此影片暫時無法在這裡播放。
+Addons updated: {0}.
+= 已更新插件：{0}。
+The launcher's language (now {0}).
+= 啟動器的語言（目前：{0}）。
+Its version, what's new and who made it.
+= 它的版本、更新內容和製作者。
+The first-time setup's steps again, with your settings as they are.
+= 再走一遍首次設定的步驟，你的設定保持不變。

@@ -516,7 +516,7 @@ namespace AzerothLauncher
             body = GearEffect.Apply(title, body);              // the Gear Planner's set, when there is one
             box.body = body;
             Font tf = Theme.F(10.5f, FontStyle.Bold), bf = Theme.F(9.5f);
-            int th = TextRenderer.MeasureText(title, tf, new Size(W - 20 - (icon != null ? 40 : 0), 0), TextFormatFlags.WordBreak).Height;
+            int th = TextRenderer.MeasureText(title, tf, new Size(W - 20 - (icon != null ? 40 : 0), 0), TextFormatFlags.WordBreak | TextFormatFlags.NoPrefix).Height;
             if (icon != null) th = Math.Max(th, 36);
             int bh;
             using (var mg = Graphics.FromImage(measure)) bh = box.Flow(mg, bf, false);
@@ -542,7 +542,7 @@ namespace AzerothLauncher
             using (var p = new Pen(Theme.Hex("#c49a48"), 1)) g.DrawRectangle(p, 0, 0, Width - 1, Height - 1);
             Font tf = Theme.F(10.5f, FontStyle.Bold), bf = Theme.F(9.5f);
             int ix = icon != null ? 40 : 0;
-            int th = TextRenderer.MeasureText(title, tf, new Size(W - 20 - ix, 0), TextFormatFlags.WordBreak).Height;
+            int th = TextRenderer.MeasureText(title, tf, new Size(W - 20 - ix, 0), TextFormatFlags.WordBreak | TextFormatFlags.NoPrefix).Height;
             if (icon != null)
             {
                 th = Math.Max(th, 36);
@@ -550,7 +550,7 @@ namespace AzerothLauncher
                 using (var p = new Pen(Theme.Hex("#8a7040"), 1)) g.DrawRectangle(p, 10, 8, 32, 32);
             }
             TextRenderer.DrawText(g, title, tf, new Rectangle(10 + ix, icon != null ? 14 : 8, W - 20 - ix, th), Theme.Gold, BackColor,
-                                  TextFormatFlags.WordBreak);
+                                  TextFormatFlags.WordBreak | TextFormatFlags.NoPrefix);   // "&" as itself
             var st = g.Save();
             g.TranslateTransform(10, 10 + th);
             Flow(g, bf, true);

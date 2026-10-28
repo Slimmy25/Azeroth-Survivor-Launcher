@@ -1902,3 +1902,11 @@ EXIT FULLSCREEN
 = UKONČIT CELOU OBRAZOVKU
 This video can't play here right now.
 = Toto video se tu teď nedá přehrát.
+Addons updated: {0}.
+= Aktualizované doplňky: {0}.
+The launcher's language (now {0}).
+= Jazyk launcheru (nyní {0}).
+Its version, what's new and who made it.
+= Jeho verze, novinky a kdo ho vytvořil.
+The first-time setup's steps again, with your settings as they are.
+= Kroky prvního nastavení znovu, s nastavením, jak je máte.

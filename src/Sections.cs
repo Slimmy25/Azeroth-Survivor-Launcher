@@ -274,7 +274,7 @@ namespace AzerothLauncher
             foreach (var kv in items)
             {
                 Action act = kv.Value;
-                var it = new ToolStripMenuItem(Lang.T(kv.Key));
+                var it = new ToolStripMenuItem(Lang.T(kv.Key).Replace("&", "&&"));   // "&" is shown as itself, not as an underline
                 it.ForeColor = kv.Key == crumbs[i].Key ? Theme.Hex("#f0c050") : Theme.Hex("#f5e9c8");   // where you are now
                 it.Click += delegate { m.Close(); WowButton.Fire(act); };
                 m.Items.Add(it);
@@ -1176,8 +1176,46 @@ namespace AzerothLauncher
                     mirrorDates = dates;
                     mirrorAsking = false;
                     if (current == "Addons" && addonMode == "download") BuildPanel("Addons");
+                    AutoUpdateAddons();                       // newer copies on GitHub: installed right away
                 });
             });
+        }
+
+        // Addon updates without asking: every installed Download More addon with a newer copy on GitHub is updated, one
+        // after the other, as soon as the launcher knows (at start, and again when the game closes). Never while the
+        // game runs (it keeps addons open) or a sync or setup is going on; the next chance picks them up.
+        bool autoAddonsBusy;
+
+        void AutoUpdateAddons()
+        {
+            if (PreviewMode || autoAddonsBusy || setupOpen || !GateOpen()) return;
+            if (GameRunningFlag || Util.GameRunning() || SyncBusy || addonDlBusy) return;
+            if (startupLauncherCheck || Updating) { After(3000, AutoUpdateAddons); return; }   // a launcher update may restart us first
+            if (mirrorDates == null) { AskMirrorDates(); return; }   // it comes back here when the dates are in
+            var todo = new List<AddonEntry>();
+            try
+            {
+                foreach (var e in Data.Addons)
+                    if (AddonFoldersOf(e.Name).Count > 0 && AddonHasUpdate(e)) todo.Add(e);
+            }
+            catch (Exception) { return; }
+            if (todo.Count == 0) return;
+            autoAddonsBusy = true;
+            int i = 0;
+            Action next = null;
+            next = delegate
+            {
+                if (i >= todo.Count || GameRunningFlag || Util.GameRunning() || SyncBusy)
+                {
+                    autoAddonsBusy = false;
+                    if (i > 0) SetStatus(Lang.F("Addons updated: {0}.", i));
+                    return;
+                }
+                var e = todo[i++];
+                SyncLog("Updating the " + e.Name + " addon (a newer copy is on GitHub) ...", Level.Info);
+                DownloadAddon(e.Name, e.Url, next, true);
+            };
+            next();
         }
 
         // true when the copy on GitHub is newer than the one installed
@@ -1349,7 +1387,8 @@ namespace AzerothLauncher
             return false;
         }
 
-        void DownloadAddon(string name, string url, Action after = null)
+        // quiet: an automatic update (no message box on a failure; the log says it and the next one goes on)
+        void DownloadAddon(string name, string url, Action after = null, bool quiet = false)
         {
             if (AddonsLocked()) return;
             if (addonDlBusy)
@@ -1384,6 +1423,11 @@ namespace AzerothLauncher
                         Cfg.Save();
                         if (after != null) try { after(); } catch (Exception) { }
                         if (current == "Addons" || current == "Stats") BuildPanel(current);
+                    }
+                    else if (quiet)
+                    {
+                        SyncLog("  " + name + " addon not updated: " + err, Level.Warn);
+                        if (after != null) try { after(); } catch (Exception) { }
                     }
                     else Msg.Show(this, "Could not install " + name + ":\n\n" + err, "Addons",
                                          MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -1846,18 +1890,6 @@ namespace AzerothLauncher
         ScrollPanel optionsPage;                             // the page shown, so a rebuild of the same tab keeps its place
         int optionsPageTab = -1;
 
-        // Options › Launcher › Settings ▾ : the launcher's other places
-        List<KeyValuePair<string, Action>> LauncherPlaces()
-        {
-            return new List<KeyValuePair<string, Action>>
-            {
-                new KeyValuePair<string, Action>("Settings", delegate { optionsLang = false; optionsTab = 4; BuildPanel("Options"); }),
-                new KeyValuePair<string, Action>("Language", delegate { optionsLang = true; BuildPanel("Options"); }),
-                new KeyValuePair<string, Action>("About Launcher", delegate { ShowSection("About Launcher"); }),
-                new KeyValuePair<string, Action>("Run setup again", delegate { RunSetup(); }),
-            };
-        }
-
         void PanelOptions()
         {
             // a setting changed on this tab rebuilds it: it stays where it was scrolled to
@@ -1869,15 +1901,8 @@ namespace AzerothLauncher
             if (optionsLang)                                 // Options › Launcher › Language ▾ : the languages themselves
             {
                 // (no list of languages here: a language is only picked on the page itself, never by passing over the path)
-                SetCrumbs("Options", home, "Launcher", (Action)delegate { optionsLang = false; BuildPanel("Options"); }, "Language", null);
+                SetCrumbs("Options", home, "Launcher", (Action)delegate { optionsLang = false; optionsTab = 4; BuildPanel("Options"); }, "Language", null);
                 SetCrumbMenu(1, OptionTabMenu());
-                SetCrumbMenu(2, LauncherPlaces());
-            }
-            else if (optionsTab == 4)                        // Options › Launcher › Settings ▾ : its other places
-            {
-                SetCrumbs("Options", home, "Launcher", (Action)delegate { BuildPanel("Options"); }, "Settings", null);
-                SetCrumbMenu(1, OptionTabMenu());
-                SetCrumbMenu(2, LauncherPlaces());
             }
             else
             {
@@ -2186,12 +2211,14 @@ namespace AzerothLauncher
                             delegate(bool on) { SetStatsEnabled(on); });
             y = OptionCheck("Show play time on the home screen", Cfg.Bool("home_playtime", true), y,
                             delegate(bool on) { Cfg.Set("home_playtime", on); Cfg.Save(); Invalidate(); });
-            // Language, About Launcher and Run setup again: places in the path above (Options › Launcher › Settings ▾)
+            // Language, About Launcher and Run setup again: right here on the Launcher page (no Settings step in the path)
             string langName = Lang.Code;
             foreach (var kv in Lang.Available()) if (kv.Key == Lang.Code) langName = kv.Value;
-            var more = PutText(Lang.F("Language ({0}), About Launcher and Run setup again: in Settings ▾ in the path above.", langName),
-                               9, FontStyle.Italic, Theme.GoldDim, 20, y + 6, PW - 40);
-            return BottomOf(more);                                        // play time: on the home screen, under the Launcher buttons
+            y += 8;
+            row("LANGUAGE", delegate { optionsLang = true; BuildPanel("Options"); }, Lang.F("The launcher's language (now {0}).", langName));
+            row("ABOUT LAUNCHER", delegate { ShowSection("About Launcher"); }, "Its version, what's new and who made it.");
+            row("RUN SETUP AGAIN", delegate { RunSetup(); }, "The first-time setup's steps again, with your settings as they are.");
+            return y;                                                     // play time: on the home screen, under the Launcher buttons
         }
 
         // the game folder: one that holds the game is the same as installing it (there is no "install from a file")

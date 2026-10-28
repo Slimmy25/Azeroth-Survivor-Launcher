@@ -1902,3 +1902,11 @@ EXIT FULLSCREEN
 = THOÁT TOÀN MÀN HÌNH
 This video can't play here right now.
 = Không thể phát video này ở đây lúc này.
+Addons updated: {0}.
+= Đã cập nhật addon: {0}.
+The launcher's language (now {0}).
+= Ngôn ngữ của launcher (hiện là {0}).
+Its version, what's new and who made it.
+= Phiên bản, điểm mới và người làm ra nó.
+The first-time setup's steps again, with your settings as they are.
+= Các bước thiết lập lần đầu một lần nữa, giữ nguyên cài đặt của bạn.

@@ -1902,3 +1902,11 @@ EXIT FULLSCREEN
 = ΕΞΟΔΟΣ ΑΠΟ ΠΛΗΡΗ ΟΘΟΝΗ
 This video can't play here right now.
 = Αυτό το βίντεο δεν μπορεί να παίξει εδώ αυτή τη στιγμή.
+Addons updated: {0}.
+= Πρόσθετα που ενημερώθηκαν: {0}.
+The launcher's language (now {0}).
+= Η γλώσσα του launcher (τώρα {0}).
+Its version, what's new and who made it.
+= Η έκδοσή του, τι νέο υπάρχει και ποιος το έφτιαξε.
+The first-time setup's steps again, with your settings as they are.
+= Τα βήματα της πρώτης ρύθμισης ξανά, με τις ρυθμίσεις σου όπως είναι.

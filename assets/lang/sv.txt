@@ -1901,3 +1901,11 @@ EXIT FULLSCREEN
 = AVSLUTA HELSKÄRM
 This video can't play here right now.
 = Den här videon kan inte spelas här just nu.
+Addons updated: {0}.
+= Uppdaterade tillägg: {0}.
+The launcher's language (now {0}).
+= Launcherns språk (nu {0}).
+Its version, what's new and who made it.
+= Version, nyheter och vem som gjorde den.
+The first-time setup's steps again, with your settings as they are.
+= Förstagångsinställningens steg igen, med dina inställningar som de är.

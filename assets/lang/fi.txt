@@ -1901,3 +1901,11 @@ EXIT FULLSCREEN
 = POISTU KOKO NÄYTÖSTÄ
 This video can't play here right now.
 = Tätä videota ei voi toistaa täällä juuri nyt.
+Addons updated: {0}.
+= Päivitettyjä lisäosia: {0}.
+The launcher's language (now {0}).
+= Käynnistimen kieli (nyt {0}).
+Its version, what's new and who made it.
+= Sen versio, uutuudet ja tekijät.
+The first-time setup's steps again, with your settings as they are.
+= Ensiasetuksen vaiheet uudelleen, asetuksesi sellaisinaan.

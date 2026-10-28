@@ -1901,3 +1901,11 @@ EXIT FULLSCREEN
 = VOLLEDIG SCHERM SLUITEN
 This video can't play here right now.
 = Deze video kan hier nu niet worden afgespeeld.
+Addons updated: {0}.
+= Bijgewerkte addons: {0}.
+The launcher's language (now {0}).
+= De taal van de launcher (nu {0}).
+Its version, what's new and who made it.
+= De versie, wat er nieuw is en wie hem maakte.
+The first-time setup's steps again, with your settings as they are.
+= De stappen van de eerste installatie opnieuw, met je instellingen zoals ze zijn.

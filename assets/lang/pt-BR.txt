@@ -1901,3 +1901,11 @@ EXIT FULLSCREEN
 = SAIR DA TELA CHEIA
 This video can't play here right now.
 = Este vídeo não pode ser reproduzido aqui agora.
+Addons updated: {0}.
+= Addons atualizados: {0}.
+The launcher's language (now {0}).
+= O idioma do launcher (agora {0}).
+Its version, what's new and who made it.
+= A versão, as novidades e quem o fez.
+The first-time setup's steps again, with your settings as they are.
+= Os passos da primeira configuração de novo, com suas configurações como estão.

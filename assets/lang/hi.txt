@@ -1902,3 +1902,11 @@ EXIT FULLSCREEN
 = फ़ुल स्क्रीन से बाहर
 This video can't play here right now.
 = यह वीडियो अभी यहाँ नहीं चल सकता।
+Addons updated: {0}.
+= अपडेट हुए ऐडऑन: {0}।
+The launcher's language (now {0}).
+= लॉन्चर की भाषा (अभी {0})।
+Its version, what's new and who made it.
+= इसका संस्करण, नया क्या है और इसे किसने बनाया।
+The first-time setup's steps again, with your settings as they are.
+= पहली बार के सेटअप के चरण फिर से, आपकी सेटिंग्स जैसी हैं वैसी।

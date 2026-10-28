@@ -1901,3 +1901,11 @@ EXIT FULLSCREEN
 = AFSLUT FULD SKÆRM
 This video can't play here right now.
 = Videoen kan ikke afspilles her lige nu.
+Addons updated: {0}.
+= Opdaterede addons: {0}.
+The launcher's language (now {0}).
+= Launcherens sprog (nu {0}).
+Its version, what's new and who made it.
+= Dens version, hvad der er nyt, og hvem der lavede den.
+The first-time setup's steps again, with your settings as they are.
+= Den første opsætnings trin igen, med dine indstillinger som de er.

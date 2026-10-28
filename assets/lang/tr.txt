@@ -1902,3 +1902,11 @@ EXIT FULLSCREEN
 = TAM EKRANDAN ÇIK
 This video can't play here right now.
 = Bu video şu anda burada oynatılamıyor.
+Addons updated: {0}.
+= Güncellenen eklentiler: {0}.
+The launcher's language (now {0}).
+= Başlatıcının dili (şu an {0}).
+Its version, what's new and who made it.
+= Sürümü, yenilikler ve onu yapanlar.
+The first-time setup's steps again, with your settings as they are.
+= İlk kurulumun adımları yeniden, ayarların olduğu gibi.

@@ -1902,3 +1902,11 @@ EXIT FULLSCREEN
 = 全画面を終了
 This video can't play here right now.
 = この動画は今ここでは再生できません。
+Addons updated: {0}.
+= 更新したアドオン：{0}。
+The launcher's language (now {0}).
+= ランチャーの言語（現在：{0}）。
+Its version, what's new and who made it.
+= バージョン、新機能、作った人。
+The first-time setup's steps again, with your settings as they are.
+= 初回セットアップの手順をもう一度（設定はそのまま）。

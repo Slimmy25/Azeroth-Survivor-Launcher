@@ -1902,3 +1902,11 @@ EXIT FULLSCREEN
 = ВИЙТИ З ПОВНОЕКРАННОГО
 This video can't play here right now.
 = Це відео зараз не відтворюється тут.
+Addons updated: {0}.
+= Оновлено аддонів: {0}.
+The launcher's language (now {0}).
+= Мова лаунчера (зараз {0}).
+Its version, what's new and who made it.
+= Версія, що нового і хто його зробив.
+The first-time setup's steps again, with your settings as they are.
+= Кроки першого налаштування ще раз, з вашими налаштуваннями як є.

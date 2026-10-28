@@ -1902,3 +1902,11 @@ EXIT FULLSCREEN
 = 전체 화면 종료
 This video can't play here right now.
 = 지금은 이 동영상을 여기서 재생할 수 없습니다.
+Addons updated: {0}.
+= 업데이트된 애드온: {0}.
+The launcher's language (now {0}).
+= 런처 언어 (현재 {0}).
+Its version, what's new and who made it.
+= 버전, 새로운 점, 만든 사람.
+The first-time setup's steps again, with your settings as they are.
+= 첫 설정 단계를 다시, 설정은 그대로.

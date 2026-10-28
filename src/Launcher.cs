@@ -174,6 +174,7 @@ namespace AzerothLauncher
             {
                 if (startInTray) Hide();
                 if (!PreviewMode) After(300, StartupUpdateCheck);   // a newer launcher on GitHub is installed right away
+                if (!PreviewMode) After(4000, AutoUpdateAddons);    // and newer addons from GitHub, without asking
                 After(500, MaybeFirstRun);
                 After(700, delegate { if ((current == null || current == "Home") && !setupOpen) ShowHomeCommunity(); });   // home: Community
             };
@@ -1477,6 +1478,7 @@ namespace AzerothLauncher
         void SessionDone(List<string> problems)
         {
             GameRunningFlag = false;
+            After(3000, AutoUpdateAddons);                    // updates that waited for the game to close
             Invalidate();                                    // the play time the game just saved
             RefreshPlayLabel();
             SetTrayTitle("Idle");

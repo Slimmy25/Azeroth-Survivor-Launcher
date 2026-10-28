@@ -1901,3 +1901,11 @@ EXIT FULLSCREEN
 = KELUAR LAYAR PENUH
 This video can't play here right now.
 = Video ini tidak dapat diputar di sini sekarang.
+Addons updated: {0}.
+= Addon diperbarui: {0}.
+The launcher's language (now {0}).
+= Bahasa launcher (sekarang {0}).
+Its version, what's new and who made it.
+= Versinya, yang baru, dan siapa pembuatnya.
+The first-time setup's steps again, with your settings as they are.
+= Langkah-langkah penyiapan awal lagi, dengan pengaturanmu seperti adanya.
