@@ -48,12 +48,15 @@ jobs:
             dist/Azeroth Survivors Launcher.sha256.txt
 
       - name: Attach the exe to the release
-        if: github.event_name == 'release' || startsWith(github.ref, 'refs/tags/') || inputs.release != ''
+        if: github.event_name == 'release' || startsWith(github.ref, 'refs/tags/') || inputs.release != '' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
-          TAG: ${{ inputs.release || github.event.release.tag_name || github.ref_name }}
+          TAG: ${{ inputs.release || github.event.release.tag_name || (startsWith(github.ref, 'refs/tags/') && github.ref_name) || '' }}
         run: |
+          # A push to main publishes the version named at the top of the launcher changelog.
+          if [ -z "$TAG" ]; then TAG="$(head -n 1 assets/launcher-changelog.txt | awk '{print $2}')"; fi
+          if [ -z "$TAG" ]; then echo "::error::Could not determine the release tag from the launcher changelog"; exit 1; fi
           # each version is its own release, with its notes from release-notes/<tag>.md when there is one
           notes="release-notes/$TAG.md"
           [ -f "$notes" ] || { echo "Azeroth Survivors Launcher $TAG" > /tmp/notes.md; notes=/tmp/notes.md; }
