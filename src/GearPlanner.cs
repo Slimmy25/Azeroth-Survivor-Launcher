@@ -91,10 +91,18 @@ namespace AzerothLauncher
 
         static readonly string[] ArmorSlots = { "Head", "Shoulder", "Chest", "Waist", "Legs", "Feet", "Wrist", "Hands" };
 
-        // a set put in the planner at once: 4 pieces at T1 (its 4-piece bonus) or all 8 at T3 (both bonuses). The other
-        // slots keep what they hold.
+        // a set put in the planner at once: 4 pieces at T1 (its 4-piece bonus) or all 8 at T3 (both bonuses). It is a
+        // starting point, not a pile: every armor slot is emptied first (what the last set put there goes), unless this
+        // is more of the same set (its 4 pieces, then its 8). Weapons and jewelry stay.
+        static string lastSetCls, lastSetRarity;
+        static int lastSetPieces;
+
         public static void FillSet(string cls, string rarity, int pieces, Dictionary<string, object> slots)
         {
+            bool more = cls == lastSetCls && rarity == lastSetRarity && pieces > lastSetPieces;
+            if (!more)
+                foreach (string slot in ArmorSlots) { slots.Remove(slot); Stars.Remove(slot); }
+            lastSetCls = cls; lastSetRarity = rarity; lastSetPieces = pieces;
             int n = 0;
             foreach (string slot in ArmorSlots)
             {
