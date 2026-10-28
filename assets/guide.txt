@@ -178,7 +178,7 @@ The meter window has three views: Damage Done (every spell, pet, talent and item
 
 # Talent trees
 - Arms: Deep Wounds, Sweeping Strikes, Mortal Wounds
-- Fury: Rampage, Fury, Bladestorm
+- Fury: Rampage, Flurry, Bladestorm
 - Protection: Shockwave, Fortified, Titan
 
 @page Paladin | Holy ground, righteous hammers, self-healing

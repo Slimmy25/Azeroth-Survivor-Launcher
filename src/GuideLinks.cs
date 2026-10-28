@@ -91,7 +91,9 @@ namespace AzerothLauncher
             links[term] = l;
         }
 
-        static readonly Regex Bullet = new Regex(@"^- ([^:(]+?)(?: \([^)]*\))?: (.+)$");
+        // a spell pool line: the name ends at the first ": " followed by the (lower-case) description, so a name with a colon
+        // of its own stays whole ("Power Word: Shield: absorbs..." is Power Word: Shield, not Power Word)
+        static readonly Regex Bullet = new Regex(@"^- ([^(]+?)(?: \([^)]*\))?: (?=[a-z0-9])(.+)$");
         static readonly string[] TreeWords = { "Arms", "Fury", "Protection", "Holy", "Retribution", "Beast Mastery", "Marksmanship",
             "Survival", "Assassination", "Combat", "Subtlety", "Discipline", "Shadow", "Elemental", "Enhancement", "Restoration",
             "Arcane", "Fire", "Frost", "Affliction", "Demonology", "Destruction", "Balance", "Feral", "Feral Combat" };

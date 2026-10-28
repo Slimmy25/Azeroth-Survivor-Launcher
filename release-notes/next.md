@@ -31,6 +31,11 @@
 - Esc closes a YouTube video (in fullscreen it leaves fullscreen first).
 - While a video plays, the right end of the header says "ADS ARE YOUTUBE. NOT ME."
 
+### Guide
+- Links: Power Word: Shield and Shadow Word: Pain link as a whole (they stopped at the colon, as "Power Word" and
+  "Shadow Word"), on the Priest page and wherever they are named, such as Co-op.
+- Warrior: the Fury tree lists its real milestone, Flurry (it said "Fury", which is the tree, not a talent).
+
 ### Guide videos
 - The Guide's own videos have a new control bar that looks like YouTube's: a red progress bar, play, volume, the
   time and fullscreen on the right, hiding when the mouse rests. Space or K plays and pauses, the arrows skip 5
