@@ -1796,3 +1796,7 @@ Every piece a {0} can wear, with its bonuses, the bosses that drop it and each s
 = {0}: СПОРЯДЖЕННЯ
 I'm sorry the launcher could not help this time. Everything it set up has been taken away again; your game, your saves and your cloud files are untouched.\n\nIf you need more help, please contact Slimjim in the Discord. Best of luck!
 = Шкода, що лаунчер цього разу не допоміг. Усе, що він налаштував, знову прибрано; гру, збереження та файли в хмарі не зачеплено.\n\nЯкщо потрібна допомога, напишіть Slimjim у Discord. Успіхів!
+The path at the top
+= Шлях угорі
+This window has no rows of buttons, to give its pages as much room as possible. The path at the top does their job: each step is where you are (Guide › Classes › Priest).\n\nClick a step to go back to it. Point at a step with ▾, or click it, for the list of places beside it (the other tabs, classes or pages). The arrow on the left goes back the way you came, and the X takes you home.
+= У цьому вікні немає рядів кнопок, щоб сторінкам діставалося якомога більше місця. Їхню роботу робить шлях угорі: кожен крок показує, де ви (Посібник › Класи › Жрець).\n\nКлацніть крок, щоб повернутися до нього. Наведіть на крок зі ▾ або клацніть його, щоб побачити сусідні місця (інші вкладки, класи чи сторінки). Стрілка ліворуч веде назад тим шляхом, яким ви прийшли, а X — на головний екран.

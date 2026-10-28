@@ -1795,3 +1795,7 @@ Every piece a {0} can wear, with its bonuses, the bosses that drop it and each s
 = {0}: PERLENGKAPAN
 I'm sorry the launcher could not help this time. Everything it set up has been taken away again; your game, your saves and your cloud files are untouched.\n\nIf you need more help, please contact Slimjim in the Discord. Best of luck!
 = Maaf, launcher tidak bisa membantu kali ini. Semua yang disiapkannya sudah dihapus lagi; game, simpanan, dan file cloud-mu tidak disentuh.\n\nJika butuh bantuan lebih, hubungi Slimjim di Discord. Semoga berhasil!
+The path at the top
+= Jalur di atas
+This window has no rows of buttons, to give its pages as much room as possible. The path at the top does their job: each step is where you are (Guide › Classes › Priest).\n\nClick a step to go back to it. Point at a step with ▾, or click it, for the list of places beside it (the other tabs, classes or pages). The arrow on the left goes back the way you came, and the X takes you home.
+= Jendela ini tidak punya deretan tombol, agar halamannya punya ruang sebanyak mungkin. Jalur di atas menggantikan tugasnya: setiap langkah menunjukkan posisimu (Panduan › Kelas › Priest).\n\nKlik sebuah langkah untuk kembali ke sana. Arahkan ke langkah ber-▾, atau klik, untuk daftar tempat di sebelahnya (tab, kelas, atau halaman lain). Panah di kiri kembali lewat jalan yang kamu lalui, dan X membawamu ke beranda.

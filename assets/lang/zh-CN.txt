@@ -1796,3 +1796,7 @@ Every piece a {0} can wear, with its bonuses, the bosses that drop it and each s
 = {0}装备
 I'm sorry the launcher could not help this time. Everything it set up has been taken away again; your game, your saves and your cloud files are untouched.\n\nIf you need more help, please contact Slimjim in the Discord. Best of luck!
 = 很抱歉这次启动器没能帮上忙。它所做的设置已全部移除；你的游戏、存档和云端文件均未被改动。\n\n如需更多帮助，请在 Discord 联系 Slimjim。祝你好运！
+The path at the top
+= 顶部路径
+This window has no rows of buttons, to give its pages as much room as possible. The path at the top does their job: each step is where you are (Guide › Classes › Priest).\n\nClick a step to go back to it. Point at a step with ▾, or click it, for the list of places beside it (the other tabs, classes or pages). The arrow on the left goes back the way you came, and the X takes you home.
+= 此窗口没有成排的按钮，以便页面拥有尽可能多的空间。顶部路径承担了它们的作用：每一步都表示你所在的位置（指南 › 职业 › 牧师）。\n\n点击某一步可返回该处。指向带 ▾ 的一步或点击它，可列出旁边的位置（其他标签、职业或页面）。左侧箭头沿你来时的路返回，X 返回主页。

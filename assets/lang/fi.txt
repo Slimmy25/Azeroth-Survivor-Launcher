@@ -1795,3 +1795,7 @@ Every piece a {0} can wear, with its bonuses, the bosses that drop it and each s
 = {0}: VARUSTEET
 I'm sorry the launcher could not help this time. Everything it set up has been taken away again; your game, your saves and your cloud files are untouched.\n\nIf you need more help, please contact Slimjim in the Discord. Best of luck!
 = Olemme pahoillamme, ettei käynnistin voinut auttaa tällä kertaa. Kaikki sen tekemä on poistettu; peliisi, tallennuksiisi ja pilvitiedostoihisi ei koskettu.\n\nJos tarvitset lisää apua, ota yhteyttä Slimjimiin Discordissa. Onnea matkaan!
+The path at the top
+= Polku ylhäällä
+This window has no rows of buttons, to give its pages as much room as possible. The path at the top does their job: each step is where you are (Guide › Classes › Priest).\n\nClick a step to go back to it. Point at a step with ▾, or click it, for the list of places beside it (the other tabs, classes or pages). The arrow on the left goes back the way you came, and the X takes you home.
+= Tässä ikkunassa ei ole painikerivejä, jotta sivuilla olisi mahdollisimman paljon tilaa. Yläreunan polku hoitaa niiden tehtävän: jokainen askel kertoo, missä olet (Opas › Luokat › Pappi).\n\nNapsauta askelta palataksesi siihen. Osoita askelta, jossa on ▾, tai napsauta sitä nähdäksesi viereiset paikat (muut välilehdet, luokat tai sivut). Vasemman reunan nuoli palaa tulemaasi reittiä ja X vie kotiin.

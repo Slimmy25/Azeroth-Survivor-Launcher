@@ -1795,3 +1795,7 @@ Every piece a {0} can wear, with its bonuses, the bosses that drop it and each s
 = {0}: UTRUSTNING
 I'm sorry the launcher could not help this time. Everything it set up has been taken away again; your game, your saves and your cloud files are untouched.\n\nIf you need more help, please contact Slimjim in the Discord. Best of luck!
 = Vi beklagar att startprogrammet inte kunde hjälpa till den här gången. Allt det ställde in har tagits bort igen; ditt spel, dina sparfiler och dina molnfiler är orörda.\n\nOm du behöver mer hjälp, kontakta Slimjim på Discord. Lycka till!
+The path at the top
+= Sökvägen överst
+This window has no rows of buttons, to give its pages as much room as possible. The path at the top does their job: each step is where you are (Guide › Classes › Priest).\n\nClick a step to go back to it. Point at a step with ▾, or click it, for the list of places beside it (the other tabs, classes or pages). The arrow on the left goes back the way you came, and the X takes you home.
+= Det här fönstret har inga rader med knappar, så att sidorna får så mycket plats som möjligt. Sökvägen överst gör deras jobb: varje steg visar var du är (Guide › Klasser › Präst).\n\nKlicka på ett steg för att gå tillbaka dit. Peka på ett steg med ▾, eller klicka på det, för listan över platserna bredvid (de andra flikarna, klasserna eller sidorna). Pilen till vänster går tillbaka samma väg som du kom, och X tar dig hem.

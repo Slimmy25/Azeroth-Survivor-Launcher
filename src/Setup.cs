@@ -40,6 +40,14 @@ namespace AzerothLauncher
             setupVals["cloud_dir"] = "";
             foreach (var kv in setupDefaults) setupVals[kv.Key] = kv.Value;
             Config.Frozen = false;                            // (after a cancelled first setup: saving again)
+            // nothing else stays open while setup runs: the launcher's own message boxes and dialogs are closed
+            try
+            {
+                var open = new List<Form>();
+                foreach (Form f in Application.OpenForms) if (f is WowDialog) open.Add(f);
+                foreach (Form f in open) f.Close();
+            }
+            catch (Exception) { }
             setupFirstTime = !Cfg.Bool("setup_done", false);
             setupImported = null;
             setupResult = null;

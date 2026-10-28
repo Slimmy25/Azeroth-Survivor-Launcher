@@ -273,7 +273,7 @@ namespace AzerothLauncher
                 using (var b = new SolidBrush(Build.SpentIn(tree) > 0 ? Theme.Hex("#7ee05a") : Theme.GoldDim))
                     g.DrawString(pts, pf, b, Width - 10 - ps.Width, 6);
             }
-            int cell = Cell, ic = Math.Min(36, cell - 10), x0 = 8 + (Width - 16 - cell * Cols) / 2, y0 = 30;
+            int cell = Cell, ic = Theme.CrispIcon(Math.Min(42, cell - 6)), x0 = 8 + (Width - 16 - cell * Cols) / 2, y0 = 30;
             cells.Clear();
             // the line that joins the milestones, as in the game's window
             var ms = tree.Talents.FindAll(delegate(Talent t) { return t.Milestone; });

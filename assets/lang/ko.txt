@@ -1796,3 +1796,7 @@ Every piece a {0} can wear, with its bonuses, the bosses that drop it and each s
 = {0} 장비
 I'm sorry the launcher could not help this time. Everything it set up has been taken away again; your game, your saves and your cloud files are untouched.\n\nIf you need more help, please contact Slimjim in the Discord. Best of luck!
 = 이번에는 런처가 도움이 되지 못해 죄송합니다. 런처가 설정한 것은 모두 다시 지웠으며, 게임과 저장 파일, 클라우드 파일은 건드리지 않았습니다.\n\n도움이 더 필요하면 Discord에서 Slimjim에게 연락하세요. 행운을 빕니다!
+The path at the top
+= 상단 경로
+This window has no rows of buttons, to give its pages as much room as possible. The path at the top does their job: each step is where you are (Guide › Classes › Priest).\n\nClick a step to go back to it. Point at a step with ▾, or click it, for the list of places beside it (the other tabs, classes or pages). The arrow on the left goes back the way you came, and the X takes you home.
+= 이 창에는 페이지에 최대한 많은 공간을 주기 위해 버튼 줄이 없습니다. 대신 상단 경로가 그 역할을 합니다. 각 단계가 현재 위치를 보여 줍니다(가이드 › 직업 › 사제).\n\n단계를 클릭하면 그곳으로 돌아갑니다. ▾ 가 있는 단계를 가리키거나 클릭하면 그 옆의 장소(다른 탭, 직업, 페이지) 목록이 나옵니다. 왼쪽 화살표는 온 길을 되돌아가고, X는 홈으로 갑니다.

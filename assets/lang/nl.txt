@@ -1795,3 +1795,7 @@ Every piece a {0} can wear, with its bonuses, the bosses that drop it and each s
 = {0}: UITRUSTING
 I'm sorry the launcher could not help this time. Everything it set up has been taken away again; your game, your saves and your cloud files are untouched.\n\nIf you need more help, please contact Slimjim in the Discord. Best of luck!
 = Het spijt ons dat de launcher deze keer niet kon helpen. Alles wat hij had ingesteld is weer weggehaald; je spel, je opslagbestanden en je cloudbestanden zijn niet aangeraakt.\n\nHeb je meer hulp nodig, neem dan contact op met Slimjim op Discord. Veel succes!
+The path at the top
+= Het pad bovenaan
+This window has no rows of buttons, to give its pages as much room as possible. The path at the top does their job: each step is where you are (Guide › Classes › Priest).\n\nClick a step to go back to it. Point at a step with ▾, or click it, for the list of places beside it (the other tabs, classes or pages). The arrow on the left goes back the way you came, and the X takes you home.
+= Dit venster heeft geen rijen knoppen, zodat de pagina's zoveel mogelijk ruimte krijgen. Het pad bovenaan doet hun werk: elke stap is waar je bent (Gids › Klassen › Priester).\n\nKlik op een stap om erheen terug te gaan. Wijs een stap met ▾ aan, of klik erop, voor de lijst met plekken ernaast (de andere tabbladen, klassen of pagina's). De pijl links gaat terug langs de weg die je kwam, en de X brengt je naar huis.

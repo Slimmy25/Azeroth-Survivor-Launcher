@@ -1796,3 +1796,7 @@ Every piece a {0} can wear, with its bonuses, the bosses that drop it and each s
 = อุปกรณ์ {0}
 I'm sorry the launcher could not help this time. Everything it set up has been taken away again; your game, your saves and your cloud files are untouched.\n\nIf you need more help, please contact Slimjim in the Discord. Best of luck!
 = ขออภัยที่ตัวเปิดเกมช่วยไม่ได้ในครั้งนี้ ทุกอย่างที่ตั้งไว้ถูกลบออกแล้ว เกม เซฟ และไฟล์บนคลาวด์ของคุณไม่ถูกแตะต้อง\n\nหากต้องการความช่วยเหลือเพิ่มเติม ติดต่อ Slimjim ใน Discord ขอให้โชคดี!
+The path at the top
+= เส้นทางด้านบน
+This window has no rows of buttons, to give its pages as much room as possible. The path at the top does their job: each step is where you are (Guide › Classes › Priest).\n\nClick a step to go back to it. Point at a step with ▾, or click it, for the list of places beside it (the other tabs, classes or pages). The arrow on the left goes back the way you came, and the X takes you home.
+= หน้าต่างนี้ไม่มีแถวปุ่ม เพื่อให้หน้าต่าง ๆ มีพื้นที่มากที่สุด เส้นทางด้านบนทำหน้าที่แทน: แต่ละขั้นบอกว่าคุณอยู่ตรงไหน (คู่มือ › อาชีพ › Priest)\n\nคลิกขั้นใดเพื่อกลับไปที่นั่น ชี้หรือคลิกขั้นที่มี ▾ เพื่อดูรายการที่อยู่ข้างกัน (แท็บ อาชีพ หรือหน้าอื่น) ลูกศรทางซ้ายพากลับตามทางที่มา และ X พากลับหน้าแรก

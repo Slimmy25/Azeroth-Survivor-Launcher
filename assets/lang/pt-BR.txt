@@ -1795,3 +1795,7 @@ Every piece a {0} can wear, with its bonuses, the bosses that drop it and each s
 = {0}: EQUIPAMENTO
 I'm sorry the launcher could not help this time. Everything it set up has been taken away again; your game, your saves and your cloud files are untouched.\n\nIf you need more help, please contact Slimjim in the Discord. Best of luck!
 = Sentimos que o launcher não tenha ajudado desta vez. Tudo o que ele configurou foi removido; seu jogo, seus saves e seus arquivos na nuvem não foram tocados.\n\nSe precisar de mais ajuda, fale com o Slimjim no Discord. Boa sorte!
+The path at the top
+= O caminho no topo
+This window has no rows of buttons, to give its pages as much room as possible. The path at the top does their job: each step is where you are (Guide › Classes › Priest).\n\nClick a step to go back to it. Point at a step with ▾, or click it, for the list of places beside it (the other tabs, classes or pages). The arrow on the left goes back the way you came, and the X takes you home.
+= Esta janela não tem fileiras de botões, para dar às páginas o máximo de espaço. O caminho no topo faz o trabalho delas: cada passo mostra onde você está (Guia › Classes › Sacerdote).\n\nClique em um passo para voltar a ele. Aponte para um passo com ▾, ou clique nele, para a lista de lugares ao lado (as outras abas, classes ou páginas). A seta à esquerda volta pelo caminho que você fez, e o X leva ao início.

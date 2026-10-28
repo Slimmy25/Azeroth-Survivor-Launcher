@@ -1796,3 +1796,7 @@ Every piece a {0} can wear, with its bonuses, the bosses that drop it and each s
 = {0}: गियर
 I'm sorry the launcher could not help this time. Everything it set up has been taken away again; your game, your saves and your cloud files are untouched.\n\nIf you need more help, please contact Slimjim in the Discord. Best of luck!
 = हमें खेद है कि इस बार लॉन्चर मदद नहीं कर सका। इसने जो कुछ सेट किया था, वह फिर से हटा दिया गया है; आपका गेम, सेव और क्लाउड फ़ाइलें अछूती हैं।\n\nअगर और मदद चाहिए, तो Discord में Slimjim से संपर्क करें। शुभकामनाएँ!
+The path at the top
+= ऊपर का रास्ता
+This window has no rows of buttons, to give its pages as much room as possible. The path at the top does their job: each step is where you are (Guide › Classes › Priest).\n\nClick a step to go back to it. Point at a step with ▾, or click it, for the list of places beside it (the other tabs, classes or pages). The arrow on the left goes back the way you came, and the X takes you home.
+= इस विंडो में बटनों की पंक्तियाँ नहीं हैं, ताकि पेजों को ज़्यादा से ज़्यादा जगह मिले। ऊपर का रास्ता उनका काम करता है: हर कदम बताता है कि आप कहाँ हैं (गाइड › क्लासें › प्रीस्ट)।\n\nकिसी कदम पर वापस जाने के लिए उस पर क्लिक करें। ▾ वाले कदम पर पॉइंटर ले जाएँ या क्लिक करें, आस-पास की जगहों की सूची के लिए (दूसरे टैब, क्लासें या पेज)। बाईं ओर का तीर आपको आए रास्ते से वापस ले जाता है और X आपको होम पर।

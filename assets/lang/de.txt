@@ -1795,3 +1795,7 @@ Every piece a {0} can wear, with its bonuses, the bosses that drop it and each s
 = {0}: AUSRÜSTUNG
 I'm sorry the launcher could not help this time. Everything it set up has been taken away again; your game, your saves and your cloud files are untouched.\n\nIf you need more help, please contact Slimjim in the Discord. Best of luck!
 = Es tut uns leid, dass der Launcher diesmal nicht helfen konnte. Alles, was er eingerichtet hat, wurde wieder entfernt; dein Spiel, deine Spielstände und deine Cloud-Dateien sind unberührt.\n\nWenn du mehr Hilfe brauchst, wende dich an Slimjim im Discord. Viel Glück!
+The path at the top
+= Der Pfad oben
+This window has no rows of buttons, to give its pages as much room as possible. The path at the top does their job: each step is where you are (Guide › Classes › Priest).\n\nClick a step to go back to it. Point at a step with ▾, or click it, for the list of places beside it (the other tabs, classes or pages). The arrow on the left goes back the way you came, and the X takes you home.
+= Dieses Fenster hat keine Reihen von Knöpfen, damit die Seiten möglichst viel Platz haben. Der Pfad oben übernimmt ihre Aufgabe: Jeder Schritt zeigt, wo du bist (Guide › Klassen › Priester).\n\nKlicke auf einen Schritt, um dorthin zurückzugehen. Zeige auf einen Schritt mit ▾ oder klicke ihn an, um die Orte daneben zu sehen (die anderen Reiter, Klassen oder Seiten). Der Pfeil links geht den Weg zurück, den du gekommen bist, und das X bringt dich nach Hause.
