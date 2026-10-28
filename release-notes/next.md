@@ -60,8 +60,12 @@
 - AZS Stats remembers each time you took your Nemesis down and who was at your side (your party, or alone). The
   celebration names them, and the Nemesis tab lists your last five wins over it.
 - AZS Stats only keeps your own runs, records and Nemesis log now. It no longer writes down the game's tooltips or the
-  icons of the gear your heroes wear for the launcher, and clears what older versions wrote down. Until the launcher has
-  another source for gear icons, gear shows its slot letters (in the Gear Planner, the Armory and the AZS Handbook).
+  icons of the gear your heroes wear for the launcher, and clears what older versions wrote down. Gear icons come from a
+  new list instead (below).
+- Gear icons: every piece of gear that is a real World of Warcraft item (195 of the 470) shows its real icon, from a
+  list made from the CMaNGOS Classic database and Wowhead's item data (assets/item-icons.txt). Pieces the game made up
+  say "Image soon" in place of a picture. In the Gear Planner, STATS > Armory, and in game in the AZS Handbook (which
+  uses the game's own icon files).
 - Guide > Transmog: hover a look that is a real World of Warcraft item (20 of them) to see its 3D model picture from
   Wowhead's model viewer, beside how to earn it.
 - AZS Minor Mods: new Mark minibosses (on by default). Each zone's bosses before its final boss (as the Guide's Zones &
