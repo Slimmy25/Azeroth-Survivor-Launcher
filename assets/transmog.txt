@@ -46,3 +46,4 @@ tabard | Tabard | Horde Officer's Tabard | Buy for 25. |
 glow | Weapon | Icy Chill | Weapons at 5 stars. |
 glow | Weapon | Crusader | The Champion of Naxxramas achievement. |
 glow | Weapon | Fiery Weapon | The Radiant Armory achievement. |
+glow | Weapon | Unholy Weapon | The Insane co-op achievement: survive 40 minutes or longer in Naxxramas on Heroic V with at least two other players, still standing at 40:00. |
