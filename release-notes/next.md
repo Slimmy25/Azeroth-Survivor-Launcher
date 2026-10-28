@@ -7,6 +7,9 @@
 
 ## What's new
 
+### Talent Tree Builder
+- Talent builds can be saved by name for each class, loaded later, exported as a shareable code, and imported from a code.
+
 ### Videos
 - Guide videos: no EXIT FULLSCREEN button over a fullscreen video any more; the player's own button or Esc brings it
   back. No "Lost?" while a Guide video plays.
