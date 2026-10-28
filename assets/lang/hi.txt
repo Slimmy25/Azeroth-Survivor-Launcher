@@ -1940,3 +1940,5 @@ ADVANCED SETTINGS
 = उन्नत सेटिंग्स
 BASIC SETTINGS
 = बुनियादी सेटिंग्स
+ADS ARE YOUTUBE. NOT ME.
+= विज्ञापन YOUTUBE के हैं। मेरे नहीं।

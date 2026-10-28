@@ -356,6 +356,7 @@ namespace AzerothLauncher
         void CommunityPlayer(GuideVideo v)
         {
             ClearPanel(v.Title.Length > 0 ? v.Title : "Video");
+            sideHead.Note = Lang.T("ADS ARE YOUTUBE. NOT ME.");   // only while a video plays (ClearPanel clears it)
             edgeHost = new Panel();
             edgeHost.BackColor = Color.Black;
             edgeHost.Bounds = new Rectangle(0, 0, PW, PH);
@@ -593,12 +594,14 @@ namespace AzerothLauncher
             "video{object-fit:contain!important}';" +
             "(document.head||document.documentElement).appendChild(s);}" +
             "if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',add);else add();" +
+            // Esc (not fullscreen) asks the launcher to close the video: the key goes to Edge, so the page notes it
+            "if(!window.__azsKey){window.__azsKey=1;document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!document.fullscreenElement)window.__azsEsc=1;},true);}" +
             "var n=0,t=setInterval(function(){add();window.dispatchEvent(new Event('resize'));if(++n>20)clearInterval(t);},500);})();";
 
         // the page's state, as a number: 1 while fullscreen, plus 2 while its video is playing
         const string PageState =
             "(function(){var v=document.querySelector('video');" +
-            "return (document.fullscreenElement?1:0)+((v&&!v.paused&&!v.ended&&v.readyState>2)?2:0);})()";
+            "return (document.fullscreenElement?1:0)+((v&&!v.paused&&!v.ended&&v.readyState>2)?2:0)+(window.__azsEsc?4:0);})()";
 
         void WatchPage(Process p, int port, GuideVideo v)
         {
@@ -612,6 +615,7 @@ namespace AzerothLauncher
                 }
                 if (!dt.Open)
                 {
+                    Ui(delegate { if (p == edgeVideo) RevealEdge(); });   // nothing to wait for: shown at once
                     // no DevTools: the time the player stays open counts as watching
                     var opened = DateTime.Now;
                     while (p == edgeVideo && (DateTime.Now - opened).TotalSeconds < WatchedSeconds) Thread.Sleep(500);
@@ -620,15 +624,24 @@ namespace AzerothLauncher
                 }
                 dt.OnEveryPage(PlayerOnly);
                 dt.Eval(PlayerOnly);
-                bool full = false, marked = false;
+                bool full = false, marked = false, shown = false;
                 double played = 0;
+                var started = DateTime.Now;
                 while (p == edgeVideo && dt.Open)
                 {
-                    Thread.Sleep(300);
+                    Thread.Sleep(shown ? 300 : 100);
                     string r = dt.Eval(PageState);
                     if (r == null) continue;
                     var m = System.Text.RegularExpressions.Regex.Match(r, "\"value\":(\\d)");
                     int state = m.Success ? m.Groups[1].Value[0] - '0' : 0;
+                    // Edge's window stays hidden behind "Loading the video..." until the video (or its ad) plays, so the
+                    // white page YouTube starts with is never seen; after 8 seconds it shows anyway (a click may be needed)
+                    if (!shown && ((state & 2) != 0 || (DateTime.Now - started).TotalSeconds > 8))
+                    {
+                        shown = true;
+                        Ui(delegate { if (p == edgeVideo) RevealEdge(); });
+                    }
+                    if ((state & 4) != 0) { Ui(delegate { if (p == edgeVideo) LeaveCommunityVideo(); }); return; }   // Esc
                     if ((state & 2) != 0 && !marked)
                     {
                         played += 0.3;                        // only the time the video really plays
@@ -692,10 +705,18 @@ namespace AzerothLauncher
             SetParent(hwnd, edgeHost.Handle);
             SetWindowPos(hwnd, IntPtr.Zero, 0, 0, 0, 0, 0x0001 | 0x0002 | 0x0004 | 0x0010 | 0x0020);   // frame changed
             edgeWnd = hwnd;
+            FitEdge();
+            ShowWindow(hwnd, 0);                              // hidden until the video plays (RevealEdge): no white page
+            ShowVideoClose();
+        }
+
+        // the video plays: Edge's window comes out from behind "Loading the video..."
+        void RevealEdge()
+        {
+            if (edgeWnd == IntPtr.Zero || !IsWindow(edgeWnd) || edgeHost == null || edgeHost.IsDisposed) return;
             foreach (Control c in edgeHost.Controls) c.Visible = false;
             FitEdge();
-            ShowWindow(hwnd, 5);
-            ShowVideoClose();
+            ShowWindow(edgeWnd, 5);
         }
 
         void FitEdge()

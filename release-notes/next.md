@@ -26,6 +26,14 @@
   the list of pieces.
 
 ### Community
+- YouTube videos no longer flash a white page before they start: the player stays behind "Loading the video..." until
+  the video (or its ad) plays.
+- Esc closes a YouTube video (in fullscreen it leaves fullscreen first).
+- While a video plays, the right end of the header says "ADS ARE YOUTUBE. NOT ME."
+
+### Guide videos
+- The launcher's own FULLSCREEN button is gone; the player's own fullscreen button does it, now with a single click
+  (it used to need two quick clicks).
 - Big Streamers is ticked whenever the launcher starts, until you pick Content Creators; that choice is remembered.
 - One of the two boxes is always ticked, never neither: unticking the ticked one does nothing, ticking the other
   switches to it.

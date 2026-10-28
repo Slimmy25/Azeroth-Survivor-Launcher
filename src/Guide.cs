@@ -469,9 +469,9 @@ namespace AzerothLauncher
             WebBrowser web = null;
             // FULLSCREEN: the launcher's own button (it does not rely on the page's), the video over the whole screen at
             // the same point. The guide's own videos (hosted with the launcher's releases) have no OPEN IN BROWSER.
-            Put(new WowButton("FULLSCREEN", delegate { if (web != null) VideoView.Fullscreen(web, v); }, 190, 32, 9), PW - 20 - bw, 8);
+            // no FULLSCREEN button of the launcher's own (Slimjim, 2026-10-28): the player's own fullscreen button does it
             if (!VideoView.OwnHosted(url))
-                Put(new WowButton("OPEN IN BROWSER ›", delegate { Util.OpenInShell(url); }, 190, 32, 9), PW - 20 - 2 * bw - 8, 8);
+                Put(new WowButton("OPEN IN BROWSER ›", delegate { Util.OpenInShell(url); }, 190, 32, 9), PW - 20 - bw, 8);
             guideTabsBottom = 8 + (int)(32 * Theme.Zoom) + 8;
             var frame = new Bordered(Theme.CardEdge, 1);
             frame.Bounds = new Rectangle(20, GuideTop, PW - 40, PH - 12 - GuideTop);
@@ -1252,6 +1252,13 @@ namespace AzerothLauncher
                 "function toggle(){try{window.external.Toggle(v.currentTime,v.volume);}catch(e){}}" +
                 "document.getElementById('fs').onclick=toggle;" +
                 "v.ondblclick=function(e){toggle();if(e&&e.preventDefault)e.preventDefault();return false;};" +
+                // one click on the player's own fullscreen button: the built-in web view (IE11) can only fill its own box,
+                // or ignores the first click, so a press on that button (the right end of the control bar) goes straight
+                // to the launcher's fullscreen window, and the web view's own fullscreen is turned into it if it happens
+                "v.addEventListener('mousedown',function(e){e=e||window.event;var r=v.getBoundingClientRect();" +
+                "if(e.button<=1&&e.clientX>r.right-44&&e.clientY>r.bottom-44){toggle();if(e.preventDefault)e.preventDefault();return false;}},true);" +
+                "document.addEventListener('MSFullscreenChange',function(){if(document.msFullscreenElement){try{document.msExitFullscreen();}catch(x){}toggle();}});" +
+                "document.addEventListener('fullscreenchange',function(){if(document.fullscreenElement){try{document.exitFullscreen();}catch(x){}toggle();}});" +
                 "document.onkeydown=function(e){e=e||window.event;if((e.keyCode==27&&" + (fullscreen ? "true" : "false") + ")||e.keyCode==70){toggle();return false;}};" +
                 "v.onerror=function(){v.style.display='none';document.getElementById('fs').style.display='none';document.getElementById('err').style.display='block';};" +
                 "</script></body></html>";

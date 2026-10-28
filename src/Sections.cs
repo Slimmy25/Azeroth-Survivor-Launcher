@@ -23,6 +23,9 @@ namespace AzerothLauncher
         public Form Owner2;
         bool closable = true;
         public bool Closable { get { return closable; } set { closable = value; Invalidate(); } }   // no X on Community
+        string note = "";                                    // a short line at the right end of the bar (Community: while a video plays)
+        public string Note { get { return note; } set { note = value ?? ""; Invalidate(); } }
+        int NoteW { get { return note.Length == 0 ? 0 : 12 + TextRenderer.MeasureText(note, Theme.F(9, FontStyle.Bold)).Width; } }
         public Action<Point> Moved;
         Point? dragOffset;
         List<KeyValuePair<string, Action>> crumbs = new List<KeyValuePair<string, Action>>();
@@ -93,7 +96,10 @@ namespace AzerothLauncher
                     g.FillPolygon(b, new[] { new PointF(bb.X + 11, bb.Y + 10), new PointF(bb.X + 19, bb.Y + 4), new PointF(bb.X + 19, bb.Y + 16) });
                 x = bb.Right + 8;
             }
-            int right = (closable ? Width - 32 : Width - 8) - (HelpClicked != null && helpShown ? HelpW + 5 : 0);
+            int right = (closable ? Width - 32 : Width - 8) - (HelpClicked != null && helpShown ? HelpW + 5 : 0) - NoteW;
+            if (note.Length > 0)
+                TextRenderer.DrawText(g, note, Theme.F(9, FontStyle.Bold), new Rectangle(right, 0, NoteW, Height), Theme.Hex("#e0a040"),
+                                      TextFormatFlags.Right | TextFormatFlags.VerticalCenter | TextFormatFlags.NoPrefix | TextFormatFlags.SingleLine);
             Font f = Theme.F(11, FontStyle.Bold), fs = Theme.F(10);
             using (var sf = new StringFormat(StringFormatFlags.NoWrap))
             {
@@ -495,6 +501,7 @@ namespace AzerothLauncher
         {
             sideHead.Closable = current != "Community";
             sideHead.Title = text;
+            sideHead.Note = "";                              // the Community player sets its own after this
             side.Text = Lang.T(Array.IndexOf(SectionNames, current) >= 0 ? current : text);    // the taskbar and Alt+Tab name
         }
 

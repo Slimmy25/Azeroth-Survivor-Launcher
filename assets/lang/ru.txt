@@ -1940,3 +1940,5 @@ ADVANCED SETTINGS
 = РАСШИРЕННЫЕ НАСТРОЙКИ
 BASIC SETTINGS
 = ОСНОВНЫЕ НАСТРОЙКИ
+ADS ARE YOUTUBE. NOT ME.
+= РЕКЛАМА ОТ YOUTUBE. НЕ ОТ МЕНЯ.
