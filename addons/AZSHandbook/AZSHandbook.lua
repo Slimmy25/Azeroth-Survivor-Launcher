@@ -783,6 +783,8 @@ local function LayMore(it, y)
 			K.Card(c);
 			c.t = Text(c, "GameFontHighlightSmall");
 			c.t:SetPoint("CENTER", c, "CENTER", 0, 0);
+			local font = c.t:GetFont();
+			if ( font ) then c.t:SetFont(font, 7); end     -- small enough for "Image soon" on two lines
 			c.t:SetJustifyH("CENTER");
 			c:SetScript("OnEnter", function() if ( this.p ) then ItemTooltip(this, this.p); end end);
 			c:SetScript("OnLeave", function() GameTooltip:Hide(); end);
