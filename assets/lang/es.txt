@@ -1879,3 +1879,13 @@ Loading the 3D model…
 = Cargando el modelo 3D…
 Image soon
 = Imagen pronto
+CHANGE FOLDER
+= CAMBIAR CARPETA
+OPEN LOCATION
+= ABRIR UBICACIÓN
+Change Folder
+= Cambiar carpeta
+Importing a save is in Change Folder ▾ in the path above.
+= Importar una partida está en Cambiar carpeta ▾, en la ruta de arriba.
+That folder does not exist.
+= Esa carpeta no existe.

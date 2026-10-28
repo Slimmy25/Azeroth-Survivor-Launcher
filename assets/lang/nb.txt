@@ -1879,3 +1879,13 @@ Loading the 3D model…
 = Laster inn 3D-modellen…
 Image soon
 = Bilde kommer
+CHANGE FOLDER
+= BYTT MAPPE
+OPEN LOCATION
+= ÅPNE PLASSERING
+Change Folder
+= Bytt mappe
+Importing a save is in Change Folder ▾ in the path above.
+= Import av en lagring ligger under Bytt mappe ▾ i stien over.
+That folder does not exist.
+= Den mappen finnes ikke.

@@ -1879,3 +1879,13 @@ Loading the 3D model…
 = Carregando o modelo 3D…
 Image soon
 = Imagem em breve
+CHANGE FOLDER
+= ALTERAR PASTA
+OPEN LOCATION
+= ABRIR LOCAL
+Change Folder
+= Alterar pasta
+Importing a save is in Change Folder ▾ in the path above.
+= Importar um save fica em Alterar pasta ▾, no caminho acima.
+That folder does not exist.
+= Essa pasta não existe.

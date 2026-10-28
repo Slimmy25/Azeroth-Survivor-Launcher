@@ -1879,3 +1879,13 @@ Loading the 3D model…
 = Memuat model 3D…
 Image soon
 = Gambar segera
+CHANGE FOLDER
+= UBAH FOLDER
+OPEN LOCATION
+= BUKA LOKASI
+Change Folder
+= Ubah folder
+Importing a save is in Change Folder ▾ in the path above.
+= Mengimpor simpanan ada di Ubah folder ▾ pada jalur di atas.
+That folder does not exist.
+= Folder itu tidak ada.

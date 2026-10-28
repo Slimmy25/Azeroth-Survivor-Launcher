@@ -1880,3 +1880,13 @@ Loading the 3D model…
 = Načítání 3D modelu…
 Image soon
 = Obrázek brzy
+CHANGE FOLDER
+= ZMĚNIT SLOŽKU
+OPEN LOCATION
+= OTEVŘÍT UMÍSTĚNÍ
+Change Folder
+= Změnit složku
+Importing a save is in Change Folder ▾ in the path above.
+= Import uložené hry najdete v nabídce Změnit složku ▾ v cestě nahoře.
+That folder does not exist.
+= Tato složka neexistuje.

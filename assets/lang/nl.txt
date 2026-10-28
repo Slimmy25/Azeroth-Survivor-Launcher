@@ -1879,3 +1879,13 @@ Loading the 3D model…
 = 3D-model laden…
 Image soon
 = Afbeelding volgt
+CHANGE FOLDER
+= MAP WIJZIGEN
+OPEN LOCATION
+= LOCATIE OPENEN
+Change Folder
+= Map wijzigen
+Importing a save is in Change Folder ▾ in the path above.
+= Een save importeren staat onder Map wijzigen ▾ in het pad hierboven.
+That folder does not exist.
+= Die map bestaat niet.

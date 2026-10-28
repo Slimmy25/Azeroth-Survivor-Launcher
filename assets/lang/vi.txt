@@ -1880,3 +1880,13 @@ Loading the 3D model…
 = Đang tải mô hình 3D…
 Image soon
 = Hình ảnh sắp có
+CHANGE FOLDER
+= ĐỔI THƯ MỤC
+OPEN LOCATION
+= MỞ VỊ TRÍ
+Change Folder
+= Đổi thư mục
+Importing a save is in Change Folder ▾ in the path above.
+= Nhập bản lưu nằm trong Đổi thư mục ▾ ở đường dẫn phía trên.
+That folder does not exist.
+= Thư mục đó không tồn tại.

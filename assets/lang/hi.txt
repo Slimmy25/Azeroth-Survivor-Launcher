@@ -1880,3 +1880,13 @@ Loading the 3D model…
 = 3D मॉडल लोड हो रहा है…
 Image soon
 = चित्र जल्द
+CHANGE FOLDER
+= फ़ोल्डर बदलें
+OPEN LOCATION
+= स्थान खोलें
+Change Folder
+= फ़ोल्डर बदलें
+Importing a save is in Change Folder ▾ in the path above.
+= सेव इम्पोर्ट करना ऊपर के पथ में फ़ोल्डर बदलें ▾ में है।
+That folder does not exist.
+= वह फ़ोल्डर मौजूद नहीं है।

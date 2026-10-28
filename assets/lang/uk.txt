@@ -1880,3 +1880,13 @@ Loading the 3D model…
 = Завантаження 3D-моделі…
 Image soon
 = Зображення скоро
+CHANGE FOLDER
+= ЗМІНИТИ ТЕКУ
+OPEN LOCATION
+= ВІДКРИТИ РОЗТАШУВАННЯ
+Change Folder
+= Змінити теку
+Importing a save is in Change Folder ▾ in the path above.
+= Імпорт збереження — у меню «Змінити теку ▾» у шляху вище.
+That folder does not exist.
+= Цієї теки не існує.

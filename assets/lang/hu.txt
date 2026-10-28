@@ -1880,3 +1880,13 @@ Loading the 3D model…
 = A 3D modell betöltése…
 Image soon
 = Kép hamarosan
+CHANGE FOLDER
+= MAPPA MÓDOSÍTÁSA
+OPEN LOCATION
+= HELY MEGNYITÁSA
+Change Folder
+= Mappa módosítása
+Importing a save is in Change Folder ▾ in the path above.
+= Mentés importálása a fenti útvonal Mappa módosítása ▾ menüjében van.
+That folder does not exist.
+= Ez a mappa nem létezik.

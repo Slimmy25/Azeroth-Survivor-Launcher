@@ -1880,3 +1880,13 @@ Loading the 3D model…
 = Φόρτωση του τρισδιάστατου μοντέλου…
 Image soon
 = Εικόνα σύντομα
+CHANGE FOLDER
+= ΑΛΛΑΓΗ ΦΑΚΕΛΟΥ
+OPEN LOCATION
+= ΑΝΟΙΓΜΑ ΘΕΣΗΣ
+Change Folder
+= Αλλαγή φακέλου
+Importing a save is in Change Folder ▾ in the path above.
+= Η εισαγωγή αποθήκευσης βρίσκεται στο Αλλαγή φακέλου ▾ στη διαδρομή επάνω.
+That folder does not exist.
+= Αυτός ο φάκελος δεν υπάρχει.

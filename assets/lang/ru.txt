@@ -1880,3 +1880,13 @@ Loading the 3D model…
 = Загрузка 3D-модели…
 Image soon
 = Изображение скоро
+CHANGE FOLDER
+= СМЕНИТЬ ПАПКУ
+OPEN LOCATION
+= ОТКРЫТЬ РАСПОЛОЖЕНИЕ
+Change Folder
+= Сменить папку
+Importing a save is in Change Folder ▾ in the path above.
+= Импорт сохранения — в меню «Сменить папку ▾» в пути выше.
+That folder does not exist.
+= Эта папка не существует.

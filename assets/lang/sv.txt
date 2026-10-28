@@ -1879,3 +1879,13 @@ Loading the 3D model…
 = Läser in 3D-modellen…
 Image soon
 = Bild kommer
+CHANGE FOLDER
+= BYT MAPP
+OPEN LOCATION
+= ÖPPNA PLATS
+Change Folder
+= Byt mapp
+Importing a save is in Change Folder ▾ in the path above.
+= Import av sparfil finns under Byt mapp ▾ i sökvägen ovan.
+That folder does not exist.
+= Den mappen finns inte.

@@ -1880,3 +1880,13 @@ Loading the 3D model…
 = Se încarcă modelul 3D…
 Image soon
 = Imagine în curând
+CHANGE FOLDER
+= SCHIMBĂ DOSARUL
+OPEN LOCATION
+= DESCHIDE LOCAȚIA
+Change Folder
+= Schimbă dosarul
+Importing a save is in Change Folder ▾ in the path above.
+= Importul unei salvări este în Schimbă dosarul ▾, în calea de sus.
+That folder does not exist.
+= Acel dosar nu există.

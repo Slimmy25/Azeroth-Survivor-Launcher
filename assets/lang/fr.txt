@@ -1879,3 +1879,13 @@ Loading the 3D model…
 = Chargement du modèle 3D…
 Image soon
 = Image bientôt
+CHANGE FOLDER
+= CHANGER DE DOSSIER
+OPEN LOCATION
+= OUVRIR L’EMPLACEMENT
+Change Folder
+= Changer de dossier
+Importing a save is in Change Folder ▾ in the path above.
+= Importer une sauvegarde se trouve dans Changer de dossier ▾, dans le chemin ci-dessus.
+That folder does not exist.
+= Ce dossier n’existe pas.

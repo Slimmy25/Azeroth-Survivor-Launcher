@@ -114,7 +114,7 @@ namespace AzerothLauncher
             {
                 string n = name;
                 if (n == "Changelog") continue;              // on the News line (below)
-                Action open = n == "Theorycrafting" ? (Action)delegate { GuideGroupPage(2); } : delegate { ShowSection(n); };
+                Action open = n == "Theorycrafting" ? (Action)delegate { GuideGroupPage(2); } : delegate { OpenMain(n); };   // always its main page
                 nav[n] = Place(new WowButton(n.ToUpperInvariant(), open, 128, 27, 8.5f), 693, 480);
                 nav[n].Skin = Retro.Button;
             }
@@ -128,7 +128,7 @@ namespace AzerothLauncher
             // CHANGELOG at the very end of the line
             discordIcon = new BrandIcon(Theme.LoadImage("AS.discord-blurple.png"), Theme.LoadImage("AS.discord-white.png"), DiscordUrl);   // the hover shows where it goes
             discordIcon.Bounds = new Rectangle(697, 203, 26, 20);
-            nav["Changelog"] = Place(new WowButton("CHANGELOG", delegate { ShowSection("Changelog"); }, 110, 22, 8), 1085 - 110, 201);
+            nav["Changelog"] = Place(new WowButton("CHANGELOG", delegate { OpenMain("Changelog"); }, 110, 22, 8), 1085 - 110, 201);
             nav["Changelog"].Skin = Retro.Button;
             discordIcon.Click += delegate { Util.OpenInShell(DiscordUrl); };
             Controls.Add(discordIcon);

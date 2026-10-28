@@ -1880,3 +1880,13 @@ Loading the 3D model…
 = 3D 모델 불러오는 중…
 Image soon
 = 이미지 준비 중
+CHANGE FOLDER
+= 폴더 변경
+OPEN LOCATION
+= 위치 열기
+Change Folder
+= 폴더 변경
+Importing a save is in Change Folder ▾ in the path above.
+= 저장 가져오기는 위 경로의 폴더 변경 ▾에 있습니다.
+That folder does not exist.
+= 해당 폴더가 없습니다.
