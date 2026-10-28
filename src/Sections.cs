@@ -305,12 +305,16 @@ namespace AzerothLauncher
             else if (e.Button == MouseButtons.Left && ArrowAt(e.Location) >= 0) ClickMenu(ArrowAt(e.Location));
             else if (e.Button == MouseButtons.Left)
             {
-                // a click anywhere on a step's word opens its list where the hover list opens (a step without a list
-                // goes to its page)
+                // a click on a step's name goes back to that place; its list of places beside it opens on the ▾ or
+                // when the pointer rests on it (a step that is not a place, the one you are on, opens its list)
                 int h = HotAt(e.Location);
                 if (h == -2) WowButton.Fire(BackClicked);
+                else if (h >= 0 && crumbs[h].Value != null)
+                {
+                    if (openMenu != null && !openMenu.IsDisposed) openMenu.Close();
+                    WowButton.Fire(crumbs[h].Value);
+                }
                 else if (h >= 0 && menus.ContainsKey(h)) ClickMenu(h);
-                else if (h >= 0) WowButton.Fire(crumbs[h].Value);
                 else
                 {
                     int m = MenuTextAt(e.Location);

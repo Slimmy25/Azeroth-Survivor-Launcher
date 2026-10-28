@@ -68,7 +68,7 @@ namespace AzerothLauncher
         readonly Dictionary<string, Rectangle> boxes = new Dictionary<string, Rectangle>();
         readonly List<KeyValuePair<Rectangle, object>> rows = new List<KeyValuePair<Rectangle, object>>();   // the selector's lines
         readonly Font fTitle = Theme.F(13, FontStyle.Bold), fText = Theme.F(9.5f), fBold = Theme.F(9.5f, FontStyle.Bold),
-                      fSmall = Theme.F(8.25f), fHead = Theme.F(11, FontStyle.Bold);   // made with the section's zoom; cached
+                      fSmall = Theme.F(8.25f), fTier = Theme.F(7f, FontStyle.Bold), fHead = Theme.F(11, FontStyle.Bold);   // made with the section's zoom; cached
         readonly ToolTip tip = new ToolTip();
         int slotSize = Math.Max(26, (int)(44 * Theme.Zoom)), slotGap = Math.Max(4, (int)(7 * Theme.Zoom));
         static string chosenSlot = "Head";                   // the slot the selector shows (kept while the launcher runs)
@@ -267,15 +267,17 @@ namespace AzerothLauncher
 
             // the slots: two columns and the weapons under them
             int s = slotSize, gap = slotGap;
-            int lx = sheet.X + 12, rx = sheet.Right - 12 - s;
+            int tierW = (int)Math.Ceiling(TextRenderer.MeasureText("T5", fTier).Width * 0.8) + 2;   // room for a piece's T1-T5 on its right
+            int lx = sheet.X + 12, rx = sheet.Right - 8 - tierW - s;
             for (int i = 0; i < Left.Length; i++) Slot(g, Left[i], new Rectangle(lx, top + i * (s + gap), s, s));
             for (int i = 0; i < Right.Length; i++) Slot(g, Right[i], new Rectangle(rx, top + i * (s + gap), s, s));
             int by = top + 8 * (s + gap);
-            int bx = sheet.X + (sheet.Width - (3 * s + 2 * gap)) / 2;
-            for (int i = 0; i < Bottom.Length; i++) Slot(g, Bottom[i], new Rectangle(bx + i * (s + gap), by, s, s));
+            int bgap = gap + tierW;                           // the weapons: room for their T1-T5 between them
+            int bx = sheet.X + (sheet.Width - (3 * s + 2 * bgap)) / 2;
+            for (int i = 0; i < Bottom.Length; i++) Slot(g, Bottom[i], new Rectangle(bx + i * (s + bgap), by, s, s));
 
             // the middle: the two stat boxes like the game's, then the note
-            var mid = new Rectangle(lx + s + 12, top, rx - lx - s - 24, by - top - 8);
+            var mid = new Rectangle(lx + s + 6 + tierW, top, rx - lx - s - 18 - tierW, by - top - 8);
             int boxH = (int)(6 * (fText.GetHeight(g) + 2)) + 12;
             int half = (mid.Width - 6) / 2;
             double hp;
@@ -545,13 +547,10 @@ namespace AzerothLauncher
                 }
                 using (var p = new Pen(RarityColor(RarityOf(o)), 2f)) g.DrawRectangle(p, r);
                 int st = o is GearPiece ? StarsOf(slot) : 0;
-                if (st > 0)                                   // its stars: T1 to T5 in the top right corner
+                if (st > 0)                                   // its stars: T1 to T5 just outside the box, by its top right corner
                 {
                     string n = "T" + st;
-                    SizeF ns = g.MeasureString(n, fSmall);
-                    var cr = new RectangleF(r.Right - ns.Width - 2, r.Y + 1, ns.Width + 1, ns.Height);
-                    using (var b = new SolidBrush(Color.FromArgb(210, 10, 8, 14))) g.FillRectangle(b, cr);
-                    using (var b = new SolidBrush(Gold)) g.DrawString(n, fSmall, b, cr.X + 1, cr.Y);
+                    using (var b = new SolidBrush(Gold)) g.DrawString(n, fTier, b, r.Right + 1, r.Y - 2);
                 }
             }
             else
