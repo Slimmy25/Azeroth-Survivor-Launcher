@@ -306,6 +306,7 @@ The meter window has three views: Damage Done (every spell, pet, talent and item
 - Health: 215
 - Starts with: Fireball
 - Plays best: kiting the horde into your blizzards and flamestrikes. Keep your distance.
+- Heals for 0.5% of all the damage you deal.
 
 # Spell pool
 - Fireball (starting spell): strikes the nearest enemy.
@@ -495,7 +496,7 @@ Every boss you kill pays your class marks: more in harder zones and on higher He
 Spend marks in the armory to raise a piece, weapons included, from 0 to 5 stars. Each star adds to the piece's own bonuses.
 - A set's stars open as your class beats Heroic levels in that set's zones: Heroic I opens the 1st star, Heroic II the 2nd, Heroic III the 3rd (and with it the 8-piece bonuses, which need 3 stars), Heroic IV the 4th and Heroic V the 5th.
 - 5 stars make the legendary sets 60% stronger (the patch notes call them tier 3: the sets from Gates of Ahn'Qiraj and Naxxramas).
-- Lower sets gain more from each star, and their 5th star is a big one: it lifts them to 95% of a 5-star legendary set, so your favourite set stays viable at the end and keeps the spells you like.
+- Lower sets gain more from each star, and their 5th star is a big one: it gives their armor the stats the legendary sets have and they lack (echo on every set; common pieces also get the legendary sets' extra stat), and lifts them close to a 5-star legendary set: 90% for common, 92% uncommon, 94% rare, 96% epic and 98% PvP, so your favourite set stays viable at the end and keeps the spells you like.
 - Lower sets are cheaper to upgrade. The last star costs what a legendary set's does: 30 marks.
 - Every other class that has a set's armor at a star rank makes that rank 5% cheaper for yours, up to 40%.
 - Not known yet: how much each single star adds, for each set and quality, and what each star costs. The Gear Planner does not count stars.
@@ -555,18 +556,20 @@ After you beat a zone's final boss you can keep going in endless mode. A random 
 
 @topic Co-op | Playing with friends
 # Joining and hosting
-Press Co-op on the main screen.
+Press Co-op on the main screen. A co-op run needs at least two players: a host alone sees "Waiting for players" until someone joins.
 - Lobbies: public games of your version. Each shows its zone, its difficulty (Normal, or the Heroic level in red), the host's class, the party's classes and the open seats. Click one to join (some need a password).
 - Filters: by zone and by difficulty. "Can join" hides every lobby whose zone or Heroic level your class has not opened yet, and a lobby you cannot join says which of the two you are missing.
 - Host: name your lobby, choose who can find it (public, or private by code), set the number of players (up to 5) and an optional password. Hosting shows the run you will host (hero, zone, difficulty), with a Change difficulty button.
 - Join by code: type a friend's lobby code.
+- Party chat: while you wait in the lobby, a chat sits beside the party (it closes when the run begins). Messages are up to 160 characters; press Enter or click Send. The Co-op button shows how many came in while the window was closed.
+- Each guest's ping to the host shows next to their name in the lobby: green when quick, gold when fair, red when slow.
 You play the hero on your own picker. The host chooses the zone and the Heroic level, and everyone in the party sees them change at once. You can only join zones (and Heroic levels) you have opened with the class you bring: a hero who has not is marked in red and stays behind when the host enters.
 
 # How co-op plays
 - Experience and gold are shared; caches are each hero's own to buy.
-- Every extra hero makes the horde bigger and the bosses tougher (each extra hero adds 20% less than before 0.121.0), but the party also finds more chests.
+- Every extra hero makes the horde bigger (each brings 35% fewer extra enemies than before 0.125.0), but the party also finds more chests. In a party every enemy (mobs, elites, guardians and bosses) has 20% less health and hits 20% softer; playing alone is unchanged.
 - When you pick a card, only you pause while the others fight on.
-- A fallen hero is down, not out: stand next to them for 6 seconds to bring them back. The run ends when every hero is down.
+- A fallen hero is down, not out: stand next to them for 6 seconds to bring them back. Each extra ally reviving the same friend speeds it up by 20% (two allies 1.2x, three 1.4x, four 1.6x). The run ends when every hero is down.
 - Your heals, Battle Shout and Power Word: Shield also help friends within 30 yards.
 - Every hero rolls on a slain boss's gear for their own class and earns their own marks and clears, and a guardian slain by anyone rewards everyone.
 - A Heroic clear counts the moment the final boss falls, even if someone leaves before every level-up card is picked.

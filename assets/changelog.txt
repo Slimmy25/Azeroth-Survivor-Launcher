@@ -2,6 +2,21 @@ Patch notes shown in the launcher's Changelog. The launcher sorts them by versio
 Every post starts with its title on the first line. Posts are separated by a line with only === on it.
 Everything above the first === line is ignored.
 ===
+0.125.0
+-------
+Co-op lobbies get a party chat and show each player's ping, and a co-op run now needs at least two players. Co-op is easier: fewer extra enemies per player, enemies 20% weaker in a party, and revives faster with more helpers. Lower sets at +5 now gain Tier 3's stats, Tier 3 armor's echo is halved, and host and guests all need this version.
+
+* Party chat: the co-op window now has a chat beside the party, open while you wait in the lobby (it closes when the run begins). Names show in their class colour with the class icon, staff names in their shimmering purple, and the chat notes who joins and who leaves. Type and press Enter, or click Send. Messages are up to 160 characters, and the Co-op button shows how many came in while the window was closed.
+* Each guest's ping to the host shows next to their name in the lobby: green when quick, gold when fair, red when slow.
+* A co-op run needs at least two players: a host alone sees "Waiting for players" until someone joins.
+* The co-op window is wider in a party, with bigger class icons, and each player's race and class on their own line.
+* Co-op is easier: each extra player brings 35% fewer extra enemies than before, and in a party every enemy (mobs, elites, guardians, bosses) has 20% less health and hits 20% softer. Playing alone is unchanged.
+* Reviving together is faster: each extra ally reviving the same fallen friend speeds it up by 20% (two allies 1.2x, three 1.4x, four 1.6x).
+* Mages now heal for 0.5% of all the damage they deal.
+* Tier 3 armor's echo is halved (at +5: 6.7% to 3.4% a piece). Tier 3 weapons are unchanged.
+* Lower sets at +5 come close to Tier 3: the last star now gives their armor the stats Tier 3 has and they lack (echo on every set; common pieces also get Tier 3's extra stat). A +5 set is 90% of a +5 Tier 3 for common, 92% uncommon, 94% rare, 96% epic and 98% PvP (PvP was 94%; the others were 95%).
+* The armory no longer shows a set bonus when a weapon is selected: weapons don't have one.
+===
 0.124.0
 -------
 Danger Money and Hazard Pay unlock as they should, and a new co-op achievement, The Insane, opens the Unholy Weapon glow. Stuns, roots, fears and polymorph now wear off when used over and over, casters can no longer shoot you through walls, and Divine Shield can no longer stay up forever. Co-op parties of three to five stay in sync, and host and guests all need this version.
