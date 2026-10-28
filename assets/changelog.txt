@@ -30,6 +30,9 @@ Danger Money and Hazard Pay unlock as they should, and a new co-op achievement, 
 * Rest in Photosynthesis now needs Heroic III: Kel'Thuzad on any other difficulty doesn't count.
 * New co-op achievement, The Insane: survive for 40 minutes or longer in Naxxramas on Heroic V with at least two other players, still standing at 40:00. It opens the Unholy Weapon glow, which shows in the armory's Weapon glow choices, locked until you earn it.
 * Crowd control wears off: each enemy takes stuns, roots, fears and polymorph at full length the first time, then 80%, 60%, 40% and 20%, and is then immune to all of them for 8 seconds before it starts over. Every player's crowd control counts toward the same enemy, whatever its kind. Elites and bosses are held at most 1 second before that. Slows are unchanged. This replaces the old limit of 3 seconds in a row.
+
+1. 
+
 * Casters no longer shoot you through walls and buildings, such as Arathi Basin's: they walk around to a clear line first, and a bolt already in the air hits the wall if you get behind one.
 * Divine Shield lasts at most 6 seconds and comes at most once every 10 seconds, whatever lowers its cooldown or casts it again (its legendary, echoes, Divine Intervention), so you are always unshielded for at least 4 seconds in between. Its tooltip shows the real numbers.
 * Warrior shouts in co-op: Improved Demoralizing Shout now makes enemies take more damage from your allies too, as its tooltip now says. The strongest Demoralizing Shout and Battle Shout always win: a weaker one cast later never replaces, shortens or stacks with a stronger one, and takes over for the rest of its own time when the stronger ends. Your Battle Shout tooltip shows what you really get, even from a friend's shout. Improved Demoralizing Shout no longer wipes a paladin's Judgement of the Crusader: both count.
