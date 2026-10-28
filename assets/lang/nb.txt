@@ -1819,3 +1819,49 @@ Click a folder to change it, or use Change ▾ in the path above. Importing a sa
 = Klikk på en mappe for å endre den, eller bruk Endre ▾ i stien over. Import av lagring finnes der også.
 Language ({0}), About Launcher and Run setup again: in Settings ▾ in the path above.
 = Språk ({0}), Om launcheren og Kjør oppsettet på nytt: under Innstillinger ▾ i stien over.
+Biggest crit: {0}
+= Største kritiske treff: {0}
+Biggest heal: {0}
+= Største helbredelse: {0}
+Highlights
+= Høydepunkter
+Left early
+= Forlatt tidlig
+Legendaries picked up: {0}
+= Legendariske plukket opp: {0}
+Level-ups that saved you: {0}
+= Nivåer som reddet deg: {0}
+Most kills in 5 seconds: {0}
+= Flest drap på 5 sekunder: {0}
+Run summary
+= Løpsoversikt
+Spell focus
+= Trylleformelfokus
+Survived {0} · level {1} · {2} kills · {3} DPS
+= Overlevde {0} · nivå {1} · {2} drap · {3} DPS
+Your best DPS of your last {0} {1} runs
+= Din beste DPS av de siste {0} {1}-løpene
+Your longest of your last {0} {1} runs
+= Ditt lengste av de siste {0} {1}-løpene
+with
+= med
+{0} bosses
+= {0} bosser
+{0} caches
+= {0} kister
+{0} damage dealt
+= {0} skade gitt
+{0} did {1}% of the damage
+= {0} sto for {1} % av skaden
+{0} elites
+= {0} eliter
+{0} gold
+= {0} gull
+{0} guardians
+= {0} voktere
+{0} kills a minute
+= {0} drap i minuttet
+{0} taken
+= {0} mottatt
+click a run for its summary
+= klikk på et løp for oversikten

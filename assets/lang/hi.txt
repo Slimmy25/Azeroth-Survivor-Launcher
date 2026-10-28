@@ -1820,3 +1820,49 @@ Click a folder to change it, or use Change ▾ in the path above. Importing a sa
 = फ़ोल्डर बदलने के लिए उस पर क्लिक करें, या ऊपर रास्ते में बदलें ▾ का उपयोग करें। सेव इंपोर्ट भी वहीं है।
 Language ({0}), About Launcher and Run setup again: in Settings ▾ in the path above.
 = भाषा ({0}), लॉन्चर के बारे में और सेटअप फिर से चलाएँ: ऊपर रास्ते में सेटिंग्स ▾ में।
+Biggest crit: {0}
+= सबसे बड़ा क्रिट: {0}
+Biggest heal: {0}
+= सबसे बड़ा हील: {0}
+Highlights
+= मुख्य बातें
+Left early
+= जल्दी छोड़ा
+Legendaries picked up: {0}
+= उठाए गए लेजेंडरी: {0}
+Level-ups that saved you: {0}
+= आपको बचाने वाले लेवल-अप: {0}
+Most kills in 5 seconds: {0}
+= 5 सेकंड में सबसे ज़्यादा किल: {0}
+Run summary
+= रन सारांश
+Spell focus
+= स्पेल फ़ोकस
+Survived {0} · level {1} · {2} kills · {3} DPS
+= {0} बचे रहे · लेवल {1} · {2} किल · {3} DPS
+Your best DPS of your last {0} {1} runs
+= आपके पिछले {0} {1} रन में सबसे अच्छा DPS
+Your longest of your last {0} {1} runs
+= आपके पिछले {0} {1} रन में सबसे लंबा
+with
+= के साथ
+{0} bosses
+= {0} बॉस
+{0} caches
+= {0} संदूक
+{0} damage dealt
+= {0} नुकसान पहुँचाया
+{0} did {1}% of the damage
+= {0} ने {1}% नुकसान किया
+{0} elites
+= {0} एलीट
+{0} gold
+= {0} सोना
+{0} guardians
+= {0} रक्षक
+{0} kills a minute
+= {0} किल प्रति मिनट
+{0} taken
+= {0} झेला
+click a run for its summary
+= सारांश के लिए किसी रन पर क्लिक करें

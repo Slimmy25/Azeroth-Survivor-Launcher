@@ -1820,3 +1820,49 @@ Click a folder to change it, or use Change ▾ in the path above. Importing a sa
 = 点击文件夹即可更改，或使用上方路径中的“更改 ▾”。导入存档也在那里。
 Language ({0}), About Launcher and Run setup again: in Settings ▾ in the path above.
 = 语言（{0}）、关于启动器和重新运行设置：在上方路径的“设置 ▾”中。
+Biggest crit: {0}
+= 最高暴击：{0}
+Biggest heal: {0}
+= 最高治疗：{0}
+Highlights
+= 精彩时刻
+Left early
+= 提前退出
+Legendaries picked up: {0}
+= 拾取的传说：{0}
+Level-ups that saved you: {0}
+= 救命的升级：{0}
+Most kills in 5 seconds: {0}
+= 5 秒内最多击杀：{0}
+Run summary
+= 本局总结
+Spell focus
+= 法术侧重
+Survived {0} · level {1} · {2} kills · {3} DPS
+= 存活 {0} · 等级 {1} · {2} 击杀 · {3} DPS
+Your best DPS of your last {0} {1} runs
+= 最近 {0} 局{1}中的最高 DPS
+Your longest of your last {0} {1} runs
+= 最近 {0} 局{1}中最长的一局
+with
+= 与
+{0} bosses
+= {0} 个首领
+{0} caches
+= {0} 个宝箱
+{0} damage dealt
+= 造成 {0} 伤害
+{0} did {1}% of the damage
+= {0} 造成了 {1}% 的伤害
+{0} elites
+= {0} 个精英
+{0} gold
+= {0} 金币
+{0} guardians
+= {0} 个守护者
+{0} kills a minute
+= 每分钟 {0} 击杀
+{0} taken
+= 承受 {0}
+click a run for its summary
+= 点击某局查看总结

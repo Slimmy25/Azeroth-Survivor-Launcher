@@ -1820,3 +1820,49 @@ Click a folder to change it, or use Change ▾ in the path above. Importing a sa
 = Kattints egy mappára a módosításhoz, vagy használd a fenti útvonal Módosítás ▾ lépését. A mentés importálása is ott van.
 Language ({0}), About Launcher and Run setup again: in Settings ▾ in the path above.
 = Nyelv ({0}), A launcherről és Beállítás újra: a fenti útvonal Beállítások ▾ lépésében.
+Biggest crit: {0}
+= Legnagyobb kritikus: {0}
+Biggest heal: {0}
+= Legnagyobb gyógyítás: {0}
+Highlights
+= Kiemelések
+Left early
+= Korán elhagyva
+Legendaries picked up: {0}
+= Felvett legendás tárgyak: {0}
+Level-ups that saved you: {0}
+= Életmentő szintlépések: {0}
+Most kills in 5 seconds: {0}
+= Legtöbb ölés 5 másodperc alatt: {0}
+Run summary
+= Futás összegzése
+Spell focus
+= Varázslatfókusz
+Survived {0} · level {1} · {2} kills · {3} DPS
+= Túlélve {0} · {1}. szint · {2} ölés · {3} DPS
+Your best DPS of your last {0} {1} runs
+= A legjobb DPS-ed az utolsó {0} {1}-futásodból
+Your longest of your last {0} {1} runs
+= A leghosszabb az utolsó {0} {1}-futásodból
+with
+= velük:
+{0} bosses
+= {0} főellenség
+{0} caches
+= {0} láda
+{0} damage dealt
+= {0} okozott sebzés
+{0} did {1}% of the damage
+= {0} adta a sebzés {1}%-át
+{0} elites
+= {0} elit
+{0} gold
+= {0} arany
+{0} guardians
+= {0} őrző
+{0} kills a minute
+= {0} ölés percenként
+{0} taken
+= {0} elszenvedett
+click a run for its summary
+= kattints egy futásra az összegzéshez

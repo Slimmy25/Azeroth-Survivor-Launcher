@@ -363,6 +363,8 @@ namespace AzerothLauncher
     {
         public string Result = "", Kind = "", Date = "", Hero = "", ClassKey = "", Class = "", Race = "", Zone = "", Party = "", Killer = "";
         public double Time, Level, Kills, Damage, Gold, Bosses, Dps;          // Dps: from the game's damage meter
+        public double Elites, Guardians, Taken, Chests, Legendary, Saves;
+        public readonly Dictionary<string, double> Highs = new Dictionary<string, double>();   // the run's highlights (crit, hit, heal, burst1, burst5)
         public readonly List<AbilityStat> Abilities = new List<AbilityStat>();     // Picks = its rank here
     }
 
@@ -743,6 +745,14 @@ namespace AzerothLauncher
             if (run.Dps <= 0 && run.Time > 0) run.Dps = Math.Round(run.Damage / run.Time);   // runs from before AZS Stats kept DPS
             run.Gold = LuaReader.Num(h, "gold");
             run.Bosses = LuaReader.Num(h, "bosses");
+            run.Elites = LuaReader.Num(h, "elites");
+            run.Guardians = LuaReader.Num(h, "guardians");
+            run.Taken = LuaReader.Num(h, "taken");
+            run.Chests = LuaReader.Num(h, "chests");
+            run.Legendary = LuaReader.Num(h, "legendary");
+            run.Saves = LuaReader.Num(h, "saves");
+            var hi = LuaReader.Tab(h, "hi");
+            if (hi != null) foreach (var kv in hi) { double v; if (double.TryParse(Convert.ToString(kv.Value, System.Globalization.CultureInfo.InvariantCulture), System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out v)) run.Highs[kv.Key] = v; }
             run.Party = LuaReader.Text(h, "party");
             run.Killer = LuaReader.Text(h, "killer");
             foreach (var a in LuaReader.List(LuaReader.Tab(h, "abilities")))

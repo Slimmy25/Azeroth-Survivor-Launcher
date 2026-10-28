@@ -1819,3 +1819,49 @@ Click a folder to change it, or use Change ▾ in the path above. Importing a sa
 = Cliquez sur un dossier pour le modifier, ou utilisez Modifier ▾ dans le chemin en haut. L'import d'une sauvegarde s'y trouve aussi.
 Language ({0}), About Launcher and Run setup again: in Settings ▾ in the path above.
 = Langue ({0}), À propos du launcher et Relancer la configuration : dans Réglages ▾ dans le chemin en haut.
+Biggest crit: {0}
+= Plus gros critique : {0}
+Biggest heal: {0}
+= Plus gros soin : {0}
+Highlights
+= Temps forts
+Left early
+= Quittée tôt
+Legendaries picked up: {0}
+= Légendaires ramassés : {0}
+Level-ups that saved you: {0}
+= Niveaux qui vous ont sauvé : {0}
+Most kills in 5 seconds: {0}
+= Plus d'éliminations en 5 secondes : {0}
+Run summary
+= Résumé de la partie
+Spell focus
+= Sorts privilégiés
+Survived {0} · level {1} · {2} kills · {3} DPS
+= Survécu {0} · niveau {1} · {2} éliminations · {3} DPS
+Your best DPS of your last {0} {1} runs
+= Votre meilleur DPS de vos {0} dernières parties de {1}
+Your longest of your last {0} {1} runs
+= Votre plus longue de vos {0} dernières parties de {1}
+with
+= avec
+{0} bosses
+= {0} boss
+{0} caches
+= {0} coffres
+{0} damage dealt
+= {0} dégâts infligés
+{0} did {1}% of the damage
+= {0} a fait {1} % des dégâts
+{0} elites
+= {0} élites
+{0} gold
+= {0} or
+{0} guardians
+= {0} gardiens
+{0} kills a minute
+= {0} éliminations par minute
+{0} taken
+= {0} subis
+click a run for its summary
+= cliquez une partie pour son résumé

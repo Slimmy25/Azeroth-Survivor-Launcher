@@ -1820,3 +1820,49 @@ Click a folder to change it, or use Change ▾ in the path above. Importing a sa
 = Apasă pe un folder ca să-l schimbi sau folosește Schimbă ▾ în calea de sus. Importul unei salvări e tot acolo.
 Language ({0}), About Launcher and Run setup again: in Settings ▾ in the path above.
 = Limba ({0}), Despre launcher și Rulează din nou configurarea: în Setări ▾ din calea de sus.
+Biggest crit: {0}
+= Cea mai mare lovitură critică: {0}
+Biggest heal: {0}
+= Cea mai mare vindecare: {0}
+Highlights
+= Momente de vârf
+Left early
+= Părăsită devreme
+Legendaries picked up: {0}
+= Legendare culese: {0}
+Level-ups that saved you: {0}
+= Creșteri de nivel care te-au salvat: {0}
+Most kills in 5 seconds: {0}
+= Cele mai multe ucideri în 5 secunde: {0}
+Run summary
+= Rezumatul rundei
+Spell focus
+= Accent pe vrăji
+Survived {0} · level {1} · {2} kills · {3} DPS
+= Supraviețuit {0} · nivelul {1} · {2} ucideri · {3} DPS
+Your best DPS of your last {0} {1} runs
+= Cel mai bun DPS din ultimele {0} runde cu {1}
+Your longest of your last {0} {1} runs
+= Cea mai lungă din ultimele {0} runde cu {1}
+with
+= cu
+{0} bosses
+= {0} boși
+{0} caches
+= {0} cufere
+{0} damage dealt
+= {0} daune provocate
+{0} did {1}% of the damage
+= {0} a făcut {1}% din daune
+{0} elites
+= {0} elite
+{0} gold
+= {0} aur
+{0} guardians
+= {0} gardieni
+{0} kills a minute
+= {0} ucideri pe minut
+{0} taken
+= {0} primite
+click a run for its summary
+= apasă pe o rundă pentru rezumat

@@ -1820,3 +1820,49 @@ Click a folder to change it, or use Change ▾ in the path above. Importing a sa
 = คลิกโฟลเดอร์เพื่อเปลี่ยน หรือใช้ เปลี่ยน ▾ ในเส้นทางด้านบน การนำเข้าเซฟก็อยู่ที่นั่น
 Language ({0}), About Launcher and Run setup again: in Settings ▾ in the path above.
 = ภาษา ({0}) เกี่ยวกับตัวเปิดเกม และเรียกใช้การตั้งค่าอีกครั้ง: อยู่ใน การตั้งค่า ▾ ในเส้นทางด้านบน
+Biggest crit: {0}
+= คริติคอลสูงสุด: {0}
+Biggest heal: {0}
+= ฮีลสูงสุด: {0}
+Highlights
+= ไฮไลต์
+Left early
+= ออกก่อน
+Legendaries picked up: {0}
+= ตำนานที่เก็บได้: {0}
+Level-ups that saved you: {0}
+= เลเวลอัปที่ช่วยชีวิต: {0}
+Most kills in 5 seconds: {0}
+= สังหารมากสุดใน 5 วินาที: {0}
+Run summary
+= สรุปรอบ
+Spell focus
+= สเปลที่เน้น
+Survived {0} · level {1} · {2} kills · {3} DPS
+= รอด {0} · เลเวล {1} · สังหาร {2} · {3} DPS
+Your best DPS of your last {0} {1} runs
+= DPS ดีที่สุดจาก {0} รอบล่าสุดของ {1}
+Your longest of your last {0} {1} runs
+= รอบที่นานที่สุดจาก {0} รอบล่าสุดของ {1}
+with
+= กับ
+{0} bosses
+= บอส {0}
+{0} caches
+= กล่อง {0}
+{0} damage dealt
+= สร้างความเสียหาย {0}
+{0} did {1}% of the damage
+= {0} ทำความเสียหาย {1}%
+{0} elites
+= อีลีท {0}
+{0} gold
+= ทอง {0}
+{0} guardians
+= ผู้พิทักษ์ {0}
+{0} kills a minute
+= {0} สังหารต่อนาที
+{0} taken
+= ได้รับ {0}
+click a run for its summary
+= คลิกที่รอบเพื่อดูสรุป

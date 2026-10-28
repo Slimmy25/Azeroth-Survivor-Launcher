@@ -1819,3 +1819,49 @@ Click a folder to change it, or use Change ▾ in the path above. Importing a sa
 = Klicka på en mapp för att ändra den, eller använd Ändra ▾ i sökvägen ovan. Import av sparfil finns där också.
 Language ({0}), About Launcher and Run setup again: in Settings ▾ in the path above.
 = Språk ({0}), Om startprogrammet och Kör konfigurationen igen: under Inställningar ▾ i sökvägen ovan.
+Biggest crit: {0}
+= Största kritiska träff: {0}
+Biggest heal: {0}
+= Största läkning: {0}
+Highlights
+= Höjdpunkter
+Left early
+= Lämnad tidigt
+Legendaries picked up: {0}
+= Upplockade legendariska: {0}
+Level-ups that saved you: {0}
+= Nivåhöjningar som räddade dig: {0}
+Most kills in 5 seconds: {0}
+= Flest dödade på 5 sekunder: {0}
+Run summary
+= Rundsammanfattning
+Spell focus
+= Besvärjelsefokus
+Survived {0} · level {1} · {2} kills · {3} DPS
+= Överlevde {0} · nivå {1} · {2} dödade · {3} DPS
+Your best DPS of your last {0} {1} runs
+= Din bästa DPS av dina senaste {0} {1}-rundor
+Your longest of your last {0} {1} runs
+= Din längsta av dina senaste {0} {1}-rundor
+with
+= med
+{0} bosses
+= {0} bossar
+{0} caches
+= {0} kistor
+{0} damage dealt
+= {0} skada utdelad
+{0} did {1}% of the damage
+= {0} stod för {1} % av skadan
+{0} elites
+= {0} eliter
+{0} gold
+= {0} guld
+{0} guardians
+= {0} väktare
+{0} kills a minute
+= {0} dödade per minut
+{0} taken
+= {0} mottagen
+click a run for its summary
+= klicka på en runda för sammanfattningen

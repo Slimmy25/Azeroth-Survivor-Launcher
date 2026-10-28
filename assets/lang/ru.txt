@@ -1820,3 +1820,49 @@ Click a folder to change it, or use Change ▾ in the path above. Importing a sa
 = Щёлкните по папке, чтобы изменить её, или используйте «Изменить ▾» в пути вверху. Там же импорт сохранения.
 Language ({0}), About Launcher and Run setup again: in Settings ▾ in the path above.
 = Язык ({0}), «О лаунчере» и «Запустить настройку снова»: в «Настройки ▾» в пути вверху.
+Biggest crit: {0}
+= Сильнейший крит: {0}
+Biggest heal: {0}
+= Сильнейшее исцеление: {0}
+Highlights
+= Яркие моменты
+Left early
+= Покинут рано
+Legendaries picked up: {0}
+= Подобрано легендарных: {0}
+Level-ups that saved you: {0}
+= Спасшие вас повышения уровня: {0}
+Most kills in 5 seconds: {0}
+= Больше всего убийств за 5 секунд: {0}
+Run summary
+= Итоги забега
+Spell focus
+= Упор на заклинания
+Survived {0} · level {1} · {2} kills · {3} DPS
+= Выжил {0} · уровень {1} · {2} убийств · {3} DPS
+Your best DPS of your last {0} {1} runs
+= Лучший DPS из последних {0} забегов за {1}
+Your longest of your last {0} {1} runs
+= Самый долгий из последних {0} забегов за {1}
+with
+= с
+{0} bosses
+= {0} боссов
+{0} caches
+= {0} тайников
+{0} damage dealt
+= нанесено {0} урона
+{0} did {1}% of the damage
+= {0} нанёс {1}% урона
+{0} elites
+= {0} элитных
+{0} gold
+= {0} золота
+{0} guardians
+= {0} стражей
+{0} kills a minute
+= {0} убийств в минуту
+{0} taken
+= получено {0}
+click a run for its summary
+= щёлкните забег, чтобы увидеть итоги

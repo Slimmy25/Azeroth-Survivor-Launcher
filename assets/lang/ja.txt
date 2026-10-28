@@ -1820,3 +1820,49 @@ Click a folder to change it, or use Change ▾ in the path above. Importing a sa
 = フォルダーをクリックして変更するか、上部のパスの「変更 ▾」を使ってください。セーブのインポートもそこにあります。
 Language ({0}), About Launcher and Run setup again: in Settings ▾ in the path above.
 = 言語（{0}）、ランチャーについて、セットアップをやり直す：上部パスの「設定 ▾」にあります。
+Biggest crit: {0}
+= 最大クリティカル: {0}
+Biggest heal: {0}
+= 最大回復: {0}
+Highlights
+= ハイライト
+Left early
+= 途中で退出
+Legendaries picked up: {0}
+= 拾ったレジェンダリー: {0}
+Level-ups that saved you: {0}
+= 命を救ったレベルアップ: {0}
+Most kills in 5 seconds: {0}
+= 5秒間の最多キル: {0}
+Run summary
+= ランの概要
+Spell focus
+= スペルの比重
+Survived {0} · level {1} · {2} kills · {3} DPS
+= 生存 {0} · レベル {1} · {2} キル · {3} DPS
+Your best DPS of your last {0} {1} runs
+= 直近 {0} 回の {1} のランで最高の DPS
+Your longest of your last {0} {1} runs
+= 直近 {0} 回の {1} のランで最長
+with
+= と一緒
+{0} bosses
+= ボス {0}
+{0} caches
+= 宝箱 {0}
+{0} damage dealt
+= 与ダメージ {0}
+{0} did {1}% of the damage
+= {0} がダメージの {1}% を与えた
+{0} elites
+= エリート {0}
+{0} gold
+= ゴールド {0}
+{0} guardians
+= ガーディアン {0}
+{0} kills a minute
+= 毎分 {0} キル
+{0} taken
+= 被ダメージ {0}
+click a run for its summary
+= ランをクリックすると概要を表示
