@@ -1896,3 +1896,9 @@ Bring in a save from elsewhere (a backup, another PC) into the save game folder.
 = Φέρε μια αποθήκευση από αλλού (αντίγραφο ασφαλείας, άλλο PC) στον φάκελο αποθηκεύσεων.
 The Talent Tree Builder, the Gear Planner and the build guides.
 = Ο δημιουργός δέντρων ταλέντων, ο σχεδιαστής εξοπλισμού και οι οδηγοί build.
+FULLSCREEN
+= ΠΛΗΡΗΣ ΟΘΟΝΗ
+EXIT FULLSCREEN
+= ΕΞΟΔΟΣ ΑΠΟ ΠΛΗΡΗ ΟΘΟΝΗ
+This video can't play here right now.
+= Αυτό το βίντεο δεν μπορεί να παίξει εδώ αυτή τη στιγμή.

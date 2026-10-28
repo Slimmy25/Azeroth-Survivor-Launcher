@@ -1895,3 +1895,9 @@ Bring in a save from elsewhere (a backup, another PC) into the save game folder.
 = Tuo tallennus muualta (varmuuskopio, toinen PC) tallennuskansioon.
 The Talent Tree Builder, the Gear Planner and the build guides.
 = Kykypuun rakentaja, varustesuunnittelija ja build-oppaat.
+FULLSCREEN
+= KOKO NÄYTTÖ
+EXIT FULLSCREEN
+= POISTU KOKO NÄYTÖSTÄ
+This video can't play here right now.
+= Tätä videota ei voi toistaa täällä juuri nyt.

@@ -39,3 +39,6 @@
 - Theorycrafting lives in Gameplay now: it is a card in Gameplay on the Guide's main page, and the path reads Guide ›
   Gameplay › Theorycrafting › Talent Tree Builder (or Gear Planner). Gameplay's list in the path has Theorycrafting,
   so you can get there from the path. The THEORYCRAFTING button on the main screen stays.
+- Guide videos: a FULLSCREEN button above the video, the launcher's own, so fullscreen always works (it plays on from
+  the same point; EXIT FULLSCREEN, Esc, double-click or F bring it back). The guide's own videos (hosted with the
+  launcher) no longer have an OPEN IN BROWSER button.

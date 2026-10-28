@@ -1896,3 +1896,9 @@ Bring in a save from elsewhere (a backup, another PC) into the save game folder.
 = 다른 곳(백업, 다른 PC)의 저장을 저장 폴더로 가져옵니다.
 The Talent Tree Builder, the Gear Planner and the build guides.
 = 특성 트리 빌더, 장비 플래너, 빌드 가이드.
+FULLSCREEN
+= 전체 화면
+EXIT FULLSCREEN
+= 전체 화면 종료
+This video can't play here right now.
+= 지금은 이 동영상을 여기서 재생할 수 없습니다.

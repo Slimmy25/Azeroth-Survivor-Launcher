@@ -1896,3 +1896,9 @@ Bring in a save from elsewhere (a backup, another PC) into the save game folder.
 = Adu o salvare din altă parte (o copie de rezervă, alt PC) în dosarul salvărilor.
 The Talent Tree Builder, the Gear Planner and the build guides.
 = Constructorul de arbori de talente, planificatorul de echipament și ghidurile de build.
+FULLSCREEN
+= ECRAN COMPLET
+EXIT FULLSCREEN
+= IEȘI DIN ECRAN COMPLET
+This video can't play here right now.
+= Acest videoclip nu poate fi redat aici acum.

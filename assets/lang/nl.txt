@@ -1895,3 +1895,9 @@ Bring in a save from elsewhere (a backup, another PC) into the save game folder.
 = Haal een save van elders (een back-up, een andere pc) naar de map met opgeslagen spellen.
 The Talent Tree Builder, the Gear Planner and the build guides.
 = De talentboombouwer, de uitrustingsplanner en de buildgidsen.
+FULLSCREEN
+= VOLLEDIG SCHERM
+EXIT FULLSCREEN
+= VOLLEDIG SCHERM SLUITEN
+This video can't play here right now.
+= Deze video kan hier nu niet worden afgespeeld.

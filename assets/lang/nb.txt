@@ -1895,3 +1895,9 @@ Bring in a save from elsewhere (a backup, another PC) into the save game folder.
 = Hent inn en lagring fra et annet sted (en sikkerhetskopi, en annen PC) til lagringsmappen.
 The Talent Tree Builder, the Gear Planner and the build guides.
 = Talenttre-byggeren, utstyrsplanleggeren og build-guidene.
+FULLSCREEN
+= FULLSKJERM
+EXIT FULLSCREEN
+= AVSLUTT FULLSKJERM
+This video can't play here right now.
+= Denne videoen kan ikke spilles av her akkurat nå.

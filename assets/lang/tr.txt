@@ -1896,3 +1896,9 @@ Bring in a save from elsewhere (a backup, another PC) into the save game folder.
 = Başka bir yerden bir kaydı (yedek, başka bir PC) kayıt klasörüne getir.
 The Talent Tree Builder, the Gear Planner and the build guides.
 = Yetenek Ağacı Oluşturucu, Ekipman Planlayıcı ve build rehberleri.
+FULLSCREEN
+= TAM EKRAN
+EXIT FULLSCREEN
+= TAM EKRANDAN ÇIK
+This video can't play here right now.
+= Bu video şu anda burada oynatılamıyor.

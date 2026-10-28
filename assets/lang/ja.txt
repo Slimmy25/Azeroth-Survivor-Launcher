@@ -1896,3 +1896,9 @@ Bring in a save from elsewhere (a backup, another PC) into the save game folder.
 = 別の場所（バックアップや別のPC）のセーブをセーブフォルダーに取り込みます。
 The Talent Tree Builder, the Gear Planner and the build guides.
 = タレントツリービルダー、装備プランナー、ビルドガイド。
+FULLSCREEN
+= 全画面
+EXIT FULLSCREEN
+= 全画面を終了
+This video can't play here right now.
+= この動画は今ここでは再生できません。

@@ -1896,3 +1896,9 @@ Bring in a save from elsewhere (a backup, another PC) into the save game folder.
 = Đưa bản lưu từ nơi khác (bản sao lưu, máy khác) vào thư mục lưu game.
 The Talent Tree Builder, the Gear Planner and the build guides.
 = Trình dựng cây thiên phú, trình lập kế hoạch trang bị và hướng dẫn build.
+FULLSCREEN
+= TOÀN MÀN HÌNH
+EXIT FULLSCREEN
+= THOÁT TOÀN MÀN HÌNH
+This video can't play here right now.
+= Không thể phát video này ở đây lúc này.

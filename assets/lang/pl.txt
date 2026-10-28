@@ -1896,3 +1896,9 @@ Bring in a save from elsewhere (a backup, another PC) into the save game folder.
 = Przenieś zapis z innego miejsca (kopia zapasowa, inny komputer) do folderu zapisów gry.
 The Talent Tree Builder, the Gear Planner and the build guides.
 = Kreator drzewek talentów, planer ekwipunku i poradniki buildów.
+FULLSCREEN
+= PEŁNY EKRAN
+EXIT FULLSCREEN
+= ZAMKNIJ PEŁNY EKRAN
+This video can't play here right now.
+= Tego filmu nie można teraz tu odtworzyć.
