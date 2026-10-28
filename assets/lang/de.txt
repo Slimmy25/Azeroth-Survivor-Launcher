@@ -1994,3 +1994,9 @@ Build code copied to the clipboard.
 
 Could not copy the build code.
 = Der Build-Code konnte nicht kopiert werden.
+
+Codex neck piece:
+= Codex-Halsschmuck:
+
+Codex neck piece that remakes it:
+= Codex-Halsschmuck, der diesen Zauber verändert:

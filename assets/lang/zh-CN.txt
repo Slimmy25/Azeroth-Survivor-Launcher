@@ -1980,3 +1980,9 @@ No profile is the game as it normally is, kept as a full copy in its own isolate
 = “无配置”就是平常的游戏，作为完整副本保存在自己独立的空间里：开启了哪些插件、界面的位置以及每个插件的设置。使用它时启动器不会做任何改动，从某个配置回到它时，一切都和你离开时完全一样。如果你不想修改游戏设置，请使用此选项。
 Click to give this profile a name of your own.
 = 点击为此配置起一个自己的名字。
+
+Codex neck piece:
+= 典籍项链：
+
+Codex neck piece that remakes it:
+= 改变此法术的典籍项链：

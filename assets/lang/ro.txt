@@ -1980,3 +1980,9 @@ No profile is the game as it normally is, kept as a full copy in its own isolate
 = Fără profil este jocul așa cum e de obicei, păstrat ca o copie completă în propriul spațiu izolat: ce addon-uri sunt pornite, unde stă interfața și setările fiecărui addon. Cât îl folosești, launcherul nu schimbă nimic, iar când revii la el dintr-un profil e exact cum l-ai lăsat. Dacă nu vrei ca preferințele jocului să fie schimbate, folosește această setare.
 Click to give this profile a name of your own.
 = Dă clic ca să dai profilului un nume ales de tine.
+
+Codex neck piece:
+= Colier Codex:
+
+Codex neck piece that remakes it:
+= Colierul Codex care modifică această vrajă:

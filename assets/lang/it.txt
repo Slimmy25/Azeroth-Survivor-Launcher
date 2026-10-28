@@ -1979,3 +1979,9 @@ No profile is the game as it normally is, kept as a full copy in its own isolate
 = Nessun profilo è il gioco com'è normalmente, tenuto come copia completa nel proprio spazio isolato: quali addon sono attivi, dove si trova l'interfaccia e le impostazioni di ogni addon. Mentre lo usi il launcher non cambia nulla, e quando ci torni da un profilo è esattamente come l'hai lasciato. Se non vuoi che le preferenze del gioco cambino, usa questa impostazione.
 Click to give this profile a name of your own.
 = Fai clic per dare al profilo un nome tuo.
+
+Codex neck piece:
+= Collana del Codex:
+
+Codex neck piece that remakes it:
+= Collana del Codex che modifica questo incantesimo:

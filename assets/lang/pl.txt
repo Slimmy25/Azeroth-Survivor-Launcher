@@ -1980,3 +1980,9 @@ No profile is the game as it normally is, kept as a full copy in its own isolate
 = Bez profilu to gra taka, jaka jest normalnie, zachowana jako pełna kopia we własnej odizolowanej przestrzeni: które dodatki są włączone, gdzie jest interfejs i ustawienia każdego dodatku. Gdy go używasz, launcher niczego nie zmienia, a gdy wrócisz do niego z profilu, będzie dokładnie taki, jakim go zostawiłeś. Jeśli nie chcesz zmieniać ustawień gry, użyj tej opcji.
 Click to give this profile a name of your own.
 = Kliknij, aby nadać profilowi własną nazwę.
+
+Codex neck piece:
+= Naszyjnik Kodeksu:
+
+Codex neck piece that remakes it:
+= Naszyjnik Kodeksu zmieniający to zaklęcie:

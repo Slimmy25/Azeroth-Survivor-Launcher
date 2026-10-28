@@ -6,3 +6,5 @@
 - Added a Codex page under Guide → Gameplay → Items, with one entry for every class-specific amulet/spell combination from the supplied video.
 - Codex spell names link to their class spell pages; each spell row links back to its Codex neck piece.
 - The Gear Planner and AZS Handbook show Codex neck pieces only for the class whose spell they remake.
+
+- Added translations for the Codex spell-link labels across all 26 launcher languages.

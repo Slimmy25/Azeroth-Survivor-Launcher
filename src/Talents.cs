@@ -540,7 +540,7 @@ namespace AzerothLauncher
         void CodexChipRow(Graphics g, Font lf, float y)
         {
             float x = Ic + 18;
-            string label = "Codex neck piece:";
+            string label = Lang.T("Codex neck piece:");
             using (var b = new SolidBrush(Theme.GoldDim)) g.DrawString(label, lf, b, x, y + 3);
             x += g.MeasureString(label, lf).Width + 4;
             Font cf = Theme.F(8, FontStyle.Bold);
@@ -627,7 +627,7 @@ namespace AzerothLauncher
             {
                 var n = new List<string>();
                 foreach (var j in codexItems) n.Add(j.Name);
-                s += "\n\nCodex neck piece that remakes it: " + string.Join(", ", n.ToArray());
+                s += "\n\n" + Lang.T("Codex neck piece that remakes it:") + " " + string.Join(", ", n.ToArray());
             }
             return s;
         }

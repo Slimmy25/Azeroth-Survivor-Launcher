@@ -1979,3 +1979,9 @@ No profile is the game as it normally is, kept as a full copy in its own isolate
 = Geen profiel is het spel zoals het normaal is, bewaard als volledige kopie in een eigen afgeschermde ruimte: welke addons aan staan, waar de interface zit en de instellingen van elke addon. Zolang je het gebruikt, verandert de launcher niets, en als je er vanuit een profiel naar terugkomt, is alles precies zoals je het achterliet. Wil je de spelvoorkeuren niet laten wijzigen, gebruik dan deze instelling.
 Click to give this profile a name of your own.
 = Klik om dit profiel een eigen naam te geven.
+
+Codex neck piece:
+= Codex-halsketting:
+
+Codex neck piece that remakes it:
+= Codex-halsketting die deze spreuk verandert:

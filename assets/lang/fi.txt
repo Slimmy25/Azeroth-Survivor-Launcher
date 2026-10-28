@@ -1979,3 +1979,9 @@ No profile is the game as it normally is, kept as a full copy in its own isolate
 = Ei profiilia on peli sellaisenaan, tallennettuna täydeksi kopioksi omaan eristettyyn tilaansa: mitkä lisäosat ovat päällä, missä käyttöliittymä on ja jokaisen lisäosan asetukset. Kun käytät sitä, käynnistin ei muuta mitään, ja kun palaat siihen profiilista, se on juuri sellainen kuin jätit sen. Jos et halua pelin asetuksia muutettavan, käytä tätä.
 Click to give this profile a name of your own.
 = Napsauta antaaksesi profiilille oman nimen.
+
+Codex neck piece:
+= Codex-kaulakoru:
+
+Codex neck piece that remakes it:
+= Codex-kaulakoru, joka muuttaa tämän loitsun:

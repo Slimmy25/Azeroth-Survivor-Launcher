@@ -1979,3 +1979,9 @@ No profile is the game as it normally is, kept as a full copy in its own isolate
 = Tanpa profil adalah game seperti biasanya, disimpan sebagai salinan lengkap di ruangnya sendiri yang terpisah: addon mana yang aktif, letak antarmuka, dan pengaturan setiap addon. Selama kamu memakainya, launcher tidak mengubah apa pun, dan saat kamu kembali dari sebuah profil, semuanya persis seperti yang kamu tinggalkan. Jika kamu tidak ingin pengaturan game diubah, pakai pengaturan ini.
 Click to give this profile a name of your own.
 = Klik untuk memberi profil ini nama sendiri.
+
+Codex neck piece:
+= Kalung Codex:
+
+Codex neck piece that remakes it:
+= Kalung Codex yang mengubah mantra ini:

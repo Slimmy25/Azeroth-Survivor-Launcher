@@ -1995,3 +1995,9 @@ Build code copied to the clipboard.
 
 Could not copy the build code.
 = Δεν ήταν δυνατή η αντιγραφή του κωδικού build.
+
+Codex neck piece:
+= Κολιέ Codex:
+
+Codex neck piece that remakes it:
+= Κολιέ Codex που μεταμορφώνει αυτό το ξόρκι:

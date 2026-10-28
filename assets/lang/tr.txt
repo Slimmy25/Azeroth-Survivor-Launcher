@@ -1980,3 +1980,9 @@ No profile is the game as it normally is, kept as a full copy in its own isolate
 = Profil yok, oyunun normal hâlidir; kendi yalıtılmış alanında tam bir kopya olarak tutulur: hangi eklentilerin açık olduğu, arayüzün nerede durduğu ve her eklentinin ayarları. Kullanırken başlatıcı hiçbir şeyi değiştirmez ve bir profilden ona döndüğünde her şey tam bıraktığın gibidir. Oyun tercihlerinin değişmesini istemiyorsan bu ayarı kullan.
 Click to give this profile a name of your own.
 = Bu profile kendi adını vermek için tıkla.
+
+Codex neck piece:
+= Codex kolyesi:
+
+Codex neck piece that remakes it:
+= Bu büyüyü değiştiren Codex kolyesi:

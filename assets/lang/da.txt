@@ -1994,3 +1994,9 @@ Build code copied to the clipboard.
 
 Could not copy the build code.
 = Buildkoden kunne ikke kopieres.
+
+Codex neck piece:
+= Codex-halskæde:
+
+Codex neck piece that remakes it:
+= Codex-halskæde, der ændrer denne besværgelse:

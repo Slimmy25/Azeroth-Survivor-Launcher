@@ -1979,3 +1979,9 @@ No profile is the game as it normally is, kept as a full copy in its own isolate
 = Sem perfil é o jogo como ele é normalmente, guardado como uma cópia completa em seu próprio espaço isolado: quais addons estão ligados, onde fica a interface e as configurações de cada addon. Enquanto você o usa, o launcher não muda nada, e quando você volta a ele de um perfil, está exatamente como você deixou. Se você não quer que as preferências do jogo mudem, use esta opção.
 Click to give this profile a name of your own.
 = Clique para dar a este perfil um nome seu.
+
+Codex neck piece:
+= Colar do Códice:
+
+Codex neck piece that remakes it:
+= Colar do Códice que transforma esta magia:

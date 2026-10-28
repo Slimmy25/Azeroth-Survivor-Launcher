@@ -1980,3 +1980,9 @@ No profile is the game as it normally is, kept as a full copy in its own isolate
 = Không hồ sơ là game như bình thường, được giữ thành một bản sao đầy đủ trong không gian riêng biệt: addon nào đang bật, giao diện nằm ở đâu và cài đặt của mọi addon. Khi bạn dùng nó, launcher không thay đổi gì, và khi bạn quay lại từ một hồ sơ, mọi thứ y như lúc bạn rời đi. Nếu bạn không muốn tùy chỉnh game bị thay đổi, hãy dùng cài đặt này.
 Click to give this profile a name of your own.
 = Bấm để đặt tên riêng cho hồ sơ này.
+
+Codex neck piece:
+= Dây chuyền Codex:
+
+Codex neck piece that remakes it:
+= Dây chuyền Codex biến đổi phép này:

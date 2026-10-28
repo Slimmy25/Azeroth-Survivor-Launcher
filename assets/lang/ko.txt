@@ -1980,3 +1980,9 @@ No profile is the game as it normally is, kept as a full copy in its own isolate
 = 프로필 없음은 평소 그대로의 게임을 자체 공간에 전체 사본으로 보관합니다. 켜진 애드온, 인터페이스 위치, 모든 애드온의 설정입니다. 사용하는 동안 런처는 아무것도 바꾸지 않으며, 프로필에서 돌아오면 떠날 때 그대로입니다. 게임 설정을 바꾸고 싶지 않다면 이 설정을 쓰세요.
 Click to give this profile a name of your own.
 = 클릭해서 이 프로필에 원하는 이름을 붙이세요.
+
+Codex neck piece:
+= 코덱스 목걸이:
+
+Codex neck piece that remakes it:
+= 이 주문을 바꾸는 코덱스 목걸이:

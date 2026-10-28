@@ -1979,3 +1979,9 @@ No profile is the game as it normally is, kept as a full copy in its own isolate
 = Ingen profil er spillet slik det vanligvis er, lagret som en full kopi i sitt eget isolerte rom: hvilke tillegg som er på, hvor grensesnittet sitter og alle tilleggenes innstillinger. Mens du bruker den, endrer launcheren ingenting, og når du kommer tilbake til den fra en profil, er den akkurat slik du forlot den. Hvis du ikke vil at spillets innstillinger skal endres, bruk denne.
 Click to give this profile a name of your own.
 = Klikk for å gi profilen et eget navn.
+
+Codex neck piece:
+= Codex-halskjede:
+
+Codex neck piece that remakes it:
+= Codex-halskjede som endrer denne besvergelsen:

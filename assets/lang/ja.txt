@@ -1980,3 +1980,9 @@ No profile is the game as it normally is, kept as a full copy in its own isolate
 = 「プロファイルなし」は普段どおりのゲームを、独立した場所に完全なコピーとして保管します。オンにするアドオン、インターフェースの配置、各アドオンの設定です。使っている間ランチャーは何も変えず、プロファイルから戻ると離れたときのままです。ゲーム設定を変更したくない場合は、これを使ってください。
 Click to give this profile a name of your own.
 = クリックしてこのプロファイルに好きな名前を付けます。
+
+Codex neck piece:
+= コーデックスの首飾り：
+
+Codex neck piece that remakes it:
+= この呪文を変化させるコーデックスの首飾り：

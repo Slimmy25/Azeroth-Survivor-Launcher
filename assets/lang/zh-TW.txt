@@ -1980,3 +1980,9 @@ No profile is the game as it normally is, kept as a full copy in its own isolate
 = 「無設定檔」就是平常的遊戲，作為完整副本保存在自己獨立的空間裡：開啟了哪些插件、介面的位置以及每個插件的設定。使用它時啟動器不會做任何改動，從某個設定檔回到它時，一切都和你離開時完全一樣。如果你不想修改遊戲設定，請使用此選項。
 Click to give this profile a name of your own.
 = 點擊為此設定檔取一個自己的名字。
+
+Codex neck piece:
+= 典籍項鍊：
+
+Codex neck piece that remakes it:
+= 改變此法術的典籍項鍊：
