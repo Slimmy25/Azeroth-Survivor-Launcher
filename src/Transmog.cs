@@ -1,5 +1,6 @@
 // Transmog: the looks that add nothing (Appearances, Tabards, weapon glows), from assets/transmog.txt, written out as the
-// Guide's "Transmog" topic. Their icons: the game's own icon names when known, else the ones AZS Stats learns in game.
+// Guide's "Transmog" topic. Their icons: the game's own icon names when known. On mouseover, a look that is a real item shows its 3D model
+// picture (assets/item-models.txt, GuideHover).
 using System;
 using System.Collections.Generic;
 

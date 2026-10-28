@@ -133,6 +133,41 @@ namespace AzerothLauncher
             return Picture("icon_" + icon, IconHost + icon + ".jpg", repaint);
         }
 
+        // the 3D model picture of a real item (a Transmog look): assets\item-models.txt gives its display id, Wowhead's
+        // model viewer host has the picture
+        static Dictionary<string, int> itemModels;
+
+        static int ItemDisplay(string name)
+        {
+            if (itemModels == null)
+            {
+                var d = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+                try
+                {
+                    foreach (string raw in Util.ReadResource("AS.item-models.txt").Replace("\r\n", "\n").Split('\n'))
+                    {
+                        if (raw.StartsWith("#")) continue;
+                        string[] f = raw.Split('|');
+                        int id;
+                        if (f.Length >= 3 && int.TryParse(f[2].Trim(), out id) && id > 0) d[f[0].Trim()] = id;
+                    }
+                }
+                catch (Exception) { }
+                itemModels = d;
+            }
+            int m;
+            return name != null && itemModels.TryGetValue(name.Trim(), out m) ? m : 0;
+        }
+
+        public static bool HasItemModel(string name) { return ItemDisplay(name) > 0; }
+
+        public static Image ItemModel(string name, Control repaint)
+        {
+            int d = ItemDisplay(name);
+            if (d <= 0) return null;
+            return Picture("item3d_" + d, "https://wow.zamimg.com/modelviewer/classic/webthumbs/item/" + (d & 255) + "/" + d + ".jpg", repaint);
+        }
+
         // the model picture of a creature (Nemesis): assets\npc-models.txt gives its model, Wowhead has the picture
         static Dictionary<string, int> npcModels;
 
