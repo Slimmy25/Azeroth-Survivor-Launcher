@@ -1891,3 +1891,7 @@ That folder does not exist.
 = Den mappe findes ikke.
 The path at the top shows where you are, for example Guide › Classes › Priest (in the picture below). Click a step's name to go back to it. Point at a step, or its ▾, for the places beside it. The arrow on the left goes back the way you came; the X takes you home.
 = Stien øverst viser, hvor du er, for eksempel Guide › Klasser › Priest (på billedet nedenfor). Klik på et trins navn for at gå tilbage til det. Peg på et trin eller dets ▾ for stederne ved siden af. Pilen til venstre går tilbage ad den vej, du kom; X'et fører dig hjem.
+Bring in a save from elsewhere (a backup, another PC) into the save game folder.
+= Hent et gem et andet sted fra (en sikkerhedskopi, en anden pc) ind i mappen med gemte spil.
+The Talent Tree Builder, the Gear Planner and the build guides.
+= Talenttræ-byggeren, udstyrsplanlæggeren og build-guiderne.

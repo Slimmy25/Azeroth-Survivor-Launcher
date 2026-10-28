@@ -23,3 +23,19 @@
 ### Changelog
 - CHANGELOG opens on the list of every patch note to pick from, instead of the second newest one (News already shows
   the newest).
+
+### The path at the top
+- Every step of the path goes straight there when clicked, the first one (the section) included, even while a step's
+  list is open. The lists still open when you point at a step or click its ▾.
+- Options › Launcher › Language: the path no longer lists the languages, so passing over it can't change your language
+  by accident. Pick a language on the page itself.
+- Options › Folders: no Change Folder ▾ step (it only offered the folders already on the page). IMPORT A SAVE is a
+  button on the Folders page now.
+
+### Options
+- Cloud Save fits the window without a scroll bar: its log takes the room that is left.
+
+### Guide
+- Theorycrafting lives in Gameplay now: it is a card in Gameplay on the Guide's main page, and the path reads Guide ›
+  Gameplay › Theorycrafting › Talent Tree Builder (or Gear Planner). Gameplay's list in the path has Theorycrafting,
+  so you can get there from the path. The THEORYCRAFTING button on the main screen stays.

@@ -1892,3 +1892,7 @@ That folder does not exist.
 = Acel dosar nu există.
 The path at the top shows where you are, for example Guide › Classes › Priest (in the picture below). Click a step's name to go back to it. Point at a step, or its ▾, for the places beside it. The arrow on the left goes back the way you came; the X takes you home.
 = Calea de sus arată unde ești, de exemplu Ghid › Clase › Priest (în imaginea de mai jos). Fă clic pe numele unui pas ca să revii la el. Indică un pas, sau ▾-ul lui, pentru locurile de lângă. Săgeata din stânga te întoarce pe drumul pe care ai venit; X-ul te duce acasă.
+Bring in a save from elsewhere (a backup, another PC) into the save game folder.
+= Adu o salvare din altă parte (o copie de rezervă, alt PC) în dosarul salvărilor.
+The Talent Tree Builder, the Gear Planner and the build guides.
+= Constructorul de arbori de talente, planificatorul de echipament și ghidurile de build.

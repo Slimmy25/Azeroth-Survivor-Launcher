@@ -1891,3 +1891,7 @@ That folder does not exist.
 = Die map bestaat niet.
 The path at the top shows where you are, for example Guide › Classes › Priest (in the picture below). Click a step's name to go back to it. Point at a step, or its ▾, for the places beside it. The arrow on the left goes back the way you came; the X takes you home.
 = Het pad bovenaan laat zien waar je bent, bijvoorbeeld Gids › Klassen › Priest (in de afbeelding hieronder). Klik op de naam van een stap om ernaar terug te gaan. Wijs een stap, of zijn ▾, aan voor de plekken ernaast. De pijl links gaat terug langs de weg die je kwam; het X brengt je naar huis.
+Bring in a save from elsewhere (a backup, another PC) into the save game folder.
+= Haal een save van elders (een back-up, een andere pc) naar de map met opgeslagen spellen.
+The Talent Tree Builder, the Gear Planner and the build guides.
+= De talentboombouwer, de uitrustingsplanner en de buildgidsen.

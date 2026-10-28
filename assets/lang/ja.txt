@@ -1892,3 +1892,7 @@ That folder does not exist.
 = そのフォルダーは存在しません。
 The path at the top shows where you are, for example Guide › Classes › Priest (in the picture below). Click a step's name to go back to it. Point at a step, or its ▾, for the places beside it. The arrow on the left goes back the way you came; the X takes you home.
 = 上のパスは今いる場所を示します。例：ガイド › クラス › Priest（下の画像）。ステップの名前をクリックするとそこへ戻ります。ステップやその ▾ にポインターを合わせると、隣の場所が表示されます。左の矢印は来た道を戻り、X はホームへ戻ります。
+Bring in a save from elsewhere (a backup, another PC) into the save game folder.
+= 別の場所（バックアップや別のPC）のセーブをセーブフォルダーに取り込みます。
+The Talent Tree Builder, the Gear Planner and the build guides.
+= タレントツリービルダー、装備プランナー、ビルドガイド。

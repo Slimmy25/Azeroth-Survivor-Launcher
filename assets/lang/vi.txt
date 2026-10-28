@@ -1892,3 +1892,7 @@ That folder does not exist.
 = Thư mục đó không tồn tại.
 The path at the top shows where you are, for example Guide › Classes › Priest (in the picture below). Click a step's name to go back to it. Point at a step, or its ▾, for the places beside it. The arrow on the left goes back the way you came; the X takes you home.
 = Đường dẫn ở trên cho biết bạn đang ở đâu, ví dụ Hướng dẫn › Lớp › Priest (trong hình bên dưới). Bấm vào tên một bước để quay lại đó. Trỏ vào một bước, hoặc ▾ của nó, để xem các nơi bên cạnh. Mũi tên bên trái quay lại theo đường bạn đã đến; X đưa bạn về trang chủ.
+Bring in a save from elsewhere (a backup, another PC) into the save game folder.
+= Đưa bản lưu từ nơi khác (bản sao lưu, máy khác) vào thư mục lưu game.
+The Talent Tree Builder, the Gear Planner and the build guides.
+= Trình dựng cây thiên phú, trình lập kế hoạch trang bị và hướng dẫn build.

@@ -261,6 +261,10 @@ namespace AzerothLauncher
             if (!menus.TryGetValue(i, out items)) return;
             if (openMenu != null && !openMenu.IsDisposed) { if (openMenuStep == i) return; openMenu.Close(); }
             var m = new ContextMenuStrip();
+            // not AutoClose: an open list does not take the next click for itself, so a click on any step of the path
+            // goes there at once; the list closes when the pointer leaves the step and the list (HoverTick), on a pick,
+            // or on a click in the path
+            m.AutoClose = false;
             openMenu = m;
             openMenuStep = i;
             m.ShowImageMargin = false;
@@ -272,12 +276,14 @@ namespace AzerothLauncher
                 Action act = kv.Value;
                 var it = new ToolStripMenuItem(Lang.T(kv.Key));
                 it.ForeColor = kv.Key == crumbs[i].Key ? Theme.Hex("#f0c050") : Theme.Hex("#f5e9c8");   // where you are now
-                it.Click += delegate { WowButton.Fire(act); };
+                it.Click += delegate { m.Close(); WowButton.Fire(act); };
                 m.Items.Add(it);
             }
             m.Closed += delegate { if (openMenu == m) { quietStep = openMenuStep; openMenu = null; openMenuStep = -1; } BeginInvoke(new Action(m.Dispose)); };
             m.Show(this, new Point(at.X - 6, Height - 4));
         }
+
+        void CloseOpenMenu() { if (openMenu != null && !openMenu.IsDisposed) openMenu.Close(); }
 
         // the list of a step, opened by a click: at the same place as when hovered
         void ClickMenu(int i)
@@ -306,7 +312,7 @@ namespace AzerothLauncher
                 Capture = false;
                 if (Moved != null && Owner2 != null) Moved(Owner2.Location);
             }
-            else if (e.Button == MouseButtons.Left && CloseBox.Contains(e.Location)) WowButton.Fire(CloseClicked);
+            else if (e.Button == MouseButtons.Left && CloseBox.Contains(e.Location)) { CloseOpenMenu(); WowButton.Fire(CloseClicked); }
             else if (e.Button == MouseButtons.Left && HelpBox.Contains(e.Location)) { }   // "Lost?" only answers the pointer
             else if (e.Button == MouseButtons.Left && ArrowAt(e.Location) >= 0) ClickMenu(ArrowAt(e.Location));
             else if (e.Button == MouseButtons.Left)
@@ -314,10 +320,11 @@ namespace AzerothLauncher
                 // a click on a step's name goes back to that place; its list of places beside it opens on the ▾ or
                 // when the pointer rests on it (a step that is not a place, the one you are on, opens its list)
                 int h = HotAt(e.Location);
-                if (h == -2) WowButton.Fire(BackClicked);
+                if (h == -2) { CloseOpenMenu(); WowButton.Fire(BackClicked); }
                 else if (h >= 0 && crumbs[h].Value != null)
                 {
-                    if (openMenu != null && !openMenu.IsDisposed) openMenu.Close();
+                    CloseOpenMenu();
+                    quietStep = h;                           // the list does not pop open again on the page it led to
                     WowButton.Fire(crumbs[h].Value);
                 }
                 else if (h >= 0 && menus.ContainsKey(h)) ClickMenu(h);
@@ -1839,6 +1846,18 @@ namespace AzerothLauncher
         ScrollPanel optionsPage;                             // the page shown, so a rebuild of the same tab keeps its place
         int optionsPageTab = -1;
 
+        // Options › Launcher › Settings ▾ : the launcher's other places
+        List<KeyValuePair<string, Action>> LauncherPlaces()
+        {
+            return new List<KeyValuePair<string, Action>>
+            {
+                new KeyValuePair<string, Action>("Settings", delegate { optionsLang = false; optionsTab = 4; BuildPanel("Options"); }),
+                new KeyValuePair<string, Action>("Language", delegate { optionsLang = true; BuildPanel("Options"); }),
+                new KeyValuePair<string, Action>("About Launcher", delegate { ShowSection("About Launcher"); }),
+                new KeyValuePair<string, Action>("Run setup again", delegate { RunSetup(); }),
+            };
+        }
+
         void PanelOptions()
         {
             // a setting changed on this tab rebuilds it: it stays where it was scrolled to
@@ -1849,29 +1868,16 @@ namespace AzerothLauncher
             Action home = delegate { optionsLang = false; optionsTab = 0; BuildPanel("Options"); };
             if (optionsLang)                                 // Options › Launcher › Language ▾ : the languages themselves
             {
+                // (no list of languages here: a language is only picked on the page itself, never by passing over the path)
                 SetCrumbs("Options", home, "Launcher", (Action)delegate { optionsLang = false; BuildPanel("Options"); }, "Language", null);
                 SetCrumbMenu(1, OptionTabMenu());
-                var langs = new List<KeyValuePair<string, Action>>();
-                foreach (var kv in Lang.Available()) { string code = kv.Key; langs.Add(new KeyValuePair<string, Action>(kv.Value, delegate { SetLanguage(code); })); }
-                SetCrumbMenu(2, langs);
+                SetCrumbMenu(2, LauncherPlaces());
             }
             else if (optionsTab == 4)                        // Options › Launcher › Settings ▾ : its other places
             {
                 SetCrumbs("Options", home, "Launcher", (Action)delegate { BuildPanel("Options"); }, "Settings", null);
                 SetCrumbMenu(1, OptionTabMenu());
-                SetCrumbMenu(2, new List<KeyValuePair<string, Action>>
-                {
-                    new KeyValuePair<string, Action>("Settings", delegate { BuildPanel("Options"); }),
-                    new KeyValuePair<string, Action>("Language", delegate { optionsLang = true; BuildPanel("Options"); }),
-                    new KeyValuePair<string, Action>("About Launcher", delegate { ShowSection("About Launcher"); }),
-                    new KeyValuePair<string, Action>("Run setup again", delegate { RunSetup(); }),
-                });
-            }
-            else if (optionsTab == 0)                        // Options › Folders › Change ▾ : each folder, and importing a save
-            {
-                SetCrumbs("Options", home, "Folders", (Action)delegate { BuildPanel("Options"); }, "Change Folder", null);
-                SetCrumbMenu(1, OptionTabMenu());
-                SetCrumbMenu(2, FolderMenu());
+                SetCrumbMenu(2, LauncherPlaces());
             }
             else
             {
@@ -1936,10 +1942,7 @@ namespace AzerothLauncher
             rows.Add(new object[] { "Save game folder", ss.SaveDir, new Action(ChooseSaveDir) });
             rows.Add(new object[] { "Game config folder (AddOns, addon settings)", ss.ConfigDir, new Action(ChooseConfigDir) });
             int y = 6;
-            // each folder: OPEN LOCATION (in Explorer) and CHANGE FOLDER beside it; importing a save is in Change Folder ▾ above
-            var hint = PutText("Importing a save is in Change Folder ▾ in the path above.",
-                               9, FontStyle.Italic, Theme.GoldDim, 20, y, PW - 40);
-            y = BottomOf(hint) + 8;
+            // each folder: OPEN LOCATION (in Explorer) and CHANGE FOLDER beside it; IMPORT A SAVE under them
             int bw = (int)(140 * Theme.Zoom), gap = (int)(8 * Theme.Zoom), room = PW - 40 - 2 * bw - gap - 10;
             foreach (var r in rows)
             {
@@ -1955,7 +1958,12 @@ namespace AzerothLauncher
                 Put(open, PW - 20 - 2 * bw - gap, by);
                 y = Math.Max(BottomOf(val), by + (int)(28 * Theme.Zoom)) + 10;
             }
-            return y;
+            var imp = PutText("Import a save", 11, FontStyle.Bold, Theme.Gold, 20, y + 4, PW - 40 - bw - 10);
+            var impNote = PutText("Bring in a save from elsewhere (a backup, another PC) into the save game folder.", 9, FontStyle.Italic,
+                                  Theme.GoldDim, 20, BottomOf(imp), PW - 40 - bw - 10);
+            Put(new WowButton("IMPORT A SAVE", delegate { if (ImportSave(side, SyncSettings().SaveDir) != null) SetStatus("Save imported."); }, 140, 28, 8.5f),
+                PW - 20 - bw, y + 4);
+            return Math.Max(BottomOf(impNote), y + 4 + (int)(28 * Theme.Zoom)) + 8;
         }
 
         // a folder in Explorer
@@ -1964,17 +1972,6 @@ namespace AzerothLauncher
             if (string.IsNullOrEmpty(dir) || !Directory.Exists(dir)) { SetStatus("That folder does not exist."); return; }
             try { System.Diagnostics.Process.Start("explorer.exe", "\"" + dir + "\""); }
             catch (Exception) { SetStatus("That folder does not exist."); }
-        }
-
-        List<KeyValuePair<string, Action>> FolderMenu()
-        {
-            return new List<KeyValuePair<string, Action>>
-            {
-                new KeyValuePair<string, Action>("Game folder", ChooseGameFolderButton),
-                new KeyValuePair<string, Action>("Save game folder", ChooseSaveDir),
-                new KeyValuePair<string, Action>("Game config folder (AddOns, addon settings)", ChooseConfigDir),
-                new KeyValuePair<string, Action>("Import a save", delegate { if (ImportSave(side, SyncSettings().SaveDir) != null) SetStatus("Save imported."); }),
-            };
         }
 
         // CLOUD SAVE: cloud saving on or off, its sync folder, and its page (sync now, the log, earlier downloads)
@@ -2024,7 +2021,9 @@ namespace AzerothLauncher
             Put(new WowButton("UPLOAD", delegate { RunSync("push", true, false); }, 170, 34, 10), 20 + 2 * bw, y);
             y += (int)(34 * Theme.Zoom) + 8;
             var frame = new Bordered(Theme.Bronze, 1);
-            frame.Bounds = new Rectangle(20, y, PW - 40, 210);
+            // the log fills what is left of the page, so the Cloud Save tab needs no scroll bar
+            int logH = Math.Max(70, PH - 12 - y - 22);
+            frame.Bounds = new Rectangle(20, y, PW - 40, logH);
             Put(frame, 20, y);
             var box = UI.Log(Theme.Ink, 9);
             box.Dock = DockStyle.Fill;

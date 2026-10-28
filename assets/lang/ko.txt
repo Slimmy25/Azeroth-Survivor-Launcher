@@ -1892,3 +1892,7 @@ That folder does not exist.
 = 해당 폴더가 없습니다.
 The path at the top shows where you are, for example Guide › Classes › Priest (in the picture below). Click a step's name to go back to it. Point at a step, or its ▾, for the places beside it. The arrow on the left goes back the way you came; the X takes you home.
 = 위쪽 경로는 지금 위치를 보여 줍니다. 예: 가이드 › 직업 › Priest (아래 그림). 단계 이름을 클릭하면 그곳으로 돌아갑니다. 단계나 그 ▾에 포인터를 올리면 옆의 장소가 나옵니다. 왼쪽 화살표는 온 길로 돌아가고, X는 홈으로 갑니다.
+Bring in a save from elsewhere (a backup, another PC) into the save game folder.
+= 다른 곳(백업, 다른 PC)의 저장을 저장 폴더로 가져옵니다.
+The Talent Tree Builder, the Gear Planner and the build guides.
+= 특성 트리 빌더, 장비 플래너, 빌드 가이드.

@@ -1892,3 +1892,7 @@ That folder does not exist.
 = वह फ़ोल्डर मौजूद नहीं है।
 The path at the top shows where you are, for example Guide › Classes › Priest (in the picture below). Click a step's name to go back to it. Point at a step, or its ▾, for the places beside it. The arrow on the left goes back the way you came; the X takes you home.
 = ऊपर का पथ दिखाता है कि आप कहाँ हैं, जैसे गाइड › क्लास › Priest (नीचे चित्र में)। किसी चरण के नाम पर क्लिक करके उस पर वापस जाएँ। उसके पास की जगहों के लिए किसी चरण या उसके ▾ पर पॉइंटर रखें। बाईं ओर का तीर उसी रास्ते पीछे ले जाता है जिससे आप आए; X आपको होम ले जाता है।
+Bring in a save from elsewhere (a backup, another PC) into the save game folder.
+= कहीं और से सेव (बैकअप, दूसरा पीसी) सेव गेम फ़ोल्डर में लाएँ।
+The Talent Tree Builder, the Gear Planner and the build guides.
+= टैलेंट ट्री बिल्डर, गियर प्लानर और बिल्ड गाइड।

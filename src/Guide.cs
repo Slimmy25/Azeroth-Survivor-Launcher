@@ -64,6 +64,7 @@ namespace AzerothLauncher
                 for (int t = 0; t < topics.Count; t++)
                     if (string.Equals(topics[t].Title, GuideGroups[group][i], StringComparison.OrdinalIgnoreCase)) { list.Add(t); break; }
             }
+            if (group == 1) list.Add(-4);                     // Gameplay › Theorycrafting: the theorycrafting tools live in Gameplay
             if (group == 0)                                   // topics no group names
                 for (int t = 0; t < topics.Count; t++)
                 {
@@ -77,6 +78,7 @@ namespace AzerothLauncher
 
         void OpenGuideTab(int tab)
         {
+            if (tab == -4) { GuideGroupPage(2); return; }    // Theorycrafting (inside Gameplay)
             guideQuery = "";
             guideGroupPage = -1;
             if (tab == -2) { gVideo = null; gTalents = null; gBuilder = true; gPlanner = false; guideMain = false; guideGroup = 2; if (current == "Guide") BuildPanel("Guide"); }
@@ -209,38 +211,43 @@ namespace AzerothLauncher
             BuildPanel("Guide");
         }
 
-        // the trail in the title bar: Guide › Gameplay › Classes › Priest, each step a way back
+        // the trail in the title bar: Guide › Gameplay › Classes › Priest, each step a way back. Theorycrafting lives in
+        // Gameplay: Guide › Gameplay › Theorycrafting › Talent Tree Builder › Priest
         void GuideTrail()
         {
             var topics = Data.Guide;
             Action home = GuideMainPage;
             Action builder = delegate { OpenGuideTab(-2); };    // the class question again
             Action theory = delegate { GuideGroupPage(2); };
+            Action gameplay = delegate { GuideGroupPage(1); };
+            string gp = GroupName(1), th = GroupName(2);
             if (gVideo != null) { SetCrumbs("Guide", home, gVideo.Title.Length > 0 ? gVideo.Title : "Video", null); return; }
-            if (gTalents != null && gBuilder) { SetCrumbs("Guide", home, GroupName(2), theory, TalentBuilder, builder, gTalents, null); return; }
-            if (gBuilder) { SetCrumbs("Guide", home, GroupName(2), theory, TalentBuilder, null); return; }
+            if (gTalents != null && gBuilder) { SetCrumbs("Guide", home, gp, gameplay, th, theory, TalentBuilder, builder, gTalents, null); return; }
+            if (gBuilder) { SetCrumbs("Guide", home, gp, gameplay, th, theory, TalentBuilder, null); return; }
             Action planner = delegate { plannerClass = null; OpenGuideTab(-3); };
-            if (gPlanner && plannerClass != null) { SetCrumbs("Guide", home, GroupName(2), theory, GearPlanner, planner, plannerClass, null); return; }
-            if (gPlanner) { SetCrumbs("Guide", home, GroupName(2), theory, GearPlanner, null); return; }
+            if (gPlanner && plannerClass != null) { SetCrumbs("Guide", home, gp, gameplay, th, theory, GearPlanner, planner, plannerClass, null); return; }
+            if (gPlanner) { SetCrumbs("Guide", home, gp, gameplay, th, theory, GearPlanner, null); return; }
             if (guideQuery.Trim().Length > 0) { SetCrumbs("Guide", home, "Search", null); return; }
+            if ((gTopic < 0 || gTopic >= topics.Count) && guideGroupPage == 2) { SetCrumbs("Guide", home, gp, gameplay, th, null); return; }
             if ((gTopic < 0 || gTopic >= topics.Count) && guideGroupPage >= 0) { SetCrumbs("Guide", home, GroupName(guideGroupPage), null); return; }
             if (gTopic < 0 || gTopic >= topics.Count) { SetCrumbs("Guide", null); return; }
             int t = gTopic, pg = gPage;
             GuideTopic topic = topics[t];
             int gi = GroupOf(topic.Title);
-            string group = GroupName(gi);
-            Action main = GuideMainPage;
-            home = delegate { GuideGroupPage(gi); };   // the group's step opens its page
+            var trail = new List<object> { "Guide", (Action)GuideMainPage };
+            if (gi == 2) { trail.Add(gp); trail.Add(gameplay); }      // a Theorycrafting topic: inside Gameplay
+            trail.Add(GroupName(gi)); trail.Add((Action)delegate { GuideGroupPage(gi); });   // the group's step opens its page
             Action toTopic = delegate { SetGuideView(t, -1); };
+            bool onPage = pg >= 0 && pg < topic.Pages.Count;
             if (gTalents != null)
             {
-                Action toPage = delegate { SetGuideView(t, pg); };
-                if (pg >= 0 && pg < topic.Pages.Count) SetCrumbs("Guide", main, group, home, topic.Title, toTopic, topic.Pages[pg].Title, toPage, "Talents", null);
-                else SetCrumbs("Guide", main, group, home, topic.Title, toTopic, "Talents", null);
-                return;
+                trail.Add(topic.Title); trail.Add(toTopic);
+                if (onPage) { trail.Add(topic.Pages[pg].Title); trail.Add((Action)delegate { SetGuideView(t, pg); }); }
+                trail.Add("Talents"); trail.Add(null);
             }
-            if (pg >= 0 && pg < topic.Pages.Count) SetCrumbs("Guide", main, group, home, topic.Title, toTopic, topic.Pages[pg].Title, null);
-            else SetCrumbs("Guide", main, group, home, topic.Title, null);
+            else if (onPage) { trail.Add(topic.Title); trail.Add(toTopic); trail.Add(topic.Pages[pg].Title); trail.Add(null); }
+            else { trail.Add(topic.Title); trail.Add(null); }
+            SetCrumbs(trail.ToArray());
         }
 
         static readonly string[] BuilderClasses = { "Warrior", "Paladin", "Hunter", "Rogue", "Priest", "Shaman", "Mage", "Warlock", "Druid" };
@@ -369,7 +376,7 @@ namespace AzerothLauncher
             Func<List<KeyValuePair<string, Action>>> groups = delegate
             {
                 var l = new List<KeyValuePair<string, Action>>();
-                for (int g = 0; g < GuideGroups.Length; g++) { int gg = g; l.Add(new KeyValuePair<string, Action>(GroupName(g), delegate { GuideGroupPage(gg); })); }
+                for (int g = 0; g < 2; g++) { int gg = g; l.Add(new KeyValuePair<string, Action>(GroupName(g), delegate { GuideGroupPage(gg); })); }   // (Theorycrafting is in Gameplay)
                 return l;
             };
             Func<int, List<KeyValuePair<string, Action>>> tabsOf = delegate(int g)
@@ -378,7 +385,7 @@ namespace AzerothLauncher
                 foreach (int tab in GroupTabs(g, topics))
                 {
                     int tt = tab;
-                    string name = tab == -2 ? TalentBuilder : tab == -3 ? GearPlanner : topics[tab].Title;
+                    string name = tab == -2 ? TalentBuilder : tab == -3 ? GearPlanner : tab == -4 ? GroupName(2) : topics[tab].Title;
                     l.Add(new KeyValuePair<string, Action>(name, delegate { if (tt < 0) OpenGuideTab(tt); else SetGuideView(tt, -1); }));
                 }
                 return l;
@@ -390,29 +397,33 @@ namespace AzerothLauncher
                 return l;
             };
             if (gVideo != null || guideQuery.Trim().Length > 0) return;
-            if (gBuilder || gPlanner)
+            if (gBuilder || gPlanner)                         // Guide › Gameplay › Theorycrafting › tool › class
             {
                 SetCrumbMenu(1, groups());
-                SetCrumbMenu(2, tabsOf(2));
+                SetCrumbMenu(2, tabsOf(1));
+                SetCrumbMenu(3, tabsOf(2));
                 if (gBuilder && gTalents != null)
-                    SetCrumbMenu(3, classes(delegate(string c) { PlannerClass(c); gTalents = c; BuildPanel("Guide"); }));
+                    SetCrumbMenu(4, classes(delegate(string c) { PlannerClass(c); gTalents = c; BuildPanel("Guide"); }));
                 if (gPlanner && plannerClass != null)
-                    SetCrumbMenu(3, classes(delegate(string c) { PlannerClass(c); BuildPanel("Guide"); }));
+                    SetCrumbMenu(4, classes(delegate(string c) { PlannerClass(c); BuildPanel("Guide"); }));
                 return;
             }
             if (gTopic < 0 || gTopic >= topics.Count)
             {
                 if (guideGroupPage >= 0) SetCrumbMenu(1, groups());
+                if (guideGroupPage == 2) SetCrumbMenu(2, tabsOf(1));
                 return;
             }
             int t = gTopic;
+            int gt = GroupOf(topics[t].Title), at = 2;         // at: the step of the topic's group's list
             SetCrumbMenu(1, groups());
-            SetCrumbMenu(2, tabsOf(GroupOf(topics[t].Title)));
+            if (gt == 2) { SetCrumbMenu(2, tabsOf(1)); at = 3; }   // a Theorycrafting topic: Gameplay's list, then Theorycrafting's
+            SetCrumbMenu(at, tabsOf(gt));
             if (gPage >= 0 && topics[t].Pages.Count > 0)
             {
                 var l = new List<KeyValuePair<string, Action>>();
                 for (int p = 0; p < topics[t].Pages.Count; p++) { int pp = p; l.Add(new KeyValuePair<string, Action>(topics[t].Pages[p].Title, delegate { SetGuideView(t, pp); })); }
-                SetCrumbMenu(3, l);
+                SetCrumbMenu(at + 1, l);
             }
             if (gTalents != null)                            // › Talents ▾ : another class's talent trees
             {
@@ -424,7 +435,7 @@ namespace AzerothLauncher
                     if (Talents.Of(cls).Count == 0) continue;
                     l.Add(new KeyValuePair<string, Action>(cls, delegate { SetGuideView(t, pp); gTalents = cls; BuildPanel("Guide"); }));
                 }
-                SetCrumbMenu(gPage >= 0 ? 4 : 3, l);
+                SetCrumbMenu(gPage >= 0 ? at + 2 : at + 1, l);
             }
         }
 
@@ -546,6 +557,7 @@ namespace AzerothLauncher
                     for (int g = 0; g < GuideGroups.Length; g++)
                     {
                         if (guideGroupPage >= 0 && g != guideGroupPage) continue;
+                        if (guideGroupPage < 0 && g == 2) continue;    // Theorycrafting is a card in Gameplay
                         var tabs = GroupTabs(g, topics);
                         if (tabs.Count == 0) continue;
                         var head = UI.Text(GuideGroups[g][0], 11, FontStyle.Bold, Theme.Gold, sp.BackColor, 0);
@@ -565,6 +577,11 @@ namespace AzerothLauncher
                             {
                                 c.Title = GearPlanner;
                                 c.Desc = Lang.T("Put gear and jewelry on a character sheet like the game's and see what they add.");
+                            }
+                            else if (t == -4)
+                            {
+                                c.Title = GroupName(2);
+                                c.Desc = Lang.T("The Talent Tree Builder, the Gear Planner and the build guides.");
                             }
                             else
                             {
