@@ -317,7 +317,7 @@ namespace AzerothLauncher
                 new[] { "Area", Val(t, "area", "%") }, new[] { "Targets", Val(t, "targets", "") }, new[] { "Echo", Val(t, "echo", "%") },
                 new[] { "Speed", Val(t, "speed", "%") }, new[] { "Regen", Val(t, "regen", "") }, new[] { "Pickup", Val(t, "pickup", "%") },
             });
-            string txt = Lang.T("The bonuses of everything chosen, added together, with the set bonuses reached. Click a piece to add a star (up to 5, then back to 0); right-click to take it off.") +;
+            string txt = Lang.T("The bonuses of everything chosen, added together, with the set bonuses reached. Click a piece to add a star (up to 5, then back to 0); right-click to take it off.");
             if (unknown > 0) txt = Lang.T("Pieces with bonuses not known yet") + ": " + unknown + ". " + txt;
             float noteH = Para(g, txt, fSmall, Dim, mid.X, mid.Y + boxH + 8, mid.Width, mid.Bottom);
 
