@@ -1942,3 +1942,5 @@ BASIC SETTINGS
 = การตั้งค่าพื้นฐาน
 ADS ARE YOUTUBE. NOT ME.
 = โฆษณาเป็นของ YOUTUBE ไม่ใช่ของผม
+Mute
+= ปิดเสียง

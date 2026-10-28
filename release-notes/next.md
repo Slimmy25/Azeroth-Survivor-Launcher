@@ -32,6 +32,9 @@
 - While a video plays, the right end of the header says "ADS ARE YOUTUBE. NOT ME."
 
 ### Guide videos
+- The Guide's own videos have a new control bar that looks like YouTube's: a red progress bar, play, volume, the
+  time and fullscreen on the right, hiding when the mouse rests. Space or K plays and pauses, the arrows skip 5
+  seconds, M mutes, F goes fullscreen.
 - The launcher's own FULLSCREEN button is gone; the player's own fullscreen button does it, now with a single click
   (it used to need two quick clicks).
 - Big Streamers is ticked whenever the launcher starts, until you pick Content Creators; that choice is remembered.

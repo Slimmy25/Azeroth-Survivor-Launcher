@@ -1234,34 +1234,100 @@ namespace AzerothLauncher
             web.ObjectForScripting = bridge;
             string poster = v.Url.EndsWith(".mp4", StringComparison.OrdinalIgnoreCase) ? v.Url.Substring(0, v.Url.Length - 4) + ".jpg" : "";
             string label = fullscreen ? Lang.T("Exit fullscreen") : Lang.T("Fullscreen");
-            string page =
-                "<!DOCTYPE html>\r\n<!-- saved from url=(0014)about:internet -->\r\n<html><head><meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"><meta charset=\"utf-8\">" +
-                "<style>html,body{margin:0;height:100%;background:" + (fullscreen ? "#000" : "#0e0d14") + ";overflow:hidden;font-family:Georgia,serif;color:#d7cea4}" +
-                "video{width:100%;height:100%;background:#000;display:block}" +
-                "#fs{position:absolute;top:10px;right:10px;padding:5px 12px;background:rgba(14,13,20,.75);color:#f2c14e;border:1px solid #b39b62;" +
-                "font:bold 13px Georgia,serif;cursor:pointer;opacity:.35;display:none}#fs:hover{opacity:1}" +   // the launcher's own buttons do this now (double-click and F still work)
-                "#err{display:none;position:absolute;left:0;right:0;top:40%;text-align:center;font-size:15px}</style></head><body>" +
-                "<video id=\"v\" controls autoplay preload=\"auto\"" + (poster.Length > 0 && start <= 0 ? " poster=\"" + Html(poster) + "\"" : "") +
-                " src=\"" + Html(v.Url) + "\"></video>" +
-                "<div id=\"fs\" title=\"" + Html(label) + "\">" + (fullscreen ? "&#x2715; " : "&#x26F6; ") + Html(label) + "</div>" +
-                "<div id=\"err\">" + Html(Lang.T(OwnHosted(v.Url) ? "This video can't play here right now." : "This video can't play here. Use OPEN IN BROWSER.")) + "</div>" +
-                "<script>var v=document.getElementById('v');" +
-                "v.volume=" + volume.ToString("0.###", System.Globalization.CultureInfo.InvariantCulture) + ";" +       // 15% to start
-                "var at=" + start.ToString("0.###", System.Globalization.CultureInfo.InvariantCulture) + ";" +
-                "v.addEventListener('loadedmetadata',function(){v.volume=" + volume.ToString("0.###", System.Globalization.CultureInfo.InvariantCulture) + ";if(at>0){try{v.currentTime=at;}catch(e){}}});" +
-                "function toggle(){try{window.external.Toggle(v.currentTime,v.volume);}catch(e){}}" +
-                "document.getElementById('fs').onclick=toggle;" +
-                "v.ondblclick=function(e){toggle();if(e&&e.preventDefault)e.preventDefault();return false;};" +
-                // one click on the player's own fullscreen button: the built-in web view (IE11) can only fill its own box,
-                // or ignores the first click, so a press on that button (the right end of the control bar) goes straight
-                // to the launcher's fullscreen window, and the web view's own fullscreen is turned into it if it happens
-                "v.addEventListener('mousedown',function(e){e=e||window.event;var r=v.getBoundingClientRect();" +
-                "if(e.button<=1&&e.clientX>r.right-44&&e.clientY>r.bottom-44){toggle();if(e.preventDefault)e.preventDefault();return false;}},true);" +
-                "document.addEventListener('MSFullscreenChange',function(){if(document.msFullscreenElement){try{document.msExitFullscreen();}catch(x){}toggle();}});" +
-                "document.addEventListener('fullscreenchange',function(){if(document.fullscreenElement){try{document.exitFullscreen();}catch(x){}toggle();}});" +
-                "document.onkeydown=function(e){e=e||window.event;if((e.keyCode==27&&" + (fullscreen ? "true" : "false") + ")||e.keyCode==70){toggle();return false;}};" +
-                "v.onerror=function(){v.style.display='none';document.getElementById('fs').style.display='none';document.getElementById('err').style.display='block';};" +
-                "</script></body></html>";
+            // the player's buttons: the launcher's own control bar, laid out like YouTube's (red progress bar with a dot,
+            // play, volume, time, fullscreen on the right, hidden after a moment of no mouse movement), so both video
+            // players look alike. The shapes are simple ones drawn here, not YouTube's own artwork. Keys: Space or K play,
+            // arrows skip 5 s, M mute, F fullscreen (Esc leaves it). Fullscreen is the launcher's window (window.external).
+            string fsPath = fullscreen ? "M14 14h-4v2h6v-6h-2zM22 14v-4h-2v6h6v-2zM20 26h2v-4h4v-2h-6zM10 22h4v4h2v-6h-6z"
+                                       : "M10 16h2v-4h4v-2h-6zM24 10h-4v2h4v4h2v-6zM24 24h-4v2h6v-6h-2zM12 20h-2v6h6v-2h-4z";
+            string page = (@"<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html><head><meta http-equiv=""X-UA-Compatible"" content=""IE=edge""><meta charset=""utf-8""><style>
+html,body{margin:0;height:100%;background:__BG__;overflow:hidden;font-family:Roboto,Arial,sans-serif;color:#fff}
+#w{position:absolute;left:0;top:0;right:0;bottom:0;background:#000;cursor:default}
+video{width:100%;height:100%;background:#000;display:block}
+#bar{position:absolute;left:0;right:0;bottom:0;height:64px;background:linear-gradient(to top,rgba(0,0,0,.75),rgba(0,0,0,0));transition:opacity .25s;opacity:1}
+#w.idle #bar{opacity:0}#w.idle{cursor:none}
+#prog{position:absolute;left:12px;right:12px;bottom:44px;height:14px;cursor:pointer}
+#track{position:absolute;left:0;right:0;top:5px;height:3px;background:rgba(255,255,255,.2);transition:height .1s,top .1s}
+#prog:hover #track{top:4px;height:5px}
+#buf{position:absolute;left:0;top:0;bottom:0;width:0;background:rgba(255,255,255,.4)}
+#played{position:absolute;left:0;top:0;bottom:0;width:0;background:#f00}
+#dot{position:absolute;top:1px;width:13px;height:13px;margin-left:-6px;border-radius:50%;background:#f00;transform:scale(0);transition:transform .1s;left:0}
+#prog:hover #dot{transform:scale(1)}
+#ctl{position:absolute;left:4px;right:4px;bottom:0;height:40px}
+.b{position:absolute;top:0;width:40px;height:40px;cursor:pointer;opacity:.9}.b:hover{opacity:1}
+.b svg{width:40px;height:40px;fill:#fff}
+#play{left:0}#mute{left:40px}
+#vol{position:absolute;left:80px;top:18px;width:0;height:4px;overflow:hidden;transition:width .2s;cursor:pointer}
+#volarea:hover #vol,#vol.on{width:56px}
+#volarea{position:absolute;left:40px;top:0;height:40px;width:40px}#volarea:hover{width:100px}
+#volbg{position:absolute;left:0;top:0;width:52px;height:4px;background:rgba(255,255,255,.2)}
+#vollv{position:absolute;left:0;top:0;height:4px;background:#fff}
+#time{position:absolute;left:96px;top:0;line-height:40px;font-size:13px;color:#ddd;white-space:nowrap;transition:left .2s}
+#volarea:hover~#time{left:150px}
+#fs{right:0}
+#err{display:none;position:absolute;left:0;right:0;top:40%;text-align:center;font-size:15px;color:#d7cea4;font-family:Georgia,serif}
+</style></head><body><div id=""w"">
+<video id=""v"" autoplay preload=""auto""__POSTER__ src=""__SRC__""></video>
+<div id=""bar""><div id=""prog""><div id=""track""><div id=""buf""></div><div id=""played""></div></div><div id=""dot""></div></div>
+<div id=""ctl""><div class=""b"" id=""play"" title=""__T_PLAY__""><svg viewBox=""0 0 36 36""><path id=""pp"" d=""M12 9v18l14-9z""/></svg></div>
+<div id=""volarea""><div class=""b"" id=""mute"" style=""left:0"" title=""__T_MUTE__""><svg viewBox=""0 0 36 36""><path d=""M8 15v6h5l6 5V10l-6 5z""/><path id=""wave"" d=""M22 13.5a6 6 0 0 1 0 9v-2.3a3.8 3.8 0 0 0 0-4.4z M22 9.5a10 10 0 0 1 0 17v-2.2a8 8 0 0 0 0-12.6z""/><path id=""cross"" style=""display:none"" d=""M21 14.5l1.4-1.4 2.6 2.6 2.6-2.6 1.4 1.4-2.6 2.6 2.6 2.6-1.4 1.4-2.6-2.6-2.6 2.6-1.4-1.4 2.6-2.6z""/></svg></div>
+<div id=""vol"" style=""left:40px""><div id=""volbg""></div><div id=""vollv""></div></div></div>
+<div id=""time"">0:00 / 0:00</div>
+<div class=""b"" id=""fs"" title=""__FSLABEL__""><svg viewBox=""0 0 36 36""><path d=""__FSPATH__""/></svg></div></div></div>
+<div id=""err"">__ERR__</div></div>
+<script>
+var v=document.getElementById('v'),w=document.getElementById('w'),at=__AT__,full=__FULL__;
+function $(i){return document.getElementById(i);}
+v.volume=__VOL__;
+function fmt(s){if(!isFinite(s)||s<0)s=0;s=Math.floor(s);var h=Math.floor(s/3600),m=Math.floor(s%3600/60),x=s%60;return (h>0?h+':'+(m<10?'0':''):'')+m+':'+(x<10?'0':'')+x;}
+function draw(){var d=v.duration||0,p=d>0?v.currentTime/d:0;$('played').style.width=(p*100)+'%';$('dot').style.left=(p*100)+'%';
+ try{if(v.buffered.length&&d>0)$('buf').style.width=(v.buffered.end(v.buffered.length-1)/d*100)+'%';}catch(e){}
+ $('time').innerHTML=fmt(v.currentTime)+' / '+fmt(d);
+ $('pp').setAttribute('d',v.paused?'M12 9v18l14-9z':'M11 9h5v18h-5z M20 9h5v18h-5z');
+ var mu=v.muted||v.volume==0;$('wave').style.display=mu?'none':'';$('cross').style.display=mu?'':'none';
+ $('vollv').style.width=(mu?0:v.volume*52)+'px';}
+function play(){if(v.paused)v.play();else v.pause();draw();}
+function toggle(){try{window.external.Toggle(v.currentTime,v.volume);}catch(e){}}
+v.addEventListener('loadedmetadata',function(){v.volume=__VOL__;if(at>0){try{v.currentTime=at;}catch(e){}}draw();});
+v.addEventListener('timeupdate',draw);v.addEventListener('play',draw);v.addEventListener('pause',function(){draw();wake();});
+v.addEventListener('volumechange',draw);v.addEventListener('progress',draw);
+v.addEventListener('click',play);
+$('play').onclick=play;
+$('mute').onclick=function(){v.muted=!v.muted;if(!v.muted&&v.volume==0)v.volume=0.15;draw();};
+function seekAt(e,el,f){var r=el.getBoundingClientRect();var p=Math.max(0,Math.min(1,(e.clientX-r.left)/r.width));f(p);}
+var dragging=null;
+$('prog').onmousedown=function(e){dragging='prog';seekAt(e,$('prog'),function(p){if(v.duration)v.currentTime=p*v.duration;});draw();return false;};
+$('vol').onmousedown=function(e){dragging='vol';seekAt(e,$('volbg'),function(p){v.muted=false;v.volume=p;});draw();return false;};
+document.onmousemove=function(e){e=e||window.event;wake();if(dragging=='prog')seekAt(e,$('prog'),function(p){if(v.duration)v.currentTime=p*v.duration;});
+ else if(dragging=='vol')seekAt(e,$('volbg'),function(p){v.muted=false;v.volume=p;});};
+document.onmouseup=function(){dragging=null;};
+$('fs').onclick=toggle;
+v.ondblclick=function(e){toggle();if(e&&e.preventDefault)e.preventDefault();return false;};
+var idle=null;function wake(){w.className='';if(idle)clearTimeout(idle);idle=setTimeout(function(){if(!v.paused&&!dragging)w.className='idle';},2500);}
+w.onmouseleave=function(){if(!v.paused)w.className='idle';};
+document.onkeydown=function(e){e=e||window.event;var k=e.keyCode;
+ if((k==27&&full)||k==70){toggle();return false;}
+ if(k==32||k==75){play();return false;}
+ if(k==37){v.currentTime=Math.max(0,v.currentTime-5);return false;}
+ if(k==39){v.currentTime=Math.min(v.duration||0,v.currentTime+5);return false;}
+ if(k==77){v.muted=!v.muted;return false;}};
+document.addEventListener('MSFullscreenChange',function(){if(document.msFullscreenElement){try{document.msExitFullscreen();}catch(x){}toggle();}});
+v.onerror=function(){v.style.display='none';$('bar').style.display='none';$('err').style.display='block';};
+draw();wake();
+</script></body></html>")
+                .Replace("__BG__", fullscreen ? "#000" : "#0e0d14")
+                .Replace("__POSTER__", poster.Length > 0 && start <= 0 ? " poster=\"" + Html(poster) + "\"" : "")
+                .Replace("__SRC__", Html(v.Url))
+                .Replace("__T_PLAY__", Html(Lang.T("Play")))
+                .Replace("__T_MUTE__", Html(Lang.T("Mute")))
+                .Replace("__FSLABEL__", Html(label))
+                .Replace("__FSPATH__", fsPath)
+                .Replace("__ERR__", Html(Lang.T(OwnHosted(v.Url) ? "This video can't play here right now." : "This video can't play here. Use OPEN IN BROWSER.")))
+                .Replace("__AT__", start.ToString("0.###", System.Globalization.CultureInfo.InvariantCulture))
+                .Replace("__FULL__", fullscreen ? "true" : "false")
+                .Replace("__VOL__", volume.ToString("0.###", System.Globalization.CultureInfo.InvariantCulture));
             // the page (not the video) goes in a small temp file marked as web content, so the web view treats it like a
             // web page and lets it stream from the internet; DocumentText pages count as about:blank and get blocked
             try

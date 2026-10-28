@@ -1942,3 +1942,5 @@ BASIC SETTINGS
 = 基本設定
 ADS ARE YOUTUBE. NOT ME.
 = 広告はYOUTUBEのもの。私じゃない。
+Mute
+= ミュート

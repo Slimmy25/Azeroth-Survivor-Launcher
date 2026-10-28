@@ -1942,3 +1942,5 @@ BASIC SETTINGS
 = ΒΑΣΙΚΕΣ ΡΥΘΜΙΣΕΙΣ
 ADS ARE YOUTUBE. NOT ME.
 = ΟΙ ΔΙΑΦΗΜΙΣΕΙΣ ΕΙΝΑΙ ΤΟΥ YOUTUBE. ΟΧΙ ΔΙΚΕΣ ΜΟΥ.
+Mute
+= Σίγαση

@@ -1942,3 +1942,5 @@ BASIC SETTINGS
 = ОСНОВНІ НАЛАШТУВАННЯ
 ADS ARE YOUTUBE. NOT ME.
 = РЕКЛАМА ВІД YOUTUBE. НЕ ВІД МЕНЕ.
+Mute
+= Вимкнути звук
