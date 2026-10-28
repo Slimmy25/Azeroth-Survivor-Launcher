@@ -400,7 +400,10 @@ namespace AzerothLauncher
         List<object> Choices(string slot)
         {
             var l = new List<object> { EmptyRow };
-            if (slot == "Neck") foreach (var j in Items.JewelryOf("Amulet")) if (!j.IsCodex || j.Class == cls) l.Add(j);
+            if (slot == "Neck")
+            {
+                foreach (var j in Items.JewelryOf("Amulet")) if (!j.IsCodex || j.Class == cls) l.Add(j);
+            }
             else if (slot.StartsWith("Finger")) foreach (var j in Items.JewelryOf("Ring")) l.Add(j);
             else if (slot.StartsWith("Trinket")) foreach (var j in Items.JewelryOf("Trinket")) l.Add(j);
             else foreach (var p in Items.GearOf(cls, slot)) l.Add(p);

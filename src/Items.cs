@@ -570,7 +570,9 @@ namespace AzerothLauncher
                 {
                     if (!j.IsCodex || j.Class != cls) continue;
                     if (!header) { l.Add("# " + cls); header = true; }
-                    l.Add("- " + j.Spell + ": " + j.Name + " — " + string.Join(" ", j.Lines.ToArray()));
+                    var effects = new List<string>();
+                    foreach (string effect in j.Lines) if (!effect.StartsWith("Legendary amulet - remakes ")) effects.Add(effect);
+                    l.Add("- " + j.Spell + ": " + j.Name + " — " + string.Join(" ", effects.ToArray()));
                 }
             }
             foreach (string cls in Classes)
