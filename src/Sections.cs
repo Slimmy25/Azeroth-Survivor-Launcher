@@ -374,6 +374,10 @@ namespace AzerothLauncher
         DateTime clLastStep = DateTime.MinValue;
         Dictionary<string, CheckBox> addonRows;
         Label addonCount;
+        // an uninstall waiting for its answer: the question takes the place of My Addons' right column (not a window,
+        // not a step in the path), so the addon list stays in view while the player decides. Name: a Download More
+        // addon; folder: one folder of the list (its X)
+        string askUninstallName, askUninstallFolder;
 
         static readonly string[] SectionNames = { "Guide", "Cloud Save", "Addons", "Changelog", "Stats", "Options", "About Launcher" };
         int gTopic = -1, gPage = -1;
@@ -727,7 +731,7 @@ namespace AzerothLauncher
             bool open = name == current && side.Visible;
             if (name == "Options") { optionsTab = 0; optionsLang = false; }
             if (name == "Stats") { statsTab = 0; statsClass = null; }
-            if (name == "Addons") { addonMode = "installed"; addonCategory = 0; }
+            if (name == "Addons") { addonMode = "installed"; addonCategory = 0; askUninstallName = askUninstallFolder = null; }
             if (name == "About Launcher") aboutLog = false;
             if (name == "Community") communityMore = false;
             if (!open) { ShowSection(name); return; }
@@ -740,7 +744,7 @@ namespace AzerothLauncher
         void SectionRoot(string name)
         {
             if (name == "Guide") { GuideMainPage(); return; }
-            if (name == "Addons") { addonMode = "installed"; addonCategory = 0; }
+            if (name == "Addons") { addonMode = "installed"; addonCategory = 0; askUninstallName = askUninstallFolder = null; }
             if (name == "Options") { optionsTab = 0; optionsLang = false; }
             if (name == "Stats") { statsTab = 0; statsClass = null; }
             if (name == "About Launcher") aboutLog = false;
@@ -1116,6 +1120,7 @@ namespace AzerothLauncher
         void SetAddonMode(string mode)
         {
             addonMode = mode;
+            askUninstallName = askUninstallFolder = null;
             BuildPanel("Addons");
         }
 
@@ -1435,19 +1440,27 @@ namespace AzerothLauncher
             });
         }
 
+        // UNINSTALL (Download More): the question opens in My Addons' right column, beside the whole list
         void UninstallAddon(string name)
         {
             if (AddonsLocked()) return;
-            var folders = AddonFoldersOf(name);
-            if (folders.Count == 0)
+            if (AddonFoldersOf(name).Count == 0)
             {
                 SetStatus(name + " is not installed.");
                 BuildPanel("Addons");
                 return;
             }
-            if (Msg.Show(side, "Remove " + name + " from your AddOns folder?\n\nFolders: " + string.Join(", ", folders) +
-                                "\n\nThis deletes everything it added, including the settings it saved.", "Uninstall",
-                                MessageBoxButtons.YesNo) != DialogResult.Yes) return;
+            addonMode = "installed";
+            askUninstallName = name;
+            askUninstallFolder = null;
+            BuildPanel("Addons");
+        }
+
+        void DoUninstallAddon(string name)
+        {
+            askUninstallName = askUninstallFolder = null;
+            if (AddonsLocked()) { BuildPanel("Addons"); return; }
+            var folders = AddonFoldersOf(name);
             List<string> removed;
             try { removed = Addons.Uninstall(AddonsDir(), folders, SyncSettings().SavedDir); }
             catch (Exception e)
@@ -1466,8 +1479,15 @@ namespace AzerothLauncher
         void UninstallFolder(string folder)
         {
             if (AddonsLocked()) return;
-            if (Msg.Show(side, "Uninstall " + folder + "?\n\nIts folder is deleted from your AddOns folder, with the settings it saved.",
-                         "Uninstall", MessageBoxButtons.YesNo) != DialogResult.Yes) return;
+            askUninstallFolder = folder;
+            askUninstallName = null;
+            BuildPanel("Addons");
+        }
+
+        void DoUninstallFolder(string folder)
+        {
+            askUninstallName = askUninstallFolder = null;
+            if (AddonsLocked()) { BuildPanel("Addons"); return; }
             var all = new List<string> { folder };
             all.AddRange(Addons.CompanionsOf(folder));       // the folders that came with it go too
             try { Addons.Uninstall(AddonsDir(), all, SyncSettings().SavedDir); }
@@ -1485,6 +1505,26 @@ namespace AzerothLauncher
             Cfg.Save();
             SetStatus(folder + " uninstalled.");
             BuildPanel("Addons");
+        }
+
+        // the uninstall question in the right column: what goes, UNINSTALL and CANCEL; the list stays as it is
+        void AddonsUninstallAsk(int cx, int top)
+        {
+            addonCount = null;
+            int w = (int)(190 * Theme.Zoom);
+            string what = askUninstallName ?? askUninstallFolder;
+            var folders = askUninstallName != null ? AddonFoldersOf(askUninstallName) : new List<string> { askUninstallFolder };
+            var head = UI.Text(Lang.T("Uninstall") + " " + what + "?", 11, FontStyle.Bold, Theme.Gold, Theme.Panel, w, false);
+            head.Size = VStack.Measure(head);
+            Put(head, cx, top);
+            var body = UI.Text(Lang.T("Folders") + ": " + string.Join(", ", folders) + "\n\n" +
+                               Lang.T("This deletes everything it added, including the settings it saved."),
+                               9, FontStyle.Regular, Theme.Text, Theme.Panel, w, false);
+            body.Size = VStack.Measure(body);
+            Put(body, cx, BottomOf(head) + 8);
+            string n = askUninstallName, f = askUninstallFolder;
+            var yes = Put(new WowButton("UNINSTALL", delegate { if (n != null) DoUninstallAddon(n); else DoUninstallFolder(f); }, 190, 32, 10), cx, BottomOf(body) + 12);
+            Put(new WowButton("CANCEL", delegate { askUninstallName = askUninstallFolder = null; BuildPanel("Addons"); }, 190, 28, 9), cx, BottomOf(yes) + 6);
         }
 
         void AddonsInstalledView(int top)
@@ -1511,6 +1551,8 @@ namespace AzerothLauncher
             int bottom = PH - 12;
             // --- right column: REFRESH and FOLDER, toggle all, the counter, two profiles at the bottom ---
             int cx = PW - 20 - (int)(190 * Theme.Zoom);
+            if (askUninstallName != null || askUninstallFolder != null) AddonsUninstallAsk(cx, top);
+            else {
             var more = Put(new WowButton("DOWNLOAD MORE ›", delegate { SetAddonMode("download"); }, 190, 32, 10), cx, top);
             int rtop = BottomOf(more) + 6;
             var refresh = Put(new WowButton("REFRESH", delegate { BuildPanel("Addons"); }, 92, 28, 9), cx, rtop);
@@ -1578,6 +1620,7 @@ namespace AzerothLauncher
                 tt.SetToolTip(q, Lang.T(note));
                 q.Disposed += delegate { tt.Dispose(); };
                 py -= 8;
+            }
             }
             // --- left: scrollable list with one switch per addon ---
             Color listbg = Theme.Ink;

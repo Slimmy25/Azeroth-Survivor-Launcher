@@ -47,6 +47,9 @@
 - New choice above them: No profile [Recommended], the default. It keeps no copy of its own and only switches
   addons; the game's preferences stay shared. Coming back to it from a profile brings back the preferences you had.
 - A small "?" beside each of the three explains what it does.
+- Uninstalling an addon no longer opens a window: the question takes the place of the right-hand column of My
+  Addons (UNINSTALL or CANCEL), so the whole list stays in view while you decide. UNINSTALL in Download More opens
+  it there too.
 - The profiles are hidden by default: the Addons section shows only ADVANCED SETTINGS at the bottom of the right
   column. It brings back all three profile choices, with BASIC SETTINGS under them to hide them again (remembered).
 - Download More: two new addons by Maidenhead, Azeroth FieldKit (an in-game helper: elite nameplates, boss frames,
