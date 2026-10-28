@@ -1866,3 +1866,13 @@ with
 = {0} elszenvedett
 click a run for its summary
 = kattints egy futásra az összegzéshez
+Lost
+= Eltévedtél
+Big Streamers
+= Nagy streamerek
+Content Creators
+= Tartalomkészítők
+A big streamer's video. All credit goes to the people who made it.
+= Egy nagy streamer videója. Minden elismerés a készítőké.
+A content creator's video. All credit goes to the people who made it.
+= Egy tartalomkészítő videója. Minden elismerés a készítőké.

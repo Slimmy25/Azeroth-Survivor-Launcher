@@ -96,9 +96,15 @@ namespace AzerothLauncher
 
         // the featured video: a headline video while they run, otherwise a random build video; a different one
         // every 10 minutes (while nothing is playing)
+        // the two boxes beside Community: 0 neither (as before), 1 Big Streamers only, 2 Content Creators only
+        static int communityFilter = -1;
+        System.Windows.Forms.Timer filterTimer;
+
         static GuideVideo Featured(List<GuideVideo> list)
         {
-            if (HeadlineOn) list = new List<GuideVideo>(Headlines);
+            if (communityFilter == 1 && Headlines.Length > 0) list = new List<GuideVideo>(Headlines);
+            else if (communityFilter == 2) { }                // the content creators: every video that is not a big streamer's
+            else if (HeadlineOn) list = new List<GuideVideo>(Headlines);
             if (list.Count == 0) return null;
             if (communityPick < 0 || communityPick >= list.Count || (DateTime.Now - communityPicked).TotalMinutes >= RotateMinutes)
             {
@@ -172,12 +178,48 @@ namespace AzerothLauncher
             if (communityPlaying != null) { CommunityPlayer(communityPlaying); return; }
             if (communityMore) { CommunityMoreVideos(); return; }
             ClearPanel("Community");
+            if (communityFilter < 0) { string cf = Cfg.Str("community_filter"); communityFilter = cf == "1" ? 1 : cf == "2" ? 2 : 0; }
             int ti;
             GuideVideo v = Featured(BuildVideos(out ti));
             if (v != null) FetchTitle(v);
-            var intro = PutText(HeadlineOn ? "Featured video. All credit goes to the people who made it."
+            // two boxes at the top: Big Streamers / Content Creators (one at a time, or neither). Five seconds after a
+            // change, the featured video is picked again from that one's own shuffle
+            int bx = 24;
+            for (int k = 1; k <= 2; k++)
+            {
+                int which = k;
+                var cb = UI.Check(k == 1 ? "Big Streamers" : "Content Creators", communityFilter == k, Theme.Gold, Theme.Panel, 10);
+                cb.Size = VStack.Measure(cb);
+                cb.CheckedChanged += delegate
+                {
+                    communityFilter = ((CheckBox)cb).Checked ? which : (communityFilter == which ? 0 : communityFilter);
+                    Cfg.Set("community_filter", communityFilter);
+                    Cfg.Save();
+                    if (filterTimer == null)
+                    {
+                        filterTimer = new System.Windows.Forms.Timer();
+                        filterTimer.Interval = 5000;
+                        filterTimer.Tick += delegate
+                        {
+                            filterTimer.Stop();
+                            communityPick = -1;               // a new pick, from the chosen shuffle
+                            if (current == "Community" && side.Visible && communityPlaying == null && !communityMore) BuildPanel("Community");
+                        };
+                    }
+                    filterTimer.Stop();
+                    filterTimer.Start();
+                    // the other box is unticked at once (only one at a time)
+                    foreach (Control c in panel.Controls)
+                        if (c is CheckBox && c != cb && ((CheckBox)c).Checked && communityFilter == which) ((CheckBox)c).Checked = false;
+                };
+                Put(cb, bx, 8);
+                bx = cb.Right + 14;
+            }
+            var intro = PutText(communityFilter == 1 ? "A big streamer's video. All credit goes to the people who made it."
+                                : communityFilter == 2 ? "A content creator's video. All credit goes to the people who made it."
+                                : HeadlineOn ? "Featured video. All credit goes to the people who made it."
                                            : "A build video made by a player. All credit goes to the people who made it.",
-                                9.5f, FontStyle.Italic, Theme.GoldDim, 24, 12, PW - 24 - (int)(200 * Theme.Zoom) - 34);
+                                9.5f, FontStyle.Italic, Theme.GoldDim, 24, 8 + (int)(24 * Theme.Zoom), PW - 24 - (int)(200 * Theme.Zoom) - 34);
             int top = Math.Max(8 + (int)(32 * Theme.Zoom) + 8, BottomOf(intro) + 6);
             if (v == null)
             {

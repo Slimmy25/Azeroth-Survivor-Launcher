@@ -1866,3 +1866,13 @@ with
 = {0} nhận vào
 click a run for its summary
 = bấm vào một lượt để xem tóm tắt
+Lost
+= Lạc đường
+Big Streamers
+= Streamer lớn
+Content Creators
+= Nhà sáng tạo nội dung
+A big streamer's video. All credit goes to the people who made it.
+= Video của một streamer lớn. Mọi công lao thuộc về người làm ra nó.
+A content creator's video. All credit goes to the people who made it.
+= Video của một nhà sáng tạo nội dung. Mọi công lao thuộc về người làm ra nó.

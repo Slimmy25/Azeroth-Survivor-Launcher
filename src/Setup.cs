@@ -316,7 +316,7 @@ namespace AzerothLauncher
         void CleanUpFirstSetup()
         {
             Config.Frozen = true;
-            try { Util.DeleteTreeQuiet(Path.Combine(Util.LauncherDir, "temp")); } catch (Exception) { }
+            try { Util.DeleteTreeQuiet(Path.Combine(Util.LauncherDir, Util.DownloadTempName)); } catch (Exception) { }
             for (int i = setupCreated.Count - 1; i >= 0; i--)
                 try
                 {

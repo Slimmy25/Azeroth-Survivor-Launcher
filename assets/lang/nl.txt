@@ -1865,3 +1865,13 @@ with
 = {0} ontvangen
 click a run for its summary
 = klik op een run voor het overzicht
+Lost
+= Verdwaald
+Big Streamers
+= Grote streamers
+Content Creators
+= Contentmakers
+A big streamer's video. All credit goes to the people who made it.
+= Een video van een grote streamer. Alle eer gaat naar de makers.
+A content creator's video. All credit goes to the people who made it.
+= Een video van een contentmaker. Alle eer gaat naar de makers.

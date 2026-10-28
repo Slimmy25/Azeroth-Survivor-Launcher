@@ -1865,3 +1865,13 @@ with
 = {0} mottagen
 click a run for its summary
 = klicka på en runda för sammanfattningen
+Lost
+= Vilse
+Big Streamers
+= Stora streamers
+Content Creators
+= Innehållsskapare
+A big streamer's video. All credit goes to the people who made it.
+= En stor streamers video. All ära går till dem som gjorde den.
+A content creator's video. All credit goes to the people who made it.
+= En innehållsskapares video. All ära går till dem som gjorde den.

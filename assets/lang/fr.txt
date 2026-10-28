@@ -1865,3 +1865,13 @@ with
 = {0} subis
 click a run for its summary
 = cliquez une partie pour son résumé
+Lost
+= Perdu
+Big Streamers
+= Grands streamers
+Content Creators
+= Créateurs de contenu
+A big streamer's video. All credit goes to the people who made it.
+= Une vidéo d'un grand streamer. Tout le mérite revient à ses auteurs.
+A content creator's video. All credit goes to the people who made it.
+= Une vidéo d'un créateur de contenu. Tout le mérite revient à ses auteurs.

@@ -1865,3 +1865,13 @@ with
 = {0} mottatt
 click a run for its summary
 = klikk på et løp for oversikten
+Lost
+= Gått deg vill
+Big Streamers
+= Store strømmere
+Content Creators
+= Innholdsskapere
+A big streamer's video. All credit goes to the people who made it.
+= En stor strømmers video. All ære går til dem som laget den.
+A content creator's video. All credit goes to the people who made it.
+= En innholdsskapers video. All ære går til dem som laget den.

@@ -1865,3 +1865,13 @@ with
 = {0} diterima
 click a run for its summary
 = klik sebuah run untuk ringkasannya
+Lost
+= Tersesat
+Big Streamers
+= Streamer besar
+Content Creators
+= Kreator konten
+A big streamer's video. All credit goes to the people who made it.
+= Video dari streamer besar. Semua kredit untuk pembuatnya.
+A content creator's video. All credit goes to the people who made it.
+= Video dari kreator konten. Semua kredit untuk pembuatnya.

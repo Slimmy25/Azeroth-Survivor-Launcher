@@ -1866,3 +1866,13 @@ with
 = {0} primite
 click a run for its summary
 = apasă pe o rundă pentru rezumat
+Lost
+= Rătăcit
+Big Streamers
+= Streameri mari
+Content Creators
+= Creatori de conținut
+A big streamer's video. All credit goes to the people who made it.
+= Un videoclip al unui streamer mare. Tot meritul aparține creatorilor.
+A content creator's video. All credit goes to the people who made it.
+= Un videoclip al unui creator de conținut. Tot meritul aparține creatorilor.

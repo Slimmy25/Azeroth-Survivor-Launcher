@@ -1866,3 +1866,13 @@ with
 = получено {0}
 click a run for its summary
 = щёлкните забег, чтобы увидеть итоги
+Lost
+= Заблудились
+Big Streamers
+= Крупные стримеры
+Content Creators
+= Авторы контента
+A big streamer's video. All credit goes to the people who made it.
+= Видео крупного стримера. Вся заслуга принадлежит авторам.
+A content creator's video. All credit goes to the people who made it.
+= Видео автора контента. Вся заслуга принадлежит авторам.

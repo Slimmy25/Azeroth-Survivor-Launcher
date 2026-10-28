@@ -1866,3 +1866,13 @@ with
 = {0} झेला
 click a run for its summary
 = सारांश के लिए किसी रन पर क्लिक करें
+Lost
+= खो गए
+Big Streamers
+= बड़े स्ट्रीमर
+Content Creators
+= कंटेंट क्रिएटर
+A big streamer's video. All credit goes to the people who made it.
+= एक बड़े स्ट्रीमर का वीडियो। सारा श्रेय इसके बनाने वालों को।
+A content creator's video. All credit goes to the people who made it.
+= एक कंटेंट क्रिएटर का वीडियो। सारा श्रेय इसके बनाने वालों को।

@@ -1866,3 +1866,13 @@ with
 = 承受 {0}
 click a run for its summary
 = 点击某局查看总结
+Lost
+= 迷路了
+Big Streamers
+= 大主播
+Content Creators
+= 内容创作者
+A big streamer's video. All credit goes to the people who made it.
+= 大主播的视频。全部功劳归于制作者。
+A content creator's video. All credit goes to the people who made it.
+= 内容创作者的视频。全部功劳归于制作者。
