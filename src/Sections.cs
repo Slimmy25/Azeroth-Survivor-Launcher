@@ -1975,9 +1975,9 @@ namespace AzerothLauncher
                                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
-        const string Profile1Note = "Separated from Profile 2: this profile keeps its own copy of the game's preferences, so a heavy UI addon can change them without leaving them set in a way that makes the next UI addon look wrong.";
-        const string Profile2Note = "Separated from Profile 1: this profile keeps its own copy of the game's preferences, so a heavy UI addon can change them without leaving them set in a way that makes the next UI addon look wrong.";
-        const string NoProfileNote = "No profile doesn't do what Profile 1 and Profile 2 do: it keeps no copy of its own. It only switches addons on and off, and the game's preferences stay as the game and your addons leave them, shared by everything. If you don't want the game's preferences changed, use this setting.";
+        const string Profile1Note = "Profile 1 keeps a full copy of itself in its own isolated space, apart from Profile 2 and No profile: which addons are on, where the interface sits and every addon's settings. A heavy UI addon can change things here without touching the others, and when you come back to Profile 1 it is exactly the way you left it.";
+        const string Profile2Note = "Profile 2 keeps a full copy of itself in its own isolated space, apart from Profile 1 and No profile: which addons are on, where the interface sits and every addon's settings. A heavy UI addon can change things here without touching the others, and when you come back to Profile 2 it is exactly the way you left it.";
+        const string NoProfileNote = "No profile is the game as it normally is, kept as a full copy in its own isolated space: which addons are on, where the interface sits and every addon's settings. While you use it the launcher changes nothing, and when you come back to it from a profile it is exactly the way you left it. If you don't want the game's preferences changed, use this setting.";
 
         // which addon profile's game preferences are in place: "1", "2" or "none" (No profile, the default)
         string ActiveAddonProfile()

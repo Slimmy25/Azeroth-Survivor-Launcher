@@ -1972,3 +1972,9 @@ The launcher keeps the addons it downloads. Pick an older copy to install it in 
 = 런처는 내려받은 애드온을 보관합니다. 이전 사본을 고르면 최신 대신 설치되며, 애드온 설정은 그대로입니다. 최신을 고를 때까지 [구버전]으로 표시되고 업데이트되지 않습니다.
 No kept copies yet: they are kept from now on, each time an addon is installed or updated.
 = 아직 보관된 사본이 없습니다. 이제부터 애드온을 설치하거나 업데이트할 때마다 보관됩니다.
+Profile 1 keeps a full copy of itself in its own isolated space, apart from Profile 2 and No profile: which addons are on, where the interface sits and every addon's settings. A heavy UI addon can change things here without touching the others, and when you come back to Profile 1 it is exactly the way you left it.
+= 프로필 1는 프로필 2, 프로필 없음과 분리된 자체 공간에 자신의 전체 사본을 보관합니다. 켜진 애드온, 인터페이스 위치, 모든 애드온의 설정입니다. 대형 UI 애드온이 여기서 무언가를 바꿔도 다른 곳에는 영향이 없고, 프로필 1로 돌아오면 떠날 때 그대로입니다.
+Profile 2 keeps a full copy of itself in its own isolated space, apart from Profile 1 and No profile: which addons are on, where the interface sits and every addon's settings. A heavy UI addon can change things here without touching the others, and when you come back to Profile 2 it is exactly the way you left it.
+= 프로필 2는 프로필 1, 프로필 없음과 분리된 자체 공간에 자신의 전체 사본을 보관합니다. 켜진 애드온, 인터페이스 위치, 모든 애드온의 설정입니다. 대형 UI 애드온이 여기서 무언가를 바꿔도 다른 곳에는 영향이 없고, 프로필 2로 돌아오면 떠날 때 그대로입니다.
+No profile is the game as it normally is, kept as a full copy in its own isolated space: which addons are on, where the interface sits and every addon's settings. While you use it the launcher changes nothing, and when you come back to it from a profile it is exactly the way you left it. If you don't want the game's preferences changed, use this setting.
+= 프로필 없음은 평소 그대로의 게임을 자체 공간에 전체 사본으로 보관합니다. 켜진 애드온, 인터페이스 위치, 모든 애드온의 설정입니다. 사용하는 동안 런처는 아무것도 바꾸지 않으며, 프로필에서 돌아오면 떠날 때 그대로입니다. 게임 설정을 바꾸고 싶지 않다면 이 설정을 쓰세요.

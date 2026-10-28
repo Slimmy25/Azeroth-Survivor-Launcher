@@ -1972,3 +1972,9 @@ The launcher keeps the addons it downloads. Pick an older copy to install it in 
 = 啟動器會保留下載過的插件。選擇較舊的副本即可替換最新版安裝；插件設定保持不變。在你選擇「最新」之前，它會標記為 [舊版] 且不會更新。
 No kept copies yet: they are kept from now on, each time an addon is installed or updated.
 = 還沒有保留的副本：從現在起，每次安裝或更新插件時都會保留。
+Profile 1 keeps a full copy of itself in its own isolated space, apart from Profile 2 and No profile: which addons are on, where the interface sits and every addon's settings. A heavy UI addon can change things here without touching the others, and when you come back to Profile 1 it is exactly the way you left it.
+= 設定檔 1 在自己獨立的空間裡保存一份完整副本，與設定檔 2 和「無設定檔」分開：開啟了哪些插件、介面的位置以及每個插件的設定。大型介面插件可以在這裡改動而不影響其他設定檔，當你回到設定檔 1 時，一切都和你離開時完全一樣。
+Profile 2 keeps a full copy of itself in its own isolated space, apart from Profile 1 and No profile: which addons are on, where the interface sits and every addon's settings. A heavy UI addon can change things here without touching the others, and when you come back to Profile 2 it is exactly the way you left it.
+= 設定檔 2 在自己獨立的空間裡保存一份完整副本，與設定檔 1 和「無設定檔」分開：開啟了哪些插件、介面的位置以及每個插件的設定。大型介面插件可以在這裡改動而不影響其他設定檔，當你回到設定檔 2 時，一切都和你離開時完全一樣。
+No profile is the game as it normally is, kept as a full copy in its own isolated space: which addons are on, where the interface sits and every addon's settings. While you use it the launcher changes nothing, and when you come back to it from a profile it is exactly the way you left it. If you don't want the game's preferences changed, use this setting.
+= 「無設定檔」就是平常的遊戲，作為完整副本保存在自己獨立的空間裡：開啟了哪些插件、介面的位置以及每個插件的設定。使用它時啟動器不會做任何改動，從某個設定檔回到它時，一切都和你離開時完全一樣。如果你不想修改遊戲設定，請使用此選項。

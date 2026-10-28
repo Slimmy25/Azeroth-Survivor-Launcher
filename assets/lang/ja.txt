@@ -1972,3 +1972,9 @@ The launcher keeps the addons it downloads. Pick an older copy to install it in 
 = ランチャーはダウンロードしたアドオンを保管します。古いコピーを選ぶと最新版の代わりにインストールされ、アドオンの設定はそのまま残ります。最新を選ぶまで［旧版］と表示され、更新されません。
 No kept copies yet: they are kept from now on, each time an addon is installed or updated.
 = まだ保管されたコピーはありません。今後、アドオンをインストール・更新するたびに保管されます。
+Profile 1 keeps a full copy of itself in its own isolated space, apart from Profile 2 and No profile: which addons are on, where the interface sits and every addon's settings. A heavy UI addon can change things here without touching the others, and when you come back to Profile 1 it is exactly the way you left it.
+= プロファイル1は、プロファイル2や「プロファイルなし」とは別の独立した場所に、自分の完全なコピーを持ちます。オンにするアドオン、インターフェースの配置、各アドオンの設定です。大型UIアドオンがここで何かを変えても他には影響せず、プロファイル1に戻ると離れたときのままです。
+Profile 2 keeps a full copy of itself in its own isolated space, apart from Profile 1 and No profile: which addons are on, where the interface sits and every addon's settings. A heavy UI addon can change things here without touching the others, and when you come back to Profile 2 it is exactly the way you left it.
+= プロファイル2は、プロファイル1や「プロファイルなし」とは別の独立した場所に、自分の完全なコピーを持ちます。オンにするアドオン、インターフェースの配置、各アドオンの設定です。大型UIアドオンがここで何かを変えても他には影響せず、プロファイル2に戻ると離れたときのままです。
+No profile is the game as it normally is, kept as a full copy in its own isolated space: which addons are on, where the interface sits and every addon's settings. While you use it the launcher changes nothing, and when you come back to it from a profile it is exactly the way you left it. If you don't want the game's preferences changed, use this setting.
+= 「プロファイルなし」は普段どおりのゲームを、独立した場所に完全なコピーとして保管します。オンにするアドオン、インターフェースの配置、各アドオンの設定です。使っている間ランチャーは何も変えず、プロファイルから戻ると離れたときのままです。ゲーム設定を変更したくない場合は、これを使ってください。
