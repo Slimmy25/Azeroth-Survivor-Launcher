@@ -1916,3 +1916,19 @@ Your run history and build statistics, kept in game: run reports and comparisons
 = История забегов и статистика билдов прямо в игре: отчёты и сравнения забегов и HUD, который вы настраиваете сами, до восьми чисел.
 How are gear stats calculated?
 = Как считаются характеристики снаряжения?
+USE
+= ВЫБРАТЬ
+In use
+= Используется
+Not in use
+= Не используется
+No profile [Recommended]
+= Без профиля [Рекомендуется]
+Separated from Profile 2: this profile keeps its own copy of the game's preferences, so a heavy UI addon can change them without leaving them set in a way that makes the next UI addon look wrong.
+= Отдельно от профиля 2: этот профиль хранит свою копию настроек игры, чтобы тяжёлый UI-аддон мог их менять, не оставляя их так, что следующий UI-аддон выглядит неправильно.
+Separated from Profile 1: this profile keeps its own copy of the game's preferences, so a heavy UI addon can change them without leaving them set in a way that makes the next UI addon look wrong.
+= Отдельно от профиля 1: этот профиль хранит свою копию настроек игры, чтобы тяжёлый UI-аддон мог их менять, не оставляя их так, что следующий UI-аддон выглядит неправильно.
+No profile doesn't do what Profile 1 and Profile 2 do: it keeps no copy of its own. It only switches addons on and off, and the game's preferences stay as the game and your addons leave them, shared by everything. If you don't want the game's preferences changed, use this setting.
+= «Без профиля» не делает того, что профили 1 и 2: у него нет своей копии. Он только включает и выключает аддоны, а настройки игры остаются такими, какими их оставили игра и ваши аддоны, общими для всего. Если не хотите, чтобы настройки игры менялись, выберите этот вариант.
+No profile in use: the game's preferences are shared again.
+= Без профиля: настройки игры снова общие.

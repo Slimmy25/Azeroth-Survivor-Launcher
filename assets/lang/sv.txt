@@ -1915,3 +1915,19 @@ Your run history and build statistics, kept in game: run reports and comparisons
 = Din körningshistorik och build-statistik i spelet: körningsrapporter och jämförelser, och en HUD du ställer in själv med upp till åtta siffror.
 How are gear stats calculated?
 = Hur räknas utrustningens statistik ut?
+USE
+= ANVÄND
+In use
+= Används
+Not in use
+= Används inte
+No profile [Recommended]
+= Ingen profil [Rekommenderas]
+Separated from Profile 2: this profile keeps its own copy of the game's preferences, so a heavy UI addon can change them without leaving them set in a way that makes the next UI addon look wrong.
+= Skild från profil 2: den här profilen har en egen kopia av spelets inställningar, så ett tungt UI-tillägg kan ändra dem utan att lämna dem så att nästa UI-tillägg ser fel ut.
+Separated from Profile 1: this profile keeps its own copy of the game's preferences, so a heavy UI addon can change them without leaving them set in a way that makes the next UI addon look wrong.
+= Skild från profil 1: den här profilen har en egen kopia av spelets inställningar, så ett tungt UI-tillägg kan ändra dem utan att lämna dem så att nästa UI-tillägg ser fel ut.
+No profile doesn't do what Profile 1 and Profile 2 do: it keeps no copy of its own. It only switches addons on and off, and the game's preferences stay as the game and your addons leave them, shared by everything. If you don't want the game's preferences changed, use this setting.
+= Ingen profil gör inte det profil 1 och 2 gör: den har ingen egen kopia. Den slår bara på och av tillägg, och spelets inställningar förblir som spelet och dina tillägg lämnar dem, gemensamma för allt. Om du inte vill att spelets inställningar ändras, använd den här.
+No profile in use: the game's preferences are shared again.
+= Ingen profil: spelets inställningar är gemensamma igen.

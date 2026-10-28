@@ -1916,3 +1916,19 @@ Your run history and build statistics, kept in game: run reports and comparisons
 = Lịch sử lượt chơi và thống kê build ngay trong game: báo cáo và so sánh các lượt, và một HUD bạn tự thiết lập với tối đa tám con số.
 How are gear stats calculated?
 = Chỉ số trang bị được tính thế nào?
+USE
+= DÙNG
+In use
+= Đang dùng
+Not in use
+= Không dùng
+No profile [Recommended]
+= Không hồ sơ [Khuyên dùng]
+Separated from Profile 2: this profile keeps its own copy of the game's preferences, so a heavy UI addon can change them without leaving them set in a way that makes the next UI addon look wrong.
+= Tách khỏi Hồ sơ 2: hồ sơ này giữ bản sao riêng của tùy chỉnh game, nên addon giao diện lớn có thể thay đổi mà không để lại khiến addon giao diện tiếp theo trông sai.
+Separated from Profile 1: this profile keeps its own copy of the game's preferences, so a heavy UI addon can change them without leaving them set in a way that makes the next UI addon look wrong.
+= Tách khỏi Hồ sơ 1: hồ sơ này giữ bản sao riêng của tùy chỉnh game, nên addon giao diện lớn có thể thay đổi mà không để lại khiến addon giao diện tiếp theo trông sai.
+No profile doesn't do what Profile 1 and Profile 2 do: it keeps no copy of its own. It only switches addons on and off, and the game's preferences stay as the game and your addons leave them, shared by everything. If you don't want the game's preferences changed, use this setting.
+= Không hồ sơ không làm điều Hồ sơ 1 và 2 làm: nó không giữ bản sao riêng. Nó chỉ bật tắt addon, còn tùy chỉnh game giữ nguyên như game và addon của bạn để lại, dùng chung cho mọi thứ. Nếu bạn không muốn tùy chỉnh game bị thay đổi, hãy dùng cài đặt này.
+No profile in use: the game's preferences are shared again.
+= Không hồ sơ: tùy chỉnh game lại dùng chung.

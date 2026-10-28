@@ -1916,3 +1916,19 @@ Your run history and build statistics, kept in game: run reports and comparisons
 = Historie tvých běhů a statistiky sestav přímo ve hře: zprávy o bězích a jejich porovnání a HUD, který si nastavíš sám, až s osmi čísly.
 How are gear stats calculated?
 = Jak se počítají statistiky výbavy?
+USE
+= POUŽÍT
+In use
+= Používá se
+Not in use
+= Nepoužívá se
+No profile [Recommended]
+= Bez profilu [Doporučeno]
+Separated from Profile 2: this profile keeps its own copy of the game's preferences, so a heavy UI addon can change them without leaving them set in a way that makes the next UI addon look wrong.
+= Odděleno od profilu 2: tento profil má vlastní kopii předvoleb hry, takže je velký UI doplněk může změnit, aniž by je nastavil tak, že další UI doplněk bude vypadat špatně.
+Separated from Profile 1: this profile keeps its own copy of the game's preferences, so a heavy UI addon can change them without leaving them set in a way that makes the next UI addon look wrong.
+= Odděleno od profilu 1: tento profil má vlastní kopii předvoleb hry, takže je velký UI doplněk může změnit, aniž by je nastavil tak, že další UI doplněk bude vypadat špatně.
+No profile doesn't do what Profile 1 and Profile 2 do: it keeps no copy of its own. It only switches addons on and off, and the game's preferences stay as the game and your addons leave them, shared by everything. If you don't want the game's preferences changed, use this setting.
+= Bez profilu nedělá to, co profily 1 a 2: nemá vlastní kopii. Jen zapíná a vypíná doplňky a předvolby hry zůstávají tak, jak je hra a tvé doplňky nechají, společné pro všechno. Pokud nechceš, aby se předvolby hry měnily, použij toto nastavení.
+No profile in use: the game's preferences are shared again.
+= Bez profilu: předvolby hry jsou zase společné.

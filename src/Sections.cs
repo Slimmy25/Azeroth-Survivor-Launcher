@@ -1523,23 +1523,49 @@ namespace AzerothLauncher
             Put(addonCount, cx, BottomOf(toggle) + 2);
             var profiles = Cfg.Section("addon_profiles");
             int py = bottom;
-            foreach (string slot in new[] { "2", "1" })      // stacked upwards from the bottom of the column
+            string active = ActiveAddonProfile();
+            // stacked upwards from the bottom of the column: Profile 2, Profile 1, then No profile (the default). Profiles 1
+            // and 2 each keep their own game preferences (AddonProfiles.cs); No profile keeps the game's shared ones
+            foreach (string slot in new[] { "2", "1", "none" })
             {
                 string s = slot;
-                var prof = Json.AsDict(Json.Get(profiles, s));
-                py -= (int)(28 * Theme.Zoom) + 2;
-                Put(new WowButton("SAVE", delegate { SaveAddonProfile(s); }, 92, 28, 9), cx, py);
-                Put(new WowButton("LOAD", delegate { LoadAddonProfile(s); }, 92, 28, 9), cx + (int)(98 * Theme.Zoom), py);
-                var info = UI.Text(prof == null ? "empty" : Addons.ProfileCount(prof, "enabled") + " on, " +
-                                   Addons.ProfileCount(prof, "disabled") + " off\nsaved " + Json.Str(prof, "saved"),
-                                   9, FontStyle.Regular, Theme.Text, Theme.Panel, (int)(190 * Theme.Zoom));
+                string text;
+                if (s == "none")
+                {
+                    py -= (int)(28 * Theme.Zoom) + 2;
+                    Put(new WowButton("USE", delegate { UseNoAddonProfile(); }, 190, 28, 9), cx, py);
+                    text = Lang.T(active == "none" ? "In use" : "Not in use");
+                }
+                else
+                {
+                    var prof = Json.AsDict(Json.Get(profiles, s));
+                    py -= (int)(28 * Theme.Zoom) + 2;
+                    Put(new WowButton("SAVE", delegate { SaveAddonProfile(s); }, 92, 28, 9), cx, py);
+                    Put(new WowButton("LOAD", delegate { LoadAddonProfile(s); }, 92, 28, 9), cx + (int)(98 * Theme.Zoom), py);
+                    text = Lang.T(prof == null ? "empty" : Addons.ProfileCount(prof, "enabled") + " on, " +
+                                  Addons.ProfileCount(prof, "disabled") + " off\nsaved " + Json.Str(prof, "saved"));
+                    if (active == s) text = Lang.T("In use") + "\n" + text;
+                }
+                var info = UI.Text(text, 9, FontStyle.Regular, active == s ? Theme.Gold : Theme.Text, Theme.Panel, (int)(190 * Theme.Zoom), false);
                 info.Size = VStack.Measure(info);
                 py -= info.Height + 2;
                 Put(info, cx, py);
-                var head = UI.Text("Profile " + s, 11, FontStyle.Bold, Theme.Gold, Theme.Panel, 0);
+                var head = UI.Text(s == "none" ? "No profile [Recommended]" : "Profile " + s, 11, FontStyle.Bold, Theme.Gold, Theme.Panel, 0);
                 head.Size = VStack.Measure(head);
                 py -= head.Height;
                 Put(head, cx, py);
+                // a small "?" beside the name: point at it to read what this choice does with the game's preferences
+                var q = UI.Text("?", 10, FontStyle.Bold, Theme.Panel, Theme.Gold, 0, false);
+                q.AutoSize = false;
+                q.TextAlign = ContentAlignment.MiddleCenter;
+                int qs = (int)(16 * Theme.Zoom);
+                q.Size = new Size(qs, qs);
+                q.Cursor = Cursors.Help;
+                Put(q, cx + head.Width + 4, py + (head.Height - qs) / 2);
+                string note = s == "none" ? NoProfileNote : s == "1" ? Profile1Note : Profile2Note;
+                var tt = new ToolTip { AutoPopDelay = 30000, InitialDelay = 150, ReshowDelay = 100 };
+                tt.SetToolTip(q, Lang.T(note));
+                q.Disposed += delegate { tt.Dispose(); };
                 py -= 8;
             }
             // --- left: scrollable list with one switch per addon ---
@@ -1754,6 +1780,48 @@ namespace AzerothLauncher
                                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
+        const string Profile1Note = "Separated from Profile 2: this profile keeps its own copy of the game's preferences, so a heavy UI addon can change them without leaving them set in a way that makes the next UI addon look wrong.";
+        const string Profile2Note = "Separated from Profile 1: this profile keeps its own copy of the game's preferences, so a heavy UI addon can change them without leaving them set in a way that makes the next UI addon look wrong.";
+        const string NoProfileNote = "No profile doesn't do what Profile 1 and Profile 2 do: it keeps no copy of its own. It only switches addons on and off, and the game's preferences stay as the game and your addons leave them, shared by everything. If you don't want the game's preferences changed, use this setting.";
+
+        // which addon profile's game preferences are in place: "1", "2" or "none" (No profile, the default)
+        string ActiveAddonProfile()
+        {
+            string a = Cfg.Str("addon_profile_active");
+            return a == "1" || a == "2" ? a : "none";
+        }
+
+        // the game's preferences move to another profile: the current ones are stored under the profile being left,
+        // then the picked profile's own come back (first time: it starts from the current ones). False on a failure.
+        bool SwitchAddonPreferences(string to)
+        {
+            string from = ActiveAddonProfile();
+            if (from == to) return true;
+            try
+            {
+                var ss = SyncSettings();
+                AddonProfiles.Store(ss, from);
+                if (AddonProfiles.Has(to)) AddonProfiles.Restore(ss, to);
+            }
+            catch (Exception e)
+            {
+                Msg.Show(side, e.Message, "Addons");
+                return false;
+            }
+            Cfg.Set("addon_profile_active", to);
+            Cfg.Save();
+            return true;
+        }
+
+        void UseNoAddonProfile()
+        {
+            if (AddonsLocked()) return;
+            if (ActiveAddonProfile() == "none") { SetStatus(Lang.T("No profile in use: the game's preferences are shared again.")); return; }
+            if (!SwitchAddonPreferences("none")) return;
+            SetStatus(Lang.T("No profile in use: the game's preferences are shared again."));
+            BuildPanel("Addons");
+        }
+
         void SaveAddonProfile(string slot)
         {
             var profiles = Cfg.Section("addon_profiles");
@@ -1779,6 +1847,7 @@ namespace AzerothLauncher
                 return;
             }
             if (AddonsLocked()) return;
+            if (!SwitchAddonPreferences(slot)) return;      // this profile's own game preferences first, then its switches
             var errors = new List<string>();
             var unknown = new List<string>();
             int changed;

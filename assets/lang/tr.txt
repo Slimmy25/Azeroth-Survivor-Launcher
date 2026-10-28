@@ -1916,3 +1916,19 @@ Your run history and build statistics, kept in game: run reports and comparisons
 = Oyun içinde koşu geçmişin ve build istatistiklerin: koşu raporları ve karşılaştırmalar, ve en fazla sekiz sayıyla kendin kurduğun bir HUD.
 How are gear stats calculated?
 = Ekipman istatistikleri nasıl hesaplanır?
+USE
+= KULLAN
+In use
+= Kullanımda
+Not in use
+= Kullanılmıyor
+No profile [Recommended]
+= Profil yok [Önerilen]
+Separated from Profile 2: this profile keeps its own copy of the game's preferences, so a heavy UI addon can change them without leaving them set in a way that makes the next UI addon look wrong.
+= Profil 2'den ayrı: bu profil oyun tercihlerinin kendi kopyasını tutar, böylece ağır bir arayüz eklentisi onları değiştirse de bir sonraki arayüz eklentisi yanlış görünmez.
+Separated from Profile 1: this profile keeps its own copy of the game's preferences, so a heavy UI addon can change them without leaving them set in a way that makes the next UI addon look wrong.
+= Profil 1'den ayrı: bu profil oyun tercihlerinin kendi kopyasını tutar, böylece ağır bir arayüz eklentisi onları değiştirse de bir sonraki arayüz eklentisi yanlış görünmez.
+No profile doesn't do what Profile 1 and Profile 2 do: it keeps no copy of its own. It only switches addons on and off, and the game's preferences stay as the game and your addons leave them, shared by everything. If you don't want the game's preferences changed, use this setting.
+= Profil yok, Profil 1 ve 2'nin yaptığını yapmaz: kendi kopyası yoktur. Yalnızca eklentileri açıp kapatır; oyun tercihleri oyunun ve eklentilerinin bıraktığı gibi kalır, her şey için ortaktır. Oyun tercihlerinin değişmesini istemiyorsan bu ayarı kullan.
+No profile in use: the game's preferences are shared again.
+= Profil yok: oyun tercihleri yeniden ortak.

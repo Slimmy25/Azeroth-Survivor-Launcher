@@ -1915,3 +1915,19 @@ Your run history and build statistics, kept in game: run reports and comparisons
 = Riwayat run dan statistik build kamu di dalam game: laporan dan perbandingan run, dan HUD yang kamu atur sendiri dengan hingga delapan angka.
 How are gear stats calculated?
 = Bagaimana statistik perlengkapan dihitung?
+USE
+= GUNAKAN
+In use
+= Sedang dipakai
+Not in use
+= Tidak dipakai
+No profile [Recommended]
+= Tanpa profil [Disarankan]
+Separated from Profile 2: this profile keeps its own copy of the game's preferences, so a heavy UI addon can change them without leaving them set in a way that makes the next UI addon look wrong.
+= Terpisah dari Profil 2: profil ini menyimpan salinan pengaturan game sendiri, jadi addon UI besar bisa mengubahnya tanpa membiarkannya membuat addon UI berikutnya terlihat salah.
+Separated from Profile 1: this profile keeps its own copy of the game's preferences, so a heavy UI addon can change them without leaving them set in a way that makes the next UI addon look wrong.
+= Terpisah dari Profil 1: profil ini menyimpan salinan pengaturan game sendiri, jadi addon UI besar bisa mengubahnya tanpa membiarkannya membuat addon UI berikutnya terlihat salah.
+No profile doesn't do what Profile 1 and Profile 2 do: it keeps no copy of its own. It only switches addons on and off, and the game's preferences stay as the game and your addons leave them, shared by everything. If you don't want the game's preferences changed, use this setting.
+= Tanpa profil tidak melakukan apa yang dilakukan Profil 1 dan 2: tidak menyimpan salinan sendiri. Hanya menyalakan dan mematikan addon, dan pengaturan game tetap seperti yang ditinggalkan game dan addon-mu, dipakai bersama. Jika kamu tidak ingin pengaturan game diubah, pakai pengaturan ini.
+No profile in use: the game's preferences are shared again.
+= Tanpa profil: pengaturan game kembali dipakai bersama.

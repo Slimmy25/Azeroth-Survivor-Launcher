@@ -1916,3 +1916,19 @@ Your run history and build statistics, kept in game: run reports and comparisons
 = A futásaid előzményei és build-statisztikák a játékban: futásjelentések és összehasonlítások, és egy HUD, amit magad állítasz be legfeljebb nyolc számmal.
 How are gear stats calculated?
 = Hogyan számolódnak a felszerelés értékei?
+USE
+= HASZNÁLAT
+In use
+= Használatban
+Not in use
+= Nincs használatban
+No profile [Recommended]
+= Nincs profil [Ajánlott]
+Separated from Profile 2: this profile keeps its own copy of the game's preferences, so a heavy UI addon can change them without leaving them set in a way that makes the next UI addon look wrong.
+= Elkülönítve a(z) 2. profiltól: ez a profil saját másolatot tart a játék beállításairól, így egy nagy UI-kiegészítő módosíthatja őket anélkül, hogy úgy hagyná, hogy a következő UI-kiegészítő rosszul nézzen ki.
+Separated from Profile 1: this profile keeps its own copy of the game's preferences, so a heavy UI addon can change them without leaving them set in a way that makes the next UI addon look wrong.
+= Elkülönítve a(z) 1. profiltól: ez a profil saját másolatot tart a játék beállításairól, így egy nagy UI-kiegészítő módosíthatja őket anélkül, hogy úgy hagyná, hogy a következő UI-kiegészítő rosszul nézzen ki.
+No profile doesn't do what Profile 1 and Profile 2 do: it keeps no copy of its own. It only switches addons on and off, and the game's preferences stay as the game and your addons leave them, shared by everything. If you don't want the game's preferences changed, use this setting.
+= A Nincs profil nem azt csinálja, amit az 1. és 2. profil: nincs saját másolata. Csak be- és kikapcsolja a kiegészítőket, a játék beállításai pedig úgy maradnak, ahogy a játék és a kiegészítőid hagyják, mindenhez közösen. Ha nem szeretnéd, hogy a játék beállításai változzanak, ezt használd.
+No profile in use: the game's preferences are shared again.
+= Nincs profil: a játék beállításai ismét közösek.

@@ -1915,3 +1915,19 @@ Your run history and build statistics, kept in game: run reports and comparisons
 = La cronologia delle tue partite e le statistiche delle build in gioco: resoconti e confronti delle partite, e un HUD che imposti tu con fino a otto numeri.
 How are gear stats calculated?
 = Come si calcolano le statistiche dell'equipaggiamento?
+USE
+= USA
+In use
+= In uso
+Not in use
+= Non in uso
+No profile [Recommended]
+= Nessun profilo [Consigliato]
+Separated from Profile 2: this profile keeps its own copy of the game's preferences, so a heavy UI addon can change them without leaving them set in a way that makes the next UI addon look wrong.
+= Separato dal profilo 2: questo profilo tiene una sua copia delle preferenze del gioco, così un addon d'interfaccia pesante può cambiarle senza lasciarle impostate in modo che il prossimo addon d'interfaccia sembri sbagliato.
+Separated from Profile 1: this profile keeps its own copy of the game's preferences, so a heavy UI addon can change them without leaving them set in a way that makes the next UI addon look wrong.
+= Separato dal profilo 1: questo profilo tiene una sua copia delle preferenze del gioco, così un addon d'interfaccia pesante può cambiarle senza lasciarle impostate in modo che il prossimo addon d'interfaccia sembri sbagliato.
+No profile doesn't do what Profile 1 and Profile 2 do: it keeps no copy of its own. It only switches addons on and off, and the game's preferences stay as the game and your addons leave them, shared by everything. If you don't want the game's preferences changed, use this setting.
+= Nessun profilo non fa ciò che fanno i profili 1 e 2: non tiene una copia propria. Attiva e disattiva solo gli addon, e le preferenze del gioco restano come le lasciano il gioco e i tuoi addon, condivise da tutto. Se non vuoi che le preferenze del gioco cambino, usa questa impostazione.
+No profile in use: the game's preferences are shared again.
+= Nessun profilo: le preferenze del gioco sono di nuovo condivise.

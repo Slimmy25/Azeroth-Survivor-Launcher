@@ -1915,3 +1915,19 @@ Your run history and build statistics, kept in game: run reports and comparisons
 = Je rungeschiedenis en buildstatistieken in het spel: runverslagen en vergelijkingen, en een HUD die je zelf instelt met maximaal acht getallen.
 How are gear stats calculated?
 = Hoe worden de uitrustingsstatistieken berekend?
+USE
+= GEBRUIKEN
+In use
+= In gebruik
+Not in use
+= Niet in gebruik
+No profile [Recommended]
+= Geen profiel [Aanbevolen]
+Separated from Profile 2: this profile keeps its own copy of the game's preferences, so a heavy UI addon can change them without leaving them set in a way that makes the next UI addon look wrong.
+= Gescheiden van profiel 2: dit profiel heeft een eigen kopie van de spelvoorkeuren, zodat een zware UI-addon ze kan wijzigen zonder ze zo achter te laten dat de volgende UI-addon er verkeerd uitziet.
+Separated from Profile 1: this profile keeps its own copy of the game's preferences, so a heavy UI addon can change them without leaving them set in a way that makes the next UI addon look wrong.
+= Gescheiden van profiel 1: dit profiel heeft een eigen kopie van de spelvoorkeuren, zodat een zware UI-addon ze kan wijzigen zonder ze zo achter te laten dat de volgende UI-addon er verkeerd uitziet.
+No profile doesn't do what Profile 1 and Profile 2 do: it keeps no copy of its own. It only switches addons on and off, and the game's preferences stay as the game and your addons leave them, shared by everything. If you don't want the game's preferences changed, use this setting.
+= Geen profiel doet niet wat profiel 1 en 2 doen: het heeft geen eigen kopie. Het zet alleen addons aan en uit, en de spelvoorkeuren blijven zoals het spel en je addons ze achterlaten, gedeeld door alles. Wil je de spelvoorkeuren niet laten wijzigen, gebruik dan deze instelling.
+No profile in use: the game's preferences are shared again.
+= Geen profiel: de spelvoorkeuren zijn weer gedeeld.

@@ -1915,3 +1915,19 @@ Your run history and build statistics, kept in game: run reports and comparisons
 = Votre historique de parties et vos statistiques de builds en jeu : rapports et comparaisons de parties, et un HUD que vous réglez vous-même avec jusqu'à huit chiffres.
 How are gear stats calculated?
 = Comment les statistiques de l'équipement sont-elles calculées ?
+USE
+= UTILISER
+In use
+= Utilisé
+Not in use
+= Non utilisé
+No profile [Recommended]
+= Aucun profil [Recommandé]
+Separated from Profile 2: this profile keeps its own copy of the game's preferences, so a heavy UI addon can change them without leaving them set in a way that makes the next UI addon look wrong.
+= Séparé du profil 2 : ce profil garde sa propre copie des préférences du jeu, pour qu'un gros addon d'interface puisse les modifier sans les laisser réglées de façon à ce que l'addon d'interface suivant s'affiche mal.
+Separated from Profile 1: this profile keeps its own copy of the game's preferences, so a heavy UI addon can change them without leaving them set in a way that makes the next UI addon look wrong.
+= Séparé du profil 1 : ce profil garde sa propre copie des préférences du jeu, pour qu'un gros addon d'interface puisse les modifier sans les laisser réglées de façon à ce que l'addon d'interface suivant s'affiche mal.
+No profile doesn't do what Profile 1 and Profile 2 do: it keeps no copy of its own. It only switches addons on and off, and the game's preferences stay as the game and your addons leave them, shared by everything. If you don't want the game's preferences changed, use this setting.
+= Aucun profil ne fait pas ce que font les profils 1 et 2 : il ne garde aucune copie à lui. Il active et désactive seulement les addons, et les préférences du jeu restent telles que le jeu et vos addons les laissent, partagées par tout. Si vous ne voulez pas que les préférences du jeu soient modifiées, utilisez ce réglage.
+No profile in use: the game's preferences are shared again.
+= Aucun profil : les préférences du jeu sont de nouveau partagées.

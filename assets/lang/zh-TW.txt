@@ -1916,3 +1916,19 @@ Your run history and build statistics, kept in game: run reports and comparisons
 = 遊戲內保存的對局紀錄和配裝統計：對局報告與比較，以及可自行設定、最多八個數字的HUD。
 How are gear stats calculated?
 = 裝備屬性如何計算？
+USE
+= 使用
+In use
+= 使用中
+Not in use
+= 未使用
+No profile [Recommended]
+= 無設定檔 [推薦]
+Separated from Profile 2: this profile keeps its own copy of the game's preferences, so a heavy UI addon can change them without leaving them set in a way that makes the next UI addon look wrong.
+= 與設定檔 2 分開：此設定檔保留自己的一份遊戲設定副本，大型介面插件可以修改它們，而不會讓下一個介面插件顯示異常。
+Separated from Profile 1: this profile keeps its own copy of the game's preferences, so a heavy UI addon can change them without leaving them set in a way that makes the next UI addon look wrong.
+= 與設定檔 1 分開：此設定檔保留自己的一份遊戲設定副本，大型介面插件可以修改它們，而不會讓下一個介面插件顯示異常。
+No profile doesn't do what Profile 1 and Profile 2 do: it keeps no copy of its own. It only switches addons on and off, and the game's preferences stay as the game and your addons leave them, shared by everything. If you don't want the game's preferences changed, use this setting.
+= 「無設定檔」不會做設定檔 1 和 2 所做的事：它沒有自己的副本。它只開關插件，遊戲設定保持遊戲和插件留下的樣子，所有設定共用。如果你不想修改遊戲設定，請使用此選項。
+No profile in use: the game's preferences are shared again.
+= 無設定檔：遊戲設定重新共用。

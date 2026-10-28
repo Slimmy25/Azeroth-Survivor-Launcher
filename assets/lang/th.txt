@@ -1916,3 +1916,19 @@ Your run history and build statistics, kept in game: run reports and comparisons
 = ประวัติการเล่นและสถิติบิลด์ของคุณในเกม: รายงานและการเปรียบเทียบแต่ละรอบ และ HUD ที่ตั้งค่าเองได้สูงสุดแปดตัวเลข
 How are gear stats calculated?
 = ค่าสถานะของอุปกรณ์คำนวณอย่างไร?
+USE
+= ใช้
+In use
+= กำลังใช้
+Not in use
+= ไม่ได้ใช้
+No profile [Recommended]
+= ไม่ใช้โปรไฟล์ [แนะนำ]
+Separated from Profile 2: this profile keeps its own copy of the game's preferences, so a heavy UI addon can change them without leaving them set in a way that makes the next UI addon look wrong.
+= แยกจากโปรไฟล์ 2: โปรไฟล์นี้เก็บสำเนาการตั้งค่าเกมของตัวเอง ทำให้แอดออน UI ขนาดใหญ่เปลี่ยนค่าได้โดยไม่ทิ้งไว้จนแอดออน UI ตัวถัดไปดูผิดเพี้ยน
+Separated from Profile 1: this profile keeps its own copy of the game's preferences, so a heavy UI addon can change them without leaving them set in a way that makes the next UI addon look wrong.
+= แยกจากโปรไฟล์ 1: โปรไฟล์นี้เก็บสำเนาการตั้งค่าเกมของตัวเอง ทำให้แอดออน UI ขนาดใหญ่เปลี่ยนค่าได้โดยไม่ทิ้งไว้จนแอดออน UI ตัวถัดไปดูผิดเพี้ยน
+No profile doesn't do what Profile 1 and Profile 2 do: it keeps no copy of its own. It only switches addons on and off, and the game's preferences stay as the game and your addons leave them, shared by everything. If you don't want the game's preferences changed, use this setting.
+= ไม่ใช้โปรไฟล์ไม่ได้ทำแบบโปรไฟล์ 1 และ 2: ไม่มีสำเนาของตัวเอง แค่เปิดปิดแอดออน และการตั้งค่าเกมจะคงอยู่ตามที่เกมและแอดออนทิ้งไว้ ใช้ร่วมกันทั้งหมด หากไม่ต้องการให้การตั้งค่าเกมเปลี่ยน ให้ใช้ตัวเลือกนี้
+No profile in use: the game's preferences are shared again.
+= ไม่ใช้โปรไฟล์: การตั้งค่าเกมกลับมาใช้ร่วมกันแล้ว

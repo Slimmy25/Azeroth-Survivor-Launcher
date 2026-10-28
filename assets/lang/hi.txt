@@ -1916,3 +1916,19 @@ Your run history and build statistics, kept in game: run reports and comparisons
 = खेल के अंदर आपके रन का इतिहास और बिल्ड के आँकड़े: रन रिपोर्ट और तुलना, और एक HUD जिसे आप खुद आठ तक संख्याओं के साथ सेट करते हैं।
 How are gear stats calculated?
 = गियर के आँकड़े कैसे गिने जाते हैं?
+USE
+= इस्तेमाल करें
+In use
+= इस्तेमाल में
+Not in use
+= इस्तेमाल में नहीं
+No profile [Recommended]
+= कोई प्रोफ़ाइल नहीं [सुझाया गया]
+Separated from Profile 2: this profile keeps its own copy of the game's preferences, so a heavy UI addon can change them without leaving them set in a way that makes the next UI addon look wrong.
+= प्रोफ़ाइल 2 से अलग: यह प्रोफ़ाइल खेल की पसंद की अपनी अलग कॉपी रखती है, ताकि कोई भारी UI ऐडऑन उन्हें बदल सके और अगला UI ऐडऑन गलत न दिखे।
+Separated from Profile 1: this profile keeps its own copy of the game's preferences, so a heavy UI addon can change them without leaving them set in a way that makes the next UI addon look wrong.
+= प्रोफ़ाइल 1 से अलग: यह प्रोफ़ाइल खेल की पसंद की अपनी अलग कॉपी रखती है, ताकि कोई भारी UI ऐडऑन उन्हें बदल सके और अगला UI ऐडऑन गलत न दिखे।
+No profile doesn't do what Profile 1 and Profile 2 do: it keeps no copy of its own. It only switches addons on and off, and the game's preferences stay as the game and your addons leave them, shared by everything. If you don't want the game's preferences changed, use this setting.
+= कोई प्रोफ़ाइल नहीं वह नहीं करता जो प्रोफ़ाइल 1 और 2 करती हैं: इसकी अपनी कोई कॉपी नहीं होती। यह सिर्फ़ ऐडऑन चालू और बंद करता है, और खेल की पसंद वैसी ही रहती है जैसी खेल और आपके ऐडऑन छोड़ते हैं, सबके लिए एक जैसी। अगर आप नहीं चाहते कि खेल की पसंद बदले, तो यही सेटिंग इस्तेमाल करें।
+No profile in use: the game's preferences are shared again.
+= कोई प्रोफ़ाइल नहीं: खेल की पसंद फिर से साझा है।

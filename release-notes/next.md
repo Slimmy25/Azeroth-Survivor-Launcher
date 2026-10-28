@@ -35,6 +35,13 @@
   left corner in the right column, so both columns lean in towards the middle.
 
 ### Addons
+- Profile 1 and Profile 2 each keep their own game preferences (options, key bindings, chat windows, camera, layout
+  and the addons' saved settings). LOAD stores the preferences you have under the profile you leave and brings back
+  the picked profile's own, so a heavy UI addon can't leave the game looking wrong for the next one. Run histories
+  (AZS Stats, Azeroth Stats), the save game and cloud saves are never part of a profile.
+- New choice above them: No profile [Recommended], the default. It keeps no copy of its own and only switches
+  addons; the game's preferences stay shared. Coming back to it from a profile brings back the preferences you had.
+- A small "?" beside each of the three explains what it does.
 - Download More: two new addons by Maidenhead, Azeroth FieldKit (an in-game helper: elite nameplates, boss frames,
   a damage meter, chests and lairs on the minimap and more) and Azeroth Stats (run history, run reports and a HUD
   you set up yourself).

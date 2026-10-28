@@ -1916,3 +1916,19 @@ Your run history and build statistics, kept in game: run reports and comparisons
 = Historia twoich rozgrywek i statystyki buildów w grze: raporty i porównania rozgrywek oraz HUD, który ustawiasz sam, z maksymalnie ośmioma liczbami.
 How are gear stats calculated?
 = Jak liczone są statystyki wyposażenia?
+USE
+= UŻYJ
+In use
+= W użyciu
+Not in use
+= Nieużywany
+No profile [Recommended]
+= Bez profilu [Zalecane]
+Separated from Profile 2: this profile keeps its own copy of the game's preferences, so a heavy UI addon can change them without leaving them set in a way that makes the next UI addon look wrong.
+= Oddzielony od profilu 2: ten profil ma własną kopię ustawień gry, więc duży dodatek interfejsu może je zmienić bez zostawiania ich tak, że następny dodatek interfejsu wygląda źle.
+Separated from Profile 1: this profile keeps its own copy of the game's preferences, so a heavy UI addon can change them without leaving them set in a way that makes the next UI addon look wrong.
+= Oddzielony od profilu 1: ten profil ma własną kopię ustawień gry, więc duży dodatek interfejsu może je zmienić bez zostawiania ich tak, że następny dodatek interfejsu wygląda źle.
+No profile doesn't do what Profile 1 and Profile 2 do: it keeps no copy of its own. It only switches addons on and off, and the game's preferences stay as the game and your addons leave them, shared by everything. If you don't want the game's preferences changed, use this setting.
+= Bez profilu nie robi tego, co profile 1 i 2: nie ma własnej kopii. Tylko włącza i wyłącza dodatki, a ustawienia gry zostają takie, jak zostawią je gra i twoje dodatki, wspólne dla wszystkiego. Jeśli nie chcesz zmieniać ustawień gry, użyj tej opcji.
+No profile in use: the game's preferences are shared again.
+= Bez profilu: ustawienia gry znów są wspólne.
