@@ -1,3 +1,7 @@
+# v3.02 (2026-10-29)
+
+- Quick Access hearts now share the launcher's top-level window as their owner, keeping their position aligned with each breadcrumb label on scaled displays.
+
 # v3.01 (2026-10-29)
 
 - Canceling first-time setup removes launcher settings and temporary downloads only; it preserves player saves, AddOns, addon settings, cloud files, and saved launcher content.

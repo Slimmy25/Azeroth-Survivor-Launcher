@@ -28,28 +28,23 @@ namespace AzerothLauncher
                      ControlStyles.OptimizedDoubleBuffer | ControlStyles.ResizeRedraw, true);
         }
 
-        public void PlaceAbove(Control anchorControl, Rectangle anchorBounds)
-        {
-            if (anchorControl == null || anchorBounds.IsEmpty) return;
+        [System.Runtime.InteropServices.DllImport("user32.dll", SetLastError = true)]
+        static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int x, int y, int cx, int cy, uint flags);
 
-            // Convert the center of the actual drawn word from its control's coordinates. Keeping
-            // the source control here avoids mixing breadcrumb-local coordinates with popup pixels.
-            Point center = anchorControl.PointToScreen(new Point(anchorBounds.Left + anchorBounds.Width / 2,
-                                                                  anchorBounds.Top));
+        const uint SwpNoSize = 0x0001, SwpNoZOrder = 0x0004, SwpNoActivate = 0x0010;
+
+        public void PlaceAbove(Rectangle textBoundsOnScreen)
+        {
+            if (textBoundsOnScreen.IsEmpty || !IsHandleCreated) return;
+            // Anchor from the actual screen-space glyph bounds. Setting a separate owned Form's
+            // Location can be DPI-virtualized relative to its owner; SetWindowPos consumes the
+            // screen coordinates directly, so short and long labels use the same true center.
+            Point center = new Point(textBoundsOnScreen.Left + textBoundsOnScreen.Width / 2,
+                                     textBoundsOnScreen.Top);
             Rectangle screen = Screen.FromPoint(center).WorkingArea;
             Point desired = new Point(Math.Max(screen.Left + 4, Math.Min(center.X - Width / 2, screen.Right - Width - 4)),
                                       Math.Max(screen.Top + 4, center.Y - 30)); // artwork ends four pixels inside its 34-pixel window
-
-            // Windows can apply DPI virtualization to owned popup windows. Correct against the
-            // popup's observed screen position so the heart remains centered on the word at any scale.
-            for (int attempt = 0; attempt < 4; attempt++)
-            {
-                Location = desired;
-                Point actual = PointToScreen(Point.Empty);
-                int dx = desired.X - actual.X, dy = desired.Y - actual.Y;
-                if (Math.Abs(dx) <= 1 && Math.Abs(dy) <= 1) break;
-                desired = new Point(Location.X + dx, Location.Y + dy);
-            }
+            SetWindowPos(Handle, IntPtr.Zero, desired.X, desired.Y, 0, 0, SwpNoSize | SwpNoZOrder | SwpNoActivate);
         }
 
         protected override bool ShowWithoutActivation { get { return true; } }
@@ -398,6 +393,12 @@ namespace AzerothLauncher
             return Rectangle.Empty;
         }
 
+        Rectangle CrumbScreenRect(int i)
+        {
+            Rectangle text = CrumbRect(i);
+            return text.IsEmpty ? Rectangle.Empty : RectangleToScreen(text);
+        }
+
         void CloseFavoritePopup()
         {
             if (favoritePopup != null && !favoritePopup.IsDisposed) favoritePopup.Close();
@@ -424,8 +425,18 @@ namespace AzerothLauncher
                 if (favoritePopup == popup) { favoritePopup = null; favoritePopupStep = -1; }
                 popup.Dispose();
             };
-            popup.Show(FindForm());
-            popup.PlaceAbove(this, anchor);
+            // SideHead is hosted inside a non-top-level Form (the section panel). Own the
+            // popup from the launcher's real top-level window instead, so its screen-space
+            // coordinates use the same DPI context as the breadcrumb it follows.
+            Form owner = hoverHost;
+            if (owner == null || owner.IsDisposed)
+            {
+                owner = FindForm();
+                while (owner != null && !owner.TopLevel) owner = owner.Parent as Form;
+            }
+            if (owner != null) popup.Show(owner);
+            else popup.Show();
+            popup.PlaceAbove(RectangleToScreen(anchor));
         }
 
         void HoverTick()
@@ -448,7 +459,7 @@ namespace AzerothLauncher
                 (favoritePopup == null || favoritePopup.IsDisposed || favoritePopupStep != retainedStep))
                 ShowFavoritePopup(retainedStep, CrumbRect(retainedStep));
             else if (retainedStep >= 0 && favoritePopup != null && !favoritePopup.IsDisposed && favoritePopupStep == retainedStep)
-                favoritePopup.PlaceAbove(this, CrumbRect(retainedStep));
+                favoritePopup.PlaceAbove(CrumbScreenRect(retainedStep));
 
             if (openMenu != null && !openMenu.IsDisposed)
             {
