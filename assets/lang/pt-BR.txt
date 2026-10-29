@@ -1988,3 +1988,14 @@ Codex neck piece that remakes it:
 
 The steps at the top show where you are in the launcher. Select an earlier step to return to it. Hover over a step or its arrow to see other pages at that level. The left arrow returns to the previous page; the X closes this section and returns home.
 = As etapas no topo mostram onde você está no launcher. Selecione uma etapa anterior para voltar. Passe o cursor sobre uma etapa ou sua seta para ver outras páginas desse nível. A seta à esquerda volta à página anterior; o X fecha esta seção e retorna ao início.
+
+SAVED BUILDS
+= BUILDS SALVOS
+EXPORT
+= EXPORTAR
+Enter a name for this build.
+= Digite um nome para este build.
+Build code copied to the clipboard.
+= O código do build foi copiado para a área de transferência.
+Could not copy the build code.
+= Não foi possível copiar o código do build.

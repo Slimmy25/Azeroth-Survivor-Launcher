@@ -6,7 +6,7 @@
 // or a video file. A file name alone is looked for in the "Guide Videos" folder next to the launcher's data.
 // Clicking the card opens the video in the browser or the PC's video player.
 //
-// The guide's own text is English; only the words around it are translated.
+// The source text is English; visible titles, descriptions, body text and inline link names are translated where available.
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -20,6 +20,58 @@ namespace AzerothLauncher
 {
     public partial class LauncherApp
     {
+        sealed class TalentBuildChoice
+        {
+            public string Name, Class, Code;
+            public string Key { get { return Class + "|" + Name; } }
+            public override string ToString() { return Lang.T(Name) + " · " + Lang.T(Class); }
+        }
+
+        string pendingTalentBuildKey;
+        string pendingTalentImportClass, pendingTalentImportCode;
+
+        static List<TalentBuildChoice> SavedTalentBuilds(Config cfg)
+        {
+            var result = new List<TalentBuildChoice>();
+            var rows = Json.AsList(Json.Get(cfg.Data, "talentTreeBuildsShared"));
+            if (rows == null)
+            {
+                // One-time migration: retain old per-class saves and expose them in the shared picker.
+                rows = new List<object>();
+                var legacy = Json.AsDict(Json.Get(cfg.Data, "talentTreeBuilds"));
+                if (legacy != null)
+                    foreach (var cls in legacy)
+                    {
+                        var builds = Json.AsDict(cls.Value);
+                        if (builds == null) continue;
+                        foreach (var saved in builds)
+                            if (saved.Value is string)
+                            {
+                                var row = new Dictionary<string, object>();
+                                row["name"] = saved.Key; row["class"] = cls.Key; row["build"] = saved.Value;
+                                rows.Add(row);
+                            }
+                    }
+                cfg.Set("talentTreeBuildsShared", rows);
+                if (rows.Count > 0) cfg.Save();
+            }
+            foreach (object value in rows)
+            {
+                var row = Json.AsDict(value);
+                if (row == null) continue;
+                string name = Json.Str(row, "name").Trim(), cls = Json.Str(row, "class").Trim();
+                string code = Json.Str(row, "build");
+                if (name.Length == 0 || cls.Length == 0 || code.Length == 0) continue;
+                result.Add(new TalentBuildChoice { Name = name, Class = cls, Code = code });
+            }
+            result.Sort(delegate(TalentBuildChoice a, TalentBuildChoice b)
+            {
+                int c = string.Compare(a.Name, b.Name, StringComparison.CurrentCultureIgnoreCase);
+                return c != 0 ? c : string.Compare(a.Class, b.Class, StringComparison.CurrentCultureIgnoreCase);
+            });
+            return result;
+        }
+
         static readonly Color GuideCardBg = Theme.Hex("#15121c"), GuideRed = Theme.Hex("#c8442f");
 
         // under the back arrow row, or under the topic tabs when they are shown
@@ -605,7 +657,7 @@ namespace AzerothLauncher
             for (int i = 0; i < BuilderClasses.Length; i++)
             {
                 string cls = BuilderClasses[i];
-                var b = new WowButton(cls.ToUpperInvariant(), delegate { pick(cls); }, bw, bh, 10);
+                var b = new WowButton(Lang.T(cls).ToUpperInvariant(), delegate { pick(cls); }, bw, bh, 10);
                 b.Location = new Point(x0 + (i % cols) * (cw + gap), y0 + (i / cols) * (ch + gap));
                 inner.Controls.Add(b);
             }
@@ -878,7 +930,7 @@ namespace AzerothLauncher
                 "Click a talent to add a point, right-click to take one back. A talent takes no more points than its ranks, and a build no more than 51; the purple ones are the milestones at 10, 20 and 30 points.");
             help.Location = new Point(reset.Left - help.Width - 8, y + (reset.Height - help.Height) / 2);
             sp.Controls.Add(help);
-            // Named builds are kept in the launcher's own config, separately for each class.
+            // Named builds are kept in one launcher-wide list, with their originating class attached.
             var tools = new Bordered(Theme.GoldDim, 1);
             tools.BackColor = bg;
             tools.Bounds = new Rectangle(x + w + 10, y, boxW, sp.ClientSize.Height - y - 8);
@@ -911,19 +963,10 @@ namespace AzerothLauncher
             int actionH = 28;
             int actionY = saved.Bottom + 10;
             int actionGap = Math.Max(4, (tools.ClientSize.Height - actionY - actionH * 4) / 4);
-            Func<Dictionary<string, object>> classBuilds = delegate
-            {
-                var cfg = Config.Load();
-                var all = cfg.Section("talentTreeBuilds");
-                var byClass = Json.AsDict(Json.Get(all, cls));
-                if (byClass == null) { byClass = new Dictionary<string, object>(); all[cls] = byClass; }
-                return byClass;
-            };
             Action refreshSaved = delegate
             {
                 saved.Items.Clear();
-                foreach (var kv in classBuilds())
-                    if (kv.Value is string) saved.Items.Add(kv.Key);
+                foreach (var choice in SavedTalentBuilds(Config.Load())) saved.Items.Add(choice);
                 saved.SelectedIndex = -1;
             };
             var saveBuild = new WowButton(Lang.T("SAVE"), delegate
@@ -931,13 +974,27 @@ namespace AzerothLauncher
                 string name = buildName.Text.Trim();
                 if (name.Length == 0) { Info("Talent Tree Builder", "Enter a name for this build."); buildName.Focus(); return; }
                 var cfg = Config.Load();
-                var all = cfg.Section("talentTreeBuilds");
-                var byClass = Json.AsDict(Json.Get(all, cls));
-                if (byClass == null) { byClass = new Dictionary<string, object>(); all[cls] = byClass; }
-                byClass[name] = build.Save();
+                var rows = Json.AsList(Json.Get(cfg.Data, "talentTreeBuildsShared"));
+                if (rows == null) { SavedTalentBuilds(cfg); rows = Json.AsList(Json.Get(cfg.Data, "talentTreeBuildsShared")); }
+                if (rows == null) rows = new List<object>();
+                int found = -1;
+                for (int i = 0; i < rows.Count; i++)
+                {
+                    var row = Json.AsDict(rows[i]);
+                    if (row != null && string.Equals(Json.Str(row, "class"), cls, StringComparison.OrdinalIgnoreCase) &&
+                        string.Equals(Json.Str(row, "name"), name, StringComparison.OrdinalIgnoreCase)) { found = i; break; }
+                }
+                var entry = new Dictionary<string, object>();
+                entry["name"] = name; entry["class"] = cls; entry["build"] = build.Save();
+                if (found >= 0) rows[found] = entry; else rows.Add(entry);
+                cfg.Set("talentTreeBuildsShared", rows);
                 cfg.Save();
                 refreshSaved();
-                saved.SelectedItem = name;
+                foreach (object item in saved.Items)
+                {
+                    var choice = item as TalentBuildChoice;
+                    if (choice != null && choice.Class == cls && choice.Name == name) { saved.SelectedItem = choice; break; }
+                }
             }, actionW, actionH, 9);
             saveBuild.Location = new Point(actionX, actionY);
             tools.Controls.Add(saveBuild);
@@ -958,12 +1015,37 @@ namespace AzerothLauncher
             };
             Action loadSelected = delegate
             {
-                if (saved.SelectedItem == null) return;
-                object code;
-                if (!classBuilds().TryGetValue(Convert.ToString(saved.SelectedItem), out code)) return;
-                applyBuild(TalentBuild.Parse(Convert.ToString(code), cls));
+                var choice = saved.SelectedItem as TalentBuildChoice;
+                if (choice == null) return;
+                if (!string.Equals(choice.Class, cls, StringComparison.OrdinalIgnoreCase))
+                {
+                    pendingTalentBuildKey = choice.Key;
+                    gTalents = choice.Class;
+                    BuildPanel("Guide");
+                    return;
+                }
+                applyBuild(TalentBuild.Parse(choice.Code, cls));
             };
             saved.SelectionChangeCommitted += delegate { loadSelected(); };
+            if (!string.IsNullOrEmpty(pendingTalentBuildKey))
+            {
+                foreach (var choice in SavedTalentBuilds(Config.Load()))
+                    if (choice.Key == pendingTalentBuildKey && string.Equals(choice.Class, cls, StringComparison.OrdinalIgnoreCase))
+                    {
+                        pendingTalentBuildKey = null;
+                        saved.SelectedItem = choice;
+                        applyBuild(TalentBuild.Parse(choice.Code, cls));
+                        break;
+                    }
+            }
+            if (string.Equals(pendingTalentImportClass, cls, StringComparison.OrdinalIgnoreCase) &&
+                !string.IsNullOrEmpty(pendingTalentImportCode))
+            {
+                TalentBuild imported;
+                string error;
+                if (TalentBuild.TryParseShareCode(pendingTalentImportCode, cls, out imported, out error)) applyBuild(imported);
+                pendingTalentImportClass = pendingTalentImportCode = null;
+            }
             var loadBuild = new WowButton(Lang.T("LOAD"), loadSelected, actionW, actionH, 9);
             loadBuild.Location = new Point(actionX, actionY + actionH + actionGap);
             tools.Controls.Add(loadBuild);
@@ -985,11 +1067,23 @@ namespace AzerothLauncher
                     code = prompt.Code;
                 }
                 if (code.Length == 0) return;
+                string targetClass = cls;
+                string[] codeParts = code.Split(new[] { '|' }, 3);
+                if (codeParts.Length == 3 && codeParts[0] == "AZST1" && codeParts[1].Trim().Length > 0)
+                    targetClass = codeParts[1].Trim();
                 TalentBuild imported;
                 string error;
-                if (!TalentBuild.TryParseShareCode(code, cls, out imported, out error))
+                if (!TalentBuild.TryParseShareCode(code, targetClass, out imported, out error))
                 {
                     Warn("IMPORT BUILD", error);
+                    return;
+                }
+                if (!string.Equals(targetClass, cls, StringComparison.OrdinalIgnoreCase))
+                {
+                    pendingTalentImportClass = targetClass;
+                    pendingTalentImportCode = code;
+                    gTalents = targetClass;
+                    BuildPanel("Guide");
                     return;
                 }
                 applyBuild(imported);
@@ -1086,7 +1180,7 @@ namespace AzerothLauncher
                         if (guideGroupPage < 0 && g == 2) continue;    // Theorycrafting is a card in Gameplay
                         var tabs = GroupTabs(g, topics);
                         if (tabs.Count == 0) continue;
-                        var head = UI.Text(GuideGroups[g][0], 11, FontStyle.Bold, Theme.Gold, sp.BackColor, 0);
+                        var head = UI.Text(Lang.T(GuideGroups[g][0]), 11, FontStyle.Bold, Theme.Gold, sp.BackColor, 0);
                         head.Size = VStack.Measure(head);
                         head.Location = new Point(4, y + (y > 4 ? 6 : 0));
                         sp.Controls.Add(head);
@@ -1323,9 +1417,9 @@ namespace AzerothLauncher
                     sp.Controls.Add(gb);
                 }
             }
-            add(UI.Text(crumb.ToUpperInvariant(), 8.5f, FontStyle.Bold, GuideRed, bg, tw - (className != null ? 260 : 0), crumb == "Guide"), x, 0);
-            add(UI.Text(page.Title, 18, FontStyle.Bold, Theme.Gold, bg, tw, false), x, 2);
-            if (page.Desc.Length > 0) add(UI.Text(page.Desc, 10.5f, FontStyle.Italic, Theme.GoldDim, bg, tw, false), x, 2);
+            add(UI.Text(Lang.T(crumb).ToUpperInvariant(), 8.5f, FontStyle.Bold, GuideRed, bg, tw - (className != null ? 260 : 0), crumb == "Guide"), x, 0);
+            add(UI.Text(Lang.T(page.Title), 18, FontStyle.Bold, Theme.Gold, bg, tw, false), x, 2);
+            if (page.Desc.Length > 0) add(UI.Text(Lang.T(page.Desc), 10.5f, FontStyle.Italic, Theme.GoldDim, bg, tw, false), x, 2);
             add(new GuideRule(tw, Theme.GoldDim), x, 10);
 
             var para = new List<string>();
@@ -1380,7 +1474,7 @@ namespace AzerothLauncher
                 else if (line.StartsWith("# "))
                 {
                     flush();
-                    add(UI.Text(line.Substring(2).Trim(), 12.5f, FontStyle.Bold, Theme.Gold, bg, tw, false), x, 16);
+                    add(UI.Text(Lang.T(line.Substring(2).Trim()), 12.5f, FontStyle.Bold, Theme.Gold, bg, tw, false), x, 16);
                     add(new GuideRule(Math.Min(60, tw), Theme.Gold), x, 3);
                 }
                 else if (line.StartsWith("- "))
@@ -1398,7 +1492,7 @@ namespace AzerothLauncher
                 else if (line.StartsWith("\""))
                 {
                     flush();
-                    add(new GuideTip(line.Trim('"'), tw), x, 10);
+                    add(new GuideTip(Lang.T(line.Trim('"')), tw), x, 10);
                 }
                 else para.Add(line);
             }
@@ -1605,7 +1699,7 @@ namespace AzerothLauncher
                 y += small.Height + 6;
             }
             Font tf = Theme.F(11.5f, FontStyle.Bold);
-            using (var b = new SolidBrush(Theme.Gold)) g.DrawString(Title, tf, b, new RectangleF(x, y, tw, tf.Height + 2));
+            using (var b = new SolidBrush(Theme.Gold)) g.DrawString(Lang.T(Title), tf, b, new RectangleF(x, y, tw, tf.Height + 2));
             y += tf.Height + 1;
             Font df = Theme.F(9);
             float badgesY = Height - small.Height - 12;
@@ -1615,7 +1709,7 @@ namespace AzerothLauncher
                 sf.Trimming = StringTrimming.EllipsisWord;
                 sf.FormatFlags = StringFormatFlags.LineLimit;   // only whole lines, the last one ending in "..."
                 float dh = badgesY - y - 3;
-                if (dh > df.Height * 0.8f) g.DrawString(Desc ?? "", df, b, new RectangleF(x, y, tw, dh), sf);
+                if (dh > df.Height * 0.8f) g.DrawString(Lang.T(Desc ?? ""), df, b, new RectangleF(x, y, tw, dh), sf);
             }
             // badges along the bottom
             float bx = x, by = badgesY;

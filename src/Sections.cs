@@ -24,6 +24,21 @@ namespace AzerothLauncher
             BackColor = Color.Transparent;
             Size = new Size(34, 34);
             Cursor = Cursors.Hand;
+            // Keep only the heart-shaped region. A normal transparent child paints its parent's
+            // background across its rectangular client area, which creates the visible dark box.
+            using (var path = HeartPath()) Region = new Region(path);
+        }
+
+        GraphicsPath HeartPath()
+        {
+            var path = new GraphicsPath();
+            float x = 4, y = 4, s = 26;
+            path.AddBezier(x + s / 2, y + s * 0.95f, x - s * 0.15f, y + s * 0.45f,
+                           x + s * 0.12f, y - s * 0.12f, x + s / 2, y + s * 0.25f);
+            path.AddBezier(x + s / 2, y + s * 0.25f, x + s * 0.88f, y - s * 0.12f,
+                           x + s * 1.15f, y + s * 0.45f, x + s / 2, y + s * 0.95f);
+            path.CloseFigure();
+            return path;
         }
 
         public void PlaceAbove(Rectangle textBoundsOnScreen, Control coordinateOwner)
@@ -44,14 +59,8 @@ namespace AzerothLauncher
             Graphics g = e.Graphics;
             g.SmoothingMode = SmoothingMode.AntiAlias;
             g.PixelOffsetMode = PixelOffsetMode.HighQuality;
-            using (var path = new GraphicsPath())
+            using (var path = HeartPath())
             {
-                float x = 4, y = 4, s = 26;
-                path.AddBezier(x + s / 2, y + s * 0.95f, x - s * 0.15f, y + s * 0.45f,
-                               x + s * 0.12f, y - s * 0.12f, x + s / 2, y + s * 0.25f);
-                path.AddBezier(x + s / 2, y + s * 0.25f, x + s * 0.88f, y - s * 0.12f,
-                               x + s * 1.15f, y + s * 0.45f, x + s / 2, y + s * 0.95f);
-                path.CloseFigure();
                 using (var brush = new SolidBrush(Theme.Gold)) g.FillPath(brush, path);
             }
             base.OnPaint(e);
@@ -647,7 +656,24 @@ namespace AzerothLauncher
         static Image heroicFavoriteIcon;
         static Image zonesBossesFavoriteIcon;
         static Image gearPlannerFavoriteIcon;
+        static Image talentTreeFavoriteIcon;
+        static Image jewelryFavoriteIcon;
+        static Dictionary<string, Image> classFavoriteIcons;
         static Dictionary<string, Image> classGearHelmetImages;
+
+        static Image FavoriteClassIcon(string classKey)
+        {
+            if (string.IsNullOrEmpty(classKey)) return null;
+            string key = classKey.Trim().ToLowerInvariant();
+            if (classFavoriteIcons == null) classFavoriteIcons = new Dictionary<string, Image>(StringComparer.OrdinalIgnoreCase);
+            Image image;
+            if (!classFavoriteIcons.TryGetValue(key, out image))
+            {
+                image = Theme.LoadImage("AS.favorites.class-icon-" + key + ".jpg");
+                classFavoriteIcons[key] = image;
+            }
+            return image;
+        }
 
         static Image FavoriteGearHelmet(string classKey)
         {
@@ -778,6 +804,11 @@ namespace AzerothLauncher
                              ((route.Kind == "guide" && route.Topic == "Classes" && route.ClassKey.Length > 0) ||
                               route.Kind == "builderClass" || route.Kind == "guideTalents" ||
                               (route.Kind == "stats" && route.Page == "class")))
+                        favoriteIcon = FavoriteClassIcon(route.ClassKey);
+                    if (favoriteIcon == null && route != null &&
+                        ((route.Kind == "guide" && route.Topic == "Classes" && route.ClassKey.Length > 0) ||
+                         route.Kind == "builderClass" || route.Kind == "guideTalents" ||
+                         (route.Kind == "stats" && route.Page == "class")))
                         favoriteIcon = SpellIcons.Class(route.ClassKey, favoriteBtns[slot]);
                     else if (route != null && route.Kind == "guide" && route.Topic == "Items" && route.Page == "Codex")
                     {
@@ -791,14 +822,22 @@ namespace AzerothLauncher
                         favoriteIcon = heroicFavoriteIcon;
                     }
                     else if (route != null && route.Kind == "guide" && route.Topic == "Items" && route.Page == "Rings, Trinkets & Amulets")
-                        favoriteIcon = SpellIcons.Icon("inv_inscription_tarot_tsunamicard", favoriteBtns[slot]);
+                    {
+                        if (jewelryFavoriteIcon == null) jewelryFavoriteIcon = Theme.LoadImage("AS.favorites.jewelry-card.jpg");
+                        favoriteIcon = jewelryFavoriteIcon;
+                        if (favoriteIcon == null) favoriteIcon = SpellIcons.Icon("inv_inscription_tarot_tsunamicard", favoriteBtns[slot]);
+                    }
                     else if (route != null && route.Kind == "planner")
                     {
                         if (gearPlannerFavoriteIcon == null) gearPlannerFavoriteIcon = Theme.LoadImage("AS.favorites.gear-planner.jpg");
                         favoriteIcon = gearPlannerFavoriteIcon;
                     }
                     else if (route != null && route.Kind == "builder")
-                        favoriteIcon = SpellIcons.TalentButton(favoriteBtns[slot]);
+                    {
+                        if (talentTreeFavoriteIcon == null) talentTreeFavoriteIcon = Theme.LoadImage("AS.favorites.talents-button.png");
+                        favoriteIcon = talentTreeFavoriteIcon;
+                        if (favoriteIcon == null) favoriteIcon = SpellIcons.TalentButton(favoriteBtns[slot]);
+                    }
                     else if (route != null && route.Kind == "guide" &&
                              string.Equals(route.Topic, "Zones & Bosses", StringComparison.OrdinalIgnoreCase))
                     {

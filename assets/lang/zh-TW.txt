@@ -1989,3 +1989,14 @@ Codex neck piece that remakes it:
 
 The steps at the top show where you are in the launcher. Select an earlier step to return to it. Hover over a step or its arrow to see other pages at that level. The left arrow returns to the previous page; the X closes this section and returns home.
 = 上方的步驟會顯示你在啟動器中的位置。選擇較早的步驟即可返回。將游標停在步驟或其箭頭上，可查看同一層級的其他頁面。左箭頭會返回上一頁；X 會關閉此區並返回首頁。
+
+SAVED BUILDS
+= 已儲存的配置
+EXPORT
+= 匯出
+Enter a name for this build.
+= 請輸入此配置的名稱。
+Build code copied to the clipboard.
+= 配置代碼已複製到剪貼簿。
+Could not copy the build code.
+= 無法複製配置代碼。

@@ -1989,3 +1989,14 @@ Codex neck piece that remakes it:
 
 The steps at the top show where you are in the launcher. Select an earlier step to return to it. Hover over a step or its arrow to see other pages at that level. The left arrow returns to the previous page; the X closes this section and returns home.
 = Pașii de sus arată unde te afli în launcher. Selectează un pas anterior pentru a reveni. Plasează cursorul peste un pas sau săgeata lui pentru a vedea alte pagini de la acel nivel. Săgeata din stânga revine la pagina anterioară; X închide această secțiune și revine acasă.
+
+SAVED BUILDS
+= BUILDURI SALVATE
+EXPORT
+= EXPORTĂ
+Enter a name for this build.
+= Introdu un nume pentru acest build.
+Build code copied to the clipboard.
+= Codul buildului a fost copiat în clipboard.
+Could not copy the build code.
+= Codul buildului nu a putut fi copiat.

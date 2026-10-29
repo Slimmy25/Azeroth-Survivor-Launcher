@@ -1989,3 +1989,14 @@ Codex neck piece that remakes it:
 
 The steps at the top show where you are in the launcher. Select an earlier step to return to it. Hover over a step or its arrow to see other pages at that level. The left arrow returns to the previous page; the X closes this section and returns home.
 = Кроки вгорі показують, де ви перебуваєте в лаунчері. Виберіть попередній крок, щоб повернутися. Наведіть курсор на крок або його стрілку, щоб побачити інші сторінки цього рівня. Ліва стрілка повертає на попередню сторінку; X закриває цей розділ і повертає на головну.
+
+SAVED BUILDS
+= ЗБЕРЕЖЕНІ БІЛДИ
+EXPORT
+= ЕКСПОРТУВАТИ
+Enter a name for this build.
+= Введіть назву для цього білда.
+Build code copied to the clipboard.
+= Код білда скопійовано в буфер обміну.
+Could not copy the build code.
+= Не вдалося скопіювати код білда.

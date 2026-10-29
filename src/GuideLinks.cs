@@ -43,10 +43,11 @@ namespace AzerothLauncher
                 foreach (string w in words) if (!n.Contains(w)) return false;
                 return true;
             };
-            foreach (var l in links.Values)
+            foreach (var entry in links)
             {
+                GuideLink l = entry.Value;
                 if (l.Topic < 0 && l.Class == null) continue;
-                if (matches(l.Term)) list.Add(l);
+                if (matches(l.Term) || matches(entry.Key)) list.Add(l);
             }
 
             // A spell search also offers the Codex item and any 8-piece set bonus that names it.
@@ -301,6 +302,15 @@ namespace AzerothLauncher
                     if (links.TryGetValue(kv.Key, out l)) l.Tip = kv.Value;
                     else Add(kv.Key, -1, -1, kv.Value);
                 }
+            // Keep each canonical destination, but let localized Guide text match its translated
+            // spell, talent, item, page, or topic name and route through the same destination.
+            var canonical = new List<KeyValuePair<string, GuideLink>>(links);
+            foreach (var pair in canonical)
+            {
+                string localized = Lang.T(pair.Key);
+                if (localized.Length >= 4 && !string.Equals(localized, pair.Key, StringComparison.OrdinalIgnoreCase) && !links.ContainsKey(localized))
+                    links[localized] = pair.Value;
+            }
             byKey = new Dictionary<string, GuideLink>(StringComparer.Ordinal);
             foreach (var l in links.Values) if (!byKey.ContainsKey(Norm(l.Term))) byKey[Norm(l.Term)] = l;
             var terms = new List<string>(links.Keys);
@@ -407,7 +417,7 @@ namespace AzerothLauncher
             SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer |
                      ControlStyles.ResizeRedraw, true);
             SetStyle(ControlStyles.Selectable, true);
-            runs = GuideLinks.Split(text, topic, page);
+            runs = GuideLinks.Split(Lang.T(text), topic, page);
             here = topic;
             herePage = page;
             font = Theme.F(size);
@@ -775,6 +785,7 @@ namespace AzerothLauncher
         static void HookHost(Control owner)
         {
             Form host = owner == null ? null : owner.FindForm();
+            while (host != null && !host.TopLevel) host = host.Parent as Form;
             if (host == hoverHost) return;
             if (hoverHost != null) hoverHost.Deactivate -= HoverHostDeactivated;
             hoverHost = host;
@@ -788,6 +799,7 @@ namespace AzerothLauncher
         {
             if (owner == null || owner.IsDisposed || !owner.Visible) return false;
             Form host = owner.FindForm();
+            while (host != null && !host.TopLevel) host = host.Parent as Form;
             return host != null && host.Visible && host.WindowState != FormWindowState.Minimized &&
                    (host.ContainsFocus || Form.ActiveForm == host);
         }

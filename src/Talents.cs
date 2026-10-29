@@ -322,7 +322,7 @@ namespace AzerothLauncher
                 using (var p = new Pen(Theme.Hex("#5a4426"), 1)) g.DrawPath(p, path);
             }
             using (var b = new SolidBrush(Theme.Gold))
-                g.DrawString(tree.Spec, Theme.F(11, FontStyle.Bold), b, 10, 6);
+                g.DrawString(Lang.T(tree.Spec), Theme.F(11, FontStyle.Bold), b, 10, 6);
             if (Build != null)
             {
                 string pts = Build.SpentIn(tree).ToString();

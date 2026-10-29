@@ -1989,3 +1989,14 @@ Codex neck piece that remakes it:
 
 The steps at the top show where you are in the launcher. Select an earlier step to return to it. Hover over a step or its arrow to see other pages at that level. The left arrow returns to the previous page; the X closes this section and returns home.
 = ขั้นตอนด้านบนแสดงตำแหน่งของคุณในตัวเปิดเกม เลือกขั้นตอนก่อนหน้าเพื่อย้อนกลับ วางเมาส์เหนือขั้นตอนหรือหัวลูกศรเพื่อดูหน้าอื่นในระดับเดียวกัน ลูกศรซ้ายจะกลับไปหน้าก่อนหน้า ส่วน X จะปิดส่วนนี้และกลับหน้าหลัก
+
+SAVED BUILDS
+= บิลด์ที่บันทึกไว้
+EXPORT
+= ส่งออก
+Enter a name for this build.
+= ป้อนชื่อสำหรับบิลด์นี้
+Build code copied to the clipboard.
+= คัดลอกรหัสบิลด์ไปยังคลิปบอร์ดแล้ว
+Could not copy the build code.
+= ไม่สามารถคัดลอกรหัสบิลด์ได้

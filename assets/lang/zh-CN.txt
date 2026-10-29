@@ -1989,3 +1989,14 @@ Codex neck piece that remakes it:
 
 The steps at the top show where you are in the launcher. Select an earlier step to return to it. Hover over a step or its arrow to see other pages at that level. The left arrow returns to the previous page; the X closes this section and returns home.
 = 顶部的步骤显示你在启动器中的位置。选择前面的步骤即可返回。将鼠标悬停在某个步骤或其箭头上，可查看同一层级的其他页面。左箭头返回上一页；X 关闭此部分并返回主页。
+
+SAVED BUILDS
+= 已保存的构筑
+EXPORT
+= 导出
+Enter a name for this build.
+= 请输入此构筑的名称。
+Build code copied to the clipboard.
+= 构筑代码已复制到剪贴板。
+Could not copy the build code.
+= 无法复制构筑代码。

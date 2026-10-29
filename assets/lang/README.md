@@ -21,6 +21,7 @@ Press PLAY to enter Azeroth.         the English text, exactly as the launcher s
 - `{0}`, `{1}` ... are filled in by the launcher (names, numbers, paths). Keep every one of them, but you can move them around in the sentence.
 - `\n` is a line break.
 - Any text that has no translation is shown in English, so a partial file still works.
+- Guide titles, descriptions, headings, tips, and body text use the same lookup. Guide source content is English, and each sentence still needs a matching translation entry before it will display in another language.
 - Patch notes, the About page and addon names are never translated.
 - When a text mentions a button (PLAY, INSTALL, UPDATE, USE CLOUD ...), use the same word the button uses in that language.
 

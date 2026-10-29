@@ -90,6 +90,8 @@ namespace AzerothLauncher
             cache.Clear();
             FontOverride = "";
             Code = string.IsNullOrEmpty(code) ? "en" : code;
+            // Search terms and inline guide hyperlinks also contain translated aliases.
+            GuideLinks.Reset();
             if (Code == "en") return;
             string key = null;
             foreach (string raw in Read("AS.lang." + Code + ".txt").Split('\n'))
