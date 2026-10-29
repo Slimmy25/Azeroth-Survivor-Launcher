@@ -1665,6 +1665,8 @@ namespace AzerothLauncher
             float s = Math.Min((float)Width / img.Width, (float)Height / img.Height);
             float w = img.Width * s, h = img.Height * s;
             Theme.Draw(e.Graphics, img, (Width - w) / 2, (Height - h) / 2, w, h);
+            if (!Enabled)
+                using (var dim = new SolidBrush(Color.FromArgb(145, 12, 12, 16))) e.Graphics.FillRectangle(dim, ClientRectangle);
             if (Focused) using (var p = new Pen(Theme.Hex("#fff2b0"), 1) { DashStyle = DashStyle.Dot }) e.Graphics.DrawRectangle(p, 2, 2, Math.Max(1, Width - 5), Math.Max(1, Height - 5));
         }
     }
@@ -1724,7 +1726,9 @@ namespace AzerothLauncher
                 p.AddBezier(x + s / 2, y + s * 0.95f, x - s * 0.15f, y + s * 0.45f, x + s * 0.12f, y - s * 0.12f, x + s / 2, y + s * 0.25f);
                 p.AddBezier(x + s / 2, y + s * 0.25f, x + s * 0.88f, y - s * 0.12f, x + s * 1.15f, y + s * 0.45f, x + s / 2, y + s * 0.95f);
                 p.CloseFigure();
-                using (var b = new SolidBrush(hover || keyDown || Focused ? Color.FromArgb(230, 92, 92) : Color.FromArgb(150, 170, 70, 70))) g.FillPath(b, p);
+                Color color = !Enabled ? Color.FromArgb(100, 116, 111, 102) :
+                              hover || keyDown || Focused ? Color.FromArgb(230, 92, 92) : Color.FromArgb(150, 170, 70, 70);
+                using (var b = new SolidBrush(color)) g.FillPath(b, p);
             }
             if (Focused) using (var p = new Pen(Theme.Hex("#fff2b0"), 1) { DashStyle = DashStyle.Dot }) g.DrawRectangle(p, 2, 2, Math.Max(1, Width - 5), Math.Max(1, Height - 5));
         }

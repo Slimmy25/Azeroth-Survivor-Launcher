@@ -1103,6 +1103,7 @@ namespace AzerothLauncher
                             {
                                 c.Title = GroupName(2);
                                 c.Desc = Lang.T("The Talent Tree Builder, the Gear Planner and the build guides.");
+                                EnableGuideCardFavorite(c, new GuideFavoriteRoute("group", GroupName(2), ""));
                             }
                             else
                             {
@@ -1110,8 +1111,8 @@ namespace AzerothLauncher
                                 c.Desc = topics[t].Desc;
                                 c.Videos = CountVideos(topics[t]);
                                 c.Pages = topics[t].Pages.Count;
-                                if (topics[t].Pages.Count == 0)
-                                    EnableGuideCardFavorite(c, new GuideFavoriteRoute("guide", topics[t].Title, ""));
+                                // Every non-root topic card can be saved, including categories that open another page list.
+                                EnableGuideCardFavorite(c, new GuideFavoriteRoute("guide", topics[t].Title, ""));
                             }
                             c.Pressed += delegate { OpenGuideTab(t); };
                         });
@@ -1186,11 +1187,8 @@ namespace AzerothLauncher
                 GuideTopic topic = topics[h.Key];
                 c.Title = h.Value < 0 ? topic.Title : topic.Pages[h.Value].Title;
                 c.Desc = (h.Value < 0 ? "" : topic.Title + " · ") + lines[i];   // where it is, and the line it was found in
-                if (h.Value >= 0 || topic.Pages.Count == 0)
-                {
-                    string page = h.Value < 0 ? "" : topic.Pages[h.Value].Title;
-                    EnableGuideCardFavorite(c, new GuideFavoriteRoute("guide", topic.Title, page, GuideClassKey(topic.Title, page), ""));
-                }
+                string page = h.Value < 0 ? "" : topic.Pages[h.Value].Title;
+                EnableGuideCardFavorite(c, new GuideFavoriteRoute("guide", topic.Title, page, GuideClassKey(topic.Title, page), ""));
                 c.Pressed += delegate { SetGuideView(h.Key, h.Value); };
             });
         }

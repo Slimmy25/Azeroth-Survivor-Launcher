@@ -57,6 +57,7 @@ namespace AzerothLauncher
 
         readonly WowButton playBtn, updateBtn, aboutBtn;
         readonly BrandIcon discordIcon;
+        readonly HeartIcon supportHeart;
         readonly Dictionary<string, WowButton> nav = new Dictionary<string, WowButton>();
         // the buttons under "Launcher": Guide and its Theorycrafting group, Addons, Stats, Options (Cloud Save is in Options)
         readonly string[] navNames = { "Guide", "Theorycrafting", "Addons", "Changelog", "Stats", "Options" };   // Changelog: on the News line   // order under "Launcher" (Discord before Options)
@@ -75,8 +76,17 @@ namespace AzerothLauncher
         // Options > Language
         public void SetLanguage(string code)
         {
-            Cfg.Set("language", code);
-            Cfg.Save();
+            if (setupOpen) setupLanguage = code;
+            else
+            {
+                Cfg.Set("language", code);
+                Cfg.Save();
+            }
+            ApplyLanguage(code, true);
+        }
+
+        void ApplyLanguage(string code, bool rebuild)
+        {
             Lang.Load(code);
             Theme.PickFont();
             TrayTexts();
@@ -84,7 +94,7 @@ namespace AzerothLauncher
             Invalidate();
             sideHead.Invalidate();
             SetSideTitle(sideHead.Title);
-            if (current != null && current != "Home" && side.Visible) BuildPanel(current);
+            if (rebuild && current != null && current != "Home" && side.Visible) BuildPanel(current);
         }
 
         public static bool PreviewMode;                     // rendering preview pictures: no update checks, no restarts
@@ -134,10 +144,10 @@ namespace AzerothLauncher
             discordIcon.Click += delegate { Util.OpenInShell(DiscordUrl); };
             Controls.Add(discordIcon);
             // the enlarged support heart, followed immediately by the Discord icon
-            var heart = new HeartIcon(Lang.T("Love the game? Support the Dev by buying him a coffee") + "\n" + SupportUrl);
-            heart.Bounds = new Rectangle(697, 203, 26, 20);
-            heart.Click += delegate { Util.OpenInShell(SupportUrl); };
-            Controls.Add(heart);
+            supportHeart = new HeartIcon(Lang.T("Love the game? Support the Dev by buying him a coffee") + "\n" + SupportUrl);
+            supportHeart.Bounds = new Rectangle(697, 203, 26, 20);
+            supportHeart.Click += delegate { Util.OpenInShell(SupportUrl); };
+            Controls.Add(supportHeart);
             LayoutNav();
 
             BuildSide();
@@ -716,11 +726,29 @@ namespace AzerothLauncher
             else if (Updating) { playBtn.Label = "UPDATING"; playBtn.FontSize = 20; }
             else if (ClientPresent()) { playBtn.Label = "PLAY"; playBtn.FontSize = 24; }
             else { playBtn.Label = "REQUIRES INSTALL"; playBtn.FontSize = 13; }
-            // Keep REQUIRES INSTALL clickable: it opens the setup flow so the player can choose a game folder.
-            playBtn.GrayedTip = "";
-            playBtn.Grayed = false;
+            // Keep REQUIRES INSTALL clickable outside setup: it opens the setup flow so the player can choose a game folder.
+            playBtn.GrayedTip = setupOpen ? "Finish first-time setup before launching the game." : "";
+            playBtn.Grayed = setupOpen;
             Invalidate(new Rectangle(0, 578, W, H - 578));
             RefreshGates();
+        }
+
+        void SetSetupNavigationEnabled(bool enabled)
+        {
+            foreach (var b in nav.Values)
+            {
+                b.GrayedTip = enabled ? "" : "Finish first-time setup first.";
+                b.Grayed = !enabled;
+            }
+            updateBtn.GrayedTip = enabled ? "" : "Finish first-time setup first.";
+            updateBtn.Grayed = !enabled;
+            aboutBtn.GrayedTip = enabled ? "" : "Finish first-time setup first.";
+            aboutBtn.Grayed = !enabled;
+            playBtn.GrayedTip = enabled ? "" : "Finish first-time setup before launching the game.";
+            playBtn.Grayed = !enabled;
+            discordIcon.Enabled = enabled;
+            supportHeart.Enabled = enabled;
+            if (enabled) RefreshGates();
         }
 
         // Cloud Save and Addons are grayed out (and say why on hover) until the game is installed; every other button
@@ -745,7 +773,11 @@ namespace AzerothLauncher
         {
             bool statsOff = !StatsAddonActive();
             WowButton sb;
-            if (nav.TryGetValue("Stats", out sb)) { sb.GrayedTip = StatsNeedAddon; sb.Grayed = statsOff; }
+            if (nav.TryGetValue("Stats", out sb))
+            {
+                sb.GrayedTip = setupOpen ? "Finish first-time setup first." : StatsNeedAddon;
+                sb.Grayed = setupOpen || statsOff;
+            }
             bool off = !GateOpen();
             foreach (string name in new[] { "Cloud Save", "Addons" })
             {
@@ -753,8 +785,8 @@ namespace AzerothLauncher
                 WowButton b;
                 if (nav.TryGetValue(name, out b))
                 {
-                    b.GrayedTip = tip;
-                    b.Grayed = off;
+                    b.GrayedTip = setupOpen ? "Finish first-time setup first." : tip;
+                    b.Grayed = setupOpen || off;
                 }
             }
         }

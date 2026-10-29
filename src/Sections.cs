@@ -103,6 +103,8 @@ namespace AzerothLauncher
         public Form Owner2;
         bool closable = true;
         public bool Closable { get { return closable; } set { closable = value; Invalidate(); } }   // no X on Community
+        bool closeEnabled = true;
+        public bool CloseEnabled { get { return closeEnabled; } set { if (closeEnabled != value) { closeEnabled = value; Invalidate(); } } }
         string note = "";                                    // a short line at the right end of the bar (Community: while a video plays)
         public string Note { get { return note; } set { note = value ?? ""; Invalidate(); } }
         int NoteW { get { return note.Length == 0 ? 0 : 12 + TextRenderer.MeasureText(note, Theme.F(9, FontStyle.Bold)).Width; } }
@@ -311,9 +313,9 @@ namespace AzerothLauncher
             }
             Rectangle xb = CloseBox;
             if (xb.IsEmpty) return;
-            using (var b = new SolidBrush(Theme.Hex("#2a1c1c"))) g.FillRectangle(b, xb);
-            using (var p = new Pen(Theme.Hex("#d6a640"), 2)) g.DrawRectangle(p, xb);
-            using (var p = new Pen(Theme.Hex("#e53a22"), 3))
+            using (var b = new SolidBrush(closeEnabled ? Theme.Hex("#2a1c1c") : Theme.Hex("#211f20"))) g.FillRectangle(b, xb);
+            using (var p = new Pen(closeEnabled ? Theme.Hex("#d6a640") : Theme.Hex("#6f6658"), 2)) g.DrawRectangle(p, xb);
+            using (var p = new Pen(closeEnabled ? Theme.Hex("#e53a22") : Theme.Hex("#79736b"), 3))
             {
                 g.DrawLine(p, xb.X + 5, xb.Y + 5, xb.X + 13, xb.Y + 13);
                 g.DrawLine(p, xb.X + 13, xb.Y + 5, xb.X + 5, xb.Y + 13);
@@ -460,7 +462,7 @@ namespace AzerothLauncher
             int h = HotAt(e.Location), ha = ArrowAt(e.Location);
             if (ha < 0) ha = MenuTextAt(e.Location);          // the last step's name lights its arrow
             if (h != hover || ha != hoverArrow) { hover = h; hoverArrow = ha; Invalidate(); }
-            Cursor = CloseBox.Contains(e.Location) || h != -1 || ha != -1 || favoriteStep >= 0 ? Cursors.Hand : Cursors.Default;   // "Lost?" is not clicked: pointed at
+            Cursor = (closeEnabled && CloseBox.Contains(e.Location)) || h != -1 || ha != -1 || favoriteStep >= 0 ? Cursors.Hand : Cursors.Default;   // "Lost?" is not clicked: pointed at
             // "Lost?": a small note while the pointer is on it (no window over the launcher)
             bool onHelp = HelpBox.Contains(e.Location);
             if (onHelp && !helpTip) { helpTip = true; WowButton.Fire(HelpClicked); }
@@ -529,7 +531,7 @@ namespace AzerothLauncher
                 Capture = false;
                 if (Moved != null && Owner2 != null) Moved(Owner2.Location);
             }
-            else if (e.Button == MouseButtons.Left && CloseBox.Contains(e.Location)) { CloseOpenMenu(); WowButton.Fire(CloseClicked); }
+            else if (e.Button == MouseButtons.Left && CloseBox.Contains(e.Location) && closeEnabled) { CloseOpenMenu(); WowButton.Fire(CloseClicked); }
             else if (e.Button == MouseButtons.Left && HelpBox.Contains(e.Location)) { }   // "Lost?" only answers the pointer
             else if (e.Button == MouseButtons.Left && ArrowAt(e.Location) >= 0) ClickMenu(ArrowAt(e.Location));
             else if (e.Button == MouseButtons.Left)
@@ -806,7 +808,7 @@ namespace AzerothLauncher
                 b.ContextClicked += delegate(Control source, Point at) { RemoveGuideFavorite(slot); };
                 b.MouseDown += delegate(object sender, MouseEventArgs e)
                 {
-                    if (e.Button != MouseButtons.Left) return;
+                    if (setupOpen || e.Button != MouseButtons.Left) return;
                     favoriteDragButton = b;
                     favoriteDragCurrentSlot = slot;
                     favoriteDragStartY = strip.PointToClient(Cursor.Position).Y;
@@ -842,7 +844,7 @@ namespace AzerothLauncher
                 };
                 b.KeyDown += delegate(object sender, KeyEventArgs e)
                 {
-                    if (!e.Shift || (e.KeyCode != Keys.Up && e.KeyCode != Keys.Down)) return;
+                    if (setupOpen || !e.Shift || (e.KeyCode != Keys.Up && e.KeyCode != Keys.Down)) return;
                     int target = slot + (e.KeyCode == Keys.Up ? -1 : 1);
                     if (MoveGuideFavoriteTo(slot, target))
                     {
@@ -913,6 +915,8 @@ namespace AzerothLauncher
                 GuideFavoriteRoute route = guideFavorites[i];
                 bool bound = route != null;
                 favoriteBtns[i].Visible = bound;
+                favoriteBtns[i].GrayedTip = setupOpen ? "Finish first-time setup first." : "";
+                favoriteBtns[i].Grayed = setupOpen;
                 favoriteBtns[i].Tip = setupOpen ? "" : bound ? "Quick Access " + (i + 1) + ": " + route.PageLabel +
                     " (click to open; hold left-click and drag or use Shift+Up/Down to move; right-click or press Menu/Shift+F10, then choose Remove; press Esc to cancel)" : "";
                 bool selected = false;
@@ -956,7 +960,7 @@ namespace AzerothLauncher
                     int setupStep;
                     selected = int.TryParse(route.ClassKey, out setupStep) && setupPage == setupStep;
                 }
-                favoriteBtns[i].Active = selected;
+                favoriteBtns[i].Active = !setupOpen && selected;
             }
             LayoutStrip();
         }
@@ -964,6 +968,7 @@ namespace AzerothLauncher
         void SetSideTitle(string text)
         {
             sideHead.Closable = current != "Community" || communityPlaying != null || communityMore;
+            sideHead.CloseEnabled = current != "Setup";
             sideHead.Title = text;
             sideHead.Note = "";                              // the Community player sets its own after this
             side.Text = Lang.T(Array.IndexOf(SectionNames, current) >= 0 ? current : text);    // the taskbar and Alt+Tab name
@@ -1336,8 +1341,23 @@ namespace AzerothLauncher
             }
             SetSideTitle(title);
             // the back arrow and the trail live in the title bar: "Addons › Download More"
-            bool back = current != "Community" || communityPlaying != null || communityMore;
+            bool back = current == "Setup" ? setupPage > 0 : current != "Community" || communityPlaying != null || communityMore;
             sideHead.BackClicked = back ? (Action)GoBack : null;
+            if (current == "Setup")
+            {
+                var setupTrail = new List<KeyValuePair<string, Action>>();
+                setupTrail.Add(new KeyValuePair<string, Action>("Setup", null));
+                int last = setupPage == 7 ? 6 : Math.Min(setupPage, SetupSteps.Length - 1);
+                for (int i = 0; i <= last; i++)
+                {
+                    int page = i;
+                    Action go = setupPage > 0 && page == setupPage - 1 ? (Action)SetupBack : null;
+                    setupTrail.Add(new KeyValuePair<string, Action>(SetupSteps[i], go));
+                }
+                if (setupPage == 7) setupTrail.Add(new KeyValuePair<string, Action>("Setup cancelled", (Action)SetupBack));
+                sideHead.SetCrumbs(setupTrail);
+                return;
+            }
             var trail = new List<KeyValuePair<string, Action>>();
             string sec = current;
             if (sec != null && sec != "Home" && sec != title)

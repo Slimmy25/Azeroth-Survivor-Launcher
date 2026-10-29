@@ -1,3 +1,11 @@
+# v3.0 (2026-10-29)
+
+- First-time setup now guides players through six staged steps, with a visible setup path, one-step Back, Start Over, and Cancel Setup controls.
+- Setup choices are kept pending until the player completes the final step. Canceling first-time setup removes launcher data and temporary downloads without touching the game, saves, or cloud files.
+- The final setup step now offers an explicit Ready to Download and Play? action that starts installing the game into the chosen folder; an existing game can finish setup without another download.
+- Launcher navigation and Quick Access are disabled during setup and restored when setup finishes.
+- Guide locations with child pages can now be added to Quick Access from their Guide cards and search results.
+
 # v2.9 (2026-10-29)
 
 - First-time setup opens with the requested welcome message inside the secondary menu.
