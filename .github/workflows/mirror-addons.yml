@@ -76,16 +76,16 @@ jobs:
                   echo "Downloading bundle component from $repo: $zipurl"
                   curl -fsSL --retry 3 -A "AzerothSurvivorsLauncher/1.0" -o "$archive" "$zipurl"
                   python3 - "$archive" "$unpack" <<'PY'
-import pathlib, sys, zipfile
-archive, target = sys.argv[1:]
-with zipfile.ZipFile(archive) as zf:
-    for item in zf.infolist():
-        name = item.filename.replace('\\', '/')
-        path = pathlib.PurePosixPath(name)
-        if not name or path.is_absolute() or (path.parts and ':' in path.parts[0]) or any(part in ('..', '') for part in path.parts):
-            raise SystemExit(f"unsafe path in addon ZIP: {item.filename}")
-    zf.extractall(target)
-PY
+          import pathlib, sys, zipfile
+          archive, target = sys.argv[1:]
+          with zipfile.ZipFile(archive) as zf:
+              for item in zf.infolist():
+                  name = item.filename.replace('\\', '/')
+                  path = pathlib.PurePosixPath(name)
+                  if not name or path.is_absolute() or (path.parts and ':' in path.parts[0]) or any(part in ('..', '') for part in path.parts):
+                      raise SystemExit(f"unsafe path in addon ZIP: {item.filename}")
+              zf.extractall(target)
+          PY
                   cp -a "$unpack"/. "$stage/package/"
                 done
                 (cd "$stage/package" && zip -qr "$GITHUB_WORKSPACE/mirror/$file" .)
