@@ -62,8 +62,9 @@ namespace AzerothLauncher
                 if (row == null) continue;
                 string topic = Json.Str(row, "topic"), page = Json.Str(row, "page");
                 string kind = Json.Str(row, "kind");
+                string classKey = Json.Str(row, "class"), url = Json.Str(row, "url");
                 if (kind.Length == 0) kind = "guide";          // earlier local favorites stored only the topic and page
-                if (kind != "guide" || topic.Length > 0) guideFavorites[i] = new GuideFavoriteRoute(kind, topic, page);
+                if (kind != "guide" || topic.Length > 0) guideFavorites[i] = new GuideFavoriteRoute(kind, topic, page, classKey, url);
             }
             CompactGuideFavorites();
         }
@@ -79,6 +80,8 @@ namespace AzerothLauncher
                     row.Add("kind", guideFavorites[i].Kind);
                     row.Add("topic", guideFavorites[i].Topic);
                     row.Add("page", guideFavorites[i].Page);
+                    row.Add("class", guideFavorites[i].ClassKey);
+                    row.Add("url", guideFavorites[i].Url);
                 }
                 saved.Add(row);
             }
@@ -91,7 +94,7 @@ namespace AzerothLauncher
             GuideFavoriteRoute favorite = guideFavorites[slot];
             if (favorite == null)
             {
-                SetStatus("Hover a final Guide item and click its heart to add it to Quick Access.");
+                SetStatus("Hover a Guide location and click its heart to add it to Quick Access.");
                 return;
             }
             if (favorite.Kind == "builder" || favorite.Kind == "planner")
@@ -99,6 +102,61 @@ namespace AzerothLauncher
                 if (current != "Guide" || !side.Visible) ShowSection("Guide");
                 OpenGuideTab(favorite.Kind == "builder" ? -2 : -3);
                 RefreshStrip();
+                return;
+            }
+            if (favorite.Kind == "group")
+            {
+                int group = -1;
+                for (int i = 0; i < 3; i++) if (GroupName(i) == favorite.Topic) group = i;
+                if (group < 0) { SetStatus("This Guide location no longer exists."); return; }
+                if (current != "Guide" || !side.Visible) ShowSection("Guide");
+                GuideGroupPage(group);
+                return;
+            }
+            if (favorite.Kind == "builderClass" || favorite.Kind == "plannerClass")
+            {
+                if (current != "Guide" || !side.Visible) ShowSection("Guide");
+                if (favorite.Kind == "builderClass")
+                {
+                    OpenGuideTab(-2);
+                    PlannerClass(favorite.ClassKey);
+                    gTalents = favorite.ClassKey;
+                }
+                else { OpenGuideTab(-3); PlannerClass(favorite.ClassKey); }
+                BuildPanel("Guide");
+                RefreshStrip();
+                return;
+            }
+            if (favorite.Kind == "guideTalents")
+            {
+                int talentTopic = Data.Guide.FindIndex(delegate(GuideTopic t) { return t.Title == favorite.Topic; });
+                int talentPage = talentTopic < 0 ? -1 : Data.Guide[talentTopic].Pages.FindIndex(delegate(GuidePage p) { return p.Title == favorite.Page; });
+                if (talentTopic < 0 || talentPage < 0) { SetStatus("This class talent page is no longer available."); return; }
+                if (current != "Guide" || !side.Visible) ShowSection("Guide");
+                SetGuideView(talentTopic, talentPage);
+                gTalents = favorite.ClassKey;
+                BuildPanel("Guide");
+                return;
+            }
+            if (favorite.Kind == "video")
+            {
+                int videoTopic = Data.Guide.FindIndex(delegate(GuideTopic t) { return t.Title == favorite.Topic; });
+                if (videoTopic < 0) { SetStatus("This Guide video is no longer available."); return; }
+                GuideTopic parent = Data.Guide[videoTopic];
+                GuideVideo video = null;
+                if (favorite.Page.Length == 0)
+                    video = parent.Videos.Find(delegate(GuideVideo v) { return v.Url == favorite.Url; });
+                else
+                {
+                    GuidePage videoSourcePage = parent.Pages.Find(delegate(GuidePage p) { return p.Title == favorite.Page; });
+                    if (videoSourcePage != null) video = videoSourcePage.Videos.Find(delegate(GuideVideo v) { return v.Url == favorite.Url; });
+                }
+                if (video == null) { SetStatus("This Guide video is no longer available."); return; }
+                if (current != "Guide" || !side.Visible) ShowSection("Guide");
+                int videoPage = favorite.Page.Length == 0 ? -1 : parent.Pages.FindIndex(delegate(GuidePage p) { return p.Title == favorite.Page; });
+                SetGuideView(videoTopic, videoPage);
+                gVideo = video;
+                BuildPanel("Guide");
                 return;
             }
             var topics = Data.Guide;
@@ -130,7 +188,8 @@ namespace AzerothLauncher
         {
             for (int i = 0; i < guideFavorites.Length; i++)
                 if (guideFavorites[i] != null && guideFavorites[i].Kind == favorite.Kind &&
-                    guideFavorites[i].Topic == favorite.Topic && guideFavorites[i].Page == favorite.Page)
+                    guideFavorites[i].Topic == favorite.Topic && guideFavorites[i].Page == favorite.Page &&
+                    guideFavorites[i].ClassKey == favorite.ClassKey && guideFavorites[i].Url == favorite.Url)
                 {
                     SetStatus(Lang.T(favorite.PageLabel) + " is already in Quick Access " + (i + 1) + ".");
                     return;
@@ -335,6 +394,31 @@ namespace AzerothLauncher
 
         void GuideMainPage() { GuideGroupPage(-1); }
 
+        // Bind every non-root destination in the Guide breadcrumb trail. The Guide, New Player and
+        // Gameplay entry points remain roots; all deeper destinations can be saved independently.
+        void SetGuideTrail(List<object> trail, params GuideFavoriteRoute[] routes)
+        {
+            SetCrumbs(trail.ToArray());
+            int count = trail.Count / 2;
+            for (int i = 1; i < count && i < routes.Length; i++)
+            {
+                GuideFavoriteRoute route = routes[i];
+                if (route != null)
+                {
+                    int step = i;
+                    sideHead.SetCrumbFavorite(step, delegate { AddGuideFavorite(route); });
+                }
+            }
+        }
+
+        static string GuideClassKey(string topic, string page)
+        {
+            if (!string.Equals(topic, "Classes", StringComparison.OrdinalIgnoreCase)) return "";
+            foreach (string cls in BuilderClasses)
+                if (string.Equals(cls, page, StringComparison.OrdinalIgnoreCase)) return cls;
+            return "";
+        }
+
         // the main page, or one group's page (Guide › Gameplay › Theorycrafting): its topics and tools as cards
         public void GuideGroupPage(int group)
         {
@@ -355,14 +439,51 @@ namespace AzerothLauncher
             Action theory = delegate { GuideGroupPage(2); };
             Action gameplay = delegate { GuideGroupPage(1); };
             string gp = GroupName(1), th = GroupName(2);
-            if (gVideo != null) { SetCrumbs("Guide", home, gVideo.Title.Length > 0 ? gVideo.Title : "Video", null); return; }
-            if (gTalents != null && gBuilder) { SetCrumbs("Guide", home, gp, gameplay, th, theory, TalentBuilder, builder, gTalents, null); return; }
-            if (gBuilder) { SetCrumbs("Guide", home, gp, gameplay, th, theory, TalentBuilder, null); return; }
+            if (gVideo != null)
+            {
+                var videoTrail = new List<object> { "Guide", home, gVideo.Title.Length > 0 ? gVideo.Title : "Video", null };
+                GuideFavoriteRoute video = null;
+                if (gTopic >= 0 && gTopic < topics.Count)
+                {
+                    string page = gPage >= 0 && gPage < topics[gTopic].Pages.Count ? topics[gTopic].Pages[gPage].Title : "";
+                    video = new GuideFavoriteRoute("video", topics[gTopic].Title, page, "", gVideo.Url);
+                }
+                SetGuideTrail(videoTrail, null, video);
+                return;
+            }
+            if (gTalents != null && gBuilder)
+            {
+                var builderClassTrail = new List<object> { "Guide", home, gp, gameplay, th, theory, TalentBuilder, builder, gTalents, null };
+                SetGuideTrail(builderClassTrail, null, null, new GuideFavoriteRoute("group", th, ""), new GuideFavoriteRoute("builder", "", ""),
+                    new GuideFavoriteRoute("builderClass", "", "", gTalents, ""));
+                return;
+            }
+            if (gBuilder)
+            {
+                var builderTrail = new List<object> { "Guide", home, gp, gameplay, th, theory, TalentBuilder, null };
+                SetGuideTrail(builderTrail, null, null, new GuideFavoriteRoute("group", th, ""), new GuideFavoriteRoute("builder", "", ""));
+                return;
+            }
             Action planner = delegate { ResetPlannerState(); plannerClass = null; OpenGuideTab(-3); };
-            if (gPlanner && plannerClass != null) { SetCrumbs("Guide", home, gp, gameplay, th, theory, GearPlanner, planner, plannerClass, null); return; }
-            if (gPlanner) { SetCrumbs("Guide", home, gp, gameplay, th, theory, GearPlanner, null); return; }
+            if (gPlanner && plannerClass != null)
+            {
+                var plannerClassTrail = new List<object> { "Guide", home, gp, gameplay, th, theory, GearPlanner, planner, plannerClass, null };
+                SetGuideTrail(plannerClassTrail, null, null, new GuideFavoriteRoute("group", th, ""), new GuideFavoriteRoute("planner", "", ""),
+                    new GuideFavoriteRoute("plannerClass", "", "", plannerClass, ""));
+                return;
+            }
+            if (gPlanner)
+            {
+                var plannerTrail = new List<object> { "Guide", home, gp, gameplay, th, theory, GearPlanner, null };
+                SetGuideTrail(plannerTrail, null, null, new GuideFavoriteRoute("group", th, ""), new GuideFavoriteRoute("planner", "", ""));
+                return;
+            }
             if (guideQuery.Trim().Length > 0) { SetCrumbs("Guide", home, "Search", null); return; }
-            if ((gTopic < 0 || gTopic >= topics.Count) && guideGroupPage == 2) { SetCrumbs("Guide", home, gp, gameplay, th, null); return; }
+            if ((gTopic < 0 || gTopic >= topics.Count) && guideGroupPage == 2)
+            {
+                SetGuideTrail(new List<object> { "Guide", home, gp, gameplay, th, null }, null, null, new GuideFavoriteRoute("group", th, ""));
+                return;
+            }
             if ((gTopic < 0 || gTopic >= topics.Count) && guideGroupPage >= 0) { SetCrumbs("Guide", home, GroupName(guideGroupPage), null); return; }
             if (gTopic < 0 || gTopic >= topics.Count) { SetCrumbs("Guide", null); return; }
             int t = gTopic, pg = gPage;
@@ -381,7 +502,20 @@ namespace AzerothLauncher
             }
             else if (onPage) { trail.Add(topic.Title); trail.Add(toTopic); trail.Add(topic.Pages[pg].Title); trail.Add(null); }
             else { trail.Add(topic.Title); trail.Add(null); }
-            SetCrumbs(trail.ToArray());
+            var routes = new List<GuideFavoriteRoute>();
+            for (int i = 0; i < trail.Count / 2; i++) routes.Add(null);
+            int topicStep = gi == 2 ? 3 : 2;
+            if (gi == 2) routes[2] = new GuideFavoriteRoute("group", th, "");
+            routes[topicStep] = new GuideFavoriteRoute("guide", topic.Title, "");
+            if (onPage)
+            {
+                string page = topic.Pages[pg].Title;
+                string classKey = GuideClassKey(topic.Title, page);
+                routes[topicStep + 1] = new GuideFavoriteRoute("guide", topic.Title, page, classKey, "");
+            }
+            if (gTalents != null && onPage)
+                routes[topicStep + 2] = new GuideFavoriteRoute("guideTalents", topic.Title, topic.Pages[pg].Title, GuideClassKey(topic.Title, topic.Pages[pg].Title), "");
+            SetGuideTrail(trail, routes.ToArray());
         }
 
         static readonly string[] BuilderClasses = { "Warrior", "Paladin", "Hunter", "Rogue", "Priest", "Shaman", "Mage", "Warlock", "Druid" };

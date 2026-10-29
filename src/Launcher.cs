@@ -135,7 +135,7 @@ namespace AzerothLauncher
             Controls.Add(discordIcon);
             // the enlarged support heart, followed immediately by the Discord icon
             var heart = new HeartIcon(Lang.T("Love the game? Support the Dev by buying him a coffee") + "\n" + SupportUrl);
-            heart.Bounds = new Rectangle(697, 203, 26, 26);
+            heart.Bounds = new Rectangle(697, 203, 26, 20);
             heart.Click += delegate { Util.OpenInShell(SupportUrl); };
             Controls.Add(heart);
             LayoutNav();

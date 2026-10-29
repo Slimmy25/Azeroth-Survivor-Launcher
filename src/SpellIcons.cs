@@ -119,6 +119,13 @@ namespace AzerothLauncher
             return null;
         }
 
+        // The original WoW micro-menu button texture, used only for Talent Tree Builder favorites.
+        public static Image TalentButton(Control repaint)
+        {
+            return Picture("favorite_talent_button",
+                "https://warcraft.wiki.gg/wiki/Special:FilePath/Micromenu_talents_btn_32x41.png", repaint);
+        }
+
         public static Image Zone(string zone, Control repaint)
         {
             string icon;

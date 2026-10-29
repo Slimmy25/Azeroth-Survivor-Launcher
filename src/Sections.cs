@@ -30,11 +30,16 @@ namespace AzerothLauncher
         Point? dragOffset;
         List<KeyValuePair<string, Action>> crumbs = new List<KeyValuePair<string, Action>>();
         readonly List<KeyValuePair<Rectangle, Action>> hot = new List<KeyValuePair<Rectangle, Action>>();
+        readonly List<KeyValuePair<Rectangle, int>> crumbRects = new List<KeyValuePair<Rectangle, int>>();
+        readonly Dictionary<int, Action> crumbFavorites = new Dictionary<int, Action>();
         // a step's drop-down (the other choices at that level), and where its arrow was drawn
         readonly Dictionary<int, List<KeyValuePair<string, Action>>> menus = new Dictionary<int, List<KeyValuePair<string, Action>>>();
         readonly List<KeyValuePair<Rectangle, int>> arrows = new List<KeyValuePair<Rectangle, int>>();
         int hoverArrow = -1;
         int hover = -1;                                      // the step under the pointer (-2: the back arrow)
+        int favoriteHoverStep = -1;
+        ContextMenuStrip favoritePopup;
+        int favoritePopupStep = -1;
 
         public SideHead()
         {
@@ -53,10 +58,19 @@ namespace AzerothLauncher
         // the trail; the last step is where you are (its action is not used)
         public void SetCrumbs(List<KeyValuePair<string, Action>> list)
         {
+            CloseFavoritePopup();
             crumbs = list ?? new List<KeyValuePair<string, Action>>();
             menus.Clear();
+            crumbFavorites.Clear();
             hover = -1;
+            favoriteHoverStep = -1;
             Invalidate();
+        }
+
+        // The current Guide location can be saved from its word in the breadcrumb trail.
+        public void SetCrumbFavorite(int i, Action add)
+        {
+            if (i >= 0 && i < crumbs.Count && add != null) { crumbFavorites[i] = add; Invalidate(); }
         }
 
         // the choices of step i (not the first one): a small arrow beside it opens them
@@ -86,6 +100,7 @@ namespace AzerothLauncher
             arrows.Clear();
             menuText.Clear();
             stepRects.Clear();
+            crumbRects.Clear();
             int x = 50;
             Rectangle bb = BackBox;
             if (!bb.IsEmpty)
@@ -123,6 +138,7 @@ namespace AzerothLauncher
                     float tw = Math.Min(widths[i], right - x);
                     bool menu = menus.ContainsKey(i);
                     var r = new RectangleF(x, 7, Math.Max(1, tw - (menu ? arrowW : 0)), 22);
+                    crumbRects.Add(new KeyValuePair<Rectangle, int>(Rectangle.Round(r), i));
                     Color c = !last && hover == i ? Color.White : Theme.Hex("#e6cf8c");
                     using (var b = new SolidBrush(c)) g.DrawString(t, last ? f : fs, b, r, sf);
                     if (menu)
@@ -208,15 +224,79 @@ namespace AzerothLauncher
             return Rectangle.Empty;
         }
 
+        int FavoriteAt(Point pt)
+        {
+            foreach (var crumb in crumbRects)
+                if (crumbFavorites.ContainsKey(crumb.Value) && crumb.Key.Contains(pt)) return crumb.Value;
+            return -1;
+        }
+
+        Rectangle CrumbRect(int i)
+        {
+            foreach (var crumb in crumbRects) if (crumb.Value == i) return crumb.Key;
+            return Rectangle.Empty;
+        }
+
+        void CloseFavoritePopup()
+        {
+            if (favoritePopup != null && !favoritePopup.IsDisposed) favoritePopup.Close();
+            favoritePopup = null;
+            favoritePopupStep = -1;
+        }
+
+        void ShowFavoritePopup(int step, Rectangle anchor)
+        {
+            Action add;
+            if (anchor.IsEmpty || !crumbFavorites.TryGetValue(step, out add)) return;
+            CloseFavoritePopup();
+            var popup = new ContextMenuStrip();
+            popup.AutoClose = false;                          // it stays open while the pointer moves up from the crumb
+            popup.ShowImageMargin = false;
+            popup.ShowCheckMargin = false;
+            popup.BackColor = Theme.Hex("#16151e");
+            popup.ForeColor = Theme.Gold;
+            popup.Padding = new Padding(2);
+            var heart = new ToolStripMenuItem("♥");
+            heart.AutoSize = false;
+            heart.Size = new Size(28, 25);
+            heart.TextAlign = ContentAlignment.MiddleCenter;
+            heart.Font = new Font("Segoe UI Symbol", 15, FontStyle.Regular, GraphicsUnit.Point);
+            heart.ToolTipText = Lang.T("Add this Guide location to Quick Access");
+            heart.Click += delegate { popup.Close(); WowButton.Fire(add); };
+            popup.Items.Add(heart);
+            favoritePopup = popup;
+            favoritePopupStep = step;
+            popup.Closed += delegate
+            {
+                if (favoritePopup == popup) { favoritePopup = null; favoritePopupStep = -1; }
+                BeginInvoke(new Action(popup.Dispose));
+            };
+            Point at = PointToScreen(new Point(anchor.Left + anchor.Width / 2 - 16, anchor.Top - 30));
+            popup.Show(at);
+        }
+
         void HoverTick()
         {
             Point pt = PointToClient(Cursor.Position);
             int s = ClientRectangle.Contains(pt) ? StepAt(pt) : -1;
+            int favoriteStep = ClientRectangle.Contains(pt) ? FavoriteAt(pt) : -1;
+            if (favoritePopup != null && !favoritePopup.IsDisposed)
+            {
+                bool inPopup = favoritePopup.Visible && favoritePopup.Bounds.Contains(Cursor.Position);
+                if (inPopup || favoriteStep == favoritePopupStep) return;
+                CloseFavoritePopup();
+            }
+            if (favoriteStep >= 0)
+            {
+                if (openMenu != null && !openMenu.IsDisposed) openMenu.Close();
+                ShowFavoritePopup(favoriteStep, CrumbRect(favoriteStep));
+                return;
+            }
             if (openMenu != null && !openMenu.IsDisposed)
             {
                 bool inMenu = openMenu.Visible && openMenu.Bounds.Contains(Cursor.Position);
                 if (!inMenu && s != openMenuStep) openMenu.Close();
-                return;
+                else return;
             }
             if (s >= 0 && s == hoverStep && s != quietStep) ShowMenu(s, StepRect(s));
         }
@@ -230,10 +310,12 @@ namespace AzerothLauncher
         protected override void OnMouseMove(MouseEventArgs e)
         {
             int st = StepAt(e.Location);
+            int favoriteStep = FavoriteAt(e.Location);
             if (st != quietStep) quietStep = -1;
-            if (st != hoverStep)
+            if (st != hoverStep || favoriteStep != favoriteHoverStep)
             {
                 hoverStep = st;
+                favoriteHoverStep = favoriteStep;
                 if (hoverTimer == null)
                 {
                     hoverTimer = new Timer();
@@ -245,7 +327,7 @@ namespace AzerothLauncher
             int h = HotAt(e.Location), ha = ArrowAt(e.Location);
             if (ha < 0) ha = MenuTextAt(e.Location);          // the last step's name lights its arrow
             if (h != hover || ha != hoverArrow) { hover = h; hoverArrow = ha; Invalidate(); }
-            Cursor = CloseBox.Contains(e.Location) || h != -1 || ha != -1 ? Cursors.Hand : Cursors.Default;   // "Lost?" is not clicked: pointed at
+            Cursor = CloseBox.Contains(e.Location) || h != -1 || ha != -1 || favoriteStep >= 0 ? Cursors.Hand : Cursors.Default;   // "Lost?" is not clicked: pointed at
             // "Lost?": a small note while the pointer is on it (no window over the launcher)
             bool onHelp = HelpBox.Contains(e.Location);
             if (onHelp && !helpTip) { helpTip = true; WowButton.Fire(HelpClicked); }
@@ -366,9 +448,11 @@ namespace AzerothLauncher
     {
         sealed class GuideFavoriteRoute
         {
-            public string Kind, Topic, Page;
-            public string PageLabel { get { return Kind == "guide" ? (Page.Length > 0 ? Page : Topic) : Kind == "builder" ? TalentBuilder : GearPlanner; } }
-            public GuideFavoriteRoute(string kind, string topic, string page) { Kind = string.IsNullOrEmpty(kind) ? "guide" : kind; Topic = topic ?? ""; Page = page ?? ""; }
+            public string Kind, Topic, Page, ClassKey, Url;
+            public string PageLabel { get { return Kind == "guide" || Kind == "guideTalents" ? (Page.Length > 0 ? Page : Topic) : Kind == "group" ? Topic : Kind == "builderClass" || Kind == "plannerClass" ? ClassKey : Kind == "video" ? (Page.Length > 0 ? Page : Topic) : Kind == "builder" ? TalentBuilder : GearPlanner; } }
+            public GuideFavoriteRoute(string kind, string topic, string page) : this(kind, topic, page, "", "") { }
+            public GuideFavoriteRoute(string kind, string topic, string page, string classKey, string url)
+            { Kind = string.IsNullOrEmpty(kind) ? "guide" : kind; Topic = topic ?? ""; Page = page ?? ""; ClassKey = classKey ?? ""; Url = url ?? ""; }
         }
 
         const int SideW = 680, SideH = 600;
@@ -384,7 +468,6 @@ namespace AzerothLauncher
         IconButton favoriteDragButton;
         int favoriteDragCurrentSlot = -1, favoriteDragStartY;
         bool favoriteDragStarted, favoriteDragChanged;
-        IconButton homeBtn;
         string current;
         string addonMode = "installed";
         int addonCategory;
@@ -459,26 +542,44 @@ namespace AzerothLauncher
             };
             inner.Controls.Add(sideHead);
 
-            // right: home and ten bindable Guide favorites
+            // right: only the Guide locations the player has favorited
             strip = new Panel();
             strip.Dock = DockStyle.Right;
             strip.Width = 32;
             strip.BackColor = dark;
             body.Controls.Add(strip);
-            homeBtn = new IconButton(Icons.Home, delegate { if (current == "Community" && side.Visible) OpenMain("Community"); else { current = null; ShowSection("Community"); } });   // home: Community
-            strip.Controls.Add(homeBtn);
             LoadGuideFavorites();
             for (int i = 0; i < GuideFavoriteCount; i++)
             {
                 int slot = i;
                 Action<Graphics, float, float, Color> paint = delegate(Graphics g, float x, float y, Color c)
                 {
+                    GuideFavoriteRoute route = guideFavorites[slot];
+                    Image favoriteIcon = null;
+                    if (route != null && route.ClassKey.Length > 0)
+                        favoriteIcon = SpellIcons.Class(route.ClassKey, favoriteBtns[slot]);
+                    else if (route != null && route.Kind == "planner")
+                        favoriteIcon = SpellIcons.Race("human", favoriteBtns[slot]);
+                    else if (route != null && route.Kind == "builder")
+                        favoriteIcon = SpellIcons.TalentButton(favoriteBtns[slot]);
+                    else if (route != null && route.Kind == "guide" &&
+                             string.Equals(route.Topic, "Zones & Bosses", StringComparison.OrdinalIgnoreCase))
+                        favoriteIcon = SpellIcons.Icon("inv_misc_groupneedmore", favoriteBtns[slot]);
+                    if (favoriteIcon != null)
+                    {
+                        float scale = Math.Min(18f / favoriteIcon.Width, 18f / favoriteIcon.Height);
+                        var iconRect = new RectangleF(x - favoriteIcon.Width * scale / 2f, y - favoriteIcon.Height * scale / 2f,
+                            favoriteIcon.Width * scale, favoriteIcon.Height * scale);
+                        g.DrawImage(favoriteIcon, iconRect);
+                        using (var p = new Pen(c, 1.2f)) g.DrawRectangle(p, Rectangle.Round(iconRect));
+                        return;
+                    }
                     var ring = new RectangleF(x - 9, y - 9, 18, 18);
                     using (var p = new Pen(c, 1.4f)) g.DrawEllipse(p, ring);
                     Theme.CenterText(g, (slot + 1).ToString(), Theme.F(9, FontStyle.Bold), c, ring, null);
                 };
                 var b = new IconButton(paint, delegate { OpenGuideFavorite(slot); });
-                b.Tip = "Quick Access " + (i + 1) + " is empty. Hover a final Guide item and click its heart.";
+                b.Tip = "Quick Access " + (i + 1) + " is empty. Hover a Guide location and click its heart.";
                 b.ContextClicked += delegate { ShowGuideFavoriteMenu(slot); };
                 b.MouseDown += delegate(object sender, MouseEventArgs e)
                 {
@@ -495,7 +596,7 @@ namespace AzerothLauncher
                     if (!favoriteDragStarted && Math.Abs(y - favoriteDragStartY) >= Math.Max(4, SystemInformation.DragSize.Height / 2))
                         favoriteDragStarted = true;
                     if (!favoriteDragStarted) return;
-                    int target = (y - 21) / 31;
+                    int target = y / 31;
                     if (target < 0) target = 0;
                     if (target >= GuideFavoriteCount) target = GuideFavoriteCount - 1;
                     if (MoveGuideFavoriteTo(favoriteDragCurrentSlot, target))
@@ -526,6 +627,7 @@ namespace AzerothLauncher
             panel.BackColor = Theme.Panel;
             chat.Controls.Add(panel);
             LayoutStrip();
+            RefreshStrip();
             Controls.Add(side);
             PlaceSide();
             side.PerformLayout();
@@ -533,11 +635,13 @@ namespace AzerothLauncher
 
         void LayoutStrip()
         {
-            homeBtn.Location = new Point(3, 0);
-            int y = 26 + 10;
+            int y = 0;
             for (int i = 0; i < favoriteBtns.Length; i++)
             {
                 var b = favoriteBtns[i];
+                bool bound = guideFavorites[i] != null;
+                b.Visible = bound;
+                if (!bound) continue;
                 b.Location = new Point(3, y);
                 y += 26 + 5;
             }
@@ -545,25 +649,32 @@ namespace AzerothLauncher
 
         void RefreshStrip()
         {
-            if (homeBtn != null) homeBtn.Active = current == "Community";
             for (int i = 0; i < favoriteBtns.Length; i++)
             {
                 if (favoriteBtns[i] == null) continue;
                 GuideFavoriteRoute route = guideFavorites[i];
                 bool bound = route != null;
-                favoriteBtns[i].Tip = bound ? "Quick Access " + (i + 1) + ": " + route.PageLabel + " (hold left button and drag to move; right-click to remove)" :
-                    "Quick Access " + (i + 1) + " is empty. Hover a final Guide item and click its heart.";
+                favoriteBtns[i].Visible = bound;
+                favoriteBtns[i].Tip = bound ? "Quick Access " + (i + 1) + ": " + route.PageLabel + " (hold left button and drag to move; right-click to remove)" : "";
                 bool selected = false;
                 if (bound && current == "Guide")
                 {
-                    if (route.Kind == "builder") selected = gBuilder;
-                    else if (route.Kind == "planner") selected = gPlanner;
+                    if (route.Kind == "group")
+                    {
+                        for (int group = 0; group < 3; group++) if (GroupName(group) == route.Topic) selected = guideGroupPage == group;
+                    }
+                    else if (route.Kind == "builder") selected = gBuilder && gTalents == null;
+                    else if (route.Kind == "planner") selected = gPlanner && plannerClass == null;
+                    else if (route.Kind == "builderClass") selected = gBuilder && gTalents == route.ClassKey;
+                    else if (route.Kind == "plannerClass") selected = gPlanner && plannerClass == route.ClassKey;
+                    else if (route.Kind == "guideTalents") selected = gTalents == route.ClassKey && gTopic >= 0 && gTopic < Data.Guide.Count && Data.Guide[gTopic].Title == route.Topic;
                     else if (gTopic >= 0 && gTopic < Data.Guide.Count)
                         selected = Data.Guide[gTopic].Title == route.Topic && (gPage < 0 ? route.Page.Length == 0 :
                             gPage < Data.Guide[gTopic].Pages.Count && Data.Guide[gTopic].Pages[gPage].Title == route.Page);
                 }
                 favoriteBtns[i].Active = selected;
             }
+            LayoutStrip();
         }
 
         void SetSideTitle(string text)
@@ -713,9 +824,9 @@ namespace AzerothLauncher
             if (name == "Addons") RefreshGates();             // AZS Stats switched on or off: the Stats buttons follow
         }
 
-        const string LostNote = "Choose New Player or Gameplay, then follow the link-tree to a final card. The path at the top shows where you are: click an earlier step to return, or hover its arrow to see other pages. Example path: Guide › New Player › Getting Started. Hover Getting Started and click the heart that appears at the top of its card. It adds the page to the next numbered Quick Access spot (1–10) at the bottom of the right-hand bar. Click a favorite to open it; hold the left button and drag to move it; right-click to remove it. The left arrow returns to the previous page; the X closes this section.";
+        const string LostNote = "Hover a page name at the top. Click the heart above it to save that page. Saved pages appear on the right. Click one to open it. Hold left-click and drag to move it. Right-click to remove it.";
 
-        // the "Lost?" note shows both the breadcrumb path (Guide › Classes › Priest ▾) and the Guide-card heart leading to a numbered favorite
+        // the "Lost?" note shows a heart above a hovered breadcrumb and the numbered Quick Access slots
         static Bitmap pathExample;
 
         static Bitmap PathExample()
@@ -729,8 +840,19 @@ namespace AzerothLauncher
                 g.Clear(Theme.Hex("#120e18"));
                 // Breadcrumb navigation: this path matches the title bar's visual treatment.
                 using (var p = new Pen(Theme.Hex("#8a7040"), 1)) g.DrawRectangle(p, 0, 0, bmp.Width - 1, bmp.Height - 1);
-                // the back arrow
-                var ab = new Rectangle(8, 7, 26, 20);
+                using (var b = new SolidBrush(Theme.Hex("#b9a875"))) g.DrawString("HOVER A LOCATION", Theme.F(7, FontStyle.Bold), b, 10, 8);
+                // the floating heart popup above the hovered breadcrumb word
+                var heartBox = new Rectangle(158, 6, 24, 23);
+                using (var b = new SolidBrush(Theme.Hex("#16151e"))) g.FillRectangle(b, heartBox);
+                using (var p = new Pen(Theme.Gold, 1)) g.DrawRectangle(p, heartBox);
+                using (var heartFont = new Font("Segoe UI Symbol", 14, FontStyle.Regular, GraphicsUnit.Point))
+                    Theme.CenterText(g, "♥", heartFont, Theme.Gold, heartBox, null);
+                using (var b = new SolidBrush(Theme.Gold))
+                    g.FillPolygon(b, new[] { new PointF(167, 29), new PointF(173, 29), new PointF(170, 34) });
+                // breadcrumb bar and back arrow
+                using (var b = new SolidBrush(Theme.Hex("#1c1a26"))) g.FillRectangle(b, 4, 36, 234, 29);
+                using (var p = new Pen(Theme.Hex("#d6a640"), 1)) g.DrawRectangle(p, 4, 36, 234, 29);
+                var ab = new Rectangle(8, 40, 26, 20);
                 using (var b = new SolidBrush(Theme.Hex("#1c1a26"))) g.FillRectangle(b, ab);
                 using (var p = new Pen(Theme.Hex("#d6a640"), 1)) g.DrawRectangle(p, ab);
                 using (var b = new SolidBrush(Theme.Hex("#f0c050")))
@@ -752,24 +874,9 @@ namespace AzerothLauncher
                         x += g.MeasureString("› ", f).Width;
                     }
                 }
-                // A hovered final Guide card with its heart, pointing to the first numbered favorite slot.
-                using (var b = new SolidBrush(Theme.Hex("#191521"))) g.FillRectangle(b, 5, 41, 216, 68);
-                using (var p = new Pen(Theme.Gold, 1.5f)) g.DrawRectangle(p, 5, 41, 216, 68);
-                using (var b = new SolidBrush(Theme.Hex("#b9a875"))) g.DrawString("FINAL GUIDE PAGE", Theme.F(7, FontStyle.Bold), b, 13, 46);
-                using (var b = new SolidBrush(Theme.Gold)) g.DrawString("Getting Started", Theme.F(10, FontStyle.Bold), b, 13, 67);
-                var heartBox = new RectangleF(190, 45, 24, 24);
-                using (var b = new SolidBrush(Theme.Hex("#30251a"))) g.FillRectangle(b, heartBox.X, heartBox.Y, heartBox.Width, heartBox.Height);
-                using (var p = new Pen(Theme.Gold, 1)) g.DrawRectangle(p, heartBox.X, heartBox.Y, heartBox.Width, heartBox.Height);
-                using (var heartFont = new Font("Segoe UI Symbol", 14, FontStyle.Regular, GraphicsUnit.Point))
-                    Theme.CenterText(g, "♥", heartFont, Theme.Gold, heartBox, null);
-                using (var p = new Pen(Theme.Hex("#d6a640"), 1.5f))
-                {
-                    g.DrawLine(p, 215, 57, 240, 57);
-                    g.DrawLine(p, 240, 57, 236, 53);
-                    g.DrawLine(p, 240, 57, 236, 61);
-                }
-                using (var b = new SolidBrush(Theme.Hex("#0e0d14"))) g.FillRectangle(b, 243, 40, 31, 72);
-                using (var p = new Pen(Theme.Hex("#8a7040"), 1)) g.DrawRectangle(p, 243, 40, 31, 72);
+                // The heart is attached to the hovered word; numbered slots hold saved locations.
+                using (var b = new SolidBrush(Theme.Hex("#0e0d14"))) g.FillRectangle(b, 243, 35, 31, 76);
+                using (var p = new Pen(Theme.Hex("#8a7040"), 1)) g.DrawRectangle(p, 243, 35, 31, 76);
                 for (int i = 0; i < 3; i++)
                 {
                     int cy = 52 + i * 22;

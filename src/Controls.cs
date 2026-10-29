@@ -1524,7 +1524,11 @@ namespace AzerothLauncher
         {
             var g = e.Graphics;
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-            float s = Math.Min(Width, Height) - 2, x = (Width - s) / 2f, y = (Height - s) / 2f + 1;
+            // Scale the drawn heart to the Discord mark's visible height while keeping its own proportions.
+            const float heartWidth = 0.7853f, heartHeight = 0.8185f, heartLeft = 0.1073f, heartTop = 0.1315f;
+            float s = Math.Min((Width - 2f) / heartWidth, (Height - 0.8f) / heartHeight);
+            float x = (Width - heartWidth * s) / 2f - heartLeft * s;
+            float y = (Height - heartHeight * s) / 2f - heartTop * s;
             using (var p = new System.Drawing.Drawing2D.GraphicsPath())
             {
                 p.AddBezier(x + s / 2, y + s * 0.95f, x - s * 0.15f, y + s * 0.45f, x + s * 0.12f, y - s * 0.12f, x + s / 2, y + s * 0.25f);
