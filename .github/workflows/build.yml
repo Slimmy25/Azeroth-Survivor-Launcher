@@ -71,5 +71,3 @@ jobs:
           [ -f "dist/Azeroth Survivors Launcher.sha256.txt" ] || (cd dist && sha256sum "Azeroth Survivors Launcher.exe" > "Azeroth Survivors Launcher.sha256.txt")
           files=("dist/Azeroth Survivors Launcher.exe" "dist/Azeroth Survivors Launcher.sha256.txt")
           run gh release upload "$TAG" "${files[@]}" --clobber
-
-\n
