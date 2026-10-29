@@ -55,6 +55,43 @@ jobs:
                 IFS='+' read -ra parts <<< "$folders"
                 (cd addons && zip -qr "../mirror/$file" "${parts[@]}")
                 ;;
+              github-bundle-latest:*)                    # combine matching ZIP assets from multiple latest releases
+                # "github-bundle-latest:<owner>/<repo>:<prefix>+..." bundles one matching ZIP from each repo.
+                spec="${url#github-bundle-latest:}"
+                stage="$(mktemp -d)"
+                trap 'rm -rf "$stage"' EXIT
+                IFS='+' read -ra sources <<< "$spec"
+                mkdir -p "$stage/package"
+                index=0
+                for source in "${sources[@]}"; do
+                  repo="${source%%:*}"; prefix="${source#*:}"
+                  if [ "$source" = "$repo" ]; then prefix=""; fi
+                  zipurl="$(curl -fsSL -H "Accept: application/vnd.github+json" "https://api.github.com/repos/$repo/releases/latest" \
+                            | jq -r --arg p "$prefix" '[.assets[] | select((.name | test("\\.zip$"; "i")) and (.name | startswith($p)))][0].browser_download_url')"
+                  if [ -z "$zipurl" ] || [ "$zipurl" = "null" ]; then echo "::error::$repo has no matching .zip in its latest release"; exit 1; fi
+                  archive="$stage/source-$index.zip"
+                  unpack="$stage/unpack-$index"
+                  mkdir -p "$unpack"
+                  index=$((index + 1))
+                  echo "Downloading bundle component from $repo: $zipurl"
+                  curl -fsSL --retry 3 -A "AzerothSurvivorsLauncher/1.0" -o "$archive" "$zipurl"
+                  python3 - "$archive" "$unpack" <<'PY'
+import pathlib, sys, zipfile
+archive, target = sys.argv[1:]
+with zipfile.ZipFile(archive) as zf:
+    for item in zf.infolist():
+        name = item.filename.replace('\\', '/')
+        path = pathlib.PurePosixPath(name)
+        if not name or path.is_absolute() or (path.parts and ':' in path.parts[0]) or any(part in ('..', '') for part in path.parts):
+            raise SystemExit(f"unsafe path in addon ZIP: {item.filename}")
+    zf.extractall(target)
+PY
+                  cp -a "$unpack"/. "$stage/package/"
+                done
+                (cd "$stage/package" && zip -qr "$GITHUB_WORKSPACE/mirror/$file" .)
+                rm -rf "$stage"
+                trap - EXIT
+                ;;
               github-latest:*)                           # the newest release's .zip of a GitHub repository
                 # "github-latest:<owner>/<repo>:<prefix>" takes only a .zip whose name starts with <prefix>
                 spec="${url#github-latest:}"; repo="${spec%%:*}"; prefix=""

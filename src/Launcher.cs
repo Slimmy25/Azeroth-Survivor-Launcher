@@ -68,7 +68,7 @@ namespace AzerothLauncher
             trayShow.Text = Lang.T("Show Launcher");
             trayPlay.Text = Lang.T("Play");
             trayUpload.Text = Lang.T("Upload Save Now");
-            trayCloseToTray.Text = Lang.T("Close Button Hides to Tray");
+            trayCloseToTray.Text = Lang.T("Close button hides the launcher to the tray");
             trayQuit.Text = Lang.T("Quit");
         }
 
@@ -776,7 +776,7 @@ namespace AzerothLauncher
             trayUpload = new ToolStripMenuItem("Upload Save Now", null, delegate { RunSync("push", false, true); });
             trayCloseToTray = new ToolStripMenuItem("Close Button Hides to Tray", null, delegate
             {
-                Cfg.Set("close_to_tray", !Cfg.Bool("close_to_tray", true));
+                Cfg.Set("close_to_tray", !Cfg.Bool("close_to_tray", false));
                 Cfg.Save();
             });
             menu.Items.Add(show);
@@ -792,7 +792,7 @@ namespace AzerothLauncher
                 trayPlay.Enabled = !GameRunningFlag;
                 trayUpload.Enabled = !GameRunningFlag;
                 trayUpload.Visible = CloudEnabled();
-                trayCloseToTray.Checked = Cfg.Bool("close_to_tray", true);
+                trayCloseToTray.Checked = Cfg.Bool("close_to_tray", false);
             };
             tray.ContextMenuStrip = menu;
             tray.MouseClick += delegate(object s, MouseEventArgs e) { if (e.Button == MouseButtons.Left) ShowWindowFront(); };
@@ -852,7 +852,7 @@ namespace AzerothLauncher
         {
             if (quitting || e.CloseReason != CloseReason.UserClosing) return;
             e.Cancel = true;
-            if (Cfg.Bool("close_to_tray", true))
+            if (Cfg.Bool("close_to_tray", false))
             {
                 HideToTray();
                 if (!trayNotified)

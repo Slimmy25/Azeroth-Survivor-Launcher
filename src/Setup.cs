@@ -15,7 +15,7 @@ namespace AzerothLauncher
     {
         // 0 language, 1 website save, 2 cloud and folders, 3 AZS Stats, 4 addons, 5 the game's download, 6 setup cancelled
         int setupPage;
-        bool setupCloud;
+        bool setupCloud, setupCloudFolderRequired;
         bool? setupStats;                                     // the answer to the AZS Stats question
         string setupAddons;                                   // "download" when the player wants addons, else null
         bool setupDownloading;                                // the game's download was started from setup
@@ -32,6 +32,7 @@ namespace AzerothLauncher
             string game = GameDir();
             string config = Path.Combine(game, "benilla-config");
             setupCloud = true;
+            setupCloudFolderRequired = false;
             setupVals = new Dictionary<string, string>();
             setupDefaults = new Dictionary<string, string>();
             setupDefaults["addons_dir"] = Path.Combine(config, "AddOns");
@@ -78,7 +79,8 @@ namespace AzerothLauncher
             int step = Math.Min(setupPage, 3) + 1;               // the AZS Stats, addons and download pages are step 4
             SetCrumbs("Setup", null, SetupSteps[setupPage], null);
             // the page sits snug at the top, as every other section does; "Step X of 4" in the top right corner
-            var sp = MakeScroll(panel, new Rectangle(8, 4, PW - 16, PH - 12), Theme.Panel, Theme.Panel);
+            int setupFooter = setupPage == 0 ? 52 : 0;           // keep the language page's NEXT button outside its scroller
+            var sp = MakeScroll(panel, new Rectangle(8, 4, PW - 16, PH - 12 - setupFooter), Theme.Panel, Theme.Panel);
             setupHeadW = 0;
             if (setupPage < 6)
             {
@@ -105,6 +107,13 @@ namespace AzerothLauncher
                 sp.Controls.Add(pad);
             }
             finally { putInto = null; }
+            if (setupPage == 0)
+            {
+                var next = new WowButton("NEXT ›", delegate { SetupGo(1); }, 170, 38, 12);
+                next.Location = new Point(PW - 16 - next.Width, PH - 48);
+                panel.Controls.Add(next);
+                next.BringToFront();
+            }
         }
 
         int setupHeadW;                                       // room kept free for "Step X of 4" beside a page's heading
@@ -124,8 +133,7 @@ namespace AzerothLauncher
                 if (++col >= cols) { col = 0; y += (int)(28 * Theme.Zoom) + 6; }
             }
             if (col > 0) y += (int)(28 * Theme.Zoom) + 6;
-            var nx = Put(new WowButton("NEXT ›", delegate { SetupGo(1); }, 170, 38, 12), x + w - (int)(170 * Theme.Zoom), y + 10);
-            return nx.Bottom;
+            return y;
         }
 
         // page 2: moving over from the website? The save is imported before anything else
@@ -166,18 +174,28 @@ namespace AzerothLauncher
             var cb = UI.Check("Keep my progress in the cloud (Google Drive, OneDrive, Dropbox ...)\nand share it between my PCs",
                               setupCloud, Theme.Text, Theme.Panel, 11);
             cb.Size = VStack.Measure(cb);
-            cb.CheckedChanged += delegate { setupCloud = cb.Checked; BeginInvoke(new Action(delegate { BuildPanel("Setup"); })); };
+            cb.CheckedChanged += delegate
+            {
+                setupCloud = cb.Checked;
+                if (!setupCloud) setupCloudFolderRequired = false;
+                BeginInvoke(new Action(delegate { BuildPanel("Setup"); }));
+            };
             Put(cb, x - 4, y);
             y = BottomOf(cb) + 4;
             if (setupCloud) y = SetupFolderRow("Sync folder (inside your cloud drive)", "cloud_dir", delegate
             {
                 string d = PickCloudDir(side, setupVals["cloud_dir"]);
-                if (d != null) { setupVals["cloud_dir"] = d; BuildPanel("Setup"); }
+                if (d != null) { setupVals["cloud_dir"] = d; setupCloudFolderRequired = false; BuildPanel("Setup"); }
             }, false, x, y, w);
             else
             {
                 var off = PutText("Cloud saving stays off. You can turn it on later in Options > CLOUD SAVE.", 10, FontStyle.Italic, Theme.GoldDim, x, y, w);
                 y = BottomOf(off) + 2;
+            }
+            if (setupCloud && setupCloudFolderRequired)
+            {
+                var required = PutText("Choose a sync folder, or turn off cloud saving to continue.", 10, FontStyle.Bold, Theme.Bad, x, y + 2, w);
+                y = BottomOf(required) + 4;
             }
             Put(UI.Line(Theme.Bronze, w, 1), x, y + 6);
             var b = PutText("B.  Where are your files?", 13, FontStyle.Bold, Theme.Gold, x, y + 14, w);
@@ -226,9 +244,11 @@ namespace AzerothLauncher
         {
             if (setupCloud && (setupVals["cloud_dir"] ?? "").Trim().Length == 0)
             {
-                Msg.Show(side, "Choose a sync folder for cloud saving, or untick\n\"Keep my progress in the cloud\".", "Setup");
+                setupCloudFolderRequired = true;
+                BuildPanel("Setup");
                 return;
             }
+            setupCloudFolderRequired = false;
             var res = new Dictionary<string, object>();
             res["cloud_enabled"] = setupCloud;
             if (setupCloud) res["cloud_dir"] = setupVals["cloud_dir"];

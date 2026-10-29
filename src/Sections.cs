@@ -28,14 +28,28 @@ namespace AzerothLauncher
                      ControlStyles.OptimizedDoubleBuffer | ControlStyles.ResizeRedraw, true);
         }
 
-        public void PlaceAbove(Rectangle screenAnchor)
+        public void PlaceAbove(Control anchorControl, Rectangle anchorBounds)
         {
-            Point center = new Point(screenAnchor.Left + screenAnchor.Width / 2, screenAnchor.Top);
+            if (anchorControl == null || anchorBounds.IsEmpty) return;
+
+            // Convert the center of the actual drawn word from its control's coordinates. Keeping
+            // the source control here avoids mixing breadcrumb-local coordinates with popup pixels.
+            Point center = anchorControl.PointToScreen(new Point(anchorBounds.Left + anchorBounds.Width / 2,
+                                                                  anchorBounds.Top));
             Rectangle screen = Screen.FromPoint(center).WorkingArea;
-            int x = center.X - Width / 2;
-            int y = screenAnchor.Top - 30;                  // heart artwork ends four pixels inside its 34-pixel window
-            Location = new Point(Math.Max(screen.Left + 4, Math.Min(x, screen.Right - Width - 4)),
-                                 Math.Max(screen.Top + 4, y));
+            Point desired = new Point(Math.Max(screen.Left + 4, Math.Min(center.X - Width / 2, screen.Right - Width - 4)),
+                                      Math.Max(screen.Top + 4, center.Y - 30)); // artwork ends four pixels inside its 34-pixel window
+
+            // Windows can apply DPI virtualization to owned popup windows. Correct against the
+            // popup's observed screen position so the heart remains centered on the word at any scale.
+            for (int attempt = 0; attempt < 4; attempt++)
+            {
+                Location = desired;
+                Point actual = PointToScreen(Point.Empty);
+                int dx = desired.X - actual.X, dy = desired.Y - actual.Y;
+                if (Math.Abs(dx) <= 1 && Math.Abs(dy) <= 1) break;
+                desired = new Point(Location.X + dx, Location.Y + dy);
+            }
         }
 
         protected override bool ShowWithoutActivation { get { return true; } }
@@ -82,6 +96,7 @@ namespace AzerothLauncher
     {
         public Action CloseClicked;
         public Action HelpClicked;                           // "Lost?" beside the X: how the path at the top works
+        public Action HelpLeft;
         bool helpShown;                                      // only on a section's other pages, never on its main page
         public bool HelpShown { get { return helpShown; } set { if (helpShown != value) { helpShown = value; Invalidate(); } } }
         public Action BackClicked;                           // null: no back arrow
@@ -202,6 +217,7 @@ namespace AzerothLauncher
         int HelpW { get { return 26 + (int)TextRenderer.MeasureText(Lang.T("Lost?"), Theme.F(9, FontStyle.Bold)).Width; } }
         Rectangle HelpBox { get { return HelpClicked != null && helpShown ? new Rectangle(Width - (closable ? 32 : 9) - HelpW, 9, HelpW, 18) : Rectangle.Empty; } }
         public Point HelpScreenAnchor { get { Rectangle box = HelpBox; return box.IsEmpty ? PointToScreen(Point.Empty) : PointToScreen(new Point(box.Left + box.Width / 2, box.Bottom)); } }
+        public Rectangle HelpScreenBounds { get { Rectangle box = HelpBox; return box.IsEmpty ? Rectangle.Empty : RectangleToScreen(box); } }
         Rectangle BackBox { get { return BackClicked != null ? new Rectangle(44, 8, 30, 20) : Rectangle.Empty; } }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -385,7 +401,7 @@ namespace AzerothLauncher
                 popup.Dispose();
             };
             popup.Show(FindForm());
-            popup.PlaceAbove(RectangleToScreen(anchor));
+            popup.PlaceAbove(this, anchor);
         }
 
         void HoverTick()
@@ -407,6 +423,8 @@ namespace AzerothLauncher
             if (retainedStep >= 0 && retainedStep != quietFavoriteStep && crumbFavorites.ContainsKey(retainedStep) &&
                 (favoritePopup == null || favoritePopup.IsDisposed || favoritePopupStep != retainedStep))
                 ShowFavoritePopup(retainedStep, CrumbRect(retainedStep));
+            else if (retainedStep >= 0 && favoritePopup != null && !favoritePopup.IsDisposed && favoritePopupStep == retainedStep)
+                favoritePopup.PlaceAbove(this, CrumbRect(retainedStep));
 
             if (openMenu != null && !openMenu.IsDisposed)
             {
@@ -446,7 +464,7 @@ namespace AzerothLauncher
             // "Lost?": a small note while the pointer is on it (no window over the launcher)
             bool onHelp = HelpBox.Contains(e.Location);
             if (onHelp && !helpTip) { helpTip = true; WowButton.Fire(HelpClicked); }
-            else if (!onHelp && helpTip) { helpTip = false; GuideHover.Hide(); }
+            else if (!onHelp && helpTip) { helpTip = false; if (HelpLeft != null) HelpLeft(); }
             if (dragOffset.HasValue && Owner2 != null)
             {
                 Point s = PointToScreen(e.Location);
@@ -457,7 +475,7 @@ namespace AzerothLauncher
 
         bool helpTip;                                        // the "Lost?" note is showing
 
-        protected override void OnMouseLeave(EventArgs e) { if (helpTip) { helpTip = false; GuideHover.Hide(); } if (hover != -1 || hoverArrow != -1) { hover = -1; hoverArrow = -1; Invalidate(); } base.OnMouseLeave(e); }
+        protected override void OnMouseLeave(EventArgs e) { if (helpTip) { helpTip = false; if (HelpLeft != null) HelpLeft(); } if (hover != -1 || hoverArrow != -1) { hover = -1; hoverArrow = -1; Invalidate(); } base.OnMouseLeave(e); }
 
         void ShowMenu(int i, Rectangle at)
         {
@@ -611,9 +629,9 @@ namespace AzerothLauncher
         static Image heroicFavoriteIcon;
         static Image zonesBossesFavoriteIcon;
         static Image gearPlannerFavoriteIcon;
-        static Dictionary<string, Image> classFavoriteIcons;
+        static Dictionary<string, Image> classGearHelmetImages;
 
-        static Image FavoriteClassIcon(string classKey)
+        static Image FavoriteGearHelmet(string classKey)
         {
             if (string.IsNullOrEmpty(classKey)) return null;
             string key = classKey.Trim().ToLowerInvariant();
@@ -625,14 +643,24 @@ namespace AzerothLauncher
                 default:
                     return null;
             }
-            if (classFavoriteIcons == null) classFavoriteIcons = new Dictionary<string, Image>(StringComparer.OrdinalIgnoreCase);
+            if (classGearHelmetImages == null) classGearHelmetImages = new Dictionary<string, Image>(StringComparer.OrdinalIgnoreCase);
             Image image;
-            if (!classFavoriteIcons.TryGetValue(key, out image))
+            if (!classGearHelmetImages.TryGetValue(key, out image))
             {
                 image = Theme.LoadImage("AS.favorites.class-" + key + ".jpg");
-                classFavoriteIcons[key] = image;
+                classGearHelmetImages[key] = image;
             }
             return image;
+        }
+
+        static string FavoriteGearClass(GuideFavoriteRoute route)
+        {
+            if (route == null) return null;
+            if (route.Kind == "plannerClass") return route.ClassKey;
+            if (route.Kind != "guide" || !string.Equals(route.Topic, "Items", StringComparison.OrdinalIgnoreCase)) return null;
+            foreach (string cls in BuilderClasses)
+                if (string.Equals(route.Page, cls + " Gear", StringComparison.OrdinalIgnoreCase)) return cls;
+            return null;
         }
         readonly IconButton[] favoriteBtns = new IconButton[GuideFavoriteCount];
         readonly GuideFavoriteRoute[] guideFavorites = new GuideFavoriteRoute[GuideFavoriteCount];
@@ -702,10 +730,8 @@ namespace AzerothLauncher
             sideHead.Dock = DockStyle.Top;
             // (no Owner2: the section area does not move)
             sideHead.CloseClicked = CloseSide;
-            sideHead.HelpClicked = delegate                  // a small note beside "Lost?", not a window over the launcher
-            {
-                GuideHover.ShowPictureAt(sideHead, Lang.T("Lost?"), Lang.T(LostNote), PathExample(), sideHead.HelpScreenAnchor);
-            };
+            sideHead.HelpClicked = ShowLostHelpInline;
+            sideHead.HelpLeft = DeferHideLostHelpInline;
             sideHead.Moved = delegate(Point p)
             {
                 Cfg.Set("side_pos", new List<object> { (long)p.X, (long)p.Y });
@@ -727,7 +753,15 @@ namespace AzerothLauncher
                 {
                     GuideFavoriteRoute route = guideFavorites[slot];
                     Image favoriteIcon = null;
-                    if (route != null && route.Kind == "guide" && route.Topic == "Items" && route.Page == "Codex")
+                    string gearClass = FavoriteGearClass(route);
+                    if (gearClass != null)
+                        favoriteIcon = FavoriteGearHelmet(gearClass);   // selected tier-set helmet for the class gear page
+                    else if (route != null &&
+                             ((route.Kind == "guide" && route.Topic == "Classes" && route.ClassKey.Length > 0) ||
+                              route.Kind == "builderClass" || route.Kind == "guideTalents" ||
+                              (route.Kind == "stats" && route.Page == "class")))
+                        favoriteIcon = SpellIcons.Class(route.ClassKey, favoriteBtns[slot]);
+                    else if (route != null && route.Kind == "guide" && route.Topic == "Items" && route.Page == "Codex")
                     {
                         if (codexFavoriteIcon == null) codexFavoriteIcon = Theme.LoadImage("AS.favorites.codex-aura.png");
                         favoriteIcon = codexFavoriteIcon;
@@ -747,11 +781,6 @@ namespace AzerothLauncher
                     }
                     else if (route != null && route.Kind == "builder")
                         favoriteIcon = SpellIcons.TalentButton(favoriteBtns[slot]);
-                    else if (route != null && route.ClassKey.Length > 0)
-                    {
-                        favoriteIcon = FavoriteClassIcon(route.ClassKey);
-                        if (favoriteIcon == null) favoriteIcon = SpellIcons.Class(route.ClassKey, favoriteBtns[slot]);
-                    }
                     else if (route != null && route.Kind == "guide" &&
                              string.Equals(route.Topic, "Zones & Bosses", StringComparison.OrdinalIgnoreCase))
                     {
@@ -782,6 +811,7 @@ namespace AzerothLauncher
                     favoriteDragCurrentSlot = slot;
                     favoriteDragStartY = strip.PointToClient(Cursor.Position).Y;
                     favoriteDragStarted = favoriteDragChanged = false;
+                    SetFavoriteDropTarget(-1);
                 };
                 b.MouseMove += delegate(object sender, MouseEventArgs e)
                 {
@@ -793,6 +823,7 @@ namespace AzerothLauncher
                     int target = y / 31;
                     if (target < 0) target = 0;
                     if (target >= GuideFavoriteCount) target = GuideFavoriteCount - 1;
+                    SetFavoriteDropTarget(target);
                     if (MoveGuideFavoriteTo(favoriteDragCurrentSlot, target))
                     {
                         favoriteDragCurrentSlot = target;
@@ -807,6 +838,7 @@ namespace AzerothLauncher
                     favoriteDragButton = null;
                     favoriteDragCurrentSlot = -1;
                     favoriteDragStarted = favoriteDragChanged = false;
+                    SetFavoriteDropTarget(-1);
                 };
                 b.KeyDown += delegate(object sender, KeyEventArgs e)
                 {
@@ -832,6 +864,15 @@ namespace AzerothLauncher
             panel.Dock = DockStyle.Fill;
             panel.BackColor = Theme.Panel;
             chat.Controls.Add(panel);
+            lostHelpCard = new Panel();
+            lostHelpCard.BackColor = Theme.Hex("#120f18");
+            lostHelpCard.Visible = false;
+            lostHelpCard.Paint += PaintLostHelpInline;
+            lostHelpCard.MouseEnter += delegate { if (lostHelpTimer != null) lostHelpTimer.Stop(); };
+            lostHelpCard.MouseLeave += delegate { DeferHideLostHelpInline(); };
+            chat.Controls.Add(lostHelpCard);
+            lostHelpCard.BringToFront();
+            Deactivate += delegate { HideLostHelpInline(); };
             LayoutStrip();
             RefreshStrip();
             Controls.Add(side);
@@ -854,6 +895,16 @@ namespace AzerothLauncher
             }
         }
 
+        void SetFavoriteDropTarget(int target)
+        {
+            int count = 0;
+            while (count < guideFavorites.Length && guideFavorites[count] != null) count++;
+            if (target >= count) target = count - 1;
+            for (int i = 0; i < favoriteBtns.Length; i++)
+                if (favoriteBtns[i] != null)
+                    favoriteBtns[i].DropHighlighted = favoriteDragButton != null && favoriteDragStarted && i == target;
+        }
+
         void RefreshStrip()
         {
             for (int i = 0; i < favoriteBtns.Length; i++)
@@ -862,7 +913,7 @@ namespace AzerothLauncher
                 GuideFavoriteRoute route = guideFavorites[i];
                 bool bound = route != null;
                 favoriteBtns[i].Visible = bound;
-                favoriteBtns[i].Tip = bound ? "Quick Access " + (i + 1) + ": " + route.PageLabel +
+                favoriteBtns[i].Tip = setupOpen ? "" : bound ? "Quick Access " + (i + 1) + ": " + route.PageLabel +
                     " (click to open; hold left-click and drag or use Shift+Up/Down to move; right-click or press Menu/Shift+F10, then choose Remove; press Esc to cancel)" : "";
                 bool selected = false;
                 if (bound && current == "Guide")
@@ -928,6 +979,76 @@ namespace AzerothLauncher
         // the section area: its top level with the top of the word "News", its bottom level with the Launcher buttons
         // (a little taller than the News column: from under the game's name down to the bottom bar, for more room)
         static readonly Rectangle SideRect = new Rectangle(6, 198, 674, 574 - 198);
+        Panel lostHelpCard;
+        Timer lostHelpTimer;
+
+        void ShowLostHelpInline()
+        {
+            if (lostHelpCard == null || side == null || !side.Visible) return;
+            if (lostHelpTimer != null) lostHelpTimer.Stop();
+            int width = Math.Min(360, lostHelpCard.Parent.ClientSize.Width - 12);
+            int height = Math.Min(320, lostHelpCard.Parent.ClientSize.Height - 12);
+            lostHelpCard.Size = new Size(Math.Max(220, width), Math.Max(220, height));
+            lostHelpCard.Location = new Point((lostHelpCard.Parent.ClientSize.Width - lostHelpCard.Width) / 2,
+                                              (lostHelpCard.Parent.ClientSize.Height - lostHelpCard.Height) / 2);
+            lostHelpCard.Visible = true;
+            lostHelpCard.BringToFront();
+            lostHelpCard.Invalidate();
+        }
+
+        void DeferHideLostHelpInline()
+        {
+            if (lostHelpCard == null || !lostHelpCard.Visible) return;
+            if (lostHelpTimer == null)
+            {
+                lostHelpTimer = new Timer();
+                lostHelpTimer.Interval = 120;
+                lostHelpTimer.Tick += delegate
+                {
+                    lostHelpTimer.Stop();
+                    bool overButton = sideHead != null && sideHead.HelpScreenBounds.Contains(Cursor.Position);
+                    bool overCard = lostHelpCard.Visible && lostHelpCard.RectangleToScreen(lostHelpCard.ClientRectangle).Contains(Cursor.Position);
+                    if (!overButton && !overCard) HideLostHelpInline();
+                };
+            }
+            lostHelpTimer.Stop();
+            lostHelpTimer.Start();
+        }
+
+        void HideLostHelpInline()
+        {
+            if (lostHelpTimer != null) lostHelpTimer.Stop();
+            if (lostHelpCard != null && lostHelpCard.Visible) lostHelpCard.Visible = false;
+        }
+
+        void PaintLostHelpInline(object sender, PaintEventArgs e)
+        {
+            Graphics g = e.Graphics;
+            g.Clear(Theme.Hex("#120f18"));
+            using (var p = new Pen(Theme.Hex("#c49a48"), 2)) g.DrawRectangle(p, 1, 1, lostHelpCard.Width - 3, lostHelpCard.Height - 3);
+            int y = 10, width = lostHelpCard.Width - 24;
+            TextRenderer.DrawText(g, Lang.T("Lost?"), Theme.F(11, FontStyle.Bold), new Rectangle(12, y, width, 20), Theme.Gold,
+                                  TextFormatFlags.NoPrefix | TextFormatFlags.SingleLine | TextFormatFlags.NoPadding);
+            y += 26;
+            DrawLostHelpSection(g, "Click a breadcrumb to go back. Hover ▼ to choose another page.", PathExamplePart(true), ref y, width);
+            DrawLostHelpSection(g, "Hover a name and click the heart to save it. Click to open, drag to move, or right-click to remove.", PathExamplePart(false), ref y, width);
+        }
+
+        void DrawLostHelpSection(Graphics g, string text, Image picture, ref int y, int width)
+        {
+            Font font = Theme.F(9.5f);
+            int textHeight = TextRenderer.MeasureText(text, font, new Size(width, 500), TextFormatFlags.WordBreak | TextFormatFlags.NoPrefix).Height;
+            TextRenderer.DrawText(g, Lang.T(text), font, new Rectangle(12, y, width, textHeight), Theme.Text,
+                                  TextFormatFlags.WordBreak | TextFormatFlags.NoPrefix);
+            y += textHeight + 5;
+            if (picture == null) return;
+            float scale = Math.Min(240f / picture.Width, 160f / picture.Height);
+            scale = Math.Min(scale, (float)(width - 12) / picture.Width);
+            int w = Math.Max(1, (int)(picture.Width * scale)), h = Math.Max(1, (int)(picture.Height * scale));
+            g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+            g.DrawImage(picture, new Rectangle((lostHelpCard.Width - w) / 2, y, w, h));
+            y += h + 8;
+        }
 
         void ShowSide()
         {
@@ -938,6 +1059,8 @@ namespace AzerothLauncher
 
         void HideSide()
         {
+            GuideHover.Hide();
+            HideLostHelpInline();
             StopEdge();
             communityPlaying = null;
             if (side.Visible) side.Hide();
@@ -1029,6 +1152,8 @@ namespace AzerothLauncher
 
         void BuildPanel(string name)
         {
+            GuideHover.Hide();
+            HideLostHelpInline();
             if (name != "Community") communityPlaying = null;   // another section: the Community video is left
             // the talent trees left (another page, class or section): their test build starts empty next time
             if (name != "Guide" || gTalents == null || gTalents != liveBuildCls) { liveBuild = null; liveBuildCls = null; }
@@ -1061,10 +1186,9 @@ namespace AzerothLauncher
             if (name == "Addons") RefreshGates();             // AZS Stats switched on or off: the Stats buttons follow
         }
 
-        const string LostNote = "Path: Click a breadcrumb to go back; hover ▼ and pick a page.\n\nSave: Hover a page name and click the heart above it.\n\nOpen: Click a favorite to go there.\n\nMove: Hold left-click and drag; Shift+Up/Down also works.\n\nRemove: Right-click a favorite once to remove it.";
-
         // the "Lost?" note demonstrates both breadcrumb navigation and saving a favorite
         static readonly Dictionary<string, Bitmap> pathExamples = new Dictionary<string, Bitmap>();
+        static readonly Dictionary<string, Bitmap[]> pathExampleParts = new Dictionary<string, Bitmap[]>();
 
         static void DrawExampleHeart(Graphics g, float centerX, float top, float size)
         {
@@ -1170,6 +1294,23 @@ namespace AzerothLauncher
             }
             pathExamples[language] = bmp;
             return bmp;
+        }
+
+        static Image PathExamplePart(bool path)
+        {
+            string language = Lang.Code ?? "en";
+            Bitmap[] parts;
+            if (!pathExampleParts.TryGetValue(language, out parts))
+            {
+                Bitmap whole = PathExample();
+                parts = new[]
+                {
+                    whole.Clone(new Rectangle(0, 0, whole.Width, 138), whole.PixelFormat),
+                    whole.Clone(new Rectangle(0, 140, whole.Width, 95), whole.PixelFormat)
+                };
+                pathExampleParts[language] = parts;
+            }
+            return parts[path ? 0 : 1];
         }
 
         public void RebuildCurrent()
@@ -1945,7 +2086,7 @@ namespace AzerothLauncher
             int y0 = 4;
             if (Data.AddonCategories[cat] == Data.UiCategory)
             {
-                var pick = UI.Text("Pick one: these interfaces can't be on together. Switching one on asks to switch the other off.",
+                var pick = UI.Text("Most interfaces overlap. Survivor UI and SurvivorUI Classic are bundled and toggle together; use their in-game chooser to pick one. Other known conflicts switch off when you enable an interface.",
                                    9, FontStyle.Italic, Theme.GoldDim, listbg, sp.ClientSize.Width - 24);
                 pick.Size = VStack.Measure(pick);
                 pick.Location = new Point(10, 6);
@@ -3096,8 +3237,11 @@ namespace AzerothLauncher
                 y = Math.Max(BottomOf(b), BottomOf(t)) + 8;
             };
             // how the launcher behaves (was GENERAL)
-            y = OptionCheck("Close button hides the launcher to the tray", Cfg.Bool("close_to_tray", true), y,
+            y = OptionCheck("Close button hides the launcher to the tray", Cfg.Bool("close_to_tray", false), y,
                             delegate(bool on) { Cfg.Set("close_to_tray", on); Cfg.Save(); });
+            var trayNote = PutText("When checked, closing hides the launcher in the tray. When unchecked, closing exits it.",
+                                   9, FontStyle.Italic, Theme.GoldDim, 36, y - 2, PW - 56);
+            y = BottomOf(trayNote) + 6;
             y = OptionCheck("Minimize the launcher when the game starts", Cfg.Bool("minimize_on_play", true), y,
                             delegate(bool on) { Cfg.Set("minimize_on_play", on); Cfg.Save(); });
             y = OptionCheck("Show the Stats section (your play time and run records)", StatsEnabled(), y,

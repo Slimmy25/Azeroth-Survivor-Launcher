@@ -696,9 +696,8 @@ namespace AzerothLauncher
 
     public static class Data
     {
-        // two categories: the addons made for Azeroth Survivors (once called "AS ADDONS") and classic WoW 1.12 addons
-        // Download More's tabs: the AZS addons as UI (pick one: they can't be on together), Gameplay and Misc, then the
-        // WoW 1.12 addons. In My Addons the first three are one group, AZS ADDONS.
+        // Download More's categories: UI, Gameplay and Misc addons made for Azeroth Survivors, then classic WoW 1.12 addons.
+        // Known UI overlaps are handled by Addons.Conflicts; compatible alternatives may be installed together.
         public static readonly string[] AddonCategories = { "UI", "GAMEPLAY", "MISC", "WOW 1.12 ADDONS" };
         public const string Wow112Category = "WOW 1.12 ADDONS", AzsAddonsHeading = "AZS ADDONS", UiCategory = "UI";
         public const string MyAddonsCategory = "MY ADDONS";

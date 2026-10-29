@@ -1,6 +1,6 @@
 # Addons offered in Addons > DOWNLOAD MORE. One addon per line:
 #   CATEGORY | Name shown | https://direct-link-to/addon.zip | Folder,Folder | description
-# CATEGORY is UI, GAMEPLAY or MISC (the addons made for Azeroth Survivors; a UI is pick-one: they conflict) or WOW 1.12 ADDONS. A link "local:<name>.zip" is a zip kept next to the launcher (listed only where it exists).
+# CATEGORY is UI, GAMEPLAY or MISC (the addons made for Azeroth Survivors) or WOW 1.12 ADDONS. A link "local:<name>.zip" is a zip kept next to the launcher (listed only where it exists).
 # A link "builtin:<folder>" is an AZS addon the launcher carries inside itself (BuiltinAddons.cs): installed from the
 # launcher, kept up to date by it.
 # The fourth field: the addon's folders in the AddOns folder, comma-separated (Cloud Save installs an addon whose
@@ -12,7 +12,7 @@ GAMEPLAY | Damage Meter By Kexo | https://github.com/Slimmy25/Azeroth-Survivor-L
 # Planned: BigCursor by JamieeLee — https://github.com/JamieeLee/BigCursor. Add after a player-ready release ZIP is published.
 UI | SurvivorsDragonU By Mxgwyn | https://github.com/Slimmy25/Azeroth-Survivor-Launcher-Releases/releases/download/addons/SurvivorsDragonUi-by-Mxgwyn.zip | SurvivorsDragonUi
 UI | Azeroth Cursor By Maidenhead | https://github.com/Slimmy25/Azeroth-Survivor-Launcher-Releases/releases/download/addons/AzerothCursor-by-Maidenhead.zip | AzerothCursor | High-contrast cursor ring with optional halo, animation, crosshair and size, thickness, opacity and color controls.
-UI | Survivor UI By morderous | https://github.com/Slimmy25/Azeroth-Survivor-Launcher-Releases/releases/download/addons/Survivor-UI-by-morderous.zip | SurvivorUI,SurvivorPlates | Flat, dark unit frames and a compact action bar, Plater-style nameplates (Survivor Plates), luck and card odds on the XP bar, a tabbed chat panel and automatic raid marks. Can't be on together with AZS Minor Mods.
+UI | Survivor UI + Classic By morderous | https://github.com/Slimmy25/Azeroth-Survivor-Launcher-Releases/releases/download/addons/Survivor-UI-by-morderous.zip | SurvivorUI,SurvivorPlates,SurvivorUIClassic | Bundles Survivor UI and SurvivorUI Classic together. They stay enabled or disabled as one, while the in-game chooser lets you pick which interface to use. Can't be on together with AZS Minor Mods.
 UI | Keijin UI By Keijin | https://github.com/Slimmy25/Azeroth-Survivor-Launcher-Releases/releases/download/addons/Keijin-UI-by-Keijin.zip | KeijinUI
 UI | Bordo UI By BordoBereli | https://github.com/Slimmy25/Azeroth-Survivor-Launcher-Releases/releases/download/addons/Bordo-UI-by-BordoBereli.zip | BordoUI | A complete interface: a centered combat bar with your health and buffs, an XP bar with kills and gold, boss timers with arrows, party frames, nameplates, map pins and a bigger damage font.
 UI | AetherHUD By Rehabrocket | https://github.com/Slimmy25/Azeroth-Survivor-Launcher-Releases/releases/download/addons/AetherHUD-by-Rehabrocket.zip | AetherHUD | A complete interface: a run clock with the boss timeline and next-boss countdown, boss bars, enemy health plates and floating combat numbers, hero, target, party and pet frames, a skill bar with cooldowns and rank gems, a combat meter, a ring minimap and glass-styled chat. Every part can be turned on or off (/aether).

@@ -8,14 +8,15 @@
 # zip under the same name on the release); the workflow only checks that it is there.
 # "github-latest:<owner>/<repo>" takes the .zip of that repository's newest release (its name can change);
 # "github-latest:<owner>/<repo>:<prefix>" only a .zip whose name starts with <prefix> (a release with other zips too).
+# "github-bundle-latest:<owner>/<repo>:<prefix>+<owner>/<repo>:<prefix>" combines matching ZIP assets into one addon bundle.
 # "local:<folder>+<folder>" zips several folders into the one .zip (an addon that comes with a second one).
 # The launcher's Download More list (assets/addons.txt) points at:
 #   https://github.com/Slimmy25/Azeroth-Survivor-Launcher-Releases/releases/download/addons/<file name>
 
 Azerloot-by-KindaGray.zip       | github-latest:Kindagrey/Azerloot
 SurvivorsDragonUi-by-Mxgwyn.zip | https://github.com/migwynkriid13/SurvivorsDragonUi/releases/latest/download/SurvivorsDragonUi.zip
-# Survivor UI: always the addon zip (SurvivorUI-v<version>.zip), never the SurvivorUI-Installer.zip next to it
-Survivor-UI-by-morderous.zip    | github-latest:morderous/survivor-ui:SurvivorUI-v
+# Survivor UI and Classic are one launcher bundle; select the addon ZIP, never an installer, from each latest release.
+Survivor-UI-by-morderous.zip    | github-bundle-latest:morderous/survivor-ui:SurvivorUI-v+morderous/survivorui-classic:SurvivorUIClassic-
 Keijin-UI-by-Keijin.zip         | https://github.com/KeijinDE/KeijinUI_modern-as-ui/releases/download/v3.7.1/KeijinUI-3.7.1.zip
 Bordo-UI-by-BordoBereli.zip     | github-latest:threenox/BordoUI
 BlackwellUI-by-Blackwell.zip    | github-latest:Blackwellcode/BlackwellUI

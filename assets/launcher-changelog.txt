@@ -1,3 +1,11 @@
+# v2.8 (2026-10-29)
+
+- Survivor UI and SurvivorUI Classic now download as one bundle and enable or disable together. The mirror combines the latest addon ZIP from each creator repository.
+- First-run setup keeps the language-page Next button visible, handles skipped cloud saving without a blocking popup, and explains a missing sync folder inline.
+- Closing the launcher now exits by default; tray behavior is an opt-in setting under Options > Launcher.
+- Quick Access tooltips clear when setup begins, favorite movement shows a gold drop target, and class-page icons are distinct from class gear helmet icons.
+- The Lost? help stays inside the secondary menu and separates its navigation and favorite examples for easier reading.
+
 # v2.7 (2026-10-29)
 
 ## In short

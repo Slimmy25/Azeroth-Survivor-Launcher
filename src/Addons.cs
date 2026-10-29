@@ -56,17 +56,25 @@ namespace AzerothLauncher
                            Why = "both record your runs and statistics" },
             new Conflict { Preferred = new[] { "SurvivorUI", "SurvivorsUI" }, Other = new[] { "AZSMinorMods" },
                            Why = "both set raid marks on bosses and party members" },
-            // the interfaces (Download More > UI): pick one. When two are found on, the one kept is the first of: Survivor UI,
-            // SurvivorsDragonUi, Keijin UI, Bordo UI, BlackwellUI, AetherHUD
+            // The interfaces (Download More > UI) that replace the same parts of the game conflict. Survivor UI and
+            // SurvivorUI Classic are distributed and toggled as one bundle; their author provides the in-game chooser.
             new Conflict { Preferred = new[] { "SurvivorUI", "SurvivorsUI" }, Other = new[] { "SurvivorsDragonUi" },
                            Why = "both replace the game's interface" },
+            new Conflict { Preferred = new[] { "SurvivorUIClassic" }, Other = new[] { "SurvivorsDragonUi" },
+                           Why = "both replace the game's interface" },
             new Conflict { Preferred = new[] { "SurvivorUI", "SurvivorsUI" }, Other = new[] { "KeijinUI" },
+                           Why = "both replace the game's interface" },
+            new Conflict { Preferred = new[] { "SurvivorUIClassic" }, Other = new[] { "KeijinUI" },
                            Why = "both replace the game's interface" },
             new Conflict { Preferred = new[] { "SurvivorsDragonUi" }, Other = new[] { "KeijinUI" },
                            Why = "both replace the game's interface" },
             new Conflict { Preferred = new[] { "SurvivorUI", "SurvivorsUI" }, Other = new[] { "BordoUI" },
                            Why = "both replace the game's interface" },
+            new Conflict { Preferred = new[] { "SurvivorUIClassic" }, Other = new[] { "BordoUI" },
+                           Why = "both replace the game's interface" },
             new Conflict { Preferred = new[] { "SurvivorUI", "SurvivorsUI" }, Other = new[] { "BlackwellUI" },
+                           Why = "both replace the game's interface" },
+            new Conflict { Preferred = new[] { "SurvivorUIClassic" }, Other = new[] { "BlackwellUI" },
                            Why = "both replace the game's interface" },
             new Conflict { Preferred = new[] { "SurvivorsDragonUi" }, Other = new[] { "BordoUI" },
                            Why = "both replace the game's interface" },
@@ -79,6 +87,8 @@ namespace AzerothLauncher
             new Conflict { Preferred = new[] { "BordoUI" }, Other = new[] { "BlackwellUI" },
                            Why = "both replace the game's interface" },
             new Conflict { Preferred = new[] { "SurvivorUI", "SurvivorsUI" }, Other = new[] { "AetherHUD" },
+                           Why = "both replace the game's interface" },
+            new Conflict { Preferred = new[] { "SurvivorUIClassic" }, Other = new[] { "AetherHUD" },
                            Why = "both replace the game's interface" },
             new Conflict { Preferred = new[] { "SurvivorsDragonUi" }, Other = new[] { "AetherHUD" },
                            Why = "both replace the game's interface" },
@@ -248,7 +258,9 @@ namespace AzerothLauncher
         {
             var l = new List<string>();
             AddonEntry e = EntryOf(folder);
-            if (e == null || e.Folders.Count < 2 || !string.Equals(MainFolder(e), folder, StringComparison.OrdinalIgnoreCase)) return l;
+            if (e == null || e.Folders.Count < 2) return l;
+            string main = MainFolder(e);
+            if (!string.Equals(main, folder, StringComparison.OrdinalIgnoreCase)) folder = main;
             foreach (string f in e.Folders) if (!string.Equals(f, folder, StringComparison.OrdinalIgnoreCase)) l.Add(f);
             return l;
         }
@@ -295,9 +307,60 @@ namespace AzerothLauncher
         // switches an addon on or off, with the folders that come with it
         public static void SetEnabled(string addonDir, string name, bool enabled)
         {
+            AddonEntry entry = EntryOf(name);
+            if (entry != null && entry.Folders.Count > 1)
+            {
+                SetBundleEnabled(addonDir, entry, enabled);
+                return;
+            }
             SetEnabledOne(addonDir, name, enabled);
             foreach (string c in CompanionsOf(name))
                 try { SetEnabledOne(addonDir, c, enabled); } catch (Exception) { }   // a companion not installed: nothing to do
+        }
+
+        static void SetBundleEnabled(string addonDir, AddonEntry entry, bool enabled)
+        {
+            var installed = new List<string>();
+            foreach (string folder in entry.Folders)
+            {
+                string on = Path.Combine(addonDir, folder);
+                string off = on + DisabledSuffix;
+                bool isOn = Directory.Exists(on);
+                bool isOff = Directory.Exists(off);
+                if (isOn && isOff) throw new IOException(folder + " exists in both enabled and disabled forms");
+                if (isOn || isOff) installed.Add(folder);   // older installs may predate one of the bundled components
+            }
+            if (installed.Count == 0) throw new IOException("No installed folders were found for " + entry.Name);
+
+            var changed = new List<string>();
+            foreach (string folder in installed)
+            {
+                string on = Path.Combine(addonDir, folder);
+                string off = on + DisabledSuffix;
+                bool isOn = Directory.Exists(on);
+                if (isOn == enabled) continue;
+                try
+                {
+                    if (enabled) Directory.Move(off, on);
+                    else Directory.Move(on, off);
+                    changed.Add(folder);
+                }
+                catch
+                {
+                    for (int i = changed.Count - 1; i >= 0; i--)
+                    {
+                        string movedOn = Path.Combine(addonDir, changed[i]);
+                        string movedOff = movedOn + DisabledSuffix;
+                        try
+                        {
+                            if (enabled && Directory.Exists(movedOn)) Directory.Move(movedOn, movedOff);
+                            else if (!enabled && Directory.Exists(movedOff)) Directory.Move(movedOff, movedOn);
+                        }
+                        catch (Exception) { }
+                    }
+                    throw;
+                }
+            }
         }
 
         static void SetEnabledOne(string addonDir, string name, bool enabled)

@@ -733,7 +733,7 @@ namespace AzerothLauncher
     public class IconButton : Control
     {
         readonly Action<Graphics, float, float, Color> icon;
-        bool hover, active, grayed, keyDown;
+        bool hover, active, grayed, keyDown, dropHighlighted;
         public event Action Pressed;
         public event Action<Control, Point> ContextClicked;
         public string GrayedTip;
@@ -742,7 +742,12 @@ namespace AzerothLauncher
         public string Tip
         {
             get { return tip; }
-            set { tip = value; AccessibleDescription = Lang.T(value); }
+            set
+            {
+                tip = value;
+                AccessibleDescription = Lang.T(value);
+                WowButton.Tips.SetToolTip(this, string.IsNullOrEmpty(value) ? null : Lang.T(value));
+            }
         }
 
         public IconButton(Action<Graphics, float, float, Color> icon, Action command)
@@ -758,6 +763,13 @@ namespace AzerothLauncher
         }
 
         public bool Active { get { return active; } set { active = value; Invalidate(); } }
+
+        // A soft gold landing marker used while rearranging Quick Access favorites.
+        public bool DropHighlighted
+        {
+            get { return dropHighlighted; }
+            set { if (dropHighlighted != value) { dropHighlighted = value; Invalidate(); } }
+        }
 
         public bool Grayed
         {
@@ -844,8 +856,16 @@ namespace AzerothLauncher
             Theme.Smooth(g);
             // modern: a soft rounded tile, a gold bar on the left for the open section, a gentle lift on hover
             var tile = new RectangleF(2, 2, s - 4, s - 4);
-            Color fill = grayed ? Theme.Hex("#121118") : active ? Theme.Hex("#2a2636") : hover ? Theme.Hex("#221f2c") : Theme.Hex("#17161f");
-            Armory.Box(g, tile, 7, fill, active ? Theme.Hex("#6b5a32") : hover ? Theme.Hex("#3d3a4a") : Theme.Hex("#26242f"));
+            if (dropHighlighted)
+            {
+                using (var glow = new SolidBrush(Color.FromArgb(34, 240, 192, 80)))
+                    Armory.Box(g, new RectangleF(0, 0, s, s), 9, glow.Color, glow.Color);
+                using (var p = new Pen(Color.FromArgb(70, 240, 192, 80), 2))
+                using (var path = Armory.Round(new RectangleF(1, 1, s - 2, s - 2), 8))
+                    g.DrawPath(p, path);
+            }
+            Color fill = dropHighlighted ? Theme.Hex("#393025") : grayed ? Theme.Hex("#121118") : active ? Theme.Hex("#2a2636") : hover ? Theme.Hex("#221f2c") : Theme.Hex("#17161f");
+            Armory.Box(g, tile, 7, fill, dropHighlighted ? Theme.Hex("#f0c050") : active ? Theme.Hex("#6b5a32") : hover ? Theme.Hex("#3d3a4a") : Theme.Hex("#26242f"));
             if (active)
                 using (var b = new SolidBrush(Theme.Gold)) g.FillRectangle(b, 0, 9, 3, s - 18);
             icon(g, s / 2f, s / 2f, active ? Theme.Gold : hover || keyDown || Focused ? Theme.Hex("#f5e9c8") : grayed ? Theme.Hex("#55524c") : Theme.Hex("#a99c80"));
