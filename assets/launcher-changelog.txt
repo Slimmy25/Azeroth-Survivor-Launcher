@@ -1,3 +1,10 @@
+# v2.9 (2026-10-29)
+
+- First-time setup opens with the requested welcome message inside the secondary menu.
+- Game location selection is explicit; the installer uses the folder the player chooses, and REQUIRES INSTALL opens setup.
+- Setup no longer guesses or creates save and addon folders; the new-player flag follows detection of the game executable.
+- Closing a Community video restores the launcher if the video window minimizes it.
+
 # v2.8 (2026-10-29)
 
 - Fixed update discovery to use the public source repository; launcher downloads, add-ons, and guide videos now publish there too.

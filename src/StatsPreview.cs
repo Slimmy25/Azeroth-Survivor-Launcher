@@ -207,7 +207,7 @@ namespace AzerothLauncher
                 if (sec == "Addons Download") { build = "Addons"; app.addonMode = "download"; app.addonCategory = 0; }
                 else if (sec == "Addons Download 112") { build = "Addons"; app.addonMode = "download"; app.addonCategory = 3; }
                 else if (sec == "Addons") app.addonMode = "installed";
-                if (sec == "Setup" || sec == "Setup Folders") { app.ShowSetupDialog(); build = "Setup"; app.setupPage = sec == "Setup" ? 0 : 2; }
+                if (sec == "Setup" || sec == "Setup Folders") { app.ShowSetupDialog(); build = "Setup"; app.setupPage = sec == "Setup" ? 0 : 3; }
                 if (sec == "Cloud Save") { build = "Options"; app.optionsTab = 1; app.optionsLang = false; }   // Options > CLOUD SAVE
                 else if (sec == "Options") app.optionsTab = 0;
                 app.current = build;

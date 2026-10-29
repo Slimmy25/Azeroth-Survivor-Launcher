@@ -276,6 +276,19 @@ namespace AzerothLauncher
             return !RequireLauncherInstall || Cfg.Bool("installed_by_launcher", false);
         }
 
+        // Persist the requested first-time marker and keep it in sync with the game root folder.
+        // A game is considered present only when its executable is in the selected root.
+        void UpdateNewPlayerFlag()
+        {
+            bool found = File.Exists(Path.Combine(GameDir(), Util.GameExe));
+            bool value = !found;
+            if (!Cfg.Has("new player") || Cfg.Bool("new player", value) != value)
+            {
+                Cfg.Set("new player", value);
+                Cfg.Save();
+            }
+        }
+
         // false while the temporary "install the game with this launcher first" rule is blocking
         public bool GateOpen() { return !RequireLauncherInstall || ClientPresent(); }
 
@@ -703,9 +716,9 @@ namespace AzerothLauncher
             else if (Updating) { playBtn.Label = "UPDATING"; playBtn.FontSize = 20; }
             else if (ClientPresent()) { playBtn.Label = "PLAY"; playBtn.FontSize = 24; }
             else { playBtn.Label = "REQUIRES INSTALL"; playBtn.FontSize = 13; }
-            // grayed out until the first-time setup is done (it installs the game too)
-            playBtn.GrayedTip = "Finish the first-time setup first.";
-            playBtn.Grayed = !GameRunningFlag && !Installing && !Updating && !Cfg.Bool("setup_done", false) && !PreviewMode;
+            // Keep REQUIRES INSTALL clickable: it opens the setup flow so the player can choose a game folder.
+            playBtn.GrayedTip = "";
+            playBtn.Grayed = false;
             Invalidate(new Rectangle(0, 578, W, H - 578));
             RefreshGates();
         }
@@ -912,6 +925,7 @@ namespace AzerothLauncher
         // ------------------------------------------------------------------ first-time setup
         void MaybeFirstRun()
         {
+            UpdateNewPlayerFlag();
             // a new folder (neither the launcher's folder nor the game beside the exe), or settings made for another
             // folder: first-time setup, whatever the settings say, to set up this copy for a new player
             bool newPlace = !File.Exists(Path.Combine(Util.LauncherDir, Util.GameExe)) &&
@@ -924,7 +938,7 @@ namespace AzerothLauncher
                 return;
             }
             setupAsked = true;
-            if (newPlace) { Cfg.Set("setup_done", false); RunSetup(); return; }
+            if (newPlace) { Cfg.Set("setup_done", false); Cfg.Save(); RunSetup(); return; }
             if (AdoptExistingInstall()) return;
             RunSetup();
         }
@@ -1193,11 +1207,7 @@ namespace AzerothLauncher
                 SetStatus("The launcher is updating itself. Please wait until that has finished.");
                 return;
             }
-            if (!ClientPresent())
-            {
-                AskHaveGame();
-                return;
-            }
+            if (!ClientPresent()) { RunSetup(); return; }
             // PLAY first makes sure this is the newest launcher: a newer one is installed (and the launcher restarts)
             // instead of starting the game; when GitHub can't be reached, the game starts as it is
             if (!playChecking && !StartedAfterUpdate && !PreviewMode)
@@ -1521,7 +1531,9 @@ namespace AzerothLauncher
 
         // INSTALL: no window of its own. The download and the install run in the launcher's status line (a bar with the
         // percentage above INSTALLING); pressing INSTALLING asks whether to stop the download.
-        void InstallClient(bool forSetup)
+        void InstallClient(bool forSetup) { InstallClient(forSetup, GameDir()); }
+
+        void InstallClient(bool forSetup, string destination)
         {
             if (Updating)
             {
@@ -1540,19 +1552,19 @@ namespace AzerothLauncher
                 return;
             }
             setupAfterInstall = forSetup;
-            BeginClientDownload();
+            BeginClientDownload(destination);
         }
 
         // The game download, done by the launcher: into <launcher folder>\temp, with the download server's login,
         // then unpacked next to the launcher; the temp folder is deleted afterwards, whatever happened.
-        void BeginClientDownload()
+        void BeginClientDownload(string destination)
         {
             Installing = true;
             RefreshPlayLabel();
             SetStatus("Downloading the game client...");
             SetDownloadBar(true, 0, 0);
             string temp = Path.Combine(Util.LauncherDir, Util.DownloadTempName);
-            string dest = Util.LauncherDir;
+            string dest = Path.GetFullPath(destination);
             installCancel = new ManualResetEvent(false);
             ManualResetEvent cancel = installCancel;
             Bg(delegate
@@ -1806,6 +1818,7 @@ namespace AzerothLauncher
             {
                 Cfg.Set("game_dir", gameDir);
                 Cfg.Set("installed_by_launcher", true);
+                    UpdateNewPlayerFlag();
                 Cfg.Save();
             }
             Invalidate();

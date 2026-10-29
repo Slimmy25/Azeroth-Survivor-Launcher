@@ -774,7 +774,23 @@ namespace AzerothLauncher
             moreOrder = null;
             StopEdge();
             BuildPanel("Community");
+            ShowWindowFront();
+            RestoreAfterCommunityVideoClose();
             return true;
+        }
+
+        void RestoreAfterCommunityVideoClose()
+        {
+            Action restoreIfMinimized = delegate
+            {
+                if (quitting || current != "Community" || setupOpen) return;
+                if (!Visible || WindowState == FormWindowState.Minimized) ShowWindowFront();
+            };
+
+            // Edge is a separate process/window. Its exit and the cleanup of its helpers can briefly minimize
+            // the owning launcher after the close click has already rebuilt the Community page.
+            After(150, restoreIfMinimized);
+            After(700, restoreIfMinimized);
         }
     }
 

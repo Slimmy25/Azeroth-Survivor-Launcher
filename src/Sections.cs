@@ -3307,6 +3307,7 @@ namespace AzerothLauncher
             }
             Cfg.Set("game_dir", d);
             Cfg.Set("installed_by_launcher", true);           // the player's own copy counts as installed
+            UpdateNewPlayerFlag();
             Cfg.Save();
             SetStatus("Game folder set: " + d);
             RefreshPlayLabel();                              // PLAY/INSTALL and the Cloud Save button follow the new folder
