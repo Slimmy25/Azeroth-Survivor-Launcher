@@ -8,6 +8,7 @@ The Guide now explains the game's 0.128.0 co-op player inspection, while the lau
 
 - Added the game's 0.128.0 patch notes verbatim to the launcher's game Changelog.
 - Updated the Co-op Guide with the new party inspection views and the 0.128.0 version requirement; AZS Handbook receives the same guide when installed or updated.
+- Added Azeroth Cursor by Maidenhead, LocalClock by JamieeLee, and Cursor Reticle by Muffla to Add-ons → Download More.
 - Moved Zones & Bosses into the New Player Guide and added distinct favorite images for classes, Codex, Heroic & Endless, Zones & Bosses, the Gear Planner, and jewelry pages.
 - Kept the heart above the hovered link-tree name while opening its menu; dropdowns and hearts now close when the launcher loses focus.
 - The More Videos X and video-player X always return to the featured-video home.

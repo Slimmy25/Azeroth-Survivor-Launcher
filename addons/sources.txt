@@ -25,6 +25,11 @@ Damage-Meter-by-Kexo.zip        | github-latest:kex0/AZSSpellMeter
 # Maidenhead's two: their current versions are pre-releases, which "github-latest" skips, so the exact zips are named
 Azeroth-FieldKit-by-Maidenhead.zip | https://github.com/Maidenquinn/azeroth-fieldkit/releases/download/v0.2.1-review.3/AzerothFieldKit-0.2.1-review.3.zip
 Azeroth-Stats-by-Maidenhead.zip | https://github.com/Maidenquinn/AzerothStats/releases/download/v1.6.0-beta.2/AzerothStats-1.6.0-beta.2.zip
+AzerothCursor-by-Maidenhead.zip | github-latest:Maidenquinn/AzerothCursor:AzerothCursor-
 AZS-Stats-by-Slimjim.zip        | local:AZSStats
+CursorReticle-by-Muffla.zip | github-latest:Muffla/CursorReticle:CursorReticle
+LocalClock-by-JamieeLee.zip | github-latest:JamieeLee/LocalClock-Addon:LocalClock_AzerothSurvivors_
 MinimapButtonBag-by-Tunhadil-LaYt.zip | local:MBB
 BugSack-by-Fritti-Rabbit.zip    | local:!BugGrabber+BugSack
+# Planned only; do not mirror until JamieeLee publishes a player-ready BigCursor release ZIP.
+# https://github.com/JamieeLee/BigCursor/releases/latest currently has no release, and the source archive folder does not match the addon's expected folder.
