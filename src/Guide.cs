@@ -1,4 +1,4 @@
-// The Guide (assets\guide.txt), in three groups (New Player, Gameplay, Theorycrafting): topic cards (every topic open at any time, nothing tracked), topics made of pages, and
+// The Guide (assets\guide.txt), in two groups (New Player and Gameplay), with Theorycrafting as a submenu in Gameplay: topic cards (every topic open at any time, nothing tracked), topics made of pages, and
 // article pages with headings, bullets, tip boxes and video cards.
 //
 // Videos: put a line "@video Title | address" anywhere in a topic or page of guide.txt; the video card shows up
@@ -34,16 +34,15 @@ namespace AzerothLauncher
         public const string TalentBuilder = "Talent Tree Builder";
         static readonly string[][] GuideGroups =
         {
-            new[] { "NEW PLAYER", "Getting Started", "Controls", "Your First Run", "Tips for New Players", "Heroic & Endless",
-                    "Achievements & Rewards", "Addons" },
-            new[] { "GAMEPLAY", "Classes", "Races", "Zones & Bosses", "Level-Ups & Cards", "Talents", "Pickups, Caches & Guardians",
-                    "Gear & the Armory", "Items", "Transmog", "Co-op" },
-            new[] { "THEORYCRAFTING", TalentBuilder, GearPlanner, "Build Guides" },
+            new[] { "NEW PLAYER", "Getting Started", "Controls", "Your First Run", "Tips for New Players", "Pickups, Caches & Guardians",
+                    "Talents", "Gear & the Armory", "Items", "Transmog", "Addons", "Achievements & Rewards", "Level-Ups & Cards", "Co-op" },
+            new[] { "GAMEPLAY", "Heroic & Endless", "Classes", "Races", "Zones & Bosses", "Build Guides" },
+            new[] { "THEORYCRAFTING", TalentBuilder, GearPlanner },
         };
         int guideGroup;                                       // the group whose tabs are shown
-        bool guideMain = true;                                // the main page: every topic as a card, by group
+        bool guideMain = true;                                // the main page: choose New Player or Gameplay
         bool gBuilder;                                        // the Talent Tree Builder is open
-        int guideGroupPage = -1;                              // the main page shows only this group (Theorycrafting button)
+        int guideGroupPage = -1;                              // -1 chooser; otherwise the selected category (or Theorycrafting submenu)
 
         static int GroupOf(string title)
         {
@@ -51,6 +50,139 @@ namespace AzerothLauncher
                 for (int i = 1; i < GuideGroups[g].Length; i++)
                     if (string.Equals(GuideGroups[g][i], title, StringComparison.OrdinalIgnoreCase)) return g;
             return 0;
+        }
+
+        void LoadGuideFavorites()
+        {
+            var saved = Json.AsList(Json.Get(Cfg.Data, "guide_favorites"));
+            if (saved == null) return;
+            for (int i = 0; i < Math.Min(saved.Count, GuideFavoriteCount); i++)
+            {
+                var row = Json.AsDict(saved[i]);
+                if (row == null) continue;
+                string topic = Json.Str(row, "topic"), page = Json.Str(row, "page");
+                string kind = Json.Str(row, "kind");
+                if (kind.Length == 0) kind = "guide";          // earlier local favorites stored only the topic and page
+                if (kind != "guide" || topic.Length > 0) guideFavorites[i] = new GuideFavoriteRoute(kind, topic, page);
+            }
+            CompactGuideFavorites();
+        }
+
+        void SaveGuideFavorites()
+        {
+            var saved = new List<object>();
+            for (int i = 0; i < guideFavorites.Length; i++)
+            {
+                var row = new Dictionary<string, object>();
+                if (guideFavorites[i] != null)
+                {
+                    row.Add("kind", guideFavorites[i].Kind);
+                    row.Add("topic", guideFavorites[i].Topic);
+                    row.Add("page", guideFavorites[i].Page);
+                }
+                saved.Add(row);
+            }
+            Cfg.Set("guide_favorites", saved);
+            Cfg.Save();
+        }
+
+        void OpenGuideFavorite(int slot)
+        {
+            GuideFavoriteRoute favorite = guideFavorites[slot];
+            if (favorite == null)
+            {
+                SetStatus("Hover a final Guide item and click its heart to add it to Quick Access.");
+                return;
+            }
+            if (favorite.Kind == "builder" || favorite.Kind == "planner")
+            {
+                if (current != "Guide" || !side.Visible) ShowSection("Guide");
+                OpenGuideTab(favorite.Kind == "builder" ? -2 : -3);
+                RefreshStrip();
+                return;
+            }
+            var topics = Data.Guide;
+            int topic = topics.FindIndex(delegate(GuideTopic t) { return string.Equals(t.Title, favorite.Topic, StringComparison.Ordinal); });
+            int page = -1;
+            if (topic >= 0 && favorite.Page.Length > 0)
+                page = topics[topic].Pages.FindIndex(delegate(GuidePage p) { return string.Equals(p.Title, favorite.Page, StringComparison.Ordinal); });
+            if (topic < 0 || (favorite.Page.Length > 0 && page < 0))
+            {
+                SetStatus("This favorite no longer matches a Guide page. Bind the page again to update it.");
+                return;
+            }
+            if (current != "Guide" || !side.Visible) ShowSection("Guide");
+            SetGuideView(topic, page);
+        }
+
+        void CompactGuideFavorites()
+        {
+            int next = 0;
+            for (int i = 0; i < guideFavorites.Length; i++)
+                if (guideFavorites[i] != null)
+                {
+                    if (i != next) { guideFavorites[next] = guideFavorites[i]; guideFavorites[i] = null; }
+                    next++;
+                }
+        }
+
+        void AddGuideFavorite(GuideFavoriteRoute favorite)
+        {
+            for (int i = 0; i < guideFavorites.Length; i++)
+                if (guideFavorites[i] != null && guideFavorites[i].Kind == favorite.Kind &&
+                    guideFavorites[i].Topic == favorite.Topic && guideFavorites[i].Page == favorite.Page)
+                {
+                    SetStatus(Lang.T(favorite.PageLabel) + " is already in Quick Access " + (i + 1) + ".");
+                    return;
+                }
+            CompactGuideFavorites();
+            int slot = Array.FindIndex(guideFavorites, delegate(GuideFavoriteRoute r) { return r == null; });
+            if (slot < 0) { SetStatus("All ten Quick Access favorites are full. Remove one before adding another."); return; }
+            guideFavorites[slot] = favorite;
+            SaveGuideFavorites();
+            RefreshStrip();
+            SetStatus(Lang.T(favorite.PageLabel) + " added to the bottom of Quick Access.");
+        }
+
+        void EnableGuideCardFavorite(GuideCard card, GuideFavoriteRoute favorite)
+        {
+            card.CanFavorite = true;
+            card.FavoriteClicked += delegate { AddGuideFavorite(favorite); };
+        }
+
+        bool MoveGuideFavoriteTo(int source, int target)
+        {
+            CompactGuideFavorites();
+            int count = 0;
+            while (count < guideFavorites.Length && guideFavorites[count] != null) count++;
+            if (source < 0 || source >= count || count < 2) return false;
+            if (target >= count) target = count - 1;
+            if (target < 0) target = 0;
+            if (source == target) return false;
+            GuideFavoriteRoute route = guideFavorites[source];
+            if (source < target)
+                for (int i = source; i < target; i++) guideFavorites[i] = guideFavorites[i + 1];
+            else
+                for (int i = source; i > target; i--) guideFavorites[i] = guideFavorites[i - 1];
+            guideFavorites[target] = route;
+            RefreshStrip();
+            return true;
+        }
+
+        void ShowGuideFavoriteMenu(int slot)
+        {
+            if (guideFavorites[slot] == null) return;
+            var menu = new ContextMenuStrip();
+            var clear = new ToolStripMenuItem(Lang.T("Clear Quick Access " + (slot + 1)));
+            clear.Click += delegate
+            {
+                guideFavorites[slot] = null;
+                CompactGuideFavorites();
+                SaveGuideFavorites();
+                RefreshStrip();
+            };
+            menu.Items.Add(clear);
+            menu.Show(Cursor.Position);
         }
 
         // the tabs of a group: the topics' indexes in Data.Guide (-2 for the Talent Tree Builder), in the group's order
@@ -203,7 +335,7 @@ namespace AzerothLauncher
 
         void GuideMainPage() { GuideGroupPage(-1); }
 
-        // the main page, or one group's page (Guide › Theorycrafting): its topics and tools as cards
+        // the main page, or one group's page (Guide › Gameplay › Theorycrafting): its topics and tools as cards
         public void GuideGroupPage(int group)
         {
             if (gPlanner) ResetPlannerState();
@@ -349,6 +481,7 @@ namespace AzerothLauncher
             PanelGuideView();
             GuideTrail();
             GuideTrailMenus();
+            RefreshStrip();
         }
 
         // a link to a spell: its row on the page, scrolled to near the top and lit up
@@ -695,9 +828,28 @@ namespace AzerothLauncher
                 sp.SuspendLayout();
                 while (sp.Controls.Count > 0) { Control c = sp.Controls[0]; sp.Controls.RemoveAt(0); c.Dispose(); }
                 int w = sp.ClientSize.Width - 8, y = 4;
-                if (guideQuery.Trim().Length == 0)
+                if (guideQuery.Trim().Length == 0 && guideGroupPage < 0)
                 {
-                    // the main page: the three groups, each with its topics as cards
+                    // The Guide button opens a choice of its two major categories.
+                    int gap = (int)(16 * Theme.Zoom), cardH = (int)(230 * Theme.Zoom);
+                    int cardW = (w - gap) / 2;
+                    string[] descriptions =
+                    {
+                        Lang.T("Start here: learn the controls, your first run, and the systems that help you get going."),
+                        Lang.T("Explore classes, zones, builds, and the systems that shape harder runs.")
+                    };
+                    for (int g = 0; g < 2; g++)
+                    {
+                        int group = g;
+                        var card = new GuideCard("", GroupName(g), descriptions[g], 0, cardW, cardH);
+                        card.Location = new Point(4 + g * (cardW + gap), 18);
+                        card.Pressed += delegate { GuideGroupPage(group); };
+                        sp.Controls.Add(card);
+                    }
+                }
+                else if (guideQuery.Trim().Length == 0)
+                {
+                    // A category page lists its topics; Theorycrafting remains a submenu within Gameplay.
                     const int gap = 10;
                     int ch = (int)(108 * Theme.Zoom);
                     for (int g = 0; g < GuideGroups.Length; g++)
@@ -718,11 +870,13 @@ namespace AzerothLauncher
                             {
                                 c.Title = TalentBuilder;
                                 c.Desc = Lang.T("Pick a class and try out a build of up to 51 points on its three talent trees.");
+                                EnableGuideCardFavorite(c, new GuideFavoriteRoute("builder", "", ""));
                             }
                             else if (t == -3)
                             {
                                 c.Title = GearPlanner;
                                 c.Desc = Lang.T("Put gear and jewelry on a character sheet like the game's and see what they add.");
+                                EnableGuideCardFavorite(c, new GuideFavoriteRoute("planner", "", ""));
                             }
                             else if (t == -4)
                             {
@@ -735,6 +889,8 @@ namespace AzerothLauncher
                                 c.Desc = topics[t].Desc;
                                 c.Videos = CountVideos(topics[t]);
                                 c.Pages = topics[t].Pages.Count;
+                                if (topics[t].Pages.Count == 0)
+                                    EnableGuideCardFavorite(c, new GuideFavoriteRoute("guide", topics[t].Title, ""));
                             }
                             c.Pressed += delegate { OpenGuideTab(t); };
                         });
@@ -802,12 +958,15 @@ namespace AzerothLauncher
                 {
                     c.Title = h.Key == -2 ? TalentBuilder : GearPlanner;
                     c.Desc = GroupName(2) + " · " + lines[i];
+                    EnableGuideCardFavorite(c, new GuideFavoriteRoute(h.Key == -2 ? "builder" : "planner", "", ""));
                     c.Pressed += delegate { OpenGuideTab(h.Key); };
                     return;
                 }
                 GuideTopic topic = topics[h.Key];
                 c.Title = h.Value < 0 ? topic.Title : topic.Pages[h.Value].Title;
                 c.Desc = (h.Value < 0 ? "" : topic.Title + " · ") + lines[i];   // where it is, and the line it was found in
+                if (h.Value >= 0 || topic.Pages.Count == 0)
+                    EnableGuideCardFavorite(c, new GuideFavoriteRoute("guide", topic.Title, h.Value < 0 ? "" : topic.Pages[h.Value].Title));
                 c.Pressed += delegate { SetGuideView(h.Key, h.Value); };
             });
         }
@@ -855,6 +1014,7 @@ namespace AzerothLauncher
                 c.Title = topic.Pages[i].Title;
                 c.Desc = topic.Pages[i].Desc;
                 c.Videos = topic.Pages[i].Videos.Count;
+                EnableGuideCardFavorite(c, new GuideFavoriteRoute("guide", topic.Title, topic.Pages[i].Title));
                 c.Pressed += delegate { SetGuideView(ti, i); };
             });
         }
@@ -1126,7 +1286,9 @@ namespace AzerothLauncher
     {
         public string Title, Desc, Label;
         public int Number, Videos, Pages;
+        public bool CanFavorite;
         public event Action Pressed;
+        public event Action FavoriteClicked;
         bool hover;
         readonly float zoom;
 
@@ -1145,7 +1307,10 @@ namespace AzerothLauncher
         protected override void OnMouseUp(MouseEventArgs e)
         {
             base.OnMouseUp(e);
-            if (e.Button == MouseButtons.Left && ClientRectangle.Contains(e.Location)) WowButton.Fire(Pressed);
+            if (e.Button != MouseButtons.Left || !ClientRectangle.Contains(e.Location)) return;
+            if (CanFavorite && hover && new Rectangle(Width - 30, 2, 26, 27).Contains(e.Location))
+            { WowButton.Fire(FavoriteClicked); return; }
+            WowButton.Fire(Pressed);
         }
 
         internal static GraphicsPath Round(RectangleF r, float rad)
@@ -1202,7 +1367,7 @@ namespace AzerothLauncher
                 Theme.CenterText(g, Number.ToString(), Theme.F(11, FontStyle.Bold), Theme.Gold, c, null);
                 x += d + 12;
             }
-            float y = 12, tw = Width - x - 14;
+            float y = 12, tw = Width - x - 14 - (CanFavorite ? 28 : 0);
             if (!string.IsNullOrEmpty(Label))
             {
                 Pill(g, Lang.T(Label), x, y, GuideTheme.Red, Color.White, small);
@@ -1230,6 +1395,16 @@ namespace AzerothLauncher
             {
                 float bw = Pill(g, kv.Key, bx, by, kv.Value, Theme.Hex("#fff2d8"), small);
                 bx += bw + 6;
+            }
+            if (CanFavorite && hover)
+            {
+                var heartBox = new RectangleF(Width - 30, 2, 26, 27);
+                using (var path = Round(heartBox, 5))
+                using (var b = new SolidBrush(Theme.Hex("#30251a"))) g.FillPath(b, path);
+                using (var path = Round(heartBox, 5))
+                using (var p = new Pen(Theme.Gold, 1)) g.DrawPath(p, path);
+                using (var heartFont = new Font("Segoe UI Symbol", 16 * zoom, FontStyle.Regular, GraphicsUnit.Point))
+                    Theme.CenterText(g, "♥", heartFont, Theme.Gold, heartBox, null);
             }
         }
     }

@@ -135,7 +135,7 @@ namespace AzerothLauncher
             Controls.Add(discordIcon);
             // the enlarged support heart, followed immediately by the Discord icon
             var heart = new HeartIcon(Lang.T("Love the game? Support the Dev by buying him a coffee") + "\n" + SupportUrl);
-            heart.Bounds = new Rectangle(697, 203, 26, 20);
+            heart.Bounds = new Rectangle(697, 203, 26, 26);
             heart.Click += delegate { Util.OpenInShell(SupportUrl); };
             Controls.Add(heart);
             LayoutNav();
@@ -733,8 +733,6 @@ namespace AzerothLauncher
             bool statsOff = !StatsAddonActive();
             WowButton sb;
             if (nav.TryGetValue("Stats", out sb)) { sb.GrayedTip = StatsNeedAddon; sb.Grayed = statsOff; }
-            IconButton si;
-            if (stripBtns != null && stripBtns.TryGetValue("Stats", out si)) { si.GrayedTip = StatsNeedAddon; si.Grayed = statsOff; }
             bool off = !GateOpen();
             foreach (string name in new[] { "Cloud Save", "Addons" })
             {
@@ -744,12 +742,6 @@ namespace AzerothLauncher
                 {
                     b.GrayedTip = tip;
                     b.Grayed = off;
-                }
-                IconButton s;
-                if (stripBtns != null && stripBtns.TryGetValue(name, out s))
-                {
-                    s.GrayedTip = tip;
-                    s.Grayed = off;
                 }
             }
         }
@@ -1857,6 +1849,7 @@ namespace AzerothLauncher
 
         // ---- the launcher itself: compared with the exe on the latest GitHub release ----
         LauncherRelease launcherRelease;                     // a different (newer) launcher on GitHub, when found
+        string launcherUpdateMessage;
         bool startupLauncherCheck;                           // the start-up check is still waiting for GitHub
 
         // Started by a launcher update? Then a launcher that still differs is offered, not forced,
@@ -1904,7 +1897,9 @@ namespace AzerothLauncher
                 if (manual)
                 {
                     SetStatus("Could not check for launcher updates.");
-                    Warn("Launcher update", err);
+                    launcherUpdateMessage = "Could not check for launcher updates: " + err;
+                    optionsTab = 4; optionsAbout = false; optionsLang = false;
+                    ShowSection("Options"); optionsTab = 4; BuildPanel("Options");
                 }
             }
             else if (launcherRelease != null)
@@ -1916,7 +1911,9 @@ namespace AzerothLauncher
             else if (manual)
             {
                 SetStatus("The launcher is up to date (" + rel.Name + ").");
-                Info("Launcher update", "You have the newest launcher (" + rel.Name + ").");
+                launcherUpdateMessage = "You have the newest launcher (" + rel.Name + ").";
+                optionsTab = 4; optionsAbout = false; optionsLang = false;
+                ShowSection("Options"); optionsTab = 4; BuildPanel("Options");
             }
         }
 

@@ -665,7 +665,10 @@ namespace AzerothLauncher
         readonly Action<Graphics, float, float, Color> icon;
         bool hover, active, grayed;
         public event Action Pressed;
+        public event Action ContextClicked;
         public string GrayedTip;
+        public string Tip;
+        public bool SuppressNextClick;
 
         public IconButton(Action<Graphics, float, float, Color> icon, Action command)
         {
@@ -696,7 +699,7 @@ namespace AzerothLauncher
         {
             hover = true;
             Invalidate();
-            WowButton.Tips.SetToolTip(this, grayed && !string.IsNullOrEmpty(GrayedTip) ? Lang.T(GrayedTip) : null);
+            WowButton.Tips.SetToolTip(this, !string.IsNullOrEmpty(Tip) ? Lang.T(Tip) : grayed && !string.IsNullOrEmpty(GrayedTip) ? Lang.T(GrayedTip) : null);
             base.OnMouseEnter(e);
         }
 
@@ -705,7 +708,11 @@ namespace AzerothLauncher
         protected override void OnMouseUp(MouseEventArgs e)
         {
             base.OnMouseUp(e);
-            if (!grayed && e.Button == MouseButtons.Left && ClientRectangle.Contains(e.Location)) WowButton.Fire(Pressed);
+            if (grayed) return;
+            if (e.Button == MouseButtons.Left && SuppressNextClick) { SuppressNextClick = false; return; }
+            if (!ClientRectangle.Contains(e.Location)) return;
+            if (e.Button == MouseButtons.Right) WowButton.Fire(ContextClicked);
+            else if (e.Button == MouseButtons.Left) WowButton.Fire(Pressed);
         }
 
         protected override void OnPaint(PaintEventArgs e)

@@ -19,5 +19,5 @@ The launcher layout is inspired by the WoW Retro Launcher by Parquelle (https://
 # Thanks
 - Keijin has been there since the beginning, and is the main reason I wanted to get into this.
 - Kraatos spent a little time helping me launch into open source; I'm grateful for his insight on problems still to come.
-- Maidenhead, a friend and fellow coder, makes cool addons and also inspired me to get started.
+- Maidenhead has been an exceptional advisor, spending extensive time helping me clarify and realize my vision for this project. His insight and support have been invaluable.
 - The Mod team has shown overwhelming support for keeping this transparent, and has given me a fair and reasonable time to put my addon up for review. At the time of writing it is still pending review: fingers crossed!

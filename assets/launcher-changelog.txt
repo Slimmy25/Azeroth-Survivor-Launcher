@@ -1,3 +1,17 @@
+# v2.5 (2026-10-28)
+## In short
+The Guide is organized into New Player and Gameplay, and its final pages can be saved to ten numbered Quick Access favorites.
+
+## Guide and Quick Access
+- Split the Guide into New Player and Gameplay sections, with Theorycrafting under Gameplay and links preserved between topics.
+- Hover a final Guide page and click its heart to add it to the next Quick Access slot.
+- Added ten numbered Quick Access slots. Click a favorite to open it, hold and drag to reorder, or right-click to remove it.
+
+## Credits
+- Updated Maidenhead's credit to recognize his extensive advising and help realizing the project's vision.
+
+---
+
 # v2.4 (2026-10-28)
 ## In short
 Talent builds now load as soon as you select their saved name, and share codes have a validated, versioned format for reliable importing between players. The test executable is removed; this is the sole launcher release.
