@@ -891,8 +891,8 @@ namespace AzerothLauncher
             toolTitle.TextAlign = ContentAlignment.MiddleCenter;
             toolTitle.Location = new Point(10, 12);
             tools.Controls.Add(toolTitle);
-            var fieldX = 16;
-            var fieldW = boxW - 32;
+            var fieldW = tools.ClientSize.Width - 32;
+            var fieldX = (tools.ClientSize.Width - fieldW) / 2;
             var buildName = new TextBox();
             buildName.Font = Theme.F(9, FontStyle.Regular);
             buildName.BackColor = Theme.Hex("#211b2a");
@@ -914,8 +914,8 @@ namespace AzerothLauncher
             int actionW = Math.Min(boxW - 32, Math.Max(150, (int)(boxW * 0.62)));
             int actionX = (tools.ClientSize.Width - actionW) / 2;
             int actionH = 28;
-            int actionGap = Math.Max(4, (tools.ClientSize.Height - 110 - 8 - actionH * 4) / 3);
-            int actionY = 110;
+            int actionY = saved.Bottom + 10;
+            int actionGap = Math.Max(4, (tools.ClientSize.Height - actionY - actionH * 4) / 4);
             Func<Dictionary<string, object>> classBuilds = delegate
             {
                 var cfg = Config.Load();
@@ -929,7 +929,7 @@ namespace AzerothLauncher
                 saved.Items.Clear();
                 foreach (var kv in classBuilds())
                     if (kv.Value is string) saved.Items.Add(kv.Key);
-                if (saved.Items.Count > 0) saved.SelectedIndex = 0;
+                saved.SelectedIndex = -1;
             };
             var saveBuild = new WowButton(Lang.T("SAVE"), delegate
             {
@@ -968,7 +968,7 @@ namespace AzerothLauncher
                 if (!classBuilds().TryGetValue(Convert.ToString(saved.SelectedItem), out code)) return;
                 applyBuild(TalentBuild.Parse(Convert.ToString(code), cls));
             };
-            saved.SelectedIndexChanged += delegate { loadSelected(); };
+            saved.SelectionChangeCommitted += delegate { loadSelected(); };
             var loadBuild = new WowButton(Lang.T("LOAD"), loadSelected, actionW, actionH, 9);
             loadBuild.Location = new Point(actionX, actionY + actionH + actionGap);
             tools.Controls.Add(loadBuild);
@@ -1001,6 +1001,16 @@ namespace AzerothLauncher
             }, actionW, actionH, 9);
             importBuild.Location = new Point(actionX, actionY + (actionH + actionGap) * 3);
             tools.Controls.Add(importBuild);
+            Action layoutActions = delegate
+            {
+                int actionSpacing = Math.Max(4, (tools.ClientSize.Height - actionY - actionH * 4) / 4);
+                saveBuild.Location = new Point((tools.ClientSize.Width - saveBuild.Width) / 2, actionY);
+                loadBuild.Location = new Point((tools.ClientSize.Width - loadBuild.Width) / 2, actionY + actionH + actionSpacing);
+                exportBuild.Location = new Point((tools.ClientSize.Width - exportBuild.Width) / 2, actionY + (actionH + actionSpacing) * 2);
+                importBuild.Location = new Point((tools.ClientSize.Width - importBuild.Width) / 2, actionY + (actionH + actionSpacing) * 3);
+            };
+            tools.Resize += delegate { layoutActions(); };
+            layoutActions();
             sp.Controls.Add(tools);
             refreshSaved();
             y += Math.Max(reset.Height, left.Height) + 6;

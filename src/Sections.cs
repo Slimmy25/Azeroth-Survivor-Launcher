@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace AzerothLauncher
 {
-    // A borderless, color-keyed overlay: only the heart is visible, and it follows the pointer.
+    // A borderless, color-keyed overlay: only the heart is visible, anchored to the hovered path name.
     sealed class FavoriteHeartPopup : Form
     {
         public event Action FavoriteClicked;
@@ -28,9 +28,10 @@ namespace AzerothLauncher
                      ControlStyles.OptimizedDoubleBuffer | ControlStyles.ResizeRedraw, true);
         }
 
-        public void CenterOn(Point screenPoint)
+        public void CenterOn(Rectangle screenAnchor)
         {
-            Location = new Point(screenPoint.X - Width / 2, screenPoint.Y - Height / 2);
+            Location = new Point(screenAnchor.Left + (screenAnchor.Width - Width) / 2,
+                                 screenAnchor.Top + (screenAnchor.Height - Height) / 2);
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -87,7 +88,7 @@ namespace AzerothLauncher
         int hover = -1;                                      // the step under the pointer (-2: the back arrow)
         int favoriteHoverStep = -1;
         FavoriteHeartPopup favoritePopup;
-        int favoritePopupStep = -1;
+        int favoritePopupStep = -1, quietFavoriteStep = -1;
 
         public SideHead()
         {
@@ -133,6 +134,7 @@ namespace AzerothLauncher
         // "Lost?" beside the X: for anyone not sure how to get around (its width follows the word in the language)
         int HelpW { get { return 26 + (int)TextRenderer.MeasureText(Lang.T("Lost?"), Theme.F(9, FontStyle.Bold)).Width; } }
         Rectangle HelpBox { get { return HelpClicked != null && helpShown ? new Rectangle(Width - (closable ? 32 : 9) - HelpW, 9, HelpW, 18) : Rectangle.Empty; } }
+        public Point HelpScreenAnchor { get { Rectangle box = HelpBox; return box.IsEmpty ? PointToScreen(Point.Empty) : PointToScreen(new Point(box.Left + box.Width / 2, box.Bottom)); } }
         Rectangle BackBox { get { return BackClicked != null ? new Rectangle(44, 8, 30, 20) : Rectangle.Empty; } }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -302,6 +304,7 @@ namespace AzerothLauncher
             favoritePopupStep = step;
             popup.FavoriteClicked += delegate
             {
+                quietFavoriteStep = step;                    // do not reopen until the pointer leaves this path name
                 CloseFavoritePopup();
                 WowButton.Fire(add);
             };
@@ -311,7 +314,7 @@ namespace AzerothLauncher
                 popup.Dispose();
             };
             popup.Show(FindForm());
-            popup.CenterOn(Cursor.Position);
+            popup.CenterOn(RectangleToScreen(anchor));
         }
 
         void HoverTick()
@@ -319,15 +322,13 @@ namespace AzerothLauncher
             Point pt = PointToClient(Cursor.Position);
             int s = ClientRectangle.Contains(pt) ? StepAt(pt) : -1;
             int favoriteStep = ClientRectangle.Contains(pt) ? FavoriteAt(pt) : -1;
+            if (favoriteStep != quietFavoriteStep) quietFavoriteStep = -1;
             if (favoritePopup != null && !favoritePopup.IsDisposed)
             {
-                if (favoriteStep == favoritePopupStep)
-                {
-                    favoritePopup.CenterOn(Cursor.Position);
-                    return;
-                }
+                if (favoriteStep == favoritePopupStep || favoritePopup.Bounds.Contains(Cursor.Position)) return;
                 CloseFavoritePopup();
             }
+            if (favoriteStep == quietFavoriteStep) return;
             if (favoriteStep >= 0)
             {
                 if (openMenu != null && !openMenu.IsDisposed) openMenu.Close();
@@ -605,7 +606,7 @@ namespace AzerothLauncher
             sideHead.CloseClicked = CloseSide;
             sideHead.HelpClicked = delegate                  // a small note beside "Lost?", not a window over the launcher
             {
-                GuideHover.ShowPicture(sideHead, Lang.T("Lost?"), Lang.T(LostNote), PathExample());
+                GuideHover.ShowPictureAt(sideHead, Lang.T("Lost?"), Lang.T(LostNote), PathExample(), sideHead.HelpScreenAnchor);
             };
             sideHead.Moved = delegate(Point p)
             {
@@ -628,12 +629,12 @@ namespace AzerothLauncher
                 {
                     GuideFavoriteRoute route = guideFavorites[slot];
                     Image favoriteIcon = null;
-                    if (route != null && route.ClassKey.Length > 0)
+                    if (route != null && (route.Kind == "builder" || route.Kind == "builderClass"))
+                        favoriteIcon = SpellIcons.TalentButton(favoriteBtns[slot]);
+                    else if (route != null && route.ClassKey.Length > 0)
                         favoriteIcon = SpellIcons.Class(route.ClassKey, favoriteBtns[slot]);
                     else if (route != null && route.Kind == "planner")
                         favoriteIcon = SpellIcons.Race("human", favoriteBtns[slot]);
-                    else if (route != null && route.Kind == "builder")
-                        favoriteIcon = SpellIcons.TalentButton(favoriteBtns[slot]);
                     else if (route != null && route.Kind == "guide" &&
                              string.Equals(route.Topic, "Zones & Bosses", StringComparison.OrdinalIgnoreCase))
                         favoriteIcon = SpellIcons.Icon("inv_misc_groupneedmore", favoriteBtns[slot]);
@@ -935,9 +936,9 @@ namespace AzerothLauncher
             if (name == "Addons") RefreshGates();             // AZS Stats switched on or off: the Stats buttons follow
         }
 
-        const string LostNote = "Save: Hover a path name and click the heart.\nOpen: Click a favorite.\nMove: Hold left-click and drag, or press Shift+Up/Down.\nRemove: Right-click or press Menu/Shift+F10, then choose Remove. Press Esc to cancel.";
+        const string LostNote = "Save: Hover a name. Click the heart.\nOpen: Click a favorite.\nMove: Hold left-click and drag. Shift+Up/Down also works.\nRemove: Right-click it, then choose Remove. Press Esc to cancel.";
 
-        // the "Lost?" note shows the pointer-centered heart and numbered Quick Access slots
+        // the "Lost?" note shows the breadcrumb-centered heart and numbered Quick Access slots
         static readonly Dictionary<string, Bitmap> pathExamples = new Dictionary<string, Bitmap>();
 
         static Bitmap PathExample()
@@ -985,7 +986,7 @@ namespace AzerothLauncher
                 // This heart has no panel; it is centered over the hovered breadcrumb word.
                 using (var heart = new GraphicsPath())
                 {
-                    float hs = 17, hx = classCenter - hs / 2f, hy = 23;
+                    float hs = 24, hx = classCenter - hs / 2f, hy = 27;
                     heart.AddBezier(hx + hs / 2, hy + hs * 0.95f, hx - hs * 0.15f, hy + hs * 0.45f,
                                     hx + hs * 0.12f, hy - hs * 0.12f, hx + hs / 2, hy + hs * 0.25f);
                     heart.AddBezier(hx + hs / 2, hy + hs * 0.25f, hx + hs * 0.88f, hy - hs * 0.12f,

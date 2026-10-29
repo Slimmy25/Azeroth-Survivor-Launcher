@@ -527,6 +527,27 @@ namespace AzerothLauncher
                 Para(g, Lang.T("4 piece: four pieces at 1 star. 8 piece: all eight at 3 stars. Everything else in the planner is emptied."), fSmall, Dim, r.X + 10, y + 2, r.Width - 20, r.Bottom - 4);
         }
 
+        // The Tier Bonus picker shows what each choice does before it replaces the current planner.
+        void ShowTierBonus(string[] tier)
+        {
+            if (tier == null || tier.Length < 2) return;
+            bool eight = tier[1] == "8";
+            string name = Items.SetName(cls, tier[0]);
+            string body;
+            if (eight)
+            {
+                string effect = Items.EightPiece(cls, tier[0]);
+                body = Lang.T("All 8 armor pieces at 3+ stars") + ": " + (effect ?? Lang.T("not entered yet"));
+                body += "\n\n" + Lang.T("At 5 stars on all 8 pieces, this bonus is half again as strong.");
+            }
+            else
+            {
+                Items.SetBonus effect = Items.FourPiece(tier[0]);
+                body = Lang.T("4 armor pieces at 1+ stars") + ": " + (effect != null ? effect.Text : Lang.T("not entered yet"));
+            }
+            GuideHover.ShowHelp(this, name + " — " + Lang.T(eight ? "8-piece bonus" : "4-piece bonus"), body);
+        }
+
         void Frame(Graphics g, Rectangle r)
         {
             using (var path = Armory.Round(r, 8))
@@ -625,6 +646,8 @@ namespace AzerothLauncher
 
         protected override void OnMouseMove(MouseEventArgs e)
         {
+            int oldTier = hoverTier;
+            bool oldHelp = hoverHelp;
             string s = SlotAt(e.Location);
             int r = s == null ? RowAt(e.Location) : -1;
             int hm = -1, ht = -1;
@@ -636,14 +659,18 @@ namespace AzerothLauncher
             {
                 hoverHelp = hh;
                 Invalidate();
-                if (hh)
+            }
+            if (hh)
+            {
+                if (!oldHelp)
                 {
                     string body = Lang.T("The bonuses of everything chosen, added together, with the set bonuses reached. Click a piece to add a star (up to 5, then back to 0); right-click to take it off.");
                     if (unknownPieces > 0) body = Lang.T("Pieces with bonuses not known yet") + ": " + unknownPieces + ". " + body;
                     GuideHover.ShowHelp(this, Lang.T("How are gear stats calculated?"), body);
                 }
-                else GuideHover.Hide();
             }
+            else if (ht >= 0 && (ht != oldTier || oldHelp)) ShowTierBonus(tierBoxes[ht].Value);
+            else if (oldTier >= 0 || oldHelp) GuideHover.Hide(this);
             Cursor = hh ? Cursors.Help : (s != null || r >= 0 || hm >= 0 || ht >= 0 ? Cursors.Hand : Cursors.Default);
             if (s != hover || r != hoverRow)
             {

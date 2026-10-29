@@ -701,6 +701,13 @@ namespace AzerothLauncher
             ShowCore(owner, title, body, null, null, false);
         }
 
+        public static void ShowPictureAt(Control owner, string title, string body, Image picture, Point screenAnchor)
+        {
+            if (box == null || box.IsDisposed) box = new GuideHover();
+            box.picture = picture;
+            ShowCore(owner, title, body, null, null, false, screenAnchor);
+        }
+
         public static void ShowHelp(Control owner, string title, string body)
         {
             ShowCore(owner, title, body, null, null, false);
@@ -734,6 +741,11 @@ namespace AzerothLauncher
 
         static void ShowCore(Control owner, string title, string body, Image icon, string model, bool applyGear)
         {
+            ShowCore(owner, title, body, icon, model, applyGear, null);
+        }
+
+        static void ShowCore(Control owner, string title, string body, Image icon, string model, bool applyGear, Point? screenAnchor)
+        {
             if (box == null || box.IsDisposed) box = new GuideHover();
             box.icon = icon;
             box.model = model;
@@ -749,11 +761,13 @@ namespace AzerothLauncher
             if (icon != null) th = Math.Max(th, 36);
             int bh;
             using (var mg = Graphics.FromImage(measure)) bh = box.Flow(mg, bf, false);
-            Point p = Cursor.Position;
+            Point p = screenAnchor.HasValue ? screenAnchor.Value : Cursor.Position;
             var size = new Size(W, th + bh + 22 + (model != null ? ModelH + 8 : 0) + (pic != null ? pic.Height + 10 : 0));
             Rectangle screen = Screen.FromPoint(p).WorkingArea;
             int x = Math.Min(p.X + 16, screen.Right - size.Width - 4), y = p.Y + 20;
             if (y + size.Height > screen.Bottom) y = p.Y - size.Height - 8;
+            x = Math.Max(screen.Left + 4, Math.Min(x, screen.Right - size.Width - 4));
+            y = Math.Max(screen.Top + 4, Math.Min(y, screen.Bottom - size.Height - 4));
             box.Bounds = new Rectangle(x, y, size.Width, size.Height);
             box.Invalidate();
             if (!box.Visible) box.Show();

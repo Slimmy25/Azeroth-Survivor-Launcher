@@ -1,8 +1,10 @@
 # Azeroth Survivors Launcher
 
-A free, community-made Windows launcher for **[Azeroth Survivors](https://wow.aethus.pl/)**, the survivors-style game made
-by **Aethus**. It gets the game onto your PC, keeps it up to date, manages your addons, teaches new players how the
-game works, gives you tools to plan builds, and brings the community's videos to your home screen.
+> **Azeroth Survivors Launcher** is a free Windows companion for the game: install and update it, manage addons and
+> cloud saves, read the Guide, track runs, and plan builds. The launcher is community-made; the game remains hosted
+> by its endorsed download sources.
+
+It supports **[Azeroth Survivors](https://wow.aethus.pl/)**, the survivors-style game made by **Aethus**.
 
 This is a fan project. It is not made by Aethus, and it is not affiliated with or endorsed by Blizzard Entertainment.
 The launcher does not contain or host the game: it downloads it from the game's own download hosts. See
@@ -55,14 +57,12 @@ nothing else: it runs on the .NET Framework 4.8 that comes with Windows 10 and 1
   during setup).
 
 ### The Guide
-Everything a player needs, in three groups:
-- **New Player**: getting started, controls, your first run, tips, run options and endless mode, achievements and
-  rewards, and how addons work.
-- **Gameplay**: all nine classes (each with its spell pool, the spells' icons and the talents that change them),
-  races, all twelve zones and their bosses, level-ups and cards, talents, pickups, caches and guardians, gear and the
-  Armory, **Items** (every class's gear in every rarity with the boss that drops it, and every ring, trinket and
-  amulet with its numbers), and co-op.
-- **Theorycrafting**: the **Talent Tree Builder**, the **Gear Planner** and players' **Build Guides**.
+The Guide has two main sections, with **Theorycrafting** inside Gameplay:
+- **New Player**: getting started, controls, a first run, beginner tips, pickups, caches and guardians, talents, gear
+  and the Armory, addons, achievements and rewards, level-ups and cards, and co-op.
+- **Gameplay**: heroics and endless mode, all nine classes (including spell pools, icons and talents), races, zones and
+  bosses, **Items**, **Transmog**, and player-made **Build Guides**.
+- **Gameplay > Theorycrafting**: the **Talent Tree Builder** and **Gear Planner**.
 
 A search box covers every page. Hovering a spell, talent or item shows what the game itself says about it. Short
 how-to videos play inside the launcher. The same guide is in the game with the **AZS Handbook** addon (`/handbook`).
@@ -157,8 +157,9 @@ team. Unofficial mirrors are never used.
 | Mirror By Discord Mod | Fotze | MD5 |
 | Official Website Host (Backup Link) | Aethus | a real .rar/.zip/.7z from the official game host |
 
-The Mirror By Discord Mod (Fotze, a Google Drive copy) is checked with MD5 only, by choice. MD5 can only be fooled by whoever made the file in the
-first place, and that copy is published by a trusted head moderator, so no further measures are taken for it.
+The project owner considers the Google Drive mirror from Fotze, a trusted head moderator, a trusted source and has
+chosen to keep its existing MD5 check. This is a deliberate project policy. The other mirrors use the checks listed
+above.
 
 ## License
 
