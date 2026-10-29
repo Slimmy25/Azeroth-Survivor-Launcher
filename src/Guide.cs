@@ -325,22 +325,17 @@ namespace AzerothLauncher
             else SetGuideView(tab, -1);
         }
 
-        // The guide's header: the title bar shows where you are (GuideTrail); the search box is on the main page and on
-        // its results only, so a topic or a tool has the whole window
+        // Keep the search box available after following a result so another search can start from that page.
         void GuideHeader(string title, List<GuideTopic> topics)
         {
             ClearPanel(title);
             guideTabsBottom = 8;
-            bool searchShown = guideQuery.Length > 0 || (guideMain && !gBuilder && !gPlanner && gTopic < 0 && gTalents == null);
-            if (!searchShown) return;
             int sh = (int)(32 * Theme.Zoom);
             var search = new GuideSearchBox(PW - 40, sh);
             search.Text = guideQuery;
             Put(search, 20, 8);
-            // on the main page, typing just types: a list of suggestions opens under the box as you type (topics, pages
-            // and the Guide's words: spells, items, zones). A click on one goes there; Enter (or the last line) shows
-            // every page the words are found in.
-            if (guideQuery.Length == 0) SearchSuggestions(search, 20, 8 + sh);
+            // A click on a suggestion goes there; Enter (or the last line) shows every page the words are found in.
+            SearchSuggestions(search, 20, 8 + sh);
             if (guideFocusSearch) { guideFocusSearch = false; search.Focus(); search.SelectionStart = search.TextLength; }
             guideSearch = search;
             guideTabsBottom = 8 + sh + 8;
@@ -351,6 +346,7 @@ namespace AzerothLauncher
         {
             public string Text;
             public Action Go;
+            public bool SearchAll;
             public override string ToString() { return Text; }
         }
 
@@ -377,7 +373,11 @@ namespace AzerothLauncher
             Action pick = delegate
             {
                 var h = drop.SelectedItem as GuideHint;
-                if (h != null) WowButton.Fire(h.Go);
+                if (h != null)
+                {
+                    if (!h.SearchAll) guideQuery = "";
+                    WowButton.Fire(h.Go);
+                }
             };
             drop.MouseClick += delegate { pick(); };
             drop.KeyDown += delegate(object s, KeyEventArgs e)
@@ -394,6 +394,13 @@ namespace AzerothLauncher
             search.TextChanged += delegate
             {
                 string q = search.Text.Trim();
+                if (q.Length == 0 && guideQuery.Trim().Length > 0 && !guideMain)
+                {
+                    guideQuery = "";
+                    guideFocusSearch = true;
+                    SetGuideView(guideLastTopic, -1);
+                    return;
+                }
                 drop.BeginUpdate();
                 drop.Items.Clear();
                 if (q.Length > 0)
@@ -423,7 +430,7 @@ namespace AzerothLauncher
                         string where = l.Topic >= 0 && l.Topic < topics.Count ? Lang.T(topics[l.Topic].Title) : Lang.T("Talents");
                         drop.Items.Add(new GuideHint { Text = l.Term + "   ·   " + where, Go = delegate { if (GuideLinks.Navigate != null) GuideLinks.Navigate(link); } });
                     }
-                    drop.Items.Add(new GuideHint { Text = Lang.F("Search every page for \"{0}\"", q), Go = showAll });
+                    drop.Items.Add(new GuideHint { Text = Lang.F("Search every page for \"{0}\"", q), Go = showAll, SearchAll = true });
                 }
                 drop.EndUpdate();
                 int rows = Math.Min(drop.Items.Count, 10);
@@ -1189,7 +1196,7 @@ namespace AzerothLauncher
                 c.Desc = (h.Value < 0 ? "" : topic.Title + " · ") + lines[i];   // where it is, and the line it was found in
                 string page = h.Value < 0 ? "" : topic.Pages[h.Value].Title;
                 EnableGuideCardFavorite(c, new GuideFavoriteRoute("guide", topic.Title, page, GuideClassKey(topic.Title, page), ""));
-                c.Pressed += delegate { SetGuideView(h.Key, h.Value); };
+                c.Pressed += delegate { guideQuery = ""; SetGuideView(h.Key, h.Value); };
             });
         }
 

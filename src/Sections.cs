@@ -10,54 +10,34 @@ using System.Windows.Forms;
 
 namespace AzerothLauncher
 {
-    // A borderless, color-keyed overlay: only the heart is visible, anchored to the hovered path name.
-    sealed class FavoriteHeartPopup : Form
+    // A transparent child overlay: only the heart is visible. It shares the launcher's client
+    // coordinate system with the breadcrumb, avoiding screen-DPI offsets from a separate Form.
+    sealed class FavoriteHeartPopup : Control
     {
         public event Action FavoriteClicked;
 
         public FavoriteHeartPopup()
         {
-            FormBorderStyle = FormBorderStyle.None;
-            ShowInTaskbar = false;
-            StartPosition = FormStartPosition.Manual;
-            Size = new Size(34, 34);
-            BackColor = Color.Magenta;
-            TransparencyKey = Color.Magenta;
-            Cursor = Cursors.Hand;
             SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint |
-                     ControlStyles.OptimizedDoubleBuffer | ControlStyles.ResizeRedraw, true);
+                     ControlStyles.OptimizedDoubleBuffer | ControlStyles.ResizeRedraw |
+                     ControlStyles.SupportsTransparentBackColor, true);
+            BackColor = Color.Transparent;
+            Size = new Size(34, 34);
+            Cursor = Cursors.Hand;
         }
 
-        [System.Runtime.InteropServices.DllImport("user32.dll", SetLastError = true)]
-        static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int x, int y, int cx, int cy, uint flags);
-
-        const uint SwpNoSize = 0x0001, SwpNoZOrder = 0x0004, SwpNoActivate = 0x0010;
-
-        public void PlaceAbove(Rectangle textBoundsOnScreen)
+        public void PlaceAbove(Rectangle textBoundsOnScreen, Control coordinateOwner)
         {
-            if (textBoundsOnScreen.IsEmpty || !IsHandleCreated) return;
-            // Anchor from the actual screen-space glyph bounds. Setting a separate owned Form's
-            // Location can be DPI-virtualized relative to its owner; SetWindowPos consumes the
-            // screen coordinates directly, so short and long labels use the same true center.
-            Point center = new Point(textBoundsOnScreen.Left + textBoundsOnScreen.Width / 2,
-                                     textBoundsOnScreen.Top);
-            Rectangle screen = Screen.FromPoint(center).WorkingArea;
-            Point desired = new Point(Math.Max(screen.Left + 4, Math.Min(center.X - Width / 2, screen.Right - Width - 4)),
-                                      Math.Max(screen.Top + 4, center.Y - 30)); // artwork ends four pixels inside its 34-pixel window
-            SetWindowPos(Handle, IntPtr.Zero, desired.X, desired.Y, 0, 0, SwpNoSize | SwpNoZOrder | SwpNoActivate);
+            if (textBoundsOnScreen.IsEmpty || coordinateOwner == null || IsDisposed) return;
+            // Convert the same screen-space glyph bounds back into the launcher's client space.
+            // Both the breadcrumb and this control are then laid out by the same WinForms DPI context.
+            Rectangle text = coordinateOwner.RectangleToClient(textBoundsOnScreen);
+            int centerX = text.Left + text.Width / 2;
+            int top = text.Top - 30;                         // heart art ends at the word's top edge
+            Location = new Point(centerX - Width / 2, top);
         }
 
-        protected override bool ShowWithoutActivation { get { return true; } }
-
-        protected override CreateParams CreateParams
-        {
-            get
-            {
-                CreateParams cp = base.CreateParams;
-                cp.ExStyle |= 0x08000000;                   // WS_EX_NOACTIVATE: showing the heart must not dismiss its menu
-                return cp;
-            }
-        }
+        protected override void OnPaintBackground(PaintEventArgs e) { base.OnPaintBackground(e); } // transparent parent background
 
         protected override void OnPaint(PaintEventArgs e)
         {
@@ -401,7 +381,12 @@ namespace AzerothLauncher
 
         void CloseFavoritePopup()
         {
-            if (favoritePopup != null && !favoritePopup.IsDisposed) favoritePopup.Close();
+            if (favoritePopup != null && !favoritePopup.IsDisposed)
+            {
+                Control parent = favoritePopup.Parent;
+                if (parent != null) parent.Controls.Remove(favoritePopup);
+                favoritePopup.Dispose();
+            }
             favoritePopup = null;
             favoritePopupStep = -1;
         }
@@ -420,23 +405,20 @@ namespace AzerothLauncher
                 CloseFavoritePopup();
                 WowButton.Fire(add);
             };
-            popup.FormClosed += delegate
-            {
-                if (favoritePopup == popup) { favoritePopup = null; favoritePopupStep = -1; }
-                popup.Dispose();
-            };
-            // SideHead is hosted inside a non-top-level Form (the section panel). Own the
-            // popup from the launcher's real top-level window instead, so its screen-space
-            // coordinates use the same DPI context as the breadcrumb it follows.
-            Form owner = hoverHost;
+            // Parent the heart to the same top-level launcher as its breadcrumb. It is a child
+            // control rather than a second window, so DPI scaling and monitor coordinates cannot
+            // pull it toward the desktop corner or out of alignment with short/long labels.
+            Control owner = hoverHost;
             if (owner == null || owner.IsDisposed)
             {
-                owner = FindForm();
-                while (owner != null && !owner.TopLevel) owner = owner.Parent as Form;
+                Form form = FindForm();
+                while (form != null && !form.TopLevel) form = form.Parent as Form;
+                owner = form;
             }
-            if (owner != null) popup.Show(owner);
-            else popup.Show();
-            popup.PlaceAbove(RectangleToScreen(anchor));
+            if (owner == null) { favoritePopup = null; favoritePopupStep = -1; popup.Dispose(); return; }
+            owner.Controls.Add(popup);
+            popup.BringToFront();
+            popup.PlaceAbove(RectangleToScreen(anchor), owner);
         }
 
         void HoverTick()
@@ -444,7 +426,8 @@ namespace AzerothLauncher
             Point pt = PointToClient(Cursor.Position);
             int s = ClientRectangle.Contains(pt) ? StepAt(pt) : -1;
             int favoriteStep = ClientRectangle.Contains(pt) ? FavoriteAt(pt) : -1;
-            bool inPopup = favoritePopup != null && !favoritePopup.IsDisposed && favoritePopup.Bounds.Contains(Cursor.Position);
+            bool inPopup = favoritePopup != null && !favoritePopup.IsDisposed && favoritePopup.Parent != null &&
+                           favoritePopup.Bounds.Contains(favoritePopup.Parent.PointToClient(Cursor.Position));
             bool inMenu = openMenu != null && !openMenu.IsDisposed && openMenu.Visible && openMenu.Bounds.Contains(Cursor.Position);
             int retainedStep = favoriteStep >= 0 ? favoriteStep :
                                inMenu ? openMenuStep :
@@ -459,7 +442,7 @@ namespace AzerothLauncher
                 (favoritePopup == null || favoritePopup.IsDisposed || favoritePopupStep != retainedStep))
                 ShowFavoritePopup(retainedStep, CrumbRect(retainedStep));
             else if (retainedStep >= 0 && favoritePopup != null && !favoritePopup.IsDisposed && favoritePopupStep == retainedStep)
-                favoritePopup.PlaceAbove(CrumbScreenRect(retainedStep));
+                favoritePopup.PlaceAbove(CrumbScreenRect(retainedStep), favoritePopup.Parent);
 
             if (openMenu != null && !openMenu.IsDisposed)
             {

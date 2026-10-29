@@ -120,6 +120,7 @@ namespace AzerothLauncher
             "Priest|Mind Blast|Eye of the Splitting Sky|Mind Blast: +1 target~Mind Blast: +20% damage~Mind Blast's hits leap to 2 more enemies for 30%",
             "Priest|Holy Fire|Eye of the Splitting Sky|Holy Fire: +1 target~Holy Fire: +20% damage~Holy Fire's hits leap to 2 more enemies for 30%",
             "Priest|Psychic Scream|Heart of the Earthshaker|Psychic Scream: +60% area~Psychic Scream: +35% damage~Psychic Scream's hits stun for 1.5 sec",
+            "Priest|Lightwell|Charm of the Fated Hour|Lightwell: +60% damage~Lightwell's hits leap to 3 more enemies for 30%",
             "Rogue|Seal Fate|Charm of the Fated Hour|Seal Fate: +60% damage~Seal Fate: +100% proc rate",
             "Rogue|Ghostly Strike|Medallion of the Bladestorm|Ghostly Strike: +4 targets~Ghostly Strike: +50% damage~Ghostly Strike: +100% absorb",
             "Rogue|Kidney Shot|Medallion of the Bladestorm|Kidney Shot: +4 targets~Kidney Shot: +50% damage~Kidney Shot: +100% stun duration",

@@ -1,3 +1,9 @@
+# v3.03 (2026-10-29)
+
+- Quick Access hearts are now anchored inside the launcher and centered over the breadcrumb text, including on short and long labels.
+- Guide search stays available after opening a result, so you can continue searching from that page.
+- Spell search suggestions now link to associated Codex entries and any matching set bonus; the Codex includes Lightwell and Rend.
+
 # v3.02 (2026-10-29)
 
 - Quick Access hearts now share the launcher's top-level window as their owner, keeping their position aligned with each breadcrumb label on scaled displays.

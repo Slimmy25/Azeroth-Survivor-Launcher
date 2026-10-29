@@ -24,6 +24,7 @@ namespace AzerothLauncher
     {
         static Dictionary<string, GuideLink> links;
         static Dictionary<string, List<Talent>> shared;       // talent names in more than one class's tree
+        static Dictionary<string, string> spellClasses;       // spell and the class whose spell pool contains it
         static int classesAt = -1;                            // the Classes topic
         static Regex finder;
         public static Action<GuideLink> Navigate;            // set by the launcher: open the Guide where the link goes
@@ -36,14 +37,69 @@ namespace AzerothLauncher
             var list = new List<GuideLink>();
             string[] words = (q ?? "").ToLowerInvariant().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
             if (words.Length == 0) return list;
+            Func<string, bool> matches = delegate(string value)
+            {
+                string n = (value ?? "").ToLowerInvariant();
+                foreach (string w in words) if (!n.Contains(w)) return false;
+                return true;
+            };
             foreach (var l in links.Values)
             {
                 if (l.Topic < 0 && l.Class == null) continue;
-                string n = l.Term.ToLowerInvariant();
-                bool all = true;
-                foreach (string w in words) if (!n.Contains(w)) { all = false; break; }
-                if (all) list.Add(l);
+                if (matches(l.Term)) list.Add(l);
             }
+
+            // A spell search also offers the Codex item and any 8-piece set bonus that names it.
+            // These are separate destinations, while the spell itself remains the first result.
+            try
+            {
+                List<GuideTopic> topics = Data.Guide;
+                int itemsTopic = topics.FindIndex(delegate(GuideTopic g) { return g.Title == "Items"; });
+                if (itemsTopic >= 0)
+                {
+                    List<GuidePage> pages = topics[itemsTopic].Pages;
+                    int codexPage = pages.FindIndex(delegate(GuidePage g) { return g.Title == "Codex"; });
+                    foreach (Jewel jewel in Items.Jewelry)
+                        if (jewel.IsCodex && jewel.Class != null && matches(jewel.Spell))
+                            list.Add(new GuideLink
+                            {
+                                Term = jewel.Spell + " · Codex — " + jewel.Name,
+                                Topic = itemsTopic,
+                                Page = codexPage,
+                                Tip = Items.Card(jewel)
+                            });
+
+                    if (spellClasses != null)
+                        foreach (var pair in spellClasses)
+                        {
+                            int split = pair.Key.IndexOf('|');
+                            if (split < 0) continue;
+                            string spell = pair.Key.Substring(0, split), cls = pair.Value;
+                            if (!matches(spell)) continue;
+                            string pattern = @"(?<![A-Za-z'])" + Regex.Escape(spell) + @"(?:s|'s)?(?![A-Za-z])";
+                            for (int r = 0; r < Items.Rarities.Length; r++)
+                            {
+                                string rarity = Items.Rarities[r];
+                                string bonus = Items.EightPiece(cls, rarity);
+                                if (string.IsNullOrEmpty(bonus) || !Regex.IsMatch(bonus, pattern, RegexOptions.IgnoreCase)) continue;
+                                string gearPage = cls + " Gear";
+                                int gearIndex = pages.FindIndex(delegate(GuidePage g) { return g.Title == gearPage; });
+                                list.Add(new GuideLink
+                                {
+                                    Term = spell + " · " + Items.SetName(cls, rarity) + " 8-piece",
+                                    Topic = itemsTopic,
+                                    Page = gearIndex,
+                                    Tip = bonus
+                                });
+                            }
+                        }
+                }
+            }
+            catch (Exception) { }
+
+            // Avoid duplicate labels if a spell has more than one matching route into the same section.
+            var seen = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            list.RemoveAll(delegate(GuideLink l) { return !seen.Add(l.Term); });
             string first = words[0];
             list.Sort(delegate(GuideLink a, GuideLink b)
             {
@@ -103,6 +159,7 @@ namespace AzerothLauncher
         static void Build()
         {
             links = new Dictionary<string, GuideLink>(StringComparer.Ordinal);
+            spellClasses = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
             var text = GameText();
             List<GuideTopic> topics;
             try { topics = Data.Guide; }
@@ -137,6 +194,7 @@ namespace AzerothLauncher
                         if (section.StartsWith("Spell pool") && m.Success)
                         {
                             string name = m.Groups[1].Value.Trim();
+                            spellClasses[name + "|" + pg.Title] = pg.Title;
                             string tip;
                             Add(name, t, p, text.TryGetValue(name, out tip) ? tip : Capital(m.Groups[2].Value.Trim()));
                         }
