@@ -1,13 +1,14 @@
-# v2.6 (2026-10-29)
+# v2.7 (2026-10-29)
 
 ## In short
 
-Guide favorites now have recognizable images, real class gear has 3D previews on hover, and leaving Community videos always returns to the featured-video home.
+The Guide now explains the game's 0.128.0 co-op player inspection, while the launcher preserves those game patch notes verbatim. This release also includes the previously prepared launcher improvements.
 
-## Guide and Quick Access
+## Co-op and Guide
 
-- Moved Zones & Bosses into the New Player Guide.
-- Added distinct favorite images for the nine classes, Codex, Heroic & Endless, Zones & Bosses, the Gear Planner, and jewelry pages.
+- Added the game's 0.128.0 patch notes verbatim to the launcher's game Changelog.
+- Updated the Co-op Guide with the new party inspection views and the 0.128.0 version requirement; AZS Handbook receives the same guide when installed or updated.
+- Moved Zones & Bosses into the New Player Guide and added distinct favorite images for classes, Codex, Heroic & Endless, Zones & Bosses, the Gear Planner, and jewelry pages.
 - Kept the heart above the hovered link-tree name while opening its menu; dropdowns and hearts now close when the launcher loses focus.
 - The More Videos X and video-player X always return to the featured-video home.
 - Removed the extra update result from Launcher settings; the launcher status line remains the feedback for update checks.
@@ -21,19 +22,16 @@ Guide favorites now have recognizable images, real class gear has 3D previews on
 
 ## Guide tools and help
 
-- Added the Codex page under Guide → Gameplay → Items, with links between each class spell and its Codex neck piece.
-- Added Codex spell-link translations across all 26 launcher languages.
+- Added the Codex page under Guide → Gameplay → Items, with links between each class spell and its Codex neck piece, and added Codex spell-link translations across all 26 launcher languages.
 - Launcher-update and save-import confirmations now overlay the open section instead of opening a separate window.
 - Talent Builder help uses the launcher's hover style, and its Save/Load/Export/Import buttons stay centered and evenly spaced.
-- Added About Launcher under Options → Launcher.
-- Simplified the navigation help and separated examples so they no longer overlap.
+- Added About Launcher under Options → Launcher and simplified the navigation help so its examples no longer overlap.
 
 ## Credits
 
 - Credited the Wowhead screenshots, item icons, and other sourced favorite artwork in CREDITS.md.
 
 ---
-
 # v2.5 (2026-10-28)
 ## In short
 The Guide is organized into New Player and Gameplay, its final pages can be saved to ten numbered Quick Access favorites, and the Gear Planner explains each set bonus before you choose it.

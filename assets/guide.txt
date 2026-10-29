@@ -567,7 +567,7 @@ After you beat a zone's final boss you can keep going in endless mode. A random 
 
 @topic Co-op | Playing with friends
 # Joining and hosting
-Press Co-op on the main screen. Host and guests must use compatible game versions: 0.126.0 requires everyone to update.
+Press Co-op on the main screen. Host and guests must use compatible game versions: 0.128.0 requires everyone to update.
 A co-op run needs at least two players: a host alone sees "Waiting for players" until someone joins.
 - Lobbies: public games of your version. Each shows its zone, its difficulty (Normal, or the Heroic level in red), the host's class, the party's classes and the open seats. Click one to join (some need a password).
 - Filters: by zone and by difficulty. "Can join" hides every lobby whose zone or Heroic level your class has not opened yet, and a lobby you cannot join says which of the two you are missing.
@@ -577,6 +577,11 @@ A co-op run needs at least two players: a host alone sees "Waiting for players" 
 - Each guest's ping shows the true round trip to the host: green when quick, gold when fair, red when slow. Before 0.127.0, it included up to 50 ms of the game's own waiting; older guests still show that old measurement. The party window shows each player's country next to their ping.
 You play the hero on your own picker. The host chooses the zone and the Heroic level, and everyone in the party sees them change at once. You can only join zones (and Heroic levels) you have opened with the class you bring: a hero who has not is marked in red and stays behind when the host enters.
 
+# Inspecting a party member
+Click any player's row in the co-op party window to inspect their hero. The Armory shows their character, gear, stars, appearance and combined stats with active set bonuses. Point at a gear piece to see its stats at its current stars, which set it belongs to and how many pieces they wear.
+- The Talents tab shows the player's three trees as they spent their points. Point at a talent to read what it does.
+- The Achievements tab shows what their account has earned, grouped by category with the date earned.
+- The inspection window updates automatically as the player changes race, appearance, gear, stars or talents in the lobby.
 # How co-op plays
 - Experience and gold are shared; caches are each hero's own to buy.
 - Every extra hero makes the horde bigger (each brings 35% fewer extra enemies than before 0.125.0), but the party also finds more chests. In a party every enemy (mobs, elites, guardians and bosses) has 20% less health and hits 20% softer; playing alone is unchanged.

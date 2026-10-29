@@ -2,6 +2,16 @@ Patch notes shown in the launcher's Changelog. The launcher sorts them by versio
 Every post starts with its title on the first line. Posts are separated by a line with only === on it.
 Everything above the first === line is ignored.
 ===
+0.128.0
+-------
+In the co-op lobby you can now click any player in your party to inspect their hero: their character, the gear they wear with its stars, their talent trees and their achievements. It updates as they change things. Host and guests all need this version.
+
+- Click a player's row in the co-op party window to open their armory: their hero to turn around, every piece they wear with its stars and any look over it, and what their gear adds up to with the set bonuses they have on.
+- Point at a piece to read it: what it adds at its stars, the set it belongs to and how much of that set they wear.
+- The Talents tab shows their three talent trees as they spent them; point at a talent to read it.
+- The Achievements tab shows what their account has earned and when, by category.
+- The window updates on its own when they change race, looks, gear, stars or talents in the lobby.
+===
 0.127.0
 -------
 The level cap rises from 99 to 120. The ping in the co-op lobby now shows your real connection: it used to read 25 to 50 ms too high.
