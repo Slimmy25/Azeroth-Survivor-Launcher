@@ -23,7 +23,6 @@ namespace AzerothLauncher
         public SetupDialog(LauncherApp app) : base("First-time setup")
         {
             this.app = app;
-            TopMost = true;
             SyncSettings ss = app.SyncSettings();
             cloudOn = app.Cfg.Bool("setup_done", false) ? app.CloudEnabled() : app.Cfg.Bool("cloud_enabled", true);
             vals["cloud_dir"] = app.Cfg.Str("cloud_dir");
@@ -214,7 +213,6 @@ namespace AzerothLauncher
 
         public ConflictDialog(List<SyncSet> sets, bool downloading) : base("Which progress do you want to keep?")
         {
-            TopMost = true;
             BackAction = delegate { Done(Choice.Abort); };
             Begin();
             Body.Add(UI.Text("Both sides changed", 18, FontStyle.Bold, Theme.Gold, Theme.Panel, 0), Align.Center, 26, 4, 26, 4);

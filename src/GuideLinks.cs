@@ -741,7 +741,9 @@ namespace AzerothLauncher
             FormBorderStyle = FormBorderStyle.None;
             ShowInTaskbar = false;
             StartPosition = FormStartPosition.Manual;
-            TopMost = true;
+            // A hover card must never become a desktop-wide always-on-top window. ShowCore
+            // assigns the launcher as its owner so Windows keeps it above the launcher only.
+            TopMost = false;
             BackColor = Theme.Hex("#120f18");
             SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer, true);
         }
@@ -784,22 +786,64 @@ namespace AzerothLauncher
 
         static void HookHost(Control owner)
         {
-            Form host = owner == null ? null : owner.FindForm();
-            while (host != null && !host.TopLevel) host = host.Parent as Form;
+            Form host = RootHost(owner);
             if (host == hoverHost) return;
-            if (hoverHost != null) hoverHost.Deactivate -= HoverHostDeactivated;
+            if (hoverHost != null)
+            {
+                hoverHost.Deactivate -= HoverHostDeactivated;
+                hoverHost.FormClosed -= HoverHostClosed;
+                hoverHost.VisibleChanged -= HoverHostVisibilityChanged;
+                hoverHost.Resize -= HoverHostResized;
+            }
             hoverHost = host;
-            if (hoverHost != null) hoverHost.Deactivate += HoverHostDeactivated;
+            if (hoverHost != null)
+            {
+                hoverHost.Deactivate += HoverHostDeactivated;
+                hoverHost.FormClosed += HoverHostClosed;
+                hoverHost.VisibleChanged += HoverHostVisibilityChanged;
+                hoverHost.Resize += HoverHostResized;
+            }
+        }
+
+        // Controls in the section surface live in a non-top-level Form nested in the launcher.
+        // Walk both parent and owner links so a hover card is always attached to a real window.
+        static Form RootHost(Control owner)
+        {
+            Form host = owner == null ? null : owner.FindForm();
+            var seen = new HashSet<Form>();
+            while (host != null && seen.Add(host) && !host.TopLevel)
+            {
+                Form parent = host.Parent as Form;
+                host = parent ?? host.Owner;
+            }
+            return host;
         }
 
         static void HoverHostDeactivated(object sender, EventArgs e) { Hide(); }
+
+        static void HoverHostClosed(object sender, FormClosedEventArgs e)
+        {
+            Hide();
+            HookHost(null);
+        }
+
+        static void HoverHostVisibilityChanged(object sender, EventArgs e)
+        {
+            Form host = sender as Form;
+            if (host != null && !host.Visible) Hide();
+        }
+
+        static void HoverHostResized(object sender, EventArgs e)
+        {
+            Form host = sender as Form;
+            if (host != null && host.WindowState == FormWindowState.Minimized) Hide();
+        }
 
         // Delayed hovers must not appear after their window loses focus (for example during Alt+Tab).
         public static bool CanShow(Control owner)
         {
             if (owner == null || owner.IsDisposed || !owner.Visible) return false;
-            Form host = owner.FindForm();
-            while (host != null && !host.TopLevel) host = host.Parent as Form;
+            Form host = RootHost(owner);
             return host != null && host.Visible && host.WindowState != FormWindowState.Minimized &&
                    (host.ContainsFocus || Form.ActiveForm == host);
         }
@@ -840,6 +884,15 @@ namespace AzerothLauncher
             if (!CanShow(owner)) { Hide(owner); return; }
             if (box == null || box.IsDisposed) box = new GuideHover();
             HookHost(owner);
+            Form host = RootHost(owner);
+            if (host == null) { Hide(); return; }
+            // Assign ownership while hidden; owned windows follow the launcher in z-order and
+            // minimize/close with it, but cannot cover unrelated applications.
+            if (box.Owner != host)
+            {
+                if (box.Visible) ((Form)box).Hide();
+                box.Owner = host;
+            }
             box.icon = icon;
             box.model = model;
             Image pic = box.picture;
@@ -863,7 +916,7 @@ namespace AzerothLauncher
             y = Math.Max(screen.Top + 4, Math.Min(y, screen.Bottom - size.Height - 4));
             box.Bounds = new Rectangle(x, y, size.Width, size.Height);
             box.Invalidate();
-            if (!box.Visible) box.Show();
+            if (!box.Visible) box.Show(host);
         }
 
         public static new void Hide()
