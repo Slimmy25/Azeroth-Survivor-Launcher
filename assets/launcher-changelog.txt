@@ -1,3 +1,10 @@
+# v3.04 (2026-10-29)
+
+- Guide links now take you to the matching passage, and search stays available so you can continue with another result.
+- Spell results include related Codex entries and matching set bonuses; the Codex includes Lightwell and Rend.
+- Added an option to export a validated save file for another client or the browser game.
+- Launcher updates are offered inside Options > Launcher, where you can install the update or choose later.
+
 # v3.03 (2026-10-29)
 
 - Quick Access hearts are now anchored inside the launcher and centered over the breadcrumb text, including on short and long labels.
