@@ -113,6 +113,7 @@ namespace AzerothLauncher
         List<KeyValuePair<string, Action>> crumbs = new List<KeyValuePair<string, Action>>();
         readonly List<KeyValuePair<Rectangle, Action>> hot = new List<KeyValuePair<Rectangle, Action>>();
         readonly List<KeyValuePair<Rectangle, int>> crumbRects = new List<KeyValuePair<Rectangle, int>>();
+        readonly List<KeyValuePair<Rectangle, int>> crumbTextRects = new List<KeyValuePair<Rectangle, int>>();
         readonly Dictionary<int, Action> crumbFavorites = new Dictionary<int, Action>();
         // a step's drop-down (the other choices at that level), and where its arrow was drawn
         readonly Dictionary<int, List<KeyValuePair<string, Action>>> menus = new Dictionary<int, List<KeyValuePair<string, Action>>>();
@@ -236,6 +237,7 @@ namespace AzerothLauncher
             menuText.Clear();
             stepRects.Clear();
             crumbRects.Clear();
+            crumbTextRects.Clear();
             int x = 50;
             Rectangle bb = BackBox;
             if (!bb.IsEmpty)
@@ -276,6 +278,26 @@ namespace AzerothLauncher
                     crumbRects.Add(new KeyValuePair<Rectangle, int>(Rectangle.Round(r), i));
                     Color c = !last && hover == i ? Color.White : Theme.Hex("#e6cf8c");
                     using (var b = new SolidBrush(c)) g.DrawString(t, last ? f : fs, b, r, sf);
+                    // Measure the visible text glyphs using the same font, layout box and trimming as DrawString.
+                    // The breadcrumb box also contains layout padding (and sometimes a menu arrow), so centering
+                    // the favorite popup over that box can visibly pull it away from the word.
+                    Rectangle textBounds = Rectangle.Round(r);
+                    try
+                    {
+                        using (StringFormat measure = (StringFormat)sf.Clone())
+                        {
+                            measure.SetMeasurableCharacterRanges(new[] { new CharacterRange(0, t.Length) });
+                            Region[] measured = g.MeasureCharacterRanges(t, last ? f : fs, r, measure);
+                            if (measured != null && measured.Length > 0)
+                            {
+                                RectangleF glyphs = measured[0].GetBounds(g);
+                                if (glyphs.Width > 0 && glyphs.Height > 0) textBounds = Rectangle.Ceiling(glyphs);
+                                foreach (Region region in measured) if (region != null) region.Dispose();
+                            }
+                        }
+                    }
+                    catch (ArgumentException) { }
+                    crumbTextRects.Add(new KeyValuePair<Rectangle, int>(textBounds, i));
                     if (menu)
                     {
                         // the drop-down arrow: the other choices at this step
@@ -372,7 +394,7 @@ namespace AzerothLauncher
 
         Rectangle CrumbRect(int i)
         {
-            foreach (var crumb in crumbRects) if (crumb.Value == i) return crumb.Key;
+            foreach (var crumb in crumbTextRects) if (crumb.Value == i) return crumb.Key;
             return Rectangle.Empty;
         }
 

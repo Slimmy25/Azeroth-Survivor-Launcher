@@ -411,8 +411,63 @@ namespace AzerothLauncher
         void CleanUpFirstSetup()
         {
             Config.Frozen = true;
-            try { Util.DeleteTreeQuiet(Path.Combine(Util.LauncherDir, Util.DownloadTempName)); } catch (Exception) { }
-            try { Util.DeleteTreeQuiet(Util.DataDir); } catch (Exception) { }
+            // Remove only launcher-owned settings/state and this launcher's uniquely named partial-download folder.
+            // DataDir also holds user content (saved addon profiles, downloaded addons, guide videos, and backups),
+            // so never recursively delete it. The game, its save directory, addon folders, and cloud data are separate.
+            var playerFolders = new List<string>();
+            try
+            {
+                SyncSettings ss = SyncSettings();
+                playerFolders.Add(ss.SaveDir);
+                playerFolders.Add(ss.AddonsDir);
+                playerFolders.Add(ss.SavedDir);
+                playerFolders.Add(ss.CloudDir);
+            }
+            catch (Exception) { }
+            if (setupVals != null)
+                foreach (string key in new[] { "save_dir", "addons_dir", "saved_dir", "cloud_dir" })
+                    if (setupVals.ContainsKey(key)) playerFolders.Add(setupVals[key]);
+
+            foreach (string name in new[] { "config.json", "state.json", "log.txt", "log.old.txt" })
+                try
+                {
+                    string file = Path.Combine(Util.DataDir, name);
+                    if (File.Exists(file) && !IsInsidePlayerFolder(file, playerFolders)) File.Delete(file);
+                }
+                catch (Exception) { }
+            string downloadTemp = Path.Combine(Util.LauncherDir, Util.DownloadTempName);
+            if (!OverlapsPlayerFolder(downloadTemp, playerFolders))
+                try { Util.DeleteTreeQuiet(downloadTemp); } catch (Exception) { }
+        }
+
+        static bool IsInsidePlayerFolder(string path, List<string> folders)
+        {
+            if (folders == null) return false;
+            string full;
+            try { full = Path.GetFullPath(path).TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar); }
+            catch (Exception) { return true; }
+            foreach (string folder in folders)
+            {
+                if (string.IsNullOrWhiteSpace(folder)) continue;
+                string root;
+                try { root = Path.GetFullPath(folder).TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar); }
+                catch (Exception) { continue; }
+                if (full.Equals(root, StringComparison.OrdinalIgnoreCase) ||
+                    full.StartsWith(root + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase)) return true;
+            }
+            return false;
+        }
+
+        static bool OverlapsPlayerFolder(string path, List<string> folders)
+        {
+            if (folders == null) return false;
+            foreach (string folder in folders)
+            {
+                if (string.IsNullOrWhiteSpace(folder)) continue;
+                if (IsInsidePlayerFolder(path, new List<string> { folder }) ||
+                    IsInsidePlayerFolder(folder, new List<string> { path })) return true;
+            }
+            return false;
         }
 
         // the game's download, started from setup, was stopped: setup is cancelled with it

@@ -618,6 +618,7 @@ namespace AzerothLauncher
     public class GuideHover : Form
     {
         static GuideHover box;
+        static Form hoverHost;
         Control hoverOwner;
         string title = "", body = "";
         static readonly Bitmap measure = new Bitmap(1, 1);
@@ -713,6 +714,26 @@ namespace AzerothLauncher
             ShowCore(owner, title, body, null, null, false);
         }
 
+        static void HookHost(Control owner)
+        {
+            Form host = owner == null ? null : owner.FindForm();
+            if (host == hoverHost) return;
+            if (hoverHost != null) hoverHost.Deactivate -= HoverHostDeactivated;
+            hoverHost = host;
+            if (hoverHost != null) hoverHost.Deactivate += HoverHostDeactivated;
+        }
+
+        static void HoverHostDeactivated(object sender, EventArgs e) { Hide(); }
+
+        // Delayed hovers must not appear after their window loses focus (for example during Alt+Tab).
+        public static bool CanShow(Control owner)
+        {
+            if (owner == null || owner.IsDisposed || !owner.Visible) return false;
+            Form host = owner.FindForm();
+            return host != null && host.Visible && host.WindowState != FormWindowState.Minimized &&
+                   (host.ContainsFocus || Form.ActiveForm == host);
+        }
+
         public static void ShowTip(Control owner, string text)
         {
             string body = (text ?? "").Trim();
@@ -746,7 +767,9 @@ namespace AzerothLauncher
 
         static void ShowCore(Control owner, string title, string body, Image icon, string model, bool applyGear, Point? screenAnchor)
         {
+            if (!CanShow(owner)) { Hide(owner); return; }
             if (box == null || box.IsDisposed) box = new GuideHover();
+            HookHost(owner);
             box.icon = icon;
             box.model = model;
             Image pic = box.picture;
@@ -880,7 +903,11 @@ namespace AzerothLauncher
         void Schedule(Control control)
         {
             string value;
-            if (!text.TryGetValue(control, out value) || value.Length == 0 || !IsUnderPointer(control)) return;
+            if (!text.TryGetValue(control, out value) || value.Length == 0 || !IsUnderPointer(control) || !GuideHover.CanShow(control))
+            {
+                Stop(control);
+                return;
+            }
             Timer timer;
             if (!timers.TryGetValue(control, out timer))
             {
@@ -897,7 +924,7 @@ namespace AzerothLauncher
                     }
                     timer.Stop();
                     string tip;
-                    if (!control.IsDisposed && IsUnderPointer(control) && text.TryGetValue(control, out tip))
+                    if (!control.IsDisposed && IsUnderPointer(control) && GuideHover.CanShow(control) && text.TryGetValue(control, out tip))
                     {
                         GuideHover.ShowTip(control, Lang.T(tip));
                         if (AutoPopDelay > 0)

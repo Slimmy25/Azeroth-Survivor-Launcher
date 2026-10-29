@@ -1,3 +1,9 @@
+# v3.01 (2026-10-29)
+
+- Canceling first-time setup removes launcher settings and temporary downloads only; it preserves player saves, AddOns, addon settings, cloud files, and saved launcher content.
+- Hover cards and themed tooltips now hide when their launcher window loses focus and cannot reappear while the launcher is inactive.
+- The Quick Access heart is centered over the rendered breadcrumb text, without including its menu arrow or layout padding.
+
 # v3.0 (2026-10-29)
 
 - First-time setup now guides players through six staged steps, with a visible setup path, one-step Back, Start Over, and Cancel Setup controls.
