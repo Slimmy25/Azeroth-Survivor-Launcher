@@ -342,11 +342,13 @@ namespace AzerothLauncher
         readonly Font font, linkFont;
         readonly int wrap;
         GuideLink over;
+        int focusLink = -1;
 
         public GuideText(string text, float size, Color fg, Color bg, int wrapWidth, int topic, int page)
         {
             SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer |
                      ControlStyles.ResizeRedraw, true);
+            SetStyle(ControlStyles.Selectable, true);
             runs = GuideLinks.Split(text, topic, page);
             here = topic;
             herePage = page;
@@ -355,6 +357,10 @@ namespace AzerothLauncher
             ForeColor = fg;
             BackColor = bg;
             wrap = wrapWidth;
+            AccessibleRole = AccessibleRole.Link;
+            AccessibleName = Lang.T("Guide links");
+            AccessibleDescription = Lang.T("Use the arrow keys to browse links and Enter to open one.");
+            TabStop = true;
             Flow(null);
         }
 
@@ -403,6 +409,9 @@ namespace AzerothLauncher
                     }
                     int h = (int)Math.Ceiling(y) + lineH;
                     Size = new Size(wrap, h);
+                    TabStop = false;
+                    foreach (var target in hot)
+                        if (Clickable(target.Value)) { TabStop = true; break; }
                     return h;
                 }
             }
@@ -427,6 +436,12 @@ namespace AzerothLauncher
                     g.DrawString(pw.Word, pw.Link != null ? linkFont : font, b, pw.X, pw.Y, sf);
                 }
             }
+            if (Focused && focusLink >= 0 && focusLink < hot.Count)
+            {
+                RectangleF r = hot[focusLink].Key;
+                using (var p = new Pen(Theme.Hex("#fff2b0"), 1) { DashStyle = System.Drawing.Drawing2D.DashStyle.Dot })
+                    g.DrawRectangle(p, r.X - 2, r.Y, r.Width + 3, r.Height - 1);
+            }
         }
 
         GuideLink At(Point p)
@@ -435,12 +450,91 @@ namespace AzerothLauncher
             return null;
         }
 
+        int AtIndex(Point p)
+        {
+            for (int i = 0; i < hot.Count; i++) if (Clickable(hot[i].Value) && hot[i].Key.Contains(p)) return i;
+            return -1;
+        }
+
+        void FocusLink(int index)
+        {
+            focusLink = index;
+            over = index >= 0 && index < hot.Count ? hot[index].Value : null;
+            if (over != null)
+            {
+                AccessibleName = Lang.T(over.Term);
+                AccessibleDescription = Lang.T(over.Tip);
+                if (over.Tip.Length > 0) GuideHover.Show(this, over.Term, over.Tip, null, SpellIcons.HasItemModel(over.Term) ? over.Term : null);
+            }
+            else GuideHover.Hide(this);
+            Invalidate();
+        }
+
+        protected override void OnGotFocus(EventArgs e)
+        {
+            base.OnGotFocus(e);
+            for (int i = 0; i < hot.Count; i++) if (Clickable(hot[i].Value)) { FocusLink(i); return; }
+        }
+
+        protected override void OnLostFocus(EventArgs e)
+        {
+            focusLink = -1;
+            over = null;
+            AccessibleName = Lang.T("Guide links");
+            GuideHover.Hide(this);
+            Invalidate();
+            base.OnLostFocus(e);
+        }
+
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Left || e.KeyCode == Keys.Up || e.KeyCode == Keys.Right || e.KeyCode == Keys.Down)
+            {
+                int direction = e.KeyCode == Keys.Left || e.KeyCode == Keys.Up ? -1 : 1;
+                int start = focusLink;
+                for (int step = 0; step < hot.Count; step++)
+                {
+                    int at = start < 0 ? (direction > 0 ? -1 : 0) : start;
+                    at = (at + direction + hot.Count) % hot.Count;
+                    if (Clickable(hot[at].Value)) { FocusLink(at); break; }
+                    start = at;
+                }
+                if (hot.Count > 0) { e.Handled = e.SuppressKeyPress = true; return; }
+            }
+            if ((e.KeyCode == Keys.Enter || e.KeyCode == Keys.Space) && focusLink >= 0 && focusLink < hot.Count)
+            {
+                GuideLink link = hot[focusLink].Value;
+                if (Clickable(link) && GuideLinks.Navigate != null)
+                {
+                    GuideHover.Hide(this);
+                    WowButton.Fire(delegate { GuideLinks.Navigate(link); });
+                }
+                e.Handled = e.SuppressKeyPress = true;
+                return;
+            }
+            base.OnKeyDown(e);
+        }
+
         protected override void OnMouseMove(MouseEventArgs e)
         {
             base.OnMouseMove(e);
             GuideLink l = At(e.Location);
-            if (l == over) return;
+            if (l == over)
+            {
+                if (Focused)
+                {
+                    int index = AtIndex(e.Location);
+                    if (index != focusLink) { focusLink = index; Invalidate(); }
+                }
+                return;
+            }
             over = l;
+            if (Focused && Clickable(l))
+            {
+                focusLink = AtIndex(e.Location);
+                AccessibleName = Lang.T(l.Term);
+                AccessibleDescription = Lang.T(l.Tip);
+            }
             Cursor = Clickable(l) ? Cursors.Hand : Cursors.Default;
             Invalidate();
             if (l != null && l.Tip.Length > 0) GuideHover.Show(this, l.Term, l.Tip, null, SpellIcons.HasItemModel(l.Term) ? l.Term : null);
@@ -450,9 +544,9 @@ namespace AzerothLauncher
         protected override void OnMouseLeave(EventArgs e)
         {
             base.OnMouseLeave(e);
-            if (over != null) { over = null; Invalidate(); }
+            if (!Focused && over != null) { over = null; Invalidate(); }
             Cursor = Cursors.Default;
-            GuideHover.Hide();
+            if (!Focused) GuideHover.Hide(this);
         }
 
         protected override void OnMouseUp(MouseEventArgs e)
@@ -476,9 +570,14 @@ namespace AzerothLauncher
             this.body = body ?? "";
             SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer |
                      ControlStyles.ResizeRedraw, true);
+            SetStyle(ControlStyles.Selectable, true);
             Size = new Size(Math.Max(20, (int)(24 * Theme.Zoom)), Math.Max(16, (int)(18 * Theme.Zoom)));
             Cursor = Cursors.Help;
             BackColor = Theme.Hex("#1c1a26");
+            AccessibleRole = AccessibleRole.PushButton;
+            AccessibleName = Lang.T(title);
+            AccessibleDescription = Lang.T(body);
+            TabStop = true;
         }
         protected override void OnPaint(PaintEventArgs e)
         {
@@ -486,6 +585,9 @@ namespace AzerothLauncher
             g.Clear(BackColor);
             using (var b = new SolidBrush(Theme.Hex("#1c1a26"))) g.FillRectangle(b, ClientRectangle);
             using (var p = new Pen(Theme.Hex("#d6a640"), 2)) g.DrawRectangle(p, 1, 1, Width - 3, Height - 3);
+            if (Focused)
+                using (var p = new Pen(Theme.Hex("#fff2b0"), 1) { DashStyle = System.Drawing.Drawing2D.DashStyle.Dot })
+                    g.DrawRectangle(p, 4, 4, Math.Max(1, Width - 9), Math.Max(1, Height - 9));
             TextRenderer.DrawText(g, "?", Theme.F(10, FontStyle.Bold), ClientRectangle, Theme.Hex("#f0c050"),
                                   TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter | TextFormatFlags.NoPrefix);
         }
@@ -494,9 +596,21 @@ namespace AzerothLauncher
             base.OnMouseEnter(e);
             GuideHover.ShowHelp(this, Lang.T(title), Lang.T(body));
         }
+        protected override void OnGotFocus(EventArgs e)
+        {
+            base.OnGotFocus(e);
+            GuideHover.ShowHelp(this, Lang.T(title), Lang.T(body));
+            Invalidate();
+        }
+        protected override void OnLostFocus(EventArgs e)
+        {
+            GuideHover.Hide(this);
+            Invalidate();
+            base.OnLostFocus(e);
+        }
         protected override void OnMouseLeave(EventArgs e)
         {
-            GuideHover.Hide();
+            if (!Focused) GuideHover.Hide(this);
             base.OnMouseLeave(e);
         }
     }
@@ -504,6 +618,7 @@ namespace AzerothLauncher
     public class GuideHover : Form
     {
         static GuideHover box;
+        Control hoverOwner;
         string title = "", body = "";
         static readonly Bitmap measure = new Bitmap(1, 1);
         string splitFor;                                      // the body (and title) the runs below were cut from
@@ -591,6 +706,25 @@ namespace AzerothLauncher
             ShowCore(owner, title, body, null, null, false);
         }
 
+        public static void ShowTip(Control owner, string text)
+        {
+            string body = (text ?? "").Trim();
+            if (body.Length == 0) { Hide(owner); return; }
+            string title = "";
+            int split = body.IndexOf('\n');
+            if (split <= 0 || split > 42)
+            {
+                split = body.IndexOf(':');
+                if (split <= 0 || split > 32) split = -1;
+            }
+            if (split > 0)
+            {
+                title = body.Substring(0, split).Trim();
+                body = body.Substring(split + 1).Trim();
+            }
+            ShowCore(owner, title, body, null, null, false);
+        }
+
         // model: a real item's name (assets\\item-models.txt): its 3D model picture from Wowhead's model viewer is shown
         // under the text (it loads the first time, then comes from the cache)
         public static void Show(Control owner, string title, string body, Image icon, string model)
@@ -607,10 +741,11 @@ namespace AzerothLauncher
             box.picture = null;                               // a picture is for the one note that passed it
             box.shownPicture = pic;
             box.title = title;
+            box.hoverOwner = owner;
             if (applyGear) body = GearEffect.Apply(title, body); // only content hovers get the planner's live totals
             box.body = body;
             Font tf = Theme.F(10.5f, FontStyle.Bold), bf = Theme.F(9.5f);
-            int th = TextRenderer.MeasureText(title, tf, new Size(W - 20 - (icon != null ? 40 : 0), 0), TextFormatFlags.WordBreak | TextFormatFlags.NoPrefix).Height;
+            int th = title.Length == 0 ? 0 : TextRenderer.MeasureText(title, tf, new Size(W - 20 - (icon != null ? 40 : 0), 0), TextFormatFlags.WordBreak | TextFormatFlags.NoPrefix).Height;
             if (icon != null) th = Math.Max(th, 36);
             int bh;
             using (var mg = Graphics.FromImage(measure)) bh = box.Flow(mg, bf, false);
@@ -627,6 +762,12 @@ namespace AzerothLauncher
         public static new void Hide()
         {
             if (box != null && !box.IsDisposed && box.Visible) ((Form)box).Hide();
+            if (box != null) box.hoverOwner = null;
+        }
+
+        public static void Hide(Control owner)
+        {
+            if (box != null && !box.IsDisposed && box.hoverOwner == owner) Hide();
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -636,15 +777,16 @@ namespace AzerothLauncher
             using (var p = new Pen(Theme.Hex("#c49a48"), 1)) g.DrawRectangle(p, 0, 0, Width - 1, Height - 1);
             Font tf = Theme.F(10.5f, FontStyle.Bold), bf = Theme.F(9.5f);
             int ix = icon != null ? 40 : 0;
-            int th = TextRenderer.MeasureText(title, tf, new Size(W - 20 - ix, 0), TextFormatFlags.WordBreak | TextFormatFlags.NoPrefix).Height;
+            int th = title.Length == 0 ? 0 : TextRenderer.MeasureText(title, tf, new Size(W - 20 - ix, 0), TextFormatFlags.WordBreak | TextFormatFlags.NoPrefix).Height;
             if (icon != null)
             {
                 th = Math.Max(th, 36);
                 Theme.Draw(g, icon, new Rectangle(10, 8, 32, 32));
                 using (var p = new Pen(Theme.Hex("#8a7040"), 1)) g.DrawRectangle(p, 10, 8, 32, 32);
             }
-            TextRenderer.DrawText(g, title, tf, new Rectangle(10 + ix, icon != null ? 14 : 8, W - 20 - ix, th), Theme.Gold, BackColor,
-                                  TextFormatFlags.WordBreak | TextFormatFlags.NoPrefix);   // "&" as itself
+            if (title.Length > 0)
+                TextRenderer.DrawText(g, title, tf, new Rectangle(10 + ix, icon != null ? 14 : 8, W - 20 - ix, th), Theme.Gold, BackColor,
+                                      TextFormatFlags.WordBreak | TextFormatFlags.NoPrefix);   // "&" as itself
             var st = g.Save();
             g.TranslateTransform(10, 10 + th);
             Flow(g, bf, true);
@@ -666,6 +808,115 @@ namespace AzerothLauncher
                 else TextRenderer.DrawText(g, Lang.T("Loading the 3D model…"), Theme.F(9), r, Theme.GoldDim, TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
                 using (var p = new Pen(Theme.Hex("#8a7040"), 1)) g.DrawRectangle(p, r);
             }
+        }
+    }
+
+    // All launcher tooltips share the GuideHover panel's colors, fonts, border and wrapping.
+    public sealed class ThemedToolTip : IDisposable
+    {
+        readonly Dictionary<Control, string> text = new Dictionary<Control, string>();
+        readonly Dictionary<Control, Timer> timers = new Dictionary<Control, Timer>();
+        readonly Dictionary<Control, bool> showing = new Dictionary<Control, bool>();
+        readonly HashSet<Control> hooked = new HashSet<Control>();
+        public int AutoPopDelay = 5000, InitialDelay = 500, ReshowDelay = 100;
+
+        public void SetToolTip(Control control, string value)
+        {
+            if (control == null) return;
+            string old;
+            bool changed = !text.TryGetValue(control, out old) || old != value;
+            if (string.IsNullOrEmpty(value))
+            {
+                text.Remove(control);
+                Stop(control);
+                GuideHover.Hide(control);
+                return;
+            }
+            text[control] = value;
+            Hook(control);
+            if (changed && IsUnderPointer(control)) Schedule(control);
+        }
+
+        public void Hide(Control control)
+        {
+            if (control == null) return;
+            Stop(control);
+            GuideHover.Hide(control);
+        }
+
+        void Hook(Control control)
+        {
+            if (!hooked.Add(control)) return;
+            control.MouseEnter += delegate { Schedule(control); };
+            control.MouseLeave += delegate { Hide(control); };
+            control.Disposed += delegate
+            {
+                Stop(control);
+                text.Remove(control);
+                hooked.Remove(control);
+            };
+        }
+
+        static bool IsUnderPointer(Control control)
+        {
+            return !control.IsDisposed && control.IsHandleCreated &&
+                   control.ClientRectangle.Contains(control.PointToClient(Cursor.Position));
+        }
+
+        void Schedule(Control control)
+        {
+            string value;
+            if (!text.TryGetValue(control, out value) || value.Length == 0 || !IsUnderPointer(control)) return;
+            Timer timer;
+            if (!timers.TryGetValue(control, out timer))
+            {
+                timer = new Timer();
+                timer.Tick += delegate
+                {
+                    bool isShowing;
+                    if (showing.TryGetValue(control, out isShowing) && isShowing)
+                    {
+                        timer.Stop();
+                        showing[control] = false;
+                        GuideHover.Hide(control);
+                        return;
+                    }
+                    timer.Stop();
+                    string tip;
+                    if (!control.IsDisposed && IsUnderPointer(control) && text.TryGetValue(control, out tip))
+                    {
+                        GuideHover.ShowTip(control, Lang.T(tip));
+                        if (AutoPopDelay > 0)
+                        {
+                            showing[control] = true;
+                            timer.Interval = AutoPopDelay;
+                            timer.Start();
+                        }
+                    }
+                };
+                timers[control] = timer;
+            }
+            timer.Stop();
+            showing[control] = false;
+            timer.Interval = Math.Max(1, InitialDelay);
+            timer.Start();
+        }
+
+        void Stop(Control control)
+        {
+            Timer timer;
+            if (timers.TryGetValue(control, out timer)) timer.Stop();
+            showing[control] = false;
+        }
+
+        public void Dispose()
+        {
+            foreach (Control control in hooked) GuideHover.Hide(control);
+            foreach (var timer in timers.Values) timer.Dispose();
+            timers.Clear();
+            showing.Clear();
+            text.Clear();
+            hooked.Clear();
         }
     }
 }

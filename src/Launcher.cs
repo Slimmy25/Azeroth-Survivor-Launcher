@@ -769,7 +769,7 @@ namespace AzerothLauncher
             tray = new NotifyIcon();
             tray.Icon = Theme.AppIcon;
             tray.Text = "Azeroth Survivors Launcher";
-            var menu = new ContextMenuStrip();
+            var menu = ThemeMenus.Create(true);
             var show = trayShow = new ToolStripMenuItem("Show Launcher", null, delegate { ShowWindowFront(); });
             show.Font = new Font(show.Font, FontStyle.Bold);
             trayPlay = new ToolStripMenuItem("Play", null, delegate { Play(); });

@@ -78,7 +78,7 @@ namespace AzerothLauncher
         readonly List<KeyValuePair<Rectangle, object>> rows = new List<KeyValuePair<Rectangle, object>>();   // the selector's lines
         readonly Font fTitle = Theme.F(13, FontStyle.Bold), fText = Theme.F(9.5f), fBold = Theme.F(9.5f, FontStyle.Bold),
                       fSmall = Theme.F(8.25f), fTier = Theme.F(7f, FontStyle.Bold), fHead = Theme.F(11, FontStyle.Bold);   // made with the section's zoom; cached
-        readonly ToolTip tip = new ToolTip();
+        readonly ThemedToolTip tip = new ThemedToolTip();
         int slotSize = Math.Max(26, (int)(44 * Theme.Zoom)), slotGap = Math.Max(4, (int)(7 * Theme.Zoom));
         static string chosenSlot = "Head";                   // the slot the selector shows (kept while the launcher runs)
         string hover;

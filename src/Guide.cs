@@ -35,8 +35,8 @@ namespace AzerothLauncher
         static readonly string[][] GuideGroups =
         {
             new[] { "NEW PLAYER", "Getting Started", "Controls", "Your First Run", "Tips for New Players", "Pickups, Caches & Guardians",
-                    "Talents", "Gear & the Armory", "Items", "Transmog", "Addons", "Achievements & Rewards", "Level-Ups & Cards", "Co-op" },
-            new[] { "GAMEPLAY", "Heroic & Endless", "Classes", "Races", "Zones & Bosses", "Build Guides" },
+                    "Talents", "Gear & the Armory", "Addons", "Achievements & Rewards", "Level-Ups & Cards", "Co-op" },
+            new[] { "GAMEPLAY", "Heroic & Endless", "Classes", "Races", "Zones & Bosses", "Items", "Transmog", "Build Guides" },
             new[] { "THEORYCRAFTING", TalentBuilder, GearPlanner },
         };
         int guideGroup;                                       // the group whose tabs are shown
@@ -64,6 +64,7 @@ namespace AzerothLauncher
                 string kind = Json.Str(row, "kind");
                 string classKey = Json.Str(row, "class"), url = Json.Str(row, "url");
                 if (kind.Length == 0) kind = "guide";          // earlier local favorites stored only the topic and page
+                if (classKey.Length == 0) classKey = GuideClassKey(topic, page);  // migrate saved class pages to their class icon
                 if (kind != "guide" || topic.Length > 0) guideFavorites[i] = new GuideFavoriteRoute(kind, topic, page, classKey, url);
             }
             CompactGuideFavorites();
@@ -94,7 +95,58 @@ namespace AzerothLauncher
             GuideFavoriteRoute favorite = guideFavorites[slot];
             if (favorite == null)
             {
-                SetStatus("Hover a Guide location and click its heart to add it to Quick Access.");
+                SetStatus("Hover a path name and click the heart to save it to Quick Access.");
+                return;
+            }
+            if (favorite.Kind == "section")
+            {
+                if (favorite.Topic == "Setup")
+                {
+                    if (setupOpen) SetupGo(0);
+                    else SetStatus("Setup is only available while the setup guide is open.");
+                }
+                else OpenMain(favorite.Topic);
+                return;
+            }
+            if (favorite.Kind == "option")
+            {
+                if (current != "Options" || !side.Visible) ShowSection("Options");
+                if (current != "Options") return;
+                optionsAbout = favorite.Page == "about";
+                optionsLang = favorite.Page == "language";
+                if (favorite.Page == "tab") int.TryParse(favorite.ClassKey, out optionsTab);
+                else if (optionsAbout || optionsLang) optionsTab = 4;
+                BuildPanel("Options");
+                return;
+            }
+            if (favorite.Kind == "addon")
+            {
+                if (current != "Addons" || !side.Visible) ShowSection("Addons");
+                if (current != "Addons") return;
+                addonMode = "download";
+                int category;
+                if (int.TryParse(favorite.ClassKey, out category) && category >= 0 && category < Data.AddonCategories.Length)
+                    addonCategory = category;
+                BuildPanel("Addons");
+                return;
+            }
+            if (favorite.Kind == "stats")
+            {
+                if (current != "Stats" || !side.Visible) ShowSection("Stats");
+                if (current != "Stats") return;
+                if (favorite.Page == "class") SetStatsView(favorite.ClassKey, 0);
+                else
+                {
+                    int tab;
+                    if (int.TryParse(favorite.Url, out tab)) SetStatsView(favorite.ClassKey.Length == 0 ? null : favorite.ClassKey, tab);
+                }
+                return;
+            }
+            if (favorite.Kind == "setup")
+            {
+                if (!setupOpen) { SetStatus("Setup is only available while the setup guide is open."); return; }
+                int step;
+                if (int.TryParse(favorite.ClassKey, out step)) SetupGo(step);
                 return;
             }
             if (favorite.Kind == "builder" || favorite.Kind == "planner")
@@ -228,20 +280,27 @@ namespace AzerothLauncher
             return true;
         }
 
-        void ShowGuideFavoriteMenu(int slot)
+        void ShowGuideFavoriteMenu(int slot, Point screenPoint)
         {
             if (guideFavorites[slot] == null) return;
-            var menu = new ContextMenuStrip();
-            var clear = new ToolStripMenuItem(Lang.T("Clear Quick Access " + (slot + 1)));
-            clear.Click += delegate
-            {
-                guideFavorites[slot] = null;
-                CompactGuideFavorites();
-                SaveGuideFavorites();
-                RefreshStrip();
-            };
-            menu.Items.Add(clear);
-            menu.Show(Cursor.Position);
+            var menu = ThemeMenus.Create(false);
+            var remove = new ToolStripMenuItem(Lang.T("Remove favorite"));
+            remove.ForeColor = Theme.Text;
+            remove.Padding = new Padding(14, 7, 14, 7);
+            remove.Click += delegate { RemoveGuideFavorite(slot); };
+            menu.Items.Add(remove);
+            menu.Show(screenPoint);
+        }
+
+        void RemoveGuideFavorite(int slot)
+        {
+            if (slot < 0 || slot >= guideFavorites.Length || guideFavorites[slot] == null) return;
+            string removed = Lang.T(guideFavorites[slot].PageLabel);
+            guideFavorites[slot] = null;
+            CompactGuideFavorites();
+            SaveGuideFavorites();
+            RefreshStrip();
+            SetStatus("Removed " + removed + " from Quick Access. Hover its path and click the heart to add it again.");
         }
 
         // the tabs of a group: the topics' indexes in Data.Guide (-2 for the Talent Tree Builder), in the group's order
@@ -394,8 +453,8 @@ namespace AzerothLauncher
 
         void GuideMainPage() { GuideGroupPage(-1); }
 
-        // Bind every non-root destination in the Guide breadcrumb trail. The Guide, New Player and
-        // Gameplay entry points remain roots; all deeper destinations can be saved independently.
+        // Bind each Guide destination to the matching saved route. Section and group entry points
+        // are also made available by the shared breadcrumb binder.
         void SetGuideTrail(List<object> trail, params GuideFavoriteRoute[] routes)
         {
             SetCrumbs(trail.ToArray());
@@ -751,6 +810,54 @@ namespace AzerothLauncher
             frame.Controls.Add(web);
         }
 
+        sealed class TalentBuildImportDialog : WowDialog
+        {
+            readonly TextBox input;
+            public string Code { get { return input.Text.Trim(); } }
+
+            public TalentBuildImportDialog(string initial) : base("Talent Tree Builder")
+            {
+                BackAction = delegate { Done(DialogResult.Cancel); };
+                Begin();
+                Heading("IMPORT BUILD", null, 24);
+                Para("Paste a talent build code below. If one is on your clipboard, it is filled in for you.",
+                     10, FontStyle.Regular, Theme.Text, 24, 0, 8, 460);
+                input = new TextBox();
+                input.Multiline = true;
+                input.AcceptsReturn = true;
+                input.ScrollBars = ScrollBars.Vertical;
+                input.BorderStyle = BorderStyle.FixedSingle;
+                input.BackColor = Theme.Hex("#211b2a");
+                input.ForeColor = Theme.Gold;
+                input.Font = Theme.F(9);
+                input.AccessibleName = Lang.T("Talent build code");
+                input.Text = initial ?? "";
+                input.Size = new Size(430, 88);
+                Body.MinWidth = 478;
+                Body.Add(input, Align.Fill, 24, 0, 24, 8);
+                var buttons = new HRow(10,
+                    B("CANCEL", delegate { Done(DialogResult.Cancel); }, 126, 34, 9),
+                    B("IMPORT", delegate { Done(DialogResult.OK); }, 126, 34, 9));
+                Body.Add(buttons, Align.Center, 12, 2, 12, 14);
+                input.KeyDown += delegate(object sender, KeyEventArgs e)
+                {
+                    if (e.Control && e.KeyCode == Keys.Enter)
+                    {
+                        e.Handled = e.SuppressKeyPress = true;
+                        Done(DialogResult.OK);
+                    }
+                };
+                Shown += delegate { input.Focus(); };
+                Finish();
+            }
+
+            void Done(DialogResult result)
+            {
+                DialogResult = result;
+                Close();
+            }
+        }
+
         // ---- a class's three talent trees, as in the game, with a test build of up to 51 points (cleared on leaving)
         void GuideTalents(string cls)
         {
@@ -827,7 +934,7 @@ namespace AzerothLauncher
             var saveBuild = new WowButton(Lang.T("SAVE"), delegate
             {
                 string name = buildName.Text.Trim();
-                if (name.Length == 0) { MessageBox.Show(Lang.T("Enter a name for this build."), Lang.T("Talent Tree Builder"), MessageBoxButtons.OK, MessageBoxIcon.Information); buildName.Focus(); return; }
+                if (name.Length == 0) { Info("Talent Tree Builder", "Enter a name for this build."); buildName.Focus(); return; }
                 var cfg = Config.Load();
                 var all = cfg.Section("talentTreeBuilds");
                 var byClass = Json.AsDict(Json.Get(all, cls));
@@ -867,45 +974,27 @@ namespace AzerothLauncher
             tools.Controls.Add(loadBuild);
             var exportBuild = new WowButton(Lang.T("EXPORT"), delegate
             {
-                try { Clipboard.SetText(build.ShareCode(cls)); MessageBox.Show(Lang.T("Build code copied to the clipboard."), Lang.T("Talent Tree Builder"), MessageBoxButtons.OK, MessageBoxIcon.Information); }
-                catch (Exception) { MessageBox.Show(Lang.T("Could not copy the build code."), Lang.T("Talent Tree Builder"), MessageBoxButtons.OK, MessageBoxIcon.Warning); }
+                try { Clipboard.SetText(build.ShareCode(cls)); Info("Talent Tree Builder", "Build code copied to the clipboard."); }
+                catch (Exception) { Warn("Talent Tree Builder", "Could not copy the build code."); }
             }, actionW, actionH, 9);
             exportBuild.Location = new Point(actionX, actionY + (actionH + actionGap) * 2);
             tools.Controls.Add(exportBuild);
             var importBuild = new WowButton(Lang.T("IMPORT"), delegate
             {
                 string code = "";
-                using (var prompt = new Form())
-                using (var input = new TextBox())
-                using (var ok = new Button())
-                using (var cancel = new Button())
+                string initial = "";
+                try { if (Clipboard.ContainsText()) initial = Clipboard.GetText(); } catch (Exception) { }
+                using (var prompt = new TalentBuildImportDialog(initial))
                 {
-                    prompt.Text = Lang.T("IMPORT BUILD");
-                    prompt.StartPosition = FormStartPosition.CenterParent;
-                    prompt.FormBorderStyle = FormBorderStyle.FixedDialog;
-                    prompt.MinimizeBox = false;
-                    prompt.MaximizeBox = false;
-                    prompt.ClientSize = new Size(420, 150);
-                    input.Multiline = true;
-                    input.ScrollBars = ScrollBars.Vertical;
-                    input.Location = new Point(10, 10);
-                    input.Size = new Size(400, 82);
-                    try { input.Text = Clipboard.ContainsText() ? Clipboard.GetText() : ""; } catch (Exception) { }
-                    ok.Text = Lang.T("IMPORT"); ok.DialogResult = DialogResult.OK;
-                    ok.Location = new Point(230, 108); ok.Size = new Size(85, 28);
-                    cancel.Text = Lang.T("CANCEL"); cancel.DialogResult = DialogResult.Cancel;
-                    cancel.Location = new Point(325, 108); cancel.Size = new Size(85, 28);
-                    prompt.Controls.Add(input); prompt.Controls.Add(ok); prompt.Controls.Add(cancel);
-                    prompt.AcceptButton = ok; prompt.CancelButton = cancel;
-                    if (prompt.ShowDialog(panel.FindForm()) != DialogResult.OK) return;
-                    code = input.Text.Trim();
+                    if (prompt.ShowModal(panel.FindForm()) != DialogResult.OK) return;
+                    code = prompt.Code;
                 }
                 if (code.Length == 0) return;
                 TalentBuild imported;
                 string error;
                 if (!TalentBuild.TryParseShareCode(code, cls, out imported, out error))
                 {
-                    MessageBox.Show(error, Lang.T("IMPORT BUILD"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    Warn("IMPORT BUILD", error);
                     return;
                 }
                 applyBuild(imported);
@@ -1100,7 +1189,10 @@ namespace AzerothLauncher
                 c.Title = h.Value < 0 ? topic.Title : topic.Pages[h.Value].Title;
                 c.Desc = (h.Value < 0 ? "" : topic.Title + " · ") + lines[i];   // where it is, and the line it was found in
                 if (h.Value >= 0 || topic.Pages.Count == 0)
-                    EnableGuideCardFavorite(c, new GuideFavoriteRoute("guide", topic.Title, h.Value < 0 ? "" : topic.Pages[h.Value].Title));
+                {
+                    string page = h.Value < 0 ? "" : topic.Pages[h.Value].Title;
+                    EnableGuideCardFavorite(c, new GuideFavoriteRoute("guide", topic.Title, page, GuideClassKey(topic.Title, page), ""));
+                }
                 c.Pressed += delegate { SetGuideView(h.Key, h.Value); };
             });
         }
@@ -1148,7 +1240,8 @@ namespace AzerothLauncher
                 c.Title = topic.Pages[i].Title;
                 c.Desc = topic.Pages[i].Desc;
                 c.Videos = topic.Pages[i].Videos.Count;
-                EnableGuideCardFavorite(c, new GuideFavoriteRoute("guide", topic.Title, topic.Pages[i].Title));
+                EnableGuideCardFavorite(c, new GuideFavoriteRoute("guide", topic.Title, topic.Pages[i].Title,
+                    GuideClassKey(topic.Title, topic.Pages[i].Title), ""));
                 c.Pressed += delegate { SetGuideView(ti, i); };
             });
         }

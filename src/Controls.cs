@@ -283,12 +283,46 @@ namespace AzerothLauncher
 
     public delegate void IconPainter(Graphics g, float x, float y, float size, Color color);
 
+    // Shared colors, text and hover states for every launcher context menu.
+    public static class ThemeMenus
+    {
+        sealed class Colors : ProfessionalColorTable
+        {
+            readonly Color dark = Theme.Hex("#120f18"), hover = Theme.Hex("#302516"), edge = Theme.Hex("#8a7040");
+            public override Color ToolStripDropDownBackground { get { return dark; } }
+            public override Color MenuBorder { get { return edge; } }
+            public override Color MenuItemSelected { get { return hover; } }
+            public override Color MenuItemBorder { get { return Theme.GoldDim; } }
+            public override Color MenuItemPressedGradientBegin { get { return hover; } }
+            public override Color MenuItemPressedGradientEnd { get { return Theme.Hex("#17120b"); } }
+            public override Color MenuItemSelectedGradientBegin { get { return hover; } }
+            public override Color MenuItemSelectedGradientEnd { get { return hover; } }
+            public override Color ImageMarginGradientBegin { get { return dark; } }
+            public override Color ImageMarginGradientMiddle { get { return dark; } }
+            public override Color ImageMarginGradientEnd { get { return dark; } }
+            public override Color SeparatorDark { get { return Theme.Hex("#51442e"); } }
+            public override Color SeparatorLight { get { return dark; } }
+        }
+
+        public static ContextMenuStrip Create(bool showCheckMargin = true)
+        {
+            var menu = new ContextMenuStrip();
+            menu.Renderer = new ToolStripProfessionalRenderer(new Colors());
+            menu.BackColor = Theme.Hex("#120f18");
+            menu.ForeColor = Theme.Text;
+            menu.Font = Theme.F(9.5f);
+            menu.ShowImageMargin = false;
+            menu.ShowCheckMargin = showCheckMargin;
+            return menu;
+        }
+    }
+
     // ---------- Custom gold-bevel button ----------
     public class WowButton : Control
     {
         string text;
         float size;
-        bool hover, down, active, selected, grayed;
+        bool hover, down, keyDown, active, selected, grayed;
         public IconPainter Icon;
         public Image[] Skin;
         readonly float zoom;                                  // launcher art {normal, hover, down, grayed}
@@ -299,8 +333,11 @@ namespace AzerothLauncher
         {
             SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer |
                      ControlStyles.ResizeRedraw, true);
-            SetStyle(ControlStyles.Selectable, false);
+            SetStyle(ControlStyles.Selectable, true);
             this.text = text;
+            AccessibleRole = AccessibleRole.PushButton;
+            AccessibleName = Lang.T(text);
+            TabStop = true;
             this.size = size;
             zoom = Theme.Zoom;                                 // made inside a section: smaller
             Size = new Size((int)(width * zoom), (int)(height * zoom));
@@ -308,7 +345,7 @@ namespace AzerothLauncher
             if (command != null) Pressed += command;
         }
 
-        public string Label { get { return text; } set { text = value; Invalidate(); } }
+        public string Label { get { return text; } set { text = value; AccessibleName = Lang.T(value); Invalidate(); } }
         public float FontSize { get { return size; } set { size = value; Invalidate(); } }
         public bool Active { get { return active; } set { active = value; Invalidate(); } }
         public bool Selected { get { return selected; } set { selected = value; Invalidate(); } }   // filled gold: the current choice
@@ -323,13 +360,14 @@ namespace AzerothLauncher
                 if (grayed == value) return;
                 grayed = value;
                 down = false;
+                AccessibleDescription = grayed ? Lang.T(GrayedTip) : "";
                 Cursor = grayed ? Cursors.Default : Cursors.Hand;
                 if (!grayed) Tips.Hide(this);
                 Invalidate();
             }
         }
 
-        internal static readonly ToolTip Tips = new ToolTip();
+        internal static readonly ThemedToolTip Tips = new ThemedToolTip();
 
         protected override void OnMouseEnter(EventArgs e)
         {
@@ -339,7 +377,36 @@ namespace AzerothLauncher
             base.OnMouseEnter(e);
         }
 
-        protected override void OnMouseLeave(EventArgs e) { hover = false; down = false; Invalidate(); base.OnMouseLeave(e); }
+        protected override void OnMouseLeave(EventArgs e) { hover = false; down = false; if (!Focused) Tips.Hide(this); Invalidate(); base.OnMouseLeave(e); }
+
+        protected override void OnGotFocus(EventArgs e)
+        {
+            if (grayed && !string.IsNullOrEmpty(GrayedTip)) GuideHover.ShowTip(this, Lang.T(GrayedTip));
+            Invalidate();
+            base.OnGotFocus(e);
+        }
+        protected override void OnLostFocus(EventArgs e) { keyDown = false; GuideHover.Hide(this); Invalidate(); base.OnLostFocus(e); }
+
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            if (!grayed && (e.KeyCode == Keys.Space || e.KeyCode == Keys.Enter))
+            {
+                keyDown = true;
+                Invalidate();
+                e.Handled = e.SuppressKeyPress = true;
+                return;
+            }
+            base.OnKeyDown(e);
+        }
+
+        protected override void OnKeyUp(KeyEventArgs e)
+        {
+            bool fire = keyDown && (e.KeyCode == Keys.Space || e.KeyCode == Keys.Enter) && !grayed;
+            keyDown = false;
+            Invalidate();
+            base.OnKeyUp(e);
+            if (fire) Fire(Pressed);
+        }
 
         protected override void OnMouseDown(MouseEventArgs e)
         {
@@ -402,6 +469,9 @@ namespace AzerothLauncher
             Theme.Zoom = zoom;
             try { PaintButton(e.Graphics); }
             finally { Theme.Zoom = old; }
+            if (Focused)
+                using (var p = new Pen(Theme.Hex("#fff2b0"), 1) { DashStyle = DashStyle.Dot })
+                    e.Graphics.DrawRectangle(p, 5, 5, Math.Max(1, Width - 11), Math.Max(1, Height - 11));
         }
 
         void PaintButton(Graphics g)
@@ -415,7 +485,7 @@ namespace AzerothLauncher
                 Skin = null;
                 return;
             }
-            string state = grayed ? "grayed" : down ? "down" : hover ? "hover" : active ? "active" : "normal";
+            string state = grayed ? "grayed" : (down || keyDown) ? "down" : (hover || Focused) ? "hover" : active ? "active" : "normal";
             Color top, bot, border, fg, shadow = Color.Black;
             if (state == "grayed") { top = Theme.Hex("#2a2620"); bot = Theme.Hex("#12100d"); border = Theme.Hex("#5a5246"); fg = Theme.Hex("#7d7466"); }
             else if (state == "hover") { top = Theme.Hex("#5a4118"); bot = Theme.Hex("#241808"); border = Theme.Gold; fg = Theme.Hex("#fff2b0"); }
@@ -454,7 +524,7 @@ namespace AzerothLauncher
         // the button is a picture from the launcher art, the label drawn on it
         void PaintSkin(Graphics g, int w, int h)
         {
-            int i = grayed ? 3 : down ? 2 : (hover || active || selected) ? 1 : 0;
+            int i = grayed ? 3 : (down || keyDown) ? 2 : (hover || active || selected || Focused) ? 1 : 0;
             Image img = Skin.Length > i && Skin[i] != null ? Skin[i] : Skin[0];
             Theme.Draw(g, img, new Rectangle(0, 0, w, h));
             Theme.Smooth(g);
@@ -490,7 +560,7 @@ namespace AzerothLauncher
         }
 
         protected override void OnMouseEnter(EventArgs e) { hover = true; Invalidate(); base.OnMouseEnter(e); }
-        protected override void OnMouseLeave(EventArgs e) { hover = false; Invalidate(); base.OnMouseLeave(e); }
+        protected override void OnMouseLeave(EventArgs e) { hover = false; WowButton.Tips.Hide(this); Invalidate(); base.OnMouseLeave(e); }
 
         public override Size GetPreferredSize(Size proposed)
         {
@@ -617,7 +687,7 @@ namespace AzerothLauncher
         }
 
         protected override void OnMouseEnter(EventArgs e) { hover = true; Invalidate(); base.OnMouseEnter(e); }
-        protected override void OnMouseLeave(EventArgs e) { hover = false; Invalidate(); base.OnMouseLeave(e); }
+        protected override void OnMouseLeave(EventArgs e) { hover = false; WowButton.Tips.Hide(this); Invalidate(); base.OnMouseLeave(e); }
         protected override void OnMouseDown(MouseEventArgs e)
         {
             Rectangle t = Thumb();
@@ -663,18 +733,25 @@ namespace AzerothLauncher
     public class IconButton : Control
     {
         readonly Action<Graphics, float, float, Color> icon;
-        bool hover, active, grayed;
+        bool hover, active, grayed, keyDown;
         public event Action Pressed;
-        public event Action ContextClicked;
+        public event Action<Control, Point> ContextClicked;
         public string GrayedTip;
-        public string Tip;
         public bool SuppressNextClick;
+        string tip;
+        public string Tip
+        {
+            get { return tip; }
+            set { tip = value; AccessibleDescription = Lang.T(value); }
+        }
 
         public IconButton(Action<Graphics, float, float, Color> icon, Action command)
         {
             SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer, true);
-            SetStyle(ControlStyles.Selectable, false);
+            SetStyle(ControlStyles.Selectable, true);
             this.icon = icon;
+            AccessibleRole = AccessibleRole.PushButton;
+            TabStop = true;
             Size = new Size(26, 26);                         // the slim strip beside the sections
             Cursor = Cursors.Hand;
             if (command != null) Pressed += command;
@@ -689,6 +766,7 @@ namespace AzerothLauncher
             {
                 if (grayed == value) return;
                 grayed = value;
+                if (grayed && !string.IsNullOrEmpty(GrayedTip)) AccessibleDescription = Lang.T(GrayedTip);
                 Cursor = grayed ? Cursors.Default : Cursors.Hand;
                 if (!grayed) WowButton.Tips.Hide(this);
                 Invalidate();
@@ -703,7 +781,46 @@ namespace AzerothLauncher
             base.OnMouseEnter(e);
         }
 
-        protected override void OnMouseLeave(EventArgs e) { hover = false; Invalidate(); base.OnMouseLeave(e); }
+        protected override void OnMouseLeave(EventArgs e) { hover = false; if (!Focused) WowButton.Tips.Hide(this); Invalidate(); base.OnMouseLeave(e); }
+
+        protected override void OnGotFocus(EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(Tip)) GuideHover.ShowTip(this, Lang.T(Tip));
+            Invalidate();
+            base.OnGotFocus(e);
+        }
+        protected override void OnLostFocus(EventArgs e) { keyDown = false; GuideHover.Hide(this); Invalidate(); base.OnLostFocus(e); }
+
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Apps || (e.KeyCode == Keys.F10 && e.Shift))
+            {
+                if (ContextClicked != null)
+                {
+                    Point at = PointToScreen(new Point(Width / 2, Height));
+                    WowButton.Fire(delegate { ContextClicked(this, at); });
+                }
+                e.Handled = e.SuppressKeyPress = true;
+                return;
+            }
+            if (!grayed && (e.KeyCode == Keys.Space || e.KeyCode == Keys.Enter))
+            {
+                keyDown = true;
+                Invalidate();
+                e.Handled = e.SuppressKeyPress = true;
+                return;
+            }
+            base.OnKeyDown(e);
+        }
+
+        protected override void OnKeyUp(KeyEventArgs e)
+        {
+            bool fire = keyDown && (e.KeyCode == Keys.Space || e.KeyCode == Keys.Enter) && !grayed;
+            keyDown = false;
+            Invalidate();
+            base.OnKeyUp(e);
+            if (fire) WowButton.Fire(Pressed);
+        }
 
         protected override void OnMouseUp(MouseEventArgs e)
         {
@@ -711,7 +828,11 @@ namespace AzerothLauncher
             if (grayed) return;
             if (e.Button == MouseButtons.Left && SuppressNextClick) { SuppressNextClick = false; return; }
             if (!ClientRectangle.Contains(e.Location)) return;
-            if (e.Button == MouseButtons.Right) WowButton.Fire(ContextClicked);
+            if (e.Button == MouseButtons.Right && ContextClicked != null)
+            {
+                Point at = PointToScreen(e.Location);
+                WowButton.Fire(delegate { ContextClicked(this, at); });
+            }
             else if (e.Button == MouseButtons.Left) WowButton.Fire(Pressed);
         }
 
@@ -719,7 +840,6 @@ namespace AzerothLauncher
         {
             Graphics g = e.Graphics;
             int s = Width;
-            bool lit = !grayed && (active || hover);
             g.Clear(Theme.Hex("#0e0d14"));
             Theme.Smooth(g);
             // modern: a soft rounded tile, a gold bar on the left for the open section, a gentle lift on hover
@@ -728,7 +848,10 @@ namespace AzerothLauncher
             Armory.Box(g, tile, 7, fill, active ? Theme.Hex("#6b5a32") : hover ? Theme.Hex("#3d3a4a") : Theme.Hex("#26242f"));
             if (active)
                 using (var b = new SolidBrush(Theme.Gold)) g.FillRectangle(b, 0, 9, 3, s - 18);
-            icon(g, s / 2f, s / 2f, active ? Theme.Gold : hover ? Theme.Hex("#f5e9c8") : grayed ? Theme.Hex("#55524c") : Theme.Hex("#a99c80"));
+            icon(g, s / 2f, s / 2f, active ? Theme.Gold : hover || keyDown || Focused ? Theme.Hex("#f5e9c8") : grayed ? Theme.Hex("#55524c") : Theme.Hex("#a99c80"));
+            if (Focused)
+                using (var p = new Pen(Theme.Hex("#fff2b0"), 1) { DashStyle = DashStyle.Dot })
+                    g.DrawRectangle(p, 3, 3, Math.Max(1, Width - 7), Math.Max(1, Height - 7));
         }
     }
 
@@ -1037,7 +1160,7 @@ namespace AzerothLauncher
         public void Wheel(int delta) { target.Wheel(delta); }
 
         protected override void OnMouseEnter(EventArgs e) { hover = true; Invalidate(); base.OnMouseEnter(e); }
-        protected override void OnMouseLeave(EventArgs e) { hover = false; Invalidate(); base.OnMouseLeave(e); }
+        protected override void OnMouseLeave(EventArgs e) { hover = false; WowButton.Tips.Hide(this); Invalidate(); base.OnMouseLeave(e); }
 
         protected override void OnMouseDown(MouseEventArgs e)
         {
@@ -1476,6 +1599,8 @@ namespace AzerothLauncher
     {
         readonly Image normal, hot;
         bool hover;
+        bool keyDown;
+        readonly string tip;
 
         public BrandIcon(Image normal, Image hot, string tip)
         {
@@ -1484,12 +1609,33 @@ namespace AzerothLauncher
             BackColor = Color.Transparent;
             this.normal = normal;
             this.hot = hot ?? normal;
+            this.tip = tip ?? "";
             Cursor = Cursors.Hand;
-            WowButton.Tips.SetToolTip(this, tip);
+            SetStyle(ControlStyles.Selectable, true);
+            TabStop = true;
+            AccessibleRole = AccessibleRole.PushButton;
+            AccessibleName = Lang.T(this.tip.Split('\n')[0]);
+            AccessibleDescription = Lang.T(this.tip);
+            WowButton.Tips.SetToolTip(this, this.tip);
         }
 
         protected override void OnMouseEnter(EventArgs e) { hover = true; Invalidate(); base.OnMouseEnter(e); }
-        protected override void OnMouseLeave(EventArgs e) { hover = false; Invalidate(); base.OnMouseLeave(e); }
+        protected override void OnMouseLeave(EventArgs e) { hover = false; if (!Focused) WowButton.Tips.Hide(this); Invalidate(); base.OnMouseLeave(e); }
+        protected override void OnGotFocus(EventArgs e) { GuideHover.ShowTip(this, Lang.T(tip)); Invalidate(); base.OnGotFocus(e); }
+        protected override void OnLostFocus(EventArgs e) { keyDown = false; GuideHover.Hide(this); Invalidate(); base.OnLostFocus(e); }
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Space) { keyDown = true; e.Handled = e.SuppressKeyPress = true; return; }
+            base.OnKeyDown(e);
+        }
+        protected override void OnKeyUp(KeyEventArgs e)
+        {
+            bool click = keyDown && (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Space);
+            keyDown = false;
+            base.OnKeyUp(e);
+            Invalidate();
+            if (click) OnClick(EventArgs.Empty);
+        }
 
         protected override void OnPaint(PaintEventArgs e)
         {
@@ -1499,6 +1645,7 @@ namespace AzerothLauncher
             float s = Math.Min((float)Width / img.Width, (float)Height / img.Height);
             float w = img.Width * s, h = img.Height * s;
             Theme.Draw(e.Graphics, img, (Width - w) / 2, (Height - h) / 2, w, h);
+            if (Focused) using (var p = new Pen(Theme.Hex("#fff2b0"), 1) { DashStyle = DashStyle.Dot }) e.Graphics.DrawRectangle(p, 2, 2, Math.Max(1, Width - 5), Math.Max(1, Height - 5));
         }
     }
 
@@ -1507,18 +1654,41 @@ namespace AzerothLauncher
     public class HeartIcon : Control
     {
         bool hover;
+        bool keyDown;
+        readonly string tip;
 
         public HeartIcon(string tip)
         {
             SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer |
                      ControlStyles.SupportsTransparentBackColor, true);
             BackColor = Color.Transparent;
+            this.tip = tip ?? "";
             Cursor = Cursors.Hand;
-            WowButton.Tips.SetToolTip(this, tip);
+            SetStyle(ControlStyles.Selectable, true);
+            TabStop = true;
+            AccessibleRole = AccessibleRole.PushButton;
+            AccessibleName = Lang.T(this.tip.Split('\n')[0]);
+            AccessibleDescription = Lang.T(this.tip);
+            WowButton.Tips.SetToolTip(this, this.tip);
         }
 
         protected override void OnMouseEnter(EventArgs e) { hover = true; Invalidate(); base.OnMouseEnter(e); }
-        protected override void OnMouseLeave(EventArgs e) { hover = false; Invalidate(); base.OnMouseLeave(e); }
+        protected override void OnMouseLeave(EventArgs e) { hover = false; if (!Focused) WowButton.Tips.Hide(this); Invalidate(); base.OnMouseLeave(e); }
+        protected override void OnGotFocus(EventArgs e) { GuideHover.ShowTip(this, Lang.T(tip)); Invalidate(); base.OnGotFocus(e); }
+        protected override void OnLostFocus(EventArgs e) { keyDown = false; GuideHover.Hide(this); Invalidate(); base.OnLostFocus(e); }
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Space) { keyDown = true; e.Handled = e.SuppressKeyPress = true; return; }
+            base.OnKeyDown(e);
+        }
+        protected override void OnKeyUp(KeyEventArgs e)
+        {
+            bool click = keyDown && (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Space);
+            keyDown = false;
+            base.OnKeyUp(e);
+            Invalidate();
+            if (click) OnClick(EventArgs.Empty);
+        }
 
         protected override void OnPaint(PaintEventArgs e)
         {
@@ -1534,8 +1704,9 @@ namespace AzerothLauncher
                 p.AddBezier(x + s / 2, y + s * 0.95f, x - s * 0.15f, y + s * 0.45f, x + s * 0.12f, y - s * 0.12f, x + s / 2, y + s * 0.25f);
                 p.AddBezier(x + s / 2, y + s * 0.25f, x + s * 0.88f, y - s * 0.12f, x + s * 1.15f, y + s * 0.45f, x + s / 2, y + s * 0.95f);
                 p.CloseFigure();
-                using (var b = new SolidBrush(hover ? Color.FromArgb(230, 92, 92) : Color.FromArgb(150, 170, 70, 70))) g.FillPath(b, p);
+                using (var b = new SolidBrush(hover || keyDown || Focused ? Color.FromArgb(230, 92, 92) : Color.FromArgb(150, 170, 70, 70))) g.FillPath(b, p);
             }
+            if (Focused) using (var p = new Pen(Theme.Hex("#fff2b0"), 1) { DashStyle = DashStyle.Dot }) g.DrawRectangle(p, 2, 2, Math.Max(1, Width - 5), Math.Max(1, Height - 5));
         }
     }
 

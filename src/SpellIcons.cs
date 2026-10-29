@@ -90,11 +90,17 @@ namespace AzerothLauncher
             return Lookup("spell:" + name, repaint, delegate { return FindSpellIcon(name); }, delegate(string ans) { return IconHost + ans + ".jpg"; });
         }
 
+        static readonly Dictionary<string, string> ClassIcons = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) {
+            { "warrior", "classicon_warrior" }, { "paladin", "classicon_paladin" }, { "hunter", "classicon_hunter" },
+            { "rogue", "classicon_rogue" }, { "priest", "classicon_priest" }, { "shaman", "classicon_shaman" },
+            { "mage", "classicon_mage" }, { "warlock", "classicon_warlock" }, { "druid", "classicon_druid" },
+            { "deathknight", "classicon_deathknight" } };
+
         public static Image Class(string classKey, Control repaint)
         {
             string k = Regex.Replace((classKey ?? "").ToLowerInvariant(), "[^a-z]", "");
-            if (k == "deathknight") k = "deathknight";
-            return k.Length == 0 ? null : Icon("classicon_" + k, repaint);
+            string icon;
+            return ClassIcons.TryGetValue(k, out icon) ? Icon(icon, repaint) : null;
         }
 
         // races and zones (Classes page): Classic's race portraits, and each zone's own art from the achievements
