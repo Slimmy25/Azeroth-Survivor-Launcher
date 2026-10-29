@@ -1981,7 +1981,7 @@ namespace AzerothLauncher
                 try
                 {
                     string text;
-                    using (var resp = Net.Open("https://api.github.com/repos/Slimmy25/Azeroth-Survivor-Launcher-Releases/releases/tags/addons",
+                    using (var resp = Net.Open("https://api.github.com/repos/Slimmy25/Azeroth-Survivors-Launcher/releases/tags/addons",
                                                15000, true, "GitHub", "application/vnd.github+json"))
                     using (var rd = new StreamReader(resp.GetResponseStream(), System.Text.Encoding.UTF8))
                         text = rd.ReadToEnd();

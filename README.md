@@ -10,7 +10,7 @@ This is a fan project. It is not made by Aethus, and it is not affiliated with o
 The launcher does not contain or host the game: it downloads it from the game's own download hosts. See
 [CREDITS.md](CREDITS.md) for where everything comes from.
 
-**[Download the launcher](https://github.com/Slimmy25/Azeroth-Survivor-Launcher/releases/latest)**: one file,
+**[Download the launcher](https://github.com/Slimmy25/Azeroth-Survivors-Launcher/releases/latest)**: one file,
 `Azeroth Survivors Launcher.exe`. Put it in the folder where the game is, or where you want it installed. It needs
 nothing else: it runs on the .NET Framework 4.8 that comes with Windows 10 and 11.
 

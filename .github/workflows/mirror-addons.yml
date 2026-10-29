@@ -1,7 +1,6 @@
 # Downloads every addon listed in addons/sources.txt from its original link (or zips the ones kept in this
 # repository) and keeps a copy on the "addons"
-# release of the PUBLIC downloads repository, so players can download all addons from GitHub.
-# Needs the secret RELEASES_TOKEN (see build.yml).
+# release of this repository, so players can download all addons from GitHub.
 # Runs by itself when addons/sources.txt changes, or by hand: Actions > Mirror addons > Run workflow.
 name: Mirror addons
 
@@ -27,11 +26,10 @@ jobs:
 
       - name: Download the addons and put them on the "addons" release
         env:
-          GH_TOKEN: ${{ secrets.RELEASES_TOKEN }}
-          GH_REPO: Slimmy25/Azeroth-Survivor-Launcher-Releases
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: Slimmy25/Azeroth-Survivors-Launcher
         run: |
           set -euo pipefail
-          if [ -z "$GH_TOKEN" ]; then echo "::error::Set the RELEASES_TOKEN secret first (see build.yml)."; exit 1; fi
           # a pre-release, so it never counts as the "latest" release (that one is the launcher)
           gh release view addons >/dev/null 2>&1 || \
             gh release create addons --prerelease --title "Addons" \

@@ -1,5 +1,4 @@
-# Updates a release's title and notes from release-notes/<tag>.md, here and on the public downloads repository,
-# without building or uploading anything (the exe stays the same, so no launcher downloads it again).
+# Updates a release's title and notes from release-notes/<tag>.md, without building or uploading anything.
 # Actions > Release notes > Run workflow, and type the release's tag (v1.0, v1.1 ...).
 name: Release notes
 
@@ -21,8 +20,6 @@ jobs:
       - name: Update the notes
         env:
           GH_TOKEN: ${{ github.token }}
-          PUBLIC_TOKEN: ${{ secrets.RELEASES_TOKEN }}
-          PUBLIC_REPO: Slimmy25/Azeroth-Survivor-Launcher-Releases
           TAG: ${{ inputs.release }}
         run: |
           set -e
@@ -30,6 +27,3 @@ jobs:
           if [ ! -f "$notes" ]; then echo "::error::$notes does not exist"; exit 1; fi
           title="Azeroth Survivors Launcher $TAG"
           gh release edit "$TAG" --title "$title" --notes-file "$notes"
-          if [ -n "$PUBLIC_TOKEN" ]; then
-            GH_TOKEN="$PUBLIC_TOKEN" gh release edit "$TAG" -R "$PUBLIC_REPO" --title "$title" --notes-file "$notes"
-          fi

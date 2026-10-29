@@ -1,4 +1,4 @@
-# Where each addon copy on the "addons" release comes from. One addon per line:
+# Where each addon copy on this repository's "addons" release comes from. One addon per line:
 #   file name on the release | original download link
 # The "Mirror addons" workflow downloads every link below, checks it is a real .zip and puts it on the
 # "addons" release under that file name (replacing the old copy). It runs by itself when this file changes,
@@ -11,7 +11,7 @@
 # "github-bundle-latest:<owner>/<repo>:<prefix>+<owner>/<repo>:<prefix>" combines matching ZIP assets into one addon bundle.
 # "local:<folder>+<folder>" zips several folders into the one .zip (an addon that comes with a second one).
 # The launcher's Download More list (assets/addons.txt) points at:
-#   https://github.com/Slimmy25/Azeroth-Survivor-Launcher-Releases/releases/download/addons/<file name>
+#   https://github.com/Slimmy25/Azeroth-Survivors-Launcher/releases/download/addons/<file name>
 
 Azerloot-by-KindaGray.zip       | github-latest:Kindagrey/Azerloot
 SurvivorsDragonUi-by-Mxgwyn.zip | https://github.com/migwynkriid13/SurvivorsDragonUi/releases/latest/download/SurvivorsDragonUi.zip

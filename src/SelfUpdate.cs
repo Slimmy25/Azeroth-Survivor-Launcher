@@ -21,12 +21,9 @@ namespace AzerothLauncher
 
     public static class SelfUpdate
     {
-        // Where the launcher's releases are: the project's own repository first (once it is public, its releases are
-        // the ones to use), then the downloads-only repository every launcher used until then. A repository that can't
-        // be read (still private: GitHub answers 404) is skipped, so nothing changes until the first one is public.
-        // The Build workflow publishes every release to both.
-        public static readonly string[] Repos = { "Slimmy25/Azeroth-Survivor-Launcher", "Slimmy25/Azeroth-Survivor-Launcher-Releases" };
-        static string repo = Repos[Repos.Length - 1];       // the one that answered last
+        // Releases and their verified launcher files are published in the public source repository.
+        public static readonly string[] Repos = { "Slimmy25/Azeroth-Survivors-Launcher" };
+        static string repo = Repos[0];
         public static string Repo { get { return repo; } }
         public static string ReleasesPage { get { return "https://github.com/" + Repo + "/releases/latest"; } }
 

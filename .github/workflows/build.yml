@@ -1,6 +1,6 @@
 # Builds the launcher on GitHub's own Windows machines every time you upload changes.
-# The finished exe appears under the "Actions" tab (open the run, then "Artifacts").
-# It is attached to a release automatically when:
+# The finished exe appears under the "Actions" tab (open the run, then "Artifacts") and is attached to this repository's release.
+# It is attached automatically when:
 #   - you publish a release (any tag name), or push a tag
 #   - you run this workflow by hand (Actions > Build > Run workflow) and type a release's tag name
 name: Build
@@ -72,33 +72,4 @@ jobs:
           files=("dist/Azeroth Survivors Launcher.exe" "dist/Azeroth Survivors Launcher.sha256.txt")
           run gh release upload "$TAG" "${files[@]}" --clobber
 
-      # Players download from a separate PUBLIC repository that holds only the exe releases, never the code.
-      # Needs the secret RELEASES_TOKEN: a fine-grained token with "Contents: Read and write" on that repository.
-      - name: Publish the exe on the public downloads repository
-        if: github.event_name == 'release' || startsWith(github.ref, 'refs/tags/') || inputs.release != '' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
-        shell: bash
-        env:
-          GH_TOKEN: ${{ github.token }}
-          PUBLIC_TOKEN: ${{ secrets.RELEASES_TOKEN }}
-          PUBLIC_REPO: Slimmy25/Azeroth-Survivor-Launcher-Releases
-          TAG: ${{ inputs.release || github.event.release.tag_name || (startsWith(github.ref, 'refs/tags/') && github.ref_name) || '' }}
-        run: |
-          if [ -z "$TAG" ]; then TAG="$(head -n 1 assets/launcher-changelog.txt | awk '{print $2}')"; fi
-          if [ -z "$TAG" ]; then echo "::error::Could not determine the release tag from the launcher changelog"; exit 1; fi
-          if [ -z "$PUBLIC_TOKEN" ]; then
-            echo "::warning::The RELEASES_TOKEN secret is not set, so nothing was published on $PUBLIC_REPO."
-            exit 0
-          fi
-          # same title and notes as the release here
-          title="$(gh release view "$TAG" --json name --jq '.name' 2>/dev/null || true)"
-          [ -n "$title" ] || title="$TAG"
-          gh release view "$TAG" --json body --jq '.body' > notes.md 2>/dev/null || echo "Azeroth Survivors Launcher $TAG" > notes.md
-          [ -s notes.md ] || echo "Azeroth Survivors Launcher $TAG" > notes.md
-          export GH_TOKEN="$PUBLIC_TOKEN"
-          if gh release view "$TAG" -R "$PUBLIC_REPO" >/dev/null 2>&1; then
-            gh release edit "$TAG" -R "$PUBLIC_REPO" --title "$title" --notes-file notes.md --latest
-          else
-            gh release create "$TAG" -R "$PUBLIC_REPO" --title "$title" --notes-file notes.md --latest
-          fi
-          files=("dist/Azeroth Survivors Launcher.exe" "dist/Azeroth Survivors Launcher.sha256.txt")
-          gh release upload "$TAG" -R "$PUBLIC_REPO" "${files[@]}" --clobber
+\n
