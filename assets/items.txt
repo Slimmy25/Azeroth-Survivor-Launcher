@@ -28,7 +28,7 @@ eldre_thalas | Royal Seal of Eldre'Thalas | INV_Jewelry_Talisman_10 | trinket | 
 chosen | Mark of the Chosen | INV_Jewelry_Talisman_08 | trinket | 270 | 0.15 | +{v}% luck
 onyxia_blood | Onyxia Blood Talisman | Spell_Shadow_LifeDrain | trinket | 271 | 2 | Each kill heals {v} health
 war_horn | Horn of the Warchief | INV_Misc_Horn_01 | trinket | 273 | 0.15 | Your buffs are {v}% stronger
-soulstone | Major Soulstone | INV_Misc_Orb_04 | trinket | 272 | 1 | +{v} return to life at half health (2 at most)
+soulstone | Major Soulstone | INV_Misc_Orb_04 | trinket | 272 | 1 | +{v} return to life at half health (2 at most); protects you from damage for 2 seconds after revival
 star_of_mystaria | Star of Mystaria | INV_Enchant_EssenceMagicLarge | trinket | 262 | 0.166667 | +{v}% max health, +{h}% damage reduction{max}
 @amulet
 animated_chain | Animated Chain Necklace | INV_Jewelry_Necklace_01 | 1 | 2=0.25 | 5=0.08

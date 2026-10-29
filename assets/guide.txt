@@ -117,6 +117,9 @@ Video by Des (youtube.com/@Dessiq). All credit for the build and the video goes 
 - Y: open your stored level-ups (when Store Level-Ups is on).
 - Escape: the menu (Back, Options, End Run).
 
+# Names and chat
+Hero and lobby names, lobby chat and in-run chat support Chinese, Japanese, Korean, Cyrillic and accented Latin letters. Chinese, Japanese and Korean input methods show your composition in every text box in both the game and browser. Enter confirms a character without sending the line or starting the run. Names and chat display across language settings, including writing from other languages.
+
 # On the main screen
 - Enter starts the run in the selected zone.
 - Every key can be changed in Options > Key Bindings.
@@ -131,6 +134,7 @@ Gamepads are supported. On menus, the D-pad or left stick moves between buttons,
 
 # Useful options
 - Controls > Store Level-Ups: level-ups no longer pause the fight. They are saved for later and a Level Up! button shows how many are waiting.
+- Graphics > Level-Up Rays: turn off the spinning rays behind the level-up cards.
 - Controls > Open Caches by Clicking: walking over a cache no longer buys it; right-click it instead.
 - Interface: turn parts of the run's screen on or off: the run clock and next-boss line, the boss and guardian bars, the kills and gold box, your spells and jewelry, the banners in the middle of the screen, the boss loot notice and the damage meter.
 
@@ -295,6 +299,7 @@ The meter window has three views: Damage Done (every spell, pet, talent and item
 - Fire Nova: hits every enemy around you.
 - Healing Wave: a big heal when your health drops.
 - Call of Flame: your totems explode in flame when they expire.
+- You can have at most 30 totems out.
 
 # Talent trees
 - Elemental: Lightning Overload, Elemental Fury, Elemental Mastery
@@ -421,9 +426,15 @@ Every zone ends with a final boss. Beat it to open the next zone, for that class
 Every boss has its own moves: charges, blinks behind you, eggs that hatch, totems and more. Before a big attack the ground is marked. Step out of the marker: getting caught hurts twice as much. The horde also grows tougher as the minutes pass, so the last bosses are the real test.
 - Several bosses can be up at once if you have not finished the last one when the next arrives.
 - Below 30% health a boss enrages and uses its abilities more often: save your cooldowns and your distance for that part.
+- Leaving a ground circle counts as soon as you are outside it on your screen.
+- Highlord Mograine's Mark stops following you soon enough to escape on Heroic, and deals damage in line with the other Horsemen's Marks. Scarlet Commander Mograine's second Mark also gives you time to escape.
+- Creature sizes affect melee reach: larger bosses reach farther, while smaller elites reach less far.
 - Bosses aim a little ahead of where you are running: blasts, breaths, charges, beams, volleys and rains lead you, and more so on each Heroic level. Change direction instead of running in a straight line.
 
 @topic Level-Ups & Cards | How your hero grows during a run
+# Level cap
+Your hero can reach level 120 during a run.
+
 # Picking cards
 Each level-up deals you three cards. Pick one with the mouse or with 1, 2 or 3. A card can teach you a new spell from your class's spell pool, upgrade a spell you already have, or give you a bonus. You have six spell slots, so choose which spells you build around. Hover the spells shown under the cards to read their full tooltips.
 
@@ -453,7 +464,7 @@ Slain enemies drop gold coins and experience. Walk close and they fly to you; mo
 A floating blue rune in a pillar of blue light. Walk over it and every coin and every bit of experience on the whole field flies to you. A run has two or three. Bosses drop them, and they never disappear, so you can save one for when the field is covered in gold.
 
 # Caches
-Caches are chests on the field that cost gold to open, and the price rises as you buy more (the run's screen shows the next price). A cache offers jewelry cards: rings, trinkets and amulets. Elites and guardians offer jewelry too. Each class also has legendary amulets of its own, one for every spell. The Codex in the Armory shows every piece the game has offered you so far. In co-op, every hero buys their own caches.
+Caches are chests on the field that cost gold to open, and the price rises as you buy more (the run's screen shows the next price). A cache offers jewelry cards: rings, trinkets and amulets. Elites and guardians offer jewelry too. Each class also has legendary amulets of its own, one for every spell. The Codex in the Armory shows every piece the game has offered you so far. In co-op, every hero buys their own caches. If an amulet would replace the one you wear, the game asks you to confirm and shows both amulets side by side with their stats. Co-op guests can see the stats on rings, trinkets and amulets too.
 
 # Guardians
 Guardians are big monsters that wait in their lairs. A red flag on the minimap points to the nearest lair (or, when every lair is empty, the one that fills soonest). Slay a guardian for a reward pick. Each one you slay makes the later ones tougher, and an empty lair fills again after a few minutes. They also have their own moves, so treat them like small bosses.
@@ -463,7 +474,7 @@ Guardians are big monsters that wait in their lairs. A red flag on the minimap p
 # Elites, runes and soulstones
 - Elites are stronger enemies in the horde, worth a jewelry pick. Many spells aim at bosses and elites first.
 - Battleground zones have runes on the field, such as Speed and Berserking, that give a short buff.
-- A Major Soulstone holds an extra life (two at most).
+- A Major Soulstone holds an extra life (two at most). After it brings you back, you are protected from damage for 2 seconds.
 
 @topic Gear & the Armory | Boss loot, your collection and how your hero looks
 # Boss gear
@@ -478,7 +489,7 @@ Every piece of every class, with its bonuses, the bosses that drop it and each s
 Head, Shoulders, Chest, Hands, Wrist, Waist, Legs, Feet and Main Hand. The final boss of a zone drops the main-hand weapon.
 
 # The Armory tabs
-- Character: race, gender, looks, and the gear you wear.
+- Character: race, gender, looks, and the gear you wear. A soft oval glow sits directly under your hero's feet.
 - Collection: every piece for your class by rarity. Click a piece to see its bonuses and the bosses that drop it. A piece can be worn, or only shown as a look.
 - Drop Tables: every zone's bosses, their arrival times, and the piece and chance each one drops.
 - Collection also shows the pieces still to find in your zones, with their boss and drop chance. Once you have them all, it shows each set's star progress instead: stars per piece, its 4-piece and 8-piece bonuses and how many stars are open.
@@ -556,13 +567,14 @@ After you beat a zone's final boss you can keep going in endless mode. A random 
 
 @topic Co-op | Playing with friends
 # Joining and hosting
-Press Co-op on the main screen. A co-op run needs at least two players: a host alone sees "Waiting for players" until someone joins.
+Press Co-op on the main screen. Host and guests must use compatible game versions: 0.126.0 requires everyone to update.
+A co-op run needs at least two players: a host alone sees "Waiting for players" until someone joins.
 - Lobbies: public games of your version. Each shows its zone, its difficulty (Normal, or the Heroic level in red), the host's class, the party's classes and the open seats. Click one to join (some need a password).
 - Filters: by zone and by difficulty. "Can join" hides every lobby whose zone or Heroic level your class has not opened yet, and a lobby you cannot join says which of the two you are missing.
 - Host: name your lobby, choose who can find it (public, or private by code), set the number of players (up to 5) and an optional password. Hosting shows the run you will host (hero, zone, difficulty), with a Change difficulty button.
 - Join by code: type a friend's lobby code.
-- Party chat: while you wait in the lobby, a chat sits beside the party (it closes when the run begins). Messages are up to 160 characters; press Enter or click Send. The Co-op button shows how many came in while the window was closed.
-- Each guest's ping to the host shows next to their name in the lobby: green when quick, gold when fair, red when slow.
+- Party chat: while you wait in the lobby, a chat sits beside the party (it closes when the run begins). Messages are up to 160 characters; press Enter or click Send. The Co-op button shows how many came in while the window was closed. Chat stays steady as messages arrive, and scrolling up keeps your place while new messages come in.
+- Each guest's ping shows the true round trip to the host: green when quick, gold when fair, red when slow. Before 0.127.0, it included up to 50 ms of the game's own waiting; older guests still show that old measurement. The party window shows each player's country next to their ping.
 You play the hero on your own picker. The host chooses the zone and the Heroic level, and everyone in the party sees them change at once. You can only join zones (and Heroic levels) you have opened with the class you bring: a hero who has not is marked in red and stays behind when the host enters.
 
 # How co-op plays
@@ -589,6 +601,9 @@ An addon made for a different game version only loads with "Load out of date Add
 
 # Replacing the game's HUD
 An addon can hide a part of the game's own screen (the clock, the boss bars, the damage meter and so on) to draw its own. Those are the same "Show ..." settings as Options > Interface, so you can always switch them back there.
+
+# Addon frames over cards
+Addon authors can use AZS_SetOnTopOfScreens to keep their frames above the level-up and new-item cards.
 
 @topic Tips for New Players | Small things that make a big difference
 - Never stop moving. Walk in wide circles so the horde follows you in a line instead of surrounding you.

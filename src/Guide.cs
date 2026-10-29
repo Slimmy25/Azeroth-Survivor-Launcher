@@ -572,7 +572,7 @@ namespace AzerothLauncher
             }, actionW, actionH, 9);
             saveBuild.Location = new Point(actionX, actionY);
             tools.Controls.Add(saveBuild);
-            Action applyBuild = delegate(TalentBuild loaded)
+            Action<TalentBuild> applyBuild = delegate(TalentBuild loaded)
             {
                 build.Reset();
                 foreach (var tr in Talents.Of(cls))
@@ -642,7 +642,6 @@ namespace AzerothLauncher
                     return;
                 }
                 applyBuild(imported);
-                }
             }, actionW, actionH, 9);
             importBuild.Location = new Point(actionX, actionY + (actionH + actionGap) * 3);
             tools.Controls.Add(importBuild);

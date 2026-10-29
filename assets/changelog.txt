@@ -2,6 +2,39 @@ Patch notes shown in the launcher's Changelog. The launcher sorts them by versio
 Every post starts with its title on the first line. Posts are separated by a line with only === on it.
 Everything above the first === line is ignored.
 ===
+0.127.0
+-------
+The level cap rises from 99 to 120. The ping in the co-op lobby now shows your real connection: it used to read 25 to 50 ms too high.
+
+- The level cap is now 120, up from 99.
+- The ping next to each guest in the co-op lobby is now the true round trip to the host. It used to include up to 50 ms of the game's own waiting, so guests looked slower than they were and could show gold or red on a good connection. A guest on an older version still shows the old number.
+- The co-op lobby's chat no longer flickers and jumps when many messages come in, and scrolled up to read, it stays where you are while new lines arrive.
+- In the armory, the glow under your hero is now a soft oval right under their feet, not a box below them.
+===
+0.126.0
+-------
+Names and chat now take Chinese, Japanese and Korean, typed with your input method, and Chinese text no longer swaps letters for other characters. Highlord Mograine's Mark can be outrun, the Major Soulstone keeps you alive after a one-shot, and Naxxramas enemies no longer sink into the floor. Host and guests all need this version.
+
+- Hero names can be written in Chinese, Japanese, Korean, Cyrillic and accented Latin letters, and so can lobby names, lobby chat and chat in a run.
+- Typing with a Chinese, Japanese or Korean input method works in every text box, in the game and in the browser: what you're composing shows as you type, and pressing Enter to pick a character no longer sends the line or starts the run.
+- Fixed Chinese (and Japanese and Korean) text mixing up letters with characters: "empty slot" showed as "e克pty slot" and Rhahk'Zor as "拉m佐".
+- Names and chat in another language's writing now show in every language: a Korean name in a Chinese game no longer shows as boxes.
+- Highlord Mograine's Mark stops following you sooner on Heroic, so you can always run out of it, and it hits as hard as the other Horsemen's Marks instead of one-shotting you on Heroic I.
+- Getting out of any circle on the ground now counts as soon as you're out on your screen: you're no longer hit by attacks you had already left.
+- Scarlet Commander Mograine's second Mark gives you enough time to run out of it.
+- The Major Soulstone now protects you for 2 seconds after it brings you back, so the next hit landing at the same moment no longer kills you again.
+- Shamans can have at most 30 totems out (was 40).
+- Fixed co-op guests seeing no stats on rings, trinkets and amulets.
+- Fixed enemies in Naxxramas sometimes sinking into the floor or dropping beneath it.
+- The co-op party window shows each player's country next to their ping.
+- New option on the Graphics page: Level-Up Rays, to turn off the spinning rays behind the level-up cards.
+- Taking an amulet that would replace the one you wear now asks first, showing both side by side with their stats.
+- Addons can keep their frames above the level-up and new-item cards with AZS_SetOnTopOfScreens.
+- Resized creatures that were far bigger or smaller than the rest:
+  - Smaller: Guardian of Icecrown, Ironbark Protector, Doomguard.
+  - Bigger: Soul Weaver, Flesh Eating Abomination, Ravasaur Hunter, Rumbling Exile, Ravasaur Matriarch, General Rajaxx, Arcanist Doan, Houndmaster Loksey, Lar'korwi, Herod, Kovork, Immol'thar, Ossirian the Unscarred and Mannoroth's Herald.
+  - Bigger bosses reach further with their melee, and the smaller elites reach less far.
+===
 0.125.0
 -------
 Co-op lobbies get a party chat and show each player's ping, and a co-op run now needs at least two players. Co-op is easier: fewer extra enemies per player, enemies 20% weaker in a party, and revives faster with more helpers. Lower sets at +5 now gain Tier 3's stats, Tier 3 armor's echo is halved, and host and guests all need this version.

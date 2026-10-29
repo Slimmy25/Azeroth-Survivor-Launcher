@@ -176,6 +176,10 @@ def main():
         if k in seen:
             continue
         seen.add(k)
+        # Creator patch 0.126.0 adds revival protection that older item text omits.
+        # Keep this supplement when regenerating the shared Guide/Planner/Handbook data.
+        if k == "soulstone" and not re.search(r"protect|immun|invulner", t, re.I):
+            t += "; protects you from damage for 2 seconds after revival"
         out.append(" | ".join([k, n, ic, "ring" if kind < 0x100 else "trinket", str(kind), "%g" % v, t]))
     out.append("@amulet")
     for key, name in amulets:

@@ -225,7 +225,8 @@ namespace AzerothLauncher
                 return false;
             }
             var known = new Dictionary<string, Talent>(StringComparer.Ordinal);
-            foreach (var talent in Talents.Of(className)) known[talent.Id] = talent;
+            foreach (var tree in Talents.Of(className))
+                foreach (var talent in tree.Talents) known[talent.Id] = talent;
             var seen = new HashSet<string>(StringComparer.Ordinal);
             int total = 0;
             foreach (string part in payload.Split(';'))

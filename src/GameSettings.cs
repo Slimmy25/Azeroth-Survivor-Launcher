@@ -66,6 +66,7 @@ namespace AzerothLauncher
             Add("spellEffectLevel", "Spell detail", null, "The detail of spell effects. Lower it for a faster game.", "0|1|2", "LOW|MEDIUM|HIGH");
             Add("weatherDensity", "Weather intensity", null, "How strong rain and snow are. Lower it for a faster game.", "0|1|2|3", "MINIMAL|LOW|HIGH|FULL");
             Check("noSpellEffects", "No spell effects", "0", "Draws no explosions, missiles, glows or beams. Spells still sound. For a slow computer.");
+            Check("cardRays", "Level-Up Rays", null, "Turns the spinning rays behind the level-up and jewelry cards on or off.");
             Check("ffxGlow", "Full screen glow", "1", "A soft glow around the bright parts of the picture. Off for a sharper picture or a slower computer.");
             Check("ffxDeath", "Death effect", "1", "Turns the world grey while your hero is dead.");
 
