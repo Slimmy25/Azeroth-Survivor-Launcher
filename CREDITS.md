@@ -34,17 +34,32 @@ Azeroth Survivors runs on the World of Warcraft 1.12 interface, and is set in Bl
 Warcraft, Azeroth and every name, picture, model, sound and other asset from it are trademarks and copyrighted work of
 **Blizzard Entertainment, Inc.** This project is not affiliated with or endorsed by Blizzard.
 
-**No Blizzard asset is stored in this repository or in the launcher.** Where Blizzard's material appears, it comes
-from somewhere else at the moment it is shown:
+Most Blizzard material appears from somewhere else at the moment it is shown. The bundled exceptions are the
+following cropped user screenshots and small dungeon icon:
 
 | What you see | Where it comes from |
 | --- | --- |
 | The game itself, with its models, art and sounds | The game client, downloaded from the game's hosts (above) |
 | Spell, talent, class, race, zone and creature icons and pictures in the launcher | Loaded when shown from **Wowhead**'s public image host, <https://wow.zamimg.com>, and cached only in the launcher's `temp` folder. Which icon belongs to which spell is in `assets/spell-icons.txt` (names only). |
+| Zones & Bosses favorite icon (`assets/favorites/zones-bosses.jpg`) | `Naxxico.jpg`, a Naxxramas icon from [Wowpedia's file page](https://wowpedia.fandom.com/wiki/File:Naxxico.jpg), originally listed in its [small icons index](https://wowpedia.fandom.com/wiki/Wowpedia:List_of_small_icons?file=Naxxico.jpg). Blizzard owns the underlying World of Warcraft artwork. |
+| Gear Planner favorite icon (`assets/favorites/gear-planner.jpg`) | The Goldshire Wardrobe item icon from [Wowhead item 253527](https://www.wowhead.com/item=253527/goldshire-wardrobe), served from Wowhead's public image host. Blizzard owns the underlying World of Warcraft artwork. |
+| Class favorite portraits (`assets/favorites/class-*.jpg`) | Cropped Wowhead screenshots of characters wearing the class tier helmets below. The screenshots are by the credited Wowhead contributors; Blizzard owns the underlying World of Warcraft artwork. |
 | Icons and textures in the AZS addons | Read from the game client's own files by path (for example `Interface\Icons\...`) |
 | Spell, zone, boss and class names | As the game names them |
 | Creature models on the STATS page | Model numbers only (`assets/npc-models.txt`), from the **CMaNGOS Classic** world database: <https://github.com/cmangos/classic-db> |
 | Gameplay in videos | Recordings of the game, by the people credited below |
+
+Class favorite screenshot sources:
+
+- Rogue — [Bloodfang Hood](https://www.wowhead.com/classic/item=16908/bloodfang-hood), screenshot 2808 by DJTyrant.
+- Priest — [Circlet of Faith](https://www.wowhead.com/classic/item=22514/circlet-of-faith), screenshot 7492 by Deja.
+- Warlock — [Hood of the Malefic](https://www.wowhead.com/tbc/item=31051/hood-of-the-malefic), screenshot 33791 by Miyari.
+- Druid — [Cenarion Helm](https://www.wowhead.com/classic/item=16834/cenarion-helm), screenshot 58842 by Miyari.
+- Warrior — [Onslaught Greathelm](https://www.wowhead.com/tbc/item=30974/onslaught-greathelm), screenshot 72439 by 130222.
+- Paladin — [Judgement Crown](https://www.wowhead.com/classic/item=16955/judgement-crown), screenshot 78458 by Miyari.
+- Hunter — [Dragonstalker's Helm](https://www.wowhead.com/classic/item=16939/dragonstalkers-helm), screenshot 877826 by Kolummon.
+- Mage — [Arcanist Crown](https://www.wowhead.com/classic/item=16795/arcanist-crown), screenshot 58045 by Axolia.
+- Shaman — [Earthfury Helmet](https://www.wowhead.com/classic/item=16842/earthfury-helmet), screenshot 1953 by eminent.
 
 Everything the launcher draws for itself (the stone, metal and night-sky window, the buttons, the icons in the side
 bar) is original, made by `tools/make_launcher_art.py` or drawn in code.

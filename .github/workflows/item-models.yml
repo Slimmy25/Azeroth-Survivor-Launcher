@@ -1,6 +1,6 @@
-# Developer tool: builds assets/item-models.txt ("Item name|item id|display id") for the Transmog looks that are real
-# World of Warcraft items, from the CMaNGOS Classic world database (https://github.com/cmangos/classic-db), so the Guide
-# can show each one's model picture from Wowhead's model viewer host on mouseover. Also checks which picture address
+# Developer tool: builds assets/item-models.txt ("Item name|item id|display id") for real class gear and Transmog looks
+# from the CMaNGOS Classic world database (https://github.com/cmangos/classic-db), so Guide hovers can show item models
+# from Wowhead's model viewer host. Also checks which picture address
 # Wowhead serves. Puts the file on the private "item-models" branch. Run by hand: Actions > Item models.
 name: Item models
 
@@ -25,9 +25,10 @@ jobs:
             *.7z) 7z x -so "$f" > /tmp/world.sql ;;
             *) cp "$f" /tmp/world.sql ;;
           esac
-          python3 tools/item_models.py assets/transmog.txt < /tmp/world.sql > /tmp/items.txt || echo "::error::parse failed"
-          echo "::notice::found $(wc -l < /tmp/items.txt) of the looks: $(cut -d'|' -f1 /tmp/items.txt | tr '\n' ';')"
-          { echo "# Item name|item id|display id, for the Transmog looks that are real items, from the CMaNGOS Classic world"
+          python3 tools/gear_names.py assets/items.txt > /tmp/gear-names.txt
+          python3 tools/item_models.py assets/transmog.txt /tmp/gear-names.txt < /tmp/world.sql > /tmp/items.txt || echo "::error::parse failed"
+          echo "::notice::found $(wc -l < /tmp/items.txt) real gear/look items: $(cut -d'|' -f1 /tmp/items.txt | tr '\n' ';')"
+          { echo "# Item name|item id|display id, for real class gear and Transmog items, from the CMaNGOS Classic world"
             echo "# database (https://github.com/cmangos/classic-db). Made by Actions > Item models."
             cat /tmp/items.txt; } > /tmp/item-models.txt
       - name: Which picture address works

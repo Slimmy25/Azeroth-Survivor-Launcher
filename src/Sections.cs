@@ -28,10 +28,26 @@ namespace AzerothLauncher
                      ControlStyles.OptimizedDoubleBuffer | ControlStyles.ResizeRedraw, true);
         }
 
-        public void CenterOn(Rectangle screenAnchor)
+        public void PlaceAbove(Rectangle screenAnchor)
         {
-            Location = new Point(screenAnchor.Left + (screenAnchor.Width - Width) / 2,
-                                 screenAnchor.Top + (screenAnchor.Height - Height) / 2);
+            Point center = new Point(screenAnchor.Left + screenAnchor.Width / 2, screenAnchor.Top);
+            Rectangle screen = Screen.FromPoint(center).WorkingArea;
+            int x = center.X - Width / 2;
+            int y = screenAnchor.Top - 30;                  // heart artwork ends four pixels inside its 34-pixel window
+            Location = new Point(Math.Max(screen.Left + 4, Math.Min(x, screen.Right - Width - 4)),
+                                 Math.Max(screen.Top + 4, y));
+        }
+
+        protected override bool ShowWithoutActivation { get { return true; } }
+
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x08000000;                   // WS_EX_NOACTIVATE: showing the heart must not dismiss its menu
+                return cp;
+            }
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -89,6 +105,7 @@ namespace AzerothLauncher
         int favoriteHoverStep = -1;
         FavoriteHeartPopup favoritePopup;
         int favoritePopupStep = -1, quietFavoriteStep = -1;
+        Form hoverHost;
 
         public SideHead()
         {
@@ -96,6 +113,56 @@ namespace AzerothLauncher
                      ControlStyles.ResizeRedraw, true);
             Height = 38;                                     // compact: the sections have little room
             BackColor = Theme.Hex("#0e0d14");
+        }
+
+        void SyncHoverHost()
+        {
+            Form host = FindForm();
+            while (host != null && !host.TopLevel) host = host.Parent as Form;
+            SetHoverHost(host);
+        }
+
+        internal void SetHoverHost(Form host)
+        {
+            if (host == hoverHost) return;
+            if (hoverHost != null) hoverHost.Deactivate -= HoverHostDeactivated;
+            hoverHost = host;
+            if (hoverHost != null) hoverHost.Deactivate += HoverHostDeactivated;
+        }
+
+        protected override void OnParentChanged(EventArgs e)
+        {
+            base.OnParentChanged(e);
+            SyncHoverHost();
+        }
+
+        protected override void OnHandleCreated(EventArgs e)
+        {
+            base.OnHandleCreated(e);
+            SyncHoverHost();
+        }
+
+        void HoverHostDeactivated(object sender, EventArgs e)
+        {
+            if (hoverTimer != null) hoverTimer.Stop();
+            CloseOpenMenu();
+            CloseFavoritePopup();
+            if (helpTip) helpTip = false;
+            GuideHover.Hide(this);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (hoverHost != null) hoverHost.Deactivate -= HoverHostDeactivated;
+                hoverHost = null;
+                if (hoverTimer != null) { hoverTimer.Stop(); hoverTimer.Dispose(); hoverTimer = null; }
+                CloseOpenMenu();
+                CloseFavoritePopup();
+                GuideHover.Hide(this);
+            }
+            base.Dispose(disposing);
         }
 
         public string Title
@@ -277,7 +344,11 @@ namespace AzerothLauncher
         int FavoriteAt(Point pt)
         {
             foreach (var crumb in crumbRects)
-                if (crumbFavorites.ContainsKey(crumb.Value) && crumb.Key.Contains(pt)) return crumb.Value;
+            {
+                Rectangle pathPart = StepRect(crumb.Value);
+                if (crumbFavorites.ContainsKey(crumb.Value) &&
+                    (crumb.Key.Contains(pt) || (!pathPart.IsEmpty && pathPart.Contains(pt)))) return crumb.Value;
+            }
             return -1;
         }
 
@@ -314,7 +385,7 @@ namespace AzerothLauncher
                 popup.Dispose();
             };
             popup.Show(FindForm());
-            popup.CenterOn(RectangleToScreen(anchor));
+            popup.PlaceAbove(RectangleToScreen(anchor));
         }
 
         void HoverTick()
@@ -322,24 +393,25 @@ namespace AzerothLauncher
             Point pt = PointToClient(Cursor.Position);
             int s = ClientRectangle.Contains(pt) ? StepAt(pt) : -1;
             int favoriteStep = ClientRectangle.Contains(pt) ? FavoriteAt(pt) : -1;
-            if (favoriteStep != quietFavoriteStep) quietFavoriteStep = -1;
-            if (favoritePopup != null && !favoritePopup.IsDisposed)
-            {
-                if (favoriteStep == favoritePopupStep || favoritePopup.Bounds.Contains(Cursor.Position)) return;
+            bool inPopup = favoritePopup != null && !favoritePopup.IsDisposed && favoritePopup.Bounds.Contains(Cursor.Position);
+            bool inMenu = openMenu != null && !openMenu.IsDisposed && openMenu.Visible && openMenu.Bounds.Contains(Cursor.Position);
+            int retainedStep = favoriteStep >= 0 ? favoriteStep :
+                               inMenu ? openMenuStep :
+                               inPopup ? favoritePopupStep : -1;
+            if (quietFavoriteStep >= 0 && retainedStep != quietFavoriteStep) quietFavoriteStep = -1;
+
+            // Treat the breadcrumb, its heart and its drop-down as one hover target. That lets the
+            // heart stay above the same path name while the pointer travels into the open menu.
+            if (favoritePopup != null && !favoritePopup.IsDisposed && retainedStep != favoritePopupStep)
                 CloseFavoritePopup();
-            }
-            if (favoriteStep == quietFavoriteStep) return;
-            if (favoriteStep >= 0)
-            {
-                if (openMenu != null && !openMenu.IsDisposed) openMenu.Close();
-                ShowFavoritePopup(favoriteStep, CrumbRect(favoriteStep));
-                return;
-            }
+            if (retainedStep >= 0 && retainedStep != quietFavoriteStep && crumbFavorites.ContainsKey(retainedStep) &&
+                (favoritePopup == null || favoritePopup.IsDisposed || favoritePopupStep != retainedStep))
+                ShowFavoritePopup(retainedStep, CrumbRect(retainedStep));
+
             if (openMenu != null && !openMenu.IsDisposed)
             {
-                bool inMenu = openMenu.Visible && openMenu.Bounds.Contains(Cursor.Position);
-                if (!inMenu && s != openMenuStep) openMenu.Close();
-                else return;
+                if (inMenu || s == openMenuStep) return;
+                openMenu.Close();
             }
             if (s >= 0 && s == hoverStep && s != quietStep) ShowMenu(s, StepRect(s));
         }
@@ -393,9 +465,8 @@ namespace AzerothLauncher
             if (!menus.TryGetValue(i, out items)) return;
             if (openMenu != null && !openMenu.IsDisposed) { if (openMenuStep == i) return; openMenu.Close(); }
             var m = ThemeMenus.Create(false);
-            // not AutoClose: an open list does not take the next click for itself, so a click on any step of the path
-            // goes there at once; the list closes when the pointer leaves the step and the list (HoverTick), on a pick,
-            // or on a click in the path
+            // not AutoClose: path clicks still go to the breadcrumb. HoverTick closes the list off-path; host deactivation
+            // also closes it (Alt+Tab), and picking an item closes it before navigation.
             m.AutoClose = false;
             openMenu = m;
             openMenuStep = i;
@@ -536,6 +607,33 @@ namespace AzerothLauncher
         Panel panel;
         Panel strip;
         const int GuideFavoriteCount = 10;
+        static Image codexFavoriteIcon;
+        static Image heroicFavoriteIcon;
+        static Image zonesBossesFavoriteIcon;
+        static Image gearPlannerFavoriteIcon;
+        static Dictionary<string, Image> classFavoriteIcons;
+
+        static Image FavoriteClassIcon(string classKey)
+        {
+            if (string.IsNullOrEmpty(classKey)) return null;
+            string key = classKey.Trim().ToLowerInvariant();
+            switch (key)
+            {
+                case "warrior": case "paladin": case "hunter": case "rogue": case "priest":
+                case "shaman": case "mage": case "warlock": case "druid":
+                    break;
+                default:
+                    return null;
+            }
+            if (classFavoriteIcons == null) classFavoriteIcons = new Dictionary<string, Image>(StringComparer.OrdinalIgnoreCase);
+            Image image;
+            if (!classFavoriteIcons.TryGetValue(key, out image))
+            {
+                image = Theme.LoadImage("AS.favorites.class-" + key + ".jpg");
+                classFavoriteIcons[key] = image;
+            }
+            return image;
+        }
         readonly IconButton[] favoriteBtns = new IconButton[GuideFavoriteCount];
         readonly GuideFavoriteRoute[] guideFavorites = new GuideFavoriteRoute[GuideFavoriteCount];
         IconButton favoriteDragButton;
@@ -629,15 +727,37 @@ namespace AzerothLauncher
                 {
                     GuideFavoriteRoute route = guideFavorites[slot];
                     Image favoriteIcon = null;
-                    if (route != null && (route.Kind == "builder" || route.Kind == "builderClass"))
+                    if (route != null && route.Kind == "guide" && route.Topic == "Items" && route.Page == "Codex")
+                    {
+                        if (codexFavoriteIcon == null) codexFavoriteIcon = Theme.LoadImage("AS.favorites.codex-aura.png");
+                        favoriteIcon = codexFavoriteIcon;
+                    }
+                    else if (route != null && route.Kind == "guide" &&
+                             string.Equals(route.Topic, "Heroic & Endless", StringComparison.OrdinalIgnoreCase))
+                    {
+                        if (heroicFavoriteIcon == null) heroicFavoriteIcon = Theme.LoadImage("AS.favorites.heroic-icon.png");
+                        favoriteIcon = heroicFavoriteIcon;
+                    }
+                    else if (route != null && route.Kind == "guide" && route.Topic == "Items" && route.Page == "Rings, Trinkets & Amulets")
+                        favoriteIcon = SpellIcons.Icon("inv_inscription_tarot_tsunamicard", favoriteBtns[slot]);
+                    else if (route != null && route.Kind == "planner")
+                    {
+                        if (gearPlannerFavoriteIcon == null) gearPlannerFavoriteIcon = Theme.LoadImage("AS.favorites.gear-planner.jpg");
+                        favoriteIcon = gearPlannerFavoriteIcon;
+                    }
+                    else if (route != null && route.Kind == "builder")
                         favoriteIcon = SpellIcons.TalentButton(favoriteBtns[slot]);
                     else if (route != null && route.ClassKey.Length > 0)
-                        favoriteIcon = SpellIcons.Class(route.ClassKey, favoriteBtns[slot]);
-                    else if (route != null && route.Kind == "planner")
-                        favoriteIcon = SpellIcons.Race("human", favoriteBtns[slot]);
+                    {
+                        favoriteIcon = FavoriteClassIcon(route.ClassKey);
+                        if (favoriteIcon == null) favoriteIcon = SpellIcons.Class(route.ClassKey, favoriteBtns[slot]);
+                    }
                     else if (route != null && route.Kind == "guide" &&
                              string.Equals(route.Topic, "Zones & Bosses", StringComparison.OrdinalIgnoreCase))
-                        favoriteIcon = SpellIcons.Icon("inv_misc_groupneedmore", favoriteBtns[slot]);
+                    {
+                        if (zonesBossesFavoriteIcon == null) zonesBossesFavoriteIcon = Theme.LoadImage("AS.favorites.zones-bosses.jpg");
+                        favoriteIcon = zonesBossesFavoriteIcon;
+                    }
                     if (favoriteIcon != null)
                     {
                         float scale = Math.Min(18f / favoriteIcon.Width, 18f / favoriteIcon.Height);
@@ -654,7 +774,7 @@ namespace AzerothLauncher
                 var b = new IconButton(paint, delegate { OpenGuideFavorite(slot); });
                 b.AccessibleName = Lang.T("Quick Access " + (i + 1));
                 b.Tip = "Quick Access " + (i + 1) + " is empty. Hover a path name and click the heart to save it.";
-                b.ContextClicked += delegate(Control source, Point at) { ShowGuideFavoriteMenu(slot, at); };
+                b.ContextClicked += delegate(Control source, Point at) { RemoveGuideFavorite(slot); };
                 b.MouseDown += delegate(object sender, MouseEventArgs e)
                 {
                     if (e.Button != MouseButtons.Left) return;
@@ -715,6 +835,7 @@ namespace AzerothLauncher
             LayoutStrip();
             RefreshStrip();
             Controls.Add(side);
+            sideHead.SetHoverHost(this);
             PlaceSide();
             side.PerformLayout();
         }
@@ -791,7 +912,7 @@ namespace AzerothLauncher
 
         void SetSideTitle(string text)
         {
-            sideHead.Closable = current != "Community";
+            sideHead.Closable = current != "Community" || communityPlaying != null || communityMore;
             sideHead.Title = text;
             sideHead.Note = "";                              // the Community player sets its own after this
             side.Text = Lang.T(Array.IndexOf(SectionNames, current) >= 0 ? current : text);    // the taskbar and Alt+Tab name
@@ -825,7 +946,11 @@ namespace AzerothLauncher
         // closing a section goes back to the home screen, which shows Community; Community itself cannot be closed
         void CloseSide()
         {
-            if (current == "Community") return;
+            if (current == "Community")
+            {
+                if (communityPlaying != null || communityMore) LeaveCommunityVideo();
+                return;
+            }
             if (current == "Guide" && gPlanner) ResetPlannerState();              // the home screen's Community can only be replaced, never closed
             if (current == "Setup") return;                  // setup cannot be closed before it is done (or cancelled)
             current = "Home";
@@ -923,9 +1048,9 @@ namespace AzerothLauncher
                 else if (name == "Community") PanelCommunity();
                 else if (name == "Setup") PanelSetup();          // first-time setup (Setup.cs)
                 RememberView(name);                              // the back arrow's way (History.cs)
-                // "Lost?" wherever there is a path to follow: not on Community's main page (but in MORE VIDEOS), not in setup,
+                // "Lost?" wherever there is a path to follow: not in Community or Setup,
                 // and not while a Guide video plays
-                sideHead.HelpShown = (name != "Community" || communityMore) && name != "Setup" && !(name == "Guide" && gVideo != null);
+                sideHead.HelpShown = name != "Community" && name != "Setup" && !(name == "Guide" && gVideo != null);
             }
             finally
             {
@@ -936,80 +1061,111 @@ namespace AzerothLauncher
             if (name == "Addons") RefreshGates();             // AZS Stats switched on or off: the Stats buttons follow
         }
 
-        const string LostNote = "Save: Hover a name. Click the heart.\nOpen: Click a favorite.\nMove: Hold left-click and drag. Shift+Up/Down also works.\nRemove: Right-click it, then choose Remove. Press Esc to cancel.";
+        const string LostNote = "Path: Click a breadcrumb to go back; hover ▼ and pick a page.\n\nSave: Hover a page name and click the heart above it.\n\nOpen: Click a favorite to go there.\n\nMove: Hold left-click and drag; Shift+Up/Down also works.\n\nRemove: Right-click a favorite once to remove it.";
 
-        // the "Lost?" note shows the breadcrumb-centered heart and numbered Quick Access slots
+        // the "Lost?" note demonstrates both breadcrumb navigation and saving a favorite
         static readonly Dictionary<string, Bitmap> pathExamples = new Dictionary<string, Bitmap>();
+
+        static void DrawExampleHeart(Graphics g, float centerX, float top, float size)
+        {
+            float x = centerX - size / 2f, y = top;
+            using (var path = new GraphicsPath())
+            {
+                path.AddBezier(x + size / 2, y + size * 0.95f, x - size * 0.15f, y + size * 0.45f,
+                              x + size * 0.12f, y - size * 0.12f, x + size / 2, y + size * 0.25f);
+                path.AddBezier(x + size / 2, y + size * 0.25f, x + size * 0.88f, y - size * 0.12f,
+                              x + size * 1.15f, y + size * 0.45f, x + size / 2, y + size * 0.95f);
+                path.CloseFigure();
+                using (var brush = new SolidBrush(Theme.Gold)) g.FillPath(brush, path);
+            }
+        }
 
         static Bitmap PathExample()
         {
             string language = Lang.Code ?? "en";
             Bitmap cached;
             if (pathExamples.TryGetValue(language, out cached)) return cached;
-            var bmp = new Bitmap(300, 160);
+            var bmp = new Bitmap(300, 235);
             using (var g = Graphics.FromImage(bmp))
             {
                 g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
                 g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
                 g.Clear(Theme.Hex("#120e18"));
                 using (var p = new Pen(Theme.Hex("#8a7040"), 1)) g.DrawRectangle(p, 0, 0, bmp.Width - 1, bmp.Height - 1);
-                foreach (var marker in new[] { new Rectangle(10, 6, 16, 16), new Rectangle(10, 66, 16, 16) })
+                var first = new Rectangle(5, 4, 290, 130);
+                var second = new Rectangle(5, 144, 290, 83);
+                using (var b = new SolidBrush(Theme.Hex("#0e0d14")))
                 {
-                    using (var p = new Pen(Theme.Gold, 1)) g.DrawEllipse(p, marker);
-                    Theme.CenterText(g, marker.Y < 20 ? "1" : "2", Theme.F(7, FontStyle.Bold), Theme.Gold,
-                                     new RectangleF(marker.X, marker.Y, marker.Width, marker.Height), null);
+                    g.FillRectangle(b, first);
+                    g.FillRectangle(b, second);
                 }
-                var pathBar = new Rectangle(6, 22, 288, 34);
+                using (var p = new Pen(Theme.Hex("#8a7040"), 1))
+                {
+                    g.DrawRectangle(p, first);
+                    g.DrawRectangle(p, second);
+                }
+
+                Font heading = Theme.F(8, FontStyle.Bold), crumbFont = Theme.F(8.5f, FontStyle.Bold), menuFont = Theme.F(8, FontStyle.Bold);
+                TextRenderer.DrawText(g, Lang.T("1  FOLLOW THE PATH"), heading, new Rectangle(10, 7, 180, 14), Theme.Gold,
+                                      TextFormatFlags.NoPrefix | TextFormatFlags.SingleLine | TextFormatFlags.NoPadding);
+
+                // Breadcrumb example with an open drop-down under the step that has the arrow.
+                var pathBar = new Rectangle(9, 41, 282, 23);
                 using (var b = new SolidBrush(Theme.Hex("#1c1a26"))) g.FillRectangle(b, pathBar);
                 using (var p = new Pen(Theme.Hex("#d6a640"), 1)) g.DrawRectangle(p, pathBar);
-                var ab = new Rectangle(10, 28, 24, 21);
-                using (var b = new SolidBrush(Theme.Hex("#1c1a26"))) g.FillRectangle(b, ab);
-                using (var p = new Pen(Theme.Hex("#d6a640"), 1)) g.DrawRectangle(p, ab);
-                using (var b = new SolidBrush(Theme.Hex("#f0c050")))
-                    g.FillPolygon(b, new[] { new PointF(ab.X + 8, ab.Y + 10), new PointF(ab.X + 15, ab.Y + 5), new PointF(ab.X + 15, ab.Y + 15) });
-                Font crumbFont = Theme.F(9, FontStyle.Bold);
-                float crumbX = 42;
-                string[] crumbs = { Lang.T("Guide"), Lang.T("Classes"), Lang.T("Priest") };
-                float classCenter = crumbX;
-                for (int i = 0; i < crumbs.Length; i++)
+                string firstCrumb = Lang.T("Guide") + "  ›  " + Lang.T("New Player");
+                TextRenderer.DrawText(g, firstCrumb, crumbFont, new Rectangle(16, 45, 128, 15), Theme.Hex("#e6cf8c"),
+                                      TextFormatFlags.NoPrefix | TextFormatFlags.SingleLine | TextFormatFlags.NoPadding);
+                int groupStart = 16 + TextRenderer.MeasureText(Lang.T("Guide") + "  ›  ", crumbFont,
+                                     new Size(128, 20), TextFormatFlags.NoPrefix | TextFormatFlags.SingleLine | TextFormatFlags.NoPadding).Width;
+                Rectangle arrow = new Rectangle(groupStart + TextRenderer.MeasureText(Lang.T("New Player"), crumbFont,
+                                     new Size(100, 18), TextFormatFlags.NoPrefix | TextFormatFlags.SingleLine | TextFormatFlags.NoPadding).Width + 1, 47, 11, 12);
+                using (var b = new SolidBrush(Theme.Hex("#e6cf8c")))
+                    g.FillPolygon(b, new[] { new PointF(arrow.X + 2, arrow.Y + 3), new PointF(arrow.Right - 2, arrow.Y + 3),
+                                             new PointF(arrow.X + arrow.Width / 2f, arrow.Y + 8) });
+                DrawExampleHeart(g, groupStart + 20, 22, 15);
+
+                var menu = new Rectangle(groupStart - 4, 64, 142, 60);
+                using (var b = new SolidBrush(Theme.Hex("#0e0d14"))) g.FillRectangle(b, menu);
+                using (var p = new Pen(Theme.Hex("#8a7040"), 1)) g.DrawRectangle(p, menu);
+                string[] choices = { "Getting Started", "Controls", "Your First Run", "Zones & Bosses" };
+                for (int i = 0; i < choices.Length; i++)
                 {
-                    float crumbWidth = g.MeasureString(crumbs[i], crumbFont).Width;
-                    using (var b = new SolidBrush(Theme.Hex("#e6cf8c"))) g.DrawString(crumbs[i], crumbFont, b, crumbX, 31);
-                    if (i == 1) classCenter = crumbX + crumbWidth / 2f;
-                    crumbX += crumbWidth;
-                    if (i < crumbs.Length - 1)
-                    {
-                        using (var b = new SolidBrush(Theme.Hex("#a08850"))) g.DrawString("›", crumbFont, b, crumbX, 31);
-                        crumbX += g.MeasureString("› ", crumbFont).Width;
-                    }
+                    Rectangle item = new Rectangle(menu.X + 2, menu.Y + 2 + i * 14, menu.Width - 4, 14);
+                    if (i == 3) using (var b = new SolidBrush(Theme.Hex("#3a2c18"))) g.FillRectangle(b, item);
+                    TextRenderer.DrawText(g, Lang.T(choices[i]), menuFont, new Rectangle(item.X + 4, item.Y, item.Width - 6, item.Height),
+                                          i == 3 ? Theme.Gold : Theme.Hex("#f5e9c8"), TextFormatFlags.NoPrefix | TextFormatFlags.SingleLine | TextFormatFlags.NoPadding);
                 }
-                // This heart has no panel; it is centered over the hovered breadcrumb word.
-                using (var heart = new GraphicsPath())
+
+                TextRenderer.DrawText(g, Lang.T("2  SAVE A FAVORITE"), heading, new Rectangle(10, 148, 180, 14), Theme.Gold,
+                                      TextFormatFlags.NoPrefix | TextFormatFlags.SingleLine | TextFormatFlags.NoPadding);
+                var savePath = new Rectangle(9, 182, 171, 22);
+                using (var b = new SolidBrush(Theme.Hex("#1c1a26"))) g.FillRectangle(b, savePath);
+                using (var p = new Pen(Theme.Hex("#d6a640"), 1)) g.DrawRectangle(p, savePath);
+                string saveCrumbs = Lang.T("Guide") + "  ›  " + Lang.T("Classes") + "  ›  " + Lang.T("Priest");
+                TextRenderer.DrawText(g, saveCrumbs, crumbFont, new Rectangle(savePath.X + 5, savePath.Y + 4, savePath.Width - 8, 14),
+                                      Theme.Hex("#e6cf8c"), TextFormatFlags.NoPrefix | TextFormatFlags.SingleLine | TextFormatFlags.NoPadding);
+                string beforePriest = Lang.T("Guide") + "  ›  " + Lang.T("Classes") + "  ›  ";
+                int priestX = savePath.X + 5 + TextRenderer.MeasureText(beforePriest, crumbFont,
+                              new Size(savePath.Width, 18), TextFormatFlags.NoPrefix | TextFormatFlags.SingleLine | TextFormatFlags.NoPadding).Width;
+                int priestWidth = TextRenderer.MeasureText(Lang.T("Priest"), crumbFont, new Size(80, 18),
+                                   TextFormatFlags.NoPrefix | TextFormatFlags.SingleLine | TextFormatFlags.NoPadding).Width;
+                DrawExampleHeart(g, priestX + priestWidth / 2f, 164, 15);
+
+                TextRenderer.DrawText(g, Lang.T("QUICK ACCESS"), Theme.F(6.5f, FontStyle.Bold), new Rectangle(202, 169, 82, 11),
+                                      Theme.Hex("#d9c48a"), TextFormatFlags.NoPrefix | TextFormatFlags.SingleLine | TextFormatFlags.NoPadding);
+                var favorite = new Rectangle(202, 182, 83, 22);
+                using (var b = new SolidBrush(Theme.Hex("#1c1a26"))) g.FillRectangle(b, favorite);
+                using (var p = new Pen(Theme.Hex("#d6a640"), 1)) g.DrawRectangle(p, favorite);
+                using (var p = new Pen(Theme.Hex("#f0c050"), 1.3f)) g.DrawEllipse(p, 205, 185, 15, 15);
+                Theme.CenterText(g, "1", Theme.F(7, FontStyle.Bold), Theme.Gold, new RectangleF(205, 185, 15, 15), null);
+                TextRenderer.DrawText(g, Lang.T("Priest"), menuFont, new Rectangle(225, 185, 55, 15), Theme.Hex("#f5e9c8"),
+                                      TextFormatFlags.NoPrefix | TextFormatFlags.SingleLine | TextFormatFlags.NoPadding);
+                using (var p = new Pen(Theme.Hex("#d9c48a"), 1.5f))
                 {
-                    float hs = 24, hx = classCenter - hs / 2f, hy = 27;
-                    heart.AddBezier(hx + hs / 2, hy + hs * 0.95f, hx - hs * 0.15f, hy + hs * 0.45f,
-                                    hx + hs * 0.12f, hy - hs * 0.12f, hx + hs / 2, hy + hs * 0.25f);
-                    heart.AddBezier(hx + hs / 2, hy + hs * 0.25f, hx + hs * 0.88f, hy - hs * 0.12f,
-                                    hx + hs * 1.15f, hy + hs * 0.45f, hx + hs / 2, hy + hs * 0.95f);
-                    heart.CloseFigure();
-                    using (var b = new SolidBrush(Theme.Gold)) g.FillPath(b, heart);
-                }
-                var second = new Rectangle(6, 81, 288, 71);
-                using (var b = new SolidBrush(Theme.Hex("#0e0d14"))) g.FillRectangle(b, second);
-                using (var p = new Pen(Theme.Hex("#8a7040"), 1)) g.DrawRectangle(p, second);
-                using (var p = new Pen(Theme.Hex("#51442e"), 2))
-                {
-                    g.DrawLine(p, 16, 104, 112, 104);
-                    g.DrawLine(p, 16, 124, 112, 124);
-                    g.DrawLine(p, 16, 144, 112, 144);
-                }
-                using (var b = new SolidBrush(Theme.Hex("#17141e"))) g.FillRectangle(b, 254, 85, 34, 62);
-                for (int i = 0; i < 3; i++)
-                {
-                    int cy = 88 + i * 20;
-                    Color c = i == 0 ? Theme.Gold : Theme.Hex("#a99c80");
-                    using (var p = new Pen(c, i == 0 ? 1.5f : 1)) g.DrawEllipse(p, 263, cy, 16, 16);
-                    Theme.CenterText(g, (i + 1).ToString(), Theme.F(7, FontStyle.Bold), c, new RectangleF(263, cy, 16, 16), null);
+                    g.DrawLine(p, 181, 193, 199, 193);
+                    g.DrawLine(p, 199, 193, 195, 189);
+                    g.DrawLine(p, 199, 193, 195, 197);
                 }
             }
             pathExamples[language] = bmp;
@@ -1164,7 +1320,6 @@ namespace AzerothLauncher
             if (LeaveCommunityVideo()) return;
             if (current == "Guide" && gVideo != null) { gVideo = null; BuildPanel("Guide"); return; }   // a video: back to its page
             if (BackInHistory()) return;                     // back along the way you came (History.cs)
-            if (current == "Community" && communityMore) { communityMore = false; BuildPanel("Community"); return; }
             if (current == "Addons" && addonMode == "download") { SetAddonMode("installed"); return; }
             if (current == "Options" && optionsLang) { optionsLang = false; BuildPanel("Options"); return; }
             if (current == "Changelog")
@@ -2955,11 +3110,6 @@ namespace AzerothLauncher
             foreach (var kv in Lang.Available()) if (kv.Key == Lang.Code) langName = kv.Value;
             y += 8;
             row("UPDATE LAUNCHER", delegate { CheckLauncherUpdate(true); }, "Looks for a newer launcher now and installs it (it also does this by itself at every start).");
-            if (!string.IsNullOrEmpty(launcherUpdateMessage))
-            {
-                var message = PutText(launcherUpdateMessage, 9.5f, FontStyle.Regular, Theme.Text, 20, y, PW - 40);
-                y = BottomOf(message) + 8;
-            }
             WowButton langBtn = null;
             Action pickLang = delegate
             {

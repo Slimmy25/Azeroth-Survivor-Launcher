@@ -1,3 +1,39 @@
+# v2.6 (2026-10-29)
+
+## In short
+
+Guide favorites now have recognizable images, real class gear has 3D previews on hover, and leaving Community videos always returns to the featured-video home.
+
+## Guide and Quick Access
+
+- Moved Zones & Bosses into the New Player Guide.
+- Added distinct favorite images for the nine classes, Codex, Heroic & Endless, Zones & Bosses, the Gear Planner, and jewelry pages.
+- Kept the heart above the hovered link-tree name while opening its menu; dropdowns and hearts now close when the launcher loses focus.
+- The More Videos X and video-player X always return to the featured-video home.
+- Removed the extra update result from Launcher settings; the launcher status line remains the feedback for update checks.
+
+## Gear Planner and items
+
+- Real class gear and Transmog items show their 3D model picture from Wowhead when hovered where a model is available.
+- The Gear Planner favorite uses the Goldshire Wardrobe item icon, and its damage label uses a matching DPS-up image.
+- The weapon-glow link now opens Wowhead's Classic dressing room.
+- Class gear and the AZS Handbook show Codex neck pieces only for the class whose spell they recreate.
+
+## Guide tools and help
+
+- Added the Codex page under Guide → Gameplay → Items, with links between each class spell and its Codex neck piece.
+- Added Codex spell-link translations across all 26 launcher languages.
+- Launcher-update and save-import confirmations now overlay the open section instead of opening a separate window.
+- Talent Builder help uses the launcher's hover style, and its Save/Load/Export/Import buttons stay centered and evenly spaced.
+- Added About Launcher under Options → Launcher.
+- Simplified the navigation help and separated examples so they no longer overlap.
+
+## Credits
+
+- Credited the Wowhead screenshots, item icons, and other sourced favorite artwork in CREDITS.md.
+
+---
+
 # v2.5 (2026-10-28)
 ## In short
 The Guide is organized into New Player and Gameplay, its final pages can be saved to ten numbered Quick Access favorites, and the Gear Planner explains each set bonus before you choose it.

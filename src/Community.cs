@@ -765,12 +765,13 @@ namespace AzerothLauncher
             if (!videoClose.Visible) videoClose.Show(top);
         }
 
-        // the back arrow while a video plays: back to the featured video's page
+        // Any Community X/back action lands on its featured-video home, never the prior More Videos list.
         bool LeaveCommunityVideo()
         {
-            if (current != "Community" || communityPlaying == null) return false;
+            if (current != "Community" || (communityPlaying == null && !communityMore)) return false;
             communityPlaying = null;
-            communityMore = false;                            // back to the featured video of the ticked group, not MORE VIDEOS
+            communityMore = false;
+            moreOrder = null;
             StopEdge();
             BuildPanel("Community");
             return true;

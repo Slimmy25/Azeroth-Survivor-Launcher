@@ -1,24 +1,219 @@
-# Item name|item id|display id, for the Transmog looks that are real items, from the CMaNGOS Classic world
-# database (https://github.com/cmangos/classic-db). Made by Actions > Item models.
+# Item name|item id|display id, real class gear and Transmog items, from the CMaNGOS Classic world database (https://github.com/cmangos/classic-db).
+# Model pictures load from Wowhead: https://wow.zamimg.com/modelviewer/classic/webthumbs/item/<display id mod 256>/<display id>.jpg. Made by Actions > Item models.
 Admiral's Hat|10030|18872
+Anathema|18609|31346
+Apprentice's Boots|55|9929
 Arathor Battle Tabard|20132|32695
+Arcanist Belt|16802|30583
+Arcanist Bindings|16799|30584
+Arcanist Boots|16800|30587
+Arcanist Gloves|16801|30585
+Arcanist Leggings|16796|30582
+Arcanist Mantle|16797|30586
+Arcanist Robes|16798|30581
+Ashbringer|13262|23875
+Assassin's Blade|1935|20471
+Atiesh, Greatstaff of the Guardian|22589|35632
+Beaststalker's Belt|16680|31404
+Belt of Faith|22518|35143
+Belt of Ten Storms|16944|34078
+Belt of Transcendence|16925|34053
+Benediction|18608|31347
+Bindings of Faith|22519|35144
+Bindings of Transcendence|16926|34052
+Blackhand Doomsaw|12583|22792
+Bloodfang Belt|16910|31110
+Bloodfang Boots|16906|31111
+Bloodfang Bracers|16911|31127
+Bloodfang Chestpiece|16905|33650
+Bloodfang Gloves|16907|33651
+Bloodfang Pants|16909|31115
+Bloodfang Spaulders|16832|33653
 Bloodsail Admiral's Hat|12185|35174
+Bonescythe Bracers|22483|35053
+Boots of Prophecy|16811|31718
+Boots of Transcendence|16919|34055
+Bracers of Might|16861|31020
+Bracers of Ten Storms|16943|34079
+Bracers of Valor|16735|29961
+Breastplate of Might|16865|31021
+Breastplate of Ten Storms|16950|34081
+Breastplate of Valor|16730|29958
+Breastplate of Wrath|16966|33983
 Cape of the Brotherhood|5193|22998
+Cenarion Belt|16828|31722
+Cenarion Boots|16829|31724
+Cenarion Bracers|16830|31725
+Cenarion Gloves|16831|31726
+Cenarion Spaulders|16836|32016
+Circlet of Faith|22514|35155
+Circlet of Prophecy|16813|31371
 Cloak of the Brood Lord|19378|28891
 Cloak of the Devoured|22731|35139
 Contest Winner's Tabard|19160|31676
+Cryptstalker Legguards|22437|35413
+Cryptstalker Spaulders|22439|35611
 Defias Bandana|7997|15308
+Devout Belt|16696|30425
+Devout Gloves|16692|30427
+Devout Mantle|16695|31103
+Dragonstalker's Belt|16936|33665
+Dragonstalker's Bracers|16935|33666
+Dragonstalker's Breastplate|16942|33667
+Dragonstalker's Gauntlets|16940|33668
+Dragonstalker's Greaves|16941|34269
+Dragonstalker's Helm|16939|34367
+Dragonstalker's Legguards|16938|33672
+Dragonstalker's Spaulders|16937|34091
+Dreadmist Belt|16702|29793
+Dreadmist Leggings|16699|29797
+Dreadmist Mantle|16701|29798
+Dreadnaught Bracers|22423|35044
+Dreadnaught Breastplate|22416|35049
+Dreadnaught Gauntlets|22421|35050
+Dreadnaught Legplates|22417|35051
+Dreadnaught Pauldrons|22419|35177
+Dreadnaught Sabatons|22420|35067
+Dreamwalker Boots|22492|35173
+Dreamwalker Spaulders|22491|35160
+Earthfury Belt|16838|31829
+Earthfury Bracers|16840|31831
+Earthfury Gauntlets|16839|31834
+Earthfury Legguards|16843|31836
+Earthshatter Legguards|22465|35754
+Earthshatter Spaulders|22467|35751
 Embrace of the Lycan|9479|18392
+Fang of the Faceless|19859|32575
+Felheart Belt|16806|31969
+Felheart Gloves|16805|31971
+Felheart Robes|16809|31973
+Footpad's Pants|48|9913
+Frostfire Belt|22502|35519
+Frostfire Bindings|22503|35677
+Frostfire Circlet|22498|36440
+Frostfire Gloves|22501|35521
+Frostfire Leggings|22497|35522
 Frostwolf Battle Tabard|19031|31527
+Gauntlets of Elements|16672|31414
+Gauntlets of Might|16863|31022
+Gauntlets of Ten Storms|16948|34082
+Gauntlets of Valor|16737|29962
+Gauntlets of Wrath|16964|33984
+Giantstalker's Belt|16851|32019
+Giantstalker's Bracers|16850|32021
+Giantstalker's Breastplate|16845|32022
 Glacial Cloak|22658|35076
+Gloves of Faith|22517|35145
+Gloves of Prophecy|16812|30620
+Gnarled Staff|2030|22146
 Gnomish Goggles|10545|22420
 Gnomish Mind Control Cap|10726|19667
+Grand Marshal's Bullseye|18833|31759
+Grand Marshal's Claymore|18876|31996
+Grand Marshal's Demolisher|23455|36065
+Grand Marshal's Dirk|18838|31379
+Grand Marshal's Mageblade|23451|36045
+Grand Marshal's Stave|18873|31764
+Greaves of Ten Storms|16949|34083
+Helm of Might|16866|31260
+Helm of Valor|16731|31284
+Helm of Wrath|16963|34215
+High Warlord's Battle Mace|23464|36078
+High Warlord's Greatsword|18877|31998
+High Warlord's Razor|18840|31381
+High Warlord's Recurve|18835|31748
+High Warlord's Shield Wall|18826|31746
+High Warlord's Spellblade|23466|36080
+High Warlord's War Staff|18874|31765
+Judgement Breastplate|16958|33635
+Judgement Gauntlets|16956|33636
+Judgement Legplates|16954|33637
+Judgement Sabatons|16957|33639
+Kingsfall|22802|35819
+Lawbringer Bracers|16857|31509
+Lawbringer Gauntlets|16860|31507
+Lawbringer Helm|16854|31506
+Lawbringer Legplates|16855|31352
+Leggings of Faith|22513|35154
+Leggings of Transcendence|16922|34049
+Legplates of Might|16867|31023
+Legplates of Valor|16732|29963
+Legplates of Wrath|16962|33986
+Lightforge Bracers|16722|29968
+Lightforge Breastplate|16726|29969
+Lightforge Gauntlets|16724|29970
+Lightforge Helm|16727|31207
+Lightforge Legplates|16728|29972
+Magister's Belt|16685|29596
+Magister's Bindings|16683|29597
+Magister's Boots|16682|29594
+Magister's Gloves|16684|29593
+Magister's Leggings|16687|29273
+Magister's Mantle|16689|30211
+Magister's Robes|16688|29591
+Mantle of Prophecy|16816|30623
+Nemesis Belt|16933|34011
+Nemesis Boots|16927|34015
+Nemesis Gloves|16928|34013
+Nemesis Leggings|16930|29857
+Nemesis Robes|16931|34014
+Netherwind Belt|16818|34046
+Netherwind Bindings|16918|34045
+Netherwind Boots|16912|34044
+Netherwind Gloves|16913|34041
+Netherwind Mantle|16917|34254
+Netherwind Robes|16916|34038
+Nightslayer Belt|16827|31339
+Nightslayer Boots|16824|31109
+Nightslayer Chestpiece|16820|31105
+Nightslayer Cover|16821|31514
+Nightslayer Gloves|16826|31503
+Nightslayer Pants|16822|31340
 Onyxia Scale Cloak|13472|24174
+Pauldrons of Might|16868|31024
+Pauldrons of Wrath|16961|34253
+Plagueheart Belt|22510|35179
+Plagueheart Bindings|22511|35180
+Plagueheart Circlet|22506|35182
+Plagueheart Gloves|22509|35183
+Plagueheart Leggings|22505|35184
+Primal Belt|15003|28007
+Redemption Girdle|22431|35614
+Rhok'delar, Longbow of the Ancient Keepers|18713|31338
+Robes of Prophecy|16815|31490
+Robes of Transcendence|16923|34047
+Round Buckler|2377|18509
+Sabatons of Might|16862|31025
+Sabatons of Wrath|16965|33989
+Shadowcraft Belt|16713|28177
+Shadowcraft Boots|16711|28162
+Shadowcraft Bracers|16710|24190
+Shadowcraft Gloves|16712|28166
+Shadowcraft Pants|16709|28161
+Shadowcraft Spaulders|16708|28179
 Silverwing Battle Tabard|19506|32026
+Spiked Club|4564|6813
+Staff of Dominance|18842|34114
+Staff of the Shadow Flame|19356|31960
 Stormpike Battle Tabard|19032|31528
+Stormrage Belt|16903|30541
+Stormrage Boots|16898|30542
+Stormrage Bracers|16904|30548
+Stormrage Cover|16900|33655
+Sulfuras, Hand of Ragnaros|17182|29698
 Tabard of Flame|23705|37060
 Tabard of Frost|23709|37061
 Tabard of the Argent Dawn|22999|35396
+Thief's Blade|5192|5144
+Thunderfury, Blessed Blade of the Windseeker|19019|30606
+Tracker's Belt|9916|17115
 Warsong Battle Tabard|19505|32031
 Whitemane's Chapeau|7720|16224
+Wildheart Belt|16716|29976
+Wildheart Boots|16715|29981
+Wildheart Bracers|16714|29977
+Wildheart Gloves|16717|29979
+Wildheart Spaulders|16718|30412
+Wooden Maul|1820|19535
+Worn Dagger|2092|6442
 Zul'Gurub Mask|9470|18689

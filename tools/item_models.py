@@ -1,6 +1,6 @@
 # Reads a CMaNGOS / VMaNGOS world database dump (item_template) and prints "Name|item id|display id" for every item
 # whose name is in the given name files (lines "kind | slot | name | ..." or plain names): the lowest entry with that
-# name. Used by .github/workflows/item-models.yml for the Transmog looks' Wowhead model pictures.
+# name. Used by .github/workflows/item-models.yml for real class gear and Transmog looks' Wowhead model pictures.
 # Usage: python3 item_models.py transmog.txt [more files, or plain lists of names] < world.sql
 import re, sys
 

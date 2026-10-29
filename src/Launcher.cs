@@ -1,4 +1,4 @@
-﻿// The main launcher window: the tall narrow window with PLAY and the section buttons, the tray icon, playing
+// The main launcher window: the tall narrow window with PLAY and the section buttons, the tray icon, playing
 // (cloud download -> game -> cloud upload), installing the game, cloud sync runs and the launcher's own updates.
 using System;
 using System.Collections.Generic;
@@ -1849,7 +1849,6 @@ namespace AzerothLauncher
 
         // ---- the launcher itself: compared with the exe on the latest GitHub release ----
         LauncherRelease launcherRelease;                     // a different (newer) launcher on GitHub, when found
-        string launcherUpdateMessage;
         bool startupLauncherCheck;                           // the start-up check is still waiting for GitHub
 
         // Started by a launcher update? Then a launcher that still differs is offered, not forced,
@@ -1897,9 +1896,6 @@ namespace AzerothLauncher
                 if (manual)
                 {
                     SetStatus("Could not check for launcher updates.");
-                    launcherUpdateMessage = "Could not check for launcher updates: " + err;
-                    optionsTab = 4; optionsAbout = false; optionsLang = false;
-                    ShowSection("Options"); optionsTab = 4; BuildPanel("Options");
                 }
             }
             else if (launcherRelease != null)
@@ -1911,9 +1907,6 @@ namespace AzerothLauncher
             else if (manual)
             {
                 SetStatus("The launcher is up to date (" + rel.Name + ").");
-                launcherUpdateMessage = "You have the newest launcher (" + rel.Name + ").";
-                optionsTab = 4; optionsAbout = false; optionsLang = false;
-                ShowSection("Options"); optionsTab = 4; BuildPanel("Options");
             }
         }
 

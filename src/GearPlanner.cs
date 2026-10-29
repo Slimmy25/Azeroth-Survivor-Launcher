@@ -62,6 +62,7 @@ namespace AzerothLauncher
 
     public class GearSheet : Control
     {
+        static Image dpsUpLabel;
         static readonly string[] Left = { "Head", "Neck", "Shoulder", "Back", "Chest", "Shirt", "Tabard", "Wrist" };
         static readonly string[] Right = { "Hands", "Waist", "Legs", "Feet", "Finger 1", "Finger 2", "Trinket 1", "Trinket 2" };
         static readonly string[] Bottom = { "Main Hand", "Off Hand", "Ranged" };
@@ -564,8 +565,21 @@ namespace AzerothLauncher
             float lh = fText.GetHeight(g) + 2, y = r.Y + 6;
             foreach (var row in lines)
             {
-                string label = Lang.T(row[0]) + ":";
-                using (var b = new SolidBrush(Gold)) g.DrawString(label, fText, b, r.X + 8, y);
+                if (row[0] == "Damage")
+                {
+                    if (dpsUpLabel == null) dpsUpLabel = Theme.LoadImage("AS.gear.dps-up.png");
+                    if (dpsUpLabel != null)
+                    {
+                        float labelHeight = Math.Min(lh - 2, 14f);
+                        float labelWidth = dpsUpLabel.Width * labelHeight / dpsUpLabel.Height;
+                        Theme.Draw(g, dpsUpLabel, r.X + 8, y + 1, labelWidth, labelHeight);
+                    }
+                }
+                else
+                {
+                    string label = Lang.T(row[0]) + ":";
+                    using (var b = new SolidBrush(Gold)) g.DrawString(label, fText, b, r.X + 8, y);
+                }
                 SizeF vs = g.MeasureString(row[1], fText);
                 using (var b = new SolidBrush(Bright)) g.DrawString(row[1], fText, b, r.Right - 8 - vs.Width, y);
                 y += lh;

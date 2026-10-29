@@ -35,8 +35,8 @@ namespace AzerothLauncher
         static readonly string[][] GuideGroups =
         {
             new[] { "NEW PLAYER", "Getting Started", "Controls", "Your First Run", "Tips for New Players", "Pickups, Caches & Guardians",
-                    "Talents", "Gear & the Armory", "Addons", "Achievements & Rewards", "Level-Ups & Cards", "Co-op" },
-            new[] { "GAMEPLAY", "Heroic & Endless", "Classes", "Races", "Zones & Bosses", "Items", "Transmog", "Build Guides" },
+                    "Zones & Bosses", "Talents", "Gear & the Armory", "Addons", "Achievements & Rewards", "Level-Ups & Cards", "Co-op" },
+            new[] { "GAMEPLAY", "Heroic & Endless", "Classes", "Races", "Items", "Transmog", "Build Guides" },
             new[] { "THEORYCRAFTING", TalentBuilder, GearPlanner },
         };
         int guideGroup;                                       // the group whose tabs are shown
@@ -278,18 +278,6 @@ namespace AzerothLauncher
             guideFavorites[target] = route;
             RefreshStrip();
             return true;
-        }
-
-        void ShowGuideFavoriteMenu(int slot, Point screenPoint)
-        {
-            if (guideFavorites[slot] == null) return;
-            var menu = ThemeMenus.Create(false);
-            var remove = new ToolStripMenuItem(Lang.T("Remove favorite"));
-            remove.ForeColor = Theme.Text;
-            remove.Padding = new Padding(14, 7, 14, 7);
-            remove.Click += delegate { RemoveGuideFavorite(slot); };
-            menu.Items.Add(remove);
-            menu.Show(screenPoint);
         }
 
         void RemoveGuideFavorite(int slot)
@@ -1497,7 +1485,8 @@ namespace AzerothLauncher
                 int nl = card.IndexOf('\n');
                 string ic;
                 GuideHover.Show(this, p.Name, nl >= 0 ? card.Substring(nl + 1) : card,
-                                icons.TryGetValue(p.Name, out ic) ? SpellIcons.Icon(ic, null) : null);
+                                icons.TryGetValue(p.Name, out ic) ? SpellIcons.Icon(ic, null) : null,
+                                SpellIcons.HasItemModel(p.Name) ? p.Name : null);
             }
             else GuideHover.Hide();
         }
