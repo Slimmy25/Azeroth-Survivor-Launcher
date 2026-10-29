@@ -364,532 +364,513 @@ the launcher is to use.
 - Community: two boxes beside its title, Big Streamers and Content Creators. Tick one and, five seconds later, the
   featured video is picked from that group's shuffle. The choice is remembered.
 - The launcher no longer pops back up by itself after the game closes. It stays in the taskbar, and only comes back
-  when the game updated, crashed or something needs your attention.
-- The game download's temporary folder is now called "Azeroth Survivors Launcher - Temp", so it's clear whose it is.
-- AZS Stats, new in game: a bounty board. When a run starts, a WANTED poster shows for a few seconds with the creature
-  that killed you last game, how many times it has killed you and whether it's your Nemesis. Take your Nemesis down
-  and a "Nemesis slain!" celebration shows. It uses the game's own parchment, frames, icons and sounds, and the
-  creature's face once the launcher has put it in AZS Stats. Click it to put it away; /azstats bounty turns it off and on.
-- AZS Stats remembers each time you took your Nemesis down and who was at your side (your party, or alone). The
-  celebration names them, and the Nemesis tab lists your last five wins over it.
-- AZS Stats only keeps your own runs, records and Nemesis log now. It no longer writes down the game's tooltips or the
-  icons of the gear your heroes wear for the launcher, and clears what older versions wrote down. Gear icons come from a
-  new list instead (below).
-- Gear icons: every piece of gear that is a real World of Warcraft item (195 of the 470) shows its real icon, from a
-  list made from the CMaNGOS Classic database and Wowhead's item data (assets/item-icons.txt). Pieces the game made up
-  say "Image soon" in place of a picture. In the Gear Planner, STATS > Armory, and in game in the AZS Handbook (which
-  uses the game's own icon files).
-- Guide > Transmog: hover a look that is a real World of Warcraft item (22 of them: the Defias Bandana shows the
-  Red Defias Mask and the Zul'Gurub Mask the Bad Mojo Mask) to see its 3D model picture from
-  Wowhead's model viewer, beside how to earn it.
-- AZS Minor Mods: new Mark minibosses (on by default). Each zone's bosses before its final boss (as the Guide's Zones &
-  Bosses lists them) get a Star, a Triangle and a Diamond, so the Skull and Cross are left for the final boss. Boss
-  markers are now Skull, Cross and Diamond (no more Moon).
-- AZS Minor Mods: a friend who falls blinks their own marker 15 times, on and off: Square, Moon or Circle, one each,
-  so several friends can be down at once. Those three are never put on a boss.
+  when the game updated, crashed or something needs your…32784 tokens truncated…                                   // the game download is running: the status line shows its bar
+        long dlDone, dlTotal;
 
-# v1.7 (2026-10-27)
-In short: Ready for the game's Heroic update: the Guide explains Heroic I to V, marks, stars and set bonuses, the Gear Planner shows stars and set bonuses, and AZS Stats tells you which spells each run leaned on.
-## Guide
-- Class pages no longer end with a NEXT button: hover the class's name in the path at the top to go to another class.
-## News and Changelog
-- Patch notes for the game's 0.121.0 update: Heroic I to V, marks, star upgrades, 4- and 8-piece set bonuses.
+        void SetDownloadBar(bool on, long done, long total)
+        {
+            dlActive = on;
+            dlDone = done;
+            dlTotal = total;
+            Invalidate(new Rectangle(0, 578, W, H - 578));
+        }
 
-## Game update 0.121.0 (Heroic and gear upgrades)
-- Guide: the Run Options topic is now Heroic & Endless: Heroic I to V and how each level opens, the weekly horde
-  affixes (Bolstering, Sanguine, Explosive), and the marks that returning endless bosses pay.
-- Guide > Gear & the Armory: new Marks, Stars, Set bonuses (4-piece, 8-piece, the PvP sets' crowd control) and Weapon
-  glows sections. Boss gear explains bad luck protection, and that a piece you already own now pays marks.
-- Guide > Zones & Bosses: bosses aim ahead of where you are running, more so on each Heroic level.
-- Guide > Talents, Achievements and Co-op: talent experience rises with the Heroic level, the new Heroic achievements,
-  Against the Odds asking for Heroic III, the host choosing the Heroic level, and co-op scaling 20% less per hero.
-- Drop chances in the Items topic are marked as normal-difficulty chances.
-- AZS Handbook (in game): the same Guide changes.
-- AZS Stats (in game): every run now keeps the game's run modifiers, so Heroic runs can be told apart later.
+        ManualResetEvent installCancel;
+        bool downloadInstall;
 
-## Set bonuses and stars
-- Guide > Items: every class's gear now ends each rarity with its set's 4-piece and 8-piece bonuses, as the game's
-  armory words them, for all nine classes (54 sets). Class pages show them under each rarity's pieces too, and the
-  spells named in them are highlighted.
-- Guide > Classes: a spell's box now also shows "Set bonuses that change it": the sets whose 8-piece bonus changes that
-  spell (Fireball: Frostfire 8-piece), in the set's colour. Point at one to read the bonus.
-- Gear Planner: pick 0 to 5 stars for each armor piece (the buttons above the list). Stars decide which set bonuses you
-  reach (4-piece at 1+ stars, 8-piece at 3+). What a star adds to a piece's own numbers is waiting for clarification
-  from the game's developer, so the totals count every piece at 0 stars for now; weapons have no stars yet for the same
-  reason. Everything is ready for those numbers.
-- Gear Planner: the Set bonuses list now has its own room under the weapons. Four pieces of one set and four of another
-  show and count both 4-piece bonuses, and a full set shows its 4-piece next to its 8-piece; a "Reached" line sums up
-  which bonuses you have.
-- Item cards (Guide hovers and the planner) show the piece's set with its 4-piece and 8-piece bonuses.
-- AZS Handbook (in game): the same star buttons, totals, Set bonuses list, set lines on class pages and "Set bonuses
-  that change it" on spells.
-- Guide: "Mr. Smite" and "High Priest Venoxis" (and every other boss's name) no longer link to Smite or the Priest
-  class; in the in-game Handbook, Smite in Mr. Smite is no longer highlighted as the spell.
-- Guide > Gear & the Armory: the 4-piece bonuses, mixing two sets, and which PvP sets are built around crowd control
-  (the warrior's is built around Mortal Strike and the shaman's around Earth Shock).
+        // INSTALL: no window of its own. The download and the install run in the launcher's status line (a bar with the
+        // percentage above INSTALLING); pressing INSTALLING asks whether to stop the download.
+        void InstallClient(bool forSetup)
+        {
+            if (Updating)
+            {
+                SetStatus("The launcher is updating itself. Please wait until that has finished.");
+                return;
+            }
+            if (Installing)
+            {
+                if (installCancel != null && dlActive && Ask("Install", "Stop downloading the game?"))
+                    installCancel.Set();
+                return;
+            }
+            if (GameRunningFlag)
+            {
+                Info("Install", Util.GameRunning() ? "Close the game first, then install it again." : StillUploading);
+                return;
+            }
+            setupAfterInstall = forSetup;
+            BeginClientDownload();
+        }
 
-## AZS Stats: spell focus
-- At the end of a run, AZS Stats says in chat which spells the run leaned on: each spell's share of the ranks you put
-  into your spells ("Spell focus (12 ranks): Fireball 42% · Frost Nova 25% ...").
-- History (in game and in the launcher) lists each run's spells with their rank and that share, the biggest first.
-- Abilities (in game and in the launcher): each spell also shows its share of every rank you have put into spells, so
-  you can see which spell you favour over time.
+        // The game download, done by the launcher: into <launcher folder>\temp, with the download server's login,
+        // then unpacked next to the launcher; the temp folder is deleted afterwards, whatever happened.
+        void BeginClientDownload()
+        {
+            Installing = true;
+            RefreshPlayLabel();
+            SetStatus("Downloading the game client...");
+            SetDownloadBar(true, 0, 0);
+            string temp = Path.Combine(Util.LauncherDir, Util.DownloadTempName);
+            string dest = Util.LauncherDir;
+            installCancel = new ManualResetEvent(false);
+            ManualResetEvent cancel = installCancel;
+            Bg(delegate
+            {
+                string error = null;
+                bool cancelled = false;
+                try
+                {
+                    Util.DeleteTreeQuiet(temp);
+                    Directory.CreateDirectory(temp);
+                    string file = Path.Combine(temp, "AzerothSurvivors-client.download");
+                    long last = -1;
+                    int lastTick = 0;
+                    Action<long, long> progress = delegate(long done, long total)
+                    {
+                        int pct = total > 0 ? (int)(done * 1000 / total) : (int)(done >> 20);
+                        if (pct == last && Environment.TickCount - lastTick < 1000) return;
+                        last = pct;
+                        lastTick = Environment.TickCount;
+                        Ui(delegate { SetDownloadBar(true, done, total); });
+                    };
+                    DownloadClient(file, progress, cancel, delegate(string text) { });
+                    Ui(delegate { SetDownloadBar(false, 0, 0); SetStatus("Unpacking the game client..."); });
+                    if (Archive.Kind(file) == null)
+                        throw new UserError("The download server sent something that is not the game archive. Please try again later.");
+                    Archive.InstallGame(file, dest);
+                }
+                catch (CancelledError) { cancelled = true; }
+                catch (Exception e) { error = e.Message; }
+                finally { Util.DeleteTreeQuiet(temp); }        // the download is never kept
+                Ui(delegate
+                {
+                    SetDownloadBar(false, 0, 0);
+                    installCancel = null;
+                    if (cancelled)
+                    {
+                        Installing = false;
+                        setupAfterInstall = false;
+                        RefreshPlayLabel();
+                        SetStatus("Download cancelled.");
+                        SetupDownloadCancelled();            // started from setup: setup is cancelled with it
+                        return;
+                    }
+                    setupDownloading = false;                // (the download from setup has ended)
+                    if (error != null)
+                    {
+                        Installing = false;
+                        setupAfterInstall = false;
+                        RefreshPlayLabel();
+                        SetStatus("Install failed.");
+                        ShowWindowFront();
+                        Error("Install", error);
+                        return;
+                    }
+                    bool setup = setupAfterInstall || !Cfg.Bool("setup_done", false);
+                    setupAfterInstall = false;
+                    downloadInstall = true;
+                    try { InstallDone(null, dest); }
+                    finally { downloadInstall = false; }
+                    if (setup) After(300, ShowSetupDialog);  // first-time setup / RUN SETUP AGAIN: on to the folders page
+                });
+            });
+        }
 
-# v1.6 (2026-10-27)
-In short: Small fixes: RUN SETUP AGAIN starts over properly, setup pages scroll instead of running off the edge, and a few buttons no longer spill past their box.
-## First-time setup
-- RUN SETUP AGAIN (Options > LAUNCHER) now asks everything from the start, as if nothing had been set up: language
-  first, every folder at its usual place, cloud saving on with no folder chosen yet. What you had stays until you
-  press FINISH, and leaving setup early changes nothing.
-- Every setup page stays inside the section window: a long page (or a long language) scrolls instead of running past
-  the edges.
+        static readonly Random hostDice = new Random();
 
-## Everything else
-- Addons > My Addons: the profiles' LOAD buttons no longer run past the right edge.
-- The path at the top of Options shows the tab's name in your language (Folders, Graphics).
-- Options > GRAPHICS: the window size buttons wrap onto a second line instead of running past the right edge, and
-  every Options tab keeps its contents inside the box.
-- About Launcher no longer lists AZS Transparency, which was removed in v1.0.
+        // One of the hosts at random; when it fails (not when you cancel), the next one.
+        static void DownloadClient(string file, Action<long, long> progress, ManualResetEvent cancel, Action<string> say)
+        {
+            var hosts = new List<int> { 0, 1, 2 };            // 0 main, 1 backup, 2 Google Drive
+            lock (hostDice)
+                for (int i = hosts.Count - 1; i > 0; i--) { int j = hostDice.Next(i + 1); int t = hosts[i]; hosts[i] = hosts[j]; hosts[j] = t; }
+            string[] names = { "main host", "backup host", "Google Drive host" };
+            var errors = new List<string>();
+            for (int i = 0; i < hosts.Count; i++)
+            {
+                int h = hosts[i];
+                say(i == 0 ? "Downloading from the " + names[h] + "..."
+                           : "The " + names[hosts[i - 1]] + " did not work. Trying the " + names[h] + "...");
+                try
+                {
+                    if (h == 0) DownloadFromMain(file, progress, cancel);
+                    else if (h == 1) DownloadFromMirror(file, progress, cancel);
+                    else DownloadFromDrive(file, progress, cancel);
+                    return;
+                }
+                catch (CancelledError) { throw; }
+                catch (UserError e) { errors.Add(char.ToUpperInvariant(names[h][0]) + names[h].Substring(1) + ": " + e.Message); }
+            }
+            say("The other hosts did not work. Trying the game's own download page...");
+            try { DownloadFromGameSite(file, progress, cancel); return; }
+            catch (CancelledError) { throw; }
+            catch (UserError e) { errors.Add("Game's download page: " + e.Message); }
+            throw new UserError("No download host worked.\n\n" + string.Join("\n\n", errors.ToArray()));
+        }
 
-# v1.5 (2026-10-27)
-In short: Every class's gear now has its real bonuses, rogues and shamans get their Off Hand, the in-game AZS Handbook has everything the launcher's Guide has, addons made of several folders switch on and off as one, and first-time setup moved inside the launcher.
-## News and Changelog
-- Patch notes for the game's 0.120.5 update: co-op works on networks that blocked the co-op server, and an unreachable
-  server is reported as such instead of "the host left".
+        // the downloaded game against its known checksums: a damaged or different file is deleted, never installed
+        static void CheckClient(string file, string sha, string md5, bool drive, string where)
+        {
+            bool ok = drive ? string.Equals(md5, ClientDriveMd5, StringComparison.OrdinalIgnoreCase)
+                              || string.Equals(sha, ClientSha256, StringComparison.OrdinalIgnoreCase)
+                            : string.Equals(sha, ClientSha256, StringComparison.OrdinalIgnoreCase)
+                              && (md5 == null || string.Equals(md5, ClientMd5, StringComparison.OrdinalIgnoreCase));
+            if (ok) return;
+            try { File.Delete(file); } catch (Exception) { }
+            throw new UserError("The download from the " + where + " is damaged or not the right file (its checksum does not match). Please try again.");
+        }
 
-## Gear Planner and Items
-- Every Priest piece now has its bonuses: the Common (Acolyte's), Uncommon (Devout), Rare (Prophecy) and Epic
-  (Transcendence) sets and their staves join Legendary and PvP. All 54 Priest pieces count in the Gear Planner's
-  totals and in the spell and talent hover numbers; none is marked * any more.
-- Warrior, Paladin and Hunter gear now has its bonuses too, read from the game's item cards: every piece of every
-  rarity, including the Legendary weapons Sulfuras, Ashbringer and Rhok'delar (each also makes your spells strike 1
-  more target). No piece of these three classes shows * any more.
-- Rogue, Shaman, Mage, Warlock and Druid gear has its bonuses too, so every class's gear is known now. Every piece of
-  every class is known now, so nothing shows * any more. The same Atiesh has its own numbers for each class: the
-  Mage's gives 46% damage, 2.4% crit and 1 more target.
-- Rogues and shamans get their **Off Hand** in the Gear Planner: the rogue's second dagger and the shaman's shield,
-  each with its own bonuses.
-- Each class page (Guide > Gameplay > Classes) now ends with its **Gear**: every piece that class can wear, rarity by
-  rarity. Point at a piece to read its card; click it to put it on in the Gear Planner.
-- On a class page, **TALENT TREES** now sits at the top right, on the same line as CLASSES. The paragraph that
-  explained the talent trees further down is gone.
-- Under a spell, the line of other spells that name it now reads "Spells that change it", like "Talents that change
-  it" above it.
-- A hunter's bow or gun goes in the **Ranged** slot of the Gear Planner, as in the game, instead of Main Hand.
+        // the main host, with the download login: sent the plain HTTP way (Basic); a server that wants it in the
+        // address instead gets that next
+        static void DownloadFromMain(string file, Action<long, long> progress, ManualResetEvent cancel)
+        {
+            string basic = Convert.ToBase64String(Encoding.UTF8.GetBytes(ClientUser + ":" + ClientPassword));
+            Action<HttpWebRequest> login = delegate(HttpWebRequest r) { r.Headers["Authorization"] = "Basic " + basic; };
+            string q = ClientUrl.Contains("?") ? "&" : "?";
+            string u = Uri.EscapeDataString(ClientUser), pw = Uri.EscapeDataString(ClientPassword);
+            string[] urls = { ClientUrl, ClientUrl + q + "username=" + u + "&password=" + pw, ClientUrl + q + "user=" + u + "&pass=" + pw };
+            UserError lastError = null;
+            foreach (string url in urls)
+            {
+                try
+                {
+                    string sha = Net.Download(url, file, true, "download", progress, cancel, 0, login);
+                    CheckClient(file, sha, Net.LastMd5, false, "main host");
+                    return;
+                }
+                catch (CancelledError) { throw; }
+                catch (UserError e)
+                {
+                    lastError = e;
+                    if (!e.Message.Contains("error 401") && !e.Message.Contains("error 403")) throw;   // only a refused login tries the next way
+                }
+            }
+            throw new UserError("The download server did not accept the launcher's login." +
+                                (lastError != null ? " (" + lastError.Message + ")" : ""));
+        }
 
-## AZS Handbook (in game)
-- The in-game Handbook now has everything the launcher's Guide has: each class page ends with that class's **gear**
-  (point at a piece for its card, click it to try it on), a **Talent trees** button at the top of each class page, and
-  under each spell the **Spells that change it** as well as the talents.
-- New in the Handbook: the **Talent Tree Builder** (pick a class; left-click adds a point, right-click takes one away,
-  with the same rules as the launcher: up to 51 points, a row opens for every 5 points above it) and the **Gear
-  Planner** (pick a class, then a slot and a piece: gear and jewelry, with the totals the launcher shows). Both are on
-  the Handbook's first page and link to each other.
-- The launcher writes the Handbook's data from its own guide, talents and gear, so the two always match.
+        // the last resort: the game's own download page (https://wow.aethus.pl/download)
+        static void DownloadFromGameSite(string file, Action<long, long> progress, ManualResetEvent cancel)
+        {
+            string sha = Net.Download(ClientLastResortUrl, file, true, "game's download page", progress, cancel, 0);
+            if (string.Equals(sha, ClientSha256, StringComparison.OrdinalIgnoreCase)) return;
+            if (Archive.Kind(file) != null) return;
+            try { File.Delete(file); } catch (Exception) { }
+            throw new UserError("The game's download page did not give a game archive.");
+        }
 
-## Addons
-- An addon that comes as more than one folder is one row in My Addons and switches on and off as one: Survivor UI with
-  Survivor Plates, BugSack with !BugGrabber. Uninstalling it removes all of its folders. Rows are sorted by the
-  addon's own name.
-- My Addons shows each addon's name with its author ("Survivor UI By morderous"); for an addon not from Download More,
-  its own title and author.
-- The OTHER ADDONS heading is gone for now: addons not from Download More are listed under AZS ADDONS.
+        // the backup host: its page names the newest archive (the link changes with every upload) and its SHA-256;
+        // the download must match the game's known checksums (and the page's, when it shows one)
+        static void DownloadFromMirror(string file, Action<long, long> progress, ManualResetEvent cancel)
+        {
+            string html;
+            using (HttpWebResponse resp = Net.Open(ClientMirrorUrl, 30000, true, "backup download", "text/html"))
+            using (var rd = new StreamReader(resp.GetResponseStream(), Encoding.UTF8))
+                html = rd.ReadToEnd();
+            var link = System.Text.RegularExpressions.Regex.Match(html,
+                "href\\s*=\\s*[\"']([^\"']*/downloads/[^\"']+\\.(?:rar|zip|7z))[\"']", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+            if (!link.Success) throw new UserError("The backup host's page has no download link right now.");
+            string url = new Uri(new Uri(ClientMirrorUrl), System.Net.WebUtility.HtmlDecode(link.Groups[1].Value)).AbsoluteUri;
+            var sum = System.Text.RegularExpressions.Regex.Match(html, "SHA-?256.{0,300}?\\b([0-9a-fA-F]{64})\\b",
+                System.Text.RegularExpressions.RegexOptions.IgnoreCase | System.Text.RegularExpressions.RegexOptions.Singleline);
+            string sha = Net.Download(url, file, true, "backup download", progress, cancel, 0);
+            if (sum.Success && !string.Equals(sum.Groups[1].Value, sha, StringComparison.OrdinalIgnoreCase))
+            {
+                try { File.Delete(file); } catch (Exception) { }
+                throw new UserError("The download from the backup host is damaged (its checksum does not match). Please try again.");
+            }
+            CheckClient(file, sha, Net.LastMd5, false, "backup host");
+        }
 
-## First-time setup
-- First-time setup now happens inside the launcher's section window, not in a box over a darkened launcher. It asks for
-  your **language first**, then the usual questions. No video plays while it runs; Community comes back when it is done.
+        // Google Drive: a large file first gives a "can't scan this file for viruses" page whose form holds the real
+        // download address; that form is followed, then the file is checked against its MD5
+        static void DownloadFromDrive(string file, Action<long, long> progress, ManualResetEvent cancel)
+        {
+            string url = "https://drive.usercontent.google.com/download?id=" + ClientDriveId + "&export=download&confirm=t";
+            // only the first byte is asked for: the file itself is then fetched by the download below
+            using (HttpWebResponse resp = Net.Open(url, 30000, true, "Google Drive download", null,
+                                                   delegate(HttpWebRequest r) { r.AddRange(0L, 0L); }))
+            {
+                if ((resp.ContentType ?? "").ToLowerInvariant().Contains("text/html"))
+                {
+                    string html;
+                    using (var rd = new StreamReader(resp.GetResponseStream(), Encoding.UTF8)) html = rd.ReadToEnd();
+                    var form = System.Text.RegularExpressions.Regex.Match(html, "<form[^>]*action=\"([^\"]+)\"[^>]*>(.*?)</form>",
+                        System.Text.RegularExpressions.RegexOptions.IgnoreCase | System.Text.RegularExpressions.RegexOptions.Singleline);
+                    if (!form.Success) throw new UserError("Google Drive did not offer the file right now (it may have hit its download limit).");
+                    var q = new List<string>();
+                    foreach (System.Text.RegularExpressions.Match m in System.Text.RegularExpressions.Regex.Matches(form.Groups[2].Value,
+                        "<input[^>]*name=\"([^\"]+)\"[^>]*value=\"([^\"]*)\"", System.Text.RegularExpressions.RegexOptions.IgnoreCase))
+                        q.Add(Uri.EscapeDataString(System.Net.WebUtility.HtmlDecode(m.Groups[1].Value)) + "=" +
+                              Uri.EscapeDataString(System.Net.WebUtility.HtmlDecode(m.Groups[2].Value)));
+                    url = new Uri(new Uri(url), System.Net.WebUtility.HtmlDecode(form.Groups[1].Value)).AbsoluteUri;
+                    url += (url.Contains("?") ? "&" : "?") + string.Join("&", q.ToArray());
+                }
+            }
+            string sha = Net.Download(url, file, true, "Google Drive download", progress, cancel, 0);
+            CheckClient(file, sha, Net.LastMd5, true, "Google Drive host");
+        }
 
-## Everything else
-- Hovering a step of the path at the top of a window opens its list of the other places at that level; a click on the
-  step still goes there.
-- The Gear Planner no longer has a TALENTS button (the path above it leads there), so the sheet starts higher.
-- Button labels that don't fit their button get smaller letters instead of running over the edges, and so does the
-  "This week / Time played" card on the home screen.
-- Options > LAUNCHER no longer shows play time: it is on the home screen.
-- Credits: the emblem beside the title (the cat heroes) is Slimjim's own art; the "AS" logo the launcher uses as its icon
-  is Aethus's.
+        bool setupAfterFileInstall;
 
-# v1.4 (2026-10-27)
-In short: Download More only lists addons the mod team has approved: three were taken out, and Bordo UI, BlackwellUI and LuckyOdds were added.
-## Addons
-- DBM by Gabriellus, Death Recap by Fotze and Chest GPS by Fotze are no longer in Download More: they hadn't been
-  approved by the mod team beforehand. Copies already installed stay in your AddOns folder until you remove them.
-- New in Download More: Bordo UI by BordoBereli and BlackwellUI (BUI) by Blackwell under UI, LuckyOdds by Cadoky
-  and Damage Meter by Kexo under Gameplay. They come from each author's newest release. Like the other interfaces,
-  only one UI can be on at a time: turning one on asks before switching the other off.
+        public void InstallFromDownloads() { InstallFromDownloads(false); }
 
-# v1.3 (2026-10-27)
-In short: Every link in the Guide goes somewhere, spells show which other spells affect them, the whole launcher draws much faster, and first-time setup no longer starts again by mistake.
-## Guide
-- Every link in the Guide now goes somewhere. A spell named in another spell's text takes you to that spell, even on
-  the same page: the page scrolls to it and its box lights up gold for a moment. A talent's name opens its class's
-  talent trees, and so do the small talent icons under a spell ("Talents that change it").
-- The question-mark mouse pointer is gone from spells, talents and links.
-- Under each spell on a class page, below "Talents that change it", a new line "Spells that affect this" shows the
-  icons of the class's other spells whose text names that spell word for word (for example, Aimed Shot under Hunter's
-  Mark). Hover one to read it, click it to go to that spell. A longer name that only contains it ("Greater Heal" for
-  "Heal") doesn't count.
+        public void InstallFromDownloads(bool forSetup)
+        {
+            if (Updating || Installing) return;
+            setupAfterFileInstall = forSetup;
+            string archive = Archive.FindDownloaded();
+            if (archive != null)
+            {
+                var fi = new FileInfo(archive);
+                if (!Ask("Install", "Install the game from this file?\n\n" + fi.Name + "  (" + (fi.Length >> 20) + " MB)\nin " + fi.DirectoryName))
+                    archive = null;
+            }
+            if (archive == null)
+            {
+                using (var d = new OpenFileDialog())
+                {
+                    d.Title = Lang.T("Choose the game file you downloaded (.rar)");
+                    d.InitialDirectory = Util.DownloadsDir;
+                    d.Filter = Lang.T("Game archive (*.rar;*.zip;*.7z)|*.rar;*.zip;*.7z|All files (*.*)|*.*");
+                    if (d.ShowDialog(this) != DialogResult.OK)
+                    {
+                        SetStatus("Install cancelled.");
+                        return;
+                    }
+                    archive = d.FileName;
+                }
+            }
+            string dest = Util.LauncherDir;                  // installs next to the launcher, no folder question
+            Installing = true;
+            RefreshPlayLabel();
+            SetStatus("Unpacking the game client...");
+            Bg(delegate
+            {
+                string error = null;
+                try
+                {
+                    Archive.InstallGame(archive, dest);
+                    try { File.Delete(archive); } catch (Exception) { }     // the download is no longer needed
+                }
+                catch (Exception e) { error = e.Message; }
+                Ui(delegate { InstallDone(error, dest); });
+            });
+        }
 
-## Navigation
-- The last step of the path at the top of a window can now be clicked too: it opens the same list as its arrow, so you
-  can switch to another page, class, tab or category from where you are. Steps that had no list now have one: Options
-  shows its tab (Options › Cloud Save) with the other tabs, Options › Launcher › Language lists the languages, Stats ›
-  a class lists the other classes, and a class's Talents lists the other classes' talents.
+        void InstallDone(string error, string gameDir)
+        {
+            Installing = false;
+            if (error == null)
+            {
+                Cfg.Set("game_dir", gameDir);
+                Cfg.Set("installed_by_launcher", true);
+                Cfg.Save();
+            }
+            Invalidate();
+            RebuildCurrent();
+            if (error != null)
+            {
+                SetStatus("Install failed.");
+                ShowWindowFront();
+                Error("Install", error);
+            }
+            else
+            {
+                SetStatus("Install complete - press PLAY.");
+                if (Cfg.Bool("stats_pending", false))        // setup said yes to AZS Stats before the game was here
+                {
+                    Cfg.Remove("stats_pending");
+                    Cfg.Save();
+                    InstallStatsAddon();
+                }
+                Notify("Install complete. Press PLAY to enter Azeroth.");
+                if (!downloadInstall && (setupAfterFileInstall || !Cfg.Bool("setup_done", false)))
+                    After(300, ShowSetupDialog);             // installed from a file during setup: on to the folders page
+                setupAfterFileInstall = false;
+            }
+        }
 
-## Cloud Save
-- The Cloud Save page now sits inside Options › CLOUD SAVE, with no second button to open it: the cloud state, CHECK
-  STATUS, DOWNLOAD, UPLOAD, EARLIER DOWNLOADS and the log are all on that tab.
+        // ------------------------------------------------------------------ the launcher's own updates (checked at start and with UPDATE)
+        // The game updates itself when it starts (it closes and opens again): the launcher never updates the game.
+        void RefreshUpdateBtn()
+        {
+            updateBtn.Label = UpdateChecking ? "CHECKING" : Updating ? "UPDATING" : "UPDATE LAUNCHER";
+            updateBtn.Selected = launcherRelease != null && !Updating;   // gold: an update is waiting
+        }
 
-## Speed
-- The whole launcher draws much faster:
-  - Pictures (the background, buttons, icons, thumbnails) are prepared once at the size they are shown, not resized
-    every time the window redraws.
-  - The home screen's background, title and headings are drawn once and reused.
-  - The Guide's text is laid out once, so scrolling a long page is smooth.
-  - The "This week" card reads AZS Stats' file every few seconds, not on every redraw.
-- Questions and the first-time setup answer at once: they wait for your click instead of checking for it every
-  10 milliseconds. A new setup page appears in one go, and the darkened launcher behind them no longer redraws itself
-  whole.
+        void StartupUpdateCheck()
+        {
+            startupLauncherCheck = true;
+            CheckLauncherUpdate(false);
+            if (!UpdateChecking) startupLauncherCheck = false;   // the check could not start (another one is running)
+        }
 
-## First-time setup
-- A launcher whose own settings folder ("Azeroth Survivor Launcher", next to it) is missing no longer starts the
-  first-time setup when the game is right there and has been played (its save or its config folder exists). It
-  carries on with them and says so above PLAY. Every setting is still in Options.
+        // ---- the launcher itself: compared with the exe on the latest GitHub release ----
+        LauncherRelease launcherRelease;                     // a different (newer) launcher on GitHub, when found
+        bool startupLauncherCheck;                           // the start-up check is still waiting for GitHub
 
-# v1.2 (2026-10-27)
-In short: More room everywhere: a bigger window, a path at the top instead of rows of buttons, and Cloud Save moved into Options. Download More gets UI, Gameplay and Misc tabs, there's a new THEORYCRAFTING button, and the Gear Planner and Talent Tree Builder now work together.
-## News and Changelog
-- Patch notes for the game's 0.120.4 update: co-op parties of three or more play smoothly again.
+        // Started by a launcher update? Then a launcher that still differs is offered, not forced,
+        // so a release whose exe never matches can't restart the launcher over and over.
+        static readonly bool StartedAfterUpdate = Array.IndexOf(Environment.GetCommandLineArgs(), "--after-update") >= 0;
 
-## More room in every section
-- The section window is bigger: it now reaches from under the game's name down to the bottom bar.
-- The back arrow moved into the title bar, followed by a trail of where you are, for example
-  "Guide › Theorycrafting › Talent Tree Builder › Priest". Click any step to go back to it. The rows of tabs you have
-  already chosen from (the Guide's groups and topics) are no longer shown inside the page, so the content gets
-  their room; go back with the trail to pick something else. The Guide's search box is on its main page.
-- The Guide's PREVIOUS / NEXT row and page dots are gone: the page uses that room.
-- Talent Tree Builder: the text explaining talents moved behind a **?** button beside RESET.
-- Stats: the UPDATE STATS ADDON and REFRESH buttons are gone (the launcher updates AZS Stats before every game);
-  a class's page is reached and left through the trail (Stats › Mage).
-- Addons, Options, Changelog, About, Cloud Save and Community start right at the top, without the empty row the
-  back arrow used to take.
+        // The UPDATE button and the start-up check: the launcher itself (the game updates itself when it starts).
+        // At start-up it stays quiet unless there is something to offer; the button always answers.
+        void CheckLauncherUpdate(bool manual)
+        {
+            if (Updating) return;
+            if (UpdateChecking) return;
+            UpdateChecking = true;
+            RefreshUpdateBtn();
+            if (manual) SetStatus("Checking for updates...");
+            Bg(delegate
+            {
+                LauncherRelease rel = null;
+                bool differs = false;
+                string err = null;
+                try
+                {
+                    rel = SelfUpdate.FetchLatest();
+                    differs = SelfUpdate.Differs(rel);
+                }
+                catch (UserError e) { err = e.Message; }
+                catch (Exception e) { err = "The update check failed (" + e.Message + ")."; }
+                Ui(delegate { LauncherCheckDone(rel, differs, err, manual); });
+            });
+        }
 
-## Addons
-- Download More has new tabs: **UI**, **Gameplay** and **Misc** for the AZS addons, and WoW 1.12 Addons.
-- UI is pick-one: Survivor UI, SurvivorsDragonUi and Keijin UI can't be on together. Switching one on now asks
-  whether to switch the other off (Yes switches it off, No leaves things as they were). The same goes for Survivor UI
-  and AZS Minor Mods. When two are found on any other way, Survivor UI is the one kept.
-- My Addons lists every addon that is not a WoW 1.12 one under one heading, AZS ADDONS.
-- My Addons: DOWNLOAD MORE moved into the right-hand column, so the buttons no longer overlap.
-- My Addons: addons that can't be on together and are both on are shown first, under CONFLICT: PICK ONE, joined by
-  a red bracket. Untick the one you don't want and both go back to their place in A to Z order.
-- Uninstalling an addon (its X) no longer flashes the launcher's background and a black screen before asking: the
-  question now opens straight over the launcher as it is. The same goes for every question inside the launcher.
-- The README's list of download hosts names who runs each one: a Mirror By Community Member (Leo), a Mirror By
-  Community Member (Meexa) and a Mirror By Discord Mod (Fotze).
+        void LauncherCheckDone(LauncherRelease rel, bool differs, string err, bool manual)
+        {
+            UpdateChecking = false;
+            startupLauncherCheck = false;
+            launcherRelease = err == null && differs ? rel : null;
+            RefreshUpdateBtn();
+            if (!manual && launcherRelease != null && !StartedAfterUpdate)
+            {
+                ForceLauncherUpdate();                       // at start-up a newer launcher is installed without asking
+                return;
+            }
+            if (err != null)
+            {
+                if (manual)
+                {
+                    SetStatus("Could not check for launcher updates.");
+                    Warn("Launcher update", err);
+                }
+            }
+            else if (launcherRelease != null)
+            {
+                SetStatus("Launcher " + rel.Name + " is available.");
+                OfferLauncherUpdate(manual);
+                return;
+            }
+            else if (manual)
+            {
+                SetStatus("The launcher is up to date (" + rel.Name + ").");
+                Info("Launcher update", "You have the newest launcher (" + rel.Name + ").");
+            }
+        }
 
-## Launcher buttons and Options
-- New **THEORYCRAFTING** button beside GUIDE: it opens the Guide's Theorycrafting page (Talent Tree Builder, Gear
-  Planner, Build Guides). Each group has its own page in the trail too: click "Gameplay" in Guide › Gameplay › Classes.
-- The Talent Tree Builder and the Gear Planner come up in the Guide's search, and their names are links anywhere in
-  the Guide.
-- The Stats buttons are disabled while AZS Stats is not installed and switched on; hovering says "Disabled when AZS
-  Stats is not active". The INSTALL STATS ADDON button on the Stats page is gone.
-- Cloud Save moved into Options: a new **CLOUD SAVE** tab holds cloud saving on or off, the sync folder (moved from
-  FOLDERS) and OPEN CLOUD SAVE › for syncing now, the log and earlier downloads.
-- The game's settings are now two tabs: **GRAPHICS** (display and graphics) and **GAMEPLAY** (gameplay and sound).
-- GENERAL is gone: its settings and the play time are on the **LAUNCHER** tab, and so is the language: LANGUAGE › opens
-  the list of languages (Options › Launcher › Language).
+        void OfferLauncherUpdate(bool manual)
+        {
+            LauncherRelease rel = launcherRelease;
+            if (rel == null) return;
+            if (!manual && setupOpen)
+            {
+                After(3000, delegate { OfferLauncherUpdate(false); });
+                return;
+            }
+            if (!manual && (!Visible || WindowState == FormWindowState.Minimized))   // in the tray or the taskbar: the gold UPDATE
+                return;                                      // button waits, quietly (no Windows notice)
+            if (GameRunningFlag || Installing || SyncBusy || Updating)
+            {
+                if (manual) Info("Launcher update", "Finish what is running first (the game, an install or a cloud sync), then press UPDATE again.");
+                return;
+            }
+            if (!AskOverSection("Launcher update", "A new version of the launcher is on GitHub: " + rel.Name + ".\n\nUpdate now? The new launcher" +
+                     (rel.Size > 0 ? " (" + Util.FmtSize(rel.Size) + ")" : "") + " is downloaded, checked and started in place of this one. " +
+                     "Your settings stay as they are."))
+            {
+                SetStatus("Launcher update postponed. Press UPDATE when you want it.");
+                return;
+            }
+            DownloadLauncher(rel, false);
+        }
 
-## The Guide
-- At the end of a page, **NEXT** takes you to the next page of the topic, then to the next topic of the same group
-  (Getting Started, Controls, Your First Run, ...), so the New Player guide reads in order.
+        // The start-up update: no question. It waits while the game, an install or a cloud sync runs
+        // (so nothing is cut off), then downloads, checks and restarts into the new launcher.
+        void ForceLauncherUpdate()
+        {
+            LauncherRelease rel = launcherRelease;
+            if (rel == null || Updating) return;
+            if (GameRunningFlag || Installing || SyncBusy || UpdateChecking || setupOpen)
+            {
+                SetStatus("A launcher update (" + rel.Name + ") will be installed as soon as the game, an install or a cloud sync has finished.");
+                After(5000, ForceLauncherUpdate);
+                return;
+            }
+            SetStatus("Updating the launcher to " + rel.Name + "...");   // quietly: no Windows notice (Slimjim, 2026-10-28)
+            DownloadLauncher(rel, true);
+        }
 
-## Theorycrafting
-- The Talent Tree Builder and the Gear Planner both start with one question in the middle of the window: "What class
-  do you want to build for?". The class rows are gone; change class from the trail (Gear Planner › Priest).
-- The two tools are linked and share the class: GEAR PLANNER › on the talent trees, TALENTS › in the Gear Planner.
-- Gear Planner: the Run Stats panel is replaced by a selector. Click a slot and the panel lists what it can hold,
-  each with its picture at the size of its name (rings, trinkets and amulets always; gear once AZS Stats has seen
-  it worn), in its rarity's color. Click one to put it in, or Empty.
-- With a set in the Gear Planner, the hover texts of spells and talents show their numbers with it: damage with the
-  set's damage bonus, cooldowns and "every N sec" with its cooldown bonus, "within N yd" with its area bonus, and a
-  line saying which bonuses are counted. It is an estimate (bonuses added together), and the set is forgotten when
-  the launcher closes.
-- The path at the top of each window (like Guide › Theorycrafting › Talent Tree Builder) now has a small arrow on every step after the first. Click it to jump to another category at that level: another guide group, another topic or tool, another page, another class, another Options tab or another Download More category.
-- The "What class do you want to build for?" question now shows over the launcher's background picture, not a black screen.
-- Big streamer videos (Asmongold's and five more) are always first in MORE VIDEOS, and the front page features them until November 9. Every other video counts as a Content Creator video.
+        void DownloadLauncher(LauncherRelease rel, bool forced)
+        {
+            Updating = true;
+            RefreshPlayLabel();
+            RefreshUpdateBtn();
+            SetStatus(forced ? "Updating the launcher to " + rel.Name + "..." : "Downloading the new launcher...");
+            Bg(delegate
+            {
+                string err = null, path = null;
+                DateTime last = DateTime.MinValue;
+                try
+                {
+                    path = SelfUpdate.Download(rel, delegate(long done, long total)
+                    {
+                        if ((DateTime.Now - last).TotalSeconds < 0.2) return;
+                        last = DateTime.Now;
+                        string t = "Downloading the new launcher... " + (total > 0 ? (done * 100 / total) + "%" : Util.FmtSize(done));
+                        Ui(delegate { SetStatus(t); });
+                    }, null);
+                }
+                catch (Exception e) { err = e.Message; }
+                Ui(delegate { LauncherDownloaded(path, err, forced); });
+            });
+        }
 
-# v1.1 (2026-10-27)
-In short: New Items topic and a Gear Planner to try out gear, cloud save no longer copies whole addon folders, Survivor UI joins Download More (with a warning when two addons can't be on together), and the launcher now follows the game when it updates itself.
-## News and Changelog
-- Patch notes for the game's 0.119.1, 0.120.0, 0.120.1, 0.120.2 and 0.120.3 updates: co-op runs that survive a
-  dropped connection, joining a new party after the last one ended, fewer co-op disconnects, any race with any class
-  (Rewards > Races), and boss kills counting for the whole party's achievements.
-
-## Cloud Save
-- Cloud Save no longer copies the AddOns folder itself, only your addons' settings and your save. Before, an older copy
-  of an addon from another PC could replace one you had just updated.
-- When settings arrive from the cloud for an addon in Download More that isn't installed on this PC, the launcher
-  installs it, at PLAY or after DOWNLOAD in Cloud Save. Addons switched off stay off.
-
-## Community
-- Hovering the Discord symbol on the News line now shows where it goes: https://discord.gg/azerothsurvivors
-- MORE VIDEOS: a video you have watched for more than 45 seconds now has a "Watched!" tag over its picture (only the
-  time the video really plays counts, not loading or pausing). The tag is remembered between launches.
-- MORE VIDEOS: the featured videos stay at the top in their own order; every other video is shuffled into a new random
-  order each time you open the page.
-- New featured video in the front page's rotation and at the top of MORE VIDEOS: https://www.youtube.com/watch?v=AxcvhgPfYHU
-
-## The Guide
-- New topic **Items** (Gameplay): every class's gear in every rarity (Common, Uncommon, Rare, Epic, PvP, Legendary)
-  with the boss and zone that drop each piece and the chance, and every ring, trinket and amulet with what it does
-  and its numbers, read from the game itself. Item names are links: point at one for its card, click it for its page.
-- New **Gear Planner** (Theorycrafting): a character sheet laid out like the game's (C). Pick a class, click a slot to
-  put in a piece of its gear, an amulet, two rings and two trinkets, and see what they add up to: Health, Damage,
-  Haste, Crit, Crit Dmg, Armor, Area, Targets, Echo, Speed, Regen and Pickup, and the Run Stats panel beside it.
-  Right-click a slot to empty it. For now the bonuses of the Priest's Legendary and PvP gear are in; the other
-  pieces are listed and marked * until their bonuses are added.
-- Races: how to open any race to any class on the Rewards tab (new in the game's 0.120.0).
-- Achievements & Rewards: the Races reward, and co-op achievements counting for the whole party.
-- Talent Tree Builder: leaving a class's talent trees now clears the points you put in, so every visit starts from an
-  empty build (before, the last build came back).
-
-## Addons
-- New in Download More > AZS ADDONS: Survivor UI by morderous (with Survivor Plates). The launcher always takes the
-  addon zip from its newest release (SurvivorUI-v….zip), never the Survivor UI installer next to it.
-- MinimapButtonBag: clicking the bag now opens its bar of buttons. It closed itself a moment after opening, and a
-  minimap button the game shows by itself could make the bag think the bar was already open. The bar now stays until
-  your pointer has been away from it for 3 seconds (change it in its options, right-click the bag). New: /mbb open
-  and /mbb close.
-- MinimapButtonBag's bag button now sits on the right of the minimap, no longer under the game's damage meter button.
-- Addons that can't be on together are now marked as a conflict. The first pair is Survivor UI and AZS Minor Mods
-  (both set raid marks on bosses and party members). In My Addons a red bracket joins the two, with CONFLICT down it.
-  Switching one on switches the other off. When both end up on any other way (an install, a profile, TOGGLE ALL, or
-  by hand), Survivor UI is kept and AZS Minor Mods goes off; PLAY checks this too.
-- AZS Minor Mods, chat: one setting now, "No level-up, stat bonus or new spell lines in chat". It hides
-  "Congratulations, you have reached level 12!", "You have gained 3% damage, 12 maximum health…" and "You have
-  learned a new spell: Cleave (Level 1)", in every language the game has. "Remove bloat from chat" is folded into it.
-- AZS Minor Mods: the separate Say & Party box is gone. Say and Party chat stay in the main chat window as usual.
-- AZS Minor Mods, new setting: "Plain action bar". The gryphons and the bar's art go, leaving just the six spell
-  squares (the racial button and the character and talent buttons are hidden too). Untick it and the bar comes back
-  as it was; the character and talent panels still open with their keys (C and N).
-
-## Playing
-- When the game updates itself (it closes and opens again), the launcher now follows it: it waits for the game to come
-  back (up to 90 seconds when the game's files changed, 10 seconds after a normal close) and treats it as the same
-  session. Cloud Save uploads only once the game stays closed, and the status line says "The game updated itself and
-  is opening again..." meanwhile.
-- The launcher no longer has any game-update code of its own: the game handles its updates itself. The unused update
-  checker, its update dialog and its update-file tools are gone, and the UPDATE button is only for the launcher.
-
-## Other
-- GitHub now shows the launcher's license as MIT. The note that the game's name, logo and artwork are not covered
-  moved from LICENSE to the README.
-
-# v1.0 (2026-10-26)
-In short: The first full release. Setup now only asks questions and installs the game when you say so, the Guide is split into New Player, Gameplay and Theorycrafting with a new Talent Tree Builder, every addon is optional and off until you pick it, AZS Minor Mods and AZS Stats got lots of new features, and YouTube videos play right inside the launcher.
-## Getting the game
-- Nothing downloads on its own any more. First-time setup only asks questions, and **INSTALL** asks whether the game
-  is already on your PC: point to its folder, or let the launcher download it.
-- If all three download hosts fail, the game's own download page is tried as a last resort.
-- **Install from a file** is gone: choosing a folder that holds the game does the same. **Import a save** moved into
-  Options > FOLDERS.
-- Every question and message now opens inside the launcher, and the rest of the window waits until you answer it.
-- All messages show in one place, the status line above PLAY.
-
-## The Guide (was the New Player Guide)
-- Three groups, each with its topics as tabs: **New Player**, **Gameplay** and **Theorycrafting**. The GUIDE button
-  always opens the main page, with every topic as a card.
-- New **Talent Tree Builder**: pick a class and plan a build on its three trees. As in the game, each row opens once
-  its own tree has 5 points for every row above it; up to 51 points, kept per class.
-- New topic **Addons**, and new pages on enraged bosses, the run clock, the damage meter's three views, guardian lairs
-  and which parts of the game's screen you can hide.
-
-## Addons
-- Every addon is optional and off unless you choose it. Setup asks about AZS Stats on its own.
-- Download More shows small blocks, four to a row, with the categories as tabs and a full-width button on each block.
-- Your installed addons are grouped by category.
-- New **WoW 1.12 addons**, converted to work in this game: **MinimapButtonBag** (every minimap button in one bag) and
-  **BugSack** with **!BugGrabber** (every Lua error in one window).
-- **Azerloot** is back in Download More, always its newest version.
-- Uninstalling with X no longer fails with "access is denied" (a problem in OneDrive folders).
-- **AZS Transparency** was a test and is gone; the launcher removes it from your AddOns folder.
-
-## AZS Minor Mods
-- A minimap button and a settings window with every option on or off.
-- **Move the UI**: unlock, drag the player, target and party frames, minimap, buffs, cast bar, action bars and the
-  Say & Party box, then lock it again. Positions are kept.
-- **Hide the target frame.**
-- No more level-up, stat bonus and "new spell (Level 1)" lines in chat, in every language the game has.
-- **Remove bloat from chat**: Say and Party only in their own box.
-- **Boss markers**: Skull, Cross and Moon on the bosses, in the order they come. In co-op a friend who falls gets a
-  blinking Square.
-
-## AZS Stats and the STATS page
-- New: level-up saves (a level-up at 15% health or less), legendaries collected and most in one run, every co-op death
-  and what caused it, and the highest DPS per zone, alone and in co-op.
-- The DPS counter stops while you are down in co-op, and "most kills in 1 second" no longer counts the kills around
-  you while you pick a card.
-- New **Armory** tab: each class's hero with their gear and numbers, outside the game.
-- The Survivor card only shows on Overview, so the other tabs start with their content.
-- Brought in line with the game's addon API: boss kills, DPS and your class are read the way the game provides them,
-  and the tracker only shows during a run.
-
-## Community and videos
-- Featured videos on the home screen rotate between this week's headliners. **MORE VIDEOS** lists every video.
-- YouTube videos play inside the launcher with only the video showing, and fullscreen fills your whole screen.
-
-## Everything else
-- Patch notes for the game's 0.117 to 0.119 updates.
-- Options > GAME has the game's settings in groups (Display, Graphics, Sound, Gameplay), each explained.
-- The changelog opens on the patch before the newest one (News already shows the newest).
-- Switching tabs and sections no longer flashes empty grey boxes.
-- Every new text is translated into all 26 languages.
-
-# v0.3 and before
-- First-time setup starts by asking whether you are moving over from the website: choose the .sav you exported there (Options > Saves > Export Save) and the game opens with your progress. Options > LAUNCHER has IMPORT A SAVE too
-- PLAY first makes sure you have the newest launcher (and installs it if not); the UPDATE LAUNCHER button is gone
-- AZS Minor Mods sets the camera as far out as it goes (50 yards) when the game starts; it can be turned off in /azsmods
-- Changing a setting in Options keeps the page where you scrolled it
-- The News line: the Discord symbol left of "News", CHANGELOG at the end of the line
-- YouTube videos play inside the launcher: the player's own window is found even when Edge hands it to another of its processes, so it no longer opens on its own at the top left of the screen
-- Community headlines Asmongold's video for two weeks; 12 new build guide videos by Holdherhand and Des
-- New AZS addons, built into the launcher (Addons > Download More > AZS ADDONS) and kept up to date by it before the game starts: AZS Handbook (the whole New Player Guide inside the game, /handbook), AZS Minor Mods (the level-up text out of the chat and a Say & Party box above it, /azsmods) and AZS Transparency (a test: which of your spells each item upgrade makes stronger, /transparency). All AZS addons share AZS Stats' look, and each has its own spot by the minimap
-- AZS ADDONS in Download More are shown as blocks, two to a row
-- The installed addons list has an X beside each addon to uninstall it from the AddOns folder
-- About Launcher describes what the launcher does: downloading the game, installing addons, cloud save and the New Player Guide
-- Each class page in the Guide has a TALENT TREES button: the class's three trees, where you can try out a build of up to 51 points (click to add a point, right-click to take one back; no talent takes more than its ranks). Your test build is kept for each class
-- Every class page in the Guide shows its spells with their icons, the talents that change each spell (point at one to read it), and the class's three full talent trees as the game draws them: every talent with its icon and ranks, the 10, 20 and 30 point milestones marked, read from the game itself
-- Options has tabs: FOLDERS, GENERAL, LANGUAGE and LAUNCHER. UPDATE LAUNCHER and ABOUT LAUNCHER moved into Options > LAUNCHER
-- The Discord button is now Discord's own symbol, on the News line at the right edge
-- The guide also finds spells written differently ("Shadowbolt", "Shadow Bolts"), and when AZS Stats has seen a spell's tooltip in game, pointing at the spell in the guide shows the game's own text
-- INSTALL no longer opens a window: the download and install run in the launcher's status line, with the percentage bar; press INSTALLING to stop the download. Options has INSTALL FROM A FILE for a game you downloaded yourself
-- The New Player Guide links its pages together: click a spell, talent, class, race or zone in the text to go to it, and point at it to read what it does (talents, classes, races and zones in the game's own words)
-- The section area is exactly as tall as the News column; "This week" and your play time sit together under the Launcher buttons
-- Community can no longer be closed; opening another section replaces it
-- Options is one scrolling page, and every new text is translated into all 26 languages; long button labels now fit in every language
-- DISCORD opens the new invite, discord.gg/azerothsurvivors
-- New Community section: it opens on the home screen whenever no other section is open and features one of the players' build videos (credited to its maker), a different one every 10 minutes. A click plays it right inside the section's borders, and so do the Guide's YouTube videos; nothing starts by itself
-- "This week" now sits centred at the bottom of the window
-- AZS Stats live tracker: PACE shows whether you are ahead of or behind your record run, second by second and minute by minute (a new class DPS record becomes the pace to beat)
-- AZS Stats highlights: highest crit, highest normal hit, highest heal and most kills in 1 and 5 seconds, per run, per class and overall; beating your best says so in chat
-- AZS Stats minimap button: at the bottom of the minimap (it was under the crossed swords button), above other buttons, click to open the window, drag to move it
-- New Build Guides in the GUIDE: players' videos of their builds, each with its title and credit to the uploader; YouTube videos open in your web browser
-- Download More has two categories: AZS ADDONS (formerly AS ADDONS) and WOW 1.12 ADDONS; the UI / gameplay / cosmetic filters and the My Addons tab are gone
-- Before the game is installed, only Cloud Save and Addons are grayed out (both say why); the Changelog, Guide, Stats, Options and About work as usual
-- While the game downloads, its window steps aside and the download bar shows in the status line above INSTALLING, so the Guide and everything else can be used; INSTALLING brings the window back (CANCEL)
-- The game download uses the main host or the new backup host at random (50/50); if one fails, the other is tried
-- INSTALL now downloads the game inside the launcher with a percentage bar (into a temp folder next to the launcher, deleted afterwards), then installs it
-- First-time setup and RUN SETUP AGAIN start by downloading and installing the game; installing again keeps your addons, addon settings and options
-- The "Cloud sync successfully downloaded / uploaded" line is gone; only problems are shown there now
-- AZS Stats in game: the faces of your Nemesis and of the enemies in your death log, a centred portrait ring, and the minimap button moved to the bottom of the minimap
-- About Launcher describes everything the launcher does
-- New look: a wide window in the style of the classic WoW launchers, with original art. News shows the newest patch; the sections open inside the launcher on the left instead of in a second window
-- UPDATE LAUNCHER and ABOUT LAUNCHER sit at the top right; GUIDE and ADDONS in the bottom bar; DISCORD with the section buttons
-- Launcher updates now close the launcher completely (tray icon too) and then reopen it with its window open
-- AZS Stats: in co-op, going down no longer spams the chat; each run is recorded once, when it is really over
-- AZS Stats replaces AS Time Tracker: one addon for every stat, also in game (/azs opens a window with Overview, Classes, Abilities, Records, Nemesis, Co-op and History)
-- Play time is now counted in game by AZS Stats (the time the game runs) instead of by the launcher; cloud saving carries it, with all the stats, to your other PCs
-- Nemesis: a death log (the killing blow and the hits before it) and who kills you most, overall and per class
-- Co-op: who you play with, how often, your wins and records together
-- Options: show or hide the play time on the home screen
-- STATS has a new look, like a WoW armory page: a character header with stat chips, tabs (Overview, Classes, Abilities, Records, History) and item-style rows colored by rarity
-- Download More: Azerloot is hidden for now
-- About Launcher has two buttons: ABOUT (a description of the launcher) and LAUNCHER CHANGELOG (this list)
-- New STATS section (can be hidden in Options): your play time, and with the AS Time Tracker addon every run's result, totals, personal bests, milestones and recent runs
-- STATS: a class selector shows the same stats for each class on its own; class pick rate, pick rate month by month, and the abilities you took with their pick rate, win rate, best rank and damage
-- AS Time Tracker is built into the launcher (INSTALL STATS ADDON on the STATS page) and also listed in Download More; /azstats in game
-- New GUIDE: a new player guide with classes, controls, zones, bosses, level-ups, gear, talents and tips
-- Buttons, top to bottom: GUIDE, Cloud Save, Addons, Changelog, Stats, Options
-- Cloud Save: uploads write straight into the one cloud folder (no more extra "-old" / "-new" copies of the save folder), and an old leftover folder that cannot be removed no longer stops a sync
-- Guide, Options, About Launcher and Discord work before the game is installed; Cloud Save is grayed out until then and says why when you point at it
-- Launcher updates and addon downloads now come from a public downloads page, so every player can get them
-
-# v0.3
-- Installs a newer launcher by itself when it starts (it waits while the game, an install, a sync or setup is running)
-- The launcher keeps its own files in an "Azeroth Survivor Launcher" folder next to the exe (or in %LOCALAPPDATA% when that folder cannot be written to or sits in a cloud drive)
-- Keeps a copy of the last 5 cloud downloads on this PC; Cloud Save > EARLIER DOWNLOADS restores one as a last resort
-- The addon list no longer shows download addresses
-
-# v0.2
-- The launcher was rebuilt as one small exe that needs nothing else installed
-- 26 languages (Options > Language); the Windows language is used by default
-- UPDATE: updates the launcher from the latest release
-- Play time: total, sessions, last and longest session, shared between your PCs through the cloud sync folder
-- The game's version is shown under "A game made by Aethus"
-- Download More gets the AS addons from the launcher's own downloads
-
-# Python launcher 1.8
-- The game's "AS" emblem is now the launcher's window, taskbar, tray and exe icon
-- Setup has a second page asking whether to open the Addons section to download addons or enable/disable them
-- First start shows a setup window: cloud saving on or off, and the AddOns, game save and addon settings folders (only asks for the ones it cannot find); Options > RUN SETUP AGAIN reopens it
-- Reading an old patch note shows PREVIOUS (older) and NEXT (newer) buttons to step through the posts in version order
-- All patch notes lists the versions newest first in two columns side by side; when both are full, numbered page buttons at the bottom (or the mouse wheel) open the next page of older notes
-- A DISCORD button next to About Launcher opens the community invite link
-- Pressing PLAY no longer shows the "Cloud Sync Complete" pop-up; the game starts as soon as the cloud download is done (questions about conflicts and errors still appear)
-- Defaults: the game folder is the folder the launcher sits in, and AddOns is <that folder>\benilla-config\AddOns (change them in Options or the setup)
-- If the cloud save cannot be loaded when you press PLAY, the game is not launched and a warning box explains why (no more "play anyway" question); a failed upload after the game closes also shows a warning box
-- New layout: the launcher is a tall, narrow window; Cloud Save, Addons, Options, Changelog and About open in a WoW whisper-style box to its right (click the button again or the X to close it)
-- The all patch notes list also includes the current update (marked "current")
-- Changelog: scrolling past the bottom of a post opens the next older post, and past the top the next newer one
-- The section window now has its own taskbar button and Alt+Tab entry (named "Azeroth Survivors - <section>"), so it stays available when you switch windows
-- The section window is its own window: drag it by its title bar, keep it open after closing the launcher, and bring the launcher back with the house button (or the tray icon)
-- The section window is styled like a WoW whisper: round emblem portrait, section name in a bronze title bar, red X, a "<Azeroth Survivors> Launcher" line, and a column of small icon buttons to jump between sections
-- Removed the "Start minimized in the tray" option (Options and tray menu)
-- Options: a "Minimize the launcher when the game starts" switch (on by default); turn it off to keep the launcher open while you play
-- After the game closes, one line left of the status text reports the cloud result: "Cloud sync successfully downloaded" when PLAY has fetched your save, "Cloud sync successfully uploaded" after the game closes
-- Everything about cloud saving (Cloud Save button, Options sync folder, tray "Upload Save Now", welcome text, sync/upload at Play) only appears and runs while cloud saving is switched on; Options has a Cloud saving switch
-- The footer status text no longer shows cloud save messages; they stay in the Cloud Save log and pop-ups
-- The World of Warcraft logo is now the launcher background; the Home screen shows it with the welcome text beneath
-- Addons: REFRESH (left) and FOLDER (right) sit above Toggle All at half width each; the enabled counter is right-aligned below Toggle All, and the two profiles sit at the bottom
-- Addons: one button swaps the addon manager for a "Download More" list; each addon installs with one click
-- Changelog opens on the newest update only; an ALL PATCH NOTES button (top right) lists every post, one button per version number; click a number to read that post
-- Addons: a switch for every addon, a Toggle All button, and two saveable profiles of toggles
-- Credits added to the top right of this page, in larger print
-- Only one launcher can run at a time; starting a second one brings the first up from the tray or taskbar
-- Removed the Game folder and Sync folder lines from the welcome screen
-- The launcher pops back up in front 2 seconds after the game closes or crashes
-- Pressing PLAY shows a pop-up when the cloud sync is done; CONTINUE launches the game
-- Header now reads Azeroth Survivors, with "A game made by Aethus" beneath it
-- The status text ("Ready.") moved to the bottom right corner and is larger
-- Removed the Set Game Folder link from the footer; the game folder is set in Options
-- Changelog shows its text exactly as written, starting with the 0.113.1 notes
-- The changelog is built into the launcher and can no longer be edited from inside it
-
-# Python launcher 1.7
-- Cloud Save syncs the save game, AddOns and addon settings are synced separately
-- Fingerprint checks decide what is newer; a real conflict asks once: Use cloud, Keep local or Cancel
-- Everything that is overwritten is backed up as a ZIP (this PC: last 20, cloud: last 10)
-- Cloud Save has Check Status, Download and Upload with a live log; Options has the folder settings
-- Cloud folder detection for Google Drive, OneDrive and Dropbox
-
-# Python launcher 1.6
-- PLAY reads INSTALL when no game client is found, and downloads it from the game server
-- Download progress shows in the status line; the client is unpacked automatically
-
-# Python launcher 1.5
-- Added an Options button under Addons: game, save and cloud folders, plus tray settings
-- About Launcher is now a small button in the footer, where the status text begins
-
-# Python launcher 1.4
-- Changelog button shows your own messages, typed into CHANGELOG.txt
-- Added this About Launcher page for launcher updates
-- Main page opens on a welcome screen instead of the changelog
-
-# Python launcher 1.3
-- Runs in the system tray and keeps running after the game closes
-- Tray menu: Show Launcher, Play, Upload Save Now, Quit
-- Start Minimized option (or launch with --tray)
-
-# Python launcher 1.2
-- Play downloads the newest cloud save before the game starts
-- Saves upload when the game closes, even after a crash
-- Added Save Folder and Cloud Folder settings
-
-# Python launcher 1.1
-- Play now launches AzerothSurvivors.exe
-
-# Python launcher 1.0
-- First release: Play, Cloud Save, Addons and Changelog
-- 2006 World of Warcraft website theme
+        void LauncherDownloaded(string path, string err, bool forced)
+        {
+            if (err == null)
+            {
+                try { SelfUpdate.InstallAndRestart(path); }        // the new one opens its window once this one is gone
+                catch (Exception e) { err = e.Message; }
+            }
+            if (err != null)
+            {
+                Updating = false;
+                RefreshPlayLabel();
+                RefreshUpdateBtn();
+                SetStatus("Launcher update failed.");
+                if (forced)
+                {
+                    // no internet or GitHub down: don't lock the player out; the next start tries again
+                    Error("Launcher update", err + "\n\nYou can keep using this version for now. The launcher tries again the next time it starts.");
+                }
+                else Error("Launcher update", err);
+                return;
+            }
+            quitting = true;                                 // the new launcher is starting: close this one
+            if (tray != null)
+            {
+                tray.Visible = false;
+                tray.Dispose();
+                tray = null;
+            }
+            Application.Exit();
+            // shut down completely even if a window or background thread holds on: the new launcher is waiting
+            var kill = new System.Threading.Thread(delegate() { System.Threading.Thread.Sleep(3000); Environment.Exit(0); });
+            kill.IsBackground = true;
+            kill.Start();
+        }
+    }
+}
