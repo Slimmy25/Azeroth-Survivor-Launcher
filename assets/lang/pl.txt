@@ -2000,3 +2000,35 @@ Build code copied to the clipboard.
 = Kod buildu skopiowano do schowka.
 Could not copy the build code.
 = Nie udało się skopiować kodu buildu.
+
+Highlight all
+= Podświetl wszystko
+Match Case
+= Uwzględnij wielkość liter
+Match Diacritics
+= Uwzględnij znaki diakrytyczne
+Whole Words
+= Całe wyrazy
+
+Export a save
+= Eksportuj zapis
+Save a copy to move to another PC or import on the website.
+= Zapisz kopię, aby przenieść ją na inny komputer lub zaimportować na stronie.
+EXPORT SAVE
+= EKSPORTUJ ZAPIS
+Save exported.
+= Zapis wyeksportowano.
+Close the game first, then export the save.
+= Zamknij grę przed wyeksportowaniem zapisu.
+The game save was not found.
+= Nie znaleziono zapisu gry.
+The save could not be exported.
+= Nie udało się wyeksportować zapisu.
+Install downloads and verifies the update, then restarts the launcher.
+= Aktualizacja zostanie pobrana i sprawdzona, a następnie launcher uruchomi się ponownie.
+INSTALL UPDATE
+= ZAINSTALUJ AKTUALIZACJĘ
+Finish the game, install, or cloud sync first, then check for the launcher update again.
+= Najpierw zakończ grę, instalację lub synchronizację w chmurze, a potem ponownie sprawdź aktualizacje.
+Launcher {0} is ready. Choose Install update on the Options > Launcher page.
+= Launcher {0} jest gotowy. Wybierz Zainstaluj aktualizację w Opcje > Launcher.

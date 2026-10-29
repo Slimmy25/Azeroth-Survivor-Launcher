@@ -2003,3 +2003,35 @@ Codex neck piece that remakes it:
 
 The steps at the top show where you are in the launcher. Select an earlier step to return to it. Hover over a step or its arrow to see other pages at that level. The left arrow returns to the previous page; the X closes this section and returns home.
 = Die Schritte oben zeigen, wo du dich im Launcher befindest. Wähle einen früheren Schritt, um zurückzukehren. Bewege den Mauszeiger über einen Schritt oder seinen Pfeil, um andere Seiten auf dieser Ebene zu sehen. Der linke Pfeil führt zur vorherigen Seite zurück; X schließt diesen Bereich und kehrt zur Startseite zurück.
+
+Highlight all
+= Alle hervorheben
+Match Case
+= Groß-/Kleinschreibung beachten
+Match Diacritics
+= Diakritische Zeichen beachten
+Whole Words
+= Ganze Wörter
+
+Export a save
+= Spielstand exportieren
+Save a copy to move to another PC or import on the website.
+= Speichere eine Kopie, um sie auf einen anderen PC zu übertragen oder auf der Website zu importieren.
+EXPORT SAVE
+= SPIELSTAND EXPORTIEREN
+Save exported.
+= Spielstand exportiert.
+Close the game first, then export the save.
+= Schließe das Spiel, bevor du den Spielstand exportierst.
+The game save was not found.
+= Der Spielstand wurde nicht gefunden.
+The save could not be exported.
+= Der Spielstand konnte nicht exportiert werden.
+Install downloads and verifies the update, then restarts the launcher.
+= Das Update wird heruntergeladen und überprüft; anschließend startet der Launcher neu.
+INSTALL UPDATE
+= UPDATE INSTALLIEREN
+Finish the game, install, or cloud sync first, then check for the launcher update again.
+= Beende zuerst das Spiel, die Installation oder die Cloud-Synchronisierung und suche dann erneut nach dem Launcher-Update.
+Launcher {0} is ready. Choose Install update on the Options > Launcher page.
+= Launcher {0} ist bereit. Wähle „Update installieren“ unter Optionen > Launcher.

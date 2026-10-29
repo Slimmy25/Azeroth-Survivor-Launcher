@@ -1999,3 +1999,35 @@ Build code copied to the clipboard.
 = Byggkoden har kopierats till urklipp.
 Could not copy the build code.
 = Det gick inte att kopiera byggkoden.
+
+Highlight all
+= Markera alla
+Match Case
+= Skilj på stora och små bokstäver
+Match Diacritics
+= Skilj på diakritiska tecken
+Whole Words
+= Hela ord
+
+Export a save
+= Exportera en sparfil
+Save a copy to move to another PC or import on the website.
+= Spara en kopia för att flytta till en annan dator eller importera på webbplatsen.
+EXPORT SAVE
+= EXPORTERA SPARFIL
+Save exported.
+= Sparfil exporterad.
+Close the game first, then export the save.
+= Stäng spelet innan du exporterar sparfilen.
+The game save was not found.
+= Sparefilen hittades inte.
+The save could not be exported.
+= Det gick inte att exportera sparfilen.
+Install downloads and verifies the update, then restarts the launcher.
+= Installationen hämtar och verifierar uppdateringen och startar sedan om launchern.
+INSTALL UPDATE
+= INSTALLERA UPPDATERING
+Finish the game, install, or cloud sync first, then check for the launcher update again.
+= Avsluta spelet, installationen eller molnsynkroniseringen först och sök sedan efter uppdateringen igen.
+Launcher {0} is ready. Choose Install update on the Options > Launcher page.
+= Launcher {0} är redo. Välj Installera uppdatering under Alternativ > Launcher.

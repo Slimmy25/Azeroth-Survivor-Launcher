@@ -2000,3 +2000,35 @@ Build code copied to the clipboard.
 = Codul buildului a fost copiat în clipboard.
 Could not copy the build code.
 = Codul buildului nu a putut fi copiat.
+
+Highlight all
+= Evidențiază tot
+Match Case
+= Ține cont de majuscule
+Match Diacritics
+= Ține cont de diacritice
+Whole Words
+= Cuvinte întregi
+
+Export a save
+= Exportă o salvare
+Save a copy to move to another PC or import on the website.
+= Salvează o copie pentru a o muta pe alt PC sau a o importa pe site.
+EXPORT SAVE
+= EXPORTĂ SALVAREA
+Save exported.
+= Salvarea a fost exportată.
+Close the game first, then export the save.
+= Închide jocul înainte de a exporta salvarea.
+The game save was not found.
+= Salvarea jocului nu a fost găsită.
+The save could not be exported.
+= Salvarea nu a putut fi exportată.
+Install downloads and verifies the update, then restarts the launcher.
+= Instalarea descarcă și verifică actualizarea, apoi repornește launcherul.
+INSTALL UPDATE
+= INSTALARE ACTUALIZARE
+Finish the game, install, or cloud sync first, then check for the launcher update again.
+= Închide jocul, finalizează instalarea sau sincronizarea cloud, apoi verifică din nou actualizările.
+Launcher {0} is ready. Choose Install update on the Options > Launcher page.
+= Launcher {0} este gata. Alege Instalează actualizarea în Opțiuni > Launcher.

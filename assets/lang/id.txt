@@ -1999,3 +1999,35 @@ Build code copied to the clipboard.
 = Kode build disalin ke papan klip.
 Could not copy the build code.
 = Kode build tidak dapat disalin.
+
+Highlight all
+= Sorot semua
+Match Case
+= Cocokkan huruf besar/kecil
+Match Diacritics
+= Cocokkan tanda diakritik
+Whole Words
+= Kata utuh
+
+Export a save
+= Ekspor save
+Save a copy to move to another PC or import on the website.
+= Simpan salinan untuk dipindahkan ke PC lain atau diimpor di situs web.
+EXPORT SAVE
+= EKSPOR SAVE
+Save exported.
+= Save berhasil diekspor.
+Close the game first, then export the save.
+= Tutup game terlebih dahulu sebelum mengekspor save.
+The game save was not found.
+= Save game tidak ditemukan.
+The save could not be exported.
+= Save tidak dapat diekspor.
+Install downloads and verifies the update, then restarts the launcher.
+= Pemasangan mengunduh dan memverifikasi pembaruan, lalu memulai ulang launcher.
+INSTALL UPDATE
+= INSTAL PEMBARUAN
+Finish the game, install, or cloud sync first, then check for the launcher update again.
+= Selesaikan game, pemasangan, atau sinkronisasi cloud terlebih dahulu, lalu periksa pembaruan lagi.
+Launcher {0} is ready. Choose Install update on the Options > Launcher page.
+= Launcher {0} siap. Pilih Instal pembaruan di Opsi > Launcher.

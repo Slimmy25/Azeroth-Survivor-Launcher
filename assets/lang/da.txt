@@ -2003,3 +2003,35 @@ Codex neck piece that remakes it:
 
 The steps at the top show where you are in the launcher. Select an earlier step to return to it. Hover over a step or its arrow to see other pages at that level. The left arrow returns to the previous page; the X closes this section and returns home.
 = Trinnene øverst viser, hvor du er i launcheren. Vælg et tidligere trin for at gå tilbage. Hold markøren over et trin eller dets pil for at se andre sider på samme niveau. Pilen til venstre går tilbage til den forrige side; X lukker denne sektion og går hjem.
+
+Highlight all
+= Fremhæv alle
+Match Case
+= Skeln mellem store og små bogstaver
+Match Diacritics
+= Skeln mellem diakritiske tegn
+Whole Words
+= Hele ord
+
+Export a save
+= Eksportér et gemt spil
+Save a copy to move to another PC or import on the website.
+= Gem en kopi til en anden pc, eller importér den på webstedet.
+EXPORT SAVE
+= EKSPORTÉR GEMT SPIL
+Save exported.
+= Gemt spil eksporteret.
+Close the game first, then export the save.
+= Luk spillet, før du eksporterer det.
+The game save was not found.
+= Spillets gemte data blev ikke fundet.
+The save could not be exported.
+= Det gemte spil kunne ikke eksporteres.
+Install downloads and verifies the update, then restarts the launcher.
+= Installationen downloader og kontrollerer opdateringen og genstarter derefter launcheren.
+INSTALL UPDATE
+= INSTALLÉR OPDATERING
+Finish the game, install, or cloud sync first, then check for the launcher update again.
+= Afslut spillet, installationen eller cloud-synkroniseringen, og søg derefter efter opdateringen igen.
+Launcher {0} is ready. Choose Install update on the Options > Launcher page.
+= Launcher {0} er klar. Vælg Installér opdatering under Indstillinger > Launcher.

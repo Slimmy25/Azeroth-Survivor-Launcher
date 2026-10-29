@@ -1874,6 +1874,36 @@ namespace AzerothLauncher
             return Path.GetFileName(file);
         }
 
+        // Copies the game's save to a portable .sav file for another client or the browser game's import page.
+        // The source save is validated first and is never changed by an export.
+        public void ExportSave(IWin32Window owner, string saveDir)
+        {
+            if (GameRunningFlag || Util.GameRunning()) { Msg.Show(owner, "Close the game first, then export the save.", "Export save"); return; }
+            if (string.IsNullOrEmpty(saveDir)) saveDir = Util.DefaultSaveDir;
+            string source = Path.Combine(saveDir, SaveImport.SaveFile);
+            if (!File.Exists(source)) { Msg.Show(owner, "The game save was not found.", "Export save"); return; }
+            try { SaveImport.Read(source); }
+            catch (Exception e) { Msg.Show(owner, e.Message, "Export save", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
+            using (var d = new SaveFileDialog())
+            {
+                d.Title = Lang.T("Export a save");
+                d.Filter = Lang.T("Azeroth Survivors save (*.sav)|*.sav|All files (*.*)|*.*");
+                d.DefaultExt = "sav";
+                d.AddExtension = true;
+                d.OverwritePrompt = true;
+                d.FileName = "Azeroth Survivors Save.sav";
+                string dl = Path.Combine(Util.Home, "Downloads");
+                d.InitialDirectory = Directory.Exists(dl) ? dl : saveDir;
+                if (d.ShowDialog(owner) != DialogResult.OK) return;
+                try
+                {
+                    File.Copy(source, d.FileName, true);
+                    SetStatus(Lang.T("Save exported."));
+                }
+                catch (Exception e) { Msg.Show(owner, Lang.T("The save could not be exported.") + "\n\n" + e.Message, "Export save", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            }
+        }
+
         // ------------------------------------------------------------------ Addons
         string AddonsDir() { return SyncSettings().AddonsDir; }
 
@@ -3097,7 +3127,13 @@ namespace AzerothLauncher
                                   Theme.GoldDim, 20, BottomOf(imp), PW - 40 - bw - 10);
             Put(new WowButton("IMPORT A SAVE", delegate { if (ImportSave(side, SyncSettings().SaveDir) != null) SetStatus("Save imported."); }, 140, 28, 8.5f),
                 PW - 20 - bw, y + 4);
-            return Math.Max(BottomOf(impNote), y + 4 + (int)(28 * Theme.Zoom)) + 8;
+            y = Math.Max(BottomOf(impNote), y + 4 + (int)(28 * Theme.Zoom)) + 8;
+            var exp = PutText("Export a save", 11, FontStyle.Bold, Theme.Gold, 20, y + 4, PW - 40 - bw - 10);
+            var expNote = PutText("Save a copy to move to another PC or import on the website.", 9, FontStyle.Italic,
+                                  Theme.GoldDim, 20, BottomOf(exp), PW - 40 - bw - 10);
+            Put(new WowButton("EXPORT SAVE", delegate { ExportSave(side, SyncSettings().SaveDir); }, 140, 28, 8.5f),
+                PW - 20 - bw, y + 4);
+            return Math.Max(BottomOf(expNote), y + 4 + (int)(28 * Theme.Zoom)) + 8;
         }
 
         // a folder in Explorer
@@ -3329,6 +3365,28 @@ namespace AzerothLauncher
             foreach (var kv in Lang.Available()) if (kv.Key == Lang.Code) langName = kv.Value;
             y += 8;
             row("UPDATE LAUNCHER", delegate { CheckLauncherUpdate(true); }, "Looks for a newer launcher now and installs it (it also does this by itself at every start).");
+            if (launcherUpdateOfferPending && launcherRelease != null)
+            {
+                y += 2;
+                var offer = PutText(Lang.F("Launcher {0} is available.", launcherRelease.Name), 10.5f, FontStyle.Bold,
+                                    Theme.Gold, 20, y, PW - 40);
+                var details = PutText("Install downloads and verifies the update, then restarts the launcher.", 9, FontStyle.Italic,
+                                      Theme.GoldDim, 20, BottomOf(offer) + 2, PW - 40);
+                y = BottomOf(details) + 8;
+                var installUpdate = new WowButton("INSTALL UPDATE", delegate
+                {
+                    LauncherRelease pending = launcherRelease;
+                    if (pending != null) DownloadLauncher(pending, false);
+                }, 150, 30, 9);
+                Put(installUpdate, 20, y);
+                Put(new WowButton("LATER", delegate
+                {
+                    launcherUpdateOfferPending = false;
+                    SetStatus(Lang.T("Launcher update postponed. Press UPDATE when you want it."));
+                    RebuildCurrent();
+                }, 110, 30, 9), installUpdate.Right + 8, y);
+                y += (int)(30 * Theme.Zoom) + 10;
+            }
             WowButton langBtn = null;
             Action pickLang = delegate
             {

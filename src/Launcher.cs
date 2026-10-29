@@ -168,6 +168,8 @@ namespace AzerothLauncher
             GuideLinks.Navigate = delegate(GuideLink l)        // a link in the Guide's text (GuideLinks.cs)
             {
                 if (current != "Guide" || !side.Visible) ShowSection("Guide");
+                guideFindQuery = string.IsNullOrWhiteSpace(l.FindText) ? l.Term : l.FindText;
+                guideQuery = guideFindQuery;
                 if (l.Class != null)                             // a talent: its class's talent trees
                 {
                     SetGuideView(l.Topic, l.Page);
@@ -255,18 +257,6 @@ namespace AzerothLauncher
         public bool Ask(string title, string msg)
         {
             return Msg.Show(this, msg, title, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
-        }
-
-        // Confirmation prompts stay inside the open section panel instead of opening another window.
-        bool AskOverSection(string title, string msg)
-        {
-            Form previousHost = WowDialog.Host;
-            try
-            {
-                if (side != null && side.Visible) WowDialog.Host = side;
-                return Ask(title, msg);
-            }
-            finally { WowDialog.Host = previousHost; }
         }
 
         public void Info(string title, string msg) { Msg.Show(this, msg, title, MessageBoxButtons.OK, MessageBoxIcon.Information); }
@@ -1894,6 +1884,7 @@ namespace AzerothLauncher
 
         // ---- the launcher itself: compared with the exe on the latest GitHub release ----
         LauncherRelease launcherRelease;                     // a different (newer) launcher on GitHub, when found
+        bool launcherUpdateOfferPending;                      // manual update choices are shown inline in Options > Launcher
         bool startupLauncherCheck;                           // the start-up check is still waiting for GitHub
 
         // Started by a launcher update? Then a launcher that still differs is offered, not forced,
@@ -1930,6 +1921,7 @@ namespace AzerothLauncher
             UpdateChecking = false;
             startupLauncherCheck = false;
             launcherRelease = err == null && differs ? rel : null;
+            if (launcherRelease == null) launcherUpdateOfferPending = false;
             RefreshUpdateBtn();
             if (!manual && launcherRelease != null && !StartedAfterUpdate)
             {
@@ -1968,17 +1960,12 @@ namespace AzerothLauncher
                 return;                                      // button waits, quietly (no Windows notice)
             if (GameRunningFlag || Installing || SyncBusy || Updating)
             {
-                if (manual) Info("Launcher update", "Finish what is running first (the game, an install or a cloud sync), then press UPDATE again.");
+                if (manual) SetStatus(Lang.T("Finish the game, install, or cloud sync first, then check for the launcher update again."));
                 return;
             }
-            if (!AskOverSection("Launcher update", "A new version of the launcher is on GitHub: " + rel.Name + ".\n\nUpdate now? The new launcher" +
-                     (rel.Size > 0 ? " (" + Util.FmtSize(rel.Size) + ")" : "") + " is downloaded, checked and started in place of this one. " +
-                     "Your settings stay as they are."))
-            {
-                SetStatus("Launcher update postponed. Press UPDATE when you want it.");
-                return;
-            }
-            DownloadLauncher(rel, false);
+            launcherUpdateOfferPending = true;
+            SetStatus(Lang.F("Launcher {0} is ready. Choose Install update on the Options > Launcher page.", rel.Name));
+            if (current == "Options" && optionsTab == 4 && !optionsLang && !optionsAbout) RebuildCurrent();
         }
 
         // The start-up update: no question. It waits while the game, an install or a cloud sync runs
@@ -1999,6 +1986,7 @@ namespace AzerothLauncher
 
         void DownloadLauncher(LauncherRelease rel, bool forced)
         {
+            launcherUpdateOfferPending = false;
             Updating = true;
             RefreshPlayLabel();
             RefreshUpdateBtn();

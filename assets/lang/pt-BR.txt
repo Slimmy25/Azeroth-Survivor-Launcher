@@ -1999,3 +1999,35 @@ Build code copied to the clipboard.
 = O código do build foi copiado para a área de transferência.
 Could not copy the build code.
 = Não foi possível copiar o código do build.
+
+Highlight all
+= Destacar tudo
+Match Case
+= Diferenciar maiúsculas e minúsculas
+Match Diacritics
+= Diferenciar sinais diacríticos
+Whole Words
+= Palavras inteiras
+
+Export a save
+= Exportar salvamento
+Save a copy to move to another PC or import on the website.
+= Salve uma cópia para transferir para outro PC ou importar no site.
+EXPORT SAVE
+= EXPORTAR SALVAMENTO
+Save exported.
+= Salvamento exportado.
+Close the game first, then export the save.
+= Feche o jogo antes de exportar o salvamento.
+The game save was not found.
+= O salvamento do jogo não foi encontrado.
+The save could not be exported.
+= Não foi possível exportar o salvamento.
+Install downloads and verifies the update, then restarts the launcher.
+= A instalação baixa e verifica a atualização e depois reinicia o launcher.
+INSTALL UPDATE
+= INSTALAR ATUALIZAÇÃO
+Finish the game, install, or cloud sync first, then check for the launcher update again.
+= Encerre o jogo, a instalação ou a sincronização na nuvem e verifique a atualização novamente.
+Launcher {0} is ready. Choose Install update on the Options > Launcher page.
+= O Launcher {0} está pronto. Escolha Instalar atualização em Opções > Launcher.

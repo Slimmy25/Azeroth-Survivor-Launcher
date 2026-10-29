@@ -2000,3 +2000,35 @@ Build code copied to the clipboard.
 = 构筑代码已复制到剪贴板。
 Could not copy the build code.
 = 无法复制构筑代码。
+
+Highlight all
+= 全部高亮
+Match Case
+= 区分大小写
+Match Diacritics
+= 匹配变音符号
+Whole Words
+= 全字匹配
+
+Export a save
+= 导出存档
+Save a copy to move to another PC or import on the website.
+= 保存副本，以便转移到另一台电脑或在网站上导入。
+EXPORT SAVE
+= 导出存档
+Save exported.
+= 存档已导出。
+Close the game first, then export the save.
+= 导出存档前请先关闭游戏。
+The game save was not found.
+= 未找到游戏存档。
+The save could not be exported.
+= 无法导出存档。
+Install downloads and verifies the update, then restarts the launcher.
+= 安装程序会下载并验证更新，然后重新启动 Launcher。
+INSTALL UPDATE
+= 安装更新
+Finish the game, install, or cloud sync first, then check for the launcher update again.
+= 请先结束游戏、安装或云同步，然后再次检查更新。
+Launcher {0} is ready. Choose Install update on the Options > Launcher page.
+= Launcher {0} 已就绪。请在“选项”>“Launcher”中选择“安装更新”。

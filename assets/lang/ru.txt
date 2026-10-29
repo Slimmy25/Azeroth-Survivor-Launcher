@@ -2000,3 +2000,35 @@ Build code copied to the clipboard.
 = Код билда скопирован в буфер обмена.
 Could not copy the build code.
 = Не удалось скопировать код билда.
+
+Highlight all
+= Выделить все
+Match Case
+= Учитывать регистр
+Match Diacritics
+= Учитывать диакритические знаки
+Whole Words
+= Целые слова
+
+Export a save
+= Экспортировать сохранение
+Save a copy to move to another PC or import on the website.
+= Сохраните копию для переноса на другой компьютер или импорта на сайте.
+EXPORT SAVE
+= ЭКСПОРТ СОХРАНЕНИЯ
+Save exported.
+= Сохранение экспортировано.
+Close the game first, then export the save.
+= Перед экспортом сохранения закройте игру.
+The game save was not found.
+= Сохранение игры не найдено.
+The save could not be exported.
+= Не удалось экспортировать сохранение.
+Install downloads and verifies the update, then restarts the launcher.
+= Обновление будет загружено и проверено, после чего лаунчер перезапустится.
+INSTALL UPDATE
+= УСТАНОВИТЬ ОБНОВЛЕНИЕ
+Finish the game, install, or cloud sync first, then check for the launcher update again.
+= Сначала завершите игру, установку или облачную синхронизацию, затем снова проверьте обновление.
+Launcher {0} is ready. Choose Install update on the Options > Launcher page.
+= Launcher {0} готов. Выберите «Установить обновление» в меню «Параметры» > Launcher.

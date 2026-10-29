@@ -2000,3 +2000,35 @@ Build code copied to the clipboard.
 = Đã sao chép mã bản dựng vào bộ nhớ tạm.
 Could not copy the build code.
 = Không thể sao chép mã bản dựng.
+
+Highlight all
+= Tô sáng tất cả
+Match Case
+= Phân biệt chữ hoa và chữ thường
+Match Diacritics
+= Phân biệt dấu
+Whole Words
+= Từ nguyên vẹn
+
+Export a save
+= Xuất dữ liệu lưu
+Save a copy to move to another PC or import on the website.
+= Lưu một bản sao để chuyển sang PC khác hoặc nhập trên trang web.
+EXPORT SAVE
+= XUẤT BẢN LƯU
+Save exported.
+= Đã xuất dữ liệu lưu.
+Close the game first, then export the save.
+= Hãy đóng trò chơi trước khi xuất dữ liệu lưu.
+The game save was not found.
+= Không tìm thấy dữ liệu lưu trò chơi.
+The save could not be exported.
+= Không thể xuất dữ liệu lưu.
+Install downloads and verifies the update, then restarts the launcher.
+= Trình cài đặt tải và xác minh bản cập nhật, sau đó khởi động lại launcher.
+INSTALL UPDATE
+= CÀI ĐẶT BẢN CẬP NHẬT
+Finish the game, install, or cloud sync first, then check for the launcher update again.
+= Hãy hoàn tất trò chơi, cài đặt hoặc đồng bộ đám mây trước, rồi kiểm tra cập nhật lại.
+Launcher {0} is ready. Choose Install update on the Options > Launcher page.
+= Launcher {0} đã sẵn sàng. Chọn Cài đặt bản cập nhật trong Tùy chọn > Launcher.

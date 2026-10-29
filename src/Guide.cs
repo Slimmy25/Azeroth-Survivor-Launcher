@@ -371,6 +371,7 @@ namespace AzerothLauncher
             if (tab == -4) { GuideGroupPage(2); return; }    // Theorycrafting (inside Gameplay)
             if (gPlanner && tab != -3) ResetPlannerState();
             guideQuery = "";
+            guideFindQuery = "";
             guideGroupPage = -1;
             if (tab == -2) { gVideo = null; gTalents = null; gBuilder = true; gPlanner = false; guideMain = false; guideGroup = 2; if (current == "Guide") BuildPanel("Guide"); }
             else if (tab == -3) { gVideo = null; gTalents = null; gBuilder = false; gPlanner = true; guideMain = false; guideGroup = 2; if (current == "Guide") BuildPanel("Guide"); }
@@ -381,13 +382,17 @@ namespace AzerothLauncher
         void GuideHeader(string title, List<GuideTopic> topics)
         {
             ClearPanel(title);
+            guideFindTargets.Clear();
+            guideFindCountLabel = null;
+            guideFindPreviousButton = null;
+            guideFindNextButton = null;
             guideTabsBottom = 8;
             int sh = (int)(32 * Theme.Zoom);
             var search = new GuideSearchBox(PW - 40, sh);
-            search.Text = guideQuery;
             Put(search, 20, 8);
             // A click on a suggestion goes there; Enter (or the last line) shows every page the words are found in.
             SearchSuggestions(search, 20, 8 + sh);
+            search.Text = guideQuery;
             if (guideFocusSearch) { guideFocusSearch = false; search.Focus(); search.SelectionStart = search.TextLength; }
             guideSearch = search;
             guideTabsBottom = 8 + sh + 8;
@@ -404,6 +409,12 @@ namespace AzerothLauncher
 
         void SearchSuggestions(GuideSearchBox search, int x, int y)
         {
+            var shell = new Panel();
+            shell.BackColor = Theme.Hex("#16151e");
+            shell.BorderStyle = BorderStyle.FixedSingle;
+            shell.Visible = false;
+            shell.Width = search.Width;
+            Put(shell, x, y);
             var drop = new ListBox();
             drop.BorderStyle = BorderStyle.FixedSingle;
             drop.BackColor = Theme.Hex("#16151e");
@@ -411,9 +422,45 @@ namespace AzerothLauncher
             drop.Font = Theme.F(10);
             drop.IntegralHeight = false;
             drop.Visible = false;
-            drop.Width = search.Width;
-            Put(drop, x, y);
-            drop.BringToFront();
+            int railWidth = Math.Min(174, Math.Max(150, search.Width / 4));
+            drop.Width = search.Width - railWidth - 2;
+            drop.Location = Point.Empty;
+            shell.Controls.Add(drop);
+            var rail = new Panel();
+            rail.BackColor = shell.BackColor;
+            rail.Bounds = new Rectangle(drop.Right, 0, railWidth, 102);
+            shell.Controls.Add(rail);
+            var previous = new WowButton("▲", delegate { MoveGuideFind(-1); }, 34, 26, 9);
+            previous.Location = new Point(7, 6);
+            rail.Controls.Add(previous);
+            guideFindPreviousButton = previous;
+            var next = new WowButton("▼", delegate { MoveGuideFind(1); }, 34, 26, 9);
+            next.Location = new Point(previous.Right + 5, 6);
+            rail.Controls.Add(next);
+            guideFindNextButton = next;
+            var count = UI.Text("0 / 0", 9, FontStyle.Bold, Theme.Gold, rail.BackColor, 70, false);
+            count.TextAlign = ContentAlignment.MiddleCenter;
+            count.Location = new Point(railWidth - 73, 7);
+            rail.Controls.Add(count);
+            guideFindCountLabel = count;
+            Action<CheckBox, int, Action<bool>> addOption = delegate(CheckBox option, int top, Action<bool> changed)
+            {
+                option.AutoSize = true;
+                option.Font = Theme.F(7.5f);
+                option.ForeColor = Theme.Gold;
+                option.BackColor = rail.BackColor;
+                option.Location = new Point(7, top);
+                option.CheckedChanged += delegate { changed(option.Checked); };
+                rail.Controls.Add(option);
+            };
+            var all = new CheckBox { Text = Lang.T("Highlight all"), Checked = guideFindHighlightAll };
+            addOption(all, 36, delegate(bool value) { guideFindHighlightAll = value; ApplyGuideFind(guideFindQuery); });
+            var matchCase = new CheckBox { Text = Lang.T("Match Case"), Checked = guideFindMatchCase };
+            addOption(matchCase, 52, delegate(bool value) { guideFindMatchCase = value; ApplyGuideFind(guideFindQuery); });
+            var matchDiacritics = new CheckBox { Text = Lang.T("Match Diacritics"), Checked = guideFindMatchDiacritics };
+            addOption(matchDiacritics, 68, delegate(bool value) { guideFindMatchDiacritics = value; ApplyGuideFind(guideFindQuery); });
+            var wholeWords = new CheckBox { Text = Lang.T("Whole Words"), Checked = guideFindWholeWords };
+            addOption(wholeWords, 84, delegate(bool value) { guideFindWholeWords = value; ApplyGuideFind(guideFindQuery); });
             Action showAll = delegate
             {
                 guideQuery = search.Text;
@@ -427,7 +474,7 @@ namespace AzerothLauncher
                 var h = drop.SelectedItem as GuideHint;
                 if (h != null)
                 {
-                    if (!h.SearchAll) guideQuery = "";
+                    guideQuery = search.Text;
                     WowButton.Fire(h.Go);
                 }
             };
@@ -446,6 +493,7 @@ namespace AzerothLauncher
             search.TextChanged += delegate
             {
                 string q = search.Text.Trim();
+                ApplyGuideFind(q);
                 if (q.Length == 0 && guideQuery.Trim().Length > 0 && !guideMain)
                 {
                     guideQuery = "";
@@ -487,8 +535,11 @@ namespace AzerothLauncher
                 drop.EndUpdate();
                 int rows = Math.Min(drop.Items.Count, 10);
                 drop.Height = rows * drop.ItemHeight + 4;
+                shell.Height = Math.Max(drop.Height, rail.Height);
+                rail.Height = shell.Height;
                 drop.Visible = rows > 0;
-                if (drop.Visible) drop.BringToFront();
+                shell.Visible = rows > 0;
+                if (shell.Visible) shell.BringToFront();
             };
         }
 
@@ -498,7 +549,7 @@ namespace AzerothLauncher
             return char.ToUpperInvariant(n[0]) + n.Substring(1).Replace("player", "Player");
         }
 
-        void GuideMainPage() { GuideGroupPage(-1); }
+        void GuideMainPage() { guideQuery = ""; guideFindQuery = ""; GuideGroupPage(-1); }
 
         // Bind each Guide destination to the matching saved route. Section and group entry points
         // are also made available by the shared breadcrumb binder.
@@ -694,6 +745,60 @@ namespace AzerothLauncher
         }
 
         GuideSearchBox guideSearch;
+
+        readonly List<GuideText> guideFindTargets = new List<GuideText>();
+        int guideFindCurrent = -1;
+        bool guideFindHighlightAll = true;
+        bool guideFindMatchCase, guideFindMatchDiacritics, guideFindWholeWords;
+        string guideFindQuery = "";
+        Label guideFindCountLabel;
+        WowButton guideFindPreviousButton, guideFindNextButton;
+
+        void ApplyGuideFind(string query)
+        {
+            guideFindQuery = (query ?? "").Trim();
+            guideFindCurrent = -1;
+            foreach (GuideText target in guideFindTargets)
+                if (target != null && !target.IsDisposed) target.SetFind(guideFindQuery, guideFindMatchCase, guideFindMatchDiacritics, guideFindWholeWords, guideFindHighlightAll);
+            UpdateGuideFindCount();
+        }
+
+        void UpdateGuideFindCount()
+        {
+            int total = 0;
+            foreach (GuideText target in guideFindTargets)
+                if (target != null && !target.IsDisposed) total += target.FindCount;
+            if (guideFindPreviousButton != null && !guideFindPreviousButton.IsDisposed)
+                guideFindPreviousButton.Enabled = guideFindNextButton.Enabled = total > 0;
+            if (guideFindCountLabel != null && !guideFindCountLabel.IsDisposed)
+                guideFindCountLabel.Text = total == 0 ? "0 / 0" : (guideFindCurrent < 0 ? "0" : (guideFindCurrent + 1).ToString()) + " / " + total;
+        }
+
+        void MoveGuideFind(int direction)
+        {
+            if (guideFindQuery.Length == 0) ApplyGuideFind(guideQuery);
+            var matches = new List<KeyValuePair<GuideText, int>>();
+            foreach (GuideText target in guideFindTargets)
+                if (target != null && !target.IsDisposed)
+                    for (int i = 0; i < target.FindCount; i++) matches.Add(new KeyValuePair<GuideText, int>(target, i));
+            if (matches.Count == 0) { guideFindCurrent = -1; UpdateGuideFindCount(); return; }
+            guideFindCurrent = guideFindCurrent < 0 ? (direction > 0 ? 0 : matches.Count - 1)
+                : (guideFindCurrent + direction + matches.Count) % matches.Count;
+            foreach (GuideText target in guideFindTargets) if (target != null && !target.IsDisposed) target.SelectFind(-1);
+            var hit = matches[guideFindCurrent];
+            hit.Key.SelectFind(hit.Value);
+            RectangleF r = hit.Key.FindBounds(hit.Value);
+            ScrollPanel scroller = null;
+            int top = 0;
+            for (Control c = hit.Key; c != null; c = c.Parent)
+            {
+                top += c.Top;
+                scroller = c.Parent as ScrollPanel;
+                if (scroller != null) break;
+            }
+            if (scroller != null) scroller.ScrollTo(top - scroller.AutoScrollPosition.Y + (int)r.Top - 24);
+            UpdateGuideFindCount();
+        }
 
         void SetGuideView(int topic, int page)
         {
@@ -1290,7 +1395,7 @@ namespace AzerothLauncher
                 c.Desc = (h.Value < 0 ? "" : topic.Title + " · ") + lines[i];   // where it is, and the line it was found in
                 string page = h.Value < 0 ? "" : topic.Pages[h.Value].Title;
                 EnableGuideCardFavorite(c, new GuideFavoriteRoute("guide", topic.Title, page, GuideClassKey(topic.Title, page), ""));
-                c.Pressed += delegate { guideQuery = ""; SetGuideView(h.Key, h.Value); };
+                c.Pressed += delegate { guideFindQuery = guideQuery; SetGuideView(h.Key, h.Value); };
             });
         }
 
@@ -1302,11 +1407,12 @@ namespace AzerothLauncher
             string low = text.ToLowerInvariant();
             for (int t = 0; t < topics.Count; t++)
                 for (int p = 0; p < topics[t].Pages.Count; p++)
-                    if (topics[t].Pages[p].Body.ToLowerInvariant().Contains(low)) { OpenGuideAt(t, p); return; }
+                    if (topics[t].Pages[p].Body.ToLowerInvariant().Contains(low)) { guideFindQuery = text; guideQuery = text; OpenGuideAt(t, p); return; }
             for (int t = 0; t < topics.Count; t++)
-                if ((topics[t].Title + " " + topics[t].Body).ToLowerInvariant().Contains(low)) { OpenGuideAt(t, -1); return; }
+                if ((topics[t].Title + " " + topics[t].Body).ToLowerInvariant().Contains(low)) { guideFindQuery = text; guideQuery = text; OpenGuideAt(t, -1); return; }
             if (current != "Guide") ShowSection("Guide");   // nothing names it: search for it
             guideQuery = text;
+            guideFindQuery = text;
             SetGuideView(-1, -1);
         }
 
@@ -1372,6 +1478,23 @@ namespace AzerothLauncher
             var sp = MakeThinScroll(panel, new Rectangle(20, GuideTop, PW - 40, by - 10 - GuideTop), GuideCardBg, Theme.Bronze,
                                     Theme.GoldDim, Theme.Gold);
             GuideBody(sp, inPage ? topic.Title : "Guide", shown);
+            var stack = new Stack<Control>();
+            stack.Push(sp);
+            while (stack.Count > 0)
+            {
+                Control c = stack.Pop();
+                var text = c as GuideText;
+                if (text != null) guideFindTargets.Add(text);
+                foreach (Control child in c.Controls) stack.Push(child);
+            }
+            guideFindTargets.Sort(delegate(GuideText a, GuideText b)
+            {
+                int top = a.Top.CompareTo(b.Top);
+                return top != 0 ? top : a.Left.CompareTo(b.Left);
+            });
+            string find = guideFindQuery.Length > 0 ? guideFindQuery : guideQuery;
+            ApplyGuideFind(find);
+            if (find.Length > 0) MoveGuideFind(1);                // open at the first exact occurrence, not the page top
             // no NEXT at the end of a page: the path above (hover a step) leads to every other page or topic
         }
 

@@ -1999,3 +1999,35 @@ Build code copied to the clipboard.
 = Byggkoden er kopiert til utklippstavlen.
 Could not copy the build code.
 = Kunne ikke kopiere byggkoden.
+
+Highlight all
+= Fremhev alle
+Match Case
+= Skill mellom store og små bokstaver
+Match Diacritics
+= Skill diakritiske tegn
+Whole Words
+= Hele ord
+
+Export a save
+= Eksporter en lagring
+Save a copy to move to another PC or import on the website.
+= Lagre en kopi som kan flyttes til en annen PC eller importeres på nettstedet.
+EXPORT SAVE
+= EKSPORTER LAGRING
+Save exported.
+= Lagring eksportert.
+Close the game first, then export the save.
+= Lukk spillet før du eksporterer lagringen.
+The game save was not found.
+= Fant ikke spillagringen.
+The save could not be exported.
+= Kunne ikke eksportere lagringen.
+Install downloads and verifies the update, then restarts the launcher.
+= Installasjonen laster ned og bekrefter oppdateringen, og starter deretter launcheren på nytt.
+INSTALL UPDATE
+= INSTALLER OPPDATERING
+Finish the game, install, or cloud sync first, then check for the launcher update again.
+= Avslutt spillet, installasjonen eller skysynkroniseringen først, og søk etter oppdateringen igjen.
+Launcher {0} is ready. Choose Install update on the Options > Launcher page.
+= Launcher {0} er klar. Velg Installer oppdatering under Alternativer > Launcher.

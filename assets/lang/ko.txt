@@ -2000,3 +2000,35 @@ Build code copied to the clipboard.
 = 빌드 코드를 클립보드에 복사했습니다.
 Could not copy the build code.
 = 빌드 코드를 복사할 수 없습니다.
+
+Highlight all
+= 모두 강조 표시
+Match Case
+= 대소문자 구분
+Match Diacritics
+= 발음 구별 부호 구분
+Whole Words
+= 전체 단어
+
+Export a save
+= 저장 파일 내보내기
+Save a copy to move to another PC or import on the website.
+= 다른 PC로 옮기거나 웹사이트에서 가져올 복사본을 저장합니다.
+EXPORT SAVE
+= 저장 파일 내보내기
+Save exported.
+= 저장 파일을 내보냈습니다.
+Close the game first, then export the save.
+= 내보내기 전에 게임을 종료하세요.
+The game save was not found.
+= 게임 저장 파일을 찾을 수 없습니다.
+The save could not be exported.
+= 저장 파일을 내보내지 못했습니다.
+Install downloads and verifies the update, then restarts the launcher.
+= 업데이트를 다운로드하고 확인한 뒤 Launcher를 다시 시작합니다.
+INSTALL UPDATE
+= 업데이트 설치
+Finish the game, install, or cloud sync first, then check for the launcher update again.
+= 게임, 설치 또는 클라우드 동기화를 먼저 마친 다음 업데이트를 다시 확인하세요.
+Launcher {0} is ready. Choose Install update on the Options > Launcher page.
+= Launcher {0} 준비 완료. 옵션 > Launcher에서 업데이트 설치를 선택하세요.

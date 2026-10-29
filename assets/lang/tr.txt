@@ -2000,3 +2000,35 @@ Build code copied to the clipboard.
 = Yapı kodu panoya kopyalandı.
 Could not copy the build code.
 = Yapı kodu kopyalanamadı.
+
+Highlight all
+= Tümünü vurgula
+Match Case
+= Büyük/küçük harfe duyarlı
+Match Diacritics
+= Aksan işaretlerine duyarlı
+Whole Words
+= Tam sözcükler
+
+Export a save
+= Kaydı dışa aktar
+Save a copy to move to another PC or import on the website.
+= Başka bir bilgisayara taşımak veya web sitesine aktarmak için bir kopya kaydet.
+EXPORT SAVE
+= KAYDI DIŞA AKTAR
+Save exported.
+= Kayıt dışa aktarıldı.
+Close the game first, then export the save.
+= Kaydı dışa aktarmadan önce oyunu kapat.
+The game save was not found.
+= Oyun kaydı bulunamadı.
+The save could not be exported.
+= Kayıt dışa aktarılamadı.
+Install downloads and verifies the update, then restarts the launcher.
+= Kurulum güncellemeyi indirip doğrular, ardından launcherı yeniden başlatır.
+INSTALL UPDATE
+= GÜNCELLEMEYİ YÜKLE
+Finish the game, install, or cloud sync first, then check for the launcher update again.
+= Önce oyunu, kurulumu veya bulut eşitlemesini tamamla, ardından güncellemeyi yeniden denetle.
+Launcher {0} is ready. Choose Install update on the Options > Launcher page.
+= Launcher {0} hazır. Seçenekler > Launcher bölümünden Güncellemeyi yükle seçeneğini seç.

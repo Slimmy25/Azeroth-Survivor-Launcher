@@ -1999,3 +1999,35 @@ Build code copied to the clipboard.
 = Rakennuskoodi kopioitiin leikepöydälle.
 Could not copy the build code.
 = Rakennuskoodia ei voitu kopioida.
+
+Highlight all
+= Korosta kaikki
+Match Case
+= Huomioi kirjainkoko
+Match Diacritics
+= Huomioi tarkkeet
+Whole Words
+= Kokonaiset sanat
+
+Export a save
+= Vie tallennus
+Save a copy to move to another PC or import on the website.
+= Tallenna kopio siirrettäväksi toiselle tietokoneelle tai tuotavaksi verkkosivustolle.
+EXPORT SAVE
+= VIE TALLENNUS
+Save exported.
+= Tallennus vietiin.
+Close the game first, then export the save.
+= Sulje peli ennen tallennuksen vientiä.
+The game save was not found.
+= Pelitallennusta ei löytynyt.
+The save could not be exported.
+= Tallennuksen vienti epäonnistui.
+Install downloads and verifies the update, then restarts the launcher.
+= Asennus lataa ja tarkistaa päivityksen ja käynnistää sitten launcherin uudelleen.
+INSTALL UPDATE
+= ASENNA PÄIVITYS
+Finish the game, install, or cloud sync first, then check for the launcher update again.
+= Sulje ensin peli, asennus tai pilvisynkronointi ja tarkista sitten päivitys uudelleen.
+Launcher {0} is ready. Choose Install update on the Options > Launcher page.
+= Launcher {0} on valmis. Valitse Asenna päivitys kohdasta Asetukset > Launcher.

@@ -2000,3 +2000,35 @@ Build code copied to the clipboard.
 = ビルドコードをクリップボードにコピーしました。
 Could not copy the build code.
 = ビルドコードをコピーできませんでした。
+
+Highlight all
+= すべて強調表示
+Match Case
+= 大文字と小文字を区別
+Match Diacritics
+= 発音区別符号を区別
+Whole Words
+= 単語単位
+
+Export a save
+= セーブデータをエクスポート
+Save a copy to move to another PC or import on the website.
+= 別のPCへ移す、またはウェブサイトへインポートするコピーを保存します。
+EXPORT SAVE
+= セーブをエクスポート
+Save exported.
+= セーブデータをエクスポートしました。
+Close the game first, then export the save.
+= エクスポートする前にゲームを終了してください。
+The game save was not found.
+= ゲームのセーブデータが見つかりません。
+The save could not be exported.
+= セーブデータをエクスポートできませんでした。
+Install downloads and verifies the update, then restarts the launcher.
+= 更新をダウンロードして検証した後、Launcherを再起動します。
+INSTALL UPDATE
+= 更新をインストール
+Finish the game, install, or cloud sync first, then check for the launcher update again.
+= ゲーム、インストール、またはクラウド同期を終了してから、更新を再確認してください。
+Launcher {0} is ready. Choose Install update on the Options > Launcher page.
+= Launcher {0} を利用できます。オプション > Launcher で「更新をインストール」を選んでください。

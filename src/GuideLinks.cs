@@ -8,6 +8,8 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -16,6 +18,7 @@ namespace AzerothLauncher
     public class GuideLink
     {
         public string Term = "", Tip = "";
+        public string FindText = "";                           // text to locate on the destination page after navigation
         public int Topic = -1, Page = -1;                    // where a click goes (-1, -1: nowhere, a hover text only)
         public string Class;                                 // a talent: its class (a click opens its talent trees)
     }
@@ -65,6 +68,7 @@ namespace AzerothLauncher
                             list.Add(new GuideLink
                             {
                                 Term = jewel.Spell + " · Codex — " + jewel.Name,
+                                FindText = jewel.Spell,
                                 Topic = itemsTopic,
                                 Page = codexPage,
                                 Tip = Items.Card(jewel)
@@ -88,6 +92,7 @@ namespace AzerothLauncher
                                 list.Add(new GuideLink
                                 {
                                     Term = spell + " · " + Items.SetName(cls, rarity) + " 8-piece",
+                                    FindText = spell,
                                     Topic = itemsTopic,
                                     Page = gearIndex,
                                     Tip = bonus
@@ -144,6 +149,7 @@ namespace AzerothLauncher
             if (term.Length < 4 || links.ContainsKey(term)) return;
             var l = new GuideLink();
             l.Term = term;
+            l.FindText = term;
             l.Topic = topic;
             l.Page = page;
             l.Tip = tip ?? "";
@@ -367,7 +373,7 @@ namespace AzerothLauncher
             catch (Exception) { return l; }
             foreach (var tal in list)
                 if (tal.Class == cls)
-                    return new GuideLink { Term = l.Term, Topic = topic, Page = page, Class = cls, Tip = Talents.HoverText(tal) };
+                    return new GuideLink { Term = l.Term, FindText = l.FindText, Topic = topic, Page = page, Class = cls, Tip = Talents.HoverText(tal) };
             return l;
         }
 
@@ -411,6 +417,9 @@ namespace AzerothLauncher
         readonly int wrap;
         GuideLink over;
         int focusLink = -1;
+        readonly List<RectangleF> findRects = new List<RectangleF>();
+        int findSelected = -1;
+        bool findHighlightAll = true;
 
         public GuideText(string text, float size, Color fg, Color bg, int wrapWidth, int topic, int page)
         {
@@ -491,6 +500,16 @@ namespace AzerothLauncher
             g.Clear(BackColor);
             g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
             int lineH = font.Height + 1;
+            using (var all = new SolidBrush(Color.FromArgb(105, 143, 112, 240)))
+            using (var current = new SolidBrush(Color.FromArgb(190, 255, 204, 80)))
+            {
+                for (int i = 0; i < findRects.Count; i++)
+                    if (findHighlightAll || i == findSelected)
+                    {
+                        RectangleF r = findRects[i];
+                        if (r.IntersectsWith(e.ClipRectangle)) g.FillRectangle(i == findSelected ? current : all, r);
+                    }
+            }
             using (var sf = (StringFormat)StringFormat.GenericTypographic.Clone())
             using (var plain = new SolidBrush(ForeColor))
             using (var gold = new SolidBrush(Theme.Hex("#e8b84a")))
@@ -511,6 +530,77 @@ namespace AzerothLauncher
                     g.DrawRectangle(p, r.X - 2, r.Y, r.Width + 3, r.Height - 1);
             }
         }
+
+        // Search positions use the same measured word runs that are painted and clicked, so matches stay attached
+        // to their passage when text wraps or the article scrolls.
+        public void SetFind(string query, bool matchCase, bool matchDiacritics, bool wholeWords, bool highlightAll)
+        {
+            findRects.Clear();
+            findSelected = -1;
+            findHighlightAll = highlightAll;
+            query = (query ?? "").Trim();
+            if (query.Length == 0) { Invalidate(); return; }
+            string foldedQuery = Fold(query, matchCase, matchDiacritics, null);
+            if (foldedQuery.Length == 0) { Invalidate(); return; }
+            StringComparison comparison = StringComparison.Ordinal;
+            foreach (Placed pw in placed)
+            {
+                Font f = pw.Link != null ? linkFont : font;
+                var sourceMap = new List<int>();
+                string foldedWord = Fold(pw.Word, matchCase, matchDiacritics, sourceMap);
+                int at = 0;
+                while (at <= foldedWord.Length - foldedQuery.Length)
+                {
+                    int found = foldedWord.IndexOf(foldedQuery, at, comparison);
+                    if (found < 0) break;
+                    int originalStart = sourceMap[found];
+                    int originalEnd = sourceMap[found + foldedQuery.Length - 1] + 1;
+                    bool whole = !wholeWords ||
+                        ((originalStart == 0 || !char.IsLetterOrDigit(pw.Word[originalStart - 1])) &&
+                         (originalEnd == pw.Word.Length || !char.IsLetterOrDigit(pw.Word[originalEnd])));
+                    if (whole)
+                    {
+                        float before = Measure(pw.Word.Substring(0, originalStart), f);
+                        float width = Measure(pw.Word.Substring(originalStart, originalEnd - originalStart), f);
+                        findRects.Add(new RectangleF(pw.X + before, pw.Y, Math.Max(2, width), font.Height + 1));
+                    }
+                    at = found + Math.Max(1, foldedQuery.Length);
+                }
+            }
+            Invalidate();
+        }
+
+        static string Fold(string value, bool matchCase, bool matchDiacritics, List<int> sourceMap)
+        {
+            var result = new StringBuilder();
+            for (int i = 0; i < value.Length; i++)
+            {
+                string part = value[i].ToString();
+                if (!matchDiacritics) part = part.Normalize(NormalizationForm.FormD);
+                foreach (char ch in part)
+                {
+                    if (!matchDiacritics && CharUnicodeInfo.GetUnicodeCategory(ch) == UnicodeCategory.NonSpacingMark) continue;
+                    result.Append(matchCase ? ch : char.ToUpperInvariant(ch));
+                    if (sourceMap != null) sourceMap.Add(i);
+                }
+            }
+            return result.ToString();
+        }
+
+        static float Measure(string value, Font f)
+        {
+            if (value.Length == 0) return 0;
+            using (Graphics g = Graphics.FromImage(measureBmp))
+            using (var sf = (StringFormat)StringFormat.GenericTypographic.Clone())
+            {
+                sf.FormatFlags |= StringFormatFlags.MeasureTrailingSpaces | StringFormatFlags.NoWrap;
+                return g.MeasureString(value, f, PointF.Empty, sf).Width;
+            }
+        }
+
+        public int FindCount { get { return findRects.Count; } }
+        public RectangleF FindBounds(int index) { return index >= 0 && index < findRects.Count ? findRects[index] : RectangleF.Empty; }
+        public void SelectFind(int index) { findSelected = index; Invalidate(); }
 
         GuideLink At(Point p)
         {

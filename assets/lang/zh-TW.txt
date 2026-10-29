@@ -2000,3 +2000,35 @@ Build code copied to the clipboard.
 = 配置代碼已複製到剪貼簿。
 Could not copy the build code.
 = 無法複製配置代碼。
+
+Highlight all
+= 全部醒目標示
+Match Case
+= 區分大小寫
+Match Diacritics
+= 符合變音符號
+Whole Words
+= 全詞
+
+Export a save
+= 匯出存檔
+Save a copy to move to another PC or import on the website.
+= 儲存副本，以便移至另一台電腦或在網站上匯入。
+EXPORT SAVE
+= 匯出存檔
+Save exported.
+= 存檔已匯出。
+Close the game first, then export the save.
+= 匯出存檔前請先關閉遊戲。
+The game save was not found.
+= 找不到遊戲存檔。
+The save could not be exported.
+= 無法匯出存檔。
+Install downloads and verifies the update, then restarts the launcher.
+= 安裝程式會下載並驗證更新，然後重新啟動 Launcher。
+INSTALL UPDATE
+= 安裝更新
+Finish the game, install, or cloud sync first, then check for the launcher update again.
+= 請先結束遊戲、安裝或雲端同步，然後再次檢查更新。
+Launcher {0} is ready. Choose Install update on the Options > Launcher page.
+= Launcher {0} 已就緒。請在「選項」>「Launcher」中選擇「安裝更新」。

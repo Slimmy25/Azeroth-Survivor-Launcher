@@ -2000,3 +2000,35 @@ Build code copied to the clipboard.
 = A build kódja a vágólapra került.
 Could not copy the build code.
 = A build kódját nem sikerült másolni.
+
+Highlight all
+= Összes kiemelése
+Match Case
+= Kis- és nagybetűk megkülönböztetése
+Match Diacritics
+= Ékezetek megkülönböztetése
+Whole Words
+= Teljes szavak
+
+Export a save
+= Mentés exportálása
+Save a copy to move to another PC or import on the website.
+= Ments el egy másolatot másik számítógépre átvitelhez vagy webhelyes importáláshoz.
+EXPORT SAVE
+= MENTÉS EXPORTÁLÁSA
+Save exported.
+= Mentés exportálva.
+Close the game first, then export the save.
+= A mentés exportálása előtt zárd be a játékot.
+The game save was not found.
+= A játékmentés nem található.
+The save could not be exported.
+= A mentést nem sikerült exportálni.
+Install downloads and verifies the update, then restarts the launcher.
+= A telepítő letölti és ellenőrzi a frissítést, majd újraindítja a launchert.
+INSTALL UPDATE
+= FRISSÍTÉS TELEPÍTÉSE
+Finish the game, install, or cloud sync first, then check for the launcher update again.
+= Előbb zárd be a játékot, fejezd be a telepítést vagy a felhőszinkronizálást, majd keresd újra a frissítést.
+Launcher {0} is ready. Choose Install update on the Options > Launcher page.
+= A(z) Launcher {0} készen áll. Válaszd a Frissítés telepítése lehetőséget a Beállítások > Launcher oldalon.

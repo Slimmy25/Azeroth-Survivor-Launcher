@@ -2004,3 +2004,35 @@ Codex neck piece that remakes it:
 
 The steps at the top show where you are in the launcher. Select an earlier step to return to it. Hover over a step or its arrow to see other pages at that level. The left arrow returns to the previous page; the X closes this section and returns home.
 = Τα βήματα στην κορυφή δείχνουν πού βρίσκεσαι στον launcher. Επίλεξε ένα προηγούμενο βήμα για να επιστρέψεις. Πέρασε τον δείκτη πάνω από ένα βήμα ή το βέλος του για να δεις άλλες σελίδες στο ίδιο επίπεδο. Το αριστερό βέλος επιστρέφει στην προηγούμενη σελίδα· το X κλείνει αυτή την ενότητα και επιστρέφει στην αρχική.
+
+Highlight all
+= Επισήμανση όλων
+Match Case
+= Διάκριση πεζών/κεφαλαίων
+Match Diacritics
+= Διάκριση διακριτικών
+Whole Words
+= Ολόκληρες λέξεις
+
+Export a save
+= Εξαγωγή αποθηκευμένου παιχνιδιού
+Save a copy to move to another PC or import on the website.
+= Αποθηκεύστε ένα αντίγραφο για μεταφορά σε άλλον υπολογιστή ή εισαγωγή στον ιστότοπο.
+EXPORT SAVE
+= ΕΞΑΓΩΓΗ ΑΠΟΘΗΚΕΥΣΗΣ
+Save exported.
+= Η αποθήκευση εξήχθη.
+Close the game first, then export the save.
+= Κλείστε πρώτα το παιχνίδι και μετά εξαγάγετε την αποθήκευση.
+The game save was not found.
+= Δεν βρέθηκε η αποθήκευση του παιχνιδιού.
+The save could not be exported.
+= Δεν ήταν δυνατή η εξαγωγή της αποθήκευσης.
+Install downloads and verifies the update, then restarts the launcher.
+= Η εγκατάσταση κατεβάζει και επαληθεύει την ενημέρωση και μετά επανεκκινεί το launcher.
+INSTALL UPDATE
+= ΕΓΚΑΤΑΣΤΑΣΗ ΕΝΗΜΕΡΩΣΗΣ
+Finish the game, install, or cloud sync first, then check for the launcher update again.
+= Κλείστε πρώτα το παιχνίδι, την εγκατάσταση ή τον συγχρονισμό cloud και μετά ελέγξτε ξανά για ενημέρωση.
+Launcher {0} is ready. Choose Install update on the Options > Launcher page.
+= Το Launcher {0} είναι έτοιμο. Επιλέξτε Εγκατάσταση ενημέρωσης στις Επιλογές > Launcher.

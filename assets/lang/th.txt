@@ -2000,3 +2000,35 @@ Build code copied to the clipboard.
 = คัดลอกรหัสบิลด์ไปยังคลิปบอร์ดแล้ว
 Could not copy the build code.
 = ไม่สามารถคัดลอกรหัสบิลด์ได้
+
+Highlight all
+= เน้นทั้งหมด
+Match Case
+= ตรงตามตัวพิมพ์ใหญ่เล็ก
+Match Diacritics
+= ตรงตามเครื่องหมายกำกับเสียง
+Whole Words
+= ทั้งคำ
+
+Export a save
+= ส่งออกไฟล์บันทึก
+Save a copy to move to another PC or import on the website.
+= บันทึกสำเนาเพื่อย้ายไปยังคอมพิวเตอร์เครื่องอื่นหรือนำเข้าในเว็บไซต์
+EXPORT SAVE
+= ส่งออกไฟล์บันทึก
+Save exported.
+= ส่งออกไฟล์บันทึกแล้ว
+Close the game first, then export the save.
+= ปิดเกมก่อนส่งออกไฟล์บันทึก
+The game save was not found.
+= ไม่พบไฟล์บันทึกเกม
+The save could not be exported.
+= ส่งออกไฟล์บันทึกไม่สำเร็จ
+Install downloads and verifies the update, then restarts the launcher.
+= การติดตั้งจะดาวน์โหลดและตรวจสอบการอัปเดต แล้วเริ่ม Launcher ใหม่
+INSTALL UPDATE
+= ติดตั้งการอัปเดต
+Finish the game, install, or cloud sync first, then check for the launcher update again.
+= ปิดเกม ติดตั้งให้เสร็จ หรือรอการซิงค์คลาวด์ก่อน แล้วตรวจสอบการอัปเดตอีกครั้ง
+Launcher {0} is ready. Choose Install update on the Options > Launcher page.
+= Launcher {0} พร้อมแล้ว เลือกติดตั้งการอัปเดตใน ตัวเลือก > Launcher

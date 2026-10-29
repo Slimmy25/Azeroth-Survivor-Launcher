@@ -1999,3 +1999,35 @@ Build code copied to the clipboard.
 = De buildcode is naar het klembord gekopieerd.
 Could not copy the build code.
 = De buildcode kon niet worden gekopieerd.
+
+Highlight all
+= Alles markeren
+Match Case
+= Hoofdlettergevoelig
+Match Diacritics
+= Diakritische tekens vergelijken
+Whole Words
+= Hele woorden
+
+Export a save
+= Een opgeslagen spel exporteren
+Save a copy to move to another PC or import on the website.
+= Sla een kopie op om naar een andere pc te verplaatsen of op de website te importeren.
+EXPORT SAVE
+= OPSLAG EXPORTEREN
+Save exported.
+= Opgeslagen spel geëxporteerd.
+Close the game first, then export the save.
+= Sluit het spel voordat je de opslag exporteert.
+The game save was not found.
+= De spelopslag is niet gevonden.
+The save could not be exported.
+= De opslag kon niet worden geëxporteerd.
+Install downloads and verifies the update, then restarts the launcher.
+= De installatie downloadt en controleert de update en start de launcher daarna opnieuw.
+INSTALL UPDATE
+= UPDATE INSTALLEREN
+Finish the game, install, or cloud sync first, then check for the launcher update again.
+= Rond eerst het spel, de installatie of cloudsynchronisatie af en controleer daarna opnieuw op updates.
+Launcher {0} is ready. Choose Install update on the Options > Launcher page.
+= Launcher {0} is klaar. Kies Update installeren onder Opties > Launcher.
