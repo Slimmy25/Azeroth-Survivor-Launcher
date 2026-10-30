@@ -755,6 +755,7 @@ namespace AzerothLauncher
         {
             Color bronzeD = Theme.Hex("#2a2620"), dark = Theme.Hex("#0e0d14");   // night stone, like the launcher
             side = new Form();
+            WowDialog.SecondaryHost = side;
             side.FormBorderStyle = FormBorderStyle.None;
             side.ShowInTaskbar = false;                      // the sections open inside the launcher, on its left side
             side.TopLevel = false;
