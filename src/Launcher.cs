@@ -45,10 +45,13 @@ namespace AzerothLauncher
         public const string SupportUrl = "https://buymeacoffee.com/aethusx";      // the game's developer's own page
 
         const int W = 1100, H = 690;                         // retro launcher window: sections open on the left, News on the right
+        float displayScale = 1f;                              // scale the fixed-coordinate UI to the display it is opened on
 
         public Config Cfg;
         public bool GameRunningFlag, Installing, SyncBusy, Updating, UpdateChecking;   // Updating: the launcher's own update
         bool setupOpen, setupAsked, quitting, closeAfterDownloadCancel;
+        System.Windows.Forms.Timer displayScaleTimer;
+        bool applyingDisplayScale;
         ManualResetEvent launcherUpdateCancel;
         readonly List<KeyValuePair<string, Level>> cloudLog = new List<KeyValuePair<string, Level>>();
         RichTextBox logBox;
@@ -141,10 +144,37 @@ namespace AzerothLauncher
             LayoutNav();
 
             BuildSide();
+            displayScale = DisplayScaleFor(Screen.PrimaryScreen);
+            if (Math.Abs(displayScale - 1f) > 0.001f)
+            {
+                Scale(new SizeF(displayScale, displayScale));
+                StartPosition = FormStartPosition.Manual;
+                CenterOn(Screen.PrimaryScreen);
+            }
+            Move += delegate
+            {
+                if (applyingDisplayScale || IsDisposed) return;
+                if (displayScaleTimer == null)
+                {
+                    displayScaleTimer = new System.Windows.Forms.Timer();
+                    displayScaleTimer.Interval = 220;
+                    displayScaleTimer.Tick += delegate
+                    {
+                        displayScaleTimer.Stop();
+                        ApplyMonitorScale();
+                    };
+                }
+                displayScaleTimer.Stop();
+                displayScaleTimer.Start();
+            };
             RefreshPlayLabel();
 
             FormClosing += OnClosingWindow;
-            FormClosed += delegate { StopEdge(); };              // a Community video never outlives the launcher
+            FormClosed += delegate
+            {
+                StopEdge();                                       // a Community video never outlives the launcher
+                if (displayScaleTimer != null) { displayScaleTimer.Stop(); displayScaleTimer.Dispose(); displayScaleTimer = null; }
+            };
             VideoCard.Live3D = OpenLive3D;                       // Wowhead's live 3D viewer in an Edge window (Community.cs)
             VideoCard.YouTube = PlayYouTube;                     // YouTube videos play inside Community (Community.cs)
             SpellRow.OpenSet = delegate(string cls, string rarity)   // a set chip on a spell: that set in the Gear Planner
@@ -196,6 +226,47 @@ namespace AzerothLauncher
             Controls.Add(b);
             return b;
         }
+
+        static float DisplayScaleFor(Screen screen)
+        {
+            if (screen == null) return 1f;
+            Rectangle area = screen.Bounds;
+            // 1920-wide displays retain the original layout. Higher-resolution displays get the same
+            // proportional layout, while the height limit keeps the complete window on screen.
+            float byWidth = area.Width / 1920f;
+            float byHeight = area.Height / 1024f;
+            return Math.Max(0.75f, Math.Min(2f, Math.Min(byWidth, byHeight)));
+        }
+
+        void CenterOn(Screen screen)
+        {
+            if (screen == null) return;
+            Rectangle area = screen.WorkingArea;
+            Location = new Point(area.Left + (area.Width - Width) / 2, area.Top + (area.Height - Height) / 2);
+        }
+
+        void ApplyMonitorScale()
+        {
+            Screen screen = Screen.FromControl(this);
+            float next = DisplayScaleFor(screen);
+            if (Math.Abs(next - displayScale) < 0.01f) return;
+            float ratio = next / displayScale;
+            displayScale = next;
+            applyingDisplayScale = true;
+            try
+            {
+                GuideHover.Hide();
+                if (sideHead != null) sideHead.HideTransientUi();
+                Scale(new SizeF(ratio, ratio));
+                LayoutNav();
+                PlaceSide();
+                CenterOn(screen);
+                Invalidate();
+            }
+            finally { applyingDisplayScale = false; }
+        }
+
+        public float DisplayScaleFactor { get { return displayScale; } }
 
         // ------------------------------------------------------------------ small tools
         public void Ui(Action a)
@@ -303,7 +374,7 @@ namespace AzerothLauncher
         // the whole window is drawn by OnPaint from the picture above: no fill first (it only makes the window flicker)
         protected override void OnPaintBackground(PaintEventArgs e)
         {
-            if (homeLayer == null || e.ClipRectangle.Right > W || e.ClipRectangle.Bottom > H) base.OnPaintBackground(e);
+            if (homeLayer == null) base.OnPaintBackground(e);
         }
 
         Bitmap HomeLayer()
@@ -373,15 +444,12 @@ namespace AzerothLauncher
         protected override void OnPaint(PaintEventArgs e)
         {
             Graphics g = e.Graphics;
-            Rectangle clip = Rectangle.Intersect(e.ClipRectangle, new Rectangle(0, 0, W, H));
-            if (clip.Width > 0 && clip.Height > 0)
-            {
-                g.InterpolationMode = InterpolationMode.NearestNeighbor;
-                g.PixelOffsetMode = PixelOffsetMode.Half;
-                g.CompositingMode = CompositingMode.SourceCopy;
-                g.DrawImage(HomeLayer(), clip, clip, GraphicsUnit.Pixel);
-                g.CompositingMode = CompositingMode.SourceOver;
-            }
+            g.ScaleTransform(displayScale, displayScale);
+            g.InterpolationMode = InterpolationMode.NearestNeighbor;
+            g.PixelOffsetMode = PixelOffsetMode.Half;
+            g.CompositingMode = CompositingMode.SourceCopy;
+            g.DrawImage(HomeLayer(), 0, 0, W, H);
+            g.CompositingMode = CompositingMode.SourceOver;
             Theme.Smooth(g);
             g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
             // News: the newest patch note
@@ -443,7 +511,7 @@ namespace AzerothLauncher
                                                   : "Game client not found. Press INSTALL, or set the game folder in Options.")
                         : status);
                     Font stf = Theme.F(9, FontStyle.Italic);
-                    float cxp = playBtn.Left + playBtn.Width / 2f;
+                    float cxp = (playBtn.Left + playBtn.Width / 2f) / displayScale;
                     if (dlActive)                            // the game download: its bar takes the status line's place
                     {
                         int pct = dlTotal > 0 ? (int)Math.Min(100, dlDone * 100 / dlTotal) : -1;
@@ -453,7 +521,7 @@ namespace AzerothLauncher
                         float dw = g.MeasureString(st, df).Width;
                         const int bw = 250, bh = 8;
                         float bx = Math.Min(cxp - bw / 2f, W - 10 - bw);
-                        float by = playBtn.Top - 12;
+                        float by = playBtn.Top / displayScale - 12;
                         g.DrawString(st, df, sb, Math.Min(cxp - dw / 2, W - 10 - dw), by - 15);
                         using (var back = new SolidBrush(Theme.Hex("#1a1410"))) g.FillRectangle(back, bx, by, bw, bh);
                         if (pct > 0)
@@ -465,7 +533,7 @@ namespace AzerothLauncher
                     {
                         float sw = g.MeasureString(st, stf).Width;
                         float sx = Math.Min(cxp - sw / 2, W - 10 - sw);
-                        g.DrawString(st, stf, sb, sx, playBtn.Top - 26);
+                        g.DrawString(st, stf, sb, sx, playBtn.Top / displayScale - 26);
                     }
                 }
             }
@@ -609,25 +677,27 @@ namespace AzerothLauncher
             to = Math.Max(0, Math.Min(max, to));
             if (to == newsScroll) return;
             newsScroll = to;
-            Invalidate(new Rectangle(NewsArea.X - 4, NewsArea.Y - 2, NewsBar.Right - NewsArea.X + 8, NewsArea.Height + 4));
+            Invalidate();
         }
 
         public void Wheel(int delta)
         {
             Point p = PointToClient(Cursor.Position);
+            p = new Point((int)(p.X / displayScale), (int)(p.Y / displayScale));
             Rectangle hot = Rectangle.Union(NewsArea, NewsBar);
             if (hot.Contains(p)) ScrollNews(newsScroll - delta / 120 * 40);
         }
 
         protected override void OnMouseDown(MouseEventArgs e)
         {
+            int x = (int)(e.X / displayScale), y = (int)(e.Y / displayScale);
             Rectangle t = NewsThumb();
             Rectangle bar = new Rectangle(NewsBar.X - 4, NewsBar.Y, NewsBar.Width + 8, NewsBar.Height);
-            if (e.Button == MouseButtons.Left && !t.IsEmpty && bar.Contains(e.Location))
+            if (e.Button == MouseButtons.Left && !t.IsEmpty && bar.Contains(x, y))
             {
                 newsDrag = true;
-                newsDragOffset = t.Contains(e.Location) ? e.Y - t.Y : t.Height / 2;
-                DragNews(e.Y);
+                newsDragOffset = t.Contains(x, y) ? y - t.Y : t.Height / 2;
+                DragNews(y);
             }
             base.OnMouseDown(e);
         }
@@ -643,20 +713,21 @@ namespace AzerothLauncher
 
         protected override void OnMouseMove(MouseEventArgs e)
         {
-            if (newsDrag) DragNews(e.Y);
-            bool over = new Rectangle(NewsBar.X - 4, NewsBar.Y, NewsBar.Width + 8, NewsBar.Height).Contains(e.Location) && !NewsThumb().IsEmpty;
+            int x = (int)(e.X / displayScale), y = (int)(e.Y / displayScale);
+            if (newsDrag) DragNews(y);
+            bool over = new Rectangle(NewsBar.X - 4, NewsBar.Y, NewsBar.Width + 8, NewsBar.Height).Contains(x, y) && !NewsThumb().IsEmpty;
             if (over != newsBarHover)
             {
                 newsBarHover = over;
                 Cursor = over ? Cursors.Hand : Cursors.Default;
-                Invalidate(new Rectangle(NewsBar.X - 2, NewsBar.Y, NewsBar.Width + 4, NewsBar.Height));
+                Invalidate();
             }
             base.OnMouseMove(e);
         }
 
         protected override void OnMouseUp(MouseEventArgs e)
         {
-            if (newsDrag) { newsDrag = false; Invalidate(new Rectangle(NewsBar.X - 2, NewsBar.Y, NewsBar.Width + 4, NewsBar.Height)); }
+            if (newsDrag) { newsDrag = false; Invalidate(); }
             base.OnMouseUp(e);
         }
 
@@ -664,7 +735,7 @@ namespace AzerothLauncher
         {
             status = msg ?? "";
             if (status == "Ready." && Util.SetupPendingForThisInstall) status = "First Time Setup";
-            Invalidate(new Rectangle(0, 578, W, H - 578));
+            Invalidate();
         }
 
         // every message goes to the one status line above PLAY (there is no note in the bottom left any more)
@@ -691,7 +762,7 @@ namespace AzerothLauncher
                 if (name == "Changelog") continue;           // its place is on the News line
                 if (!NavShown(name)) { nav[name].Visible = false; continue; }
                 nav[name].Visible = true;
-                nav[name].Location = new Point(693 + (k % 3) * 134, 480 + (k / 3) * 34);
+                nav[name].Location = new Point((int)((693 + (k % 3) * 134) * displayScale), (int)((480 + (k / 3) * 34) * displayScale));
                 k++;
             }
             if (strip != null) LayoutStrip();
@@ -711,7 +782,7 @@ namespace AzerothLauncher
             // Play stays illuminated and acts as the current slide's NEXT action during setup.
             playBtn.GrayedTip = "";
             playBtn.Grayed = false;
-            Invalidate(new Rectangle(0, 578, W, H - 578));
+            Invalidate();
             RefreshGates();
         }
 
@@ -1515,7 +1586,7 @@ namespace AzerothLauncher
                 LayoutDownloadClosePrompt();
                 closeDownloadCard.Invalidate();
             }
-            Invalidate(new Rectangle(0, 578, W, H - 578));
+            Invalidate();
         }
 
         ManualResetEvent installCancel;

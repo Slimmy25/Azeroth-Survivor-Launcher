@@ -325,7 +325,7 @@ namespace AzerothLauncher
         bool hover, down, keyDown, active, selected, grayed;
         public IconPainter Icon;
         public Image[] Skin;
-        readonly float zoom;                                  // launcher art {normal, hover, down, grayed}
+        float zoom;                                           // launcher art {normal, hover, down, grayed}
         public event Action Pressed;
         public string GrayedTip;                              // shown on hover, only while the button is grayed out
         public string Tip;                                    // themed hover help while the button is available
@@ -344,6 +344,12 @@ namespace AzerothLauncher
             Size = new Size((int)(width * zoom), (int)(height * zoom));
             Cursor = Cursors.Hand;
             if (command != null) Pressed += command;
+        }
+
+        protected override void ScaleControl(SizeF factor, BoundsSpecified specified)
+        {
+            zoom *= factor.Width;
+            base.ScaleControl(factor, specified);
         }
 
         public string Label { get { return text; } set { text = value; AccessibleName = Lang.T(value); Invalidate(); } }
