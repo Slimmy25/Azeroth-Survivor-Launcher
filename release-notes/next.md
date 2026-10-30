@@ -5,3 +5,5 @@
 - Moved Azeroth Cursor by Maidenhead to Misc in Add-ons → Download More, retaining its existing latest-release download.
 
 - Added Big Cursor by JamieeLee to Misc in Add-ons → Download More, using its latest official ZIP release.
+
+- Added Move UI by JamieeLee to Misc in Add-ons → Download More, using the latest official release ZIP.
