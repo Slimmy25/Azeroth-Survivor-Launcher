@@ -15,24 +15,18 @@ namespace AzerothLauncher
     sealed class FavoriteHeartPopup : Control
     {
         public event Action FavoriteClicked;
-        readonly float visualScale;
 
-        public FavoriteHeartPopup(float scale)
+        public FavoriteHeartPopup()
         {
-            visualScale = Math.Max(1f, scale);
             SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint |
                      ControlStyles.OptimizedDoubleBuffer | ControlStyles.ResizeRedraw |
                      ControlStyles.SupportsTransparentBackColor, true);
             BackColor = Color.Transparent;
-            Size = new Size((int)(34 * visualScale), (int)(34 * visualScale));
+            Size = new Size(34, 34);
             Cursor = Cursors.Hand;
             // Keep only the heart-shaped region. A normal transparent child paints its parent's
             // background across its rectangular client area, which creates the visible dark box.
-            using (var path = HeartPath())
-            {
-                using (var matrix = new Matrix()) { matrix.Scale(visualScale, visualScale); path.Transform(matrix); }
-                Region = new Region(path);
-            }
+            using (var path = HeartPath()) Region = new Region(path);
         }
 
         GraphicsPath HeartPath()
@@ -63,7 +57,6 @@ namespace AzerothLauncher
         protected override void OnPaint(PaintEventArgs e)
         {
             Graphics g = e.Graphics;
-            g.ScaleTransform(visualScale, visualScale);
             g.SmoothingMode = SmoothingMode.AntiAlias;
             g.PixelOffsetMode = PixelOffsetMode.HighQuality;
             using (var path = HeartPath())
@@ -85,7 +78,6 @@ namespace AzerothLauncher
     // Talent Tree Builder › Priest"): click a step to go back to it. The red X closes the section.
     public class SideHead : Control
     {
-        float visualScale = 1f;
         public Action CloseClicked;
         public Action HelpClicked;                           // "Lost?" beside the X: how the path at the top works
         public Action HelpLeft;
@@ -124,15 +116,6 @@ namespace AzerothLauncher
             Height = 38;                                     // compact: the sections have little room
             BackColor = Theme.Hex("#0e0d14");
         }
-
-        protected override void ScaleControl(SizeF factor, BoundsSpecified specified)
-        {
-            visualScale *= factor.Width;
-            base.ScaleControl(factor, specified);
-        }
-
-        int LogicalWidth { get { return Math.Max(1, (int)Math.Round(Width / visualScale)); } }
-        Point LogicalPoint(Point p) { return new Point((int)Math.Round(p.X / visualScale), (int)Math.Round(p.Y / visualScale)); }
 
         void SyncHoverHost()
         {
@@ -222,20 +205,19 @@ namespace AzerothLauncher
             Invalidate();
         }
 
-        Rectangle CloseBox { get { return closable ? new Rectangle(LogicalWidth - 27, 9, 18, 18) : Rectangle.Empty; } }
+        Rectangle CloseBox { get { return closable ? new Rectangle(Width - 27, 9, 18, 18) : Rectangle.Empty; } }
         // "Lost?" beside the X: for anyone not sure how to get around (its width follows the word in the language)
         int HelpW { get { return 26 + (int)TextRenderer.MeasureText(Lang.T("Lost?"), Theme.F(9, FontStyle.Bold)).Width; } }
-        Rectangle HelpBox { get { return HelpClicked != null && helpShown ? new Rectangle(LogicalWidth - (closable ? 32 : 9) - HelpW, 9, HelpW, 18) : Rectangle.Empty; } }
-        public Point HelpScreenAnchor { get { Rectangle box = HelpBox; return box.IsEmpty ? PointToScreen(Point.Empty) : PointToScreen(new Point((int)((box.Left + box.Width / 2) * visualScale), (int)(box.Bottom * visualScale))); } }
-        public Rectangle HelpScreenBounds { get { Rectangle box = HelpBox; return box.IsEmpty ? Rectangle.Empty : RectangleToScreen(new Rectangle((int)(box.X * visualScale), (int)(box.Y * visualScale), (int)(box.Width * visualScale), (int)(box.Height * visualScale))); } }
+        Rectangle HelpBox { get { return HelpClicked != null && helpShown ? new Rectangle(Width - (closable ? 32 : 9) - HelpW, 9, HelpW, 18) : Rectangle.Empty; } }
+        public Point HelpScreenAnchor { get { Rectangle box = HelpBox; return box.IsEmpty ? PointToScreen(Point.Empty) : PointToScreen(new Point(box.Left + box.Width / 2, box.Bottom)); } }
+        public Rectangle HelpScreenBounds { get { Rectangle box = HelpBox; return box.IsEmpty ? Rectangle.Empty : RectangleToScreen(box); } }
         Rectangle BackBox { get { return BackClicked != null ? new Rectangle(44, 8, 30, 20) : Rectangle.Empty; } }
 
         protected override void OnPaint(PaintEventArgs e)
         {
             Graphics g = e.Graphics;
-            g.ScaleTransform(visualScale, visualScale);
             g.Clear(BackColor);
-            int w = Math.Max(LogicalWidth, 200);
+            int w = Math.Max(Width, 200);
             Image bar = Retro.Get("long");                  // the launcher's blue stone, framed in gold
             if (bar != null) Theme.Draw(g, bar, new Rectangle(22, 7, w - 26, 22));
             using (var p = new Pen(Theme.Hex("#c49a48"), 2)) g.DrawRectangle(p, 22, 7, w - 26, 21);
@@ -256,9 +238,9 @@ namespace AzerothLauncher
                     g.FillPolygon(b, new[] { new PointF(bb.X + 11, bb.Y + 10), new PointF(bb.X + 19, bb.Y + 4), new PointF(bb.X + 19, bb.Y + 16) });
                 x = bb.Right + 8;
             }
-            int right = (closable ? LogicalWidth - 32 : LogicalWidth - 8) - (HelpClicked != null && helpShown ? HelpW + 5 : 0) - NoteW;
+            int right = (closable ? Width - 32 : Width - 8) - (HelpClicked != null && helpShown ? HelpW + 5 : 0) - NoteW;
             if (note.Length > 0)
-                TextRenderer.DrawText(g, note, Theme.F(9, FontStyle.Bold), new Rectangle(right, 0, NoteW, (int)(Height / visualScale)), Theme.Hex("#e0a040"),
+                TextRenderer.DrawText(g, note, Theme.F(9, FontStyle.Bold), new Rectangle(right, 0, NoteW, Height), Theme.Hex("#e0a040"),
                                       TextFormatFlags.Right | TextFormatFlags.VerticalCenter | TextFormatFlags.NoPrefix | TextFormatFlags.SingleLine);
             // every step looks the same, the first (root) included: one font, one size, one colour (white under the pointer)
             Font f = Theme.F(10.5f, FontStyle.Bold), fs = f;
@@ -409,8 +391,7 @@ namespace AzerothLauncher
         Rectangle CrumbScreenRect(int i)
         {
             Rectangle text = CrumbRect(i);
-            return text.IsEmpty ? Rectangle.Empty : RectangleToScreen(new Rectangle((int)(text.X * visualScale), (int)(text.Y * visualScale),
-                                                                                     (int)(text.Width * visualScale), (int)(text.Height * visualScale)));
+            return text.IsEmpty ? Rectangle.Empty : RectangleToScreen(text);
         }
 
         void CloseFavoritePopup()
@@ -430,7 +411,7 @@ namespace AzerothLauncher
             Action add;
             if (anchor.IsEmpty || !crumbFavorites.TryGetValue(step, out add)) return;
             CloseFavoritePopup();
-            var popup = new FavoriteHeartPopup(visualScale);
+            var popup = new FavoriteHeartPopup();
             favoritePopup = popup;
             favoritePopupStep = step;
             popup.FavoriteClicked += delegate
@@ -457,10 +438,9 @@ namespace AzerothLauncher
 
         void HoverTick()
         {
-            Point pt = LogicalPoint(PointToClient(Cursor.Position));
-            bool inside = pt.X >= 0 && pt.Y >= 0 && pt.X < LogicalWidth && pt.Y < Height / visualScale;
-            int s = inside ? StepAt(pt) : -1;
-            int favoriteStep = inside ? FavoriteAt(pt) : -1;
+            Point pt = PointToClient(Cursor.Position);
+            int s = ClientRectangle.Contains(pt) ? StepAt(pt) : -1;
+            int favoriteStep = ClientRectangle.Contains(pt) ? FavoriteAt(pt) : -1;
             bool inPopup = favoritePopup != null && !favoritePopup.IsDisposed && favoritePopup.Parent != null &&
                            favoritePopup.Bounds.Contains(favoritePopup.Parent.PointToClient(Cursor.Position));
             bool inMenu = openMenu != null && !openMenu.IsDisposed && openMenu.Visible && openMenu.Bounds.Contains(Cursor.Position);
@@ -495,9 +475,8 @@ namespace AzerothLauncher
 
         protected override void OnMouseMove(MouseEventArgs e)
         {
-            Point pt = LogicalPoint(e.Location);
-            int st = StepAt(pt);
-            int favoriteStep = FavoriteAt(pt);
+            int st = StepAt(e.Location);
+            int favoriteStep = FavoriteAt(e.Location);
             if (st != quietStep) quietStep = -1;
             if (st != hoverStep || favoriteStep != favoriteHoverStep)
             {
@@ -511,12 +490,12 @@ namespace AzerothLauncher
                 }
                 hoverTimer.Start();
             }
-            int h = HotAt(pt), ha = ArrowAt(pt);
-            if (ha < 0) ha = MenuTextAt(pt);                  // the last step's name lights its arrow
+            int h = HotAt(e.Location), ha = ArrowAt(e.Location);
+            if (ha < 0) ha = MenuTextAt(e.Location);          // the last step's name lights its arrow
             if (h != hover || ha != hoverArrow) { hover = h; hoverArrow = ha; Invalidate(); }
-            Cursor = (closeEnabled && CloseBox.Contains(pt)) || h != -1 || ha != -1 || favoriteStep >= 0 ? Cursors.Hand : Cursors.Default;   // "Lost?" is not clicked: pointed at
+            Cursor = (closeEnabled && CloseBox.Contains(e.Location)) || h != -1 || ha != -1 || favoriteStep >= 0 ? Cursors.Hand : Cursors.Default;   // "Lost?" is not clicked: pointed at
             // "Lost?": a small note while the pointer is on it (no window over the launcher)
-            bool onHelp = HelpBox.Contains(pt);
+            bool onHelp = HelpBox.Contains(e.Location);
             if (onHelp && !helpTip) { helpTip = true; WowButton.Fire(HelpClicked); }
             else if (!onHelp && helpTip) { helpTip = false; if (HelpLeft != null) HelpLeft(); }
             if (dragOffset.HasValue && Owner2 != null)
@@ -551,19 +530,10 @@ namespace AzerothLauncher
                 m.Items.Add(it);
             }
             m.Closed += delegate { if (openMenu == m) { quietStep = openMenuStep; openMenu = null; openMenuStep = -1; } BeginInvoke(new Action(m.Dispose)); };
-            m.Font = new Font(m.Font.FontFamily, m.Font.Size * visualScale, m.Font.Style, GraphicsUnit.Point);
-            m.Show(this, new Point((int)((at.X - 6) * visualScale), Height - 4));
+            m.Show(this, new Point(at.X - 6, Height - 4));
         }
 
         void CloseOpenMenu() { if (openMenu != null && !openMenu.IsDisposed) openMenu.Close(); }
-
-        internal void HideTransientUi()
-        {
-            if (hoverTimer != null) hoverTimer.Stop();
-            CloseOpenMenu();
-            CloseFavoritePopup();
-            GuideHover.Hide(this);
-        }
 
         // the list of a step, opened by a click: at the same place as when hovered
         void ClickMenu(int i)
@@ -575,8 +545,7 @@ namespace AzerothLauncher
 
         protected override void OnMouseDown(MouseEventArgs e)
         {
-            Point pt = LogicalPoint(e.Location);
-            if (e.Button == MouseButtons.Left && !CloseBox.Contains(pt) && !HelpBox.Contains(pt) && Owner2 != null)
+            if (e.Button == MouseButtons.Left && !CloseBox.Contains(e.Location) && !HelpBox.Contains(e.Location) && Owner2 != null)
             {
                 Point s = PointToScreen(e.Location);
                 dragOffset = new Point(s.X - Owner2.Left, s.Y - Owner2.Top);   // drag the title bar to move the window
@@ -587,21 +556,20 @@ namespace AzerothLauncher
 
         protected override void OnMouseUp(MouseEventArgs e)
         {
-            Point pt = LogicalPoint(e.Location);
             if (dragOffset.HasValue)
             {
                 dragOffset = null;
                 Capture = false;
                 if (Moved != null && Owner2 != null) Moved(Owner2.Location);
             }
-            else if (e.Button == MouseButtons.Left && CloseBox.Contains(pt) && closeEnabled) { CloseOpenMenu(); WowButton.Fire(CloseClicked); }
-            else if (e.Button == MouseButtons.Left && HelpBox.Contains(pt)) { }   // "Lost?" only answers the pointer
-            else if (e.Button == MouseButtons.Left && ArrowAt(pt) >= 0) ClickMenu(ArrowAt(pt));
+            else if (e.Button == MouseButtons.Left && CloseBox.Contains(e.Location) && closeEnabled) { CloseOpenMenu(); WowButton.Fire(CloseClicked); }
+            else if (e.Button == MouseButtons.Left && HelpBox.Contains(e.Location)) { }   // "Lost?" only answers the pointer
+            else if (e.Button == MouseButtons.Left && ArrowAt(e.Location) >= 0) ClickMenu(ArrowAt(e.Location));
             else if (e.Button == MouseButtons.Left)
             {
                 // a click on a step's name goes back to that place; its list of places beside it opens on the ▾ or
                 // when the pointer rests on it (a step that is not a place, the one you are on, opens its list)
-                int h = HotAt(pt);
+                int h = HotAt(e.Location);
                 if (h == -2) { CloseOpenMenu(); WowButton.Fire(BackClicked); }
                 else if (h >= 0 && crumbs[h].Value != null)
                 {
@@ -612,7 +580,7 @@ namespace AzerothLauncher
                 else if (h >= 0 && menus.ContainsKey(h)) ClickMenu(h);
                 else
                 {
-                    int m = MenuTextAt(pt);
+                    int m = MenuTextAt(e.Location);
                     if (m >= 0) ClickMenu(m);
                 }
             }
@@ -771,8 +739,8 @@ namespace AzerothLauncher
         string liveBuildCls;
         GuideVideo gVideo;                                   // the guide: a video playing inside the section (Guide.cs)                         // the guide: -1 = the topic list / the topic itself
 
-        int PW { get { return Math.Max(1, (int)Math.Round(panel.ClientSize.Width / displayScale)); } }
-        int PH { get { return Math.Max(1, (int)Math.Round(panel.ClientSize.Height / displayScale)); } }
+        int PW { get { return panel.ClientSize.Width; } }
+        int PH { get { return panel.ClientSize.Height; } }
 
         // ------------------------------------------------------------------ the window itself
         void BuildSide()
@@ -1001,7 +969,7 @@ namespace AzerothLauncher
                 bool bound = guideFavorites[i] != null;
                 b.Visible = bound;
                 if (!bound) continue;
-                b.Location = new Point((int)(3 * displayScale), (int)(y * displayScale));
+                b.Location = new Point(3, y);
                 y += 26 + 5;
             }
         }
@@ -1086,8 +1054,7 @@ namespace AzerothLauncher
         // the open section fills the left side of the launcher window
         void PlaceSide()
         {
-            side.Bounds = new Rectangle((int)(SideRect.X * displayScale), (int)(SideRect.Y * displayScale),
-                                        (int)(SideRect.Width * displayScale), (int)(SideRect.Height * displayScale));
+            side.Bounds = SideRect;                          // as tall as the News column: from "News" to the last Launcher button
             side.BringToFront();
         }
 
@@ -1101,11 +1068,9 @@ namespace AzerothLauncher
         {
             if (lostHelpCard == null || side == null || !side.Visible) return;
             if (lostHelpTimer != null) lostHelpTimer.Stop();
-            int parentW = (int)(lostHelpCard.Parent.ClientSize.Width / displayScale);
-            int parentH = (int)(lostHelpCard.Parent.ClientSize.Height / displayScale);
-            int width = Math.Min(360, parentW - 12);
-            int height = Math.Min(320, parentH - 12);
-            lostHelpCard.Size = new Size((int)(Math.Max(220, width) * displayScale), (int)(Math.Max(220, height) * displayScale));
+            int width = Math.Min(360, lostHelpCard.Parent.ClientSize.Width - 12);
+            int height = Math.Min(320, lostHelpCard.Parent.ClientSize.Height - 12);
+            lostHelpCard.Size = new Size(Math.Max(220, width), Math.Max(220, height));
             lostHelpCard.Location = new Point((lostHelpCard.Parent.ClientSize.Width - lostHelpCard.Width) / 2,
                                               (lostHelpCard.Parent.ClientSize.Height - lostHelpCard.Height) / 2);
             lostHelpCard.Visible = true;
@@ -1141,11 +1106,9 @@ namespace AzerothLauncher
         void PaintLostHelpInline(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
-            g.ScaleTransform(displayScale, displayScale);
             g.Clear(Theme.Hex("#120f18"));
-            int cardW = (int)(lostHelpCard.Width / displayScale), cardH = (int)(lostHelpCard.Height / displayScale);
-            using (var p = new Pen(Theme.Hex("#c49a48"), 2)) g.DrawRectangle(p, 1, 1, cardW - 3, cardH - 3);
-            int y = 10, width = cardW - 24;
+            using (var p = new Pen(Theme.Hex("#c49a48"), 2)) g.DrawRectangle(p, 1, 1, lostHelpCard.Width - 3, lostHelpCard.Height - 3);
+            int y = 10, width = lostHelpCard.Width - 24;
             TextRenderer.DrawText(g, Lang.T("Lost?"), Theme.F(11, FontStyle.Bold), new Rectangle(12, y, width, 20), Theme.Gold,
                                   TextFormatFlags.NoPrefix | TextFormatFlags.SingleLine | TextFormatFlags.NoPadding);
             y += 26;
@@ -1161,12 +1124,11 @@ namespace AzerothLauncher
                                   TextFormatFlags.WordBreak | TextFormatFlags.NoPrefix);
             y += textHeight + 5;
             if (picture == null) return;
-            int cardW = (int)(lostHelpCard.Width / displayScale);
             float scale = Math.Min(240f / picture.Width, 160f / picture.Height);
             scale = Math.Min(scale, (float)(width - 12) / picture.Width);
             int w = Math.Max(1, (int)(picture.Width * scale)), h = Math.Max(1, (int)(picture.Height * scale));
             g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
-            g.DrawImage(picture, new Rectangle((cardW - w) / 2, y, w, h));
+            g.DrawImage(picture, new Rectangle((lostHelpCard.Width - w) / 2, y, w, h));
             y += h + 8;
         }
 
@@ -1227,12 +1189,10 @@ namespace AzerothLauncher
         void PaintDownloadClosePrompt(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
-            g.ScaleTransform(displayScale, displayScale);
             g.Clear(Theme.Hex("#0e0d14"));
-            int cardW = (int)(closeDownloadCard.Width / displayScale), cardH = (int)(closeDownloadCard.Height / displayScale);
             using (var p = new Pen(Theme.Hex("#c49a48"), 2))
-                g.DrawRectangle(p, 1, 1, cardW - 3, cardH - 3);
-            int width = Math.Max(100, (int)(closeDownloadCard.ClientSize.Width / displayScale) - 48);
+                g.DrawRectangle(p, 1, 1, closeDownloadCard.Width - 3, closeDownloadCard.Height - 3);
+            int width = Math.Max(100, closeDownloadCard.ClientSize.Width - 48);
             bool downloading = dlActive;
             string title = downloading ? "The game is downloading" : "The game is being installed";
             string message = downloading
@@ -1363,11 +1323,6 @@ namespace AzerothLauncher
                 Theme.Zoom = 1f;
                 panel.ResumeLayout();
                 if (freeze) Freeze(false);
-            }
-            if (Math.Abs(displayScale - 1f) > 0.001f)
-            {
-                SizeF factor = new SizeF(displayScale, displayScale);
-                foreach (Control child in panel.Controls) child.Scale(factor);
             }
             if (restoreScrollPositions != null)
             {
@@ -3484,33 +3439,6 @@ namespace AzerothLauncher
                             delegate(bool on) { SetStatsEnabled(on); });
             y = OptionCheck("Show play time on the home screen", Cfg.Bool("home_playtime", true), y,
                             delegate(bool on) { Cfg.Set("home_playtime", on); Cfg.Save(); Invalidate(); });
-            y += 5;
-            var scaleTitle = PutText(Lang.T("Interface size"), 11, FontStyle.Bold, Theme.Gold, 20, y, PW - 40);
-            var scaleNote = PutText(Lang.T("Automatic follows the display; choose a size to adjust it."), 9.5f,
-                                    FontStyle.Italic, Theme.GoldDim, 20, BottomOf(scaleTitle) + 2, PW - 40);
-            y = BottomOf(scaleNote) + 6;
-            string[] scaleChoices = { "auto", "80", "90", "100", "110", "125" };
-            string[] scaleLabels = { "AUTO", "80%", "90%", "100%", "110%", "125%" };
-            var scaleButtons = new List<WowButton>();
-            int scaleGap = 6;
-            int scaleButtonWidth = 76;
-            for (int i = 0; i < scaleChoices.Length; i++)
-            {
-                string choice = scaleChoices[i];
-                var b = new WowButton(scaleLabels[i], delegate
-                {
-                    SetUiScaleChoice(choice);
-                    foreach (WowButton option in scaleButtons) option.Selected = option.Tag as string == uiScaleChoice;
-                }, scaleButtonWidth, 28, 8.5f);
-                b.Tag = choice;
-                b.Selected = choice == uiScaleChoice;
-                b.Tip = choice == "auto"
-                    ? Lang.T("Follow the current display automatically.")
-                    : Lang.T("Adjust the monitor-based size by this percentage.");
-                scaleButtons.Add(b);
-                Put(b, 20 + (int)(i * (scaleButtonWidth + scaleGap) * Theme.Zoom), y);
-            }
-            y += (int)(28 * Theme.Zoom) + 10;
             // Launcher is the end of the path (Options › Launcher): everything it holds is on this page, nothing opens a
             // step of its own. The language is picked from a list under its button; About is written out at the bottom.
             string langName = Lang.Code;

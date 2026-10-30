@@ -8,7 +8,6 @@ using System.Drawing.Drawing2D;
 using System.Globalization;
 using System.IO;
 using System.Net;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
@@ -46,14 +45,10 @@ namespace AzerothLauncher
         public const string SupportUrl = "https://buymeacoffee.com/aethusx";      // the game's developer's own page
 
         const int W = 1100, H = 690;                         // retro launcher window: sections open on the left, News on the right
-        float displayScale = 1f;                              // scale the fixed-coordinate UI to the display it is opened on
-        string uiScaleChoice = "auto";                       // saved preference; fixed choices multiply the monitor-aware scale
 
         public Config Cfg;
         public bool GameRunningFlag, Installing, SyncBusy, Updating, UpdateChecking;   // Updating: the launcher's own update
         bool setupOpen, setupAsked, quitting, closeAfterDownloadCancel;
-        System.Windows.Forms.Timer displayScaleTimer;
-        bool applyingDisplayScale;
         ManualResetEvent launcherUpdateCancel;
         readonly List<KeyValuePair<string, Level>> cloudLog = new List<KeyValuePair<string, Level>>();
         RichTextBox logBox;
@@ -99,7 +94,6 @@ namespace AzerothLauncher
             WowDialog.Host = this;                           // questions and messages open inside the launcher
             Theme.PickFont();
             Cfg = Config.Load();
-            uiScaleChoice = ReadUiScaleChoice(Cfg.Str("ui_scale"));
             // Create the first-run marker beside this exe before Shown can start the automatic updater. It remains
             // pending until setup succeeds, including across an automatic updater restart.
             if (!PreviewMode) try { Util.EnsureSetupPendingMarker(); } catch (Exception) { }
@@ -147,37 +141,10 @@ namespace AzerothLauncher
             LayoutNav();
 
             BuildSide();
-            displayScale = DisplayScaleFor(Screen.PrimaryScreen) * UiScaleMultiplier(uiScaleChoice);
-            if (Math.Abs(displayScale - 1f) > 0.001f)
-            {
-                Scale(new SizeF(displayScale, displayScale));
-                StartPosition = FormStartPosition.Manual;
-                CenterOn(Screen.PrimaryScreen);
-            }
-            Move += delegate
-            {
-                if (applyingDisplayScale || IsDisposed) return;
-                if (displayScaleTimer == null)
-                {
-                    displayScaleTimer = new System.Windows.Forms.Timer();
-                    displayScaleTimer.Interval = 220;
-                    displayScaleTimer.Tick += delegate
-                    {
-                        displayScaleTimer.Stop();
-                        ApplyMonitorScale();
-                    };
-                }
-                displayScaleTimer.Stop();
-                displayScaleTimer.Start();
-            };
             RefreshPlayLabel();
 
             FormClosing += OnClosingWindow;
-            FormClosed += delegate
-            {
-                StopEdge();                                       // a Community video never outlives the launcher
-                if (displayScaleTimer != null) { displayScaleTimer.Stop(); displayScaleTimer.Dispose(); displayScaleTimer = null; }
-            };
+            FormClosed += delegate { StopEdge(); };              // a Community video never outlives the launcher
             VideoCard.Live3D = OpenLive3D;                       // Wowhead's live 3D viewer in an Edge window (Community.cs)
             VideoCard.YouTube = PlayYouTube;                     // YouTube videos play inside Community (Community.cs)
             SpellRow.OpenSet = delegate(string cls, string rarity)   // a set chip on a spell: that set in the Gear Planner
@@ -229,148 +196,6 @@ namespace AzerothLauncher
             Controls.Add(b);
             return b;
         }
-
-        const int CurrentDisplaySettings = -1;
-        const uint MonitorDefaultToNearest = 2;
-
-        [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
-        struct DisplayMode
-        {
-            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 32)] public string DeviceName;
-            public short SpecVersion, DriverVersion, Size, DriverExtra;
-            public int Fields;
-            // This union is 16 bytes. The printer fields occupy the same storage as display position/orientation.
-            public short Orientation, PaperSize, PaperLength, PaperWidth, Scale, Copies, DefaultSource, PrintQuality;
-            public short Color, Duplex, YResolution, TTOption, Collate;
-            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 32)] public string FormName;
-            public short LogPixels;
-            public int BitsPerPixel, Width, Height, DisplayFlags, DisplayFrequency;
-            public int IcmMethod, IcmIntent, MediaType, DitherType, Reserved1, Reserved2, PanningWidth, PanningHeight;
-        }
-
-        [StructLayout(LayoutKind.Sequential)]
-        struct NativePoint { public int X, Y; public NativePoint(int x, int y) { X = x; Y = y; } }
-
-        [DllImport("user32.dll", EntryPoint = "EnumDisplaySettingsW", CharSet = CharSet.Unicode, SetLastError = true)]
-        static extern bool EnumDisplaySettings(string deviceName, int modeNumber, ref DisplayMode mode);
-
-        [DllImport("user32.dll")]
-        static extern IntPtr MonitorFromPoint(NativePoint point, uint flags);
-
-        [DllImport("shcore.dll")]
-        static extern int GetScaleFactorForMonitor(IntPtr monitor, out int scalePercent);
-
-        static bool TryGetEffectiveResolution(Screen screen, out float width, out float height)
-        {
-            width = height = 0;
-            if (screen == null) return false;
-            try
-            {
-                var mode = new DisplayMode();
-                mode.Size = (short)Marshal.SizeOf(typeof(DisplayMode));
-                if (!EnumDisplaySettings(screen.DeviceName, CurrentDisplaySettings, ref mode) || mode.Width <= 0 || mode.Height <= 0)
-                    return false;
-
-                Rectangle bounds = screen.Bounds;
-                var center = new NativePoint(bounds.Left + bounds.Width / 2, bounds.Top + bounds.Height / 2);
-                IntPtr monitor = MonitorFromPoint(center, MonitorDefaultToNearest);
-                int percent;
-                if (monitor == IntPtr.Zero || GetScaleFactorForMonitor(monitor, out percent) != 0 || percent < 50 || percent > 500)
-                    return false;
-
-                // EnumDisplaySettings reports physical pixels; remove this monitor's Windows scale to get
-                // its effective resolution. This keeps the launcher proportional at 100%, 150%, 200%, etc.
-                width = mode.Width * 100f / percent;
-                height = mode.Height * 100f / percent;
-                return true;
-            }
-            catch (DllNotFoundException) { return false; }
-            catch (EntryPointNotFoundException) { return false; }
-            catch (ExternalException) { return false; }
-        }
-
-        static float DisplayScaleFor(Screen screen)
-        {
-            if (screen == null) return 1f;
-            float width, height;
-            if (!TryGetEffectiveResolution(screen, out width, out height))
-            {
-                Rectangle fallback = screen.Bounds;
-                width = fallback.Width;
-                height = fallback.Height;
-            }
-            // 1920x1024 effective resolution retains the original layout. Scale up with room on both axes.
-            float byWidth = width / 1920f;
-            float byHeight = height / 1024f;
-            return Math.Max(0.75f, Math.Min(2f, Math.Min(byWidth, byHeight)));
-        }
-
-        static string ReadUiScaleChoice(string saved)
-        {
-            switch ((saved ?? "").Trim().ToLowerInvariant())
-            {
-                case "80": case "90": case "100": case "110": case "125": return saved.Trim();
-                default: return "auto";
-            }
-        }
-
-        static float UiScaleMultiplier(string choice)
-        {
-            switch (choice)
-            {
-                case "80": return 0.80f;
-                case "90": return 0.90f;
-                case "100": return 1.00f;
-                case "110": return 1.10f;
-                case "125": return 1.25f;
-                default: return 1.00f;
-            }
-        }
-
-        void CenterOn(Screen screen)
-        {
-            if (screen == null) return;
-            Rectangle area = screen.WorkingArea;
-            Location = new Point(area.Left + (area.Width - Width) / 2, area.Top + (area.Height - Height) / 2);
-        }
-
-        void ApplyMonitorScale()
-        {
-            ApplyDisplayScale(Screen.FromControl(this), false);
-        }
-
-        void ApplyDisplayScale(Screen screen, bool recenter)
-        {
-            float next = DisplayScaleFor(screen) * UiScaleMultiplier(uiScaleChoice);
-            bool scaleChanged = Math.Abs(next - displayScale) >= 0.01f;
-            if (!scaleChanged && !recenter) return;
-            applyingDisplayScale = true;
-            try
-            {
-                if (scaleChanged)
-                {
-                    GuideHover.Hide();
-                    if (sideHead != null) sideHead.HideTransientUi();
-                    Scale(new SizeF(next / displayScale, next / displayScale));
-                    displayScale = next;
-                }
-                LayoutNav();
-                PlaceSide();
-                if (recenter || scaleChanged) CenterOn(screen);
-                Invalidate();
-            }
-            finally { applyingDisplayScale = false; }
-        }
-
-        void SetUiScaleChoice(string choice)
-        {
-            uiScaleChoice = ReadUiScaleChoice(choice);
-            Cfg.Set("ui_scale", uiScaleChoice);
-            Cfg.Save();
-            ApplyDisplayScale(Screen.FromControl(this), false);
-        }
-
-        public float DisplayScaleFactor { get { return displayScale; } }
 
         // ------------------------------------------------------------------ small tools
         public void Ui(Action a)
@@ -478,7 +303,7 @@ namespace AzerothLauncher
         // the whole window is drawn by OnPaint from the picture above: no fill first (it only makes the window flicker)
         protected override void OnPaintBackground(PaintEventArgs e)
         {
-            if (homeLayer == null) base.OnPaintBackground(e);
+            if (homeLayer == null || e.ClipRectangle.Right > W || e.ClipRectangle.Bottom > H) base.OnPaintBackground(e);
         }
 
         Bitmap HomeLayer()
@@ -548,12 +373,15 @@ namespace AzerothLauncher
         protected override void OnPaint(PaintEventArgs e)
         {
             Graphics g = e.Graphics;
-            g.ScaleTransform(displayScale, displayScale);
-            g.InterpolationMode = InterpolationMode.NearestNeighbor;
-            g.PixelOffsetMode = PixelOffsetMode.Half;
-            g.CompositingMode = CompositingMode.SourceCopy;
-            g.DrawImage(HomeLayer(), 0, 0, W, H);
-            g.CompositingMode = CompositingMode.SourceOver;
+            Rectangle clip = Rectangle.Intersect(e.ClipRectangle, new Rectangle(0, 0, W, H));
+            if (clip.Width > 0 && clip.Height > 0)
+            {
+                g.InterpolationMode = InterpolationMode.NearestNeighbor;
+                g.PixelOffsetMode = PixelOffsetMode.Half;
+                g.CompositingMode = CompositingMode.SourceCopy;
+                g.DrawImage(HomeLayer(), clip, clip, GraphicsUnit.Pixel);
+                g.CompositingMode = CompositingMode.SourceOver;
+            }
             Theme.Smooth(g);
             g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
             // News: the newest patch note
@@ -615,7 +443,7 @@ namespace AzerothLauncher
                                                   : "Game client not found. Press INSTALL, or set the game folder in Options.")
                         : status);
                     Font stf = Theme.F(9, FontStyle.Italic);
-                    float cxp = (playBtn.Left + playBtn.Width / 2f) / displayScale;
+                    float cxp = playBtn.Left + playBtn.Width / 2f;
                     if (dlActive)                            // the game download: its bar takes the status line's place
                     {
                         int pct = dlTotal > 0 ? (int)Math.Min(100, dlDone * 100 / dlTotal) : -1;
@@ -625,7 +453,7 @@ namespace AzerothLauncher
                         float dw = g.MeasureString(st, df).Width;
                         const int bw = 250, bh = 8;
                         float bx = Math.Min(cxp - bw / 2f, W - 10 - bw);
-                        float by = playBtn.Top / displayScale - 12;
+                        float by = playBtn.Top - 12;
                         g.DrawString(st, df, sb, Math.Min(cxp - dw / 2, W - 10 - dw), by - 15);
                         using (var back = new SolidBrush(Theme.Hex("#1a1410"))) g.FillRectangle(back, bx, by, bw, bh);
                         if (pct > 0)
@@ -637,7 +465,7 @@ namespace AzerothLauncher
                     {
                         float sw = g.MeasureString(st, stf).Width;
                         float sx = Math.Min(cxp - sw / 2, W - 10 - sw);
-                        g.DrawString(st, stf, sb, sx, playBtn.Top / displayScale - 26);
+                        g.DrawString(st, stf, sb, sx, playBtn.Top - 26);
                     }
                 }
             }
@@ -781,27 +609,25 @@ namespace AzerothLauncher
             to = Math.Max(0, Math.Min(max, to));
             if (to == newsScroll) return;
             newsScroll = to;
-            Invalidate();
+            Invalidate(new Rectangle(NewsArea.X - 4, NewsArea.Y - 2, NewsBar.Right - NewsArea.X + 8, NewsArea.Height + 4));
         }
 
         public void Wheel(int delta)
         {
             Point p = PointToClient(Cursor.Position);
-            p = new Point((int)(p.X / displayScale), (int)(p.Y / displayScale));
             Rectangle hot = Rectangle.Union(NewsArea, NewsBar);
             if (hot.Contains(p)) ScrollNews(newsScroll - delta / 120 * 40);
         }
 
         protected override void OnMouseDown(MouseEventArgs e)
         {
-            int x = (int)(e.X / displayScale), y = (int)(e.Y / displayScale);
             Rectangle t = NewsThumb();
             Rectangle bar = new Rectangle(NewsBar.X - 4, NewsBar.Y, NewsBar.Width + 8, NewsBar.Height);
-            if (e.Button == MouseButtons.Left && !t.IsEmpty && bar.Contains(x, y))
+            if (e.Button == MouseButtons.Left && !t.IsEmpty && bar.Contains(e.Location))
             {
                 newsDrag = true;
-                newsDragOffset = t.Contains(x, y) ? y - t.Y : t.Height / 2;
-                DragNews(y);
+                newsDragOffset = t.Contains(e.Location) ? e.Y - t.Y : t.Height / 2;
+                DragNews(e.Y);
             }
             base.OnMouseDown(e);
         }
@@ -817,21 +643,20 @@ namespace AzerothLauncher
 
         protected override void OnMouseMove(MouseEventArgs e)
         {
-            int x = (int)(e.X / displayScale), y = (int)(e.Y / displayScale);
-            if (newsDrag) DragNews(y);
-            bool over = new Rectangle(NewsBar.X - 4, NewsBar.Y, NewsBar.Width + 8, NewsBar.Height).Contains(x, y) && !NewsThumb().IsEmpty;
+            if (newsDrag) DragNews(e.Y);
+            bool over = new Rectangle(NewsBar.X - 4, NewsBar.Y, NewsBar.Width + 8, NewsBar.Height).Contains(e.Location) && !NewsThumb().IsEmpty;
             if (over != newsBarHover)
             {
                 newsBarHover = over;
                 Cursor = over ? Cursors.Hand : Cursors.Default;
-                Invalidate();
+                Invalidate(new Rectangle(NewsBar.X - 2, NewsBar.Y, NewsBar.Width + 4, NewsBar.Height));
             }
             base.OnMouseMove(e);
         }
 
         protected override void OnMouseUp(MouseEventArgs e)
         {
-            if (newsDrag) { newsDrag = false; Invalidate(); }
+            if (newsDrag) { newsDrag = false; Invalidate(new Rectangle(NewsBar.X - 2, NewsBar.Y, NewsBar.Width + 4, NewsBar.Height)); }
             base.OnMouseUp(e);
         }
 
@@ -839,7 +664,7 @@ namespace AzerothLauncher
         {
             status = msg ?? "";
             if (status == "Ready." && Util.SetupPendingForThisInstall) status = "First Time Setup";
-            Invalidate();
+            Invalidate(new Rectangle(0, 578, W, H - 578));
         }
 
         // every message goes to the one status line above PLAY (there is no note in the bottom left any more)
@@ -866,7 +691,7 @@ namespace AzerothLauncher
                 if (name == "Changelog") continue;           // its place is on the News line
                 if (!NavShown(name)) { nav[name].Visible = false; continue; }
                 nav[name].Visible = true;
-                nav[name].Location = new Point((int)((693 + (k % 3) * 134) * displayScale), (int)((480 + (k / 3) * 34) * displayScale));
+                nav[name].Location = new Point(693 + (k % 3) * 134, 480 + (k / 3) * 34);
                 k++;
             }
             if (strip != null) LayoutStrip();
@@ -886,7 +711,7 @@ namespace AzerothLauncher
             // Play stays illuminated and acts as the current slide's NEXT action during setup.
             playBtn.GrayedTip = "";
             playBtn.Grayed = false;
-            Invalidate();
+            Invalidate(new Rectangle(0, 578, W, H - 578));
             RefreshGates();
         }
 
@@ -1690,7 +1515,7 @@ namespace AzerothLauncher
                 LayoutDownloadClosePrompt();
                 closeDownloadCard.Invalidate();
             }
-            Invalidate();
+            Invalidate(new Rectangle(0, 578, W, H - 578));
         }
 
         ManualResetEvent installCancel;

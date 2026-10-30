@@ -779,7 +779,6 @@ namespace AzerothLauncher
         static Form hoverHost;
         Control hoverOwner;
         string title = "", body = "";
-        float visualScale = 1f;
         static readonly Bitmap measure = new Bitmap(1, 1);
         string splitFor;                                      // the body (and title) the runs below were cut from
         List<KeyValuePair<string, GuideLink>> runs;
@@ -992,8 +991,6 @@ namespace AzerothLauncher
                 if (box.Parent != null) box.Parent.Controls.Remove(box);
                 host.Controls.Add(box);
             }
-            LauncherApp app = host as LauncherApp;
-            box.visualScale = app != null ? app.DisplayScaleFactor : 1f;
             box.icon = icon;
             box.model = model;
             Image pic = box.picture;
@@ -1017,15 +1014,15 @@ namespace AzerothLauncher
 
             // Confine every tooltip to its launcher window. Clamping to the monitor's working area alone lets
             // bottom-edge hovers spill over other apps (the launcher can sit above another window).
-            int margin = (int)(6 * box.visualScale);
+            const int margin = 6;
             int availableWidth = ownerBounds.Width - margin * 2;
             int availableHeight = ownerBounds.Height - margin * 2;
-            int width = Math.Min((int)(W * box.visualScale), availableWidth);
-            int height = Math.Min((int)((th + bh + 22 + (model != null ? ModelH + 8 : 0) + (pic != null ? pic.Height + 10 : 0)) * box.visualScale), availableHeight);
+            int width = Math.Min(W, availableWidth);
+            int height = Math.Min(th + bh + 22 + (model != null ? ModelH + 8 : 0) + (pic != null ? pic.Height + 10 : 0), availableHeight);
             var size = new Size(width, height);
-            int x = p.X + (int)(16 * box.visualScale), y = p.Y + (int)(20 * box.visualScale);
-            if (x + size.Width > ownerBounds.Right - margin) x = p.X - size.Width - (int)(8 * box.visualScale);
-            if (y + size.Height > ownerBounds.Bottom - margin) y = p.Y - size.Height - (int)(8 * box.visualScale);
+            int x = p.X + 16, y = p.Y + 20;
+            if (x + size.Width > ownerBounds.Right - margin) x = p.X - size.Width - 8;
+            if (y + size.Height > ownerBounds.Bottom - margin) y = p.Y - size.Height - 8;
             x = Math.Max(ownerBounds.Left + margin, Math.Min(x, ownerBounds.Right - size.Width - margin));
             y = Math.Max(ownerBounds.Top + margin, Math.Min(y, ownerBounds.Bottom - size.Height - margin));
             box.Bounds = host.RectangleToClient(new Rectangle(x, y, size.Width, size.Height));
@@ -1050,10 +1047,8 @@ namespace AzerothLauncher
         protected override void OnPaint(PaintEventArgs e)
         {
             Graphics g = e.Graphics;
-            g.ScaleTransform(visualScale, visualScale);
             g.Clear(BackColor);
-            int logicalHeight = (int)(Height / visualScale);
-            using (var p = new Pen(Theme.Hex("#c49a48"), 1)) g.DrawRectangle(p, 0, 0, W - 1, logicalHeight - 1);
+            using (var p = new Pen(Theme.Hex("#c49a48"), 1)) g.DrawRectangle(p, 0, 0, Width - 1, Height - 1);
             Font tf = Theme.F(10.5f, FontStyle.Bold), bf = Theme.F(9.5f);
             int ix = icon != null ? 40 : 0;
             int th = title.Length == 0 ? 0 : TextRenderer.MeasureText(title, tf, new Size(W - 20 - ix, 0), TextFormatFlags.WordBreak | TextFormatFlags.NoPrefix).Height;
@@ -1071,10 +1066,10 @@ namespace AzerothLauncher
             Flow(g, bf, true);
             g.Restore(st);
             if (shownPicture != null)
-                g.DrawImage(shownPicture, (W - shownPicture.Width) / 2, logicalHeight - shownPicture.Height - 10, shownPicture.Width, shownPicture.Height);
+                g.DrawImage(shownPicture, (Width - shownPicture.Width) / 2, Height - shownPicture.Height - 10, shownPicture.Width, shownPicture.Height);
             if (model != null)
             {
-                var r = new Rectangle(10, logicalHeight - ModelH - 10, W - 20, ModelH);
+                var r = new Rectangle(10, Height - ModelH - 10, W - 20, ModelH);
                 using (var b = new SolidBrush(Theme.Hex("#0b0910"))) g.FillRectangle(b, r);
                 Image pic = SpellIcons.ItemModel(model, this);
                 if (pic != null)
