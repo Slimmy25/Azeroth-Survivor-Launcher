@@ -2,6 +2,7 @@
 
 - Launcher questions and warnings now appear over the secondary section without replacing its contents.
 - Oversized prompt content can scroll to fit the secondary section, while Windows file and folder pickers remain unchanged.
+- Existing players confirm their game folder during setup and finish without seeing the game-download slide.
 
 ===
 # v3.05 (2026-10-29)
