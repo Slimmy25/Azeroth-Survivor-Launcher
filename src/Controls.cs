@@ -1380,6 +1380,7 @@ namespace AzerothLauncher
             KeyPreview = true;
             frame = new Panel();
             frame.BackColor = Theme.Panel;
+            frame.AutoScroll = true;
             frame.Location = new Point(10, 10);
             frame.Paint += delegate(object s, PaintEventArgs e)
             {
@@ -1471,6 +1472,7 @@ namespace AzerothLauncher
         // ---- shown inside the launcher: over a darkened picture of it, and nothing behind it can be clicked until it
         // is answered. No window of its own (when the launcher is hidden or minimized, it opens as a window instead).
         public static Form Host;                              // the launcher, set when it starts
+        public static Form SecondaryHost;                     // section window, without changing its contents
         ShadePanel shade;
         bool closedInside;
         int margin = 10;                                      // the dark edge around the frame: only as a window of its own
@@ -1480,14 +1482,21 @@ namespace AzerothLauncher
 
         static bool HostUsable()
         {
-            Form h = Host;
+            Form h = ActiveHost();
             return h != null && !h.IsDisposed && h.Visible && h.WindowState != FormWindowState.Minimized && !h.InvokeRequired;
+        }
+
+        public static Form ActiveHost()
+        {
+            Form s = SecondaryHost;
+            if (s != null && !s.IsDisposed && s.Visible && s.ClientSize.Width > 0 && s.ClientSize.Height > 0) return s;
+            return Host;
         }
 
         public bool PutInLauncher()
         {
             if (!HostUsable()) return false;
-            Form h = Host;
+            Form h = ActiveHost();
             var bmp = new Bitmap(Math.Max(1, h.ClientSize.Width), Math.Max(1, h.ClientSize.Height), System.Drawing.Imaging.PixelFormat.Format32bppPArgb);
             // the launcher as it is on screen (DrawToBitmap leaves the section window and its scrolled lists black, and
             // is slow enough to flash): copied from the screen, then dimmed
@@ -1512,11 +1521,24 @@ namespace AzerothLauncher
             // dimmed launcher)
             margin = 0;
             frame.Location = Point.Empty;
+            // The dialog's content can scroll, but the window itself must never extend
+            // beyond the section. Preserve the section controls beneath the shade.
+            int maxW = Math.Max(1, shade.ClientSize.Width - 16);
+            int maxH = Math.Max(1, shade.ClientSize.Height - 16);
+            frame.Size = new Size(Math.Min(frame.Width, maxW), Math.Min(frame.Height, maxH));
             ClientSize = frame.Size;
             shade.Controls.Add(this);
             h.Controls.Add(shade);
             shade.BringToFront();
             SizeChanged += delegate { CenterInShade(); };
+            shade.SizeChanged += delegate
+            {
+                if (shade == null) return;
+                int w = Math.Max(1, shade.ClientSize.Width - 16), ht = Math.Max(1, shade.ClientSize.Height - 16);
+                frame.Size = new Size(Math.Min(Body.Width + 4, w), Math.Min(Body.Height + 4, ht));
+                ClientSize = frame.Size;
+                CenterInShade();
+            };
             FormClosed += delegate { closedInside = true; RemoveShade(); };
             CenterInShade();
             Show();
@@ -1544,7 +1566,7 @@ namespace AzerothLauncher
         // like ShowDialog, but inside the launcher: returns when it is closed
         public DialogResult ShowModal(IWin32Window owner)
         {
-            if (!PutInLauncher()) return ShowDialog(owner);
+            if (!PutInLauncher()) { PlaceOver(owner as Form); return ShowDialog(owner); }
             while (!closedInside && !IsDisposed && Host != null && !Host.IsDisposed)
             {
                 Application.DoEvents();
@@ -1558,7 +1580,7 @@ namespace AzerothLauncher
         // like Show (it stays open while the launcher goes on), but inside the launcher
         public void ShowInside()
         {
-            if (!PutInLauncher()) Show();
+            if (!PutInLauncher()) { PlaceOver(Host); Show(); }
         }
 
         // centred over the launcher when that is on screen, otherwise centred on the screen
