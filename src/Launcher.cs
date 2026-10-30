@@ -47,6 +47,7 @@ namespace AzerothLauncher
 
         const int W = 1100, H = 690;                         // retro launcher window: sections open on the left, News on the right
         float displayScale = 1f;                              // scale the fixed-coordinate UI to the display it is opened on
+        string uiScaleChoice = "auto";                       // saved preference; fixed choices multiply the monitor-aware scale
 
         public Config Cfg;
         public bool GameRunningFlag, Installing, SyncBusy, Updating, UpdateChecking;   // Updating: the launcher's own update
@@ -98,6 +99,7 @@ namespace AzerothLauncher
             WowDialog.Host = this;                           // questions and messages open inside the launcher
             Theme.PickFont();
             Cfg = Config.Load();
+            uiScaleChoice = ReadUiScaleChoice(Cfg.Str("ui_scale"));
             // Create the first-run marker beside this exe before Shown can start the automatic updater. It remains
             // pending until setup succeeds, including across an automatic updater restart.
             if (!PreviewMode) try { Util.EnsureSetupPendingMarker(); } catch (Exception) { }
@@ -145,7 +147,7 @@ namespace AzerothLauncher
             LayoutNav();
 
             BuildSide();
-            displayScale = DisplayScaleFor(Screen.PrimaryScreen);
+            displayScale = DisplayScaleFor(Screen.PrimaryScreen) * UiScaleMultiplier(uiScaleChoice);
             if (Math.Abs(displayScale - 1f) > 0.001f)
             {
                 Scale(new SizeF(displayScale, displayScale));
@@ -303,6 +305,28 @@ namespace AzerothLauncher
             return Math.Max(0.75f, Math.Min(2f, Math.Min(byWidth, byHeight)));
         }
 
+        static string ReadUiScaleChoice(string saved)
+        {
+            switch ((saved ?? "").Trim().ToLowerInvariant())
+            {
+                case "80": case "90": case "100": case "110": case "125": return saved.Trim();
+                default: return "auto";
+            }
+        }
+
+        static float UiScaleMultiplier(string choice)
+        {
+            switch (choice)
+            {
+                case "80": return 0.80f;
+                case "90": return 0.90f;
+                case "100": return 1.00f;
+                case "110": return 1.10f;
+                case "125": return 1.25f;
+                default: return 1.00f;
+            }
+        }
+
         void CenterOn(Screen screen)
         {
             if (screen == null) return;
@@ -312,23 +336,38 @@ namespace AzerothLauncher
 
         void ApplyMonitorScale()
         {
-            Screen screen = Screen.FromControl(this);
-            float next = DisplayScaleFor(screen);
-            if (Math.Abs(next - displayScale) < 0.01f) return;
-            float ratio = next / displayScale;
-            displayScale = next;
+            ApplyDisplayScale(Screen.FromControl(this), false);
+        }
+
+        void ApplyDisplayScale(Screen screen, bool recenter)
+        {
+            float next = DisplayScaleFor(screen) * UiScaleMultiplier(uiScaleChoice);
+            bool scaleChanged = Math.Abs(next - displayScale) >= 0.01f;
+            if (!scaleChanged && !recenter) return;
             applyingDisplayScale = true;
             try
             {
-                GuideHover.Hide();
-                if (sideHead != null) sideHead.HideTransientUi();
-                Scale(new SizeF(ratio, ratio));
+                if (scaleChanged)
+                {
+                    GuideHover.Hide();
+                    if (sideHead != null) sideHead.HideTransientUi();
+                    Scale(new SizeF(next / displayScale, next / displayScale));
+                    displayScale = next;
+                }
                 LayoutNav();
                 PlaceSide();
-                CenterOn(screen);
+                if (recenter || scaleChanged) CenterOn(screen);
                 Invalidate();
             }
             finally { applyingDisplayScale = false; }
+        }
+
+        void SetUiScaleChoice(string choice)
+        {
+            uiScaleChoice = ReadUiScaleChoice(choice);
+            Cfg.Set("ui_scale", uiScaleChoice);
+            Cfg.Save();
+            ApplyDisplayScale(Screen.FromControl(this), false);
         }
 
         public float DisplayScaleFactor { get { return displayScale; } }

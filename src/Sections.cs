@@ -3484,6 +3484,33 @@ namespace AzerothLauncher
                             delegate(bool on) { SetStatsEnabled(on); });
             y = OptionCheck("Show play time on the home screen", Cfg.Bool("home_playtime", true), y,
                             delegate(bool on) { Cfg.Set("home_playtime", on); Cfg.Save(); Invalidate(); });
+            y += 5;
+            var scaleTitle = PutText(Lang.T("Interface size"), 11, FontStyle.Bold, Theme.Gold, 20, y, PW - 40);
+            var scaleNote = PutText(Lang.T("Automatic follows the display; choose a size to adjust it."), 9.5f,
+                                    FontStyle.Italic, Theme.GoldDim, 20, BottomOf(scaleTitle) + 2, PW - 40);
+            y = BottomOf(scaleNote) + 6;
+            string[] scaleChoices = { "auto", "80", "90", "100", "110", "125" };
+            string[] scaleLabels = { "AUTO", "80%", "90%", "100%", "110%", "125%" };
+            var scaleButtons = new List<WowButton>();
+            int scaleGap = 6;
+            int scaleButtonWidth = 76;
+            for (int i = 0; i < scaleChoices.Length; i++)
+            {
+                string choice = scaleChoices[i];
+                var b = new WowButton(scaleLabels[i], delegate
+                {
+                    SetUiScaleChoice(choice);
+                    foreach (WowButton option in scaleButtons) option.Selected = option.Tag as string == uiScaleChoice;
+                }, scaleButtonWidth, 28, 8.5f);
+                b.Tag = choice;
+                b.Selected = choice == uiScaleChoice;
+                b.Tip = choice == "auto"
+                    ? Lang.T("Follow the current display automatically.")
+                    : Lang.T("Adjust the monitor-based size by this percentage.");
+                scaleButtons.Add(b);
+                Put(b, 20 + (int)(i * (scaleButtonWidth + scaleGap) * Theme.Zoom), y);
+            }
+            y += (int)(28 * Theme.Zoom) + 10;
             // Launcher is the end of the path (Options › Launcher): everything it holds is on this page, nothing opens a
             // step of its own. The language is picked from a list under its button; About is written out at the bottom.
             string langName = Lang.Code;
