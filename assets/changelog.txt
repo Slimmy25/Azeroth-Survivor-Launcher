@@ -2,6 +2,13 @@ Patch notes shown in the launcher's Changelog. The launcher sorts them by versio
 Every post starts with its title on the first line. Posts are separated by a line with only === on it.
 Everything above the first === line is ignored.
 ===
+0.130.1
+-------
+Dwarves and Humans are stronger: Stoneform shields you more and more often, and Humans level up faster.
+
+- Stoneform (Dwarf) now comes every 30 sec instead of 45, and its shield absorbs 45% of your max health instead of 30%.
+- The Human Spirit (Human) now gives +20% experience instead of +10%.
+===
 0.130.0
 -------
 When you fall, the end screen now shows a Death Recap: what killed you, who dealt it and how hard it hit, with a full breakdown of your last seconds one click away.

@@ -11,39 +11,48 @@ The launcher does not contain or host the game: it downloads it from the game's 
 [CREDITS.md](CREDITS.md) for where everything comes from.
 
 **[Download the launcher](https://github.com/Slimmy25/Azeroth-Survivors-Launcher/releases/latest)**: one file,
-`Azeroth Survivors Launcher.exe`. Put it in the folder where the game is, or where you want it installed. It needs
-nothing else: it runs on the .NET Framework 4.8 that comes with Windows 10 and 11.
+`Azeroth Survivors Launcher.exe`. Put it beside your game, or in the folder where you want the game installed.
+It runs on .NET Framework 4.8.
 
 <table>
   <tr>
     <td align="center"><img src="docs/screenshots/home-community.png" width="420" alt="The home screen with a featured Community video"><br><sub>Home: featured Community videos and the game's news</sub></td>
-    <td align="center"><img src="docs/screenshots/stats-overview.png" width="420" alt="The STATS page: your survivor and your runs"><br><sub>STATS: every run, your records and your DPS over time</sub></td>
+    <td align="center"><img src="docs/screenshots/stats-overview.png" width="420" alt="The STATS overview with sample run totals and play time"><br><sub>STATS: sample runs, wins, time played and enemies defeated</sub></td>
   </tr>
   <tr>
     <td align="center"><img src="docs/screenshots/talent-tree-builder.png" width="420" alt="The Talent Tree Builder with a Warrior build"><br><sub>Theorycrafting: try a talent build on the game's trees</sub></td>
-    <td align="center"><img src="docs/screenshots/gear-planner-tier-bonus.png" width="420" alt="The Gear Planner, laid out like the game's character sheet"><br><sub>Theorycrafting: the Gear Planner, a piece at a time or a whole set</sub></td>
+    <td align="center"><img src="docs/screenshots/gear-planner-tier-bonus.png" width="420" alt="The Gear Planner with a Priest set and jewelry equipped"><br><sub>Theorycrafting: compare a class set and jewelry on the character sheet</sub></td>
   </tr>
   <tr>
-    <td align="center"><img src="docs/screenshots/guide-class-gear.png" width="420" alt="A class's gear page in the Guide"><br><sub>Guide: every piece of a class's gear, its bonuses and its set</sub></td>
-    <td align="center"><img src="docs/screenshots/options-path.png" width="420" alt="Options with the path at the top"><br><sub>The path at the top: every page one click away, no rows of buttons</sub></td>
+    <td align="center"><img src="docs/screenshots/guide-class-gear.png" width="420" alt="The Paladin Guide with its in-article contents tree"><br><sub>Guide: a class passage with a live contents tree beside it</sub></td>
+    <td align="center"><img src="docs/screenshots/options-path.png" width="420" alt="Options folders with save import and export"><br><sub>Options: folder locations and portable save import/export</sub></td>
   </tr>
 </table>
+
+The STATS screenshot uses made-up sample data. The other screenshots show the local launcher with example selections.
 
 ---
 
 ## What it does
 
-### Gets the game for you
-- **INSTALL** first asks whether the game is already on your PC. If it is, you point the launcher at its folder. If
-  not, the launcher downloads it, with a progress bar, and installs it next to itself.
-- The download comes from one of the game's three download hosts, picked at random, and the next one is tried if a
-  host fails. The official game host is the backup link. Every download is checked against the game's known
-  checksums before it is installed. See [Download hosts](#download-hosts).
-- **PLAY** checks for a newer launcher, then starts the game. The game updates itself when it starts (it closes and
-  opens again); the launcher follows it through that restart.
-- Nothing is downloaded until you press INSTALL. First-time setup only asks questions, all inside the launcher:
-  importing a save from the website version, your folders, cloud saving and addons.
-- The launcher updates itself: a new version is checked (SHA-256) and installed when it starts.
+### First-time setup and game installation
+- A new launcher location starts **First Time Setup**, even if another copy has been used before. Its marker stays
+  beside the executable until setup succeeds; cancellation does not mark setup complete.
+- Cancel Setup removes the launcher's own setup data and temporary download files, while preserving the game, saves,
+  addons, addon settings and cloud files.
+- Players moving from the browser game can import an exported `.sav` during setup. Existing client owners select
+  their game folder; new players can install the game beside the launcher.
+- Setup asks whether you are new or already have the game. Existing players select the folder containing
+  `AzerothSurvivors.exe`; that route skips downloading the game. New players reach the download as the final setup
+  step. The game begins downloading when they choose to continue from “Ready to download and play?”.
+- Cloud saving is off by default for a new install; saved preferences from an existing install are preserved. When
+  enabled, it syncs the game's save directory and addon settings to the
+  chosen cloud folder. The game controls where it writes live saves (by default `%APPDATA%\wenilla-rogue`); changing
+  the launcher's save-folder field only changes the folder used for import and sync. Addon program files are not synced.
+- Downloads use the game's hosted files, try alternate hosts after failures and verify the archive when a trusted
+  checksum is available. The Google Drive mirror's existing MD5 verification is a deliberate project policy.
+- The launcher checks for its own update at startup and before launching the game. The game also updates itself
+  when it starts. During a game or launcher download/install, closing opens an in-launcher choice to cancel and exit or stay.
 
 ### Addon manager
 - **Your addons**: turn each one on or off, uninstall it (its folder and saved settings), toggle them all, and keep
@@ -53,19 +62,25 @@ nothing else: it runs on the .NET Framework 4.8 that comes with Windows 10 and 1
   - **AZS addons** are made for Azeroth Survivors, by Slimjim and other players.
   - **WoW 1.12 addons** are classic addons converted to work in this game.
   - **My Addons** lists the addon .zip files you keep on your own PC.
-- Every addon is optional and starts off. Nothing is installed unless you choose it (AZS Stats is offered once
-  during setup).
+- Addons from Download More are installed only when chosen. Setup offers AZS Stats; you can decline it.
 
 ### The Guide
-The Guide has two main sections, with **Theorycrafting** inside Gameplay:
+The Guide has **New Player** and **Gameplay** sections. **Theorycrafting** is a Gameplay menu:
 - **New Player**: getting started, controls, a first run, beginner tips, pickups, caches and guardians, talents, gear
   and the Armory, addons, achievements and rewards, level-ups and cards, and co-op.
-- **Gameplay**: heroics and endless mode, all nine classes (including spell pools, icons and talents), races, zones and
-  bosses, **Items**, **Transmog**, and player-made **Build Guides**.
+- **Gameplay**: heroics and endless mode, all nine class guides, races, zones and bosses, **Items**, **Archive**,
+  **Transmog**, and player-made **Build Guides**. Class guides share a linked passage for spells, talent descriptions,
+  gear, Codex entries and class-specific resources.
+- **Items** contains every class's gear and set bonuses, plus shared rings, trinkets and ordinary amulets. **Archive**
+  preserves the flat alphabetical Codex record for reference; Archive is omitted from search, and links lead to the
+  relevant entry in the class guide instead.
 - **Gameplay > Theorycrafting**: the **Talent Tree Builder** and **Gear Planner**.
 
-A search box covers every page. Hovering a spell, talent or item shows what the game itself says about it. Short
-how-to videos play inside the launcher. The same guide is in the game with the **AZS Handbook** addon (`/handbook`).
+Search covers player-facing guide pages, not Archive. Spell, talent, gear and Codex links keep their surrounding text
+and lead to the matching passage or class-guide location. The class contents tree stays beside the passage; scrolling
+it jumps between sections and the passage follows. Spell and talent hovers show their details; item hovers also show a
+Wowhead Classic 3D model preview when an item match is available, including in the Gear Planner.
+Short how-to videos play inside the launcher. The same guide is in the game with **AZS Handbook** (`/handbook`).
 
 ### Tools to theorycraft
 - **Talent Tree Builder**: all three trees of every class, as in the game. Click to add a point and right-click to
@@ -74,24 +89,29 @@ how-to videos play inside the launcher. The same guide is in the game with the *
 - **Gear Planner**: a character sheet laid out like the game's. Put a class's gear and any rings, trinkets and
   amulet in its slots and see what they add, on the sheet's stats and the Run Stats beside it. Gear whose bonuses
   are not known yet is marked.
-- **Build Guides**: players' build videos, credited to them, for every class.
+- **Build Guides**: player videos are grouped by class when their title or description identifies one; some classes
+  may not have a published guide yet.
+- **Saved talent builds**: names are shared across classes. Each saved build remembers its class and opens that class's
+  Talent Tree Builder when selected.
 - **STATS** (optional, with the AZS Stats addon): every run's result and DPS, DPS over time, your best builds with
   their spells, records per class, race and zone (highest DPS solo and in co-op), level-up saves, legendaries, a
   death log with your Nemesis, co-op stats with your friends, and an **Armory** of each class's hero with their gear
   and numbers. In game, a live tracker compares your DPS with your record as you play.
 
 ### Community videos
-The home screen features videos made by the community, in rotation. **MORE VIDEOS** lists them all. They play inside
-the launcher, streamed from YouTube and never saved on your PC, with the creator's name linking to their channel.
+The home screen features videos made by the community, in rotation. **MORE VIDEOS** lists them all. They stream from
+YouTube in a launcher-managed video window and are not saved as video files. Each creator's name links to their channel.
 
 ### Also
 - **Cloud Save** (Options > Cloud Save): your save and your addons' settings kept in Google Drive, OneDrive or Dropbox and shared between
   your PCs. The addons themselves aren't copied (an old copy could replace a newer one): when settings arrive for an
   addon from Download More that isn't installed, the launcher installs it.
+- **Import / Export Save** (Options > Folders): import or export a validated `.sav` file for the browser game or another
+  client. Importing over existing progress keeps a backup in the game's Saves folder.
 - **News and Changelog**: every patch note of the game, newest first.
 - **Options**: the game's own settings (display, graphics, sound, gameplay) with a plain explanation for each, your
   folders, and the launcher's own settings.
-- **26 languages** and only one copy running at a time. Closing the launcher exits it; it does not stay in the system tray.
+- **26 languages** and only one copy running at a time. Closing exits the launcher; it does not stay in the system tray.
 
 ### The AZS addons
 | Addon | What it does |
@@ -118,9 +138,9 @@ Program Files), or when the exe is inside Google Drive, OneDrive, Dropbox or iCl
 - **The game's download hosts** (in `src/Launcher.cs`): the game client.
 - **GitHub**: launcher updates and the addons offered in Download More.
 - **jsDelivr** (a CDN for GitHub files): the guide's how-to videos, streamed while they play.
-- **YouTube**: community and build videos, played in a Microsoft Edge window inside the launcher, and their titles.
-- **Wowhead's image host** (`wow.zamimg.com`): spell, class, race, zone and creature pictures, shown when a page
-  needs them and cached in the launcher's `temp` folder.
+- **YouTube**: community and build videos and their titles; Community videos play in a Microsoft Edge window managed by the launcher.
+- **Wowhead's image host** (`wow.zamimg.com`): spell, class, race, zone and creature pictures, plus item-model previews in guide and Gear Planner hovers. Images load
+  when needed and are cached in the launcher's `temp` folder.
 - **Your cloud drive's folder on this PC** (Cloud Save), and nothing else of your files.
 
 ---
@@ -152,14 +172,14 @@ team. Unofficial mirrors are never used.
 
 | Host | Run by | Check |
 | --- | --- | --- |
-| Mirror By Community Member | Leo | SHA-256 and MD5 |
-| Mirror By Community Member | Meexa | SHA-256 and MD5 |
-| Mirror By Discord Mod | Fotze | MD5 |
-| Official Website Host (Backup Link) | Aethus | a real .rar/.zip/.7z from the official game host |
+| Primary download host (`budapestmix.hu`) | Project endpoint | Pinned SHA-256 and MD5 |
+| Developer backup (`azerothsurvivors-mirror.sandervspl.dev`) | Project backup | Host-provided SHA-256 plus pinned checks |
+| Google Drive | Fotze, trusted head moderator | Pinned MD5 or matching SHA-256 |
+| Official website fallback | Aethus | Accepts a real `.rar`, `.zip` or `.7z` from the game site; checks the pinned SHA-256 when it matches |
 
 The project owner considers the Google Drive mirror from Fotze, a trusted head moderator, a trusted source and has
-chosen to keep its existing MD5 check. This is a deliberate project policy. The other mirrors use the checks listed
-above.
+chosen to keep its existing MD5 check. This is a deliberate project policy. The primary and developer backup hosts
+use their pinned checks; the official-site fallback is accepted only as a real game archive from Aethus's site.
 
 ## License
 

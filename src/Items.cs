@@ -572,9 +572,13 @@ namespace AzerothLauncher
                     string eight = EightPiece(cls, rar);
                     string fourText = four != null ? four.Text : "Not entered yet.";
                     string eightText = eight ?? "Not entered yet.";
-                    l.Add("# " + rar + (chance.TryGetValue(rar, out c) ? " (" + Pct(Num(c) * 100) + "% each on normal)" : "") +
-                          " — " + SetName(cls, rar) + " | 4-piece (4 armor at 1+ stars): " + fourText +
-                          " | 8-piece (8 armor at 3+ stars; empowered at 5): " + eightText);
+                    l.Add("# " + rar + (chance.TryGetValue(rar, out c) ? " (" + Pct(Num(c) * 100) + "% each on normal)" : ""));
+                    l.Add(SetName(cls, rar));
+                    l.Add("");
+                    l.Add("4p bonus (4 armor at 1+ stars): " + fourText);
+                    l.Add("");
+                    l.Add("8p bonus (8 armor at 3+ stars; empowered at 5): " + eightText);
+                    l.Add("");
                     foreach (var p in Gear)
                     {
                         if (p.Class != cls || p.Rarity != rar) continue;

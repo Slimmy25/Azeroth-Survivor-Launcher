@@ -1,3 +1,11 @@
+# v3.08 (2026-10-30)
+
+- The Guide button now opens the Wiki introduction. A separate New Player Guide button opens the new-player section.
+- The Wiki introduction can be collapsed for navigation testing. Classes, Items and Transmog appear as peer sections, with class trees opening and closing interactively.
+- Items open directly to the shared rings, trinkets and amulets passage. Transmog's related passages are combined into one Wiki page.
+- Updated guide navigation, item and talent visuals, launcher documentation, screenshots and the game changelog, including patch 0.130.1.
+
+===
 # v3.07 (2026-10-30)
 
 - Class guides now share a nested passage with working links among spells, talents, gear and Codex entries.

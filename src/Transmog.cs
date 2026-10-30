@@ -46,23 +46,23 @@ namespace AzerothLauncher
             if (All.Count == 0) return l;
             l.Add("@topic Transmog | Appearances, tabards and weapon glows: looks that add nothing, and how to earn them");
             l.Add("Every look here only changes how your hero looks; none of them adds to your numbers. Choose them in Armory > Character.");
-            l.Add("@page Appearances | Head and back looks any class can show, each with an achievement");
+            l.Add("# Appearances");
+            l.Add("Head and back looks any class can show, each with an achievement.");
             foreach (string slot in new[] { "Head", "Back" })
             {
                 l.Add("# " + slot);
                 foreach (var x in All) if (x.Kind == "appearance" && x.Slot == slot) l.Add("- " + x.Name + ": " + x.How);
             }
-            l.Add("@page Tabards | A look for the tabard slot: battleground tabards come with their zone's achievement, the others are bought");
-            l.Add("# Earned");
+            l.Add("# Tabards");
+            l.Add("Battleground tabards come with their zone's achievement; the others are bought.");
+            l.Add("# Earned tabards");
             foreach (var x in All) if (x.Kind == "tabard" && !x.How.StartsWith("Buy")) l.Add("- " + x.Name + ": " + x.How);
-            l.Add("# Bought");
+            l.Add("# Bought tabards");
             foreach (var x in All) if (x.Kind == "tabard" && x.How.StartsWith("Buy")) l.Add("- " + x.Name + ": " + x.How);
-            l.Add("@page Weapon Glows | A glow on any weapon, picked in the armory");
+            l.Add("# Weapon Glows");
             l.Add("Pick your class's glow, or none, on any weapon in the armory. A picked glow also replaces a legendary weapon's own.");
             foreach (var x in All) if (x.Kind == "glow") l.Add("- " + x.Name + ": " + x.How);
-            // Wowhead's still pictures don't show Classic enchant glows; its live Classic dressing room does (Community.cs)
-            l.Add("See them in 3D: Wowhead's Classic dressing room opens in a window of its own. Put a weapon in a hand, then pick its illusion (Icy Chill, Crusader, Fiery Weapon or Unholy Weapon).");
-            l.Add("@video Weapon glows in 3D (Wowhead) | https://www.wowhead.com/classic/dressing-room");
+            l.Add("Wowhead's static item pictures do not show Classic weapon enchant glows.");
             return l;
         }
     }

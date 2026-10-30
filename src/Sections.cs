@@ -626,11 +626,18 @@ namespace AzerothLauncher
         sealed class GuideFavoriteRoute
         {
             public string Kind, Topic, Page, ClassKey, Url;
+            public string Anchor;
+            public int ScrollY, AnchorOffset;
             public string PageLabel
             {
                 get
                 {
-                    if (Kind == "guide" || Kind == "guideTalents") return Page.Length > 0 ? Page : Topic;
+                    if (Kind == "wiki") return "Wiki";
+                    if (Kind == "guide" || Kind == "guideTalents")
+                    {
+                        string label = Page.Length > 0 ? Page : Topic;
+                        return Anchor.Length > 0 ? label + " · " + Lang.T(Anchor) : label;
+                    }
                     if (Kind == "group" || Kind == "section") return Topic;
                     if (Kind == "builderClass" || Kind == "plannerClass") return ClassKey;
                     if (Kind == "video") return Page.Length > 0 ? Page : Topic;
@@ -663,7 +670,10 @@ namespace AzerothLauncher
             }
             public GuideFavoriteRoute(string kind, string topic, string page) : this(kind, topic, page, "", "") { }
             public GuideFavoriteRoute(string kind, string topic, string page, string classKey, string url)
-            { Kind = string.IsNullOrEmpty(kind) ? "guide" : kind; Topic = topic ?? ""; Page = page ?? ""; ClassKey = classKey ?? ""; Url = url ?? ""; }
+            { Kind = string.IsNullOrEmpty(kind) ? "guide" : kind; Topic = topic ?? ""; Page = page ?? ""; ClassKey = classKey ?? ""; Url = url ?? ""; Anchor = ""; }
+            public GuideFavoriteRoute(string kind, string topic, string page, string classKey, string url, string anchor, int scrollY, int anchorOffset)
+                : this(kind, topic, page, classKey, url)
+            { Anchor = anchor ?? ""; ScrollY = Math.Max(0, scrollY); AnchorOffset = Math.Max(0, anchorOffset); }
         }
 
         const int SideW = 680, SideH = 600;
@@ -884,7 +894,7 @@ namespace AzerothLauncher
                 };
                 var b = new IconButton(paint, delegate { OpenGuideFavorite(slot); });
                 b.AccessibleName = Lang.T("Quick Access " + (i + 1));
-                b.Tip = "Quick Access " + (i + 1) + " is empty. Hover a path name and click the heart to save it.";
+                b.Tip = "Quick Access " + (i + 1) + " is empty. Use the guide star or a section favorite control to save a location.";
                 b.ContextClicked += delegate(Control source, Point at) { RemoveGuideFavorite(slot); };
                 b.MouseDown += delegate(object sender, MouseEventArgs e)
                 {
@@ -1134,7 +1144,7 @@ namespace AzerothLauncher
                                   TextFormatFlags.NoPrefix | TextFormatFlags.SingleLine | TextFormatFlags.NoPadding);
             y += 26;
             DrawLostHelpSection(g, "Click a breadcrumb to go back. Hover ▼ to choose another page.", PathExamplePart(true), ref y, width);
-            DrawLostHelpSection(g, "Hover a name and click the heart to save it. Click to open, drag to move, or right-click to remove.", PathExamplePart(false), ref y, width);
+            DrawLostHelpSection(g, "On a guide page, click the star to save your reading position. Click a favorite to open it, drag to move it, or right-click to remove it.", PathExamplePart(false), ref y, width);
         }
 
         void DrawLostHelpSection(Graphics g, string text, Image picture, ref int y, int width)
@@ -1263,8 +1273,9 @@ namespace AzerothLauncher
             if (name == "Guide" && current == "Guide" && side.Visible)   // the Guide's button again: back to its main page
             {
                 if (gPlanner) ResetPlannerState();
-                guideGroupPage = -1;
-                gTopic = -1; gPage = -1; guideQuery = ""; gBuilder = false; gPlanner = false; gTalents = null; gVideo = null; guideMain = true;
+                guideGroupPage = 1;
+                gTopic = -1; gPage = -1; guideQuery = ""; gBuilder = false; gPlanner = false; gTalents = null; gVideo = null;
+                guideMain = false; guideWikiIndex = true;
                 BuildPanel("Guide");
                 return;
             }
@@ -1274,7 +1285,7 @@ namespace AzerothLauncher
             foreach (var kv in nav) kv.Value.Active = kv.Key == name;
             RefreshStrip();
             if (name == "Changelog") clView = ClList;          // the list of every patch note to pick from
-            if (name == "Guide") { gTopic = -1; gPage = -1; guideQuery = ""; guideLastTopic = 0; gBuilder = false; gPlanner = false; gTalents = null; guideGroup = 0; guideMain = true; }   // the guide opens on its first topic
+            if (name == "Guide") { gTopic = -1; gPage = -1; guideQuery = ""; guideLastTopic = 0; gBuilder = false; gPlanner = false; gTalents = null; guideGroup = 1; guideGroupPage = 1; guideMain = false; guideWikiIndex = true; }   // the Guide button opens the Wiki introduction
             if (name == "About Launcher") aboutLog = false;
             if (name == "Home")
             {
@@ -1358,16 +1369,19 @@ namespace AzerothLauncher
         static readonly Dictionary<string, Bitmap> pathExamples = new Dictionary<string, Bitmap>();
         static readonly Dictionary<string, Bitmap[]> pathExampleParts = new Dictionary<string, Bitmap[]>();
 
-        static void DrawExampleHeart(Graphics g, float centerX, float top, float size)
+        static void DrawExampleStar(Graphics g, float centerX, float centerY, float size)
         {
-            float x = centerX - size / 2f, y = top;
             using (var path = new GraphicsPath())
             {
-                path.AddBezier(x + size / 2, y + size * 0.95f, x - size * 0.15f, y + size * 0.45f,
-                              x + size * 0.12f, y - size * 0.12f, x + size / 2, y + size * 0.25f);
-                path.AddBezier(x + size / 2, y + size * 0.25f, x + size * 0.88f, y - size * 0.12f,
-                              x + size * 1.15f, y + size * 0.45f, x + size / 2, y + size * 0.95f);
-                path.CloseFigure();
+                PointF[] points = new PointF[10];
+                for (int i = 0; i < points.Length; i++)
+                {
+                    double angle = -Math.PI / 2 + i * Math.PI / 5;
+                    float radius = i % 2 == 0 ? size / 2f : size / 4.5f;
+                    points[i] = new PointF(centerX + (float)Math.Cos(angle) * radius,
+                                           centerY + (float)Math.Sin(angle) * radius);
+                }
+                path.AddPolygon(points);
                 using (var brush = new SolidBrush(Theme.Gold)) g.FillPath(brush, path);
             }
         }
@@ -1415,8 +1429,6 @@ namespace AzerothLauncher
                 using (var b = new SolidBrush(Theme.Hex("#e6cf8c")))
                     g.FillPolygon(b, new[] { new PointF(arrow.X + 2, arrow.Y + 3), new PointF(arrow.Right - 2, arrow.Y + 3),
                                              new PointF(arrow.X + arrow.Width / 2f, arrow.Y + 8) });
-                DrawExampleHeart(g, groupStart + 20, 22, 15);
-
                 var menu = new Rectangle(groupStart - 4, 64, 142, 60);
                 using (var b = new SolidBrush(Theme.Hex("#0e0d14"))) g.FillRectangle(b, menu);
                 using (var p = new Pen(Theme.Hex("#8a7040"), 1)) g.DrawRectangle(p, menu);
@@ -1431,18 +1443,14 @@ namespace AzerothLauncher
 
                 TextRenderer.DrawText(g, Lang.T("2  SAVE A FAVORITE"), heading, new Rectangle(10, 148, 180, 14), Theme.Gold,
                                       TextFormatFlags.NoPrefix | TextFormatFlags.SingleLine | TextFormatFlags.NoPadding);
-                var savePath = new Rectangle(9, 182, 171, 22);
-                using (var b = new SolidBrush(Theme.Hex("#1c1a26"))) g.FillRectangle(b, savePath);
+                var savePath = new Rectangle(9, 178, 171, 38);
+                using (var b = new SolidBrush(Theme.Hex("#15121c"))) g.FillRectangle(b, savePath);
                 using (var p = new Pen(Theme.Hex("#d6a640"), 1)) g.DrawRectangle(p, savePath);
-                string saveCrumbs = Lang.T("Guide") + "  ›  " + Lang.T("Classes") + "  ›  " + Lang.T("Priest");
-                TextRenderer.DrawText(g, saveCrumbs, crumbFont, new Rectangle(savePath.X + 5, savePath.Y + 4, savePath.Width - 8, 14),
+                TextRenderer.DrawText(g, Lang.T("Priest guide"), crumbFont, new Rectangle(savePath.X + 6, savePath.Y + 5, 118, 14),
                                       Theme.Hex("#e6cf8c"), TextFormatFlags.NoPrefix | TextFormatFlags.SingleLine | TextFormatFlags.NoPadding);
-                string beforePriest = Lang.T("Guide") + "  ›  " + Lang.T("Classes") + "  ›  ";
-                int priestX = savePath.X + 5 + TextRenderer.MeasureText(beforePriest, crumbFont,
-                              new Size(savePath.Width, 18), TextFormatFlags.NoPrefix | TextFormatFlags.SingleLine | TextFormatFlags.NoPadding).Width;
-                int priestWidth = TextRenderer.MeasureText(Lang.T("Priest"), crumbFont, new Size(80, 18),
-                                   TextFormatFlags.NoPrefix | TextFormatFlags.SingleLine | TextFormatFlags.NoPadding).Width;
-                DrawExampleHeart(g, priestX + priestWidth / 2f, 164, 15);
+                TextRenderer.DrawText(g, Lang.T("Gear section"), menuFont, new Rectangle(savePath.X + 6, savePath.Y + 20, 118, 13),
+                                      Theme.GoldDim, TextFormatFlags.NoPrefix | TextFormatFlags.SingleLine | TextFormatFlags.NoPadding);
+                DrawExampleStar(g, savePath.Right - 12, savePath.Top + 12, 15);
 
                 TextRenderer.DrawText(g, Lang.T("QUICK ACCESS"), Theme.F(6.5f, FontStyle.Bold), new Rectangle(202, 169, 82, 11),
                                       Theme.Hex("#d9c48a"), TextFormatFlags.NoPrefix | TextFormatFlags.SingleLine | TextFormatFlags.NoPadding);
@@ -1543,7 +1551,9 @@ namespace AzerothLauncher
 
         void BindCrumbFavorites(List<KeyValuePair<string, Action>> trail)
         {
-            if (current == "Community") return;
+            // These sections are utility destinations, not favoriteable link-tree locations.
+            if (current == "Community" || current == "Guide" || current == "Addons" ||
+                current == "Options" || current == "Stats") return;
             for (int i = 0; i < trail.Count; i++)
             {
                 GuideFavoriteRoute route = CrumbFavoriteRoute(trail[i].Key, i);

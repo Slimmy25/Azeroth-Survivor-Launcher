@@ -443,7 +443,7 @@ namespace AzerothLauncher
         string overSpell;
         string[] overSet;
         Jewel overCodex;
-        const int Ic = 34;
+        const int Ic = 30;
 
         static string Base(string n) { return Regex.Replace(n ?? "", @"\s*\(.*\)$", "").Trim(); }
 

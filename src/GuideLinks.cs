@@ -816,6 +816,7 @@ namespace AzerothLauncher
         }
         Image icon;                                           // the spell's or talent's icon, beside its name
         string model;                                         // a real item's name: its model picture under the text
+        bool modelLayout;
         Image picture, shownPicture;                          // a picture under the text (ShowPicture)
         const int W = 300, ModelH = 230;
 
@@ -986,12 +987,15 @@ namespace AzerothLauncher
             }
             box.icon = icon;
             box.model = model;
+            Image modelImage = model == null ? null : SpellIcons.ItemModel(model, box);
+            box.modelLayout = modelImage != null;
             Image pic = box.picture;
             box.picture = null;                               // a picture is for the one note that passed it
             box.shownPicture = pic;
             box.title = title;
             box.hoverOwner = owner;
             if (applyGear) body = GearEffect.Apply(title, body); // only content hovers get the planner's live totals
+            if (model != null || IsItemTitle(title)) body = ShortItemExplanation(body);
             box.body = body;
             Font tf = Theme.F(10.5f, FontStyle.Bold), bf = Theme.F(9.5f);
             int th = title.Length == 0 ? 0 : TextRenderer.MeasureText(title, tf, new Size(W - 20 - (icon != null ? 40 : 0), 0), TextFormatFlags.WordBreak | TextFormatFlags.NoPrefix).Height;
@@ -1011,7 +1015,7 @@ namespace AzerothLauncher
             int availableWidth = ownerBounds.Width - margin * 2;
             int availableHeight = ownerBounds.Height - margin * 2;
             int width = Math.Min(W, availableWidth);
-            int height = Math.Min(th + bh + 22 + (model != null ? ModelH + 8 : 0) + (pic != null ? pic.Height + 10 : 0), availableHeight);
+            int height = Math.Min(th + bh + 22 + (box.modelLayout ? ModelH + 8 : 0) + (pic != null ? pic.Height + 10 : 0), availableHeight);
             var size = new Size(width, height);
             int x = p.X + 16, y = p.Y + 20;
             if (x + size.Width > ownerBounds.Right - margin) x = p.X - size.Width - 8;
@@ -1031,6 +1035,37 @@ namespace AzerothLauncher
         }
 
         void HideCard() { base.Hide(); }
+
+        static bool IsItemTitle(string title)
+        {
+            if (string.IsNullOrEmpty(title)) return false;
+            foreach (var item in Items.Gear) if (string.Equals(item.Name, title, StringComparison.OrdinalIgnoreCase)) return true;
+            foreach (var item in Items.Jewelry) if (string.Equals(item.Name, title, StringComparison.OrdinalIgnoreCase)) return true;
+            foreach (var item in Transmog.All) if (string.Equals(item.Name, title, StringComparison.OrdinalIgnoreCase)) return true;
+            return false;
+        }
+
+        // Keep item cards readable: at most two complete sentences, or two short lines for stat-style cards.
+        static string ShortItemExplanation(string value)
+        {
+            string body = (value ?? "").Trim();
+            if (body.Length == 0) return body;
+            int sentences = 0;
+            for (int i = 0; i < body.Length; i++)
+            {
+                char c = body[i];
+                if (c != '.' && c != '!' && c != '?') continue;
+                if (c == '.' && i > 0 && i + 1 < body.Length && char.IsDigit(body[i - 1]) && char.IsDigit(body[i + 1])) continue;
+                if (i + 1 < body.Length && !char.IsWhiteSpace(body[i + 1])) continue;
+                if (++sentences == 2) return body.Substring(0, i + 1).Trim();
+            }
+            if (sentences == 0)
+            {
+                string[] lines = body.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                if (lines.Length > 2) return lines[0].Trim() + "\n" + lines[1].Trim();
+            }
+            return body;
+        }
 
         public static void Hide(Control owner)
         {
@@ -1062,18 +1097,30 @@ namespace AzerothLauncher
                 g.DrawImage(shownPicture, (Width - shownPicture.Width) / 2, Height - shownPicture.Height - 10, shownPicture.Width, shownPicture.Height);
             if (model != null)
             {
-                var r = new Rectangle(10, Height - ModelH - 10, W - 20, ModelH);
-                using (var b = new SolidBrush(Theme.Hex("#0b0910"))) g.FillRectangle(b, r);
                 Image pic = SpellIcons.ItemModel(model, this);
                 if (pic != null)
                 {
+                    if (!modelLayout)
+                    {
+                        modelLayout = true;
+                        int targetHeight = Height + ModelH + 8;
+                        if (Parent != null)
+                        {
+                            targetHeight = Math.Min(targetHeight, Parent.ClientSize.Height - 12);
+                            Top = Math.Max(6, Math.Min(Top, Parent.ClientSize.Height - targetHeight - 6));
+                        }
+                        Height = Math.Max(Height, targetHeight);
+                        Invalidate();
+                        return;
+                    }
+                    var r = new Rectangle(10, Height - ModelH - 10, W - 20, ModelH);
+                    using (var b = new SolidBrush(Theme.Hex("#0b0910"))) g.FillRectangle(b, r);
                     float k = Math.Min((float)r.Width / pic.Width, (float)r.Height / pic.Height);
                     int w = (int)(pic.Width * k), h = (int)(pic.Height * k);
                     g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
                     g.DrawImage(pic, new Rectangle(r.X + (r.Width - w) / 2, r.Y + (r.Height - h) / 2, w, h));
+                    using (var p = new Pen(Theme.Hex("#8a7040"), 1)) g.DrawRectangle(p, r);
                 }
-                else TextRenderer.DrawText(g, Lang.T("Loading the 3D model…"), Theme.F(9), r, Theme.GoldDim, TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
-                using (var p = new Pen(Theme.Hex("#8a7040"), 1)) g.DrawRectangle(p, r);
             }
         }
     }
@@ -1082,6 +1129,8 @@ namespace AzerothLauncher
     public sealed class ThemedToolTip : IDisposable
     {
         readonly Dictionary<Control, string> text = new Dictionary<Control, string>();
+        sealed class ItemHover { public string Name, Icon; }
+        readonly Dictionary<Control, ItemHover> itemHover = new Dictionary<Control, ItemHover>();
         readonly Dictionary<Control, Timer> timers = new Dictionary<Control, Timer>();
         readonly Dictionary<Control, bool> showing = new Dictionary<Control, bool>();
         readonly HashSet<Control> hooked = new HashSet<Control>();
@@ -1089,14 +1138,34 @@ namespace AzerothLauncher
 
         public void SetToolTip(Control control, string value)
         {
+            SetToolTip(control, value, null);
+        }
+
+        // Item hovers use the same themed card, plus the item icon and an available Wowhead model image.
+        public void SetItemToolTip(Control control, string name, string value, string icon)
+        {
+            SetToolTip(control, value, string.IsNullOrEmpty(value) || string.IsNullOrEmpty(name)
+                ? null : new ItemHover { Name = name, Icon = icon });
+        }
+
+        void SetToolTip(Control control, string value, ItemHover item)
+        {
             if (control == null) return;
             string old;
             bool changed = !text.TryGetValue(control, out old) || old != value;
+            ItemHover oldItem;
+            bool hadItem = itemHover.TryGetValue(control, out oldItem);
+            if (item == null) itemHover.Remove(control);
+            else itemHover[control] = item;
+            if (hadItem != (item != null) || (hadItem && item != null &&
+                (!string.Equals(oldItem.Name, item.Name, StringComparison.Ordinal) ||
+                 !string.Equals(oldItem.Icon, item.Icon, StringComparison.Ordinal)))) changed = true;
             if (string.IsNullOrEmpty(value))
             {
                 text.Remove(control);
                 Stop(control);
                 GuideHover.Hide(control);
+                itemHover.Remove(control);
                 return;
             }
             text[control] = value;
@@ -1120,6 +1189,7 @@ namespace AzerothLauncher
             {
                 Stop(control);
                 text.Remove(control);
+                itemHover.Remove(control);
                 hooked.Remove(control);
             };
         }
@@ -1156,7 +1226,13 @@ namespace AzerothLauncher
                     string tip;
                     if (!control.IsDisposed && IsUnderPointer(control) && GuideHover.CanShow(control) && text.TryGetValue(control, out tip))
                     {
-                        GuideHover.ShowTip(control, Lang.T(tip));
+                        ItemHover item;
+                        if (itemHover.TryGetValue(control, out item))
+                        {
+                            string model = SpellIcons.HasItemModel(item.Name) ? item.Name : null;
+                            GuideHover.Show(control, Lang.T(item.Name), Lang.T(tip), SpellIcons.Icon(item.Icon, control), model);
+                        }
+                        else GuideHover.ShowTip(control, Lang.T(tip));
                         if (AutoPopDelay > 0)
                         {
                             showing[control] = true;
@@ -1187,6 +1263,7 @@ namespace AzerothLauncher
             timers.Clear();
             showing.Clear();
             text.Clear();
+            itemHover.Clear();
             hooked.Clear();
         }
     }

@@ -695,7 +695,14 @@ namespace AzerothLauncher
                 else if (r >= 0) o = rows[r].Value;
                 int st = StarsOf(s ?? chosenSlot);
                 string text = o is GearPiece ? Items.Card((GearPiece)o, st) : o is Jewel ? Items.Card((Jewel)o) : s != null ? Lang.T(s) : null;
-                tip.SetToolTip(this, text);
+                string itemName = o is GearPiece ? ((GearPiece)o).Name : o is Jewel ? ((Jewel)o).Name : null;
+                if (itemName != null)
+                {
+                    int titleEnd = text == null ? -1 : text.IndexOf('\n');
+                    string body = titleEnd > 0 ? text.Substring(titleEnd + 1) : text;
+                    tip.SetItemToolTip(this, itemName, body, Items.IconFor(itemName));
+                }
+                else tip.SetToolTip(this, text);
                 Invalidate();
             }
             base.OnMouseMove(e);

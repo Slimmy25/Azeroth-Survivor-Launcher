@@ -60,7 +60,7 @@ namespace AzerothLauncher
         readonly HeartIcon supportHeart;
         readonly Dictionary<string, WowButton> nav = new Dictionary<string, WowButton>();
         // the buttons under "Launcher": Guide and its Theorycrafting group, Addons, Stats, Options (Cloud Save is in Options)
-        readonly string[] navNames = { "Guide", "Theorycrafting", "Addons", "Changelog", "Stats", "Options" };   // Changelog: on the News line   // order under "Launcher" (Discord before Options)
+        readonly string[] navNames = { "Guide", "New Player Guide", "Theorycrafting", "Addons", "Changelog", "Stats", "Options" };   // Changelog: on the News line   // order under "Launcher" (Discord before Options)
         // Options > Language
         public void SetLanguage(string code)
         {
@@ -115,7 +115,8 @@ namespace AzerothLauncher
             {
                 string n = name;
                 if (n == "Changelog") continue;              // on the News line (below)
-                Action open = n == "Theorycrafting" ? (Action)delegate { GuideGroupPage(2); } : delegate { OpenMain(n); };   // always its main page
+                Action open = n == "Theorycrafting" ? (Action)delegate { GuideGroupPage(2); } :
+                              n == "New Player Guide" ? (Action)delegate { GuideGroupPage(0); } : delegate { OpenMain(n); };   // dedicated guide destinations
                 nav[n] = Place(new WowButton(n.ToUpperInvariant(), open, 128, 27, 8.5f), 693, 480);
                 nav[n].Skin = Retro.Button;
             }

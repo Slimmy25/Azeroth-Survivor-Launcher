@@ -1,4 +1,8 @@
-New player guide shown in the launcher's GUIDE section.
+Player-facing guide content used by the launcher's Guide and the AZS Handbook addon.
+The Guide navigation is built in src/Guide.cs: New Player, Gameplay, and Theorycrafting are separate menus.
+Gameplay's Build Guides topic is shown under class headings when a class can be identified from a page's title,
+description, or body; pages with no clear class remain under Uncategorized. Build guide videos also feed Community.
+Class article contents, spell/talent/item links, Archive behavior and section scrolling are built in src/Guide.cs.
 Format:
   @topic Title | short description        a topic on the guide's first page
   @page Title | short description         a page inside the topic above (a topic with pages shows a list of them)
@@ -12,10 +16,12 @@ Format:
                                           e.g.  @video Your first run | https://www.youtube.com/watch?v=XXXXXXXXXXX
   @video Title | address | Uploader | uploader's address
                                           the same, with credit to the person who made the video
-Build Guides: one @page per video, newest first. Every video there is also listed in the launcher's Community
-section (shown on the home screen); a YouTube video plays in its own window over the section when clicked (or in
-the web browser without Edge), it never starts by itself.
-Everything above the first @topic line is ignored. Gathered from the game itself (version 0.114.2); numbers can change with game updates.
+Build Guides: one @page per entry. Use a class or specialization in the title, description or body when known so the
+launcher can place the entry under the right class. Keep creator and video credits with the entry. A video is opened
+only when selected; it never starts by itself.
+Everything above the first @topic line is ignored by the content parser. Guide facts can change with game updates;
+the newest creator patch notes take priority over earlier notes and conflicting guide text. Review affected passages
+when adding a new patch; preserve developer patch-note wording in the patch-note files.
 
 @topic Getting Started | What Azeroth Survivors is and how a run works
 # What is Azeroth Survivors?
@@ -391,8 +397,8 @@ On the armory's Rewards tab, the Races section opens a race to every class for 1
 @video Can I change my race? | https://cdn.jsdelivr.net/gh/Slimmy25/Azeroth-Survivors-Launcher@guide-videos/races/can-i-change-my-race.mp4
 
 # Alliance
-- Human: Perception (every 30 sec, more damage for a short time), The Human Spirit (+10% experience), Diplomacy (+20% gold).
-- Dwarf: Stoneform (every 45 sec, a shield worth 30% of your max health), Gun Specialization (+6% damage), Treasure Finding (+30% pickup range).
+- Human: Perception (every 30 sec, more damage for a short time), The Human Spirit (+20% experience), Diplomacy (+20% gold).
+- Dwarf: Stoneform (every 30 sec, a shield worth 45% of your max health), Gun Specialization (+6% damage), Treasure Finding (+30% pickup range).
 - Night Elf: Shadowmeld (near death, 3 sec of immunity, long cooldown), Quickness (+8% movement speed), Nature Resistance (+5% damage reduction).
 - Gnome: Escape Artist (every 20 sec, roots nearby enemies), Expansive Mind (-8% cooldowns), Engineering Specialization (+20% luck).
 
