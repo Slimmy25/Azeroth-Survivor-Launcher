@@ -11,15 +11,17 @@ namespace AzerothLauncher
     {
         class ViewState
         {
-            public string Section, GTalents, GuideQuery, AddonMode;
-            public int GTopic, GPage, GuideGroupPage, GuideGroup, GuideLastTopic, ClView, OptionsTab, StatsTab;
+            public string Section, GTalents, GuideQuery, AddonMode, AskUninstallName, AskUninstallFolder;
+            public int GTopic, GPage, GuideGroupPage, GuideGroup, GuideLastTopic, ClView, OptionsTab, StatsTab, AddonCategory;
             public int[] ScrollPositions;
-            public bool GBuilder, GPlanner, GuideMain, OptionsLang, OptionsAbout, CommunityMore;
+            public bool GBuilder, GPlanner, GuideMain, OptionsLang, OptionsAbout, CommunityMore, RollbackOpen;
 
             // the same place (the search text aside: typing is not a new step)
             public bool SamePlace(ViewState o)
             {
                 return o != null && Section == o.Section && GTalents == o.GTalents && AddonMode == o.AddonMode &&
+                       AddonCategory == o.AddonCategory && RollbackOpen == o.RollbackOpen &&
+                       AskUninstallName == o.AskUninstallName && AskUninstallFolder == o.AskUninstallFolder &&
                        GTopic == o.GTopic && GPage == o.GPage && GuideGroupPage == o.GuideGroupPage && GuideGroup == o.GuideGroup &&
                        ClView == o.ClView && OptionsTab == o.OptionsTab && StatsTab == o.StatsTab && GBuilder == o.GBuilder &&
                        GPlanner == o.GPlanner && GuideMain == o.GuideMain && OptionsLang == o.OptionsLang && OptionsAbout == o.OptionsAbout &&
@@ -74,6 +76,8 @@ namespace AzerothLauncher
             return new ViewState
             {
                 Section = section, GTalents = gTalents, GuideQuery = guideQuery ?? "", AddonMode = addonMode,
+                AddonCategory = addonCategory, RollbackOpen = rollbackOpen,
+                AskUninstallName = askUninstallName, AskUninstallFolder = askUninstallFolder,
                 GTopic = gTopic, GPage = gPage, GuideGroupPage = guideGroupPage, GuideGroup = guideGroup, GuideLastTopic = guideLastTopic,
                 ClView = clView, OptionsTab = optionsTab, StatsTab = statsTab,
                 GBuilder = gBuilder, GPlanner = gPlanner, GuideMain = guideMain, OptionsLang = optionsLang, OptionsAbout = optionsAbout, CommunityMore = communityMore
@@ -100,11 +104,17 @@ namespace AzerothLauncher
         bool BackInHistory()
         {
             if (history.Count < 2) return false;
-            history.RemoveAt(history.Count - 1);
-            ViewState v = history[history.Count - 1];
-            if (v.Section == "Stats" && !StatsAddonActive()) { history.RemoveAt(history.Count - 1); return BackInHistory(); }
+            // Resolve a valid destination before changing history. A disabled Stats view
+            // must not consume the current view if there is nowhere valid to return.
+            int target = history.Count - 2;
+            while (target >= 0 && history[target].Section == "Stats" && !StatsAddonActive()) target--;
+            if (target < 0) return false;
+            ViewState v = history[target];
+            history.RemoveRange(target + 1, history.Count - target - 1);
             bool leavingPlanner = gPlanner && !v.GPlanner;
             gTalents = v.GTalents; guideQuery = v.GuideQuery; addonMode = v.AddonMode;
+            addonCategory = v.AddonCategory; rollbackOpen = v.RollbackOpen;
+            askUninstallName = v.AskUninstallName; askUninstallFolder = v.AskUninstallFolder;
             gTopic = v.GTopic; gPage = v.GPage; guideGroupPage = v.GuideGroupPage; guideGroup = v.GuideGroup; guideLastTopic = v.GuideLastTopic;
             clView = v.ClView; optionsTab = v.OptionsTab; statsTab = v.StatsTab;
             gBuilder = v.GBuilder; gPlanner = v.GPlanner; guideMain = v.GuideMain; optionsLang = v.OptionsLang; optionsAbout = v.OptionsAbout; communityMore = v.CommunityMore;
