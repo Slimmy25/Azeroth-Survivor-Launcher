@@ -2,6 +2,18 @@ Patch notes shown in the launcher's Changelog. The launcher sorts them by versio
 Every post starts with its title on the first line. Posts are separated by a line with only === on it.
 Everything above the first === line is ignored.
 ===
+0.130.0
+-------
+When you fall, the end screen now shows a Death Recap: what killed you, who dealt it and how hard it hit, with a full breakdown of your last seconds one click away.
+
+- Under "You have fallen" you now see the killing blow: its icon and name, the enemy or boss who dealt it, the damage and any overkill.
+- The new Death Recap button opens your final blows, oldest to last, each with how long before your death it landed, how much it hit for, what your shields absorbed and how much health it left you.
+- Repeated hits from the same enemy are grouped (Melee x6) so a crowd does not drown out the blow that mattered.
+- A Damage by Source section ranks everything that hurt you in your last seconds, with each one's share.
+- Boss mechanics you could have stepped out of (telegraphed blasts, pools, orbs) are marked Avoidable, and the recap tells you how much of the damage came from them.
+- Works in co-op too: each player gets their own recap of their own fall. Close it with its button or Escape.
+- Amulets no longer promise one last extra target at a far-off rank (95, 106 or 109). That target came from a rounding quirk rather than real growth, and it is gone from the game as well as the tooltip. Every other target milestone is unchanged.
+===
 0.128.0
 -------
 In the co-op lobby you can now click any player in your party to inspect their hero: their character, the gear they wear with its stars, their talent trees and their achievements. It updates as they change things. Host and guests all need this version.

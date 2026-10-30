@@ -156,6 +156,7 @@ The meter window has three views: Damage Done (every spell, pet, talent and item
 - Caches cost gold and offer jewelry. Guardians wait in lairs and give a reward when slain.
 
 # After the run
+- If you fall, choose Death Recap on the end screen to see the killing blow and review the last hits, damage by source and avoidable boss damage. In co-op, each player gets a recap of their own fall; close it with its button or Escape.
 - Open Talents to spend the talent points you earned.
 - Check Drop Tables to see which boss drops which piece of your class's gear.
 - New achievements give points to spend on perks in Rewards.
