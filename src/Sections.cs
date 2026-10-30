@@ -41,15 +41,21 @@ namespace AzerothLauncher
             return path;
         }
 
-        public void PlaceAbove(Rectangle textBoundsOnScreen, Control coordinateOwner)
+        public void PlaceAbove(Rectangle textBoundsOnScreen, Rectangle headerBoundsOnScreen, Control coordinateOwner)
         {
             if (textBoundsOnScreen.IsEmpty || coordinateOwner == null || IsDisposed) return;
             // Convert the same screen-space glyph bounds back into the launcher's client space.
             // Both the breadcrumb and this control are then laid out by the same WinForms DPI context.
             Rectangle text = coordinateOwner.RectangleToClient(textBoundsOnScreen);
-            int centerX = text.Left + text.Width / 2;
-            int top = text.Top - 30;                         // heart art ends at the word's top edge
-            Location = new Point(centerX - Width / 2, top);
+            // The old -30 offset put the heart across the title bar's upper border.
+            // Keep it beside the actual text, wholly inside the breadcrumb header.
+            Rectangle header = coordinateOwner.RectangleToClient(headerBoundsOnScreen);
+            int x = text.Right + 4;
+            if (x + Width > header.Right - 46) x = text.Left - Width - 4;
+            x = Math.Max(header.Left, Math.Min(x, header.Right - Width));
+            int y = Math.Max(header.Top, Math.Min(
+                text.Top + (text.Height - Height) / 2, header.Bottom - Height));
+            Location = new Point(x, y);
         }
 
         protected override void OnPaintBackground(PaintEventArgs e) { base.OnPaintBackground(e); } // transparent parent background
@@ -375,9 +381,11 @@ namespace AzerothLauncher
         {
             foreach (var crumb in crumbRects)
             {
-                Rectangle pathPart = StepRect(crumb.Value);
-                if (crumbFavorites.ContainsKey(crumb.Value) &&
-                    (crumb.Key.Contains(pt) || (!pathPart.IsEmpty && pathPart.Contains(pt)))) return crumb.Value;
+                // Only the rendered breadcrumb label activates its favorite heart.
+                // The wider step rectangle also includes padding and menu arrows.
+                Rectangle label = CrumbRect(crumb.Value);
+                if (crumbFavorites.ContainsKey(crumb.Value) && !label.IsEmpty &&
+                    label.Contains(pt)) return crumb.Value;
             }
             return -1;
         }
@@ -433,7 +441,7 @@ namespace AzerothLauncher
             if (owner == null) { favoritePopup = null; favoritePopupStep = -1; popup.Dispose(); return; }
             owner.Controls.Add(popup);
             popup.BringToFront();
-            popup.PlaceAbove(RectangleToScreen(anchor), owner);
+            popup.PlaceAbove(RectangleToScreen(anchor), RectangleToScreen(ClientRectangle), owner);
         }
 
         void HoverTick()
@@ -457,7 +465,7 @@ namespace AzerothLauncher
                 (favoritePopup == null || favoritePopup.IsDisposed || favoritePopupStep != retainedStep))
                 ShowFavoritePopup(retainedStep, CrumbRect(retainedStep));
             else if (retainedStep >= 0 && favoritePopup != null && !favoritePopup.IsDisposed && favoritePopupStep == retainedStep)
-                favoritePopup.PlaceAbove(CrumbScreenRect(retainedStep), favoritePopup.Parent);
+                favoritePopup.PlaceAbove(CrumbScreenRect(retainedStep), RectangleToScreen(ClientRectangle), favoritePopup.Parent);
 
             if (openMenu != null && !openMenu.IsDisposed)
             {
