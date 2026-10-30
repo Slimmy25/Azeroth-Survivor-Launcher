@@ -328,6 +328,7 @@ namespace AzerothLauncher
         readonly float zoom;                                  // launcher art {normal, hover, down, grayed}
         public event Action Pressed;
         public string GrayedTip;                              // shown on hover, only while the button is grayed out
+        public string Tip;                                    // themed hover help while the button is available
 
         public WowButton(string text, Action command, int width, int height, float size)
         {
@@ -373,7 +374,8 @@ namespace AzerothLauncher
         {
             hover = true;
             Invalidate();
-            Tips.SetToolTip(this, grayed && !string.IsNullOrEmpty(GrayedTip) ? Lang.T(GrayedTip) : null);
+            Tips.SetToolTip(this, grayed && !string.IsNullOrEmpty(GrayedTip) ? Lang.T(GrayedTip) :
+                                   !string.IsNullOrEmpty(Tip) ? Lang.T(Tip) : null);
             base.OnMouseEnter(e);
         }
 
@@ -382,6 +384,7 @@ namespace AzerothLauncher
         protected override void OnGotFocus(EventArgs e)
         {
             if (grayed && !string.IsNullOrEmpty(GrayedTip)) GuideHover.ShowTip(this, Lang.T(GrayedTip));
+            else if (!string.IsNullOrEmpty(Tip)) GuideHover.ShowTip(this, Lang.T(Tip));
             Invalidate();
             base.OnGotFocus(e);
         }

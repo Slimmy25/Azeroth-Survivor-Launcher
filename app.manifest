@@ -18,13 +18,8 @@
       <supportedOS Id="{35138b9a-5d96-4fbd-8e2d-a2440225f93a}"/>
     </application>
   </compatibility>
-  <!-- sharp text on scaled displays (125%, 150% ...): Windows draws the text at the screen's real resolution
-       instead of stretching a 100% picture of the launcher, which made the letters look blurry -->
-  <application xmlns="urn:schemas-microsoft-com:asm.v3">
-    <windowsSettings>
-      <gdiScaling xmlns="http://schemas.microsoft.com/SMI/2017/WindowsSettings">true</gdiScaling>
-    </windowsSettings>
-  </application>
+  <!-- This launcher mixes custom GDI+ drawing with WinForms/GDI controls and uses fixed-size layout coordinates.
+       Keep Windows' uniform DPI bitmap scaling so text, hit targets, dropdowns, and custom drawing stay aligned. -->
   <dependency>
     <dependentAssembly>
       <assemblyIdentity type="win32" name="Microsoft.Windows.Common-Controls" version="6.0.0.0"

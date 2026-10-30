@@ -1,4 +1,4 @@
-// The main launcher window: the tall narrow window with PLAY and the section buttons, the tray icon, playing
+// The main launcher window: the tall narrow window with PLAY and the section buttons, playing
 // (cloud download -> game -> cloud upload), installing the game, cloud sync runs and the launcher's own updates.
 using System;
 using System.Collections.Generic;
@@ -48,8 +48,8 @@ namespace AzerothLauncher
 
         public Config Cfg;
         public bool GameRunningFlag, Installing, SyncBusy, Updating, UpdateChecking;   // Updating: the launcher's own update
-        bool setupOpen, setupAsked, trayNotified, quitting;
-        readonly bool startInTray;
+        bool setupOpen, setupAsked, quitting, closeAfterDownloadCancel;
+        ManualResetEvent launcherUpdateCancel;
         readonly List<KeyValuePair<string, Level>> cloudLog = new List<KeyValuePair<string, Level>>();
         RichTextBox logBox;
         string status = "Ready.", cloudNote = "";
@@ -61,18 +61,6 @@ namespace AzerothLauncher
         readonly Dictionary<string, WowButton> nav = new Dictionary<string, WowButton>();
         // the buttons under "Launcher": Guide and its Theorycrafting group, Addons, Stats, Options (Cloud Save is in Options)
         readonly string[] navNames = { "Guide", "Theorycrafting", "Addons", "Changelog", "Stats", "Options" };   // Changelog: on the News line   // order under "Launcher" (Discord before Options)
-        NotifyIcon tray;
-        ToolStripMenuItem trayShow, trayPlay, trayUpload, trayCloseToTray, trayQuit;
-
-        internal void TrayTexts()
-        {
-            trayShow.Text = Lang.T("Show Launcher");
-            trayPlay.Text = Lang.T("Play");
-            trayUpload.Text = Lang.T("Upload Save Now");
-            trayCloseToTray.Text = Lang.T("Close button hides the launcher to the tray");
-            trayQuit.Text = Lang.T("Quit");
-        }
-
         // Options > Language
         public void SetLanguage(string code)
         {
@@ -89,7 +77,6 @@ namespace AzerothLauncher
         {
             Lang.Load(code);
             Theme.PickFont();
-            TrayTexts();
             foreach (Control c in Controls) c.Invalidate();
             Invalidate();
             sideHead.Invalidate();
@@ -101,13 +88,16 @@ namespace AzerothLauncher
 
         public static LauncherApp App;                       // the running launcher (for the Stats page's static builders)
 
-        public LauncherApp(bool startInTray)
+        public LauncherApp()
         {
             App = this;
             WowDialog.Host = this;                           // questions and messages open inside the launcher
-            this.startInTray = startInTray;
             Theme.PickFont();
             Cfg = Config.Load();
+            // Create the first-run marker beside this exe before Shown can start the automatic updater. It remains
+            // pending until setup succeeds, including across an automatic updater restart.
+            if (!PreviewMode) try { Util.EnsureSetupPendingMarker(); } catch (Exception) { }
+            if (!PreviewMode && Util.SetupPendingForThisInstall) status = "First Time Setup";
 
             Text = "Azeroth Survivors Launcher";
             Icon = Theme.AppIcon;
@@ -151,7 +141,6 @@ namespace AzerothLauncher
             LayoutNav();
 
             BuildSide();
-            SetupTray();
             RefreshPlayLabel();
 
             FormClosing += OnClosingWindow;
@@ -180,8 +169,7 @@ namespace AzerothLauncher
                 SetGuideView(l.Topic, l.Page);
                 After(30, delegate { ShowSpellRow(l.Term); });   // a spell: its row on the page, scrolled to and lit up
             };
-            // minimizing keeps the launcher in the taskbar (it used to hide itself to the tray a moment later, and a
-            // click on the taskbar at that moment opened an empty window). Coming back, everything is drawn again.
+            // Restore repaint: everything is redrawn after minimizing and restoring from the taskbar.
             Resize += delegate
             {
                 if (WindowState == FormWindowState.Minimized) { wasMinimized = true; return; }
@@ -191,8 +179,7 @@ namespace AzerothLauncher
             };
             Shown += delegate
             {
-                if (startInTray) Hide();
-                if (!PreviewMode) After(300, StartupUpdateCheck);   // a newer launcher on GitHub is installed right away
+                if (!PreviewMode && !Program.LocalDevelopmentBuild) After(300, StartupUpdateCheck);
                 if (!PreviewMode) After(4000, AutoUpdateAddons);    // and newer addons from GitHub, without asking
                 After(500, MaybeFirstRun);
                 After(700, delegate { if ((current == null || current == "Home") && !setupOpen) ShowHomeCommunity(); });   // home: Community
@@ -290,7 +277,7 @@ namespace AzerothLauncher
         }
 
         // false while the temporary "install the game with this launcher first" rule is blocking
-        public bool GateOpen() { return !RequireLauncherInstall || ClientPresent(); }
+        public bool GateOpen() { return !RequireLauncherInstall || ClientPresent() || (Installing && setupBrowseWhileInstalling); }
 
         public bool CloudEnabled() { return Cfg.Bool("cloud_enabled", Cfg.Str("cloud_dir").Trim().Length > 0); }
 
@@ -676,6 +663,7 @@ namespace AzerothLauncher
         public void SetStatus(string msg)
         {
             status = msg ?? "";
+            if (status == "Ready." && Util.SetupPendingForThisInstall) status = "First Time Setup";
             Invalidate(new Rectangle(0, 578, W, H - 578));
         }
 
@@ -711,14 +699,18 @@ namespace AzerothLauncher
 
         public void RefreshPlayLabel()
         {
-            if (GameRunningFlag) { playBtn.Label = "PLAYING..."; playBtn.FontSize = 24; }
+            bool firstSetupPending = Util.SetupPendingForThisInstall;
+            if (setupOpen || firstSetupPending) { playBtn.Label = "INSTALL"; playBtn.FontSize = 20; }
+            else if (GameRunningFlag) { playBtn.Label = "PLAYING..."; playBtn.FontSize = 24; }
             else if (Installing) { playBtn.Label = "INSTALLING"; playBtn.FontSize = 18; }
             else if (Updating) { playBtn.Label = "UPDATING"; playBtn.FontSize = 20; }
             else if (ClientPresent()) { playBtn.Label = "PLAY"; playBtn.FontSize = 24; }
             else { playBtn.Label = "REQUIRES INSTALL"; playBtn.FontSize = 13; }
-            // Keep REQUIRES INSTALL clickable outside setup: it opens the setup flow so the player can choose a game folder.
-            playBtn.GrayedTip = setupOpen ? "Finish first-time setup before launching the game." : "";
-            playBtn.Grayed = setupOpen;
+            playBtn.Tip = (setupOpen || firstSetupPending) ? "Click to continue to the next step of First Time Setup." :
+                           ClientPresent() ? "" : "Click to continue through First Time Setup and get help installing the game.";
+            // Play stays illuminated and acts as the current slide's NEXT action during setup.
+            playBtn.GrayedTip = "";
+            playBtn.Grayed = false;
             Invalidate(new Rectangle(0, 578, W, H - 578));
             RefreshGates();
         }
@@ -734,8 +726,8 @@ namespace AzerothLauncher
             updateBtn.Grayed = !enabled;
             aboutBtn.GrayedTip = enabled ? "" : "Finish first-time setup first.";
             aboutBtn.Grayed = !enabled;
-            playBtn.GrayedTip = enabled ? "" : "Finish first-time setup before launching the game.";
-            playBtn.Grayed = !enabled;
+            playBtn.GrayedTip = "";
+            playBtn.Grayed = false;
             discordIcon.Enabled = enabled;
             supportHeart.Enabled = enabled;
             if (enabled) RefreshGates();
@@ -798,53 +790,9 @@ namespace AzerothLauncher
             if (on && Cfg.Str("cloud_dir").Trim().Length == 0) ChooseCloudDir();      // cloud on needs a sync folder
         }
 
-        // ------------------------------------------------------------------ window, tray
-        void SetupTray()
-        {
-            tray = new NotifyIcon();
-            tray.Icon = Theme.AppIcon;
-            tray.Text = "Azeroth Survivors Launcher";
-            var menu = ThemeMenus.Create(true);
-            var show = trayShow = new ToolStripMenuItem("Show Launcher", null, delegate { ShowWindowFront(); });
-            show.Font = new Font(show.Font, FontStyle.Bold);
-            trayPlay = new ToolStripMenuItem("Play", null, delegate { Play(); });
-            trayUpload = new ToolStripMenuItem("Upload Save Now", null, delegate { RunSync("push", false, true); });
-            trayCloseToTray = new ToolStripMenuItem("Close Button Hides to Tray", null, delegate
-            {
-                Cfg.Set("close_to_tray", !Cfg.Bool("close_to_tray", false));
-                Cfg.Save();
-            });
-            menu.Items.Add(show);
-            menu.Items.Add(trayPlay);
-            menu.Items.Add(trayUpload);
-            menu.Items.Add(new ToolStripSeparator());
-            menu.Items.Add(trayCloseToTray);
-            menu.Items.Add(new ToolStripSeparator());
-            menu.Items.Add(trayQuit = new ToolStripMenuItem("Quit", null, delegate { QuitApp(); }));
-            TrayTexts();
-            menu.Opening += delegate
-            {
-                trayPlay.Enabled = !GameRunningFlag;
-                trayUpload.Enabled = !GameRunningFlag;
-                trayUpload.Visible = CloudEnabled();
-                trayCloseToTray.Checked = Cfg.Bool("close_to_tray", false);
-            };
-            tray.ContextMenuStrip = menu;
-            tray.MouseClick += delegate(object s, MouseEventArgs e) { if (e.Button == MouseButtons.Left) ShowWindowFront(); };
-            tray.Visible = true;
-        }
-
         public void Notify(string msg)
         {
-            try { if (tray != null) tray.ShowBalloonTip(5000, "Azeroth Survivors Launcher", Lang.T(msg), ToolTipIcon.Info); }
-            catch (Exception) { }
-        }
-
-        void SetTrayTitle(string text)
-        {
-            if (tray == null) return;
-            string t = "Azeroth Survivors Launcher - " + Lang.T(text);
-            tray.Text = t.Length > 63 ? t.Substring(0, 63) : t;
+            SetStatus(Lang.T(msg));
         }
 
         bool wasMinimized;
@@ -866,12 +814,6 @@ namespace AzerothLauncher
             catch (Exception) { }
         }
 
-        void HideToTray()
-        {
-            Hide();
-            WindowState = FormWindowState.Normal;
-        }
-
         public void ShowWindowFront()
         {
             Show();
@@ -887,80 +829,84 @@ namespace AzerothLauncher
         {
             if (quitting || e.CloseReason != CloseReason.UserClosing) return;
             e.Cancel = true;
-            if (Cfg.Bool("close_to_tray", false))
+            if (Installing)
             {
-                HideToTray();
-                if (!trayNotified)
-                {
-                    trayNotified = true;
-                    Notify("Still running in the tray. Right-click the icon to quit.");
-                }
+                ShowDownloadClosePrompt();
+                return;
             }
-            else QuitApp();
+            QuitApp();
         }
 
         public void QuitApp()
         {
-            StopEdge();
-            StopLive3D();
-            if (SyncBusy)
-            {
-                ShowWindowFront();
-                if (!Ask("Cloud sync running", "A cloud sync is still running. If you quit now it is cut short; the next " +
-                         "sync repairs any half-finished copy.\n\nQuit anyway?")) return;
-            }
+            if (quitting) return;
             if (Installing)
             {
-                ShowWindowFront();
-                if (!Ask("Installing", "The game client is still being installed. If you quit now, it is cut short.\n\nQuit anyway?")) return;
-            }
-            if (Updating)
-            {
-                ShowWindowFront();
-                if (!Ask("Updating", "The launcher is still updating itself. If you quit now, the update is cut short and " +
-                         "this launcher stays as it is.\n\nQuit anyway?")) return;
-            }
-            if (GameRunningFlag)
-            {
-                ShowWindowFront();
-                if (!Ask("Game running", "The game is still running. If you quit the launcher now, your saves will NOT be " +
-                         "uploaded automatically.\n\nQuit anyway?")) return;
+                ShowDownloadClosePrompt();
+                return;
             }
             quitting = true;
-            if (tray != null)
-            {
-                tray.Visible = false;
-                tray.Dispose();
-                tray = null;
-            }
+            if (launcherUpdateCancel != null) launcherUpdateCancel.Set();
+            StopEdge();
+            StopLive3D();
             Application.Exit();
         }
 
-        // the launcher out of the way (the game started): minimized to the taskbar, not hidden, so a click on its
-        // taskbar button always brings it back
-        void HideAll()
+        void CloseAfterCancellingGameDownload()
         {
-            HideSide();
-            if (Visible) WindowState = FormWindowState.Minimized;
+            closeAfterDownloadCancel = true;
+            if (dlActive && installCancel != null)
+            {
+                SetStatus("Stopping the game download before closing...");
+                HideDownloadClosePrompt();
+                installCancel.Set();
+            }
+            else if (Installing)
+            {
+                SetStatus("The game files are being installed. The launcher will close when that finishes.");
+                HideDownloadClosePrompt();
+            }
+            else
+            {
+                closeAfterDownloadCancel = false;
+                HideDownloadClosePrompt();
+                QuitApp();
+            }
+        }
+
+        void KeepGameDownloadRunning()
+        {
+            closeAfterDownloadCancel = false;
+            HideDownloadClosePrompt();
+            Activate();
         }
 
         // ------------------------------------------------------------------ first-time setup
         void MaybeFirstRun()
         {
             UpdateNewPlayerFlag();
-            // a new folder (neither the launcher's folder nor the game beside the exe), or settings made for another
-            // folder: first-time setup, whatever the settings say, to set up this copy for a new player
-            bool newPlace = !File.Exists(Path.Combine(Util.LauncherDir, Util.GameExe)) &&
-                            (Util.NewFolderAtStart || (Cfg.Str("setup_folder").Length > 0 && !SameFolder(Cfg.Str("setup_folder"), Util.LauncherDir)));
-            if (setupAsked || setupOpen || PreviewMode || (!newPlace && Cfg.Bool("setup_done", false))) return;
+            // Completion belongs to this executable location, not to movable/cloud-backed settings. A first run in
+            // any new location must offer setup even when an old config says setup_done or game data already exists.
+            bool markerForcesSetup = Util.SetupPendingForThisInstall;
+            bool setupComplete = Util.SetupCompleteForThisInstall;
+            if (setupAsked || setupOpen || PreviewMode || (!markerForcesSetup && setupComplete && Cfg.Bool("setup_done", false))) return;
             if (!Visible) return;                            // started hidden: asked when the window is first opened
-            if (startupLauncherCheck || Updating)           // a launcher update may restart us first
+            // Let the automatic launcher update finish first. The pending marker stays beside the exe across the swap,
+            // so the updated launcher still enters setup before showing normal use.
+            if (Updating || startupLauncherCheck)
             {
                 After(500, MaybeFirstRun);
                 return;
             }
+            if (markerForcesSetup || !setupComplete)
+            {
+                // Leave the false marker where it is until setup succeeds, even if old settings claim setup was done.
+                try { Util.EnsureSetupPendingMarker(); } catch (Exception) { }
+                setupAsked = true;
+                RunSetup();
+                return;
+            }
             setupAsked = true;
-            if (newPlace) { Cfg.Set("setup_done", false); Cfg.Save(); RunSetup(); return; }
             if (AdoptExistingInstall()) return;
             RunSetup();
         }
@@ -1218,6 +1164,17 @@ namespace AzerothLauncher
         // ------------------------------------------------------------------ play: download newest -> run game -> upload
         void Play()
         {
+            if (setupOpen || Util.SetupPendingForThisInstall)
+            {
+                if (!setupOpen)
+                {
+                    RunSetup();
+                    if (!setupOpen) return;
+                }
+                if (setupFooterNext != null) setupFooterNext();
+                else SetStatus("Choose an option on this setup step to continue.");
+                return;
+            }
             if (GameRunningFlag) return;
             if (Installing)
             {
@@ -1229,10 +1186,15 @@ namespace AzerothLauncher
                 SetStatus("The launcher is updating itself. Please wait until that has finished.");
                 return;
             }
-            if (!ClientPresent()) { RunSetup(); return; }
+            if (!ClientPresent())
+            {
+                RunSetup();
+                if (setupOpen && setupPage == 0) SetupGo(1);   // REQUIRES INSTALL acts as NEXT on the welcome slide
+                return;
+            }
             // PLAY first makes sure this is the newest launcher: a newer one is installed (and the launcher restarts)
             // instead of starting the game; when GitHub can't be reached, the game starts as it is
-            if (!playChecking && !StartedAfterUpdate && !PreviewMode)
+            if (!playChecking && !StartedAfterUpdate && !PreviewMode && !Program.LocalDevelopmentBuild)
             {
                 playChecking = true;
                 SetStatus("Checking for a launcher update...");
@@ -1266,14 +1228,21 @@ namespace AzerothLauncher
 
         void StartGame()
         {
+            // Final launch gate: even if a delayed update callback reaches this method directly, a marker
+            // beside the running EXE keeps the game locked until first-time setup completes and moves it.
+            if (Util.SetupPendingForThisInstall)
+            {
+                if (!setupOpen) RunSetup();
+                RefreshPlayLabel();
+                return;
+            }
             if (GameRunningFlag || Installing || Updating || !ClientPresent()) return;
             string exe = Path.Combine(GameDir(), Util.GameExe);
             GameRunningFlag = true;
             RefreshPlayLabel();
             SyncEngine eng = (CloudEnabled() && Cfg.Str("cloud_dir").Trim().Length > 0) ? MakeEngine() : null;
             bool cloudOnButNoFolder = CloudEnabled() && eng == null;
-            bool minimize = Cfg.Bool("minimize_on_play", true);
-            Bg(delegate { Session(exe, eng, cloudOnButNoFolder, minimize); });
+            Bg(delegate { Session(exe, eng, cloudOnButNoFolder); });
         }
 
         // A copy of your AZS Stats records before every game start, the last 10 kept, in the launcher's
@@ -1294,7 +1263,7 @@ namespace AzerothLauncher
             catch (Exception) { }
         }
 
-        void Session(string exe, SyncEngine eng, bool cloudOnButNoFolder, bool minimize)
+        void Session(string exe, SyncEngine eng, bool cloudOnButNoFolder)
         {
             var problems = new List<string>();
             bool launched = false;
@@ -1357,8 +1326,6 @@ namespace AzerothLauncher
                 Ui(delegate
                 {
                     SetStatus("Game running.");
-                    if (minimize) HideAll();                 // Options: minimize the launcher when the game starts
-                    SetTrayTitle("Game running");
                 });
                 try
                 {
@@ -1525,10 +1492,8 @@ namespace AzerothLauncher
             After(3000, AutoUpdateAddons);                    // updates that waited for the game to close
             Invalidate();                                    // the play time the game just saved
             RefreshPlayLabel();
-            SetTrayTitle("Idle");
             // the launcher comes back up only when there is something to say: the game updated itself, it crashed, or
-            // something went wrong (an upload). Otherwise it stays where it is (in the taskbar or the tray) until the
-            // player opens it again
+            // something went wrong (an upload). Otherwise the launcher stays visible after the game closes.
             if (problems.Count > 0 || sessionUpdated || sessionCrashed) ShowWindowFront();
             if (problems.Count > 0) Warn("Launcher", string.Join("\n\n", problems));
         }
@@ -1545,6 +1510,11 @@ namespace AzerothLauncher
             dlActive = on;
             dlDone = done;
             dlTotal = total;
+            if (closeDownloadCard != null && closeDownloadCard.Visible)
+            {
+                LayoutDownloadClosePrompt();
+                closeDownloadCard.Invalidate();
+            }
             Invalidate(new Rectangle(0, 578, W, H - 578));
         }
 
@@ -1624,9 +1594,16 @@ namespace AzerothLauncher
                     if (cancelled)
                     {
                         Installing = false;
+                        setupBrowseWhileInstalling = false;
                         setupAfterInstall = false;
                         RefreshPlayLabel();
                         SetStatus("Download cancelled.");
+                        if (closeAfterDownloadCancel)
+                        {
+                            closeAfterDownloadCancel = false;
+                            QuitApp();
+                            return;
+                        }
                         SetupDownloadCancelled();            // started from setup: setup is cancelled with it
                         return;
                     }
@@ -1634,18 +1611,32 @@ namespace AzerothLauncher
                     if (error != null)
                     {
                         Installing = false;
+                        setupBrowseWhileInstalling = false;
                         setupAfterInstall = false;
                         RefreshPlayLabel();
                         SetStatus("Install failed.");
+                        if (closeAfterDownloadCancel)
+                        {
+                            closeAfterDownloadCancel = false;
+                            QuitApp();
+                            return;
+                        }
                         ShowWindowFront();
                         Error("Install", error);
                         return;
                     }
                     bool setup = setupAfterInstall || !Cfg.Bool("setup_done", false);
                     setupAfterInstall = false;
+                    setupBrowseWhileInstalling = false;
                     downloadInstall = true;
                     try { InstallDone(null, dest); }
                     finally { downloadInstall = false; }
+                    if (closeAfterDownloadCancel)
+                    {
+                        closeAfterDownloadCancel = false;
+                        QuitApp();
+                        return;
+                    }
                     if (setup) After(300, ShowSetupDialog);  // first-time setup / RUN SETUP AGAIN: on to the folders page
                 });
             });
@@ -1956,7 +1947,7 @@ namespace AzerothLauncher
                 After(3000, delegate { OfferLauncherUpdate(false); });
                 return;
             }
-            if (!manual && (!Visible || WindowState == FormWindowState.Minimized))   // in the tray or the taskbar: the gold UPDATE
+            if (!manual && (!Visible || WindowState == FormWindowState.Minimized))   // in the taskbar: the gold UPDATE
                 return;                                      // button waits, quietly (no Windows notice)
             if (GameRunningFlag || Installing || SyncBusy || Updating)
             {
@@ -1988,6 +1979,9 @@ namespace AzerothLauncher
         {
             launcherUpdateOfferPending = false;
             Updating = true;
+            if (launcherUpdateCancel != null) launcherUpdateCancel.Dispose();
+            launcherUpdateCancel = new ManualResetEvent(false);
+            ManualResetEvent cancel = launcherUpdateCancel;
             RefreshPlayLabel();
             RefreshUpdateBtn();
             SetStatus(forced ? "Updating the launcher to " + rel.Name + "..." : "Downloading the new launcher...");
@@ -2003,7 +1997,7 @@ namespace AzerothLauncher
                         last = DateTime.Now;
                         string t = "Downloading the new launcher... " + (total > 0 ? (done * 100 / total) + "%" : Util.FmtSize(done));
                         Ui(delegate { SetStatus(t); });
-                    }, null);
+                    }, cancel);
                 }
                 catch (Exception e) { err = e.Message; }
                 Ui(delegate { LauncherDownloaded(path, err, forced); });
@@ -2012,6 +2006,7 @@ namespace AzerothLauncher
 
         void LauncherDownloaded(string path, string err, bool forced)
         {
+            if (quitting) return;
             if (err == null)
             {
                 try { SelfUpdate.InstallAndRestart(path); }        // the new one opens its window once this one is gone
@@ -2032,12 +2027,6 @@ namespace AzerothLauncher
                 return;
             }
             quitting = true;                                 // the new launcher is starting: close this one
-            if (tray != null)
-            {
-                tray.Visible = false;
-                tray.Dispose();
-                tray = null;
-            }
             Application.Exit();
             // shut down completely even if a window or background thread holds on: the new launcher is waiting
             var kill = new System.Threading.Thread(delegate() { System.Threading.Thread.Sleep(3000); Environment.Exit(0); });

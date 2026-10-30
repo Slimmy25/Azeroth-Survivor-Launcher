@@ -140,7 +140,7 @@ namespace AzerothLauncher
                 try { File.Move(old, exe); } catch (Exception) { }
                 throw new UserError("The new launcher could not be put in place (" + e.Message + "). Nothing was changed.");
             }
-            // the new launcher waits until this process has fully exited (tray icon included), then opens its window
+            // the new launcher waits until this process has fully exited, then opens its window
             Process.Start(new ProcessStartInfo(exe, "--after-update " + Process.GetCurrentProcess().Id) { UseShellExecute = false, WorkingDirectory = Path.GetDirectoryName(exe) });
         }
 

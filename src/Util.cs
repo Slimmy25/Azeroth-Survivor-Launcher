@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Reflection;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -345,6 +346,97 @@ namespace AzerothLauncher
         public static string LauncherDir
         {
             get { return Path.GetDirectoryName(Path.GetFullPath(Application.ExecutablePath)); }
+        }
+
+        // The pending marker lives beside the exe. Completion is recorded in the per-install launcher data folder.
+        static string SetupBootstrapMarker { get { return Path.Combine(LauncherDir, "First-Time-Setup.txt"); } }
+        // Also recognize the same visible name without an extension. Windows commonly hides .txt in Explorer, and
+        // a manually created marker may have been saved without it.
+        static string SetupBootstrapMarkerNoExtension { get { return Path.Combine(LauncherDir, "First-Time-Setup"); } }
+        static string SetupStateDirectory
+        {
+            get
+            {
+                string install = LauncherDir;
+                try { install = Path.GetFullPath(install).TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar); }
+                catch (Exception) { }
+                byte[] digest;
+                using (SHA256 sha = SHA256.Create()) digest = sha.ComputeHash(Encoding.UTF8.GetBytes(install.ToUpperInvariant()));
+                string key = BitConverter.ToString(digest).Replace("-", "");
+                return Path.Combine(DataDir, "setup-state", key);
+            }
+        }
+        static string SetupPendingMarker { get { return Path.Combine(SetupStateDirectory, "First-Time-Setup.txt"); } }
+
+        static bool IsSetupDoneFile(string path)
+        {
+            try { return File.Exists(path) && string.Equals(File.ReadAllText(path).Trim(), "First-Time-Setup-Done", StringComparison.Ordinal); }
+            catch (Exception) { return false; }
+        }
+
+        // File.Exists returns false for access errors as well as a missing file. Setup gating must fail closed:
+        // a permission or path error cannot be treated as proof that the pending marker is absent.
+        static bool ExistsOrUnknown(string path)
+        {
+            try { File.GetAttributes(path); return true; }
+            catch (FileNotFoundException) { return false; }
+            catch (DirectoryNotFoundException) { return false; }
+            catch (Exception) { return true; }
+        }
+
+        public static bool SetupCompleteForThisInstall
+        {
+            // The launcher considers setup complete only after the done file reaches its normal per-install location.
+            get { return IsSetupDoneFile(SetupPendingMarker); }
+        }
+
+        public static bool SetupPendingForThisInstall
+        {
+            get
+            {
+                // Location is authoritative: a marker beside the EXE always means setup is still pending.
+                // Only the marker moved into this install's state directory can record successful completion.
+                try
+                {
+                    if (ExistsOrUnknown(SetupBootstrapMarker) || ExistsOrUnknown(SetupBootstrapMarkerNoExtension)) return true;
+                    return ExistsOrUnknown(SetupPendingMarker) && !IsSetupDoneFile(SetupPendingMarker);
+                }
+                catch (Exception) { return true; }
+            }
+        }
+
+        public static void EnsureSetupPendingMarker()
+        {
+            if (SetupPendingForThisInstall || SetupCompleteForThisInstall) return;
+            File.WriteAllText(SetupBootstrapMarker, "First-Time-Setup\r\n", new UTF8Encoding(false));
+        }
+
+        // Called by Program before settings or update checks. Keep the visible bootstrap file beside the exe until
+        // MaybeFirstRun runs after startup update handling; migration is deliberately a separate step.
+        public static void CreateSetupBootstrapMarker()
+        {
+            if (SetupPendingForThisInstall || SetupCompleteForThisInstall) return;
+            EnsureSetupPendingMarker();
+        }
+
+        // Only successful setup changes the marker: write the done state, then move that same file to normal
+        // per-install launcher storage. If the move fails, the done marker remains beside the exe and is recognized.
+        public static void CompleteSetupForThisInstall()
+        {
+            string source = File.Exists(SetupBootstrapMarker) ? SetupBootstrapMarker :
+                            File.Exists(SetupBootstrapMarkerNoExtension) ? SetupBootstrapMarkerNoExtension : SetupPendingMarker;
+            if (!File.Exists(source))
+            {
+                File.WriteAllText(SetupBootstrapMarker, "First-Time-Setup\r\n", new UTF8Encoding(false));
+                source = SetupBootstrapMarker;
+            }
+            WriteAtomic(source, "First-Time-Setup-Done\r\n");
+            Directory.CreateDirectory(SetupStateDirectory);
+            if (source == SetupBootstrapMarker || source == SetupBootstrapMarkerNoExtension)
+            {
+                File.Copy(source, SetupPendingMarker, true);
+                File.Delete(source);
+            }
         }
 
         public static string AppData

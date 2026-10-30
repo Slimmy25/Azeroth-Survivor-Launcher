@@ -15,7 +15,7 @@ namespace AzerothLauncher
         {
             Directory.CreateDirectory(outDir);
             PreviewMode = true;
-            var app = new LauncherApp(true);
+            var app = new LauncherApp();
             app.Cfg.Set("saved_dir", Path.GetFullPath(savedDir));
             app.Cfg.Set("addons_dir", Path.Combine(Path.GetFullPath(outDir), "AddOns"));
             app.Cfg.Set("cloud_enabled", false);
@@ -201,7 +201,7 @@ namespace AzerothLauncher
             catch (Exception) { }
             foreach (string sec in new[] { "Setup", "Setup Folders", "Cloud Save", "Addons", "Addons Download", "Addons Download 112", "Changelog", "Options", "About Launcher", "Guide" })
             {
-                app.Show();                                  // the preview starts as if in the tray
+                app.Show();                                  // the preview starts as a visible launcher window
                 app.ShowSide();
                 string build = sec;
                 if (sec == "Addons Download") { build = "Addons"; app.addonMode = "download"; app.addonCategory = 0; }
@@ -274,7 +274,6 @@ namespace AzerothLauncher
             {
                 Lang.Load(kv.Key);
                 Theme.PickFont();
-                app.TrayTexts();
                 foreach (string sec in new[] { "Community", "Options", "Guide" })
                 {
                     app.current = sec;
@@ -285,13 +284,12 @@ namespace AzerothLauncher
             }
             Lang.Load("en");
             Theme.PickFont();
-            app.tray.Visible = false;
         }
 
         // the whole window as a picture, painted by hand: the build machine's screen is smaller than the window
         static void PreviewShot(LauncherApp app, string file)
         {
-            app.Show();                                      // the preview starts as if in the tray
+                app.Show();                                      // the preview starts as a visible launcher window
             app.Invalidate(true);
             Application.DoEvents();
             using (var home = new Bitmap(W, H))

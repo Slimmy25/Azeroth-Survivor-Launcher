@@ -13,9 +13,9 @@ using System.Windows.Forms;
 [assembly: AssemblyCompany("Azeroth Survivors")]
 [assembly: AssemblyProduct("Azeroth Survivors Launcher")]
 [assembly: AssemblyCopyright("Copyright (c) 2026 Azeroth Survivors")]
-[assembly: AssemblyVersion("3.4.0.0")]
-[assembly: AssemblyFileVersion("3.4.0.0")]
-[assembly: AssemblyInformationalVersion("3.04")]
+[assembly: AssemblyVersion("3.5.0.0")]
+[assembly: AssemblyFileVersion("3.5.0.0")]
+[assembly: AssemblyInformationalVersion("3.05")]
 [assembly: ComVisible(false)]
 [assembly: System.Runtime.Versioning.TargetFramework(".NETFramework,Version=v4.8", FrameworkDisplayName = ".NET Framework 4.8")]
 
@@ -23,6 +23,12 @@ namespace AzerothLauncher
 {
     static class Program
     {
+#if AZS_RELEASE_BUILD
+        public const bool LocalDevelopmentBuild = false;
+#else
+        public const bool LocalDevelopmentBuild = true;
+#endif
+
         // Only one launcher may run at a time. A named mutex decides who is first; a named event lets a second
         // start ask the first one to come forward. Nothing listens on the network.
         const string MutexName = "Local\\AzerothSurvivorsLauncher";
@@ -45,17 +51,25 @@ namespace AzerothLauncher
                 LauncherApp.RenderStatsPreview(args[preview + 1], args[preview + 2]);
                 Environment.Exit(0);
             }
-            bool tray = Array.IndexOf(args, "--tray") >= 0;
+            // Put the visible first-run file beside the exe before settings or update checks. It stays here through
+            // self-update; the running, updated launcher moves it into its per-install data folder before setup.
+            try { Util.CreateSetupBootstrapMarker(); }
+            catch (Exception ex)
+            {
+                MessageBox.Show("The launcher could not create First-Time-Setup.txt beside its executable.\n\n" +
+                                "Move the launcher to a folder where you can write files, then try again.\n\n" + ex.Message,
+                                "Azeroth Survivors Launcher", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             Lang.Load(Lang.Default(Config.Load().Str("language")));     // the player's language (Options > Language)
             int au = Array.IndexOf(args, "--after-update");
             bool afterUpdate = au >= 0;
             if (afterUpdate)
             {
-                tray = false;                                // after an update the launcher always reopens fully
                 int oldPid;
                 if (args.Length > au + 1 && int.TryParse(args[au + 1], out oldPid))
                 {
-                    try { Process.GetProcessById(oldPid).WaitForExit(30000); }   // the old launcher, tray icon and all, is gone
+                    try { Process.GetProcessById(oldPid).WaitForExit(30000); }
                     catch (Exception) { }                    // already exited
                 }
             }
@@ -69,10 +83,9 @@ namespace AzerothLauncher
                 }
                 if (!first)
                 {
-                    // already running: bring that window forward (unless this start was --tray) and quit
-                    if (!tray && !WakeExisting())
-                        Msg.Show("The launcher is already running.\n\nLook for its icon in the system tray (near the clock).",
-                                        "Azeroth Survivors Launcher");
+                    // already running: bring that window forward and quit
+                    if (!WakeExisting()) Msg.Show("The launcher is already running. Look for its window on the taskbar.",
+                                                   "Azeroth Survivors Launcher");
                     return;
                 }
                 SelfUpdate.CleanUp();                        // the previous exe after a launcher update
@@ -83,7 +96,7 @@ namespace AzerothLauncher
                 Application.AddMessageFilter(new WheelRouter());
                 using (var show = new EventWaitHandle(false, EventResetMode.AutoReset, EventName))
                 {
-                    var app = new LauncherApp(tray);
+                    var app = new LauncherApp();
                     var listener = new Thread(delegate()
                     {
                         while (true)

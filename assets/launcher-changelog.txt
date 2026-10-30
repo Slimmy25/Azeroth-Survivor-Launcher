@@ -1,3 +1,11 @@
+# v3.05 (2026-10-29)
+
+- First-time setup is now required while its marker file remains beside the launcher; only successful setup moves it into that install's state folder.
+- Setup now branches for new players and existing clients, keeps cloud saving off by default for new players, and lets game downloads continue while browsing addons.
+- Closing exits the launcher. During a game download or install, an in-launcher confirmation lets you cancel and close or stay until it finishes.
+- Hover cards stay inside the launcher window and hide when it moves, resizes, loses focus or closes.
+
+===
 # v3.04 (2026-10-29)
 
 - Guide links now take you to the matching passage, and search stays available so you can continue with another result.

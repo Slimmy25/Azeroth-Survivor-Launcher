@@ -3,6 +3,7 @@
 // itself (a toggle, a language change, typing in the search) is not a new step. The home screen starts the way anew.
 using System;
 using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace AzerothLauncher
 {
@@ -12,6 +13,7 @@ namespace AzerothLauncher
         {
             public string Section, GTalents, GuideQuery, AddonMode;
             public int GTopic, GPage, GuideGroupPage, GuideGroup, GuideLastTopic, ClView, OptionsTab, StatsTab;
+            public int[] ScrollPositions;
             public bool GBuilder, GPlanner, GuideMain, OptionsLang, OptionsAbout, CommunityMore;
 
             // the same place (the search text aside: typing is not a new step)
@@ -27,6 +29,45 @@ namespace AzerothLauncher
 
         readonly List<ViewState> history = new List<ViewState>();
         bool restoringView;
+        ViewState displayedView;
+        int[] restoreScrollPositions;
+
+        void CaptureDisplayedScrollPositions()
+        {
+            if (displayedView == null) return;
+            var panels = new List<ScrollPanel>();
+            CollectScrollPanels(panel, panels);
+            var positions = new int[panels.Count];
+            for (int i = 0; i < panels.Count; i++) positions[i] = Math.Max(0, -panels[i].AutoScrollPosition.Y);
+            displayedView.ScrollPositions = positions;
+            if (history.Count > 0 && object.ReferenceEquals(history[history.Count - 1], displayedView))
+                history[history.Count - 1].ScrollPositions = positions;
+        }
+
+        static void CollectScrollPanels(Control parent, List<ScrollPanel> found)
+        {
+            if (parent == null) return;
+            foreach (Control child in parent.Controls)
+            {
+                ScrollPanel scroll = child as ScrollPanel;
+                if (scroll != null) found.Add(scroll);
+                CollectScrollPanels(child, found);
+            }
+        }
+
+        void RestoreDisplayedScrollPositions(int[] positions)
+        {
+            if (positions == null) return;
+            Action restore = delegate
+            {
+                if (IsDisposed || panel == null || panel.IsDisposed) return;
+                var panels = new List<ScrollPanel>();
+                CollectScrollPanels(panel, panels);
+                for (int i = 0; i < panels.Count && i < positions.Length; i++) panels[i].ScrollTo(positions[i]);
+            };
+            if (IsHandleCreated) BeginInvoke(restore);
+            else restore();
+        }
 
         ViewState CurrentView(string section)
         {
@@ -45,7 +86,12 @@ namespace AzerothLauncher
             if (restoringView || section == "Setup") return;
             if (section == "Community" && !communityMore) { history.Clear(); return; }   // the home screen: a new way starts
             var v = CurrentView(section);
-            if (history.Count > 0 && history[history.Count - 1].SamePlace(v)) { history[history.Count - 1] = v; return; }
+            if (history.Count > 0 && history[history.Count - 1].SamePlace(v))
+            {
+                v.ScrollPositions = history[history.Count - 1].ScrollPositions;
+                history[history.Count - 1] = v;
+                return;
+            }
             history.Add(v);
             if (history.Count > 50) history.RemoveAt(0);
         }
@@ -64,6 +110,7 @@ namespace AzerothLauncher
             gBuilder = v.GBuilder; gPlanner = v.GPlanner; guideMain = v.GuideMain; optionsLang = v.OptionsLang; optionsAbout = v.OptionsAbout; communityMore = v.CommunityMore;
             if (leavingPlanner) ResetPlannerState();
             gVideo = null;
+            restoreScrollPositions = v.ScrollPositions;
             current = v.Section;
             foreach (var kv in nav) kv.Value.Active = kv.Key == v.Section;
             RefreshStrip();

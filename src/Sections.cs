@@ -176,11 +176,17 @@ namespace AzerothLauncher
         // the trail; the last step is where you are (its action is not used)
         public void SetCrumbs(List<KeyValuePair<string, Action>> list)
         {
+            if (hoverTimer != null) hoverTimer.Stop();
+            CloseOpenMenu();
             CloseFavoritePopup();
             crumbs = list ?? new List<KeyValuePair<string, Action>>();
             menus.Clear();
             crumbFavorites.Clear();
             hover = -1;
+            hoverStep = -1;
+            hoverArrow = -1;
+            quietStep = -1;
+            quietFavoriteStep = -1;
             favoriteHoverStep = -1;
             Invalidate();
         }
@@ -650,6 +656,8 @@ namespace AzerothLauncher
         Form side;
         SideHead sideHead;
         Panel panel;
+        Panel closeDownloadCard;
+        WowButton cancelDownloadCloseButton, keepDownloadButton;
         Panel strip;
         const int GuideFavoriteCount = 10;
         static Image codexFavoriteIcon;
@@ -929,6 +937,20 @@ namespace AzerothLauncher
             lostHelpCard.MouseLeave += delegate { DeferHideLostHelpInline(); };
             chat.Controls.Add(lostHelpCard);
             lostHelpCard.BringToFront();
+            closeDownloadCard = new Panel();
+            closeDownloadCard.Dock = DockStyle.Fill;
+            closeDownloadCard.BackColor = Theme.Hex("#0e0d14");
+            closeDownloadCard.Visible = false;
+            closeDownloadCard.Paint += PaintDownloadClosePrompt;
+            cancelDownloadCloseButton = new WowButton("CANCEL DOWNLOAD & CLOSE", CloseAfterCancellingGameDownload, 210, 34, 8.5f);
+            cancelDownloadCloseButton.Skin = Retro.Button;
+            keepDownloadButton = new WowButton("STAY & FINISH", KeepGameDownloadRunning, 180, 34, 8.5f);
+            keepDownloadButton.Skin = Retro.Button;
+            closeDownloadCard.Controls.Add(cancelDownloadCloseButton);
+            closeDownloadCard.Controls.Add(keepDownloadButton);
+            closeDownloadCard.Resize += delegate { LayoutDownloadClosePrompt(); };
+            chat.Controls.Add(closeDownloadCard);
+            closeDownloadCard.BringToFront();
             Deactivate += delegate { HideLostHelpInline(); };
             LayoutStrip();
             RefreshStrip();
@@ -1121,9 +1143,66 @@ namespace AzerothLauncher
         {
             GuideHover.Hide();
             HideLostHelpInline();
+            HideDownloadClosePrompt();
             StopEdge();
             communityPlaying = null;
             if (side.Visible) side.Hide();
+        }
+
+        void ShowDownloadClosePrompt()
+        {
+            if (!Installing) { QuitApp(); return; }
+            ShowWindowFront();
+            if (!side.Visible)
+            {
+                current = "Options";
+                optionsTab = 4;
+                ShowSide();
+                BuildPanel("Options");
+            }
+            closeAfterDownloadCancel = false;
+            LayoutDownloadClosePrompt();
+            closeDownloadCard.Visible = true;
+            closeDownloadCard.BringToFront();
+            cancelDownloadCloseButton.Focus();
+        }
+
+        void HideDownloadClosePrompt()
+        {
+            if (closeDownloadCard != null) closeDownloadCard.Visible = false;
+        }
+
+        void LayoutDownloadClosePrompt()
+        {
+            if (closeDownloadCard == null) return;
+            int y = Math.Max(125, closeDownloadCard.ClientSize.Height / 2 + 35);
+            int gap = 10;
+            cancelDownloadCloseButton.Visible = true;
+            cancelDownloadCloseButton.Label = dlActive ? "CANCEL DOWNLOAD & CLOSE" : "CLOSE WHEN FINISHED";
+            keepDownloadButton.Label = "STAY & FINISH";
+            int total = cancelDownloadCloseButton.Width + keepDownloadButton.Width + gap;
+            int x = Math.Max(12, (closeDownloadCard.ClientSize.Width - total) / 2);
+            cancelDownloadCloseButton.Location = new Point(x, y);
+            keepDownloadButton.Location = new Point(x + cancelDownloadCloseButton.Width + gap, y);
+        }
+
+        void PaintDownloadClosePrompt(object sender, PaintEventArgs e)
+        {
+            Graphics g = e.Graphics;
+            g.Clear(Theme.Hex("#0e0d14"));
+            using (var p = new Pen(Theme.Hex("#c49a48"), 2))
+                g.DrawRectangle(p, 1, 1, closeDownloadCard.Width - 3, closeDownloadCard.Height - 3);
+            int width = Math.Max(100, closeDownloadCard.ClientSize.Width - 48);
+            bool downloading = dlActive;
+            string title = downloading ? "The game is downloading" : "The game is being installed";
+            string message = downloading
+                ? "Would you like to cancel the download and close the launcher, or leave it open until the download finishes?"
+                : "The download is complete and the game files are being installed. Choose whether to close after installation finishes or leave the launcher open.";
+            TextRenderer.DrawText(g, Lang.T(title), Theme.F(15, FontStyle.Bold),
+                new Rectangle(24, 42, width, 30), Theme.Gold, TextFormatFlags.HorizontalCenter | TextFormatFlags.NoPrefix);
+            TextRenderer.DrawText(g, message, Theme.F(10, FontStyle.Regular),
+                new Rectangle(30, 85, width - 12, 60), Theme.Text,
+                TextFormatFlags.HorizontalCenter | TextFormatFlags.WordBreak | TextFormatFlags.NoPrefix);
         }
 
         // closing a section goes back to the home screen, which shows Community; Community itself cannot be closed
@@ -1212,6 +1291,7 @@ namespace AzerothLauncher
 
         void BuildPanel(string name)
         {
+            CaptureDisplayedScrollPositions();
             GuideHover.Hide();
             HideLostHelpInline();
             if (name != "Community") communityPlaying = null;   // another section: the Community video is left
@@ -1233,6 +1313,7 @@ namespace AzerothLauncher
                 else if (name == "Community") PanelCommunity();
                 else if (name == "Setup") PanelSetup();          // first-time setup (Setup.cs)
                 RememberView(name);                              // the back arrow's way (History.cs)
+                displayedView = name != "Setup" && history.Count > 0 ? history[history.Count - 1] : null;
                 // "Lost?" wherever there is a path to follow: not in Community or Setup,
                 // and not while a Guide video plays
                 sideHead.HelpShown = name != "Community" && name != "Setup" && !(name == "Guide" && gVideo != null);
@@ -1242,6 +1323,12 @@ namespace AzerothLauncher
                 Theme.Zoom = 1f;
                 panel.ResumeLayout();
                 if (freeze) Freeze(false);
+            }
+            if (restoreScrollPositions != null)
+            {
+                int[] positions = restoreScrollPositions;
+                restoreScrollPositions = null;
+                RestoreDisplayedScrollPositions(positions);
             }
             if (name == "Addons") RefreshGates();             // AZS Stats switched on or off: the Stats buttons follow
         }
@@ -3347,14 +3434,7 @@ namespace AzerothLauncher
                 var t = PutText(note, 9.5f, FontStyle.Italic, Theme.GoldDim, 20 + b.Width + 12, y + 2, PW - 40 - b.Width - 12);
                 y = Math.Max(BottomOf(b), BottomOf(t)) + 8;
             };
-            // how the launcher behaves (was GENERAL)
-            y = OptionCheck("Close button hides the launcher to the tray", Cfg.Bool("close_to_tray", false), y,
-                            delegate(bool on) { Cfg.Set("close_to_tray", on); Cfg.Save(); });
-            var trayNote = PutText("When checked, closing hides the launcher in the tray. When unchecked, closing exits it.",
-                                   9, FontStyle.Italic, Theme.GoldDim, 36, y - 2, PW - 56);
-            y = BottomOf(trayNote) + 6;
-            y = OptionCheck("Minimize the launcher when the game starts", Cfg.Bool("minimize_on_play", true), y,
-                            delegate(bool on) { Cfg.Set("minimize_on_play", on); Cfg.Save(); });
+            // Closing the launcher exits it; it stays visible while the game runs and has no tray/minimize-on-play mode.
             y = OptionCheck("Show the Stats section (your play time and run records)", StatsEnabled(), y,
                             delegate(bool on) { SetStatsEnabled(on); });
             y = OptionCheck("Show play time on the home screen", Cfg.Bool("home_playtime", true), y,

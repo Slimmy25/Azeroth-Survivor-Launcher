@@ -1,5 +1,5 @@
 // First-time setup, inside the launcher's section window (no window of its own): a welcome, then six setup slides for
-// language, save import, cloud saving and folders, AZS Stats, addons and the game location/install. Choices stay staged
+// language, save import, player type, optional existing-client folders, AZS Stats, addons and game install. Choices stay staged
 // until the final slide. Setup cannot be closed before it is done: cancelling it shows a last page that
 // says what the launcher is for, with START SETUP AGAIN. PLAY stays grayed out until setup is done.
 // While it runs no Community video is shown; when it is done the home screen's Community comes back.
@@ -13,12 +13,14 @@ namespace AzerothLauncher
 {
     public partial class LauncherApp
     {
-        // 0 welcome, 1 language, 2 website save, 3 cloud and folders, 4 AZS Stats, 5 addons, 6 game, 7 setup cancelled
+        // 0 welcome, 1 language, 2 website save, 3 player type, 4 existing-client folders, 5 AZS Stats, 6 addons, 7 game, 8 cancelled
         int setupPage;
         bool setupCloud, setupCloudFolderRequired;
+        bool setupExistingClient;
         bool? setupStats;                                     // the answer to the AZS Stats question
         string setupAddons;                                   // "download" when the player wants addons, else null
         bool setupDownloading;                                // first-time game download is in progress
+        bool setupBrowseWhileInstalling;                      // allow Download More during setup-triggered game download
         bool setupFirstTime;                                  // setup was never done before (not RUN SETUP AGAIN)
         string setupImported;
         string setupImportFile;                               // selected save is validated now, imported only when setup finishes
@@ -26,20 +28,35 @@ namespace AzerothLauncher
         string setupLanguage;
         Dictionary<string, string> setupVals, setupDefaults;
         Dictionary<string, object> setupResult;
+        readonly HashSet<string> setupManualFolderDirs = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        Action setupFooterNext;
+        string setupFooterNextLabel;
 
         // Setup keeps explicitly configured folders, but does not guess conventional save or addon locations.
         void ShowSetupDialog()
         {
-            setupCloud = Cfg.Bool("cloud_enabled", false);
+            setupFirstTime = !Cfg.Bool("setup_done", false);
+            // A genuinely new setup starts with cloud saving off. Preserve an existing player's explicit saved choice.
+            setupCloud = setupFirstTime ? false : Cfg.Bool("cloud_enabled", false);
             setupCloudFolderRequired = false;
+            setupExistingClient = false;
+            setupBrowseWhileInstalling = false;
             setupVals = new Dictionary<string, string>();
             setupDefaults = new Dictionary<string, string>();
-            setupDefaults["addons_dir"] = "";
-            setupDefaults["saved_dir"] = "";
-            setupDefaults["save_dir"] = "";
+            setupManualFolderDirs.Clear();
+            // Keep local game files beside the launcher/game by default. Save data remains in the game's
+            // fixed AppData location, independent of the cloud-sync choice.
+            setupGameDir = GameDir();
+            setupDefaults["addons_dir"] = Path.Combine(setupGameDir, "benilla-config", "AddOns");
+            setupDefaults["saved_dir"] = Path.Combine(setupGameDir, "benilla-config", "saved");
+            setupDefaults["save_dir"] = Util.DefaultSaveDir;
             setupVals["cloud_dir"] = Cfg.Str("cloud_dir");
-            foreach (var kv in setupDefaults) setupVals[kv.Key] = Cfg.Str(kv.Key);
-            setupGameDir = ClientPresent() ? GameDir() : Cfg.Str("game_dir");
+            foreach (var kv in setupDefaults)
+            {
+                string configured = Cfg.Str(kv.Key);
+                setupVals[kv.Key] = string.IsNullOrWhiteSpace(configured) ? kv.Value : configured;
+                if (!string.IsNullOrWhiteSpace(configured)) setupManualFolderDirs.Add(kv.Key);
+            }
             setupLanguage = Cfg.Str("language");
             if (string.IsNullOrWhiteSpace(setupLanguage)) setupLanguage = Lang.Code;
             Config.Frozen = false;                            // (after a cancelled first setup: saving again)
@@ -51,7 +68,8 @@ namespace AzerothLauncher
                 foreach (Form f in open) f.Close();
             }
             catch (Exception) { }
-            setupFirstTime = !Cfg.Bool("setup_done", false);
+            // The per-install marker decides whether setup is shown; the saved config only classifies cancellation
+            // cleanup and preserves explicit choices for players who have already completed setup.
             setupImported = null;
             setupImportFile = null;
             setupResult = null;
@@ -73,23 +91,27 @@ namespace AzerothLauncher
         // The setup back arrow always moves exactly one slide; the welcome has no back action.
         void SetupBack()
         {
-            if (setupPage > 0 && setupPage <= 7) SetupGo(setupPage - 1);
+            if (setupPage > 0 && setupPage <= 8) SetupGo(setupPage - 1);
         }
 
         void SetupRestart() { ShowSetupDialog(); }
 
-        static readonly string[] SetupSteps = { "Welcome", "Language", "Your save", "Cloud & folders", "AZS Stats", "Addons", "Game" };
+        static readonly string[] SetupSteps = { "First Time Setup", "Language", "Your save", "Player type", "Cloud & folders", "AZS Stats", "Addons", "Game" };
 
         void PanelSetup()
         {
             ClearPanel("Setup");
+            setupFooterNext = null;
+            setupFooterNextLabel = "NEXT ›";
             // Keep the restart control fixed at the bottom while each slide's content can scroll.
             int setupFooter = 52;
             var sp = MakeScroll(panel, new Rectangle(8, 4, PW - 16, PH - 12 - setupFooter), Theme.Panel, Theme.Panel);
             setupHeadW = 0;
-            if (setupPage > 0 && setupPage <= 6)
+            if (setupPage > 0 && setupPage <= 7)
             {
-                var stepL = PutText(Lang.F("Step {0} of {1}", setupPage, 6), 10, FontStyle.Italic, Theme.GoldDim, 0, 8, 0);
+                int totalSteps = setupPage == 3 || setupExistingClient ? 7 : 6;
+                int stepNumber = setupPage > 4 && !setupExistingClient ? setupPage - 1 : setupPage;
+                var stepL = PutText(Lang.F("Step {0} of {1}", stepNumber, totalSteps), 10, FontStyle.Italic, Theme.GoldDim, 0, 8, 0);
                 stepL.Left = PW - 24 - stepL.Width;
                 stepL.BringToFront();
                 setupHeadW = stepL.Width + 16;                    // the first heading stays clear of it
@@ -102,10 +124,12 @@ namespace AzerothLauncher
                 if (setupPage == 0) end = SetupWelcome(px, 6, pw);
                 else if (setupPage == 1) end = SetupLanguage(px, 6, pw);
                 else if (setupPage == 2) end = SetupSave(px, 6, pw);
-                else if (setupPage == 3) end = SetupFolders(px, 6, pw);
-                else if (setupPage == 4) end = SetupStats(px, 6, pw);
-                else if (setupPage == 5) end = SetupAddons(px, 6, pw);
-                else if (setupPage == 6) end = SetupDownload(px, 6, pw);
+                else if (setupPage == 3) end = SetupPlayerType(px, 6, pw);
+                else if (setupPage == 4) end = SetupFolders(px, 6, pw);
+                else if (setupPage == 5) end = SetupStats(px, 6, pw);
+                else if (setupPage == 6) end = SetupAddons(px, 6, pw);
+                else if (setupPage == 7) end = SetupDownload(px, 6, pw);
+                else if (setupPage == 8) end = SetupAddonHandoff(px, 6, pw);
                 else end = SetupCancelled(px, 6, pw);
                 var pad = new Panel();
                 pad.BackColor = Theme.Panel;
@@ -122,8 +146,17 @@ namespace AzerothLauncher
             panel.Controls.Add(restart);
             restart.BringToFront();
             if (setupPage == 0 || setupPage == 1)
+                setupFooterNext = delegate { SetupGo(setupPage + 1); };
+            else if (setupPage == 2)
             {
-                var next = new WowButton("NEXT ›", delegate { SetupGo(setupPage + 1); }, 170, 38, 12);
+                setupFooterNext = delegate { SetupGo(3); };
+                if (setupImported == null) setupFooterNextLabel = "I'M NEW HERE ›";
+            }
+            else if (setupPage == 4)
+                setupFooterNext = SetupFinishFolders;
+            if (setupFooterNext != null)
+            {
+                var next = new WowButton(setupFooterNextLabel, delegate { setupFooterNext(); }, 190, 38, 11);
                 next.Location = new Point(PW - 16 - next.Width, PH - 48);
                 panel.Controls.Add(next);
                 next.BringToFront();
@@ -134,7 +167,7 @@ namespace AzerothLauncher
 
         int SetupWelcome(int x, int y, int w)
         {
-            var title = PutText("Welcome to Azeroth Survivors Launcher", 15, FontStyle.Bold, Theme.Gold, x, y, w);
+            var title = PutText("First Time Setup", 15, FontStyle.Bold, Theme.Gold, x, y, w);
             var p = PutText("Thank you for using my community-made launcher. This is designed to help people celebrate how cool this game is and make a unifying one-stop-shop for all Azeroth Survivors needs\n\n" +
                             "During your first time setup please go through this next line of slides that will help set the game up for an existing user, or even help out if you are new\n\n" +
                             "Please follow this step by step guide to help get ready to play", 12, FontStyle.Regular, Theme.Text, x, BottomOf(title) + 12, w);
@@ -171,14 +204,34 @@ namespace AzerothLauncher
             {
                 var ok = PutText("✓ Save selected: " + setupImported + " (will import when setup finishes)", 11, FontStyle.Bold, Theme.Good, x, y, w, false);
                 y = BottomOf(ok) + 12;
-                var n = Put(new WowButton("NEXT ›", delegate { SetupGo(3); }, 170, 38, 12), x, y);
-                Put(new WowButton("IMPORT ANOTHER", SetupImport, 190, 38, 10), n.Right + 12, y);
-                Put(new WowButton("CLEAR", delegate { setupImported = setupImportFile = null; BuildPanel("Setup"); }, 92, 38, 9), n.Right + (int)(202 * Theme.Zoom), y);
-                return n.Bottom;
+                var again = Put(new WowButton("IMPORT ANOTHER", SetupImport, 190, 38, 10), x, y);
+                Put(new WowButton("CLEAR", delegate { setupImported = setupImportFile = null; BuildPanel("Setup"); }, 92, 38, 9), again.Right + 12, y);
+                return again.Bottom;
             }
             var im = Put(new WowButton("IMPORT MY SAVE", SetupImport, 220, 42, 12), x, y);
-            Put(new WowButton("I'M NEW HERE", delegate { SetupGo(3); }, 190, 42, 11), im.Right + 12, y);
             return im.Bottom;
+        }
+
+        // Existing client owners get the folder controls; browser players and new players skip them and install
+        // directly beside the launcher. The game's own save location remains untouched.
+        int SetupPlayerType(int x, int y, int w)
+        {
+            var q = PutText("Do you already have the Azeroth Survivors game client on this PC?", 13, FontStyle.Bold, Theme.Gold, x, y, w - setupHeadW);
+            var p = PutText("If yes, setup will let you choose where the existing game and its AddOns are located. If no, the game will download into the folder containing this launcher.",
+                            11, FontStyle.Regular, Theme.Text, x, BottomOf(q) + 4, w);
+            y = BottomOf(p) + 14;
+            var yes = Put(new WowButton("YES, I HAVE THE CLIENT", delegate
+            {
+                setupExistingClient = true;
+                SetupGo(4);
+            }, 250, 42, 11), x, y);
+            Put(new WowButton("NO, DOWNLOAD IT", delegate
+            {
+                setupExistingClient = false;
+                setupGameDir = Util.LauncherDir;
+                SetupGo(5);
+            }, 220, 42, 11), yes.Right + 12, y);
+            return yes.Bottom;
         }
 
         void SetupImport()
@@ -241,29 +294,29 @@ namespace AzerothLauncher
             }
             Put(UI.Line(Theme.Bronze, w, 1), x, y + 6);
             var b = PutText("B.  Where are your files?", 13, FontStyle.Bold, Theme.Gold, x, y + 14, w);
-            var n = PutText("Choose the folders you want the launcher to use. Locations stay unset until you choose them.",
+            var n = PutText("Defaults are filled in for you. Change a folder if your files live somewhere else.",
                             10, FontStyle.Regular, Theme.Text, x, BottomOf(b), w);
             y = BottomOf(n) + 4;
-            y = SetupFolderRow("AddOns", "addons_dir", delegate { SetupPick("addons_dir", "Select your AddOns folder"); }, false, x, y, w);
+            y = SetupFolderRow("AddOns", "addons_dir", delegate { SetupPick("addons_dir", "Select your AddOns folder"); }, true, x, y, w);
             y = SetupFolderRow("Game saves", "save_dir", delegate
             {
                 SetupPick("save_dir", "Select the folder that holds your game saves");
-            }, false, x, y, w);
+            }, true, x, y, w);
             y = SetupFolderRow("Addon settings", "saved_dir", delegate
             {
                 SetupPick("saved_dir", "Select the folder that holds your addon settings");
-            }, false, x, y, w);
-            var fin = Put(new WowButton("NEXT ›", SetupFinishFolders, 170, 38, 12), x, y + 12);
-            return fin.Bottom;
+            }, true, x, y, w);
+            return y;
         }
 
         int SetupFolderRow(string label, string key, Action chooser, bool defaultOk, int x, int y, int w)
         {
             string path = setupVals.ContainsKey(key) ? setupVals[key] ?? "" : "";
             bool found = path.Length > 0 && Directory.Exists(path);
+            bool isDefault = setupDefaults.ContainsKey(key) && Util.SamePath(path, setupDefaults[key]);
             var name = PutText(label, 11, FontStyle.Bold, Theme.Gold, x, y, 0);
-            string note = found ? (defaultOk ? "✓ found" : "✓ chosen") : (path.Length == 0 ? "not chosen yet" : defaultOk ? "Created if not found" : "not found - please choose it");
-            PutText(note, 9, FontStyle.Italic, found ? Theme.Good : defaultOk && path.Length > 0 ? Theme.GoldDim : Theme.Bad, name.Right + 8, y + 3, 0);
+            string note = found ? (isDefault ? "✓ found" : "✓ chosen") : (path.Length == 0 ? "not chosen yet" : isDefault ? "Created if not found" : "not found - please choose it");
+            PutText(note, 9, FontStyle.Italic, found ? Theme.Good : isDefault && path.Length > 0 ? Theme.GoldDim : Theme.Bad, name.Right + 8, y + 3, 0);
             int btnW = (int)(100 * Theme.Zoom);
             var pathL = PutText(path.Length > 0 ? path : Lang.T("(not set)"), 9, FontStyle.Regular, Theme.LinkBlue, x, BottomOf(name), w - btnW - 12, false);
             int h = BottomOf(pathL) - y;
@@ -278,6 +331,7 @@ namespace AzerothLauncher
                 (cur.Length > 0 && Directory.Exists(Path.GetDirectoryName(cur)) ? Path.GetDirectoryName(cur) : Util.Home));
             if (d == null) return;
             setupVals[key] = Path.GetFullPath(d);
+            setupManualFolderDirs.Add(key);
             BuildPanel("Setup");
         }
 
@@ -300,10 +354,11 @@ namespace AzerothLauncher
             res["cloud_enabled"] = setupCloud;
             if (setupCloud) res["cloud_dir"] = setupVals["cloud_dir"];
             foreach (string key in new[] { "addons_dir", "saved_dir", "save_dir" })
-                if (!string.IsNullOrWhiteSpace(setupVals[key]) && !Util.SamePath(setupVals[key], setupDefaults[key]))
+                if (!string.IsNullOrWhiteSpace(setupVals[key]) &&
+                    (setupManualFolderDirs.Contains(key) || !Util.SamePath(setupVals[key], setupDefaults[key])))
                     res[key] = Path.GetFullPath(setupVals[key]);
             setupResult = res;
-            SetupGo(4);
+            SetupGo(5);
         }
 
         // page 5: AZS Stats, asked before the addons (it is one of them)
@@ -313,45 +368,95 @@ namespace AzerothLauncher
             var p = PutText("AZS Stats records your runs while you play (/azs in game) and fills the launcher's STATS page: records, " +
                             "abilities, classes, play time, your Nemesis and co-op with friends.", 11, FontStyle.Regular, Theme.Text, x, BottomOf(q) + 4, w);
             y = BottomOf(p) + 14;
-            var yes = Put(new WowButton("YES, TRACK MY STATS", delegate { setupStats = true; SetupGo(5); }, 250, 42, 12), x, y);
-            Put(new WowButton("NO", delegate { setupStats = false; SetupGo(5); }, 140, 42, 12), yes.Right + 12, y);
+            var yes = Put(new WowButton("YES, TRACK MY STATS", delegate { setupStats = true; SetupGo(6); }, 250, 42, 12), x, y);
+            Put(new WowButton("NO", delegate { setupStats = false; SetupGo(6); }, 140, 42, 12), yes.Right + 12, y);
             return yes.Bottom;
         }
 
         // page 6: the other addons, all optional
         int SetupAddons(int x, int y, int w)
         {
-            var q = PutText("Would you like to download addons?", 13, FontStyle.Bold, Theme.Gold, x, y, w - setupHeadW);
+            string question = setupStats == true ? "Would you like to download more addons?" : "Would you like to download addons?";
+            var q = PutText(question, 13, FontStyle.Bold, Theme.Gold, x, y, w - setupHeadW);
             var p = PutText("They are all optional: you choose each one you want in Addons > DOWNLOAD MORE.", 11, FontStyle.Regular, Theme.Text, x, BottomOf(q) + 4, w);
             y = BottomOf(p) + 14;
-            var yes = Put(new WowButton("YES, ADDONS", delegate { setupAddons = "download"; SetupNext(); }, 200, 42, 12), x, y);
+            var yes = Put(new WowButton("YES, ADDONS", delegate { setupAddons = "download"; SetupGo(8); }, 200, 42, 12), x, y);
             Put(new WowButton("NO THANKS", delegate { setupAddons = null; SetupNext(); }, 170, 42, 11), yes.Right + 12, y);
             return yes.Bottom;
+        }
+
+        int SetupAddonHandoff(int x, int y, int w)
+        {
+            bool alreadyInstalled = File.Exists(Path.Combine(setupGameDir, Util.GameExe));
+            var title = PutText(alreadyInstalled ? "Browse Download More" : "Browse while the game downloads", 14,
+                                FontStyle.Bold, Theme.Gold, x, y, w);
+            string message = alreadyInstalled
+                ? "Your game is already installed. Continue to Addons > DOWNLOAD MORE. The Guide will stay available for tips and tricks."
+                : "The game will start downloading when you continue. You can browse Addons > DOWNLOAD MORE and the Guide for tips and tricks while it installs.";
+            var body = PutText(message, 11, FontStyle.Regular, Theme.Text, x, BottomOf(title) + 8, w);
+            y = BottomOf(body) + 16;
+            var go = Put(new WowButton(alreadyInstalled ? "OPEN DOWNLOAD MORE" : "START DOWNLOAD & BROWSE", StartSetupAddonBrowse, 260, 40, 10), x, y);
+            Put(new WowButton("BACK", delegate { SetupGo(6); }, 110, 40, 10), go.Right + 10, y);
+            return go.Bottom;
+        }
+
+        void StartSetupAddonBrowse()
+        {
+            if (Updating || Installing || GameRunningFlag)
+            {
+                SetStatus("Finish the current update, install, or game session before continuing setup.");
+                return;
+            }
+            bool alreadyInstalled = File.Exists(Path.Combine(setupGameDir, Util.GameExe));
+            if (setupResult == null) setupResult = new Dictionary<string, object>();
+            setupResult["cloud_enabled"] = setupCloud;
+            setupResult["game_dir"] = Path.GetFullPath(setupGameDir);
+            if (alreadyInstalled) setupResult["installed_by_launcher"] = true;
+            if (alreadyInstalled)
+            {
+                SetupLeave("download", setupStats);
+                return;
+            }
+
+            setupBrowseWhileInstalling = true;
+            if (!SetupLeave("download", setupStats))
+            {
+                setupBrowseWhileInstalling = false;
+                return;
+            }
+            setupDownloading = true;
+            InstallClient(false, setupGameDir);
         }
 
         // The game location is always the sixth slide, whether the game is already installed or not.
         void SetupNext()
         {
-            SetupGo(6);
+            SetupGo(7);
         }
 
         // slide 6: select the game folder, then explicitly start the download or finish with the existing game
         int SetupDownload(int x, int y, int w)
         {
-            var q = PutText("Ready to download and play?", 13, FontStyle.Bold, Theme.Gold, x, y, w - setupHeadW);
+            var q = PutText("Last step: download the game?", 13, FontStyle.Bold, Theme.Gold, x, y, w - setupHeadW);
             bool alreadyInstalled = setupGameDir.Length > 0 && File.Exists(Path.Combine(setupGameDir, Util.GameExe));
             var p = PutText(alreadyInstalled
                                 ? "Your game is already in this folder. Finish setup to return to the launcher."
-                                : "Choose where to install the game. The download starts when you press READY TO DOWNLOAD AND PLAY?",
+                                : setupExistingClient
+                                    ? "Choose the folder for your game client. The download starts when you click DOWNLOAD GAME."
+                                    : "The game will download into the folder containing this launcher when you click DOWNLOAD GAME.",
                             11, FontStyle.Regular, Theme.Text, x, BottomOf(q) + 4, w);
             y = BottomOf(p) + 12;
-            var path = PutText(setupGameDir.Length > 0 ? setupGameDir : "No game folder selected", 10, FontStyle.Italic,
-                               setupGameDir.Length > 0 ? Theme.LinkBlue : Theme.GoldDim, x, y, w - 120);
-            Put(new WowButton("CHOOSE FOLDER", delegate
+            string gamePathText = setupGameDir.Length > 0 ? setupGameDir : "No game folder selected";
+            if (!setupExistingClient) gamePathText += " (game download location)";
+            var path = PutText(gamePathText, 10, FontStyle.Italic,
+                               setupGameDir.Length > 0 ? Theme.LinkBlue : Theme.GoldDim, x, y, setupExistingClient ? w - 120 : w);
+            if (setupExistingClient) Put(new WowButton("CHOOSE FOLDER", delegate
             {
                 string d = AskFolder(side, "Choose a folder for Azeroth Survivors", setupGameDir.Length > 0 && Directory.Exists(setupGameDir) ? setupGameDir : Util.Home);
                 if (d == null) return;
+                string previousGameDir = setupGameDir;
                 setupGameDir = Path.GetFullPath(d);
+                UpdateSetupFolderDefaults(previousGameDir, setupGameDir);
                 BuildPanel("Setup");
             }, 110, 30, 9), x + w - (int)(110 * Theme.Zoom), y - 3);
             y = BottomOf(path) + 12;
@@ -360,6 +465,7 @@ namespace AzerothLauncher
                 var existing = Put(new WowButton("FINISH SETUP", delegate
                 {
                     if (setupResult == null) setupResult = new Dictionary<string, object>();
+                    setupResult["cloud_enabled"] = setupCloud;
                     setupResult["game_dir"] = Path.GetFullPath(setupGameDir);
                     setupResult["installed_by_launcher"] = true;
                     SetupLeave(setupAddons, setupStats);
@@ -374,13 +480,30 @@ namespace AzerothLauncher
                     return;
                 }
                 if (setupResult == null) setupResult = new Dictionary<string, object>();
+                setupResult["cloud_enabled"] = setupCloud;
                 setupResult["game_dir"] = Path.GetFullPath(setupGameDir);
                 if (!SetupLeave(setupAddons, setupStats)) return;
                 setupDownloading = true;
                 InstallClient(false, setupGameDir);
             }, 270, 42, 11), x, y);
-            dl.Label = "READY TO DOWNLOAD AND PLAY?";
+            dl.Label = "DOWNLOAD GAME";
             return dl.Bottom;
+        }
+
+        void UpdateSetupFolderDefaults(string previousGameDir, string newGameDir)
+        {
+            string oldConfig = Path.Combine(previousGameDir, "benilla-config");
+            string newConfig = Path.Combine(newGameDir, "benilla-config");
+            foreach (var pair in new[] { new[] { "addons_dir", "AddOns" }, new[] { "saved_dir", "saved" } })
+            {
+                string key = pair[0];
+                if (setupManualFolderDirs.Contains(key)) continue;
+                string oldPath = Path.Combine(oldConfig, pair[1]);
+                string newPath = Path.Combine(newConfig, pair[1]);
+                if (Util.SamePath(setupVals[key], oldPath)) setupVals[key] = newPath;
+                setupDefaults[key] = newPath;
+                if (setupResult != null) setupResult.Remove(key);
+            }
         }
 
         // setup (or the game's download started from it) was cancelled. RUN SETUP AGAIN: back to the home screen with
@@ -404,7 +527,7 @@ namespace AzerothLauncher
             RefreshStrip();
             ShowSide();
             RefreshPlayLabel();
-            SetupGo(7);
+            SetupGo(9);
         }
 
         // A cancelled first setup does not remove user folders or game data.
@@ -475,6 +598,8 @@ namespace AzerothLauncher
         {
             if (!setupDownloading) return;
             setupDownloading = false;
+            setupBrowseWhileInstalling = false;
+            RefreshGates();
             RefreshPlayLabel();
             SetStatus("Game download cancelled. Choose INSTALL when you are ready to try again.");
         }
@@ -508,6 +633,8 @@ namespace AzerothLauncher
                 UpdateNewPlayerFlag();
                 Cfg.Set("setup_folder", Util.LauncherDir);       // the folder this setup was for (a copy elsewhere sets up again)
                 Cfg.Save();
+                try { Util.CompleteSetupForThisInstall(); } catch (Exception) { }
+                if (launcherRelease != null) After(500, ForceLauncherUpdate);
                 RefreshPlayLabel();                           // PLAY is no longer grayed out
                 SetStatus("Setup saved.");
                 ApplyCloudVisibility();

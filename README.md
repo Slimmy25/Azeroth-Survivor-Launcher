@@ -91,7 +91,7 @@ the launcher, streamed from YouTube and never saved on your PC, with the creator
 - **News and Changelog**: every patch note of the game, newest first.
 - **Options**: the game's own settings (display, graphics, sound, gameplay) with a plain explanation for each, your
   folders, and the launcher's own settings.
-- **26 languages**, the system tray, and only one copy running at a time.
+- **26 languages** and only one copy running at a time. Closing the launcher exits it; it does not stay in the system tray.
 
 ### The AZS addons
 | Addon | What it does |

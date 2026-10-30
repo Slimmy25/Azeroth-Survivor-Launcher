@@ -884,6 +884,7 @@ namespace AzerothLauncher
                 hoverHost.FormClosed -= HoverHostClosed;
                 hoverHost.VisibleChanged -= HoverHostVisibilityChanged;
                 hoverHost.Resize -= HoverHostResized;
+                hoverHost.Move -= HoverHostMoved;
             }
             hoverHost = host;
             if (hoverHost != null)
@@ -892,6 +893,7 @@ namespace AzerothLauncher
                 hoverHost.FormClosed += HoverHostClosed;
                 hoverHost.VisibleChanged += HoverHostVisibilityChanged;
                 hoverHost.Resize += HoverHostResized;
+                hoverHost.Move += HoverHostMoved;
             }
         }
 
@@ -899,14 +901,22 @@ namespace AzerothLauncher
         // Walk both parent and owner links so a hover card is always attached to a real window.
         static Form RootHost(Control owner)
         {
-            Form host = owner == null ? null : owner.FindForm();
-            var seen = new HashSet<Form>();
-            while (host != null && seen.Add(host) && !host.TopLevel)
+            Control current = owner;
+            var seen = new HashSet<Control>();
+            while (current != null && seen.Add(current))
             {
-                Form parent = host.Parent as Form;
-                host = parent ?? host.Owner;
+                Form form = current as Form;
+                if (form != null)
+                {
+                    if (form.TopLevel) return form;
+                    // A child Form can be parented by a Panel, not another Form. Keep walking
+                    // through that control tree instead of dropping the hover owner here.
+                    if (form.Parent != null) { current = form.Parent; continue; }
+                    if (form.Owner != null) { current = form.Owner; continue; }
+                }
+                current = current.Parent;
             }
-            return host;
+            return null;
         }
 
         static void HoverHostDeactivated(object sender, EventArgs e) { Hide(); }
@@ -925,9 +935,10 @@ namespace AzerothLauncher
 
         static void HoverHostResized(object sender, EventArgs e)
         {
-            Form host = sender as Form;
-            if (host != null && host.WindowState == FormWindowState.Minimized) Hide();
+            Hide();
         }
+
+        static void HoverHostMoved(object sender, EventArgs e) { Hide(); }
 
         // Delayed hovers must not appear after their window loses focus (for example during Alt+Tab).
         public static bool CanShow(Control owner)
@@ -997,13 +1008,26 @@ namespace AzerothLauncher
             if (icon != null) th = Math.Max(th, 36);
             int bh;
             using (var mg = Graphics.FromImage(measure)) bh = box.Flow(mg, bf, false);
-            Point p = screenAnchor.HasValue ? screenAnchor.Value : Cursor.Position;
-            var size = new Size(W, th + bh + 22 + (model != null ? ModelH + 8 : 0) + (pic != null ? pic.Height + 10 : 0));
-            Rectangle screen = Screen.FromPoint(p).WorkingArea;
-            int x = Math.Min(p.X + 16, screen.Right - size.Width - 4), y = p.Y + 20;
-            if (y + size.Height > screen.Bottom) y = p.Y - size.Height - 8;
-            x = Math.Max(screen.Left + 4, Math.Min(x, screen.Right - size.Width - 4));
-            y = Math.Max(screen.Top + 4, Math.Min(y, screen.Bottom - size.Height - 4));
+            Rectangle ownerBounds = host.RectangleToScreen(host.ClientRectangle);
+            if (ownerBounds.Width < 40 || ownerBounds.Height < 40) { Hide(); return; }
+            Point p;
+            if (screenAnchor.HasValue) p = screenAnchor.Value;
+            else if (owner.ClientRectangle.Contains(owner.PointToClient(Cursor.Position)) && owner.IsHandleCreated) p = Cursor.Position;
+            else p = owner.PointToScreen(new Point(owner.ClientSize.Width / 2, owner.ClientSize.Height / 2));
+
+            // Confine every tooltip to its launcher window. Clamping to the monitor's working area alone lets
+            // bottom-edge hovers spill over other apps (the launcher can sit above another window).
+            const int margin = 6;
+            int availableWidth = ownerBounds.Width - margin * 2;
+            int availableHeight = ownerBounds.Height - margin * 2;
+            int width = Math.Min(W, availableWidth);
+            int height = Math.Min(th + bh + 22 + (model != null ? ModelH + 8 : 0) + (pic != null ? pic.Height + 10 : 0), availableHeight);
+            var size = new Size(width, height);
+            int x = p.X + 16, y = p.Y + 20;
+            if (x + size.Width > ownerBounds.Right - margin) x = p.X - size.Width - 8;
+            if (y + size.Height > ownerBounds.Bottom - margin) y = p.Y - size.Height - 8;
+            x = Math.Max(ownerBounds.Left + margin, Math.Min(x, ownerBounds.Right - size.Width - margin));
+            y = Math.Max(ownerBounds.Top + margin, Math.Min(y, ownerBounds.Bottom - size.Height - margin));
             box.Bounds = new Rectangle(x, y, size.Width, size.Height);
             box.Invalidate();
             if (!box.Visible) box.Show(host);

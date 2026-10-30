@@ -14,6 +14,10 @@ rem To change the patch notes or the addon list, edit assets\changelog.txt or as
 rem On GitHub (CI is set there) the window does not wait for a key press.
 set "PAUSE=pause"
 if defined CI set "PAUSE=rem"
+rem Local builds do not silently replace themselves with the published GitHub exe while being tested.
+rem The GitHub Build workflow sets RELEASE_BUILD=true for its public artifact.
+set "BUILD_KIND=/define:AZS_LOCAL_BUILD"
+if defined RELEASE_BUILD set "BUILD_KIND=/define:AZS_RELEASE_BUILD"
 
 set "CSC=%WINDIR%\Microsoft.NET\Framework64\v4.0.30319\csc.exe"
 if not exist "%CSC%" set "CSC=%WINDIR%\Microsoft.NET\Framework\v4.0.30319\csc.exe"
@@ -35,7 +39,8 @@ for %%f in (src\Program.cs assets\changelog.txt assets\addons.txt assets\launche
 )
 
 if not exist dist mkdir dist
-set "OUT=dist\Azeroth Survivors Launcher.exe"
+if not defined OUT set "OUT=dist\Azeroth Survivors Launcher.exe"
+if not defined HASHOUT set "HASHOUT=dist\Azeroth Survivors Launcher.sha256.txt"
 if exist "%OUT%" del "%OUT%"
 
 rem every language file in assets\lang is built in (see assets\lang\README.md)
@@ -47,7 +52,7 @@ for %%f in (assets\fonts\*.ttf) do set "LANGRES=!LANGRES! /resource:assets\fonts
 for %%f in (assets\favorites\class-*.jpg) do set "CLASSFAVRES=!CLASSFAVRES! /resource:assets\favorites\%%~nxf,AS.favorites.%%~nxf"
 
 echo Building %OUT% ...
-"%CSC%" /nologo /target:winexe /platform:anycpu /optimize+ /langversion:5 /warn:3 /nowarn:162,429 ^
+"%CSC%" /nologo /target:winexe /platform:anycpu /optimize+ /langversion:5 /warn:3 /nowarn:162,429 !BUILD_KIND! ^
   /out:"%OUT%" /win32icon:assets\AzerothSurvivors.ico /win32manifest:app.manifest ^
   /r:System.dll /r:System.Core.dll /r:System.Drawing.dll /r:System.Windows.Forms.dll ^
   /r:System.Management.dll /r:System.IO.Compression.dll /r:System.IO.Compression.FileSystem.dll ^
@@ -65,7 +70,7 @@ set "HASH="
 for /f "skip=1 tokens=*" %%H in ('certutil -hashfile "%OUT%" SHA256') do if not defined HASH set "HASH=%%H"
 set "HASH=!HASH: =!"
 if not defined HASH goto fail
-> "dist\Azeroth Survivors Launcher.sha256.txt" echo !HASH!  Azeroth Survivors Launcher.exe
+> "%HASHOUT%" echo !HASH!  %OUT%
 
 echo.
 echo Done.  %~dp0%OUT%

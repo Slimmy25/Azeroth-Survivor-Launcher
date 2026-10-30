@@ -30,6 +30,8 @@ jobs:
 
       - name: Build the launcher
         shell: pwsh
+        env:
+          RELEASE_BUILD: 'true'
         run: |
           # the compiler's messages also become annotations of the run, so a failed build says why
           cmd /c build.bat 2>&1 | Tee-Object -FilePath build.log
