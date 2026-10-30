@@ -8,6 +8,7 @@ using System.Drawing.Drawing2D;
 using System.Globalization;
 using System.IO;
 using System.Net;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
@@ -227,14 +228,78 @@ namespace AzerothLauncher
             return b;
         }
 
+        const int CurrentDisplaySettings = -1;
+        const uint MonitorDefaultToNearest = 2;
+
+        [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
+        struct DisplayMode
+        {
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 32)] public string DeviceName;
+            public short SpecVersion, DriverVersion, Size, DriverExtra;
+            public int Fields;
+            // This union is 16 bytes. The printer fields occupy the same storage as display position/orientation.
+            public short Orientation, PaperSize, PaperLength, PaperWidth, Scale, Copies, DefaultSource, PrintQuality;
+            public short Color, Duplex, YResolution, TTOption, Collate;
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 32)] public string FormName;
+            public short LogPixels;
+            public int BitsPerPixel, Width, Height, DisplayFlags, DisplayFrequency;
+            public int IcmMethod, IcmIntent, MediaType, DitherType, Reserved1, Reserved2, PanningWidth, PanningHeight;
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        struct NativePoint { public int X, Y; public NativePoint(int x, int y) { X = x; Y = y; } }
+
+        [DllImport("user32.dll", EntryPoint = "EnumDisplaySettingsW", CharSet = CharSet.Unicode, SetLastError = true)]
+        static extern bool EnumDisplaySettings(string deviceName, int modeNumber, ref DisplayMode mode);
+
+        [DllImport("user32.dll")]
+        static extern IntPtr MonitorFromPoint(NativePoint point, uint flags);
+
+        [DllImport("shcore.dll")]
+        static extern int GetScaleFactorForMonitor(IntPtr monitor, out int scalePercent);
+
+        static bool TryGetEffectiveResolution(Screen screen, out float width, out float height)
+        {
+            width = height = 0;
+            if (screen == null) return false;
+            try
+            {
+                var mode = new DisplayMode();
+                mode.Size = (short)Marshal.SizeOf(typeof(DisplayMode));
+                if (!EnumDisplaySettings(screen.DeviceName, CurrentDisplaySettings, ref mode) || mode.Width <= 0 || mode.Height <= 0)
+                    return false;
+
+                Rectangle bounds = screen.Bounds;
+                var center = new NativePoint(bounds.Left + bounds.Width / 2, bounds.Top + bounds.Height / 2);
+                IntPtr monitor = MonitorFromPoint(center, MonitorDefaultToNearest);
+                int percent;
+                if (monitor == IntPtr.Zero || GetScaleFactorForMonitor(monitor, out percent) != 0 || percent < 50 || percent > 500)
+                    return false;
+
+                // EnumDisplaySettings reports physical pixels; remove this monitor's Windows scale to get
+                // its effective resolution. This keeps the launcher proportional at 100%, 150%, 200%, etc.
+                width = mode.Width * 100f / percent;
+                height = mode.Height * 100f / percent;
+                return true;
+            }
+            catch (DllNotFoundException) { return false; }
+            catch (EntryPointNotFoundException) { return false; }
+            catch (ExternalException) { return false; }
+        }
+
         static float DisplayScaleFor(Screen screen)
         {
             if (screen == null) return 1f;
-            Rectangle area = screen.Bounds;
-            // 1920-wide displays retain the original layout. Higher-resolution displays get the same
-            // proportional layout, while the height limit keeps the complete window on screen.
-            float byWidth = area.Width / 1920f;
-            float byHeight = area.Height / 1024f;
+            float width, height;
+            if (!TryGetEffectiveResolution(screen, out width, out height))
+            {
+                Rectangle fallback = screen.Bounds;
+                width = fallback.Width;
+                height = fallback.Height;
+            }
+            // 1920x1024 effective resolution retains the original layout. Scale up with room on both axes.
+            float byWidth = width / 1920f;
+            float byHeight = height / 1024f;
             return Math.Max(0.75f, Math.Min(2f, Math.Min(byWidth, byHeight)));
         }
 
