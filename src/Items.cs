@@ -562,20 +562,6 @@ namespace AzerothLauncher
                     l.Add("- " + j.Name + ": " + string.Join(" ", j.Lines.ToArray()));
                 }
             }
-            l.Add("@page Codex | Legendary neck pieces that remake class spells");
-            l.Add("Each Codex neck piece is tied to one class and one spell. It is offered only once your hero knows that spell; while worn, it can be offered again and empowered. Select your class in the Gear Planner to see only its Codex pieces.");
-            foreach (string cls in Classes)
-            {
-                bool header = false;
-                foreach (var j in Jewelry)
-                {
-                    if (!j.IsCodex || j.Class != cls) continue;
-                    if (!header) { l.Add("# " + cls); header = true; }
-                    var effects = new List<string>();
-                    foreach (string effect in j.Lines) if (!effect.StartsWith("Legendary amulet - remakes ")) effects.Add(effect);
-                    l.Add("- " + j.Spell + ": " + j.Name + " — " + string.Join(" ", effects.ToArray()));
-                }
-            }
             foreach (string cls in Classes)
             {
                 l.Add("@page " + cls + " Gear | Every " + cls + " piece in every rarity, and the bosses that drop it");
@@ -596,6 +582,23 @@ namespace AzerothLauncher
                         l.Add("- " + p.Name + " (" + p.Slot + "): " + bon + " Drops from " + string.Join(" or ", p.Drops.ToArray()) + ".");
                     }
                 }
+            }
+            l.Add("@topic Archive | Every class Codex neck piece, listed alphabetically");
+            l.Add("A Codex neck piece remakes one spell. It is offered once your hero knows that spell; while worn, it can be offered again and empowered. The class guides also show each class's Codex pieces beside its gear.");
+            var codex = new List<Jewel>();
+            foreach (var j in Jewelry) if (j.IsCodex) codex.Add(j);
+            codex.Sort(delegate(Jewel a, Jewel b)
+            {
+                int c = string.Compare(a.Name, b.Name, StringComparison.OrdinalIgnoreCase);
+                if (c != 0) return c;
+                c = string.Compare(a.Class, b.Class, StringComparison.OrdinalIgnoreCase);
+                return c != 0 ? c : string.Compare(a.Spell, b.Spell, StringComparison.OrdinalIgnoreCase);
+            });
+            foreach (var j in codex)
+            {
+                var effects = new List<string>();
+                foreach (string effect in j.Lines) if (!effect.StartsWith("Legendary amulet - remakes ")) effects.Add(effect);
+                l.Add("- " + j.Name + ": this " + j.Class.ToLowerInvariant() + " neck piece remakes " + j.Spell + ". " + string.Join(" ", effects.ToArray()));
             }
             return l;
         }

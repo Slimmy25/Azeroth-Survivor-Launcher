@@ -20,6 +20,26 @@ namespace AzerothLauncher
 {
     public partial class LauncherApp
     {
+        // WheelRouter walks up from the hovered child label to IWheel. The contents
+        // tree consumes the wheel here, independently of focus and the passage's pixels.
+        sealed class GuideContentsPanel : Panel, IWheel
+        {
+            public Action<int> SectionStep;
+            int wheelRemainder;
+            public void Wheel(int delta)
+            {
+                if (delta == 0) return;
+                if (Math.Sign(delta) != Math.Sign(wheelRemainder)) wheelRemainder = 0;
+                wheelRemainder += delta;
+                while (Math.Abs(wheelRemainder) >= 120)
+                {
+                    int direction = wheelRemainder > 0 ? -1 : 1;
+                    wheelRemainder += direction * 120;
+                    if (SectionStep != null) SectionStep(direction);
+                }
+            }
+        }
+
         sealed class TalentBuildChoice
         {
             public string Name, Class, Code;
@@ -79,6 +99,17 @@ namespace AzerothLauncher
         int GuideTop { get { return guideTabsBottom > 0 ? guideTabsBottom : 8; } }
         int guideLastTopic;                                  // the tab to go back to when the search is emptied
         bool guideFocusSearch;
+        ScrollPanel classArticleScroll;
+        readonly Stack<int> classArticleBackPositions = new Stack<int>();
+        readonly Dictionary<string, Control> classTalentTargets = new Dictionary<string, Control>(StringComparer.OrdinalIgnoreCase);
+        readonly Dictionary<string, SpellRow> classSpellTargets = new Dictionary<string, SpellRow>(StringComparer.OrdinalIgnoreCase);
+        readonly Dictionary<string, Control> classSectionTargets = new Dictionary<string, Control>(StringComparer.OrdinalIgnoreCase);
+        readonly Dictionary<string, Control> classGearItemTargets = new Dictionary<string, Control>(StringComparer.OrdinalIgnoreCase);
+        readonly Dictionary<string, Control> classCodexItemTargets = new Dictionary<string, Control>(StringComparer.OrdinalIgnoreCase);
+        readonly Dictionary<string, Control> classCodexSpellTargets = new Dictionary<string, Control>(StringComparer.OrdinalIgnoreCase);
+        readonly Dictionary<string, Label> classNavLinks = new Dictionary<string, Label>(StringComparer.OrdinalIgnoreCase);
+        string classNavCurrent;
+        string classArticleName;
 
         // The guide's groups, each a row of topic tabs (by the topics' titles, in this order). A topic not named here goes
         // to the first group. "Talent Tree Builder" is not a topic of guide.txt: it is the class picker for the talent
@@ -88,7 +119,7 @@ namespace AzerothLauncher
         {
             new[] { "NEW PLAYER", "Getting Started", "Controls", "Your First Run", "Tips for New Players", "Pickups, Caches & Guardians",
                     "Zones & Bosses", "Talents", "Gear & the Armory", "Addons", "Achievements & Rewards", "Level-Ups & Cards", "Co-op" },
-            new[] { "GAMEPLAY", "Heroic & Endless", "Classes", "Races", "Items", "Transmog", "Build Guides" },
+            new[] { "GAMEPLAY", "Heroic & Endless", "Classes", "Races", "Items", "Archive", "Transmog", "Build Guides" },
             new[] { "THEORYCRAFTING", TalentBuilder, GearPlanner },
         };
         int guideGroup;                                       // the group whose tabs are shown
@@ -116,6 +147,8 @@ namespace AzerothLauncher
                 string kind = Json.Str(row, "kind");
                 string classKey = Json.Str(row, "class"), url = Json.Str(row, "url");
                 if (kind.Length == 0) kind = "guide";          // earlier local favorites stored only the topic and page
+                if (kind == "guide" && topic == "Items" && page == "Codex")
+                { topic = "Classes"; page = ""; classKey = ""; } // old Codex favorites now lead to the class-guide index
                 if (classKey.Length == 0) classKey = GuideClassKey(topic, page);  // migrate saved class pages to their class icon
                 if (kind != "guide" || topic.Length > 0) guideFavorites[i] = new GuideFavoriteRoute(kind, topic, page, classKey, url);
             }
@@ -516,8 +549,8 @@ namespace AzerothLauncher
                     for (int t = 0; t < topics.Count && drop.Items.Count < 6; t++)
                     {
                         int ti = t;
-                        if (has(topics[t].Title)) drop.Items.Add(new GuideHint { Text = Lang.T(topics[t].Title), Go = delegate { OpenGuideTab(ti); } });
-                        for (int p = 0; p < topics[t].Pages.Count && drop.Items.Count < 6; p++)
+                        if (!string.Equals(topics[t].Title, "Archive", StringComparison.OrdinalIgnoreCase) && has(topics[t].Title)) drop.Items.Add(new GuideHint { Text = Lang.T(topics[t].Title), Go = delegate { OpenGuideTab(ti); } });
+                        for (int p = 0; !string.Equals(topics[t].Title, "Archive", StringComparison.OrdinalIgnoreCase) && p < topics[t].Pages.Count && drop.Items.Count < 6; p++)
                         {
                             int pi = p;
                             if (has(topics[t].Pages[p].Title))
@@ -1345,6 +1378,7 @@ namespace AzerothLauncher
             var hits = new List<KeyValuePair<int, int>>();   // topic, page (-1: the topic itself)
             var lines = new List<string>();
             for (int t = 0; t < topics.Count; t++)
+                if (!string.Equals(topics[t].Title, "Archive", StringComparison.OrdinalIgnoreCase))
                 for (int p = -1; p < topics[t].Pages.Count; p++)
                 {
                     GuidePage pg = p < 0 ? (GuidePage)topics[t] : topics[t].Pages[p];
@@ -1406,6 +1440,7 @@ namespace AzerothLauncher
             if (string.IsNullOrEmpty(text)) return;
             string low = text.ToLowerInvariant();
             for (int t = 0; t < topics.Count; t++)
+                if (!string.Equals(topics[t].Title, "Archive", StringComparison.OrdinalIgnoreCase))
                 for (int p = 0; p < topics[t].Pages.Count; p++)
                     if (topics[t].Pages[p].Body.ToLowerInvariant().Contains(low)) { guideFindQuery = text; guideQuery = text; OpenGuideAt(t, p); return; }
             for (int t = 0; t < topics.Count; t++)
@@ -1428,6 +1463,11 @@ namespace AzerothLauncher
             GuideHeader(topic.Title, Data.Guide);
             var sp = MakeThinScroll(panel, new Rectangle(20, GuideTop, PW - 40, PH - 12 - GuideTop), Theme.Panel, Theme.Bronze,
                                     Theme.GoldDim, Theme.Gold);
+            if (string.Equals(topic.Title, "Build Guides", StringComparison.OrdinalIgnoreCase))
+            {
+                GuideBuildGuideCategories(sp, topic);
+                return;
+            }
             int w = sp.ClientSize.Width - 8, y = 4;
             if (topic.Desc.Length > 0)
             {
@@ -1447,6 +1487,66 @@ namespace AzerothLauncher
                     GuideClassKey(topic.Title, topic.Pages[i].Title), ""));
                 c.Pressed += delegate { SetGuideView(ti, i); };
             });
+        }
+
+        static string BuildGuideClass(GuidePage page)
+        {
+            string text = ((page.Title ?? "") + " " + (page.Desc ?? "") + " " + (page.Body ?? "")).ToLowerInvariant();
+            var classes = new[] { "Warrior", "Paladin", "Hunter", "Rogue", "Priest", "Shaman", "Mage", "Warlock", "Druid" };
+            var specs = new Dictionary<string, string[]>(StringComparer.OrdinalIgnoreCase)
+            {
+                { "Warrior", new[] { "arms", "fury", "protection" } }, { "Paladin", new[] { "holy", "protection", "retribution", "prot" } },
+                { "Hunter", new[] { "beast mastery", "marksmanship", "survival", "bm", "mm" } },
+                { "Rogue", new[] { "assassination", "combat", "subtlety", "sub rogue", "combat rogue" } },
+                { "Priest", new[] { "discipline", "holy", "shadow" } }, { "Shaman", new[] { "elemental", "enhancement", "restoration" } },
+                { "Mage", new[] { "arcane", "fire", "frost" } }, { "Warlock", new[] { "affliction", "demonology", "destruction" } },
+                { "Druid", new[] { "balance", "feral", "restoration" } }
+            };
+            foreach (string cls in classes)
+                if (Regex.IsMatch(text, @"(?<![a-z])" + Regex.Escape(cls.ToLowerInvariant()) + @"(?![a-z])")) return cls;
+            string match = null;
+            foreach (string cls in classes)
+                foreach (string spec in specs[cls])
+                    if (Regex.IsMatch(text, @"(?<![a-z])" + Regex.Escape(spec) + @"(?![a-z])"))
+                    {
+                        if (match != null && !string.Equals(match, cls, StringComparison.OrdinalIgnoreCase)) return null;
+                        match = cls;
+                    }
+            return match;
+        }
+
+        void GuideBuildGuideCategories(ScrollPanel sp, GuideTopic topic)
+        {
+            int w = sp.ClientSize.Width - 8, y = 6;
+            var groups = new List<KeyValuePair<string, List<int>>>();
+            string[] classes = { "Warrior", "Paladin", "Hunter", "Rogue", "Priest", "Shaman", "Mage", "Warlock", "Druid", "Uncategorized" };
+            foreach (string cls in classes) groups.Add(new KeyValuePair<string, List<int>>(cls, new List<int>()));
+            for (int i = 0; i < topic.Pages.Count; i++)
+            {
+                string cls = BuildGuideClass(topic.Pages[i]) ?? "Uncategorized";
+                groups.Find(delegate(KeyValuePair<string, List<int>> g) { return g.Key == cls; }).Value.Add(i);
+            }
+            foreach (var group in groups)
+            {
+                if (group.Value.Count == 0) continue;
+                var heading = UI.Text(Lang.T(group.Key), 12, FontStyle.Bold, Theme.Gold, sp.BackColor, w - 8, false);
+                heading.Size = VStack.Measure(heading);
+                heading.Location = new Point(6, y);
+                sp.Controls.Add(heading);
+                y += heading.Height + 5;
+                int first = group.Value[0];
+                int topicIndex = gTopic;
+                GuideGrid(sp, y, w, group.Value.Count, delegate(int n, GuideCard card)
+                {
+                    int pageIndex = group.Value[n];
+                    GuidePage page = topic.Pages[pageIndex];
+                    card.Title = page.Title; card.Desc = page.Desc; card.Videos = page.Videos.Count;
+                    EnableGuideCardFavorite(card, new GuideFavoriteRoute("guide", topic.Title, page.Title, "", ""));
+                    card.Pressed += delegate { SetGuideView(topicIndex, pageIndex); };
+                });
+                int cardHeight = (int)(108 * Theme.Zoom), gap = 10;
+                y += ((group.Value.Count + 1) / 2) * (cardHeight + gap) + 10;
+            }
         }
 
         // cards two to a row, numbered
@@ -1470,14 +1570,61 @@ namespace AzerothLauncher
         // ---- one topic or page as an article
         void GuideArticle(List<GuideTopic> topics, GuideTopic topic)
         {
+            classArticleScroll = null;
+            classArticleBackPositions.Clear();
+            classTalentTargets.Clear();
+            classSpellTargets.Clear();
+            classSectionTargets.Clear();
+            classGearItemTargets.Clear();
+            classCodexItemTargets.Clear();
+            classCodexSpellTargets.Clear();
+            classNavLinks.Clear();
+            classNavCurrent = null;
             bool inPage = gPage >= 0;
             GuidePage shown = inPage ? topic.Pages[gPage] : topic;
+            bool classArticle = inPage && string.Equals(topic.Title, "Classes", StringComparison.OrdinalIgnoreCase) &&
+                                Talents.Of(shown.Title).Count > 0;
+            classArticleName = classArticle ? shown.Title : null;
+            if (classArticle) shown = ClassPageWithoutTreeSummary(shown);
             GuideHeader(shown.Title, topics);
 
-            int by = PH - 2;                                 // no PREVIOUS / NEXT row: the article has the whole window
-            var sp = MakeThinScroll(panel, new Rectangle(20, GuideTop, PW - 40, by - 10 - GuideTop), GuideCardBg, Theme.Bronze,
+            int articleTop = GuideTop + (classArticle ? 4 : 22);
+            // Keep the contents tree broad enough for its labels, using the spare space
+            // on the right while leaving a small gutter before the favorites strip.
+            int navWidth = 0;
+            if (classArticle)
+            {
+                // Keep the compact tree column against the right boundary, leaving the
+                // remaining width to the article. Entries indent normally within it.
+                int preferredNavWidth = Math.Max(88, (int)(110 * Theme.Zoom));
+                // The sidebar owns the strip up to the panel's right border. Reserve
+                // enough article width to keep paragraphs readable at narrow sizes.
+                navWidth = Math.Min(preferredNavWidth, Math.Max(92, PW - 190));
+            }
+            int scrollTop = articleTop;
+            // The passage and free-floating tree sit side by side for the full height;
+            // only the tree's own column is reserved, so the article never runs beneath it.
+            int scrollWidth = classArticle ? PW - 6 - navWidth : PW - 8;
+            var sp = MakeThinScroll(panel, new Rectangle(4, scrollTop, scrollWidth, Math.Max(1, PH - 4 - scrollTop)), GuideCardBg, Theme.Bronze,
                                     Theme.GoldDim, Theme.Gold);
+            if (!classArticle)
+            {
+                var topLink = new Label { Text = "↑ " + Lang.T("Back to Top"), AutoSize = true, UseMnemonic = false,
+                    Font = Theme.F(8.5f, FontStyle.Underline), ForeColor = Theme.Gold, BackColor = panel.BackColor,
+                    Cursor = Cursors.Hand, AccessibleRole = AccessibleRole.Link };
+                topLink.Location = new Point(Math.Max(20, PW - 20 - topLink.Width), GuideTop + 2);
+                topLink.Click += delegate { sp.ScrollTo(0); };
+                topLink.MouseEnter += delegate { topLink.ForeColor = Theme.Hex("#fff2b0"); };
+                topLink.MouseLeave += delegate { topLink.ForeColor = Theme.Gold; };
+                panel.Controls.Add(topLink);
+            }
+            if (classArticle) classArticleScroll = sp;
             GuideBody(sp, inPage ? topic.Title : "Guide", shown);
+            if (classArticle)
+            {
+                ExtendClassGuide(sp, topics, classArticleName);
+                BuildClassContentsSidebar(sp, articleTop, navWidth, topics, classArticleName);
+            }
             var stack = new Stack<Control>();
             stack.Push(sp);
             while (stack.Count > 0)
@@ -1498,10 +1645,480 @@ namespace AzerothLauncher
             // no NEXT at the end of a page: the path above (hover a step) leads to every other page or topic
         }
 
+        static string ClassSpellKey(string name)
+        {
+            return Regex.Replace(name ?? "", @"\s*\(.*?\)\s*$", "").Trim();
+        }
+
+        void NavigateClassArticleTo(ScrollPanel sp, int y)
+        {
+            if (sp == null || sp.IsDisposed) return;
+            classArticleBackPositions.Push(Math.Max(0, -sp.AutoScrollPosition.Y));
+            sp.ScrollTo(Math.Max(0, y));
+        }
+
+        int ClassArticleControlTop(Control target)
+        {
+            if (target == null || classArticleScroll == null) return 0;
+            int top = 0;
+            for (Control c = target; c != null && c != classArticleScroll; c = c.Parent) top += c.Top;
+            return top - classArticleScroll.AutoScrollPosition.Y;
+        }
+
+        void NavigateClassArticleToControl(Control target)
+        {
+            if (target == null || classArticleScroll == null) return;
+            NavigateClassArticleTo(classArticleScroll, ClassArticleControlTop(target) - 8);
+        }
+
+        bool BackWithinClassArticle()
+        {
+            if (current != "Guide" || gTalents != null || classArticleScroll == null ||
+                classArticleScroll.IsDisposed || classArticleBackPositions.Count == 0) return false;
+            int y = classArticleBackPositions.Pop();
+            classArticleScroll.ScrollTo(y);
+            return true;
+        }
+
+        void UpdateClassNavigation(ScrollPanel sp)
+        {
+            if (sp == null || sp.IsDisposed) return;
+            string active = classArticleName ?? "";
+            int cutoff = -sp.AutoScrollPosition.Y + 32, best = -1;
+            foreach (var pair in classSectionTargets)
+            {
+                if (pair.Value == null || pair.Value.IsDisposed) continue;
+                int top = ClassArticleControlTop(pair.Value);
+                if (top <= cutoff && top >= best) { best = top; active = pair.Key; }
+            }
+            classNavCurrent = active;
+            foreach (var pair in classNavLinks)
+            {
+                bool selected = string.Equals(pair.Key, active, StringComparison.OrdinalIgnoreCase);
+                pair.Value.ForeColor = selected ? Theme.Hex("#fff2b0") : Theme.GoldDim;
+                Font[] styles = pair.Value.Tag as Font[];
+                if (styles != null) pair.Value.Font = styles[selected ? 1 : 0];
+                pair.Value.Invalidate();
+            }
+        }
+
+        void StepClassSection(ScrollPanel sp, int direction)
+        {
+            if (sp == null || sp.IsDisposed) return;
+            UpdateClassNavigation(sp);
+            var sections = new List<KeyValuePair<string, Control>>();
+            foreach (var pair in classSectionTargets)
+                if (pair.Value != null && !pair.Value.IsDisposed) sections.Add(pair);
+            sections.Sort(delegate(KeyValuePair<string, Control> a, KeyValuePair<string, Control> b)
+            {
+                return ClassArticleControlTop(a.Value).CompareTo(ClassArticleControlTop(b.Value));
+            });
+            int index = sections.FindIndex(delegate(KeyValuePair<string, Control> p) { return p.Key == classNavCurrent; });
+            int next = Math.Max(0, Math.Min(sections.Count - 1, index + direction));
+            if (next >= 0 && next < sections.Count && next != index)
+                NavigateClassArticleToControl(sections[next].Value);
+        }
+
+        void BuildClassContentsSidebar(ScrollPanel sp, int top, int width, List<GuideTopic> topics, string className)
+        {
+            // sp belongs to the scroll frame, not panel: its Right is in frame coordinates.
+            // Anchor to panel directly so the tree ends exactly before the favorites strip.
+            var nav = new GuideContentsPanel { Bounds = new Rectangle(PW - width, top, width, sp.Parent.Height), BackColor = Color.Transparent };
+            // One complete wheel notch jumps one in-article section; resource links
+            // (builder/build guides) still require a click, so scrolling cannot leave the page.
+            nav.SectionStep = delegate(int direction) { StepClassSection(sp, direction); };
+            panel.Controls.Add(nav);
+            nav.BringToFront(); // Keep the floating links visible above the article's scroll surface.
+            int y = 8;
+            Action<string, string, int, Action> add = delegate(string key, string label, int level, Action action)
+            {
+                string text = Lang.T(label);
+                Font font = Theme.F(7.2f, FontStyle.Regular);
+                Font bold = Theme.F(7.2f, FontStyle.Bold);
+                int left = level * 6;
+                int labelWidth = Math.Max(1, width - left);
+                int labelHeight = Math.Max(15, TextRenderer.MeasureText(text, bold, new Size(labelWidth, 100), TextFormatFlags.WordBreak | TextFormatFlags.NoPadding).Height + 2);
+                labelHeight = Math.Min(labelHeight, Math.Max(1, nav.Height - y));
+                var link = new Label { Text = text, AutoSize = false, Height = labelHeight, Width = labelWidth,
+                    Left = left, Top = y, UseMnemonic = false, AutoEllipsis = false,
+                    TextAlign = ContentAlignment.TopLeft,
+                    BackColor = Color.Transparent, ForeColor = Theme.GoldDim, Cursor = Cursors.Hand,
+                    Font = font, Tag = new[] { font, bold }, AccessibleRole = AccessibleRole.Link };
+                link.Click += delegate { if (action != null) action(); };
+                link.MouseEnter += delegate { link.BackColor = Theme.Hex("#28212b"); };
+                link.MouseLeave += delegate { link.BackColor = Color.Transparent; };
+                nav.Controls.Add(link); classNavLinks[key] = link; y += labelHeight + 1;
+            };
+            Action<string> jump = delegate(string key)
+            {
+                Control target;
+                if (classSectionTargets.TryGetValue(key, out target)) NavigateClassArticleToControl(target);
+            };
+            add(className, className, 0, delegate { jump(className); });
+            add("Spells", "Spells", 1, delegate { jump("Spells"); });
+            add("Talents", "Talents", 1, delegate { jump("Talents"); });
+            add("Talent Tree Builder", "Talent Tree Builder", 2, delegate { gTalents = className; BuildPanel("Guide"); });
+            add("Gear", "Gear", 1, delegate { jump("Gear"); });
+            add("Items", "Items", 2, delegate { jump("Items"); });
+            add("Codex (Necklaces)", "Codex (Necklaces)", 2, delegate { jump("Codex (Necklaces)"); });
+            y += 5;
+            Font resourceFont = Theme.F(7.2f, FontStyle.Bold);
+            string resourceText = Lang.T("Additional resources");
+            int resourceWidth = width;
+            int resourceHeight = Math.Max(15, TextRenderer.MeasureText(resourceText, resourceFont, new Size(resourceWidth, 100), TextFormatFlags.WordBreak | TextFormatFlags.NoPadding).Height + 2);
+            var resources = new Label { Text = resourceText, AutoSize = false, Height = resourceHeight, Width = resourceWidth,
+                Left = 0, Top = y, UseMnemonic = false, ForeColor = Theme.Gold, BackColor = Color.Transparent,
+                TextAlign = ContentAlignment.TopLeft, Font = resourceFont };
+            nav.Controls.Add(resources); y += resourceHeight + 1;
+            string buildGuidesLabel = Lang.F("{0} {1}", Lang.T(className), Lang.T("Build Guides"));
+            add(className + " Build Guides", buildGuidesLabel, 1, delegate
+            {
+                int t = topics.FindIndex(delegate(GuideTopic g) { return string.Equals(g.Title, "Build Guides", StringComparison.OrdinalIgnoreCase); });
+                if (t >= 0) SetGuideView(t, -1);
+            });
+            sp.Scrolled += delegate { UpdateClassNavigation(sp); };
+            UpdateClassNavigation(sp);
+        }
+
+        bool NavigateClassInline(GuideLink link)
+        {
+            if (link == null || current != "Guide" || gTalents != null || classArticleScroll == null ||
+                classArticleScroll.IsDisposed) return false;
+
+            string className = classArticleName;
+            if (!string.IsNullOrEmpty(link.Class) && string.Equals(link.Class, className, StringComparison.OrdinalIgnoreCase))
+            {
+                foreach (var tree in Talents.Of(className))
+                    foreach (var talent in tree.Talents)
+                        if (string.Equals(talent.Name, link.Term, StringComparison.OrdinalIgnoreCase))
+                        {
+                            Control target;
+                            if (classTalentTargets.TryGetValue(talent.Id, out target) && target != null && !target.IsDisposed)
+                            { NavigateClassArticleToControl(target); return true; }
+                        }
+            }
+
+            int classes = Data.Guide.FindIndex(delegate(GuideTopic t) { return string.Equals(t.Title, "Classes", StringComparison.OrdinalIgnoreCase); });
+            int classPage = classes < 0 ? -1 : Data.Guide[classes].Pages.FindIndex(delegate(GuidePage p)
+            { return string.Equals(p.Title, className, StringComparison.OrdinalIgnoreCase); });
+            if (link.Topic == classes && link.Page == classPage)
+            {
+                SpellRow row;
+                string spell = ClassSpellKey(string.IsNullOrWhiteSpace(link.FindText) ? link.Term : link.FindText);
+                if (!classSpellTargets.TryGetValue(spell, out row) &&
+                    !classSpellTargets.TryGetValue(ClassSpellKey(link.Term), out row)) row = null;
+                if (row != null && !row.IsDisposed)
+                { NavigateClassArticleToControl(row); row.Flash(); return true; }
+            }
+
+            int directoryTopic = Data.Guide.FindIndex(delegate(GuideTopic t) { return string.Equals(t.Title, "Archive", StringComparison.OrdinalIgnoreCase); });
+            if (link.Topic == directoryTopic && link.Page < 0)
+            {
+                Control target;
+                if (TryGetClassLinkedTarget(classCodexItemTargets, link, out target) ||
+                    TryGetClassLinkedTarget(classCodexSpellTargets, link, out target))
+                { NavigateClassArticleToControl(target); return true; }
+                if ((link.Term ?? "").IndexOf("Codex", StringComparison.OrdinalIgnoreCase) >= 0 &&
+                    TryGetClassSectionTarget("Codex (Necklaces)", out target))
+                { NavigateClassArticleToControl(target); return true; }
+            }
+
+            if (link.Topic >= 0 && link.Topic < Data.Guide.Count &&
+                string.Equals(Data.Guide[link.Topic].Title, "Items", StringComparison.OrdinalIgnoreCase) &&
+                link.Page >= 0 && link.Page < Data.Guide[link.Topic].Pages.Count)
+            {
+                string title = Data.Guide[link.Topic].Pages[link.Page].Title;
+                string key = string.Equals(title, className + " Gear", StringComparison.OrdinalIgnoreCase) ? "Items" : null;
+                if (key != null)
+                {
+                    Control target;
+                    if (TryGetClassLinkedTarget(classGearItemTargets, link, out target))
+                    { NavigateClassArticleToControl(target); return true; }
+                    // The inline class article owns this gear page, so related item links stay in the same passage.
+                    if (TryGetClassSectionTarget(key, out target))
+                    { NavigateClassArticleToControl(target); return true; }
+                }
+            }
+            return false;
+        }
+
+        void OpenClassCodexEntry(Jewel codex)
+        {
+            if (codex == null) return;
+            int classes = Data.Guide.FindIndex(delegate(GuideTopic t) { return string.Equals(t.Title, "Classes", StringComparison.OrdinalIgnoreCase); });
+            int page = classes < 0 ? -1 : Data.Guide[classes].Pages.FindIndex(delegate(GuidePage p)
+            { return string.Equals(p.Title, codex.Class, StringComparison.OrdinalIgnoreCase); });
+            if (classes < 0 || page < 0) { SetStatus("This Codex entry's class guide is unavailable."); return; }
+            if (current != "Guide" || !side.Visible) ShowSection("Guide");
+            guideQuery = guideFindQuery = "";
+            SetGuideView(classes, page);
+            Control target;
+            if (classCodexSpellTargets.TryGetValue(codex.Spell, out target) && target != null && !target.IsDisposed)
+                NavigateClassArticleToControl(target);
+        }
+
+        bool NavigateDirectoryCodex(GuideLink link)
+        {
+            if (link == null || link.Topic < 0 || link.Topic >= Data.Guide.Count ||
+                !string.Equals(Data.Guide[link.Topic].Title, "Archive", StringComparison.OrdinalIgnoreCase)) return false;
+            foreach (var codex in Items.Jewelry)
+                if (codex.IsCodex && (string.Equals(link.Term, codex.Name, StringComparison.OrdinalIgnoreCase) ||
+                    (!string.IsNullOrEmpty(link.Term) && link.Term.IndexOf(codex.Name, StringComparison.OrdinalIgnoreCase) >= 0)))
+                { OpenClassCodexEntry(codex); return true; }
+            return false;
+        }
+
+        static bool TryGetClassLinkedTarget(Dictionary<string, Control> targets, GuideLink link, out Control target)
+        {
+            target = null;
+            if (targets == null || link == null) return false;
+            string[] text = { link.Term ?? "", link.FindText ?? "" };
+            foreach (string value in text)
+                if (targets.TryGetValue(value, out target) && target != null && !target.IsDisposed) return true;
+            foreach (string key in targets.Keys)
+                foreach (string value in text)
+                    if (key.Length > 0 && value.IndexOf(key, StringComparison.OrdinalIgnoreCase) >= 0 &&
+                        targets.TryGetValue(key, out target) && target != null && !target.IsDisposed) return true;
+            target = null;
+            return false;
+        }
+
+        bool TryGetClassSectionTarget(string key, out Control target)
+        {
+            return classSectionTargets.TryGetValue(key, out target) && target != null && !target.IsDisposed;
+        }
+
+        void NavigateClassTalent(Talent talent)
+        {
+            if (talent == null || classArticleScroll == null) return;
+            Control target;
+            if (classTalentTargets.TryGetValue(talent.Id, out target) && target != null && !target.IsDisposed)
+                NavigateClassArticleToControl(target);
+        }
+
+        void NavigateClassSpell(string spell)
+        {
+            SpellRow target;
+            if (classArticleScroll != null && classSpellTargets.TryGetValue(ClassSpellKey(spell), out target) &&
+                target != null && !target.IsDisposed)
+            {
+                NavigateClassArticleToControl(target);
+                target.Flash();
+            }
+        }
+
+        // Every class uses the same article structure: its spell pool, readable talent descriptions,
+        // its own gear and Codex entries, and links to the class-specific Builder and build guide catalog.
+        void ExtendClassGuide(ScrollPanel sp, List<GuideTopic> topics, string className)
+        {
+            classArticleScroll = sp;
+            var anchors = new Dictionary<string, Control>(StringComparer.OrdinalIgnoreCase);
+            Control firstBodyControl = sp.Controls.Count > 0 ? sp.Controls[0] : null;
+            int originalControlCount = sp.Controls.Count;
+            int contentWidth = Math.Max(1, sp.ClientSize.Width - 28);
+            int left = 8;
+
+            for (int i = 0; i < originalControlCount; i++)
+            {
+                var label = sp.Controls[i] as Label;
+                if (label != null && string.Equals(label.Text, Lang.T(className), StringComparison.OrdinalIgnoreCase))
+                { anchors[className] = label; break; }
+            }
+            if (!anchors.ContainsKey(className) && firstBodyControl != null)
+                anchors[className] = firstBodyControl;
+            for (int i = 0; i < originalControlCount; i++)
+            {
+                var label = sp.Controls[i] as Label;
+                if (label != null && string.Equals(label.Text, Lang.T("Spell pool"), StringComparison.OrdinalIgnoreCase))
+                { anchors["Spells"] = label; break; }
+            }
+            if (!anchors.ContainsKey("Spells")) anchors["Spells"] = anchors[className];
+            classSectionTargets[className] = anchors[className];
+            classSectionTargets["Spells"] = anchors["Spells"];
+
+            int y = LastGuideChildBottom(sp) + 14;
+            var classTrees = Talents.Of(className);
+            if (classTrees.Count > 0)
+            {
+                var heading = AddClassSectionHeading(sp, "Talents", left + 10, ref y, contentWidth - 20);
+                anchors["Talents"] = heading;
+                classSectionTargets["Talents"] = heading;
+            }
+            foreach (var tree in classTrees)
+            {
+                string spec = tree.Spec;
+                var specHeading = UI.Text(Lang.T(spec), 10.5f, FontStyle.Bold, Theme.Gold,
+                                          sp.BackColor, contentWidth - 28, false);
+                specHeading.Size = VStack.Measure(specHeading);
+                specHeading.Location = new Point(left + 18, y);
+                sp.Controls.Add(specHeading);
+                y = specHeading.Bottom + 3;
+                foreach (var talent in tree.Talents)
+                {
+                    int iconSize = Math.Max(28, (int)(34 * Theme.Zoom));
+                    var talentIcon = new GuideIconButton(talent.Icon, false, talent.Name, Talents.HoverText(talent), iconSize, null);
+                    talentIcon.Location = new Point(left + 18, y + 2);
+                    sp.Controls.Add(talentIcon);
+                    classTalentTargets[talent.Id] = talentIcon;
+
+                    string rankText = talent.Ranks > 1 ? "  ·  " + talent.Ranks + " " + Lang.T("ranks") : "";
+                    var name = UI.Text(Lang.T(talent.Name) + rankText, 10, FontStyle.Bold, Theme.Gold,
+                                       sp.BackColor, contentWidth - 84, false);
+                    name.Size = VStack.Measure(name);
+                    name.Location = new Point(left + 60, y);
+                    sp.Controls.Add(name);
+                    var description = UI.Text(Lang.T(talent.Shown), 9.5f, FontStyle.Regular, Theme.Text,
+                                               sp.BackColor, contentWidth - 84, false);
+                    description.Size = VStack.Measure(description);
+                    description.Location = new Point(left + 60, name.Bottom + 2);
+                    sp.Controls.Add(description);
+                    y = Math.Max(talentIcon.Bottom, description.Bottom) + 4;
+
+                    var related = new List<string>();
+                    foreach (string spell in talent.Changes)
+                        if (classSpellTargets.ContainsKey(ClassSpellKey(spell)) &&
+                            !related.Exists(delegate(string s) { return string.Equals(s, spell, StringComparison.OrdinalIgnoreCase); }))
+                            related.Add(spell);
+                    if (related.Count > 0)
+                    {
+                        var affects = UI.Text(Lang.T("Affects"), 8.5f, FontStyle.Italic, Theme.GoldDim,
+                                              sp.BackColor, 0, false);
+                        affects.Size = VStack.Measure(affects);
+                        affects.Location = new Point(left + 60, y + 1);
+                        sp.Controls.Add(affects);
+                        int linkX = affects.Right + 6;
+                        int linkSize = Math.Max(18, (int)(21 * Theme.Zoom));
+                        int linkGap = Math.Max(2, (int)(4 * Theme.Zoom));
+                        foreach (string spell in related)
+                        {
+                            if (linkX + linkSize > contentWidth + left - 4) { linkX = left + 60; y += linkSize + linkGap; }
+                            var spellIcon = new GuideIconButton(spell, true, spell,
+                                GuideLinks.GameTip(spell) ?? spell, linkSize,
+                                delegate { NavigateClassSpell(spell); });
+                            spellIcon.Location = new Point(linkX, y);
+                            sp.Controls.Add(spellIcon);
+                            linkX += linkSize + linkGap;
+                        }
+                        y += linkSize + 5;
+                    }
+                    var separator = new GuideRule(contentWidth - 48, Theme.Hex("#4a3b27"));
+                    separator.Location = new Point(left + 18, y);
+                    sp.Controls.Add(separator);
+                    y = separator.Bottom + 5;
+                }
+                y += 5;
+            }
+
+            int itemsTopic = topics.FindIndex(delegate(GuideTopic t) { return string.Equals(t.Title, "Items", StringComparison.OrdinalIgnoreCase); });
+            if (itemsTopic >= 0)
+            {
+                var items = topics[itemsTopic];
+                var gearHeading = AddClassSectionHeading(sp, "Gear", left + 10, ref y, contentWidth - 20);
+                anchors["Gear"] = gearHeading;
+                int gearPage = items.Pages.FindIndex(delegate(GuidePage p) { return string.Equals(p.Title, className + " Gear", StringComparison.OrdinalIgnoreCase); });
+                if (gearPage >= 0)
+                {
+                    GuidePage gearItems = new GuidePage { Title = "Items", Desc = items.Pages[gearPage].Desc, Body = items.Pages[gearPage].Body };
+                    AppendClassGuidePage(sp, topics, itemsTopic, gearPage, "Items", anchors, gearItems);
+                    if (anchors.ContainsKey("Items")) classSectionTargets["Items"] = anchors["Items"];
+                    y = LastGuideChildBottom(sp) + 14;
+                }
+            }
+            int directoryTopic = topics.FindIndex(delegate(GuideTopic t) { return string.Equals(t.Title, "Archive", StringComparison.OrdinalIgnoreCase); });
+            if (directoryTopic >= 0)
+            {
+                GuidePage classCodex = ClassCodexPage(className);
+                AppendClassGuidePage(sp, topics, directoryTopic, -1, "Codex (Necklaces)", anchors, classCodex);
+                if (anchors.ContainsKey("Codex (Necklaces)")) classSectionTargets["Codex (Necklaces)"] = anchors["Codex (Necklaces)"];
+            }
+            if (anchors.ContainsKey("Gear")) classSectionTargets["Gear"] = anchors["Gear"];
+        }
+
+        static GuidePage ClassPageWithoutTreeSummary(GuidePage source)
+        {
+            var lines = new List<string>();
+            bool skipTrees = false;
+            foreach (string line in source.Body.Replace("\r\n", "\n").Split('\n'))
+            {
+                if (line.StartsWith("# "))
+                {
+                    skipTrees = string.Equals(line.Substring(2).Trim(), "Talent trees", StringComparison.OrdinalIgnoreCase);
+                    if (skipTrees) continue;
+                }
+                if (!skipTrees) lines.Add(line);
+            }
+            return new GuidePage { Title = source.Title, Desc = source.Desc, Body = string.Join("\n", lines.ToArray()), Videos = source.Videos };
+        }
+
+        static int LastGuideChildBottom(ScrollPanel sp)
+        {
+            int bottom = 0;
+            foreach (Control c in sp.Controls) if (c.Bottom > bottom) bottom = c.Bottom;
+            return bottom;
+        }
+
+        static Control AddClassSectionHeading(ScrollPanel sp, string title, int x, ref int y, int width)
+        {
+            var heading = UI.Text(Lang.T(title).ToUpperInvariant(), 12.5f, FontStyle.Bold, Theme.Gold,
+                                  sp.BackColor, width, false);
+            heading.Size = VStack.Measure(heading);
+            heading.Location = new Point(x, y + 10);
+            sp.Controls.Add(heading);
+            y = heading.Bottom + 3;
+            var rule = new GuideRule(Math.Min(64, width), Theme.Gold);
+            rule.Location = new Point(x, y);
+            sp.Controls.Add(rule);
+            y = rule.Bottom + 7;
+            return heading;
+        }
+
+        GuidePage ClassCodexPage(string className)
+        {
+            var lines = new List<string>();
+            foreach (var jewel in Items.Jewelry)
+            {
+                if (!jewel.IsCodex || !string.Equals(jewel.Class, className, StringComparison.OrdinalIgnoreCase)) continue;
+                var effects = new List<string>();
+                foreach (string effect in jewel.Lines)
+                    if (!effect.StartsWith("Legendary amulet - remakes ")) effects.Add(effect);
+                lines.Add("- " + jewel.Spell + ": " + jewel.Name + " — " + string.Join(" ", effects.ToArray()));
+            }
+            return new GuidePage { Title = "Codex (Necklaces)", Desc = "This class's Codex neck pieces, shown beside its gear.",
+                                   Body = string.Join("\n", lines.ToArray()) };
+        }
+
+        void AppendClassGuidePage(ScrollPanel sp, List<GuideTopic> topics, int topicIndex, int pageIndex,
+                                    string anchorKey, Dictionary<string, Control> anchors, GuidePage overridePage = null)
+        {
+            if (topicIndex < 0 || topicIndex >= topics.Count ||
+                (pageIndex < 0 && overridePage == null) ||
+                (pageIndex >= 0 && pageIndex >= topics[topicIndex].Pages.Count)) return;
+            int startY = LastGuideChildBottom(sp) + 14;
+            int firstNew = sp.Controls.Count;
+            int oldTopic = gTopic, oldPage = gPage;
+            gTopic = topicIndex;
+            gPage = pageIndex;
+            GuidePage sourcePage = overridePage ?? topics[topicIndex].Pages[pageIndex];
+            try { GuideBody(sp, topics[topicIndex].Title, sourcePage); }
+            finally { gTopic = oldTopic; gPage = oldPage; }
+            Control anchor = null;
+            for (int i = firstNew; i < sp.Controls.Count; i++)
+            {
+                Control c = sp.Controls[i];
+                c.Top += startY;
+                var label = c as Label;
+                if (anchor == null && label != null &&
+                    string.Equals(label.Text, Lang.T(sourcePage.Title), StringComparison.OrdinalIgnoreCase))
+                    anchor = label;
+            }
+            if (anchor == null && firstNew < sp.Controls.Count) anchor = sp.Controls[firstNew];
+            if (anchor != null) anchors[anchorKey] = anchor;
+        }
+
         void GuideBody(ScrollPanel sp, string crumb, GuidePage page)
         {
             Color bg = sp.BackColor;
-            int w = sp.ClientSize.Width - 8, tw = w - 40, x = 18, y = 14;
+            int w = sp.ClientSize.Width, tw = w - 16, x = 8, y = 8;
             Action<Control, int, int> add = delegate(Control c, int cx, int gap)
             {
                 if (c is Label) c.Size = VStack.Measure((Label)c);
@@ -1509,8 +2126,7 @@ namespace AzerothLauncher
                 sp.Controls.Add(c);
                 y += gap + c.Height;
             };
-            // a class's page: its spells with their icons and the talents that change them, its gear, and its talent
-            // trees one click away (TALENT TREES at the right of the "CLASSES" line)
+            // Class pages are consolidated below with the same in-article contents tree and class-specific links.
             string className = null;
             try
             {
@@ -1519,28 +2135,8 @@ namespace AzerothLauncher
                     className = page.Title;
             }
             catch (Exception) { }
-            if (className != null)
-            {
-                string tcls = className;
-                var tb = new WowButton("TALENT TREES ›", delegate { gTalents = tcls; BuildPanel("Guide"); }, 170, 28, 9);
-                tb.Location = new Point(x + tw - tb.Width, y - 4);
-                sp.Controls.Add(tb);
-                // beside it: the class's gear page (every piece, its bonuses, the bosses and each set's bonuses)
-                int it = -1, ip = -1;
-                var tops2 = Data.Guide;
-                for (int t = 0; t < tops2.Count && ip < 0; t++)
-                    if (tops2[t].Title == "Items")
-                        for (int p = 0; p < tops2[t].Pages.Count; p++)
-                            if (tops2[t].Pages[p].Title == className + " Gear") { it = t; ip = p; break; }
-                if (ip >= 0 && Items.Gear.Count > 0)
-                {
-                    int gt = it, gp = ip;
-                    var gb = new WowButton(Lang.F("{0} GEAR", Lang.T(className).ToUpperInvariant()) + " ›", delegate { SetGuideView(gt, gp); }, 170, 28, 9);
-                    gb.Location = new Point(tb.Left - gb.Width - 6, y - 4);
-                    sp.Controls.Add(gb);
-                }
-            }
-            add(UI.Text(Lang.T(crumb).ToUpperInvariant(), 8.5f, FontStyle.Bold, GuideRed, bg, tw - (className != null ? 260 : 0), crumb == "Guide"), x, 0);
+            add(UI.Text(Lang.T(crumb).ToUpperInvariant(), 8.5f, FontStyle.Bold, GuideRed, bg,
+                        tw, crumb == "Guide"), x, 0);
             add(UI.Text(Lang.T(page.Title), 18, FontStyle.Bold, Theme.Gold, bg, tw, false), x, 2);
             if (page.Desc.Length > 0) add(UI.Text(Lang.T(page.Desc), 10.5f, FontStyle.Italic, Theme.GoldDim, bg, tw, false), x, 2);
             add(new GuideRule(tw, Theme.GoldDim), x, 10);
@@ -1584,7 +2180,13 @@ namespace AzerothLauncher
                     if (m.Success)
                     {
                         string body = m.Groups[2].Value;
-                        add(new SpellRow(m.Groups[1].Value, char.ToUpperInvariant(body[0]) + body.Substring(1), className, tw, gTopic, gPage, pool), x, 6);
+                        var row = new SpellRow(m.Groups[1].Value, char.ToUpperInvariant(body[0]) + body.Substring(1), className, tw, gTopic, gPage, pool);
+                        if (classArticleScroll != null && string.Equals(classArticleName, className, StringComparison.OrdinalIgnoreCase))
+                        {
+                            classSpellTargets[ClassSpellKey(row.Spell)] = row;
+                            row.OpenTalentInArticle = NavigateClassTalent;
+                        }
+                        add(row, x, 6);
                         continue;
                     }
                 }
@@ -1603,6 +2205,52 @@ namespace AzerothLauncher
                 else if (line.StartsWith("- "))
                 {
                     flush();
+                    if (string.Equals(page.Title, "Archive", StringComparison.OrdinalIgnoreCase) &&
+                        gTopic >= 0 && gTopic < Data.Guide.Count &&
+                        string.Equals(Data.Guide[gTopic].Title, "Archive", StringComparison.OrdinalIgnoreCase))
+                    {
+                        string entry = line.Substring(2).Trim();
+                        Jewel directoryCodex = null;
+                        foreach (var jewel in Items.Jewelry)
+                            if (jewel.IsCodex && entry.StartsWith(jewel.Name + ":", StringComparison.OrdinalIgnoreCase))
+                            { directoryCodex = jewel; break; }
+                        if (directoryCodex != null)
+                        {
+                            Jewel selectedCodex = directoryCodex;
+                            var icon = new GuideIconButton(selectedCodex.Spell, true, selectedCodex.Name,
+                                Items.Card(selectedCodex), Math.Max(28, (int)(34 * Theme.Zoom)),
+                                null);
+                            icon.Location = new Point(x + 2, y + 5);
+                            sp.Controls.Add(icon);
+                            var codexEntry = new GuideText(entry, 10, Theme.Text, bg, tw - 54, gTopic, gPage);
+                            add(codexEntry, x + 48, 5);
+                            y = Math.Max(y, icon.Bottom + 5);
+                            continue;
+                        }
+                    }
+                    if (string.Equals(page.Title, "Codex (Necklaces)", StringComparison.OrdinalIgnoreCase))
+                    {
+                        string entry = line.Substring(2).Trim();
+                        Jewel codex = null;
+                        foreach (var jewel in Items.Jewelry)
+                            if (jewel.IsCodex && string.Equals(jewel.Class, classArticleName, StringComparison.OrdinalIgnoreCase) &&
+                                entry.StartsWith(jewel.Spell + ":", StringComparison.OrdinalIgnoreCase))
+                            { codex = jewel; break; }
+                        if (codex != null)
+                        {
+                            var icon = new GuideIconButton(codex.Spell, true, codex.Name, Items.Card(codex),
+                                                           Math.Max(28, (int)(34 * Theme.Zoom)),
+                                                           delegate { NavigateClassSpell(codex.Spell); });
+                            icon.Location = new Point(x + 2, y + 5);
+                            sp.Controls.Add(icon);
+                            var linkedEntry = new GuideText(entry, 10, Theme.Text, bg, tw - 54, gTopic, gPage);
+                            add(linkedEntry, x + 48, 5);
+                            classCodexItemTargets[codex.Name] = linkedEntry;
+                            classCodexSpellTargets[codex.Spell] = linkedEntry;
+                            y = Math.Max(y, icon.Bottom + 5);
+                            continue;
+                        }
+                    }
                     var dot = new GuideRule(6, Theme.Gold);
                     dot.Diamond = true;
                     dot.Height = 6;
@@ -1611,6 +2259,16 @@ namespace AzerothLauncher
                     dot.Location = new Point(x + 3, y + 6 + (lineH - 6) / 2);
                     sp.Controls.Add(dot);
                     add(l, x + 20, 6);
+                    if (classArticleScroll == sp && gTopic >= 0 && gTopic < Data.Guide.Count &&
+                        string.Equals(Data.Guide[gTopic].Title, "Items", StringComparison.OrdinalIgnoreCase) &&
+                        gPage >= 0 && gPage < Data.Guide[gTopic].Pages.Count &&
+                        string.Equals(Data.Guide[gTopic].Pages[gPage].Title, classArticleName + " Gear", StringComparison.OrdinalIgnoreCase))
+                    {
+                        foreach (var gear in Items.Gear)
+                            if (string.Equals(gear.Class, classArticleName, StringComparison.OrdinalIgnoreCase) &&
+                                line.Substring(2).TrimStart().StartsWith(gear.Name + " (", StringComparison.OrdinalIgnoreCase))
+                            { classGearItemTargets[gear.Name] = l; break; }
+                    }
                 }
                 else if (line.StartsWith("\""))
                 {
@@ -2156,6 +2814,78 @@ draw();wake();
                 using (var b = new SolidBrush(i == at ? Theme.Gold : Theme.Hex("#4a4356")))
                     g.FillEllipse(b, cx - d / 2, cy - d / 2, d, d);
             }
+        }
+    }
+
+    // A compact icon used by class-guide talent and Codex entries. Icons keep the page visual while
+    // retaining the launcher's themed hover card and click behavior.
+    public class GuideIconButton : Control
+    {
+        readonly string key, title, tip;
+        readonly bool spellIcon;
+        readonly Action activate;
+        bool hover;
+
+        public GuideIconButton(string key, bool spellIcon, string title, string tip, int size, Action activate)
+        {
+            SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer |
+                     ControlStyles.ResizeRedraw, true);
+            this.key = key ?? "";
+            this.spellIcon = spellIcon;
+            this.title = title ?? "";
+            this.tip = tip ?? "";
+            this.activate = activate;
+            Size = new Size(size, size);
+            BackColor = Theme.Hex("#1b1822");
+            Cursor = activate != null ? Cursors.Hand : Cursors.Default;
+            AccessibleRole = activate != null ? AccessibleRole.PushButton : AccessibleRole.Graphic;
+            AccessibleName = Lang.T(this.title);
+            AccessibleDescription = Lang.T(this.tip);
+            TabStop = activate != null;
+        }
+
+        Image Picture { get { return spellIcon ? SpellIcons.Spell(key, this) : SpellIcons.Icon(key.ToLowerInvariant(), this); } }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            Graphics g = e.Graphics;
+            g.Clear(BackColor);
+            Theme.Smooth(g);
+            var r = new Rectangle(1, 1, Width - 3, Height - 3);
+            using (var b = new SolidBrush(Theme.Hex("#211c29"))) g.FillRectangle(b, r);
+            Image image = Picture;
+            if (image != null) Theme.Draw(g, image, Rectangle.Inflate(r, -2, -2));
+            else
+            {
+                using (var b = new SolidBrush(Theme.Hex("#31293a"))) g.FillRectangle(b, Rectangle.Inflate(r, -3, -3));
+                using (var p = new Pen(Theme.GoldDim, 1)) g.DrawRectangle(p, r);
+            }
+            using (var p = new Pen(hover ? Theme.Hex("#fff2b0") : Theme.Hex("#80663a"), hover ? 2 : 1))
+                g.DrawRectangle(p, r);
+        }
+
+        protected override void OnMouseEnter(EventArgs e)
+        {
+            base.OnMouseEnter(e);
+            hover = true;
+            Invalidate();
+            if (tip.Length > 0) GuideHover.Show(this, title, tip, Picture);
+        }
+
+        protected override void OnMouseLeave(EventArgs e)
+        {
+            base.OnMouseLeave(e);
+            hover = false;
+            Invalidate();
+            GuideHover.Hide();
+        }
+
+        protected override void OnMouseUp(MouseEventArgs e)
+        {
+            base.OnMouseUp(e);
+            if (e.Button != MouseButtons.Left || activate == null) return;
+            GuideHover.Hide();
+            activate();
         }
     }
 

@@ -157,6 +157,8 @@ namespace AzerothLauncher
             GuideLinks.Navigate = delegate(GuideLink l)        // a link in the Guide's text (GuideLinks.cs)
             {
                 if (current != "Guide" || !side.Visible) ShowSection("Guide");
+                if (NavigateClassInline(l)) return;              // class spells, talents and item links stay in their article
+                if (NavigateDirectoryCodex(l)) return;            // a Codex entry opens its class guide context
                 guideFindQuery = string.IsNullOrWhiteSpace(l.FindText) ? l.Term : l.FindText;
                 guideQuery = guideFindQuery;
                 if (l.Class != null)                             // a talent: its class's talent trees
@@ -707,7 +709,8 @@ namespace AzerothLauncher
             else if (ClientPresent()) { playBtn.Label = "PLAY"; playBtn.FontSize = 24; }
             else { playBtn.Label = "REQUIRES INSTALL"; playBtn.FontSize = 13; }
             playBtn.Tip = (setupOpen || firstSetupPending) ? "Click to continue to the next step of First Time Setup." :
-                           ClientPresent() ? "" : "Click to continue through First Time Setup and get help installing the game.";
+                           Installing ? "Click to stop the game download." :
+                           ClientPresent() ? "" : "Click to install Azeroth Survivors.";
             // Play stays illuminated and acts as the current slide's NEXT action during setup.
             playBtn.GrayedTip = "";
             playBtn.Grayed = false;

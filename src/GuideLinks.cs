@@ -53,30 +53,17 @@ namespace AzerothLauncher
                 if (matches(l.Term) || matches(entry.Key)) list.Add(l);
             }
 
-            // A spell search also offers the Codex item and any 8-piece set bonus that names it.
-            // These are separate destinations, while the spell itself remains the first result.
+            // A spell search also offers any 8-piece set bonus that names it. Codex stays out of search;
+            // the spell and item links in class guides lead to the class-specific passage.
             try
             {
                 List<GuideTopic> topics = Data.Guide;
                 int itemsTopic = topics.FindIndex(delegate(GuideTopic g) { return g.Title == "Items"; });
-                if (itemsTopic >= 0)
+                if (itemsTopic >= 0 && spellClasses != null)
                 {
                     List<GuidePage> pages = topics[itemsTopic].Pages;
-                    int codexPage = pages.FindIndex(delegate(GuidePage g) { return g.Title == "Codex"; });
-                    foreach (Jewel jewel in Items.Jewelry)
-                        if (jewel.IsCodex && jewel.Class != null && matches(jewel.Spell))
-                            list.Add(new GuideLink
-                            {
-                                Term = jewel.Spell + " · Codex — " + jewel.Name,
-                                FindText = jewel.Spell,
-                                Topic = itemsTopic,
-                                Page = codexPage,
-                                Tip = Items.Card(jewel)
-                            });
-
-                    if (spellClasses != null)
-                        foreach (var pair in spellClasses)
-                        {
+                    foreach (var pair in spellClasses)
+                    {
                             int split = pair.Key.IndexOf('|');
                             if (split < 0) continue;
                             string spell = pair.Key.Substring(0, split), cls = pair.Value;
@@ -98,7 +85,7 @@ namespace AzerothLauncher
                                     Tip = bonus
                                 });
                             }
-                        }
+                    }
                 }
             }
             catch (Exception) { }
@@ -179,6 +166,7 @@ namespace AzerothLauncher
             }
             // pages first (a class page wins over a mention elsewhere), then the spells and talents on them
             for (int t = 0; t < topics.Count; t++)
+                if (!string.Equals(topics[t].Title, "Archive", StringComparison.OrdinalIgnoreCase))
                 for (int p = 0; p < topics[t].Pages.Count; p++)
                 {
                     GuidePage pg = topics[t].Pages[p];
@@ -187,6 +175,7 @@ namespace AzerothLauncher
                 }
             for (int t = 0; t < topics.Count; t++)
             {
+                if (string.Equals(topics[t].Title, "Archive", StringComparison.OrdinalIgnoreCase)) continue;
                 if (topics[t].Title.Length >= 6) Add(topics[t].Title, t, -1, topics[t].Desc);
                 for (int p = -1; p < topics[t].Pages.Count; p++)
                 {
@@ -267,7 +256,7 @@ namespace AzerothLauncher
             // the theorycrafting tools: a click opens them (-2 the Talent Tree Builder, -3 the Gear Planner)
             Add("Talent Tree Builder", -2, -1, "Pick a class and try out a build of up to 51 points on its three talent trees.");
             Add("Gear Planner", -3, -1, "Put gear and jewelry on a character sheet like the game's and see what they add.");
-            // every item: its card as the hover text; a click opens its page in the Items topic
+            // every item: gear and ordinary jewelry link to their guide; Codex links point to class-guide passages
             int itemsTopic = topics.FindIndex(delegate(GuideTopic g) { return g.Title == "Items"; });
             if (itemsTopic >= 0)
             {
@@ -281,8 +270,12 @@ namespace AzerothLauncher
                         if (!links.ContainsKey(piece.Name)) Add(piece.Name, itemsTopic, pg, Items.Card(piece));
                     }
                     int jp = pages.FindIndex(delegate(GuidePage g) { return g.Title.StartsWith("Rings"); });
-                    int cp = pages.FindIndex(delegate(GuidePage g) { return g.Title == "Codex"; });
-                    foreach (var j in Items.Jewelry) if (j.IsCodex && !links.ContainsKey(j.Name)) Add(j.Name, itemsTopic, cp, Items.Card(j));
+                    int codexClassesTopic = topics.FindIndex(delegate(GuideTopic g) { return g.Title == "Classes"; });
+                    foreach (var j in Items.Jewelry) if (j.IsCodex && !links.ContainsKey(j.Name) && codexClassesTopic >= 0)
+                    {
+                        int classPage = topics[codexClassesTopic].Pages.FindIndex(delegate(GuidePage g) { return g.Title == j.Class; });
+                        if (classPage >= 0) Add(j.Name, codexClassesTopic, classPage, Items.Card(j));
+                    }
                     foreach (var j in Items.Jewelry) if (!j.IsCodex && !links.ContainsKey(j.Name)) Add(j.Name, itemsTopic, jp, Items.Card(j));
                 }
                 catch (Exception) { }

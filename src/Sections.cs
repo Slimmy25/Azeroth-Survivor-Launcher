@@ -47,15 +47,16 @@ namespace AzerothLauncher
             // Convert the same screen-space glyph bounds back into the launcher's client space.
             // Both the breadcrumb and this control are then laid out by the same WinForms DPI context.
             Rectangle text = coordinateOwner.RectangleToClient(textBoundsOnScreen);
-            // The old -30 offset put the heart across the title bar's upper border.
-            // Keep it beside the actual text, wholly inside the breadcrumb header.
             Rectangle header = coordinateOwner.RectangleToClient(headerBoundsOnScreen);
-            int x = text.Right + 4;
-            if (x + Width > header.Right - 46) x = text.Left - Width - 4;
-            x = Math.Max(header.Left, Math.Min(x, header.Right - Width));
-            int y = Math.Max(header.Top, Math.Min(
-                text.Top + (text.Height - Height) / 2, header.Bottom - Height));
-            Location = new Point(x, y);
+            // Center the visible heart shape on the measured glyphs, excluding the
+            // breadcrumb's arrow, separators and padding. Keep the shape ABOVE the bar.
+            using (var path = HeartPath())
+            {
+                RectangleF shape = path.GetBounds();
+                int x = (int)Math.Round(text.Left + text.Width / 2f - (shape.Left + shape.Width / 2f));
+                int y = (int)Math.Floor(header.Top - 2 - shape.Bottom);
+                Location = new Point(x, y);
+            }
         }
 
         protected override void OnPaintBackground(PaintEventArgs e) { base.OnPaintBackground(e); } // transparent parent background
@@ -451,10 +452,17 @@ namespace AzerothLauncher
             int favoriteStep = ClientRectangle.Contains(pt) ? FavoriteAt(pt) : -1;
             bool inPopup = favoritePopup != null && !favoritePopup.IsDisposed && favoritePopup.Parent != null &&
                            favoritePopup.Bounds.Contains(favoritePopup.Parent.PointToClient(Cursor.Position));
+            bool inBridge = false;
+            if (favoritePopup != null && !favoritePopup.IsDisposed && favoritePopup.Parent != null)
+            {
+                Rectangle label = CrumbScreenRect(favoritePopupStep);
+                Rectangle heart = favoritePopup.Parent.RectangleToScreen(favoritePopup.Bounds);
+                if (!label.IsEmpty) inBridge = Rectangle.Union(label, heart).Contains(Cursor.Position);
+            }
             bool inMenu = openMenu != null && !openMenu.IsDisposed && openMenu.Visible && openMenu.Bounds.Contains(Cursor.Position);
             int retainedStep = favoriteStep >= 0 ? favoriteStep :
                                inMenu ? openMenuStep :
-                               inPopup ? favoritePopupStep : -1;
+                               inPopup || inBridge ? favoritePopupStep : -1;
             if (quietFavoriteStep >= 0 && retainedStep != quietFavoriteStep) quietFavoriteStep = -1;
 
             // Treat the breadcrumb, its heart and its drop-down as one hover target. That lets the
@@ -469,7 +477,7 @@ namespace AzerothLauncher
 
             if (openMenu != null && !openMenu.IsDisposed)
             {
-                if (inMenu || s == openMenuStep) return;
+                if (inMenu || s == openMenuStep || retainedStep == openMenuStep) return;
                 openMenu.Close();
             }
             if (s >= 0 && s == hoverStep && s != quietStep) ShowMenu(s, StepRect(s));
@@ -827,7 +835,7 @@ namespace AzerothLauncher
                          route.Kind == "builderClass" || route.Kind == "guideTalents" ||
                          (route.Kind == "stats" && route.Page == "class")))
                         favoriteIcon = SpellIcons.Class(route.ClassKey, favoriteBtns[slot]);
-                    else if (route != null && route.Kind == "guide" && route.Topic == "Items" && route.Page == "Codex")
+                    else if (route != null && route.Kind == "guide" && route.Topic == "Archive")
                     {
                         if (codexFavoriteIcon == null) codexFavoriteIcon = Theme.LoadImage("AS.favorites.codex-aura.png");
                         favoriteIcon = codexFavoriteIcon;
@@ -1080,8 +1088,12 @@ namespace AzerothLauncher
             int width = Math.Min(360, lostHelpCard.Parent.ClientSize.Width - 12);
             int height = Math.Min(320, lostHelpCard.Parent.ClientSize.Height - 12);
             lostHelpCard.Size = new Size(Math.Max(220, width), Math.Max(220, height));
-            lostHelpCard.Location = new Point((lostHelpCard.Parent.ClientSize.Width - lostHelpCard.Width) / 2,
-                                              (lostHelpCard.Parent.ClientSize.Height - lostHelpCard.Height) / 2);
+            Point cursor = lostHelpCard.Parent.PointToClient(Cursor.Position);
+            int left = Math.Max(0, Math.Min(lostHelpCard.Parent.ClientSize.Width - lostHelpCard.Width, cursor.X));
+            int top = cursor.Y + 20;
+            if (top + lostHelpCard.Height > lostHelpCard.Parent.ClientSize.Height)
+                top = Math.Max(0, lostHelpCard.Parent.ClientSize.Height - lostHelpCard.Height);
+            lostHelpCard.Location = new Point(left, top);
             lostHelpCard.Visible = true;
             lostHelpCard.BringToFront();
             lostHelpCard.Invalidate();
@@ -1631,6 +1643,7 @@ namespace AzerothLauncher
             if (current == "Setup") { SetupBack(); return; }
             if (LeaveCommunityVideo()) return;
             if (current == "Guide" && gVideo != null) { gVideo = null; BuildPanel("Guide"); return; }   // a video: back to its page
+            if (current == "Guide" && BackWithinClassArticle()) return; // return to the prior scroll position after an in-page jump
             if (BackInHistory()) return;                     // restore the previous complete view, including addon context
             if (current == "Addons" && addonMode == "download") { SetAddonMode("installed"); return; }
             if (current == "Options" && optionsLang) { optionsLang = false; BuildPanel("Options"); return; }

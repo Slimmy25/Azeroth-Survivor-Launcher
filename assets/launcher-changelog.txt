@@ -1,3 +1,9 @@
+# v3.07 (2026-10-30)
+
+- Class guides now share a nested passage with working links among spells, talents, gear and Codex entries.
+- Codex passages remain in Archive for reference; Archive is excluded from search, and Codex links lead to the related class guide.
+
+===
 # v3.06 (2026-10-30)
 
 - Launcher questions and warnings now appear over the secondary section without replacing its contents.

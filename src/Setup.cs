@@ -88,7 +88,29 @@ namespace AzerothLauncher
             BuildPanel("Setup");
         }
 
-        void SetupGo(int page) { setupPage = page; BuildPanel("Setup"); }
+        void SetupGo(int page)
+        {
+            // Final guard: an existing-client choice can never enter the download page. If its selected folder
+            // no longer contains the game executable, return to the folder chooser instead.
+            if (page == 7 && setupExistingClient)
+            {
+                if (!File.Exists(Path.Combine(setupGameDir, Util.GameExe)))
+                {
+                    setupGameFolderRequired = true;
+                    page = 4;
+                }
+                else
+                {
+                    if (setupResult == null) setupResult = new Dictionary<string, object>();
+                    setupResult["game_dir"] = Path.GetFullPath(setupGameDir);
+                    setupResult["installed_by_launcher"] = true;
+                    SetupLeave(setupAddons, setupStats);
+                    return;
+                }
+            }
+            setupPage = page;
+            BuildPanel("Setup");
+        }
 
         // The setup back arrow always moves exactly one slide; the welcome has no back action.
         void SetupBack()
@@ -315,6 +337,8 @@ namespace AzerothLauncher
             return y;
         }
 
+        // Existing players must point setup at the directory that directly contains the game executable.
+        // Recheck the exact executable before allowing them to continue, so this path cannot fall through to download.
         int SetupExistingGameFolderRow(int x, int y, int w)
         {
             bool found = !string.IsNullOrWhiteSpace(setupGameDir) && File.Exists(Path.Combine(setupGameDir, Util.GameExe));
@@ -475,7 +499,7 @@ namespace AzerothLauncher
             InstallClient(false, setupGameDir);
         }
 
-        // New players get the game-download slide; existing-client owners finish after the addons choice.
+        // The game location is always the sixth slide, whether the game is already installed or not.
         void SetupNext()
         {
             if (setupExistingClient)

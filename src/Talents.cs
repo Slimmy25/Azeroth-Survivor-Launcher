@@ -432,6 +432,8 @@ namespace AzerothLauncher
         readonly List<KeyValuePair<Rectangle, KeyValuePair<string, string>>> spellChips = new List<KeyValuePair<Rectangle, KeyValuePair<string, string>>>();
         // set by the launcher: a set chip clicked opens the Gear Planner with that set put on (class, rarity)
         public static Action<string, string> OpenSet;
+        // Optional in-page destination for a talent chip. Class guides use this to keep readers in the same article.
+        public Action<Talent> OpenTalentInArticle;
         // the class's set bonuses whose text names this spell: { "Faith 8-piece", its text, the rarity }
         readonly List<string[]> setBonuses = new List<string[]>();
         readonly List<KeyValuePair<Rectangle, string[]>> setChips = new List<KeyValuePair<Rectangle, string[]>>();
@@ -594,7 +596,7 @@ namespace AzerothLauncher
             }
         }
 
-        // The Codex neck piece that remakes this spell; clicking it opens Items > Codex.
+        // The Codex neck piece that remakes this spell; it routes through the class guide to its class guide.
         void CodexChipRow(Graphics g, Font lf, float y)
         {
             float x = Ic + 18;
@@ -704,9 +706,9 @@ namespace AzerothLauncher
             {
                 GuideHover.Hide();
                 var topics = Data.Guide;
-                int ti = topics.FindIndex(delegate(GuideTopic g) { return g.Title == "Items"; });
-                int pi = ti < 0 ? -1 : topics[ti].Pages.FindIndex(delegate(GuidePage g) { return g.Title == "Codex"; });
-                if (ti >= 0 && pi >= 0) GuideLinks.Navigate(new GuideLink { Term = overCodex.Name, Topic = ti, Page = pi, Tip = Items.Card(overCodex) });
+                int ti = topics.FindIndex(delegate(GuideTopic g) { return g.Title == "Classes"; });
+                int pi = ti < 0 ? -1 : topics[ti].Pages.FindIndex(delegate(GuidePage p) { return p.Title == className; });
+                if (ti >= 0 && pi >= 0) GuideLinks.Navigate(new GuideLink { Term = overCodex.Name, FindText = overCodex.Name, Topic = ti, Page = pi, Tip = Items.Card(overCodex) });
                 return;
             }
             if (e.Button == MouseButtons.Left && overSet != null && OpenSet != null)
@@ -726,8 +728,15 @@ namespace AzerothLauncher
                 GuideLinks.Navigate(sl);
                 return;
             }
-            if (e.Button != MouseButtons.Left || over == null || GuideLinks.Navigate == null) return;
+            if (e.Button != MouseButtons.Left || over == null) return;
             GuideHover.Hide();
+            if (OpenTalentInArticle != null)
+            {
+                Talent target = over;
+                OpenTalentInArticle(target);
+                return;
+            }
+            if (GuideLinks.Navigate == null) return;
             var l = new GuideLink();
             l.Term = over.Name;
             l.Class = className;
