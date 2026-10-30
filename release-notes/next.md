@@ -9,3 +9,5 @@
 - Added Move UI by JamieeLee to Misc in Add-ons → Download More, using the latest official release ZIP.
 
 - Fixed LocalClock by JamieeLee's existing Misc addon download to match the current official release ZIP naming.
+
+- Improved universal Back navigation: restores Add-ons categories, rollback and inline uninstall views, preserves existing scroll history, and validates destinations before consuming history. Confirmation buttons remain explicit; Back never answers a modal dialog.
