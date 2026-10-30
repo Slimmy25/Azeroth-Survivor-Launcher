@@ -1512,7 +1512,7 @@ namespace AzerothLauncher
             using (var g = Graphics.FromImage(bmp))
             using (var dim = new SolidBrush(Color.FromArgb(175, 0, 0, 0))) g.FillRectangle(dim, 0, 0, bmp.Width, bmp.Height);
             shade = new ShadePanel(bmp);
-            shade.Bounds = new Rectangle(Point.Empty, h.ClientSize);
+            shade.Dock = DockStyle.Fill;
             TopMost = false;
             ShowInTaskbar = false;
             TopLevel = false;
