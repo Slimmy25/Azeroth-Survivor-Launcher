@@ -1,3 +1,9 @@
+# v3.06 (2026-10-30)
+
+- Launcher questions and warnings now appear over the secondary section without replacing its contents.
+- Oversized prompt content can scroll to fit the secondary section, while Windows file and folder pickers remain unchanged.
+
+===
 # v3.05 (2026-10-29)
 
 - First-time setup is now required while its marker file remains beside the launcher; only successful setup moves it into that install's state folder.
