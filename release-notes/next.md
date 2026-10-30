@@ -7,3 +7,5 @@
 - Added Big Cursor by JamieeLee to Misc in Add-ons → Download More, using its latest official ZIP release.
 
 - Added Move UI by JamieeLee to Misc in Add-ons → Download More, using the latest official release ZIP.
+
+- Fixed LocalClock by JamieeLee's existing Misc addon download to match the current official release ZIP naming.
