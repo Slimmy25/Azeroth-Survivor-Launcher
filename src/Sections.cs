@@ -735,8 +735,8 @@ namespace AzerothLauncher
         DateTime clLastStep = DateTime.MinValue;
         Dictionary<string, CheckBox> addonRows;
         Label addonCount;
-        // an uninstall waiting for its answer: the question takes the place of My Addons' right column (not a window,
-        // not a step in the path), so the addon list stays in view while the player decides. Name: a Download More
+        // An uninstall question takes the place of My Addons' right column, not a modal dialog.
+        // History treats this as a view: Back navigates, but never chooses UNINSTALL or CANCEL. Name: a Download More
         // addon; folder: one folder of the list (its X)
         string askUninstallName, askUninstallFolder;
 
@@ -1630,7 +1630,7 @@ namespace AzerothLauncher
             if (current == "Setup") { SetupBack(); return; }
             if (LeaveCommunityVideo()) return;
             if (current == "Guide" && gVideo != null) { gVideo = null; BuildPanel("Guide"); return; }   // a video: back to its page
-            if (BackInHistory()) return;                     // back along the way you came (History.cs)
+            if (BackInHistory()) return;                     // restore the previous complete view, including addon context
             if (current == "Addons" && addonMode == "download") { SetAddonMode("installed"); return; }
             if (current == "Options" && optionsLang) { optionsLang = false; BuildPanel("Options"); return; }
             if (current == "Changelog")
