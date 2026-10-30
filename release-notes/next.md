@@ -11,3 +11,5 @@
 - Fixed LocalClock by JamieeLee's existing Misc addon download to match the current official release ZIP naming.
 
 - Improved universal Back navigation: restores Add-ons categories, rollback and inline uninstall views, preserves existing scroll history, and validates destinations before consuming history. Confirmation buttons remain explicit; Back never answers a modal dialog.
+
+- Custom launcher questions and confirmations now overlay the secondary section without rebuilding its contents. Oversized prompt content scrolls inside the available space; native Windows file and folder pickers remain unchanged.
